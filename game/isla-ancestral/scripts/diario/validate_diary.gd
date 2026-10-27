@@ -36,6 +36,10 @@ extends SceneTree
 const RUTA_PO_ES := "res://locales/es.po"
 const RUTA_PO_EN := "res://locales/en.po"
 const RUTA_LAYER := "res://scripts/ui/layers/diary_layer.gd"
+## Resolutor de iconos (iter. 6) e inventario de arte 2D de M46.
+const ICONOS := preload("res://scripts/diario/iconos_diario.gd")
+const RUTA_ICONOS := "res://scripts/diario/iconos_diario.gd"
+const RUTA_INVENTARIO_M46 := "res://data/arte2d/inventario_2d.json"
 ## Total de cargas del catálogo para el test de rendimiento
 const ITER_RENDIMIENTO := 20
 ## Techo total (ms) para ITER_RENDIMIENTO cargas+parseos en headless
@@ -43,6 +47,12 @@ const TECHO_MS_RENDIMIENTO := 500.0
 
 var _fallos: int = 0
 var _avisos: int = 0
+var _checks: int = 0
+## Piso de checks MEDIDO en verde (iter. 6). Se re-mide cada vez que la suite
+## crece; nunca se estima. Ver 06-Plan-Testings.
+## Piso MEDIDO en verde: 387 checks de los bloques (el check del piso se
+## cuenta a sí mismo y NO entra en el mínimo). Si un bloque aborta, baja.
+const CHECKS_MINIMOS: int = 387
 
 
 func _init() -> void:
@@ -65,15 +75,24 @@ func _run() -> void:
 	if typeof(parseado) == TYPE_DICTIONARY:
 		_validar_estructura(parseado, ruta_catalogo)
 		_validar_descripciones_refs(parseado)
+		_validar_iconos(parseado)
 	_validar_i18n()
 	_validar_persistencia()
 	_validar_rendimiento(ruta_catalogo)
 
-	print("=== VALIDATE DIARY: %d fallo(s), %d aviso(s) ===" % [_fallos, _avisos])
+	# Piso de checks (iter. 6): un aborto de runtime en cualquier bloque deja el
+	# contador por debajo del mínimo MEDIDO en verde. Sin esto, un "0 fallos" de
+	# una corrida que se cortó a la mitad es indistinguible de un verde real.
+	_check(_checks >= CHECKS_MINIMOS,
+		"piso de checks: %d ejecutados (mínimo medido %d)" % [_checks, CHECKS_MINIMOS])
+
+	print("=== VALIDATE DIARY: %d checks, %d fallo(s), %d aviso(s) ==="
+		% [_checks, _fallos, _avisos])
 	quit(1 if _fallos > 0 else 0)
 
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)
@@ -169,6 +188,79 @@ func _validar_descripciones_refs(parseado: Dictionary) -> void:
 							"ref '%s' de '%s' existe en catálogo" % [rid, eid])
 						_check(rid != eid,
 							"ref de '%s' sin autoreferencia" % eid)
+
+
+## ── Iconografía (iter. 6: L93/L117/L203 y las siluetas de L77/L85) ──
+##
+## Valida la iconografía de las entradas contra el catálogo de arte 2D (M46,
+## `data/arte2d/inventario_2d.json`), que es la fuente de ids de iconos del
+## proyecto. No exige que el arte exista (hoy no existe NINGUNO de los 48
+## assets: deuda de M46) — eso se REPORTA como aviso medido. Lo que sí exige:
+##   (a) el inventario M46 se lee y declara ids (guarda de ceguera: sin esto el
+##       validador diría "0 problemas" sin haber mirado nada);
+##   (b) toda entrada tiene un id de icono DERIVABLE o DECLARADO con la
+##       convención de prefijos de M46;
+##   (c) el campo opcional `icono` es un slug ASCII.
+func _validar_iconos(parseado: Dictionary) -> void:
+	var inv: Dictionary = ICONOS.inventario_m46()
+	# (a) guarda de ceguera: un inventario vacío no es "todo bien"
+	_check(not inv.is_empty(),
+		"inventario M46 con ids (leídos %d de %s)" % [inv.size(), RUTA_INVENTARIO_M46])
+
+	var total := 0
+	var derivables := 0
+	var sin_familia: Array[String] = []
+	var cats_sin_familia: Array[String] = []
+	for c in parseado.get("categorias", []):
+		var cat := String(c.get("id", ""))
+		for e in c.get("entradas", []):
+			total += 1
+			var eid := String(e.get("id", ""))
+			# (c) el campo declarado, si existe, es un slug ASCII
+			if e.has("icono"):
+				_check(typeof(e["icono"]) == TYPE_STRING,
+					"icono es String en '%s'" % eid)
+				var decl := String(e["icono"])
+				_check(_es_slug(decl), "icono '%s' es slug ascii en '%s'" % [decl, eid])
+			# (b) id de icono obtenible
+			var id_ico := String(ICONOS.id_derivado(cat, eid))
+			if id_ico.is_empty() and not String(e.get("icono", "")).is_empty():
+				id_ico = String(e.get("icono", ""))
+			if id_ico.is_empty():
+				sin_familia.append("%s (%s)" % [eid, cat])
+				if not cats_sin_familia.has(cat):
+					cats_sin_familia.append(cat)
+			else:
+				derivables += 1
+
+	# Invariante ESTRUCTURAL (no un conteo fijo): una entrada solo puede quedar
+	# sin id de icono si su CATEGORÍA no tiene familia de arte declarada en M46.
+	# Así el check discrimina (si 'minerales' pierde su prefijo, falla) y no se
+	# rompe cuando el catálogo crece con contenido legítimo.
+	var cat_invalida: Array[String] = []
+	for cat in cats_sin_familia:
+		if not String(ICONOS.FAMILIA_POR_CATEGORIA.get(cat, "")).is_empty():
+			cat_invalida.append(String(cat))
+	_check(cat_invalida.is_empty(),
+		"categorías con familia M46 y entradas sin id de icono: %s" % str(cat_invalida))
+	_check(derivables > 0,
+		"al menos una entrada aporta id de icono (derivables %d de %d)" % [derivables, total])
+
+	var inf: Dictionary = ICONOS.inventario_iconos(parseado)
+	print("[iconos] entradas=%d derivables=%d en_inventario=%d con_asset=%d declarados=%d sin_familia=%d"
+		% [int(inf["entradas"]), int(inf["con_id_derivado"]), int(inf["en_inventario"]),
+		int(inf["con_asset"]), int(inf["declarados"]), int(inf["sin_familia"])])
+	var ausentes: Array = inf["sin_id_en_inventario"]
+	print("[iconos] ids fuera del inventario M46: %d" % ausentes.size())
+	var fam: Array = inf["familia_disponible"]
+	print("[iconos] ids sin id exacto pero con simbolo de familia: %d %s" % [fam.size(), str(fam)])
+
+	# Deuda MEDIDA, no silencio (patrón M72): el arte de M46 está pendiente.
+	_warn("iconografía: %d/%d entradas con id en el inventario M46; %d con asset en disco"
+		% [int(inf["en_inventario"]), total, int(inf["con_asset"])])
+	if int(inf["con_asset"]) == 0:
+		_warn("iconografía: 0 assets de icono en disco (inventario M46 = 48 ids 'pendiente'); "
+			+ "la UI muestra el fallback genérico del resolutor (L203)")
 
 
 ## ── i18n ───────────────────────────────────────────────────────────

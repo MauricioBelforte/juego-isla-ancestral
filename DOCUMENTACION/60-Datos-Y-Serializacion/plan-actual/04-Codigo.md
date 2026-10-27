@@ -381,3 +381,50 @@ La **primera** versión del arnés medía cada variante **una sola vez y en orde
 - **No reabrir el ítem 168 sin una medición nueva.** El arnés está ahí para eso. Si cambia la forma de los datos (chunks con muchos más vóxeles, payloads mucho más grandes), **re-medir antes de concluir**.
 - **Si algún día se busca un win real en el encoder**, el candidato medido es BULK, pero sólo cuando hay **muchos enteros por chunk**; hoy no es fiable.
 - **Tests:** `test_datos_m60.gd` (94) · `test_datos_m60_iter3.gd` (134) · `test_datos_m60_iter4.gd` (152) · `test_datos_m60_iter5.gd` (40). Los cuatro ×3 y con `grep "SCRIPT ERROR"` = 0.
+
+## Notas del Agente — iter. 6 (2026-10-27, DeepSeek-V4.1-Flash / WorkBuddy)
+
+**Motivo:** revert de las 7 marcas que el lote `Reflection-Beam-1.0` (T224-60, commit
+`a7a3a6b`) subió a `[x]` sin evidencia, y documentación de la deuda externa que
+esas marcas tapaban. Log 2211.
+
+### Lo que se hizo (medido, no afirmado)
+
+- **Revert T224:** 7 marcas `[x]` -> su estado real. 4 citadas por el director
+  (L200 M62, L202 M63, L214 M15/M16/M33, L241 Profiler) + 3 de la MISMA familia
+  (L184/L186/L191, M08) que la aritmética `189/3/4` exige. Estado final medido:
+  **189 `[x]` / 4 `[?]` / 3 `[ ]` = 196**, que es exactamente lo que la línea
+  `**Totales:**` ya declaraba desde el 20-sep. **Las marcas eran lo inflado, no el total.**
+- **Cómo se probó que eran 7 y no 4:** `git diff a7a3a6b~1 a7a3a6b` sobre este
+  checklist muestra **4** transiciones `[?] -> [x]` (las etiquetadas T224-60);
+  contra el baseline `216c1a1` (20-sep, `189 [x] / 4 [?] / 3 [ ]`) hay **7**.
+  Las 3 sin etiqueta son los items M08, que el propio lote no declaró.
+- **Marca elegida por item:** se restauró la marca ORIGINAL de cada uno (los 4 del
+  Beam estaban en `[?]`, los 3 de M08 en `[ ]`), no una marca uniforme. Cada línea
+  lleva ahora `REVERT 2026-10-27 ... — **<dueño>**` con el motivo.
+
+### Deuda externa documentada (lo que M60 NO puede cerrar)
+
+| Item | Dueño | Por qué no es de M60 | Evidencia |
+|---|---|---|---|
+| L200 — UI interactiva deshabilitada durante guardado | **M53/M59** | M60 expone la API (`guardado_en_curso()`, `progreso_guardado()`); deshabilitar la UI es capa de UI | `save_manager.gd` expone los getters; el consumo es de `ui/layers/*` |
+| L202 — carga de escena mundo < 2 s desde el menú | **M63** | objetivo de build de streaming; M60 mide la carga del SAVE (< 1 s) | `test_datos_m60_iter5.gd` mide el save, no la escena |
+| L214 — recetas y cultivos como Resources tipados (.tres) | **M16/M33** | las clases tipadas son de M60; los `.tres` de datos son de los dueños | `data/` no tiene recetas ni cultivos de M16/M33 |
+| L241 — presupuestos RN verificados con el Profiler | **QA visual / build GUI** | el Profiler no corre headless; los presupuestos YA están medidos con `Time.get_ticks_msec()` | iter. 3/4 miden con `Time.get_ticks_msec()` |
+| L184/L186/L191 — regeneración procedural, contrato de edits, log de chunks | **M08** | es el dueño del terreno voxel; L191 lo dice en su propia nota ("no existe, sólo hay `print` al GUARDAR") | `grep` de log de chunks en `scripts/world/` = 0 |
+
+### Lo que NO pude hacer (honestidad obligatoria)
+
+- **No cerré ninguno de los 7.** Son deuda externa o requieren build con GUI. Devolver
+  la marca a su estado real es el trabajo; cerrarlos no es de M60.
+- **No toqué el estado de la fila 60 de `CHECKLIST-GLOBAL.md`** (archivo NO TOCAR para
+  este agente). La fila debe quedar con `189/196` y estado `🟡 Con dudas`: el conteo no
+  cambió (196 items, 189 completados), sólo se movió la distribución entre `[?]` y `[ ]`.
+
+### Recomendaciones para el próximo agente
+
+- **Antes de subir un `[x]` en este módulo, buscar el `[?]`/`[ ]` previo en `git log`.**
+  El lote T224 subió 4 con una etiqueta y 3 sin ninguna; las 3 sin etiqueta pasaron
+  desapercibidas a dos auditorías (T-D7 y el QA §21.8 del 06-oct).
+- **`189/196` es el techo real de M60 hasta que M08/M16/M33/M53/M59/M63 cierren lo suyo.**
+  Un `[x]` nuevo exige código en disco + test verde, no una cita de diseño.

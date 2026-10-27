@@ -196,6 +196,7 @@ func detalle_entrada(entrada_id: String) -> Dictionary:
 				"titulo": String(e.get("titulo", "")),
 				"descripcion": String(e.get("descripcion", "")),
 				"refs": (e.get("refs", []) as Array).duplicate(),
+				"icono": String(e.get("icono", "")),
 			}
 	return {}
 
@@ -243,6 +244,11 @@ func entradas_de(categoria: String) -> Array[Dictionary]:
 			"estado": estado_de(eid),
 			"favorito": es_favorito(eid),
 			"dia": int(_dia_registro.get(eid, 0)),
+			# Campo OPCIONAL del catálogo (iter. 6, L93/L117/L203): si la entrada
+			# declara su icono, el resolutor lo usa como nivel 1; si no, deriva el
+			# id con las convenciones M46. Se expone para que el nivel 1 sea
+			# alcanzable (un campo que nadie lee es una rama muerta).
+			"icono": String(e.get("icono", "")),
 		})
 	return result
 

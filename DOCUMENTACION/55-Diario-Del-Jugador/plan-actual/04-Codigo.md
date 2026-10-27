@@ -306,3 +306,108 @@ El diario usa el sistema central de logs de consola (M118): prefijo `[DIARY]` pa
 - **Cablear las suites M55 al CI** (`quality.yml` no menciona "diario": hoy las 5 suites corren solo a mano). Decisión del director.
 - **Puentes de evento:** igual que iter. 4 (M36/M34, M50, M35, M16, M24/M26, M25, M71, M56).
 - **El fix del paso congelado es el patrón para toda lista virtualizada del proyecto**: step = medido una vez + congelado; si el tema cambia en runtime, resetear el flag a mano.
+
+---
+
+## Iter. 6 — Iconografía de entradas (2026-10-27, DeepSeek-V4.1-Flash, Log 2210)
+
+**Alcance:** la familia de iconos del checklist (L20, L77, L85, L93, L117, L203). Hasta
+esta iteración el diario **no tenía iconos en ninguna parte**: `grep -niE "icono|icon"` sobre
+`diary_layer.gd` daba **0** y el catálogo JSON no tenía campo `icono` (44/44 entradas sin él).
+
+### Contrato: el id del icono se DERIVA, no se declara
+
+No se agregó un campo obligatorio al JSON (habría duplicado la fuente de verdad y exigido
+44 decisiones de contenido que no son del módulo). El id del icono se **deriva** del id de la
+entrada con las convenciones de prefijos que **M46 ya declara** en
+`data/arte2d/inventario_2d.json > convenciones.prefijos`:
+
+| Categoría | Prefijo de familia | Ejemplo |
+|---|---|---|
+| personajes | `pt_` | `vecino_catalina_oso` → `pt_catalina_oso` |
+| lugares, ruinas | `illus_` | `lugar_isla_raiz` → `illus_isla_raiz` |
+| minerales, plantas, criaturas, recetas, descubrimientos | `ico_` | `mineral_mineral_cobre` → `ico_mineral_cobre` |
+| sellos | `sym_` | `sello_sello_ceniza_sala1` → `sym_sello_ceniza_sala1` |
+| misiones, eventos, cartas, pistas | — (sin familia en M46) | no deriva id |
+
+El **campo opcional `icono`** sigue existiendo como nivel 1 de prioridad y `entradas_de()` /
+`detalle_entrada()` ahora lo **exponen**: sin eso el nivel 1 era una rama muerta (un campo que
+nadie lee). Hoy **0 de 44** entradas lo declaran.
+
+### Resolución en 3 niveles (L203)
+
+`scripts/diario/iconos_diario.gd` (`preload`, sin `class_name` para no depender de la caché):
+
+1. `icono` declarado en la entrada → se usa si el archivo existe.
+2. id derivado presente en el inventario M46 → ruta convencional por familia
+   (`ico_`→`assets/2d/iconos/`, `sym_`→`simbolos/`, `pt_`→`retratos/`, `illus_`→`ilustraciones/`,
+   `badge_`→`insignias/`, `ui_art_`→`ui/`, `logo_`→`logo/`), extensiones `.png|.webp|.svg`.
+3. **fallback genérico procedural**: `ImageTexture` 16×16 generada en código (relleno + borde),
+   **cacheada en una sola instancia**. Nunca devuelve `null`: la fila no puede quedar sin icono.
+
+El fallback **conserva el id** que no pudo resolver, así el inventario reporta deuda por id y no
+"sin icono" (misma distinción que M72: `iconos_ausentes()` ≠ "no hay arte").
+
+### Medición del estado real (no estimada)
+
+`ICONOS.inventario_iconos(catalogo)` sobre el catálogo real:
+
+| Métrica | Valor medido |
+|---|---|
+| entradas del catálogo | 44 |
+| con id de icono derivable | 33 |
+| sin familia de arte en M46 | 11 (misiones 4, eventos 4, cartas 1, pistas 2) |
+| id presente en el inventario M46 | **5** (los 3 minerales + las 2 plantas) |
+| con asset en disco | **0** |
+| ids fuera del inventario M46 | 28 |
+| ids sin id exacto pero con símbolo de familia | 2 (`sym_sello_ceniza_sala1/_sala2` ← `sym_sello_ceniza`) |
+
+El inventario M46 declara **48 ids y los 48 están en estado `pendiente`**: la deuda es **arte**,
+no código. Este módulo no inventa arte; la UI muestra el fallback.
+
+### Hallazgos medidos (reportados, NO corregidos por ser de otro dueño)
+
+1. **Prefijo duplicado en los ids del catálogo**: `mineral_mineral_cobre`, `planta_baya_roja`,
+   `receta_rec_mesa_robusta`, `pista_pista_01`, `carta_carta_bienvenida`, `sello_sello_ceniza_*`.
+   La derivación lo tolera (quita **una** vez el prefijo de la categoría), pero el id canónico
+   debería ser `mineral_cobre` etc.
+2. **Tres vocabularios de sellos que no se cruzan**: el diario usa `ceniza/mar/brisa`
+   (7 entradas); el inventario M46 tiene `sym_sello_{raiz,coral,ceniza,aurora}` (4); y
+   `data/balance/seals.json` tiene `sello_{llegada,cultivador,guardian}` (3). Intersección
+   diario∩M46 = {ceniza}; diario∩seals.json = ∅; M46∩seals.json = ∅. **L117 no puede cerrarse**
+   sin que M46/M39 decidan qué ids de sello son canónicos.
+3. **`Button.icon_max_width` NO existe como propiedad en Godot 4.7.2** — es una **constante de
+   tema**. Asignarla como propiedad lanza `SCRIPT ERROR` y aborta el refresco de la lista
+   (medido: lo delató el guardián de la suite nueva, no una lectura del código). Se aplica con
+   `add_theme_constant_override("icon_max_width", ICONO_FILA)`.
+
+### UI
+
+- **Fila de la lista**: `Button.icon` = textura resuelta (16 px, `expand_icon = false`,
+  `icon_max_width` 16). 16 < `FILA_ALTURA` (28) → **no altera el paso congelado** de la
+  virtualización.
+- **Panel de detalle**: `TextureRect` "IconoDetalle" de 48×48 dentro del `ScrollContainer` de la
+  columna (tamaño fijo: no propaga mínimo al panel, lección M53 L210).
+- **Anti-spoiler §3.2**: una entrada secreta no registrada **no muestra icono** (`texture = null`),
+  igual que no muestra título ni descripción.
+
+### Validación
+
+`validate_diary.gd` incorpora `_validar_iconos()`: guarda de ceguera (inventario M46 vacío =
+fallo, no "0 problemas"), `icono` declarado debe ser slug ASCII, e **invariante estructural**: una
+entrada solo puede quedarse sin id de icono si su **categoría** no tiene familia en M46 (así el
+check discrimina y no se rompe si el catálogo crece). La deuda de arte se emite como **AVISO
+medido**, no como fallo (patrón M72).
+
+Además `validate_diary.gd` gana un **piso de checks** (`CHECKS_MINIMOS = 387`, medido en verde):
+antes, un aborto de runtime en cualquier bloque dejaba `0 fallo(s)` con menos checks ejecutados y
+el validador salía **EXIT 0** — un falso verde indistinguible de un verde real.
+
+### Lo que NO se hizo (honestidad)
+
+- **No se flipó ninguna marca**: los flips los aplica el director. Propuestas en el informe.
+- **No se tocó `05-Checklist.md`**: la directora está deshaciendo el pase de flips de
+  Reflection-Beam-1.0 sobre este mismo archivo (3 de esos flips son de esta familia y su nota
+  propia dice lo contrario de la marca).
+- **No se agregó arte**: el inventario M46 está 100 % `pendiente`.
+- **No se cableó la suite nueva en `quality.yml`** (archivo protegido): pedido al director.

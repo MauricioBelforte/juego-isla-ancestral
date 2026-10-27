@@ -29,7 +29,7 @@
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Definir familias de rigs: humanoide, cuadrúpedo, ave, pez [M] — 03-Diseno sec 5: 4 familias con UN rig base y mapping de huesos identico por especie; sin rigs nuevos por animal (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
-- [x] Definir plantilla de import en editor (import_animation_defaults.gd) [M] — 03-Diseno sec 6 CONTRATO del tool futuro (fps 30, loop por sufijo _loop, remapeo por familia, senales L199); mientras no exista: defaults manuales + checklist L173 (2026-10-23 S49)
+- [x] Definir plantilla de import en editor (import_animation_defaults.gd) [M] — 03-Diseno sec 6 CONTRATO del tool futuro (fps 30, loop por sufijo _loop, remapeo por familia, senales L199); mientras no exista: defaults manuales + checklist L173 (2026-10-23 S49) | IMPLEMENTADO 2026-10-27 (DeepSeek-V4.1-Flash, Log 2211): `scripts/animacion/validacion/import_animation_defaults.gd` (step por fps, loop por sufijo `_loop`, remapeo de vendor, subset por familia) + bloque E de `test_validacion_m48.gd` (50/0/EXIT 0 x3). El hook de import del editor NO se implementa: un EditorImportPlugin no corre con --script.
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [M])
 - [x] Definir máximos de duración por categoría [S] — 03-Diseno: tabla 3.1 como TOPES (locomocion 1.6s/acciones 2.5s/fauna 3.0s/mecanicas 4.0s/UI 0.6s); exceder exige justificacion o dividir (2026-10-23 S47)
   · espera: pendiente de definicion de diseno (contrato del item) (marcado [S])
@@ -163,7 +163,7 @@
 
 ## M. RF12 — Validación automática
 
-- [x] Definir script validate_animation.gd [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T240-48): spec en 03-Diseno.md § (L166 validate_animation.gd)
+- [x] Definir script validate_animation.gd [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T240-48): spec en 03-Diseno.md § (L166 validate_animation.gd) | IMPLEMENTADO 2026-10-27 (DeepSeek-V4.1-Flash, Log 2211): `animation_validator.gd` + gate `validate_animation_cli.gd` (exit 0 limpio / 1 hallazgos / 3 detector ciego) + suite 50/0 x3 con 4 sondas en rojo. La cita '03-Diseno.md §' sin numero de seccion queda senalada como defecto de cita; la seccion real es 2.3.
 - [x] Verificar naming anim_[actor]_[estado] [S]
   · espera: pendiente de verificacion/QA (criterio del item) (marcado [S])
 - [x] Verificar fps 30 base / UI 60 [S]
@@ -233,7 +233,7 @@
 
 ## S. Riesgos y mitigaciones
 
-- [x] Riesgo de clips duplicados → AnimationLibrary central + validación [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §1 "libraries/ (AnimationLibrary por actor/familia)" + validate_animation.gd.**
+- [x] Riesgo de clips duplicados → AnimationLibrary central + validación [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §1 "libraries/ (AnimationLibrary por actor/familia)" + validate_animation.gd.** (validador implementado 2026-10-27, Log 2211: `scripts/animacion/validacion/animation_validator.gd`, corre headless sobre cada AnimationLibrary)
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
 - [x] Riesgo de snaps por blending → blend 250 ms + revisión visual [M] → **agnes-3-flash (2026-10-14): `03-Diseno.md` §3.1 "blend por crossfade 250ms".**
   · espera: pendiente de definicion/cierre (ver descripcion del item) (marcado [M])
@@ -310,6 +310,7 @@
 - [x] Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
 **Totales:** 123 items - Completados: 36 - Pendientes: 84 - No resueltos: 3. (Corregido agnes-3-flash 2026-10-14: +13 flips lotes 1-3 citando 02-Analisis/03-Diseno)
 **Totales:** 123 ítems · Completados: 42 · Pendientes: 78 · No resueltos: 3. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 123 ítems · Completados: 113 · Pendientes: 10 · No resueltos: 0. (Medido 2026-10-27 por DeepSeek-V4.1-Flash, Log 2211: 113 [x] / 10 [ ] / 0 [?] contados por prefijo de línea. Las dos líneas Totales anteriores quedan como historial: estaban STALE en 36/84/3 y 42/78/3.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?].

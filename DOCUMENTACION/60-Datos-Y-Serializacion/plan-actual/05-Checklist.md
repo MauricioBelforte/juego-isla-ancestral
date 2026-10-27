@@ -181,14 +181,14 @@
 - [x] M08: semilla del mundo almacenada en save.json [M]
 - [x] M08: solo edits de chunks guardados en mundo_voxel.bin [C]
 - [x] M08: cada chunk editado con su coordenada y sus vóxeles [C]
-- [x] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (verificado, bloque G), pero no regenera.
+- [ ] M08: el resto del mundo se regenera con la semilla (procedural) [C] -- iter. 4: es trabajo de M08 (Voxel Tools). M60 guarda y devuelve la semilla (verificado, bloque G), pero no regenera. | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): la regeneracion procedural del mundo es de M08. Dueño externo. — **M08**
 - [x] M08: payload binario entregado a través de DataStore.cargar_mundo_voxel [M]
-- [x] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. · iter. 4: sigue esperando a M08; se deja como [ ] (no se marca por simpatía).
+- [ ] M08: contrato de "edits" ajustado al formato real de Voxel Tools [M] -- agnes-2.5-flash 2026-09-12: formato contractual (coord int32x3, type uint8) documented en 03-Diseno.md; ajuste requiere M08 refactor. KnownIssue no bloqueante DoD. · iter. 4: sigue esperando a M08; se deja como [ ] (no se marca por simpatía). | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): el contrato de edits de Voxel Tools es de M08. Dueño externo. — **M08**
 - [x] M08: un mundo_voxel.bin por slot [S]
 - [x] M08: coordenadas int32 con signo (mundo puede extenderse a negativos) [S]
 - [x] M08: backup .bak también para mundo_voxel.bin [S] -- iter. 4 (Log 916): NO existía; se implementó en `_guardar_voxel_binario` con la misma ventana de 3 copias. Verificado (bloque C).
 - [x] M08: carga del voxel tras cargar el save principal (orden correcto) [M]
-- [x] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto.
+- [ ] M08: log con cantidad de chunks editados cargados [S] -- iter. 4: no existe (sólo hay `print` al GUARDAR). Se deja abierto. | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): la nota del propio item dice que no existe (solo hay `print` al GUARDAR); el log de chunks es de M08. Dueño externo. — **M08**
 - [x] M59: GestorSlot disponible para consumo de M59 sin duplicar lógica de slots [M]
 - [x] M59: autosave puede llamar a DataStore.guardar_partida(slot) [M]
 - [x] M59: menú de guardado puede usar listar_slots() y meta.json [M]
@@ -197,9 +197,9 @@
 - [x] M59: slot sin save.json tratado como inexistente (no crash) [M]
 - [x] M62: IO del guardado en hilo secundario (Thread/WorkerThreadPool) [C]
 - [x] M62: progreso visible durante guardado (regla UX de progreso visual) [M]
-- [x] M62: UI interactiva deshabilitada durante guardado/carga (anti clicks rápidos) [M] -- iter. 4: capa de UI (dueño M53/M59). M60 expone `guardado_en_curso()` y `progreso_guardado()`. -- agnes-2.5-flash 2026-09-12: es capa de UI (M53/M59 blocking). KnownIssue no bloqueante DoD — guardado ya es atómico. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L200 M62 UI deshabilitada)
+- [?] M62: UI interactiva deshabilitada durante guardado/carga (anti clicks rápidos) [M] -- iter. 4: capa de UI (dueño M53/M59). M60 expone `guardado_en_curso()` y `progreso_guardado()`. -- agnes-2.5-flash 2026-09-12: es capa de UI (M53/M59 blocking). KnownIssue no bloqueante DoD — guardado ya es atómico. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L200 M62 UI deshabilitada) | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): sin evidencia — la capa de UI es de M53/M59; M60 solo expone `guardado_en_curso()`/`progreso_guardado()`. Dueño externo. — **M53/M59**
 - [x] M63: tiempos de carga dentro del presupuesto de streaming (medidos en test) [M]
-- [x] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C] -- iter. 4: objetivo de build; dueño M63. M60 mide la carga del SAVE (< 1 s, iter. 3). | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L202 M63 carga <2s)
+- [?] M63: carga de escena mundo < 2 s desde el menú (objetivo de build) [C] -- iter. 4: objetivo de build; dueño M63. M60 mide la carga del SAVE (< 1 s, iter. 3). | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L202 M63 carga <2s) | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): objetivo de build de M63; M60 mide la carga del SAVE (<1 s), no la de escena. Dueño externo. — **M63**
 - [x] M58/M90/M91: secciones del config: graficos, audio, accesibilidad [S]
 - [x] M58/M90/M91: defaults para claves ausentes al cargar config [M]
 - [x] M58/M90/M91: guardar_config al cambiar opciones [M]
@@ -211,7 +211,7 @@
 - [x] M15/M16/M33: obtener_item(id) por ID estable [S]
 - [x] M15/M16/M33: validación de IDs referenciados en código contra el catálogo [M] -- iter. 4: `CatalogosEstaticos.validar_ids(ids)` devuelve los ids que faltan sin cargar Resources. Verificado (bloque E).
 - [x] M15/M16/M33: fecha sin .tres -> log limpio y tabla vacía (no crash) [S]
-- [x] M15/M16/M33: recetas y cultivos como Resources tipados (agregar .tres M16/M33) [M] -- agnes-2.5-flash 2026-09-12: clases tipadas YA existen en scripts/; agregar .tres es trabajo de M16/M33 dueños. KnownIssue no bloqueante DoD. · iter. 4: confirmado; dueño M16/M33. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L214 recetas/cultivos .tres)
+- [?] M15/M16/M33: recetas y cultivos como Resources tipados (agregar .tres M16/M33) [M] -- agnes-2.5-flash 2026-09-12: clases tipadas YA existen en scripts/; agregar .tres es trabajo de M16/M33 dueños. KnownIssue no bloqueante DoD. · iter. 4: confirmado; dueño M16/M33. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L214 recetas/cultivos .tres) | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): los .tres son de M16/M33; M60 solo aporta las clases tipadas. Dueño externo. — **M16/M33**
 - [x] M15/M16/M33: aprovechar cache de load() de Godot [S]
 - [x] Edge case: save corrupto detectado por checksum sin crash [M]
 - [x] Edge case: JSON malformado -> error claro y recuperación con .bak [M]
@@ -238,7 +238,7 @@
 - [x] Optimización: checksum sobre flujo sin copias innecesarias [S]
 - [x] Optimización: IO en hilo secundario, UI nunca bloqueada [M]
 - [x] Optimización: medición de duraciones con Time.get_ticks_msec() [S]
-- [x] Optimización: presupuestos RN verificados con el Profiler de Godot [M] -- iter. 4: el Profiler no corre en headless; requiere build con GUI. Los presupuestos SÍ están medidos con `Time.get_ticks_msec()` (iter. 3/4). -- agnes-2.5-flash 2026-09-12: requiere build con GUI (Profiler no disponible headless). KnownIssue no bloqueante DoD — diseño documented, verificación visual pendiente. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L241 presupuestos RN Profiler)
+- [?] Optimización: presupuestos RN verificados con el Profiler de Godot [M] -- iter. 4: el Profiler no corre en headless; requiere build con GUI. Los presupuestos SÍ están medidos con `Time.get_ticks_msec()` (iter. 3/4). -- agnes-2.5-flash 2026-09-12: requiere build con GUI (Profiler no disponible headless). KnownIssue no bloqueante DoD — diseño documented, verificación visual pendiente. | FLIP 2026-10-26 (Reflection-Beam-1.0, T224-60): spec en 03-Diseno.md § (L241 presupuestos RN Profiler) | REVERT 2026-10-27 (DeepSeek-V4.1-Flash, T224): el Profiler exige build con GUI; headless no se puede medir y los presupuestos ya estan medidos con Time.get_ticks_msec(). — **QA visual**
 - [x] Documentación: plan-inicial completo con los 5 archivos [S]
 - [x] Documentación: plan-actual al día con implementación real (04-Codigo actualizado) [S]
 - [x] Documentación: firmas del agente en todos los archivos [S]

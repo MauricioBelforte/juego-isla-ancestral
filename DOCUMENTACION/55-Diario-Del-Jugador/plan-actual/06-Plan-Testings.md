@@ -59,3 +59,28 @@ S3, S4 y S5 siempre en verde además de S1/S2. Si alguna cae → no se commitea.
 - ~~`validate_diary.gd` (checklist Y)~~ → **cubierto 2026-10-05**: `scripts/diario/validate_diary.gd` (6 áreas + sonda roja EXIT 1).
 - Contenido fotográfico y puente FOTO_TOMADA (L53/L212) — depende de M56.
 - Tercer idioma / plurales (checklist V).
+
+## 7. Iconografía (iter. 6, 2026-10-27, Log 2210)
+
+Suite nueva **S6: `scripts/diario/test_diario_iconos_m55.gd`** (56 checks, piso medido 56).
+
+1. **Derivación del id** (bloque A): prefijo de familia por categoría (`pt_`, `illus_`, `ico_`,
+   `sym_`), categorías sin familia → sin id, id sin prefijo de categoría no se mutila, id que
+   queda vacío no deriva.
+2. **Resolución en 3 niveles** (bloque B): declarado > derivado con archivo > fallback procedural;
+   el fallback nunca es `null`, está cacheado (una sola instancia) y mide 16×16; el id se conserva
+   cuando cae a fallback; `Button.icon` acepta la textura y `icon_max_width` se aplica como
+   **constante de tema** (no es propiedad en 4.7.2).
+3. **Inventario medido** (bloque C): aritmética (`derivables + sin_familia == entradas`),
+   contrato con M46 (minerales y plantas resuelven en el inventario), `iconos_ausentes()` ==
+   `derivables − en_inventario`, sin duplicados, todo id del inventario con familia con carpeta.
+4. **Integración por fuente** (bloque D): el layer precarga y llama al resolutor, fila y detalle
+   asignan icono, la entrada secreta **no** muestra icono (anti-spoiler §3.2), el service expone
+   el campo opcional `icono`, el validador corre el bloque de iconografía y tiene piso de checks.
+5. **Forma del catálogo M46** (bloque E): ≥40 ids, cada id declara `estado` y `familia`.
+
+**Sonda roja obligatoria** (hecha, ver 07-Resultados §8.1): aborto de runtime inyectado al inicio
+del bloque B → EXIT 1 en 2,9 s **sin cuelgue**, con el bloque nombrado y el piso disparado.
+Restauración byte-exacta verificada por sha256.
+
+**Pendiente de cablear en CI** (`quality.yml` es archivo protegido): pedido al director.

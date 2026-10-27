@@ -87,3 +87,58 @@ Los [?] restantes documentados en §5 y en el 05 (L20 icono, L53/L212 foto M56, 
 - Virtualización/pooling/LazyLoad y 500+ entradas (W) — lote de rendimiento aparte.
 - Tercer idioma / plurales (V).
 - Descripciones para 36/44 entradas, iconos (L203), galería Q, estética cozy (L29).
+
+---
+
+## 8. Iter. 6 — iconografía (2026-10-27, DeepSeek-V4.1-Flash, Log 2210)
+
+### 8.1 Suite nueva: `scripts/diario/test_diario_iconos_m55.gd`
+
+**MEDIDO: 56 checks / 0 fallos / EXIT 0 ×3 corridas, 0 SCRIPT ERROR.**
+Piso `CHECKS_MINIMOS = 56` **medido** en verde (bloques A 14 · B 17 · C 10 · D 11 · E 4).
+
+| Bloque | Qué ejercita |
+|---|---|
+| A | derivación del id: los 4 prefijos de familia, categorías sin familia, id sin prefijo, id que queda vacío |
+| B | resolución en 3 niveles, fallback nunca `null`, instancia cacheada, 16×16, `Button.icon` + `icon_max_width` como constante de tema |
+| C | inventario medido: aritmética (derivables+sin_familia==entradas), contrato con M46 (minerales y plantas resuelven), `iconos_ausentes()` == derivables − en_inventario, sin duplicados |
+| D | integración por fuente: el layer precarga y llama al resolutor, fila y detalle asignan icono, la secreta no, el service expone `icono`, el validador corre el bloque y tiene piso |
+| E | forma del catálogo M46: ≥40 ids, cada id declara `estado` y `familia` |
+
+**Guardián probado EN ROJO** (sonda con restauración byte-exacta, sha256
+`70c2ce01…` verificado tras restaurar):
+
+| Corrida | Resultado |
+|---|---|
+| control (sin mutar) | EXIT 0, 2,8 s |
+| inyección de aborto de runtime al inicio del bloque B | **EXIT 1**, 2,9 s (**sin cuelgue**), `[FALLO] el bloque B NO se ejecutó`, `[FALLO] solo 41 checks ejecutados (mínimo medido 56)`, resumen `41 checks, 2 fallo(s)` |
+
+La inyección usa un **intermedio sin tipo** (`var _pv: Variant = []` → `var _pboom: Dictionary = _pv`):
+un literal mal tipado sería `Parse Error` estático y no probaría el guardián de runtime.
+
+### 8.2 Regresión de las suites del módulo (todas EXIT 0, 0 SCRIPT ERROR)
+
+| Suite | Resultado |
+|---|---|
+| `test_diario.gd` | 0 fallo(s) |
+| `test_diario_ui.gd` | **89** checks / 0 fallos (sin cambios: el icono no altera el paso) |
+| `test_diario_perf_m55.gd` | **26** checks / 0 fallos (sin cambios) |
+| `test_diario_persist.gd` | 0 fallo(s) |
+| `validate_diary.gd` | **388** checks / 0 fallos / **3 avisos** (antes 3 avisos, ahora 2 de ellos son la deuda de iconografía medida) |
+
+`--check-only` sobre los 5 archivos tocados: **EXIT 0** y **0** `SCRIPT ERROR|Parse Error|Compile Error`.
+
+### 8.3 Efecto sobre las marcas (NO aplicado: lo aplica el director)
+
+| Ítem | Estado en disco | Propuesta | Evidencia |
+|---|---|---|---|
+| L203 icono faltante con fallback | `[ ]` | **`[x]`** | resolutor de 3 niveles + fallback procedural cacheado + bloque B (17 checks) |
+| L93 validar iconos de gemas/minerales | `[ ]` | **`[x]`** | `_validar_iconos()` + bloque C: 3/3 minerales y 2/2 plantas resuelven en el inventario M46 |
+| L20 modelo de entrada con `icono` | `[x]` (flip Beam sin sustento) | **`[x]` (ahora sí con evidencia)** | el campo existe, se expone por el service y tiene consumidor real (nivel 1 del resolutor) |
+| L117 iconografía de Sellos (M46) | `[ ]` | **sigue `[ ]`** | 0/7 sellos con id en el inventario; 3 vocabularios disjuntos (ver 04-Codigo iter. 6, hallazgo 2) |
+| L77 siluetas del bestiario (M46) | `[x]` (flip Beam sin sustento) | **bajar a `[ ]`** | el validador ya existe, pero 0/4 criaturas tienen id en el inventario M46: la iconografía no existe |
+| L85 iconos de hojas | `[x]` (flip Beam sin sustento) | **bajar a `[ ]`** | ídem: las 2 plantas sí resuelven, pero la validación de "hojas" como familia no tiene arte |
+
+Los 3 flips de Reflection-Beam-1.0 (L20/L77/L85) citan `03-Diseno.md §` **sin número de
+sección** y su propia nota dice "no hay validador / ICONO pendiente". Eran flips inflados
+cuando se aplicaron; L20 pasa a tener sustento real con esta iteración, L77/L85 no.

@@ -49,6 +49,14 @@ const FILAS_VENTANA_MIN: int = 8
 const FILAS_VENTANA_MAX: int = 24
 const FILAS_OVERSCAN: int = 2
 
+## Resolutor de iconos de entrada (iter. 6, DeepSeek-V4.1-Flash): deriva el id
+## del icono con las convenciones M46 y cae a un fallback generico cuando el
+## arte no existe. Nunca devuelve null (checklist L93/L117/L203).
+const ICONOS := preload("res://scripts/diario/iconos_diario.gd")
+## Lado del icono en la fila de la lista y en el detalle (px).
+const ICONO_FILA: int = 16
+const ICONO_DETALLE: int = 48
+
 var _categoria_actual: String = ""
 var _busqueda: String = ""
 var _filtro: int = Filtro.TODOS
@@ -89,6 +97,9 @@ var _lbl_refs_hdr: Label
 var _refs_box: VBoxContainer
 var _btn_det_fav: Button
 var _lbl_sin_sel: Label
+## Icono de la entrada seleccionada (iter. 6). Siempre tiene textura: si el
+## arte no existe, muestra el fallback generico del resolutor.
+var _icono_detalle: TextureRect
 
 
 func _ready() -> void:
@@ -294,6 +305,17 @@ func _crear_ui() -> void:
 	col_der.add_child(_lbl_det_hdr)
 
 	col_der.add_child(HSeparator.new())
+
+	# Icono de la entrada (iter. 6, L93/L117/L203). Tamano FIJO y dentro del
+	# ScrollContainer de la columna: no propaga minimo al panel (M53 L210).
+	_icono_detalle = TextureRect.new()
+	_icono_detalle.name = "IconoDetalle"
+	_icono_detalle.custom_minimum_size = Vector2(ICONO_DETALLE, ICONO_DETALLE)
+	_icono_detalle.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+	_icono_detalle.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+	_icono_detalle.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+	_icono_detalle.size_flags_horizontal = Control.SIZE_SHRINK_BEGIN
+	col_der.add_child(_icono_detalle)
 
 	_lbl_det_titulo = Label.new()
 	_lbl_det_titulo.name = "LblDetalleTitulo"
@@ -545,6 +567,17 @@ func _actualizar_ventana(first: int) -> void:
 		var b := _filas[i]
 		b.name = "Fila_" + String(e.get("id", ""))
 		b.text = _texto_fila(e)
+		# Icono de la fila (iter. 6): id derivado del catalogo M46 + fallback
+		# generico si el arte no existe. 16 px < FILA_ALTURA, no altera el paso.
+		var ico: Dictionary = ICONOS.resolver(
+			String(e.get("cat", "")), String(e.get("id", "")),
+			String(e.get("icono", "")))
+		b.icon = ico.get("textura", null)
+		b.expand_icon = false
+		# `Button.icon_max_width` NO existe como propiedad en 4.7.2 (medido: el
+		# assignment lanza SCRIPT ERROR y aborta el refresco): es una constante
+		# de TEMA. Se aplica por override.
+		b.add_theme_constant_override("icon_max_width", ICONO_FILA)
 		b.tooltip_text = String(e.get("titulo", ""))  # texto completo (checklist W)
 		b.custom_minimum_size = Vector2(0, FILA_ALTURA)
 		b.set_meta("entrada", (e as Dictionary).duplicate())
@@ -604,6 +637,7 @@ func _refrescar_detalle() -> void:
 		_lbl_det_dia.text = ""
 		_btn_det_fav.disabled = true
 		_btn_det_fav.set_pressed_no_signal(false)
+		_icono_detalle.texture = null
 		return
 	var secreta := bool(_sel.get("secreta", false))
 	var reg := bool(_sel.get("registrada", false))
@@ -613,9 +647,14 @@ func _refrescar_detalle() -> void:
 		_lbl_det_dia.text = ""
 		_btn_det_fav.disabled = true
 		_btn_det_fav.set_pressed_no_signal(false)
+		_icono_detalle.texture = null  # anti-spoiler: ni el icono de una secreta
 		return  # sin descripción ni refs: anti-spoiler (§3.2)
 	_lbl_det_titulo.text = String(_sel.get("titulo", ""))
 	_lbl_det_estado.text = _texto_estado(int(_sel.get("estado", 0)))
+	var ico: Dictionary = ICONOS.resolver(
+		String(_sel.get("cat", "")), String(_sel.get("id", "")),
+		String(_sel.get("icono", "")))
+	_icono_detalle.texture = ico.get("textura", null)
 	var dia := int(_sel.get("dia", 0))
 	_lbl_det_dia.text = (_t("DIARY.DIA") % str(dia)) if dia > 0 else ""
 	_btn_det_fav.disabled = false

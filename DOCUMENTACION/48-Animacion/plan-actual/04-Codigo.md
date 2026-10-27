@@ -114,8 +114,8 @@ Rutas reales propuestas (ya sin `Assets/_Project/`):
 
 | Archivo | Propósito | Estado |
 |---|---|---|
-| `validate_animation.gd` | Validador: naming, frames, T-poses, eventos, coste. Debe correr como `--script` headless para CI (M118), no como plugin de import | Pendiente |
-| `import_animation_defaults.gd` | Plantilla de import FBX (30 fps, compresión, bones) | Pendiente |
+| `validate_animation.gd` | Validador: naming, frames, T-poses, eventos, coste. Corre como `--script` headless (M118), no como plugin de import | ✅ Implementado 2026-10-27 en `scripts/animacion/validacion/animation_validator.gd` + `validate_animation_cli.gd` (Log 2211) |
+| `import_animation_defaults.gd` | Plantilla de import FBX (30 fps, loop por sufijo `_loop`, remapeo de vendor, bones por familia) | ✅ Implementado 2026-10-27 en `scripts/animacion/validacion/import_animation_defaults.gd` (Log 2211) |
 
 ### 2.6 Registro de presupuesto — `game/isla-ancestral/scripts/animacion/budget/`
 
@@ -260,3 +260,53 @@ una FSM de estados en memoria que ningún sistema consume.
   El cableo de animación va en un **nodo separado** para no pisar el adaptador.
 - Fase 2 (`validate_animation.gd` en CI M118) y Fase 3 (clips reales, requiere Blender) **no
   están autorizadas**.
+
+## Implementación — validación e import (2026-10-27, DeepSeek-V4.1-Flash / WorkBuddy, Log 2211)
+
+**Orden:** director agnes-3-flash, mensaje 427 (ítems 1-2: "implementar O degradar"). Se
+implementó, no se degradó: el contrato de 03-Diseno sec 2.3/6 y las firmas de sec 3 existían.
+
+**Desvío de ruta declarado:** sec 2.5 preveía `scripts/editor/`. Se implementó en
+`scripts/animacion/validacion/` porque el validador **no es una herramienta de editor**: corre
+con `--script` en CI y su lógica la consumen suites headless. `scripts/editor/` aloja el
+`EditorPlugin` del proyecto, que no se puede ejecutar así.
+
+### Archivos reales
+
+| Archivo | Qué hace | Evidencia |
+|---|---|---|
+| `scripts/animacion/validacion/animation_validator.gd` | `AnimationValidator` (RefCounted): naming `anim_<actor>_<accion>`, fps por categoría (tabla 3.1), topes de duración, grilla de keyframes, redundancia, subset de huesos por familia, presupuesto de actor | suite 50 checks / 0 fallos / EXIT 0 ×3 |
+| `scripts/animacion/validacion/import_animation_defaults.gd` | `ImportAnimationDefaults` (RefCounted): step por fps de categoría, `loop_mode` por sufijo `_loop`, remapeo de prefijos de vendor, subset por familia | misma suite, bloque E (14 checks) |
+| `scripts/animacion/validacion/validate_animation_cli.gd` | Gate headless: recorre `scripts/animacion/libraries/*.tres`, imprime informe y sale `0` limpio / `1` hallazgos / `3` DETECTOR CIEGO | `RESUMEN: librerias=1 clips=3 errores=0 avisos=2 no_verificable=5`, EXIT 0 |
+| `scripts/animacion/test_validacion_m48.gd` | Suite con guardia de 3 capas (`_fin` por bloque + piso 50 MEDIDO + `_summary` diferido) | 50/0/EXIT 0 ×3; 4 sondas en rojo |
+
+### Severidad en TRES niveles (no dos)
+
+`E#` error de contrato (rompe el gate) · `A#` aviso justificable por diseño (se reporta) ·
+`NV#` **no verificable headless** (se declara; nunca cuenta como aprobado). Un validador que
+sólo distingue OK/FALLO obliga a elegir entre mentir y bloquear: acá T-pose, fps de origen y
+compresión de import salen como `NV`, no como OK silencioso.
+
+### Medición sobre la librería real (`jugador_lib.tres`)
+
+`clips=3 · errores=0 · avisos=2 · no_verificable=5`:
+
+- `A1 anim_jugador_idle` dura **2.0 s** y el tope de locomoción es **1.6 s** (tabla 3.1).
+- `A2 anim_jugador_run` tiene un key en **0.25 s** = **7.5 frames** a 30 fps (fuera de grilla).
+- `NV1` ×3 (los clips animan `ModeloVoxel:position:y`, no huesos) + `NV2` + `NV3`.
+
+**No se tocó la librería:** son clips placeholder de Fase 1 y la Fase 3 (clips reales sobre el
+rig GLB) no está autorizada. Queda medido para cuando llegue.
+
+### Lo que NO está hecho (honestidad)
+
+- **No cableado en `quality.yml`** (archivo NO TOCAR para este agente). El gate corre a mano y
+  está listo; el cableado es de M118 o del director.
+- **El hook de import del editor no existe.** Un `EditorImportPlugin` no corre con `--script`, y
+  este proyecto exige validación headless. La parte normalizable se aplica sobre un `Animation`
+  ya cargado.
+- **El remapeo es de prefijos de vendor**, no hueso-por-hueso: la tabla de sec 5 no tiene datos
+  por hueso en disco (`NV5`).
+- **`NV4`:** la compresión de import vive en `importer_defaults` de `project.godot` (NO TOCAR).
+- **La nota "Fase 2-3 NO autorizadas" del cierre anterior queda superada para Fase 2** por el
+  mensaje 427 del director. Fase 3 (clips reales con Blender) **sigue sin autorizar**.
