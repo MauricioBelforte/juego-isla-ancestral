@@ -70,6 +70,12 @@ func _cargar_catalogo() -> void:
 		if id.is_empty():
 			continue
 		_logros[id] = {
+			# `id` dentro de la definicion (2026-10-26, residuo M72): la clave del
+			# diccionario ya era el id, pero `get_definicion()` devolvia el dict SIN
+			# el campo, mientras `get_estado()`/`get_todos()` si lo incluyen. Un
+			# consumidor no podia identificar la definicion que recibia. Additivo:
+			# ningun consumidor itera las claves de forma estricta.
+			"id": id,
 			"nombre": String(logro.get("nombre", id)),
 			"descripcion": String(logro.get("descripcion", "")),
 			# RF1: claves de traducción (nombre_i18n / descripcion_i18n). Si no
@@ -491,9 +497,70 @@ func validar_catalogo() -> int:
 			print("[M72][RF14] Problema: '%s' sin condición — definir condicion" % id)
 			continue
 		problemas += _validar_condicion(id, cond)
+	# Deuda de DEPENDENCIAS externas (2026-10-26, residuo M72): no es un defecto
+	# de FORMA del catalogo (eso es lo que cuenta `problemas`), pero antes era
+	# invisible. Se mide y se reporta con su numero en cada arranque.
+	var iconos := iconos_ausentes()
+	var claves := claves_i18n_ausentes()
+	if not iconos.is_empty() or not claves.is_empty():
+		print("[M72][DEUDA] %d icono(s) declarados sin archivo en disco (arte: %d PNG) y %d clave(s) i18n fuera de locales/es.po" % [
+			iconos.size(), iconos.size(), claves.size()])
 	if problemas == 0:
 		print("[M72][RF14] Catálogo OK: %d logros, 0 problemas" % _logros.size())
 	return problemas
+
+
+## ── Deuda de dependencias externas (residuo M72, 2026-10-26) ──
+## RF14 valida la FORMA del catalogo. Estos dos metodos miden dos dependencias
+## que antes eran INVISIBLES y que no son defectos de forma: el PNG del icono
+## (arte, pipeline de assets) y la clave de traduccion (locales/*.po, M88).
+## Se reportan aparte para que la deuda no se confunda con un catalogo roto,
+## pero con numero medido en cada arranque.
+
+func iconos_ausentes() -> Array[String]:
+	"""Ids de logro cuyo `icono` declarado no existe como archivo en disco."""
+	var out: Array[String] = []
+	for id in _logros:
+		var def: Dictionary = _logros[id]
+		var ruta := String(def.get("icono", ""))
+		if ruta.is_empty():
+			continue
+		if not FileAccess.file_exists(ruta):
+			out.append(String(id))
+	return out
+
+
+func claves_i18n_ausentes() -> Array[String]:
+	"""Claves i18n declaradas por el catalogo que no estan en locales/es.po."""
+	var disponibles := _msgids_po("res://locales/es.po")
+	var out: Array[String] = []
+	for id in _logros:
+		var def: Dictionary = _logros[id]
+		for campo in ["nombre_i18n", "descripcion_i18n"]:
+			var clave := String(def.get(campo, ""))
+			if clave.is_empty() or disponibles.has(clave):
+				continue
+			if not out.has(clave):
+				out.append(clave)
+	return out
+
+
+func _msgids_po(ruta: String) -> Dictionary:
+	"""Conjunto de msgid de un .po (una clave por linea, formato del proyecto)."""
+	var set_msgids := {}
+	var texto := FileAccess.get_file_as_string(ruta)
+	if texto.is_empty():
+		return set_msgids
+	for linea in texto.split("\n"):
+		var l := linea.strip_edges()
+		if not l.begins_with("msgid "):
+			continue
+		var clave := l.substr(6).strip_edges()
+		if clave.length() >= 2 and clave.begins_with("\"") and clave.ends_with("\""):
+			clave = clave.substr(1, clave.length() - 2)
+		if not clave.is_empty():
+			set_msgids[clave] = true
+	return set_msgids
 
 
 func _validar_condicion(id: String, cond: Dictionary) -> int:

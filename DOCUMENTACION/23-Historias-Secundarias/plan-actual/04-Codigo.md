@@ -1376,3 +1376,103 @@ Piso **891 → 923 MEDIDO en verde**: **923 / 0 / EXIT 0 ×3**, `SCRIPT ERROR: 0
 
 L99 `[ ]` → `[x]` con la cita de esta sección. Lo aplica la directora: el
 `05-Checklist.md` no lo edita este agente.
+
+## Iter. 25 — Integración con M24: el `ref` de los pasos puzzle no apuntaba a nada (Log 2209, 2026-10-26, DeepSeek-V4.1-Flash)
+
+Item **L92** del checklist («Definir la integración con el framework M24»), que
+llevaba abierto con la nota «M24 no se menciona en disco». **La premisa era
+falsa**: M24 existe (`DOCUMENTACION/24-Templos-Y-Puzzles`, **128 `[x]` / 0 / 0**,
+cerrado) y su framework está en `scripts/templos/` (43 scripts; `PuzzleDef`,
+`PuzzleRoom`, `PuzzleRecompensas`).
+
+### Lo medido antes de escribir código
+
+| Medición | Valor |
+|---|---|
+| Pasos `tipo: "puzzle"` en las 82 cadenas cargadas | **77** (en 77 cadenas) |
+| `ref` distintos | **77** |
+| `ref` que resuelven contra el catálogo de M24 (`data/templos/puzzles/**`) | **0** (ni por substring) |
+| Puzzles en el catálogo de M24 | **28** (13 tipos; `presion` ×4, `multilateral` ×2) |
+| Puzzles de M24 usados por alguna cadena de M23 | **0 de 28** |
+| Llamadas de RUNTIME a `reportar_paso(..., "puzzle", ...)` | **0** (todas las del repo son de tests) |
+| Validación de referencias en `validar_cadenas()` | **ninguna** (ni `ref`, ni `lugar`, ni `npc`, ni `objeto`) |
+
+Conclusión: el paso `puzzle` era un **tipo muerto**. El `ref` no identificaba
+nada, ningún sistema lo completaba en runtime y el validador no lo veía. Los 77
+refs son nombres narrativos (`receta-pan-fiesta`, `nudos-red`, `tinta-de-escamas`),
+no puzzles emisor→receptor de M24, así que un mapeo 1:1 automático habría sido
+inventar semántica.
+
+### Entregado
+
+- **`scripts/historias/puzzle_bridge_m24.gd`** (nuevo, `class_name PuzzleBridgeM24`,
+  `RefCounted` + `static`): `catalogo()` escanea `data/templos/puzzles/**` y devuelve
+  `{id: ruta}`; `resolver(ref, cat)` clasifica `m24` / `narrativo` / `vacio`;
+  `clasificar(cadenas, cat)` y `clasificar_servicio(servicio, cat)` recorren los pasos
+  puzzle; `m24_sin_uso(cat, clasif)` mide el sentido inverso del cruce;
+  `sala_de(ref, cat)` construye la `PuzzleRoom` con la API **real** de M24
+  (`PuzzleDef.cargar` → `PuzzleDef.a_puzzle_room`); `conectar(sala, servicio, cadena_id)`
+  encadena el `al_cambiar` previo y reporta el paso cuando `sala.completada`.
+- **`secondary_stories_service.gd`** (2 métodos read-only nuevos + 1 refactor):
+  `ids_cadenas()` (universo completo, incluye ocultas y postgame) y
+  `ref_paso_actual(cadena_id)`; `reportar_paso()` ahora toma la evidencia esperada de
+  `ref_paso_actual()` en vez de recalcularla inline, así la evidencia esperada tiene
+  **una sola fuente de verdad** y el puente no puede divergir del motor.
+- **`scripts/historias/test_m23_l92_m24.gd`** (nuevo): bloques A–F, **36 checks**
+  (piso 36 **MEDIDO**, no estimado).
+
+### Evidencia de la suite
+
+`36 / 0 / EXIT 0 ×3`, `SCRIPT ERROR: 0`. Cruces en las dos direcciones y por caminos
+independientes: el catálogo de M24 se cuenta también con `DirAccess` en la propia
+suite (28 disco = 28 API) y cada puzzle se re-valida con `PuzzleDef.validar_def()`;
+los `ref` de cada cadena se comparan servicio↔JSON crudo cadena por cadena (82/82
+coinciden). Bloque D: `cadena-faro` (hablar → explorar → **puzzle** → entregar) se
+avanza hasta el puzzle, se construye una sala real de M24, se cablea y se completa
+encendiendo el objetivo; el puente reporta el paso, la cadena **sigue activa**
+(avanzó exactamente 1 paso: el ref esperado pasa de `faro-linterna` a
+`farol_cargado`) y cierra con el `entregar`.
+
+**Guardián probado EN ROJO** por inyección de un aborto de runtime (`null.get_name()`)
+al inicio del bloque C: la suite nombra `["C"]`, dispara el piso (`33 < 36`) y sale
+**EXIT 1** sin colgarse. Sonda retirada y `sha256` restaurado byte-exacto
+(`ca1807f547c632ddfdffd287bf006008ab1cc2e7be632627f23c95a0f954a999`).
+
+**Regresión** (se tocó el servicio, que es núcleo de M23/M59): `test_historias` 923/0,
+`test_m23_l92_m24` 36/0, `test_carga_npc_misiones_m59` 63/0,
+`test_fecha_diario_cola_m59` 45/0 — **1067 checks, 0 fallos, 4/4 EXIT 0**, 0
+`SCRIPT ERROR`.
+
+### Hallazgos colaterales
+
+- **`cadena-faro` está duplicada** en `secundarias.json` y `cadenas_ejemplo.json` con
+  `ref` de puzzle **distinto** (`faro-linterna` vs `M25-faro-linterna`). El merge la
+  rechaza por conflicto y gana el principal, pero el dato divergente sigue en disco:
+  es una trampa para cualquier herramienta que lea los dos archivos sin replicar la
+  regla de precedencia. La suite lo documenta y replica la precedencia.
+- **84 cadenas crudas → 82 cargadas**: 81 del principal + 2 nuevas de ejemplos
+  (`cadena-biblioteca`, `cadena-postgame-plaza`) − 1 rechazada
+  (`cadena-postgame-plaza`, tipo `construir` desconocido); `cadena-faro` de ejemplos
+  se descarta por conflicto. Por eso los pasos puzzle cargados son **77** y no 78.
+- **`templo_24` / `templo_25` / `templo_26`** (los `lugar` de 3 cadenas del cluster
+  Puzzles) existen **solo** en `secundarias.json` y en la suite: no están en los datos
+  de M24 (`templo_subterraneo` es el único templo con id propio). Misma familia de
+  referencia colgante que los `ref`.
+
+### Lo que NO se hizo (y por qué)
+
+- **No se asignó ningún puzzle de M24 a las 6 cadenas del cluster Puzzles.** Elegir qué
+  puzzle (`simbolos_01` para las 24 marcas, `agua_*` para las 26 mareas…) es una
+  decisión de contenido y cambia la evidencia que hoy usan los tests; el contrato ya lo
+  soporta sin tocar el esquema. Se propone al director.
+- **No se agregó un campo `puzzle_m24` a los datos**: la clasificación es derivada del
+  catálogo, así no hay dos fuentes de verdad ni 77 ediciones de datos.
+- **No se tocó `validar_cadenas()`** para exigir resolución de referencias: hoy
+  reportaría 77+ errores y rompería el contrato de forma; es un cambio de gate que
+  requiere GO.
+
+### Flip propuesto, NO aplicado
+
+L92 `[ ]` → `[x]` con la cita de esta sección: el contrato está definido, implementado
+y medido. M23 pasaría a **90 `[x]` / 13 `[ ]` / 2 `[?]` = 105**. Lo aplica la
+directora: el `05-Checklist.md` no lo edita este agente.

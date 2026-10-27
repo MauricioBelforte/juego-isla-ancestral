@@ -81,6 +81,26 @@ las otras 77 son contenido de M55 (hallazgo reportado a la directora).
 - **M36:** el museo alimenta misiones de colección (minerales, peces, murales).
 - **M37:** los comerciantes ofrecen misiones; recompensas en especie (nunca duplicadas — M66).
 - **M66:** todo requisito y referencia es verificable (sin softlocks de cadena).
+- **M24 (framework de puzzles) — contrato definido el 2026-10-26 (item L92, Log 2209).**
+  El `ref` de un paso `tipo: "puzzle"` es la **evidencia** que el dueño del puzzle debe
+  reportar a `reportar_paso(cadena_id, "puzzle", ref)`. El puente
+  `scripts/historias/puzzle_bridge_m24.gd` clasifica cada `ref` contra el catálogo real
+  de M24 (`data/templos/puzzles/**`, **28** puzzles medidos) en dos niveles:
+  - **Tier A — `m24`:** el `ref` es un id del catálogo de M24. `sala_de(ref)` construye
+    la `PuzzleRoom` con la API de M24 (`PuzzleDef.cargar` + `PuzzleDef.a_puzzle_room`) y
+    `conectar(sala, servicio, cadena_id)` reporta el paso cuando la sala queda
+    `completada` (gancho `al_cambiar`), usando `ref_paso_actual()` como evidencia para
+    que no existan dos fuentes de verdad.
+  - **Tier B — `narrativo`:** el `ref` NO es un puzzle de M24; lo completa el sistema
+    narrativo (M19 diálogo / M14 inventario) reportando la misma evidencia. Es deuda
+    **medida** por la suite, no silencio.
+  - **`vacio`:** paso `puzzle` sin `ref` — defecto real de datos (hoy 0).
+  **Estado medido:** 77 pasos puzzle en 77 cadenas cargadas → **0 en Tier A, 77 en
+  Tier B, 0 vacíos**; los 28 puzzles de M24 no son usados por ninguna cadena. Asignar
+  puzzles reales a las 6 cadenas del cluster Puzzles queda como decisión de diseño
+  (propuesta en el Log 2209); el contrato ya la soporta sin cambios de esquema.
+  Nota: `validar_cadenas()` **no** valida referencias (ni `ref`, ni `lugar`, ni `npc`,
+  ni `objeto`), así que la clasificación del puente es hoy la única medición de esa deuda.
 
 ## QA
 

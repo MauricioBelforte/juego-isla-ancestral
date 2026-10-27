@@ -241,6 +241,17 @@ func get_cadena(cadena_id: String) -> Dictionary:
 	return _cadenas.get(cadena_id, {})
 
 
+## Ids de TODAS las cadenas cargadas, incluidas las ocultas y las de postgame.
+## (cadenas_disponibles() filtra por estado de mundo y por oculta/postgame; el
+## puente de M24 necesita el universo completo para clasificar sus referencias.)
+func ids_cadenas() -> Array[String]:
+	var out: Array[String] = []
+	for cid in _cadenas:
+		out.append(String(cid))
+	out.sort()
+	return out
+
+
 func esta_completada(cadena_id: String) -> bool:
 	return _estado.has(cadena_id) and bool(_estado[cadena_id].get("completada", false))
 
@@ -271,6 +282,24 @@ func iniciar_cadena(cadena_id: String) -> Dictionary:
 	return {"ok": true, "motivo": ""}
 
 
+## Referencia esperada del paso ACTUAL de una cadena: npc / lugar / objeto / ref,
+## en ese orden de precedencia (el mismo que exige reportar_paso). "" si la cadena
+## no existe, no esta activa o no le quedan pasos.
+## Es la UNICA fuente de verdad de la evidencia esperada: reportar_paso() la usa y
+## el puente de M24 (puzzle_bridge_m24.gd, item L92) tambien, asi no pueden divergir.
+func ref_paso_actual(cadena_id: String) -> String:
+	if not _cadenas.has(cadena_id):
+		return ""
+	var pasos: Array = (_cadenas[cadena_id] as Dictionary).get("pasos", [])
+	var idx := 0
+	if _estado.has(cadena_id):
+		idx = int((_estado[cadena_id] as Dictionary).get("paso_actual", 0))
+	if idx < 0 or idx >= pasos.size():
+		return ""
+	var paso: Dictionary = pasos[idx]
+	return String(paso.get("npc", paso.get("lugar", paso.get("objeto", paso.get("ref", "")))))
+
+
 ## El sistema dueño del paso (M19 diálogo, M25 puzzle, M14 inventario) reporta
 ## que el paso actual fue cumplido. El motor valida el tipo y avanza.
 func reportar_paso(cadena_id: String, tipo: String, evidencia: String) -> Dictionary:
@@ -285,7 +314,7 @@ func reportar_paso(cadena_id: String, tipo: String, evidencia: String) -> Dictio
 	if String(paso.get("tipo", "")) != tipo:
 		return {"ok": false, "motivo": "tipo incorrecto: esperado %s" % String(paso.get("tipo", ""))}
 	# Referencia esperada del paso (npc/lugar/objeto/ref) — evidencia debe coincidir
-	var esperado := String(paso.get("npc", paso.get("lugar", paso.get("objeto", paso.get("ref", "")))))
+	var esperado := ref_paso_actual(cadena_id)
 	if esperado != "" and _slug(evidencia) != _slug(esperado):
 		return {"ok": false, "motivo": "evidencia incorrecta: esperado %s" % esperado}
 	# Avanzar

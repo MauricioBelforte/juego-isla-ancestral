@@ -496,3 +496,136 @@ Deuda declarada de M72 (no de esta tanda, medida el 2026-10-26):
   existe (`{}` -> `d.id` lanza SCRIPT ERROR).
 - Los 18 `icono` apuntan a `res://assets/ui/logros/`, directorio inexistente.
 - Las claves `LOGROS.*` no estan en ningun `.po`.
+
+
+---
+
+## Iter. 26 (2026-10-26, DeepSeek-V4.1-Flash) — Residuo: las 4 deudas cerradas con medicion
+
+Log 2208. Disparador: mensaje 421 de la directora agnes-3-flash ("Tu proximo riel: M72
+residuo, los 4 hallazgos"). **No se copio ninguna cifra de la nota de la iter. 25**: las
+cuatro se midieron con el binario real antes de tocar codigo.
+
+### 1. `test_logros.gd` estaba MUERTA y publicaba `0 fallo(s)`
+
+Medido: `SCRIPT ERROR: Invalid assignment of property or key '_desbloqueados' with value
+of type 'Array' on a base object of type 'Node (achievement_service.gd)'` en L294.
+`_desbloqueados` es `Array[String]` (`achievement_service.gd:44`) y el test le asignaba un
+`Array` sin tipar. Un `SCRIPT ERROR` de runtime aborta **solo** la funcion donde ocurre:
+`_test_guardado_carga_rf9_rn8()` moria, sus 6 checks no corrian, el resumen se imprimia
+igual (`0 fallo(s)`) y el proceso salia **EXIT 0**.
+
+Endurecido con las 3 capas: contador `_checks`, piso `CHECKS_MINIMOS = 72` **medido en
+verde** (el primer valor escrito fue 74 por estimacion y el medido real fue 72), `BLOQUES`
+(20) con `_fin()` al final de cada bloque, y `_summary()` en un `call_deferred` **separado**
+del de `_run()` para que un aborto no se lleve el resumen.
+
+Fix del aborto: `_ach._desbloqueados.clear()` + `.append("logro_primer_sello")` — se usa el
+array tipado REAL en vez de asignar un `Array` sin tipar (sin cast fragil).
+
+**2 aserciones infalsificables eliminadas** (`_check(true, ...)`):
+- RN7 (toasts): el test desbloqueaba `logro_primer_sello`, que en ese punto **ya estaba
+  desbloqueado** (`desbloquear()` devuelve `false` y no emite toast) y luego afirmaba
+  `true`: vacio por partida doble. Ahora ejercita el guard real (`_emitir_toast`) y observa
+  `_toast_buffer` en las dos direcciones (con `_toasts_disabled = true` NO crece; con
+  `false` SI crece: control positivo).
+- RF7 (`panel_solicitado`): ahora conecta un Callable, emite y afirma que llego 1 vez con
+  payload `"logros"`.
+
+Guarda nueva en `_test_ocultos()`: si `logro_secreto_guardian` no aparece en el listado, el
+bloque corria **0 checks**; ahora es un fallo explicito.
+
+Medicion: **72 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR. Guardian **EN ROJO x2**
+(aborto inyectado: `[FAIL] bloques ... ["api_rf10"]` + `[FAIL] solo 65 checks (minimo 72)`
++ EXIT 1; asercion falsa: 72/1/EXIT 1), restauracion byte-exacta sha256
+`c22750f9ea4547ae`.
+
+**Consecuencia en CI (hallazgo colateral):** `quality.yml:527` corre esta suite y, como
+siempre salia 0, el gate de M72-core era un **no-op** (familia trampa 81). Con el
+endurecimiento el gate pasa a poder fallar. No se toco `quality.yml` (limite duro).
+
+### 2. `test_logros_rf10_m72.gd`: id inexistente + contrato del API
+
+Medido: `get_definicion("primer_sello")` — id que NO existe (el real es
+`logro_primer_sello`). `get_definicion()` devuelve `_logros.get(id, {})`, o sea un
+Dictionary **vacio y nunca `null`**; el test hacia `d.id` sobre `{}` -> `SCRIPT ERROR` ->
+`_test_get_definicion` abortaba, sus 2 checks no corrian y la suite publicaba
+`OK=23 FALLOS=0` + **EXIT 0**.
+
+Corregido: id real, contrato real medido (`{}` vacio) y las mismas 3 capas (piso
+**27 MEDIDO**, `BLOQUES` de 4, `_reportar()` diferido aparte). Medicion: **27/0/EXIT 0 x3**.
+Guardian EN ROJO: 9 checks, nombra `["todos"]`, EXIT 1.
+
+**Defecto de API corregido (aditivo):** `_logros[id]` no guardaba el campo `id` (el id era
+la clave del diccionario) mientras `_estado_de()` si lo agrega. O sea `get_definicion(id)`
+devolvia una definicion que **no se identificaba a si misma**, y `get_estado(id)` si. Se
+agrego `"id": id` en `_cargar_catalogo()`. Verificado que ningun consumidor itera las
+claves de forma estricta: los unicos externos son `sfx_manager.gd` y `test_postgame.gd`
+(senal `logro_desbloqueado` y `get_todos`).
+
+### 3 y 4. Iconos e i18n: de invisibles a MEDIDAS
+
+Medido: los 18 `icono` apuntan a `res://assets/ui/logros/*.png` y **`assets/ui/` no
+existe**. En el repo hay 300 PNG y **los 300 estan en `assets/2d/items_m159`**;
+`assets/2d/ui` y `assets/2d/iconos` solo tienen `.gitkeep`. Las 36 claves `LOGROS.*`
+(18 x `nombre_i18n` + `descripcion_i18n`) tienen **0** apariciones en `locales/es.po` y
+**0** en `en.po`.
+
+No se invento arte ni se toco el `.po` ajeno (**M88 esta en NO TOCAR**). Lo que se cerro es
+la parte propia: **que la deuda deje de ser invisible**.
+
+`achievement_service.gd` suma:
+- `iconos_ausentes() -> Array[String]`: ids cuyo `icono` declarado no existe en disco
+  (`FileAccess.file_exists`).
+- `claves_i18n_ausentes() -> Array[String]`: claves del catalogo ausentes de
+  `locales/es.po`.
+- `_msgids_po(ruta) -> Dictionary`: parser de `msgid` del `.po`.
+
+`validar_catalogo()` imprime en cada arranque `[M72][DEUDA] 18 icono(s) declarados sin
+archivo en disco (arte: 18 PNG) y 36 clave(s) i18n fuera de locales/es.po`. **No**
+incrementan `problemas`: RF14 valida la FORMA del catalogo (ids, categorias, condiciones,
+steam ids) y esto es dependencia externa (arte / M88). Mezclarlos habria roto el contrato
+"0 problemas" que afirman `test_logros`, `test_logros_rf1_e` y `test_logros_m72_statids`.
+
+Suite nueva `scripts/logros/test_m72_deuda_assets.gd` — **no fija cifras: cruza**:
+- Bloque A: para cada logro, `(id en iconos_ausentes()) == (not FileAccess.file_exists(icono))`
+  en las DOS direcciones (invariante, no numero).
+- Bloque B: cada clave reportada como ausente NO aparece como `msgid "..."` en el texto
+  crudo del `.po` (camino independiente del parser) + clasificacion completa de las 36.
+- Bloque C (guarda de CEGUERA): el parser debe leer > 50 msgid y reconocer una clave
+  conocida (`MAIN_MENU.PLAY`). Un parser roto devuelve `{}`, entonces TODAS las claves
+  parecen ausentes y el numero sube pareciendo correcto.
+- Bloque D: `validar_catalogo()` sigue en 0 problemas.
+
+Medicion: **9 checks / 0 fallos / EXIT 0 x3**, piso 9 MEDIDO, `[MEDIDO] iconos ausentes: 18
+de 18`, `[MEDIDO] claves i18n ausentes: 36`. Sondas EN ROJO 2: API ciega
+(`iconos_ausentes() -> []`) -> los 18 desalineados + EXIT 1; asercion falsa -> EXIT 1.
+Restauraciones byte-exactas (sha256 `18eb6a6fd9a8b0e2` servicio, `68ee9ba54d09617a` suite).
+
+### Lo que queda abierto (decision externa, no codigo)
+
+1. **36 claves `LOGROS.*` en `locales/es.po` + `en.po`**: M88 es NO TOCAR -> GO pedido.
+   Dato para decidir: hoy **nadie** traduce `nombre_i18n` (`tr(` en el servicio = 0), asi
+   que agregarlas sin cablear el `tr()` en el consumidor las deja decorativas.
+2. **18 PNG de icono**: no existe arte de UI en el repo. Opciones: pipeline de assets,
+   quitar el `icono` (rompe RF1) o repuntar (no hay set: los 300 PNG son texturas de
+   items).
+3. **Cablear `test_m72_deuda_assets.gd` en `quality.yml`**: limite duro, pedido.
+
+### Regresion medida
+
+| suite | resultado |
+|---|---|
+| test_logros | 72 / 0 / EXIT 0 x3 |
+| test_logros_rf10_m72 | 27 / 0 / EXIT 0 x3 |
+| test_logros_rf13_m72 | 3 / 0 / EXIT 0 |
+| test_logros_m72_statids | 9 / 0 / EXIT 0 |
+| test_logros_rf1_e | 39 / 0 / EXIT 0 |
+| test_m72_rf6_m72 | 7 / 0 / EXIT 0 |
+| test_logros_depende_de_m72 | 6 / 0 / EXIT 0 |
+| test_m72_deuda_assets (nueva) | 9 / 0 / EXIT 0 x3 |
+| test_postgame (M75, consume M72) | 86 / 0 / EXIT 0 |
+| test_sfx_m43 (consume la senal) | OK / EXIT 0 |
+
+`--check-only` sobre `achievement_service.gd`: EXIT 0. **0 flips aplicados**: M72 esta en
+200 [x] / 0 [ ] / 0 [?] y los 4 hallazgos eran defectos DENTRO de items ya marcados.
