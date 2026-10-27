@@ -13,6 +13,10 @@ extends SceneTree
 ##      esa suite está en tests/Obsoletos/, ver su cabecera).
 ##   4. El banner ÉXITO exige EVIDENCIA: suites ejecutadas + excluidas ==
 ##      descubiertas, tests reportados > 0, 0 fallos, 0 timeout, rc 0.
+##   5. Una suite que da TIMEOUT dentro del POOL se RE-MIDE EN SERIE antes de
+##      declararse fallida (2026-10-27): el timeout es contencion del pool sobre
+##      la salida final del motor, no un fallo de la suite (evidencia en
+##      _correr_scenetree). El reintento no tolera fallos reales.
 ##
 ## Nota de captura (misma lección que test_regresion_templos.gd): en este build
 ## `OS.execute` NO captura el stdout de un Godot hijo; cada corrida va envuelta
@@ -317,7 +321,22 @@ func _correr_scenetree(ruta: String, en_pool: bool = false) -> void:
 	print("\n[SUITE SceneTree] %s" % ruta)
 	var t0 := Time.get_ticks_msec()
 	var timeout_ms := POOL_TIMEOUT_MS if en_pool else TIMEOUT_MS
-	var r := await _ejecutar_con_redirect(["--headless", "--path", "res://", "--script", ruta], timeout_ms, en_pool)
+	var args := ["--headless", "--path", "res://", "--script", ruta]
+	var r := await _ejecutar_con_redirect(args, timeout_ms, en_pool)
+	if r["timeout"] and en_pool:
+		# REINTENTO EN SERIE tras un TIMEOUT en el pool (medido 2026-10-27).
+		# EVIDENCIA: dos corridas consecutivas del CI colgaron suites DISTINTAS
+		# (res://tests/test_m166_h12_variantes.gd y res://tests/unit/data/
+		# test_item_data.gd) y ambas pasan EN SERIE en < 10 s. Causa: contencion
+		# del pool (6 workers) sobre la salida final del motor (deinit de Voxel
+		# Tools) que TODAS las suites pagan al arrancar los autoloads (Bootstrap
+		# carga main_island.tscn) -> el proceso hijo no termina de salir dentro
+		# del tope de 300 s. NO es un fallo de la suite.
+		# El reintento NO tolera fallos: si la suite vuelve a fallar (rc != 0 o
+		# checks con fallos) el fallo se reporta igual. Solo se re-mide el
+		# TIMEOUT, que es un artefacto de contencion.
+		print("  [REINTENTO] TIMEOUT en pool (>%ds) -> se re-mide en serie" % [timeout_ms / 1000])
+		r = await _ejecutar_con_redirect(args, TIMEOUT_MS, false)
 	var dt := (Time.get_ticks_msec() - t0) / 1000.0
 	var texto: String = r["salida"]
 	var exit := int(r["rc"])

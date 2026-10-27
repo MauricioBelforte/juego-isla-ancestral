@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
 
 # 01-Requerimientos.md — Módulo 20: Sistema de Amistad
 
@@ -208,6 +208,41 @@ Las cartas son un sistema de comunicación asíncrona entre el jugador y los NPC
 - Cartas enviadas: se guardan en el archivo de partida (M59/M60) como array de {npc_id, tipo, objeto_adjunto, fecha_envio}
 - Cartas recibidas: se guardan en el buzón del jugador (inventario especial, no ocupa slots normales)
 - Cartas leídas: se marcan como leídas pero se conservan (el jugador puede re-leerlas)
+
+---
+
+## 6. CATÁLOGO DE LOS 26 PUNTOS DE LA SECCIÓN 19 (PLAN MAESTRO)
+
+| # | Punto (plan maestro §19) | Resolución en M20 | Dónde / Referencia | Estado |
+|---|---|---|---|---|
+| 1 | Definir puntos de amistad | Puntos por acción: regalo (amado 20 / gusta 10 / neutral 5 / duplicado 2), charla (5 + nivel-1), carta (8), cumpleaños (15 + 5 bonus) | §5.2, 03-Diseno §4, GiftEvaluator.PUNTOS | Resuelto (RF2) |
+| 2 | Definir niveles | 11 niveles (umbrales 0..500) data-driven en amistad_config.tres, inyectados en VecinoAmistad | §5.1, amistad_config.tres | Resuelto (RF1) |
+| 3 | Definir desbloqueos | recompensas_nivel por nivel + beneficios_por_nivel en data/balance/friendship.json | §5.1, data/balance/friendship.json | Resuelto |
+| 4 | Definir regalos | GiftEvaluator (4 clases), extracción integrada del inventario | §5.3, §5.4, regalar() | Resuelto |
+| 5 | Definir preferencias | gustos/disgustos M19 cacheados en FriendshipService → VecinoData | §5.3, _get_vecino_data() | Resuelto |
+| 6 | Definir conversaciones | charla diaria: 5 + (nivel-1) máx 10, 1/día/vecino | §5.2, charla() | Resuelto |
+| 7 | Definir eventos | cumpleaños (celebrar_cumpleanos, carta CUMPLEANOS, bonus); eventos convocables (visita/picnic/reunión/cumpleaños/festival) → **DEUDA: FriendshipEvent no implementado** | §5.4, _verificar_cumpleanos_hoy() | Parcial (cumpleaños OK; eventos convocables deuda) |
+| 8 | Definir visitas | RF8 → **DEUDA** (FriendshipEvent) | | Pendiente |
+| 9 | Definir invitaciones | cartas con adjunto + carta CUMPLEANOS (NPC → jugador) | §5.8, enviar_carta(), _recibir_carta_npc() | Resuelto (cartas) |
+| 10 | Definir recompensas | recompensas_nivel + bandeja bajo demanda (get_recompensas_pendientes) | §5.1, RECOMPENSAS_NIVEL | Resuelto |
+| 11 | Definir reacciones | reaction_id (R_AMADO/R_GUSTA/R_NEUTRAL/R_DUPLICADO) + señales regalo_entregado/charla_realizada/carta_recibida/nivel_subido/evento_celebrado | §5.3, GiftEvaluator._reaccion(), señales | Resuelto |
+| 12 | Definir pérdida de relación si corresponde | **DECISIÓN DOCUMENTADA:** NO hay pérdida (Alternativa B acumulativa, sin decaimiento) | 02-Analisis Alternativa B, §5.6 | Resuelto por decisión (sin pérdida) |
+| 13 | Definir límites | 1 regalo + 1 charla + 1 carta + 1 cumpleaños por vecino/día | §5.7, LIMITE_DIARIO, intentar_usar_limite() | Resuelto |
+| 14 | Evitar sistema excesivamente repetitivo | límites diarios + clase DUPLICADO (memoria de regalos previos) | §5.4, §5.7, ha_regalado() | Resuelto |
+| 15 | Crear momentos únicos | recuerdos narrativos: primer_regalo, cumpleaños_anio_N | §5.5, agregar_recuerdo() | Resuelto (memoria) |
+| 16 | Crear historias de personaje | M23 (misiones consultan nivel y memoria) | Relación M23 | Compartido con M23 (fuera de alcance M20) |
+| 17 | Crear secretos | M23/M21 (diálogos por nivel) | Relación M23/M21 | Compartido |
+| 18 | Crear finales personales | M23 | Relación M23 | Compartido |
+| 19 | Crear consecuencias sociales | M21 (reacción de diálogo al subir nivel via amistad_<npc_id>) | Relación M21, WorldStateService._get_amistad() | Compartido |
+| 20 | Crear recuerdos de NPC | memoria de regalos + recuerdos narrativos (primer_regalo, cumpleaños) | §5.5, _regalos_recibidos, _recuerdos | Resuelto |
+| 21 | Crear relaciones entre NPC | **DEUDA** (no implementado en M20) | | Pendiente |
+| 22 | Crear cambios de rutina | **DEUDA** (M20 no toca IA M19; item 128 abierto en checklist) | 05-Checklist ítem 128 | Pendiente |
+| 23 | Crear eventos colectivos | **DEUDA** (solo evento_celebrado cumpleaños implementado) | | Pendiente |
+| 24 | Crear eventos estacionales | M31/M32 (clima/estaciones) — relaciones laterales | Relación M31/M32 | Compartido |
+| 25 | Crear escenas especiales | **DEUDA** (no hay escenas de amistad) | | Pendiente |
+| 26 | Crear misiones de amistad (§22) | M23 (misiones consultan nivel mínimo + memoria) + §5.5 | Relación M23 | Compartido con M23 |
+
+> **Leyenda:** **Resuelto** = implementado y cubierto por tests; **Parcial** = núcleo implementado, extensión declarada como deuda; **Compartido** = el diseño existe en M20 pero la ejecución corresponde a otro módulo (M21/M23/M31/M32); **Pendiente** = no implementado, queda como deuda técnica explícita.
 
 ---
 

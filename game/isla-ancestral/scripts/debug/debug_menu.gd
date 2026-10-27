@@ -11,9 +11,23 @@
 extends Node
 
 const RUTA_CONFIG := "res://data/debug/debug_menu_config.json"
+## M110 (iter. DeepSeek-V4.1-Flash 2026-10-27): persistencia del ESTADO del
+## menu (geometria, paneles, toggles, filtros de consola) en `user://`.
+## El config de pestanas/comandos sigue en `res://` y es de SOLO LECTURA
+## (el build exportado no es escribible; el estado de sesion si).
+const RUTA_ESTADO := "user://debug_menu_estado.json"
+const VERSION_ESTADO: int = 1
 
 var config: Dictionary = {}
 var visible: bool = false
+## Estado persistible — seccion N. Configuracion y persistencia.
+var _geom_pos: Vector2i = Vector2i(64, 64)
+var _geom_tam: Vector2i = Vector2i(640, 400)
+var _paneles_visibles: Dictionary = {}
+var _filtros_consola: Dictionary = {"nivel": -1, "categoria": -1, "busqueda": "", "autoscroll": true}
+## Verdadero si el estado en memoria difiere del disco: solo entonces se
+## reescribe el archivo (un arranque sin tocar nada no genera escrituras).
+var _estado_sucio: bool = false
 var _comandos_ejecutados: int = 0
 ## RF14/16/18: toggles visuales
 var _show_colliders: bool = false
@@ -35,10 +49,17 @@ signal estacion_solicitada(estacion: int)
 signal clima_solicitado(tipo_clima: int)
 ## RF H: consola ligada al logger
 var _console_lines: Array[String] = []
+## M110 iter. 2026-10-27: la misma consola con nivel/categoria, para que los
+## filtros (N) puedan discriminar. `_console_lines` se mantiene intacta para
+## no romper `console_get_lines()`.
+var _console_entradas: Array[Dictionary] = []
 const CONSOLA_MAX_LINEAS: int = 100
 
 func _ready() -> void:
 	_cargar_config()
+	_cargar_estado()
+	## Q: acciones de input en runtime (§6) — `project.godot` es NO TOCAR.
+	_registrar_acciones()
 	_registrar_servicio()
 	_conectar_logger()
 	if not OS.is_debug_build():
@@ -55,6 +76,488 @@ func _cargar_config() -> void:
 	if typeof(parsed) == TYPE_DICTIONARY:
 		config = parsed
 
+
+## ── N. Configuracion y persistencia (estado del menu) ───────────────────────
+## El estado de SESION (posicion/tamano del panel, visibilidad de paneles,
+## estado de los 6 toggles y filtros de consola) se guarda en
+## `user://debug_menu_estado.json`, separado del config de `res://`.
+## Fail-closed: si el archivo no existe, no parsea o trae otra VERSION, se
+## usan los defaults y NO se pisa el archivo hasta que el usuario cambie algo.
+
+func _defaults_estado() -> Dictionary:
+	return {
+		"version": VERSION_ESTADO,
+		"posicion": [64, 64],
+		"tamano": [640, 400],
+		"paneles": {},
+		"toggles": {
+			"colliders": false,
+			"chunks": false,
+			"hitboxes": false,
+			"fps": false,
+			"navigation": false,
+			"ai_states": false,
+		},
+		"filtros_consola": {"nivel": -1, "categoria": -1, "busqueda": "", "autoscroll": true},
+	}
+
+
+func estado_actual() -> Dictionary:
+	## Foto serializable del estado. Es la unica fuente de `save_config()`,
+	## asi que lo que se guarda y lo que se lee no pueden divergir.
+	return {
+		"version": VERSION_ESTADO,
+		"posicion": [_geom_pos.x, _geom_pos.y],
+		"tamano": [_geom_tam.x, _geom_tam.y],
+		"paneles": _paneles_visibles.duplicate(true),
+		"toggles": {
+			"colliders": _show_colliders,
+			"chunks": _show_chunks,
+			"hitboxes": _show_hitboxes,
+			"fps": _show_fps,
+			"navigation": _show_navigation,
+			"ai_states": _show_ai_states,
+		},
+		"filtros_consola": _filtros_consola.duplicate(true),
+	}
+
+
+func save_config() -> Dictionary:
+	## Escribe el estado en `user://`. Devuelve {ok, ruta, error}.
+	var datos := estado_actual()
+	var texto := JSON.stringify(datos, "\t")
+	var ok := _escribir_archivo(RUTA_ESTADO, texto)
+	_estado_sucio = not ok
+	print("[M110] N save_config %s (%d claves)" % ["ok" if ok else "FALLO", datos.size()])
+	return {"ok": ok, "ruta": RUTA_ESTADO, "error": "" if ok else "no se pudo escribir el estado"}
+
+
+func reset_config() -> Dictionary:
+	## Vuelve a defaults y borra el archivo. Deja el estado LIMPIO (no sucio):
+	## un reset no necesita reescribir el archivo para ser efectivo.
+	_aplicar_estado(_defaults_estado())
+	_estado_sucio = false
+	var borrado := false
+	if FileAccess.file_exists(RUTA_ESTADO):
+		borrado = DirAccess.remove_absolute(ProjectSettings.globalize_path(RUTA_ESTADO)) == OK
+	print("[M110] N reset_config (archivo borrado=%s)" % str(borrado))
+	return {"ok": true, "borrado": borrado, "estado": estado_actual()}
+
+
+func _cargar_estado() -> Dictionary:
+	## Carga el estado de `user://`. NUNCA falla: ante cualquier problema deja
+	## los defaults y lo informa. Devuelve {ok, motivo}.
+	if not FileAccess.file_exists(RUTA_ESTADO):
+		return {"ok": false, "motivo": "sin archivo (defaults)"}
+	var parseado: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_ESTADO))
+	if typeof(parseado) != TYPE_DICTIONARY:
+		return {"ok": false, "motivo": "JSON invalido (defaults)"}
+	var d: Dictionary = parseado
+	if int(d.get("version", -1)) != VERSION_ESTADO:
+		return {"ok": false, "motivo": "version distinta (defaults)"}
+	_aplicar_estado(d)
+	_estado_sucio = false
+	return {"ok": true, "motivo": ""}
+
+
+func _aplicar_estado(d: Dictionary) -> void:
+	## Aplica un diccionario ya validado. Cada campo se valida por tipo: un
+	## valor corrupto cae al default de ESE campo, no invalida todo el archivo.
+	var base := _defaults_estado()
+	var pos: Variant = d.get("posicion", base["posicion"])
+	if typeof(pos) == TYPE_ARRAY and (pos as Array).size() == 2:
+		_geom_pos = Vector2i(int((pos as Array)[0]), int((pos as Array)[1]))
+	var tam: Variant = d.get("tamano", base["tamano"])
+	if typeof(tam) == TYPE_ARRAY and (tam as Array).size() == 2:
+		_geom_tam = Vector2i(maxi(1, int((tam as Array)[0])), maxi(1, int((tam as Array)[1])))
+	var pan: Variant = d.get("paneles", {})
+	if typeof(pan) == TYPE_DICTIONARY:
+		_paneles_visibles = (pan as Dictionary).duplicate(true)
+	var tog: Variant = d.get("toggles", {})
+	if typeof(tog) == TYPE_DICTIONARY:
+		var t: Dictionary = tog
+		# Restauracion SILENCIOSA: no se emite `toggle_visual_cambiado` al
+		# cargar (la UI todavia no existe); el estado se consulta con
+		# `toggle_activo()`.
+		_show_colliders = bool(t.get("colliders", false))
+		_show_chunks = bool(t.get("chunks", false))
+		_show_hitboxes = bool(t.get("hitboxes", false))
+		_show_fps = bool(t.get("fps", false))
+		_show_navigation = bool(t.get("navigation", false))
+		_show_ai_states = bool(t.get("ai_states", false))
+	var filt: Variant = d.get("filtros_consola", {})
+	if typeof(filt) == TYPE_DICTIONARY:
+		var fd: Dictionary = filt
+		_filtros_consola = {
+			"nivel": int(fd.get("nivel", -1)),
+			"categoria": int(fd.get("categoria", -1)),
+			"busqueda": String(fd.get("busqueda", "")),
+			"autoscroll": bool(fd.get("autoscroll", true)),
+		}
+
+
+func _escribir_archivo(ruta: String, texto: String) -> bool:
+	## Escritura con temporal + rename para no dejar el JSON truncado si el
+	## proceso muere a mitad. Si el rename falla (Windows con lock), cae a
+	## escritura directa: el load valida el JSON igual.
+	var tmp := ruta + ".tmp"
+	var f := FileAccess.open(tmp, FileAccess.WRITE)
+	if f == null:
+		return false
+	f.store_string(texto)
+	f.close()
+	var destino := ProjectSettings.globalize_path(ruta)
+	var origen := ProjectSettings.globalize_path(tmp)
+	if FileAccess.file_exists(ruta):
+		DirAccess.remove_absolute(destino)
+	if DirAccess.rename_absolute(origen, destino) == OK and FileAccess.file_exists(ruta):
+		return true
+	var f2 := FileAccess.open(ruta, FileAccess.WRITE)
+	if f2 == null:
+		return false
+	f2.store_string(texto)
+	f2.close()
+	if FileAccess.file_exists(tmp):
+		DirAccess.remove_absolute(origen)
+	return FileAccess.file_exists(ruta)
+
+
+func _marcar_sucio() -> void:
+	_estado_sucio = true
+
+
+func estado_sucio() -> bool:
+	return _estado_sucio
+
+
+## Geometria del panel (posicion y tamano). La UI (M110-UI) la aplica.
+func set_geometria(pos: Vector2i, tam: Vector2i) -> void:
+	_geom_pos = pos
+	_geom_tam = Vector2i(maxi(1, tam.x), maxi(1, tam.y))
+	_marcar_sucio()
+
+
+func get_geometria() -> Dictionary:
+	return {"posicion": _geom_pos, "tamano": _geom_tam}
+
+
+## Visibilidad de paneles por id (los ids de `pestanas`/paneles del config).
+func set_panel_visible(panel_id: String, mostrar: bool) -> void:
+	if panel_id == "":
+		return
+	_paneles_visibles[panel_id] = mostrar
+	_marcar_sucio()
+
+
+func panel_visible(panel_id: String) -> bool:
+	return bool(_paneles_visibles.get(panel_id, false))
+
+
+func paneles_visibles() -> Dictionary:
+	return _paneles_visibles.duplicate(true)
+
+
+## Estado de un toggle visual por id (para que la UI restaure su checkbox).
+func toggle_activo(id_toggle: String) -> bool:
+	match id_toggle:
+		"colliders":
+			return _show_colliders
+		"chunks":
+			return _show_chunks
+		"hitboxes":
+			return _show_hitboxes
+		"fps":
+			return _show_fps
+		"navigation":
+			return _show_navigation
+		"ai_states":
+			return _show_ai_states
+	return false
+
+
+## Filtros de la consola. `nivel`/`categoria` = -1 significa "todos".
+## `autoscroll` no filtra: es una preferencia de la UI que igual se persiste.
+func set_filtros_consola(filtros: Dictionary) -> Dictionary:
+	var nuevos := _filtros_consola.duplicate(true)
+	for k in ["nivel", "categoria", "busqueda", "autoscroll"]:
+		if filtros.has(k):
+			nuevos[k] = filtros[k]
+	_filtros_consola = {
+		"nivel": int(nuevos.get("nivel", -1)),
+		"categoria": int(nuevos.get("categoria", -1)),
+		"busqueda": String(nuevos.get("busqueda", "")),
+		"autoscroll": bool(nuevos.get("autoscroll", true)),
+	}
+	_marcar_sucio()
+	return filtros_consola()
+
+
+func filtros_consola() -> Dictionary:
+	return _filtros_consola.duplicate(true)
+
+
+func aplicar_filtros_consola() -> Array[String]:
+	## Lineas de la consola que pasan los filtros vigentes. `console_get_lines()`
+	## sigue devolviendo TODAS (contrato previo intacto).
+	var salida: Array[String] = []
+	var nivel := int(_filtros_consola.get("nivel", -1))
+	var categoria := int(_filtros_consola.get("categoria", -1))
+	var busqueda := String(_filtros_consola.get("busqueda", "")).to_lower()
+	for e in _console_entradas:
+		if nivel >= 0 and int(e.get("nivel", -1)) != nivel:
+			continue
+		if categoria >= 0 and int(e.get("categoria", -1)) != categoria:
+			continue
+		var linea := String(e.get("linea", ""))
+		if busqueda != "" and linea.to_lower().find(busqueda) < 0:
+			continue
+		salida.append(linea)
+	return salida
+
+
+## ── Q. Capa de control, input y avisos (M110-UI) ───────────────────────────
+## Contrato de `03-Diseno.md` §2 (`show`/`hide`/`toggle`/`is_visible`,
+## `show_panel`/`hide_panel`/`toggle_panel`) y §6 (input por ACCIONES, no por
+## keycode suelto). `alternar()`/`esta_visible()` se conservan como alias
+## historicos: hay suites y consumidores previos que ya los usan.
+
+const ACCION_TOGGLE := "debug_menu_toggle"
+const ACCION_CLOSE := "debug_menu_close"
+## §6: F1 (o Backtick) para alternar, Escape para cerrar.
+const TECLAS_TOGGLE: Array[int] = [KEY_F1, KEY_QUOTELEFT]
+const TECLA_CLOSE: int = KEY_ESCAPE
+## F12 se mantiene como alias de LEGADO: el fix del 2026-09-02 lo cableo en
+## `_unhandled_input` y `test_debug_menu_headless.gd:123-128` lo verifica.
+const TECLA_LEGADO: int = KEY_F12
+const AVISO_DESARROLLO := "SOLO PARA DESARROLLO - no usar en partidas reales"
+## §7: el overlay de FPS se refresca cada 500 ms, no cada frame.
+const FPS_REFRESCO_MS: int = 500
+
+## Acciones propias: se registran en RUNTIME porque `project.godot` es NO
+## TOCAR (regla de la flota). Si el proyecto ya las declara, se respetan.
+var _acciones_registradas: bool = false
+var _acciones_creadas: Array[String] = []
+var _accesos: int = 0
+var _ultimo_acceso: String = ""
+var _mouse_mode_previo: int = -1
+var _mouse_mode_deseado: int = -1
+var _fps_texto: String = ""
+var _fps_ultimo_ms: int = -1000
+
+
+## §2: control de visibilidad. Devuelven `true` si el estado CAMBIO.
+func show() -> bool:
+	return _fijar_visible(true)
+
+
+func hide() -> bool:
+	return _fijar_visible(false)
+
+
+func toggle() -> bool:
+	return _fijar_visible(not visible)
+
+
+func is_visible() -> bool:
+	return visible
+
+
+## Unico punto de cambio de visibilidad. Idempotente: un `show()` sobre un
+## menu ya abierto NO cuenta como acceso nuevo ni ensucia el estado.
+func _fijar_visible(mostrar: bool) -> bool:
+	if visible == mostrar:
+		return false
+	visible = mostrar
+	_aplicar_mouse_mode()
+	_registrar_acceso("abrir" if mostrar else "cerrar")
+	if mostrar:
+		## Fuerza un refresco inmediato del overlay al abrir (no esperar 500 ms).
+		_fps_ultimo_ms = -1000
+	print("[M110] Debug menu %s" % ("visible" if mostrar else "oculto"))
+	return true
+
+
+## §2: paneles por id. Devuelven el estado RESULTANTE (no void): la UI necesita
+## saber que quedo prendido para pintar el checkbox.
+func show_panel(panel_id: String) -> bool:
+	return _fijar_panel(panel_id, true)
+
+
+func hide_panel(panel_id: String) -> bool:
+	return _fijar_panel(panel_id, false)
+
+
+func toggle_panel(panel_id: String) -> bool:
+	if panel_id == "":
+		return false
+	return _fijar_panel(panel_id, not panel_visible(panel_id))
+
+
+## Idempotente y sin crear estado para ids vacios o desconocidos al apagar.
+func _fijar_panel(panel_id: String, mostrar: bool) -> bool:
+	if panel_id == "":
+		return false
+	if panel_visible(panel_id) == mostrar:
+		return mostrar
+	set_panel_visible(panel_id, mostrar)
+	return mostrar
+
+
+## §6: registra las acciones del Input Map en RUNTIME. No duplica eventos si
+## la accion ya existia (idempotente: llamarla 2 veces agrega 0 eventos).
+func _registrar_acciones() -> Dictionary:
+	var creadas: Array[String] = []
+	for accion in [ACCION_TOGGLE, ACCION_CLOSE]:
+		if not InputMap.has_action(accion):
+			InputMap.add_action(accion)
+			creadas.append(accion)
+	var eventos := 0
+	for k in TECLAS_TOGGLE:
+		if _asegurar_evento(ACCION_TOGGLE, k):
+			eventos += 1
+	if _asegurar_evento(ACCION_CLOSE, TECLA_CLOSE):
+		eventos += 1
+	_acciones_creadas = creadas
+	_acciones_registradas = (InputMap.has_action(ACCION_TOGGLE)
+		and InputMap.has_action(ACCION_CLOSE))
+	return {
+		"acciones_creadas": creadas.duplicate(),
+		"eventos_agregados": eventos,
+		"registradas": _acciones_registradas,
+	}
+
+
+func _asegurar_evento(accion: String, keycode: int) -> bool:
+	if not InputMap.has_action(accion):
+		return false
+	var ev := InputEventKey.new()
+	ev.keycode = keycode
+	if InputMap.action_has_event(accion, ev):
+		return false
+	InputMap.action_add_event(accion, ev)
+	return true
+
+
+func acciones_registradas() -> bool:
+	return _acciones_registradas
+
+
+func acciones_creadas() -> Array[String]:
+	return _acciones_creadas.duplicate()
+
+
+## §6: `_input` (no `_unhandled_input`) para que Escape cierre el menu aunque
+## un Control con foco consuma la tecla antes.
+func _input(event: InputEvent) -> void:
+	if event == null:
+		return
+	if not _acciones_registradas:
+		_registrar_acciones()
+	if InputMap.has_action(ACCION_TOGGLE) and event.is_action_pressed(ACCION_TOGGLE):
+		toggle()
+		_consumir(event)
+		return
+	if not is_visible():
+		return
+	if InputMap.has_action(ACCION_CLOSE) and event.is_action_pressed(ACCION_CLOSE):
+		hide()
+		_consumir(event)
+
+
+func _consumir(event: InputEvent) -> void:
+	var vp := get_viewport()
+	if vp != null:
+		vp.set_input_as_handled()
+
+
+## L231: al abrir se libera el mouse; al cerrar se restaura el modo PREVIO.
+## En headless no hay mouse: se registra la INTENCION (`mouse_mode_deseado()`)
+## y NO se llama al backend, para no ensuciar la salida con warnings.
+func _aplicar_mouse_mode() -> void:
+	if visible:
+		if _mouse_mode_previo < 0:
+			_mouse_mode_previo = int(Input.mouse_mode)
+		_mouse_mode_deseado = int(Input.MOUSE_MODE_VISIBLE)
+	else:
+		if _mouse_mode_previo >= 0:
+			_mouse_mode_deseado = _mouse_mode_previo
+			_mouse_mode_previo = -1
+		else:
+			_mouse_mode_deseado = int(Input.MOUSE_MODE_CAPTURED)
+	if DisplayServer.get_name() != "headless":
+		Input.mouse_mode = _mouse_mode_deseado
+
+
+func mouse_mode_deseado() -> int:
+	return _mouse_mode_deseado
+
+
+## §7/L263: overlay de FPS con refresco acotado a 500 ms. `ahora_ms` es
+## INYECTABLE para que la suite sea hermetica (nada de wall-clock en tests).
+func fps_overlay_texto(ahora_ms: int = -1) -> String:
+	if not _show_fps or not is_visible():
+		return ""
+	var ahora := ahora_ms if ahora_ms >= 0 else Time.get_ticks_msec()
+	if _fps_texto == "" or (ahora - _fps_ultimo_ms) >= FPS_REFRESCO_MS:
+		_fps_texto = "FPS: %d" % Engine.get_frames_per_second()
+		_fps_ultimo_ms = ahora
+	return _fps_texto
+
+
+func fps_ultimo_ms() -> int:
+	return _fps_ultimo_ms
+
+
+## §7/L268: las visualizaciones solo se dibujan con el menu ABIERTO (el diseno
+## pide 0% de overhead con el menu cerrado). `toggle_activo()` sigue siendo el
+## estado del checkbox; esto es la condicion EFECTIVA de dibujo.
+func visualizacion_activa(id_toggle: String) -> bool:
+	return visible and toggle_activo(id_toggle)
+
+
+func visualizaciones_activas() -> Array[String]:
+	var out: Array[String] = []
+	for id in ["colliders", "chunks", "hitboxes", "fps", "navigation", "ai_states"]:
+		if visualizacion_activa(id):
+			out.append(id)
+	return out
+
+
+## L244: registro de accesos al debug menu. Sin GameLogger disponible NO se
+## pierde el dato: queda el contador local y el ultimo acceso.
+func _registrar_acceso(accion: String) -> void:
+	_accesos += 1
+	_ultimo_acceso = accion
+	var gl := get_node_or_null("/root/GameLogger")
+	if gl != null and gl.has_method("info"):
+		gl.info("[M110] acceso al debug menu: %s" % accion)
+	print("[M110] acceso #%d: %s" % [_accesos, accion])
+
+
+func accesos_registrados() -> int:
+	return _accesos
+
+
+func ultimo_acceso() -> String:
+	return _ultimo_acceso
+
+
+## L243: aviso obligatorio de "solo para desarrollo". Se expone como TEXTO
+## (la UI lo pinta); el banner visual depende de la escena de M110-UI.
+func aviso_desarrollo() -> String:
+	return AVISO_DESARROLLO
+
+
+func es_build_de_desarrollo() -> bool:
+	return OS.is_debug_build()
+
+
+func _notification(what: int) -> void:
+	## N: "Guardar configuracion al cerrar". Solo si hubo cambios.
+	if what == NOTIFICATION_WM_CLOSE_REQUEST or what == NOTIFICATION_EXIT_TREE:
+		if _estado_sucio:
+			save_config()
+
 func _registrar_servicio() -> void:
 	if not OS.is_debug_build():
 		return
@@ -64,9 +567,9 @@ func _registrar_servicio() -> void:
 	if not sr.has("debug_menu"):
 		sr.register("debug_menu", self)
 
+## Alias historico de `toggle()` (§2). Se conserva: lo usan suites previas.
 func alternar() -> void:
-	visible = not visible
-	print("[M110] Debug menu %s" % ("visible" if visible else "oculto"))
+	toggle()
 
 ## Atajo F12 para alternar el menú (fix 2026-09-02, deepseek-v4-flash-vision-exp):
 ## el menú no tenía input cableado; F12 alterna visible.
@@ -388,6 +891,7 @@ func desbloquear_sello(sello_id: String) -> Dictionary:
 
 func toggle_colliders(enabled: bool) -> void:
 	_show_colliders = enabled
+	_marcar_sucio()
 	print("[M110] RF14 colliders %s" % ("ON" if enabled else "OFF"))
 	# TODO: conectar a DebugUtils/PhysicsServer cuando exista
 	# Por ahora es un stub que marca el estado
@@ -395,12 +899,14 @@ func toggle_colliders(enabled: bool) -> void:
 
 func toggle_chunks(enabled: bool) -> void:
 	_show_chunks = enabled
+	_marcar_sucio()
 	print("[M110] RF16 chunks %s" % ("ON" if enabled else "OFF"))
 	# TODO: conectar a VoxelViewer/M08 cuando exista
 
 
 func toggle_hitboxes(enabled: bool) -> void:
 	_show_hitboxes = enabled
+	_marcar_sucio()
 	print("[M110] RF18 hitboxes %s" % ("ON" if enabled else "OFF"))
 	# TODO: conectar a NavigationServer/AStar cuando exista
 
@@ -412,12 +918,14 @@ func toggle_hitboxes(enabled: bool) -> void:
 
 func toggle_fps(enabled: bool) -> void:
 	_show_fps = enabled
+	_marcar_sucio()
 	toggle_visual_cambiado.emit("fps", enabled)
 	print("[M110] RF15 fps overlay %s" % ("ON" if enabled else "OFF"))
 
 
 func toggle_navigation(enabled: bool) -> void:
 	_show_navigation = enabled
+	_marcar_sucio()
 	toggle_visual_cambiado.emit("navigation", enabled)
 	print("[M110] RF17 navigation %s" % ("ON" if enabled else "OFF"))
 	# Integración real: NavigationServer3D (M64/M27) cuando esté disponible.
@@ -425,6 +933,7 @@ func toggle_navigation(enabled: bool) -> void:
 
 func toggle_ai_states(enabled: bool) -> void:
 	_show_ai_states = enabled
+	_marcar_sucio()
 	toggle_visual_cambiado.emit("ai_states", enabled)
 	print("[M110] RF19 ai_states %s" % ("ON" if enabled else "OFF"))
 	# Integración real: NPCManager (M64) cuando expona estados.
@@ -633,6 +1142,9 @@ func _on_logger_line(level: int, category: int, line: String) -> void:
 	_console_lines.append("%s" % line)
 	if _console_lines.size() > CONSOLA_MAX_LINEAS:
 		_console_lines = _console_lines.slice(-CONSOLA_MAX_LINEAS)
+	_console_entradas.append({"nivel": level, "categoria": category, "linea": "%s" % line})
+	if _console_entradas.size() > CONSOLA_MAX_LINEAS:
+		_console_entradas = _console_entradas.slice(-CONSOLA_MAX_LINEAS)
 
 
 func console_get_lines() -> Array[String]:

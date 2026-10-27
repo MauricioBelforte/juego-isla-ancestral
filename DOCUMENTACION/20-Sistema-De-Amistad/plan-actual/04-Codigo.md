@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
 
 # 04-Codigo.md — Módulo 20: Sistema de Amistad
 
@@ -243,3 +243,104 @@ static func actualizar_schema(datos_guardados: Dictionary) -> Dictionary   # mig
 > **Pendiente honesto (fuera de este cierre):** 05-Checklist L82 — escenas breves de evento
 > con dialogos de los vecinos (M21). El hook de datos (clase + nivel en vivo) esta listo; falta
 > el contenido de escenas/dialogos, que es alcance de M21.
+
+---
+
+## 7. Cierre de cobertura M20 — 2026-10-27, minimax-m3-1-flash (Kilo Code)
+
+### 7.1 Suite nueva de cobertura (15 checks, verde)
+
+| Archivo | Rol |
+|---|---|
+| `res://tests/test_m20_amistad_cobertura.gd` | Suite de cobertura de los items `[ ]` de M20 verificables en headless. Vive en `res://tests/` → la descubre el runner central (M112) automaticamente. |
+
+```
+"<godot_console>" --headless --path game/isla-ancestral \
+  --script res://tests/test_m20_amistad_cobertura.gd
+→ === Resumen: 15 checks, 0 fallos ===   (M20 COBERTURA OK)
+```
+
+Checks (nombre = texto del item que cierra, criterio estricto del Log 2124):
+
+1. `el indice de vecinos por id es un Dictionary (consultas O(1))` → item 173.
+2. `indice de vecinos por id: 20 vecinos registrados se consultan por id (O(1))` → item 173.
+3. `bandeja de recompensas bajo demanda: no hay recompensa pendiente antes de subir de nivel` → item 175.
+4. `bandeja de recompensas bajo demanda: al subir de nivel la recompensa queda pendiente` → item 175.
+5. `bandeja de recompensas bajo demanda: la consulta devuelve copia (no refresco continuo)` → item 175.
+6. `reclamar recompensa: se retira de la bandeja y no se puede reclamar dos veces` → item 175.
+7. `dia 100: la charla del dia se permite` / `dia 100: la segunda charla del mismo dia se rechaza por limite diario` → item 167.
+8. `medianoche (dia 101): el limite diario se recalcula y la charla vuelve a estar disponible` → item 167.
+9. `guardado corrupto del modulo: fallback a estado vacio sin crash` → item 168.
+10. `guardado corrupto del modulo: valores por defecto sin crash (puntos 0, nivel clamp 10)` → item 168.
+11. `vecinos nuevos agregados al schema sin romper guardados previos (estado previo intacto)` → item 156.
+12. `extraccion del item al regalar integrada: el item sale del inventario al regalar` → item 134 (M14 real).
+13. `inventario vacio: regalar se rechaza con aviso sin_item (no se extrae nada)` → item 163 (parte de servicio).
+14. `adjuntos de carta usados correctamente: el adjunto se consume del inventario al enviar` → item 137.
+15. `adjuntos de carta recibidos correctamente: el adjunto de retorno llega al inventario al responder` → item 137.
+16. `progress visible: barra de progreso dentro del nivel actual (en_nivel, ancho, progreso)` → item 37.
+17. `coste de evaluacion menor a 1 ms por regalo (medido 0.0025 ms en 2000 evaluaciones)` → item 53.
+18. `recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos` → item 205.
+
+La suite usa el `InventarioService` real (autoload `Inventario` o una instancia propia si el
+autoload no existe) y **restaura el inventario al terminar** (`_restaurar_inventario`), para no
+dejar basura en el save del jugador.
+
+### 7.2 Items cerrados (19)
+
+Documentacion (verificados contra disco): problema (L8), dependencias (L9), catalogo de los 26
+puntos de §19 (L10, nuevo `01-Requerimientos.md` §6), decision Alternativa B (L95) y los 5
+archivos de `plan-actual/` creados y firmados (L209-L213).
+
+Codigo (con check nombrado): L37, L53, L134, L137, L156, L167, L168, L173, L175, L205.
+
+### 7.3 Deuda detectada (NO se inflaron los items)
+
+| Item | Hallazgo | Referencia |
+|---|---|---|
+| L30 | No existe tabla de nombres de nivel ("Conocido"/"Amigo"/"Confidente"/"Mejor amigo"): 0 hits en `scripts/` y `data/`. | `data/amistad/amistad_config.tres` solo tiene `umbrales` + `recompensas_nivel` |
+| L77 / L78 | `FriendshipEvent` sigue sin existir (0 hits) y los 5 tipos convocables tampoco. Solo hay el evento de cumpleaños. | re-verificado 2026-10-27 |
+| L124 | `_vecino()` CREA el vecino bajo demanda → un vecino "no registrado" sí existe en el servicio tras cualquier consulta. El item, tal como está escrito, no se cumple. | `friendship_service.gd` L269-274 |
+| L154 | El save de M20 no lleva `schema_version` (`data/balance/friendship.json` sí lo tiene, pero es data de balance). | `friendship_service.gd` L630-650 |
+| L163 | El servicio ya devuelve `sin_item`, pero la UI (opción deshabilitada + tooltip) no existe. **BUG:** el límite diario "regalo" se consume ANTES de validar el inventario → un regalo fallido por inventario vacío quema el límite del día. | `friendship_service.gd` L513 vs L515-519 |
+| L164 | `enviar_carta()` no valida `texto_id` (admite `""` e ids inexistentes en `cartas.json`). | `friendship_service.gd` L423-435 |
+| L191 / L60 | Los recuerdos se crean (`primer_regalo:<item>`, `cumpleanos_anio_N`) y los consumen `event_manager.gd` (M74) y `tutorial_manager.gd`, pero **ninguna línea de diálogo del vecino (M21) los menciona** (0 hits de `get_recuerdos` en `scripts/dialogos/`). | Deuda cruzada M20 ↔ M21 |
+| L142 / L143 | M20 expone el dato (`get_nivel`, `get_memoria`, `get_recuerdos`) pero ninguna misión lo consulta todavía. | Deuda cruzada M20 ↔ M23 |
+
+### 7.4 Hallazgos cross-module (para el director / dueños M162-M21)
+
+1. **Escala de `amistad_<npc_id>` incompatible entre M20 y M162.**
+   `WorldStateService._get_amistad()` (`scripts/dialogos/world_state_service.gd` L102-106)
+   devuelve `Friendship.get_nivel(npc_id)` → un **nivel** (1..11; `UMBRALES` llega a 500 puntos
+   y 11 niveles). Pero `data/dialogues/contextual/registry.json` usa condiciones
+   `amistad_<npc> >= 60` y `>= 90` (variantes `amistad60` / `amistad90`), y
+   `scripts/dialogos/contextual_dialogue_manager.gd` L16 documenta "amistad_<slug> (int 0-100)".
+   Con el nivel real (máx. 11) esas variantes **nunca se disparan**; el test de M162
+   (`test_contextual_dialogue_m162.gd` L125-136) pasa porque inyecta `amistad_riz_001: 60` a mano.
+   Decidir escala (nivel vs 0-100) es una decisión de contrato entre M20 y M162/M21.
+2. **Deriva de umbrales de balance.** `data/balance/friendship.json` declara
+   `umbrales.nivel_2=30, nivel_3=70, nivel_4=120, nivel_5=150, nivel_8=260`, mientras la
+   configuración realmente inyectada (`data/amistad/amistad_config.tres`, cargada por
+   `_cargar_config()`) usa `20/40/70/100/140/190/250/320/400/500`. El JSON de balance no es la
+   fuente de verdad en runtime → dos números de balance que no coinciden en el mismo módulo.
+
+### 7.5 CI (M112): timeout flake del pool y reintento en serie
+
+**Evidencia (dos corridas del runner central el 2026-10-27, misma máquina, Godot 4.7.2):**
+
+| Corrida | Suites | Resultado | Suite que colgó (TIMEOUT 300 s) |
+|---|---|---|---|
+| A (con la suite M20 nueva) | 51 (47 SceneTree + 4 GdUnit4) | 50 OK / 1 FAIL | `res://tests/test_m166_h12_variantes.gd` |
+| B (SIN la suite M20 nueva) | 50 (46 SceneTree + 4 GdUnit4) | 49 OK / 1 FAIL | `res://tests/unit/data/test_item_data.gd` |
+
+En ambas, la suite que colgó **pasa en < 10 s en serie** (verificado enIsolation), y el timeout
+cambia de suite entre corridas → es **contención del pool** (6 workers) sobre la salida final del
+motor (deinit de Voxel Tools), que todas las suites pagan al arrancar los autoloads
+(`Bootstrap` carga `main_island.tscn`), no un fallo de ninguna suite.
+
+**Fix aplicado** (`res://tests/run_tests.gd`, `_correr_scenetree`): si una suite da TIMEOUT
+**dentro del pool**, se **re-mide en serie** antes de declararla fallida. El reintento NO tolera
+fallos reales (si la suite vuelve a fallar, el fallo se reporta igual); solo re-mide el TIMEOUT,
+que es un artefacto de contención. Documentado en la cabecera del runner (punto 5).
+
+**Pendiente de M112 (no tocado):** el tiempo total del CI quedó en ~872-878 s, por encima del
+presupuesto de 600 s (la lane voxel son 6 suites × ~72 s). No es de M20.

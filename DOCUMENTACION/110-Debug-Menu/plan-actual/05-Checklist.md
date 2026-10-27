@@ -247,15 +247,15 @@
 
 - [x] data/debug/debug_config.json [S] — existe como debug_menu_config.json
 - [x] Configuración inicial [S] — pestanas+comandos+params en config
-- [ ] save_config() [S] — dueño: M110-UI
+- [x] save_config() [S] — dueño: M110-UI — flip 27oct agnes (DS#430 M110 persistencia: debug_menu.gd RUTA_ESTADO user:// + test 75/0)
 - [x] load_config() [S] — _cargar_config()
-- [ ] reset_config() [S] — dueño: M110-UI
-- [ ] Guardar posición y tamaño [S] — dueño: M110-UI
-- [ ] Guardar visibilidad de paneles [S] — dueño: M110-UI
-- [ ] Guardar estado de toggles [S] — vars sin persistir; dueño: M110-UI
-- [ ] Guardar filtros de consola [S] — dueño: M110-UI
+- [x] reset_config() [S] — dueño: M110-UI — flip 27oct agnes (DS#430 M110 persistencia: reset defaults + borrar archivo + estado limpio)
+- [x] Guardar posición y tamaño [S] — dueño: M110-UI — flip 27oct agnes (DS#430: set/get_geometria serializa posición+tamaño)
+- [x] Guardar visibilidad de paneles [S] — dueño: M110-UI — flip 27oct agnes (DS#430: set/get_panel_visible + paneles_visibles)
+- [x] Guardar estado de toggles [S] — vars sin persistir; dueño: M110-UI — flip 27oct agnes (DS#430: 6 toggle_* marcan _marcar_sucio; guardan al EXIT/WM_CLOSE)
+- [x] Guardar filtros de consola [S] — dueño: M110-UI — flip 27oct agnes (DS#430: _console_entrades paralela + set_filtros_consola persiste preferencia)
 - [x] Cargar configuración al abrir [S] — _cargar_config() en _ready()
-- [ ] Guardar configuración al cerrar [S] — dueño: M110-UI
+- [x] Guardar configuración al cerrar [S] — dueño: M110-UI — flip 27oct agnes (DS#430: _notification(EXIT_TREE|WM_CLOSE_REQUEST) guarda solo si _estado_sucio)
 
 ## O. Performance (8)
 
@@ -308,7 +308,7 @@
 - [x] Pendientes asignados a dueños [S] — todos los [?] con dueño (M110-UI / M102 / M64 / M117 / M103)
 - [x] DoD cumplida: 5 archivos + firma + log [M] — log 928
 
-**Totales:** 225 ítems · [x] Completados: 150 · [?] No resueltos (con dueño): 0 · Pendientes: 75.
+**Totales:** 225 ítems · [x] Completados: 179 · [?] No resueltos (con dueño): 0 · Pendientes: 46. (sync agnes 27oct: +7 M110 persistencia DS#430; el 150/75 previo era STALE contra el cuerpo 172/53.)
 
 > El módulo queda como **API backend completa y verificada**. Los `[?]` originales fueron cerrados
 > por el triaje E-12d (step-5-kilocode, 5 bloques, msgs 24-33, 2026-10-09/10): los que

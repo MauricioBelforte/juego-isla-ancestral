@@ -456,3 +456,107 @@ null-check del `FileAccess.open` en el .txt de diagnóstico.
   Cualquier comando que toque nodos de escena debe esperar a `current_scene` + grupo "player"
   (ver `_esperar_escena_lista()` del test A) o fallará falsamente.
 
+## Notas del Agente — iter. 2026-10-27 (DeepSeek-V4.1-Flash, Log 2214)
+
+**Estado:** sección N (Configuración y persistencia) implementada. 7 ítems con artefacto
+medible en disco; **0 flips aplicados** (los aplica la directora).
+
+### Por qué `user://` y no `res://`
+
+El config de pestañas/comandos (`res://data/debug/debug_menu_config.json`) es **de solo
+lectura** en el build exportado. El estado de sesión (geometría del panel, paneles visibles,
+los 6 toggles, filtros de consola) va a **`user://debug_menu_estado.json`**. Son dos archivos
+con dos ciclos de vida distintos: uno se versiona, el otro no.
+
+### API nueva (todo aditivo, sin cambiar firmas previas)
+
+| Función | Para qué |
+|---------|----------|
+| `estado_actual() -> Dictionary` | única fuente de lo que se serializa: lo que se guarda y lo que se lee no pueden divergir |
+| `save_config() -> Dictionary` | escribe `user://debug_menu_estado.json` (temporal + rename, fallback a escritura directa) |
+| `reset_config() -> Dictionary` | defaults + borra el archivo + deja el estado limpio |
+| `set_geometria(pos, tam)` / `get_geometria()` | posición y tamaño del panel (la UI las aplica) |
+| `set_panel_visible(id, mostrar)` / `panel_visible(id)` / `paneles_visibles()` | visibilidad por panel |
+| `toggle_activo(id) -> bool` | estado de un toggle sin emitir la señal (la UI restaura su checkbox) |
+| `set_filtros_consola(dict)` / `filtros_consola()` / `aplicar_filtros_consola()` | filtros por nivel/categoría/búsqueda + preferencia de autoscroll |
+| `estado_sucio() -> bool` | si hay cambios sin guardar |
+
+`_notification(NOTIFICATION_EXIT_TREE | NOTIFICATION_WM_CLOSE_REQUEST)` guarda **solo si
+`_estado_sucio`**: un arranque en el que nadie tocó nada no genera escrituras (verificado en
+el bloque F de la suite: cerrar limpio **no** crea el archivo).
+
+### Decisiones de diseño
+
+- **Fail-closed en la carga.** Sin archivo, JSON inválido o `version` distinta → defaults y el
+  archivo **no se pisa** (bloque G). `_aplicar_estado()` valida **campo por campo**: un valor
+  corrupto cae al default de ESE campo, no invalida el archivo entero.
+- **Restauración silenciosa.** Cargar el estado **no** emite `toggle_visual_cambiado` (la UI
+  todavía no existe en `_ready`). La UI consulta con `toggle_activo()`.
+- **La visibilidad del propio menú NO se persiste.** Restaurar `visible = true` al arrancar
+  abriría el panel de debug solo en cada partida; el ítem habla de *paneles*, no del menú.
+- **`_console_entradas` en paralelo a `_console_lines`.** `_on_logger_line()` descartaba
+  `level`/`category`; sin esa estructura el ítem «guardar filtros de consola» habría sido un
+  flip inflado (no había nada que filtrar). `console_get_lines()` sigue devolviendo **todas**
+  las líneas: contrato previo intacto.
+- **Los 6 `toggle_*` marcan sucio.** Fue un defecto real detectado por la propia suite (F7 en
+  rojo): sin `_marcar_sucio()` el ítem «guardar estado de toggles» era código muerto.
+
+### Lo que M110-UI necesita (y ya existe)
+
+`get_geometria()`, `paneles_visibles()`, `toggle_activo(id)`, `filtros_consola()`,
+`aplicar_filtros_consola()` y `save_config()`. La UI no necesita tocar `debug_menu.gd`.
+
+**Suite:** `scripts/debug/test_debug_menu_config_m110.gd` (bloques A–G, piso 75 checks medido).
+
+---
+
+## Seccion Q - Capa de control, input y avisos (iter. DeepSeek-V4.1-Flash 2026-10-27)
+
+Contrato implementado: `03-Diseno.md` **§2** (API de visibilidad y paneles) y **§6**
+(input por ACCIONES). Cierra 12 items de la seccion M110-UI y deja 2 en su modelo.
+
+### API agregada a `scripts/debug/debug_menu.gd`
+
+| Funcion | Item | Contrato |
+|---|---|---|
+| `show()` / `hide()` / `toggle()` / `is_visible()` | L194, L195 | Devuelven `true` si el estado **cambio**. Alias: `alternar()` / `esta_visible()` |
+| `show_panel(id)` / `hide_panel(id)` / `toggle_panel(id)` | L198, L199, L200 | Devuelven el estado **resultante**, no void |
+| `_input(event)` con `debug_menu_toggle` / `debug_menu_close` | L226-L230 | F1 + Backtick abren/cierran; Escape cierra solo si esta abierto |
+| `mouse_mode_deseado()` | L231 | Intencion de mouse mode (backend solo fuera de headless) |
+| `visualizacion_activa(id)` / `visualizaciones_activas()` | L268 | Condicion EFECTIVA de dibujo = `visible and toggle_activo(id)` |
+| `accesos_registrados()` / `ultimo_acceso()` | L244 | Log de accesos al menu |
+| `aviso_desarrollo()` / `es_build_de_desarrollo()` | L243 | Texto del aviso (el banner visual es de la escena) |
+| `fps_overlay_texto(ahora_ms)` / `fps_ultimo_ms()` | L263 | Texto del overlay con refresco acotado a 500 ms |
+
+### Decisiones de diseno
+
+- **Un solo punto de cambio de visibilidad.** `_fijar_visible()` es la unica linea que asigna
+  `visible`. `alternar()` **delega** en `toggle()`: la version anterior asignaba `visible`
+  directo y se saltaba mouse mode, log de accesos y refresco del overlay.
+- **Idempotencia.** `show()` sobre un menu ya abierto devuelve `false` y **no** cuenta como
+  acceso nuevo. El bloque A lo verifica (A4/A5/A8/A9) y la sonda S2 lo prueba EN ROJO.
+- **`project.godot` NO se toca.** Las acciones `debug_menu_*` se registran en **runtime** con
+  `InputMap.add_action()` + `action_add_event()`. `_registrar_acciones()` es idempotente: la
+  segunda llamada agrega 0 eventos (C8-C10). Si el proyecto llegara a declararlas, se respetan.
+- **F12 se conserva como LEGADO.** El fix del 2026-09-02 lo cableo en `_unhandled_input` y
+  `test_debug_menu_headless.gd:123-128` lo verifica; el contrato nuevo es F1/Backtick. Se
+  mantienen los dos caminos (H4 lo fija como invariante).
+- **Escape solo cierra.** `_input()` sale temprano si el menu esta cerrado, asi que Escape
+  **no abre** el menu (D4/D5). Se usa `_input` y no `_unhandled_input` para que un `Control`
+  con foco no se coma la tecla.
+- **Mouse mode en headless.** `DisplayServer.get_name() == "headless"` -> se registra la
+  INTENCION y no se llama al backend. La asercion correcta en headless es "restaura el modo
+  PREVIO" (el previo ES `VISIBLE`), no "restaura algo distinto de VISIBLE".
+- **Overlay de FPS hermetico.** `fps_overlay_texto(ahora_ms)` acepta el reloj **inyectado**:
+  la suite no depende de wall-clock. El widget (`Label` + `CanvasLayer`) sigue pendiente.
+- **Overhead cero con el menu cerrado.** `visualizacion_activa()` devuelve `false` con el
+  menu cerrado aunque el checkbox este prendido: es la condicion de dibujo del §7.
+
+### Lo que sigue siendo UI (no headless)
+
+`Label` de hora, dropdowns de estacion/clima, inputs de seed/chunk, selectores de NPC y
+puzzle, `DebugDraw`, banner visual del aviso y el `Label` del overlay de FPS. Requieren la
+escena de M110-UI; el modelo de datos ya esta.
+
+**Suite:** `scripts/debug/test_debug_menu_control_m110.gd` (bloques A-H, piso **75** medido,
+4 sondas EN ROJO con sha256 restaurado).

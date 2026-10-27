@@ -142,3 +142,47 @@ export de diagnóstico RF20). Implementar el cierre con Escape o corregir `04-Co
 
 ---
 **Modelo:** atria-dawn-s3 (Atria-Dawn-Preview) / **Plataforma:** Kilo Code / **Fecha:** 2026-10-10 04:45:00
+
+---
+
+## 9. Persistencia de estado — iter. 2026-10-27 (DeepSeek-V4.1-Flash, Log 2214)
+
+**Suite:** `scripts/debug/test_debug_menu_config_m110.gd` (NUEVA, 7 bloques A–G).
+**Resultado: 75 checks / 0 fallos / EXIT 0 ×3.** Piso `CHECKS_MINIMOS = 75` **MEDIDO** en
+verde (A 14 + B 9 + C 18 + D 9 + E 11 + F 7 + G 7), no estimado.
+
+### Qué se mide (contrato, no cifras de contenido)
+
+| Bloque | Qué verifica |
+|--------|--------------|
+| A | `estado_actual()` tiene las 6 claves, versión declarada, 6 toggles, filtros por defecto en -1, instancia nueva limpia |
+| B | `save_config()` escribe JSON parseable, sin `.tmp` residual, **idempotente byte a byte**, deja el estado limpio |
+| C | **round-trip**: set → save → instancia nueva → `_cargar_estado()` restaura geometría, paneles, los 6 toggles y los 4 filtros; panel/toggle desconocido → `false` |
+| D | `reset_config()` borra el archivo, vuelve a defaults y deja el estado limpio; el guardado posterior regenera con defaults |
+| E | filtros de consola por nivel, categoría y búsqueda **case-insensitive**, combinación que da 0, autoscroll no filtra, y el tope de 100 líneas se aplica también a las entradas con nivel |
+| F | guardado al cerrar: **sin cambios NO escribe**, con cambios escribe en `EXIT_TREE` **y** en `WM_CLOSE_REQUEST`, y lo escrito se recupera |
+| G | fail-closed: JSON inválido → defaults y **el archivo corrupto no se pisa**; versión distinta → defaults; cableado estático de `_ready`→`_cargar_estado()` y `_notification`→`save_config()` |
+
+### Guardián probado EN ROJO (×3, restauración con reintentos + sha256 verificado)
+
+| Inyección | Resultado medido |
+|-----------|------------------|
+| aborto de RUNTIME en el bloque C (acceso a clave inexistente de un `Dictionary`) | **EXIT 1 en 1 corrida**; nombra `el bloque C NO se ejecutó`, dispara el piso (58 < 75) y **termina** (no cuelga) |
+| quitar `_marcar_sucio()` de `toggle_chunks` | `[FALLO] F7 WM_CLOSE_REQUEST tambien guarda` → EXIT 1 |
+| `CHECKS_MINIMOS = 99` | `solo 75 checks ejecutados (mínimo medido 99)` → EXIT 1 |
+
+Control final tras las 3 sondas: **75/0/EXIT 0** y **sha256 de los 2 archivos idéntico al
+original** (nada quedó inyectado).
+
+### Regresión M110 (6 suites, 115 checks, todas EXIT 0)
+
+`test_debug_m110` 18/0 · `test_debug_menu_headless` 22/0 · `test_m110_iter_atria` 27/0 ·
+`test_m110_ui` 17/0 · `test_m110_ui2` 14/0 · `test_m110_ui3` 17/0. `--check-only` EXIT 0 en
+los 2 archivos tocados. EOL: `debug_menu.gd` 1008 CRLF / 0 LF suelto / sin BOM; suite nueva
+LF puro sin BOM.
+
+**Límite declarado:** el bloque G verifica el cableado de `_ready`/`_notification` de forma
+**estática** (texto del script), porque la suite no agrega el menú al árbol para no disparar
+`_ready` sobre la escena completa. Un refactor que mueva esas llamadas a otra función
+haría fallar G6/G7 — es intencional: si la persistencia deja de estar cableada, es código
+muerto y el ítem no está cerrado.

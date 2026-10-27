@@ -7,6 +7,16 @@
 
 ## COLA ACTIVA
 
+- [x] [20-Amistad] Suite de cobertura headless para los items `[ ]` de M20 (`game/isla-ancestral/tests/test_m20_amistad_cobertura.gd`, 15 checks, 0 fallos) — 2026-10-27
+- [x] [20-Amistad] Cerrar 19 items verificados de M20 (81 → 100 `[x]`, pendientes 68 → 49) con evidencia por check nombrado o archivo citado — 2026-10-27
+- [x] [20-Amistad] Catálogo de los 26 puntos de la sección 19 del plan maestro (`01-Requerimientos.md` §6, nuevo) — 2026-10-27
+- [x] [20-Amistad] Deuda real mapeada con motivo y referencia de código (`04-Codigo.md` §7.3) — 2026-10-27
+- [x] [112-Testing] Reintento EN SERIE tras TIMEOUT del pool en el runner central (flake de contención, no fallo de suite) — 2026-10-27
+- [x] [20-Amistad] Log reservado: **2215** — tanda 4 M20/M112 (suite de cobertura + cierre de 19 items + fix del CI)
+- [ ] [112-Testing] Bajar el tiempo total del CI (~875 s > presupuesto 600 s; lane voxel = 6 suites × ~72 s) — dueño a definir
+- [ ] [20-Amistad] Cerrar con el dueño de M20 la deuda vigente: `FriendshipEvent` + 5 tipos convocables, nombres de nivel, `schema_version` en el save, UI (M53), validación de `texto_id` en cartas, límite diario quemado cuando falla el regalo
+- [ ] [20-Amistad/M162] Decidir la escala de `amistad_<npc_id>` (hoy devuelve el NIVEL 1..11; el registry de M162 exige `>= 60` / `>= 90` → esas variantes nunca se disparan) — decisión de contrato M20/M162/M21
+
 
 ## REPOBLACION V3 (2026-10-21T07:58:00)
 

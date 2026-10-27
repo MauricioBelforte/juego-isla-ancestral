@@ -67,9 +67,9 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:15.
 
 ## CRON PROGRAMADO (estado actual)
 
-- Intervalo: **cada 15 minutos** (`*/15 * * * *`)
-- ID tarea: `wku_1755e3f12001tYh5TPo6sZt9pt`
-- Próximo disparo: `2026-10-25T23:30:08.326Z`
-- Anterior (borrado): `wku_17522ed2d0019jlk5VeakX9Soa` (`*/25 * * * *`, borrado 2026-10-25 23:20)
+- Intervalo: **cada 10 minutos** (`*/10 * * * *`)
+- ID tarea: `wku_17560f7c12001tYh5TPo6sZt9pt`
+- Próximo disparo: `2026-10-27T05:30:08.326Z`
+- Anterior (borrado): `wku_1755e3f12001tYh5TPo6sZt9pt` (`*/15 * * * *`, borrado 2026-10-27 05:17)
 
-Actualizado por Nemotron-3.5-Super-VL — 2026-10-25 23:20:48 (cambio de 25 min → 15 min por orden del usuario).
+Actualizado por Nemotron-3.5-Super-VL — 2026-10-27 05:17:00 (cambio de 15 min → 10 min por orden del usuario).
