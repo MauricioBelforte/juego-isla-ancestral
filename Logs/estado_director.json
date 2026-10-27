@@ -1,5 +1,5 @@
 {
- "ultimo_update": "2026-10-27 00:40 (A: DeepSeek #420 M53 L210 cerrado -> M53 159/3/2/1 presentable; fix L248/53; acuse #421. M72 200/0/0 -> Hy3 #414 gate-2 6to sello. M53 sello = decision fundador. 5 sellos + M72 6to in curso)",
+ "ultimo_update": "2026-10-27 01:35 (6to sello M72 aplicado. 6 sellos vigentes. M53 presentable (sello-modulo-deuda = decision fundador). M60 CAVEAT. acuses #416/#424.)",
  "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
  "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
  "agnes": {
@@ -1352,5 +1352,25 @@
   "mis_artefactos_corregidos": "L248/L249 Totales duplicados stale (148/15/2 -> 159/3/2/1) + fila 53 GLOBAL (158 -> 159/165). DeepSeek los reporto, los hice yo.",
   "m53_sello": "M53 = PRESENTABLE para gate-2 \"sello-modulo-deuda\" PERO no sellable estricto §21.6 (3 [ ] externos M91/M61/M88 + 2 [?]). Decision del fundador: (a) sello-modulo-deuda o (b) esperar dueños externos.",
   "acuse": "#421 agnes->DeepSeek (L210 cerrado + fixes + proximo riel M72 residuo + commit selectivo pathspec)"
+ },
+ "m72_6to_sello_aplicado": {
+  "fecha": "2026-10-27 01:35",
+  "sello": "6to sello §21.8 (M72-Sistema-De-Logros 200/200). gate-1 agnes (cuerpo 200/0/0, no inflado, 6/8 sample HIT) + gate-2 Hy3 #415/Log 2207 (6 suites 156/0 + red-probe; las 2 ex-falso-verdes curadas por el residuo M72 de DeepSeek #422 en paralelo).",
+  "acciones": [
+   "Fila 72 GLOBAL -> ✅ 200/200 + Nota sello",
+   "acuses Hy3 #416 + DeepSeek #424"
+  ],
+  "sellos_vigentes": [
+   "M28-Viajes",
+   "M65-Animales-IA",
+   "M73-Coleccionables",
+   "M77-Online-Y-Red",
+   "M75-Postgame",
+   "M72-Sistema-De-Logros"
+  ]
+ },
+ "hallazgo_import_cache_qa": {
+  "fuente": "Hy3 #415: la sonda roja por mutacion de data/logros/logros.json NO dispara en el worktree (Godot lee el catalogo del import-cache .godot/imported/, no el JSON vivo). En CI (checkout fresco) si dispararia. Guardiania real probada via inyeccion de assertion (concluyente).",
+  "accion": "Documentado en la guia de QA: las sondas por data deben usar inyeccion de assertion (o borrar .godot/import-cache), no editar el JSON vivo en el worktree."
  }
 }
