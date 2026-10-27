@@ -71,6 +71,11 @@ func _crear_ui() -> void:
 	add_child(center)
 
 	var panel := PanelContainer.new()
+	# M53 L210: ancho maximo del panel. Las 10 pestanas de categoria en un
+	# HBox pedian 1469 px de minimo (mas que el lienzo 16:9 de 1152) y el
+	# CenterContainer desbordaba. Con este piso el FlowContainer de tabs
+	# envuelve en 2 filas y el panel entra en ambos ratios.
+	panel.custom_minimum_size = Vector2(900, 0)
 	var sb := StyleBoxFlat.new()
 	sb.bg_color = ThemeUx.COLOR_BG_ARENA
 	sb.border_color = ThemeUx.COLOR_HIGHLIGHT_GOLD
@@ -81,7 +86,7 @@ func _crear_ui() -> void:
 	center.add_child(panel)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 10)
+	vbox.add_theme_constant_override("separation", 8)
 	panel.add_child(vbox)
 
 	_titulo_label = Label.new()
@@ -127,9 +132,15 @@ func _crear_ui() -> void:
 	_discard_button.pressed.connect(_on_discard_pressed)
 	discard_row.add_child(_discard_button)
 ## Pestañas de categoría (portado del legacy M14 — E-categorías).
+## M53 L210: HFlowContainer en vez de HBoxContainer — las 10 pestañas sumaban
+## ~1400 px de minimo en una sola fila y arrastraban el panel a 1469 px.
+## El flow envuelve segun el ancho disponible, asi que el minimo pasa a ser
+## el de la pestaña mas ancha.
 func _construir_tabs(parent: Control) -> void:
-	var tabs := HBoxContainer.new()
-	tabs.add_theme_constant_override("separation", 4)
+	var tabs := HFlowContainer.new()
+	tabs.name = "TabsCategorias"
+	tabs.add_theme_constant_override("h_separation", 4)
+	tabs.add_theme_constant_override("v_separation", 4)
 	parent.add_child(tabs)
 	for cat_id in CATEGORY_NAMES.keys():
 		var btn := Button.new()

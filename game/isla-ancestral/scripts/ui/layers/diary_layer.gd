@@ -179,7 +179,17 @@ func _crear_ui() -> void:
 	var col_izq := VBoxContainer.new()
 	col_izq.name = "ColCategorias"
 	col_izq.custom_minimum_size = Vector2(210, 0)
-	cuerpo.add_child(col_izq)
+	# M53 L210: un botón por categoría crece sin techo (medido 644 px con 15
+	# categorías) y arrastraba el panel a 894x765 al abrir. El scroll le pone
+	# tope de alto y la lista de categorías se desplaza.
+	var scroll_izq := ScrollContainer.new()
+	scroll_izq.name = "ScrollCategorias"
+	scroll_izq.custom_minimum_size = Vector2(210, 380)
+	scroll_izq.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_izq.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	cuerpo.add_child(scroll_izq)
+	col_izq.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll_izq.add_child(col_izq)
 
 	_lbl_cats = Label.new()
 	_lbl_cats.name = "LblCategorias"
@@ -263,7 +273,19 @@ func _crear_ui() -> void:
 	col_der.name = "ColDetalle"
 	col_der.custom_minimum_size = Vector2(280, 0)
 	col_der.add_theme_constant_override("separation", 8)
-	cuerpo.add_child(col_der)
+	# M53 L210: la columna va dentro de un ScrollContainer. Sin el, el Label
+	# de autowrap "LblSinSeleccion" colapsaba a 1 px de ancho, su altura
+	# minima se calculaba a ese ancho (855 px) y arrastraba el panel a
+	# 874x1189 (> lienzo 16:9 de 1152x648). El scroll le fija el ancho y
+	# aporta un tope de alto propio, asi que el minimo deja de propagarse.
+	var scroll_der := ScrollContainer.new()
+	scroll_der.name = "ScrollDetalle"
+	scroll_der.custom_minimum_size = Vector2(300, 380)
+	scroll_der.size_flags_vertical = Control.SIZE_EXPAND_FILL
+	scroll_der.horizontal_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
+	cuerpo.add_child(scroll_der)
+	col_der.size_flags_horizontal = Control.SIZE_EXPAND_FILL
+	scroll_der.add_child(col_der)
 
 	_lbl_det_hdr = Label.new()
 	_lbl_det_hdr.name = "LblDetalle"

@@ -88,12 +88,16 @@ func _crear_ui() -> void:
 	sb.border_color = Color(0.72, 0.55, 0.30)
 	sb.set_border_width_all(2)
 	sb.set_corner_radius_all(16)
-	sb.set_content_margin_all(24)
+	# M53 L210: margen 24->18 y separacion 10->6. Con 24/10 el panel medía
+	# 508x689 y desbordaba 41 px el lienzo 16:9 (648). El contenido (7 sliders
+	# de bus + 3 filas de opciones) no cambia: solo se aprieta el espaciado,
+	# sin scroll, para que el boton Volver quede siempre visible.
+	sb.set_content_margin_all(18)
 	panel.add_theme_stylebox_override("panel", sb)
 	center.add_child(panel)
 
 	var vbox := VBoxContainer.new()
-	vbox.add_theme_constant_override("separation", 10)
+	vbox.add_theme_constant_override("separation", 6)
 	vbox.custom_minimum_size = Vector2(460, 0)
 	panel.add_child(vbox)
 

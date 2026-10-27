@@ -361,3 +361,67 @@ Además las teclas se leían con `evento.keycode`, que en este InputMap es **0**
 - **M57 / InputMap:** `interactuar` y `equipamiento` comparten `physical_keycode = 69` (**E**). El prompt de "interactuar" muestra E en una tecla que también abre equipamiento. Es de M57.
 - **M53 layout (L210):** con `stretch/aspect = "expand"` el lienzo es 1152x648 (16:9) y 1152x720 (16:10). Medidas las 10 capas de `scripts/ui/layers/`: **`inventory_layer` 1469x588**, **`diary_layer` 874x765** y **`settings_audio_layer` 508x689** desbordan el lienzo 16:9. Las otras 7 caben.
 - **`test_ui_i18n_m53.gd`** sigue colgando (EXIT 124) por `get_locale_actual()` inexistente: suite muerta, no cuenta como evidencia.
+
+## Iter. 25 — L210 (ratios 16:9 / 16:10) — 2026-10-26
+
+**Modelo:** DeepSeek-V4.1-Flash | **Log:** 2205 | **Alcance:** M53-core (3 capas de `scripts/ui/layers/`).
+
+### Premisa medida antes de tocar
+
+L210 estaba `[x]` con una nota que decía lo contrario ("NO se cumple"). Se re-midió con el
+instrumento nuevo `scripts/ui/diag_arbol_m53.gd` (volcado del árbol con `size` y
+`get_combined_minimum_size()` por nodo) y con `scripts/ui/test_m53_ratios.gd`.
+
+Línea base real (lienzo 1152x648 en 16:9, 1152x720 en 16:10, `stretch/aspect = "expand"`):
+
+| capa | oculta | abierta | causa raíz medida |
+|---|---|---|---|
+| inventory_layer | 1469x588 | 1469x588 | `_construir_tabs` usaba `HBoxContainer`: las 10 pestañas de categoría pedían ~1400 px de mínimo en UNA fila y el `CenterContainer` arrastraba el panel |
+| diary_layer | 874x1189 | 894x765 | `ColCategorias` crecía sin techo (un botón por categoría, medido 644 px) y `ColDetalle` colapsaba a 1 px de ancho estando oculta: el `Label` con `AUTOWRAP_WORD_SMART` calculaba su altura mínima a ese ancho (**855 px**) |
+| settings_audio_layer | 508x689 | 508x689 | 7 sliders de bus + 3 filas de opciones con margen 24 y separación 10: 41 px de más |
+
+El colapso a 1 px **solo ocurre con la capa oculta** (medido en test aislado: oculto 1x1427,
+tras `visible = true` 300x49). Es un bucle de mínimo: `Label` autowrap -> altura mínima
+calculada al ancho actual (1) -> el `VBox` hereda esa altura -> el panel crece.
+
+### Fix (3 capas, sin tocar lógica)
+
+- **inventory_layer.gd**: `_construir_tabs` pasa de `HBoxContainer` a **`HFlowContainer`**
+  (las pestañas envuelven según el ancho disponible; el mínimo pasa a ser la pestaña más
+  ancha) + `panel.custom_minimum_size = Vector2(900, 0)` para que envuelvan en 2 filas y no en
+  3. Separación del `VBox` 10 -> 8 (margen de 31 px contra el lienzo).
+- **diary_layer.gd**: `ColCategorias` y `ColDetalle` van dentro de **`ScrollContainer`**
+  (`ScrollCategorias` 210x380, `ScrollDetalle` 300x380, `horizontal_scroll_mode = DISABLED`,
+  `size_flags_vertical = EXPAND_FILL`). El scroll corta la propagación del mínimo y le fija el
+  ancho al `Label`, así que el bucle se rompe y la columna se desplaza en vez de estirar el panel.
+- **settings_audio_layer.gd**: `set_content_margin_all(24)` -> 18 y separación del `VBox` 10 -> 6.
+  Sin scroll: el contenido no cambia y el botón Volver queda siempre visible.
+
+### Evidencia
+
+- `scripts/ui/test_m53_ratios.gd` (nueva): **80 checks / 0 fallos / EXIT 0 x3**, 0 SCRIPT ERROR.
+  Mide 10 capas x 2 ratios x 2 estados (oculta / tras `open()`) contra el lienzo real
+  (`root.get_visible_rect()`), con footprint = mayor `Control` hijo directo de la capa.
+  `CHECKS_MINIMOS = 80` **medido** en verde.
+- Guardián probado **EN ROJO** por inyección (`inventory_layer.panel.custom_minimum_size.x`
+  = 1400): `80 checks, 4 fallo(s)`, `EXIT 1`, con las 4 líneas
+  `inventory_layer.gd [16:9|16:10] oculta|abierta desborda: 1400x... > lienzo ...`. Inyección
+  revertida (`grep INYECCION` = 0).
+- Medición final (16:9 / 16:10, oculta / abierta): inventory **900x535 / 900x617**,
+  diary **894x501 / 902x541**, settings **496x621 / 496x621**. Las otras 7 capas sin cambio
+  (confirm 356x129, credits 715x186, dialog 139x234, equipment 516x547, loading 400x179,
+  menus 320x346, pause 328x364).
+- Regresiones (11 suites, todas EXIT 0): `test_m53_capas` 14/0, `test_m53_extremos` 9/0,
+  `test_m53_no_redundancia` 7/0, `test_m53_lista_larga` 7/0, `test_m53_wcag` 23/0,
+  `test_settings_audio_roundtrip` 79/0, `test_diario_ui` 89/0, `test_layer_type_m53` 10/0,
+  `test_m53_pausa_prompts` 35/0, `test_m89_menus` 48/0, `test_ui_framework` 0 fallos.
+- `--check-only` EXIT 0 en los 4 archivos tocados; carga de proyecto (`--quit`): 0 SCRIPT ERROR,
+  0 Parse Error.
+
+### Deuda residual
+
+- **Locales largos (M87):** con alemán las pestañas de inventory pueden pedir una 3.ª fila
+  (+43 px) y volver a desbordar en 16:9. Mitigado por el margen de 31 px, no eliminado: la
+  protección definitiva es el locale, que no existe todavía (L165, bloqueado por M87).
+- **`test_ui_i18n_m53.gd`** sigue colgando (EXIT 124) por `get_locale_actual()` inexistente:
+  suite muerta, no cuenta como evidencia.
