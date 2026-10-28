@@ -762,6 +762,11 @@ func posicion_jugador() -> Dictionary:
 		return {}
 	if not ("global_position" in p):
 		return {}
+	# Godot 4.7: `global_position` de un Node3D FUERA del arbol devuelve
+	# Transform3D() en silencio (guarda `!is_inside_tree()`), o sea ceros.
+	# Capturar ese cero lo haria indistinguible del origen real: fail-closed.
+	if not p.is_inside_tree():
+		return {}
 	var v: Variant = p.get("global_position")
 	if typeof(v) != TYPE_VECTOR3:
 		return {}

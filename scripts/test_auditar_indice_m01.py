@@ -25,7 +25,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 AUDITOR = os.path.join(AQUI, "auditar_indice_m01.py")
 PY = sys.executable
 
-CHECKS_MINIMOS = 62  # medido en verde (62/0 x3) el 2026-10-24; se ajusta SOLO tras medir
+CHECKS_MINIMOS = 79  # medido en verde (79/0 x3) el 2026-10-28; se ajusta SOLO tras medir
 
 _checks = 0
 _fallos = 0
@@ -335,6 +335,99 @@ def main():
                  "O: exactamente 3 de 6 items son hardware (no 6)")
         chequear(dep_o["detalle"][0]["externos"] == 3,
                  "O: el modulo tiene 3 items externos, no 6")
+
+        # --- Bloque P: --stale (clasificacion de los [x] no sostenidos + cita)
+        # Arbol con los 152 items marcados [x]; se rompe a proposito un modulo
+        # por clase para comprobar que cada uno cae en SU clase y no en otra.
+        p = os.path.join(base, "P")
+        construir(p, ["x"] * 152, OK)
+        DOC_P = os.path.join(p, "DOCUMENTACION")
+
+        def escribir_checklist(nombre_carpeta, contenido):
+            ruta = os.path.join(DOC_P, nombre_carpeta, "plan-actual", "05-Checklist.md")
+            with open(ruta, "w", encoding="utf-8", newline="\n") as f:
+                f.write(contenido)
+
+        # M01 -> carpeta 02 (fila 2 en OK por construccion): cerrada -> VALIDO
+        # M02 -> carpeta 03: cerrada pero fila amarilla -> cerrada_sin_fila_ok
+        # M03 -> carpeta 04: tiene un [ ] -> modulo_abierto
+        # M04 -> carpeta 05: tiene un [?] y ningun [ ] -> solo_interrogantes
+        escribir_checklist("04-Modulo-04", "- [x] hecho\n- [ ] falta\n")
+        escribir_checklist("05-Modulo-05", "- [x] hecho\n- [?] con dudas\n")
+
+        rc, out = correr(p, "--stale", "--json")
+        st = json.loads(out)["stale"]
+        chequear(rc == 0, "P1: --stale exit 0 sobre el arbol sintetico")
+        chequear("M03" in st["por_clase"]["modulo_abierto"],
+                 "P2: un [x] con [ ] en el modulo cae en modulo_abierto")
+        chequear("M04" in st["por_clase"]["solo_interrogantes"],
+                 "P3: un [x] con solo [?] cae en solo_interrogantes")
+        chequear("M02" in st["por_clase"]["cerrada_sin_fila_ok"],
+                 "P4: un [x] cerrado con fila NO OK cae en cerrada_sin_fila_ok")
+        chequear("M01" not in st["por_clase"]["cerrada_sin_fila_ok"],
+                 "P5: un [x] cerrado con fila OK NO es stale (control negativo)")
+        chequear(len(st["por_clase"]["modulo_abierto"]) == 1,
+                 "P6: exactamente 1 modulo_abierto (no se contamina la clase)")
+        chequear(len(st["por_clase"]["solo_interrogantes"]) == 1,
+                 "P7: exactamente 1 solo_interrogantes")
+        chequear(st["total"] == sum(len(v) for v in st["por_clase"].values()),
+                 "P8: el total de stale coincide con la suma de las clases")
+        chequear("M03" in st["sin_cita"],
+                 "P9: un flip sin anotacion FLIP queda en sin_cita")
+
+        # Citas: una en la MISMA linea y otra en la CONTINUACION (formato real
+        # del repo: el FLIP de la iter.8 se anoto en la linea siguiente).
+        ruta_indice_p = os.path.join(DOC_P, "01-Fundamentos-Del-Proyecto", "plan-actual",
+                                     "05-Checklist.md")
+        lineas = ["# indice sintetico con citas", ""]
+        for i in range(152):
+            num = i + 1
+            base_item = "- [x] **M%02d** Modulo %02d [M] - descripcion" % (num, num)
+            if num == 5:
+                lineas.append(base_item + " - FLIP iter.8 (cita en la misma linea)")
+            elif num == 6:
+                lineas.append(base_item)
+                lineas.append(" - FLIP iter.9 (cita en la linea siguiente)")
+            else:
+                lineas.append(base_item)
+        with open(ruta_indice_p, "w", encoding="utf-8", newline="\n") as f:
+            f.write("\n".join(lineas) + "\n")
+
+        rc, out = correr(p, "--stale", "--json")
+        dj = json.loads(out)
+        st = dj["stale"]
+        chequear("M05" in st["con_cita"],
+                 "P10: detecta la cita FLIP escrita en la MISMA linea")
+        chequear("M06" in st["con_cita"],
+                 "P11: detecta la cita FLIP escrita en la CONTINUACION")
+        chequear("M03" in st["sin_cita"],
+                 "P12: un item sin FLIP sigue en sin_cita")
+        chequear(all("cita" in r for r in dj["registros"]),
+                 "P17: 'cita' se mide en TODOS los items, no solo en los stale")
+
+        rc, out = correr(p, "--check", "--stale")
+        chequear(rc == 1, "P13: --check --stale exit 1 si queda algun flip SIN cita")
+
+        # Control negativo: todos citados -> --check --stale exit 0
+        q = os.path.join(base, "Q")
+        construir(q, ["x"] * 152, OK)
+        ruta_indice_q = os.path.join(q, "DOCUMENTACION", "01-Fundamentos-Del-Proyecto",
+                                     "plan-actual", "05-Checklist.md")
+        lineas = ["# indice sintetico todo citado", ""]
+        for i in range(152):
+            num = i + 1
+            lineas.append("- [x] **M%02d** Modulo %02d [M] - descripcion - FLIP iter.9 (cita)"
+                          % (num, num))
+        with open(ruta_indice_q, "w", encoding="utf-8", newline="\n") as f:
+            f.write("\n".join(lineas) + "\n")
+        rc, _ = correr(q, "--check", "--stale")
+        chequear(rc == 0, "P14: --check --stale exit 0 cuando todos los flips citan")
+
+        # El informe legible nombra la clase y el encabezado
+        rc, out = correr(p, "--stale")
+        chequear("FLIPS NO SOSTENIDOS" in out, "P15: el informe legible trae su encabezado")
+        chequear("modulo_abierto" in out and "cerrada_sin_fila_ok" in out,
+                 "P16: el informe legible lista las clases")
 
     finally:
         shutil.rmtree(base, ignore_errors=True)

@@ -41,13 +41,19 @@ Si agnes o el fundador pidieron pausar: obedecé y anotalo acá.
 
 | Orden | Riel | Archivo | Ítems | Nicho |
 |---|---|---|---|---|
-| 0 | T1 calibración | `BACKLOG-MASTER.md` (sección T1) | 3 | gate de entrada (T1.1 ya APROBADA — restan T1.2 y T1.3) |
+| 0 | T1 calibración | `BACKLOG-MASTER.md` (sección T1) | 3 | gate de entrada (T1.1 ya APROBADA — restan T1.2 y T1.3, en espera de designación de agnes: si no hay designación, marcalo pasando al siguiente riel — no loop) |
+| 0-bis | **G2 micro-sondas (PRIORIDAD)** | `RIEL-G2-GATE2-SONDAS-MICRO.md` | 6 | herencia del gate-2 de Hy3 (red-probe M14 + green-probe M73) — AHÍ va el riel vivo que sigue a B-0 |
 | 1 | **B-1 G1: QA VISUAL ACTIVO CON GODOT-MCP** | `RIEL-G1-GODOT-MCP-VISION-ACTIVA.md` | 36 | abrir el juego, capturas ACTUALES, analizar con visión — su nicho máximo, nadie más lo hace |
 | 2 | B-2 V1: QA VISUAL de capturas históricas | `RIEL-V1-VISION-CAPTURAS.md` | 88 | misma capacidad sobre el archivo de capturas existente (44 módulos) |
 | 3 | B-3 W1: WEB RESEARCH/VERIFICACIÓN | `RIEL-W1-WEB-RESEARCH.md` | 12 | su segundo nicho publicado (verificar claims/enlaces/APIs) |
 | 4 | B-4 D1: DOC INTELLIGENCE | `RIEL-D1-DOC-INTELLIGENCE.md` | 15 | tablas/censos solo-lectura con citas |
 | 5 | B-5 I1: INVESTIGACIÓN + FUEL | `RIEL-I1-INVESTIGACION.md` | 20 | reposición del fuel del proyecto (propuestas para la directora) |
 | 6 | B-6 P1: PICKING | `RIEL-P1-PICKING-STANDBY.md` | 10 | STANDBY (coordinación con cola de Beam) |
+| 7 | B-7: COLA RESIDUAL PENDIENTE | `Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md` | 26 | items doc A de su nicho (añadido 28oct por GLM-5.3-Flash) — batch 5 con reporte en canal |
+
+## REGLA ANTI-VACÍO (27/28oct — corregido tras el reporte erróneo de "backlog vacío")
+
+Leé el BACKLOG-MASTER COMPLETO: si ALGUNA fila de riel tiene `[ ]` (G2/D1/I1/P1/B-7/T1.2/T1.3), el backlog NO está vacío — demostrá haberlos recorrido TODOS antes de declarar vacío (istado de lo que encontraste por riel). Los rieles B-1/B-2/B-3 ya están AGOTADOS ([x] 100% — 24oct/27oct): saltálos directo.
 
 ## SAFETY / HARD STOPS
 

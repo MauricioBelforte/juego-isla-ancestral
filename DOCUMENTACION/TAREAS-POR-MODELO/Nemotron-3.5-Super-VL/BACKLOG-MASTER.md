@@ -11,15 +11,19 @@ Leer CRONÓMETRO → tomar el PRIMER riel no agotado (orden de capacidad, NO reo
 
 ## CHECKLIST DE RIELES (marca [x] al AGOTAR cada backlog)
 
-- [ ] **B-0 CALIBRACIÓN** — restan T1.2 (citas textuales) y T1.3 (fix pequeño con test). T1.1 visión: APROBADA (25oct, veredicto canal 003). Si agnes designa archivos, ejecutarlos primero de todo; NO bloquean los rieles de solo-lectura.
+- [ ] **G2 — GATE-2 MICRO-SONDAS (PRIORIDAD 1 — herencia de Hy3): 6 items** → `RIEL-G2-GATE2-SONDAS-MICRO.md` — ejecutar las 2 sondas de Hy3 (red-probe M14 con script permanente + green-probe M73 byte-exact) en micro-tareas de salida corta y firmar el veredicto dual. En curso 28oct.
+- [ ] **B-0 CALIBRACIÓN** — restan T1.2 (citas textuales) y T1.3 (fix pequeño con test). T1.1 visión: APROBADA (25oct, veredicto canal 003). Si agnes designa archivos, ejecutarlos primero de todo; NO bloquean los rieles de solo-lectura. → Ahora la herencia del gate-2 (G2) cubre parte de T1.2 (citas textuales en sondas reales).
 - [x] **B-1 G1 — QA VISUAL ACTIVO CON GODOT-MCP: 36 items** → `RIEL-G1-GODOT-MCP-VISION-ACTIVA.md` — abrir el juego (run_project), capturas ACTUALES (nomenclatura repo, nunca sobrescribir), analizar con visión, correlacionar get_debug_output, reportar defectos en canal. **Nicho máximo (nadie más lo hace).** Prioridad de arranque: G1-001, 002, 003, 006, 009. AGOTADO: 35 [x] + 1 [?] honesto (G1-002: Escape no abre menú de pausa; "Escape - Liberar mouse").
 - [x] **B-2 V1 — QA VISUAL DE CAPTURAS HISTÓRICAS: 88 items** → `RIEL-V1-VISION-CAPTURAS.md` — las 44 carpetas reales de `tools/mcp/godot-mcp/capturas/` (2 ítems por módulo: describir + defectos). Output: reporte en canal. Batch 5. AGOTADO: 88 [x] completados (V1-001 a V1-088).
 - [x] **B-3 W1 — WEB RESEARCH/VERIFICACIÓN: 12 items** → `RIEL-W1-WEB-RESEARCH.md` — su segundo nicho publicado: verificar licencias/assets legales (M85/M86/M79), URLs activas de las guías, claims de M154/M97/M61 contra fuentes web, vigencia del free tier de su propia familia. AGOTADO: 12 [x] completados (W1-001 a W1-012).
 - [ ] **B-4 D1 — DOC INTELLIGENCE: 15 items** → `RIEL-D1-DOC-INTELLIGENCE.md` — drift de CHECKLIST-GLOBAL, censo FLAGS, .po, Logs, docs/, scripts/, mapas de ocupación. Solo-lectura con citas.
 - [ ] **B-5 I1 — INVESTIGACIÓN + NUEVO FUEL: 20 items** → `RIEL-I1-INVESTIGACION.md` — 4 fuentes de reposición (Plan-inicial-minimo, 5-FUTURAS-MEJORAS, GUIA-GODOT, derivaciones ex-director). Output:_PROPUESTAS_ con L#+cubo para validación de la directora (él no apila directo).
 - [ ] **B-6 P1 — PICKING DOCUMENTAL: 10 items** → `RIEL-P1-PICKING-STANDBY.md` — **STANDBY**: se activa solo con asignación de la directora + anti-duplicado (la cola T057-T265 es de Beam).
+- [ ] **B-7 COLA RESIDUAL PENDIENTE: 26 items A vivos** → `Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md` (ruta: `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md`, regenerada 28oct por GLM-5.3-Flash) — items doc de su nicho que Beam dejó pendientes. Ejecutar EN ORDEN: spec en 03 + flip 05 CON CITA, marcar [x] en la cola; si es de dueño ajeno/DEP-BLOQ → [ ] + skip con motivo. Batch 5 con reporte en canal.
 
-**TOTAL: 184 items** (T1: 3 — 1 hecha, 2 pendientes | G1 36 + V1 88 + W1 12 + D1 15 + I1 20 + P1 10 = **181 en rieles**).
+**TOTAL: 216 items** (T1: 3 — 1 hecha, 2 pendientes | G2: 6 | rieles 181 | B-7 cola residual 26).
+
+**NOTA ANTI-VACÍO (27/28oct):** el backlog NUNCA está vacío mientras exista alguna fila `[ ]` en los rieles (D1/I1/P1/B-7/G2) o ítems T1.2/T1.3 pendientes. Si un riel no tiene trabajo o esperas designación: marcalo `[?]`/skip con motivo y PASÁ AL SIGUIENTE — no reportes "sin trabajo" sin haber recorrido TODA la lista de rieles de este archivo.
 
 ## REGLAS FIJAS (detalle en canal 01 y cronómetro)
 

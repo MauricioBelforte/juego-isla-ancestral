@@ -15,6 +15,7 @@ Uso:
     python scripts/auditar_indice_m01.py --check     # exit 1 si hay candidatos nuevos
     python scripts/auditar_indice_m01.py --pendientes    # clasifica los [ ] por bloqueo
     python scripts/auditar_indice_m01.py --dependencias  # clasifica los abiertos por TIPO de dependencia
+    python scripts/auditar_indice_m01.py --stale         # clasifica los [x] NO sostenidos hoy + cita
 
 Codigos de salida:
     0 = medicion completa, sin candidatos nuevos
@@ -124,13 +125,22 @@ def leer_global(ruta):
 
 def leer_indice(ruta):
     items = []
-    for numero, linea in enumerate(leer_texto(ruta).splitlines(), 1):
+    lineas = leer_texto(ruta).splitlines()
+    for numero, linea in enumerate(lineas, 1):
         m = RE_ITEM.match(linea)
         if not m:
             continue
         marca, ident, resto = m.group(1), m.group(2), m.group(3)
         # El resto trae "Titulo [M] PRIORIDAD - descripcion"
         titulo = resto.split("[")[0].strip()
+        # La cita del flip puede vivir en la linea siguiente (continuacion que
+        # empieza con guion largo) y no en la propia: se captura para poder
+        # auditar si el flip esta justificado.
+        siguiente = ""
+        if numero < len(lineas):
+            cand = lineas[numero]
+            if cand.strip() and not RE_MARCA.match(cand) and not cand.lstrip().startswith("#"):
+                siguiente = cand
         items.append(
             {
                 "id": "M" + ident,
@@ -138,6 +148,8 @@ def leer_indice(ruta):
                 "marca": marca,
                 "titulo": titulo,
                 "linea": numero,
+                "texto": linea,
+                "siguiente": siguiente,
             }
         )
     return items
@@ -174,6 +186,9 @@ def medir():
             "carpeta": carpeta,
             "checklist": None,
             "global": filas.get(objetivo),
+            "linea": it["linea"],
+            "texto": it.get("texto", ""),
+            "siguiente": it.get("siguiente", ""),
         }
         if carpeta:
             carpetas_vistas += 1
@@ -665,8 +680,93 @@ def informe_dependencias(datos, bloque=0, tam=20):
     return "\n".join(lineas)
 
 
-def informe(datos):
+RE_CITA = re.compile(r"\bFLIP\b|\bcita\s*:", re.IGNORECASE)
 
+CLASES_STALE = (
+    ("modulo_abierto", "la checklist propia del modulo todavia tiene [ ]: el flip se adelanto"),
+    ("solo_interrogantes", "la checklist propia no tiene [ ] pero si [?] abiertos"),
+    ("cerrada_sin_fila_ok", "checklist propia cerrada, pero la fila GLOBAL no esta en OK"),
+    ("sin_checklist", "no existe la checklist del modulo en disco"),
+)
+
+
+def clase_stale(r):
+    """Razon por la que un [x] del indice NO se sostiene hoy."""
+    if not r.get("checklist_existe"):
+        return "sin_checklist"
+    ch = r.get("checklist") or {}
+    if ch.get(" ", 0) > 0:
+        return "modulo_abierto"
+    if ch.get("?", 0) > 0:
+        return "solo_interrogantes"
+    return "cerrada_sin_fila_ok"
+
+
+def clasificar_stale(datos):
+    """Anota cada [x] no sostenido con su clase y con si el flip trae cita.
+
+    Un [x] es "stale" cuando hoy NO cumple el criterio ratificado
+    (checklist propia cerrada Y fila GLOBAL en OK). La cita se busca en la
+    propia linea del item y en su continuacion (los FLIP de la iter. 8 se
+    anotaron en la linea siguiente).
+    """
+    detalle = []
+    for r in datos["registros"]:
+        # La cita se mide en TODOS los items (sirve tambien para auditar los
+        # flips que hoy si se sostienen); la clase solo tiene sentido en los
+        # que no se sostienen.
+        texto_cita = (r.get("texto", "") or "") + " " + (r.get("siguiente", "") or "")
+        r["cita"] = bool(RE_CITA.search(texto_cita))
+        if r["marca_indice"] != "x" or r["candidato"]:
+            continue
+        r["clase_stale"] = clase_stale(r)
+        detalle.append(r)
+    por_clase = {nombre: [] for nombre, _ in CLASES_STALE}
+    for r in detalle:
+        por_clase[r["clase_stale"]].append(r["id"])
+    datos["stale"] = {
+        "total": len(detalle),
+        "por_clase": por_clase,
+        "con_cita": [r["id"] for r in detalle if r["cita"]],
+        "sin_cita": [r["id"] for r in detalle if not r["cita"]],
+        "detalle": detalle,
+    }
+    return datos
+
+
+def informe_stale(datos):
+    st = datos["stale"]
+    lineas = []
+    lineas.append("=== FLIPS NO SOSTENIDOS DEL INDICE MAESTRO M01 ===")
+    lineas.append("items del indice     : %d" % datos["items"])
+    lineas.append("[x] en el indice     : %d" % sum(
+        1 for r in datos["registros"] if r["marca_indice"] == "x"))
+    lineas.append("[x] sostenidos hoy   : %d" % len(datos["flipeados_validos"]))
+    lineas.append("[x] NO sostenidos    : %d" % st["total"])
+    lineas.append("  con cita de flip   : %d" % len(st["con_cita"]))
+    lineas.append("  SIN cita de flip   : %d" % len(st["sin_cita"]))
+    lineas.append("")
+    lineas.append("-- POR CLASE --")
+    for nombre, desc in CLASES_STALE:
+        ids = st["por_clase"][nombre]
+        lineas.append("%-22s %3d  %s" % (nombre, len(ids), desc))
+    lineas.append("")
+    lineas.append("-- DETALLE --")
+    lineas.append("%-5s %-6s %-34s %-11s %-6s %s"
+                  % ("ID", "LINEA", "CARPETA", "CHK x/?/[]", "CITA", "CLASE"))
+    for r in st["detalle"]:
+        ch = r["checklist"] or {"x": 0, "?": 0, " ": 0}
+        lineas.append("%-5s %-6d %-34s %-11s %-6s %s" % (
+            r["id"], r["linea"], (r["carpeta"] or "SIN CARPETA")[:34],
+            "%d/%d/%d" % (ch["x"], ch["?"], ch[" "]),
+            "si" if r["cita"] else "NO", r["clase_stale"]))
+    lineas.append("")
+    lineas.append("-- SIN CITA (el flip no esta justificado en el archivo) --")
+    lineas.append("   " + (", ".join(st["sin_cita"]) or "(ninguno)"))
+    return "\n".join(lineas)
+
+
+def informe(datos):
     lineas = []
     lineas.append("=== AUDITOR INDICE MAESTRO M01 ===")
     lineas.append("items del indice        : %d" % datos["items"])
@@ -722,6 +822,8 @@ def main(argv=None):
                     help="con --dependencias: numero de bloque de 20 modulos a mostrar (1..N)")
     ap.add_argument("--tam", type=int, default=20,
                     help="con --dependencias: modulos por bloque (default 20)")
+    ap.add_argument("--stale", action="store_true",
+                    help="clasifica los [x] NO sostenidos hoy (clase + cita del flip)")
     args = ap.parse_args(argv)
 
     if args.bloque < 0 or args.tam < 1:
@@ -736,6 +838,7 @@ def main(argv=None):
         return 3
 
     datos = clasificar_pendientes(clasificar(medir()))
+    datos = clasificar_stale(datos)
     if args.dependencias or args.json:
         datos = clasificar_dependencias(datos)
 
@@ -746,6 +849,8 @@ def main(argv=None):
             print(json.dumps(datos, ensure_ascii=False, indent=1))
         elif args.dependencias:
             print(informe_dependencias(datos, args.bloque, args.tam))
+        elif args.stale:
+            print(informe_stale(datos))
         elif args.pendientes:
             print(informe_pendientes(datos))
         else:
@@ -756,11 +861,15 @@ def main(argv=None):
         print(json.dumps(datos, ensure_ascii=False, indent=1))
     elif args.dependencias:
         print(informe_dependencias(datos, args.bloque, args.tam))
+    elif args.stale:
+        print(informe_stale(datos))
     elif args.pendientes:
         print(informe_pendientes(datos))
     else:
         print(informe(datos))
 
+    if args.check and args.stale and datos["stale"]["sin_cita"]:
+        return 1
     if args.check and datos["candidatos_nuevos"]:
         return 1
     return 0

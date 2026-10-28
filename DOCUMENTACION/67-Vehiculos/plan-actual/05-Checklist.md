@@ -43,14 +43,14 @@
 - [x] Velocidad de crucero/rápida, timón suave y reversa [M] — Step-5 2026-10-22 (tanda 4): crucero = velocidad_crucero por preset + modo crucero nuevo (controller.rapida=false limita el techo a velocidad_crucero; default true = comportamiento historico hasta vel_max); rápida = flag rapida (acelera hasta velocidad_max_efectiva, mejoras incluidas); timón = giro por preset con mejoras (giro_efectivo); reversa = clamp -40% de vel_max_efectiva. Bloque _test_mejoras (36 checks) + validate_vehicles +44 checks, todo 0 fallos/EXIT 0 x3 con binario real.
 - [x] Colisiones con islas, rocas y vegetación (M50) sin atravesar [C] — capas fisicas por tipo; respuesta por tipo/velocidad (rebote 0.4-0.5, dano x2/x3, rozamiento 20%); margen casco 0.3-0.5 m y CCD anti-tunneling; 0 atravesamientos en 100 colisiones con semilla M29 — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
 - [x] No atascarse en aguas poco profundas (aviso) [M] — sondeo cada 6 frames (ciclo RF4); aviso < 2.0 m con SFX cada 3 s; < 1.2 m empuje 40%; encallamiento: reversa automatica 2 s (0 softlocks) — 03 sec "Protocolo de gating hidraulico y colisiones" (S61 2026-10-23 G-5.3-Flash-Agente, apilado CRON F)
-- [x] Vela desplegable (M48) y estela por evento (M52) [M]
+- [?] Vela desplegable (M48) y estela por evento (M52) [M] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo ampliado 15): CERO hits de vela y de estela de barco en TODO el proyecto (el unico "vela" es un test de dialogo de M21) y M67 no tiene nodo 3D
 
 ## D. Dirigible
 
 - [x] Vuelo con altitud/descenso y aterrizaje suave en plataformas [M]
 - [x] Altitud máxima 60 m (mejorable a 90 m) [S] — IMPLEMENTADO G-5.3-Flash-Agente 2026-10-22: vehicle_controller.gd dimensión vertical LÓGICA (var altitud + VELOCIDAD_VERTICAL 2 m/s; aplicar() con args subir/bajar DEFAULTS retrocompatibles — los tests de 4 args intactos 99/0). Techo EXACTO del preset: clamp mini(altitud, altitud_max_efectiva()) — dirigible 60 de base, 90 con el nivel máximo de mejoras (_por_nivel altitud 30 + tope 90); qa_m67_altitud.gd 6/0 EXIT 0 (techo 60, piso 0, barco no vuela, retrocompatible, techo mejorado 90). El Node3D de la iter. 2 consume ctrl.altitud — Step-5 2026-10-21: el preset declara altitud_max 60 (vehicles.json, testeado) pero el controller no tiene eje vertical (plano XZ); el techo de vuelo efectivo es iter. 2 con nodos 3D. La mejora a 90 m pertenece a la seccion M (mejoras), no implementada.
-- [x] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61.
-- [x] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50.
+- [?] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C] — Step-5 2026-10-21: medicion de dependencias: chunk_target = 0 archivos fuera de validate_vehicles.gd (M10/M61 NO exponen la API); vehicle_streaming.gd no existe. Diseno del cable en 03-Diseno.md §3.2 (tanda 2); implementacion con dueno externo M10/M61. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "vehicle_streaming.gd no existe" (spec autocontradictoria)
+- [?] No colisionar con vegetación alta (paso por encima) [M] — Step-5 2026-10-21: sin sistema de colisiones de vegetacion en M50 (grep colision en scripts/: camera/construccion/animales_ia, ninguno de terreno para vehiculos); sin nodos 3D. Dueno externo M50. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "sin sistema de colisiones de vegetacion en M50 ... sin nodos 3D"
 - [x] Viento lateral (M32) y farol nocturno (M49) [M]
 
 ## E. Submarino
@@ -72,7 +72,7 @@
 ## G. Física y Control (M57)
 
 - [x] Física acotada: velocidad/giro/frenado por preset con suavizado [M] — iter. 1: VehicleController lógico (ACELERACION 3 m/s², clamp vel_max, frenado por preset; testeado clamp 12 m/s + frenado a 0)
-- [x] Controles con WASD y gamepad (palanca/gatillos) [M]
+- [?] Controles con WASD y gamepad (palanca/gatillos) [M] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo ampliado 15): CERO hits de WASD/gamepad en scripts/vehiculos y data/vehiculos; tick_conduccion() recibe los bools como parametros y solo lo llaman el test y el validador (0 llamadores de produccion)
 - [x] Reversa para barco [S] — iter. 1: tiene_reversa por preset; reversa clamp a -40% vel_max (testeado barco+dirigible)
 - [x] Velocidad limitada por tipo (nunca romper streaming) [M] — iter. 1: clamp por preset (12/15/8/20 m/s del diseño §3.1; testeado)
 - [x] Testear física en 30/60 FPS (delta correcto) [C] [C] — Step-5 2026-10-21 (Log 2089): bloque _test_delta_frameindependiente (6 checks): 2 s simulados a 30 FPS (60 ticks de 1/30 s) vs 60 FPS (120 ticks de 1/60 s) dan la MISMA velocidad 6.000000 (medido por sonda); desplazamiento acumulado 6.100000 vs 6.050001 m (valor analitico 6 m; diferencia = discretizacion Euler); delta <= 0 es no-op; rumbo con wrapf en [0, TAU) tras 20 s de giro. Suite completa 53 checks / 0 fallos / EXIT 0 x3.
@@ -96,10 +96,10 @@
 ## J. Entrada/Salida (M70)
 
 - [x] Interacción para entrar/salir del vehículo [S]
-- [x] Entrada solo si está docked o en superficie [M] — Step-5 2026-10-21: enter() valida docked (vehicle_manager.gd L83-84, testeado); "en superficie" no existe sin nodos 3D. La interaccion para entrar (J1) sigue pendiente.
+- [?] Entrada solo si está docked o en superficie [M] — Step-5 2026-10-21: enter() valida docked (vehicle_manager.gd L83-84, testeado); "en superficie" no existe sin nodos 3D. La interaccion para entrar (J1) sigue pendiente. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "'en superficie' no existe sin nodos 3D; la interaccion para entrar (J1) sigue pendiente"
 - [ ] Al salir: restaurar cámara, HUD y sonidos (sin fugas) [M]
 - [x] No quedar atascado cerca de muros al entrar/salir [M]
-- [x] Testear entrada/salida con gamepad y durante eventos (M74) [M]
+- [?] Testear entrada/salida con gamepad y durante eventos (M74) [M] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo ampliado 15): CERO hits de gamepad en el dominio del modulo y ningun cableado de input al vehiculo
 
 ## K. Docking (M28)
 
@@ -107,7 +107,7 @@
 - [x] Ajustar posición y rotación; ángulo inválido → reintento [M]
 - [x] Docking de barco y dirigible en plataformas [M]
 - [ ] Indicador visual de zona de atraque (M53) y sonido (M43) [S]
-- [x] Testear docking en muelles angostos y con olas (M51) [C]
+- [?] Testear docking en muelles angostos y con olas (M51) [C] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo ampliado 15): las olas existen en M51 (agua_animada.gd) pero CERO en el dominio de M67: el test de docking no usa olas
 
 ## L. Almacenamiento (M14)
 
@@ -179,7 +179,7 @@
 - [x] Localizar menús de personalización y avisos de docking [S]
 - [x] Localizar nombres de vehículos [S]
 - [x] Testear HUD en 3 idiomas sin desbordes [M]
-- [x] Localizar mensajes de límites (profundidad, altitud) [S] — Step-5 2026-10-21: los avisos de avisar() son strings hardcodeados en espanol; no hay claves M87 para los mensajes de limites. Pendiente de contenido i18n.
+- [?] Localizar mensajes de límites (profundidad, altitud) [S] — Step-5 2026-10-21: los avisos de avisar() son strings hardcodeados en espanol; no hay claves M87 para los mensajes de limites. Pendiente de contenido i18n. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "strings hardcodeados en espanol; no hay claves M87 ... Pendiente de contenido i18n"
 
 ## U. Accesibilidad (M58)
 
@@ -187,14 +187,14 @@
 - [x] Tamaño de texto configurable [M]
 - [ ] Reduce Motion: cámara y animaciones reducidas [M]
 - [x] Subtítulos en avisos del vehículo [S]
-- [x] Controles completos con gamepad (sin mouse) [M]
+- [?] Controles completos con gamepad (sin mouse) [M] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo ampliado 15): CERO hits de gamepad en scripts/vehiculos; sin cableado de input de produccion
 
 ## V. Validación y QA
 
 - [x] Crear validate_vehicles.gd (física, streaming, colisiones, presupuestos) [C] — Step-5 2026-10-21: el archivo EXISTE (tanda 2) y hoy cubre catalogo + presets + fisica + manager + ciclo barco = 46 checks / 0 fallos / EXIT 0 x3. QUEDA [ ] por decision del director (msg 157): "un validador que reporta areas pendientes NO consume el item". PENDIENTES para consumirlo: streaming (M10/M61), colisiones (M50), HUD (M53), camara (M12/M57), audio (M43), animaciones (M48), mejoras, personalizacion, baul real (M14), controles (M57). — FLIP RATIFICADO por el director 2026-10-22 (aclaracion 161: este item es el DELIVERABLE crear; V1-areas es item distinto que sigue [ ]). Evidencia: 46/0 x3 + tamper-rojo (Step-5 160, Log 2098).
 - [x] Probar ciclo barco: dock → entrar → navegar → atracar → salir [C] — Step-5 2026-10-21 (Log 2098): bloque _test_ciclo_barco en test_vehiculos.gd (10 checks end-to-end: a pie/docked -> enter -> zarpar -> 2 s acelerando a crucero 6 m/s con desplazamiento medido -> atracar camino real VEH-DOCK -> salir -> controller liberado). Suite 63 checks / 0 fallos / EXIT 0 x3 (piso 63 MEDIDO; guardian en rojo por inyeccion de runtime: 53<63 EXIT 1). Validador validate_vehicles.gd +bloque ciclo (6 checks): 46/0/EXIT 0 x3.
-- [x] Probar ciclo dirigible: despegar → volar → aterrizar [C] — Step-5 2026-10-21: el controller es plano XZ (sin eje vertical); despegar/aterrizar no existen sin nodos 3D. La navegacion plana SI esta cubierta por los invariantes del ciclo (mismo bloque, otros presets). Dueno visual iter. 2.
-- [x] Probar ciclo submarino: sumergir → explorar → emerger [C] — Step-5 2026-10-21: igual que V3: sin eje vertical en el controller; profundidad_max -40 declarada en preset y validada (validate_vehicles B). Sumergir/emerger con nodos 3D, iter. 2.
+- [?] Probar ciclo dirigible: despegar → volar → aterrizar [C] — Step-5 2026-10-21: el controller es plano XZ (sin eje vertical); despegar/aterrizar no existen sin nodos 3D. La navegacion plana SI esta cubierta por los invariantes del ciclo (mismo bloque, otros presets). Dueno visual iter. 2. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "despegar/aterrizar no existen sin nodos 3D"
+- [?] Probar ciclo submarino: sumergir → explorar → emerger [C] — Step-5 2026-10-21: igual que V3: sin eje vertical en el controller; profundidad_max -40 declarada en preset y validada (validate_vehicles B). Sumergir/emerger con nodos 3D, iter. 2. | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): el texto declara "sin eje vertical en el controller; profundidad_max -40 declarada ... iter. 2" (0 escenas instancian vehiculos)
 - [x] Revisar logs VEH-* en consola sin errores [S] [S] — Step-5 2026-10-21 (Log 2089): corrida headless real (binario Godot 4.7.2): [VEH-ENTER] x14 / [VEH-EXIT] x14 / [VEH-DOCK] x1, 0 errores propios (el unico ERROR del boot es ajeno: singleton 'AnimationService'). Hallazgo: el camino real de atracar() (log VEH-DOCK) NO estaba ejercitado por la suite (el early return "ya docked" lo esquivaba); agregado al bloque dock en esta tanda.
 
 ## W. Documentación
@@ -216,18 +216,18 @@
 ## Y. Cierre del Módulo
 
 - [x] Firmar los documentos del módulo (modelo y plataforma) [S]
-- [x] Actualizar CHECKLIST-GLOBAL con el progreso real [S]
+- [?] Actualizar CHECKLIST-GLOBAL con el progreso real [S] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): FALSO verificable: CHECKLIST-GLOBAL dice 38/131 y el cuerpo 118/131; la fila 67 ademas tiene columnas desplazadas (sin Prioridad)
 - [x] Actualizar DOCUMENTACION/README.md con el módulo 67 [S]
 - [x] Actualizar ESTADO-PARALELO.md [S]
 - [x] Generar el log 63 en Logs/ [S]
 
 ## Z. Validación Final (DoD)
 
-- [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
+- [?] Verificar con verificar_checklist.py (sin alertas nuevas) [S] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): FALSO verificable: M67 figura en el barrido de drift del 218 con delta > 5 (38 Global vs 118 cuerpo); verificar_checklist alerta
 - [x] Push del módulo y reporte al usuario [S]
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S]
-- [x] Revisar que plan-inicial == plan-actual (SHA-256) [S]
-- [x] Confirmar 130 ítems exactos [S]
+- [?] Revisar que plan-inicial == plan-actual (SHA-256) [S] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): FALSO verificable: SHA-256 de plan-inicial (288e3876...) != plan-actual (b717d106...)
+- [?] Confirmar 130 ítems exactos [S] | DEGRADADO 2026-10-28 DS-V4.1-Flash-Opencode (gate-1 §21.8.2.b, muestreo 10/78): FALSO verificable: el modulo tiene 131 items, no 130
 
 ## Dependencia: Visión del Agente (M154)
 
