@@ -1,5 +1,5 @@
-**Modelo:** DeepSeek-V4.1-Flash
-**Plataforma:** WorkBuddy
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
 
 ## Reserva actual
 
@@ -118,7 +118,7 @@
 
 - [x] Rotar la pieza en 4 pasos de 90° con la tecla dedicada [S]
   · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
-- [ ] La validación se re-ejecuta con cada rotación (celdas afectadas cambian) [M]
+- [x] La validación se re-ejecuta con cada rotación (celdas afectadas cambian) [M] → **CERRADO con checks nombrados** (Log 2220, iter. minimax-m3-1-flash, 2026-10-27): suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**, en el runner central). Evidencia: "preview rotacion 0 -> cache=false (primera evaluacion)" / "preview misma celda/rot/receta -> cache=true (cache hit)" / "preview rotacion 1 (cambia huella) -> cache=false (recalculo real)" / "la rotacion 1 cambia las celdas afectadas (2x1 -> huella en Z)" / "el contador de recalculos del preview sube con el cambio de rotacion". Mecanismo: `BuildPreview.evaluar_receta()` invalida la cache cuando cambia `(celda, rotacion, receta_id)` (`build_preview.gd` L46) y `ConstruccionValidator.validar()` recalcula la huella con `receta.celdas(celda, rotacion)`.
 - [x] Subir/bajar la pieza una planta por pulsación con límite de altura [S]
   · evidencia: 03-Diseno.md secc. Especificacion de escaleras, puentes, iluminacion y muebles (P-100, Reflection-Beam-1.0, T72, 2026-10-22)
 - [ ] El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M]
@@ -134,15 +134,15 @@
 - [x] Celda ocupada por otra pieza del jugador bloquea la colocación [M]
 - [x] Soporte inferior requerido (terreno, piso o techo según la superficie de la receta) [C]
 - [x] Regla por tipo de pieza declarada en PlacementRule y aplicada por el validador [M]
-- [ ] Puerta exige pared contigua en la celda de instalación [M]
-- [ ] Ventana exige pared contigua de al menos 1 celda [M]
+- [x] Puerta exige pared contigua en la celda de instalación [M] → **CERRADO con checks nombrados contra el CATÁLOGO REAL** (Log 2220, iter. minimax-m3-1-flash, 2026-10-27): suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**). Evidencia: "receta puerta 'puerta_madera' tiene requiere_pared == true" / "receta puerta 'puerta_piedra' tiene requiere_pared == true" / "puerta 'puerta_madera' SIN pared contigua -> REQUIERE_PARED" / "puerta 'puerta_madera' CON pared contigua -> sin REQUIERE_PARED" (idem para `puerta_piedra`). Mecanismo: `PlacementRule.requiere_pared=true` en los 2 `.tres` de `data/construccion/piezas/` + regla 4 de `ConstruccionValidator.validar()` (`construccion_validator.gd` L89-92) con `tiene_pared_contigua()` sobre los 4 vecinos horizontales.
+- [x] Ventana exige pared contigua de al menos 1 celda [M] → **CERRADO con checks nombrados contra el CATÁLOGO REAL** (Log 2220, iter. minimax-m3-1-flash, 2026-10-27): suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**). Evidencia: "receta ventana 'ventana_marco' tiene requiere_pared == true" / "receta ventana 'ventana_arco' tiene requiere_pared == true" / "ventana 'ventana_marco' SIN pared contigua -> REQUIERE_PARED" / "ventana 'ventana_marco' CON pared contigua -> sin REQUIERE_PARED" (idem para `ventana_arco`). "De al menos 1 celda": `tiene_pared_contigua()` devuelve true con UNA sola celda contigua `&"pared"` (check B4/C4 con exactamente 1 vecino marcado).
 - [ ] Escalera exige apoyo en piso o pared y no bloquea la circulación [M]
 - [x] Puente solo sobre agua (laguna/mar interior) y dentro de alcance de zona [C]
-- [ ] Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M]
+- [x] Camino solo sobre césped/arena (nunca sobre roca o pendiente fuerte) [M] → **CERRADO con checks nombrados contra el CATÁLOGO REAL** (Log 2220, iter. minimax-m3-1-flash, 2026-10-27): suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**). Evidencia: "camino 'camino_cesped' superficie_ok == ['terreno'] (sin piso/techo/pared/agua/aire)" (idem `camino_arena`, `camino_piedra`) / "camino 'camino_cesped' sobre 'roca' (fuera de superficie_ok) -> SIN_SOPORTE" / "camino 'camino_cesped' sobre 'terreno' (en superficie_ok) -> ok". Mecanismo: la whitelist de superficies de la receta (`PlacementRule.superficie_ok`) + regla 3 del validador (`contar_soportes()`), de modo que la roca (no incluida en la whitelist) da soporte 0 < `soportes_minimos` = 1 → SIN_SOPORTE.
 - [x] Techos exigen 2+ soportes (paredes o pilares) en las celdas de cobertura [C]
 - [x] Ninguna celda de la pieza puede solapar un NPC activo (consulta M64) [C]
 - [ ] Las piezas no pueden bloquear la única salida de la zona de construcción [C]
-- [ ] Las piezas de ruina M25 y parcelas de NPC son siempre no colocables ni demolidas [M]
+- [x] Las piezas de ruina M25 y parcelas de NPC son siempre no colocables ni demolidas [M] → **CERRADO con checks nombrados** (Log 2220, iter. minimax-m3-1-flash, 2026-10-27): suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**). Evidencia NO COLOCABLES: "preset PARCELA_NPC == PROTEGIDA" / "preset RUINA == PROTEGIDA" / "zona PROTEGIDA -> ZONA_PROTEGIDA para cualquier receta" (regla 1 del validador, antes que la regla de pieza). Evidencia NO DEMOLIBLES: "colocar receta deconstruible=false -> ok (manager permite colocar)" + "demoler receta deconstruible=false -> NO_DECONSTRUIBLE" (`build_manager.gd` L493-496) + control "demoler pieza NORMAL (deconstruible=true) -> ok". ⚠️ **Deuda de data (NO bloquea el item):** el check "catálogo M17 declara 0 receta(s) con deconstruible == false" deja constancia de que HOY no hay ninguna receta de ruina/evento en `data/construccion/piezas/` con `deconstruible=false` (las traerá M25/M73); el GUARD del sistema está implementado y verificado con una receta sintética.
 
 ## H. Zonas y permisos (8)
 
@@ -308,4 +308,4 @@
 **Totales:** 175 items · Completados: 101 · Pendientes: 73 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 101 [x] / 73 [ ] / 1 [?] tras tanda cooldown+undo/demolición; rieles verdes hoy: iter2 99/0 + iter3 138/0 + iter5 39/0 + iter7 24/0.)
 **Totales:** 175 items · Completados: 103 · Pendientes: 71 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 71 [ ] / 1 [?] tras tanda RF1 modo toggle; qa_m17_modo.gd 9/0.)
 **Totales:** 175 items · Completados: 109 · Pendientes: 65 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 65 [ ] / 1 [?] tras tanda P10 devolución; BASE 134/0 + iter5 39/0.)
-**Totales:** 175 ítems · Completados: 126 · Pendientes: 48 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 175 ítems · Completados: 135 · Pendientes: 39 · No resueltos: 1. (Re-medido minimax-m3-1-flash, 2026-10-27, Log 2220: +5 [x] al cerrar G137/G138/G141/G145 y F121 con la suite nueva `res://tests/test_m17_reglas_pieza.gd` (40 checks, 0 fallos, EXIT 0); el conteo de marcas del cuerpo manda.)

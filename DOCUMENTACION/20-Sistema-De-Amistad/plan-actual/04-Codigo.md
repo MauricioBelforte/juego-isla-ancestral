@@ -344,3 +344,70 @@ que es un artefacto de contención. Documentado en la cabecera del runner (punto
 
 **Pendiente de M112 (no tocado):** el tiempo total del CI quedó en ~872-878 s, por encima del
 presupuesto de 600 s (la lane voxel son 6 suites × ~72 s). No es de M20.
+
+### 7.6 BUG M20: el límite diario se consumía antes de validar el inventario (corregido)
+
+**Routeo:** la directora `agnes-3-flash` (canal MiniMax #059) detectó el bug y lo asignó a M20
+(dueño: MiniMax). Regresión de gameplay: con el inventario vacío, el jugador hacía un regalo,
+recibía `sin_item` y **ya no podía volver a regalar ese día** (el límite "regalo" = 1/día se
+había quemado en el intento fallido).
+
+**Causa raíz** (`res://scripts/friendship/friendship_service.gd`, `func regalar`):
+el orden era *consumir límite → validar inventario*. Con `remover_items()` en modo todo-o-nada,
+el fallo `sin_item` devolvía el control **sin devolver el límite**.
+
+**Fix (3 call sites + 1 primitiva nueva):**
+
+| Archivo | Cambio |
+|---|---|
+| `res://scripts/friendship/vecino_amistad.gd` | Nueva primitiva `devolver_limite(tipo)` (descuenta 1 uso del límite diario del día). |
+| `res://scripts/friendship/friendship_service.gd` `regalar()` | Si `remover_items()` falla → `v.devolver_limite("regalo")` antes de devolver `sin_item`. |
+| `res://scripts/friendship/friendship_service.gd` `regalar_en_cumpleanos()` | Ídem con el límite propio `"cumpleanos"` (que va aparte del `"regalo"`). |
+| `res://scripts/friendship/friendship_service.gd` `enviar_carta()` | Adjunto inexistente → `devolver_limite("carta")`; además **valida `texto_id` antes de consumir el límite**: `texto_id == ""` → `texto_vacio`; `texto_id` inexistente en `data/amistad/cartas.json` → `texto_invalido`. Nuevo helper privado `_hay_item_para_regalo(inv, item_id)` (consulta `count_item(item_id, true)` = bolsa+mochila+casa, igual que `remover_items`). |
+
+**Suite de regresión nueva:** `res://tests/test_m20_limite_regalo.gd` → **19 checks, 0 fallos,
+EXIT 0** (Godot 4.7.2 headless). Checks nombrados (texto literal en el log):
+
+1. "regalo rechazado por falta de item: se avisa sin_item y no se entrega nada"
+2. "regalo rechazado por falta de item NO consume el limite diario de regalo"
+3. "regalo valido del mismo dia tras el fallo: se acepta (limite conservado)"
+4. "carta con adjunto inexistente: se rechaza con sin_adjunto"
+5. "carta con adjunto inexistente NO consume el limite diario de carta"
+6. "carta valida del mismo dia tras el fallo: se envia (limite de carta conservado)"
+7. "carta sin texto seleccionado (texto_id vacio): se rechaza con texto_vacio"
+8. "carta sin texto no consume el limite diario de carta"
+9. "carta con texto_id inexistente en data: se rechaza con texto_invalido"
+10. "carta con texto_id inexistente no consume el limite diario de carta"
+11. "carta con texto_id valido tras los rechazos: se envia (limite de carta conservado)"
+12. "cumpleanos: la fecha de prueba coincide con el cumpleanos del vecino"
+13. "regalo de cumpleanos rechazado por falta de item: se avisa sin_item"
+14. "regalo de cumpleanos fallido NO consume el limite diario de cumpleanos"
+15. "regalo de cumpleanos valido tras el fallo: se acepta (limite conservado)"
+16. "regalo de cumpleanos NO consume el limite diario de regalo"
+17. "regalo valido: el limite diario de regalo queda consumido (usado=1)"
+18. "segundo regalo del mismo dia: se rechaza con limite_diario"
+19. "dia siguiente: el limite diario de regalo se reinicia y el regalo se acepta"
+
+**Prueba rojo-verde (guardianía):**
+
+| Escenario | Resultado |
+|---|---|
+| Suite sin el fix (`devolver_limite` ausente) | **14 checks / 6 fallos / EXIT 1** — el guardián detecta el bug |
+| Suite sin la validación de `texto_id` | **19 checks / 5 fallos / EXIT 1** |
+| Suite con el fix completo | **19 checks / 0 fallos / EXIT 0** |
+
+**Regresión (todas verdes, EXIT 0):** `scripts/friendship/test_amistad.gd` 14/0 ·
+`scripts/friendship/test_amistad_eventos.gd` 53/0 · `scripts/friendship/test_amistad_rf48_m20.gd`
+12/0 · `scripts/friendship/test_ciclo_amistad_m20_hy3.gd` 30/0 · `tests/test_m20_amistad_cobertura.gd`
+15/0 · `tests/test_m20_limite_regalo.gd` 19/0.
+
+**Nota de compatibilidad:** `scripts/friendship/test_ciclo_amistad_m20_hy3.gd` (suite de Hy3)
+codificaba por accidente el comportamiento con bug (el primer regalo fallaba por falta de `PIEDRA`
+en el inventario y el segundo se rechazaba con `limite_diario`). Se ajustó **solo** para que el
+primer regalo sea determinista (se asegura `PIEDRA` en el inventario antes de regalar); el caso
+negativo que la suite quiere probar (2º regalo del mismo día → `limite_diario`) se mantiene
+intacto. No se cambió ninguna aserción de fondo de la suite de Hy3.
+
+**CI:** la suite nueva queda cableada en `.github/workflows/quality.yml` (job `test-suite`, lane
+M20) junto a las otras 4 de M20; el runner central M112 (`tests/run_tests.gd`) también la
+descubre por estar en `res://tests/`.

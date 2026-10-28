@@ -1,5 +1,5 @@
-**Modelo:** Deepseek V4 Flash
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
 
 # 04-Codigo.md — Módulo 17: Construcción
 
@@ -355,3 +355,66 @@ porque no se haya buscado:
 | P15 colisiones | "colision estatica real" | el validator es **logico**, no fisico: no hay colisiones reales |
 | A. Requisitos (12) | redaccion | son items de documentacion del modulo (problema, dependencias, RF1..RF14): son del dueno del modulo, no se autocierran |
 | C. Modo construccion | UI + mundo | requieren HUD y viewport: fuera del riel headless |
+
+## 7. Tanda P3-3 — Reglas declarativas por pieza contra el catálogo real (Log 2220, 2026-10-27 21:40)
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** MiniMax API (Kilo Code)
+
+### 7.1 Qué se añadió
+
+Suite NUEVA en el runner central: **`res://tests/test_m17_reglas_pieza.gd`** → **40 checks, 0 fallos,
+EXIT 0** (Godot 4.7.2 headless). Cableada en `.github/workflows/quality.yml` (job `test-suite`, lane
+M17) junto a las 3 suites de `scripts/construccion/` que ya corrían en CI.
+
+El motivo: el validador de M17 es **declarativo** (lee `PlacementRule`), y las suites que ya existían
+probaban las REGLAS con recetas sintéticas. Esta suite prueba las reglas contra el **catálogo real**
+(`res://data/construccion/piezas/`, 46 recetas `.tres` cargadas por `BuildCatalogDB`), que es donde
+vive el dato que el jugador realmente toca.
+
+### 7.2 Checks por item cerrado (texto literal de los checks)
+
+| Item | Checks | Evidencia |
+|---|---|---|
+| **G137** Puerta exige pared contigua | 7 | "receta puerta 'puerta_madera' tiene requiere_pared == true" · "receta puerta 'puerta_piedra' tiene requiere_pared == true" · "puerta 'puerta_madera' SIN pared contigua -> REQUIERE_PARED" · "puerta 'puerta_madera' CON pared contigua -> sin REQUIERE_PARED" (idem `puerta_piedra`) |
+| **G138** Ventana exige pared contigua de al menos 1 celda | 7 | "receta ventana 'ventana_marco' tiene requiere_pared == true" · "receta ventana 'ventana_arco' tiene requiere_pared == true" · "ventana 'ventana_marco' SIN pared contigua -> REQUIERE_PARED" · "ventana 'ventana_marco' CON pared contigua -> sin REQUIERE_PARED" (idem `ventana_arco`; con **una sola** celda contigua `pared`) |
+| **G141** Camino solo sobre césped/arena | 13 | "camino 'camino_cesped' superficie_ok == ['terreno'] (sin piso/techo/pared/agua/aire)" (idem `camino_arena`, `camino_piedra`) · "camino 'camino_cesped' sobre 'roca' (fuera de superficie_ok) -> SIN_SOPORTE" · "camino 'camino_cesped' sobre 'terreno' (en superficie_ok) -> ok" |
+| **G145** Ruina M25 / parcela NPC no colocables ni demolidas | 8 | "preset PARCELA_NPC == PROTEGIDA" · "preset RUINA == PROTEGIDA" · "zona PROTEGIDA -> ZONA_PROTEGIDA para cualquier receta" · "colocar receta deconstruible=false -> ok (manager permite colocar)" · "demoler receta deconstruible=false -> NO_DECONSTRUIBLE" · "demoler pieza NORMAL (deconstruible=true) -> ok" |
+| **F121** La validación se re-ejecuta con cada rotación | 5 | "preview rotacion 0 -> cache=false (primera evaluacion)" · "preview misma celda/rot/receta -> cache=true (cache hit)" · "preview rotacion 1 (cambia huella) -> cache=false (recalculo real)" · "la rotacion 1 cambia las celdas afectadas (2x1 -> huella en Z)" · "el contador de recalculos del preview sube con el cambio de rotacion" |
+| Catalogo (control) | 3 | "catalogo carga recursiva res://data/construccion/piezas (46 recetas)" · "catalogo valido (sin problemas de schema): ok == true" · "12 familias canonicas PRESENTES (RF12 bloque J)" |
+
+### 7.3 Mecanismos verificados (con ruta y línea)
+
+- `PlacementRule.requiere_pared` (`scripts/construccion/placement_rule.gd` L49) — flag declarativo en
+  los `.tres` de `data/construccion/piezas/` (2 puertas + 2 ventanas = `true`).
+- Regla 4 del validador (`scripts/construccion/construccion_validator.gd` L89-92) →
+  `tiene_pared_contigua()` (L209-215) sobre los 4 vecinos horizontales (`VECINOS_H`, L45-48).
+- Regla 3 del validador (soporte) → `contar_soportes()` (L146-154) contra la whitelist
+  `PlacementRule.superficie_ok` (L43): el camino solo acepta `terreno`; la roca no está en la lista
+  → 0 soportes < `soportes_minimos` = 1 → `SIN_SOPORTE`.
+- Regla 1 del validador (zona) → `ZonasPermisos.PARCELA_NPC` / `.RUINA` = `Permiso.PROTEGIDA`
+  (`scripts/construccion/zonas_permisos.gd` L28-30) → `ZONA_PROTEGIDA` antes que cualquier otra regla.
+- Guard de demolición (`scripts/construccion/build_manager.gd` L493-496): receta con
+  `deconstruible == false` → `Motivo.NO_DECONSTRUIBLE`; el control con `deconstruible == true` демuele
+  normal.
+- Cache del preview (`scripts/construccion/build_preview.gd` L46): la cache se invalida cuando cambia
+  `(celda, rotacion, receta_id)`; `evaluar()` toma la rotación viva del manager (L39-40).
+
+### 7.4 Deuda que queda (honesta, no tapada)
+
+- **G145 — data:** el catálogo M17 tiene **0 recetas con `deconstruible == false`** (check explícito
+  "catálogo M17 declara 0 receta(s) con deconstruible == false"). El GUARD del sistema está
+  implementado y verificado con una receta sintética, pero las piezas de ruina (M25) y de evento
+  (M73) todavía no existen como recetas: cuando M25/M73 las entreguen, el sistema las cubrirá sin
+  tocar M17. Deuda de **data**, no de código.
+- **G139 escalera** (exige apoyo en piso o pared y no bloquea la circulación): la parte de "no
+  bloquea la circulación" no tieneImplementation en el validador lógico — sigue `[ ]`.
+- **M Raycast 1/frame + cache de celda** (M221): la cache de celda existe en `BuildPreview`, pero el
+  raycast vive en la capa de input/UI, fuera del riel headless — sigue `[ ]`.
+
+### 7.5 Regresión
+
+Las 3 suites de M17 que ya corrían en CI (`scripts/construccion/test_construccion.gd`,
+`test_construccion_iter2.gd`, `test_construccion_iter3.gd`) NO se tocaron en esta tanda (no se
+modificó ningún `.gd` de `scripts/construccion/`). La suite nueva es aditiva.
+

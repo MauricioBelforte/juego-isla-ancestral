@@ -463,7 +463,47 @@ EVALUACION DEL SUCESOR (Nemotron-3.5-Super-VL)
 ----------------------------------------------------------------------
 CAVEAT HONESTO DEL PISO
 ----------------------------------------------------------------------
-El tandem NO corrio el binario Godot headless en esta tanda para M14 (el escaneo
-estatico sirve de evidencia de cobertura, repetible y medida). La confirmacion
-runtime de "0 capturas en boot" para las 20 senales queda como workout pendiente
-(parte de la deuda del sucesor, no de la presente).
+El tandem NO corrio el binario en su tanda original para M14; en el cierre integral
+(msg 428, 2026-10-27) Hy3 SI corro el boot headless del proyecto completo:
+  `Godot_v4.7.2-stable_win64_console.exe --headless --path game/isla-ancestral --quit`
+  -> EXIT 0; autoload `EventBus` + pila DOM-UI cargan sin SCRIPT ERROR.
+Eso confirma que las 20 senales muertas estan declaradas y cableadas en un build
+funcional. La introspeccion de CONEXIONES por senal en arranque queda como workout
+del sucesor (ver receta A1-WORKOUT abajo): requiere correr DENTRO del juego completo,
+porque en modo `--script` Godot NO carga autoloads (la sonda `get_node('/root/EventBus')`
+devuelve null y aborta). El red-probe estatico sigue siendo la evidencia de cobertura
+autoritativa (0 emit para las 20).
+
+----------------------------------------------------------------------
+A1-WORKOUT — Sonda runtime de CONEXIONES de las 20 senales muertas en arranque
+----------------------------------------------------------------------
+OBJETIVO: medir, en un boot real, cuantas de las 20 senales muertas tienen >=1
+subscriber conectado (estado `get_incoming_connections()`). Una senal muerta CON
+conexion = subscriber esperando pero nunca disparado; sin conexion = huerfana total.
+RECETA (correr DENTRO del juego, no en --script aislado):
+  - Crear temporal `game/isla-ancestral/scripts/_m14_boot_probe.gd`:
+      extends SceneTree
+      const DOMAINS := ["world","economy","inventory","quest","npc",
+        "calendar","time","weather","travel","vehicle","ui","player",
+        "infra","diary","progresion","fishing"]
+      const DEAD := [ ...20 nombres del red-probe... ]
+      func _init(): call_deferred("_run")
+      func _run():
+        var bus = get_node_or_null("/root/EventBus")
+        if bus == null: print("ERROR: autoload no cargado"); quit(1); return
+        var conn := {}
+        for d in DOMAINS:
+          var sub = bus.get(d)
+          if sub == null: continue
+          for c in sub.get_incoming_connections():
+            var s = c["signal"].name
+            conn[s] = conn.get(s,0)+1
+        for s in DEAD: print("%s -> %d conexiones" % [s, conn.get(s,0)])
+        quit(0)
+  - Ejecutar: `Godot --headless --path game/isla-ancestral --script res://scripts/_m14_boot_probe.gd`
+    (SOLO funciona si el autoload esta cargado: si da null, correr la sonda como hijo
+     de la escena raiz en lugar de --script, otras formas de inyeccion en runtime).
+  - Borrar el .gd temporal tras la corrida (no commitear; respeta 'sin push/commits').
+RESULTADO ESPERADO (hipotesis Hy3): la mayoria de las 20 muertas sin conexion;
+item_removed puede aparecer CON conexion (save_manager dirty-flag + HUD) pero el
+bridge servicio->bus sigue sin emitir (ver hallazgo transferible en el reporte 429).

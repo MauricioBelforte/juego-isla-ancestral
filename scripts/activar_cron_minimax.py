@@ -14,7 +14,7 @@ import io, os, re, sys
 AQUI = os.path.dirname(os.path.abspath(__file__))
 RAIZ = os.path.dirname(AQUI)
 COPIA = os.path.join(RAIZ, 'DOCUMENTACION', 'TAREAS-POR-MODELO', 'MiniMax-M3.1-Flash', 'CRONOMETRO.md')
-SCHEDULE = '*/30 * * * *'
+SCHEDULE = '0 * * * *'
 
 
 def main() -> int:

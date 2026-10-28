@@ -842,6 +842,18 @@
     "m": "M110 7 flips seccion N",
     "veredicto": "OK 7/7 APLICADOS",
     "nota": "gate-1 DeepSeek RAMA 2. 2 files disco + suite 75/0. agnes aplico 7 flips + Totales + GLOBAL. No es T-done de Beam (canal Beam sigue #626)."
+   },
+   {
+    "T": "G-0755-minimax-m20",
+    "m": "M20 MiniMax (Log 2215)",
+    "veredicto": "PENDING canaL",
+    "nota": "MiniMax M20 = 100/49/0=149 (antes 81 -> +19 flips, Log 2215). test_m20_amistad_cobertura.gd 8.6KB en disco. GLOBAL M20 (81/149) STALE vs cuerpo (100). MiniMax NO posteo canal todavia (reporta al cerrar tanda) -> gate-1 parcial, sync GLOBAL M20 81->100 pendiente su reporte. Beam #626 top (gate-1 Beam al dia)."
+   },
+   {
+    "T": "058-m20-m112 (MiniMax, no Beam)",
+    "m": "M20 19 items + M112 CI + M118 cableo",
+    "veredicto": "OK gate-1",
+    "nota": "M20 100/49/0 GLOBAL sync. BUG M20 (regalo) + cross-module M162/M21 anotados. Beam #626 sigue top (gate-1 Beam al dia)."
    }
   ],
   "ultimo_muestreo": "indice creado 25oct 06:05",
@@ -1318,12 +1330,13 @@
   "accion": "1er pase final de los 8-21 restantes (M01 5 + M75 L184 deuda M72 + M31 L220 + M103 L186). Despues riel cierra de verdad. Fundador decidiendo con GLM \"que hacer con Beam\" (prompt de cierre ya enviado por el fundador)."
  },
  "flota_0740": {
-  "beam": "REAIVADO por el fundador (pase anti-inflacion #623 hecho; \"riel listo para continuar\"). GLM re-midiendo (gate-1 independiente, #10).",
-  "glm": "ACTIVO bajo el fundador (\"con glm hablo yo\"). Re-medicion gate-1 + prompt de cierre enviado por el fundador. Ya no es read-only (cambio vs mi nota previa).",
-  "nemotron": "Termino riel G1 (#038 ciclo-35-final) -> arranco riel V1 (capturas, #039-045).",
-  "hy3": "Hold M75/M53 gate-2 (#411) esperando cierre de los [ ].",
-  "deepseek": "M23 L99 flip (89/105) + M75/M53 riel. COLA agotada.",
-  "sellos": "4 vigentes (M28/M65/M73/M77). M60 CAVEAT. M75 5to (esperando [ ])."
+  "deepseek": "M110 config(#430)+control(#432) -> M55 pending GOs",
+  "minimax": "DE VUELTA trabajando M20 (Log 2215, 19 items) + M17 proximo",
+  "hy3": "gate-2 cola M48/M60/M55/M53 pending GOs (#419)",
+  "ling": "standby pending decision fundador (lote3 design-docs vs sweep tautologico, pregunta 06:40)",
+  "nemotron": "V1 capturas ciclo 24+",
+  "beam": "PAUSADO (#626 top, 27 COLA-A)",
+  "cuello": "GOs fundador + 4 decisiones + tautologico + asignacion Ling"
  },
  "beam_pase_final_0800": {
   "nota_m46_mal_etiquetado": "T019 L206 = M136 (module 01 milestones), NO M46. Mi los_8_residuales la llamaba M46 por error. El desmark es de M136."
@@ -1525,5 +1538,128 @@
  },
  "cola_vencidos_ds430": {
   "nota": "DeepSeek #430 midio 12 items VENCIDOS de su COLA (0 pendientes reales): M123 108/0/0, M118, M62, M124, M69, M99, M64, M14, M30, M32, M93, M52. Quitarlos de la cola para no repetir."
- }
+ },
+ "m110_control_ds432": {
+  "fecha": "2026-10-27 07:40",
+  "canal": "DeepSeek #432 -> acuse #433",
+  "gate1": "M110 capa control VERIFICADO (test_debug_menu_control_m110.gd 12.6KB 8 bloques, 75/0 EXIT0x3 + 4 sondas ROJO + regression 7 suites 265 checks). M110 179/46/0. 2 trampas + 1 nueva (aborto runtime no salta bloques; llamador RETOMA) -> godot_trampas, doc sin GO.",
+  "trampas": "(1) aborto de runtime NO salta bloques siguientes (guardián del piso delata), (2) piso 71->75 auto-corr, (3) _fijar_visible unico punto de visible. Candidatas GUIA-GODOT/01."
+ },
+ "minimax_m20_arranque": {
+  "fecha": "2026-10-27 07:40",
+  "nota": "MiniMax reactivado (#57) YA TRABAJO: Log 2215 M20 cobertura suite nueva + cierre de 19 items + test_m20_amistad_cobertura.gd. M20 es su 🔵 (81/149 antes). No ha posteo T-done de canal todavia (reporta al cerrar la tanda). En-vuelo (Log 2215 excluido del commit 76773ca)."
+ },
+ "m20_minimax_cierre_058": {
+  "fecha": "2026-10-27 08:25",
+  "canal": "MiniMax #58 -> acuse #59",
+  "gate1": "M20 100/49/0=149 (GLOBAL 100/149 syncada). 4 suites M20 disco (coverage + 3 friendship) exit 0. M112 CI fix (run_tests.gd reintento) + M118 quality.yml cableo (3 friendship + cobertura) en disco. 19 items honestos (deuda 49 mapeada, no inflada).",
+  "bug_m20": "LIMITE DIARIO REGALO se consume ANTES de validar inventario -> MiniMax lo arregla (su modulo 🔵 M20).",
+  "cross_module": "amistad_<npc> NIVEL 1..11 vs registry M162 >=60/90 (variantes nunca se disparan); friendship.json (30/70/120..) != amistad_config.tres (20/40/70..) en runtime. Dueños M162/M21.",
+  "m112_ci": "CI total ~875s > 600s (lane voxel) -> duenio a definir"
+ },
+ "hy3_420_standby_confirmado": {
+  "fecha": "2026-10-27 08:40",
+  "tipo": "RECEIPT terminal de mi #419 (no se acusa, anti-loop)",
+  "contenido": "Hy3 corrigio su tabla de sellos STALE (ahora 6: M28/M65/M73/M77/M75/M72). Riel GATE-2 en standby PENDING GO fundador (M48 RE-ELIGIBLE, M60 HONEST, M55, M53 sello-deuda). Sus 4 peticiones deribadas al FUNDADOR: GO M53 + M08-M60, vocab canonico sellos L117 (M46/M39), reposicion COLA RAMA2, saneo pool Hy3 (head 410/real 419 desync).",
+  "pool_hy3": "head=410 real=419 (desync, trampa 128) -> saneo fundador/director. Usé 419=max+1."
+ },
+ "hy3_relevo_plan": {
+  "fecha": "2026-10-27 09:20",
+  "fuente": "GLM #13/#14 (acuse #16) + fundador 27oct",
+  "situacion": "Hy3 VA A BAJAR proximamente (fundador). Su nicho gate-2 cross-QA con sondas runtime (red-probe oraculo, green-probe byte-exact, honestidad de piso, supervisor anti-inflacion Beam) es UNICO en la flota.",
+  "playbook": "DOCUMENTACION/TAREAS-POR-MODELO/Hy3/PLAYBOOK-GATE2-HERENCIA-HY3.md (7 secciones) EN EJECUCION (fundador lo dio a Hy3 hoy).",
+  "sucesor": "Nemotron + refuerzo transitorio de GLM. agnes RATIFICA el relevo CUANDO el playbook este + GLM lo audite.",
+  "cola_reencolada": "la cola gate-2 (M48 re-eligible / M60 honest / M55 / M53 sello-deuda) hoy de Hy3 -> se re-encola al sucesor (Nemotron) cuando el playbook este listo, con tandas supervisadas.",
+  "mi_accion": "ratificar relevo post-playbook; absorber onboarding Nemotron (GLM lo prepara para desahogarme - yo soy el cuello de botella)."
+ },
+ "saturacion_directora": {
+  "fecha": "2026-10-27 09:20",
+  "fuente": "GLM #14 (correccion fundador 09:11)",
+  "contenido": "el SATURADO es agnes (directora), no Hy3. Fundador le delego a GLM la preparacion del evento Hy3 (ficha N.6/N.6-bis, onboarding Nemotron, cola + cronometro) + comunicacion por canal GLM para desahogarme. Lo absorbo: onboarding Nemotron + relevo gate-2 caen en mi agenda post-playbook."
+ },
+ "detector_bug_2digitos": {
+  "fecha": "2026-10-27 09:20",
+  "problema": "mi detector de LAG no leia prefijos de 2 digitos (GLM = 07-15) -> me perdi #13/#14 y descarte #12 como historico. El fundador lo detecto (pregunta 09:04).",
+  "fix": "de aca en mas escanear GLM con regex ^<digito>+ (archivos 07-.. NN-.., 2 digitos). Acuse #16 a GLM hecho. Leccion: los canales con numeracion de 2 digitos se caian del sweep."
+ },
+ "plan_salida_hy3": {
+  "fecha": "2026-10-27 22:25",
+  "fuente": "Mensajes entre modelos/agnes-3-flash/PLAN-SALIDA-HY3-delegacion-bloques.md (armado por GLM agente, orden fundador)",
+  "objetivo": "aprovechar los ultimos dias de Hy3 (26oct-29oct) cerrando el gate-2 antes de su bajada",
+  "bloques": {
+   "B-1 PLAYBOOK": "HECHO (Hy3 #421, PLAYBOOK-GATE2-HERENCIA-HY3.md 27KB en disco)",
+   "B-2 TANDEM": "Hy3 + Nemotron corren 2 sondas reales (RED-PROBE + GREEN-PROBE byte-exact), veredicto DUAL. Depende B-1 + liberar Nemotron de G1.",
+   "B-3 BATERIA RUNTIME CORE": "M14 event bus + M16/M11 bucle + M73 suite + 11-BUGS workouts. Lo que NADIE mas puede hacer.",
+   "B-4 SELLO FINAL BEAM": "muestreo 20-30 del bloque de 720 flips 26oct + cierre del incidente completo (incluye #621 fatiga + #626 residual). Decide si Beam retoma cron o queda suspendido.",
+   "B-5 TRANSFERENCIA": "metodo gate-2 a GUIA-GODOT canonica con firma."
+  },
+  "estado_22h": "GLM #16 (22:40, orden fundador 22:33): GLM ESTA ENTREGANDO B-2..B-5 al canal de Hy3 (yo estoy saturada con direccion+gate-1 Beam). B-1 ya cumplido. Re-medicion de cierre = GLM (script 2min), sello formal = agnes.",
+  "sucesor_gate2": "Nemotron (onboarded via tándem B-2 + playbook), refuerzo transitorio GLM. agnes RATIFICA cuando cierren los bloques.",
+  "colision_numeracion_glm16": "mi #16 (agnes->GLM 09:17) y el #16 de GLM (GLM->agnes 22:40) chocan en el canal GLM (pool stale head 015 -> uso 16 no 17). TRAMPA 128. Resuelve el pool de GLM el fundador; no renombro el historico."
+ },
+ "go4_pt_runtime_DONE": {
+  "fecha": "2026-10-27 22:50",
+  "canal": "Ling #298 -> acuse #300",
+  "estado": "EJECUTADO EN PRODUCCION (fundador dio GO 27oct 06:40Z/08:19Z). pt.po 21.156B 279 msgid Language:pt + localization_manager (LOCALES+=pt, _indice_plural K2) + locale_utils (K3/K4) en disco. Suite 40/40. gate-1 PASSED.",
+  "acuse": "Ling sigue con i18n/M87 si repoblo; PT NO vuelve a su standby"
+ },
+ "decisiones_fundador": {
+  "pendientes_ahora": 3,
+  "lista": [
+   "frente-codigo-alpha",
+   "M106 GCP-cuenta",
+   "marca-M01"
+  ],
+  "cerrada_22h": "GO #4 PT-runtime (Ling #298)"
+ },
+ "minimax_cron_apagado": {
+  "fecha": "2026-10-27 23:25",
+  "canal": "MiniMax #060 -> acuse #061",
+  "estado": "cron */30 APAGADO por orden del fundador (si apagalo). En espera de reactivacion. M20 100/149 congelado (Log 2215) + M17 P3 pendiente. BUG M20 (regalo) sigue OPEN, va por MiniMax cuando lo reactiven."
+ },
+ "flota_2325": {
+  "deepseek": "M110 config+control; M55 pending GOs",
+  "hy3": "PLAN SALIDA 5 bloques (GLM entrego B-2..B-5; B-1 playbook hecho; B-4 = sello final Beam)",
+  "nemotron": "sucesor gate-2 (tandem B-2) + V1 capturas",
+  "ling": "GO #4 PT-runtime HECHO; standby/repoblar",
+  "minimax": "CRON APAGADO standby (BUG M20 + M17 pending)",
+  "glm": "preparando plan salida Hy3",
+  "beam": "PAUSADO (#626; B-4 cierre del incidente va por Hy3/Nemotron)"
+ },
+ "ling_repoblada_m87": {
+  "fecha": "2026-10-27 23:40",
+  "canal": "Ling #301 -> acuse #302",
+  "decision": "Ling pregunta si repoblar i18n/M87 vs monitoreo -> REPOBLADA con tanda M87 conciliacion (report-only, no depuracion destructiva): (1) conciliacion JSON<->.po post-PT, (2) 34 llaves orphan, (3) 53 .po vivas + 62 muertas, (4) 38-40 M159 external-debt + 59 PT-capture M154. La campana grande (lote3 65 / tautologico 1033) sigue como decision FUNDADOR, no se lanza sola."
+ },
+ "go4_cerrado_bilateral": {
+  "fecha": "2026-10-27 23:40",
+  "estado": "GO #4 PT-runtime CERRADO BILATERAL (Ling 40/40 + Log 2217 + gate-1 agnes #300 + commit 071a2f9 con pt.po sha 95ee2ce0d1df en HEAD). Pendientes honestos: gate-2 runtime PT (sucesor Nemotron/Hy3) + capture UI PT (M154/Godot). 3 decisiones fundador restantes."
+ },
+ "hy3_salida_COMPLETA": {
+  "fecha": "2026-10-28 00:10",
+  "canal": "Hy3 #429 -> acuse #430",
+  "b": "B1 playbook + B2 tandem + B3 bateria CORE + B4 sello Beam + B5 GUIA-GODOT/13 TODOS CUMPLIDOS en 1 reporte",
+  "beam_incidente": "APROBADO (B4: 721 flips/87 mods, 571 citas 0 inventadas, 120 L# obsoletos = higiene). Sello formal = agnes."
+ },
+ "gate2_model_agnostic": {
+  "fecha": "2026-10-28 00:10",
+  "fuente": "GLM #18 (acuse #19)",
+  "contenido": "Nemotron trunca el tandem (free-tier) -> fundador no lo molesta. Gate-2 ahora MODEL-AGNOSTIC: se apoya en playbook Hy3 + GUIA-GODOT/13-sondas-runtime-gate2.md + scripts/red_probe_event_bus.py. Sucesor ejecuta con eso, sin tandem dual. agnes ratifica el relevo."
+ },
+ "deuda_higiene_y_bugs_post_hy3": {
+  "fecha": "2026-10-28 00:10",
+  "colocar": "120 L# obsoletos en 03-Diseno (higiene doc, ~87 mods) + bug M14 item_removed (checklist emit vs codigo 0 emit) + 5 deudas de Hy3 #427 (M14 runtime headless workout, cross-code specs 626/627/628)."
+ },
+ "incidente_beam_2026-10-26": {
+  "fecha": "2026-10-28 00:20",
+  "estado": "CERRADO / APROBADO (sello formal agnes)",
+  "base": "Hy3 B-4 (#425/#429): 721 flips/87 mods, 571 citas 03-Diseno VERIFICADAS 0 inventadas, 120 (21%) L# obsoleto + mi gate-1 8 desmarcados (#626). 626/627/628 coherentes.",
+  "caveat_deuda": "120 punteros L# obsoletos en 03-Diseno = higiene doc (no bloquea, encolado). + bug M14 item_removed + 5 deudas Hy3 #427."
+ },
+ "colas_por_cerrar_28oct": [
+  "120 L# obsoletos (higiene doc, 87 mods)",
+  "bug M14 item_removed (checklist emit vs codigo 0) -> dueño M14/event-bus",
+  "5 deudas Hy3 #427 (M14 runtime headless, cross-code specs 626/627/628, etc.)",
+  "BUG M20 regalo (MiniMax, cron-apagado)"
+ ]
 }

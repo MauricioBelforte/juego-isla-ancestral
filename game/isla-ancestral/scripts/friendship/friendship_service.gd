@@ -382,6 +382,9 @@ func regalar_en_cumpleanos(vecino_id: String, item_id: String) -> Dictionary:
 	var item_meta = _get_item_meta(item_id)
 	if inv != null:
 		if not bool(inv.remover_items({item_id: 1})):
+			# El límite diario se devuelve: un regalo rechazado por falta de item
+			# no debe quemar el intento del día (bug M20).
+			v.devolver_limite("cumpleanos")
 			return {"ok": false, "motivo": "sin_item"}
 	var vecino_data := _get_vecino_data(vecino_id)
 	var evaluacion: Dictionary = EVALUADOR_SCRIPT.evaluar(vecino_data, item_meta, v.ha_regalado(item_id))
@@ -422,12 +425,23 @@ func celebrar_cumpleanos(vecino_id: String) -> Dictionary:
 ## RECIBIR la respuesta (el dia siguiente de juego, M29), no ahora.
 func enviar_carta(vecino_id: String, texto_id: String, adjunto_id: String = "") -> Dictionary:
 	var v := _vecino(vecino_id)
+	# Validar el texto antes de consumir el limite: un envio mal formado no
+	# debe quemar el intento del dia (bug M20).
+	if texto_id == "":
+		return {"ok": false, "motivo": "texto_vacio"}
+	if not _cartas_data.has(texto_id):
+		return {"ok": false, "motivo": "texto_invalido"}
+	var inv = get_node_or_null("/root/Inventario")
+	# Validar el adjunto antes de consumir el limite (bug M20).
+	if adjunto_id != "" and inv != null and not _hay_item_para_regalo(inv, adjunto_id):
+		return {"ok": false, "motivo": "sin_adjunto"}
 	if not v.intentar_usar_limite("carta", _dia):
 		return {"ok": false, "motivo": "limite_diario"}
 	if adjunto_id != "":
-		var inv = get_node_or_null("/root/Inventario")
-		if inv != null and not bool(inv.remover_items({adjunto_id: 1})):
-			return {"ok": false, "motivo": "sin_adjunto"}
+		if inv != null:
+			if not bool(inv.remover_items({adjunto_id: 1})):
+				v.devolver_limite("carta")
+				return {"ok": false, "motivo": "sin_adjunto"}
 	if not _cartas.has(vecino_id):
 		_cartas[vecino_id] = {"pendientes": [], "recibidas": []}
 	_cartas[vecino_id]["pendientes"].append({"texto_id": texto_id, "adjunto_id": adjunto_id, "dia_envio": _dia})
@@ -507,6 +521,16 @@ func get_cartas_pendientes_total() -> int:
 
 ## ── Acciones base ──────────────────────────────────────
 
+## true si el inventario (autoload /root/Inventario) dispone de `item_id` en
+## bolsa, mochila o casa. Usado para validar antes de consumir límites diarios
+## (bug M20): un regalo/carta fallido no debe quemar el intento del día.
+func _hay_item_para_regalo(inv: Object, item_id: String) -> bool:
+	if inv == null:
+		return true
+	if inv.has_method("count_item"):
+		return int(inv.count_item(item_id, true)) >= 1
+	return true
+
 ## Regalar. Devuelve Dictionary con resultado o motivo de rechazo.
 func regalar(vecino_id: String, item_id: String) -> Dictionary:
 	var v := _vecino(vecino_id)
@@ -516,6 +540,9 @@ func regalar(vecino_id: String, item_id: String) -> Dictionary:
 	var item_meta = _get_item_meta(item_id)
 	if inv != null:
 		if not bool(inv.remover_items({item_id: 1})):
+			# El límite diario se devuelve: un regalo rechazado por falta de item
+			# no debe quemar el intento del día (bug M20).
+			v.devolver_limite("regalo")
 			return {"ok": false, "motivo": "sin_item"}
 	var vecino_data := _get_vecino_data(vecino_id)
 	var evaluacion: Dictionary = EVALUADOR_SCRIPT.evaluar(vecino_data, item_meta, v.ha_regalado(item_id))

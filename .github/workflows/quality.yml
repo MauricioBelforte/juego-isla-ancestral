@@ -255,7 +255,18 @@ jobs:
           # Run time consumers tests
           suite --script scripts/time/test_consumidores_tiempo.gd
           # Run friendship tests (M20)
+          # M20 (2026-10-27, minimax-m3-1-flash, Log 2215): cableo de las 3 suites
+          # de scripts/friendship/ (solo estaba cableada la 1a) + la suite nueva de
+          # cobertura en res://tests/ (15 checks, 0 fallos). El runner central M112
+          # (tests/run_tests.gd) tambien descubre la suite nueva.
           suite --script scripts/friendship/test_amistad.gd
+          suite --script scripts/friendship/test_amistad_eventos.gd
+          suite --script scripts/friendship/test_amistad_rf48_m20.gd
+          suite --script tests/test_m20_amistad_cobertura.gd
+          # M20 (2026-10-27, minimax-m3-1-flash, Log 2219): suite de regresion del
+          # BUG "el limite diario se consumia antes de validar el inventario"
+          # (19 checks, 0 fallos). El runner central M112 tambien la descubre.
+          suite --script tests/test_m20_limite_regalo.gd
           # Run economy tests (M38)
           suite --script scripts/economia/test_m38_economia_smoke.gd
           # Run economy minorista/mayorista tests
@@ -441,6 +452,13 @@ jobs:
           # tope de pila 200). 138 checks, 9 bloques con marcador _fin() y guarda
           # anti-falso-verde probada por INYECCION (4 sondas en ROJO limpio).
           suite --script scripts/construccion/test_construccion_iter3.gd
+          # M17 Construccion (2026-10-27, minimax-m3-1-flash, Log 2220): reglas
+          # DECLARATIVAS por pieza contra el CATALOGO REAL (data/construccion/piezas):
+          # puerta/ventana exigen pared contigua (REQUIERE_PARED), camino solo sobre
+          # terreno (superficie_ok == [terreno]), zonas PROTEGIDA (parcela NPC / ruina)
+          # bloquean la colocacion, NO_DECONSTRUIBLE al demoler y la cache del preview
+          # se invalida al rotar. 40 checks, 0 fallos, EXIT 0.
+          suite --script tests/test_m17_reglas_pieza.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

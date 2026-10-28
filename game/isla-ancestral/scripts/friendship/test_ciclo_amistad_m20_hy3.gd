@@ -52,6 +52,11 @@ func _run() -> void:
 
 	# --- regalar: rechazo por limite diario (CASO NEGATIVO del guard) ---
 	var inv = root.get_node_or_null("Inventario")
+	# El primer regalo se fuerza exitoso: se asegura el item en el inventario
+	# (deterministico). Con el fix M20, el segundo del mismo dia se rechaza por
+	# limite_diario (el fallo por falta de item ya no quema el limite).
+	if inv != null and inv.has_method("agregar_items"):
+		inv.agregar_items({"PIEDRA": 1})
 	var r1 = fs.regalar(NPC, "PIEDRA")
 	_check("regalar devuelve Dictionary con 'ok'", (r1 is Dictionary) and r1.has("ok"))
 	if (inv == null) and (r1.get("ok", false) == true):
