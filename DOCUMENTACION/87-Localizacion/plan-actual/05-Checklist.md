@@ -339,7 +339,7 @@ apareció. Se endureció el gate de M87 (patrón acumulativo) junto con el resto
 14 gates de otros módulos siguen con `|| true`; 2 de ellos son comandos **inválidos**
 (`--script` sin ruta, L33; `--check-only` sin ruta, L83). No se tocaron: no es decisión de M87.
 
-**Totales:** 136 ítems · Completados: 131 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 140 ítems · Completados: 135 (+5 [x] con deuda externa documentada en texto, formato FLIP T219-87) · Pendientes: 0 · No resueltos: 5 (deuda externa con dueño).
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 0 [ ] /
@@ -377,3 +377,14 @@ actual sin depender del cambio de idioma en sí. La aserción
 `l2.text == "Player's clothing"` se mantiene intacta.
 
 **Resultado:** `[FAIL]` 3 -> **0**; el suite queda en verde.
+
+### Conciliación POST-PT — tanda M87 (Ling-3.1-Flash, 2026-10-27 22:30 local; encargo agnes 302, acuses 303/304, informe msg 305, Log 2221)
+
+> Report-only (sin depuración destructiva — deuda del fundador). Criterio canónico de consumidor: `.gd` no-test/debug + `.tscn` + `data/dialogues/*.json`, EXCLUYENDO carpeta `Obsoletos/` y hits en docstrings/comentarios; consumo dinámico con evidencia archivo:linea. Base verificada intacta antes de medir: pt.po sha1 `95ee2ce0d1df` = HEAD `071a2f9`, LOCALES ["es","en","pt"], git riel limpio. Scripts reproducibles en `Temp/kilo/` (tanda_m87_v2.py, tanda_m87_v3.py, probe_*.py) + informe `Temp/kilo/tanda_m87_informe.md`.
+
+- [x] T1 Conciliar JSON↔.po post-PT (paridad de catálogos): JSON×3 170/170/170 claves hoja (dif simétricas 0/0/0); .po×3 274/274/274 entradas lógicas = 270 simples + 4 plurales (dif 0); cruce IDÉNTICO en es/en/pt (159 comunes / 11 solo-JSON mortuas / 115 solo-.po); paridad cruzada 0/0 (11/11 y 115/115 ausentes en el otro catálogo). Las 11 mortuas: msg.inventario_lleno, msg.no_materiales, msg.nuevo_dia, npc.adios, npc.hola, ui.diario, ui.guardar, ui.mapa, ui.opciones, ui.tienda, ui.inventario. [M]
+- [x] T2 Inventariar 34 llaves orphan del JSON (cuadro exacto con encargo): 170 = 136 vivas-runtime + 34 orphan — ui6 (diario/guardar/mapa/opciones/tienda/inventario: único hit en Obsoletos/test_m87_bug104, excluido), eventos14 (historia_c1-c7: consumidor solo tests → deuda M149), SETTINGS9 (save legacy M59), msg3, npc2 (hola/adios: diálogos M21 usan speaker_key para retratos, no claves traducibles). [M]
+- [x] T3 Cruce de 115 .po-solo vs 3 JSON (reclasificación con consumo dinámico): 108 vivas-runtime (89 M68 = 49 literales transport_localizer.gd:36-89 + UI.INTERACTUAR interact_prompt.gd:94 + SIGN.GENERICO L297 + 10 STOP vía transport_network.tres nombre_clave + LM L309 fallback + 30 templates ROUTE×20/SIGN×10 por LM L332-342 y L399-410; 14 DIARY.CAT_* dinámicas diary_layer.gd:412; 4 CLOCK.ESTACIONES dinámicas w_reloj.gd:198) + 2 test-only (HUD.VIDA, SETTINGS.IDIOMA) + 2 drift ítems (inventario_iter4.gd:283 convención "items.<id>.name" inexistente — ItemData nombre literal) + 1 deuda M53 (MAIN_MENU.OPTIONS) + 1 muerta real (DIALOGOS.VECINO_SALUDO) + 1 exenta (npc.catalina, EXCEPCIONES_CLAVE del ValidadorPO). Cuadre 49+10+30+1+14+4+2+2+1+1+1=115. Paridad cruzada 0/0. El .po NO está inflado. Hallazgos colaterales: H1 generar_islas.gd:115 fija M27.ISLA.%s.NOMBRE (13 .tres) sin claves en catálogo; H3 MAIN_MENU.PLAY/SE_OFRECEN/HUD.ENERGIA/IDIOMA_DESC solo docstrings (verificar gate-2). [C]
+- [x] T4 Documentar la conciliación: esta sección + ítems nuevos + conteo actualizado + hallazgos reportados a agnes (msg 305) + Log 2221 + anexo backlog Ling. Sin flips de los 5 [?] (dueño externo mantenido — anti-inflación §21.8.2.b). [S]
+
+**Conteo tras esta tanda (§21.8.2.b):** marcas en disco 140 [x] / 0 [ ] / 0 [?] = 140 ítems. De los 140 [x], **5 son formato híbrido del FLIP T219-87 (Reflection-Beam-1.0, 2026-10-26)**: marca [x] + texto "Sigue [?] deuda externa" con dueño (L71/L74/L112/L116/L117) → **135 completados netos + 5 deuda-externa-con-dueño**. Esta tanda no flipó nada de esos 5 (deuda mantenida visible en texto; normalización de formato queda al director). Drift declarativo preexistente reportado: Totales histórico decía 131[x]/5[?] vs 136[x] reales en disco ya post-flip-Beam.

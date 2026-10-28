@@ -1485,7 +1485,8 @@
  ],
  "modulos_candidatos_sello": {
   "fecha_sync": "2026-10-27 04:55 (G)",
-  "nota": "la lista del cron G era STALE (M28/M72/M48/M75). Los LIVE son: M48 (RE-ELIGIBLE, validacion/ 4 files #429), M60 (HONEST 189/3/4 #428), M55 (presentable iconografia #425), M53 (presentable sello-modulo-deuda). Todos PENDING GOs del fundador para gate-2 Hy3. Los 6 sellados (M28/M65/M73/M77/M75/M72) ya estan en sellos_218."
+  "nota": "la lista del cron G era STALE (M28/M72/M48/M75). Los LIVE son: M48 (RE-ELIGIBLE, validacion/ 4 files #429), M60 (HONEST 189/3/4 #428), M55 (presentable iconografia #425), M53 (presentable sello-modulo-deuda). Todos PENDING GOs del fundador para gate-2 Hy3. Los 6 sellados (M28/M65/M73/M77/M75/M72) ya estan en sellos_218.",
+  "M87": "140/0/0 cand 7to (gate-2 por sucesor)"
  },
  "flota_0515": {
   "minimax": "DE VUELTA en la flota (fundador 05:11). Acuse #57 enviado (M20+M17 suyo, M73 cola stale).",
@@ -1657,9 +1658,39 @@
   "caveat_deuda": "120 punteros L# obsoletos en 03-Diseno = higiene doc (no bloquea, encolado). + bug M14 item_removed + 5 deudas Hy3 #427."
  },
  "colas_por_cerrar_28oct": [
-  "120 L# obsoletos (higiene doc, 87 mods)",
-  "bug M14 item_removed (checklist emit vs codigo 0) -> dueño M14/event-bus",
-  "5 deudas Hy3 #427 (M14 runtime headless, cross-code specs 626/627/628, etc.)",
-  "BUG M20 regalo (MiniMax, cron-apagado)"
- ]
+  "120 L# obsoletos (higiene doc, 87 mods)"
+ ],
+ "m20_bug_regalo_RESUELTO": {
+  "fecha": "2026-10-28 01:17",
+  "canal": "Log 2219",
+  "contenido": "BUG M20 (regalar() consumia limite diario ANTES de validar inventario) + validacion texto_id ENVIAR_CARTA corregidos (friendship_service.gd +33, test_m20_limite_regalo.gd 188, test_ciclo_amistad_m20_hy3.gd). M20 deuda baja. commit 253f942."
+ },
+ "m17_suite_nueva": {
+  "fecha": "2026-10-28 01:17",
+  "canal": "Log 2220",
+  "contenido": "M17 reglas declarativas por pieza: suite test_m17_reglas_pieza.gd (311) nueva + docs M17 04/05. P3."
+ },
+ "m20_m17_minimax_062": {
+  "fecha": "2026-10-28 01:30",
+  "canal": "MiniMax #062 -> acuse #063",
+  "gate1": "M20 BUG regalo + validacion texto_id RESUELTOS (vecino_amistad.devolver_limite, Log 2219, 19/0). M20 102/48/0=150 + M17 135/39/1=175 (suite test_m17_reglas_pieza.gd 14.7KB) verificados en disco.",
+  "nota": "MiniMax cronometro REACTIVADO a 60min por orden del usuario (no mas standby)."
+ },
+ "ling_m87_ejecutando": {
+  "fecha": "2026-10-28 01:30",
+  "canal": "Ling #303 -> acuse #304",
+  "contenido": "Ling acepta la tanda M87 conciliacion (4 tareas T1-T4, report-only, ejecuta en 1 vuelta). Base intacta (sha + pt.po en HEAD 071a2f9). Reporta al cerrar -> agnes marca [x] 05 M87."
+ },
+ "deepseek_tanda_m14": {
+  "fecha": "2026-10-28 01:40",
+  "canal": "#434",
+  "contenido": "DeepSeek idle ~18h (M55 GO-blocked) -> repoblado con tanda M14/event-bus post-Hy3 (3 items: BUG item_removed confirm + 20 señales muertas runtime red_probe + cross-code specs 626/627/628). No apilo mas (M55 sigue pending GO)."
+ },
+ "m87_cerrado_m87": {
+  "fecha": "2026-10-28 02:20",
+  "canal": "Ling #305 -> acuse #307",
+  "gate1": "M87 05 = 140/0/0 (mod completo). Tanda conciliacion post-PT CERRADA: JSON<->.po PARIDAD TOTAL (170/274 dif 0), 34 orphan JSON cuadrado exacto, 115 .po-solo = 108 vivas (PO NO inflado).",
+  "candidato_sello": "M87 = 7to cand. gate-1 ok; gate-2 runtime = sucesor (model-agnostic).",
+  "leccion": "verificar flags de riel con grep, no slicing (falso negativo K2)."
+ }
 }

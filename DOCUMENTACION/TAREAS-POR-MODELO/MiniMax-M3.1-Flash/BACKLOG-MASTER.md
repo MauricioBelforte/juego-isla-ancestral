@@ -13,8 +13,17 @@
 - [x] [20-Amistad] Deuda real mapeada con motivo y referencia de código (`04-Codigo.md` §7.3) — 2026-10-27
 - [x] [112-Testing] Reintento EN SERIE tras TIMEOUT del pool en el runner central (flake de contención, no fallo de suite) — 2026-10-27
 - [x] [20-Amistad] Log reservado: **2215** — tanda 4 M20/M112 (suite de cobertura + cierre de 19 items + fix del CI)
+- [x] [20-Amistad] BUG M20 (limite diario quemado cuando falla el regalo) corregido + validacion de `texto_id` en `enviar_carta()` — 2026-10-27 (Log 2219)
+- [x] [20-Amistad] Suite de regresion del bug: `game/isla-ancestral/tests/test_m20_limite_regalo.gd` (19 checks, 0 fallos, EXIT 0; prueba ROJO: sin fix = 6 fallos, sin validacion de texto = 5 fallos) — 2026-10-27 (Log 2219)
+- [x] [20-Amistad] Log reservado: **2219** — tanda 5 M20 (fix del bug + suite de regresion + cableo en quality.yml)
+- [x] [17-Construccion] Suite de reglas declarativas por pieza contra el CATALOGO REAL: `game/isla-ancestral/tests/test_m17_reglas_pieza.gd` (40 checks, 0 fallos, EXIT 0) — 2026-10-27 (Log 2220)
+- [x] [17-Construccion] +5 [x] en M17 (126 -> 135 de 175): G137 (puerta exige pared contigua), G138 (ventana exige pared contigua de 1 celda), G141 (camino solo sobre terreno), G145 (ruina/parcela NPC no colocables ni demolidas), F121 (re-validacion con cada rotacion) — 2026-10-27 (Log 2220)
+- [x] [17-Construccion] Log reservado: **2220** — tanda P3-3 M17 (suite de reglas contra catalogo real + 5 flips + cableo en quality.yml)
+- [x] [112-Testing] Suite M17 nueva + suite M20 nueva cableadas en `quality.yml` (M118) — 2026-10-27 (Logs 2219/2220)
+- [x] [Canal] Mensaje 062 de cierre de tanda (M20 bug + M17 suite) reportado a la directora en `Mensajes entre modelos/MiniMax-M3.1-Flash/` — 2026-10-27 21:50
+- [x] [Cronometro] Cadencia actualizada de 30 min a **60 min** (`0 * * * *`, id `wku_17fcb57f5001ibrgRaZ2c68TLo`) + `CRONOMETRO.md` y `scripts/activar_cron_minimax.py` actualizados — 2026-10-27 23:55
 - [ ] [112-Testing] Bajar el tiempo total del CI (~875 s > presupuesto 600 s; lane voxel = 6 suites × ~72 s) — dueño a definir
-- [ ] [20-Amistad] Cerrar con el dueño de M20 la deuda vigente: `FriendshipEvent` + 5 tipos convocables, nombres de nivel, `schema_version` en el save, UI (M53), validación de `texto_id` en cartas, límite diario quemado cuando falla el regalo
+- [ ] [20-Amistad] Cerrar con el dueño de M20 la deuda vigente (QUEDAN: `FriendshipEvent` + 5 tipos convocables, nombres de nivel, `schema_version` en el save, UI de M53) — **RESUELTO en esta tanda: validación de `texto_id` en cartas + limite diario quemado cuando falla el regalo (Log 2219, suite 19 checks, 0 fallos)**
 - [ ] [20-Amistad/M162] Decidir la escala de `amistad_<npc_id>` (hoy devuelve el NIVEL 1..11; el registry de M162 exige `>= 60` / `>= 90` → esas variantes nunca se disparan) — decisión de contrato M20/M162/M21
 
 
