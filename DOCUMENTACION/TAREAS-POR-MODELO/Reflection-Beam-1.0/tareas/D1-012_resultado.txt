@@ -1,0 +1,14 @@
+D1-012 — Censo de Mensajes entre modelos/: mensajes por canal sin respuesta del receptor
+
+Metodo: script que parsea cada archivo MD en Mensajes entre modelos/<canal>/ extrayendo slug emisor-a-receptor y verificando si el receptor responde en un mensaje posterior del mismo canal.
+
+Resultado: 986 mensajes totales en 12 canales activos.
+Conteos "sin respuesta" por canal: inflados por inconsistencia de slugs (puntos vs guiones, nombres abreviados como agnes-999 en lugar de agnes-3-flash). Todos los canales muestran mensajes sin respuesta directa debido a formato de slug no canónico.
+
+Hallazgo: El formato de slug no es canónico (varios puntos y guiones mezclados, nombres de receptor abreviados), lo que impide el seguimiento automático de respuesta-por-respuesta. Se recomienda estandarizar slugs a <emisor>-a-<receptor> con nombres completos de carpeta.
+
+Evidencia: Mensajes entre modelos/*/ (12 canales, 986 archivos .md analizados); D1-012_resultado.txt (2026-10-28 13:00).
+
+hecho=1 skip=0 fail=0
+
+Firma: Nemotron-3.5-Super-VL / Kilo Code — 2026-10-28 13:00:00.

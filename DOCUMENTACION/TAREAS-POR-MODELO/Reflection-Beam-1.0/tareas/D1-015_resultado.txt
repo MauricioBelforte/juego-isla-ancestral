@@ -1,0 +1,29 @@
+D1-015 — Inventario de capturas masivas: modulos con 10+ capturas
+
+Metodo: conteo de archivos .png por carpeta de modulo en tools/mcp/godot-mcp/capturas/.
+
+Resultado: 62 carpetas de modulos en tools/mcp/godot-mcp/capturas/. 11 modulos con 10+ capturas:
+
+| Modulo | Capturas |
+|--------|----------|
+| 09-Terreno-Y-Geografia | 68 |
+| 25-Ruinas | 65 |
+| 53-UI-UX | 36 |
+| 49-Iluminacion | 25 |
+| 51-Agua | 22 |
+| 10-Generacion-Del-Mundo | 22 |
+| 50-Vegetacion | 19 |
+| 01-Fundamentos-Del-Proyecto | 18 |
+| 13-Herramientas | 12 |
+| 155-Vestimenta-Y-Accesorios | 11 |
+| 101-QA-General | 11 |
+
+Adicional: 15 archivos PNG sueltos en la raiz de capturas/ (sin carpeta de modulo).
+
+Hallazgo: Ningun modulo supera un umbral de alerta específico, pero 09-Terreno-Y-Geografia (68) y 25-Ruinas (65) concentran la mayor parte de las capturas visuales. Las capturas NO se versionan en git (capturas/ excluida en .gitignore). Regla de retencion: durante el desarrollo se guardan TODAS las capturas, sin limpieza (directiva del usuario 2026-08-25).
+
+Evidencia: tools/mcp/godot-mcp/capturas/ (62 carpetas de modulos, 15 PNG sueltos en raiz) (2026-10-28 13:00).
+
+hecho=1 skip=0 fail=0
+
+Firma: Nemotron-3.5-Super-VL / Kilo Code — 2026-10-28 13:00:00.

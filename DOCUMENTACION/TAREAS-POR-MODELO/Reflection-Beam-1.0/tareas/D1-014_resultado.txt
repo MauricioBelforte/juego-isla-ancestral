@@ -1,0 +1,21 @@
+D1-014 — Mapa de las 4 consultas del fundador pendientes
+
+Metodo: lectura de Logs/estado_director.json, seccion consultas_fundador_23oct.
+
+Resultado: 4 consultas del fundador pendientes (clasificacion 24oct: DEUDA DEL FUNDADOR, no bloqueantes):
+
+1. FRENTE DE CODIGO a alpha: GO para 13 implementaciones (M56 ×13, M64 ×6, M147 ×2, M151 gate/schema, L271 UI). Plan de remedio Hy3 348: 8 ítems M56 + 5 ítems M64. Bloqueado por fundador (espera GO).
+
+2. CIFRA TOTAL V1 para M123 modding: default 3.000 vigente, pendiente re-fijar por el fundador.
+
+3. RAREZA CANON: M159 catalogo 12% vs M93 fishing 5% — una tasa o dos sistemas. Pendiente decision del fundador.
+
+4. PT-RUNTIME i18n: pt.po 274 entradas (159 reutilizables + 115 nuevas), LOCALES_SOPORTADOS += 'pt', QA ValidadorPO.validar_par 0-errores, doc M87. Espera GO del fundador para ejecutar (Ling tiene plan listo).
+
+Hallazgo: Las 4 consultas son deuda del fundador, no bloqueantes para la flota. Ninguna requiere accion de este agente (solo lectura de estado_director.json).
+
+Evidencia: Logs/estado_director.json seccion consultas_fundador_23oct (2026-10-28 13:00).
+
+hecho=1 skip=0 fail=0
+
+Firma: Nemotron-3.5-Super-VL / Kilo Code — 2026-10-28 13:00:00.

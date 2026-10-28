@@ -1,0 +1,46 @@
+I1-020 — Resumen final: Investigacion + Nuevo Fuel (4 fuentes, 20 items)
+
+Fuente 1 — Plan-inicial-minimo.md (I1-001 a I1-004):
+- 3163 puntos de control en Plan-inicial-minimo.md
+- 1719 SIN correspondencia en 05-Checklist (54% huecos duros; ver I1-001_resultado.txt)
+- No existen marcadores P1/P2 — comparativa de críticos no aplicable (I1-003)
+- 1719 huecos duros = promesas del plan inicial no materializadas en checklists (I1-004)
+
+Fuente 2 — Plan-de-produccion.md (I1-002, I1-005):
+- 26 ítems en sección 19 Checklist maestro final
+- 13 SIN correspondencia en 05-Checklist (50%) (ver I1-002_resultado.txt)
+- Desglose por disciplina: S2 Motor (code), S3 Gameplay (code/design), S4 Arte 3D (art), S6 Audio (audio), S7 Narrativa (design), S8 UI/UX (ui)
+- Disciplina con menor cobertura: Audio (ningún agente con foco principal; solo M41, M43, M87, M88, M91, M92 dedicados)
+
+Fuente 3 — 5-FUTURAS-MEJORAS.md (I1-006 a I1-010):
+- 4 ideas Alta 🔴 pendientes: L39 (animales sexo/reproducción), L41 (animales dan objetos/habilidades), L157 (más animales funcionales), L185 (dificultad alta modificar terreno)
+- 4 ideas Media 🟡 pendientes: L45 (jaulas), L189 (aviso alejarse nadando), L191 (identidad visual por isla), L193 (estandarizar tamaños objetos)
+- 5 ideas Baja 🟢 pendientes: L199 (cuevas), L201 (jaulas con datos), L203 (objetos sólidos), L205 (bordes suaves cubos), L207 (cerro más alto)
+- 7 ideas ya marcadas [x] cubiertas por trabajo posterior de la flota
+- Orden propuesto para ideas Alta: L185 → L39 → L41 → L157 (L185 desbloquea todo lo demás)
+
+Fuente 4 — GUIA-GODOT + derivaciones ex-director (I1-011 a I1-020):
+- 01-gdscript-errores-comunes.md: 972 líneas, §1-§9+, ítems de verificación propuestos para M11, M13, M20, M38, M53, M59/M60, M64, M65, M73
+- 02-voxel-tools.md: 311 líneas, 5 recetas (VoxelViewer obligatorio, bake() requerido, modelos VoxelBlockyModel, view_distance, generator properties)
+- 08-terreno-voxel.md + 18-impostores-terreno.md: guías de referencia, sin checklist de impostores pendiente
+- 19-diagnostico-tildes.md: 189 líneas, catálogo C-01 a C-11; causas con guarda de regression identificadas
+- 16-zoom-camara-personaje.md (189L) + 17-disco-plano-verde.md (222L): recetas cámara y disco verde
+- M105: 11 señales sin productor (M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial)
+- M74: 15/15 eventos .tres implementados; M140 es hito Alpha (no módulo de datos de festivales); sin migración pendiente
+- M53/M37: tooltips ES hardcodeados (M68 L75/L76, M129 x11, shop_ui.gd L183/L202, museo_sign.gd L76)
+- M56→M19/M36: PHOTO_POSE_REQUEST signal; NPC posan 0.5s; animales responden en 4 scripts; item pendiente: "Identificar especie al capturarla (M36/M37)"
+- M107 §5.1: Procedimiento GCP/OAuth paso a paso (116L, 7 pasos); ejecución bloqueada por fundador (su cuenta Google)
+
+Propuestas para la directora (cubo A-DEF):
+1. Migrar 1719 huecos duros de Plan-inicial-minimo.md a 05-Checklist de módulos correspondientes (cubo A-DEF, prioridad alta)
+2. Sincronizar 13 ítems de Plan-de-produccion.md §19 a checklists de módulos (cubo A-DEF)
+3. Asignar foco Audio a un agente de la flota (cobertura más baja; solo M41/M43/M87/M88/M91/M92 dedicados)
+4. Ejecutar 4 ideas Alta 🔴 de 5-FUTURAS-MEJORAS.md en orden: L185 → L39 → L41 → L157 (cubo A-DEF)
+5. Escribir specs de verificación GDScript para 9 módulos basadas en 01-gdscript-errores-comunes.md (cubo A-DEF)
+6. Ejecutar procedimiento M107 §5.1 GCP/OAuth cuando el fundador dé GO (bloqueado por cuenta de Google del fundador)
+
+Evidencia: I1-001_resultado.txt, I1-002_resultado.txt, reportes 118-119 en canal, 03-Diseno.md y 05-Checklist.md de módulos citados (2026-10-28 13:00).
+
+hecho=1 skip=0 fail=0
+
+Firma: Nemotron-3.5-Super-VL / Kilo Code — 2026-10-28 13:00:00.

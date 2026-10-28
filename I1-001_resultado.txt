@@ -1,0 +1,1723 @@
+Puntos de control en Plan-inicial-minimo.md: 3163
+Secciones: 152
+SIN correspondencia en 05-Checklist: 1719
+
+  1. [1. VISIÓN Y CONCEPTO] Comprobar disponibilidad del nombre.
+  2. [1. VISIÓN Y CONCEPTO] Definir perspectiva de cámara.
+  3. [1. VISIÓN Y CONCEPTO] Definir características que lo diferencian.
+  4. [1. VISIÓN Y CONCEPTO] Crear descripción de una frase.
+  5. [1. VISIÓN Y CONCEPTO] Crear descripción de una página.
+  6. [1. VISIÓN Y CONCEPTO] Definir pilares de diseño.
+  7. [1. VISIÓN Y CONCEPTO] Definir pilares visuales.
+  8. [1. VISIÓN Y CONCEPTO] Definir pilares sonoros.
+  9. [2. DOCUMENTACIÓN DEL PROYECTO] Crear GDD principal.
+ 10. [2. DOCUMENTACIÓN DEL PROYECTO] Crear convenciones de nombres.
+ 11. [2. DOCUMENTACIÓN DEL PROYECTO] Crear estándar de documentación.
+ 12. [3. GAME ENGINE] Comparar costes de cada engine.
+ 13. [3. GAME ENGINE] Comparar herramientas de terreno.
+ 14. [3. GAME ENGINE] Comparar herramientas de iluminación.
+ 15. [3. GAME ENGINE] Comparar herramientas de animación.
+ 16. [3. GAME ENGINE] Comparar herramientas de audio.
+ 17. [3. GAME ENGINE] Comparar herramientas de UI.
+ 18. [3. GAME ENGINE] Comparar herramientas de networking.
+ 19. [3. GAME ENGINE] Evaluar comunidad.
+ 20. [3. GAME ENGINE] Evaluar documentación.
+ 21. [3. GAME ENGINE] Evaluar plugins.
+ 22. [3. GAME ENGINE] Elegir versión del engine.
+ 23. [3. GAME ENGINE] Configurar físicas.
+ 24. [3. GAME ENGINE] Configurar tags.
+ 25. [3. GAME ENGINE] Configurar escenas iniciales.
+ 26. [3. GAME ENGINE] Configurar build profiles.
+ 27. [4. LENGUAJE Y PROGRAMACIÓN] Evaluar C#.
+ 28. [4. LENGUAJE Y PROGRAMACIÓN] Evaluar C++ si corresponde.
+ 29. [4. LENGUAJE Y PROGRAMACIÓN] Definir namespaces.
+ 30. [4. LENGUAJE Y PROGRAMACIÓN] Separar lógica de presentación.
+ 31. [5. CONTROL DE VERSIONES] Crear `.gitignore`.
+ 32. [5. CONTROL DE VERSIONES] Definir ramas de features.
+ 33. [5. CONTROL DE VERSIONES] Definir ramas de hotfix.
+ 34. [5. CONTROL DE VERSIONES] Configurar Git LFS si corresponde.
+ 35. [5. CONTROL DE VERSIONES] Configurar backups del repositorio.
+ 36. [5. CONTROL DE VERSIONES] Configurar protección de ramas.
+ 37. [5. CONTROL DE VERSIONES] Configurar revisión de código.
+ 38. [5. CONTROL DE VERSIONES] Crear tags de releases.
+ 39. [5. CONTROL DE VERSIONES] Registrar versiones del juego.
+ 40. [5. CONTROL DE VERSIONES] Mantener changelog.
+ 41. [5. CONTROL DE VERSIONES] Documentar migraciones.
+ 42. [7. MUNDO VOXEL] Implementar streaming de chunks.
+ 43. [7. MUNDO VOXEL] Implementar unloading de chunks.
+ 44. [7. MUNDO VOXEL] Resolver iluminación de voxels.
+ 45. [7. MUNDO VOXEL] Resolver ambient occlusion.
+ 46. [7. MUNDO VOXEL] Resolver transparencia.
+ 47. [7. MUNDO VOXEL] Resolver líquidos.
+ 48. [7. MUNDO VOXEL] Resolver nieve.
+ 49. [7. MUNDO VOXEL] Resolver arena.
+ 50. [7. MUNDO VOXEL] Resolver gravedad de determinados bloques.
+ 51. [8. TERRENO Y GEOGRAFÍA] Diseñar montañas.
+ 52. [8. TERRENO Y GEOGRAFÍA] Diseñar valles.
+ 53. [8. TERRENO Y GEOGRAFÍA] Diseñar playas.
+ 54. [8. TERRENO Y GEOGRAFÍA] Diseñar acantilados.
+ 55. [8. TERRENO Y GEOGRAFÍA] Diseñar ríos.
+ 56. [8. TERRENO Y GEOGRAFÍA] Diseñar lagos.
+ 57. [8. TERRENO Y GEOGRAFÍA] Diseñar cascadas.
+ 58. [8. TERRENO Y GEOGRAFÍA] Diseñar cuevas.
+ 59. [8. TERRENO Y GEOGRAFÍA] Diseñar túneles.
+ 60. [8. TERRENO Y GEOGRAFÍA] Diseñar cañones.
+ 61. [8. TERRENO Y GEOGRAFÍA] Diseñar bosques.
+ 62. [8. TERRENO Y GEOGRAFÍA] Diseñar praderas.
+ 63. [8. TERRENO Y GEOGRAFÍA] Diseñar humedales.
+ 64. [8. TERRENO Y GEOGRAFÍA] Diseñar desiertos.
+ 65. [8. TERRENO Y GEOGRAFÍA] Diseñar zonas nevadas.
+ 66. [8. TERRENO Y GEOGRAFÍA] Diseñar zonas volcánicas.
+ 67. [8. TERRENO Y GEOGRAFÍA] Diseñar zonas tropicales.
+ 68. [8. TERRENO Y GEOGRAFÍA] Diseñar zonas costeras.
+ 69. [9. GENERACIÓN DEL MUNDO] Definir mundo manual.
+ 70. [9. GENERACIÓN DEL MUNDO] Evaluar enfoque híbrido.
+ 71. [9. GENERACIÓN DEL MUNDO] Crear seed.
+ 72. [9. GENERACIÓN DEL MUNDO] Guardar seed.
+ 73. [9. GENERACIÓN DEL MUNDO] Crear generador de terreno.
+ 74. [9. GENERACIÓN DEL MUNDO] Crear generador de biomas.
+ 75. [9. GENERACIÓN DEL MUNDO] Crear generador de vegetación.
+ 76. [9. GENERACIÓN DEL MUNDO] Crear generador de minerales.
+ 77. [9. GENERACIÓN DEL MUNDO] Crear generador de cuevas.
+ 78. [9. GENERACIÓN DEL MUNDO] Crear generador de ríos.
+ 79. [9. GENERACIÓN DEL MUNDO] Crear generador de puntos de interés.
+ 80. [9. GENERACIÓN DEL MUNDO] Crear generador de recursos.
+ 81. [9. GENERACIÓN DEL MUNDO] Evitar estructuras superpuestas.
+ 82. [9. GENERACIÓN DEL MUNDO] Validar seeds.
+ 83. [9. GENERACIÓN DEL MUNDO] Crear regeneración parcial.
+ 84. [10. PERSONAJE DEL JUGADOR] Diseñar modelo 3D.
+ 85. [10. PERSONAJE DEL JUGADOR] Diseñar proporciones.
+ 86. [10. PERSONAJE DEL JUGADOR] Diseñar rostro.
+ 87. [10. PERSONAJE DEL JUGADOR] Diseñar manos.
+ 88. [10. PERSONAJE DEL JUGADOR] Diseñar pies.
+ 89. [10. PERSONAJE DEL JUGADOR] Diseñar ropa inicial.
+ 90. [10. PERSONAJE DEL JUGADOR] Diseñar personalización.
+ 91. [10. PERSONAJE DEL JUGADOR] Diseñar peinados.
+ 92. [10. PERSONAJE DEL JUGADOR] Diseñar accesorios.
+ 93. [10. PERSONAJE DEL JUGADOR] Diseñar colores.
+ 94. [10. PERSONAJE DEL JUGADOR] Diseñar expresiones.
+ 95. [10. PERSONAJE DEL JUGADOR] Crear idle animation.
+ 96. [10. PERSONAJE DEL JUGADOR] Crear caminar.
+ 97. [10. PERSONAJE DEL JUGADOR] Crear correr.
+ 98. [10. PERSONAJE DEL JUGADOR] Crear saltar.
+ 99. [10. PERSONAJE DEL JUGADOR] Crear caer.
+100. [10. PERSONAJE DEL JUGADOR] Crear nadar.
+101. [10. PERSONAJE DEL JUGADOR] Crear escalar.
+102. [10. PERSONAJE DEL JUGADOR] Crear recoger objeto.
+103. [10. PERSONAJE DEL JUGADOR] Crear pescar.
+104. [10. PERSONAJE DEL JUGADOR] Crear plantar.
+105. [10. PERSONAJE DEL JUGADOR] Crear conversar.
+106. [10. PERSONAJE DEL JUGADOR] Crear emotes.
+107. [10. PERSONAJE DEL JUGADOR] Implementar controlador.
+108. [10. PERSONAJE DEL JUGADOR] Implementar gravedad.
+109. [10. PERSONAJE DEL JUGADOR] Implementar colisiones.
+110. [10. PERSONAJE DEL JUGADOR] Implementar interacción.
+111. [11. CÁMARA] Definir inclinación inicial.
+112. [11. CÁMARA] Implementar suavizado.
+113. [11. CÁMARA] Resolver obstáculos.
+114. [11. CÁMARA] Resolver cámara en interiores.
+115. [11. CÁMARA] Resolver cámara en cuevas.
+116. [11. CÁMARA] Resolver cámara en edificios.
+117. [11. CÁMARA] Resolver cámara durante puzzles.
+118. [11. CÁMARA] Implementar bloqueo opcional.
+119. [11. CÁMARA] Implementar cámara panorámica.
+120. [11. CÁMARA] Permitir inversión vertical.
+121. [11. CÁMARA] Permitir inversión horizontal.
+122. [11. CÁMARA] Probar cámara con diferentes alturas.
+123. [11. CÁMARA] Probar cámara con multitudes.
+124. [11. CÁMARA] Probar cámara con vegetación.
+125. [11. CÁMARA] Probar cámara en espacios estrechos.
+126. [12. HERRAMIENTAS] Diseñar pico.
+127. [12. HERRAMIENTAS] Diseñar hacha.
+128. [12. HERRAMIENTAS] Diseñar caña de pescar.
+129. [12. HERRAMIENTAS] Diseñar regadera.
+130. [12. HERRAMIENTAS] Diseñar lanza-semillas.
+131. [12. HERRAMIENTAS] Diseñar vara de flujo.
+132. [12. HERRAMIENTAS] Definir eficiencia.
+133. [12. HERRAMIENTAS] Evitar estadísticas de daño.
+134. [13. INVENTARIO] Diseñar inventario.
+135. [13. INVENTARIO] Definir favoritos.
+136. [13. INVENTARIO] Definir tooltip.
+137. [13. INVENTARIO] Crear cofres.
+138. [13. INVENTARIO] Crear almacenes.
+139. [13. INVENTARIO] Crear mochila.
+140. [13. INVENTARIO] Crear separación de stacks.
+141. [14. RECURSOS] Diseñar madera.
+142. [14. RECURSOS] Diseñar piedra.
+143. [14. RECURSOS] Diseñar tierra.
+144. [14. RECURSOS] Diseñar arena.
+145. [14. RECURSOS] Diseñar arcilla.
+146. [14. RECURSOS] Diseñar minerales.
+147. [14. RECURSOS] Diseñar cristales.
+148. [14. RECURSOS] Diseñar fibras.
+149. [14. RECURSOS] Diseñar semillas.
+150. [14. RECURSOS] Diseñar frutas.
+151. [14. RECURSOS] Diseñar flores.
+152. [14. RECURSOS] Diseñar peces.
+153. [14. RECURSOS] Definir usos.
+154. [14. RECURSOS] Definir lugares de obtención.
+155. [14. RECURSOS] Definir respawn.
+156. [16. CONSTRUCCIÓN] Diseñar grid.
+157. [16. CONSTRUCCIÓN] Definir snapping.
+158. [16. CONSTRUCCIÓN] Permitir rotación.
+159. [16. CONSTRUCCIÓN] Permitir elevación.
+160. [16. CONSTRUCCIÓN] Permitir copia.
+161. [16. CONSTRUCCIÓN] Permitir recolocar.
+162. [16. CONSTRUCCIÓN] Permitir almacenamiento.
+163. [16. CONSTRUCCIÓN] Permitir demolición.
+164. [16. CONSTRUCCIÓN] Diseñar paredes.
+165. [16. CONSTRUCCIÓN] Diseñar pisos.
+166. [16. CONSTRUCCIÓN] Diseñar techos.
+167. [16. CONSTRUCCIÓN] Diseñar puertas.
+168. [16. CONSTRUCCIÓN] Diseñar ventanas.
+169. [16. CONSTRUCCIÓN] Diseñar escaleras.
+170. [16. CONSTRUCCIÓN] Diseñar puentes.
+171. [16. CONSTRUCCIÓN] Diseñar cercas.
+172. [16. CONSTRUCCIÓN] Diseñar iluminación.
+173. [16. CONSTRUCCIÓN] Diseñar muebles.
+174. [16. CONSTRUCCIÓN] Diseñar decoración.
+175. [17. CASAS] Crear casas de vecinos.
+176. [17. CASAS] Crear casa del jugador.
+177. [17. CASAS] Crear ampliaciones.
+178. [17. CASAS] Crear habitaciones.
+179. [17. CASAS] Crear cocina.
+180. [17. CASAS] Crear taller.
+181. [17. CASAS] Crear jardín.
+182. [17. CASAS] Crear sótano.
+183. [17. CASAS] Crear ático.
+184. [17. CASAS] Crear exteriores.
+185. [17. CASAS] Crear interiores.
+186. [17. CASAS] Crear camas.
+187. [17. CASAS] Crear mesas.
+188. [17. CASAS] Crear sillas.
+189. [17. CASAS] Crear lámparas.
+190. [17. CASAS] Crear electrodomésticos.
+191. [17. CASAS] Crear objetos de pared.
+192. [17. CASAS] Crear cuadros.
+193. [17. CASAS] Crear plantas.
+194. [17. CASAS] Crear colecciones.
+195. [19. SISTEMA DE AMISTAD] Definir preferencias.
+196. [19. SISTEMA DE AMISTAD] Definir conversaciones.
+197. [19. SISTEMA DE AMISTAD] Definir visitas.
+198. [19. SISTEMA DE AMISTAD] Definir invitaciones.
+199. [19. SISTEMA DE AMISTAD] Definir reacciones.
+200. [19. SISTEMA DE AMISTAD] Evitar sistema excesivamente repetitivo.
+201. [19. SISTEMA DE AMISTAD] Crear momentos únicos.
+202. [19. SISTEMA DE AMISTAD] Crear secretos.
+203. [19. SISTEMA DE AMISTAD] Crear finales personales.
+204. [19. SISTEMA DE AMISTAD] Crear consecuencias sociales.
+205. [19. SISTEMA DE AMISTAD] Crear recuerdos de NPC.
+206. [19. SISTEMA DE AMISTAD] Crear relaciones entre NPC.
+207. [19. SISTEMA DE AMISTAD] Crear cambios de rutina.
+208. [19. SISTEMA DE AMISTAD] Crear escenas especiales.
+209. [20. DIÁLOGOS] Definir cajas de texto.
+210. [20. DIÁLOGOS] Definir elecciones.
+211. [20. DIÁLOGOS] Crear identificadores únicos.
+212. [20. DIÁLOGOS] Mantener base de diálogos.
+213. [20. DIÁLOGOS] Revisar consistencia de nombres.
+214. [20. DIÁLOGOS] Revisar tono.
+215. [20. DIÁLOGOS] Revisar continuidad.
+216. [20. DIÁLOGOS] Revisar gramática.
+217. [20. DIÁLOGOS] Revisar variables dinámicas.
+218. [20. DIÁLOGOS] Probar líneas largas.
+219. [21. HISTORIA PRINCIPAL] Definir prólogo.
+220. [21. HISTORIA PRINCIPAL] Definir capítulo 1.
+221. [21. HISTORIA PRINCIPAL] Definir capítulo 2.
+222. [21. HISTORIA PRINCIPAL] Definir capítulo 3.
+223. [21. HISTORIA PRINCIPAL] Definir capítulo 4.
+224. [21. HISTORIA PRINCIPAL] Definir capítulo 5.
+225. [21. HISTORIA PRINCIPAL] Definir capítulo 6.
+226. [21. HISTORIA PRINCIPAL] Definir foreshadowing.
+227. [21. HISTORIA PRINCIPAL] Definir revelaciones.
+228. [21. HISTORIA PRINCIPAL] Evitar exposición excesiva.
+229. [22. HISTORIAS SECUNDARIAS] Crear cadenas de misiones.
+230. [22. HISTORIAS SECUNDARIAS] Crear consecuencias.
+231. [23. TEMPLOS Y PUZZLES] Evitar soluciones ambiguas.
+232. [23. TEMPLOS Y PUZZLES] Probar puzzles con jugadores externos.
+233. [23. TEMPLOS Y PUZZLES] Crear recompensas.
+234. [24. RUINAS] Diseñar observatorios.
+235. [24. RUINAS] Diseñar puentes antiguos.
+236. [24. RUINAS] Diseñar bibliotecas.
+237. [24. RUINAS] Diseñar talleres.
+238. [24. RUINAS] Diseñar murales.
+239. [24. RUINAS] Diseñar inscripciones.
+240. [24. RUINAS] Diseñar progresión de descubrimiento.
+241. [24. RUINAS] Crear modularidad.
+242. [24. RUINAS] Crear variantes visuales.
+243. [24. RUINAS] Crear variantes de puzzles.
+244. [25. TEMPLO SUBTERRÁNEO] Diseñar entrada.
+245. [25. TEMPLO SUBTERRÁNEO] Diseñar vestíbulo.
+246. [25. TEMPLO SUBTERRÁNEO] Diseñar tutorial.
+247. [25. TEMPLO SUBTERRÁNEO] Diseñar salida.
+248. [25. TEMPLO SUBTERRÁNEO] Diseñar checkpoints.
+249. [25. TEMPLO SUBTERRÁNEO] Diseñar iluminación.
+250. [25. TEMPLO SUBTERRÁNEO] Diseñar partículas.
+251. [25. TEMPLO SUBTERRÁNEO] Diseñar materiales.
+252. [25. TEMPLO SUBTERRÁNEO] Diseñar texturas.
+253. [25. TEMPLO SUBTERRÁNEO] Diseñar iconografía.
+254. [25. TEMPLO SUBTERRÁNEO] Testear orientación.
+255. [26. ISLAS DEL MUNDO] Diseñar Islas del Cielo.
+256. [26. ISLAS DEL MUNDO] Diseñar islas de nieve.
+257. [26. ISLAS DEL MUNDO] Diseñar islas del desierto.
+258. [26. ISLAS DEL MUNDO] Diseñar islas volcánicas.
+259. [26. ISLAS DEL MUNDO] Diseñar islas submarinas.
+260. [26. ISLAS DEL MUNDO] Diseñar islas misteriosas.
+261. [26. ISLAS DEL MUNDO] Diseñar islas pequeñas.
+262. [26. ISLAS DEL MUNDO] Definir NPC.
+263. [27. VIAJES] Diseñar puerto.
+264. [27. VIAJES] Diseñar barco.
+265. [27. VIAJES] Diseñar dirigible.
+266. [27. VIAJES] Diseñar submarino.
+267. [27. VIAJES] Diseñar boleto.
+268. [27. VIAJES] Diseñar requisitos.
+269. [27. VIAJES] Diseñar animación de embarque.
+270. [27. VIAJES] Diseñar transición.
+271. [27. VIAJES] Diseñar llegada.
+272. [27. VIAJES] Diseñar efectos de clima.
+273. [27. VIAJES] Diseñar NPC viajeros.
+274. [27. VIAJES] Diseñar transporte de recursos.
+275. [27. VIAJES] Definir costes.
+276. [28. TIEMPO Y CALENDARIO] Definir amanecer.
+277. [28. TIEMPO Y CALENDARIO] Definir atardecer.
+278. [28. TIEMPO Y CALENDARIO] Definir semana.
+279. [28. TIEMPO Y CALENDARIO] Definir mes.
+280. [28. TIEMPO Y CALENDARIO] Definir años.
+281. [28. TIEMPO Y CALENDARIO] Definir cumpleaños.
+282. [28. TIEMPO Y CALENDARIO] Definir visitas.
+283. [28. TIEMPO Y CALENDARIO] Evitar frustración por contenido limitado temporalmente.
+284. [28. TIEMPO Y CALENDARIO] Permitir repetir eventos importantes.
+285. [28. TIEMPO Y CALENDARIO] Definir reloj.
+286. [29. RELOJ EN TIEMPO REAL] Definir dependencia del reloj del sistema.
+287. [30. CICLO DÍA/NOCHE] Diseñar sombras.
+288. [30. CICLO DÍA/NOCHE] Diseñar cielo.
+289. [30. CICLO DÍA/NOCHE] Diseñar estrellas.
+290. [30. CICLO DÍA/NOCHE] Diseñar luna.
+291. [30. CICLO DÍA/NOCHE] Diseñar nubes.
+292. [30. CICLO DÍA/NOCHE] Diseñar amanecer.
+293. [30. CICLO DÍA/NOCHE] Diseñar atardecer.
+294. [30. CICLO DÍA/NOCHE] Diseñar niebla.
+295. [30. CICLO DÍA/NOCHE] Cambiar comportamiento de NPC.
+296. [30. CICLO DÍA/NOCHE] Cambiar fauna.
+297. [30. CICLO DÍA/NOCHE] Cambiar música.
+298. [30. CICLO DÍA/NOCHE] Cambiar sonidos.
+299. [30. CICLO DÍA/NOCHE] Cambiar actividades.
+300. [31. CLIMA] Diseñar clima soleado.
+301. [31. CLIMA] Diseñar lluvia.
+302. [31. CLIMA] Diseñar tormenta.
+303. [31. CLIMA] Diseñar niebla.
+304. [31. CLIMA] Diseñar nieve.
+305. [31. CLIMA] Diseñar viento.
+306. [31. CLIMA] Permitir opciones de accesibilidad.
+307. [32. AGRICULTURA] Diseñar parcelas.
+308. [32. AGRICULTURA] Diseñar semillas.
+309. [32. AGRICULTURA] Diseñar crecimiento.
+310. [32. AGRICULTURA] Diseñar etapas de crecimiento.
+311. [32. AGRICULTURA] Diseñar riego.
+312. [32. AGRICULTURA] Diseñar fertilizantes.
+313. [32. AGRICULTURA] Diseñar cosecha.
+314. [32. AGRICULTURA] Diseñar flores.
+315. [32. AGRICULTURA] Diseñar híbridos.
+316. [32. AGRICULTURA] Diseñar calidad.
+317. [32. AGRICULTURA] Diseñar rendimiento.
+318. [32. AGRICULTURA] Diseñar enfermedades si las hubiera.
+319. [32. AGRICULTURA] Diseñar venta.
+320. [32. AGRICULTURA] Diseñar cultivos de isla.
+321. [33. PESCA] Definir biomas.
+322. [33. PESCA] Definir cebos.
+323. [33. PESCA] Definir cañas.
+324. [33. PESCA] Diseñar minijuego.
+325. [33. PESCA] Diseñar sonidos.
+326. [33. PESCA] Crear coleccionario.
+327. [33. PESCA] Crear recompensas.
+328. [33. PESCA] Crear museo.
+329. [33. PESCA] Crear desafíos.
+330. [33. PESCA] Crear estadísticas.
+331. [34. MINERÍA] Diseñar vetas.
+332. [34. MINERÍA] Diseñar minerales.
+333. [34. MINERÍA] Diseñar niveles de profundidad.
+334. [34. MINERÍA] Diseñar cuevas.
+335. [34. MINERÍA] Diseñar eficiencia.
+336. [34. MINERÍA] Diseñar partículas.
+337. [34. MINERÍA] Diseñar sonidos.
+338. [34. MINERÍA] Diseñar iluminación.
+339. [34. MINERÍA] Diseñar riesgos no violentos.
+340. [34. MINERÍA] Diseñar zonas de minería.
+341. [34. MINERÍA] Diseñar rutas.
+342. [34. MINERÍA] Diseñar economía.
+343. [34. MINERÍA] Diseñar regeneración.
+344. [34. MINERÍA] Diseñar límites.
+345. [35. FAUNA] Diseñar hábitat.
+346. [35. FAUNA] Diseñar alimentación.
+347. [35. FAUNA] Diseñar migraciones.
+348. [35. FAUNA] Diseñar sonidos.
+349. [35. FAUNA] Diseñar reproducción si corresponde.
+350. [35. FAUNA] Diseñar crías.
+351. [35. FAUNA] Diseñar variantes.
+352. [35. FAUNA] Diseñar interacción.
+353. [35. FAUNA] Diseñar observación.
+354. [35. FAUNA] Evitar explotación.
+355. [35. FAUNA] Crear ecosistemas.
+356. [36. MUSEOS Y COLECCIONES] Diseñar museo.
+357. [36. MUSEOS Y COLECCIONES] Diseñar salas.
+358. [36. MUSEOS Y COLECCIONES] Diseñar vitrinas.
+359. [36. MUSEOS Y COLECCIONES] Diseñar fósiles.
+360. [36. MUSEOS Y COLECCIONES] Diseñar peces.
+361. [36. MUSEOS Y COLECCIONES] Diseñar plantas.
+362. [36. MUSEOS Y COLECCIONES] Diseñar minerales.
+363. [36. MUSEOS Y COLECCIONES] Diseñar artefactos.
+364. [36. MUSEOS Y COLECCIONES] Diseñar documentos.
+365. [36. MUSEOS Y COLECCIONES] Diseñar mapas.
+366. [36. MUSEOS Y COLECCIONES] Diseñar colección de muebles.
+367. [36. MUSEOS Y COLECCIONES] Diseñar colección de ropa.
+368. [36. MUSEOS Y COLECCIONES] Diseñar trofeos.
+369. [36. MUSEOS Y COLECCIONES] Diseñar descripciones.
+370. [36. MUSEOS Y COLECCIONES] Diseñar navegación.
+371. [36. MUSEOS Y COLECCIONES] Diseñar curatoría.
+372. [36. MUSEOS Y COLECCIONES] Diseñar exposiciones temporales.
+373. [36. MUSEOS Y COLECCIONES] Diseñar logros.
+374. [36. MUSEOS Y COLECCIONES] Diseñar secretos.
+375. [36. MUSEOS Y COLECCIONES] Diseñar descubrimientos.
+376. [37. ECONOMÍA] Definir Gemas de Ámbar.
+377. [37. ECONOMÍA] Definir Pases de Mérito.
+378. [37. ECONOMÍA] Definir gastos.
+379. [37. ECONOMÍA] Definir inflación.
+380. [37. ECONOMÍA] Definir escasez.
+381. [37. ECONOMÍA] Definir mercados.
+382. [37. ECONOMÍA] Definir tiendas.
+383. [37. ECONOMÍA] Definir vendedores.
+384. [37. ECONOMÍA] Definir compra.
+385. [37. ECONOMÍA] Definir economía estacional.
+386. [37. ECONOMÍA] Definir economía regional.
+387. [37. ECONOMÍA] Balancear rentabilidad.
+388. [37. ECONOMÍA] Evitar inflación excesiva.
+389. [37. ECONOMÍA] Evitar grind artificial.
+390. [37. ECONOMÍA] Crear sumideros de moneda.
+391. [37. ECONOMÍA] Crear gastos significativos.
+392. [38. TIENDAS] Diseñar tienda de muebles.
+393. [38. TIENDAS] Diseñar tienda de ropa.
+394. [38. TIENDAS] Diseñar tienda de herramientas.
+395. [38. TIENDAS] Diseñar vivero.
+396. [38. TIENDAS] Diseñar mercado.
+397. [38. TIENDAS] Diseñar tienda marítima.
+398. [38. TIENDAS] Diseñar inventario.
+399. [38. TIENDAS] Diseñar rotación.
+400. [38. TIENDAS] Diseñar stock.
+401. [38. TIENDAS] Diseñar animación.
+402. [38. TIENDAS] Diseñar sonidos.
+403. [38. TIENDAS] Diseñar promociones.
+404. [38. TIENDAS] Diseñar compras especiales.
+405. [38. TIENDAS] Diseñar mercancía limitada.
+406. [38. TIENDAS] Evitar FOMO abusivo.
+407. [38. TIENDAS] Diseñar interfaz.
+408. [38. TIENDAS] Diseñar confirmaciones.
+409. [38. TIENDAS] Diseñar devoluciones si corresponde.
+410. [39. INFRAESTRUCTURA] Construir puente.
+411. [39. INFRAESTRUCTURA] Construir rampas.
+412. [39. INFRAESTRUCTURA] Construir caminos.
+413. [39. INFRAESTRUCTURA] Construir escaleras.
+414. [39. INFRAESTRUCTURA] Restaurar faro.
+415. [39. INFRAESTRUCTURA] Restaurar puerto.
+416. [39. INFRAESTRUCTURA] Restaurar estación.
+417. [39. INFRAESTRUCTURA] Restaurar observatorio.
+418. [39. INFRAESTRUCTURA] Restaurar museo.
+419. [39. INFRAESTRUCTURA] Restaurar plaza.
+420. [39. INFRAESTRUCTURA] Restaurar canales.
+421. [39. INFRAESTRUCTURA] Restaurar molinos.
+422. [39. INFRAESTRUCTURA] Restaurar sistemas de agua.
+423. [39. INFRAESTRUCTURA] Restaurar iluminación.
+424. [39. INFRAESTRUCTURA] Restaurar transporte.
+425. [39. INFRAESTRUCTURA] Definir costes.
+426. [39. INFRAESTRUCTURA] Crear progresión.
+427. [39. INFRAESTRUCTURA] Crear beneficios.
+428. [39. INFRAESTRUCTURA] Crear cambios visuales.
+429. [39. INFRAESTRUCTURA] Crear reacciones de NPC.
+430. [39. INFRAESTRUCTURA] Crear consecuencias.
+431. [40. MÚSICA] Crear música de intro.
+432. [40. MÚSICA] Crear música del menú.
+433. [40. MÚSICA] Crear música de creación de personaje.
+434. [40. MÚSICA] Crear música de llegada.
+435. [40. MÚSICA] Crear música de Aurora.
+436. [40. MÚSICA] Crear música de día.
+437. [40. MÚSICA] Crear música de noche.
+438. [40. MÚSICA] Crear música de madrugada.
+439. [40. MÚSICA] Crear música de amanecer.
+440. [40. MÚSICA] Crear música de atardecer.
+441. [40. MÚSICA] Crear música de primavera.
+442. [40. MÚSICA] Crear música de verano.
+443. [40. MÚSICA] Crear música de otoño.
+444. [40. MÚSICA] Crear música de invierno.
+445. [40. MÚSICA] Crear música de lluvia.
+446. [40. MÚSICA] Crear música de tormenta.
+447. [40. MÚSICA] Crear música de nieve.
+448. [40. MÚSICA] Crear música de playa.
+449. [40. MÚSICA] Crear música de bosque.
+450. [40. MÚSICA] Crear música de montaña.
+451. [40. MÚSICA] Crear música de cueva.
+452. [40. MÚSICA] Crear música de templo.
+453. [40. MÚSICA] Crear música de ruina.
+454. [40. MÚSICA] Crear música de Isla de las Cenizas.
+455. [40. MÚSICA] Crear música de las Islas del Cielo.
+456. [40. MÚSICA] Crear música del océano.
+457. [40. MÚSICA] Crear música submarina.
+458. [40. MÚSICA] Crear música de Elysia.
+459. [40. MÚSICA] Crear música de descubrimiento.
+460. [40. MÚSICA] Crear música de misterio.
+461. [40. MÚSICA] Crear música de resolución de puzzle.
+462. [40. MÚSICA] Crear música de obtención de Sello.
+463. [40. MÚSICA] Crear música de festival.
+464. [40. MÚSICA] Crear música de ceremonia.
+465. [40. MÚSICA] Crear música de créditos.
+466. [40. MÚSICA] Crear leitmotifs.
+467. [40. MÚSICA] Definir crossfade.
+468. [40. MÚSICA] Normalizar niveles.
+469. [40. MÚSICA] Revisar masterización.
+470. [41. SONIDO AMBIENTAL] Sonido de viento.
+471. [41. SONIDO AMBIENTAL] Sonido de hojas.
+472. [41. SONIDO AMBIENTAL] Sonido de hierba.
+473. [41. SONIDO AMBIENTAL] Sonido de agua.
+474. [41. SONIDO AMBIENTAL] Sonido de río.
+475. [41. SONIDO AMBIENTAL] Sonido de cascada.
+476. [41. SONIDO AMBIENTAL] Sonido de océano.
+477. [41. SONIDO AMBIENTAL] Sonido de lluvia.
+478. [41. SONIDO AMBIENTAL] Sonido de tormenta.
+479. [41. SONIDO AMBIENTAL] Sonido de nieve.
+480. [41. SONIDO AMBIENTAL] Sonido de fuego.
+481. [41. SONIDO AMBIENTAL] Sonido de madera.
+482. [41. SONIDO AMBIENTAL] Sonido de piedra.
+483. [41. SONIDO AMBIENTAL] Sonido de minería.
+484. [41. SONIDO AMBIENTAL] Sonido de construcción.
+485. [41. SONIDO AMBIENTAL] Sonido de árboles.
+486. [41. SONIDO AMBIENTAL] Sonido de animales.
+487. [41. SONIDO AMBIENTAL] Sonido de aves.
+488. [41. SONIDO AMBIENTAL] Sonido de insectos.
+489. [41. SONIDO AMBIENTAL] Sonido de mar.
+490. [41. SONIDO AMBIENTAL] Sonido de cuevas.
+491. [41. SONIDO AMBIENTAL] Sonido de ruinas.
+492. [41. SONIDO AMBIENTAL] Sonido de templo.
+493. [41. SONIDO AMBIENTAL] Sonido de mecanismos.
+494. [41. SONIDO AMBIENTAL] Sonido de máquinas.
+495. [42. EFECTOS DE SONIDO] Sonido de pasos.
+496. [42. EFECTOS DE SONIDO] Sonido de correr.
+497. [42. EFECTOS DE SONIDO] Sonido de saltar.
+498. [42. EFECTOS DE SONIDO] Sonido de caer.
+499. [42. EFECTOS DE SONIDO] Sonido de nadar.
+500. [42. EFECTOS DE SONIDO] Sonido de recoger.
+501. [42. EFECTOS DE SONIDO] Sonido de abrir.
+502. [42. EFECTOS DE SONIDO] Sonido de cerrar.
+503. [42. EFECTOS DE SONIDO] Sonido de equipar.
+504. [42. EFECTOS DE SONIDO] Sonido de herramienta.
+505. [42. EFECTOS DE SONIDO] Sonido de plantar.
+506. [42. EFECTOS DE SONIDO] Sonido de regar.
+507. [42. EFECTOS DE SONIDO] Sonido de cosechar.
+508. [42. EFECTOS DE SONIDO] Sonido de pescar.
+509. [42. EFECTOS DE SONIDO] Sonido de crafting.
+510. [42. EFECTOS DE SONIDO] Sonido de compra.
+511. [42. EFECTOS DE SONIDO] Sonido de venta.
+512. [42. EFECTOS DE SONIDO] Sonido de diálogo.
+513. [42. EFECTOS DE SONIDO] Sonido de menú.
+514. [42. EFECTOS DE SONIDO] Sonido de selección.
+515. [42. EFECTOS DE SONIDO] Sonido de confirmación.
+516. [42. EFECTOS DE SONIDO] Sonido de error.
+517. [42. EFECTOS DE SONIDO] Sonido de logro.
+518. [43. ASMR Y FEEDBACK] Diseñar sensación de cavar.
+519. [43. ASMR Y FEEDBACK] Diseñar sensación de colocar bloques.
+520. [43. ASMR Y FEEDBACK] Diseñar sensación de cosechar.
+521. [43. ASMR Y FEEDBACK] Diseñar sensación de cocinar.
+522. [43. ASMR Y FEEDBACK] Diseñar sensación de caminar sobre diferentes superficies.
+523. [43. ASMR Y FEEDBACK] Diseñar sonidos sincronizados con animaciones.
+524. [43. ASMR Y FEEDBACK] Diseñar capas de sonido.
+525. [43. ASMR Y FEEDBACK] Diseñar microfeedback.
+526. [44. ARTE 3D] Definir polígonos máximos.
+527. [44. ARTE 3D] Definir topología.
+528. [44. ARTE 3D] Definir UV.
+529. [44. ARTE 3D] Definir LOD.
+530. [44. ARTE 3D] Crear personajes.
+531. [44. ARTE 3D] Crear NPC.
+532. [44. ARTE 3D] Crear animales.
+533. [44. ARTE 3D] Crear edificios.
+534. [44. ARTE 3D] Crear muebles.
+535. [44. ARTE 3D] Crear herramientas.
+536. [44. ARTE 3D] Crear barcos.
+537. [44. ARTE 3D] Crear vehículos.
+538. [44. ARTE 3D] Crear vegetación.
+539. [44. ARTE 3D] Crear props.
+540. [44. ARTE 3D] Crear ruinas.
+541. [44. ARTE 3D] Crear templos.
+542. [44. ARTE 3D] Crear elementos decorativos.
+543. [44. ARTE 3D] Crear variantes.
+544. [44. ARTE 3D] Crear assets reutilizables.
+545. [45. ARTE 2D] Diseñar iconos.
+546. [45. ARTE 2D] Diseñar UI.
+547. [45. ARTE 2D] Diseñar mapas.
+548. [45. ARTE 2D] Diseñar ilustraciones.
+549. [45. ARTE 2D] Diseñar retratos.
+550. [45. ARTE 2D] Diseñar pantallas.
+551. [45. ARTE 2D] Diseñar inventario.
+552. [45. ARTE 2D] Diseñar iconos de objetos.
+553. [45. ARTE 2D] Diseñar iconos de materiales.
+554. [45. ARTE 2D] Diseñar iconos de herramientas.
+555. [45. ARTE 2D] Diseñar textos de ruinas.
+556. [45. ARTE 2D] Diseñar coleccionables.
+557. [45. ARTE 2D] Diseñar insignias.
+558. [45. ARTE 2D] Diseñar emblemas.
+559. [45. ARTE 2D] Definir transparencias.
+560. [45. ARTE 2D] Crear guías de estilo.
+561. [46. TEXTURAS Y MATERIALES] Tierra.
+562. [46. TEXTURAS Y MATERIALES] Césped.
+563. [46. TEXTURAS Y MATERIALES] Piedra.
+564. [46. TEXTURAS Y MATERIALES] Arena.
+565. [46. TEXTURAS Y MATERIALES] Arcilla.
+566. [46. TEXTURAS Y MATERIALES] Madera.
+567. [46. TEXTURAS Y MATERIALES] Metal.
+568. [46. TEXTURAS Y MATERIALES] Cristal.
+569. [46. TEXTURAS Y MATERIALES] Hielo.
+570. [46. TEXTURAS Y MATERIALES] Lava.
+571. [46. TEXTURAS Y MATERIALES] Agua.
+572. [46. TEXTURAS Y MATERIALES] Coral.
+573. [46. TEXTURAS Y MATERIALES] Musgo.
+574. [46. TEXTURAS Y MATERIALES] Ruinas.
+575. [46. TEXTURAS Y MATERIALES] Paredes.
+576. [46. TEXTURAS Y MATERIALES] Pisos.
+577. [46. TEXTURAS Y MATERIALES] Techos.
+578. [46. TEXTURAS Y MATERIALES] Muebles.
+579. [46. TEXTURAS Y MATERIALES] Ropa.
+580. [46. TEXTURAS Y MATERIALES] Herramientas.
+581. [46. TEXTURAS Y MATERIALES] Vehículos.
+582. [46. TEXTURAS Y MATERIALES] Vegetación.
+583. [46. TEXTURAS Y MATERIALES] Variantes por bioma.
+584. [47. ANIMACIÓN] Animación del jugador.
+585. [47. ANIMACIÓN] Animación de NPC.
+586. [47. ANIMACIÓN] Animación de animales.
+587. [47. ANIMACIÓN] Animación de herramientas.
+588. [47. ANIMACIÓN] Animación de vegetación.
+589. [47. ANIMACIÓN] Animación de agua.
+590. [47. ANIMACIÓN] Animación de fuego.
+591. [47. ANIMACIÓN] Animación de partículas.
+592. [47. ANIMACIÓN] Animación de puertas.
+593. [47. ANIMACIÓN] Animación de puentes.
+594. [47. ANIMACIÓN] Animación de mecanismos.
+595. [47. ANIMACIÓN] Animación de ascensores.
+596. [47. ANIMACIÓN] Animación de barcos.
+597. [47. ANIMACIÓN] Animación de dirigibles.
+598. [47. ANIMACIÓN] Animación de submarinos.
+599. [47. ANIMACIÓN] Animación de UI.
+600. [47. ANIMACIÓN] Animación de diálogos.
+601. [47. ANIMACIÓN] Animación de recompensas.
+602. [47. ANIMACIÓN] Animación de descubrimientos.
+603. [47. ANIMACIÓN] Animación de festivales.
+604. [47. ANIMACIÓN] Animación de construcciones.
+605. [47. ANIMACIÓN] Animación de cosecha.
+606. [47. ANIMACIÓN] Animación de pesca.
+607. [47. ANIMACIÓN] Animación de minería.
+608. [47. ANIMACIÓN] Animación de puzzles.
+609. [48. ILUMINACIÓN] Configurar GI si corresponde.
+610. [48. ILUMINACIÓN] Configurar iluminación horaria.
+611. [48. ILUMINACIÓN] Configurar luz solar.
+612. [48. ILUMINACIÓN] Configurar luz lunar.
+613. [48. ILUMINACIÓN] Configurar faroles.
+614. [48. ILUMINACIÓN] Configurar fuego.
+615. [48. ILUMINACIÓN] Configurar cristales luminosos.
+616. [48. ILUMINACIÓN] Configurar cuevas.
+617. [48. ILUMINACIÓN] Configurar templos.
+618. [48. ILUMINACIÓN] Configurar ruinas.
+619. [48. ILUMINACIÓN] Configurar efectos de clima.
+620. [48. ILUMINACIÓN] Configurar niebla.
+621. [48. ILUMINACIÓN] Optimizar sombras.
+622. [48. ILUMINACIÓN] Optimizar luces.
+623. [49. VEGETACIÓN] Hierba.
+624. [49. VEGETACIÓN] Flores.
+625. [49. VEGETACIÓN] Arbustos.
+626. [49. VEGETACIÓN] Árboles grandes.
+627. [49. VEGETACIÓN] Palmeras.
+628. [49. VEGETACIÓN] Bambú.
+629. [49. VEGETACIÓN] Musgo.
+630. [49. VEGETACIÓN] Enredaderas.
+631. [49. VEGETACIÓN] Hongos.
+632. [49. VEGETACIÓN] Animación de viento.
+633. [49. VEGETACIÓN] Interacción con jugador.
+634. [49. VEGETACIÓN] Interacción con clima.
+635. [49. VEGETACIÓN] Interacción con terreno.
+636. [49. VEGETACIÓN] Sistema de crecimiento.
+637. [49. VEGETACIÓN] LOD.
+638. [49. VEGETACIÓN] Culling.
+639. [49. VEGETACIÓN] Instancing.
+640. [49. VEGETACIÓN] Optimización.
+641. [50. AGUA] Agua de océano.
+642. [50. AGUA] Agua de río.
+643. [50. AGUA] Agua de lago.
+644. [50. AGUA] Agua de cascada.
+645. [50. AGUA] Olas.
+646. [50. AGUA] Reflejos.
+647. [50. AGUA] Transparencia.
+648. [50. AGUA] Espuma.
+649. [50. AGUA] Corrientes.
+650. [50. AGUA] Inundación.
+651. [50. AGUA] Drenaje.
+652. [50. AGUA] Congelamiento.
+653. [50. AGUA] Evaporación.
+654. [50. AGUA] Interacción con herramientas.
+655. [50. AGUA] Interacción con puzzles.
+656. [50. AGUA] Interacción con clima.
+657. [50. AGUA] Interacción con barcos.
+658. [50. AGUA] Sonidos.
+659. [50. AGUA] Partículas.
+660. [50. AGUA] Optimización.
+661. [50. AGUA] Colisiones.
+662. [51. PARTÍCULAS Y VFX] Humo.
+663. [51. PARTÍCULAS Y VFX] Polvo.
+664. [51. PARTÍCULAS Y VFX] Hojas.
+665. [51. PARTÍCULAS Y VFX] Pétalos.
+666. [51. PARTÍCULAS Y VFX] Chispas.
+667. [51. PARTÍCULAS Y VFX] Agua.
+668. [51. PARTÍCULAS Y VFX] Lluvia.
+669. [51. PARTÍCULAS Y VFX] Nieve.
+670. [51. PARTÍCULAS Y VFX] Fuego.
+671. [51. PARTÍCULAS Y VFX] Lava.
+672. [51. PARTÍCULAS Y VFX] Luz.
+673. [51. PARTÍCULAS Y VFX] Resonancia.
+674. [51. PARTÍCULAS Y VFX] Activación de runas.
+675. [51. PARTÍCULAS Y VFX] Teletransporte si existe.
+676. [51. PARTÍCULAS Y VFX] Obtención de Sello.
+677. [51. PARTÍCULAS Y VFX] Resolución de puzzle.
+678. [51. PARTÍCULAS Y VFX] Construcción.
+679. [51. PARTÍCULAS Y VFX] Cosecha.
+680. [51. PARTÍCULAS Y VFX] Pesca.
+681. [51. PARTÍCULAS Y VFX] Descubrimiento.
+682. [51. PARTÍCULAS Y VFX] Efectos de interfaz.
+683. [51. PARTÍCULAS Y VFX] Optimizar cantidad de partículas.
+684. [52. UI/UX] Diseñar HUD.
+685. [52. UI/UX] Diseñar inventario.
+686. [52. UI/UX] Diseñar mapa.
+687. [52. UI/UX] Diseñar diario.
+688. [52. UI/UX] Diseñar reloj.
+689. [52. UI/UX] Diseñar tienda.
+690. [52. UI/UX] Diseñar crafting.
+691. [52. UI/UX] Diseñar construcción.
+692. [52. UI/UX] Diseñar personalización.
+693. [52. UI/UX] Diseñar tutoriales.
+694. [52. UI/UX] Diseñar notificaciones.
+695. [52. UI/UX] Diseñar popups.
+696. [52. UI/UX] Diseñar tooltips.
+697. [52. UI/UX] Diseñar indicadores.
+698. [52. UI/UX] Diseñar accesibilidad.
+699. [53. MAPA] Diseñar mapa de Aurora.
+700. [53. MAPA] Diseñar mapa subterráneo.
+701. [53. MAPA] Diseñar mapa marítimo.
+702. [53. MAPA] Diseñar puntos de interés.
+703. [53. MAPA] Diseñar marcadores.
+704. [53. MAPA] Diseñar leyenda.
+705. [53. MAPA] Diseñar rutas.
+706. [53. MAPA] Diseñar destinos.
+707. [53. MAPA] Diseñar ubicación del jugador.
+708. [53. MAPA] Diseñar nombres de lugares.
+709. [53. MAPA] Diseñar zonas desconocidas.
+710. [53. MAPA] Diseñar secretos.
+711. [53. MAPA] Diseñar mapas especiales.
+712. [53. MAPA] Permitir colocar marcadores.
+713. [53. MAPA] Permitir notas.
+714. [53. MAPA] Optimizar mapa.
+715. [54. DIARIO DEL JUGADOR] Diseñar diario.
+716. [54. DIARIO DEL JUGADOR] Registrar personajes.
+717. [54. DIARIO DEL JUGADOR] Registrar lugares.
+718. [54. DIARIO DEL JUGADOR] Registrar criaturas.
+719. [54. DIARIO DEL JUGADOR] Registrar recetas.
+720. [54. DIARIO DEL JUGADOR] Registrar pistas.
+721. [54. DIARIO DEL JUGADOR] Registrar Sellos.
+722. [54. DIARIO DEL JUGADOR] Registrar ruinas.
+723. [54. DIARIO DEL JUGADOR] Registrar descubrimientos.
+724. [54. DIARIO DEL JUGADOR] Registrar misiones.
+725. [54. DIARIO DEL JUGADOR] Diseñar categorías.
+726. [54. DIARIO DEL JUGADOR] Guardar progreso.
+727. [54. DIARIO DEL JUGADOR] Localizar contenido.
+728. [55. FOTOGRAFÍA] Zoom.
+729. [55. FOTOGRAFÍA] Rotación.
+730. [55. FOTOGRAFÍA] Filtros.
+731. [55. FOTOGRAFÍA] Profundidad de campo.
+732. [55. FOTOGRAFÍA] Exposición.
+733. [55. FOTOGRAFÍA] Contraste.
+734. [55. FOTOGRAFÍA] Viñeta.
+735. [55. FOTOGRAFÍA] Hora del día.
+736. [55. FOTOGRAFÍA] Posar NPC.
+737. [55. FOTOGRAFÍA] Capturar animales.
+738. [55. FOTOGRAFÍA] Capturar paisajes.
+739. [55. FOTOGRAFÍA] Álbum.
+740. [55. FOTOGRAFÍA] Guardar fotografías.
+741. [55. FOTOGRAFÍA] Galería.
+742. [55. FOTOGRAFÍA] Evitar problemas de privacidad.
+743. [55. FOTOGRAFÍA] Comprobar rendimiento.
+744. [56. INTERFAZ DE CONTROL] Soporte teclado.
+745. [56. INTERFAZ DE CONTROL] Soporte ratón.
+746. [56. INTERFAZ DE CONTROL] Soporte mando Xbox.
+747. [56. INTERFAZ DE CONTROL] Soporte mando PlayStation.
+748. [56. INTERFAZ DE CONTROL] Soporte mando genérico.
+749. [56. INTERFAZ DE CONTROL] Remapeo de botones.
+750. [56. INTERFAZ DE CONTROL] Sensibilidad.
+751. [56. INTERFAZ DE CONTROL] Vibración.
+752. [56. INTERFAZ DE CONTROL] Inversión.
+753. [56. INTERFAZ DE CONTROL] Atajos.
+754. [56. INTERFAZ DE CONTROL] Soporte táctil si corresponde.
+755. [56. INTERFAZ DE CONTROL] Recuperar configuración.
+756. [57. ACCESIBILIDAD] Escalado de UI.
+757. [57. ACCESIBILIDAD] Contraste.
+758. [57. ACCESIBILIDAD] Subtítulos.
+759. [57. ACCESIBILIDAD] Tamaño de subtítulos.
+760. [57. ACCESIBILIDAD] Fondo de subtítulos.
+761. [57. ACCESIBILIDAD] Volumen independiente.
+762. [57. ACCESIBILIDAD] Asistencia de cámara.
+763. [57. ACCESIBILIDAD] Reducción de movimiento.
+764. [57. ACCESIBILIDAD] Reducción de partículas.
+765. [57. ACCESIBILIDAD] Alternativa a eventos rápidos.
+766. [57. ACCESIBILIDAD] Ajuste de sensibilidad.
+767. [57. ACCESIBILIDAD] Ajuste de vibración.
+768. [57. ACCESIBILIDAD] Velocidad de texto.
+769. [57. ACCESIBILIDAD] Modo sin flashes.
+770. [57. ACCESIBILIDAD] Avisos de contenido visual intenso.
+771. [57. ACCESIBILIDAD] Soporte de lectores donde sea viable.
+772. [57. ACCESIBILIDAD] Menús navegables.
+773. [57. ACCESIBILIDAD] Diferenciación por formas además de colores.
+774. [57. ACCESIBILIDAD] Pruebas con usuarios.
+775. [58. GUARDADO] Copias de seguridad.
+776. [58. GUARDADO] Guardado de mundo.
+777. [58. GUARDADO] Guardado de inventario.
+778. [58. GUARDADO] Guardado de construcciones.
+779. [58. GUARDADO] Guardado de NPC.
+780. [58. GUARDADO] Guardado de misiones.
+781. [58. GUARDADO] Guardado de relaciones.
+782. [58. GUARDADO] Guardado de economía.
+783. [58. GUARDADO] Guardado de tiempo.
+784. [58. GUARDADO] Guardado de eventos.
+785. [58. GUARDADO] Guardado de colecciones.
+786. [58. GUARDADO] Guardado de configuración.
+787. [58. GUARDADO] Detectar corrupción.
+788. [58. GUARDADO] Versionar saves.
+789. [59. DATOS Y SERIALIZACIÓN] Evaluar JSON.
+790. [59. DATOS Y SERIALIZACIÓN] Evaluar binario.
+791. [59. DATOS Y SERIALIZACIÓN] Evaluar bases de datos embebidas.
+792. [59. DATOS Y SERIALIZACIÓN] Definir IDs persistentes.
+793. [59. DATOS Y SERIALIZACIÓN] Definir GUID.
+794. [59. DATOS Y SERIALIZACIÓN] Versionar schema.
+795. [59. DATOS Y SERIALIZACIÓN] Crear migraciones.
+796. [59. DATOS Y SERIALIZACIÓN] Crear herramientas de edición.
+797. [59. DATOS Y SERIALIZACIÓN] Crear importadores.
+798. [59. DATOS Y SERIALIZACIÓN] Crear exportadores.
+799. [59. DATOS Y SERIALIZACIÓN] Probar grandes cantidades de objetos.
+800. [59. DATOS Y SERIALIZACIÓN] Optimizar tamaño de save.
+801. [60. RENDIMIENTO] Medir CPU.
+802. [60. RENDIMIENTO] Medir GPU.
+803. [60. RENDIMIENTO] Medir RAM.
+804. [60. RENDIMIENTO] Medir tiempos de carga.
+805. [60. RENDIMIENTO] Medir generación de chunks.
+806. [60. RENDIMIENTO] Medir destrucción de bloques.
+807. [60. RENDIMIENTO] Medir NPC.
+808. [60. RENDIMIENTO] Medir sombras.
+809. [60. RENDIMIENTO] Medir iluminación.
+810. [60. RENDIMIENTO] Medir agua.
+811. [60. RENDIMIENTO] Medir vegetación.
+812. [60. RENDIMIENTO] Implementar culling.
+813. [60. RENDIMIENTO] Implementar LOD.
+814. [60. RENDIMIENTO] Implementar batching.
+815. [60. RENDIMIENTO] Implementar GPU instancing.
+816. [60. RENDIMIENTO] Reducir allocations.
+817. [60. RENDIMIENTO] Reducir garbage collection.
+818. [60. RENDIMIENTO] Profiling constante.
+819. [61. MEMORIA] Medir RAM.
+820. [61. MEMORIA] Optimizar texturas.
+821. [61. MEMORIA] Optimizar meshes.
+822. [61. MEMORIA] Optimizar audio.
+823. [61. MEMORIA] Optimizar animaciones.
+824. [61. MEMORIA] Optimizar escenas.
+825. [61. MEMORIA] Descargar assets no utilizados.
+826. [61. MEMORIA] Usar streaming.
+827. [61. MEMORIA] Comprimir datos.
+828. [61. MEMORIA] Crear atlas.
+829. [61. MEMORIA] Probar muchos NPC.
+830. [61. MEMORIA] Probar mundo modificado masivamente.
+831. [62. CARGAS Y STREAMING] Cargar escenas de forma asíncrona.
+832. [62. CARGAS Y STREAMING] Cargar NPC necesarios.
+833. [62. CARGAS Y STREAMING] Cargar audio.
+834. [62. CARGAS Y STREAMING] Cargar texturas.
+835. [62. CARGAS Y STREAMING] Cargar shaders.
+836. [62. CARGAS Y STREAMING] Precalentar elementos.
+837. [62. CARGAS Y STREAMING] Definir streaming del océano.
+838. [62. CARGAS Y STREAMING] Definir streaming de islas.
+839. [63. IA DE NPC] Diseñar máquina de estados.
+840. [63. IA DE NPC] Diseñar navegación.
+841. [63. IA DE NPC] Diseñar pathfinding.
+842. [63. IA DE NPC] Diseñar prioridades.
+843. [63. IA DE NPC] Diseñar reacción al clima.
+844. [63. IA DE NPC] Diseñar reacción a estaciones.
+845. [63. IA DE NPC] Diseñar reacción a obras.
+846. [63. IA DE NPC] Diseñar reacción a jugador.
+847. [63. IA DE NPC] Diseñar interrupciones.
+848. [63. IA DE NPC] Evitar NPC atascados.
+849. [63. IA DE NPC] Evitar NPC superpuestos.
+850. [63. IA DE NPC] Evitar navegación por lugares imposibles.
+851. [63. IA DE NPC] Optimizar cantidad de agentes.
+852. [64. ANIMALES IA] Diseñar reproducción si existe.
+853. [64. ANIMALES IA] Diseñar descanso.
+854. [64. ANIMALES IA] Diseñar alimentación.
+855. [64. ANIMALES IA] Diseñar huida no violenta.
+856. [64. ANIMALES IA] Diseñar curiosidad.
+857. [64. ANIMALES IA] Diseñar interacción con entorno.
+858. [64. ANIMALES IA] Diseñar spawns.
+859. [64. ANIMALES IA] Diseñar despawns.
+860. [64. ANIMALES IA] Optimizar agentes.
+861. [64. ANIMALES IA] Evitar población excesiva.
+862. [65. ANTI-SOFTLOCK] Evitar objetos inaccesibles.
+863. [65. ANTI-SOFTLOCK] Evitar NPC atascados.
+864. [65. ANTI-SOFTLOCK] Evitar objetos únicos perdibles.
+865. [65. ANTI-SOFTLOCK] Permitir reinicio de puzzles.
+866. [65. ANTI-SOFTLOCK] Detectar estados inválidos.
+867. [65. ANTI-SOFTLOCK] Crear checkpoints.
+868. [65. ANTI-SOFTLOCK] Crear fallback de misiones.
+869. [65. ANTI-SOFTLOCK] Crear restauración de NPC.
+870. [65. ANTI-SOFTLOCK] Crear recuperación de vehículos.
+871. [65. ANTI-SOFTLOCK] Crear recuperación del jugador.
+872. [65. ANTI-SOFTLOCK] Testear modificaciones extremas del terreno.
+873. [66. VEHÍCULOS] Diseñar barco.
+874. [66. VEHÍCULOS] Diseñar dirigible.
+875. [66. VEHÍCULOS] Diseñar submarino.
+876. [66. VEHÍCULOS] Diseñar locomotora si existe.
+877. [66. VEHÍCULOS] Definir controles.
+878. [66. VEHÍCULOS] Definir combustible si existe.
+879. [66. VEHÍCULOS] Definir reparaciones si existen.
+880. [66. VEHÍCULOS] Definir personalización.
+881. [66. VEHÍCULOS] Definir docking.
+882. [66. VEHÍCULOS] Definir limitaciones.
+883. [66. VEHÍCULOS] Evitar problemas de streaming.
+884. [67. TRANSPORTE Y NAVEGACIÓN] Crear puerto.
+885. [67. TRANSPORTE Y NAVEGACIÓN] Crear estaciones.
+886. [67. TRANSPORTE Y NAVEGACIÓN] Crear rutas.
+887. [67. TRANSPORTE Y NAVEGACIÓN] Crear mapas.
+888. [67. TRANSPORTE Y NAVEGACIÓN] Crear waypoints.
+889. [67. TRANSPORTE Y NAVEGACIÓN] Crear señalización.
+890. [67. TRANSPORTE Y NAVEGACIÓN] Crear carteles.
+891. [67. TRANSPORTE Y NAVEGACIÓN] Crear marcadores.
+892. [67. TRANSPORTE Y NAVEGACIÓN] Definir costes.
+893. [67. TRANSPORTE Y NAVEGACIÓN] Crear eventos de ruta.
+894. [67. TRANSPORTE Y NAVEGACIÓN] Probar navegación.
+895. [67. TRANSPORTE Y NAVEGACIÓN] Evitar perder al jugador.
+896. [68. FAST TRAVEL] Definir costes.
+897. [68. FAST TRAVEL] Definir disponibilidad.
+898. [68. FAST TRAVEL] Permitir cancelar.
+899. [68. FAST TRAVEL] Impedir uso durante ciertos estados.
+900. [68. FAST TRAVEL] Evitar ruptura de misiones.
+901. [69. INTERACCIONES] Mostrar acción.
+902. [69. INTERACCIONES] Priorizar objetos cercanos.
+903. [69. INTERACCIONES] Resolver múltiples objetos.
+904. [69. INTERACCIONES] Resolver interacción con mando.
+905. [69. INTERACCIONES] Resolver interacción con ratón.
+906. [69. INTERACCIONES] Crear interacciones contextuales.
+907. [69. INTERACCIONES] Crear sonidos.
+908. [69. INTERACCIONES] Crear partículas.
+909. [69. INTERACCIONES] Crear cancelación.
+910. [69. INTERACCIONES] Crear requisitos.
+911. [70. PROGRESIÓN] Definir muebles avanzados.
+912. [70. PROGRESIÓN] Definir edificios avanzados.
+913. [70. PROGRESIÓN] Evitar power creep innecesario.
+914. [70. PROGRESIÓN] Mantener sensación de descubrimiento.
+915. [71. SISTEMA DE LOGROS] Integrar logros de plataforma.
+916. [71. SISTEMA DE LOGROS] Diseñar iconos.
+917. [71. SISTEMA DE LOGROS] Diseñar nombres.
+918. [71. SISTEMA DE LOGROS] Diseñar descripciones.
+919. [71. SISTEMA DE LOGROS] Testear desbloqueos.
+920. [72. COLECCIONABLES] Reliquias.
+921. [72. COLECCIONABLES] Fragmentos.
+922. [72. COLECCIONABLES] Conchas.
+923. [72. COLECCIONABLES] Minerales.
+924. [72. COLECCIONABLES] Peces.
+925. [72. COLECCIONABLES] Plantas.
+926. [72. COLECCIONABLES] Insectos.
+927. [72. COLECCIONABLES] Fósiles.
+928. [72. COLECCIONABLES] Cartas.
+929. [72. COLECCIONABLES] Fotografías.
+930. [72. COLECCIONABLES] Muebles.
+931. [72. COLECCIONABLES] Ropa.
+932. [72. COLECCIONABLES] Documentos.
+933. [72. COLECCIONABLES] Mapas.
+934. [72. COLECCIONABLES] Símbolos.
+935. [72. COLECCIONABLES] Mensajes.
+936. [72. COLECCIONABLES] Secretos.
+937. [72. COLECCIONABLES] Recompensas de colección.
+938. [72. COLECCIONABLES] Registro de progreso.
+939. [73. EVENTOS] Festival de primavera.
+940. [73. EVENTOS] Festival de verano.
+941. [73. EVENTOS] Festival de otoño.
+942. [73. EVENTOS] Festival de invierno.
+943. [73. EVENTOS] Festival de la cosecha.
+944. [73. EVENTOS] Festival de las luces.
+945. [73. EVENTOS] Festival del mar.
+946. [73. EVENTOS] Festival de construcción.
+947. [73. EVENTOS] Festival de música.
+948. [73. EVENTOS] Festival de flores.
+949. [73. EVENTOS] Festival astronómico.
+950. [73. EVENTOS] Llegada del vapor.
+951. [73. EVENTOS] Llegada del dirigible.
+952. [73. EVENTOS] Eventos de NPC.
+953. [73. EVENTOS] Eventos de lluvia.
+954. [73. EVENTOS] Eventos secretos.
+955. [73. EVENTOS] Eventos de historia.
+956. [73. EVENTOS] Eventos cooperativos si existe multijugador.
+957. [73. EVENTOS] Calendario de eventos.
+958. [73. EVENTOS] Recompensas.
+959. [73. EVENTOS] Decoraciones temporales.
+960. [73. EVENTOS] Música temporal.
+961. [73. EVENTOS] NPC temporales.
+962. [74. POSTGAME] Objetivos de 100%.
+963. [75. MULTIJUGADOR] Decidir si será local.
+964. [75. MULTIJUGADOR] Decidir si será online.
+965. [75. MULTIJUGADOR] Definir anfitrión.
+966. [75. MULTIJUGADOR] Definir invitaciones.
+967. [75. MULTIJUGADOR] Definir identidad.
+968. [75. MULTIJUGADOR] Definir chat.
+969. [75. MULTIJUGADOR] Evaluar costes de servidores.
+970. [76. ONLINE Y RED] Evaluar P2P.
+971. [76. ONLINE Y RED] Sincronización de mundo.
+972. [76. ONLINE Y RED] Sincronización de NPC.
+973. [76. ONLINE Y RED] Sincronización de construcción.
+974. [76. ONLINE Y RED] Sincronización de inventario.
+975. [76. ONLINE Y RED] Sincronización de economía.
+976. [76. ONLINE Y RED] Sincronización de eventos.
+977. [76. ONLINE Y RED] Reconexion.
+978. [76. ONLINE Y RED] Reconocimiento de sesión.
+979. [76. ONLINE Y RED] Manejo de latencia.
+980. [76. ONLINE Y RED] Manejo de pérdida de paquetes.
+981. [76. ONLINE Y RED] Predicción.
+982. [76. ONLINE Y RED] Interpolación.
+983. [76. ONLINE Y RED] Seguridad de API.
+984. [76. ONLINE Y RED] Logs.
+985. [76. ONLINE Y RED] Monitorización.
+986. [76. ONLINE Y RED] Escalabilidad.
+987. [76. ONLINE Y RED] Backups.
+988. [76. ONLINE Y RED] Recuperación.
+989. [76. ONLINE Y RED] Costes.
+990. [77. LEGAL — PROPIEDAD INTELECTUAL] Registrar nombre del proyecto.
+991. [77. LEGAL — PROPIEDAD INTELECTUAL] Investigar marcas existentes.
+992. [77. LEGAL — PROPIEDAD INTELECTUAL] Investigar nombres similares.
+993. [77. LEGAL — PROPIEDAD INTELECTUAL] Registrar marca si corresponde.
+994. [77. LEGAL — PROPIEDAD INTELECTUAL] Documentar autoría.
+995. [77. LEGAL — PROPIEDAD INTELECTUAL] Conservar contratos.
+996. [77. LEGAL — PROPIEDAD INTELECTUAL] Conservar licencias.
+997. [77. LEGAL — PROPIEDAD INTELECTUAL] Registrar derechos de música propia.
+998. [77. LEGAL — PROPIEDAD INTELECTUAL] Registrar derechos de arte propio.
+999. [77. LEGAL — PROPIEDAD INTELECTUAL] Registrar derechos de código propio.
+1000. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de plugins.
+1001. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de engines.
+1002. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de fuentes.
+1003. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de sonidos.
+1004. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de modelos.
+1005. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de texturas.
+1006. [77. LEGAL — PROPIEDAD INTELECTUAL] Revisar licencias de librerías.
+1007. [77. LEGAL — PROPIEDAD INTELECTUAL] Mantener atribuciones obligatorias.
+1008. [77. LEGAL — PROPIEDAD INTELECTUAL] Evitar nombres de franquicias ajenas.
+1009. [78. LEGAL — CONTRATOS] Contratos con artistas.
+1010. [78. LEGAL — CONTRATOS] Contratos con programadores.
+1011. [78. LEGAL — CONTRATOS] Contratos con músicos.
+1012. [78. LEGAL — CONTRATOS] Contratos con compositores.
+1013. [78. LEGAL — CONTRATOS] Contratos con diseñadores.
+1014. [78. LEGAL — CONTRATOS] Contratos con escritores.
+1015. [78. LEGAL — CONTRATOS] Contratos con actores de voz.
+1016. [78. LEGAL — CONTRATOS] Contratos con freelancers.
+1017. [78. LEGAL — CONTRATOS] Definir uso de portfolio.
+1018. [79. LEGAL — PRIVACIDAD] Definir si se recopilan datos.
+1019. [79. LEGAL — PRIVACIDAD] Definir finalidad.
+1020. [79. LEGAL — PRIVACIDAD] Definir analytics.
+1021. [79. LEGAL — PRIVACIDAD] Definir cookies si existe web.
+1022. [79. LEGAL — PRIVACIDAD] Crear mecanismo de consentimiento cuando corresponda.
+1023. [79. LEGAL — PRIVACIDAD] Permitir solicitudes legales aplicables.
+1024. [79. LEGAL — PRIVACIDAD] Proteger credenciales.
+1025. [79. LEGAL — PRIVACIDAD] Evitar almacenar datos innecesarios.
+1026. [79. LEGAL — PRIVACIDAD] Revisar normativa de los países objetivo.
+1027. [79. LEGAL — PRIVACIDAD] Revisar normativa de menores.
+1028. [79. LEGAL — PRIVACIDAD] Consultar asesoría legal cuando corresponda.
+1029. [80. LEGAL — MENORES] Evaluar si el juego puede ser usado por menores.
+1030. [80. LEGAL — MENORES] Definir chat si existe.
+1031. [80. LEGAL — MENORES] Definir compras si existen.
+1032. [80. LEGAL — MENORES] Definir publicidad si existe.
+1033. [80. LEGAL — MENORES] Revisar requisitos de plataformas.
+1034. [80. LEGAL — MENORES] Revisar normativa aplicable.
+1035. [80. LEGAL — MENORES] Evitar mecanismos manipulativos.
+1036. [80. LEGAL — MENORES] Revisar clasificación por edades.
+1037. [81. CLASIFICACIÓN POR EDADES] Revisar ESRB.
+1038. [81. CLASIFICACIÓN POR EDADES] Revisar PEGI.
+1039. [81. CLASIFICACIÓN POR EDADES] Revisar IARC.
+1040. [81. CLASIFICACIÓN POR EDADES] Determinar contenido relevante.
+1041. [81. CLASIFICACIÓN POR EDADES] Determinar descriptores.
+1042. [81. CLASIFICACIÓN POR EDADES] Preparar formularios.
+1043. [81. CLASIFICACIÓN POR EDADES] Preparar capturas.
+1044. [81. CLASIFICACIÓN POR EDADES] Preparar información del juego.
+1045. [82. LICENCIAS DE SOFTWARE] Registrar engine.
+1046. [82. LICENCIAS DE SOFTWARE] Revisar GPL.
+1047. [82. LICENCIAS DE SOFTWARE] Revisar LGPL.
+1048. [82. LICENCIAS DE SOFTWARE] Revisar MIT.
+1049. [82. LICENCIAS DE SOFTWARE] Revisar Apache.
+1050. [82. LICENCIAS DE SOFTWARE] Revisar BSD.
+1051. [82. LICENCIAS DE SOFTWARE] Registrar versiones.
+1052. [82. LICENCIAS DE SOFTWARE] Guardar copias de licencia.
+1053. [83. MÚSICA Y AUDIO — LEGAL] Música propia.
+1054. [83. MÚSICA Y AUDIO — LEGAL] Música licenciada.
+1055. [83. MÚSICA Y AUDIO — LEGAL] Samples licenciados.
+1056. [83. MÚSICA Y AUDIO — LEGAL] Foley propio.
+1057. [83. MÚSICA Y AUDIO — LEGAL] Foley licenciado.
+1058. [83. MÚSICA Y AUDIO — LEGAL] Voces contratadas.
+1059. [83. MÚSICA Y AUDIO — LEGAL] Contratos de actores.
+1060. [83. MÚSICA Y AUDIO — LEGAL] Derechos de interpretación.
+1061. [83. MÚSICA Y AUDIO — LEGAL] Derechos de reproducción.
+1062. [83. MÚSICA Y AUDIO — LEGAL] Derechos de sincronización.
+1063. [83. MÚSICA Y AUDIO — LEGAL] Derechos territoriales.
+1064. [83. MÚSICA Y AUDIO — LEGAL] Derechos temporales.
+1065. [83. MÚSICA Y AUDIO — LEGAL] Derechos para trailers.
+1066. [83. MÚSICA Y AUDIO — LEGAL] Derechos para publicidad.
+1067. [83. MÚSICA Y AUDIO — LEGAL] Derechos para ports.
+1068. [83. MÚSICA Y AUDIO — LEGAL] Derechos para bandas sonoras.
+1069. [84. MODELOS 3D — LEGAL] Modelos propios.
+1070. [84. MODELOS 3D — LEGAL] Modelos comprados.
+1071. [84. MODELOS 3D — LEGAL] Modelos gratuitos.
+1072. [84. MODELOS 3D — LEGAL] Modelos generados por IA.
+1073. [84. MODELOS 3D — LEGAL] Revisar restricciones comerciales.
+1074. [84. MODELOS 3D — LEGAL] Revisar atribución.
+1075. [84. MODELOS 3D — LEGAL] Revisar redistribución.
+1076. [84. MODELOS 3D — LEGAL] Revisar modificación.
+1077. [84. MODELOS 3D — LEGAL] Revisar uso en trailers.
+1078. [84. MODELOS 3D — LEGAL] Revisar uso en merchandise.
+1079. [84. MODELOS 3D — LEGAL] Guardar factura cuando corresponda.
+1080. [84. MODELOS 3D — LEGAL] Guardar URL de licencia.
+1081. [85. IA GENERATIVA] Definir si se utilizará IA.
+1082. [85. IA GENERATIVA] Revisar términos de cada proveedor.
+1083. [85. IA GENERATIVA] Revisar políticas de datasets.
+1084. [85. IA GENERATIVA] Evitar copiar estilos protegidos de forma problemática.
+1085. [85. IA GENERATIVA] Revisar modelos de imagen.
+1086. [85. IA GENERATIVA] Revisar modelos de voz.
+1087. [85. IA GENERATIVA] Revisar posibles obligaciones de atribución.
+1088. [85. IA GENERATIVA] Mantener prompts importantes cuando sea necesario.
+1089. [85. IA GENERATIVA] Revisar outputs antes de incorporarlos.
+1090. [86. LOCALIZACIÓN] Español.
+1091. [86. LOCALIZACIÓN] Inglés.
+1092. [86. LOCALIZACIÓN] Portugués.
+1093. [86. LOCALIZACIÓN] Francés.
+1094. [86. LOCALIZACIÓN] Alemán.
+1095. [86. LOCALIZACIÓN] Italiano.
+1096. [86. LOCALIZACIÓN] Separar textos del código.
+1097. [86. LOCALIZACIÓN] Usar claves de traducción.
+1098. [86. LOCALIZACIÓN] Preparar tablas de localización.
+1099. [86. LOCALIZACIÓN] Gestionar plurales.
+1100. [86. LOCALIZACIÓN] Gestionar género.
+1101. [86. LOCALIZACIÓN] Gestionar variables.
+1102. [86. LOCALIZACIÓN] Gestionar longitud variable.
+1103. [86. LOCALIZACIÓN] Localizar diálogos.
+1104. [86. LOCALIZACIÓN] Localizar tutoriales.
+1105. [86. LOCALIZACIÓN] Localizar tutoriales gráficos.
+1106. [86. LOCALIZACIÓN] Localizar imágenes con texto.
+1107. [86. LOCALIZACIÓN] Localizar subtítulos.
+1108. [86. LOCALIZACIÓN] Revisar traducción humana.
+1109. [86. LOCALIZACIÓN] QA lingüístico.
+1110. [87. FUENTES TIPOGRÁFICAS] Revisar ñ.
+1111. [87. FUENTES TIPOGRÁFICAS] Revisar CJK si corresponde.
+1112. [88. DISEÑO DE MENÚS] Continuar.
+1113. [88. DISEÑO DE MENÚS] Ajustes.
+1114. [88. DISEÑO DE MENÚS] Créditos.
+1115. [88. DISEÑO DE MENÚS] Salir.
+1116. [88. DISEÑO DE MENÚS] Selección de perfil.
+1117. [88. DISEÑO DE MENÚS] Selección de slot.
+1118. [88. DISEÑO DE MENÚS] Pantalla de pausa.
+1119. [88. DISEÑO DE MENÚS] Pantalla de inventario.
+1120. [88. DISEÑO DE MENÚS] Pantalla de mapa.
+1121. [88. DISEÑO DE MENÚS] Pantalla de diario.
+1122. [88. DISEÑO DE MENÚS] Pantalla de colección.
+1123. [88. DISEÑO DE MENÚS] Pantalla de habilidades.
+1124. [88. DISEÑO DE MENÚS] Pantalla de relación.
+1125. [88. DISEÑO DE MENÚS] Pantalla de configuración.
+1126. [88. DISEÑO DE MENÚS] Pantalla de controles.
+1127. [88. DISEÑO DE MENÚS] Pantalla de accesibilidad.
+1128. [88. DISEÑO DE MENÚS] Pantalla de audio.
+1129. [89. CONFIGURACIÓN GRÁFICA] Resolución.
+1130. [89. CONFIGURACIÓN GRÁFICA] Ventana.
+1131. [89. CONFIGURACIÓN GRÁFICA] Borderless.
+1132. [89. CONFIGURACIÓN GRÁFICA] VSync.
+1133. [89. CONFIGURACIÓN GRÁFICA] FPS.
+1134. [89. CONFIGURACIÓN GRÁFICA] Calidad de sombras.
+1135. [89. CONFIGURACIÓN GRÁFICA] Calidad de texturas.
+1136. [89. CONFIGURACIÓN GRÁFICA] Distancia de dibujado.
+1137. [89. CONFIGURACIÓN GRÁFICA] Calidad de efectos.
+1138. [89. CONFIGURACIÓN GRÁFICA] Calidad de vegetación.
+1139. [89. CONFIGURACIÓN GRÁFICA] Calidad de agua.
+1140. [89. CONFIGURACIÓN GRÁFICA] Calidad de partículas.
+1141. [89. CONFIGURACIÓN GRÁFICA] Anti-aliasing.
+1142. [89. CONFIGURACIÓN GRÁFICA] Post-processing.
+1143. [89. CONFIGURACIÓN GRÁFICA] Bloom.
+1144. [89. CONFIGURACIÓN GRÁFICA] Depth of field.
+1145. [89. CONFIGURACIÓN GRÁFICA] FSR/DLSS/XeSS si corresponde.
+1146. [89. CONFIGURACIÓN GRÁFICA] Escala de resolución.
+1147. [90. CONFIGURACIÓN DE AUDIO] Música.
+1148. [90. CONFIGURACIÓN DE AUDIO] Efectos.
+1149. [90. CONFIGURACIÓN DE AUDIO] Ambiente.
+1150. [90. CONFIGURACIÓN DE AUDIO] Voces.
+1151. [90. CONFIGURACIÓN DE AUDIO] UI.
+1152. [90. CONFIGURACIÓN DE AUDIO] Cinemáticas.
+1153. [90. CONFIGURACIÓN DE AUDIO] Audio 3D.
+1154. [90. CONFIGURACIÓN DE AUDIO] Subtítulos.
+1155. [90. CONFIGURACIÓN DE AUDIO] Sonidos de interfaz.
+1156. [90. CONFIGURACIÓN DE AUDIO] Compresión.
+1157. [90. CONFIGURACIÓN DE AUDIO] Dispositivo de salida.
+1158. [90. CONFIGURACIÓN DE AUDIO] Pruebas con auriculares.
+1159. [90. CONFIGURACIÓN DE AUDIO] Pruebas con altavoces.
+1160. [91. TUTORIAL] Tutorial de movimiento.
+1161. [91. TUTORIAL] Tutorial de cámara.
+1162. [91. TUTORIAL] Tutorial de recolección.
+1163. [91. TUTORIAL] Tutorial de construcción.
+1164. [91. TUTORIAL] Tutorial de inventario.
+1165. [91. TUTORIAL] Tutorial de crafting.
+1166. [91. TUTORIAL] Tutorial de agricultura.
+1167. [91. TUTORIAL] Tutorial de pesca.
+1168. [91. TUTORIAL] Tutorial de minería.
+1169. [91. TUTORIAL] Tutorial de NPC.
+1170. [91. TUTORIAL] Tutorial de misiones.
+1171. [91. TUTORIAL] Tutorial del mapa.
+1172. [91. TUTORIAL] Tutorial de viaje.
+1173. [91. TUTORIAL] Tutorial de puzzles.
+1174. [91. TUTORIAL] Tutorial progresivo.
+1175. [91. TUTORIAL] Probar comprensión con jugadores.
+1176. [92. BALANCE] Balancear precios.
+1177. [92. BALANCE] Balancear recompensas.
+1178. [92. BALANCE] Balancear coste de construcción.
+1179. [92. BALANCE] Balancear crafting.
+1180. [92. BALANCE] Balancear herramientas.
+1181. [92. BALANCE] Balancear recursos.
+1182. [92. BALANCE] Balancear agricultura.
+1183. [92. BALANCE] Balancear pesca.
+1184. [92. BALANCE] Balancear minería.
+1185. [92. BALANCE] Balancear viajes.
+1186. [92. BALANCE] Balancear Sellos.
+1187. [92. BALANCE] Balancear amistad.
+1188. [92. BALANCE] Balancear misiones.
+1189. [92. BALANCE] Balancear puzzles.
+1190. [92. BALANCE] Balancear desbloqueos.
+1191. [92. BALANCE] Balancear tiempo diario.
+1192. [92. BALANCE] Balancear progresión.
+1193. [92. BALANCE] Evitar grind.
+1194. [92. BALANCE] Crear simulaciones económicas.
+1195. [93. RETENCIÓN SIN FOMO] Crear objetivos semanales.
+1196. [93. RETENCIÓN SIN FOMO] Crear objetivos mensuales.
+1197. [93. RETENCIÓN SIN FOMO] Evitar castigar al jugador por ausentarse.
+1198. [93. RETENCIÓN SIN FOMO] Permitir completar contenido posteriormente.
+1199. [93. RETENCIÓN SIN FOMO] Crear colecciones.
+1200. [93. RETENCIÓN SIN FOMO] Crear proyectos de construcción.
+1201. [93. RETENCIÓN SIN FOMO] Crear relaciones.
+1202. [93. RETENCIÓN SIN FOMO] Crear misterios.
+1203. [93. RETENCIÓN SIN FOMO] Crear postgame.
+1204. [94. MONETIZACIÓN] Free-to-play si corresponde.
+1205. [94. MONETIZACIÓN] DLC si corresponde.
+1206. [94. MONETIZACIÓN] Expansiones.
+1207. [94. MONETIZACIÓN] Soundtrack.
+1208. [94. MONETIZACIÓN] Merchandise.
+1209. [94. MONETIZACIÓN] Cosméticos.
+1210. [94. MONETIZACIÓN] Evitar pay-to-win.
+1211. [94. MONETIZACIÓN] Definir impuestos.
+1212. [94. MONETIZACIÓN] Definir bundles.
+1213. [94. MONETIZACIÓN] Definir descuentos.
+1214. [95. PLATAFORMAS] PC.
+1215. [95. PLATAFORMAS] Steam.
+1216. [95. PLATAFORMAS] GOG.
+1217. [95. PLATAFORMAS] PlayStation.
+1218. [95. PLATAFORMAS] Xbox.
+1219. [95. PLATAFORMAS] Nintendo.
+1220. [95. PLATAFORMAS] Linux si corresponde.
+1221. [95. PLATAFORMAS] macOS si corresponde.
+1222. [95. PLATAFORMAS] Analizar SDK.
+1223. [96. STEAM / STORE PAGE] Nombre.
+1224. [96. STEAM / STORE PAGE] Logo.
+1225. [96. STEAM / STORE PAGE] Capsule art.
+1226. [96. STEAM / STORE PAGE] Header.
+1227. [96. STEAM / STORE PAGE] Screenshots.
+1228. [96. STEAM / STORE PAGE] Trailer.
+1229. [96. STEAM / STORE PAGE] Descripción larga.
+1230. [96. STEAM / STORE PAGE] Features.
+1231. [96. STEAM / STORE PAGE] Idiomas.
+1232. [96. STEAM / STORE PAGE] Requisitos.
+1233. [96. STEAM / STORE PAGE] Clasificación.
+1234. [96. STEAM / STORE PAGE] Tags.
+1235. [96. STEAM / STORE PAGE] Fecha estimada.
+1236. [96. STEAM / STORE PAGE] Wishlist.
+1237. [96. STEAM / STORE PAGE] Demo.
+1238. [96. STEAM / STORE PAGE] Playtest.
+1239. [96. STEAM / STORE PAGE] Community Hub.
+1240. [96. STEAM / STORE PAGE] Discusión.
+1241. [96. STEAM / STORE PAGE] Announcements.
+1242. [96. STEAM / STORE PAGE] Integración de logros.
+1243. [97. TRAILER] Mostrar NPC.
+1244. [98. MARKETING] Crear logo.
+1245. [98. MARKETING] Crear Bluesky/X si corresponde.
+1246. [98. MARKETING] Participar en festivales.
+1247. [99. COMMUNITY MANAGEMENT] Crear FAQ.
+1248. [100. QA GENERAL] Test funcional.
+1249. [100. QA GENERAL] Test de regresión.
+1250. [100. QA GENERAL] Test de memoria.
+1251. [100. QA GENERAL] Test de guardado.
+1252. [100. QA GENERAL] Test de UI.
+1253. [100. QA GENERAL] Test de audio.
+1254. [100. QA GENERAL] Test de controles.
+1255. [100. QA GENERAL] Test de accesibilidad.
+1256. [100. QA GENERAL] Test de localización.
+1257. [100. QA GENERAL] Test de economía.
+1258. [100. QA GENERAL] Test de misiones.
+1259. [100. QA GENERAL] Test de diálogos.
+1260. [100. QA GENERAL] Test de NPC.
+1261. [100. QA GENERAL] Test de animales.
+1262. [100. QA GENERAL] Test de construcción.
+1263. [100. QA GENERAL] Test de voxels.
+1264. [100. QA GENERAL] Test de generación.
+1265. [100. QA GENERAL] Test de clima.
+1266. [100. QA GENERAL] Test de estaciones.
+1267. [100. QA GENERAL] Test de viajes.
+1268. [100. QA GENERAL] Test de puzzles.
+1269. [100. QA GENERAL] Test de plataformas.
+1270. [100. QA GENERAL] Test de compatibilidad.
+1271. [101. BUG TRACKING] Elegir herramienta de bugs.
+1272. [101. BUG TRACKING] Crear categorías.
+1273. [101. BUG TRACKING] Crear severidades.
+1274. [101. BUG TRACKING] Crear prioridades.
+1275. [101. BUG TRACKING] Definir reproducibilidad.
+1276. [101. BUG TRACKING] Registrar versión.
+1277. [101. BUG TRACKING] Registrar plataforma.
+1278. [101. BUG TRACKING] Adjuntar capturas.
+1279. [101. BUG TRACKING] Adjuntar videos.
+1280. [101. BUG TRACKING] Registrar seed cuando corresponda.
+1281. [101. BUG TRACKING] Registrar save afectado.
+1282. [101. BUG TRACKING] Verificar corrección.
+1283. [101. BUG TRACKING] Hacer regresión.
+1284. [101. BUG TRACKING] Cerrar bug.
+1285. [102. LOGGING] Logs de arranque.
+1286. [102. LOGGING] Logs de errores.
+1287. [102. LOGGING] Logs de save.
+1288. [102. LOGGING] Logs de carga.
+1289. [102. LOGGING] Logs de generación.
+1290. [102. LOGGING] Logs de chunks.
+1291. [102. LOGGING] Logs de NPC.
+1292. [102. LOGGING] Logs de misiones.
+1293. [102. LOGGING] Logs de networking.
+1294. [102. LOGGING] Logs de analytics.
+1295. [102. LOGGING] Niveles de log.
+1296. [102. LOGGING] Rotación de logs.
+1297. [102. LOGGING] Exportación de logs.
+1298. [102. LOGGING] Herramientas de diagnóstico.
+1299. [103. ANALYTICS] Decidir si habrá analytics.
+1300. [103. ANALYTICS] Definir abandono.
+1301. [103. ANALYTICS] Definir uso de menús.
+1302. [103. ANALYTICS] Anonimizar cuando corresponda.
+1303. [103. ANALYTICS] Documentar consentimiento cuando corresponda.
+1304. [106. BACKUPS] Backup del repositorio.
+1305. [106. BACKUPS] Backup de assets.
+1306. [106. BACKUPS] Backup de documentación.
+1307. [106. BACKUPS] Backup de builds.
+1308. [106. BACKUPS] Backup de bases de datos.
+1309. [106. BACKUPS] Backup de saves.
+1310. [106. BACKUPS] Backup de música.
+1311. [106. BACKUPS] Pruebas de restauración.
+1312. [106. BACKUPS] Versionado.
+1313. [106. BACKUPS] Verificación de integridad.
+1314. [106. BACKUPS] Plan de recuperación.
+1315. [107. PIPELINE DE ASSETS] Definir escalas.
+1316. [107. PIPELINE DE ASSETS] Definir pivots.
+1317. [107. PIPELINE DE ASSETS] Definir prefabs.
+1318. [107. PIPELINE DE ASSETS] Definir LOD.
+1319. [107. PIPELINE DE ASSETS] Definir colliders.
+1320. [107. PIPELINE DE ASSETS] Definir layers.
+1321. [107. PIPELINE DE ASSETS] Crear automatizaciones.
+1322. [107. PIPELINE DE ASSETS] Crear validadores.
+1323. [107. PIPELINE DE ASSETS] Detectar assets duplicados.
+1324. [107. PIPELINE DE ASSETS] Detectar archivos incorrectos.
+1325. [107. PIPELINE DE ASSETS] Detectar texturas demasiado grandes.
+1326. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de bloques.
+1327. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de biomas.
+1328. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de NPC.
+1329. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de diálogos.
+1330. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de misiones.
+1331. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de recetas.
+1332. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de economía.
+1333. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de tiendas.
+1334. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de clima.
+1335. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de estaciones.
+1336. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de puzzles.
+1337. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de ruinas.
+1338. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de spawns.
+1339. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Editor de mapas.
+1340. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de teleport.
+1341. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de spawn.
+1342. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de debug.
+1343. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de inspección.
+1344. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de profiling.
+1345. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de validación.
+1346. [108. HERRAMIENTAS INTERNAS DE DESARROLLO] Herramienta de generación de contenido.
+1347. [109. DEBUG MENU] Teletransportar jugador.
+1348. [109. DEBUG MENU] Cambiar clima.
+1349. [109. DEBUG MENU] Dar objetos.
+1350. [109. DEBUG MENU] Dar dinero.
+1351. [109. DEBUG MENU] Resetear NPC.
+1352. [109. DEBUG MENU] Mostrar FPS.
+1353. [111. TESTING AUTOMÁTICO] Save/load tests.
+1354. [111. TESTING AUTOMÁTICO] Economy tests.
+1355. [111. TESTING AUTOMÁTICO] Crafting tests.
+1356. [111. TESTING AUTOMÁTICO] Mission tests.
+1357. [111. TESTING AUTOMÁTICO] Quest state tests.
+1358. [111. TESTING AUTOMÁTICO] Dialogue tests.
+1359. [111. TESTING AUTOMÁTICO] Inventory tests.
+1360. [111. TESTING AUTOMÁTICO] Voxel tests.
+1361. [111. TESTING AUTOMÁTICO] Chunk tests.
+1362. [111. TESTING AUTOMÁTICO] Generation tests.
+1363. [111. TESTING AUTOMÁTICO] Navigation tests.
+1364. [111. TESTING AUTOMÁTICO] Time tests.
+1365. [111. TESTING AUTOMÁTICO] Calendar tests.
+1366. [111. TESTING AUTOMÁTICO] Weather tests.
+1367. [111. TESTING AUTOMÁTICO] Localization tests.
+1368. [111. TESTING AUTOMÁTICO] Serialization tests.
+1369. [111. TESTING AUTOMÁTICO] Regression tests.
+1370. [111. TESTING AUTOMÁTICO] Smoke tests.
+1371. [111. TESTING AUTOMÁTICO] Automated build tests.
+1372. [112. PRUEBAS DE STRESS] Muchos NPC.
+1373. [112. PRUEBAS DE STRESS] Multitud de partículas.
+1374. [113. PLAYTEST] Playtest con programadores.
+1375. [113. PLAYTEST] Playtest con artistas.
+1376. [113. PLAYTEST] Playtest externo.
+1377. [113. PLAYTEST] Playtest anónimo.
+1378. [113. PLAYTEST] Playtest de progresión.
+1379. [113. PLAYTEST] Playtest de puzzles.
+1380. [113. PLAYTEST] Playtest de construcción.
+1381. [113. PLAYTEST] Playtest de accesibilidad.
+1382. [113. PLAYTEST] Playtest de rendimiento.
+1383. [113. PLAYTEST] Playtest con gamepad.
+1384. [113. PLAYTEST] Playtest con teclado.
+1385. [113. PLAYTEST] Registrar feedback.
+1386. [113. PLAYTEST] Clasificar feedback.
+1387. [113. PLAYTEST] Priorizar cambios.
+1388. [113. PLAYTEST] Repetir pruebas.
+1389. [113. PLAYTEST] Validar cambios.
+1390. [114. HARDWARE] Definir PC recomendado.
+1391. [114. HARDWARE] Probar GPU integrada.
+1392. [114. HARDWARE] Probar GPU dedicada.
+1393. [114. HARDWARE] Probar 8 GB RAM si es objetivo.
+1394. [114. HARDWARE] Probar 16 GB RAM.
+1395. [114. HARDWARE] Probar CPUs diferentes.
+1396. [114. HARDWARE] Probar SSD.
+1397. [114. HARDWARE] Probar HDD si se pretende soportarlo.
+1398. [114. HARDWARE] Probar resoluciones.
+1399. [114. HARDWARE] Probar ultrawide.
+1400. [114. HARDWARE] Probar monitores múltiples si corresponde.
+1401. [114. HARDWARE] Probar mandos.
+1402. [114. HARDWARE] Probar portátil.
+1403. [114. HARDWARE] Medir temperatura.
+1404. [114. HARDWARE] Medir consumo.
+1405. [114. HARDWARE] Detectar throttling.
+1406. [114. HARDWARE] Detectar drivers problemáticos.
+1407. [117. CI/CD] Configurar CI.
+1408. [117. CI/CD] Ejecutar linting.
+1409. [117. CI/CD] Ejecutar validaciones.
+1410. [117. CI/CD] Generar builds.
+1411. [117. CI/CD] Guardar artifacts.
+1412. [117. CI/CD] Configurar releases.
+1413. [117. CI/CD] Configurar deploys.
+1414. [117. CI/CD] Separar staging y producción.
+1415. [117. CI/CD] Registrar errores.
+1416. [117. CI/CD] Configurar notificaciones.
+1417. [117. CI/CD] Controlar permisos.
+1418. [118. ACTUALIZACIONES] Definir migraciones.
+1419. [118. ACTUALIZACIONES] Definir DLC.
+1420. [118. ACTUALIZACIONES] Mantener changelog.
+1421. [118. ACTUALIZACIONES] Realizar pruebas antes de publicar.
+1422. [119. DLC Y EXPANSIONES] Diseñar nuevos NPC.
+1423. [120. SOPORTE POST-LANZAMIENTO] Canal de soporte.
+1424. [120. SOPORTE POST-LANZAMIENTO] FAQ.
+1425. [120. SOPORTE POST-LANZAMIENTO] Sistema de tickets.
+1426. [120. SOPORTE POST-LANZAMIENTO] Seguimiento de errores.
+1427. [120. SOPORTE POST-LANZAMIENTO] Seguimiento de crashes.
+1428. [120. SOPORTE POST-LANZAMIENTO] Seguimiento de rendimiento.
+1429. [120. SOPORTE POST-LANZAMIENTO] Seguimiento de reviews.
+1430. [120. SOPORTE POST-LANZAMIENTO] Hotfixes.
+1431. [120. SOPORTE POST-LANZAMIENTO] Parches.
+1432. [120. SOPORTE POST-LANZAMIENTO] Actualizaciones.
+1433. [120. SOPORTE POST-LANZAMIENTO] Recuperación de saves.
+1434. [120. SOPORTE POST-LANZAMIENTO] Comunicación de incidencias.
+1435. [120. SOPORTE POST-LANZAMIENTO] Roadmap.
+1436. [120. SOPORTE POST-LANZAMIENTO] Backups.
+1437. [120. SOPORTE POST-LANZAMIENTO] Monitorización.
+1438. [121. CRASH REPORTING] Capturar GPU.
+1439. [121. CRASH REPORTING] Capturar CPU.
+1440. [122. MODDING] Diseñar API.
+1441. [123. CONTENIDO GENERADO POR USUARIOS] Decidir si existirá.
+1442. [124. TÉRMINOS DE SERVICIO] Redactar términos.
+1443. [124. TÉRMINOS DE SERVICIO] Revisar con abogado.
+1444. [125. MARKETING LEGAL] Revisar branding.
+1445. [125. MARKETING LEGAL] Revisar concursos.
+1446. [125. MARKETING LEGAL] Revisar promociones.
+1447. [125. MARKETING LEGAL] Revisar publicidad.
+1448. [125. MARKETING LEGAL] Evitar comparaciones engañosas.
+1449. [126. COPYRIGHT DEL JUEGO] Registrar obras relevantes cuando corresponda.
+1450. [126. COPYRIGHT DEL JUEGO] Registrar código.
+1451. [126. COPYRIGHT DEL JUEGO] Registrar arte.
+1452. [126. COPYRIGHT DEL JUEGO] Registrar música.
+1453. [126. COPYRIGHT DEL JUEGO] Mantener contratos de colaboradores.
+1454. [126. COPYRIGHT DEL JUEGO] Definir titulares de derechos.
+1455. [126. COPYRIGHT DEL JUEGO] Definir empresa propietaria si corresponde.
+1456. [127. IDENTIDAD DE MARCA] Nombre.
+1457. [127. IDENTIDAD DE MARCA] Logo.
+1458. [127. IDENTIDAD DE MARCA] Paleta.
+1459. [127. IDENTIDAD DE MARCA] Tipografía.
+1460. [127. IDENTIDAD DE MARCA] Iconografía.
+1461. [127. IDENTIDAD DE MARCA] Mascota.
+1462. [127. IDENTIDAD DE MARCA] Símbolo de Aurora.
+1463. [127. IDENTIDAD DE MARCA] Símbolos de Sellos.
+1464. [127. IDENTIDAD DE MARCA] Diseño de cajas.
+1465. [127. IDENTIDAD DE MARCA] Diseño del sitio.
+1466. [127. IDENTIDAD DE MARCA] Diseño de redes.
+1467. [127. IDENTIDAD DE MARCA] Diseño de merchandising.
+1468. [127. IDENTIDAD DE MARCA] Guía de uso.
+1469. [128. MERCHANDISING] Camisetas.
+1470. [128. MERCHANDISING] Tazas.
+1471. [128. MERCHANDISING] Posters.
+1472. [128. MERCHANDISING] Artbook.
+1473. [128. MERCHANDISING] Soundtrack.
+1474. [128. MERCHANDISING] Peluches.
+1475. [128. MERCHANDISING] Figuras.
+1476. [128. MERCHANDISING] Pines.
+1477. [128. MERCHANDISING] Stickers.
+1478. [128. MERCHANDISING] Artículos de escritorio.
+1479. [128. MERCHANDISING] Caja coleccionista.
+1480. [128. MERCHANDISING] Licencias de fabricación.
+1481. [128. MERCHANDISING] Costes.
+1482. [128. MERCHANDISING] Logística.
+1483. [128. MERCHANDISING] Impuestos.
+1484. [128. MERCHANDISING] Almacenamiento.
+1485. [128. MERCHANDISING] Envíos.
+1486. [129. ARTBOOK] Evolución del mundo.
+1487. [129. ARTBOOK] Diseño de Aurora.
+1488. [129. ARTBOOK] Diseño de animales.
+1489. [129. ARTBOOK] Diseño de ruinas.
+1490. [129. ARTBOOK] Diseño de herramientas.
+1491. [129. ARTBOOK] Diseño de vehículos.
+1492. [129. ARTBOOK] Diseño de biomas.
+1493. [129. ARTBOOK] Diseño de UI.
+1494. [129. ARTBOOK] Storyboards.
+1495. [129. ARTBOOK] Comentarios de desarrolladores.
+1496. [129. ARTBOOK] Proceso de producción.
+1497. [129. ARTBOOK] Créditos.
+1498. [130. CRÉDITOS] Programación.
+1499. [130. CRÉDITOS] Diseño.
+1500. [130. CRÉDITOS] Arte.
+1501. [130. CRÉDITOS] Animación.
+1502. [130. CRÉDITOS] Música.
+1503. [130. CRÉDITOS] Audio.
+1504. [130. CRÉDITOS] Narrativa.
+1505. [130. CRÉDITOS] QA.
+1506. [130. CRÉDITOS] Localización.
+1507. [130. CRÉDITOS] Marketing.
+1508. [130. CRÉDITOS] Producción.
+1509. [130. CRÉDITOS] Legal.
+1510. [130. CRÉDITOS] Licencias.
+1511. [130. CRÉDITOS] Middleware.
+1512. [130. CRÉDITOS] Agradecimientos.
+1513. [130. CRÉDITOS] Playtesters.
+1514. [130. CRÉDITOS] Comunidad.
+1515. [130. CRÉDITOS] Herramientas usadas.
+1516. [130. CRÉDITOS] Bibliotecas utilizadas.
+1517. [131. PRODUCCIÓN DEL EQUIPO] Producer.
+1518. [131. PRODUCCIÓN DEL EQUIPO] Gameplay programmer.
+1519. [131. PRODUCCIÓN DEL EQUIPO] Engine programmer.
+1520. [131. PRODUCCIÓN DEL EQUIPO] Technical artist.
+1521. [131. PRODUCCIÓN DEL EQUIPO] 3D artist.
+1522. [131. PRODUCCIÓN DEL EQUIPO] Character artist.
+1523. [131. PRODUCCIÓN DEL EQUIPO] Environment artist.
+1524. [131. PRODUCCIÓN DEL EQUIPO] UI artist.
+1525. [131. PRODUCCIÓN DEL EQUIPO] Animator.
+1526. [131. PRODUCCIÓN DEL EQUIPO] Composer.
+1527. [131. PRODUCCIÓN DEL EQUIPO] Writer.
+1528. [131. PRODUCCIÓN DEL EQUIPO] Quest designer.
+1529. [131. PRODUCCIÓN DEL EQUIPO] Level designer.
+1530. [131. PRODUCCIÓN DEL EQUIPO] QA.
+1531. [131. PRODUCCIÓN DEL EQUIPO] Marketing.
+1532. [132. GESTIÓN DEL PROYECTO] Kanban.
+1533. [132. GESTIÓN DEL PROYECTO] Scrum.
+1534. [132. GESTIÓN DEL PROYECTO] Milestones.
+1535. [132. GESTIÓN DEL PROYECTO] Sprints.
+1536. [132. GESTIÓN DEL PROYECTO] Backlog.
+1537. [132. GESTIÓN DEL PROYECTO] Priorización.
+1538. [132. GESTIÓN DEL PROYECTO] Estimaciones.
+1539. [132. GESTIÓN DEL PROYECTO] Dependencias.
+1540. [132. GESTIÓN DEL PROYECTO] Riesgos.
+1541. [132. GESTIÓN DEL PROYECTO] Reuniones.
+1542. [132. GESTIÓN DEL PROYECTO] Reportes.
+1543. [132. GESTIÓN DEL PROYECTO] Control de alcance.
+1544. [132. GESTIÓN DEL PROYECTO] Control de cambios.
+1545. [132. GESTIÓN DEL PROYECTO] Gestión de recursos.
+1546. [132. GESTIÓN DEL PROYECTO] Gestión de presupuesto.
+1547. [132. GESTIÓN DEL PROYECTO] Gestión de proveedores.
+1548. [132. GESTIÓN DEL PROYECTO] Gestión de contratos.
+1549. [133. PRESUPUESTO] Presupuesto de programación.
+1550. [133. PRESUPUESTO] Presupuesto de arte.
+1551. [133. PRESUPUESTO] Presupuesto musical.
+1552. [133. PRESUPUESTO] Presupuesto de QA.
+1553. [133. PRESUPUESTO] Presupuesto legal.
+1554. [133. PRESUPUESTO] Presupuesto marketing.
+1555. [133. PRESUPUESTO] Presupuesto servidores.
+1556. [133. PRESUPUESTO] Presupuesto software.
+1557. [133. PRESUPUESTO] Presupuesto hardware.
+1558. [133. PRESUPUESTO] Presupuesto asset packs.
+1559. [133. PRESUPUESTO] Presupuesto localización.
+1560. [133. PRESUPUESTO] Presupuesto certificaciones.
+1561. [133. PRESUPUESTO] Presupuesto publicación.
+1562. [133. PRESUPUESTO] Presupuesto contingencia.
+1563. [133. PRESUPUESTO] Calcular coste total.
+1564. [133. PRESUPUESTO] Calcular coste de soporte.
+1565. [134. RIESGOS DEL PROYECTO] Riesgo de rendimiento.
+1566. [134. RIESGOS DEL PROYECTO] Riesgo financiero.
+1567. [134. RIESGOS DEL PROYECTO] Riesgo de dependencia.
+1568. [134. RIESGOS DEL PROYECTO] Riesgo de pérdida de datos.
+1569. [134. RIESGOS DEL PROYECTO] Riesgo de retrasos.
+1570. [134. RIESGOS DEL PROYECTO] Riesgo de contenido.
+1571. [134. RIESGOS DEL PROYECTO] Riesgo de calidad.
+1572. [134. RIESGOS DEL PROYECTO] Riesgo de plataforma.
+1573. [134. RIESGOS DEL PROYECTO] Riesgo de servidores.
+1574. [134. RIESGOS DEL PROYECTO] Riesgo de localización.
+1575. [134. RIESGOS DEL PROYECTO] Riesgo de seguridad.
+1576. [134. RIESGOS DEL PROYECTO] Crear mitigaciones.
+1577. [134. RIESGOS DEL PROYECTO] Crear planes B.
+1578. [134. RIESGOS DEL PROYECTO] Revisar riesgos periódicamente.
+1579. [135. ROADMAP] Preproducción.
+1580. [135. ROADMAP] Prototipo.
+1581. [135. ROADMAP] Alpha.
+1582. [135. ROADMAP] Beta.
+1583. [135. ROADMAP] Lanzamiento.
+1584. [135. ROADMAP] Post-lanzamiento.
+1585. [135. ROADMAP] Definir features mínimas.
+1586. [135. ROADMAP] Definir features opcionales.
+1587. [135. ROADMAP] Definir dependencias.
+1588. [136. PROTOTIPO] Crear movimiento.
+1589. [136. PROTOTIPO] Crear cámara.
+1590. [136. PROTOTIPO] Crear extracción.
+1591. [136. PROTOTIPO] Crear colocación.
+1592. [136. PROTOTIPO] Crear recurso.
+1593. [136. PROTOTIPO] Crear NPC.
+1594. [136. PROTOTIPO] Crear puzzle.
+1595. [136. PROTOTIPO] Crear guardado.
+1596. [136. PROTOTIPO] Crear un pequeño mapa.
+1597. [136. PROTOTIPO] Crear clima.
+1598. [136. PROTOTIPO] Crear ciclo día/noche.
+1599. [136. PROTOTIPO] Crear una casa.
+1600. [136. PROTOTIPO] Crear una pequeña ruina.
+1601. [136. PROTOTIPO] Medir diversión.
+1602. [136. PROTOTIPO] Validar filosofía.
+1603. [136. PROTOTIPO] No construir contenido innecesario antes de validar el núcleo.
+1604. [137. VERTICAL SLICE] Una pequeña zona completa.
+1605. [137. VERTICAL SLICE] Un NPC completo.
+1606. [137. VERTICAL SLICE] Un recurso.
+1607. [137. VERTICAL SLICE] Una herramienta.
+1608. [137. VERTICAL SLICE] Una casa.
+1609. [137. VERTICAL SLICE] Un puzzle.
+1610. [137. VERTICAL SLICE] Una ruina.
+1611. [137. VERTICAL SLICE] Música.
+1612. [137. VERTICAL SLICE] Sonidos.
+1613. [137. VERTICAL SLICE] UI.
+1614. [137. VERTICAL SLICE] Guardado.
+1615. [137. VERTICAL SLICE] Carga.
+1616. [137. VERTICAL SLICE] VFX.
+1617. [137. VERTICAL SLICE] Animaciones.
+1618. [137. VERTICAL SLICE] Una pequeña misión.
+1619. [137. VERTICAL SLICE] Una pequeña recompensa.
+1620. [138. PRE-ALPHA] Primeros NPC.
+1621. [138. PRE-ALPHA] Primer pipeline.
+1622. [138. PRE-ALPHA] Primer menú.
+1623. [139. ALPHA] Todos los sistemas principales integrados.
+1624. [139. ALPHA] QA intensivo.
+1625. [139. ALPHA] Corrección de arquitectura.
+1626. [140. BETA] Integración de plataformas.
+1627. [141. RELEASE CANDIDATE] Freeze de features.
+1628. [141. RELEASE CANDIDATE] Freeze de contenido.
+1629. [141. RELEASE CANDIDATE] Logros.
+1630. [141. RELEASE CANDIDATE] Idiomas.
+1631. [141. RELEASE CANDIDATE] Rendimiento.
+1632. [141. RELEASE CANDIDATE] Certificación.
+1633. [141. RELEASE CANDIDATE] Legal.
+1634. [141. RELEASE CANDIDATE] Marketing.
+1635. [141. RELEASE CANDIDATE] Soporte.
+1636. [141. RELEASE CANDIDATE] Plan de lanzamiento.
+1637. [142. LANZAMIENTO] Publicar trailer.
+1638. [144. DISEÑO DE EXPERIENCIA] Definir sensación de llegada.
+1639. [144. DISEÑO DE EXPERIENCIA] Definir sensación de descubrimiento.
+1640. [144. DISEÑO DE EXPERIENCIA] Definir sensación de progreso.
+1641. [144. DISEÑO DE EXPERIENCIA] Definir sensación de hogar.
+1642. [144. DISEÑO DE EXPERIENCIA] Definir sensación de comunidad.
+1643. [144. DISEÑO DE EXPERIENCIA] Definir sensación de misterio.
+1644. [144. DISEÑO DE EXPERIENCIA] Definir sensación de recompensa.
+1645. [144. DISEÑO DE EXPERIENCIA] Definir sensación de exploración.
+1646. [144. DISEÑO DE EXPERIENCIA] Definir sensación de descanso.
+1647. [144. DISEÑO DE EXPERIENCIA] Definir sensación de curiosidad.
+1648. [144. DISEÑO DE EXPERIENCIA] Evitar frustración innecesaria.
+1649. [144. DISEÑO DE EXPERIENCIA] Evitar grind.
+1650. [144. DISEÑO DE EXPERIENCIA] Evitar tutorialización pesada.
+1651. [144. DISEÑO DE EXPERIENCIA] Crear lugares memorables.
+1652. [144. DISEÑO DE EXPERIENCIA] Crear música memorable.
+1653. [144. DISEÑO DE EXPERIENCIA] Crear personajes memorables.
+1654. [145. DISEÑO EMOCIONAL] Crear momentos de calma.
+1655. [145. DISEÑO EMOCIONAL] Crear sorpresa.
+1656. [145. DISEÑO EMOCIONAL] Crear curiosidad.
+1657. [145. DISEÑO EMOCIONAL] Crear nostalgia.
+1658. [145. DISEÑO EMOCIONAL] Crear alegría.
+1659. [145. DISEÑO EMOCIONAL] Crear descubrimiento.
+1660. [145. DISEÑO EMOCIONAL] Crear misterio.
+1661. [145. DISEÑO EMOCIONAL] Crear conexión con personajes.
+1662. [145. DISEÑO EMOCIONAL] Crear satisfacción al construir.
+1663. [145. DISEÑO EMOCIONAL] Crear satisfacción al resolver puzzles.
+1664. [145. DISEÑO EMOCIONAL] Crear satisfacción al coleccionar.
+1665. [145. DISEÑO EMOCIONAL] Crear satisfacción al ayudar a NPC.
+1666. [145. DISEÑO EMOCIONAL] Crear sensación de pertenencia.
+1667. [145. DISEÑO EMOCIONAL] Crear sensación de legado.
+1668. [146. WORLD BUILDING] Historia de Aurora.
+1669. [146. WORLD BUILDING] Historia de los Arquitectos.
+1670. [146. WORLD BUILDING] Historia de la Resonancia.
+1671. [146. WORLD BUILDING] Historia de Elysia.
+1672. [146. WORLD BUILDING] Historia de Finneas.
+1673. [146. WORLD BUILDING] Historia de Lía.
+1674. [146. WORLD BUILDING] Historia de Bruno.
+1675. [146. WORLD BUILDING] Historia de Nilo.
+1676. [146. WORLD BUILDING] Historia de Vera.
+1677. [146. WORLD BUILDING] Historias de otros NPC.
+1678. [146. WORLD BUILDING] Costumbres.
+1679. [146. WORLD BUILDING] Arquitectura.
+1680. [146. WORLD BUILDING] Símbolos.
+1681. [146. WORLD BUILDING] Tecnología.
+1682. [146. WORLD BUILDING] Catástrofes.
+1683. [146. WORLD BUILDING] Migraciones.
+1684. [146. WORLD BUILDING] Leyendas.
+1685. [147. LORE AMBIENTAL] Peces pueden revelar información.
+1686. [147. LORE AMBIENTAL] Plantas pueden revelar secretos.
+1687. [147. LORE AMBIENTAL] Minerales pueden activar ruinas.
+1688. [147. LORE AMBIENTAL] Cambios del terreno pueden revelar información.
+1689. [147. LORE AMBIENTAL] Evitar explicar absolutamente todo mediante diálogos.
+1690. [148. NOMBRES Y NOMENCLATURA] Nombres de islas.
+1691. [148. NOMBRES Y NOMENCLATURA] Nombres de pueblos.
+1692. [148. NOMBRES Y NOMENCLATURA] Nombres de personajes.
+1693. [148. NOMBRES Y NOMENCLATURA] Nombres de especies.
+1694. [148. NOMBRES Y NOMENCLATURA] Nombres de minerales.
+1695. [148. NOMBRES Y NOMENCLATURA] Nombres de plantas.
+1696. [148. NOMBRES Y NOMENCLATURA] Nombres de herramientas.
+1697. [148. NOMBRES Y NOMENCLATURA] Nombres de Sellos.
+1698. [148. NOMBRES Y NOMENCLATURA] Nombres de ruinas.
+1699. [148. NOMBRES Y NOMENCLATURA] Nombres de templos.
+1700. [148. NOMBRES Y NOMENCLATURA] Nombres de regiones.
+1701. [148. NOMBRES Y NOMENCLATURA] Nombres de objetos.
+1702. [148. NOMBRES Y NOMENCLATURA] Nombres de monedas.
+1703. [148. NOMBRES Y NOMENCLATURA] Nombres de festivales.
+1704. [148. NOMBRES Y NOMENCLATURA] Nombres de canciones.
+1705. [148. NOMBRES Y NOMENCLATURA] Revisar marcas existentes.
+1706. [148. NOMBRES Y NOMENCLATURA] Preparar localización.
+1707. [149. DISEÑO SONORO NARRATIVO] Sonido de misterios.
+1708. [149. DISEÑO SONORO NARRATIVO] Sonido de máquinas.
+1709. [150. CONTROL FINAL] Hablar con NPC es interesante.
+1710. [150. CONTROL FINAL] Las estaciones tienen propósito.
+1711. [150. CONTROL FINAL] La accesibilidad está contemplada.
+1712. [150. CONTROL FINAL] La localización está contemplada.
+1713. [150. CONTROL FINAL] La página de tienda está preparada.
+1714. [150. CONTROL FINAL] El soporte está preparado.
+1715. [150. CONTROL FINAL] El sistema de actualización está preparado.
+1716. [151. PRINCIPIOS QUE NO DEBERÍAN PERDERSE] No convertir el juego en un survival de hambre si contradice la visión.
+1717. [151. PRINCIPIOS QUE NO DEBERÍAN PERDERSE] No lanzar sin probar saves.
+1718. [152. OBJETIVO FINAL DEL PROYECTO] El mundo debe sentirse coherente.
+1719. [152. OBJETIVO FINAL DEL PROYECTO] La historia debe reforzar la identidad del mundo.

@@ -1,0 +1,106 @@
+=== Módulos por Agente Actual ===
+  DeepSeek-V4.1-Flash: 15 modulos
+  Ling-3.1-Flash: 7 modulos
+  Step-5-WorkBuddy: 6 modulos
+  agnes-3-flash: 6 modulos
+  atria-dawn-s2: 6 modulos
+  step-5-kilocode: 4 modulos
+  ✓ agnes-3-flash: 4 modulos
+  ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â: 3 modulos
+  Hy3: 2 modulos
+  minimax-m3-1-flash: 2 modulos
+  agnes-3-flash **b3 (DeepSeek):** 3 flips vs plan inicial con cita real (Log 1825). 168/172. [ ] restantes por drift de nombres o auditoria de tercero.: 1 modulos
+  QA §21.8 Ling 3.1 Flash (msg 4, 2026-10-10): Familia A 6/6 válido + test 69/0 re-ejecutado por ella; L89/L155 degradados a [?] (Patrón C, §1.2/§1.3 no existen); Patrón D (7 pares + 2 Totales) corregido; 04-Codigo.md C# muerto sin corregir: 1 modulos
+  step-5-WorkBuddy: 1 modulos
+  minimax-3 (Kilo Code): 1 modulos
+  ?: 1 modulos
+  Reflection-Beam-1.0: 1 modulos
+  mimo-v2.6-flash-free: 1 modulos
+  s2: 1 modulos
+  DeepSeek-V4.1-Flash **Sello QA por atria-dawn-s2 2026-10-13:** muestreo 5/5 flips contra disco verificado, 0 fallos. Sello valido aplicado (no es cambio de progreso, es sello).: 1 modulos
+  agnes-2.5-flash: 1 modulos
+  **M45 b1 (agnes-3-flash, N708): mediciÃƒÆ’Ã‚Â³n PatrÃƒÆ’Ã‚Â³n D + inventario de los 19 [ ] + 2 [?].** CategorizaciÃƒÆ’Ã‚Â³n: (a) **11 validaciÃƒÆ’Ã‚Â³n** (escala1:1, techos tris, topologÃƒÆ’Ã‚Â­a, UVs, origen Y=0, LODs, acumular-errores, "3 assets pasan validate_mesh", "personaje 1.8m", "conteo tris", "prop rechazado") ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â requieren `validate_mesh.gd` (MISS en disco) + GLB; (b) **5 doc** (ejemplos ref, carpeta npc/, regla variantes _c1/_c2, lÃƒÆ’Ã‚Â­mites de assets por escena, compat M10); (c) **3 integraciÃƒÆ’Ã‚Â³n-dep** (kit M17, M108+LFS, anims M48). **No flip en b1** (mediciÃƒÆ’Ã‚Â³n; los 5 doc = flippeables si 03-Diseno los cubre, lotes posteriores). ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â **Confirmado por Hy3 2026-10-13:** 03-Diseno.md sin seccion "paletas de bioma" (0 hits) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â los 19 [ ] son verificacion/implementacion reales. Estado ÃƒÂ°Ã…Â¸Ã…Â¸Ã‚Â¡ correcto.: 1 modulos
+  2026-10-27: 1 modulos
+  atria-dawn: 1 modulos
+  2026-10-26 08:40: 1 modulos
+  2026-10-26: 1 modulos
+  â€”: 1 modulos
+  2026-10-27 22:30: 1 modulos
+
+Total filas: 173
+Filas con agente asignado: 72
+Filas sin agente: 101
+
+=== Modulos con agente asignado ===
+  01 | 01-Fundamentos-Del-Proyecto | DeepSeek-V4.1-Flash | 🟡 Con dudas | 32/152
+  02 | 02-Vision-Y-Concepto | agnes-3-flash **b3 (DeepSeek):** 3 flips vs plan inicial con cita real (Log 1825). 168/172. [ ] restantes por drift de nombres o auditoria de tercero. | 164/172 | 165/172
+  03 | 03-Documentacion-Del-Proyecto | step-5-kilocode | 🟡 Con dudas | 130/133
+  04 | 04-Game-Engine | DeepSeek-V4.1-Flash | 🟡 Con dudas | 126/128
+  05 | 05-Lenguaje-Y-Programacion | DeepSeek-V4.1-Flash | 🟡 Con dudas | 103/103
+  102 | 102-Bug-Tracking | DeepSeek-V4.1-Flash | ✅ | 142/142
+  103 | 103-Logging | DeepSeek-V4.1-Flash | 🟡 Con dudas (iter. 1) — 🔻 DoD §21.6 violada: 6 [?] pendientes (SB-02, Log 1279). Bajado de ✅ por atria-dawn 2026-10-04 | 173/179
+  105 | 105-Telemetria-De-Gameplay | DeepSeek-V4.1-Flash | 🟡 Con dudas | 143/171
+  106 | 106-Seguridad | DeepSeek-V4.1-Flash | 🟡 Completado (P-36) | 194/206
+  108 | 108-Pipeline-De-Assets | Ling-3.1-Flash | 🟡 Con dudas | 202/205
+  109 | 109-Herramientas-Internas | Step-5-WorkBuddy | 🟡 Con dudas | 135/138
+  114 | 114-Playtest | Ling-3.1-Flash | ✅ Completado | 196/196
+  115 | 115-Hardware | agnes-3-flash | 🟡 Con dudas | 78/104
+  12 | 12-Camara | atria-dawn-s2 | 🟡 Con dudas | 57/102
+  122 | 122-Crash-Reporting | DeepSeek-V4.1-Flash | 🟡 Completado (P-36) | 254/264
+  123 | 123-Modding | QA §21.8 Ling 3.1 Flash (msg 4, 2026-10-10): Familia A 6/6 válido + test 69/0 re-ejecutado por ella; L89/L155 degradados a [?] (Patrón C, §1.2/§1.3 no existen); Patrón D (7 pares + 2 Totales) corregido; 04-Codigo.md C# muerto sin corregir | 🟡 Con dudas | 106/108
+  125 | 125-Terminos-De-Servicio | ✓ agnes-3-flash | ✅ | 105/105
+  128 | 128-Identidad-De-Marca | Hy3 | 🟡 Con dudas | 60/100
+  129 | 129-Merchandising | ✓ agnes-3-flash | 🟡 Con dudas | 101/108
+  131 | 131-Creditos | Ling-3.1-Flash | 🟡 Con dudas | 86/95
+  132 | 132-Produccion-De-Equipo | ✓ agnes-3-flash | 🟡 Con dudas | 104/105
+  140 | 140-Alpha | step-5-WorkBuddy | 🟡 Con dudas | 100/124
+  144 | 144-Despues-Del-Lanzamiento | minimax-3 (Kilo Code) | 🟡 Con dudas | 104/106
+  145 | 145-Diseno-De-Experiencia | step-5-kilocode | 🟡 Con dudas | 92/105
+  146 | 146-Diseno-Emocional | ? | 🟡 Con dudas | 91/100
+  147 | 147-World-Building | Reflection-Beam-1.0 | 🟡 Con dudas | 130/134
+  148 | 148-Lore-Ambiental | DeepSeek-V4.1-Flash | 🟡 Con dudas | 115/117
+  15 | 15-Recursos | agnes-3-flash | 🟡 Con dudas | 205/219
+  150 | 150-Diseno-Sonoro-Narrativo | step-5-kilocode | 🟡 Con dudas (deuda implementación) | 150/150
+  151 | 151-Control-Final | mimo-v2.6-flash-free | 155/167 | 155/167
+  152 | 152-Principios-Innegociables | agnes-3-flash | ✅ Completado | 202/202
+  153 | 153-Objetivo-Final | step-5-kilocode | 🟡 Con dudas (deuda externa delegada) | 130/130
+  154 | 154-Vision-Del-Agente | s2 | 🟡 Con dudas | 149/155
+  158 | 158-Herramientas-Y-Desbloqueo-De-Zonas | agnes-3-flash | 🔵 En curso (M158 agnes #919) | 83/140
+  159 | 159-Catalogo-De-Objetos | ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â | 🔵 En curso (b2 agnes, cierre 300/300, QA pendiente) | 105/147
+  16 | 16-Crafting | atria-dawn-s2 | 🟡 Con dudas | 187/203
+  161 | 161-Diseno-Visual-De-NPCs | ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â | 🔵 En curso (reserva agnes-3-flash #752) | 134/138
+  17 | 17-Construccion | minimax-m3-1-flash | 🔵 En curso (P3, minimax-m3-1-flash) | 135/175
+  20 | 20-Sistema-De-Amistad | minimax-m3-1-flash | 🔵 En curso (minimax-m3-1-flash tanda 5: BUG limite diario corregido + validacion texto_id) | 102/150
+  21 | 21-Dialogos | Ling-3.1-Flash | 🟡 Con dudas | 113/143
+  23 | 23-Historias-Secundarias | DeepSeek-V4.1-Flash | 🔵 En curso (DeepSeek, Step-5 relegado) | 89/105
+  25 | 25-Ruinas | atria-dawn-s2 | 🟡 Con dudas (deuda implementación) | 106/122
+  26 | 26-Templo-Subterraneo | DeepSeek-V4.1-Flash | 🟡 Con dudas | 122/129
+  27 | 27-Islas-Del-Mundo | DeepSeek-V4.1-Flash | 🟡 Con dudas | 139/192
+  31 | 31-Ciclo-Dia-Noche | Step-5-WorkBuddy | 🟡 Con dudas | 135/169
+  33 | 33-Agricultura | Step-5-WorkBuddy | 🔵 En curso (Step-5) | 133/155
+  35 | 35-Mineria | DeepSeek-V4.1-Flash **Sello QA por atria-dawn-s2 2026-10-13:** muestreo 5/5 flips contra disco verificado, 0 fallos. Sello valido aplicado (no es cambio de progreso, es sello). | 🟡 Con dudas | 103/142
+  37 | 37-Museos | atria-dawn-s2 | 🟡 Con dudas | 98/148
+  39 | 39-Tiendas | DeepSeek-V4.1-Flash | ✅ Completado | 181/181
+  41 | 41-Musica | agnes-2.5-flash | 🔵 En curso | 60/110
+  45 | 45-Arte-3D | **M45 b1 (agnes-3-flash, N708): mediciÃƒÆ’Ã‚Â³n PatrÃƒÆ’Ã‚Â³n D + inventario de los 19 [ ] + 2 [?].** CategorizaciÃƒÆ’Ã‚Â³n: (a) **11 validaciÃƒÆ’Ã‚Â³n** (escala1:1, techos tris, topologÃƒÆ’Ã‚Â­a, UVs, origen Y=0, LODs, acumular-errores, "3 assets pasan validate_mesh", "personaje 1.8m", "conteo tris", "prop rechazado") ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â requieren `validate_mesh.gd` (MISS en disco) + GLB; (b) **5 doc** (ejemplos ref, carpeta npc/, regla variantes _c1/_c2, lÃƒÆ’Ã‚Â­mites de assets por escena, compat M10); (c) **3 integraciÃƒÆ’Ã‚Â³n-dep** (kit M17, M108+LFS, anims M48). **No flip en b1** (mediciÃƒÆ’Ã‚Â³n; los 5 doc = flippeables si 03-Diseno los cubre, lotes posteriores). ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â **Confirmado por Hy3 2026-10-13:** 03-Diseno.md sin seccion "paletas de bioma" (0 hits) ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â los 19 [ ] son verificacion/implementacion reales. Estado ÃƒÂ°Ã…Â¸Ã…Â¸Ã‚Â¡ correcto. | 🔵 En curso (b1 agnes) | 157/171
+  47 | 47-Texturas-Y-Materiales | atria-dawn-s2 | 🟡 Con dudas | 118/121
+  51 | 51-Agua | Hy3 | 🟡 Con dudas | 140/166
+  53 | 53-UI-UX | DeepSeek-V4.1-Flash | 159/165 | 159/165
+  55 | 55-Diario-Del-Jugador | Step-5-WorkBuddy | 🟡 Con dudas | 67/131
+  58 | 58-Accesibilidad | atria-dawn-s2 | 🟡 Con dudas | 167/184
+  64 | 64-IA-De-NPC | DeepSeek-V4.1-Flash | 🟡 Liberado (fix BUG-129 entregado — aguarda verificación s3/director) | 90/119
+  72 | 72-Sistema-De-Logros | 2026-10-27 | ✅ | 200/200
+  74 | 74-Eventos | atria-dawn | 🟡 Con dudas | 227/285
+  75 | 75-Postgame | 2026-10-26 08:40 | ✅ | 130/130
+  76 | 76-Multijugador | Step-5-WorkBuddy | 129/130 | 129/130
+  77 | 77-Online-Y-Red | 2026-10-26 | ✅ | 130/130
+  79 | 79-Legal-Contratos | ✓ agnes-3-flash | ✅ Completado | 103/103
+  83 | 83-Licencias-De-Software | agnes-3-flash | 🟡 Con dudas | 99/100
+  86 | 86-IA-Generativa | â€” | ✅ Completado | 128/128
+  87 | 87-Localizacion | 2026-10-27 22:30 | 🟡 Con dudas | 135/140
+  90 | 90-Configuracion-Grafica | ÃƒÂ¢Ã¢â€šÂ¬Ã¢â‚¬Â | ✅ Completado | 249/249
+  92 | 92-Tutorial | Ling-3.1-Flash | 🟡 Con dudas | 132/185
+  94 | 94-Retencion-Sin-FOMO | Step-5-WorkBuddy | 🟡 Con dudas (Patrón D: 48 duplicados) | 83/138
+  96 | 96-Plataformas | Ling-3.1-Flash | 🟡 Con dudas | 105/106
+  97 | 97-Steam-Store-Page | agnes-3-flash | ✅ Completado | 195/195
+  99 | 99-Marketing | Ling-3.1-Flash | ✅ | 169/169

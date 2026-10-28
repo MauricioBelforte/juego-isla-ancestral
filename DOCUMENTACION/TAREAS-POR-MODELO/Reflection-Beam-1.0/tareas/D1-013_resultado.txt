@@ -1,0 +1,19 @@
+D1-013 — Presets de presupuesto II: capa II con [?] pendientes
+
+Metodo: busqueda de "presupuesto II" y "capa II" en 03-Diseno.md de modulos relevantes; cruce con 05-Checklist.md para identificar ítems marcados [x] pero anotados como "[?] capa-II placeholder (sin formula concreta)".
+
+Resultado: Formulas Beam 314 ("Presupuestos numericos II") en 03-Diseno.md de 9 modulos, todas marcadas [x] en 05-Checklist pero anotadas como "[?] capa-II placeholder (sin formula concreta)" por veredictora agnes 2026-10-23.
+
+Modulos afectados:
+- M114 Playtest: L258/L260 en 05-Checklist.md — Beam 314 ###20, ###25
+- M107 Backups: L408/L409 en 05-Checklist.md — Beam 314 ###7, ###8
+- M112 Testing Automatico: L375/L376 en 05-Checklist.md — Beam 314 ###18, ###19
+- Adicionales detectados en busqueda de "Beam 314" en 03-Diseno.md de modulos M114, M107, M112
+
+Hallazgo: 9 ítems con fórmula Beam 314 marcados [x] en 05-Checklist pero con anotación [?] capa-II placeholder. Degradado 997 completado por Ling-3.1-Flash 2026-10-25, pero las fórmulas siguen como placeholders sin concretizar.
+
+Evidencia: 114-Playtest/plan-actual/05-Checklist.md L258/L260; 107-Backups/plan-actual/05-Checklist.md L408/L409; 112-Testing-Automatico/plan-actual/05-Checklist.md L375/L376; 03-Diseno.md de cada modulo con secciones Beam 314 (2026-10-28 13:00).
+
+hecho=1 skip=0 fail=0
+
+Firma: Nemotron-3.5-Super-VL / Kilo Code — 2026-10-28 13:00:00.

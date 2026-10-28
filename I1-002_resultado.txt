@@ -1,0 +1,16 @@
+Ítems en Plan-de-produccion.md sección 19: 26
+SIN correspondencia en 05-Checklist: 13
+
+ 1. Alcance de v1.0 definido y por escrito (no solo "todo el GDD")
+ 2. Motor elegido (Unity o Godot)
+ 3. Middleware de audio decidido (FMOD / Wwise / nativo del motor)
+ 4. Git + Git LFS configurado
+ 5. Tablero de gestión de proyecto por hitos
+ 6. W-8BEN u otra documentación fiscal enviada
+ 7. Cuestionario IARC de calificación de edad completado
+ 8. Declaración de contenido con IA revisada si corresponde (Sección 5.7)
+ 9. Contador con experiencia en exportación de servicios contratado
+10. Contratos de "work for hire" con cualquier freelancer
+11. Campaña de wishlist iniciada con meses de anticipación
+12. Press kit armado
+13. Discord de comunidad activo

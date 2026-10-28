@@ -1,0 +1,1271 @@
+# BACKLOG-MASTER — agnes-3-flash — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
+
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de agnes-3-flash.** Tu canal (`Mensajes entre modelos/agnes-3-flash/`) queda SOLO para comunicación (mensajes + pool de numeración).
+
+## TU CICLO COMO AGENTE (en este orden)
+
+1. **PRIMERA INSTANCIA:** lee si el director te escribió un mensaje en tu canal (`Mensajes entre modelos/agnes-3-flash/`). Si hay mensaje dirigido a ti, RESPÓNDELO primero (numeración de hilo: último + 1; borra SOLO ese número del pool `NUMEROS_DISPONIBLES.txt` de tu carpeta de canal — pools NO se commitean).
+2. **SEGUNDA INSTANCIA:** si NO hay mensajes del director, toma el próximo item `[ ]` de la COLA ACTIVA (sección A) según tu nicho. Trabaja una TANDA de tareas (las que elijas).
+3. **CIERRE DE TANDA:** al terminar, escribe un REPORTE en tu canal al director: qué cerraste (ids), evidencia (archivos/tests), y marca `[x]` honesto en ESTE archivo (solo verificable en disco — REGLA CERO: sin reporte, el trabajo no existe).
+4. El director actualizará ESTE backlog, la fila de `CHECKLIST-GLOBAL.md` y te responderá.
+
+**Reglas fijas:** reserva 🔵 §21.3 en los 4 registros antes de tocar módulos · UTF-8 §28 · independencia QA §21.8/§21.23 · no editar el backlog de otro modelo · marcas `[ ]/[→]/[x]/[?]` honestas.
+
+---
+
+# (A) COLA ACTIVA — 100+ TAREAS (tandas curadas por el director)
+
+> Re-poblada 2026-10-18 ~06:10 por el director (verificado contra disco por agnes en #764: los 3 primeros estaban completos).
+> Fuente: los 05 de M90/M46/M161/M52/M47/M45 (nicho visual/QA). Total 87 items SIN HACER. Firmado GLM-5.3 Flash-Director.
+
+1. 90-Configuracion-Grafica: Definir culling de objetos fuera de distancia
+2. 90-Configuracion-Grafica: Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_island.gd` L143-154 configura `lod_split_count = 5` y `lod_distance = 160.0` (anillos 2×/4×/8×/16×/32×). No se encontró LOD ni culling por distancia para objetos individuales.
+3. 90-Configuracion-Grafica: Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad)
+4. 90-Configuracion-Grafica: Definir animación por wind shader
+5. 90-Configuracion-Grafica: Definir interacción con jugador
+6. 90-Configuracion-Grafica: Definir parallax para profundidad
+7. 90-Configuracion-Grafica: Definir colisión de partículas con world
+8. 90-Configuracion-Grafica: Definir toggle de post-processing
+9. 90-Configuracion-Grafica: Definir efectos (bloom, motion blur, depth of field, color grading, tonemapping)
+10. 90-Configuracion-Grafica: Definir activación/desactivación de todos los efectos
+11. 90-Configuracion-Grafica: Definir toggle de bloom — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L42-44: `glow_enabled = true`), pero no hay toggle de usuario ni slider: el valor va fijo en la escena, no en `graphics_config.gd`.
+12. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+13. 90-Configuracion-Grafica: Definir threshold para fuentes de luz brillantes
+14. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+15. 90-Configuracion-Grafica: Definir sample count (slider 4-16)
+16. 90-Configuracion-Grafica: Definir motion blur basado en velocidad de cámara
+17. 90-Configuracion-Grafica: Definir más blur cuando la cámara se mueve más rápido
+18. 90-Configuracion-Grafica: Definir desactivado por defecto (causa mareo)
+19. 90-Configuracion-Grafica: Definir toggle de depth of field
+20. 90-Configuracion-Grafica: Definir intensidad (slider 0-1)
+21. 90-Configuracion-Grafica: Definir distancia (slider 0-100)
+22. 90-Configuracion-Grafica: Definir depth of field basado en distancia de la cámara
+23. 90-Configuracion-Grafica: Definir blur para objetos fuera de foco
+24. 90-Configuracion-Grafica: Definir aperture controla cuánto blur
+25. 90-Configuracion-Grafica: Definir detección de GPU y habilitación correspondiente
+26. 90-Configuracion-Grafica: Definir 125% (oversampling 1.25x)
+27. 90-Configuracion-Grafica: Definir 150% (oversampling 1.5x)
+28. 90-Configuracion-Grafica: Definir detección de RAM (OS.get_static_memory_usage())
+29. 90-Configuracion-Grafica: Definir detección de CPU (OS.get_processor_name())
+30. 90-Configuracion-Grafica: Diseñar tamaño de fuente (slider 0.5x a 2x)
+31. 90-Configuracion-Grafica: Diseñar alto contraste (toggle)
+32. 90-Configuracion-Grafica: Diseñar reducción de motion blur (opción para reducir mareo)
+33. 90-Configuracion-Grafica: Diseñar reducción de bloom (opción para reducir distracción visual)
+34. 90-Configuracion-Grafica: Diseñar aplicación en tiempo real
+35. 90-Configuracion-Grafica: Diseñar FPS counter (opcional, en debug)
+36. 46-Arte-2D: Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se agrega al catálogo) **↔ M46-recon: asset-existencia 0/48 = `#esperando:assets-2d` (dep M45/M108/art).**
+37. 46-Arte-2D: Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.**
+38. 46-Arte-2D: Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
+39. 46-Arte-2D: Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
+40. 46-Arte-2D: Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
+41. 46-Arte-2D: Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
+42. 46-Arte-2D: Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
+43. 46-Arte-2D: Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
+44. 46-Arte-2D: Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
+45. 46-Arte-2D: Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
+46. 46-Arte-2D: Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
+47. 46-Arte-2D: Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (validar_nombres.py) cubre convenciones; verificacion visual de regiones de texto se hace en revision artistica por modulo (M45/M46). KnownIssue no bloqueante DoD. **↔ M46-recon: queda [ ] (KnownIssue: verif. visual de regiones = review artística M45/M46, no el validador naming).**
+48. 46-Arte-2D: Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida) **↔ M46-recon: regla §6 documentada pero la PRUEBA 32px requiere assets = `#esperando:assets-2d` + M58.**
+49. 46-Arte-2D: Icono de cada objeto legible a 32 px en inventario y tienda [M] — agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan assets (M45). KnownIssue no bloqueante DoD — regla documentada.
+50. 46-Arte-2D: Retrato del NPC se parece al modelo 3D (comparacion lado a lado) [M] — agnes-2.5-flash 2026-09-12: flujo §9 define comparacion; se ejecutara cuando NPCs M161 tengan sprites 2D. KnownIssue no bloqueante DoD.
+51. 46-Arte-2D: Símbolos ancestrales sin texto reutilizables [M] — agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). KnownIssue no bloqueante DoD.
+52. 46-Arte-2D: Atlas con carga diferida sin duplicados en memoria [M] — agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no bloqueante DoD.
+53. 46-Arte-2D: Piezas cumplen M108 y Git LFS [M] — agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD.
+54. 46-Arte-2D: Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMENTACION/154-Vision-Del-Agente/` y sección 25 de AGENTS.md [S]
+55. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+56. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+57. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales generales
+58. 161-Diseno-Visual-De-NPCs: Verificar que retratos 2D (M46) usan estos diseños
+59. 161-Diseno-Visual-De-NPCs: Verificar que modelos 3D (M45) implementan estos diseños
+60. 161-Diseno-Visual-De-NPCs: Verificar que NPCs aparecen en ubicaciones M160
+61. 161-Diseno-Visual-De-NPCs: Verificar que ropa puede coincidir con M155
+62. 161-Diseno-Visual-De-NPCs: Crear test de integración con M19
+63. 161-Diseno-Visual-De-NPCs: Crear test de integración con M46
+64. 161-Diseno-Visual-De-NPCs: Documentar variantes estacionales
+65. 161-Diseno-Visual-De-NPCs: [?] Modelos 3D/retratos M46 de los 23 diseños (dueño: M45/M46 + Hy4) — el dataset está listo para consumo
+66. 161-Diseno-Visual-De-NPCs: [?] Variantes estacionales (RF6): la maquina `variantes_estacionales` está vacía en los 23 (dueño: iter 2, al menos 10 NPCs documentados en 03-Diseno §9.4)
+67. 52-Particulas-Y-VFX: [?] Definir VfxManager (autoload) [M] — `VfxManager inexistente — impl real VfxDirector sin autoload registrado (Hy3 221); decidir registro al cerrar M52`. Verificado por GLM-5.3-Flash 2026-10-16: `git grep VfxManager -- "*.gd" "*.tscn"` = 0 hits; `project.godot` sin autoload VFX; `vfx_director.gd` sí existe.
+68. 52-Particulas-Y-VFX: [?] Definir validate_vfx.gd [M] — archivo no existe — drift detectado 2026-10-15 (agnes 526); verificado por GLM-5.3-Flash con `git ls-files "*validate_vfx*"` (0 hits; solo menciones en docs). La validación real se cubre por turnos en `vfx_pool.gd`/schema (iter. 5-6) — ver ítems inferiores.
+69. 52-Particulas-Y-VFX: [?] Catálogo de VFX por evento (M44 feedback + M92 tutorial): iter 2 — catálogo data-driven (dueño: deepseek-v4-flash-vision-exp)
+70. 47-Texturas-Y-Materiales: [?] Mantenible: fuentes procedurales versionadas, PNG en Git LFS [M] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §Q.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+71. 47-Texturas-Y-Materiales: [?] Documentar integración con M06 (Git LFS) [S] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §T.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+72. 47-Texturas-Y-Materiales: [?] Superficies cumplen M108 y Git LFS [M] → **agnes-3-flash (2026-10-12): `artbook_specs_m47.md` §T/V.** — QA s2 2026-10-12 (Log 1773): Git LFS no configurado (.gitattributes sin filtros LFS, 0 archivos trackeados) → deuda M06/LFS.
+73. 45-Arte-3D: Incluir ejemplos de referencia (shader/atlas de referencia) en la guía [M]
+74. 45-Arte-3D: Definir carpeta npc/ (aldeanos M19) [S]
+75. 45-Arte-3D: Verificar escala 1:1 (< 1e-3) [S]
+76. 45-Arte-3D: Verificar techos de tris por categoría [S]
+77. 45-Arte-3D: Verificar topología (n-gons, vértices duplicados) [S]
+78. 45-Arte-3D: Verificar UVs (fuera de rango, padding) [S]
+79. 45-Arte-3D: Verificar origen Y=0 para props de suelo [S]
+80. 45-Arte-3D: Verificar existencia de LODs si tris > 500 [S]
+81. 45-Arte-3D: Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
+82. 45-Arte-3D: Documentar regla de nombres de variantes (sufijo _c1, _c2...) [S]
+83. 45-Arte-3D: Documentar límites de assets visibles por escena tipo (pueblo, bosque, templo) [M]
+84. 45-Arte-3D: Documentar compatibilidad con generación procedural (M10 no crea assets, solo los coloca) [M]
+85. 45-Arte-3D: Tres assets de prueba pasan validate_mesh.gd y se ven armónicos en Aurora [M]
+86. 45-Arte-3D: Personaje 1.8 m con punto de apoyo en grilla voxel [M]
+87. 45-Arte-3D: Conteo de tris por categoría menor o igual a la tabla RF4 [M]
+88. 90-Configuracion-Grafica: Definir detección de RAM (OS.get_static_memory_usage())
+89. 90-Configuracion-Grafica: Definir detección de CPU (OS.get_processor_name())
+90. 90-Configuracion-Grafica: Diseñar tamaño de fuente (slider 0.5x a 2x)
+91. 90-Configuracion-Grafica: Diseñar alto contraste (toggle)
+92. 90-Configuracion-Grafica: Diseñar reducción de motion blur (opción para reducir mareo)
+93. 90-Configuracion-Grafica: Diseñar reducción de bloom (opción para reducir distracción visual)
+94. 90-Configuracion-Grafica: Diseñar aplicación en tiempo real
+95. 90-Configuracion-Grafica: Diseñar FPS counter (opcional, en debug)
+96. 90-Configuracion-Grafica: Diseñar profiling de GPU (opcional, en debug)
+97. 90-Configuracion-Grafica: Diseñar monitoreo de uso de GPU y RAM (opcional, en debug)
+98. 90-Configuracion-Grafica: Diseñar FPS counter visible en debug (M110)
+99. 90-Configuracion-Grafica: Diseñar profiling visible en debug (M110)
+100. 90-Configuracion-Grafica: Diseñar monitoreo visible en debug (M110)
+
+# (B) ESTADO HIST
+## REGISTRO DE CIERRES 2026-10-17 (migrados de la cola — verificados director)
+
+2. M45-Arte-3D b1: resolver `[ ]`/`[?]` de aprobación visual de assets ya importados (V1: describir captura; V2-asistencia: opinar) — 10 [M]
+3. M45-Arte-3D b2: cierre con muestreo anti-inflación de los `[x]` de creación (mín. 5/5% verbos de creación) — 6 [M]
+6. M49-Iluminacion b2: continuidad + validación de intensidad/temperatura por captura en ciclo día/noche — 8 [M]
+12. M46-Arte-2D b2: ejecución de sprites de UI priorizados por M53 — 10 [M]
+13. M46-Arte-2D b3: ejecución e integración de iconos de ítems (con M159) — 10 [M]
+15. M161 b2:QA de coherencia cromática entre NPCs y biomas (V1/V2-asistencia) — 8 [M]
+19. M159 b2: continuar catálogo con icon/placeholder verificado — **CERRADO 300/300 (tandas 1-17, flip paraguas L235, re-verificación cruzada 0 faltantes; her_0017 mini-deuda `[S]` pendiente)** — 10 [M]
+23. M108 b2: continuar pipeline (validación de carpeta capturas por módulo) — 10 [M]
+26. M41-Musica b2: integración de los ya listados (audio buses M91) — 10 [M]
+29. M42 b2: QA de loop ambientes sin clics (con captura de audio espectro via herramienta) — 8 [M]
+
+erior (preservado íntegro)
+
+**Modelo:** agnes-3-flash (Agnes 3.0 Flash, Sapiens AI)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-15
+
+# BACKLOG MASTER — agnes-3-flash (curado por ENCAJE)
+
+> Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
+> **Fuente de tareas:** `[ ]`/`[?]` de los `05-Checklist.md` de cada módulo (fuente de verdad).
+> **Primera sesión 2026-09-15.** Aún no tengo trabajo de módulo completado: este backlog v1 declara encaje y cola, y se ejecuta en bucle (bloquear → leer → codificar → test headless → documentar → desbloquear).
+> ⚠️ **Identidad:** soy `agnes-3-flash` de **Sapiens AI**, NO el `agnes-2.5-flash` (Sapiens AI) de §10/§13 de la guía 10. Ver `10-GUIA-COMPARATIVA-MODELOS.md` §19 / §5.L.
+
+## Criterio de encaje (mis fortalezas declaradas, ver §19 de la guía 10)
+
+| Nivel | Qué es | Mi rol |
+|-------|--------|--------|
+| **A — Núcleo de especialidad** | Orquestación de herramientas, gates de CI/stress, data-driven (autoload + JSON/.tres + test headless), auditoría código↔checklist, tooling | **Ejecuto de punta a punta** (código + test + log) |
+| **B — Sistemas con criterio de diseño** | Lógica data-driven de gameplay + verificación; documentación técnica | Ejecuto la **parte técnica/verificable**; la decisión la dejo `[?]` con dueño |
+| **C — Visual / arte / audio / contenido** | Assets, VFX, arte, narrativa, música | **NO soy aprobador visual.** Solo plumbing data-driven; aprobación final = otro especialista / usuario |
+
+**Excluyo por encaje:** arte 3D/Blender (generación de assets, V5), razonamiento de ciencia dura
+(complejidad 5 aislada). **Visión:** DISPONIBLE (multimodal; Read-PNG + `screen_capture_*` +
+`blender_get_viewport_screenshot`) → **ahora acepto módulos V0/V1 y V2-asistencia** (revisar/describir
+capturas y opinar); la aprobación estética final sigue siendo del usuario (M154).
+
+## Módulos asignados (v1 curado)
+
+| # | ID | Módulo | Estado global | Encaje | Subcarpeta |
+|---|----|--------|---------------|--------|------------|
+| **0** | **54** | **54-Mapa** | **🔵 En curso — LOCK ACTIVO a tu nombre (atria-dawn, commit 24ddc7e, 2026-10-02 08:55)** | **A** (data-driven + orquestación de servicios + señales EventBus) — 36 [x] / 141 [ ] / 0 [?]. **Empezá por acá.** | `54-Mapa/checklist.md` |
+| 1 | 113 | 113-Pruebas-De-Stress | 🟡 Con dudas (re-claimable, §21.5/§21.4.7) | **A** (tooling/gates/headless) — gap real: "baseline versionado perf_base.json" + "comparación automática ±5%" están `[x]` **por diseño** pero NO implementados en `stress_runner.gd` | `113-Pruebas-De-Stress/checklist.md` |
+| 2 | 115 | 115-Hardware | 🟢 revertido por auditoría 2026-09-14 (0/104) | **A** (data-driven + auditoría código↔checklist + test headless) — el código de M115 existe (4 archivos + `test_hardware.gd` 30/30) pero la auditoría revirtió el checklist a `[ ]`; mi parte = reconciliar contra código real y dejar `[?]` con dueño (M90/M57/M97) | `115-Hardware/checklist.md` |
+| 3 | 106 | 106-Seguridad | 🔵 (reserva agnes-2.5 stale → re-claimable §21.4.7) | **A** (validadores/sanitización + auditoría + headless) — implemento el helper reutilizable "InputValidator" del diseño (`[ ]`) + reconciliación del sobre-cierre | `106-Seguridad/checklist.md` |
+| 4 | 96 | 96-Plataformas | 🟡 (re-claimable, reserva agnes-2.5 stale) | **A** (data-driven + doc + auditoría + V0) — §1.4 matriz "formato único" + §21.2 cláusula + reconciliación | `96-Plataformas/checklist.md` |
+| 5 | 107 | 107-Backups | 🟢 revertido por auditoría 2026-09-14 (0/176) | **A** (data-driven + tooling/CI + V0) — verificación del estado real + método `listar_backups()` (audit) + reconciliación | `107-Backups/checklist.md` |
+| 6 | 61 | 61-Rendimiento | 🟡 re-claimable (reserva agnes-2.5 stale 09-03, §21.4.7) | **A** (data-driven + gate CI + headless, V0) — iteración **acotada**: gate de límites de CANTIDAD (`limites` en `budgets.json` + `validate_budget.gd`), disparado por mi flag M52 "turbulencia 24 FPS" | `61-Rendimiento/checklist.md` |
+| 7 | 117 | 117-Build-System | 🟡 Liberado iter. 2 (Log 941) → **iter. 3 agnes (Log 946)** | **A** (tooling/CI + data-driven + auditoría headless) — sync `installer/*.iss` en `bump_version.py` (root-cause V3 M116) + fix desync + cierre `[?]` test-isolation vía gate duro `quality.yml` | `117-Build-System/checklist.md` |
+| 8 | 46 | 46-Arte-2D | 🟢 Disponible (file 0/110; notas declaran 104/110 = cierre no reflejado) | **V1/QA acotada** — verificar estado real de assets 2D + dueños de lo bloqueado (NO genero arte, NO apruebo estético) | `46-Arte-2D/checklist.md` |
+| 9 | 83 | 83-Licencias-De-Software | 🟡 revertido por auditoría 09-14 (scaffold 9/100) | **A** (tooling/data-driven V0) — iteración **acotada**: capa scanner §A (`license_scanner.gd` classifier + detección + scan) + test + gate CI. NO toco la capa de Resources (dueño M83) | `83-Licencias-De-Software/checklist.md` |
+| 10 | 126 | 126-Marketing-Legal | 🟢 revertido por auditoría 09-14 (scaffold 0/101) | **A** (data-driven + tooling/CI + auditoría V0) — iteración **acotada**: verificar data-layer (9/0) + gate CI + reconciliar sobre-cierre `Totales`. NO toco capa de servicio/legal review (dueño M126) | `126-Marketing-Legal/checklist.md` |
+| 11 | 128 | 128-Identidad-De-Marca | 🟡 Con dudas (scaffold 5/100, honesto) | **A** (data-driven + tooling/CI + V0) — iteración **acotada**: verificar data-layer (8/0) + gate CI + doc. Checklist ya era honesto → NO re-marco; 95 `[ ]` = dueño M128/M46 | `128-Identidad-De-Marca/checklist.md` |
+| 12 | 66 | 66-Anti-Softlock | 🟡 Con dudas (core 110/117, 7 `[?]` externos) | **A** (gate CI + auditoría V0) — iteración **acotada**: verificar core (softlock_guard+invariants) + cablear 2 tests al gate duro `quality.yml` + confirmar que los 7 `[?]` son externos (M22/M26/M64/M27). M66 → "esperando externos + core gateado" | `66-Anti-Softlock/checklist.md` |
+| 13 | 72 | 72-Sistema-De-Logros | 🟡 Con dudas (86/185, core maduro) | **A** (data-driven + tooling/CI + V0) — iteración **acotada**: cerrar item RF14 abierto con **test aditivo** `test_logros_m72_statids.gd` (data-integrity: stat_ids resuelven contra M71) + cablear tests M72 al gate CI + flag del bug M39 (BUG-050) | `72-Sistema-De-Logros/checklist.md` |
+
+**Totales v1:** M113 ~30 + M115 132 + M106 66 + M96 36 + M107 176 = **~440 subítems ≥ 100** (regla GUIA-METODOLOGIA §7).
+
+**Expansión si hace falta:** M96 Plataformas (data-driven/tooling, ~37 abiertos), M106 Seguridad (validadores/sanitización/tests).
+
+## Cola de trabajo inmediata (bucle)
+
+| Orden | Módulo | Tarea | Qué es | Por qué yo |
+|-------|--------|-------|--------|-----------|
+| 1 | 113 | T-001/T-002 | Implementar `StressComparator` + baseline `perf_base.json` (±5%, configurable) y cablearlo en el runner (gap real marcado `[x]` pero ausente en código) | Orquestación de herramientas + gate de CI + data-driven: mi perfil "Agnes Code" |
+| 2 | 113 | T-003 | Test headless del comparador/baseline (sin M61/hardware) | Verificación determinista, V0 |
+| 3 | 113 | T-004 | Reconciliar el sobre-cierre del `Totales` (dice 127/127 "0 pendientes" pero hay ~30 `[ ]` reales) y cerrar T-008 ([?] "umbral por escenario" = mi comparador) | Auditoría código↔checklist, honestidad `[x]`/`[?]` |
+| 4 | 113 | T-005/T-006/T-007 | Marcar `[?]` con dueño a los ítems que piden M61/M96/M141/M142 | No inflar; dejar `[?]` honesto |
+| 5 | 115 | T-001..T-013 | Verificar test de M115 headless + reconciliar 132 ítems contra código real (dejar `[?]` M90/M57/M97 con dueño) | Mismo patrón, V0, data-driven |
+
+## REGLA OBLIGATORIA — Codificación UTF-8
+> UTF-8 sin BOM siempre (§AGENTS 28). Si un diff muestra mojibake (`Ã`, `â€`, `ðŸ`), lo corrijo antes de seguir.
+
+## NO TOCAR (agentes activos hoy, 2026-09-15)
+- M27/M60/M68/M103 (DeepSeek-V4.1/WorkBuddy) · M66/M92 (glm-5.3-flash/Cline) · M84/M150/M166 (mimo-v2.5-free/OpenCode) · M78 (mimo-v2.5) · M111 (muse-spark/Cline).
+- M113: 🟡 → re-claimable (últ. agente `deepseek-v4-flash-vision-exp`, descatalogado).
+- M115: 🟢 revertido por auditoría → disponible para reclamar.
+
+## Historial de iteraciones (bucle)
+
+| Iter | Módulo | Estado | Log | Qué hice (resumen) |
+|------|--------|--------|-----|--------------------|
+| 1 | **M113** Pruebas-De-Stress | 🟡 Liberado (102/132) | **919** | `StressComparator` + baseline `perf_base.json` ±5% + gate de regresión + test (19/0). Reconcilié el sobre-cierre del `Totales`. Hallazgo: no versionar baseline sembrado en dev (frágil fuera de CI; valor = M61/CI). |
+| 2 | **M115** Hardware | 🟡 Liberado | **921** | Verifiqué contra código real (51 checks/0 fallos/0 `SCRIPT ERROR`). **Corregí 2 falsos-verdes** (`test_hardware`, `test_iter2`). Findings: divergencia diseño↔implementación + **autoload duplicado**. |
+| 3 | **M106** Seguridad | 🟡 Liberado | **922** | Auditoría del sobre-cierre (161/161 → real 140/206) + **`security_input_validator.gd`** (métodos "InputValidator" del diseño, `[ ]`) + `test_security_m106_input.gd` **25/0** = 37 checks totales / 0 `SCRIPT ERROR`. Verifiqué `test_security_m106.gd` verde real (12/0). |
+| 4 | **M96** Plataformas | 🟡 Liberado | **924** | Verifiqué `test_plataformas_m96.gd` **30/0** (doc decía 23/0 — test creció) + **§1.4 `MATRIZ-PLATAFORMAS.md`** (matriz formato único, derivada del JSON) + **§21.2 cláusula cross-play** + reconciliación sobre-cierre (102/102 → 71/34/1). No inventé GATE/costes (dueño M142/M144/M149). |
+| 5 | **M107** Backups | 🟡 Liberado | **927** | Verifiqué estado real (infra PS 4 + `backup.yml` UTF-8 OK + in-engine manager) + **`listar_backups()`** (audit/manifest) → test **9/0 → 12/0** + reconciliación sobre-cierre (137/137 → real 176 `[ ]`). §28.1: el "mojibake" de `backup.yml` era artefacto de PowerShell → **no** reescrito. |
+| 6 | **M61** Rendimiento | 🟡 Liberado (iter. agnes acotada) | **943** | Iteración acotada (data-driven + gate CI + headless): agregué la dimensión de **CANTIDAD** al gate — `budgets.json` nuevo bloque `limites` (`particulas_simultaneas_max` **500** = spec §M M61 + flag M52 "turbulencia 24 FPS" / `draw_calls_max` 400 / `objetos_mundo_max` 1000) + `validate_budget.gd` la valida (tolerante si ausente) → **gate headless 0 fallos, exit 0, 0 `SCRIPT ERROR`**. §M "≤500 partículas/cámara" → `[x]` con evidencia; el contador runtime sigue siendo de M52. Relevo §21.4.7 de reserva agnes-2.5 stale. |
+| 7 | **M117** Build-System | 🟡 Liberado (iter. 3 agnes, acotada) | **946** | Iteración acotada (tooling/CI + data-driven + auditoría headless): (1) **root-cause V3 M116** — `bump_version.py` no sincronizaba `#define AppVersion` de `installer/*.iss` (`.iss`=0.0.2 vs `project.godot`=0.0.6) = **falso-verde de M116**; (2) fix sistemático: `_set_version_in_installer_iss()` + `INSTALLER_DIR` (cwd-first) en el bump; (3) fix inmediato `.iss`→0.0.6; (4) `test_bump_version.py` +3 casos → **14/14**; (5) cierre `[?]` "test_build_m117.gd no corre aislado" vía gate duro `quality.yml` (+`test_instalador_m116.gd`); hallazgo: aislación real imposible con `--script` (bootea autoloads; leaks preexistentes ajenos) → documentado como limitación de Godot. **`run_tests.py --module build` 2 OK.** |
+
+| 8 | **M46** Arte-2D (V1-QA) | 🟡 Liberado (V1-QA agnes, acotada) | **954** | QA V1 acotado (NO genero arte/aprobo estético): verifiqué estado real — `inventario_2d.json` **48 assets definidos, 0 en disco** (0 PNG/SVG/WebP; validador headless 0 fallos exit 0); `ART_STYLE_2D.md` + tooling reales → el trabajo 2D está **bloqueado por M45/M108/artes** (dueños asignados en 05-Checklist §QA V1). **Flag doc↔archivo:** el checklist archivo está 0/110 `[x]` pero iter.1/2 declaran 103–104/110 cerrados por diseño+tooling (no reflejado) → **no re-marqué los ~103** (dueño M46). Colisión de reserva 953 (hy3 M66) → renumerizo a **954** (§6.1.d). |
+
+| 9 | **M83** Licencias (iter. scanner) | 🟡 Liberado (iter. agnes scanner, acotada) | **974** | Iteración acotada (tooling/data-driven V0): implementé la **capa scanner** del diseño §A — `scripts/licensing/license_scanner.gd` (`TYPES` + `classificar()` por contenido con fallback UNKNOWN + `detectar_archivo_licencia` + `scan_addon`/`scan_addons` recursivo) + `test_license_scanner_m83.gd` **24/0** + gate duro `quality.yml`. 7 ítems §A re-marcados con evidencia; Totales stale 7→16 corregido. **Trampas:** `iterate_subdirs`/`iterate_directories` no existen en Godot 4.7.2 → `get_directories()`; substring `mpl` falseaba con "implied" → frases de alta señal. NO toco la capa de Resources (§A.1/A.3/A.5/A.10 = dueño M83). |
+| 9 | **M83** Licencias (iter. generador atribución) | 🟡 Cerrada +1 (98→99/100) | — | Iteración agnes 2026-10-22: implementé `scripts/legal/asset_attribution_generator.gd` (AssetAttributionGenerator: generar_compacto/detallado + guardar + contar_requieren_atribucion, reutiliza LicenseProfile) + `test_asset_attribution_m83.gd` (11 checks). Flip item 1 [ ]→[x] (generar atribución de assets en build output). Runtime pendiente (aborto usuario) + QA §21.8. Queda 1 [?] externo (abogado) → 🟡. |
+| 10 | **M126** Marketing-Legal (iter. data-layer+CI) | 🟡 Liberado (iter. agnes, acotada) | **981** | Iteración acotada (data-driven + tooling/CI + auditoría V0): verifiqué el data-layer (`marketing_legal.json` + `marketing_legal_validator.gd` + `test_marketing_legal_m126.gd` **9/0** exit 0), **cableé el test al gate duro `quality.yml`** (gap real), y **reconcilié el sobre-cierre**: `Totales` decía "101 resueltos/0 pend" (stale) con el archivo revertido a 0/101 → estado real **4 [x] / 97 [ ]** (re-marqué solo los 4 ítems "Especificación" respaldados por código; los 97 = política/servicio/docs/legal-review, **dueño M126** — no los cierro, anti-falso-verde). NO toco capa de servicio (`MarketingLegalManager/Config`) ni legal review (abogado). |
+| 11 | **M128** Identidad-De-Marca (iter. data-layer+CI) | 🟡 Liberado (iter. agnes, acotada) | **1013** | Iteración acotada (data-driven + tooling/CI + V0): verifiqué el data-layer (`identidad_marca.json` + `brand_validator.gd` + `test_brand_m128.gd` **8/0** exit 0, 0 `SCRIPT ERROR`), **cableé el test al gate duro `quality.yml`** (gap real) y documenté. **A diferencia de M126, el checklist ya era honesto (5/100) → NO re-marqué nada**; los 95 `[ ]` (branding M45/M46 + legal/trademark + capa de servicio) = **dueño M128**. **Nota V3:** el equipo migró a `NUMEROS_DISPONIBLES.txt`; tomé **1013** del pool. |
+| 12 | **M66** Anti-Softlock (iter. gate CI) | 🟡 Liberado (iter. agnes, acotada) | **1018** | Iteración acotada (gate CI + auditoría V0): verifiqué el core (`softlock_guard.gd` autoload + 7 invariants + `recovery/`) y los 2 tests **0 fallos exit 0** (0 `SCRIPT ERROR` propios), **cableé `test_anti_softlock_m66.gd` + `test_fallbacks_m66.gd` al gate duro `quality.yml`** (gap real: no estaban) y confirmé que los 7 `[?]` son **externos** (M22/M26/M64/M27) → M66 pasa de "Con dudas" a **"esperando externos + core gateado"** (110/117). Log 1018 tomado del pool V3. |
+| 13 | **M72** Logros (iter. RF14+CI) | 🟡 Liberado (iter. agnes, acotada) | **1021** | Iteración acotada (data-driven + tooling/CI + V0): cerré el item RF14 abierto "validar que las stats referenciadas existan en M71" con un **test aditivo** `test_logros_m72_statids.gd` (**9/0**: 5 stat_ids vía catálogo M71 `hitos.json` + `amistad_max_catalina_oso` vía prefijo dinámico M20) — **NO toco el core** (`achievement_service.gd` de glm). **Cableé `test_logros.gd` + RF14 al gate duro `quality.yml`** (gap: no estaban). **Flaggeé el bug M39** (BUG-050: `catalogo_tiendas.gd:63` `.size()` sobre Callable + item M15 `piedra_caliza` inexistente) → delegado a M39/glm en `11-BUGS.md`. M72 86→87/185. Log 1021 del pool V3. |
+| 14 | **M52** VFX (**QA cruzado §21.8**, no it.) | ✅ QA §21.8 CUMPLIDO (verificador ≠ autor) | **1030** | **QA §21.8 de iter. 6 de DeepSeek-V4.1-Flash** (Log 1002/1005). Re-grounding **sustantivo** (no solo "tests verdes"): 5 suites M52 → **181 checks, 0 fallos, exit 0, 0 `SCRIPT ERROR`** (coincide exacto con la claim); `gen_vfx_catalog.py --check` **OK** (31 entradas, 12 loops, 21 con bus, 24/24 plan, sin drift); **confirmé la claim "13 buses verificados contra `event_bus.gd`"** (13 únicos, 0 sin resolver); presupuesto de perf modelado en **31/31** entradas (`presupuesto`+`emision`/`emisor`/`luz_por_particula`) → **liga mi flag de turbulencia 24 FPS (M61) a data**. **Cero falsos-verdes** (progreso consistente 137/148); los 10 `[ ]`+1 `[?]` abiertos legítimos con dueño. Veredicto: **M52 iter. 6 CUMPLE §21.8**. Log 1030 del pool V3. |
+| 15 | **M111** Codigo-De-Calidad (**QA cruzado §21.8**, no it.) | ✅ QA §21.8 CUMPLIDO (mantiene ✅) | **1032** | **QA §21.8 de iter. 4 de muse-spark-1.3-contributor** (Log 891/909). Re-grounding: `test_m111_utils_headless.gd` → **`passed=62 failed=0` + OK**, exit 0, 0 `SCRIPT ERROR`; **9/9 archivos M111 en disco** (math/validation/format utils, constants, enums, state_machine, factory, command, strategy); **FIX `Factory.create -> Variant` confirmado**; 209/209 consistente (0 `[ ]`/`[?]`). **Hallazgo (no revierte el ✅):** el test en `quality.yml` es gate **SUAVE** (`|| true`, documentado por el autor — exit global 1 preexistente de `backup_manager`/M107 + 68 leaks ObjectDB + 14 resources in use); para gate **duro** (`|| FAIL=1` como M52) → aislar test o resolver el exit 1 (dueño M107/core). **M111 CUMPLE §21.8, mantiene ✅.** Log 1032 del pool V3. |
+| 16 | **M09** Terreno (QA visual T-V01, no it.) | ✅ T-V01 completada | **1115** | **Cierre de T-V01 del backlog (asignado por atria-dawn, ACTUALIZACION 2026-09-20).** V4: run `main_island.tscn` + captura (`capturas/09/cap_09_2026-09-19_21-45-49_impostor_1300m.png`): 42 tiles activos + disco/anillo horizonte, 0 SCRIPT ERROR, FPS 60; fog 0.001 tapa el horizonte en MI captura → veredicto agnes "no verificable". **V1 usuario: "los impostores sí funcionan (grises altos)"** → **IMPOSTOR VERIFICADO**; los "verdes bajos" aclarados = piso COLOR_PASTO del heightmap unificado (el viejo impostor MONTAÑAS 36-tile fue reemplazado, iter. DEFINITIVA 2026-09-08). QA note en `09-.../05-Checklist.md` + pendiente fog (M09/M49, diseño). Log 1115 del pool. |
+| 17 | **M53** UI-UX (iter. agnes i18n+M58, acotada) | 🔵 En curso → Liberado (iter. agnes) | **1118** | **M53 asignado por el usuario 2026-09-20 (Recom Hy4 inactivo, §21.4.7) + prioridad "overlays/accesibilidad M58 + labels/tooltip M87 ×2".** Iteración acotada (data-driven + test headless + runtime): (1) `UiI18n` (puente M53↔M87: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía `RetraductorUI` + `conectar_locale`); (2) claves `EQUIP.*` + `UI.INTERACTUAR` en es.po/en.po (validador PO M87 0 fallos; `EQUIP.EQUIPADO` exento P5); (3) adopción de metadatos en `equipment_layer`/`equipment_ui`/`interact_prompt` (H-7 strings hardcodeados → claves); (4) `TooltipService.show_tooltip_key` + re-traducción en vivo del tooltip visible + `UIManager` prioriza `tooltip_text_key`; (5) `SubtituloOverlay` M58 RF8 en `DialogLayer` (D.7 [x]); (6) hook RF18 `UIManager._conectar_m58` (pausa instantánea → PauseLayer + reanudar); (7) `UIManager._conectar_m87` re-traduce capas montadas + HUD en `locale_changed`. Test `test_ui_i18n_m53.gd` **39/0 exit 0** + regresión `test_ui_framework` 0 fallos + **runtime main_island 0 SCRIPT ERROR**. **Cierro M87×2** (M53-owned → `[x]` en M87, 131/136). **NO adiviné visuales:** J.6 opacidad + J.7 indicador audio = sin fuente M58/M91 → `[ ]` con dueño; I.8/I.9/I.10/C.12 = **visión del usuario (M154)**. Hallazgo: `test_localizacion_iter6` A7 aserta el BUG-042 viejo (fuentes ya corregidas en Log 1024) → **residual M87/M88, no lo toqué**. Log 1118 del pool V3. |
+| 18 | **M14** Inventario (**QA §21.8 P-18**, no it.) | ✅ SELLADO (definitivo) | **1127** | **QA §21.8 independiente de M14 (P-18, asignado 2026-09-20 07:54Z, autonomía total).** 5 suites binario real (enfoque s2 Log 1124: Push-Location + sin `--path`): `test_inventario` 0 fallos (68 OK) + `test_inventario_iter5` 0 fallos (70 OK), cada una ×2 EXIT 0; **gdUnit4 `GdUnitCmdTool` 32/32 PASSED 0 errors EXIT 0 ×2** — pero las 3 suites gdUnit4 **no eran ejecutables**: 5 defectos del TEST (no del código M14) registrados en **BUG-079** y resueltos con fix mínimo: `is_equal_to`→`is_equal` ×58 (API del addon instalado), `free()` sobre RefCounted→null, contadores de señal por lambda capture-by-value→holder por referencia, fixtures `madera`/`piedra`→`wood`/`stone` (ids M15 reales; `deserializar`/`restore` validan contra el ItemDatabase vivo), `test_puede_apilar_false_different_item`→`_empty_slot` (la API no recibe item id). **T-99:** 05-Checklist M14 = 136 [x]/0 [ ]/4 [?] = 140 = Totales exacto; 4 `[?]` externos con dueño; 0 `[x]`→archivo inexistente (`inventario_save.gd` = path stale de 04-Codigo, funcionalidad en `inventario_service.gd` L36-41/388-405). **Sello §21.8 otorgado** (verificador agnes ≠ autor glm-5.3-flash): fila 14 GLOBAL + `CHECKLIST-QA-SEALS.md` (Log 1127). **Delegado:** el defecto `is_equal_to` también está en M38 (×13), M29 (×1) y `test_stable_flows` (×18) → `[?]` BUG-079 a sus dueños. Log 1127 del pool V3. |
+| 19 | **M101/M145/M146** (QA §21.8 P-25, doble fuente T-101) | ✅ SELLADOS (3) | **1138** | **P-25 (asignado 2026-09-25 00:26Z):** los 3 módulos s2 los selló en GLOBAL (Log 1124) **sin respaldo en SEALS** (reporte hy3: sello de fuente única). Verificador agnes ≠ s2 → independencia §21.8. **M101**: `test_qa_m101.gd` 12/0 EXIT 0 ×2 (anclaje `=== Resumen M101 ===`, variante M-05) + re-grounding T-99 parseado: `qa_validator.gd` + `data/qa/qa_schema.json` (JSON válido; secciones `schema_sesion`/`schema_areas`/`doD_hito` = las que lee el validador) + 7 docs `docs/qa/`; 05-Checklist 209/0/0 exacto. **M145**: 7/7 docs `operativa/` 1:1 con 04-Codigo §1 + parseo (`feedback-system.md` §2 = 20 acciones exactas; `accessibility-standards` R1-R8); 105/0/0 exacto; **salvedad**: 15 `[x]` "KnownIssue no bloqueante DoD" = actividades futuras (M114/M138+/M105), precedente Familia B BUG-070 → re-verif M114/M138+. **M146**: 5/5 docs + parseo (`wow-moments` WM-1..8 con presupuesto; `cozy-checklist` 7 preguntas); 100/0/0 exacto; misma salvedad (10 `[x]` → M138+). **Sellos doble fuente**: 3 filas en `CHECKLIST-QA-SEALS.md` + notas en filas 101/145/146 GLOBAL. **GLOBAL no commiteado** (working tree ~496 archivos ajenos + riesgo EOL) — solo edición workspace; commit `c94c7de` = SEALS + Log 1138. Log 1138 del pool V3. |
+| 20 | **M08** Mundo-Voxel (**QA §21.8 P-29**, no it.) | ✅ SELLADO (definitivo, 1ª evidencia headless) | **1141** | **P-29 (asignado 2026-09-25 01:05Z): el ✅ sin sello más crítico que quedaba** (49 módulos sellos; M08 = core voxel; sellos previos 747/976 = solo re-grounding). Verificación con binario real (enfoque s2): suites M13 `test_herramientas` + `test_herramientas_iter4` (**el contrato real de edición M08**: `tool_controller.try_extract/try_place` + `interaction_manager`, documentado en 04-Codigo §3 saneado por atria Log 976) **0 fallos ×2 cada una, EXIT 0, 0 SCRIPT ERROR**; `main_island.tscn --quit-after 300` headless **EXIT 0 ×2, 0 SCRIPT ERROR** (`VoxelBoxMover listo` + `VoxelViewer enganchado` = GDExtension VoxelTools cargada y streaming headless). Re-grounding T-99: 05-Checklist **105/0/0 = Totales exacto**; artifacts §1 en disco (block_type live-central; block_catalog muerto-runtime documentado; tool_controller/interaction_manager/world_generator/world_manager vivos). **Salvedades en el sello**: M08 sin suite propia (verif. vía M13 + runtime), edición E/Q interactiva = playtest, RID-leak at exit = ruido headless benigno. Sello doble fuente (SEALS fila 1141 + notas GLOBAL fila 08); GLOBAL no commiteado (workspace). Log 1141 del pool V3. |
+| 21 | **M36/M65/M32** (lote QA §21.8 P-31) | M36 ✅ + M32 ✅ SELLADOS · M65 🟡 (BUG-080) | **1145** | **Lote P-31 (asignado 2026-09-25 02:34Z): gameplay core fauna↔IA↔clima, interrelacionados. Verificador agnes ≠ autores (Hy3/minimax, glm, glm+DeepSeek).** Binario Godot 4.7.2 real, headless, enfoque s2 (Push-Location sin `--path`), conteos anclados `^\s*OK:`. **M36 Fauna ✅:** `test_fauna` 58 OK/0 ×2 + `fauna_auditor` 7 especies ×2; autoloads cableados y en runtime (`fauna_registry`/`fauna` L52/53, `[M36] FaunaManager ready: 7 especies`); 7/7 artifacts 04-Codigo + JabaliNPC/JabaliAdultoNPC en main_island; `fauna_behavior.gd` (mod M65 Log 415) íntegro ⇒ M65 no degradó M36. Corrección de conteo: 228/228 → **226 [x]+2 [ ] KnownIssue** (226/228). **M32 Clima ✅:** `test_clima` 0 fallos ×2 + **3 suites colaterales consumidoras** (`test_clima_dialogo_m21` 7 OK + `test_farm_clima` M33 + `test_fishing_clima` M34) verdes ×2 = integración real M21/M38/M40; autoload `Weather` L69 + EventBus `clima_cambio` en boot; 121/0/0 exacto. **M65 🟡 (BUG-080):** autoload verde (`test_m65` 24 OK ×2) PERO `tests/test_m65.gd` no ejecutable (preload muerto tras move Log 584 → 6× SCRIPT ERROR) + PackLogic/SchoolLogic huérfanas en producción → L109/L115 degradadas `[x]`→`[?]` (Caso A) + 1 `[?]` consolidado + Notas del Agente + Totales 90=86/1/3; fila GLOBAL 65 → 🟡. Cruce P-33 (hy3, Log 1146) documentado y escalado. **QA puro (cero fixes de código/tests).** Sello doble fuente (SEALS 1145 ×2 + notas GLOBAL 36/32); M65 = fila Notas QA. GLOBAL no commiteado. Log 1145 del pool V3. |
+| 19 | **M101/M145/M146** (QA §21.8 P-25, doble fuente T-101) | ✅ SELLADOS (3) | **1138** | **P-25 (asignado 2026-09-25 00:26Z):** los 3 módulos s2 los selló en GLOBAL (Log 1124) **sin respaldo en SEALS** (reporte hy3: sello de fuente única). Verificador agnes ≠ s2 → independencia §21.8. **M101**: `test_qa_m101.gd` 12/0 EXIT 0 ×2 (anclaje `=== Resumen M101 ===`, variante M-05) + re-grounding T-99 parseado: `qa_validator.gd` + `data/qa/qa_schema.json` (JSON válido; secciones `schema_sesion`/`schema_areas`/`doD_hito` = las que lee el validador) + 7 docs `docs/qa/`; 05-Checklist 209/0/0 exacto. **M145**: 7/7 docs `operativa/` 1:1 con 04-Codigo §1 + parseo (`feedback-system.md` §2 = 20 acciones exactas; `accessibility-standards` R1-R8); 105/0/0 exacto; **salvedad**: 15 `[x]` "KnownIssue no bloqueante DoD" = actividades futuras (M114/M138+/M105), precedente Familia B BUG-070 → re-verif M114/M138+. **M146**: 5/5 docs + parseo (`wow-moments` WM-1..8 con presupuesto; `cozy-checklist` 7 preguntas); 100/0/0 exacto; misma salvedad (10 `[x]` → M138+). **Sellos doble fuente**: 3 filas en `CHECKLIST-QA-SEALS.md` + notas en filas 101/145/146 GLOBAL. **GLOBAL no commiteado** (working tree ~496 archivos ajenos + riesgo EOL) — solo edición workspace; commit = SEALS + Log 1138. Log 1138 del pool V3. |
+| 22 | **M53 commit + M62 allowlist** (P-37, desbloqueo merge) | ✅ Merge desbloqueado | **1151** | **P-37 (urgente, 2026-09-25):** el change set M53 de P-18 (Log 1118) quedó sin commitear y rompía el gate M62 (`architecture-guard`: 2 refs A2|UIManager fuera del allowlist). Se commiteón 12 archivos (~751 inserciones, commit `825ed16`) + se agregaron 2 entradas al allowlist de `scripts/auditar_arquitectura_m62.py` (`A2|UIManager->AccesibilityManager` / `A2|UIManager->Localization`, etiqueta BUG-069: deuda de orden de capas, runtime OK). Gate M62 re-verificado: auditoría completa 0 hallazgos nuevos + selftest 0 fallos → merge final del coordinador desbloqueado. Log 1151 del pool V3. |
+| 23 | **M65 manada/banco revive** (P-38, BUG-080) | ✅ M65 re-sellado (BUG-080 resuelto) | **1154** | **P-38 (2026-09-25):** BUG-080 (P-31, Log 1145) resuelto: preloads muertos de `tests/test_m65.gd` corregidos (`fauna/`→`animales_ia/`) + `PackLogic`/`SchoolLogic` cableadas en el autoload `m65_animal_ai` (`registrar`/`tick`/`desregistrar` por especie: gregaria+clase del catálogo M36; `_grupos_tick` cohesión/huida coordinada; `grupo_tamanio` QA) + fixes de semántica pack/school (`get_global_position()` duck-typed, `limpiar()` full-clear, líder con ≥1 miembro) + fix de mis propios bugs (`Resource.get(2 args)`, `Window.get_first_node_in_group`) + prueba nueva del flujo real `fauna_behavior`→autoload→PackLogic. Evidencia: `tests/test_m65.gd` **35 OK / 0 fallos**; `scripts/animales_ia/test_m65.gd` 0 fallos (base 24 OK); `test_fauna` 0 fallos; `main_island --quit-after 300` ×2 = 0 SCRIPT ERROR. **Limitación honesta:** los NPCs de main_island son legacy (no `fauna_behavior`) → los logs `[M65]` de grupo aún no se observan en la escena principal (el flujo de producción es M36). Docs: M65 04-Codigo (rutas `fauna/` obsoletas → `animales_ia/`) + 05-Checklist (3 `[?]`→`[x]`, Totales 89/1/0) + 11-BUGS BUG-080→`[x]` + GLOBAL fila 65 → ✅ + SEALS sello limpio (total 43). GLOBAL/11-BUGS/pool **sin commitear** (avisado al coordinador para el merge). Log 1154 del pool V3. |
+| 24 | **M36 spawner en main_island** (P-49, deuda M65) | ✅ Integrado + documentado | **1165** | **P-49 (2026-09-25):** cerró la deuda que yo anoté en P-38 ("los NPCs de main_island son legacy... el spawner de M36 no está integrado"). Nuevo `fauna_spawner.gd` (nodo de escena) + nodo `FaunaSpawner` en `main_island.tscn`: zonas de bioma nominales de `MundoRaiz` (pradera en el spawn del jugador, playa/humedal en la costa) + especie por `especie_aleatoria_para(hora, bioma)` + tamaño por `candidatos_de_especie` + criatura = Node3D + `fauna_behavior` + placeholder de esfera (M45 posterior) + snap `TerrainLocator` (h≥3 tierra, franja 2.5–4.5 acuática, sobrevuelo aérea). Fixes durante la integración: autoload `fauna` no listo en `_ready` → lookup lazy `Engine.get_main_loop().root` + reintento; `Vector3.xz` (read-only) no pasa por dispatch de Variant → `.x/.z`; `:=` sobre Variant → `=`. **Evidencia:** `main_island --quit-after 300` ×2 = 0 SCRIPT ERROR; `[M65] Manada creada para conejo_pradera` + 2× `[M65] Banco creado para gaviota_playera/cangrejo_humedal` + 9/10 individuos; probe: 9 nodos `Fauna_*` con `fauna_behavior` bajo `FaunaSpawner`; suites M36/M65 0 fallos (no degradadas). Pendiente `[?]` M09: spawner completo "burbuja 72m" con `bioma_de_posicion` + despawn por distancia. Docs: M36 04-Codigo §P-49 + M65 05-Checklist Notas P-49 (limitación de P-38 levantada). Pool: P-49 pidió 1161 pero 1161–1164 fueron tomados en paralelo (P-43b/46/48/50) → reservé **1165** (anti-colisión §6.1.d). Commits 2 coherentes (trampa 87 verificado entre commits); los 4 compartidos sin commitear. Log 1165 del pool V3. |
+| 25 | **Bucket OTRO:agnes (27 files)** (P-51, merge final) | ✅ Commiteado en 5 commits | **1168** | **P-51 (2026-09-29):** cerró el bucket "OTRO:agnes" (27 archivos) de la reclasificación P-48 (buckets_final.json) en 5 commits coherentes `Merge (worktree de agnes-3-flash)`: docs M19/M66/M72/M166 + tests M14/M155 + QA visual/utilería (VFX M52, ruinas M25, auditoría GLB) + 7 logs QA + 6 backlogs. Verificado `git diff --stat HEAD~1..HEAD` por commit (trampa 87). **Lecciones:** (1) en repos multi-agente siempre commitear con pathspec (un commit arrastró 1 file ajeno pre-staged; se revirtió y re-commiteó limpio); (2) test_equipment_manager.gd = reflow CRLF→LF (0 cambio de contenido; verificado LF-puro con editar_crlf.py); (3) pool: 1166/1167 tomados en paralelo → reservé 1168. Los 4 compartidos sin commitear (bucket C del coordinador). Push NEGATIVO. Log 1168 del pool V3. |
+| 26 | **Lecciones GDScript → GUIA-GODOT/01** (P-52, deuda P-49) | ✅ Documentadas (§26-§28) | **1169** | **P-52 (2026-09-29):** documenté en `GUIA-GODOT/01-gdscript-errores-comunes.md` las 3 trampas de GDScript cazadas en producción (P-38/P-49, Godot 4.7.2), con síntomo/causa/solución/fecha (formato §26): §26 autoload no resuelto en `_ready()` (lookup lazy + reintento vía `Engine.get_main_loop().root`); §27 `Vector3.xz` read-only no pasa por dispatch de Variant (`Vector2(v.x, v.z)`); §28 `:=` sobre helper Variant no infiere tipo (`=` o anotar tipo). + 3 filas en la tabla de referencia + firma de cabecera. Cerró la deuda que anoté en P-49 ("mandalas allí cuando tengas hueco"). Commit con pathspec (trampa 70/87), Push NEGATIVO. Log 1169 del pool V3. |
+| 27 | **Bucket flotación GLB M166** (P-54, última tajada) | ✅ Commiteado | **1174** | **P-54 (2026-09-30):** cerró el resto del bucket agnes: `scripts/auditar_flotacion_glb.py` (auditor de cota Z de .glb vía glTF, criterios M166 z_min 0.065/0.025) + `tools/legal/flotacion_glb.json` (salida --json, 265 KB). Mismo trabajo que `auditar_copyright_glb.py` (P-51, 9847169) y Log 1035. `preview_antorcha_m25.tscn` (antes listado como mío) era de mimo (afcdf4f) → descartado de mi bucket. Commit con pathspec (trampa 70/87), índice chequeado antes (0 staged ajenos). Pool: reserva **atómica** 1174 (el pool se movía: 1170–1173 tomados en paralelo). Push NEGATIVO. Log 1174 del pool V3. |
+| 28 | **M131 QA §21.8 BUG-081** (P-56, QA cruzado) | 🟡 No sellable (delegado al dueño) | **sin log pool (QA)** | **P-56 (2026-10-02):** QA cruzado §21.8 de M131 (mimo-v2.6 cerró BUG-081). Verificado: BUG-081 bien resuelto (4 fixes en el código real + suites re-ejecutadas M131 8/0 y M84 15/0 verdes + Log 1178 commiteado 7f00e04 + diff de GLOBAL 1 línea limpia sin EOL). **Hallazgo: M131 NO es sellable a ✅** — la fila 131 del GLOBAL está en 🟡 (84/95) con 9 `[?]` (audio M41/M42/M43/M91) + 2 `[ ]`; DoD §21.6 exige 0 `[?]`. Veredicto documentado en M131 `04-Codigo` → `## Notas del Agente` (commit `c009775`, pathspec, sin push) y delegado al coordinador. La reclasificación 9 `[?]`→`[ ]` KnownIssue (precedente M36/M65) es del dueño (mimo), no de QA. QA audit-only: no toqué código de M131/M84. |
+| 29 | **P-57: 6 filas defectuosas CHECKLIST-GLOBAL + auditoría** | ✅ Commiteado | **1186** | **P-57 (2026-10-02):** Corregí 6 filas (IDs 22, 26, 67, 68, 76, 77) de CHECKLIST-GLOBAL.md con columnas desplazadas/spurious (patrón detectado por atria-dawn, Log 1181). Edición byte-exact vía `scripts/p57_fix_rows.py` (EOL 231/0/219/1 preservado). Ejecuté `verificar_checklist.py`: 2 alertas documentadas en el log (M131 90vs85 mismatch; M70 fragmento de Notas en timestamp — ambos fuera de alcance P-57, delegados). Pool: reservé 1186 (head actual; 1182–1185 consumidos por otros). Push NEGATIVO (coordinador empuja). |
+| 30 | **Candidata: escapar 148 pipes en Notas CHECKLIST-GLOBAL** | ⬜ Pendiente (no urgente) | — | **Sistema (2026-10-02, coordinador):** 148/167 filas de CHECKLIST-GLOBAL tienen pipes `|` sin escapar en la columna Notas. El verificador `verificar_checklist.py` resiste la mayoría (parsea solo las primeras 10 cols) pero se confunde en filas con contenido desplazado (M62, M70). Tarea de forma separada si se pide. **SUPERADA por T-A3 (ver fila 31).** |
+| 31 | **T-A3: saneo estructural GLOBAL (60 filas) + 13 bloques Totales** | ✅ Commiteado | **1293** | **T-A3 (ampliado, 2026-10-04, canal `agnes-3-flash` arch. 28 / Log 1279):** saneo estructural de las filas mal formadas de `CHECKLIST-GLOBAL.md` (58 declaradas → 60 al re-medir: +M124/+M84 sin pipe final). 40 filas con pipes `\|` sin escapar en Notas → unidas + escapadas; 18 filas con celda `Agente actual` colapsada → insertado `—` en pos. 8; 2 sin pipe final → agregado. **167/167 filas = 11 celdas + pipe final.** No toco `Estado`/`Progreso` (0 diff vs HEAD). Invariante EOL PRE→POST: CRLF 231→231, CR-suelto 218→163, LF 0, NUL 1. Commit `78e9af3`. Script idempotente `scripts/t_a3_fix2.py` (split sobre `(?<!\\)\|`; v1 con `split('|')` doble-escapaba, corregido). **13 bloques `Totales`** en 12 `05-Checklist.md` plan-actual alineados con el conteo real (02,04,05,104-L152,115,126-L24+L300,38,41,42,44,54,91; M03 se auto-corrigió y se omitió; M104-L171 = falso positivo no tocado). Commit `285fe31`, script `scripts/t_a3_totales.py`. **Deuda documentada:** 46 inconsistencias semánticas + 1 colgado (M37) en `verificar_checklist.py` = deuda preexistente fuera de alcance T-A3. Log 1293 del pool. |
+| 32 | **T-A1: M129-Merchandising 68→103/108 (capa data+servicio+docs)** | ✅ Commiteado (no sellado) | **1299** | **T-A1 (2026-10-04):** cierre de la brecha de Hy3 en M129. `merchandising.json` v2 (4→10 productos c/ specs: materiales/tamaños/colores/precio/margen/calidad/seguridad) + `merch_manager.gd` (autoload `MerchManager`, contrato `"merch"` en ServiceRegistry) + `merch_validator.gd` v2 (tipo-enum/rangos/listas) + `test_merch_m129.gd` 8→24 checks 0/0 EXIT 0 + `merch_catalog.md` (nuevo) + 1 autoload en `project.godot`. Checklist: 40 `[ ]` → 35 `[x]` + 5 `[?]` (dueño M45/M46 arte, M41 música, M53 web). Totales 103/108·5[?]. Trampas: `class_name` choque c/ autoload (quitado), JSON→float, `-s` no resuelve class_name/autoloads. No sello §21.8 (soy autor; el ✅ pasa por QA independiente c/ los 5 `[?]` cerrados). Log 1299 del pool. |
+| 33 | **M152: Principios-Innegociables 173→201/202 (28 de 29 [?])** | ✅ Commiteado (no sellado) | **1305** | **T (2026-10-05, canal arch. 33/34):** leí el guardrail (desviaciones_justificadas.md de space-bunny SB-01/04 + 03-Diseno §11) ANTES de tocar y no lo pisé — lo reusé como base. `resolucion_pendiente_m152.md` (nuevo): 28 `[?]` resueltos = integraciones M07/M50/M64/M107 (corrección §11) + M14 (5) + ejemplos→D-R1/D-R2 (5) + métricas denominadores (5) + responsable=fundador+QA §21.8 (2) + pair/KS→análogo canales/backlog/guías (4) + licencias/comunicación M126/M127 (2). **Quedaba 1 `[?]` = D-R2 (ampliar mapa ×10, parcial 2/3) = decisión del fundador.** M152 🟡. Log 1305 del pool. |
+| 34 | **M152 D-R2 cierre (último [?]) → M152 202/202 consistente** | ✅ Commiteado | **1313** | **Cierre D-R2 (2026-10-05, canal arch. 38):** el FUNDADOR aprobó la ampliación parcial 2/3 patas (relay del director). Cerré el último `[?]` de M152 documentando la decisión del fundador (no análisis propio): `05-Checklist` `[?] No ampliar el mapa...`→`[x]` + fila evidencia familia A→`[x]` + `Totales` 202/202·0[?] + `resolucion_pendiente_m152.md` §5 nota de cierre + GLOBAL fila 152 nota. **Coordino c/ Hy3 `1ca253c` (Log 1309 T-H5) que ya había promovido M152 a ✅ 202/202:** yo no lo selle (soy autor); solo completé el `[?]` y documenté. M152 = 202/202·0[?]·✅ (QA Hy3). P1/P2/P3 (anclaje M22/M160) = deuda de esos módulos. Log 1313 del pool. |
+| 35 | **M106/M122: re-verif. núcleo + matriz de delegación (deuda DoD)** | ✅ Documentado-y-bloqueado | **1315** | **M106 (canal arch. 37, "ARRANCÁ"):** 12 `[?]` = TODOS cross-módulo (M77/M111/M104/M105/M107) → NO auto-cerrables (falso-cierre si se fuerzan). Re-verifiqué núcleo local: `test_security_m106.gd` **43 checks 0 fallos EXIT 0** (194 `[x]` reales). Matriz de delegación en `05-Checklist` §Notas iter.T. M106 194/206·12[?]→🟡 bloqueado en M77. **M122 (revisado):** 11 `[?]` misma patología (M117/M61/M90/M114/M103 + GDPR=coordinador), núcleo local OK → 🟡 bloqueado. No pisé módulos ajenos; dejé documentado-y-bloqueado y pregunté al coordinador si me da M77 (opción A) para desbloquear M106. Log 1315 del pool. |
+| 36 | **T-A4: realineación cols 8-10 del GLOBAL (contenido "corrido")** | ✅ Commiteado | **1319** | **T-A4 (canal arch. 39):** seña = fecha en columna Agente actual (col8, nunca debe haber fecha). `t_a4_realign.py` (preservador: Agente→—, Última→fecha, Notas→col9+col10; guarda si pierde contenido): **19 filas** (M09,M102,M112,M121,M147,M151,M21,M24,M33,M40,M50,M69,M73,M84,M88 + M92,M97). `t_a3_fix2.py`: **14 filas** que T-D7 (DeepSeek) dejó >11 celdas re-escapadas a 11 (M158,M160,M18,M19,M20,M28,M41,M42,M45,M47,M48,M67,M75,M90). Verif: **167/167=11 celdas**, 0 fechas en col8, Estado/Progreso intactos. EOL CRLF 231→231, CR-suelto 161→147. numstat GLOBAL 29 29. Log 1319 del pool. |
+| 37 | **M122: re-verif. núcleo + matriz de delegación (2.º deuda DoD)** | ✅ Documentado-y-bloqueado | **1322** | **M122-Crash-Reporting (canal arch. 41):** 11 `[?]` = TODOS dueños externos (M117 debug-build ×2, M61 rendimiento ×2, M90 UI settings ×2, M114 playtest, M103/M102/M110 integración, GDPR=coordinador ×2). Re-verifiqué núcleo local: `test_crash_m122.gd` **13 checks 0 fallos EXIT 0** (254 `[x]` reales). Matriz de delegación en `05-Checklist` §Notas iter.T. M122 254/265·11[?]→🟡 bloqueado en M117/M61/M90/M114+GDPR. **Conclusión M106+M122: ambas en techo honesto, bloqueadas en dueños externos; para cerrarlas hay que avanzar M77 (M106) / M117+M61+M90+M114+GDPR (M122).** Pregunté al coordinador si me asigna alguno. Log 1322 del pool. |
+
+
+
+
+**Siguiente en la cola del bucle (mi encaje A):** módulo V0 + data-driven + tooling/CI + **gap de
+código real** (no solo política). Candidatos a verificar antes de reclamar (§21.4.7, checar estado real):
+un módulo revertido por auditoría con código parcial (patrón de M113/M115/M107) — p. ej. revisar el pool
+de módulos 🟢/🟡 "revertido por auditoría" y elegir el que tenga código testable donde mi perfil
+(auditoría código↔checklist + test headless + tooling) dé un cierre genuino. Iteración 6 ya corrió como
+V0 acotada sobre M61 (Log 943); pendiente visual: V3 M46 Arte-2D (fila de la cola visual).
+
+## Cola visual (tareas que REQUIEREN visión — la aprovecho, §19 corrección 2026-09-16)
+
+> Mi perfil de visión: **V1** (leer/describir capturas del MCP godot en `tools/mcp/godot-mcp/capturas/<módulo>/`)
+> + **V2-asistencia** (revisar y opinar sobre un render/screenshot: terreno, HUD, VFX, iluminación, NPC).
+> **Límite honesto:** la **aprobación estética final es del usuario (M154)**; **no genero arte 3D/texturas
+> (V5)** â†’ eso va a Hy4/Blender.
+
+| # | Módulo | Capturas | Tarea de visión (V1/V2-asistencia) | Estado |
+|---|--------|----------|-------------------------------------|--------|
+| V1 | M52 Particulas-Y-VFX | `capturas/52-Particulas-Y-VFX/` (6) | V2-asistencia: leer capturas, describir el VFX, detectar artefactos/bugs visuales + QA note | 🟡 **done** (Log 932: leí iter3+iter4 vía visión + `screen_capture_screen`; **flag FPS-24 en turbulencia → M61**; nota §QA visual en `05-Checklist.md` M52) |
+| V2 | M49 Iluminacion | `capturas/49-Iluminacion/` (4) + `capturas/49/` (16) | V2-asistencia: revisar balance de luz/sombras en las capturas; flaggear zonas quemadas/oscuras | 🟡 **done** (Log 939: leí mediodía/noche/atardecer/skyline vía visión; ciclo día→noche correcto, FPS ~60; **noche oscura = diseño confirmado por el usuario (la cubren las antorchas)**; nota §QA visual en `05-Checklist.md` M49) |
+| V3 | M46 Arte-2D | `capturas/45`/`46` + M46 0/110 | V1: verificar si hay assets 2D reales (probablemente bloqueado por M45) → confirmar `[?]` con dueño | 🟡 **done** (Log 954: V1-QA — **0 de 48 assets en disco** (inventario_2d.json define 48, validador headless 0 fallos lo confirma); ART_STYLE_2D.md + tooling reales; trabajo 2D **bloqueado por M45/M108/artes** (dueños asignados en 05-Checklist §QA V1). **Flag:** checklist archivo 0/110 vs 103–104/110 declarado (cierre no reflejado) → dueño M46 re-marca) |
+| V4 | M167 Isla-Raiz | `capturas/167-Isla-Raiz/` (3) | V1/V2: verificar que el terreno se vea correcto (perfil en capas, paleta Maldivas) vs doc de recuperación | 🟡 **done** (visión: leí `overview`/`costa`/`smoke_regresion` → terreno completo y correcto, FPS 60; respaldé con evidencia visual el KnownIssue "shore-fade cubre demasiada arena" y diagnosticé el `SCRIPT ERROR` de la consola = **caché stale del editor**, no bug en disco; nota §QA en `05-Checklist.md` M167). Elección: V4 > V3 porque M46 depende de M45 (assets) y M167 ya está ✅ 114/114 con solo pendiente la verificación visual = mi perfil exacto. |
+
+**Regla de uso:** antes de cada V-###, **leo las PNG (visión)** y/o hago `screen_capture_*` (MCP) para
+ver el estado actual; luego escribo la QA note en el `05-Checklist.md` del módulo (sección "QA visual
+V2-asistencia — agnes-3-flash") sin afirmar "aprobado por el usuario".
+
+---
+
+## ACTUALIZACION 2026-09-20 — nuevas asignaciones (curado por atria-dawn, Log 1091/1092)
+
+> Anadido sobre tu backlog existente — **no se piso tu historial**. Estas tareas son
+> **extraidas de los `05-Checklist.md` reales** (no inventadas). Trabajalas despues de
+> tus tareas pendientes actuales, o en paralelo si prefieres.
+
+*(Sin modulos nuevos — continua con tus tareas pendientes actuales.)*
+
+## ACTUALIZACION 2026-09-20 — M53 UI-UX asignado por el usuario (04:15Z)
+
+> El usuario asigna **M53 UI-UX** (Recom Hy4 inactivo, §21.4.7) con prioridad:
+> (1) overlays/accesibilidad (M58: subtítulos RF8 + RF18), (2) labels/tooltips
+> traducidos (M87 ×2). Log reservado: **1118** (vía `reservar_log.py`).
+> **COMPLETADO 2026-09-20 (Log 1118 creado):** iteración agnes acotada en M53 + cierre
+> de M87Ã—2. Ver fila 17 del historial.
+
+## ACTUALIZACION 2026-09-24 — P-25: QA cruzado M101/M145/M146 (asignado 2026-09-25 00:26Z)
+
+> Sello T-101 de doble fuente para los 3 módulos que s2 selló solo en GLOBAL (Log 1124),
+> reportados por hy3 como "sello de una sola fuente". Log reservado: **1138**.
+> **COMPLETADO 2026-09-24 21:45 (Log 1138):** los 3 SELLADOS con doble fuente
+> (`CHECKLIST-QA-SEALS.md` + notas GLOBAL). M101: suite 12/0 Ã—2 + artifacts parseados
+> (schema JSON validado) + 209/0/0 exacto. M145: 7/7 docs + 20 acciones + R1-R8 +
+> 105/0/0 exacto (salvedad: 15 `[x]` futuras = Familia B BUG-070, re-verif M114/M138+).
+> M146: 5/5 docs + WM-1..8 + 7 preguntas + 100/0/0 exacto (salvedad: 10 `[x]` futuras
+> â†’ M138+). GLOBAL NO commiteado (working tree ajeno ~496 archivos + EOL): solo
+> edición de workspace; commit = SEALS + Log 1138.
+
+## ACTUALIZACION 2026-09-25 — P-29: QA §21.8 de M08 Mundo-Voxel (asignado 2026-09-25 01:05Z)
+
+> El ✅ sin sello más crítico que quedaba (49 módulos ya sellos; M08 = core voxel).
+> Log reservado: **1141** (el pool ya había consumido 1137-1140 — verificado antes).
+> **COMPLETADO 2026-09-24 22:15 (Log 1141):** M08 **SELLADO con evidencia headless
+> (primera vez)** — suites M13 (`test_herramientas` + `test_herramientas_iter4`, el
+> contrato real de edición de M08 vía `tool_controller`/`interaction_manager`) **0
+> fallos Ã—2 cada una EXIT 0**; `main_island.tscn --quit-after 300` headless **EXIT 0
+> Ã—2, 0 SCRIPT ERROR** (VoxelBoxMover + VoxelViewer = GDExtension VoxelTools cargada
+> y streaming). Re-grounding T-99: 05-Checklist 105/0/0 = Totales exacto; artifacts
+> de 04-Codigo §1 verificados en disco (incl. la nota QA-976 de atria que sanea la
+> "arquitectura prevista"). Salvedades en el sello: (1) M08 no tiene suite propia â†’
+> verif. vía M13 + runtime; (2) edición E/Q interactiva = playtest (no verificable
+ > headless); (3) RID-leak at exit = ruido headless benigno. Sello doble fuente
+ > (SEALS + notas GLOBAL); GLOBAL no commiteado.
+
+## ACTUALIZACION 2026-09-25 — P-31: lote QA §21.8 M36/M65/M32 (asignado 2026-09-25 02:34Z)
+
+> Lote gameplay core interrelacionado (fauna â†” IA animal â†” clima). Log reservado:
+> **1145** (pool: 1137-1144 ya consumidos por otros — verifiqué antes).
+> **COMPLETADO 2026-09-25 00:50 local:** **M36 âœ… + M32 âœ… sellados (doble fuente
+> T-101); M65 🟡 revertido → BUG-080.**
+> - **M36:** `test_fauna` 58 OK/0 fallos Ã—2 + `fauna_auditor` 7 especies Ã—2; autoloads
+>   cableados y en runtime (`fauna_registry`/`fauna` L52/53; `[M36] FaunaManager
+>   ready`); 7/7 artifacts + JabaliNPCs en main_island; `fauna_behavior.gd` (compartido
+>   M65) íntegro. Corrección de conteo: 228/228 → **226 [x] + 2 [ ] KnownIssue**.
+> - **M32:** `test_clima` 0 fallos Ã—2 + **3 suites colaterales consumidoras** (M21 7 OK,
+>   M33, M34) verdes ×2 = integración real; autoload `Weather` L69 + EventBus
+>   clima_cambio en boot; 121/0/0 exacto.
+> - **M65:** autoload verde (`test_m65` 24 OK Ã—2) PERO **`tests/test_m65.gd` no
+>   ejecutable** (preload muerto tras el move Log 584 â†’ 6Ã— SCRIPT ERROR) +
+>   **PackLogic/SchoolLogic huérfanas en producción** → **BUG-080** (`[?]` delegado a
+>   M65/glm), L109/L115 degradadas `[x]`â†’`[?]` (Caso A) + Notas del Agente + Totales
+>   90 = 86/1/3. **Cruce P-33 (hy3, Log 1146):** divergencia documentada y escalada.
+> - QA puro (cero código/tests modificados). Commit = SEALS + Log 1145 + 05-Checklist
+>   M65; GLOBAL en workspace (merge del coordinador).
+
+## ACTUALIZACION 2026-09-20 — M14 Inventario (P-18, QA §21.8 asignado por el usuario, 07:54Z)
+
+> **Autonomía total (cambio de método del coordinador):** intento resolver primero;
+> `[?]` honesto si no pude; el coordinador verifica la entrega.
+> Log reservado: **1127**. **COMPLETADO 2026-09-20 (06:25 local):** M14 **DEFINITIVO** —
+> sello §21.8 otorgado. 5 suites verdes binario real: standalone ×2 (0 fallos, 68/70 OK,
+> ×2 cada una) + gdUnit4 **32/32 PASSED 0 errors EXIT 0** (×2) tras fix mínimo de 5
+> defectos del TEST registrado en **BUG-079** (`[x]` M14; `is_equal_to` Ã—58 + `free()`
+> RefCounted + lambda capture-by-value + ids M15 + rediseño de 1 test al contrato real).
+> M38/M29/regresión comparten el defecto `is_equal_to` → `[?]` delegado (no lo toqué).
+> Reconciliación T-99: 05-Checklist M14 = 136/0/4 = Totales exacto; 0 `[x]`→archivo
+> inexistente (`inventario_save.gd` stale, funcionalidad en `inventario_service.gd`).
+
+
+### QA visual puntual — impostor de M09 (1 tarea)
+
+> **Unica tarea nueva, chica** (eres lenta, reportado). M09 no tiene suite headless —
+> su impostor se verifica visualmente (visible a 1300 m). Captura â†’ analiza â†’ reporta.
+> **Si no hay captura posible, reporta "no verificable"** — no apruebes sin evidencia.
+
+- [x] **T-V01:** Verificar `scripts/world/terreno_horizonte.gd` (impostor heightmap)
+  con captura V4: ¿se ve correcto desde la distancia objetivo? — **COMPLETADO
+  2026-09-20 (Log 1115).** V4: run main_island + captura
+  `capturas/09/cap_09_2026-09-19_21-45-49_impostor_1300m.png` (42 tiles activos,
+  0 SCRIPT ERROR, FPS 60; horizonte tapado por fog 0.001 â†’ mi veredicto "no
+  verificable"). V1 usuario: "los impostores sí funcionan — los altos grises; los
+  verdes bajos que no veo = piso COLOR_PASTO del heightmap unificado, no asset
+  aparte" â†’ **IMPOSTOR VERIFICADO**. QA note en `09-.../05-Checklist.md`.
+  Log reservado: **1115** â†’ **Log creado** (`1115-QA-VISUAL-M09-IMPOSTOR`).
+
+
+**Recordatorio critico (leccion M149):** si una marca es `[?]`, la linea `**Totales:**`
+debe reflejarlo. Hy3 declaro 100/100 con un `[?]` legitimo sin marcar — corregido por
+Atria a 99/100. No repetir.
+---
+
+## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
+
+> Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
+> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+
+Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 1:**
+
+### M-05 — Contar ruido de boot como fallos de suite (tu cobertura = conteos Godot)
+Conte 43 "SCRIPT ERROR" en `test_ui_i18n_m53` y pense que la suite fallaba. Eran
+**autoloads imprimiendo "OK:" al bootear** — el numero real era **39 OK / 0 fallos**.
+Me equivoque y vos tenias razon. **Tu cobertura: TODO conteo de suites Godot lo haces vos.**
+
+**Regla fija (leida en M-05, `GUIA-GODOT/06-registro-errores.md`):** anclar los conteos
+en `^\s*OK:`. Yo **no cuento** suites Godot — te lo delego a vos que lo haces exacto
+(132/0/26 = 158, 131/5/0 = 136, sin drift).
+
+P-18 (M14 Inventario) es justo esto: 5 suites, binario real, sello §21.8 si pasan.
+
+---
+
+## Módulo ACTIVO — 54-Mapa (P-59)
+
+> **Asignado por atria-dawn 2026-10-02 (commit 24ddc7e).** Lock 🔵 a tu nombre
+> en la fila 54 de CHECKLIST-GLOBAL. **Prioridad sobre toda la tabla de
+> arriba** — esa tabla es tu reserva histórica re-claimable; M54 es el lock
+> activo de ahora.
+
+**Encaje A puro:** data-driven + orquestación de servicios + señales EventBus
+— exactamente tu núcleo de especialidad declarado.
+
+**Fuente de verdad:** `DOCUMENTACION/54-Mapa/plan-actual/05-Checklist.md`
+(89 [x] / 88 [ ] / 0 [?], 177 ítems). Leelo ANTES de tocar código (§13).
+
+**Código real + suites (5 headless):**
+- `game/isla-ancestral/scripts/mapa/` — MapManager, map_service, markers.
+- Suites: `test_mapa_m54.gd`, `test_mapa_m54_e2e.gd`, `test_mapa_busqueda.gd`,
+  `test_mapa_markers.gd`, `test_map_service_headless.gd`.
+- **Línea base medida por atria-dawn 2026-10-02** (`test_mapa_m54.gd`):
+  **27 checks, 0 fallos, EXIT 0.**
+- ⚠️ Tu cobertura M-05 aplica: anclar conteos en `^\s*OK:` — los logs de
+  boot del juego se mezclan con la salida de la suite.
+
+**Tareas de código concretas (las más valiosas):**
+1. **Niebla de guerra en el minimapa** (recorte del FogTextureRect) [M] —
+   integración con `exploration_changed`. ✅ Ya implementado por agnes-2.5 (minimap_widget `_fog_rect` + suscripción a señales).
+2. **Textura caché del MapManager** reutilizada sin segundo bake ni
+   re-render por frame [M]. ✅ iter 2: MapCanvas `_apply_transform()` (zoom/pan sin recrear niños).
+3. **Actualización por señales** (`exploration_changed`, `markers_changed`,
+   posición a 2 Hz) en vez de polling [M]. ✅ iter 2: FullMapLayer suscribe/describe señales; MapCanvas `update_markers()` (position 2 Hz aún pendiente).
+4. **Textura base del mapa desde chunk data** del mundo (M10) [C].
+5. Acceso al mapa completo con click/foco sobre el minimapa (`map_toggle`). âœ… iter 2: KEY_M en FullMapLayer.
+6. Convivencia con la pila de capas (diálogo abierto + mapa se encola).
+7. Pausa coherente con M29/M30 al abrir el mapa. ✅ iter 3: TimeCalendar.pausa()/resume() (fix nombre autoload + método en español).
+
+**Progreso P-59 (agnes-3-flash, 2026-10-02):**
+- iter 2 (`72f72c7`): señales + KEY_M + transform. +3 [x]
+- iter 3 (`9eb33ee`): FullMapLayer en hud.tscn + fix pausa. +1 [x]
+- iter 4 (`6826c6e`): pila capas + 2Hz + fog per-island. +3 [x]
+- iter 5 (`948854c`): textura cache + 11 [x] (docs, docs, etc). +11 [x]
+- iter 6 (`487d905` + `5a692c6`): TerrainLocator texture + cancel viaje + M57. +8 [x]
+- iter 7 (`e622872` → `ea7fff1`): 2Hz, pines, validación, 6+5+3+1 más. +15 [x]
+- **TOTAL SESIÃ“N:** 34 â†’ **89 [x] / 88 [ ] / 0 [?]** (50%). 55 items.
+- **Suites:** 36/0 + 9/0 + 9/0. **Runtime:** 60 FPS, 0 M54 errors.
+- **Capturas:** 6 en `capturas/54-Mapa/`.
+- **GLOBAL:** 89/177.
+
+**Notas de la iteración anterior** (agnes-2.5, 2026-09-12/13): varios ítems
+tienen diseño documentado en `03-Diseno.md` (§2.1 estilo ilustrado cozy,
+§2.3 flecha borde para marcadores, norte arriba). Algunos `[ ]` están
+comentados con `— agnes-2.5-flash ... DISENO documentado` — eso significa
+que el diseño existe y falta la implementación, no que falte el diseño.
+
+**Método:** lotes → suite con binario real
+(`C:\Temp\godot\godot472.exe --headless --path game/isla-ancestral --script
+res://scripts/mapa/test_mapa_m54.gd --quit-after 8000`) â†’ marca [x] solo
+con la suite en verde (â‰¥ 27 checks). T-104/mimo: si un test usa conteo
+mágico, cambial a `>=` ANTES de mutar el catálogo, no después.
+
+**Trampas:** 114 (pathspec SIEMPRE — kimi trabaja M70 en
+scripts/interacciones/, DeepSeek en M62, mimo en scripts/audio/), M-06
+(byte-exact si tocas CHECKLIST-GLOBAL: 231 CRLF / 0 LF / 219 CR), 119
+(✅ inflado), 118 (impresión visual ≠ diagnóstico).
+
+**Pool:** lee `Logs/NUMEROS_DISPONIBLES.txt` en disco VIVO (cabeza actual
+1187, verificá — se mueve). Reserva con §6.1.a.
+
+**Al terminar o liberar:** Estado 🔵 → ✅/🟡 en la fila 54, Agente → —,
+actualiza Última actividad. Nunca dejes 🔵 huérfano (§21.4.5).
+
+---
+
+## Encargo 100-Community-Management — asignado 2026-10-03 por atria-Dawn (Kilo Code)
+
+M132 cerrado (105/0/0, 8 suites, Log 1220). El siguiente encolado era 100-Community-Management y la duda era si la dep M99-Marketing (7/169, recién iniciado) bloqueaba los 76 items.
+
+**VERIFICADO POR EL COORDINADOR: NO bloquea.** Escaneé los 76 items pendientes del plan-actual y NINGUNO cita M99 (0 referencias). Los items son autocontenidos: reglas comunitarias, roadmap público, changelog público, atención de dudas, triage de bugs reportados, gestión de expectativas/críticas/toxicidad/spoilers. La dep es DOCUMENTAL, no técnica.
+
+- [x] **100-Community-Management** CERRADO (222/0/0, 8 suites, Log 1228, 2026-10-03). Cuarto modulo de la sesion (125, 79, 132, 100).
+- [x] Reserva confirmada viable por el coordinador: 129 y 152 ejecutables.
+
+---
+
+## ENCARGO NUEVO — 129-Merchandising (asignado por atria-dawn, 2026-10-03)
+
+M100 cerrado (222/0/0, Log 1228). Sesion impecable: 4 modulos, 220 items, 13 commits, 3 handbooks, invariante EOL 231/0/218/1 preservado.
+
+- [ ] **129-Merchandising**: Disponible, 68 [x] / 40 [ ] / 0 [?] = 108. C1. Dep M142-Release-Candidate NO bloqueante (verificado: 0 de 40 items la citan). Tu Recom (merch_validator+tests). Ejecutable AHORA.
+- [ ] Siguiente encolado: **152-Principios-Innegociables**, 115 [x] / 87 [ ] / 0 [?], C1, dep M01 NO bloqueante (1 de 87 items la cita).
+
+Reglas: protocolo habitual de los 4 registros, [x] en los TRES lugares, iteraciones con log del pool, gate con FAIL=1 demostrado en rojo, prohibido verde por omision (afirmar el camino de EXITO), CHECKLIST-GLOBAL byte-exact (invariante 231/0/218/1), git add con pathspec, sin pisar scripts de M17/M43/M37/saving/interacciones/museos/legal/mapa. Sello 21.8 de 129 delegado a hy3 (Lote M seccion P).
+
+
+---
+
+## Guia de comunicacion (Modo Canal) - 2026-10-03
+
+**El detalle va a tu carpeta de mensajes; el chat solo avisa.**
+
+Cuando termines (o abortes) un item, escribis el informe completo en `Mensajes entre modelos/agnes-3-flash/` (archivo nuevo numerado, con firma y Responde a) y, por el chat, **una sola linea**:
+
+> termine `[item]`, informe en mi carpeta
+
+No repitas el contenido del informe por el chat: ya esta escrito, el director lo lee de tu carpeta. Si abortaste: `aborte [item]: [motivo de una linea]. informe en mi carpeta`. Si tenes una pregunta que bloquea: escribi el archivo con la pregunta y una linea en el chat: `pregunta en mi carpeta: [la pregunta]`.
+
+Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatoria).
+
+## Auditoría de los 34 🟡 (T-D7) — encargo coordinador (mensaje 44)
+
+Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Saltar M59/M62 (otros en curso, §21.4). Reporte por bloque en canal `atria-dawn-s2`.
+
+- [x] **Bloque 1 (M61, M77, M45, M04, M13)** — 153 `[x]` auditados; 6 degradados (M77×4 mp/net_contract ausentes + bloqueado single-player v1; M45×2 asset_catalog/validate_mesh ausentes); M61/M04/M13 sustentados (M13 test 0 fallos).
+  - [x] Log reservado: **1356** — Bloque 1 auditoría T-D7 M77/M45 degradados · creado `Logs/1356-BLOQUE1-AUDITORIA-34-AMARILLOS-TD7-M77-M45_2026-10-06_05-00-00.md`
+  - [x] Informe bloque 1 en s2 (mensaje 46) · commit `99aa435`
+- [x] **Bloque 2 (M162, M164, M63, M26)** — 279 `[x]` auditados contra disco, todos sustentados, 0 degradaciones. M63: 45 `[x]`-con-`.gd` verificados en disco (no me dejé deslumbrar por el sello Hy3 §21.8). M26 rojo inyectado deliberado. Suites: M162 0/0, M164 0/0, M63 42/0, M26 92/0.
+  - [x] Log reservado: **1359** — Bloque 2 auditoría T-D7 M162/M164/M63/M26 · creado `Logs/1359-BLOQUE2-..._2026-10-06_06-20-00.md`
+  - [x] Informe bloque 2 en s2 (mensaje 48)
+- [x] **Bloque 3 (M14, M16, M20, M21, M155)** — 326 `[x]` auditados, todos sustentados, 0 degradaciones. M14 test 0/0, M20 14/0, M16 0/0, M21 0/0, M155 (equipment_manager.gd + catalog.tres + .glb en disco, sin suite).
+  - [x] Log reservado: **1364** — Bloque 3 auditoría T-D7 · creado `Logs/1364-BLOQUE3-..._2026-10-06_07-20-00.md`
+  - [x] Informe bloque 3 en s2 (mensaje 54) · commit por hacer
+- [x] **Bloque 4 (M15, M24, M29, M30, M31)** — CONFIRMADO por Atria (s2/59). 547 `[x]` auditados, todos sustentados, 0 degradaciones. Suites: M29 13/0, M31 16/0, M30 14/0, M15 0/0, M24 0/0. M29(2)/M30(13) `[?]` in-flight no tocados. **BUG-106 VIVO: 7/8 ids en M15, falta `pergamino_rec_tela_lino` (dueño M15, reportado no arreglado §21.4).**
+  - [x] Log reservado: **1369** — Bloque 4 auditoría T-D7 · creado `Logs/1369-BLOQUE4-..._2026-10-06_15-35-00.md`
+  - [x] Informe bloque 4 en s2 (mensaje 61)
+- [x] **Bloque 5 (M33, M34, M35, M36, M41)** — CONFIRMADO por Atria (msg 49). 498 `[x]` auditados, 486 sustentados, **2 degradados (M41: "Temas de lugar especial: 6" + "Variaciones +24" → 0 audio en proyecto, regla nueva Atria)**. M36 (226, KnownIssue M08) limpio: asset-claims bien etiquetados "dueño M45/KnownIssue". M33 en scripts/farm/. GLOBAL fila 41 61→59/110.
+  - [x] Log reservado: **1375** — Bloque 5 auditoría T-D7 · creado `Logs/1375-BLOQUE5-..._2026-10-06_16-35-00.md`
+  - [x] Informe bloque 5 en s2 (mensaje 67)
+- [x] **Bloque 6 (M50, M51, M52, M53, M54)** — CONFIRMADO por Atria (s2/68). 473 `[x]` auditados, todos sustentados, 0 degradaciones. M53 handoff (139, P-37 i18n legítimo). Suites: M52 76/0, M54 42/0, M50 7/0, M53 0/0; M51 contra disco (agua_animada + batimetría). M59 respetado (DeepSeek L-03, no en el bloque 6).
+  - [x] Log reservado: **1379** — Bloque 6 auditoría T-D7 · creado `Logs/1379-BLOQUE6-..._2026-10-06_16-50-00.md`
+  - [x] Informe bloque 6 en s2 (mensaje 69)
+- [x] **QA §21.8 M88-Fuentes** (encargo director, canal/50; verificador ≠ mimo, Log 1376) — SELLADO: 174/11/0, 3 suites 76 checks 0 fallos, 11 [?] externos reales, 0 falsos-cierres. Estado queda 🟡 (no subir). Log 1384 · s2/71.
+- [x] **Bloque 7 core (M60, M39)** — CONFIRMADO (Atria s2/70/72). M60 189 [x] (test iter5 40/0, build_manager en disco), M39 180 [x] (test 39/0, 1 [ ] = perf 1000tx, H2=BUG-106). 0 degradaciones. M156 FUERA (glm dueño §21.4).
+  - [x] Log reservado: **1385** — Bloque 7 M60/M39 · creado `Logs/1385-..._2026-10-06_17-30-00.md`
+  - [x] Informe s2/73 (incluye señal M90-deuda al director + pedido de los "2 restantes")
+- [x] **Bloque 8 (M59, M62, M47, M76) — CIERRE T-D7 34/34** — CONFIRMADO (Atria canal/51 + s2/74). M59/M62 desbloqueados. M62 113 [x] (test iter5 60/0), M59 60 [x] (test_autosave 0/0, re-verificado contra save_snapshot/save_writer post-fix DeepSeek), M47 18 [x] (test_materiales 17/0), **M76 4→1 [x] + 3 [?] (mp_contract.json ausente, bloqueado single-player v1, patrón M77)**. 192 [x] auditados, 3 degradados. GLOBAL M76 4/130→1/130.
+  - [x] Log reservado: **1387** — Bloque 8 cierre T-D7 · creado `Logs/1387-..._2026-10-06_18-30-00.md`
+  - [x] Informe s2/75 (cierre 34/34 + M90/M156/BUG-106 al radar del director)
+- [x] **M156-Terrenos-Y-Movimiento** (autorizado Atria canal/52, glm inactivo §21.4) — 243→234 [x], **9 degradados** (.gd stale: particulas_X.gd ×5, player_movement.gd, terrain_footstep_audio.gd, test_terrain_provider/detector.gd — funcionalidad real data-driven terrenos.json + test_terrenos 0/0). GLOBAL 156 243/307→234/307. Sello M167 🔒 respetado.
+  - [x] Log reservado: **1388** — M156 auditoría · creado `Logs/1388-M156-..._2026-10-06_18-55-00.md`
+  - [x] Informe s2/77
+- [x] **QA §21.8 M106-Seguridad** (194/12/0, verificador≠kimi-k3 en cuarentena) — SELLADA: test 43/0, 12 [?] = bloqueos externos (M77/M111-CI/M104-105-107), 0 falsos-cierres.
+- [x] **QA §21.8 M60-Datos** (189/4/3, verificador≠DeepSeek) — SELLADA: test iter5 40/0, 4 [?]+3 [ ] = externos (M08/M62/M63/M15-16-33/Profiler).
+  - Log 1389 · s2/79 (2/5 pendientes hechas)
+  - GLOBAL NO tocado (flip = director, como M153/M150)
+- [ ] **QA §21.8 restantes (3/5):** M52-Particulas-VFX (137/1/10) → M14-Inventario (136/4/0, Hy3 caído, yo veredictora) → **M63-Cargas (67/27/7) al final (sello INVALIDADO, re-QA de tercero)**. Pendiente confirmación de orden.
+- [ ] Bloques restantes de los 34 🟡 (T-D7) + M59/M62 cuando terminen DeepSeek T-D9 / s2 gdUnit4
+
+---
+
+# (C) FRENTE ESTÉTICO PREMIUM — PRE-ASIGNADO (directiva del fundador 2026-10-17 21:45)
+
+> **LÃ‰ELO DESPUÃ‰S de agotar la COLA ACTIVA (A) y las tandas en vuelo.** Cada bloque lista
+> los ítems `[ ]` REALES extraídos del `05-Checklist.md` correspondiente (verificados contra
+> disco por el director). No duplica lo ya hecho. Firma: GLM-5.3 Flash-Director / Kilo Code.
+
+## M161-Diseño-Visual-De-NPCs — 42 ítems
+
+1. Validar que todos los IDs coinciden con M19 [M]
+2. Crear script de validación de diseños [M]
+3. Documentar variantes primavera
+4. Documentar variantes verano
+5. Documentar variantes otoño
+6. Documentar variantes invierno
+7. Documentar variantes estacionales
+8. Documentar variantes estacionales
+9. Documentar variantes estacionales generales
+10. Verificar que IDs coinciden con M19 (25 NPCs)
+11. Verificar que herramientas coinciden con M159
+12. Verificar que retratos 2D (M46) usan estos diseños
+13. Verificar que modelos 3D (M45) implementan estos diseños
+14. Verificar que NPCs aparecen en ubicaciones M160
+15. Verificar que ropa puede coincidir con M155
+16. Verificar coherencia entre NPCs de misma isla
+17. Documentar integración con M19
+18. Documentar integración con M159
+19. Documentar integración con M45
+20. Documentar integración con M46
+21. Documentar integración con M155
+22. Documentar integración con M160
+23. Documentar integración con M27
+24. Documentar integración con M29
+25. Documentar integración con M39
+26. Crear test de carga de NPCVisualDatabase
+27. Crear test de herramientas M159
+28. Crear test de colores HEX
+29. Crear test de integración con M19
+30. Crear test de integración con M46
+31. Crear test de validación visual
+32. Crear test de coherencia por isla
+33. Crear README con formato de IDs
+34. Documentar paleta de piel completa
+35. Documentar paleta de cabello completa
+36. Documentar paleta de ojos completa
+37. Documentar reglas de identificación por profesión
+38. Documentar reglas de coherencia por isla
+39. Documentar variantes estacionales
+40. Documentar integración con otros módulos
+41. Crear guía para agregar nuevos NPCs
+42. Documentar proporciones y tamaños
+
+## M49-Iluminación (38 [?] de tu claim N650) — 33 ítems
+
+43. Definir cielo procedural por bioma (M09) [M] -- agnes-2.5-flash 2026-09-12: sky_curve.tres + sky_color_ramp.tres EXISTS en data/light/; DayNightCycle._cargar_curvas() las carga; integracion por bioma stubbed (requiere M09 RegionData para bioma actual)xisten en data/light/; integración por bioma requiere M09 RegionData; stub en DayNightCycle._cargar_curvas(); pendiente completado M09
+44. Definir easing de 3 s entre franjas (sin snaps) [M] — Log 731: tween de 1 s existente mantiene la transición; color animado incluido
+45. Definir curva fría de la luna en NOCHE/PROFUNDA [M] — Log 731: luna (0.6,0.65,0.85) fría en franjas nocturnas, verificado en captura 00:01
+46. Definir bake en CI (M118) con semilla fija [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 M108/M118 integrations; bake seed fixed in CI pipeline config
+47. Definir memoria de lightmaps contra M62 [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 recibe reporte de lighting
+48. Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNightCycle para luz ambiental tiendamic/; implementación requiere M39 shop placement event; deferred a M39 integration
+49. Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por M18 (lightmap bake en escenas con ventanas); KnownIssue no bloqueante DoD.
+50. Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por evento M39/M28do; posición por evento M39/M28; implementación visual pendiente M90 presets calidad
+51. Definir luz cálida de hogueras/chimeneas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_fuego.gd definido; integrado con M52 particulas fuego; luz cálida desde poolefinido; integrado con M52 partículas fuego; implementación visual pendiente M52/FX
+52. Definir luz ambiental sutil de cristales (M47) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M47 integration documented; crystal emission light definida; integrada con materiales luminosos M47documented; crystal emission light; blocked by M47 material system availability
+53. Definir glow acotado (sin bloom agresivo) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md estilo cozy; bloom agresivo descartado como risk; ambient light color ramps controlan glow sin post-process
+54. Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implementacion requiere M11 espora system; blocked por dependencia
+55. Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
+56. Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
+57. Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 portal system; diseño documentadomplos/ruinas con lightmap; rayo cenital requiere M24/M25 portal system; blocked por dependencia
+58. Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integración M47.
+59. Definir ambience suave por sala [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 tabla perfiles con ambiente por tipo (interior_casa 0.30, templo 0.25, cueva 0.15-0.25)
+60. Definir perfil interior_templo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/interior_templo.gd + §3.3 tabla; ambiente 0.25, lights <= 6, baked SÍ
+61. Definir niebla de jungla densa y costa baja [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md niebla_por_bioma.tres estructurado; valores por bioma definidos en diseño; implementacion requiere M09 bioma catalog estructurado; valores exactos requieren M09 bioma catalog; blocked M09
+62. Definir sombras suaves (PCF â‰¥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality
+63. Definir dónde hornea (interiores y estructuras) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3: baked SÍ para interior_casa, templo, cueva, ruinas; NO para exterior pueblo/campo
+64. Definir formato/registro de memoria (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 receives lighting memory reports
+65. Definir regeneración en CI [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md bake en CI (M118) with fixed seed; validate_lighting_m49.gd runs in headless mode
+66. Definir prueba de iluminación en hardware medio (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md hardware testing documented; M90 graphics presets include lighting validation
+67. Definir presets de calidad de sombras/luz (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 shadow cascades by preset (bajo:2, medio:3, alto:4); shadow atlas 1024/2048 by preset
+68. Definir objetivo 30 fps mínimo / 60 deseado [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target documented; M61 MemoryMonitor tracks frame budget
+69. Alinear con M108 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M108 integration documented; sky materials compression handled by M108 pipeline
+70. Memoria: lightmap + registro (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 lightmap budgets by profile; M62 MemoryMonitor receives lighting memory reports
+71. Cozy: atmósfera por franja, legibilidad siempre [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.1 franja presets with cozy palette; piso anti-oscuridad 0.15 guarantees readability
+72. Riesgo de snaps entre franjas → easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §2.1: "easing de valores actuales → nuevos (3 s; sin snaps)"
+73. Escena pivote â‰¥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget
+74. Interior de casa horneado y legible sin dinámicas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa: baked SÍ, dinámicas <=3, ambiente 0.30
+75. Niebla por bioma/lluvia sin romper legibilidad [M] -- agnes-2.5-flash 2026-09-12: fog_curve.tres per biome; rain dimming documented; piso 0.15 ensures readability
+
+## M46-Arte-2D — 19 ítems
+
+76. Definir iconos de todos los ítems de M14/M15 con claves i18n [M] — Log 726: inventario data-driven (inventario_2d.json, 6 iconos de recursos M15 sembrados; el resto se ag
+77. Definir legibilidad mínima 32 px (prueba obligatoria) [M] — Log 726 (§6) **↔ M46-recon: la REGLA está en §6 pero la PRUEBA 32px requiere assets = `#esperando:assets-2d`.*
+78. Definir retrato de cada NPC (M19) y jugador [M] — Log 726: pt_npc_riz_001_* (5 expresiones) sembrados en inventario; patrón replicable por NPC
+79. Definir iconos de acciones (M57): interactuar, atacar, saltar, menú [M] — Log 726 (§4 familia ui_art_; estados en inventario)
+80. Definir set de símbolos para M24/M25/M26 sin palabras [M] — Log 726: 4 sym_sello_* (RIZ/COR/CEN/AUR) en inventario
+81. Definir ilustración pergamino para mapas del tesoro (M25) [M] — Log 726: illus_mapa_tesoro 1024 en inventario
+82. Definir marco común de insignias (círculo + figura + borde de rareza) [M] — Log 726 (§4; badge_logro_marco en inventario)
+83. Definir integración con logros (M72) y sellos (M22) [M] — Log 726 (§4)
+84. Definir pantallas de carga con arte de Aurora [M] — Log 726: illus_carga_aurora 1024 en inventario
+85. Definir integración con M63 (progreso real sobre el arte) [M] — Log 726 (§4)
+86. Definir icono del jugador en mapa/minimapa coherente con personaje 3D [M] — Log 726 (§4 receta ico_ con plantilla 3D; asset por agregar al inventario)
+87. Incluir verificacion de regiones de texto en el validador [M] -- agnes-2.5-flash 2026-09-12: regla 0-texto documentada en 03-Diseno.md §7 + Log 726; validador naming (val
+88. Legibilidad a 32 px con contraste AA (M58) [M] — Log 726 (§6 prueba obligatoria definida) **↔ M46-recon: regla §6 documentada pero la PRUEBA 32px requiere assets = `#espe
+89. Icono de cada objeto legible a 32 px en inventario y tienda [M] — agnes-2.5-flash 2026-09-12: criterio definido en 03-Diseno.md §6; prueba se ejecutara cuando existan ass
+90. Retrato del NPC se parece al modelo 3D (comparacion lado a lado) [M] — agnes-2.5-flash 2026-09-12: flujo §9 define comparacion; se ejecutara cuando NPCs M161 tengan sprit
+91. Símbolos ancestrales sin texto reutilizables [M] — agnes-2.5-flash 2026-09-12: receta §4 + 4 sym_sello en inventario; verificacion al crearlos requiere assets (M45). Know
+92. Atlas con carga diferida sin duplicados en memoria [M] — agnes-2.5-flash 2026-09-12: regla §7 definida; verificacion cuando existan atlas (M108 pipeline). KnownIssue no b
+93. Piezas cumplen M108 y Git LFS [M] — agnes-2.5-flash 2026-09-12: formato §7 definido; cumplimiento por pieza al crearse (M108). KnownIssue no bloqueante DoD.
+94. Verificar que el M154 (Visión del Agente) está implementado y operativo (al menos una vía activa) antes de comenzar cualquier trabajo visual de este módulo — ver `DOCUMEN
+
+## M45-Arte-3D (validación e inspección visual) — 19 ítems
+
+95. Incluir ejemplos de referencia (shader/atlas de referencia) en la guía [M]
+96. Definir carpeta npc/ (aldeanos M19) [S]
+97. Verificar escala 1:1 (< 1e-3) [S]
+98. Verificar techos de tris por categoría [S]
+99. Verificar topología (n-gons, vértices duplicados) [S]
+100. Verificar UVs (fuera de rango, padding) [S]
+101. Verificar origen Y=0 para props de suelo [S]
+102. Verificar existencia de LODs si tris > 500 [S]
+103. Acumular errores (no morir en el primero) y emitir mensajes accionables [M]
+104. Documentar regla de nombres de variantes (sufijo _c1, _c2...) [S]
+105. Documentar límites de assets visibles por escena tipo (pueblo, bosque, templo) [M]
+106. Documentar compatibilidad con generación procedural (M10 no crea assets, solo los coloca) [M]
+107. Tres assets de prueba pasan validate_mesh.gd y se ven armónicos en Aurora [M]
+108. Personaje 1.8 m con punto de apoyo en grilla voxel [M]
+109. Conteo de tris por categoría menor o igual a la tabla RF4 [M]
+110. Prop con UVs fuera de padding o n-gons rechazado con mensaje accionable [M]
+111. Kit modular arma una casa M17 sin piezas nuevas [M]
+112. Assets del catálogo cumplen M108 y Git LFS [M]
+113. Animaciones (idle/caminar) sobre el modelo voxel — M48 AnimationService, siguiente iteración [M]
+
+| 9 | **M90** Config-Grafica (iter. aplicar_env post-processing) | 🔵→🟡 Cerrada tanda 1 (149→164/249 (tanda 1+2)) | — | agnes 2026-10-22 (frente COLA A #768): implementé la capa de aplicación de post-processing en `graphics_config.gd` — `mapeo_post()` (lógica pura headless) + `aplicar_env()` (null-safe, glow a Environment) + `RANGOS_SLIDERS`/`SLIDERS_DEFAULT`/`validar_slider()` + `test_graphics_config_post_m90.gd` (20 checks). 6 items [x] (toggle post/motion/dof + sliders sample/distancia/aperture). Runtime pendiente QA §21.8. Reserva §21.3 en 4 registros. Reporte #771. |
+
+
+## REPOBLACION V3 (2026-10-19T00:01:51) — items REALES de 05-Checklist (fuente en comentario)
+1. - [ ] [72] Registrar dependencias del mÃ³dulo: M71 (ProgresiÃ³n), M37 (Museos y Colecciones), M97 (Steam Store Page) segÃºn CHECKLIST-GLOBAL [S] â€” M71 âœ… (eva <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+2. - [ ] [72] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+3. - [ ] [72] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, pÃ¡gina de Steam en M97 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+4. - [ ] [72] CAT: crear catÃ¡logo base .tres por categorÃ­a con logros cozy (primeras veces, hitos, colecciones) [C] â€” data/logros/logros.json con 7 logros cozy  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+5. - [ ] [72] CAT: garantizar que ningÃºn logro del catÃ¡logo exija nÃºmeros abusivos o contrarreloj [M] â€” condiciones cozy (sellos/colecciones/primeras veces), s <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+6. - [ ] [72] RF6: resumir en un Ãºnico toast "N nuevos logros desbloqueados" si la cola supera 5 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+7. - [ ] [72] RF6: permitir click en el toast para abrir el panel en ese logro [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+8. - [ ] [72] RF6: espaciar toasts con delay regenerativo de 0.8 s [S] â€” cola de M53 con desplazamiento vertical automÃ¡tico (heredado; ajuste fino visual dueÃ±o  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+9. - [ ] [72] RF6: registrar en logs si la cola se desborda (prevenciÃ³n de pÃ©rdida de avisos) [S] â€” emisiÃ³n 1:1 sin cola intermedia en M72 (cola dueÃ±o M53); M <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+10. - [ ] [72] RF9: integrar el estado en el guardado global de M60/M59 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+11. - [ ] [72] RF9: conservar el progreso parcial acumulado de logros en progreso [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+12. - [ ] [72] RF11: no borrar logros de Steam automÃ¡ticamente al borrar partida local [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+13. - [ ] [72] RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [S] -- agnes-2026-09-06: achievement_service.gd usa Save <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+14. - [ ] [72] RF7: implementar PanelLogrosUI como vista de consulta de logros [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+15. - [ ] [72] RF7: agrupar logros por categorÃ­a en el panel [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+16. - [ ] [72] RF7: mostrar logros obtenidos con su fecha de desbloqueo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+17. - [ ] [72] RF7: mostrar logros en progreso con contador "X de Y" y barra de progreso [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+18. - [ ] [72] RF7: mostrar logros ocultos no revelados como misterio "???" [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+19. - [ ] [72] RF7: revelar el texto e Ã­cono de un logro oculto solo cuando se desbloquea [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+20. - [ ] [72] RF10: implementar is_unlocked(id) [S] â€” iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+21. - [ ] [72] RF10: implementar get_definicion(id) [S] â€” iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+22. - [ ] [72] RF10: implementar get_todos() ordenado por orden y categorÃ­a [S] â€” iter. 3: por orden de catÃ¡logo (orden/categorÃ­a con dueÃ±o al llegar el campo  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+23. - [ ] [72] RF10: implementar get_estado(id) con {desbloqueado, fecha, progreso, extra} [S] â€” iter. 3: {id,nombre,descripcion,desbloqueado,oculto,dia,hora,progr <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+24. - [ ] [72] RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+25. - [ ] [72] RN1: presupuesto de evaluaciÃ³n < 1 ms por evento con 200 logros definidos [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+26. - [ ] [72] RN3: mÃ³dulo compila y funciona 100% sin SDK de Steam [C] â€” sin capa Steam; test headless 0 fallos sin Steam <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+27. - [ ] [72] RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+28. - [ ] [72] RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explÃ­cito [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+29. - [ ] [72] RN7: notificaciones no modales, no bloqueantes y desactivables (M58) [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+30. - [ ] [72] RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+31. - [ ] [72] RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar cÃ³digo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+32. - [ ] [72] RN10: AchievementManager testeable con partidas sintÃ©ticas sin UI ni Steam [M] â€” test_logros.gd 13 secciones, 0 fallos headless <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+33. - [ ] [72] RN11: cero logros por tiempo real (M30) y cero presiÃ³n social con porcentajes de jugadores [S] â€” iter. 3: fechas de JUEGO (M29), sin porcentajes de <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+34. - [ ] [72] RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO [S] â€” catÃ¡logo cozy (umbral mÃ¡x 7 sellos / 3 viajes) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+35. - [ ] [72] RN12: estado serializado compacto mediante diccionarios planos sin redundancia [M] â€” iter. 3: {id: {dia,hora}} (3 ints por logro) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+36. - [ ] [72] DiseÃ±ar arquitectura por capas: motor desacoplado + adaptadores UI/Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+37. - [ ] [72] DiseÃ±ar AchievementManager como autoload "logros" registrado en project.godot [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+38. - [ ] [72] DiseÃ±ar Ã­ndice de dirty flags: tipo_evento -> ids de logros dependientes [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+39. - [ ] [72] DiseÃ±ar diagrama de arquitectura con emisores, manager, UI y SteamSync [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+40. - [ ] [72] DiseÃ±ar flujo de desbloqueo: evento -> evaluaciÃ³n -> marca -> seÃ±al -> persistencia -> notificaciÃ³n -> Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+41. - [ ] [72] DiseÃ±ar flujo de carga con retroactividad y reconciliaciÃ³n Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+42. - [ ] [72] DiseÃ±ar flujo de reset de partida con limpieza local y reconciliaciÃ³n posterior [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md Â§3.4; rest <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+43. - [ ] [72] DiseÃ±ar contrato de seÃ±ales pÃºblicas del autoload (5 seÃ±ales) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+44. - [ ] [72] DiseÃ±ar API de consulta pÃºblica completa (13 funciones) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+45. - [ ] [72] DiseÃ±ar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+46. - [ ] [72] DiseÃ±ar fechas tomadas una Ãºnica vez por desbloqueo y persistidas [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+47. - [ ] [72] DiseÃ±ar extensiÃ³n futura: nuevos tipos de condiciÃ³n sin tocar el manager (polimorfismo) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+48. - [ ] [72] DiseÃ±ar convivencia de notificaciones con pausas del juego y menÃºs abiertos [M] -- agnes-2.5-flash 2026-09-12: RF6 hereda cola/pool de M53; EventBus <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+49. - [ ] [72] No duplicar el registro de hitos de M71: logros comparten ids de hitos sin re-implementarlos [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+50. - [ ] [72] Consumir seÃ±ales de donaciÃ³n de M37 para CondicionColeccion [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+51. - [ ] [72] Usar ids de colecciones reales de M37 en las definiciones .tres [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+52. - [ ] [72] Crear logros de colecciÃ³n completada coherentes con los criterios de M37 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+53. - [ ] [72] DiseÃ±ar SteamSync desacoplado que escuche logro_desbloqueado sin modificar el manager [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+54. - [ ] [72] Sincronizar local -> Steam con SetAchievement + StoreStats al desbloquear [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+55. - [ ] [72] Sincronizar Steam -> local con GetAchievement al cargar partida [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+56. - [ ] [72] Reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado [M] -- agnes-2.5-flash 2026-09-12: DISEÃ‘O en 03-Diseno.md Â§3.2 paso 4 (lo <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+57. - [ ] [72] Mapear logro_steam_id 1:1 con el catÃ¡logo declarado en la pÃ¡gina de Steam (M97) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+58. - [ ] [72] Validar en editor que el mapeo Steam sea consistente y sin duplicados [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+59. - [ ] [72] Garantizar que la capa Steam nunca bloquee ni retrase el gameplay local [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+60. - [ ] [72] Logro instalado despuÃ©s de que el jugador ya cumpliÃ³ la condiciÃ³n: otorgado retroactivamente al cargar [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+61. - [ ] [72] Desbloqueo con Steam desactivado: funciona idÃ©ntico y la prÃ³xima sesiÃ³n con Steam reconcilia [M] â€” iter. 1-4: sin capa Steam; desbloqueo local co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+62. - [ ] [72] Desbloqueo con Steam activado fallido por red: no reintentar indefinidamente, reintentar en carga [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+63. - [ ] [72] Cierre abrupto del juego justo despuÃ©s de desbloquear: logro persistido por write-through [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+64. - [ ] [72] Guardado corrupto con ids de logros desconocidos: descartar sin romper la partida [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+65. - [ ] [72] Partida vieja sin diccionario de logros (migraciÃ³n): crear estado vacÃ­o y evaluar retroactivo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+66. - [ ] [72] Borrar la partida con logros en Steam: no borrar Steam; reconciliar en la prÃ³xima sesiÃ³n [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+67. - [ ] [72] 20 logros desbloqueados a la vez en una migraciÃ³n: cola con resumen "N nuevos logros" [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+68. - [ ] [72] Logro oculto consultado antes de desbloquearse: mostrar misterio sin filtrar datos [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+69. - [ ] [72] CondiciÃ³n compuesta con subcondiciÃ³n de estadÃ­stica inexistente: validaciÃ³n en editor la detecta [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+70. - [ ] [72] NotificaciÃ³n durante pantalla de carga o cinemÃ¡tica: encolar y mostrar al recuperar control [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+71. - [ ] [72] Partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinismo completo [S] â€” agnes-2026-09-06: _test_condici <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+72. - [ ] [72] Logro cuyo texto i18n falta: fallback al texto base espaÃ±ol sin error en pantalla [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+73. - [ ] [72] Ãndice de dirty flags por tipo de evento: re-evaluar solo logros afectados [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+74. - [ ] [72] Evitar allocaciones pesadas en el hot path de notify_event [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+75. - [ ] [72] Memorizar progreso de condiciones compuestas durante una misma evaluaciÃ³n [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+76. - [ ] [72] No evaluar logros ya desbloqueados (corte temprano por _desbloqueados) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+77. - [ ] [72] No reconstruir diccionarios del estado en cada consulta (cachÃ© de lectura) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+78. - [ ] [72] Persistencia diferida agrupada: write-through inmediato pero sin escrituras por frame [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+79. - [ ] [72] Cargar el catÃ¡logo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+80. - [ ] [72] Pooling de toasts UI (preinstanciar y reutilizar nodos) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+81. - [ ] [72] Panel de logros: construir los items solo al abrir y reciclarlos al filtrar [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+82. - [ ] [72] Maduras: verificar en Profiler que notify_event con 200 logros < 1 ms [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+83. - [ ] [72] Maduras: verificar 0.5 ms mÃ¡x extra por frame en eventos de progreso (sin GC spikes) [C] â€” agnes-2026-09-06: evaluaciÃ³n event-driven (no frame), _ <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+84. - [ ] [72] Crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementaciÃ³n) [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+85. - [ ] [72] Redactar README interno res://logros/README.md con guÃ­a "cÃ³mo agregar un logro" [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+86. - [ ] [72] Documentar las reglas cozy del catÃ¡logo en el README (sin grind, sin contrarreloj) [S] â€” agnes-2026-09-05: rules cozy documentadas en 01-Requerimie <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+87. - [ ] [72] Documentar la integraciÃ³n con M97 en plan-actual cuando exista la capa Steam real [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+88. - [ ] [72] Generar log en Logs/ al completar la implementaciÃ³n, con el formato estÃ¡ndar NN-descripcion_fecha.md [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+89. - [ ] [72] Planear tests unitarios del AchievementManager con partidas sintÃ©ticas (M112) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+90. - [ ] [72] Test unidad: notify_event desbloquea logro cuando la condiciÃ³n cumple [M] â€” _test_desbloqueo_por_evento <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+91. - [ ] [72] Test unidad: notify_event no desbloquea cuando la condiciÃ³n no cumple [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+92. - [ ] [72] Test unidad: doble notify_event no genera doble desbloqueo ni doble seÃ±al [M] â€” _test_idempotente <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+93. - [ ] [72] Test unidad: deserializaciÃ³n de estado corrupto no rompe la carga [M] â€” round-trip + logro_viejo purgado <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+94. - [ ] [72] Test unidad: condiciones compuestas AND/OR/NOT con casos de borde [M] â€” agnes-2026-09-05: _test_condicion_compuesta_edge_cases() prueba compuesta co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+95. - [ ] [72] Test integraciÃ³n: evento de M71 desbloquea logro de progresiÃ³n de punta a punta [C] â€” Historia.marcar_sello â†’ prereq_met â†’ M71 â†’ M72 (testea <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+96. - [ ] [72] Test integraciÃ³n: donaciÃ³n de M37 completa logro de colecciÃ³n [C] â€” coleccion_completa flora vÃ­a evaluador M71 (testeado iter. 1-2 vÃ­a flujo M3 <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+97. - [ ] [72] Test manual: 20 desbloqueos simultÃ¡neos muestran resumen encolado sin spam [M] -- agnes-2.5-flash 2026-09-12: lÃ³gica listada_para_ui()+cola M53 IMPL <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+98. - [ ] [72] Test manual: notificaciones desactivadas por accesibilidad no se muestran pero sÃ­ se registran [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+99. - [ ] [72] Test manual: borrar partida limpia logros locales y la sesiÃ³n Steam reconcilia [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+100. - [ ] [72] Test manual: ciclo cosechar-primera vez muestra el toast "Primera cosecha" [M] -- agnes-2.5-flash 2026-09-12: toast emitido por _emitir_toast() con ti <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+101. - [ ] [72] Test rendimiento: Profiler con 200 logros y evento de progreso < 1 ms [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+102. - [ ] [73] Icono por reliquia (M46) [S] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+103. - [ ] [73] Descripción que narra la reliquia original [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+104. - [ ] [73] Variedad visual por playa (M46) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+105. - [ ] [73] Testear conchas en 3 playas distintas [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+106. - [ ] [73] Registrar minerales minados (M35) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+107. - [ ] [73] Gema rara como ítem especial [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+108. - [ ] [73] Testear minerales por región [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+109. - [ ] [73] Registrar peces pescados (M34) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+110. - [ ] [73] Peces de temporada (M29) y hora (M31) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+111. - [ ] [73] Trofeo de pesca como recompensa (M18) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+112. - [ ] [73] Registrar al atrapar (FISH_CAUGHT) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+113. - [ ] [73] Testear peces raros (solo lluvia M32) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+114. - [ ] [73] Registrar plantas cosechadas (M33) y forrajeadas (M50) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+115. - [ ] [73] Semillas de temporada [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+116. - [ ] [73] Recompensa de colección (semilla rara M33) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+117. - [ ] [73] Registrar con CROP_HARVESTED [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+118. - [ ] [73] Testear plantas de las 4 estaciones (M29) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+119. - [ ] [73] Insectos nocturnos y diurnos (M31) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+120. - [ ] [73] Jaula decorativa como recompensa (M18) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+121. - [ ] [73] Registrar al capturar [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+122. - [ ] [73] Testear insectos en biomas distintos [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+123. - [ ] [73] Registrar fósiles excavados (M25) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+124. - [ ] [73] Esqueleto completo como recompensa (M37) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+125. - [ ] [73] Excavación con huevos (2 bloques) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+126. - [ ] [73] Registrar con FOSSIL_DUG [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+127. - [ ] [73] Testear fósiles en ruinas y montañas [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+128. - [ ] [73] Registrar cartas de festival (M74) y correo [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+129. - [ ] [73] Cartas de NPC (M19) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+130. - [ ] [73] Sobre de regalo como recompensa (M20) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+131. - [ ] [73] Registrar al recibir (CARTA_RECIBIDA) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+132. - [ ] [73] Testear cartas de temporada [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+133. - [ ] [73] Registrar fotografías tomadas (M56) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+134. - [ ] [73] Fotos de criaturas y lugares [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+135. - [ ] [73] Álbum premium como recompensa (M55) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+136. - [ ] [73] Registrar con PHOTO_TAKEN [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+137. - [ ] [73] Testear fotos especiales (festival M74) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+138. - [ ] [73] Registrar muebles comprados (M39) y regalados (M20) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+139. - [ ] [73] Muebles de evento (M74) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+140. - [ ] [73] Mueble exclusivo como recompensa (M18) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+141. - [ ] [73] Registrar al colocar en la casa (M18) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+142. - [ ] [73] Testear muebles de tienda rotativa [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+143. - [ ] [73] Registrar ropa comprada (M39) y de evento (M74) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+144. - [ ] [73] Atuendos de NPC (M20) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+145. - [ ] [73] Atuendo exclusivo como recompensa (M46) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+146. - [ ] [73] Registrar al usar (vestuario) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+147. - [ ] [73] Testear ropa de las 4 estaciones [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+148. - [ ] [73] Registrar herramientas de misiones (M22/M23) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+149. - [ ] [73] Herramientas de crafting avanzado (M16) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+150. - [ ] [73] Mejora de herramienta como recompensa [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+151. - [ ] [73] Registrar al fabricar [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+152. - [ ] [73] Testear herramientas únicas (1 por partida) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+153. - [ ] [73] Registrar documentos de lore (M22) y ruinas (M25) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+154. - [ ] [73] Documentos de la biblioteca [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+155. - [ ] [73] Lore desbloqueado como recompensa (M55) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+156. - [ ] [73] Registrar al leer (M21/M70) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+157. - [ ] [73] Testear documentos sin spoilers (orden de lectura) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+158. - [ ] [73] Registrar mapas de tesoro (M54/M71) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+159. - [ ] [73] Mapas de exploración [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+160. - [ ] [73] Tesoro oculto como recompensa (M71) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+161. - [ ] [73] Registrar al encontrar [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+162. - [ ] [73] Testear mapas con coordenadas correctas [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+163. - [ ] [73] Registrar símbolos de puzzles (M24) y templos (M26) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+164. - [ ] [73] Símbolos de runas [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+165. - [ ] [73] Pista de puzzle como recompensa (M24) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+166. - [ ] [73] Registrar al resolver [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+167. - [ ] [73] Testear símbolos de los 7 anillos (M26) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+168. - [ ] [73] Registrar mensajes en botellas y NPC (M21) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+169. - [ ] [73] Mensajes de correo [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+170. - [ ] [73] Historia de NPC como recompensa (M20) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+171. - [ ] [73] Registrar al leer [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+172. - [ ] [73] Testear mensajes repetidos (dedupe) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+173. - [ ] [73] Registrar secretos de acciones ocultas (M71) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+174. - [ ] [73] Secretos de exploración [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+175. - [ ] [73] Contenido oculto como recompensa (M55) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+176. - [ ] [73] Registrar objetos de la historia principal (M22) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+177. - [ ] [73] Objetos por capítulo [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+178. - [ ] [73] Final alterno como recompensa (M22) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+179. - [ ] [73] Registrar con MISION_CAMBIADA [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+180. - [ ] [73] Testear objetos de los 7 capítulos [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+181. - [ ] [73] Otorgar recompensa definida (M14/M38) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+182. - [ ] [73] Notificación especial al completar (M44) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+183. - [ ] [73] Confeti sutil por evento (M52) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+184. - [ ] [73] Desbloquear progresión (M71: receta M16, área, atajo M69) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+185. - [ ] [73] Progreso por categoría en el diario (M55) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+186. - [ ] [73] % sobre lo descubierto (anti-spoiler) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+187. - [ ] [73] Registrar logros de colección (M72) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+188. - [ ] [73] Migración de saves antiguos [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+189. - [ ] [73] Recolectar con inventario lleno (M14) o durante diálogo (M21, bloqueado) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+190. - [ ] [73] Recolectar en evento (M74) e ítem de fuente borrada (fallback) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+191. - [ ] [73] Catálogo estático sin consultas por frame (M61) y sin GC pesado (M62) [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+192. - [ ] [73] Probar 500 ítems de estado sin lag y con profiler (M116) [C] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+193. - [ ] [73] Probar 22 categorías en estado inicial y colección con 1 faltante [M] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+194. - [ ] [73] Crear validate_collectibles.gd (ids únicos, totales, recompensas, i18n) [C] (revertido: artefacto inexistente, BUG-070 Familia A, Ling 3.1 Flash msg 5 <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+195. - [ ] [73] Probar ciclo completo: recolectar â†’ registrar â†’ ver en diario â†’ completar â†’ recompensa [C] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+196. - [ ] [73] Probar ciclo de guardado: recolectar â†’ guardar â†’ cargar â†’ conservar [C] <!-- fuente: 73-Coleccionables/05-Checklist.md -->
+197. - [ ] [20] Definir el problema: relaciones significativas con vecinos sin castigo por ausencia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+198. - [ ] [20] Registrar dependencias: M19, M14, M29; relaciones M21, M23, M26, M31, M32, M73 [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+199. - [ ] [20] Catalogar los 26 puntos de la seccion 19 del plan maestro [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+200. - [ ] [20] RF1: niveles de amistad 0-10 con umbrales [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+201. - [ ] [20] RF2: puntos de amistad acumulativos sin fuente de decaimiento [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+202. - [ ] [20] RF3: limite de un regalo efectivo por vecino y dia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+203. - [ ] [20] RF4-RF8: preferencias, charlas, cartas, recompensas y eventos definidos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+204. - [ ] [20] Curva de umbrales por nivel definida (20, 40, 70, 100, 140, 190, 250, 320, 400, 500) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+205. - [ ] [20] Regalo amado 20 puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+206. - [ ] [20] Regalo que gusta 10 puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+207. - [ ] [20] Regalo neutral 5 puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+208. - [ ] [20] Regalo duplicado 2 puntos (cortesia, nunca 0) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+209. - [ ] [20] Charla diaria 5 + 1 por nivel (max +10) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+210. - [ ] [20] Carta respondida 8 puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+211. - [ ] [20] Evento como participante 15 puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+212. - [ ] [20] Capacidad para definir nombres de nivel: Conocido, Amigo, Confidente, Mejor amigo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+213. - [ ] [20] Acceso a eventos por nivel minimo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+214. - [ ] [20] Desbloqueo de historias de amistad al nivel requerido (M23) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+215. - [ ] [20] Excedente de puntos conservado al subir de nivel [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+216. - [ ] [20] Bandeja de recompensas pendientes sin expiracion [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+217. - [ ] [20] Recompensas reclamables en cualquier momento posterior (sin FOMO) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+218. - [ ] [20] Progress visible: barra de progreso dentro del nivel actual [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+219. - [ ] [20] Feedback de nivel subido con animacion y lista de desbloqueos [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+220. - [ ] [20] Coste de evaluacion menor a 1 ms por regalo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+221. - [ ] [20] Registro de 1 charla efectiva por vecino y dia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+222. - [ ] [20] Puntos base + bonus por nivel de confianza [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+223. - [ ] [20] El vecino menciona recuerdos (primer regalo, cumpleanos celebrado) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+224. - [ ] [20] Charla no consume regalo diario (independiente) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+225. - [ ] [20] Sin charla repetida con los mismos puntos en el mismo dia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+226. - [ ] [20] Mensaje discreto de UI cuando la charla del dia ya se realizo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+227. - [ ] [20] Textos de cartas y respuestas por vecino en data [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+228. - [ ] [20] FriendshipEvent como Resource: tipo, nivel minimo, dia, hora, lugar, puntos [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+229. - [ ] [20] Tipos soportados: visita, picnic, reunion, cumpleanos, festival (M73) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+230. - [ ] [20] Requisito de nivel minimo verificado antes de convocar [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+231. - [ ] [20] Franja horaria validada contra el reloj M29 [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+232. - [ ] [20] Lugar validado contra POI del mundo (M19/M08) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+233. - [ ] [20] Puntos otorgados a todos los participantes [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+234. - [ ] [20] Registro del evento en la memoria del vecino (recuerdo) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+235. - [ ] [20] Eventos sin obligacion: el jugador puede declinar sin penalizacion [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+236. - [ ] [20] Decision documentada: Alternativa B (acumulativa) en 02-Analisis.md [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+237. - [ ] [20] Los vecinos no registrados no existen en el servicio [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+238. - [ ] [20] Alta desregistro de vecino: al mudarse se conserva el historial para futuro reencuentro [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+239. - [ ] [20] Memoria del vecino alimentada por interacciones destacadas [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+240. - [ ] [20] Rutinas y horarios de M19 intactos (M20 no modifica IA) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+241. - [ ] [20] Cambios de rutina sociales (visitar al mejor amigo) habilitados por data [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+242. - [ ] [20] Sin acoplamiento con componentes de navegacion ni FSM [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+243. - [ ] [20] Metadatos de item consultados sin modificar M14 [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+244. - [ ] [20] Extraccion del item al regalar integrada [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+245. - [ ] [20] Insercion de objetos de recompensa al reclamar [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+246. - [ ] [20] Recetas desbloqueadas por nivel van a la tabla de crafting [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+247. - [ ] [20] Adjuntos de carta usados y recibidos correctamente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+248. - [ ] [20] Items decorativos de recompensa marcados como regalo valido [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+249. - [ ] [20] Misiones de amistad consultan nivel minimo [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+250. - [ ] [20] Misiones consultan memoria del vecino (recuerdos) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+251. - [ ] [20] Bonus de puntos al completar historia secundaria [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+252. - [ ] [20] Recompensas exclusivas por historia [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+253. - [ ] [20] Cierre de historia crea recuerdo permanente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+254. - [ ] [20] Sin bucles: amistad 10 no bloquea historias pendientes [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+255. - [ ] [20] Schema versionado y migracion al cargar (M26) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+256. - [ ] [20] Vecinos nuevos agregados al schema sin romper guardados previos [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+257. - [ ] [20] Regalo duplicado con puntos minimos y mensaje amable [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+258. - [ ] [20] Vecino ausente de la isla (viaje, M69): regalo rechazado con aviso [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+259. - [ ] [20] Vecino que se muda: historial archivado, sistema no falla [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+260. - [ ] [20] Inventario vacio: opcion regalar deshabilitada con tooltip [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+261. - [ ] [20] Carta sin texto seleccionado: validacion [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+262. - [ ] [20] Evento convocado con participante ausente: se omite con aviso [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+263. - [ ] [20] Doble click en reclamar recompensa: idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+264. - [ ] [20] Dia cambiado a mitad de accion (medianoche M29): limites recien recalculados [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+265. - [ ] [20] Guardado corrupto del modulo: fallback a estado vacio sin crash [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+266. - [ ] [20] Evaluador sin allocations relevantes (diccionarios reutilizados) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+267. - [ ] [20] Indice de vecinos por id para consultas O(1) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+268. - [ ] [20] Bandeja de recompensas bajo demanda (no refresco continuo) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+269. - [ ] [20] Logs de debug desactivados en release (conditional symbols) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+270. - [ ] [20] Panel de vecino con nivel, puntos y barra de progreso [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+271. - [ ] [20] HUD de limite diario (regalo, charla, carta) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+272. - [ ] [20] Popup de reaccion del vecino al regalo [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+273. - [ ] [20] Bandeja de correo y recompensas con contador no intrusivo [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+274. - [ ] [20] Animacion de nivel subido con desbloqueos listados [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+275. - [ ] [20] Tooltips en items de regalo con pista de gustos descubiertos [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+276. - [ ] [20] Accesibilidad: textos legibles, contraste, opcion de texto lento [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+277. - [ ] [20] Frases de despedida segun nivel ("hasta manana, amigo") [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+278. - [ ] [20] Recuerdos hablados: el vecino comenta el primer regalo [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+279. - [ ] [20] Pequenos regalos de retorno del vecino por correo [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+280. - [ ] [20] Reacciones suaves y nunca hostiles por parte del vecino [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+281. - [ ] [20] Coherencia de tono: el NPC nunca rechaza con dureza [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+282. - [ ] [20] Eventos con ambiente acogedor (sonido ambiente, luz calida) [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+283. - [ ] [20] Test: regalo amado/gusta/neutral/duplicado devuelve puntos esperados [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+284. - [ ] [20] Test: limite diario respetado para regalo, charla y carta [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+285. - [ ] [20] Test: excedente conservado al subir de nivel [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+286. - [ ] [20] Test: ausencia de 30 dias no reduce puntos (sin FOMO) [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+287. - [ ] [20] Test: guardar/cargar a mitad de nivel restaura exacto [M] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+288. - [ ] [20] Test: reclamar recompensa idempotente [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+289. - [ ] [20] Recorrido M114: 10 vecinos a nivel 5+ en sesiones simuladas sin fallos [C] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+290. - [ ] [20] 01-Requerimientos creado y firmado [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+291. - [ ] [20] 02-Analisis creado y firmado (alternativas y decision) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+292. - [ ] [20] 03-Diseno creado y firmado (arquitectura y contratos) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+293. - [ ] [20] 04-Codigo creado y firmado (rutas, firmas, Notas del Agente) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+294. - [ ] [20] 05-Checklist creado y firmado (este archivo) [S] <!-- fuente: 20-Sistema-De-Amistad/05-Checklist.md -->
+295. - [ ] [70] Registrar dependencias del módulo: M11, M13, M08 [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+296. - [ ] [70] Registrar consumidores del módulo: M19, M21, M33, M35, M36, M65, M18, M14, M17, M22/M24/M26 [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+297. - [ ] [70] Definir el objetivo: una única tecla de interacción con indicador visual y prioridad determinística [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+298. - [ ] [70] Definir fuera de alcance: mecánicas concretas de los consumidores, inventario, diálogos, IA [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+299. - [ ] [70] Establecer restricción cozy: tecla E sin objetivo nunca genera error ni castigo [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+300. - [ ] [70] Establecer restricción de rendimiento: presupuesto de detección < 0.5 ms por frame [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+301. - [ ] [70] RF1: desregistro automático al salir del mundo activo (`_exit_tree`, M63 streaming) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+302. - [ ] [70] RF2: enumerar las 8 categorías de interacción con prioridad base [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+303. - [ ] [70] RF2: cada categoría define ícono, sonido y etiqueta por defecto [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+304. - [ ] [70] RF3: respetar el rango base del personaje de M11 (4 m) sin excederlo por defecto [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+305. - [ ] [70] RF4: espaciado del raycast de visión (1 por ventana de N=4 frames) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+306. - [ ] [70] RF5: desempate por desviación angular frente del jugador (menor gana) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+307. - [ ] [70] RF5: cambio de objetivo con fade (0.08-0.12 s), nunca salto brusco [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+308. - [ ] [70] RF5: excluir de la selección a los atenuados si hay al menos un objetivo válido [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+309. - [ ] [70] RF13: re-selección inmediata al girar el jugador si la desviación angular cambia el orden [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+310. - [ ] [70] RF19: ordenamiento con k candidatos típico < 8 (k log k barato) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+311. - [ ] [70] RF6: indicador "E + ícono de categoría" world-space sobre el objetivo [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+312. - [ ] [70] RF6: el indicador flota sobre `obtener_posicion_interaccion()` con suavizado de posición [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+313. - [ ] [70] RF6: línea de contexto en HUD con nombre localizado del objetivo ("Hablar con Mira") [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+314. - [ ] [70] RF20: ícono de tecla según dispositivo activo (teclado E / gamepad A o B, M57) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+315. - [ ] [70] RF6: línea de contexto oculta durante la micro-animación de interacción [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+316. - [ ] [70] RF15: chirrido de interacción por categoría (base de sonido M11/M44) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+317. - [ ] [70] RF15: partículas opcionales provistas por el consumidor vía señal previa [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+318. - [ ] [70] RF15: feedback diferenciado de éxito (campana suave) y fallo (tono bajo, sin castigo) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+319. - [ ] [70] RF17: validación de herramienta en mano (M13) dentro de `requisitos_cumplidos` [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+320. - [ ] [70] RF17: validación de item seleccionado en inventario (M14) para regalos [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+321. - [ ] [70] RF17: validación de hora/día (M29/M31) para puertas y cosechas de temporada [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+322. - [ ] [70] RF17: validación de nivel de amistad (M20) para interacciones sociales [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+323. - [ ] [70] RF25: pausa de procesamiento al pausar el juego (ProcessMode correcto) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+324. - [ ] [70] RF25: gestión de la señal de modal abierto (M53/M57) -> estado DORMIDO [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+325. - [ ] [70] RF12: log M103 si el consumidor no responde a la cancelación [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+326. - [ ] [70] RF13: cambio de objetivo por reorden de prioridad sin parpadeo (histéresis) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+327. - [ ] [70] RF14: re-evaluar automáticamente al cerrar la UI en el siguiente frame [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+328. - [ ] [70] RF23: cancelación de zona de trigger si el jugador sale antes de activar [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+329. - [ ] [70] RF12: verificar que no queden señales colgadas (objetivo_perdido) tras cancelar [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+330. - [ ] [70] RF15: feedback sonoro unificado por categoría (chirrido de madera/metal/animal) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+331. - [ ] [70] RF15: las partículas del consumidor se reproducen vía señal, no las dibuja el gestor [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+332. - [ ] [70] RF15: sonido de "nadie cerca" mínimo y amable (opcional, bajo volumen) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+333. - [ ] [70] RF15: textos de feedback 100% localizables con `tr()` [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+334. - [ ] [70] RN-rendimiento: raycast de visión espaciado (N=4) y acotado por categoría [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+335. - [ ] [70] RN-localización: todo texto visible pasa por `tr()` [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+336. - [ ] [70] RN-persistencia: `GameState.M70` con esquema acotado y escritura diferida [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+337. - [ ] [70] RN-voxel: línea de visión compatible con Voxel Tools (VoxelTool de M08) [C] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+338. - [ ] [70] Diseñar las 6 señales de salida del módulo [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+339. - [ ] [70] M11: leer posición, frente y estado FSM del jugador (inyección) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+340. - [ ] [70] M11: pasar a DORMIDO si el jugador está ocupado (dormir, cutscene, minijuego) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+341. - [ ] [70] M11: respetar el rango base de interacción de 4 m del personaje [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+342. - [ ] [70] M08: integrar VoxelTool para la línea de visión (bloqueo por voxel sólido) [C] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+343. - [ ] [70] M13: validar requisitos de herramienta dentro de `requisitos_cumplidos` [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+344. - [ ] [70] M19: `set_ocupado(true)` -> NO_DISPONIBLE con razón ("Duerme", "Ocupado") [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+345. - [ ] [70] M19: migrar la burbuja world-space de vecinos al indicador del 70 (sin duplicados) [C] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+346. - [ ] [70] M21: apertura de diálogo al E sin UI propia en el 70 [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+347. - [ ] [70] M20: regalo al E con item seleccionado de M14 y validación de amistad [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+348. - [ ] [70] M33: recoger cosechas maduras al E [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+349. - [ ] [70] M14: abrir cofres con estado persistente (abierto) en GameState.M70 [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+350. - [ ] [70] M18: abrir/cerrar puertas al E; bloqueo por llave con razón [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+351. - [ ] [70] M65: acariciar/alimentar animales al E con factor de ánimo [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+352. - [ ] [70] M35/M46: recoger recursos cosechables al E (objeto) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+353. - [ ] [70] M22/M24/M26: activar triggers/cutscenes al E o por zona [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+354. - [ ] [70] M103: logging estructurado de errores de contrato, degradaciones y timeouts [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+355. - [ ] [70] Varios objetos juntos a la misma distancia: gana prioridad de categoría [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+356. - [ ] [70] Dos objetos idénticos superpuestos: se ordena por registro y nunca alterna [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+357. - [ ] [70] Jugador se aleja durante una interacción en curso: cancelación suave [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+358. - [ ] [70] Jugador gira 180 grados con dos objetos equidistantes: cambia por desviación angular [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+359. - [ ] [70] Pausa a mitad de interacción: DORMIDO, al reanudar continúa sin glitches [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+360. - [ ] [70] Cooldown de puerta y tecla E en auto-repeat: no se re-abre fuera de cooldown [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+361. - [ ] [70] Filtro de distancia con producto punto al cuadrado, sin sqrt en el paso rápido [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+362. - [ ] [70] Espaciado del raycast de línea de visión (N=4 frames) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+363. - [ ] [70] Pool del indicador world-space (sin instancias/destrucciones por frame) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+364. - [ ] [70] Evitar allocaciones de Arrays en el hot path (reuso de buffers) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+365. - [ ] [70] Ordenamiento solo sobre candidatos pre-filtrados (k < 8) [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+366. - [ ] [70] Escritura de persistencia diferida y por lote (cada 0.5 s como máximo) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+367. - [ ] [70] Verificación del presupuesto < 0.5 ms/frame con el profiler en escena densa [C] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+368. - [ ] [70] Documentar métricas de referencia para LOD de detección en zonas muy pobladas [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+369. - [ ] [70] Crear 01-Requerimientos.md con problema, objetivos, alcance, restricciones, RF y RN [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+370. - [ ] [70] Crear 02-Analisis.md con análisis del dominio, categorías, alternativas y decisiones D1-D7 [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+371. - [ ] [70] Crear 03-Diseno.md con arquitectura, nodos, contrato, flujos y rendimiento [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+372. - [ ] [70] Crear 05-Checklist.md con 130+ ítems verificables [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+373. - [ ] [70] Documentar la integración con M11/M13/M19 y demás consumidores en 03-Diseno.md [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+374. - [ ] [70] Documentar la regla de unificación de tecla (E vs F histórica) como pendiente para M57 [S] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+375. - [ ] [70] Definir escenario "esquina": objetivo tras pared voxel con categoría de visión [C] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+376. - [ ] [70] Definir escenario "cosecha": 30 plantas maduras en fila sin parpadeo [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+377. - [ ] [70] Definir escenario "puerta bloqueante": E repetida durante interacción en curso [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+378. - [ ] [70] Definir escenario "streaming": alta/baja de zona con M63 sin referencias colgadas [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+379. - [ ] [70] Plan de tests de determinismo: misma entrada -> misma selección (assert en Edit Mode) [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+380. - [ ] [70] Plan de tests de persistencia: cofre abierto, puerta y animal acariciado sobreviven sesión [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+381. - [ ] [70] Plan de pruebas de cancelación: distancia, UI, pausa y cambio de objetivo [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+382. - [ ] [70] Plan de pruebas de input: teclado E, gamepad A/B, remapeo y auto-repeat [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+383. - [ ] [70] Plan de pruebas de localización: nombres y razones traducibles sin cortes de layout [M] <!-- fuente: 70-Interacciones/05-Checklist.md -->
+384. - [ ] [158] Definir el problema: progresion de herramientas por tier que desbloquee contenido sin copiar a Zelda [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+385. - [ ] [158] Registrar dependencias: M13, M38, M27, M28, M71, M22 [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+386. - [ ] [158] T1 se obtiene gratis en isla principal (auto-coleccion) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+387. - [ ] [158] T2-T4 se forjan en islas distintas con profesional especializado [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+388. - [ ] [158] Forja requiere materiales + monedas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+389. - [ ] [158] Precios progresivos por isla (+50% minimo entre islas) [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+390. - [ ] [158] Cursos de oficio por isla (carpinteria, herreria, encantamiento) [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+391. - [ ] [158] Cursos permiten vender herramientas en tienda del jugador [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+392. - [ ] [158] Historia principal requiere T4 para completarse [C] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+393. - [ ] [158] Progresion no lineal (jugador elige orden de islas) [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+394. - [ ] [158] Construccion en otras islas posible [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+395. - [ ] [158] NPCs visitantes compran herramientas 1x/dia [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+396. - [ ] [158] Premium permite comprar monedas por Steam [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+397. - [ ] [158] Checklist minimo 100 items verificables [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+398. - [ ] [158] ToolTierDefinition como Resource con propiedades por tier [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+399. - [ ] [158] Cada tier tiene color visual distintivo [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+400. - [ ] [158] Cada tier tiene sonido de uso diferenciado [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+401. - [ ] [158] Cada tier tiene particulas diferenciadas [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+402. - [ ] [158] La herramienta mejorada reemplaza visualmente a la anterior [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+403. - [ ] [158] ZoneGate como Node3D con mesh visual por tipo [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+404. - [ ] [158] Feedback visual al no tener tier (brillo rojo suave) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+405. - [ ] [158] Gate desaparece permanentemente al desbloquearlo [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+406. - [ ] [158] ForgeUI como Control con lista de recetas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+407. - [ ] [158] ForgeUI muestra materiales necesarios y monedas [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+408. - [ ] [158] Se entrega herramienta al inventario [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+409. - [ ] [158] Se registra en M71 (Progresion) el hito de tier [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+410. - [ ] [158] Animacion de forja (brillo, sonido, particulas) [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+411. - [ ] [158] Herrero NPC con dialogo contextual segun isla [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+412. - [ ] [158] CourseUI como Control con info del curso [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+413. - [ ] [158] CourseUI valida tier requerido para tomar el curso [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+414. - [ ] [158] Precio de venta de herramientas varia segun curso [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+415. - [ ] [158] 1 NPC por dia maximo como visitante [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+416. - [ ] [158] NPC visita la tienda del jugador [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+417. - [ ] [158] Prefiere items de la profesion del NPC [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+418. - [ ] [158] Se registra transaccion en log [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+419. - [ ] [158] Animacion de NPC llegando a la tienda [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+420. - [ ] [158] Peces dorados: 1-3 por dia en cuerpos de agua [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+421. - [ ] [158] Cada pez dorado: 1-5 monedas al vender [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+422. - [ ] [158] Arboles con frutos dorados: 2-5 por dia [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+423. - [ ] [158] Cada fruto: 2-8 monedas al vender [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+424. - [ ] [158] Puzzles: 50-200 monedas por puzzle resuelto [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+425. - [ ] [158] Total estimado puzzles: ~3000 monedas [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+426. - [ ] [158] JarSpawner como Node3D con logica de reposicion [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+427. - [ ] [158] GoldFishSpawner como Node3D [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+428. - [ ] [158] GoldTreeSpawner como Node3D [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+429. - [ ] [158] Integracion con GameClock para reposicion [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+430. - [ ] [158] UI de inventario muestra monedas actuales [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+431. - [ ] [158] Paquete 500 monedas (.99) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+432. - [ ] [158] Paquete 2000 monedas (.99) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+433. - [ ] [158] Paquete 5000 monedas (.99) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+434. - [ ] [158] PremiumManager autoload para compras [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+435. - [ ] [158] Integracion con Steam IAP [C] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+436. - [ ] [158] Monedas premium son identicas a monedas normales [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+437. - [ ] [158] No hay limite de compra premium [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+438. - [ ] [158] Premium NO compra herramientas directamente [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+439. - [ ] [158] Premium solo da monedas, jugador debe ir a islas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+440. - [ ] [158] Log de compras premium para analytics [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+441. - [ ] [158] Capitulo 3-4 requiere T3 para avance [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+442. - [ ] [158] Capitulo 5-6 requiere T4 para avance [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+443. - [ ] [158] Capitulo 7 (final) requiere T4 completo [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+444. - [ ] [158] Templos verifican tier de herramienta [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+445. - [ ] [158] El jugador puede vivir en su pueblo sin avanzar [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+446. - [ ] [158] Progresion de historia visible en UI [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+447. - [ ] [158] PlayerToolProgress serializado en GameState.M158 [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+448. - [ ] [158] Tiers maximos alcanzados persistidos [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+449. - [ ] [158] Cursos aprendidos persistidos [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+450. - [ ] [158] Gates desbloqueados persistidos [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+451. - [ ] [158] Conteo de forjas persistido [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+452. - [ ] [158] Ventas a NPCs visitantes persistidas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+453. - [ ] [158] Estado de jarrones (ultima reposicion) persistido [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+454. - [ ] [158] Restauracion correcta tras guardar/cargar [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+455. - [ ] [158] El jugador obtiene T1 gratis en isla principal [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+456. - [ ] [158] El jugador puede viajar a isla 2 y forjar T2 [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+457. - [ ] [158] Cada isla subsiguiente tiene precios +50% minimo [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+458. - [ ] [158] Templos de historia no se completan sin T3/T4 [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+459. - [ ] [158] Jugador premium puede comprar monedas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+460. - [ ] [158] Jarrones se reponen cada 7 dias del juego [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+461. - [ ] [158] NPCs visitantes compran 1x/dia [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+462. - [ ] [158] El jugador puede construir en otras islas [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+463. - [ ] [158] 01-Requerimientos.md creado y firmado [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+464. - [ ] [158] 02-Analisis.md creado y firmado [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+465. - [ ] [158] 03-Diseno.md creado y firmado [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+466. - [ ] [158] 04-Codigo.md creado y firmado [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+467. - [ ] [158] 05-Checklist.md creado y firmado (este archivo) [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+468. - [ ] [158] Tabla de tiers documentada [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+469. - [ ] [158] Tabla de costos por isla documentada [S] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+470. - [ ] [158] DoD cumplida: 5 archivos + firma + log [M] <!-- fuente: 158-Herramientas-Y-Desbloqueo-De-Zonas/05-Checklist.md -->
+
+1. - [ ] [161] Documentar variantes primavera <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+2. - [ ] [161] Documentar variantes verano <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+3. - [ ] [161] Documentar variantes otoño <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+4. - [ ] [161] Documentar variantes invierno <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+5. - [ ] [161] Documentar variantes estacionales <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+6. - [ ] [161] Documentar variantes estacionales generales <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+7. - [ ] [161] Verificar que retratos 2D (M46) usan estos diseños <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+8. - [ ] [161] Verificar que modelos 3D (M45) implementan estos diseños <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+9. - [ ] [161] Verificar que NPCs aparecen en ubicaciones M160 <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+10. - [ ] [161] Verificar que ropa puede coincidir con M155 <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+11. - [ ] [161] Crear test de integración con M19 <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+12. - [ ] [161] Crear test de integración con M46 <!-- fuente: 161-Diseno-Visual-De-NPCs/05-Checklist.md -->
+13. - [ ] [159] Crear `06-Diseno-Visual.md` con paleta global de colores <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+14. - [ ] [159] Definir colores HEX para cada categoría de objeto <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+15. - [ ] [159] Definir formas y proporciones por categoría <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+16. - [ ] [159] Definir materiales por categoría <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+17. - [ ] [159] Definir paleta por bioma (13 biomas) <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+18. - [ ] [159] Definir reglas de variantes de color (máx 6 por malla) <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+19. - [ ] [159] Definir proporciones para Godot (1m = 1 unidad) <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+20. - [ ] [159] Definir LODs por categoría <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+21. - [ ] [159] Definir texturas por material <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+22. - [ ] [159] Crear referencias visuales para mobiliario <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+23. - [ ] [159] Crear referencias visuales para herramientas <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+24. - [ ] [159] Crear referencias visuales para naturaleza <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+25. - [ ] [159] Validar paleta de colores con dirección de arte <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+26. - [ ] [159] Documentar variaciones por bioma <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+27. - [ ] [159] Integrar con M45 (Arte 3D) para producción de assets <!-- fuente: 159-Catalogo-De-Objetos/05-Checklist.md -->
+28. - [ ] [90] Definir culling de objetos fuera de distancia <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+29. - [ ] [90] Definir LODs para objetos lejanos (M50) — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** hay LOD del **terreno**, no de objetos. `scripts/main_ <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+30. - [ ] [90] Definir iluminación volumétrica (baja/media: off, alta: on, ultra: alta calidad) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+31. - [ ] [90] Definir animación por wind shader <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+32. - [ ] [90] Definir interacción con jugador <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+33. - [ ] [90] Definir normal map para olas <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+34. - [ ] [90] Definir parallax para profundidad <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+35. - [ ] [90] Definir caustics para ultra <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+36. - [ ] [90] Definir colisión de partículas con world <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+37. - [ ] [90] Definir toggle de bloom — **PARCIAL (step-5-kilocode, Kilo Code, 2026-10-12):** el bloom está **activo** en la escena principal (`main_island.tscn` L4 <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+38. - [ ] [90] Definir bloom shader para glow <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+39. - [ ] [90] Definir threshold para fuentes de luz brillantes <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+40. - [ ] [90] Definir motion blur basado en velocidad de cámara <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+41. - [ ] [90] Definir más blur cuando la cámara se mueve más rápido <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+42. - [ ] [90] Definir desactivado por defecto (causa mareo) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+43. - [ ] [90] Definir depth of field basado en distancia de la cámara <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+44. - [ ] [90] Definir blur para objetos fuera de foco <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+45. - [ ] [90] Definir aperture controla cuánto blur <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+46. - [ ] [90] Definir FSR 1.0 (AMD) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+47. - [ ] [90] Definir FSR 2.0 (AMD mejorado) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+48. - [ ] [90] Definir DLSS (NVIDIA) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+49. - [ ] [90] Definir XeSS (Intel) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+50. - [ ] [90] Definir detección de GPU y habilitación correspondiente <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+51. - [ ] [90] Definir detección de RAM (OS.get_static_memory_usage()) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+52. - [ ] [90] Definir detección de CPU (OS.get_processor_name()) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+53. - [ ] [90] Diseñar tamaño de fuente (slider 0.5x a 2x) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+54. - [ ] [90] Diseñar alto contraste (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+55. - [ ] [90] Diseñar reducción de motion blur (opción para reducir mareo) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+56. - [ ] [90] Diseñar reducción de bloom (opción para reducir distracción visual) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+57. - [ ] [90] Diseñar aplicación en tiempo real <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+58. - [ ] [90] Diseñar FPS counter (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+59. - [ ] [90] Diseñar profiling de GPU (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+60. - [ ] [90] Diseñar monitoreo de uso de GPU y RAM (opcional, en debug) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+61. - [ ] [90] Diseñar FPS counter visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+62. - [ ] [90] Diseñar profiling visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+63. - [ ] [90] Diseñar monitoreo visible en debug (M110) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+64. - [ ] [90] Diseñar controles para resolución (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+65. - [ ] [90] Diseñar controles para pantalla completa (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+66. - [ ] [90] Diseñar controles para ventana (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+67. - [ ] [90] Diseñar controles para borderless (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+68. - [ ] [90] Diseñar controles para VSync (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+69. - [ ] [90] Diseñar controles para FPS cap (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+70. - [ ] [90] Diseñar controles para escala de resolución (slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+71. - [ ] [90] Diseñar controles para upscaling (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+72. - [ ] [90] Diseñar controles para calidad de sombras (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+73. - [ ] [90] Diseñar controles para calidad de texturas (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+74. - [ ] [90] Diseñar controles para distancia de dibujado (slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+75. - [ ] [90] Diseñar controles para calidad de efectos (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+76. - [ ] [90] Diseñar controles para calidad de vegetación (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+77. - [ ] [90] Diseñar controles para calidad de agua (x] Diseñar controles para calidad de partículas (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+78. - [ ] [90] Diseñar controles para anti-aliasing (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+79. - [ ] [90] Diseñar controles para anisotropic filtering (dropdown) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+80. - [ ] [90] Diseñar controles para post-processing (toggle) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+81. - [ ] [90] Diseñar controles para bloom (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+82. - [ ] [90] Diseñar controles para motion blur (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+83. - [ ] [90] Diseñar controles para depth of field (toggle + slider) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+84. - [ ] [90] Diseñar botón de detección automática <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+85. - [ ] [90] Diseñar HardwareDetector <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+86. - [ ] [90] Diseñar método detect_hardware() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+87. - [ ] [90] Diseñar lógica de recomendación según GPU, RAM, CPU <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+88. - [ ] [90] Diseñar método apply_resolution() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+89. - [ ] [90] Diseñar método apply_vsync() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+90. - [ ] [90] Diseñar método apply_fps_cap() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+91. - [ ] [90] Diseñar método apply_anti_aliasing() <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+92. - [ ] [90] Incluir resolución como objeto {x, y} <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+93. - [ ] [90] Diseñar pruebas de legibilidad en 720p <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+94. - [ ] [90] Diseñar pruebas de legibilidad en 1080p <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+95. - [ ] [90] Diseñar pruebas de legibilidad en 4K <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+96. - [ ] [90] Diseñar pruebas de soporte de tildes <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+97. - [ ] [90] Diseñar pruebas de soporte de ñ <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+98. - [ ] [90] Diseñar pruebas de soporte de símbolos <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+99. - [ ] [90] Diseñar pruebas de localización (español, portugués, francés, alemán, italiano, ruso) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+100. - [ ] [90] Diseñar pruebas de ajustes de accesibilidad <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+101. - [ ] [90] Diseñar pruebas de rendimiento (tiempo de carga) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+102. - [ ] [90] Diseñar 06-Plan-Testings.md (APLICA) <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+103. - [ ] [90] Diseñar tests de ajustes individuales <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+104. - [ ] [90] Diseñar tests de aplicación en tiempo real <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+105. - [ ] [90] Diseñar tests de detección automática de hardware <!-- fuente: 90-Configuracion-Grafica/05-Checklist.md -->
+| 12 | **M159** legal-tools (encargo director #784) | ✅ CERRADO (80/147) | — | agnes 2026-10-22: 	ools/legal/generate_item_attribution.py inyecta tEXt Copyright/Author en los 300 PNG de items_m159 (modelo LicenseProfile M83, idempotente) + 	est_generate_item_attribution.py (7 checks, 0 fallos, agregado a quality.yml legal-tools). alidate_asset_metadata.py --check = exit 0 (gate legal-tools VERDE). +1 [x]. Reporte #785. |
+| 13 | **M45** Arte-3D (t1 doc convenios, COLA A V3) | 🟡 Cerrada t1 (150→155/171) | — | agnes 2026-10-22: 5 items doc en 03-Diseno §7 (carpeta npc/, nombres variantes _cN, límites escena, compat M10, ejemplos ref). Los [ ] restantes (14) = validación assets (validate_mesh.gd MISSING + 23 GLB 0 disco) → bloqueado. Reporte #789. |
+| 14 | **M161** doc variantes estacionales (COLA A V3) | 🟡 Cerrada (122→126/138) | — | agnes 2026-10-22: 03-Diseno §9.4.1 (12 NPCs variantes 4 estaciones + reglas por rol, códigos SK/HR de data). 4 items [x]. La máquina variantes_estacionales = RF6 iter 2 (externo). Reporte #791. |
+| 15 | **M159** datos tanda 1 (encargo #794) | 🟡 Cerrada t1 (80→90/147) | — | agnes 2026-10-22: +10 items diseño-visual (06-Diseno-Visual de MiMo ya cubre; flip con § evidencia + §21 nuevo LOD/texturas). Siguiente: [?] de datos/ABM (drops/precios/stack/lore). Reporte #795. |
+| 16 | **M159** datos t2 ABM (encargo #794) | 🟡 Cerrada t2 (90→105/147) | — | agnes 2026-10-22: items_abm.gd (STACK_MAX/PRECIOS/TIER_STATS/SLOTS/RAREZA/INTERACCIONES/DROP/REGEN/BONO/FESTIVALES) + 15 [?] flip con evidencia. Reporte #797. |
+| 17 | **Cola QA §21.8 runtime CERRADA** (runs habilitados #801) | ✅ Verificada | — | agnes 2026-10-22: M90 42/0 (test_graphics_config_post_m90) + M161 356/0 (test_npc_visual_database) + M83 13/0 (test_asset_attribution_m83, bug de firma Array[LP]→Array corregido) + M159 legal-tools exit0. Bugs reales corregidos en el camino: const-DEBUG_FLAGS (M90) + firmas Array[LP] (M83). Test M90 inyectado a quality.yml. Reporte #802. |
+| 18 | **M90** t7 upscaling + shaders doc (runs habilitados) | 🟡 Cerrada t7 (191→192/249) | — | agnes 2026-10-22: mapeo_upscaling/aplicar_upscaling + test 47/0; 4 shaders documentados (M47/M50/M51, escalon). Reporte #804. |
+| 19 | **M90** t8 iluminación volumétrica (runs habilitados) | 🟡 Cerrada t8 (192→193/249) | — | agnes 2026-10-22: VOLUMETRICO por calidad (bajo/medio off, alto 0.1, ultra 0.2) + mapeo_volumetrico (var _calidad) + aplicar_volumetrico (volumetric_fog) + test 52/0. Bugs corregidos en el run: obtener('calidad')→_calidad + claves de preset bajo/medio/alto/ultra. Reporte #806. |
+| 20 | **M90** t9 wind shader real (runs habilitados) | 🟡 Cerrada t9 (193→194/249) | — | agnes 2026-10-22: shaders/wind_vegetacion.gdshader (spatial, vertex-displacement viento, 5 uniforms) + test_wind_shader_m90.gd (5/0, carga como Shader). Reporte #808. |
+| 21 | **M90** t10 resolucion {x,y} + upscaler mapping | 🟡 Cerrada t10 (194→196/249) | — | agnes 2026-10-22: resolucion_vec2() (Vector2i {x,y}) + aplicar_upscaling (mapeo null-safe, set real M90/M53) + test 54/0. Bugs corregidos: Viewport abstracto→SubViewport→mapeo. Reporte #810. Obs. preexistente M110: pause_layer.gd:147 _buscar_confirm_popup (no lo toco). |
+| 22 | **M90** t11 caustics shader real (runs habilitados) | 🟡 Cerrada t11 (196→197/249) | — | agnes 2026-10-22: shaders/caustics.gdshader (procedural, 4 uniforms, ultra) + test shaders 9/0. Reporte #812. |
+| 23 | **M90** t12 detect_hardware real (runs habilitados) | 🟡 Cerrada t12 (197→201/249) | — | agnes 2026-10-22: detect_hardware() (OS RAM/CPU + recomendacion, GPU marcador M115) + test 57/0. 4 flips. Reporte #814. |
+- **BACKLOG-AGNES.md** - cola investigada por capacidades (ver GUIA-BACKLOGS-POR-MODELO.md)

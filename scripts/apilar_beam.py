@@ -15,6 +15,12 @@ st = {"colas": {}, "orden": QUEUES}
 if os.path.isfile(ESTADO):
     st.update(json.loads(io.open(ESTADO, "r", encoding="utf-8").read()))
 
+# GUARD DE PAUSA (directiva fundador 2026-10-28 08:23): si existe la flag, el apilador
+# termina sin publicar nada. Reversible: borrar la flag reactiva el cron E.
+_FLAG_PAUSE = os.path.join(BASE, "APILADOR_PAUSADO.flag")
+if os.path.isfile(_FLAG_PAUSE):
+    sys.exit("[apilar_beam] APILADOR PAUSADO (flag presente) — sin publicar.")
+
 def item_modulo_de_linea(fila):
     m = re.match(r"-\s*\(L\d+\)\s*(?:\[(.*?)\]\s*)?(.*)$", fila)
     mod = m.group(1) or "" if m else ""
