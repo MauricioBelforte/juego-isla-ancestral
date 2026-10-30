@@ -660,6 +660,43 @@ jobs:
           suite --script tests/integration/test_time_calendar_events.gd
           # M68 iter.3 (Log 1251): waypoints + edge cases de transporte. 108/0.
           suite --script scripts/transporte/test_transporte_m68_iter3.gd
+          # M55 Diario del Jugador (Log 2240, DeepSeek-V4.1-Flash, orden de la
+          # directora agnes-3-flash msg 448 punto 7): 3 idiomas (es/en/pt) x 3
+          # tamanos (12/16/24 px) sobre la capa REAL abierta en 1280x720, con
+          # control negativo a 96 px. 51 checks / 0 fallos, piso 51 MEDIDO y
+          # guardian de 3 capas probado EN ROJO por inyeccion.
+          suite --script scripts/diario/test_diario_idiomas_m55.gd
+          # M55 persistencia real (L130: "guardar -> salir -> cargar"). Dos
+          # procesos Godot encadenados por OS.execute con el SaveManager REAL
+          # (M59: escritura atomica + checksum + rotacion) sobre el slot 3.
+          # GO de la directora (msg 452 punto 1). Medido antes de cablear:
+          # padre 10 checks / hijo 11, 0 fallos, EXIT 0, 0 SCRIPT ERROR (x3).
+          # Guardian de 5 capas: contador por check, pisos POR FASE medidos
+          # (10 padre / 11 hijo), `_arrancar -> await _run -> _summary`, `_fin`
+          # por fase y reporte JSON del hijo (su cobertura era invisible al
+          # padre, que solo veia el exit code). Probado EN ROJO con 7 sondas.
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/diario/test_diario_persist.gd
+          # M59 L184: el menu de guardado se re-traduce EN CALIENTE al cambiar
+          # idioma. 6 bloques sobre la PauseLayer real: etiquetas por locale
+          # (es/en/pt), expansion por clave, negativos (clave inexistente y
+          # desborde a 96 px), re-traduccion en vivo y determinismo.
+          # Bloque G (L215): Reduce Motion. 0 nodos AnimationPlayer/AnimationTree
+          # en el subarbol, 0 create_tween en la capa y el popup, y panel/titulo
+          # sin alpha ni scale animados. 6 checks.
+          # GO de la directora agnes-3-flash (msg 461 punto 2). Medido antes de
+          # cablear: 88 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR (x3), piso
+          # CHECKS_MINIMOS = 88 MEDIDO y guardian probado EN ROJO con 3 sondas
+          # (create_tween en el fuente, AnimationPlayer en runtime y piso 999 ->
+          # las 3 dan EXIT 1 nombrando el check; restauracion por sha256).
+          # Gate duro: suite (falla => ::error::FALLO <script>).
+          suite --script scripts/saving/test_menu_guardado_idiomas_m59.gd
+          # Muestreo P-100 (metodo 21.8.2.b): se cablea la SUITE de la
+          # herramienta (60 checks / piso 60 medido), NO el auditor
+          # `muestreo_p100.py`: ese devuelve EXIT 1 cuando un modulo acumula
+          # >= 2 huecos, o sea es un INFORME, no un gate; cablearlo pondria el
+          # CI en rojo por diseno. Reportado al director.
+          py_suite scripts/test_muestreo_p100.py python "$GITHUB_WORKSPACE/scripts/test_muestreo_p100.py"
           # Resumen del conjunto: GitHub recorta a 10 anotaciones ::error:: por step
           # (limite documentado; 50 por job), asi que si fallan mas de 10 suites el
           # listado completo queda tambien en texto plano. Los contadores son

@@ -59,7 +59,11 @@ func _crear_ui() -> void:
 	panel.add_child(vbox)
 
 	var title := Label.new()
-	title.text = _t("SETTINGS.PAUSA")
+	# M59 L184 (DeepSeek-V4.1-Flash, 2026-10-30): se declara la clave con la
+	# convencion M87 (`text_key`) en vez de asignar el texto a mano, para que el
+	# menu se re-traduzca al cambiar de idioma en caliente (UIManager escucha
+	# `locale_changed` y llama UiI18n.retraducir sobre las capas montadas).
+	UiI18n.meta_texto(title, "SETTINGS.PAUSA")
 	title.add_theme_font_size_override("font_size", ThemeUx.FONT_SIZE_H1)
 	title.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
 	vbox.add_child(title)
@@ -84,7 +88,8 @@ func _crear_ui() -> void:
 
 func _agregar_boton(vbox: VBoxContainer, clave: String, cb: Callable) -> Button:
 	var btn := Button.new()
-	btn.text = _t(clave)
+	# M59 L184: misma convencion M87 que el titulo (re-traduccion en vivo).
+	UiI18n.meta_texto(btn, clave)
 	btn.pressed.connect(cb)
 	vbox.add_child(btn)
 	_buttons.append(btn)
