@@ -1,7 +1,7 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md â€” MÃ³dulo 37: Museos y Colecciones
+# 03-Diseno.md — Módulo 37: Museos y Colecciones
 
 ## 1. Arquitectura General
 

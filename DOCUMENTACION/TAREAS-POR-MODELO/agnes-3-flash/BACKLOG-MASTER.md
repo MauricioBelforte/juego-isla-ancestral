@@ -680,105 +680,105 @@ Método A (muestreo dirigido + verificación contra disco). Bloques de ~5. Salta
 
 
 ## REPOBLACION V3 (2026-10-19T00:01:51) — items REALES de 05-Checklist (fuente en comentario)
-1. - [ ] [72] Registrar dependencias del mÃ³dulo: M71 (ProgresiÃ³n), M37 (Museos y Colecciones), M97 (Steam Store Page) segÃºn CHECKLIST-GLOBAL [S] â€” M71 âœ… (eva <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+1. - [ ] [72] Registrar dependencias del módulo: M71 (Progresión), M37 (Museos y Colecciones), M97 (Steam Store Page) según CHECKLIST-GLOBAL [S] — M71 ✅ (eva <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 2. - [ ] [72] Registrar integraciones adicionales: M20, M22, M33, M34, M38, M53, M58, M60, M66, M103, M104, M112 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-3. - [ ] [72] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, pÃ¡gina de Steam en M97 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-4. - [ ] [72] CAT: crear catÃ¡logo base .tres por categorÃ­a con logros cozy (primeras veces, hitos, colecciones) [C] â€” data/logros/logros.json con 7 logros cozy  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-5. - [ ] [72] CAT: garantizar que ningÃºn logro del catÃ¡logo exija nÃºmeros abusivos o contrarreloj [M] â€” condiciones cozy (sellos/colecciones/primeras veces), s <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-6. - [ ] [72] RF6: resumir en un Ãºnico toast "N nuevos logros desbloqueados" si la cola supera 5 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+3. - [ ] [72] Separar dentro/fuera de alcance: UI core en M53/M58, reglas de colecciones en M37, página de Steam en M97 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+4. - [ ] [72] CAT: crear catálogo base .tres por categoría con logros cozy (primeras veces, hitos, colecciones) [C] — data/logros/logros.json con 7 logros cozy  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+5. - [ ] [72] CAT: garantizar que ningún logro del catálogo exija números abusivos o contrarreloj [M] — condiciones cozy (sellos/colecciones/primeras veces), s <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+6. - [ ] [72] RF6: resumir en un único toast "N nuevos logros desbloqueados" si la cola supera 5 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 7. - [ ] [72] RF6: permitir click en el toast para abrir el panel en ese logro [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-8. - [ ] [72] RF6: espaciar toasts con delay regenerativo de 0.8 s [S] â€” cola de M53 con desplazamiento vertical automÃ¡tico (heredado; ajuste fino visual dueÃ±o  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-9. - [ ] [72] RF6: registrar en logs si la cola se desborda (prevenciÃ³n de pÃ©rdida de avisos) [S] â€” emisiÃ³n 1:1 sin cola intermedia en M72 (cola dueÃ±o M53); M <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+8. - [ ] [72] RF6: espaciar toasts con delay regenerativo de 0.8 s [S] — cola de M53 con desplazamiento vertical automático (heredado; ajuste fino visual dueño  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+9. - [ ] [72] RF6: registrar en logs si la cola se desborda (prevención de pérdida de avisos) [S] — emisión 1:1 sin cola intermedia en M72 (cola dueño M53); M <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 10. - [ ] [72] RF9: integrar el estado en el guardado global de M60/M59 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 11. - [ ] [72] RF9: conservar el progreso parcial acumulado de logros en progreso [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-12. - [ ] [72] RF11: no borrar logros de Steam automÃ¡ticamente al borrar partida local [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+12. - [ ] [72] RF11: no borrar logros de Steam automáticamente al borrar partida local [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 13. - [ ] [72] RN2: verificar que el write-through no bloquee el frame principal (escritura diferida segura) [S] -- agnes-2026-09-06: achievement_service.gd usa Save <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 14. - [ ] [72] RF7: implementar PanelLogrosUI como vista de consulta de logros [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-15. - [ ] [72] RF7: agrupar logros por categorÃ­a en el panel [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+15. - [ ] [72] RF7: agrupar logros por categoría en el panel [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 16. - [ ] [72] RF7: mostrar logros obtenidos con su fecha de desbloqueo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 17. - [ ] [72] RF7: mostrar logros en progreso con contador "X de Y" y barra de progreso [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 18. - [ ] [72] RF7: mostrar logros ocultos no revelados como misterio "???" [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-19. - [ ] [72] RF7: revelar el texto e Ã­cono de un logro oculto solo cuando se desbloquea [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-20. - [ ] [72] RF10: implementar is_unlocked(id) [S] â€” iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-21. - [ ] [72] RF10: implementar get_definicion(id) [S] â€” iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-22. - [ ] [72] RF10: implementar get_todos() ordenado por orden y categorÃ­a [S] â€” iter. 3: por orden de catÃ¡logo (orden/categorÃ­a con dueÃ±o al llegar el campo  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-23. - [ ] [72] RF10: implementar get_estado(id) con {desbloqueado, fecha, progreso, extra} [S] â€” iter. 3: {id,nombre,descripcion,desbloqueado,oculto,dia,hora,progr <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+19. - [ ] [72] RF7: revelar el texto e ícono de un logro oculto solo cuando se desbloquea [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+20. - [ ] [72] RF10: implementar is_unlocked(id) [S] — iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+21. - [ ] [72] RF10: implementar get_definicion(id) [S] — iter. 3 (testeado) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+22. - [ ] [72] RF10: implementar get_todos() ordenado por orden y categoría [S] — iter. 3: por orden de catálogo (orden/categoría con dueño al llegar el campo  <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+23. - [ ] [72] RF10: implementar get_estado(id) con {desbloqueado, fecha, progreso, extra} [S] — iter. 3: {id,nombre,descripcion,desbloqueado,oculto,dia,hora,progr <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 24. - [ ] [72] RF7: permitir abrir el panel desde el toast y desde la UI de progreso de M53/M71 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-25. - [ ] [72] RN1: presupuesto de evaluaciÃ³n < 1 ms por evento con 200 logros definidos [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-26. - [ ] [72] RN3: mÃ³dulo compila y funciona 100% sin SDK de Steam [C] â€” sin capa Steam; test headless 0 fallos sin Steam <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+25. - [ ] [72] RN1: presupuesto de evaluación < 1 ms por evento con 200 logros definidos [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+26. - [ ] [72] RN3: módulo compila y funciona 100% sin SDK de Steam [C] — sin capa Steam; test headless 0 fallos sin Steam <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 27. - [ ] [72] RN3: SteamSync se carga en runtime solo si la plataforma lo provee (M97) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-28. - [ ] [72] RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explÃ­cito [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+28. - [ ] [72] RN6: compatible con Godot 4.x >= 4.4.1 y GDScript tipado explícito [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 29. - [ ] [72] RN7: notificaciones no modales, no bloqueantes y desactivables (M58) [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 30. - [ ] [72] RN8: estado en guardado de partida (M60), coherente con PRNG (M29) y M71 [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-31. - [ ] [72] RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar cÃ³digo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-32. - [ ] [72] RN10: AchievementManager testeable con partidas sintÃ©ticas sin UI ni Steam [M] â€” test_logros.gd 13 secciones, 0 fallos headless <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-33. - [ ] [72] RN11: cero logros por tiempo real (M30) y cero presiÃ³n social con porcentajes de jugadores [S] â€” iter. 3: fechas de JUEGO (M29), sin porcentajes de <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-34. - [ ] [72] RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO [S] â€” catÃ¡logo cozy (umbral mÃ¡x 7 sellos / 3 viajes) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-35. - [ ] [72] RN12: estado serializado compacto mediante diccionarios planos sin redundancia [M] â€” iter. 3: {id: {dia,hora}} (3 ints por logro) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-36. - [ ] [72] DiseÃ±ar arquitectura por capas: motor desacoplado + adaptadores UI/Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-37. - [ ] [72] DiseÃ±ar AchievementManager como autoload "logros" registrado en project.godot [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-38. - [ ] [72] DiseÃ±ar Ã­ndice de dirty flags: tipo_evento -> ids de logros dependientes [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-39. - [ ] [72] DiseÃ±ar diagrama de arquitectura con emisores, manager, UI y SteamSync [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-40. - [ ] [72] DiseÃ±ar flujo de desbloqueo: evento -> evaluaciÃ³n -> marca -> seÃ±al -> persistencia -> notificaciÃ³n -> Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-41. - [ ] [72] DiseÃ±ar flujo de carga con retroactividad y reconciliaciÃ³n Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-42. - [ ] [72] DiseÃ±ar flujo de reset de partida con limpieza local y reconciliaciÃ³n posterior [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md Â§3.4; rest <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-43. - [ ] [72] DiseÃ±ar contrato de seÃ±ales pÃºblicas del autoload (5 seÃ±ales) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-44. - [ ] [72] DiseÃ±ar API de consulta pÃºblica completa (13 funciones) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-45. - [ ] [72] DiseÃ±ar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-46. - [ ] [72] DiseÃ±ar fechas tomadas una Ãºnica vez por desbloqueo y persistidas [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-47. - [ ] [72] DiseÃ±ar extensiÃ³n futura: nuevos tipos de condiciÃ³n sin tocar el manager (polimorfismo) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-48. - [ ] [72] DiseÃ±ar convivencia de notificaciones con pausas del juego y menÃºs abiertos [M] -- agnes-2.5-flash 2026-09-12: RF6 hereda cola/pool de M53; EventBus <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+31. - [ ] [72] RN9: agregar un logro nuevo = crear un .tres y registrarlo, sin tocar código [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+32. - [ ] [72] RN10: AchievementManager testeable con partidas sintéticas sin UI ni Steam [M] — test_logros.gd 13 secciones, 0 fallos headless <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+33. - [ ] [72] RN11: cero logros por tiempo real (M30) y cero presión social con porcentajes de jugadores [S] — iter. 3: fechas de JUEGO (M29), sin porcentajes de <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+34. - [ ] [72] RN11: todo logro alcanzable jugando con calma, sin contrarreloj ni FOMO [S] — catálogo cozy (umbral máx 7 sellos / 3 viajes) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+35. - [ ] [72] RN12: estado serializado compacto mediante diccionarios planos sin redundancia [M] — iter. 3: {id: {dia,hora}} (3 ints por logro) <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+36. - [ ] [72] Diseñar arquitectura por capas: motor desacoplado + adaptadores UI/Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+37. - [ ] [72] Diseñar AchievementManager como autoload "logros" registrado en project.godot [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+38. - [ ] [72] Diseñar índice de dirty flags: tipo_evento -> ids de logros dependientes [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+39. - [ ] [72] Diseñar diagrama de arquitectura con emisores, manager, UI y SteamSync [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+40. - [ ] [72] Diseñar flujo de desbloqueo: evento -> evaluación -> marca -> señal -> persistencia -> notificación -> Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+41. - [ ] [72] Diseñar flujo de carga con retroactividad y reconciliación Steam [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+42. - [ ] [72] Diseñar flujo de reset de partida con limpieza local y reconciliación posterior [M] -- agnes-2.5-flash 2026-09-12: disenado 03-Diseno.md §3.4; rest <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+43. - [ ] [72] Diseñar contrato de señales públicas del autoload (5 señales) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+44. - [ ] [72] Diseñar API de consulta pública completa (13 funciones) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+45. - [ ] [72] Diseñar estructura de carpetas res://logros/ con subcarpetas condiciones, ui, steam, datos [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+46. - [ ] [72] Diseñar fechas tomadas una única vez por desbloqueo y persistidas [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+47. - [ ] [72] Diseñar extensión futura: nuevos tipos de condición sin tocar el manager (polimorfismo) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+48. - [ ] [72] Diseñar convivencia de notificaciones con pausas del juego y menús abiertos [M] -- agnes-2.5-flash 2026-09-12: RF6 hereda cola/pool de M53; EventBus <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 49. - [ ] [72] No duplicar el registro de hitos de M71: logros comparten ids de hitos sin re-implementarlos [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-50. - [ ] [72] Consumir seÃ±ales de donaciÃ³n de M37 para CondicionColeccion [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+50. - [ ] [72] Consumir señales de donación de M37 para CondicionColeccion [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 51. - [ ] [72] Usar ids de colecciones reales de M37 en las definiciones .tres [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-52. - [ ] [72] Crear logros de colecciÃ³n completada coherentes con los criterios de M37 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-53. - [ ] [72] DiseÃ±ar SteamSync desacoplado que escuche logro_desbloqueado sin modificar el manager [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+52. - [ ] [72] Crear logros de colección completada coherentes con los criterios de M37 [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+53. - [ ] [72] Diseñar SteamSync desacoplado que escuche logro_desbloqueado sin modificar el manager [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 54. - [ ] [72] Sincronizar local -> Steam con SetAchievement + StoreStats al desbloquear [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 55. - [ ] [72] Sincronizar Steam -> local con GetAchievement al cargar partida [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-56. - [ ] [72] Reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado [M] -- agnes-2.5-flash 2026-09-12: DISEÃ‘O en 03-Diseno.md Â§3.2 paso 4 (lo <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-57. - [ ] [72] Mapear logro_steam_id 1:1 con el catÃ¡logo declarado en la pÃ¡gina de Steam (M97) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+56. - [ ] [72] Reconciliar discrepancias en ambos sentidos ganando el estado desbloqueado [M] -- agnes-2.5-flash 2026-09-12: DISEÑO en 03-Diseno.md §3.2 paso 4 (lo <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+57. - [ ] [72] Mapear logro_steam_id 1:1 con el catálogo declarado en la página de Steam (M97) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 58. - [ ] [72] Validar en editor que el mapeo Steam sea consistente y sin duplicados [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 59. - [ ] [72] Garantizar que la capa Steam nunca bloquee ni retrase el gameplay local [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-60. - [ ] [72] Logro instalado despuÃ©s de que el jugador ya cumpliÃ³ la condiciÃ³n: otorgado retroactivamente al cargar [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-61. - [ ] [72] Desbloqueo con Steam desactivado: funciona idÃ©ntico y la prÃ³xima sesiÃ³n con Steam reconcilia [M] â€” iter. 1-4: sin capa Steam; desbloqueo local co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+60. - [ ] [72] Logro instalado después de que el jugador ya cumplió la condición: otorgado retroactivamente al cargar [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+61. - [ ] [72] Desbloqueo con Steam desactivado: funciona idéntico y la próxima sesión con Steam reconcilia [M] — iter. 1-4: sin capa Steam; desbloqueo local co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 62. - [ ] [72] Desbloqueo con Steam activado fallido por red: no reintentar indefinidamente, reintentar en carga [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-63. - [ ] [72] Cierre abrupto del juego justo despuÃ©s de desbloquear: logro persistido por write-through [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+63. - [ ] [72] Cierre abrupto del juego justo después de desbloquear: logro persistido por write-through [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 64. - [ ] [72] Guardado corrupto con ids de logros desconocidos: descartar sin romper la partida [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-65. - [ ] [72] Partida vieja sin diccionario de logros (migraciÃ³n): crear estado vacÃ­o y evaluar retroactivo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-66. - [ ] [72] Borrar la partida con logros en Steam: no borrar Steam; reconciliar en la prÃ³xima sesiÃ³n [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-67. - [ ] [72] 20 logros desbloqueados a la vez en una migraciÃ³n: cola con resumen "N nuevos logros" [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+65. - [ ] [72] Partida vieja sin diccionario de logros (migración): crear estado vacío y evaluar retroactivo [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+66. - [ ] [72] Borrar la partida con logros en Steam: no borrar Steam; reconciliar en la próxima sesión [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+67. - [ ] [72] 20 logros desbloqueados a la vez en una migración: cola con resumen "N nuevos logros" [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 68. - [ ] [72] Logro oculto consultado antes de desbloquearse: mostrar misterio sin filtrar datos [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-69. - [ ] [72] CondiciÃ³n compuesta con subcondiciÃ³n de estadÃ­stica inexistente: validaciÃ³n en editor la detecta [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-70. - [ ] [72] NotificaciÃ³n durante pantalla de carga o cinemÃ¡tica: encolar y mostrar al recuperar control [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-71. - [ ] [72] Partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinismo completo [S] â€” agnes-2026-09-06: _test_condici <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-72. - [ ] [72] Logro cuyo texto i18n falta: fallback al texto base espaÃ±ol sin error en pantalla [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-73. - [ ] [72] Ãndice de dirty flags por tipo de evento: re-evaluar solo logros afectados [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+69. - [ ] [72] Condición compuesta con subcondición de estadística inexistente: validación en editor la detecta [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+70. - [ ] [72] Notificación durante pantalla de carga o cinemática: encolar y mostrar al recuperar control [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+71. - [ ] [72] Partidas con PRNG distinto (M29) evaluando condiciones: sin aleatoriedad en condiciones, determinismo completo [S] — agnes-2026-09-06: _test_condici <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+72. - [ ] [72] Logro cuyo texto i18n falta: fallback al texto base español sin error en pantalla [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+73. - [ ] [72] Índice de dirty flags por tipo de evento: re-evaluar solo logros afectados [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 74. - [ ] [72] Evitar allocaciones pesadas en el hot path de notify_event [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-75. - [ ] [72] Memorizar progreso de condiciones compuestas durante una misma evaluaciÃ³n [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+75. - [ ] [72] Memorizar progreso de condiciones compuestas durante una misma evaluación [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 76. - [ ] [72] No evaluar logros ya desbloqueados (corte temprano por _desbloqueados) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-77. - [ ] [72] No reconstruir diccionarios del estado en cada consulta (cachÃ© de lectura) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+77. - [ ] [72] No reconstruir diccionarios del estado en cada consulta (caché de lectura) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 78. - [ ] [72] Persistencia diferida agrupada: write-through inmediato pero sin escrituras por frame [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-79. - [ ] [72] Cargar el catÃ¡logo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+79. - [ ] [72] Cargar el catálogo .tres con ResourceLoader al inicio, sin cargas perezosas en runtime [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 80. - [ ] [72] Pooling de toasts UI (preinstanciar y reutilizar nodos) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 81. - [ ] [72] Panel de logros: construir los items solo al abrir y reciclarlos al filtrar [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 82. - [ ] [72] Maduras: verificar en Profiler que notify_event con 200 logros < 1 ms [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-83. - [ ] [72] Maduras: verificar 0.5 ms mÃ¡x extra por frame en eventos de progreso (sin GC spikes) [C] â€” agnes-2026-09-06: evaluaciÃ³n event-driven (no frame), _ <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-84. - [ ] [72] Crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementaciÃ³n) [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-85. - [ ] [72] Redactar README interno res://logros/README.md con guÃ­a "cÃ³mo agregar un logro" [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-86. - [ ] [72] Documentar las reglas cozy del catÃ¡logo en el README (sin grind, sin contrarreloj) [S] â€” agnes-2026-09-05: rules cozy documentadas en 01-Requerimie <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-87. - [ ] [72] Documentar la integraciÃ³n con M97 en plan-actual cuando exista la capa Steam real [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-88. - [ ] [72] Generar log en Logs/ al completar la implementaciÃ³n, con el formato estÃ¡ndar NN-descripcion_fecha.md [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-89. - [ ] [72] Planear tests unitarios del AchievementManager con partidas sintÃ©ticas (M112) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-90. - [ ] [72] Test unidad: notify_event desbloquea logro cuando la condiciÃ³n cumple [M] â€” _test_desbloqueo_por_evento <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-91. - [ ] [72] Test unidad: notify_event no desbloquea cuando la condiciÃ³n no cumple [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-92. - [ ] [72] Test unidad: doble notify_event no genera doble desbloqueo ni doble seÃ±al [M] â€” _test_idempotente <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-93. - [ ] [72] Test unidad: deserializaciÃ³n de estado corrupto no rompe la carga [M] â€” round-trip + logro_viejo purgado <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-94. - [ ] [72] Test unidad: condiciones compuestas AND/OR/NOT con casos de borde [M] â€” agnes-2026-09-05: _test_condicion_compuesta_edge_cases() prueba compuesta co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-95. - [ ] [72] Test integraciÃ³n: evento de M71 desbloquea logro de progresiÃ³n de punta a punta [C] â€” Historia.marcar_sello â†’ prereq_met â†’ M71 â†’ M72 (testea <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-96. - [ ] [72] Test integraciÃ³n: donaciÃ³n de M37 completa logro de colecciÃ³n [C] â€” coleccion_completa flora vÃ­a evaluador M71 (testeado iter. 1-2 vÃ­a flujo M3 <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-97. - [ ] [72] Test manual: 20 desbloqueos simultÃ¡neos muestran resumen encolado sin spam [M] -- agnes-2.5-flash 2026-09-12: lÃ³gica listada_para_ui()+cola M53 IMPL <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-98. - [ ] [72] Test manual: notificaciones desactivadas por accesibilidad no se muestran pero sÃ­ se registran [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
-99. - [ ] [72] Test manual: borrar partida limpia logros locales y la sesiÃ³n Steam reconcilia [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+83. - [ ] [72] Maduras: verificar 0.5 ms máx extra por frame en eventos de progreso (sin GC spikes) [C] — agnes-2026-09-06: evaluación event-driven (no frame), _ <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+84. - [ ] [72] Crear 04-Codigo.md (archivos previstos, firmas GDScript, notas de implementación) [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+85. - [ ] [72] Redactar README interno res://logros/README.md con guía "cómo agregar un logro" [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+86. - [ ] [72] Documentar las reglas cozy del catálogo en el README (sin grind, sin contrarreloj) [S] — agnes-2026-09-05: rules cozy documentadas en 01-Requerimie <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+87. - [ ] [72] Documentar la integración con M97 en plan-actual cuando exista la capa Steam real [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+88. - [ ] [72] Generar log en Logs/ al completar la implementación, con el formato estándar NN-descripcion_fecha.md [S] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+89. - [ ] [72] Planear tests unitarios del AchievementManager con partidas sintéticas (M112) [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+90. - [ ] [72] Test unidad: notify_event desbloquea logro cuando la condición cumple [M] — _test_desbloqueo_por_evento <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+91. - [ ] [72] Test unidad: notify_event no desbloquea cuando la condición no cumple [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+92. - [ ] [72] Test unidad: doble notify_event no genera doble desbloqueo ni doble señal [M] — _test_idempotente <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+93. - [ ] [72] Test unidad: deserialización de estado corrupto no rompe la carga [M] — round-trip + logro_viejo purgado <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+94. - [ ] [72] Test unidad: condiciones compuestas AND/OR/NOT con casos de borde [M] — agnes-2026-09-05: _test_condicion_compuesta_edge_cases() prueba compuesta co <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+95. - [ ] [72] Test integración: evento de M71 desbloquea logro de progresión de punta a punta [C] — Historia.marcar_sello → prereq_met → M71 → M72 (testea <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+96. - [ ] [72] Test integración: donación de M37 completa logro de colección [C] — coleccion_completa flora vía evaluador M71 (testeado iter. 1-2 vía flujo M3 <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+97. - [ ] [72] Test manual: 20 desbloqueos simultáneos muestran resumen encolado sin spam [M] -- agnes-2.5-flash 2026-09-12: lógica listada_para_ui()+cola M53 IMPL <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+98. - [ ] [72] Test manual: notificaciones desactivadas por accesibilidad no se muestran pero sí se registran [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
+99. - [ ] [72] Test manual: borrar partida limpia logros locales y la sesión Steam reconcilia [M] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 100. - [ ] [72] Test manual: ciclo cosechar-primera vez muestra el toast "Primera cosecha" [M] -- agnes-2.5-flash 2026-09-12: toast emitido por _emitir_toast() con ti <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 101. - [ ] [72] Test rendimiento: Profiler con 200 logros y evento de progreso < 1 ms [C] <!-- fuente: 72-Sistema-De-Logros/05-Checklist.md -->
 102. - [ ] [73] Icono por reliquia (M46) [S] <!-- fuente: 73-Coleccionables/05-Checklist.md -->

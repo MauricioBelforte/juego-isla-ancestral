@@ -14,7 +14,8 @@ Uso:
 Codigos de salida:
   0 = muestreo completo, 0-1 fallas (sello sostenible)
   1 = 2 o mas fallas (sello DENEGADO por 21.8.2.b punto 3)
-  3 = DETECTOR CIEGO (no se pudo leer el 05 / no hay items muestreables)
+  3 = DETECTOR CIEGO (no se pudo leer el 05 / no hay items muestreables: la
+      muestra vacia NO es evidencia y el sello queda denegado)
 """
 import argparse
 import io
@@ -36,6 +37,50 @@ RX_BACKTICK = re.compile(r"`([^`\n]{2,160})`")
 # generar falsos positivos con prosa (una palabra cualquiera puede "existir").
 RX_ARCHIVO_DESNUDO = re.compile(
     r"(?<![\w`/.])([\w][\w./\-]{1,120}\.(?:gd|tres|tscn|json|py|md|cfg|gdshader|yml))(?![\w`])")
+# Extension suelta entre backticks (`.tres`): se cita como FORMATO, no como archivo.
+EXTENSION_SUELTA = re.compile(r"^\.[A-Za-z0-9]{1,12}$")
+
+# ── Cita NEGATIVA (el item menciona el artefacto para decir que NO existe) ─────
+# Un item puede citar un archivo justamente para aclarar que no existe: "el claim
+# citaba `slot.tscn`, que NO existe". Contarlo como PATH FALTA fabrica un hueco
+# que el propio texto desmiente: medido 30-oct en M14 L163, un item real quedo
+# PARCIAL por un `slot.tscn` que el item declara inexistente.
+# El marcador tiene que estar ANCLADO al token (solo puntuacion y "que"/"el" de
+# por medio). Aproposito CONSERVADOR: si la negacion es dudosa NO se aplica, para
+# que el error residual sea un hueco falso (retrasa un sello) y nunca un OK falso
+# (concederia un sello sobre un artefacto ausente).
+RX_NEG_PRE = re.compile(
+    r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|inexistente[s]?|no\s+hay|"
+    r"no\s+aparece|no\s+figura|no\s+se\s+encuentra|no\s+se\s+encontro|"
+    r"no\s+se\s+encontró|eliminad[oa]s?|retirad[oa]s?|borrad[oa]s?|"
+    r"obsolet[oa]s?|descartad[oa]s?|en\s+vez\s+de|en\s+lugar\s+de|"
+    r"nunca\s+existio|nunca\s+existió)"
+    r"[\s,;:(\[\]*_`\-]*(?:el\s+|la\s+|los\s+|las\s+|archivo\s+|doc\s+)?$", re.I)
+RX_NEG_POST = re.compile(
+    r"^[\s,;:.)\]*`\-]*(?:que\s+|el\s+cual\s+)?"
+    r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|no\s+aparece|no\s+figura|"
+    r"no\s+se\s+encuentra|no\s+se\s+encontro|no\s+se\s+encontró|"
+    r"es\s+inexistente|inexistente[s]?)", re.I)
+NEG_PRE_CHARS = 60
+NEG_POST_CHARS = 40
+
+# Identificador snake_case inmediatamente despues de un `.gd` citado:
+# "`inventory_layer.gd` _crear_slots". Exige >=1 underscore para no capturar prosa.
+RX_IDENT_PEGADO = re.compile(r"`[^`\n]*\.gd`\s+(_?[a-z][a-z0-9]*(?:_[a-z0-9]+)+)")
+
+
+def _es_cita_negativa(texto, ini_bt, fin_bt):
+    """True si el artefacto entre [ini_bt, fin_bt) se cita como INEXISTENTE.
+    `ini_bt` es el backtick de apertura (o el inicio del token desnudo) y `fin_bt`
+    el fin del token: las ventanas excluyen el token para no leer su propio texto."""
+    pre = (texto or "")[max(0, ini_bt - NEG_PRE_CHARS):ini_bt]
+    post = (texto or "")[fin_bt:fin_bt + NEG_POST_CHARS]
+    # El marcador no puede pertenecer a OTRA cita: se corta en el backtick vecino.
+    if "`" in pre:
+        pre = pre.rsplit("`", 1)[1]
+    if "`" in post:
+        post = post.split("`", 1)[0]
+    return bool(RX_NEG_PRE.search(pre) or RX_NEG_POST.search(post))
 
 VERBOS_CREACION = (
     "crear", "crea", "implementar", "implementa", "escribir", "escribe",
@@ -135,26 +180,65 @@ def _limpiar_ident(tok):
     return t.strip()
 
 
-def extraer_artefactos(texto):
-    """Devuelve (rutas, identificadores) citados. Rutas: backticks con forma de ruta
-    MAS menciones de archivo desnudas. Identificadores: solo desde backticks."""
-    rutas, idents = [], []
-    for tok in RX_BACKTICK.findall(texto or ""):
-        tok = tok.strip()
+def extraer_artefactos_ex(texto):
+    """Devuelve (rutas, identificadores, negadas).
+
+    `negadas` son rutas que el item menciona para declararlas INEXISTENTES: no son
+    huecos, son aclaraciones del propio item. Se devuelven aparte para poder
+    mostrarlas (visibilidad) sin que cuenten como falla.
+    """
+    rutas, idents, negadas = [], [], []
+    for m in RX_BACKTICK.finditer(texto or ""):
+        tok = m.group(1).strip()
         if not tok or " " in tok:
             continue
+        # Una EXTENSION suelta (`.tres`, `.gd`) NO es un archivo: `_parece_ruta` la
+        # acepta porque termina en extension valida y el muestreo reporta HUECO
+        # "PATH FALTA .tres" (medido 29-oct en M74 L41/L70/L75: 3 huecos falsos
+        # que daban DISCREPANCIA a un modulo con evidencia real).
+        if EXTENSION_SUELTA.match(tok):
+            continue
         if _parece_ruta(tok):
-            rutas.append(tok)
+            if _es_cita_negativa(texto, m.start(), m.end()):
+                negadas.append(tok)
+            else:
+                rutas.append(tok)
         else:
             ident = _limpiar_ident(tok)
             # identificadores utiles: snake_case o CamelCase con >=6 chars
             if len(ident) >= 6 and re.match(r"^[A-Za-z_][A-Za-z0-9_]*$", ident):
                 if "_" in ident or re.search(r"[a-z][A-Z]", ident):
-                    idents.append(ident)
-    for tok in RX_ARCHIVO_DESNUDO.findall(texto or ""):
-        rutas.append(tok.strip())
+                    # Misma regla que para las rutas: "`_crear_slots` no existe" es
+                    # una aclaracion, no un hueco (medido 30-oct en M14 L163).
+                    if _es_cita_negativa(texto, m.start(), m.end()):
+                        negadas.append(ident)
+                    else:
+                        idents.append(ident)
+    for m in RX_ARCHIVO_DESNUDO.finditer(texto or ""):
+        tok = m.group(1).strip()
+        if _es_cita_negativa(texto, m.start(), m.end()):
+            negadas.append(tok)
+        else:
+            rutas.append(tok)
+    # Identificador suelto pegado a una cita de archivo: "`inventory_layer.gd`
+    # _crear_slots". El nombre del metodo NO va entre backticks, asi que sin esta
+    # rama el muestreo avala un item que cita una funcion inexistente (medido
+    # 30-oct: M14 L163 cita `_crear_slots` y el real es `_construir_slots`).
+    # Solo snake_case con >=1 underscore: medido en 23.069 items [x] da 5
+    # ocurrencias, 4 resuelven y la unica GREP 0 es un defecto REAL -> ruido nulo.
+    for m in RX_IDENT_PEGADO.finditer(texto or ""):
+        ident = _limpiar_ident(m.group(1))
+        if len(ident) >= 6:
+            idents.append(ident)
     # dedup preservando orden
-    return list(dict.fromkeys(rutas)), list(dict.fromkeys(idents))
+    return (list(dict.fromkeys(rutas)), list(dict.fromkeys(idents)),
+            list(dict.fromkeys(negadas)))
+
+
+def extraer_artefactos(texto):
+    """Compatibilidad: (rutas, identificadores). Ver `extraer_artefactos_ex`."""
+    rutas, idents, _ = extraer_artefactos_ex(texto)
+    return rutas, idents
 
 
 _IDX = None
@@ -309,7 +393,7 @@ def clasificar_item(texto):
 
 def verificar_item(texto, prefer=None):
     """Devuelve dict con resultado: RESUELTO / HUECO / INDETERMINADO + detalle."""
-    rutas, idents = extraer_artefactos(texto)
+    rutas, idents, negadas = extraer_artefactos_ex(texto)
     detalle = []
     fallas = 0
     aciertos = 0
@@ -329,16 +413,28 @@ def verificar_item(texto, prefer=None):
         else:
             fallas += 1
             detalle.append("GREP 0 %s" % ident)
+    # Las citas negativas NO son falla ni acierto: el item declara que no existen.
+    # Se muestran para que un humano vea la aclaracion, pero no mueven el veredicto.
+    for r in negadas:
+        detalle.append("NEGADO %s (el item lo declara inexistente)" % r)
     if aciertos and not fallas:
         res = "RESUELTO"
     elif fallas and not aciertos:
         res = "HUECO"
     elif fallas and aciertos:
         res = "PARCIAL"
+    elif negadas:
+        # Cita SOLO artefactos que el propio item declara inexistentes: no queda
+        # evidencia positiva. Eso es un HUECO, no una aclaracion inofensiva:
+        # medido 30-oct en M85 (32 items [x] cuya nota dice "los artefactos
+        # citados NO existen ... = 0 en disco"). Decir RESUELTO o INDETERMINADO
+        # aqui avalaria un item cuya unica evidencia es una ausencia.
+        res = "HUECO"
     else:
         res = "INDETERMINADO"
     return {"resultado": res, "rutas": rutas, "identificadores": idents,
-            "detalle": detalle, "fallas": fallas, "aciertos": aciertos}
+            "negadas": negadas, "detalle": detalle, "fallas": fallas,
+            "aciertos": aciertos}
 
 
 def ruta_checklist(modulo):
@@ -415,15 +511,17 @@ def analizar_modulo(modulo, n_muestra=5):
     for n, t in muestra:
         v = verificar_item(t, prefer=os.path.dirname(p))
         filas.append({"linea": n, "texto": t[:200], "veredicto": v["resultado"],
-                      "detalle": v["detalle"], "fallas": v["fallas"], "modo": "SCRIPT"})
+                      "detalle": v["detalle"], "fallas": v["fallas"],
+                      "negadas": len(v.get("negadas") or []), "modo": "SCRIPT"})
     for n, t in manual_sub:
         filas.append({"linea": n, "texto": t[:200], "veredicto": "MANUAL",
                       "detalle": ["sin artefacto citado: exige grep dirigido"],
-                      "fallas": 0, "modo": "MANUAL"})
+                      "fallas": 0, "negadas": 0, "modo": "MANUAL"})
     fallas = sum(1 for f in filas if f["veredicto"] in ("HUECO", "PARCIAL"))
     huecos = sum(1 for f in filas if f["veredicto"] == "HUECO")
     parciales = sum(1 for f in filas if f["veredicto"] == "PARCIAL")
     indet = sum(1 for f in filas if f["veredicto"] == "INDETERMINADO")
+    negadas = sum(f.get("negadas", 0) for f in filas)
     drift = None
     if totales:
         reales = marcas["x"] + marcas[" "] + marcas["?"]
@@ -433,7 +531,13 @@ def analizar_modulo(modulo, n_muestra=5):
             "delta_total": totales["total"] - reales,
             "delta_x": totales["x"] - marcas["x"],
         }
-    if huecos >= 2:
+    # MUESTRA VACIA NO ES EVIDENCIA. Un modulo cuyos [x] no citan artefacto y no
+    # usan verbo de creacion deja `filas` en 0; sin este corte el resumen sale
+    # "fallas=0 -> OK" y el muestreo avala un sello SIN haber mirado nada (medido
+    # 29-oct en el indice maestro M01: 122 [x], 0 muestreables, veredicto OK).
+    if not filas:
+        veredicto = "CIEGO"
+    elif huecos >= 2:
         veredicto = "DISCREPANCIA"
     elif fallas >= 1 or indet >= 1:
         veredicto = "CAVEAT"
@@ -447,7 +551,7 @@ def analizar_modulo(modulo, n_muestra=5):
             "manual_total": len(manual),
             "manual_muestra": [{"linea": n, "texto": t[:160]} for n, t in manual[:8]],
             "veredicto": veredicto, "n_muestra": len(filas), "n_req": n_req,
-            "manual_sub": len(manual_sub)}
+            "negadas": negadas, "manual_sub": len(manual_sub)}
 
 
 def imprimir(r, verbose=True):
@@ -465,8 +569,10 @@ def imprimir(r, verbose=True):
               % (d["totales_declarados"], d["reales_medidos"], d["delta_total"], d["delta_x"]))
     else:
         print("  Totales: SIN LINEA **Totales:** EN DISCO")
-    print("  muestra P-100: %d items (requisito 21.8.2.b = %d; auto-verificables %d, manuales %d) sobre %d items [x] con verbo de creacion"
-          % (r["n_muestra"], r["n_req"], r["auto_total"], r["manual_sub"], r["creacion_total"]))
+    print("  muestra P-100: %d items (requisito 21.8.2.b = %d; auto-verificables %d, manuales %d)"
+          % (r["n_muestra"], r["n_req"], r["auto_total"], r["manual_sub"]))
+    print("  poblacion: %d [x] con verbo de creacion + %d [x] sin verbo que SI citan artefacto"
+          % (r["creacion_total"], max(0, r["auto_total"] - r["creacion_total"])))
     for f in r["muestra"]:
         print("   - L%-4d [%s] %s" % (f["linea"], f["veredicto"], f["texto"][:110]))
         if verbose:
@@ -477,8 +583,12 @@ def imprimir(r, verbose=True):
               % r["manual_total"])
         for f in r["manual_muestra"]:
             print("   - L%-4d %s" % (f["linea"], f["texto"][:100]))
-    print("  RESUMEN: fallas=%d (huecos=%d parciales=%d) indeterminados=%d  -> VEREDICTO: %s"
-          % (r["fallas"], r["huecos"], r["parciales"], r["indeterminados"], r["veredicto"]))
+    print("  RESUMEN: fallas=%d (huecos=%d parciales=%d) indeterminados=%d negadas=%d  -> VEREDICTO: %s"
+          % (r["fallas"], r["huecos"], r["parciales"], r["indeterminados"],
+             r.get("negadas", 0), r["veredicto"]))
+    if r["veredicto"] == "CIEGO":
+        print("  ATENCION: 0 items muestreables (ni por verbo de creacion ni por cita de artefacto).")
+        print("            Muestra vacia NO es evidencia: sello DENEGADO hasta muestreo manual.")
 
 
 def main(argv=None):
@@ -502,6 +612,8 @@ def main(argv=None):
         for r in res:
             imprimir(r, verbose=not a.quiet)
     if any(r.get("error") for r in res):
+        return 3
+    if any(r.get("veredicto") == "CIEGO" for r in res):
         return 3
     return 1 if any(r["huecos"] >= 2 for r in res) else 0
 

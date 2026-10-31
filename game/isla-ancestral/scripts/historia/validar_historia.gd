@@ -12,6 +12,11 @@
 extends SceneTree
 
 var _fallos: int = 0
+var _checks: int = 0
+# Piso MEDIDO en verde el 2026-10-30 (2 corridas: 79 checks, 0 fallos, EXIT 0). Un
+# validador que no ejecuta checks tambien imprime "0 fallo(s)": el piso es lo unico
+# que distingue "no hay fallos" de "no medi nada".
+const CHECKS_MINIMOS := 79
 
 func _init() -> void:
 	call_deferred("_run")
@@ -92,8 +97,11 @@ func _run() -> void:
 				if String(req.get("tipo", "")) == "flag":
 					flags_externos[String(n.get("final_id", ""))] = String(req.get("id", ""))
 	for fid in flags_externos:
-		print("ADVERTENCIA: final '%s' exige flag externa '%s' (seteada por M25/M147); "
-			+ "in-alcanzable sin esa bandera." % [String(fid), flags_externos[fid]])
+		# OJO: `%` liga MAS FUERTE que `+`. Sin los parentesis el formato se aplicaba solo a
+		# la 2a cadena (0 placeholders, 2 args) -> "not all arguments converted" y la
+		# ADVERTENCIA nunca llegaba al log (bug medido 2026-10-30).
+		print(("ADVERTENCIA: final '%s' exige flag externa '%s' (seteada por M25/M147); "
+			+ "in-alcanzable sin esa bandera.") % [String(fid), String(flags_externos[fid])])
 	# final_id declarados coinciden con nodos tipo final.
 	var declarados: Array = datos.get("finales", [])
 	var ids_finales := {}
@@ -104,10 +112,14 @@ func _run() -> void:
 		_check(ids_finales.has(String(fid)), "final_id declarado existe en grafo: %s" % String(fid))
 	for fid in ids_finales:
 		_check(declarados.has(String(fid)), "nodo final presente en lista declarada: %s" % String(fid))
-	print("=== VALIDADOR M22 HISTORIA: %d fallo(s) ===" % _fallos)
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("FALLO: solo %d checks ejecutados (minimo %d): el validador no midio el grafo" % [_checks, CHECKS_MINIMOS])
+	print("=== VALIDADOR M22 HISTORIA: %d checks, %d fallo(s) ===" % [_checks, _fallos])
 	quit(1 if _fallos > 0 else 0)
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)

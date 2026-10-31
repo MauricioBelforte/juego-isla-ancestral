@@ -12,6 +12,10 @@
 # Modelo: step-5-kilocode | Plataforma: Kilo Code | Fecha: 2026-10-10
 # Modificado 2026-10-11 por atria-dawn: referencia al autoload AnimationService
 # reemplazada por Engine.get_singleton (fix CI M118, BUG-129).
+# Modificado 2026-10-29 por DeepSeek-V4.1-Flash: `Engine.get_singleton` NO
+# resuelve un autoload -> `_anim` quedaba null y el jugador no animaba en
+# runtime (BUG-151). Ahora se resuelve por ruta de nodo (`/root/...`), que sigue
+# compilando en CI sin el class cache (el motivo original del cambio de M118).
 
 extends Node
 
@@ -28,16 +32,19 @@ const MAPEO := {
 var _fsm: RefCounted = null
 var _ultimo_estado: String = ""
 
-## Singleton AnimationService resuelto en runtime. Se usa Engine.get_singleton en
-## vez de la referencia directa al autoload para que el script compile con
-## --check-only en CI (M118): el compilador headless no resuelve autoloads sin el
-## class cache del editor, y este script nuevo no esta precompilado en el cache.
+## Singleton AnimationService resuelto en runtime por RUTA de nodo (`/root/...`):
+## `Engine.get_singleton()` NO resuelve un autoload (devuelve null + ERROR de
+## engine) y dejaba `_anim` en null -> `_process()` salia por el guard y el
+## jugador NO animaba nada en runtime (BUG-151, fix 2026-10-29).
+## Se usa la ruta de nodo (no el identificador del autoload) para que el script
+## siga compilando con --check-only en CI (M118): el compilador headless no
+## resuelve autoloads sin el class cache del editor.
 var _anim: Node = null
 
 
 func _ready() -> void:
-	# Singleton del servicio de animacion (autoload M48).
-	_anim = Engine.get_singleton("AnimationService")
+	# Autoload del servicio de animacion (M48): se resuelve por ruta de nodo.
+	_anim = get_node_or_null("/root/AnimationService")
 	# La FSM vive en el nodo hermano NucleoM11 (campo `fsm`).
 	var hermano := get_node_or_null("../" + NODO_FSM)
 	if hermano != null:

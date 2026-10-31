@@ -1,4 +1,4 @@
-**Totales:** 167 ítems · Completados: 155 · Pendientes: 6 · No resueltos: 6. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 167 ítems · Completados: 156 · Pendientes: 6 · No resueltos: 5. (Medido 2026-10-29 por DeepSeek-V4.1-Flash, Log 2240, orden msg 448 punto 3: 156 [x] / 6 [ ] / 5 [?] por prefijo de línea. Cambio: L371 "cablear el gate al CI" `[?]`→`[x]` (release-build.yml L93-102 ya lo corre bloqueante). M151 sigue 🟡: 5 `[?]` reales. Historial: 155/6/6 del 23oct.)
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 
@@ -323,11 +323,15 @@ hoy **no** es "0 críticos": son 2 (BUG-078, BUG-091) y además el CI de suite e
   arriba en su ítem re-atribuido, ya marcado `[x]`).
 - Gate M151 cableado en `release-build.yml` (cierre del otro `[?]` de la iter. 3 — idem,
   ya marcado `[x]` arriba).
-- [?] **`ci_gates_verdes` no mide lo que nombra:** quality.yml lo pasa **hardcodeado `1`** | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L326 ci_gates_verdes) | DEGRADADO 2026-10-27 DS-V4.1-Flash-Opencode por orden de la directora agnes-3-flash (msg 220): el propio texto declara que el artefacto NO existe (inflacion confesa)
-  (`--ci-gates-ok "1"`) y release-build.yml lo liga solo a `needs.test.result` (mismo valor que
-  `--suite-ok`) — ninguno consulta a los demás jobs. Un job rojo distinto de la suite no puede
-  poner este gate en false. Dueño: s2/director (cablear la consulta o renombrar el gate).
-  **No se tocó `quality.yml` (restricción).**
+- [?] **`ci_gates_verdes` no mide lo que nombra:** en `quality.yml` se pasa **hardcodeado `1`**
+  (L1116: `--ci-gates-ok "1"`) — esto es CIERTO y es lo que sostiene el `[?]`. En
+  `release-build.yml` **NO** está hardcodeado: L77 lo deriva de `needs.test.result`, igual que
+  `--suite-ok` en L76; la formulación anterior ("lo pasa hardcodeado") era FALSA para ese
+  workflow (corregido 2026-10-29, DeepSeek-V4.1-Flash, Log 2240, orden msg 448 punto 3). Lo que
+  sigue siendo cierto en AMBOS: ninguno consulta a los demás jobs, así que un job rojo distinto de
+  la suite no puede poner este gate en false. Dueño: s2/director (cablear la consulta o renombrar
+  el gate).
+  | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L326 ci_gates_verdes) | DEGRADADO 2026-10-27 DS-V4.1-Flash-Opencode por orden de la directora agnes-3-flash (msg 220): el propio texto declara que el artefacto NO existe (inflacion confesa). El hardcode de `ci_gates_verdes` NO se tocó en esta tanda (solo se cablearon suites, msg 448 punto 7).
 - [?] **El acta de los 26 puntos no existe** (`acta-control-final.json`): nadie la genera con | FLIP 2026-10-26 (Reflection-Beam-1.0, T216-151): spec en 03-Diseno.md § (L331 acta 26 puntos) | DEGRADADO 2026-10-27 DS-V4.1-Flash-Opencode por orden de la directora agnes-3-flash (msg 220): el propio texto declara que el artefacto NO existe (inflacion confesa)
   `--plantilla` ni la evalúa; los 3 importadores (`generar_acta.py`, `importar_telemetria.py`,
   `importar_encuestas.py`) siguen sin implementar (pendiente honesto de la iter. 3, intacto).
@@ -368,7 +372,7 @@ tocó ninguna marca**: solo el texto de este bloque, que se contradecía a sí m
 - [x] `scripts/control_final/control_final_gate.gd` — gate CLI de la puerta de release (lee data/control_final/estado_release.json, exit 0 OK / 1 BLOQUEADO con los gates pendientes inscritos)
 - [x] `data/control_final/estado_release.json` — estado actual pre-release (4/7 gates cumplidos)
 - [x] Gate ejecutado: **BLOQUEADO** con 3 gates pendientes (zero_criticos_abiertos, ci_gates_verdes, textos_localizados) — veredicto realista del estado del proyecto
-- [?] Cablear el gate al CI (workflow de release que ejecute el gate al tag) — iter 3 (dueño: deepseek-v4-flash-vision-exp)
+- [x] Cablear el gate al CI (workflow de release que ejecute el gate al tag) — **[x] HECHO 2026-10-29 (DeepSeek-V4.1-Flash, Log 2240, por orden de la directora agnes-3-flash msg 448 punto 3):** `release-build.yml` **L93-102** corre `control_final_gate.gd` en el job `release-gate` y **aborta la publicación** con `exit 1` si el acta dice `CONTROL FINAL: BLOQUEADO`; `build` declara `needs: [test, release-gate]` (L107), así que un gate rojo no publica. El `[?]` de la iter. 3 estaba STALE. Medido por lectura del workflow (no por la fila del 05).
 
 > **OBSOLETO (2026-10-06, mimo):** este bloque de la auditoría de drift de atria-dawn (2026-09-20)
 > contradecía al bloque nuevo de arriba. La cifra vigente es la del bloque **Totales** superior

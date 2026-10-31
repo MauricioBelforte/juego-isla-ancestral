@@ -4,7 +4,13 @@
 #
 # M55 (Diario del Jugador) - suite de la ICONOGRAFIA de entradas.
 # Cubre los items L93 (iconos de minerales/gemas), L117 (iconografia de Sellos,
-# M46), L203 (icono faltante con fallback) y las siluetas de L77/L85.
+# M46) y L203 (icono faltante con fallback).
+#
+# NO cubre L77/L85 (siluetas de bestiario y hojas): ningun bloque de esta suite
+# tiene asercion especifica de siluetas. Esa validacion vive en
+# `validate_diary._validar_iconos()`, que exige id de icono derivable para TODA
+# entrada (criaturas y plantas incluidas). El encabezado anterior atribuia esa
+# cobertura a esta suite; era un overstatement, corregido 2026-10-29 (Log 2240).
 #
 # Ejecutar:
 #   Godot --headless --path game/isla-ancestral \
@@ -251,8 +257,15 @@ func _bloque_d() -> void:
 	var val := FileAccess.get_file_as_string("res://scripts/diario/validate_diary.gd")
 	_check(val.contains("_validar_iconos(parseado)"),
 		"D: validate_diary corre el bloque de iconografía")
-	_check(val.contains("CHECKS_MINIMOS: int = 387"),
-		"D: validate_diary tiene piso de checks medido")
+	# El piso se PARSEA: fijarlo como literal hace que la suite se ponga roja
+	# cada vez que validate_diary crece (pasó en la iter. 7: 387 -> 391). Lo que
+	# se afirma es que EXISTE y que no baja del mínimo histórico medido.
+	var re_piso := RegEx.new()
+	re_piso.compile("CHECKS_MINIMOS: int = (\\d+)")
+	var m_piso := re_piso.search(val)
+	var piso := int(m_piso.get_string(1)) if m_piso != null else 0
+	_check(piso >= 387,
+		"D: validate_diary tiene piso de checks medido (>=387; hoy %d)" % piso)
 	_fin("D")
 
 

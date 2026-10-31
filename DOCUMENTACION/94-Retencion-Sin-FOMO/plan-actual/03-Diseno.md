@@ -83,4 +83,15 @@ Bloques tras el epílogo del faro (M22):
 - Spec: definir contenido de postgame >= 5 h verificado. agnes-2.5-flash 2026-09-12: spec documented in 03-Diseno.md §15.2 (5h+ postgame content); content deferred to M22/M27. Policy defined. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado. Coherente with M94 (retencion) and M114 (hardware).
 
 ### Definir que cultivos/plantas no mueren por ausentarse
+
+## Specs Retencion Sin FOMO (Beam 751-753)
+
+### Notificación suave de objetivo cumplido (L165)
+- Spec: definir notificación suave de objetivo cumplido. Cuando el jugador cumple un objetivo del Tablero (diario/semanal/mensual) se muestra una notificación cozy suave en el diario (M55) y en el HUD, sin presión, sin cuenta regresiva, sin pérdida si no se cobra inmediatamente; la recompensa va a Sobremesa (M55 §16.5). Coherente con M94 (retención) y M55 (diario).
+
+### 30 ciclos de carga/guardado sin pérdida de objetivos (L172)
+- Spec: definir 30 ciclos de carga/guardado sin pérdida de objetivos. El sistema de persistencia (M59) garantiza que tras 30 ciclos de guardar/cargar los objetivos del Tablero, las variantes de festividad (MotorEventosVariantes) y las recompensas acumuladas se conservan exactamente; no hay pérdida de estado al alternar guarda/carga. Coherente con M94 (retención) y M59 (guardado).
+
+### Suite MigraciónMotivacion (v3.1→3.2) (L191)
+- Spec: definir suite MigraciónMotivacion (v3.1→3.2). Prueba headless que verifica que un save v3.1 (sin el campo nuevo de versión) se migra a v3.2 preservando objetivos, variantes y recompensas acumuladas, con valores por defecto para campos nuevos. Coherente con M94 (retención) y M59 (guardado).
 - Spec: definir que cultivos/plantas no mueren por ausentarse. agnes-2.5-flash 2026-09-12: regla cozy documentada en 03-Diseno.md §4.1 (cultivos pause durante ausencia); M152 principle applied. DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado identico de la linea 25. Coherente with M94 (retencion) and M33 (agricultura).

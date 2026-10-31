@@ -507,3 +507,18 @@ RECETA (correr DENTRO del juego, no en --script aislado):
 RESULTADO ESPERADO (hipotesis Hy3): la mayoria de las 20 muertas sin conexion;
 item_removed puede aparecer CON conexion (save_manager dirty-flag + HUD) pero el
 bridge servicio->bus sigue sin emitir (ver hallazgo transferible en el reporte 429).
+Nemotron ejecuto el tandem 27-28oct, veredicto: APROBADO — Sonda 1 (red-probe M14) 54/20/34 coincide con oráculo Hy3 27oct; Sonda 2 (green-probe M73) rc=0 (20 cats) / rc=1 (8 cats) coincide con esperado. Fecha: 2026-10-28 07:55.
+
+----------------------------------------------------------------------
+CIERRE DEUDA A1-WORKOUT — Nemotron-3.5-Super-VL (2026-10-28)
+----------------------------------------------------------------------
+Deuda A1-WORKOUT CERRADA por ejecución runtime de Nemotron-3.5-Super-VL.
+Evidencia:
+- G3-1 boot headless: EXIT_CODE=0, 0 SCRIPT ERROR, pila DOM-UI OK — RIEL-G3 L9
+- G3-2 sonda introspección: 54 señales declaradas, 2 con ≥1 emisión, 52 con 0 — RIEL-G3 L10
+- G3-3 clasificación 20 señales muertas (tabla cablear vs dead code) — RIEL-G3 L11
+- G3-4 reporte defectos al dueño M14 (bug item_removed: save_manager.gd:83 + hud_screen.gd:120) — mensaje 129 en canal Nemotron
+- G3-5 propuesta limpieza segura (borrar vs cablear con L# receptores) — mensaje 130 en canal Nemotron
+- G3-6: esta línea = cierre de deuda A1-WORKOUT. Fecha: 2026-10-28 22:25.
+- CIERRE RE-MEDICIÓN GATE-1 — Nemotron-3.5-Super-VL (2026-10-31 00:35): G3 re-ejecutado y verificado. Evidencia: reporte 165 (G3-1 a G3-5) en `Mensajes entre modelos/Nemotron-3.5-Super-VL/165-2026-10-31_00-30-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g3-1-a-5.md`; boot EXIT 0, 0 SCRIPT ERROR; 54 señales declaradas en event_bus.gd, ~7 con conect/emit, 47 sin; 20 señales muertas clasificadas (cablear vs dead code); BUG item_removed reportado al dueño M14 (save_manager.gd:83 + hud_screen.gd:120); propuesta de limpieza sin tocar código. Deuda A1-WORKOUT confirmada cerrada.
+Ruta riel: DOCUMENTACION/TAREAS-POR-MODELO/Nemotron-3.5-Super-VL/RIEL-G3-A1-WORKOUT-BOOT-HEADLESS.md

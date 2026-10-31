@@ -1,12 +1,12 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md â€” MÃ³dulo 17: ConstrucciÃ³n
+# 03-Diseno.md — Módulo 17: Construcción
 
 ## 1. Arquitectura
 
 ```
-                    BuildManager.gd (autoload, Ãºnica autoridad de sesiÃ³n)
+                    BuildManager.gd (autoload, única autoridad de sesión)
    â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¬â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
    â–¼                  â–¼                  â–¼                  â–¼                  â–¼
 BuildPreview      BuildValidator     BuildGhost        BuildHistory      CatalogDB
@@ -20,21 +20,21 @@ BuildPreview      BuildValidator     BuildGhost        BuildHistory      Catalog
         flags por chunk     devoluciones
               â”‚
               â–¼
-        SeÃ±ales: obra_activa(npc), pieza_colocada, navmesh_delta (M64)
+        Señales: obra_activa(npc), pieza_colocada, navmesh_delta (M64)
 ```
 
-SeparaciÃ³n de responsabilidades: `BuildManager` no conoce UI (emite seÃ±ales; la capa UI/M18 consume). `BuildValidator` es la Ãºnica autoridad "puede colocar". `BuildGhost` es puramente visual. `PlacementRule` son datos declarativos por pieza.
+Separación de responsabilidades: `BuildManager` no conoce UI (emite señales; la capa UI/M18 consume). `BuildValidator` es la única autoridad "puede colocar". `BuildGhost` es puramente visual. `PlacementRule` son datos declarativos por pieza.
 
-## 2. Diagrama de flujo del modo construcciÃ³n
+## 2. Diagrama de flujo del modo construcción
 
 ```
 Abrir modo (herramienta/tecla) 
    â†’ BuildManager.entrar_modo()
        â†’ se suspende input de movimiento del jugador
        â†’ se instancia BuildGhost (pooled) + HUD (capa UI)
-       â†’ seÃ±al obra_activa(true) â†’ M64 (NPC curiosos, evitan zona)
-Seleccionar pieza (catÃ¡logo) â†’ pieza_actual = receta.tres + fantasma.recargar()
-Apunticar cÃ©lula: raycast â†’ BuildPreview.calcular_celda() (snap 1m, planta)
+       → señal obra_activa(true) → M64 (NPC curiosos, evitan zona)
+Seleccionar pieza (catálogo) → pieza_actual = receta.tres + fantasma.recargar()
+Apunticar célula: raycast → BuildPreview.calcular_celda() (snap 1m, planta)
    â†’ BuildValidator.validar(pieza, celda, rotacion)
        â†’ [ocupada? | soporte? | regla pieza? | zona? | recursos M14? | NPC?]
        â†’ resultado {ok, motivos[]}
@@ -45,24 +45,24 @@ Confirmar (click)
        â†’ Inventario.descontar(costo)      (M14)
        â†’ VoxelWorld.escribir_pieza(celdas, bloque, chunk meta)
        â†’ BuildHistory.push(delta)          (para undo)
-       â†’ seÃ±al pieza_colocada(pieza)
-Salir (tecla) â†’ BuildGhost devuelto al pool â†’ seÃ±al obra_activa(false)
-Demoler: seleccionar pieza colocada â†’ confirmar â†’ delta de demoliciÃ³n
-   â†’ devoluciÃ³n parcial (Inventario.devolver) â†’ undo disponible
+       → señal pieza_colocada(pieza)
+Salir (tecla) → BuildGhost devuelto al pool → señal obra_activa(false)
+Demoler: seleccionar pieza colocada → confirmar → delta de demolición
+   → devolución parcial (Inventario.devolver) → undo disponible
 ```
 
 ## 3. Clases principales
 
 | Clase | Tipo | Responsabilidad |
 |---|---|---|
-| `BuildManager` | Autoload | SesiÃ³n de construcciÃ³n, entrada/salida, orquesta validaciÃ³n-colocaciÃ³n, emite seÃ±ales, pila de acciÃ³n actual |
-| `BuildPreview` | Componente | Raycast, conversiÃ³n cursor â†’ celda voxel (snap 1 m, planta), lÃ­mites de mundo |
-| `BuildValidator` | Util/estÃ¡tico | Aplica zonas + reglas + ocupaciÃ³n + soporte + costos; Ãºnica fuente "puede colocar" |
+| `BuildManager` | Autoload | Sesión de construcción, entrada/salida, orquesta validación-colocación, emite señales, pila de acción actual |
+| `BuildPreview` | Componente | Raycast, conversión cursor → celda voxel (snap 1 m, planta), límites de mundo |
+| `BuildValidator` | Util/estático | Aplica zonas + reglas + ocupación + soporte + costos; única fuente "puede colocar" |
 | `BuildGhost` | Nodo visual | Malla fantasma semi-transparente (verde/rojo), pooling al entrar/salir, sigue al cursor con suavizado |
-| `PlacementRule` | Resource `.tres` | Regla declarativa por pieza: tipo, tamaÃ±o (celdas), soporte requerido, restricciÃ³n de superficie, devoluciÃ³n, costo |
+| `PlacementRule` | Resource `.tres` | Regla declarativa por pieza: tipo, tamaño (celdas), soporte requerido, restricción de superficie, devolución, costo |
 | `BuildHistory` | Componente | Pila de deltas (colocar/demoler/mover) con undo/redo exacto, incluye recursos |
 | `ZoneRegistry` | Autoload M08/M17 | Regiones AABB en celdas voxel con permiso (edificable/protegida/narrativa/agua) |
-| `BuildCatalogDB` | Autoload data | CatÃ¡logo de piezas (recetas .tres) filtrado por modo construcciÃ³n/decoraciÃ³n y desbloqueos (M70/M93) |
+| `BuildCatalogDB` | Autoload data | Catálogo de piezas (recetas .tres) filtrado por modo construcción/decoración y desbloqueos (M70/M93) |
 
 ## 4. Contrato de API (GDScript)
 
@@ -83,7 +83,7 @@ BuildManager (autoload):
   signal pieza_colocada(receta: PlacementRule, celda: Vector3i)
   signal zona_rechazada(celda: Vector3i, motivo: String)
 
-BuildValidator (clase estÃ¡tica):
+BuildValidator (clase estática):
   func validar(receta: PlacementRule, celda: Vector3i, rotacion: int) -> Dictionary
   func celda_ocupada(celda: Vector3i) -> bool
   func tiene_soporte(receta: PlacementRule, celda: Vector3i) -> bool
@@ -94,7 +94,7 @@ BuildValidator (clase estÃ¡tica):
 BuildPreview:
   func celda_bajo_cursor() -> Vector3i
   func elevar(plantas: int) -> void
-  func rotar(direccion: int) -> void    # 0..3 (90Â°)
+  func rotar(direccion: int) -> void    # 0..3 (90°)
   func celda_valida_en_mundo(celda: Vector3i) -> bool
 
 BuildGhost:
@@ -116,46 +116,46 @@ PlacementRule (Resource):
   @export var devolucion: float = 0.5
   @export var costo: Dictionary         # {item_id: cantidad} â†’ M14
   @export var mesh: PackedScene
-  @export var es_mueble: bool = false   # modo decoraciÃ³n
+  @export var es_mueble: bool = false   # modo decoración
 ```
 
-## 5. Reglas de validaciÃ³n (orden de aplicaciÃ³n en BuildValidator)
+## 5. Reglas de validación (orden de aplicación en BuildValidator)
 
 1. **Zona (ZoneRegistry):** la celda completa de la pieza debe estar en zona edificable; agua solo si `sobre_agua`; zonas protegidas (parcelas NPC, ruinas M25) â†’ rechazo con motivo.
-2. **OcupaciÃ³n:** ninguna celda de la pieza (considerando rotaciÃ³n) ocupada por otra pieza del jugador ni por bloques no triturables de M08 (roca/violaciÃ³n del terreno solo vÃ­a herramienta M13).
+2. **Ocupación:** ninguna celda de la pieza (considerando rotación) ocupada por otra pieza del jugador ni por bloques no triturables de M08 (roca/violación del terreno solo vía herramienta M13).
 3. **Soporte:** al menos una celda de la base apoya en superficie permitida (terreno/piso/techo); escaleras apoyan en pared contigua; techos exigen 2+ soportes.
-4. **Regla especÃ­fica (PlacementRule):** puerta/ventana requieren pared contigua; fuentes solo sobre piso; faroles sobre cualquier pieza.
-5. **NPC y rutas (M64):** si la celda intercepta un NPC activo â†’ rechazo temporal ("NPC en el lugar"); si bloquea la Ãºnica ruta caminable de un vecino â†’ aviso de "obra" y M64 recalcula ruta (las puertas siempre dejan hueco navegable).
-6. **Recursos (M14):** verificaciÃ³n de `puede_pagar` durante la preview (fantasma rojo con motivo "recursos insuficientes"); descuento solo al confirmar.
+4. **Regla específica (PlacementRule):** puerta/ventana requieren pared contigua; fuentes solo sobre piso; faroles sobre cualquier pieza.
+5. **NPC y rutas (M64):** si la celda intercepta un NPC activo → rechazo temporal ("NPC en el lugar"); si bloquea la única ruta caminable de un vecino → aviso de "obra" y M64 recalcula ruta (las puertas siempre dejan hueco navegable).
+6. **Recursos (M14):** verificación de `puede_pagar` durante la preview (fantasma rojo con motivo "recursos insuficientes"); descuento solo al confirmar.
 
-## 6. IntegraciÃ³n con otros mÃ³dulos
+## 6. Integración con otros módulos
 
-| MÃ³dulo | IntegraciÃ³n |
+| Módulo | Integración |
 |---|---|
 | M08 Mundo Voxel | Escrituras `VoxelBuffer` por celdas de pieza; `VoxelViewer` marcado dirty por chunk; datos voxel de pieza en capa separada (no confundir con terreno generado); navmesh delta emitida |
 | M14 Inventario | `Inventario.descontar(costo)` al confirmar; `devolver(item_id, cantidad)` al demoler/almacenar; agrupar stacks |
-| M18 Casas | Las ampliaciones de la casa del jugador se modelan como proyectos de piezas (paredes, planta, techo); interiores usan el modo decoraciÃ³n |
+| M18 Casas | Las ampliaciones de la casa del jugador se modelan como proyectos de piezas (paredes, planta, techo); interiores usan el modo decoración |
 | M25 Ruinas (solo visual) | Piezas `deconstruible = false`; se inspeccionan/copian visualmente; nunca se modifican (zona protegida) |
-| M64 IA de NPC | `obra_activa(true)` â†’ curiosidad y desvÃ­o; `navmesh_delta` â†’ re-planificaciÃ³n; las obras nunca encierran a un NPC |
-| M58 Guardado | Lista de piezas `{receta_id, celda, rotacion}` + costos descontados; restauraciÃ³n idempotente (limpiar celdas antes de reescribir) |
+| M64 IA de NPC | `obra_activa(true)` → curiosidad y desvío; `navmesh_delta` → re-planificación; las obras nunca encierran a un NPC |
+| M58 Guardado | Lista de piezas `{receta_id, celda, rotacion}` + costos descontados; restauración idempotente (limpiar celdas antes de reescribir) |
 | M31/M32 Tiempo/clima | Luces de faroles siguen el ciclo M31; la lluvia (M32) no afecta las piezas (solo VFX); reacciones visuales cozy |
-| M73 Festival de construcciÃ³n | Recetas de evento con `devolucion = 0`; el festival premia proyectos (M93) |
-| M92 Balance / M93 ProgresiÃ³n | Costos por receta balanceados en M92; desbloqueos de piezas viven en progresiÃ³n M70/M93 (proyectos de construcciÃ³n de meta larga) |
-| M71 Logros | Logros de construcciÃ³n (primera casa, N piezas, villa decorada) escuchan `pieza_colocada` |
+| M73 Festival de construcción | Recetas de evento con `devolucion = 0`; el festival premia proyectos (M93) |
+| M92 Balance / M93 Progresión | Costos por receta balanceados en M92; desbloqueos de piezas viven en progresión M70/M93 (proyectos de construcción de meta larga) |
+| M71 Logros | Logros de construcción (primera casa, N piezas, villa decorada) escuchan `pieza_colocada` |
 
-## 7. OptimizaciÃ³n (M61/M111)
+## 7. Optimización (M61/M111)
 
-- Dirty flags por chunk: al escribir una pieza se marcan solo los chunks tocados; la regeneraciÃ³n de mesh la orquesta M08; jamÃ¡s full-regen.
-- BuildGhost con pooling (una sola instancia reutilizada; ningÃºn alloc en el tick de preview).
-- Raycast de colocaciÃ³n limitado a 1 por frame con cache de celda (si el cursor no se mueve, no re-valida).
-- ValidaciÃ³n en O(n) por pieza (n = celdas de la pieza, mÃ¡x. 8); ocupaciÃ³n consultada como mapa de celdas en memoria + lectura de datos voxel M08 solo en bordes.
-- LOD del fantasma por distancia; piezas estÃ¡ticas unen meshes no dinÃ¡micos (static batching de Godot).
-- LÃ­mite suave de piezas por zona (configurable) con aviso, protege M112 (muchas construcciones).
+- Dirty flags por chunk: al escribir una pieza se marcan solo los chunks tocados; la regeneración de mesh la orquesta M08; jamás full-regen.
+- BuildGhost con pooling (una sola instancia reutilizada; ningún alloc en el tick de preview).
+- Raycast de colocación limitado a 1 por frame con cache de celda (si el cursor no se mueve, no re-valida).
+- Validación en O(n) por pieza (n = celdas de la pieza, máx. 8); ocupación consultada como mapa de celdas en memoria + lectura de datos voxel M08 solo en bordes.
+- LOD del fantasma por distancia; piezas estáticas unen meshes no dinámicos (static batching de Godot).
+- Límite suave de piezas por zona (configurable) con aviso, protege M112 (muchas construcciones).
 
 ## 8. QA
 
-- Unit tests (GUT/vÃ­a C# si corresponde): BuildValidator con casos lÃ­mite (aire, fuera de zona, NPC encima, recursos insuficientes, rotaciÃ³n que invade).
-- IntegraciÃ³n: colocarâ†’guardarâ†’cargarâ†’restaurar idÃ©ntico; undo de demolir devuelve recursos exactos.
+- Unit tests (GUT/vía C# si corresponde): BuildValidator con casos límite (aire, fuera de zona, NPC encima, recursos insuficientes, rotación que invade).
+- Integración: colocar→guardar→cargar→restaurar idéntico; undo de demolir devuelve recursos exactos.
 - Stress M112: 200+ piezas en una zona con profiler (frame time y memoria).
 - Recorrido M114: construir una casa completa (M18) sin errores de consola, sin NPC atrapados.
 

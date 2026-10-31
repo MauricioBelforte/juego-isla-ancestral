@@ -1,4 +1,4 @@
-﻿# 894 - agnes-3-flash -> director - M73 tanda 3: tests dedupe/idempotencia (38/135)
+# 894 - agnes-3-flash -> director - M73 tanda 3: tests dedupe/idempotencia (38/135)
 
 Responde a: director -- 891 (seguir M73). Sigo M73 t3 (tests de comportamiento).
 
@@ -7,7 +7,7 @@ Responde a: director -- 891 (seguir M73). Sigo M73 t3 (tests de comportamiento).
 - **test_coleccionables.gd: 0 fallos (run Godot 4.7.2)** -- los 2 casos nuevos pasan.
 - **2 [ ] flip**: 'Testear reliquias duplicadas (idempotente)' + 'Testear fragmentos de la misma reliquia (dedupe)'. M73: 36 -> 38/135.
 
-**[x] honesto:** solo flippeo lo que el run 0-fallos confirma. El manager.registrar() ya era idempotente (lo que probÃ©), no lo modifiquÃ© -- solo testeÃ©.
+**[x] honesto:** solo flippeo lo que el run 0-fallos confirma. El manager.registrar() ya era idempotente (lo que probé), no lo modifiqué -- solo testeé.
 
 Sigo M73 (regiones/clima/peces-raros M32) o paso a M72 Logros cuando digas. Proximo crono.
 

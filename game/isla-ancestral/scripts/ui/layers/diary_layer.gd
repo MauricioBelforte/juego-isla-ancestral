@@ -53,6 +53,10 @@ const FILAS_OVERSCAN: int = 2
 ## del icono con las convenciones M46 y cae a un fallback generico cuando el
 ## arte no existe. Nunca devuelve null (checklist L93/L117/L203).
 const ICONOS := preload("res://scripts/diario/iconos_diario.gd")
+## Clasificacion de secciones lore (iter. 7, L164): fuente UNICA compartida con
+## diary_service (visibilidad) y validate_diary (regla de datos). El "???" solo
+## se muestra en lore; en colecciones la marca `secreta` se ignora.
+const LORE := preload("res://scripts/diario/secciones_lore.gd")
 ## Lado del icono en la fila de la lista y en el detalle (px).
 const ICONO_FILA: int = 16
 const ICONO_DETALLE: int = 48
@@ -477,11 +481,24 @@ func _texto_estado(est: int) -> String:
 	return _t("DIARY.ESTADO_NUEVO")
 
 
+## Categoria de una entrada de la lista. La cache la trae en "cat"; si faltara
+## (entrada construida a mano), se consulta al servicio para no perder el gate
+## de lore y filtrar un titulo que deberia estar bloqueado.
+func _cat_de(e: Dictionary) -> String:
+	var cat := String(e.get("cat", ""))
+	if cat != "":
+		return cat
+	var d = _diario()
+	if d != null and d.has_method("categoria_de"):
+		return String(d.categoria_de(String(e.get("id", ""))))
+	return ""
+
+
 func _texto_fila(e: Dictionary) -> String:
 	var secreta := bool(e.get("secreta", false))
 	var reg := bool(e.get("registrada", false))
-	if secreta and not reg:
-		return _t("DIARY.BLOQUEADO")  # "???" (solo lore §3.2)
+	if LORE.bloqueada(_cat_de(e), secreta, reg):
+		return _t("DIARY.BLOQUEADO")  # "???" (solo lore §3.2 / L164)
 	var txt := String(e.get("titulo", ""))
 	if bool(e.get("favorito", false)):
 		txt = "★ " + txt
@@ -641,7 +658,7 @@ func _refrescar_detalle() -> void:
 		return
 	var secreta := bool(_sel.get("secreta", false))
 	var reg := bool(_sel.get("registrada", false))
-	if secreta and not reg:
+	if LORE.bloqueada(_cat_de(_sel), secreta, reg):
 		_lbl_det_titulo.text = _t("DIARY.BLOQUEADO")
 		_lbl_det_estado.text = _t("DIARY.BLOQUEADO")
 		_lbl_det_dia.text = ""

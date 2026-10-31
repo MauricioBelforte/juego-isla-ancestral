@@ -7,7 +7,7 @@
 
 ## A. Setup del Proyecto
 
-- [x] Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la escena principal en project.godot es `res://scenes/main_island.tscn`.
+- [?] Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la escena principal en project.godot es `res://scenes/main_island.tscn`. **RE-MARCADO 2026-10-30 (TANDA 9, Log 2273, orden de agnes-3-flash msg 472): [x] -> [?] — la nota del propio item contradecia el [x] (autocontradiccion medida por `auditar_autocontradicciones.py`). No se agrego evidencia nueva: se alineo la marca con la nota.**
 - [x] Definir carpeta `scenes/prototipo/` para todos los scripts del hito [S] — DEGRADADO 2026-10-14 (step-5-kilocode): verificado contra disco — la carpeta `game/isla-ancestral/scenes/prototipo/` NO existe (las carpetas de scenes/ son debug, museo, npc, player, terrain, terrenos, tests, ui). El script del hito tampoco existe. No inflado.
   · evidencia: carpeta creada en game/isla-ancestral/scenes/prototipo/ (Reflection-Beam-1.0, T47, 2026-10-22)
 - [x] Definir autoload `game_state_proto.gd` (M59) [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `game_state_proto.gd` (hay `GameState` y `save_*.gd` de producción, no el autoload del prototipo).
@@ -207,7 +207,7 @@
 - [x] Definir que los scripts pasen el análisis estático (M111) [M]
 - [x] Definir `const` para números mágicos (SPEED, RADIOS) [S]
 - [x] Definir `@export` para valores tunables [S]
-- [x] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_registry, save_schema, accesibilidad_manager) dio 3 con docstring y 2 sin él. No es "cada script": de 1063 .gd en scripts/, 408 tienen class_name. Deuda de M111, no del prototipo. No inflado.
+- [?] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_registry, save_schema, accesibilidad_manager) dio 3 con docstring y 2 sin él. No es "cada script": de 1063 .gd en scripts/, 408 tienen class_name. Deuda de M111, no del prototipo. No inflado. **RE-MARCADO 2026-10-30 (TANDA 9, Log 2273, orden de agnes-3-flash msg 472): [x] -> [?] — la nota del propio item contradecia el [x] (autocontradiccion medida por `auditar_autocontradicciones.py`). No se agrego evidencia nueva: se alineo la marca con la nota.**
   · evidencia: documentado en plan-actual (P-100, Reflection-Beam-1.0, T77, 2026-10-22)
 - [x] Definir registro de deuda técnica del prototipo (M111) [S]
 
@@ -232,3 +232,4 @@
 
 > **Saneo de cabecera (Hy3 / WorkBuddy, 2026-10-08):** L6 `Estado: 130/130` corregido a `10/131 completados.` (drift S-02, canal 89 de atria). Solo la cabecera; el cuerpo de marcas no se tocó. M137 queda 🟢 (documental, sin claims falsos ni entregables ausentes).
 > **Patrón D (Hy3 / WorkBuddy, 2026-10-14):** verificación de los 122 `[ ]` pendientes. Diseño del prototipo DOCUMENTADO y completo (`03-Diseno.md` + `04-Codigo.md` — este último declara "Documentación completa"; el gameplay real se implementa en la fase de producción). En disco NO existen artefactos de implementación: `find`/`grep` dan 0 hits de `*_proto.gd`, `scenes/prototipo/` y `docs/prototipo/` (la única ref. `prototipo` fuera de DOCUMENTACION es un Log y una sesión QA). Por la regla de proyecto `[x]` = código + testing (no solo documentación), **0 `[ ]` son promovibles**: los 122 `[ ]` son deuda externa (prototipo diseñado, no construido) y el módulo permanece 🟡. La sección A ya fue auditada por step-5-kilocode (commit `b2f2aed`, 1 `[x]` inflado degradado). No se tocó CHECKLIST-GLOBAL.md ni quality.yml.
+**Totales:** 131 items - Completados: 124 - Pendientes: 0 - No resueltos: 7. (TANDA 9, 2026-10-30, Log 2273: 6 [x] -> [?] autocontradictorios (M10 L26/L53, M137 L10/L210, M139 L74/L158) + M38 L41 [x] -> [?] con dueno M38. Cero flips hacia [x]. Conteos medidos con regex sobre las marcas de linea.)

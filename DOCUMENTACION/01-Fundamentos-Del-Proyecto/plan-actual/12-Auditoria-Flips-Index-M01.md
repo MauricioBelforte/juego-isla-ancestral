@@ -197,3 +197,61 @@ clasificador miente (P6/P7).
 6. **El `M##` del BACKLOG no es el `M##` del índice maestro**: el índice está desplazado +1 respecto
    de la carpeta (`M40` → `41-Musica`). Citar «M40» sin decir qué numeración se usa hace que dos
    agentes midan carpetas distintas y ambos crean tener razón.
+
+## 11. Re-baseline aplicado (2026-10-29 — Log 2249, orden de la directora msg 457)
+
+**Qué cambió:** el índice maestro pasó de **122/30/0** a **73/79/0** (`[x]`/`[ ]`/`[?]`, medido por
+prefijo de línea). Se degradaron **49** marcas, no 86: la clasificación de §4 se re-midió fresca hoy y
+las clases se movieron (24 `modulo_abierto` · 25 `solo_interrogantes` · 36 `cerrada_sin_fila_ok` =
+**85**, no 86 — el módulo M59 cambió entre el 28 y el 29).
+
+| Clase | N | Se degradó | Por qué |
+|---|---|---|---|
+| `modulo_abierto` | 24 | **sí** | la checklist propia todavía tiene `[ ]`: el `[x]` afirmaba cerrado un módulo con trabajo pendiente |
+| `solo_interrogantes` | 25 | **sí** | sin `[ ]` pero con `[?]` abiertos; el criterio ratificado exige `[?]` = 0 |
+| `cerrada_sin_fila_ok` | 36 | **no** | la checklist propia está 100 % cerrada; lo único que falta es que la fila del GLOBAL pase a `✅`, palanca de la directora |
+
+**Las 49 líneas degradadas** (marca `[x]` → `[ ]`, con nota inline `re-baseline 29oct` que cita clase y
+conteo de la checklist propia):
+
+- `modulo_abierto` (24): L41 M12, L45 M16, L52 M19, L73 M32, L75 M34, L77 M36, L80 M39, L84 M40,
+  L88 M44, L93 M49, L94 M50, L100 M53, L102 M55, L103 M56, L104 M57, L108 M58, L109 M59, L110 M60,
+  L112 M62, L116 M66, L117 M67, L144 M84, L218 M139, L232 M150.
+- `solo_interrogantes` (25): L26 M01, L27 M02, L37 M08, L40 M11, L43 M14, L44 M15, L59 M25, L63 M26,
+  L74 M33, L92 M48, L95 M51, L126 M73, L150 M87, L157 M93, L159 M95, L170 M102, L175 M107, L176 M108,
+  L194 M121, L196 M123, L199 M126, L201 M128, L203 M130, L215 M136, L226 M144.
+
+**Las 36 que NO se tocaron** (decisión pendiente de la directora): M09, M13, M17, M20, M23, M31, M35,
+M65, M70, M75, M77, M79, M80, M81, M82, M88, M90, M91, M92, M94, M103, M104, M105, M111, M112, M114,
+M118, M122, M125, M127, M140, M142, M143, M145, M148, M152. **Si se aplica la lectura estricta** del
+criterio (fila `✅` obligatoria), el conteo honesto sería **37/115/0** — queda medido y visible, no aplicado.
+
+**Línea de totales corregida.** El archivo tenía **dos** líneas de totales (26/126 y 29/123), ambas stale;
+quedaron marcadas `SUPERADA` y se agregó el total vigente al pie: `152 ítems · Completados: 73 ·
+Pendientes: 79 · No resueltos: 0`. El muestreador ahora lee `delta_total=+0 delta_x=+0` sobre el índice
+(antes `delta_x=-93`).
+
+**Verificación:** `scripts/auditar_indice_m01.py --stale` → 36 stale, todas `cerrada_sin_fila_ok`, 0 en
+las otras dos clases. `--check` EXIT 0. Sin BOM, CRLF preservado (309/309), `git diff --stat` ==
+`--ignore-cr-at-eol` (75/51, sin churn).
+
+### 11.1 Defecto del muestreador que este módulo destapó
+
+`muestreo_p100.py` devolvía **`VEREDICTO: OK` con la muestra vacía**. El índice M01 no tiene un solo ítem
+con verbo de creación ni con artefacto citado (son enunciados de plan: «definir nombre, pilares, pitch»),
+así que `filas` quedaba en 0, `fallas=0` y el resumen decía OK **sin haber mirado nada** — un falso verde
+por muestra vacía, justo el que el propio docstring decía cubrir con el código de salida 3.
+
+- **Corte nuevo:** `if not filas: veredicto = "CIEGO"` + `main()` devuelve **3** si algún módulo sale CIEGO.
+- **Suite:** bloque `test_ceguera_muestra_vacia` (fixture `77-Ciego`: 2 `[x]` de diseño puro) + control
+  negativo (un módulo con muestra no puede salir CIEGO). Piso `CHECKS_MINIMOS` 60 → **71** (medido).
+- **Sonda EN ROJO:** se eliminó la rama `if not filas` en una copia → **2 fallos** nombrando los checks y
+  `RESULTADO: FAIL`. Restaurado; verde ×2 después.
+
+### 11.2 Trampa nueva: contar `[?]` con grep da 0 SIEMPRE
+
+`grep -cE "^\s*- \[$m\]"` con `m='?'` devuelve **0** en cualquier archivo: en ERE el `?` cuantifica el `\[`
+que tiene delante, así que el patrón busca «cero o una `[` seguida de `]`» y nunca matchea `- [?]`. Medido
+hoy: dio `[?]=0` para M11, M67 y M74 cuando los reales son **7, 15 y 58** (coinciden con la tabla de la
+directora). Se detectó porque el muestreador en Python (`[ x?]` dentro de una clase de caracteres) daba
+otra cifra. **Regla:** contar marcas con `[?]` entre corchetes (`\[[?]\]`) o, mejor, con el muestreador.

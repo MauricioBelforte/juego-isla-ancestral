@@ -90,6 +90,16 @@ Si no hay nada nuevo desde el ultimo commit -> 'sin cambios'.
 ```
 Cadencia `5 3,9,15,21 * * *` (29oct; antes `17 */2`).
 
+> **⚠️ REGLA ANTI-RESTAURACIÓN (Cron C) — agregada 30oct (hallazgo M85, DeepSeek TANDA 6):**
+> el commit de preservación commitea el worktree **tal cual**. Si un worktree traé una
+> **regresión de marcas** (`[ ]`→`[x]` **sin nota de flip**) — p. ej. una re-inflación
+> silenciosa que conserva la nota "INFLADO / NO existen" — **el Cron C NO la versiona
+> limpia**: detectala antes de commitear (buscá en el diff de checklists `[x]` nuevos cuya
+> nota contenga "INFLADO"/"NO existen"/"sin codigo en disco") y, si hay, **anoatá y no
+> la commitees** (o commiteala señalada como inflación pendiente de re-audit). Origen:
+> M85 se re-infló de 73→99 por commits bulk de preservación que trajeron `[ ]→[x]` sin
+> firma (24/26 de la inflación NO fueron Beam, sino restauración del worktree).
+
 ---
 
 ## 5. CRON D — prompt EXACTO (asignador cada 2 h)

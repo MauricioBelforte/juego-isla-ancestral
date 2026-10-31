@@ -1,7 +1,7 @@
-﻿**Modelo:** SWE-1.6
+**Modelo:** SWE-1.6
 **Plataforma:** Devin
 
-# 03-Diseno.md â€” MÃ³dulo 110: Debug Menu
+# 03-Diseno.md — Módulo 110: Debug Menu
 
 ## 1. Arquitectura del sistema
 
@@ -11,7 +11,7 @@ DebugMenu (Node, autoload solo en debug builds)
 â”‚   â”œâ”€â”€ Panel Jugador
 â”‚   â”œâ”€â”€ Panel Mundo
 â”‚   â”œâ”€â”€ Panel Entidades
-â”‚   â”œâ”€â”€ Panel VisualizaciÃ³n
+│   ├── Panel Visualización
 â”‚   â””â”€â”€ Panel Sistema
 â”œâ”€â”€ Consola In-Game
 â”œâ”€â”€ Debug Visualizer
@@ -80,11 +80,11 @@ func toggle_navigation(enabled: bool)
 func toggle_hitboxes(enabled: bool)
 func toggle_ai_states(enabled: bool)
 
-# DiagnÃ³stico
+# Diagnóstico
 func export_diagnostic() -> String
 func report_bug() -> void
 
-# ConfiguraciÃ³n
+# Configuración
 func save_config()
 func load_config()
 func reset_config()
@@ -100,7 +100,7 @@ DebugWindow (Window)
 â”‚   â”œâ”€â”€ Jugador
 â”‚   â”œâ”€â”€ Mundo
 â”‚   â”œâ”€â”€ Entidades
-â”‚   â”œâ”€â”€ VisualizaciÃ³n
+│   ├── Visualización
 â”‚   â””â”€â”€ Sistema
 â””â”€â”€ ContentPanel (StackContainer)
     â”œâ”€â”€ PanelJugador (visible when selected)
@@ -128,8 +128,8 @@ PanelJugador (VBoxContainer)
 â”œâ”€â”€ HBoxContainer
 â”‚   â”œâ”€â”€ SpinBox: Dinero
 â”‚   â””â”€â”€ Button: "Dar"
-â”œâ”€â”€ Label: "ProgresiÃ³n"
-â”œâ”€â”€ OptionButton: MisiÃ³n
+├── Label: "Progresión"
+├── OptionButton: Misión
 â”œâ”€â”€ Button: "Completar"
 â”œâ”€â”€ OptionButton: Herramienta
 â”œâ”€â”€ Button: "Desbloquear"
@@ -146,10 +146,10 @@ PanelMundo (VBoxContainer)
 â”œâ”€â”€ HBoxContainer
 â”‚   â”œâ”€â”€ Slider: Hora (0-23)
 â”‚   â””â”€â”€ Label: "XX:XX"
-â”œâ”€â”€ OptionButton: EstaciÃ³n
+├── OptionButton: Estación
 â”œâ”€â”€ Label: "Clima"
 â”œâ”€â”€ OptionButton: Clima
-â”œâ”€â”€ Label: "GeneraciÃ³n"
+├── Label: "Generación"
 â”œâ”€â”€ HBoxContainer
 â”‚   â”œâ”€â”€ LineEdit: Seed
 â”‚   â””â”€â”€ Button: "Aplicar"
@@ -167,19 +167,19 @@ PanelEntidades (VBoxContainer)
 â”œâ”€â”€ OptionButton: NPC
 â”œâ”€â”€ Button: "Resetear"
 â”œâ”€â”€ Label: "Estado IA"
-â”œâ”€â”€ Label: "IDLE" (dinÃ¡mico)
+├── Label: "IDLE" (dinámico)
 â”œâ”€â”€ Label: "Puzzles"
 â”œâ”€â”€ OptionButton: Puzzle
 â””â”€â”€ Button: "Resetear"
 ```
 
-**Panel VisualizaciÃ³n:**
+**Panel Visualización:**
 ```
 PanelVisualizacion (VBoxContainer)
 â”œâ”€â”€ CheckBox: "Mostrar Colliders"
 â”œâ”€â”€ CheckBox: "Mostrar FPS"
 â”œâ”€â”€ CheckBox: "Mostrar Chunks"
-â”œâ”€â”€ CheckBox: "Mostrar NavegaciÃ³n"
+├── CheckBox: "Mostrar Navegación"
 â”œâ”€â”€ CheckBox: "Mostrar Hitboxes"
 â””â”€â”€ CheckBox: "Mostrar Estados IA"
 ```
@@ -188,16 +188,16 @@ PanelVisualizacion (VBoxContainer)
 ```
 PanelSistema (VBoxContainer)
 â”œâ”€â”€ Label: "Consola"
-â”œâ”€â”€ RichTextLabel (scrollable, 100 lÃ­neas)
+├── RichTextLabel (scrollable, 100 líneas)
 â”œâ”€â”€ HBoxContainer
 â”‚   â”œâ”€â”€ OptionButton: Filtro Nivel
-â”‚   â”œâ”€â”€ OptionButton: Filtro CategorÃ­a
-â”‚   â”œâ”€â”€ LineEdit: BÃºsqueda
+│   ├── OptionButton: Filtro Categoría
+│   ├── LineEdit: Búsqueda
 â”‚   â””â”€â”€ CheckBox: "Auto-scroll"
-â”œâ”€â”€ Label: "DiagnÃ³stico"
-â”œâ”€â”€ Button: "Exportar DiagnÃ³stico"
+├── Label: "Diagnóstico"
+├── Button: "Exportar Diagnóstico"
 â”œâ”€â”€ Button: "Reportar Bug"
-â””â”€â”€ Button: "Guardar ConfiguraciÃ³n"
+└── Button: "Guardar Configuración"
 ```
 
 ## 4. Debug Visualizer
@@ -313,25 +313,25 @@ func report_bug():
     
     # Generar URL de GitHub con plantilla pre-llenada
     var metadata = _read_metadata()
-    var title = "[BUG] " + metadata.get("description", "DescripciÃ³n breve")
+    var title = "[BUG] " + metadata.get("description", "Descripción breve")
     var body = """
-## DescripciÃ³n del bug
-[DescripciÃ³n del problema]
+## Descripción del bug
+[Descripción del problema]
 
-## Contexto tÃ©cnico
-- **VersiÃ³n del juego:** {version}
+## Contexto técnico
+- **Versión del juego:** {version}
 - **Plataforma:** {platform}
 - **Specs:** {cpu}, {gpu}, {ram}
-- **Seed de generaciÃ³n:** {seed}
-- **PosiciÃ³n del jugador:** {player_position}
+- **Seed de generación:** {seed}
+- **Posición del jugador:** {player_position}
 - **FPS:** {fps}
 - **Memoria:** {memory}
 - **Hora del juego:** {game_time}
-- **EstaciÃ³n:** {season}
+- **Estación:** {season}
 - **Clima:** {weather}
 
 ## Evidencia
-DiagnÃ³stico adjunto: {diagnostic}
+Diagnóstico adjunto: {diagnostic}
 """
     
     var url = "https://github.com/MauricioBelforte/juego-isla-ancestral/issues/new?title=" + title.uri_encode() + "&body=" + body.uri_encode()
@@ -360,17 +360,17 @@ func _input(event):
 **Input Map (Project Settings):**
 - `debug_menu_toggle`: F1 (o Backtick)
 - `debug_menu_close`: Escape
-- `debug_menu_teleport`: T (cuando panel jugador estÃ¡ activo)
+- `debug_menu_teleport`: T (cuando panel jugador está activo)
 
 ## 7. Performance considerations
 
 **Optimizaciones:**
-- Debug visualizations solo cuando debug menu estÃ¡ visible
-- LÃ­mite de FPS overlay: actualizar cada 0.5s (no cada frame)
-- LÃ­mite de consola: mÃ¡ximo 100 lÃ­neas (rotativo)
-- LÃ­mite de chunks visualizados: solo chunks cercanos al jugador (radio 5 chunks)
-- LÃ­mite de navigation paths: solo NPC cercanos (radio 50m)
-- LÃ­mite de AI states: solo NPC cercanos (radio 50m)
+- Debug visualizations solo cuando debug menu está visible
+- Límite de FPS overlay: actualizar cada 0.5s (no cada frame)
+- Límite de consola: máximo 100 líneas (rotativo)
+- Límite de chunks visualizados: solo chunks cercanos al jugador (radio 5 chunks)
+- Límite de navigation paths: solo NPC cercanos (radio 50m)
+- Límite de AI states: solo NPC cercanos (radio 50m)
 
 **Budget de rendimiento:**
 - Debug menu cerrado: 0% overhead
@@ -379,7 +379,7 @@ func _input(event):
 
 ## 8. Seguridad en builds
 
-**ActivaciÃ³n condicional:**
+**Activación condicional:**
 ```gdscript
 # project.godot
 
@@ -390,7 +390,7 @@ DebugMenu="*res://scripts/debug/debug_menu.gd" # Solo en debug
 application/config/features=packed
 ```
 
-**En cÃ³digo:**
+**En código:**
 ```gdscript
 # main.gd
 
@@ -402,14 +402,14 @@ func _ready():
         DebugMenu = null
 ```
 
-**VerificaciÃ³n en runtime:**
+**Verificación en runtime:**
 ```gdscript
 func _input(event):
     if DebugMenu == null:
         return  # No hacer nada en release
 ```
 
-## 9. IntegraciÃ³n con Service Locator
+## 9. Integración con Service Locator
 
 ```gdscript
 # ServiceRegistry
@@ -425,26 +425,26 @@ func register_debug_services():
 
 ### Regla 1: Solo en debug builds
 - Debug menu nunca accesible en release
-- VerificaciÃ³n con `OS.is_debug_build()`
+- Verificación con `OS.is_debug_build()`
 - Input actions desactivadas en release
 
 ### Regla 2: Bajo overhead
 - Visualizaciones solo cuando visible
-- LÃ­mites de cantidad de elementos visualizados
-- Actualizaciones periÃ³dicas (no cada frame)
+- Límites de cantidad de elementos visualizados
+- Actualizaciones periódicas (no cada frame)
 
 ### Regla 3: UX intuitiva
-- Paneles organizados por categorÃ­a
+- Paneles organizados por categoría
 - Atajos de teclado documentados
 - Feedback visual inmediato
 
-### Regla 4: IntegraciÃ³n completa
-- Todos los mÃ³dulos relevantes integrados
-- Exportar diagnÃ³stico funciona completamente
+### Regla 4: Integración completa
+- Todos los módulos relevantes integrados
+- Exportar diagnóstico funciona completamente
 - Logs en tiempo real
 
-### Regla 5: Persistencia de configuraciÃ³n
-- Guardar posiciÃ³n y tamaÃ±o
+### Regla 5: Persistencia de configuración
+- Guardar posición y tamaño
 - Guardar estado de toggles
 - Restaurar al abrir
 

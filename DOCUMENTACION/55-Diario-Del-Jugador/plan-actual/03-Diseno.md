@@ -1,23 +1,23 @@
-﻿**Modelo:** mimo-v2.6-flash-free (Ãºltimo modificador; base por Deepseek V4 Flash)
+**Modelo:** mimo-v2.6-flash-free (último modificador; base por Deepseek V4 Flash)
 **Plataforma:** opencode
 
-# 03-Diseno.md â€” MÃ³dulo 55: Diario del Jugador
+# 03-Diseno.md — Módulo 55: Diario del Jugador
 
 ## 1. Arquitectura
 
 ```
 Assets/_Project/Diary/
-â”œâ”€â”€ data/                          (catÃ¡logo y modelo)
-â”‚   â”œâ”€â”€ diary_catalog.tres         (14 categorÃ­as + entradas estÃ¡ticas: ids, tÃ­tulos i18n)
-â”‚   â””â”€â”€ diary_entry.gd             (modelo: id, categorÃ­a, estado, tags, favorito, secreto)
-â”œâ”€â”€ service/                       (lÃ³gica)
+├── data/                          (catálogo y modelo)
+│   ├── diary_catalog.tres         (14 categorías + entradas estáticas: ids, títulos i18n)
+│   └── diary_entry.gd             (modelo: id, categoría, estado, tags, favorito, secreto)
+├── service/                       (lógica)
 â”‚   â”œâ”€â”€ diary_service.gd           (autoload: registro por eventos, estado, % completado)
-â”‚   â””â”€â”€ diary_save.gd              (serializaciÃ³n en GameState M59/M60, versionado)
+│   └── diary_save.gd              (serialización en GameState M59/M60, versionado)
 â”œâ”€â”€ ui/                            (pantallas de M53)
-â”‚   â”œâ”€â”€ diary_screen.gd            (pestaÃ±as, listas virtualizadas, detalle)
-â”‚   â”œâ”€â”€ diary_list_item.gd         (fila: icono M46, tÃ­tulo, estado, favorito)
-â”‚   â””â”€â”€ diary_detail.gd            (detalle: descripciÃ³n, acciones, foto M56)
-â””â”€â”€ validators/                    (validaciÃ³n en editor/CI)
+│   ├── diary_screen.gd            (pestañas, listas virtualizadas, detalle)
+│   ├── diary_list_item.gd         (fila: icono M46, título, estado, favorito)
+│   └── diary_detail.gd            (detalle: descripción, acciones, foto M56)
+└── validators/                    (validación en editor/CI)
     â””â”€â”€ validate_diary.gd
 
 Assets/_Project/Services/
@@ -33,8 +33,8 @@ Los sistemas de juego emiten eventos al `EventBus` (M07): `NPC_CONOCIDO`, `LUGAR
 ```
 evento del sistema (ej: PISTA_LEIDA, M24)
   â†’ EventBus (M07) â†’ DiaryService.on_pista_leida(id)
-    â†’ 1) Â¿existe entrada en catÃ¡logo? sÃ­ â†’ estado = visto (y completado si aplica)
-    â†’ 2) si es primera vez â†’ notificaciÃ³n sutil "Â¡Diario actualizado!" (M53/M44)
+    → 1) ¿existe entrada en catálogo? sí → estado = visto (y completado si aplica)
+    → 2) si es primera vez → notificación sutil "¡Diario actualizado!" (M53/M44)
     â†’ 3) guardar en memoria; marcar dirty para persistencia
     â†’ 4) log DIARY-ADD
 ```
@@ -44,10 +44,10 @@ evento del sistema (ej: PISTA_LEIDA, M24)
 ```
 jugador abre diario (atajo, M57)
   â†’ diary_screen.gd:
-    â†’ 1) LazyLoad: cargar pestaÃ±as y solo la lista visible (virtualizaciÃ³n)
-    â†’ 2) aplicar filtros actuales (categorÃ­a, estado, favoritos, bÃºsqueda)
+    → 1) LazyLoad: cargar pestañas y solo la lista visible (virtualización)
+    → 2) aplicar filtros actuales (categoría, estado, favoritos, búsqueda)
     â†’ 3) mostrar % de completado de lo DESCUBIERTO (anti-spoiler)
-    â†’ 4) navegaciÃ³n: pestaÃ±a â†’ lista â†’ detalle (2 clics)
+    → 4) navegación: pestaña → lista → detalle (2 clics)
     â†’ 5) log DIARY-OPEN
 ```
 
@@ -58,30 +58,30 @@ cierre del diario / auto-save (M59)
   â†’ diary_save.gd:
     â†’ 1) recolectar entradas con estado != inicial
     â†’ 2) serializar con schema_version (M60)
-    â†’ 3) escribir en GameState (atÃ³mico, M59)
+    → 3) escribir en GameState (atómico, M59)
     â†’ 4) log DIARY-SAVE
 ```
 
-## 3. Tablas de MÃ©tricas (tÃ©cnico)
+## 3. Tablas de Métricas (técnico)
 
-### 3.1 CategorÃ­as del diario (catÃ¡logo)
+### 3.1 Categorías del diario (catálogo)
 
-| CategorÃ­a | Fuente | Entradas tÃ­picas | Icono (M46) |
+| Categoría | Fuente | Entradas típicas | Icono (M46) |
 |---|---|---|---|
 | Personajes | M19 | ~30 | retrato |
-| Lugares | M09/M54 | ~40 | sÃ­mbolo de POI |
+| Lugares | M09/M54 | ~40 | símbolo de POI |
 | Criaturas | M36/M65 | ~35 | silueta |
 | Plantas | M50/M33 | ~30 | hoja |
 | Minerales | M35 | ~20 | gema |
-| Recetas | M16 | ~60 | Ã­tem |
+| Recetas | M16 | ~60 | ítem |
 | Pistas | M24/M26 | ~25 | signo |
 | Sellos | M22/M26 | 7 | sello |
 | Ruinas | M25 | ~15 | ruina |
 | Cartas | M74 | ~20 | carta |
 | Descubrimientos | M71 | ~25 | estrella |
-| Misiones | M22/M23 | ~40 | exclamaciÃ³n |
+| Misiones | M22/M23 | ~40 | exclamación |
 | Eventos | M74/M29 | ~15 | calendario |
-| FotografÃ­as | M56 | ilimitado | cÃ¡mara |
+| Fotografías | M56 | ilimitado | cámara |
 
 ### 3.2 Reglas anti-spoiler
 
@@ -94,88 +94,88 @@ cierre del diario / auto-save (M59)
 
 ### 3.3 Rendimiento (contra M61)
 
-- Apertura del diario: < 100 ms con 500+ entradas (virtualizaciÃ³n).
-- Persistencia: < 5 KB por sesiÃ³n tÃ­pica (JSON, M60).
-- NotificaciÃ³n de entrada nueva: sutil, no bloqueante (M53/M44).
+- Apertura del diario: < 100 ms con 500+ entradas (virtualización).
+- Persistencia: < 5 KB por sesión típica (JSON, M60).
+- Notificación de entrada nueva: sutil, no bloqueante (M53/M44).
 
 ## 4. Integraciones Clave
 
-| MÃ³dulo | IntegraciÃ³n |
+| Módulo | Integración |
 |---|---|
-| M53/M57 | Pantallas, navegaciÃ³n 2 clics, atajo |
+| M53/M57 | Pantallas, navegación 2 clics, atajo |
 | M07 | EventBus de registro |
 | M59/M60 | Persistencia versionada |
-| M19/M20 | Entradas de personajes y relaciÃ³n |
+| M19/M20 | Entradas de personajes y relación |
 | M09/M54 | Lugares y mapa |
 | M36/M65, M50, M35 | Criaturas, plantas, minerales |
 | M16 | Recetas |
 | M24/M25/M26 | Pistas, ruinas, Sellos |
 | M22/M23 | Misiones y descubrimientos |
 | M74/M29 | Cartas, eventos, calendario |
-| M56 | GalerÃ­a de fotografÃ­as (interface) |
+| M56 | Galería de fotografías (interface) |
 | M46 | Iconos/retratos |
-| M72 | % real para logros de colecciÃ³n |
-| M87/M88 | LocalizaciÃ³n de textos |
-| M61 | VirtualizaciÃ³n y lazy loading |
-| M108/M118 | ImportaciÃ³n y validaciÃ³n en CI |
+| M72 | % real para logros de colección |
+| M87/M88 | Localización de textos |
+| M61 | Virtualización y lazy loading |
+| M108/M118 | Importación y validación en CI |
 
-## 5. ImplementaciÃ³n real (iter. 2 â€” UI, 2026-10-04, mimo-v2.6-flash-free/opencode)
+## 5. Implementación real (iter. 2 — UI, 2026-10-04, mimo-v2.6-flash-free/opencode)
 
-> Esta secciÃ³n describe lo que **existe en disco** hoy. Los apartados 1â€“4 son el diseÃ±o
-> original (plan); donde difieren, manda lo aquÃ­ indicado.
+> Esta sección describe lo que **existe en disco** hoy. Los apartados 1–4 son el diseño
+> original (plan); donde difieren, manda lo aquí indicado.
 
-### 5.1 Rutas reales (drift vs Â§1)
+### 5.1 Rutas reales (drift vs §1)
 
-| DiseÃ±o (Â§1, plan) | Real implementado |
+| Diseño (§1, plan) | Real implementado |
 |---|---|
 | `Assets/_Project/Diary/ui/diary_screen.gd` | `scripts/ui/layers/diary_layer.gd` (capa del framework M53) |
 | `diary_list_item.gd` / `diary_detail.gd` | unificados dentro de `diary_layer.gd` (filas y panel de detalle) |
 | `Assets/_Project/Diary/service/diary_service.gd` | `scripts/diario/diary_service.gd` (autoload, iter. 1) |
-| `diary_catalog.tres` | `data/diario/diario_catalog.json` (14 categorÃ­as, 44 entradas) |
-| `diary_save.gd` | persistencia vÃ­a ISaveProvider M59 dentro de `diary_service.gd` (`get_save_data`/`restore_save_data`, schema_version 1) |
-| `diary_entry.gd` / `diary_event.gd` | no existen: las entradas son Dictionaries y el registro es por seÃ±ales reales (iter. 1) |
+| `diary_catalog.tres` | `data/diario/diario_catalog.json` (14 categorías, 44 entradas) |
+| `diary_save.gd` | persistencia vía ISaveProvider M59 dentro de `diary_service.gd` (`get_save_data`/`restore_save_data`, schema_version 1) |
+| `diary_entry.gd` / `diary_event.gd` | no existen: las entradas son Dictionaries y el registro es por señales reales (iter. 1) |
 | `validate_diary.gd` | **NO existe** (pendiente, checklist Y) |
 
-### 5.2 ComposiciÃ³n de la capa (DiaryLayer)
+### 5.2 Composición de la capa (DiaryLayer)
 
 ```
 DiaryLayer (UILayer, MODAL_FULL, nombre "DiaryLayer")
 â”œâ”€â”€ FondoDim + PanelDiario
-â”‚   â”œâ”€â”€ Cabecera: LblTitulo Â· ProgresoCat (ProgressBar) Â· LblProgresoGlobal Â· BtnCerrar
-â”‚   â”œâ”€â”€ ColCategorias: LblCategorias + CategoriasBox (14 pestaÃ±as, botones por categorÃ­a)
-â”‚   â”œâ”€â”€ ColLista: Buscador (LineEdit) Â· LblFiltro + FiltroEstado (5 opciones)
-â”‚   â”‚            Â· ScrollLista/ListaEntradas (filas "Fila_<id>": â˜… + tÃ­tulo Â· estado Â· dÃ­a)
-â”‚   â”‚            Â· LblVacio ("TodavÃ­a no hayâ€¦" / "Sin resultadosâ€¦")
-â”‚   â””â”€â”€ ColDetalle: LblDetalle Â· LblDetalleTitulo/Estado/Dia Â· BtnFavoritoDetalle
-â”‚                   Â· LblSinSeleccion ("SeleccionÃ¡ una entradaâ€¦")
+│   ├── Cabecera: LblTitulo · ProgresoCat (ProgressBar) · LblProgresoGlobal · BtnCerrar
+│   ├── ColCategorias: LblCategorias + CategoriasBox (14 pestañas, botones por categoría)
+│   ├── ColLista: Buscador (LineEdit) · LblFiltro + FiltroEstado (5 opciones)
+│   │            · ScrollLista/ListaEntradas (filas "Fila_<id>": ★ + título · estado · día)
+│   │            · LblVacio ("Todavía no hay…" / "Sin resultados…")
+│   └── ColDetalle: LblDetalle · LblDetalleTitulo/Estado/Dia · BtnFavoritoDetalle
+│                   · LblSinSeleccion ("Seleccioná una entrada…")
 ```
 
-- **NavegaciÃ³n 2 clics:** pestaÃ±a (clic 1) â†’ fila (clic 2) muestra el detalle en la tercera columna.
-- **Filtros:** TODOS / NUEVOS / VISTOS / COMPLETADOS / FAVORITOS (`enum Filtro`) + bÃºsqueda con
-  diacrÃ­ticos (`buscar()` con `_slug()` en servicio y consulta, M87).
-- **% (anti-spoiler Â§3.2):** barra de categorÃ­a y % global se calculan SIEMPRE sobre lo
+- **Navegación 2 clics:** pestaña (clic 1) → fila (clic 2) muestra el detalle en la tercera columna.
+- **Filtros:** TODOS / NUEVOS / VISTOS / COMPLETADOS / FAVORITOS (`enum Filtro`) + búsqueda con
+  diacríticos (`buscar()` con `_slug()` en servicio y consulta, M87).
+- **% (anti-spoiler §3.2):** barra de categoría y % global se calculan SIEMPRE sobre lo
   descubierto; tooltip `DIARY.PROGRESO_CAT` ("del contenido descubierto"); clamp [0,100].
-- **Secreto:** entrada `secreta` no registrada â†’ "???" (`DIARY.BLOQUEADO`) â€” solo aplica a
-  entradas con la marca en el catÃ¡logo (hoy ninguna del JSON la trae: catÃ¡logo solo `{id, titulo}`).
+- **Secreto:** entrada `secreta` no registrada → "???" (`DIARY.BLOQUEADO`) — solo aplica a
+  entradas con la marca en el catálogo (hoy ninguna del JSON la trae: catálogo solo `{id, titulo}`).
 - **Apertura/cierre:** atajo `diario` (tecla J, 74/106) en `ui_manager._unhandled_input` â†’
-  `toggle()` de la capa; Esc/`close_top()` cierra la capa **visible** mÃ¡s reciente (fix de
+  `toggle()` de la capa; Esc/`close_top()` cierra la capa **visible** más reciente (fix de
   pila: antes purgaba `stack[-1]` aunque estuviera oculta).
-- **Favorito:** atajo `favorito` (M53) consume la capa sÃ³lo si estÃ¡ visible; la estrella â˜… vive
-  en la fila y en el botÃ³n del detalle (undo visual verificado en test).
+- **Favorito:** atajo `favorito` (M53) consume la capa sólo si está visible; la estrella ★ vive
+  en la fila y en el botón del detalle (undo visual verificado en test).
 
-### 5.3 Flujo de apertura (real vs Â§2.2)
+### 5.3 Flujo de apertura (real vs §2.2)
 
 ```
 J (diario) â†’ ui_manager._unhandled_input â†’ DiaryLayer.toggle()
   â†’ on_layer_opened: re-registro idempotente en la pila + _aplicar_textos_estaticos (i18n)
-  â†’ _refrescar_completo: pestaÃ±as (14) Â· lista de la categorÃ­a activa (solo lo descubierto)
-  Â· barra + % global Â· detalle (si hay selecciÃ³n persistida)
+  → _refrescar_completo: pestañas (14) · lista de la categoría activa (solo lo descubierto)
+  · barra + % global · detalle (si hay selección persistida)
 ```
 
-LazyLoad/virtualizaciÃ³n (Â§2.2.1) **NO implementados** en iter. 2: la lista crea una fila por
-entrada descubierta de la categorÃ­a activa (checklist W pendiente para el lote de rendimiento).
+LazyLoad/virtualización (§2.2.1) **NO implementados** en iter. 2: la lista crea una fila por
+entrada descubierta de la categoría activa (checklist W pendiente para el lote de rendimiento).
 
-## 9. T-M1 lote 2 â€” Modelo rico y detalle (2026-10-05)
+## 9. T-M1 lote 2 — Modelo rico y detalle (2026-10-05)
 
 **Modelo de entrada** en `diario_catalog.json` (ya no solo `{id, titulo}`):
 
@@ -184,70 +184,70 @@ entrada descubierta de la categorÃ­a activa (checklist W pendiente para el lot
   "descripcion": "...", "refs": ["lugar_isla_raiz"] }
 ```
 
-- `descripcion` (opcional): pÃ¡rrafo corto de contexto; **solo fuentes reales del repo**
+- `descripcion` (opcional): párrafo corto de contexto; **solo fuentes reales del repo**
   (historia de villager .tres, historia_principal.json, secundarias.json).
-- `refs` (opcional): ids de otras entradas del catÃ¡logo. En la UI son botones navegables;
+- `refs` (opcional): ids de otras entradas del catálogo. En la UI son botones navegables;
   **cada ref se filtra con `esta_registrada()`** â†’ no puede revelar contenido no descubierto.
 - `DiaryService.detalle_entrada(id)` devuelve `{id, titulo, descripcion, refs}`;
-  `categoria_de(id)` da la categorÃ­a de una entrada (para navegar desde otra pestaÃ±a).
+  `categoria_de(id)` da la categoría de una entrada (para navegar desde otra pestaña).
 
-**Detalle del panel** (columna 3): tÃ­tulo â†’ estado/dÃ­a â†’ descripciÃ³n (`LblDetalleDesc`,
+**Detalle del panel** (columna 3): título → estado/día → descripción (`LblDetalleDesc`,
 autowrap, oculto si no hay texto) â†’ cabecera `Referencias` + botones `Ref_*` â†’ acciones
-(favorito, etc.). Sin descripciÃ³n/refs, los widgets extra se ocultan (sin huecos).
+(favorito, etc.). Sin descripción/refs, los widgets extra se ocultan (sin huecos).
 
-**Persistencia de preferencias de UI:** el save del diario aÃ±ade
+**Persistencia de preferencias de UI:** el save del diario añade
 `"ui": {"filtro": <0-4>, "categoria": <slug>}`; `set_ui_prefs()` sanea valores fuera de
 rango a los defaults (0/"personajes"); al abrir la capa, `_aplicar_prefs_ui()` restaura
-el filtro y la pestaÃ±a de la sesiÃ³n anterior.
+el filtro y la pestaña de la sesión anterior.
 
-## 10. Filtro por bioma (definiciÃ³n 2026-10-20, Step-5-WorkBuddy)
+## 10. Filtro por bioma (definición 2026-10-20, Step-5-WorkBuddy)
 
-DefiniciÃ³n del filtro por bioma para las categorÃ­as `criaturas` y `lugares`
+Definición del filtro por bioma para las categorías `criaturas` y `lugares`
 (checklist 05 L155). Estado real medido hoy: `DiaryLayer` expone 5 filtros de
-estado (`enum Filtro`: TODOS/NUEVOS/VISTOS/COMPLETADOS/FAVORITOS) + bÃºsqueda con
-diacrÃ­ticos; NO existe filtro por bioma en disco.
+estado (`enum Filtro`: TODOS/NUEVOS/VISTOS/COMPLETADOS/FAVORITOS) + búsqueda con
+diacríticos; NO existe filtro por bioma en disco.
 
 - **Dato:** campo opcional `bioma` (slug ascii) en cada entrada de `criaturas` y
-  `lugares` del catÃ¡logo (`data/diario/diario_catalog.json`). El validador
-  (`validate_diary.gd`) debe exigir slug y valor del catÃ¡logo de biomas de M09/M54.
+  `lugares` del catálogo (`data/diario/diario_catalog.json`). El validador
+  (`validate_diary.gd`) debe exigir slug y valor del catálogo de biomas de M09/M54.
 - **Servicio:** `DiaryService.entradas_de(categoria)` ya devuelve las entradas
-  descubiertas; se agrega `set_filtro_bioma(slug)` / `get_filtro_bioma()` anÃ¡logo
+  descubiertas; se agrega `set_filtro_bioma(slug)` / `get_filtro_bioma()` análogo
   a `set_ui_prefs()` (se persiste con el save en `"ui"`, saneado a default).
-- **UI:** 6.Âª opciÃ³n de filtro + dropdown de biomas poblado con los biomas
-  presentes en las entradas descubiertas de la categorÃ­a activa (anti-spoiler:
-  la lista de biomas se calcula sobre lo descubierto, Â§3.2).
-- **Dependencia:** catÃ¡logo de biomas de M09/M54 (dueÃ±o externo); mientras no
+- **UI:** 6.ª opción de filtro + dropdown de biomas poblado con los biomas
+  presentes en las entradas descubiertas de la categoría activa (anti-spoiler:
+  la lista de biomas se calcula sobre lo descubierto, §3.2).
+- **Dependencia:** catálogo de biomas de M09/M54 (dueño externo); mientras no
   exista, el filtro opera sobre los `bioma` que traigan las entradas.
-- ImplementaciÃ³n diferida = KnownIssue no bloqueante (precedente M50/M119).
+- Implementación diferida = KnownIssue no bloqueante (precedente M50/M119).
 
-## 11. Contenido secreto desbloqueable por acciÃ³n concreta (definiciÃ³n 2026-10-20, Step-5-WorkBuddy)
+## 11. Contenido secreto desbloqueable por acción concreta (definición 2026-10-20, Step-5-WorkBuddy)
 
-DefiniciÃ³n del mecanismo de contenido secreto (checklist 05 L163). Base real
+Definición del mecanismo de contenido secreto (checklist 05 L163). Base real
 medida hoy: el modelo de entrada tiene la marca `secreta`; `entradas_de()` filtra
 `registrada or secreta` y la UI muestra `DIARY.BLOQUEADO` ("???") para la secreta
-no registrada (diary_layer.gd L437-440, "solo lore Â§3.2"). Sin embargo, HOY
-ninguna entrada del catÃ¡logo trae la marca (medido: 0 de 44) y ninguna acciÃ³n
+no registrada (diary_layer.gd L437-440, "solo lore §3.2"). Sin embargo, HOY
+ninguna entrada del catálogo trae la marca (medido: 0 de 44) y ninguna acción
 concreta revela una secreta.
 
 Reglas definidas:
 
 1. **Marca:** `secreta: true` solo en entradas de secciones lore (pistas, sellos,
    ruinas, cartas); NUNCA en colecciones (criaturas, plantas, minerales, recetas)
-   â€” coherente con L164 y Â§3.2.
-2. **Visibilidad:** no registrada â†’ "???" + tÃ­tulo oculto; registrada â†’ tÃ­tulo,
-   descripciÃ³n y refs normales. El mecanismo de UI ya existe (Â§3.2, L439-440).
-3. **AcciÃ³n reveladora:** cada secreta declara en el catÃ¡logo el evento del
+   — coherente con L164 y §3.2.
+2. **Visibilidad:** no registrada → "???" + título oculto; registrada → título,
+   descripción y refs normales. El mecanismo de UI ya existe (§3.2, L439-440).
+3. **Acción reveladora:** cada secreta declara en el catálogo el evento del
    EventBus (M07) que la registra (ej: `PISTA_LEIDA` de M24, `prereq_met` de
    M22). Los puentes vivos hoy: `prereq_met`â†’sellos, `npc_moved_in`â†’personajes,
    `quest_completed`â†’misiones, `island_loaded`â†’lugares, `season_changed`â†’eventos,
    `carta_recibida`â†’cartas (diary_service.gd L90-112). Los puentes que falten
    (PISTA_LEIDA, RUIDA_PROGRESADA, DESCUBRIMIENTO) se conectan cuando el sistema
-   dueÃ±o emita la seÃ±al.
-4. **ValidaciÃ³n:** `validate_diary.gd` extiende la regla de refs: una `secreta`
-   debe declarar `accion` (string no vacÃ­a) y ninguna ref puede apuntar a una
-   secreta no revelable por la misma acciÃ³n (anti-spoiler por construcciÃ³n).
-5. Poblar el catÃ¡logo con las primeras secretas es contenido de M22/M24/M25
-   (dueÃ±os externos); la definiciÃ³n y el mecanismo quedan cerrados acÃ¡.
+   dueño emita la señal.
+4. **Validación:** `validate_diary.gd` extiende la regla de refs: una `secreta`
+   debe declarar `accion` (string no vacía) y ninguna ref puede apuntar a una
+   secreta no revelable por la misma acción (anti-spoiler por construcción).
+5. Poblar el catálogo con las primeras secretas es contenido de M22/M24/M25
+   (dueños externos); la definición y el mecanismo quedan cerrados acá.
 
 ## Specs Diario (Beam 489)
 

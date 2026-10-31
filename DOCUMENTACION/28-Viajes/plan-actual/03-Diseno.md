@@ -1,29 +1,29 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md â€” MÃ³dulo 28: Viajes
+# 03-Diseno.md — Módulo 28: Viajes
 
 ## 1. Arquitectura General
 
-SeparaciÃ³n por responsabilidades (secciÃ³n 9 AGENTS.md): la lÃ³gica de viaje vive en nodos y autoloads desacoplados de la capa UI.
+Separación por responsabilidades (sección 9 AGENTS.md): la lógica de viaje vive en nodos y autoloads desacoplados de la capa UI.
 
 ```
 Autoload
 â””â”€â”€ TravelService        (singleton global: orquesta viajes, rutas, reservas)
 
 Escena del Gran Vapor
-â”œâ”€â”€ Boat                 (Node3D: estados, animaciÃ³n, cubierta navegable)
+├── Boat                 (Node3D: estados, animación, cubierta navegable)
 â”‚   â”œâ”€â”€ BoatVisual       (malla voxel del vapor + chimenea/humo)
-â”‚   â”œâ”€â”€ BoatDeck         (Ã¡rea caminable del jugador)
-â”‚   â””â”€â”€ WakeFX           (partÃ­culas de estela, M51)
+│   ├── BoatDeck         (área caminable del jugador)
+│   └── WakeFX           (partículas de estela, M51)
 
 Rutas (Resources)
 â””â”€â”€ BoatRoute            (curva + metadatos de un trayecto origen â†’ destino)
 
 Puertos (una instancia por isla, M27)
 â”œâ”€â”€ Harbor               (Node3D: muelles, docks, zona de embarque)
-â”‚   â”œâ”€â”€ HarborDock       (punto de atraque con lock/liberaciÃ³n)
-â”‚   â””â”€â”€ EmbarkTrigger    (Area3D de interacciÃ³n: "Hablar con el conserje")
+│   ├── HarborDock       (punto de atraque con lock/liberación)
+│   └── EmbarkTrigger    (Area3D de interacción: "Hablar con el conserje")
 ```
 
 ## 2. Diagrama de Componentes
@@ -32,7 +32,7 @@ Puertos (una instancia por isla, M27)
 M27 Islas â”€â”€ define â”€â”€â–º Harbor (puerto de cada isla)
 M29 Reloj â”€â”€ entrega horario â”€â”€â–º TravelService (ventana de salida)
 M32 Clima â”€â”€ entrega estado â”€â”€â–º TravelService (retraso, sin bloqueo)
-M38 EconomÃ­a â”€â”€ cobra â”€â”€â–º TravelService (boleto y viaje rÃ¡pido)
+M38 Economía ── cobra ──► TravelService (boleto y viaje rápido)
 M63 Streaming â”€â”€ precarga â”€â”€â–º TravelService (isla destino)
 TravelService â”€â”€ controla â”€â”€â–º Boat (sigue BoatRoute)
 TravelService â”€â”€ notifica â”€â”€â–º TravelUI (pantallas y avisos)
@@ -46,44 +46,44 @@ TravelService â”€â”€ guarda/restaura â”€â”€â–º M58 Guard
 2. `TravelUI` abre la pantalla de reserva: lista de destinos (M27) con coste (M38) y horarios (M29).
 3. El jugador confirma el destino. `TravelService.request_travel(destino)`.
 4. Validaciones: destino desbloqueado, boleto pagado, horario vigente, muelle libre.
-5. Si el clima M32 es adverso â†’ aviso amable + retraso programado de 5â€“15 s. El jugador puede esperar o cancelar.
-6. Embarque: cÃ¡mara a cinematogrÃ¡fica, el jugador camina solo hasta su asiento/cubierta.
+5. Si el clima M32 es adverso → aviso amable + retraso programado de 5–15 s. El jugador puede esperar o cancelar.
+6. Embarque: cámara a cinematográfica, el jugador camina solo hasta su asiento/cubierta.
 7. `TravelService` reserva el dock de salida y el dock de llegada (`HarborDock.lock()`), y dispara la precarga de la isla destino (M63).
 
-### 3.2 Flujo de travesÃ­a
-1. El `Boat` entra en estado `SAILING` y avanza por la curva de `BoatRoute` (20â€“60 s segÃºn distancia).
+### 3.2 Flujo de travesía
+1. El `Boat` entra en estado `SAILING` y avanza por la curva de `BoatRoute` (20–60 s según distancia).
 2. El jugador camina libre por la cubierta (`BoatDeck`).
-3. Durante el trayecto pueden dispararse eventos suaves (NPC viajeros, coleccionables, diÃ¡logos breves).
-4. Si el clima es adverso: olas mÃ¡s altas, balanceo mayor, barra de progreso mÃ¡s lenta (retraso del 25 %).
-5. `TravelUI` muestra barra de progreso "Llegando a [isla]..." (secciÃ³n 8 AGENTS.md).
+3. Durante el trayecto pueden dispararse eventos suaves (NPC viajeros, coleccionables, diálogos breves).
+4. Si el clima es adverso: olas más altas, balanceo mayor, barra de progreso más lenta (retraso del 25 %).
+5. `TravelUI` muestra barra de progreso "Llegando a [isla]..." (sección 8 AGENTS.md).
 
 ### 3.3 Flujo de llegada
 1. El `Boat` reduce velocidad y se aproxima al muelle (estado `ARRIVING`).
-2. Si el dock de destino estÃ¡ libre â†’ atraque directo. Si estÃ¡ ocupado â†’ espera en el agua (giro visible) hasta 10 s, o muelle secundario; nunca soft-lock.
-3. Atraque: `HarborDock.lock()` â†’ animaciÃ³n de amarre, pasarela.
-4. El jugador desembarca con transiciÃ³n suave (fade 0.5 s) y aparece en el muelle de destino.
+2. Si el dock de destino está libre → atraque directo. Si está ocupado → espera en el agua (giro visible) hasta 10 s, o muelle secundario; nunca soft-lock.
+3. Atraque: `HarborDock.lock()` → animación de amarre, pasarela.
+4. El jugador desembarca con transición suave (fade 0.5 s) y aparece en el muelle de destino.
 5. `TravelService` libera los docks, cierra el estado de viaje y guarda (M58).
 
-### 3.4 Flujo de cancelaciÃ³n
+### 3.4 Flujo de cancelación
 1. Antes de zarpar, el jugador pulsa "Cancelar viaje".
-2. Si aÃºn no embarcÃ³ â†’ devoluciÃ³n 100 % (M38). Si ya embarcÃ³ y el barco sigue en puerto â†’ devoluciÃ³n 50 %.
+2. Si aún no embarcó → devolución 100 % (M38). Si ya embarcó y el barco sigue en puerto → devolución 50 %.
 3. El jugador vuelve al muelle; el estado de viaje vuelve a `IDLE`.
 
-### 3.5 Flujo de viaje rÃ¡pido (M69)
-1. El jugador abre la pantalla de viaje rÃ¡pido (mapa M53 + puntos desbloqueados).
+### 3.5 Flujo de viaje rápido (M69)
+1. El jugador abre la pantalla de viaje rápido (mapa M53 + puntos desbloqueados).
 2. Requisitos: destino ya visitado + coste alto en monedas.
-3. ConfirmaciÃ³n con coste explÃ­cito â†’ fade directo (2â€“3 s) â†’ llegada al muelle del destino.
-4. No disponible con clima extremo: se muestra aviso descriptivo (no bloquea la opciÃ³n de viajar en vapor).
+3. Confirmación con coste explícito → fade directo (2–3 s) → llegada al muelle del destino.
+4. No disponible con clima extremo: se muestra aviso descriptivo (no bloquea la opción de viajar en vapor).
 
 ### 3.6 Flujo nocturno y estacional (M29)
-1. En horario nocturno el vapor ofrece lÃ­nea nocturna (misma ruta, ambientaciÃ³n oscura con faroles).
-2. En festivales (M73) y estaciones hay viajes estacionales: misma mecÃ¡nica, destino o decorado especial.
+1. En horario nocturno el vapor ofrece línea nocturna (misma ruta, ambientación oscura con faroles).
+2. En festivales (M73) y estaciones hay viajes estacionales: misma mecánica, destino o decorado especial.
 3. Expediciones secretas requieren desbloqueo (M22/M70) y usan el mismo `TravelService` con ruta reservada.
 
 ## 4. Contratos API GDScript
 
 ```gdscript
-# travel_service.gd â€” Autoload "TravelService"
+# travel_service.gd — Autoload "TravelService"
 class_name TravelService
 extends Node
 
@@ -107,7 +107,7 @@ func restore(state: Dictionary) -> void            # para M58
 ```
 
 ```gdscript
-# boat.gd â€” Escena del Gran Vapor
+# boat.gd — Escena del Gran Vapor
 class_name Boat
 extends Node3D
 
@@ -121,7 +121,7 @@ func get_deck_position() -> Vector3
 ```
 
 ```gdscript
-# boat_route.gd â€” Resource
+# boat_route.gd — Resource
 class_name BoatRoute
 extends Resource
 
@@ -140,7 +140,7 @@ func compute_duration_with_weather(weather_factor: float) -> float
 ```
 
 ```gdscript
-# harbor.gd â€” Puerto de cada isla
+# harbor.gd — Puerto de cada isla
 class_name Harbor
 extends Node3D
 
@@ -155,7 +155,7 @@ func get_embark_area() -> Area3D
 ```
 
 ```gdscript
-# harbor_dock.gd â€” Punto de atraque
+# harbor_dock.gd — Punto de atraque
 class_name HarborDock
 extends Marker3D
 
@@ -166,7 +166,7 @@ func release() -> void
 ```
 
 ```gdscript
-# travel_ui.gd â€” Capa UI (CanvasLayer). Sin lÃ³gica de gameplay.
+# travel_ui.gd — Capa UI (CanvasLayer). Sin lógica de gameplay.
 class_name TravelUI
 extends CanvasLayer
 
@@ -178,32 +178,32 @@ func show_reservation_screen(routes: Array[BoatRoute]) -> void
 func show_travel_progress(progress: float, label: String) -> void
 func show_weather_delay_notice(seconds: float, reason: String) -> void
 func show_refund_notice(coins: int) -> void
-func set_interactive(enabled: bool) -> void         # secciÃ³n 8 AGENTS.md
+func set_interactive(enabled: bool) -> void         # sección 8 AGENTS.md
 ```
 
-## 5. IntegraciÃ³n con Otros MÃ³dulos
+## 5. Integración con Otros Módulos
 
-| MÃ³dulo | IntegraciÃ³n |
+| Módulo | Integración |
 |---|---|
 | M27 Islas | Cada isla define su `Harbor`; `island_id` une `BoatRoute` e `Harbor` |
-| M32 Clima | `apply_weather_delay()` consulta el estado del clima; retraso calculado, jamÃ¡s cancelaciÃ³n |
+| M32 Clima | `apply_weather_delay()` consulta el estado del clima; retraso calculado, jamás cancelación |
 | M69 Fast Travel | Reutiliza destinos y puertos; fade directo; coste alto; requisito de visita previa |
-| M63 Streaming | Precarga de la escena de la isla destino al confirmar boleto; liberaciÃ³n de la isla origen al zarpar |
-| M29 Tiempo/Reloj | Ventanas de salida del vapor, lÃ­neas nocturnas y estacionales |
-| M38 EconomÃ­a | Coste de boletos, viajes rÃ¡pidos y devoluciones |
-| M58 Guardado | `serialize()` / `restore()` del estado de travesÃ­a (incluso a mitad de ruta) |
-| M50 Agua | Estela y boyantes del barco; el mar es decorativo (el vapor no colisiona con el ocÃ©ano voxel) |
+| M63 Streaming | Precarga de la escena de la isla destino al confirmar boleto; liberación de la isla origen al zarpar |
+| M29 Tiempo/Reloj | Ventanas de salida del vapor, líneas nocturnas y estacionales |
+| M38 Economía | Coste de boletos, viajes rápidos y devoluciones |
+| M58 Guardado | `serialize()` / `restore()` del estado de travesía (incluso a mitad de ruta) |
+| M50 Agua | Estela y boyantes del barco; el mar es decorativo (el vapor no colisiona con el océano voxel) |
 | M40/41/42 Audio | Silbato del vapor, olas, ambiente de cubierta |
 | M51 VFX | Estela, humo de chimenea, lluvia/nieve sobre cubierta |
 | M52/M56 UI/UX | Pantallas de reserva, progreso y confirmaciones reutilizando el tema visual |
 | M73 Eventos | Viajes estacionales y de festival reutilizan `TravelService` |
-| M22 Historia | Rutas secretas y expediciones condicionadas a la progresiÃ³n narrativa |
+| M22 Historia | Rutas secretas y expediciones condicionadas a la progresión narrativa |
 
 ## 6. Manejo de Estados y Exclusividad
 
 - `TravelService` garantiza **un solo viaje activo**: `request_travel()` falla si `is_traveling()`.
-- Los docks se reservan al zarpar y se liberan al atracar; la cola de espera evita soft-locks (secciÃ³n 02-AnÃ¡lisis D4).
-- La travesÃ­a es serializable: si se guarda en `SAILING`, al restaurar el barco reaparece en `sample_position(t)` con el tiempo restante intacto.
+- Los docks se reservan al zarpar y se liberan al atracar; la cola de espera evita soft-locks (sección 02-Análisis D4).
+- La travesía es serializable: si se guarda en `SAILING`, al restaurar el barco reaparece en `sample_position(t)` con el tiempo restante intacto.
 ## Specs Viajes (Beam 502)
 
 ### Diseño del barco (Gran Vapor)

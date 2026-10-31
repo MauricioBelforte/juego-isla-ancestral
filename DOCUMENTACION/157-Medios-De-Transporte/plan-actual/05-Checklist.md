@@ -145,8 +145,8 @@
 - [x] J-01: 01-Requerimientos.md con 10 requisitos funcionales [S] — evidencia disco: `plan-actual/01-Requerimientos.md` RF-01..RF-10 presentes (copia verificada del plan-inicial + nota de scaffold)
 - [x] J-02: 02-Analisis.md con análisis por tipo de transporte [M] — evidencia disco: `plan-actual/02-Analisis.md` L9 Barco / L35 Tren / L61 Avión / L87 Carreta / L113 A Pie
 - [x] J-03: 03-Diseno.md con arquitectura y diagramas [C] — evidencia disco: `plan-actual/03-Diseno.md` L7 Arquitectura General, diagrama TransportManager L11-14, Diagrama de Flujo del Viaje L292
-- [x] J-04: 04-Codigo.md con archivos y contratos de integración [M] — evidencia disco: `plan-actual/04-Codigo.md` lista 20 scripts "A Crear" + contratos. **ADVERTENCIA anti-drift (patrón M119): los scripts listados NO existen en disco — el [x] cubre el documento, no la implementación**
-- [ ] J-05: 05-Checklist.md con 106 items completados [C] — este archivo (132 ítems: 4 [x] / 128 [ ]); se cumple con 106+ ítems [x] reales según DoD §21.6
+- [?] J-04: 04-Codigo.md con archivos y contratos de integración [M] — evidencia disco: `plan-actual/04-Codigo.md` creado (lista 20 scripts "A Crear" + contratos de integración). **Alcance de este ítem = el documento (cerrado).** Implementación: 0/20 scripts en `game/isla-ancestral/scripts/` (medido 2026-10-31: glob Transport*/TransportManager/JourneyInstance/JourneyHUD/EventPanel/MysteryPanel = sin resultados; módulo doc-only corroborado por Nemotron P1, reporte 164). La deuda de implementación vive en los ítems A/B/C y K ([ ]) — no en este ítem documental. **RE-MARCADO 2026-10-31 (TANDA 9, Log 2273, orden de agnes-3-flash msg 472): [x] -> [?] — el alcance documental esta cerrado pero la implementacion medida es 0/20 scripts, asi que la marca [x] no se sostiene bajo el criterio de re-baseline (artefacto que implemente la funcion Y la ejercite por ruta real). No se agrego evidencia nueva: se alineo la marca con la nota.**
+- [ ] J-05: 05-Checklist.md con 106 items completados [C] — este archivo (132 ítems: 7 [x] / 1 [?] / 124 [ ]; Totales en §L); se cumple con 106+ ítems [x] reales según DoD §21.6
 
 ## K. Cubrimiento ampliado — Plan-inicial-minimo + Plan-de-produccion + estándares del proyecto (26 items)
 
@@ -166,24 +166,52 @@
 - [ ] K-12: Tests unitarios TransportManager ≥80% cobertura, ejecutables headless (suites en quality.yml) [C] — RNF-05; Plan-inicial-minimo §111
 - [ ] K-13: Tests de integración: flujo completo de viaje + 1 viaje por cada tipo de transporte (CA-08: 0 errores de runtime) [C]
 - [ ] K-14: Tests de edge cases: viaje cancelado, inventario lleno, fondos insuficientes, softlock a medio viaje [M]
-- [ ] K-15: Plan de testings profesional (`plan-actual/06-Plan-Testings.md`) creado ANTES de la primera prueba manual (módulo complejo, gameplay core) [M] — AGENTS §14
+- [x] K-15: Plan de testings profesional (`plan-actual/06-Plan-Testings.md`) creado ANTES de la primera prueba manual (módulo complejo, gameplay core) [M] — AGENTS §14 — **CERRADO 2026-10-30 (vuelta 16, encargo agnes #319):** `plan-actual/06-Plan-Testings.md` creado (8 secciones: unitarias T-U1..U8 ≥80% RNF-05, integración T-I1..I8 flujo ×5 tipos + M69/M22/M24/M19/M29 + contrato M28/M68 no-duplicar + save/load CA-07, edge cases T-E1..E7 anti-softlock §65, manejo de errores, rendimiento drops>5ms/pooling/virtualización, gates de ejecución + quality.yml). Suites se escriben contra código cuando exista (GO fundador).
 - [ ] K-16: Persistencia del viaje: save/load de viaje activo, eventos completados, misterios resueltos, transportes desbloqueados — RF-09 [C] — Plan-inicial-minimo §58
 - [ ] K-17: Señales de event bus documentadas para el módulo (journey_started / journey_event / journey_completed / journey_cancelled) en `event_bus.gd` [M]
 - [ ] K-18: Anti-softlock: reglas ante viaje cancelado, interrumpido por carga, o jugador atrapado a medio viaje (integrar `softlock_rules.gd` / `softlock_guard.gd`) [C] — Plan-inicial-minimo §65
 - [ ] K-19: Telemetría M104: eventos de transporte medibles (embarque, desembarque, evento de viaje, resolución de misterio) con propiedades [M] — Plan-inicial-minimo §104
 - [ ] K-20: Capturas de progreso del módulo en `tools/mcp/godot-mcp/capturas/157-Medios-De-Transporte/` (nomenclatura cap_157_*, sin sobrescribir) [S] — AGENTS §24
 - [ ] K-21: Respaldo en `Obsoletos/` con nomenclatura timestamp antes de refactors grandes del módulo [S] — AGENTS §5
-- [ ] K-22: Logs en `Logs/` con numeración de pool (§6.1) y firma modelo/plataforma en toda documentación generada [S] — AGENTS §6
+- [x] K-22: Logs en `Logs/` con numeración de pool (§6.1) y firma modelo/plataforma en toda documentación generada [S] — AGENTS §6 — **CERRADO 2026-10-30 (vuelta 16):** verificado en disco — notas de scaffold con firma Ling en 01-04 (L142/L210/L395/L226), firma en 05 (L1-3 + Notas del Agente L190-192), Log `Logs/2250-Ling-V14-Cierre-Riel-Intacto-Scaffold-M157_2026-10-29_21-36-07.md` con numeración de pool §6.1.a + firma; cierre v16 = Log 2252 + msg 321 (pool).
 - [ ] K-23: QA cruzado §21.8 (verificador ≠ implementador) + muestreo anti-inflación §21.8.2.b (≥5 ítems [x] contra disco) ANTES de cualquier sello [M]
-- [ ] K-24: Cubrimiento Plan-de-produccion §3.6 "Viaje entre islas": diseño de rutas/destinos, costes, transición cozy sin perder al jugador [M]
-- [ ] K-25: Mapeo de puntos relevantes del maestro: Plan-inicial-minimo §27 Viajes + §67 Transporte y Navegación → RF/CA de este módulo (tabla de trazabilidad) [M]
+- [x] K-24: Cubrimiento Plan-de-produccion §3.6 "Viaje entre islas": diseño de rutas/destinos, costes, transición cozy sin perder al jugador [M] — **CERRADO 2026-10-30 (vuelta 16):** sección "Cubrimiento Plan-de-produccion §3.6" añadida al final de `02-Analisis.md` (L221+): rutas = grafo M68 (130/130) + TravelService M28 (4 rutas) — M157 consume, NO duplica; destinos = islas M27 (nombre_clave); costes RF-03/C-13/CA-09 con validación ANTES de deducir (lección BUG M20); transición cozy = viaje jugable sin pantalla de carga (01-R L9) + G-03 + K-18 + CA-07 ("evitar perder al jugador", maestro §67 L1992).
+- [x] K-25: Mapeo de puntos relevantes del maestro: Plan-inicial-minimo §27 Viajes + §67 Transporte y Navegación → RF/CA de este módulo (tabla de trazabilidad) [M] — **CERRADO 2026-10-30 (vuelta 16):** sección L "Trazabilidad Plan-inicial-minimo → M157" añadida a este archivo (tabla §27 L825-851 = 25 pts + §67 L1971-1992 = 20 pts → RF-01..04/CA-01..10, con fuera-de-alcance honesto: dirigible/submarino = decisión fundador, fast travel = M69, estacional/nocturnos = M29/M74, narrativo = M22, puerto/estaciones/rutas = contrato M68/M28).
 - [ ] K-26: Auditoría anti-inflación permanente: verificar artefacto en disco por ítem antes de marcar [x] (lección M01/M119; el plan-inicial declaró 106/106 con 0 marcas reales) [S]
 
 ---
 
-**Totales:** 132 items · Completados: 4 (J-01..J-04 documentales, evidencia en disco) · Pendientes: 128 · [?]: 0
+## L. Trazabilidad Plan-inicial-minimo → M157 (tabla de cobertura — K-25, creada 2026-10-30 vuelta 16)
 
-**Drift documental corregido:** plan-inicial/05 declaraba "106/106 completados" sin marcas `[x]` reales ni implementación en disco. Este plan-actual arranca verificable: 4/132 con evidencia citada por ítem.
+> Fuente: `DOCUMENTACION/00-PLAN-INICIAL/Plan-inicial-minimo.md` §27 VIAJES (L825-851, 25 puntos) y §67 TRANSPORTE Y NAVEGACIÓN (L1971-1992, 20 puntos). Destino: RF-01..RF-04 y CA-01..CA-10 de `01-Requerimientos.md` (plan-inicial L101-112). Regla: un punto del maestro solo se marca "cubierto" si el RF/CA correspondiente existe en el plan; la implementación está en 0 (scaffold doc) — esta tabla es DOCUMENTAL.
+
+| Punto del maestro | Cobertura en M157 | Estado |
+|---|---|---|
+| §27 Diseñar puerto / barco / animación de embarque / pantalla de viaje / transición / llegada | RF-04 Barco (C-01, C-07); D-01..D-11; G-01..G-10 (JourneyHUD; transiciones G-10) | Pendiente implementación |
+| §27 Diseñar dirigible / submarino | — | **Fuera de alcance M157** (RF-04 fija 5 tipos: barco/tren/avión/carreta/a pie); ampliación = decisión del fundador |
+| §27 Diseñar boleto / sistema de reservas | Boleto ≈ costo de viaje (RF-03, B-08, C-13, CA-09); **reservas no cubierto** | Parcial — reservas = deuda documental pendiente de diseño |
+| §27 Diseñar requisitos / Definir restricciones | C-12 desbloqueo por condición (inicio/estación/hangar); disponibilidad por posición/terreno (B-05) | Pendiente implementación |
+| §27 Diseñar efectos de clima | E-01..E-12 (tormenta costera/oceánica en C-01 barco) | Pendiente implementación |
+| §27 Diseñar calendario / viajes especiales / expediciones secretas / nocturnos / estacionales | No cubierto por M157 — corresponde a M29 Tiempo-Calendario / M74 festival / narrativo M22 | **Fuera de alcance** (delegado, documentado) |
+| §27 Diseñar eventos en el trayecto | RF-03 + E-01..E-12 (8 eventos × 5 tipos; CA-02/CA-03) | Pendiente implementación |
+| §27 Diseñar objetos coleccionables del viaje / NPC viajeros | H-02 obtención de items en eventos (M69); NPC viajeros → M22 (H-03/H-04) | Parcial — integración |
+| §27 Diseñar transporte de recursos / almacenamiento | No cubierto por M157 (logística de carga = otra materia) | **Fuera de alcance** — documentado |
+| §27 Definir costes / desbloqueos | RF-03, B-08/B-09, C-13 (0/25/100/150/300), CA-09; C-12 desbloqueos | Pendiente implementación |
+| §67 Crear puerto / estaciones / rutas / mapas / waypoints / señalización / carteles / marcadores | **Contrato externo:** M157 consume el grafo de paradas/rutas de M68-Transporte-Y-Navegacion (130/130) y las 4 rutas de TravelService M28-Viajes (Log 370) — NO duplicar (Notas del Agente v14) | Contrato M68/M28 |
+| §67 Crear fast travel | M069 Fast Travel es módulo aparte (la mecánica no vive en M157) | **Fuera de alcance** — M69 |
+| §67 Definir costes / desbloqueo / restricciones / animaciones / tiempos / transiciones | C-12/C-13; D-02/D-03 (tiempos y progreso); G-10 transiciones; C-14/C-15 iconos y escenas | Pendiente implementación |
+| §67 Crear viajes especiales / narrativos | E-04..E-08 tablas base por tipo; lo narrativo → M22 Historia Principal (H-04) | Parcial — narrativo delegado a M22 |
+| §67 Crear eventos de ruta | RF-03, D-05 pool por transporte×bioma, D-06 selección por peso+cooldown | Pendiente implementación |
+| §67 Probar navegación | I-05 tests de integración por tipo (06-Plan-Testings.md T-I1) | Pendiente implementación |
+| §67 Evitar perder al jugador | K-24 (transición cozy), K-18 anti-softlock, G-03 panel de info siempre visible, CA-06 cancelación, CA-07 persistencia | Pendiente implementación (doc listo) |
+
+**Resumen de trazabilidad:** 45 puntos del maestro (§27: 25 + §67: 20) mapeados 1-a-1 en la tabla. Mayoría = pendiente de implementación (GO fundador + owner gameplay). Fuera-de-alcance honesto y explícito (dirigible/submarino, reservas, calendario/estacionales, recursos/almacenamiento, fast travel → M69, narrativo → M22). Contratos externos respetados (M68 grafo de rutas, M28 TravelService — M157 consume, NO duplica).
+
+---
+
+**Totales:** 132 items · Completados: 7 (J-01..J-03 + K-15/K-22/K-24/K-25 documentales, evidencia en disco) · Pendientes: 124 · [?]: 1 (J-04, degradado en TANDA 9 por orden agnes msg 472)
+
+**Drift documental corregido:** plan-inicial/05 declaraba "106/106 completados" sin marcas `[x]` reales ni implementación en disco. Este plan-actual arranca verificable: 8/132 con evidencia citada por ítem (J-01..J-04 + K-15/K-22/K-24/K-25, todos documentales con artefacto en disco).
 
 ## Notas del Agente
 
@@ -212,3 +240,21 @@
 - i18n del módulo (K-04..K-06) es mi riel: cuando existan literales jugador-visibles, pasarlos por el proceso M87 (clave M157.* + 3 catálogos + validador_po).
 - Integraciones críticas a respetar: M69 inventario, M22 NPCs, M24 misiones, M19 combate, M29 economía (sección H) + M28-Viajes ( TravelService 4 rutas, Log 370) y M68-Transporte-Y-Navegacion (grafo de paradas/rutas 130/130, Log 437-equivalente DeepSeek) — M157 debe consumir el grafo de M68 como fuente de rutas, NO duplicarlo.
 - Anti-drift: todo ítem [x] futuro debe citar archivo:línea verificable (§21.8.2.b).
+
+### Vuelta 16 (2026-10-30 23:05 local — encargo agnes msg 319: cerrar K-ítems doc/verificables)
+- **Cerrados 4 K con evidencia de disco (auditoría §21.8.2.b ítem por ítem antes de flippear):** K-15 (`06-Plan-Testings.md` creado — 8 secciones, contrato de testing §14 AGENTS), K-22 (firmas scaffold 01-04 L142/L210/L395/L226 + firma 05 L1-3 + Log 2250 con pool §6.1.a), K-24 (cubrimiento Plan-de-produccion §3.6 añadido al final de 02-Analisis: rutas M68/M28 no duplicar, costes RF-03/CA-09, transición cozy = viaje jugable sin pantalla de carga), K-25 (sección L de este archivo: trazabilidad maestro §27/§67 → RF/CA con fuera-de-alcance honesto).
+- **Auditados y LEFT [ ] (0 inflación):** K-01..K-14/K-16..K-21 = implementación (0 código en disco; GO fundador + visión M154 + owner gameplay); K-17 verificado: grep "journey" en event_bus.gd = 0 hits (señales no existen — correcto [ ]); K-04..K-06 i18n = mi riel pero pendiente de literales jugador-visibles (cuando haya código); K-23/K-26 = proceso, no entregable.
+- Totales: **8 [x] / 124 [ ] / 0 [?] = 132**. GLOBAL fila 157 actualizada 4/132 → 8/132.
+- Gemelos 316 y 319 del canal documentados al director (saneo oficial = fundador con scripts/renumerar_canal.py; yo no renombro a mano §10.2).
+- **Recomendación añadida para el owner de implementación:** el 06-Plan-Testings.md es el contrato — escribir suites T-U* primero (TDD) contra TransportManager/JourneyInstance; T-I7 protege el contrato M28/M68 (no duplicar rutas).
+
+### Vuelta 25 (2026-10-31 02:0x local — nicho auditoría/doc/i18n, cron vuelta 25)
+- **Caso M157 L148 (J-04) — autocontradicción cruzada resuelta por precisión, no por flip:** el barrido PATRON A de DeepSeek (TANDA 7, msg 468/469) y mi detector v8 (bucket A2) coincidieron en señalar J-04: `[x]` + nota con frase de ausencia ("los scripts listados NO existen en disco"). Verificación en disco: 0/20 scripts de transporte en `game/isla-ancestral/scripts/` (glob medido 2026-10-31); Nemotron P1 (reporte 164) corroboró doc-only por visión. **Resolución:** el `[x]` es documental legítimo (el ítem pide el documento 04-Codigo.md, que existe con lista+contratos) — se reformuló la nota precisando alcance ("alcance de este ítem = el documento") con cifra medida 0/20 y delegación de la deuda a los ítems A/B/C y K ([ ]), eliminando la frase trampa sin perder información. J-05 (L149) y la línea de drift (L214) actualizadas a 8/132 (stale desde v16).
+- **Lección para el kit anti-inflación (relevo 1-nov):** `[x]` con alcance documental explícito + deuda de implementación correctamente atribuida a ítems `[ ]` NO es autocontradicción; la frase de ausencia en la nota es lo que dispara PATRON A (DeepSeek) y CONTRARIOS_A2 (detector Ling). Al precisar un ítem cuya nota afirmaba ausencia, se REESCRIBE la frase (misma lección §8 del Log 2271 de DeepSeek), no se apila.
+- Sin flips de marca en este módulo (los 8 `[x]` son los documentales de v14/v16, todos con evidencia en disco).
+
+
+### Vuelta 17 (2026-10-31 - TANDA 9 DeepSeek-V4.1-Flash, orden agnes-3-flash msg 472)
+- **J-04 (L148) [x] -> [?]:** el alcance documental del item (04-Codigo.md) esta cerrado, pero la implementacion medida es 0/20 scripts en disco; bajo el criterio de re-baseline la marca [x] no se sostiene. Flip aplicado por orden explicita del director (msg 472, 02:14 del 31-oct).
+- **Conflicto cross-agente declarado:** Ling-3.1-Flash (Log 2272, 30-oct 23:26) habia resuelto el mismo caso SIN flip, reformulando la nota para sostener el [x] documental. Mi flip es posterior a esa resolucion y la pisa. Queda a decision del director si se conserva [?] o se restaura [x] con la nota de Ling; el cambio es reversible en un solo caracter.
+- Totales: **7 [x] / 124 [ ] / 1 [?] = 132**. GLOBAL fila 157 queda 8/132 hasta que la directora la sincronice (no edito CHECKLIST-GLOBAL.md).

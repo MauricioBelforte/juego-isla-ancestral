@@ -411,3 +411,74 @@ el validador salía **EXIT 0** — un falso verde indistinguible de un verde rea
   propia dice lo contrario de la marca).
 - **No se agregó arte**: el inventario M46 está 100 % `pendiente`.
 - **No se cableó la suite nueva en `quality.yml`** (archivo protegido): pedido al director.
+
+## Iter. 7 — "???" SOLO en secciones lore + el loader del icono (2026-10-28, DeepSeek-V4.1-Flash, Log 2237)
+
+**Alcance:** checklist **L164** ("Mostrar '???' SOLO en secciones lore, nunca en colecciones") y un
+**defecto propio de la iter. 6** que se midió en esta vuelta.
+
+### Premisa medida (ANTES del cambio)
+
+| Hecho | Medición |
+|---|---|
+| La capa mostraba "???" para cualquier `secreta` | `diary_layer.gd` `_texto_fila` y `_refrescar_detalle`: `if secreta and not reg`, sin mirar la categoría |
+| El servicio dejaba visible cualquier `secreta` no registrada | `entradas_de()`: `if not registrado and not secreta: continue` |
+| El validador no tenía ninguna regla | `grep -n secreta validate_diary.gd` = 0 |
+| Entradas `secreta` en el catálogo real | **0 de 44** (por eso el defecto no se veía en juego) |
+| **Defecto propio (iter. 6):** el loader descartaba `icono` | `_catalogo` interno: **0/44** entradas con la clave; `entradas_de()` leía siempre `""` → el **nivel 1 del resolutor era inalcanzable** |
+
+### Solución: una sola fuente de clasificación
+
+`scripts/diario/secciones_lore.gd` (**NUEVO**, `RefCounted`, sin `class_name` para cargarse por
+`preload`): `CATEGORIAS = ["pistas", "sellos", "ruinas", "cartas"]`, `es_lore()`,
+`bloqueada(categoria, secreta, registrada)`, `secretas()`, `violaciones_secreta()`,
+`secretas_mal_tipadas()`. Tres consumidores usan la **misma** función:
+
+| Consumidor | Qué hace ahora |
+|---|---|
+| `diary_service.gd` → `entradas_de()` | una `secreta` de colección **no se vuelve visible**: sigue invisible hasta registrarse (semántica normal de colección) |
+| `diary_layer.gd` → `_texto_fila()` / `_refrescar_detalle()` | "???" solo si `bloqueada()`; `_cat_de()` resuelve la categoría por el servicio si la entrada no la trae en `cat` |
+| `validate_diary.gd` → `_validar_secretas()` | regla de **DATOS**: `secreta` fuera de lore = fallo, + guarda de ceguera (lista lore vacía) + tipo del campo |
+
+Además `_cargar_catalogo()` ahora **propaga** el campo opcional `icono` (44/44), que era el eslabón
+que faltaba para que el nivel 1 del resolutor de la iter. 6 fuese alcanzable.
+
+### Cifras medidas
+
+- `validate_diary.gd`: **392 checks** (antes 388; +4), 0 fallos, 3 avisos, EXIT 0 ×3. Piso re-medido
+  387 → **391**.
+- Suite nueva `scripts/diario/test_diario_lore_m55.gd`: **67 checks**, 0 fallos, EXIT 0 ×3,
+  0 SCRIPT ERROR. Piso **67 MEDIDO** (no estimado).
+- `test_diario.gd`: contador + piso **36 medido** + `_summary` diferido (ver abajo).
+
+### Guardián de `test_diario.gd` (hueco medido, no heredado)
+
+Publicaba `=== TEST M55 DIARIO: 0 fallo(s) ===` **sin contador**: `grep -c _checks` = **0**. Un
+`SCRIPT ERROR` que abortara un `_test_*` dejaba el verde intacto con la mitad de los checks sin
+correr. Medido con sonda: aborto dentro de `_test_catalogo` → antes habría dicho "0 fallo(s)" con
+EXIT 0; ahora `[FAIL] solo 33 checks ejecutados (minimo medido 36)` + EXIT 1. Y un aborto en `_run()`
+ya **no cuelga** (`_summary` en un `call_deferred` aparte): 2,9 s, EXIT 1.
+
+### Sondas EN ROJO (7), con `sha256` restaurado
+
+| Sonda | Inyección | Resultado medido |
+|---|---|---|
+| P1 | aborto de runtime al inicio del bloque B | 29 checks, nombra B/C/D/E, dispara el piso, EXIT 1, 3,0 s sin cuelgue |
+| P2 | piso 68 (medido 67) | `[FAIL] solo 67 checks ejecutados`, EXIT 1 |
+| P3 | capa sin gate de lore (fila) | `C: fila de colección secreta muestra el título` → EXIT 1 |
+| P4 | loader sin `icono` | `E: el loader propaga 'icono' (0/44)` → EXIT 1 |
+| P5 | capa sin gate de lore (detalle) | `C: detalle de colección secreta muestra el título` → EXIT 1 |
+| P6 | aborto dentro de un helper de `test_diario` | 33 checks, piso, EXIT 1 |
+| P7 | aborto en `_run()` de `test_diario` | `_summary` corre, EXIT 1, sin cuelgue |
+| Validador | catálogo alterno con `secreta` en `criaturas` | `FALLO: ninguna 'secreta' fuera de LORE — 1 violación(es) pez_trucha_cascada(criaturas)`, EXIT 1 |
+
+### Lo que NO se hizo (con motivo)
+
+- **No se pobló el catálogo con secretas**: es contenido de M22/M24/M25 (§11.5) y hoy hay **0**.
+  Consecuencia honesta: el cambio **todavía no tiene efecto visible en juego**; está verificado con
+  datos sintéticos a través de la **UI real** (bloque C), no leyendo código.
+- **No se implementó §11.4 completo** (toda `secreta` debe declarar `accion` y ninguna ref puede
+  apuntar a una secreta no revelable por la misma acción): exige preservar `accion` en el loader y
+  acordar el contrato con M22/M24. Queda propuesto, no inventado.
+- **`test_diario_persist.gd` sigue sin contador**: corre en DOS modos (padre e hijo, L97/L120), así
+  que necesita dos pisos distintos. Se reporta; no se toca a ciegas.

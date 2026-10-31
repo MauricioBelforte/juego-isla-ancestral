@@ -40,6 +40,9 @@ const RUTA_LAYER := "res://scripts/ui/layers/diary_layer.gd"
 const ICONOS := preload("res://scripts/diario/iconos_diario.gd")
 const RUTA_ICONOS := "res://scripts/diario/iconos_diario.gd"
 const RUTA_INVENTARIO_M46 := "res://data/arte2d/inventario_2d.json"
+## Clasificación de secciones lore (iter. 7, L164): fuente única compartida con
+## diary_service (visibilidad) y diary_layer (texto "???").
+const LORE := preload("res://scripts/diario/secciones_lore.gd")
 ## Total de cargas del catálogo para el test de rendimiento
 const ITER_RENDIMIENTO := 20
 ## Techo total (ms) para ITER_RENDIMIENTO cargas+parseos en headless
@@ -48,11 +51,13 @@ const TECHO_MS_RENDIMIENTO := 500.0
 var _fallos: int = 0
 var _avisos: int = 0
 var _checks: int = 0
-## Piso de checks MEDIDO en verde (iter. 6). Se re-mide cada vez que la suite
+## Piso de checks MEDIDO en verde (iter. 7). Se re-mide cada vez que la suite
 ## crece; nunca se estima. Ver 06-Plan-Testings.
-## Piso MEDIDO en verde: 387 checks de los bloques (el check del piso se
+## Piso MEDIDO en verde: 391 checks de los bloques (el check del piso se
 ## cuenta a sí mismo y NO entra en el mínimo). Si un bloque aborta, baja.
-const CHECKS_MINIMOS: int = 387
+## iter. 6 = 387; iter. 7 suma 4 (_validar_secretas: guarda de ceguera,
+## cruce con las 14 categorías, regla §3.2 y tipo del campo).
+const CHECKS_MINIMOS: int = 391
 
 
 func _init() -> void:
@@ -75,6 +80,7 @@ func _run() -> void:
 	if typeof(parseado) == TYPE_DICTIONARY:
 		_validar_estructura(parseado, ruta_catalogo)
 		_validar_descripciones_refs(parseado)
+		_validar_secretas(parseado)
 		_validar_iconos(parseado)
 	_validar_i18n()
 	_validar_persistencia()
@@ -188,6 +194,53 @@ func _validar_descripciones_refs(parseado: Dictionary) -> void:
 							"ref '%s' de '%s' existe en catálogo" % [rid, eid])
 						_check(rid != eid,
 							"ref de '%s' sin autoreferencia" % eid)
+
+
+## ── Contenido secreto y secciones lore (iter. 7, checklist L164) ──
+##
+## §3.2 y §11 regla 1: `secreta: true` SOLO en secciones lore (pistas, sellos,
+## ruinas, cartas) y NUNCA en colecciones (criaturas, plantas, minerales,
+## recetas...). La marca fuera de lore no es un detalle de UI: es un defecto de
+## DATOS que dejaría una entrada de colección visible como "???" (lo que L164
+## prohíbe), así que el validador lo marca como fallo.
+##
+## La clasificación NO se escribe acá: se toma de `secciones_lore.gd`, la misma
+## que usan el servicio (visibilidad) y la capa (texto). Una sola fuente.
+func _validar_secretas(parseado: Dictionary) -> void:
+	# (a) guarda de ceguera: con la lista de secciones lore VACÍA la regla (b)
+	#     pasaría trivialmente ("0 secretas fuera de lore") sin haber mirado
+	#     nada. Misma familia que un auditor ciego con exit 0.
+	_check(LORE.CATEGORIAS.size() == 4,
+		"secciones LORE declaradas (llegaron %d, esperadas 4)" % LORE.CATEGORIAS.size())
+	var diary := root.get_node_or_null("Diary")
+	if diary != null:
+		var cats: Array = diary.get_categorias()
+		var fuera := 0
+		for c in LORE.CATEGORIAS:
+			if not (String(c) in cats):
+				fuera += 1
+		_check(fuera == 0,
+			"toda sección LORE es una de las 14 categorías del service (fuera: %d)" % fuera)
+
+	# (b) la regla: ninguna `secreta` fuera de lore
+	var viol: Array = LORE.violaciones_secreta(parseado)
+	var detalle := ""
+	for v in viol:
+		detalle += " %s(%s)" % [String(v.get("id", "")), String(v.get("categoria", ""))]
+	_check(viol.is_empty(),
+		"ninguna 'secreta' fuera de LORE — %d violación(es)%s" % [viol.size(), detalle])
+
+	# (c) tipo del campo: un "true" en string sería una marca que nadie lee
+	var malas: Array = LORE.secretas_mal_tipadas(parseado)
+	var tipos := ""
+	for m in malas:
+		tipos += " %s=%s" % [String(m.get("id", "")), String(m.get("tipo", ""))]
+	_check(malas.is_empty(),
+		"campo 'secreta' booleano cuando está presente — %d mal tipada(s)%s"
+		% [malas.size(), tipos])
+
+	var secs: Array = LORE.secretas(parseado)
+	print("[validate] secretas declaradas: %d (fuera de lore: %d)" % [secs.size(), viol.size()])
 
 
 ## ── Iconografía (iter. 6: L93/L117/L203 y las siluetas de L77/L85) ──

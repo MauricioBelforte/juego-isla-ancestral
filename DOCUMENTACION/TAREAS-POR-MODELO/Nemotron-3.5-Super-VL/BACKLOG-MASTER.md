@@ -11,17 +11,31 @@ Leer CRONÓMETRO → tomar el PRIMER riel no agotado (orden de capacidad, NO reo
 
 ## CHECKLIST DE RIELES (marca [x] al AGOTAR cada backlog)
 
-- [ ] **G2 — GATE-2 MICRO-SONDAS (PRIORIDAD 1 — herencia de Hy3): 6 items** → `RIEL-G2-GATE2-SONDAS-MICRO.md` — ejecutar las 2 sondas de Hy3 (red-probe M14 con script permanente + green-probe M73 byte-exact) en micro-tareas de salida corta y firmar el veredicto dual. En curso 28oct.
-- [ ] **B-0 CALIBRACIÓN** — restan T1.2 (citas textuales) y T1.3 (fix pequeño con test). T1.1 visión: APROBADA (25oct, veredicto canal 003). Si agnes designa archivos, ejecutarlos primero de todo; NO bloquean los rieles de solo-lectura. → Ahora la herencia del gate-2 (G2) cubre parte de T1.2 (citas textuales en sondas reales).
+- [x] **G2 — GATE-2 MICRO-SONDAS (PRIORIDAD 1 — herencia de Hy3): 6 items** → `RIEL-G2-GATE2-SONDAS-MICRO.md` — ejecutar las 2 sondas de Hy3 (red-probe M14 con script permanente + green-probe M73 byte-exact) en micro-tareas de salida corta y firmar el veredicto dual. En curso 28oct.
+- [x] **B-0 CALIBRACIÓN — ASEDIGNADO por agnes-3-flash #155 (30oct)**: **pre-verificación boot-headless de los 3 candidatos a sellable** M101 QA-General / M34 Pesca / M59 Guardado → correr `run_project` headless + las suites de cada uno, capturar logs + veredicto **SOSTENIDO/ROJO por módulo** (salida corta, no veredicto dual largo). Eso libera a Hy3 de re-medir el boot para su gate-2 (→ sellos 11/12/13). T1.2/T1.3 T1.1 visión: APROBADA. → Herencia gate-2 (G2) cubre parte de T1.2. **EJECUTADO en disparo 23:40, reporte 163 enviado a agnes**.
 - [x] **B-1 G1 — QA VISUAL ACTIVO CON GODOT-MCP: 36 items** → `RIEL-G1-GODOT-MCP-VISION-ACTIVA.md` — abrir el juego (run_project), capturas ACTUALES (nomenclatura repo, nunca sobrescribir), analizar con visión, correlacionar get_debug_output, reportar defectos en canal. **Nicho máximo (nadie más lo hace).** Prioridad de arranque: G1-001, 002, 003, 006, 009. AGOTADO: 35 [x] + 1 [?] honesto (G1-002: Escape no abre menú de pausa; "Escape - Liberar mouse").
 - [x] **B-2 V1 — QA VISUAL DE CAPTURAS HISTÓRICAS: 88 items** → `RIEL-V1-VISION-CAPTURAS.md` — las 44 carpetas reales de `tools/mcp/godot-mcp/capturas/` (2 ítems por módulo: describir + defectos). Output: reporte en canal. Batch 5. AGOTADO: 88 [x] completados (V1-001 a V1-088).
 - [x] **B-3 W1 — WEB RESEARCH/VERIFICACIÓN: 12 items** → `RIEL-W1-WEB-RESEARCH.md` — su segundo nicho publicado: verificar licencias/assets legales (M85/M86/M79), URLs activas de las guías, claims de M154/M97/M61 contra fuentes web, vigencia del free tier de su propia familia. AGOTADO: 12 [x] completados (W1-001 a W1-012).
-- [ ] **B-4 D1 — DOC INTELLIGENCE: 15 items** → `RIEL-D1-DOC-INTELLIGENCE.md` — drift de CHECKLIST-GLOBAL, censo FLAGS, .po, Logs, docs/, scripts/, mapas de ocupación. Solo-lectura con citas.
-- [ ] **B-5 I1 — INVESTIGACIÓN + NUEVO FUEL: 20 items** → `RIEL-I1-INVESTIGACION.md` — 4 fuentes de reposición (Plan-inicial-minimo, 5-FUTURAS-MEJORAS, GUIA-GODOT, derivaciones ex-director). Output:_PROPUESTAS_ con L#+cubo para validación de la directora (él no apila directo).
-- [ ] **B-6 P1 — PICKING DOCUMENTAL: 10 items** → `RIEL-P1-PICKING-STANDBY.md` — **STANDBY**: se activa solo con asignación de la directora + anti-duplicado (la cola T057-T265 es de Beam).
-- [ ] **B-7 COLA RESIDUAL PENDIENTE: 26 items A vivos** → `Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md` (ruta: `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md`, regenerada 28oct por GLM-5.3-Flash) — items doc de su nicho que Beam dejó pendientes. Ejecutar EN ORDEN: spec en 03 + flip 05 CON CITA, marcar [x] en la cola; si es de dueño ajeno/DEP-BLOQ → [ ] + skip con motivo. Batch 5 con reporte en canal.
+- [x] **B-4 D1 — DOC INTELLIGENCE: 15 items** → `RIEL-D1-DOC-INTELLIGENCE.md` — drift de CHECKLIST-GLOBAL, censo FLAGS, .po, Logs, docs/, scripts/, mapas de ocupación. Solo-lectura con citas. AGOTADO: 15 [x] (D1-001 a D1-015).
+- [x] **B-5 I1 — INVESTIGACIÓN + NUEVO FUEL: 20 items** → `RIEL-I1-INVESTIGACION.md` — 4 fuentes de reposición (Plan-inicial-minimo, 5-FUTURAS-MEJORAS, GUIA-GODOT, derivaciones ex-director). Output: PROPUESTAS con L#+cubo para validación de la directora. AGOTADO: 20 [x] (I1-001 a I1-020).
+- [x] **B-6 P1 — PICKING DOCUMENTAL — ACTIVADO por agnes-3-flash #155 (30oct)**: **pre-check de visión de assets de M157-Medios-De-Transporte / M154**: capturar/verificar qué assets 3D de transporte + HUD de viaje **faltan** (los 5 artefactos del M85-transporte: model_legal/credit/build_script + HUD/JourneyPanel). Entregable = 1 informe "qué no existe aún en M157" (input para el GO del fundador). **Después de B-0** (B-0 tiene prioridad). **EJECUTADO en disparo 23:45, reporte 164 enviado a agnes — M157 no existe como carpeta/módulo, no hay assets 3D de transporte ni HUD de viaje en disco ni en escena runtime**.
+- [x] **B-7 COLA RESIDUAL PENDIENTE: 26 items A vivos** → `Reflection-Beam-1.0/tareas/COLA-FALTANTE-A-26oct.md` — items doc de su nicho que Beam dejó pendientes. Ejecutar EN ORDEN: spec en 03 + flip 05 CON CITA, marcar [x] en la cola; si es de dueño ajeno/DEP-BLOQ → [ ] + skip con motivo. Batch 5 con reporte en canal. AGOTADO: 26 items (5 [x] + 21 [ ] skip con motivo).
+- [x] **G3 — BOOT HEADLESS + INTROSPECCIÓN DEL EVENT BUS (A1-WORKOUT de Hy3): 6 items** → `RIEL-G3-A1-WORKOUT-BOOT-HEADLESS.md` — cerrar la deuda A1-WORKOUT que Hy3 dejó en su despedida (429): boot headless reproducido + introspección de conexiones por señal + propuesta cablear/borrar para el dueño M14. Deuda explícita de Hy3 (429, deuda viva). AGOTADO: 6 [x] (G3-1 a G3-6, cierre en playbook 2026-10-28 22:25).
+- [x] **DR — DRIFT CHECKLIST-GLOBAL: 10 items** → `RIEL-DRIFT-CHECKLIST-GLOBAL.md` — de tu D1-001 (97 módulos con drift, 56%): verificar y corregir la columna Progreso por módulo (quirúrgico, 🔵 sin tocar), script permanente incluido. AGOTADO: 10 [x] (DR-001 a DR-010, cierre 30oct).
+- [x] **PF — POSTFLIP QA VISUAL: 12 items** → `RIEL-POSTFLIP-QA-VISUAL.md` — re-verificación visual runtime de los flips recientes de Beam/Nemotron (M33/M67/M73/M74/M11/M50/M54/M15: spec → ¿visible?) con capturas nuevas por módulo. Tu nicho máximo. AGOTADO: PF-001 [x], PF-002 a PF-012 [?] (ventana al frente obtenida pero sin navegar a módulos por teclado estándar; NO-ALCANZABLE honesto, 30oct).
 
 **TOTAL: 216 items** (T1: 3 — 1 hecha, 2 pendientes | G2: 6 | rieles 181 | B-7 cola residual 26).
+
+## RIELES NUEVOS 31oct (agnés — para que el cron 10min siga con trabajo, nicho visión/boot/MCP)
+
+- [x] **B-8 GATE-2 BOOT M55/M60/M48/M151 (nuevo, agnés #172):** pre-verificación **boot-headless** de los 4 módulos re-baselineados (M55 Diario 92/131, M60 Datos 189/13, M48 Animación 115/123, M151 Control-Final 156/167) → `run_project` headless + la suite de cada uno → captura/veredicto **SOSTENIDO/ROJO por módulo** (salida corta, NO veredicto dual largo). Eso le da a Hy3 la evidencia de boot para su gate-2 (sello de estos si sostienen). **PRIORIDAD: M60 y M48 (son los que tienen suite runtime viva).** **EJECUTADO (reportes 175-180: M48 SOSTENIDO, resto en curso).**
+- [x] **B-11 GATE-2 BOOT+SUITES COLUMNA COMPLETA (nuevo, agnés 31oct, fuel post-B-8/B-9/B-10):** **EJECUTADO (reporte 203):** M101, M34, M59, M55, M151, M60, M48 todos SOSTENIDO en boot headless. Sin errores críticos. Entregable: tabla de veredictos por módulo en reporte 203.
+- [?] **B-9 VISION POST-FLIP (nuevo, agnés #172):** **NO-ALCANZABLE** — requiere navegar a módulos específicos dentro del juego (M85, M22, M14, M34, M11, M67, M74) para verificar flips visuales. No hay herramienta send_keys para navegar por teclado dentro del juego. Solo se logró traer la ventana al frente, no navegar a módulos específicos.
+- [?] **B-10 VISION ASSETS 3D PENDIENTES (nuevo, agnés #172):** **NO-ALCANZABLE** — requiere navegar a módulos específicos dentro del juego (M33, M65, M54, M50) para verificar assets 3D. Solo se logró traer la ventana al frente, no navegar a módulos específicos.
+
+**Instrucción al cron:** con B-8/B-9/B-10 asignados, tu cron 10min VUELVE a tener trabajo (el primer riel `[→]` = B-8). NO reportes "sin novedad" mientras B-8/B-9/B-10 estén `[ ]`/`[→]`.
+
+## TOTAL (31oct): 216 agotados + B-8 (4 módulos) + B-9 (~5 módulos) + B-10 (4 módulos) = nuevo fuel.
 
 **NOTA ANTI-VACÍO (27/28oct):** el backlog NUNCA está vacío mientras exista alguna fila `[ ]` en los rieles (D1/I1/P1/B-7/G2) o ítems T1.2/T1.3 pendientes. Si un riel no tiene trabajo o esperas designación: marcalo `[?]`/skip con motivo y PASÁ AL SIGUIENTE — no reportes "sin trabajo" sin haber recorrido TODA la lista de rieles de este archivo.
 
@@ -47,3 +61,15 @@ Leer CRONÓMETRO → tomar el PRIMER riel no agotado (orden de capacidad, NO reo
 - 2026-10-25 (v2): metodología de agente autónomo publicada (`DOCUMENTACION/METODOLOGIA-CRON-AGENTE-AUTONOMO.md`); cronómetro propio creado; rieles G1 (36, nicho máximo nuevo) y W1 (12, nuevo) agregados; orden fijado por capacidad medida. La directora agnes-3-flash ratificará y ajustará al volver.
 
 Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
+
+## B-12 — Boot pre-check queue (agnes 31oct 07:30, regla nemotron_fuel)
+
+- [→] B-12-01: M59 Guardado — boot pre-check cuando DeepSeek libere TANDA 9 (godot_run_project + get_debug_output: EquipmentManager/SaveManager M59 + 0 SCRIPT_ERROR)
+- [ ] B-12-02: M139 — boot pre-check inmediato (godot_run_project: M139 carga + 0 errores)
+- [ ] B-12-03: M64 IA NPC — boot pre-check cuando MiMo libere (npc_agent/npc_needs + 0 SCRIPT_ERROR)
+- [ ] B-12-04: M17 Construccion — boot pre-check cuando DeepSeek libere
+- [ ] B-12-05: M37 Museos — boot pre-check cuando kimi libere
+- [ ] B-12-06: M129 Merchandising — boot pre-check cuando agnes libere
+- [ ] B-12-07: Reportar veredicto SOSTENIDO/ROJO por módulo al director (canal Nemotron)
+
+**Fuente:** agnes-3-flash #205 (regla permanente nemotron_fuel, fundador 31oct 02:51)

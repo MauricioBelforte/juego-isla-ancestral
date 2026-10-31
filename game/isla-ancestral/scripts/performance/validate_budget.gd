@@ -553,6 +553,9 @@ const TECNICAS_CANONICAS: Dictionary = {
 		"estaticos_por_bioma": true,
 		"max_materiales_por_batch": 32,
 		"ui_por_atlas": true,
+		"meshes_combinados_por_chunk": true,
+		"chunk_mesh_block_size": 16,
+		"verts_cascara_chunk": 6144,
 	},
 	"instancing": {
 		"peces": true,
@@ -646,5 +649,37 @@ func _validar_tecnicas(data: Dictionary) -> void:
 			_check(int(b.get("max_materiales_por_batch", 0)) > 0
 				and int(b.get("max_materiales_por_batch", 0)) <= 64,
 				"batching.max_materiales_por_batch en 1..64")
+			# item L289 (2026-10-28): "meshes combinados por chunk" ya no es una
+			# afirmacion sin medir. El chunk declarado debe ser el mesh_block_size
+			# REAL del VoxelTerrain de produccion (se mide, no se asume), y la
+			# cascara del chunk debe caber en verts_cascara_chunk.
+			_invariante_batching(b)
 		print("[M61] %s: %d umbral(es) tecnicos validados" % [nombre, b.size() - (1 if b.has("nota") else 0)])
+
+
+## Invariante del bloque `batching` (item L289, 2026-10-28).
+## El valor `chunk_mesh_block_size` NO puede ser un numero magico: se contrasta
+## contra el `mesh_block_size` REAL del `VoxelTerrain` que usa el juego. Si el
+## addon cambia su default (o alguien configura otro chunk), esto se pone rojo y
+## obliga a re-medir. `verts_cascara_chunk` se deriva aritmeticamente de la
+## cascara del cubo: 6 caras * lado^2 quads * 4 verts.
+func _invariante_batching(b: Dictionary) -> void:
+	var lado := int(b.get("chunk_mesh_block_size", 0))
+	_check(lado >= 2, "batching.chunk_mesh_block_size >= 2 (%d)" % lado)
+	var verts_esperados := 6 * lado * lado * 4
+	_check(int(b.get("verts_cascara_chunk", 0)) == verts_esperados,
+		"batching.verts_cascara_chunk == 6*lado^2*4 = %d (declarado %d)" % [
+			verts_esperados, int(b.get("verts_cascara_chunk", 0))])
+	# El chunk declarado debe ser el del motor, medido en una instancia real.
+	if not ClassDB.class_exists("VoxelTerrain"):
+		_check(false, "batching: VoxelTerrain no existe (addon zylann.voxel no cargado) — no se puede medir el chunk")
+		return
+	var obj: Object = ClassDB.instantiate("VoxelTerrain")
+	if obj == null:
+		_check(false, "batching: VoxelTerrain no se pudo instanciar")
+		return
+	var real := int(obj.get("mesh_block_size"))
+	obj.free()
+	_check(real == lado,
+		"batching.chunk_mesh_block_size == VoxelTerrain.mesh_block_size medido (%d vs %d)" % [lado, real])
 

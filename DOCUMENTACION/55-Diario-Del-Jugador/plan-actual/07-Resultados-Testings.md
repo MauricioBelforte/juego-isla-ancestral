@@ -142,3 +142,43 @@ un literal mal tipado sería `Parse Error` estático y no probaría el guardián
 Los 3 flips de Reflection-Beam-1.0 (L20/L77/L85) citan `03-Diseno.md §` **sin número de
 sección** y su propia nota dice "no hay validador / ICONO pendiente". Eran flips inflados
 cuando se aplicaron; L20 pasa a tener sustento real con esta iteración, L77/L85 no.
+
+## 9. Iter. 7 — "???" solo en lore + loader del icono (2026-10-28, DeepSeek-V4.1-Flash, Log 2237)
+
+### 9.1 Suite nueva: `scripts/diario/test_diario_lore_m55.gd` (67 checks)
+
+| Bloque | Qué prueba | Checks |
+|---|---|---|
+| A | clasificación de las 14 categorías + tabla de verdad de `bloqueada()` + cruce con `CATEGORIAS` del servicio | 29 |
+| B | visibilidad REAL del servicio con catálogo sintético (la secreta de lore aparece; la de colección no hasta registrarse) | 14 |
+| C | **capa instanciada en el árbol**: texto de fila y de detalle para ambos casos + `_cat_de` sin `cat` | 9 |
+| D | regla de datos: catálogo real sin violaciones + fixture que la dispara + tipo del campo | 9 |
+| E | el loader propaga `icono` (44/44) y el nivel 1 del resolutor queda alcanzable | 6 |
+| **Total** | **A 29 + B 14 + C 9 + D 9 + E 6** | **67** |
+
+Resultado: **67 checks / 0 fallos / EXIT 0 ×3**, `SCRIPT ERROR: 0`, piso **67 MEDIDO**.
+
+### 9.2 Regresión de las suites del módulo (todas EXIT 0, 0 SCRIPT ERROR)
+
+| Suite | Resultado |
+|---|---|
+| `scripts/diario/validate_diary.gd` | 392 checks, 0 fallos, 3 avisos (piso 391) |
+| `scripts/diario/test_diario.gd` | 36 checks, 0 fallos (piso 36, contador nuevo) |
+| `scripts/diario/test_diario_persist.gd` | 0 fallos (sin contador: reportado) |
+| `scripts/diario/test_diario_iconos_m55.gd` | 56 checks, 0 fallos |
+| `scripts/ui/test_diario_ui.gd` | 89 checks, 0 fallos |
+| `scripts/ui/test_diario_perf_m55.gd` | 26 checks, 0 fallos |
+
+### 9.3 Regresión PROPIA corregida en esta vuelta
+
+`test_diario_iconos_m55.gd` (iter. 6) afirmaba el piso del validador como **literal**
+(`CHECKS_MINIMOS: int = 387`). Al subir el piso a 391 la suite se puso ROJA — es el patrón "test que
+fija una cifra que legítimamente cambia" (trampa 97). Ahora el piso se **parsea** con `RegEx` y se
+afirma `>= 387` (que exista y que no baje del mínimo histórico).
+
+### 9.4 Efecto sobre las marcas (NO aplicado: lo aplica el director)
+
+- **L164** `[ ]` → **`[x]` propuesto**: la regla está implementada en las 3 capas y verificada con 67
+  checks + 5 sondas en rojo. Caveat explícito: el catálogo tiene **0** entradas `secreta`, así que el
+  cambio **no se observa todavía en juego**.
+- `test_diario.gd` gana guardián; **no** cambia ninguna marca.

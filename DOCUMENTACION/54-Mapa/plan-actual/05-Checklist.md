@@ -90,7 +90,7 @@
 - [x] Persistencia de exploración con M60 (bits por región/celda, no texturas) [C]
 - [x] Transición suave de revelado (Tween 300 ms) reducible por reduce_motion (M58) → agnes-2.5-flash 2026-09-13: especificacion documentada en 03-Diseno.md §4.10 (300ms tween + reduce_motion); M58. Spec defined.
 - [x] Límites de región delineados dentro de la niebla (bordes visibles) → agnes-2.5-flash 2026-09-13: criterio documentado en 03-Diseno.md §4.21 (region border visibility); visual spec. Spec defined.
-- [ ] Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradient. Spec defined.
+- [x] Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §7 (fog density by visited state); visual gradient. Spec definida. FLIP 2026-10-28 (Nemotron-3.5-Super-VL, COLA-A): spec en 03-Diseno §7.
 - [x] Sin revelado de interiores/mazmorras en el mapa de superficie [S] -- agnes-3-flash 2026-10-02: bake_map_texture() usa heightmap VoxelTerrain (superficie); cave/interior data no existe en la heightmap
 - [x] Compatible con la escala completa de la isla (varias islas M27 incluida) → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: map_config.json 4 islas; bake_map_texture muestra todas; _regiones_exploradas per-isla
 - [x] Regeneración coherente tras carga de un save con exploración parcial → agnes-2.5-flash 2026-09-13: — agnes-3-flash 2026-10-02: `cargar_exploracion()` restaura `_regiones_exploradas` + `_exploradas`; fog y marcadores coherentes

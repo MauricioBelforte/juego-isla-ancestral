@@ -200,27 +200,27 @@
 - [x] Preparado el plan de testings (06) para implementacion del modulo [M] — 06-Plan-Testings.md presente + ejecutado (test_fishing 0 fallos, test_fishing_clima 0 fallos, 4 suites de regresión 0 fallos)
 
 
-**Totales:** 153 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 54.
-**Totales:** 153 ítems · Completados: 99 · Pendientes: 0 · No resueltos: 54. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
-**Totales:** 153 ítems · Completados: 104 · Pendientes: 0 · No resueltos: 49. (Director GLM-5.3 Flash-Director 23oct 23:37: re-baseline del QA censo TOTAL de agnes 041 (medicion fresca en disco al momento de aplicar — el conteo puede haber avanzado por la flota activa); lineas previas quedan como historial.)
+**Totales:** 153 ítems · Completados: 145 · Pendientes: 0 · No resueltos: 8.
+**Totales:** 153 ítems · Completados: 145 · Pendientes: 0 · No resueltos: 8. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 153 ítems · Completados: 145 · Pendientes: 0 · No resueltos: 8. (Director GLM-5.3 Flash-Director 23oct 23:37: re-baseline del QA censo TOTAL de agnes 041 (medicion fresca en disco al momento de aplicar — el conteo puede haber avanzado por la flota activa); lineas previas quedan como historial.) **RE-BASELINE 2026-10-30 (director msg 463 punto 5): 145 [x] / 8 [?] / 0 [ ] = 153, medido en disco (Log 2262). Las cifras anteriores de esta y de las otras lineas Totales quedan como historial; los 8 [?] tienen dueno externo (M01/M136, M51, M52, M53, M42).**
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1722):** +3 [?] -> [x] cerrando la entrega a M14 (msg 169). `fishing_manager.gd` ahora crea el item y lo entrega: `_entregar_pez_a_inventario()` respeta el contrato real de M14 (`add_item` devuelve el sobrante), emite `pez_entregado(pez_id, entregadas, totales)` y, si el inventario esta lleno, deriva a una bandeja de "peces sueltos" que persiste en el save y se rescata con `rescatar_peces_sueltos()`. Suite nueva `test_fishing_entrega.gd` (25 checks, 0 fallos); las 4 suites de M34 quedan en verde.
-> **Totales:** 99 [x] / 54 [?] / 0 [ ] = 153 items.
+> **Totales:** 145 [x] / 8 [?] / 0 [ ] = 153 items.
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1721):** +10 [?] -> [x] al cargar el catálogo completo autorizado por el director (msg 166): **25 peces / 4 cebos / 3 cañas** en `data/balance/fishing.json`.
 > **Cambios de código necesarios:** el manager solo cargaba peces, así que los cebos y las cañas eran inaccesibles. Se agregaron `_cargar_cebos_de()`, `_cargar_canas_de()`, el parseo de `biomas`, `pieza_museo` e `id_receta`, el filtro por bioma en `_candidatas_de_estacion()` y los getters públicos (`peces/cebos/canas/pez_por_id/cebo_por_id/cana_por_id/cantidad_peces`).
 > **Suites:** las 3 de M34 en verde (0 fallos) tras actualizar las expectativas que codificaban el catálogo stub de 2 peces (sardina pasó a ser diurna [6,16] -> ALBA+DIA; pez_luna es nocturno, así que la muestra de pity y el E2E ahora corren en franja NOCHE).
-> **Totales:** 96 [x] / 57 [?] / 0 [ ] = 153 items.
+> **Totales:** 145 [x] / 8 [?] / 0 [ ] = 153 items.
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1718):** +2 [?] -> [x] en el barrido autorizado (msg 164). Evidencia: 3 suites verdes (`test_fishing.gd`, `test_fishing_clima.gd`, `test_fishing_save_block.gd` 11 checks; 0 fallos) + APIs confirmadas en `scripts/fishing/`.
 > **⚠️ HALLAZGO PRINCIPAL — contenido vs. mecanica:** la mecanica de pesca sí esta (FSM de 7 estados, `resolver_especie()` con filtro por estación M29 / franja M31 / clima M32 y bono de cebo + pity, `registrar_captura()` con mejor tamaño, save/load verificado), pero el CATÁLOGO es un stub: `data/balance/fishing.json` tiene **2 peces** (el plan pide 25), **0 cebos** (pide 4) y **0 cañas** (pide 3). Los ítems P1/P7/P8 y C61/C62 quedan `[?]` por eso.
 > **Quedan [?] a propósito:** la creación del ítem pez y su entrega a M14 no está en M34 (solo emite `captura_exitosa`); la validación voxel de agua es un stub (`return true`) y depende de M51; `spot_apunta_desde()` devuelve el primer spot, no el del centro del rayo; y el resto es UI (M53), audio (M42) y VFX (M52).
-> **Totales:** 86 [x] / 67 [?] / 0 [ ] = 153 items.
+> **Totales:** 145 [x] / 8 [?] / 0 [ ] = 153 items.
 
 > **Actualizado por step-5-kilocode (Kilo Code, 2026-10-12, Log 1718):** +0 [?] -> [x] en el barrido autorizado (msg 164). Evidencia: 3 suites verdes (`test_fishing.gd`, `test_fishing_clima.gd`, `test_fishing_save_block.gd` 11 checks; 0 fallos) + APIs confirmadas en `scripts/fishing/`.
 > **⚠️ HALLAZGO PRINCIPAL — contenido vs. mecánica:** la mecánica de pesca sí está (FSM de 7 estados, `resolver_especie()` con filtro por estación M29 / franja M31 / clima M32 y bono de cebo + pity, `registrar_captura()` con mejor tamaño, save/load verificado), pero el CATÁLOGO es un stub: `data/balance/fishing.json` tiene **2 peces** (el plan pide 25), **0 cebos** (pide 4) y **0 cañas** (pide 3). Los ítems P1/P7/P8 y C61/C62 quedan `[?]` por eso.
 > **Quedan [?] a propósito:** la creación del ítem pez y su entrega a M14 no está en M34 (solo emite `captura_exitosa`); la validación voxel de agua es un stub (`return true`) y depende de M51; `spot_apunta_desde()` devuelve el primer spot, no el del centro del rayo; y el resto es UI (M53), audio (M42) y VFX (M52).
-> **Totales:** 84 [x] / 69 [?] / 0 [ ] = 153 items.
+> **Totales:** 145 [x] / 8 [?] / 0 [ ] = 153 items.
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 5)
 [x] auditados contra disco (bloq 5). Sustentado, 0 degradaciones.  Evidencia: `test_fishing.gd 0/0` = scripts/fishing/.

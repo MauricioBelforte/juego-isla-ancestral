@@ -1,4 +1,4 @@
-﻿# 65-Animales-IA â€” DiseÃ±o (plan-actual)
+# 65-Animales-IA — Diseño (plan-actual)
 
 **Modelo:** Hy3
 **Plataforma:** Kilo Code
@@ -23,39 +23,39 @@ Flujo: FaunaBehavior (FSM, auto-impulsado) --solicitar_movimiento--> M65 mueve n
 - Presupuesto: ignora registros que superen `presupuesto_max`.
 
 ## Boids (PackLogic / SchoolLogic)
-- PackLogic: lÃ­der rotativo, cohesiÃ³n â‰¤5m, huida coordinada.
-- SchoolLogic: cohesiÃ³n/alineaciÃ³n/separaciÃ³n, migraciÃ³n cada 30s, delta â‰¤1.2m.
-- Nota: viven en `scripts/fauna/` (deberÃ­an estar en `scripts/animales_ia/`).
+- PackLogic: líder rotativo, cohesión ≤5m, huida coordinada.
+- SchoolLogic: cohesión/alineación/separación, migración cada 30s, delta ≤1.2m.
+- Nota: viven en `scripts/fauna/` (deberían estar en `scripts/animales_ia/`).
 
 ## Anti-stuck (individual + grupo coordinado)
 
-**Individual â€” IMPLEMENTADO** (`scripts/animales_ia/m65_animal_ai.gd` L159-168):
+**Individual — IMPLEMENTADO** (`scripts/animales_ia/m65_animal_ai.gd` L159-168):
 todo individuo registrado en el autoload acumula `distancia_acumulada`; si
 supera **30 m** sin haber llegado (`dist > 0.5`), aborta el movimiento
-(`en_movimiento = false`) y resetea el acumulador. El reset tambiÃ©n ocurre al
+(`en_movimiento = false`) y resetea el acumulador. El reset también ocurre al
 llegar a destino (L151/L163). Cubierto por
 `scripts/animales_ia/test_m65.gd` â†’ *"anti-stuck: tras 35m acumulados, aborta"*
 (medido 2026-10-19: 24 OK / 0 fallos / EXIT 0).
 
-**Herencia por grupo â€” VIGENTE:** PackLogic y SchoolLogic emiten
-`solicitar_movimiento` sobre sus miembros, que estÃ¡n registrados en el
+**Herencia por grupo — VIGENTE:** PackLogic y SchoolLogic emiten
+`solicitar_movimiento` sobre sus miembros, que están registrados en el
 autoload `animal_ai` â†’ cada miembro hereda el anti-stuck individual. No
 existe hoy un aborto exclusivo de grupo (verificado 2026-10-19: 0
 referencias a `distancia_acumulada`/aborto en `pack_logic.gd` ni
 `school_logic.gd`).
 
-**Grupo coordinado â€” DISEÃ‘O (implementaciÃ³n diferida a navmesh M65,
-KnownIssue no bloqueante; Ã­tems 36-Fauna L208/L212):**
+**Grupo coordinado — DISEÑO (implementación diferida a navmesh M65,
+KnownIssue no bloqueante; ítems 36-Fauna L208/L212):**
 
-- *Manada (PackLogic):* si el lÃ­der queda sin movimiento por aborto
-  individual y un seguidor estÃ¡ a mÃ¡s de `DELTA_SEGUIDOR` (5 m), el seguidor
-  recalcula la cohesiÃ³n hacia la posiciÃ³n **actual** del lÃ­der. Si el grupo
-  completo no desplaza mÃ¡s de 0.5 m en 5 s, rotaciÃ³n forzada de lÃ­der.
-- *Banco (SchoolLogic):* si la direcciÃ³n grupal no produce desplazamiento
-  neto (â‰¤ 0.5 m en 5 s), forzar migraciÃ³n anticipada: reset de
-  `_tiempo_migracion` + nueva direcciÃ³n aleatoria (adelanta el ciclo de 30 s).
+- *Manada (PackLogic):* si el líder queda sin movimiento por aborto
+  individual y un seguidor está a más de `DELTA_SEGUIDOR` (5 m), el seguidor
+  recalcula la cohesión hacia la posición **actual** del líder. Si el grupo
+  completo no desplaza más de 0.5 m en 5 s, rotación forzada de líder.
+- *Banco (SchoolLogic):* si la dirección grupal no produce desplazamiento
+  neto (≤ 0.5 m en 5 s), forzar migración anticipada: reset de
+  `_tiempo_migracion` + nueva dirección aleatoria (adelanta el ciclo de 30 s).
 - *Prueba:* cuando se implemente, extender `tests/test_m65.gd` con casos de
-  grupo (lÃ­der abortado con seguidor lejano; banco sin desplazamiento).
+  grupo (líder abortado con seguidor lejano; banco sin desplazamiento).
 
 ## Specs Animales-IA (Beam 516)
 

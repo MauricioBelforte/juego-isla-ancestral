@@ -1,14 +1,14 @@
-﻿# 03-Diseno.md â€” DISEÃ‘O DEL PROYECTO (PLAN INICIAL GENERICO)
+# 03-Diseno.md — DISEÑO DEL PROYECTO (PLAN INICIAL GENERICO)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 **Fecha:** 2026-08-15
 **Componente:** 01-Fundamentos-Del-Proyecto
-**Estado:** DocumentaciÃ³n inicial (plan genÃ©rico)
+**Estado:** Documentación inicial (plan genérico)
 
 ---
 
-## 1. VisiÃ³n de DiseÃ±o
+## 1. Visión de Diseño
 
 > **"Construye tu hogar. Descubre su pasado. Escucha al mundo."**
 
@@ -33,43 +33,43 @@ Decorar pueblo y hablar con vecinos
         â–¼
 Vender excedentes y pagar mejoras de infraestructura
         â”‚
-        â””â”€â”€â”€â”€â”€â”€â”€ (reinicia al dÃ­a siguiente) â”€â”€â”€â”€â”€â”€â”€â”˜
+        └─────── (reinicia al día siguiente) ───────┘
 ```
 
 ### 2.2 Bucle Semanal (Misterios)
 
 ```
-Explorar ruinas/templos subterrÃ¡neos
+Explorar ruinas/templos subterráneos
         â”‚
         â–¼
-Resolver acertijos ambientales (luz, presiÃ³n, agua, viento)
+Resolver acertijos ambientales (luz, presión, agua, viento)
         â”‚
         â–¼
 Obtener herramientas de aventura y Reliquias (Fragmentos de Sello)
 ```
 
-### 2.3 Bucle Mensual (ExpansiÃ³n)
+### 2.3 Bucle Mensual (Expansión)
 
 ```
 Comprar el Boleto de Pasaje (Gemas + Sello requerido)
         â”‚
         â–¼
-Abordar el Gran Vapor / Dirigible (carga diegÃ©tica)
+Abordar el Gran Vapor / Dirigible (carga diegética)
         â”‚
         â–¼
-Explorar una nueva isla temÃ¡tica
+Explorar una nueva isla temática
         â”‚
         â–¼
-Desbloquear vecinos, flora rara y materiales Ãºnicos
+Desbloquear vecinos, flora rara y materiales únicos
 ```
 
 ---
 
 ## 3. Flujo del Jugador (Player Journey v1.0)
 
-1. **Mes 1:** Llegada a Aurora (Isla Base). Tienda de campaÃ±a. Aprende a picar bloques, construye su primera casa, conoce a Finneas (Administrador) y los 2 primeros vecinos. Paga la primera cuota.
-2. **Semana 2-3:** Descubre una grieta en las montaÃ±as. Entra al Templo de la Brisa (sin enemigos). Resuelve puzzles de luz y botones usando el Gancho MecÃ¡nico. Obtiene el **Sello de la Brisa** â†’ el faro de Aurora se enciende.
-3. **DÃ­a 1 del Mes 2:** El Gran Vapor atraca. Compra el **Boleto a las Islas de Coral** (Gemas de Ãmbar + Sello de la Brisa).
+1. **Mes 1:** Llegada a Aurora (Isla Base). Tienda de campaña. Aprende a picar bloques, construye su primera casa, conoce a Finneas (Administrador) y los 2 primeros vecinos. Paga la primera cuota.
+2. **Semana 2-3:** Descubre una grieta en las montañas. Entra al Templo de la Brisa (sin enemigos). Resuelve puzzles de luz y botones usando el Gancho Mecánico. Obtiene el **Sello de la Brisa** → el faro de Aurora se enciende.
+3. **Día 1 del Mes 2:** El Gran Vapor atraca. Compra el **Boleto a las Islas de Coral** (Gemas de Ámbar + Sello de la Brisa).
 4. **Viaje:** Explora la Isla de Coral. Descubre frutas tropicales, invita a un vecino nuevo y junta materiales raros. Regresa a Aurora a seguir expandiendo su hogar.
 5. **(Opcional v1.0):** Templo de la Marea para el Sello de la Marea y la Vara de Flujo.
 
@@ -77,22 +77,22 @@ Desbloquear vecinos, flora rara y materiales Ãºnicos
 
 ## 4. Arquitectura de Software
 
-### 4.1 Estructura de Carpetas (independiente del motor â€” ver motor en 02-Analisis)
+### 4.1 Estructura de Carpetas (independiente del motor — ver motor en 02-Analisis)
 
 ```
 Assets/                              â† Unity (o estructura equivalente en Godot)
 â”œâ”€â”€ _Project/
 â”‚   â”œâ”€â”€ Scripts/
 â”‚   â”‚   â”œâ”€â”€ Core/                    â† Bootstrapping, managers, service locator
-â”‚   â”‚   â”œâ”€â”€ Gameplay/                â† Jugador, herramientas, interacciÃ³n, construcciÃ³n
-â”‚   â”‚   â”œâ”€â”€ World/                   â† Voxel: chunks, meshing, generaciÃ³n, terreno
+│   │   ├── Gameplay/                ← Jugador, herramientas, interacción, construcción
+│   │   ├── World/                   ← Voxel: chunks, meshing, generación, terreno
 â”‚   â”‚   â”œâ”€â”€ Puzzle/                  â† Framework Emisorâ†’Receptor, templos
 â”‚   â”‚   â”œâ”€â”€ AI/                      â† NPC, rutinas, pathfinding, animales
-â”‚   â”‚   â”œâ”€â”€ Economy/                 â† Wallets (Ãmbar/MÃ©rito), tiendas, infraestructura
-â”‚   â”‚   â”œâ”€â”€ Narrative/               â† DiÃ¡logo, flags, misiones, historia
+│   │   ├── Economy/                 ← Wallets (Ámbar/Mérito), tiendas, infraestructura
+│   │   ├── Narrative/               ← Diálogo, flags, misiones, historia
 â”‚   â”‚   â”œâ”€â”€ Systems/                 â† Tiempo, calendario, clima, estaciones, eventos
 â”‚   â”‚   â”œâ”€â”€ Audio/                   â† Managers de audio, mixers
-â”‚   â”‚   â”œâ”€â”€ UI/                      â† Solo vistas; sin lÃ³gica de gameplay
+│   │   ├── UI/                      ← Solo vistas; sin lógica de gameplay
 â”‚   â”‚   â”œâ”€â”€ Data/                    â† ScriptableObjects de datos (bloques, recetas, NPC)
 â”‚   â”‚   â”œâ”€â”€ Persistence/             â† GameState versionado, diffs de chunks, saves
 â”‚   â”‚   â””â”€â”€ Utils/                   â† Helpers, extensiones, math
@@ -108,12 +108,12 @@ Assets/                              â† Unity (o estructura equivalente en 
 
 ```
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
-â”‚ UI (Canvas/UGUI o Godot UI) â€” Vista           â”‚  â† solo eventos, sin lÃ³gica
+│ UI (Canvas/UGUI o Godot UI) — Vista           │  ← solo eventos, sin lógica
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Managers / Servicios (singletons, locator)    â”‚  â† orquestaciÃ³n
+│ Managers / Servicios (singletons, locator)    │  ← orquestación
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
-â”‚ Systems: Voxel Â· Puzzle Â· Economy Â· AI Â·      â”‚
-â”‚          Narrative Â· Time/Weather Â· Audio      â”‚  â† lÃ³gica de gameplay
+│ Systems: Voxel · Puzzle · Economy · AI ·      │
+│          Narrative · Time/Weather · Audio      │  ← lógica de gameplay
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚ Data (ScriptableObjects / Resources)          â”‚  â† datos configurables
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
@@ -123,67 +123,67 @@ Assets/                              â† Unity (o estructura equivalente en 
 
 ### 4.3 Patrones y Contratos Clave
 
-| PatrÃ³n | Uso |
+| Patrón | Uso |
 |--------|-----|
-| Event Bus / Observer | Reloj central (dÃ­a, estaciÃ³n, clima) notifica a sistemas |
+| Event Bus / Observer | Reloj central (día, estación, clima) notifica a sistemas |
 | Service Locator | Acceso a managers sin acoplar |
-| ScriptableObject Architecture | Datos de bloques, recetas, NPC, diÃ¡logos |
+| ScriptableObject Architecture | Datos de bloques, recetas, NPC, diálogos |
 | Interfaces | `IInteractable`, `ISignalEmitter`, `ISignalReceiver`, `IWorldState` |
-| ComposiciÃ³n | Prefabs modulares sobre herencia profunda |
-| Command/Undo (opcional) | Modo construcciÃ³n con deshacer |
+| Composición | Prefabs modulares sobre herencia profunda |
+| Command/Undo (opcional) | Modo construcción con deshacer |
 
 ---
 
-## 5. DiseÃ±o del Sistema Voxel
+## 5. Diseño del Sistema Voxel
 
-| Concepto | DecisiÃ³n |
+| Concepto | Decisión |
 |----------|----------|
-| TamaÃ±o de voxel | 1Ã—1Ã—1 m (coincide colisiÃ³n, escala personaje ~1.8 m) |
-| TamaÃ±o de chunk | 16Â³ o 32Â³ voxels (evaluar en prototipo) |
+| Tamaño de voxel | 1×1×1 m (coincide colisión, escala personaje ~1.8 m) |
+| Tamaño de chunk | 16³ o 32³ voxels (evaluar en prototipo) |
 | Procesamiento | Solo chunks activos en memoria; streaming por distancia |
 | Malla | Face culling obligatorio; greedy meshing a evaluar |
-| Hilos | GeneraciÃ³n/remallado en hilos secundarios |
+| Hilos | Generación/remallado en hilos secundarios |
 | LOD | Chunks lejanos simplificados |
 | Colisiones | Raycast contra grilla de voxels (no contra malla) |
-| Persistencia | Diffs por chunk (bloques vs. generaciÃ³n original) |
-| Bloques lÃ­quidos | Agua, nieve, arena con comportamiento propio (evaluar) |
-| InteracciÃ³n | Pala (tierra/cÃ©sped), Pico (piedra/minerales), Hacha (madera sin destruir Ã¡rbol completo) |
+| Persistencia | Diffs por chunk (bloques vs. generación original) |
+| Bloques líquidos | Agua, nieve, arena con comportamiento propio (evaluar) |
+| Interacción | Pala (tierra/césped), Pico (piedra/minerales), Hacha (madera sin destruir árbol completo) |
 
 ---
 
-## 6. DiseÃ±o del Framework de Puzzles (Emisor â†’ Receptor)
+## 6. Diseño del Framework de Puzzles (Emisor → Receptor)
 
 ```
-[Emisor] â”€â”€seÃ±alâ”€â”€> [Medio transportador] â”€â”€seÃ±alâ”€â”€> [Receptor] â”€â”€acciÃ³nâ”€â”€> [Mecanismo]
+[Emisor] ──señal──> [Medio transportador] ──señal──> [Receptor] ──acción──> [Mecanismo]
 
 Ejemplos:
 - Espejo (emisor de LUZ)  â†’ haz guiado        â†’ Receptor de luz â†’ abre puerta
-- Placa de presiÃ³n (emisor de PESO)           â†’ Receptor â†’ activa plataforma
+- Placa de presión (emisor de PESO)           → Receptor → activa plataforma
 - Bloque deslizante (empujado por jugador)    â†’ Receptor â†’ cierra canal de agua
 - Vara de Flujo (emisor AGUA/FRIO)            â†’ Receptor â†’ congela/evapora agua
-- Gancho MecÃ¡nico (input del jugador)         â†’ Punto de anclaje â†’ cruza abismo
+- Gancho Mecánico (input del jugador)         → Punto de anclaje → cruza abismo
 - Lanza-Semillas (input del jugador)          â†’ Maceta lejana â†’ crece planta â†’ abre puerta
 ```
 
-**Reglas de diseÃ±o:**
-1. Toda mecÃ¡nica de templo debe poder expresarse como combinaciÃ³n de emisor/receptor.
-2. Las herramientas del jugador son "inputs" que activan receptores especÃ­ficos.
-3. Cada templo nuevo = componer piezas con skin temÃ¡tica distinta (SN); no programar mecÃ¡nica nueva.
+**Reglas de diseño:**
+1. Toda mecánica de templo debe poder expresarse como combinación de emisor/receptor.
+2. Las herramientas del jugador son "inputs" que activan receptores específicos.
+3. Cada templo nuevo = componer piezas con skin temática distinta (SN); no programar mecánica nueva.
 4. Pistas opcionales por templo; sin soluciones ambiguas; checkpoints y reinicio de puzzle.
 
 ---
 
-## 7. DiseÃ±o de Datos (GameState)
+## 7. Diseño de Datos (GameState)
 
 ```
 GameState v1.0 (versionado)
-â”œâ”€â”€ Player: posiciÃ³n, inventario, hotbar, herramientas
+├── Player: posición, inventario, hotbar, herramientas
 â”œâ”€â”€ Wallets: { gemasAmbar, pasesDeMerito }
 â”œâ”€â”€ Relations: { npcId â†’ { puntosDeAmistad, nivel, flags } }
 â”œâ”€â”€ Progression: { sellos[], gRABACIONESescuchadas[], islasVisitadas[], historiaStage }
 â”œâ”€â”€ WorldDiffs: { chunkId â†’ { bloqueModificado â†’ tipoNuevo } }  (persistencia voxel incremental)
 â”œâ”€â”€ Crops: { parcelaId â†’ { semilla, etapa, riego } }
-â”œâ”€â”€ Calendar: { fecha, hora, estacion, aÃ±o }
+├── Calendar: { fecha, hora, estacion, año }
 â””â”€â”€ Settings: { controles, accesibilidad, audio, graficos }
 ```
 
@@ -191,16 +191,16 @@ GameState v1.0 (versionado)
 
 ---
 
-## 8. DiseÃ±o del Sistema de Guardado
+## 8. Diseño del Sistema de Guardado
 
-1. Autosave periÃ³dico + guardado manual en slots.
-2. SerializaciÃ³n incremental: solo diffs de chunks modificados.
+1. Autosave periódico + guardado manual en slots.
+2. Serialización incremental: solo diffs de chunks modificados.
 3. Escritura fuera del hilo principal; sin congelamientos.
-4. Pruebas: apagado a mitad de guardado, falta de espacio, mÃºltiples perfiles.
+4. Pruebas: apagado a mitad de guardado, falta de espacio, múltiples perfiles.
 
 ---
 
-## 9. Estructura de DocumentaciÃ³n del Proyecto
+## 9. Estructura de Documentación del Proyecto
 
 ```
 DOCUMENTACION/
@@ -212,20 +212,20 @@ DOCUMENTACION/
 â”œâ”€â”€ 00-PLAN-INICIAL/                    â† Origen (no modificar)
 â”œâ”€â”€ 01-Fundamentos-Del-Proyecto/        â† ESTE componente
 â”‚   â”œâ”€â”€ plan-inicial/                   â† Base (no modificar)
-â”‚   â””â”€â”€ plan-actual/                    â† Vigente (actualizar aquÃ­)
-â”œâ”€â”€ 02-... hasta 152-... per mÃ³dulo
+│   └── plan-actual/                    ← Vigente (actualizar aquí)
+├── 02-... hasta 152-... per módulo
 â”œâ”€â”€ INVESTIGACION SOBRE OTROS JUEGOS/
 README.md (DOCUMENTACION)
 ```
 
 ---
 
-## 10. Roadmap de ProducciÃ³n (Fases)
+## 10. Roadmap de Producción (Fases)
 
 ```mermaid
 flowchart LR
-    A["PreproducciÃ³n\nPrototipo voxel + decisiones\n1-3 meses"] --> B["Vertical Slice\nAurora + 1 templo + 1 NPC\n2-4 meses"]
-    B --> C["ProducciÃ³n MVP v1.0\nAurora + 1-2 islas + 2-3 Sellos\n8-14 meses"]
+    A["Preproducción\nPrototipo voxel + decisiones\n1-3 meses"] --> B["Vertical Slice\nAurora + 1 templo + 1 NPC\n2-4 meses"]
+    B --> C["Producción MVP v1.0\nAurora + 1-2 islas + 2-3 Sellos\n8-14 meses"]
     C --> D["Alpha cerrada\nPlaytesters externos\n2-3 meses"]
     D --> E["Beta abierta / Early Access"]
     E --> F["Lanzamiento 1.0 en Steam"]
@@ -234,20 +234,20 @@ flowchart LR
 
 ---
 
-## 11. Decisiones de DiseÃ±o Cerradas (Resumen)
+## 11. Decisiones de Diseño Cerradas (Resumen)
 
-| # | DecisiÃ³n | Estado |
+| # | Decisión | Estado |
 |---|----------|--------|
-| 1 | Cero violencia y cero penalizaciones violentas | CERRADA (filosofÃ­a del juego) |
+| 1 | Cero violencia y cero penalizaciones violentas | CERRADA (filosofía del juego) |
 | 2 | Framework de puzzles emisorâ†’receptor | CERRADA |
-| 3 | GameState versionado desde el dÃ­a uno | CERRADA |
-| 4 | LocalizaciÃ³n con claves desde el dÃ­a uno | CERRADA |
-| 5 | Escenas separadas con carga diegÃ©tica entre islas | CERRADA |
-| 6 | DiferenciaciÃ³n por narrativa + direcciÃ³n de arte | CERRADA (estrategia) |
-| 7 | Motor (Unity/Godot) | **ABIERTA** â€” se cierra en prototipo |
-| 8 | Middleware de audio | **ABIERTA** â€” mÃ³dulo 40 |
-| 9 | Modelo de negocio (DLC vs gratis) | **ABIERTA** â€” mÃ³dulo 94 |
-| 10 | Multijugador | **ABIERTA** â€” mÃ³dulo 75 |
+| 3 | GameState versionado desde el día uno | CERRADA |
+| 4 | Localización con claves desde el día uno | CERRADA |
+| 5 | Escenas separadas con carga diegética entre islas | CERRADA |
+| 6 | Diferenciación por narrativa + dirección de arte | CERRADA (estrategia) |
+| 7 | Motor (Unity/Godot) | **ABIERTA** — se cierra en prototipo |
+| 8 | Middleware de audio | **ABIERTA** — módulo 40 |
+| 9 | Modelo de negocio (DLC vs gratis) | **ABIERTA** — módulo 94 |
+| 10 | Multijugador | **ABIERTA** — módulo 75 |
 ---
 
 ## Specs M01 (Beam 481)

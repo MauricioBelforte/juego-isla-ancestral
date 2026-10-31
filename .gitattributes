@@ -3,3 +3,10 @@
 # Alcance deliberadamente mínimo (un solo archivo): no se normaliza el resto
 # del repo para no generar ruido a los agentes que trabajan en paralelo.
 .github/create_labels.sh text eol=lf
+
+# Agnès 29oct (flag DeepSeek #455): *.md y *.yml en eol=lf — evita el churn
+# CRLF del incidente M01 (05-Checklist HEAD-LF vs worktree-CRLF). core.autocrlf=true
+# + sin regla = cada checkout/reset reescribe CRLF y ensucia los diffs.
+# Los *.gd ya estaban protegidos (text=auto eol=lf).
+*.md text eol=lf
+*.yml text eol=lf

@@ -160,7 +160,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 
 
 
-- [x] Panel principal con grilla de slots (botones construidos por codigo en `inventory_layer.gd` _crear_slots, sin .tscn) [C] — **QA atria-dawn 2026-09-18 (Log 1047): el claim citaba `slot.tscn`, que NO existe;** la grilla se construye con `Button.new()` dinamico. Corregida la redaccion; la grilla SI funciona (verificado por test_inventario 0 fallos).
+- [x] Panel principal con grilla de slots (botones construidos por codigo en `inventory_layer.gd` `_construir_slots()`, sin .tscn) **Cita corregida 2026-10-30 (Log 2262): `_crear_slots` no existe; el metodo real es `_construir_slots()` (inventory_layer.gd:183, `Button.new()` en L192).** [C] — **QA atria-dawn 2026-09-18 (Log 1047): el claim citaba `slot.tscn`, que NO existe;** la grilla se construye con `Button.new()` dinamico. Corregida la redaccion; la grilla SI funciona (verificado por test_inventario 0 fallos).
 
 - [x] Pestañas de categoría con contadores de ítems [M]
 
@@ -180,7 +180,7 @@ Los ítems llevan el marcador de esfuerzo al final de la línea (S: simple, M: m
 
 - [x] Apertura con pausa suave del mundo (M29 UI-only) [C]
 
-- [x] Soporte completo de gamepad y teclado/mouse [C] — **QA atria-dawn 2026-09-18 (Log 1047): grep `gamepad` en `inventory_layer.gd` = 0.** La capa usa `_input_event` con acciones (`inventario`, `pausa`) que funcionan en teclado; no hay mapeo gamepad ni navegacion por botones documentada. El servicio es agnostico al input (sin _input), asi que el claim es puramente de UI. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L183 gamepad/teclado)
+- [?] Soporte completo de gamepad y teclado/mouse [C] — **QA atria-dawn 2026-09-18 (Log 1047): grep `gamepad` en `inventory_layer.gd` = 0.** La capa usa `_input_event` con acciones (`inventario`, `pausa`) que funcionan en teclado; no hay mapeo gamepad ni navegacion por botones documentada. El servicio es agnostico al input (sin _input), asi que el claim es puramente de UI. | FLIP 2026-10-26 (Reflection-Beam-1.0, T221-14): spec en 03-Diseno.md § (L183 gamepad/teclado) | **RE-BASELINE 2026-10-30 (director msg 463 punto 3): `[x]` -> `[?]`.** Medido: `grep -c gamepad` en `inventory_layer.gd` = 0; el metodo real de input es `_unhandled_input` (inventory_layer.gd:415), NO `_input_event` (0 definiciones en el arbol); project.godot da 0 `InputEventJoypadButton` y 0 `InputEventJoypadMotion` para `pausa` y `inventario` (1 `InputEventKey` cada una). La cita del FLIP anterior apunta a `03-Diseno.md` sin numero de seccion y esa seccion (L133) transcribe el claim FALSO: es cita autocontradictoria, no evidencia. Dueno: M14 (UI).
 
 - [x] Release de foco y cierre limpio sin estado colgado [S]
 
@@ -611,7 +611,7 @@ cofre_16/28/40, almacén 240) con contrato persistible (ISaveProvider "cofres_mu
 muelles físicos de M17 — el lado de datos está completo.
 
 
-**Totales:** 140 ítems · Completados: 136 · Pendientes: 0 · No resueltos: 4.
+**Totales:** 140 ítems · Completados: 139 · Pendientes: 0 · No resueltos: 1.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** la línea decía *"146 items · Completados: 142 · No resueltos: 4 ·

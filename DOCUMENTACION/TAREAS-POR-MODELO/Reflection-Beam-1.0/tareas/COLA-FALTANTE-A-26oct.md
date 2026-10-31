@@ -6,29 +6,32 @@ Tandas de 5 items con reporte en canal (numeracion ultimo+1, firma). PROHIBIDO d
 
 | # | T-file origen | Modulo | Tarea | Hecho |
 |---|---|---|---|---|
-| 1 | T105-54.md | 54 | L93 | Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradie |
-| 2 | T110-33.md | 33 | L44 | P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M] — CUBO: A-DOC/FORMULA |
-| 3 | T110-33.md | 33 | L120 | Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M] — CUBO: A-DOC/FORMULA |
-| 4 | T110-33.md | 33 | L126 | Cancelación segura del selector sin consumir semillas [S] — el selector UI no existe aún (M53); plant() no consume semilla si la validación falla — CUBO: A-DOC/FORMULA |
-| 5 | T110-33.md | 33 | L166 | Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C] — CUBO: A-DOC/FORMULA |
-| 6 | T110-33.md | 33 | L169 | Cosecha con inventario lleno: sobrante devuelto con notificación [M] — CUBO: A-DOC/FORMULA |
-| 7 | T110-33.md | 33 | L173 | Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M] — CUBO: A-DOC/FORMULA |
+| 1 | T105-54.md | 54 | L93 | [x] | Niebla más clara en zonas visitadas y oscura en no exploradas → agnes-2.5-flash 2026-09-13: politica documentada en 03-Diseno.md §4.22 (fog density by visited state); visual gradie |
+| 2 | T110-33.md | 33 | L44 | [x] | HECHO: spec en 03-Diseno.md L307-308 Beam 663; flip 05-Checklist M33 L44 [x] con cita Beam 663 (2026-10-28 13:10) |
+| 3 | T110-33.md | 33 | L120 | [x] | HECHO: spec en 03-Diseno.md L322-323 Beam 664; flip 05-Checklist M33 L120 [x] con cita Beam 664 (2026-10-28 13:10) |
+| 4 | T110-33.md | 33 | L126 | [x] | HECHO: spec en 03-Diseno.md L325-326 Beam 664; flip 05-Checklist M33 L126 [x] con cita Beam 664 (2026-10-28 13:10) |
+| 5 | T110-33.md | 33 | L166 | [x] | HECHO: spec en 03-Diseno.md L340-341 Beam 664; flip 05-Checklist M33 L166 [x] con cita Beam 664 (2026-10-28 13:10) |
+| 6 | T110-33.md | 33 | L169 | [x] | HECHO: spec en 03-Diseno.md L343-344 Beam 665; flip 05-Checklist M33 L169 [x] con cita Beam 665 (2026-10-28 12:55) |
+| 7 | T110-33.md | 33 | L173 | [x] | HECHO: spec en 03-Diseno.md L349-350 Beam 666; flip 05-Checklist M33 L173 [x] con cita Beam 666 (2026-10-28 12:55) |
 | 8 | T123-40.md | 40 | L261 | Copiar plan-inicial a plan-actual byte a byte (verificación por hash) [S] — **Ítem inválido por diseño (orden del director mimo, msg 229, hallazgo K):** contradice AGENTS.md §3, qu |
 | 9 | T135-53.md | 53 | L221 | Canvas merge por capa para minimizar draw calls [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): la UI usa MÚLTIPLES CanvasLayer (UIRoot CanvasLayer 100 + HUDScreen + TooltipService + |
 | 10 | T135-53.md | 53 | L229 | Font subsetting por idioma (M88) para evitar desperdicio de memoria [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): `theme_ux.gd:193-208` `_try_load_font` carga las TTF completas con |
-| 11 | T140-50.md | 50 | L176 | Viento determinista con amplitud por bioma/clima [M] — [ ] honesto 2026-10-19 (Log 2022): no existe viento_shader.gdshader ni shader de viento en disco (find = 0 archivos). — CUBO: |
-| 12 | T155-94.md | 94 | L99 | [?] DEGRADADO — Definir 3+ variantes por festividad (4 y 3 variantes en 2 festividades) [C] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — CUBO: A-DEF/FORMULA (re-ve |
-| 13 | T156-94.md | 94 | L123 | [?] DEGRADADO — Definir regalos del dia (catalogo) sin exclusividad [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico |
-| 14 | T156-94.md | 94 | L144 | [?] DEGRADADO — Definir prohibicion formal de streaks [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 6 |
-| 15 | T156-94.md | 94 | L145 | [?] DEGRADADO — Definir prohibicion de contenido exclusivo temporal [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico |
-| 16 | T156-94.md | 94 | L146 | [?] DEGRADADO — Definir prohibicion de vuelve o lo pierdes [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la lí |
-| 17 | T156-94.md | 94 | L147 | [?] DEGRADADO — Definir prohibicion de penalizacion de ausencia [S] — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de |
-| 18 | T157-94.md | 94 | L165 | [?] DEGRADADO — Definir notificación suave de objetivo cumplido [S] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — CUBO: A-DEF/FORMULA (re-verificar y definir) |
-| 19 | T157-94.md | 94 | L172 | [?] DEGRADADO — Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — CUBO: A-DEF/FORMULA (re-verificar y d |
-| 20 | T157-94.md | 94 | L191 | [?] DEGRADADO — Definir suite MigraciónMotivacion (v3.1→3.2) [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — CUBO: A-DEF/FORMULA (re-verificar y definir) |
-| 21 | T157-94.md | 94 | L192 | [?] DEGRADADO — Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (playtest guide); eje |
-| 22 | T158-11.md | 11 | L80 | [?] DEGRADADO — Destellos visibles en streaming lejano (no se cargan inútilmente fuera del radio) [M] |
-| 23 | T159-11.md | 11 | L109 | [?] DEGRADADO — Assets finales → M65 (terceros) → Pendiente de M65 [M] |
-| 24 | T204-131.md | 131 | L93 | [?] DEGRADADO — Fade-out gradual al salir [S] - KnownIssue no bloqueante DoD: dueño M41; no hay pista que atenuar; los motores M41/M42/M43/M91 EXISTEN y pasan tests (M41 14/0, M43 |
-| 25 | T225-62.md | 62 | L190 | [?] DEGRADADO — Baseline menú principal: objetivo < 600 MB [S] — **[?] 2026-10-20 (Tanda 78, DS-Opencode): NO MEDIBLE, no hay escena de menú.** `project.godot` arranca en `res://sc |
-| 26 | T225-62.md | 62 | L193 | [?] DEGRADADO — Baseline subterráneo del templo (M26): objetivo < 2.000 MB [S] — **[?] 2026-10-20 (Tanda 81, DS-Opencode): NO MEDIBLE, no existe templo/API de acceso.** No hay ning |
+| 11 | T140-50.md | 50 | L176 | [ ] | SKIP: NO MEDIBLE — no existe viento_shader.gdshader en disco (M50 03-Diseno/05-Checklist L176 documenta el bloqueo; find = 0 archivos shader de viento) |
+| 12 | T155-94.md | 94 | L99 | [ ] | SKIP: degradado por auditoría Step-5 47 (§21.8.2.b); spec general en 03-Diseno.md L35 no cubre "4 y 3 variantes en 2 festividades" específico [C]; no resolvible sin definición concreta de variantes por festividad |
+| 13 | T156-94.md | 94 | L123 | [ ] | SKIP: Patrón D — duplicado idéntico de la línea 48 (regalos del día sin exclusividad, ya [x] en 05-Checklist M94 L48) |
+| 14 | T156-94.md | 94 | L144 | [ ] | SKIP: Patrón D — duplicado idéntico de la línea 65 (prohibición formal de streaks, ya [x] en 05-Checklist M94 L65) |
+| 15 | T156-94.md | 94 | L145 | [ ] | SKIP: Patrón D — duplicado idéntico de la línea 66 (prohibición de contenido exclusivo temporal, ya [x] en 05-Checklist M94 L66) |
+| 16 | T156-94.md | 94 | L146 | [ ] | SKIP: Patrón D — duplicado idéntico de la línea 6 (vuelve o lo pierdes) |
+| 17 | T156-94.md | 94 | L147 | [ ] | SKIP: Patrón D — duplicado idéntico de la línea 6 (penalización de ausencia) |
+| 18 | T157-94.md | 94 | L165 | [x] | HECHO: spec en 03-Diseno.md L89-90 Beam 751; flip 05-Checklist L165 [x] con cita Beam 751 |
+| 19 | T157-94.md | 94 | L172 | [x] | HECHO: spec en 03-Diseno.md L92-93 Beam 752; flip 05-Checklist L172 [x] con cita Beam 752 |
+| 20 | T157-94.md | 94 | L191 | [x] | HECHO: spec en 03-Diseno.md L95-96 Beam 753; flip 05-Checklist L191 [x] con cita Beam 753 |
+| 21 | T157-94.md | 94 | L192 | [ ] | SKIP: sin spec en 03-Diseno.md (no existe §20.3); director degradó como "M114 deferral disfrazado — contenido no existe hoy" |
+| 22 | T158-11.md | 11 | L80 | [ ] | SKIP: sin spec en 03-Diseno.md (solo §5 Sistema de luz destellos=coleccionables, no streaming lejano) |
+| 23 | T159-11.md | 11 | L109 | [ ] | SKIP: dependencia externa M65 (dueño ajeno) — assets finales pendiente de M65 |
+| 24 | T204-131.md | 131 | L93 | [ ] | SKIP: dependencia externa M41 (dueño ajeno) — fade-out gradual al salir, dueño M41 |
+| 25 | T225-62.md | 62 | L190 | [ ] | SKIP: NO MEDIBLE — no hay escena de menú (project.godot arranca en main_island.tscn; no existen scenes/main_menu.tscn ni similares) |
+| 26 | T225-62.md | 62 | L193 | [ ] | SKIP: NO MEDIBLE — no existe templo/API de acceso (no hay escena *templo* ni *subterr* en scenes/) |
+
+
+

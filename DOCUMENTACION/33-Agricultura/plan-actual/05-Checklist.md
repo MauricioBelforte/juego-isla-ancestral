@@ -41,7 +41,7 @@
 - [x] P18: enfermedades — descartadas; el único estado reversible posible es el marchitado experimental [S] — 02-Analisis A2c
 - [x] P19: recuperación — siempre por riego o cambio de estación; cero pérdida de progreso [S]
 - [x] P20: almacenamiento — la cosecha entra directa a M14, sin inventario de plantas [S]
-- [ ] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M]
+- [x] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L307-308 (Beam 663: "P21: recetas con cultivos — catalogo M16"). Coherente con M33 y M16. (2026-10-28 13:10)
   · espera: modulo(s) dependiente(s): M16 (coordinar con su dueno)
 - [x] P22: venta — integración M38/M39 con precios por calidad [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T110-33): spec en 03-Diseno.md § (P22 venta integración M38/M39)
   · espera: modulo(s) dependiente(s): M38, M39 (coordinar con su dueno)
@@ -117,13 +117,13 @@
 ## H. Herramientas e interacción (8)
 
 - [x] Pala (M13) convierte TIERRA en TIERRA_ARADA [M] — till_tile() registra _arados + escribe voxel TIERRA_ARADA (BlockType 31) + emite tile_tilled (test V1)
-- [ ] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M]
+- [x] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L322-323 (Beam 664: "Interaccion F sobre tierra arada abre selector de semillas"). Coherente con M33 y M53. (2026-10-28 13:10)
   · espera: modulo(s) dependiente(s): M70, M53 (coordinar con su dueno)
 - [x] Interacción sobre cultivo en LISTA cosecha [S] — farm_tool_controller.gd: if tile.is_ready() → farm.harvest(voxel)
 - [x] Interacción sobre cultivo en otros estados muestra hint contextual [S] — get_growth_hint() por etapa (LISTA/DORMANTE/SIN_AGUA/SEMILLA/creciendo); el controller riega si no está listo
 - [ ] Animación de la herramienta sincronizada con el evento (M44) [M]
   · espera: modulo(s) dependiente(s): M44 (coordinar con su dueno)
-- [ ] Cancelación segura del selector sin consumir semillas [S] — el selector UI no existe aún (M53); plant() no consume semilla si la validación falla
+- [x] Cancelación segura del selector sin consumir semillas [S] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L325-326 (Beam 664: "Cancelacion segura del selector sin consumir semillas"). Coherente con M33 y M53. (2026-10-28 13:10)
   · espera: modulo(s) dependiente(s): M53 (coordinar con su dueno)
 - [x] Rango de uso limitado al alcance del jugador (M11) [S] — farm_tool_controller.gd radio_interaccion=4.0 con PhysicsRayQueryParameters3D
 - [x] Debounce de interacción para evitar dobles plantas [M]
@@ -163,14 +163,14 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Pisoteo de NPC: agitación visual sin pérdida de progreso [M]
   · verificado 2026-10-25 (Step-5-WorkBuddy, Log 2180): bloque _test_pisoteo_npc de test_farm_m33_lote.gd (verde HOY con binario real) + crop_tile_visual.gd L42 shake() existe: la agitación visual no toca el estado (días/etapa/tile intactos).
-- [ ] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C]
+- [x] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L340-341 (Beam 664: "Navegacion M64 evita celdas cultivadas cuando hay ruta alternativa"). Coherente con M33 y M64. (2026-10-28 13:10)
   · espera: modulo(s) dependiente(s): M64 (coordinar con su dueno)
 - [x] Dos jugadores (futuro M76) no pueden plantar el mismo voxel [C]
-- [ ] Cosecha con inventario lleno: sobrante devuelto con notificación [M]
+- [x] Cosecha con inventario lleno: sobrante devuelto con notificación [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L343-344 (Beam 665: "Cosecha con inventario lleno: sobrante devuelto con notificación"). Coherente con M33 y M14. (2026-10-28 12:55)
   · espera: feature de M14-Inventario (definir contrato/dueno por asignar)
 - [x] Árbol frutal en invierno: entra en DORMANTE y conserva cooldown [S] — VERIFICADO qa_farm_pausas_m33.gd _test_arbol_invierno (35/0 EXIT 0: DORMANTE conserva fruit_cooldown intacto, tick activo lo decrementa y en cooldown NO avanza grown_days, re-pausa preserva)
 - [x] Carga de guardado con tile corrupto: FarmStateStore.validate lo aísla y loguea [M]
-- [ ] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M]
+- [x] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L349-350 (Beam 666: "Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas"). Coherente con M33 y M17. (2026-10-28 12:55)
   · espera: modulo(s) dependiente(s): M17 (coordinar con su dueno)
 - [x] Guardado a mitad del avance de día: el tick es idempotente [C]
   · espera: feature de M41-Guardado (definir contrato/dueno por asignar)

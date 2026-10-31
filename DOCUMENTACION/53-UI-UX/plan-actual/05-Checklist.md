@@ -226,7 +226,7 @@
 - [x] Capas modales en pausa no repintan el HUD por frame [M]
 - [x] Presupuesto UI menor o igual a 8% del frame medido con Profiler (M61) [C]
 - [x] Verificación de draw calls en escena poblada (pueblo + HUD completo) [M]
-- [ ] Font subsetting por idioma (M88) para evitar desperdicio de memoria [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): `theme_ux.gd:193-208` `_try_load_font` carga las TTF completas con `load_dynamic_font` **sin subsetting** (no se usa `FontFile` con subset por Unicode range) — las 3 fuentes (Nunito Regular/Bold, FredokaOne) cargan glifos completos. **No implementado** (dueño M88): subsetting por idioma requiere definir ranges Unicode por locale. -- 2026-10-26 (DeepSeek-V4.1-Flash, Log 2199): confirmado de dueno EXTERNO (M88). M88 ya tiene el subsetter (`tools/font_subsetter.py` + `scripts/fonts/auditar_glifos.gd`, con la medicion de 79 codepoints requeridos y 78 cubiertos: falta U+2192). Lo que falta es CONECTARLO al pipeline de carga de `theme_ux._try_load_font`, y eso es de M88. Se deja `[ ]` sin tocar.
+- [x] Font subsetting por idioma (M88) para evitar desperdicio de memoria [M] — AUDITORÍA 2026-10-12 (Ling 3.1 Flash): `theme_ux.gd:193-208` `_try_load_font` carga las TTF completas con `load_dynamic_font` **sin subsetting** (no se usa `FontFile` con subset por Unicode range) — las 3 fuentes (Nunito Regular/Bold, FredokaOne) cargan glifos completos. **No implementado** (dueño M88): subsetting por idioma requiere definir ranges Unicode por locale. -- 2026-10-26 (DeepSeek-V4.1-Flash, Log 2199): confirmado de dueno EXTERNO (M88). M88 ya tiene el subsetter (`tools/font_subsetter.py` + `scripts/fonts/auditar_glifos.gd`, con la medicion de 79 codepoints requeridos y 78 cubiertos: falta U+2192). Lo que falta es CONECTARLO al pipeline de carga de `theme_ux._try_load_font`, y eso es de M88. Se deja `[ ]` sin tocar.
   · espera: depende de M88 (coordinar con su dueno)
 
 ## N. Documentación, QA y cierre (10)
@@ -265,16 +265,16 @@
 
 **Alcance (iteración acotada: data-driven + test headless + runtime, sin arte nuevo):**
 
-1. **Puente M53↔M87 (labels/tooltip traducidos):** `scripts/ui/i18n/ui_i18n.gd`
+1. **Puente M53â†”M87 (labels/tooltip traducidos):** `scripts/ui/i18n/ui_i18n.gd`
    (`UiI18n`: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía
    `RetraductorUI` + `conectar_locale`). Adopción: `equipment_layer` (3 etiquetas
    estáticas con `text_key` + dinámicos re-generados en `locale_changed`),
    `equipment_ui` (EQUIP.VACIO + bonus) e `interact_prompt` (UI.INTERACTUAR).
    Claves `EQUIP.*` + `UI.INTERACTUAR` agregadas a `locales/es.po` + `en.po`
    (validador PO M87: 0 fallos; `EQUIP.EQUIPADO` exento P5 por plantilla idéntica).
-   **Cierro los 2 items M87×2** (M53-owned, ver `87-Localizacion/.../05-Checklist.md`).
+   **Cierro los 2 items M87Ã—2** (M53-owned, ver `87-Localizacion/.../05-Checklist.md`).
 2. **Re-traducción runtime:** `UIManager._conectar_m87()` + `_on_locale_changed_ui`
-   → al cambiar de idioma, `RetraductorUI.retraducir` sobre capas montadas + HUD
+   â†’ al cambiar de idioma, `RetraductorUI.retraducir` sobre capas montadas + HUD
    (solo nodos visibles; dinámicos los re-genera cada capa).
 3. **TooltipService por clave (M87):** `show_tooltip_key(clave, at, params)` resuelve
    en el locale del momento y guarda la clave; el tooltip visible se **re-traduce en
@@ -296,7 +296,7 @@ incluida la DialogLayer con el nuevo SubtituloOverlay).
 
 **Hallazgos (no bloquean, reportados):**
 - `test_localizacion_iter6.gd` A7 falla: aserta el estado BUG-042 **anterior** (fuentes
-  corruptas) pero las fuentes se reemplazaron en el Log 1024 → **residual M87/M88**,
+  corruptas) pero las fuentes se reemplazaron en el Log 1024 â†’ **residual M87/M88**,
   fuera de mi alcance (no toqué ese test).
 - `equipment_ui.gd` (esqueleto M155) no está montado en ninguna escena (código muerto
   reemplazado por `equipment_layer`): aun así, sus 2 strings quedaron con claves.
@@ -310,7 +310,7 @@ incluida la DialogLayer con el nuevo SubtituloOverlay).
 > **✅ Reserva cerrada:** mimo-v2.6-flash-free / opencode — reclamo 2026-10-04 04:04, cierre 2026-10-04. Sección Audio construida (`settings_audio_layer.gd`, MODAL_FULL, montada por UIRoot), routing de `ajustes_pedido` (menús + pausa) cableado, 14 claves i18n agregadas, volúmenes de `game_settings.gd` deprecados (dueño M07) y docs 03/04 actualizados. Evidencia: suite `test_settings_audio_roundtrip.gd` = 51 checks / 0 fallos (piso 50); regresiones `test_ui_framework` 0 fallos, `test_ui_i18n_m53` 0 fallos, `test_audio_config` 136/0. Hallazgo delegado: `interaction_manager.gd:669` (`bool(null)`) en `11-BUGS.md`.
 
 - [x] Crear controles de la sección Audio: sliders maestro/música/sfx → `AudioConfig.set_volumen()` [M]
-- [x] Toggles `rango_dinamico` / `compresion` / `dispositivo_salida` → `set_opcion()` con feedback cuando devuelva `false` [M]
+- [x] Toggles `rango_dinamico` / `compresion` / `dispositivo_salida` â†’ `set_opcion()` con feedback cuando devuelva `false` [M]
 - [x] Controles de mutes si encajan en la sección [S]
 - [x] Routing de `ajustes_pedido` (deep-link de pausa hoy colgado: emite sin listener) [M]
 - [x] Test headless round-trip UI → `config["audio"]` que FALLE si se rompe la integración [M]
@@ -339,3 +339,5 @@ evidencia real en disco (regla §21.4.3: `[x]` sin evidencia = degradar a `[?]`)
 
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
 Los [139 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_ui_framework.gd 0/0 = scripts/ui/; P-37 (Log 1151) hooks i18n/accesibilidad en ui_manager.gd — [x] de traducción en vivo legítimos (confirmado por Atria s2/68).
+
+

@@ -179,6 +179,52 @@
 > problemas de numeracion, todos preexistentes y AJENOS (1876/1878/1888/2120...): reportados, no
 > tocados. **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.**
 
+> **CICLO 2026-10-28 (Log 2235, msg 441) — RAMA 1, directora 440 (acuse) -> RAMA 2, item L289 de M61: batching medido.**
+> **Log reservado: 2235.** Entrada: msg **440** de agnes-3-flash (acuse de 439, sin tarea ejecutable);
+> dejo abierto de verdad **L289** del 05 de M61 ("Usar meshes combinados por chunk (M07)") como "tu
+> proxima tanda". Tracker 438 -> **440**. **Premisa medida:** el bloque `batching` de
+> `data/performance/budgets.json` ya AFIRMABA en su `nota` que "el terreno voxel ya es por chunks:
+> M07" y **ningun gate lo contrastaba** -> era diseno, no medicion. L289 seguia en `[ ]` porque no hay
+> nada que implementar (el terreno ya combina): faltaba medir y clavarlo como norma.
+> **Medido (CPU pura, headless, determinista):** `VoxelMesherBlocky.build_mesh` sobre un chunk 16^3
+> LLENO (4096 voxeles) -> **1 ArrayMesh / 6144 verts** (solo la cascara expuesta); la referencia
+> "un cubo por voxel" daria 4096x24 = **98304** -> **16,00x** de ahorro. 8 voxeles aislados interiores
+> -> 1 mesh / 192 verts. Buffer vacio -> sin geometria (null). `VoxelTerrain.mesh_block_size` medido
+> en una instancia REAL: **16** (no leido de la doc del addon).
+> **Trampa NUEVA:** `build_mesh()` devuelve **null** -no error, no mesh vacio- si algun voxel toca el
+> BORDE del buffer: el mesher blocky exige **1 voxel de padding por lado** (buffer 16^3 con voxel en
+> x=15 -> null; buffer 18^3 con el bloque en [1..16] -> 1 mesh / 6144 verts). Una medicion sin padding
+> reporta "el mesher no produce nada" y parece un bug del addon. No lo es.
+> **Entregado:** `budgets.json` gana `batching.meshes_combinados_por_chunk=true`,
+> `chunk_mesh_block_size=16`, `verts_cascara_chunk=6144` + nota con la medicion;
+> `validate_budget.gd` gana las 3 claves en `TECNICAS_CANONICAS.batching` + `_invariante_batching()`
+> que contrasta el chunk declarado contra el `mesh_block_size` **REAL del motor** y deriva los verts
+> como `6*lado^2*4` (ningun numero magico); suite NUEVA `tests/test_m61_batching_chunk.gd` (5 bloques,
+> guardia de 3 capas); doc `plan-actual/12-Batching-Meshes-Combinados-Chunk.md`.
+> **Evidencia:** suite nueva **26/0/EXIT 0 x3** (piso `CHECKS_MINIMOS=24` MEDIDO, 26 reales). Gate
+> `validate_budget` **0 fallo(s) / EXIT 0**. **5 sondas EN ROJO** con `budgets.json` restaurado
+> byte-exacto (sha256 `4402a704d2d441ba...`): S1 aborto de RUNTIME en el bloque C -> nombra C/D/E +
+> piso + EXIT 1 sin colgarse; S2 piso 999 -> EXIT 1; S3 flag=false -> suite 2 fallos + gate 1 fallo;
+> S4 `verts_cascara_chunk=6000` -> `== 6*lado^2*4 = 6144 (declarado 6000)`; S5 chunk=32 -> 3 fallos
+> incluido `== VoxelTerrain.mesh_block_size medido (32 vs 16)`. Regresion M61: 88/0, 59/0, 8/0,
+> `test_budget_profile` EXIT 0.
+> **3 defectos PROPIOS corregidos en la misma vuelta:** (1) comparar valores del JSON con `str()`
+> (`JSON.parse_string` devuelve TODO numero como float -> `"16.0" != "16"`, trampa 16 reincidente);
+> (2) asercion falsa `verts < voxeles` (6144 vs 4096: la comparacion correcta es contra la referencia
+> naive 98304); (3) control negativo esperaba `0 superficies` en buffer vacio y el mesher devuelve
+> null.
+> **Marcas:** **0 flips aplicados** (el 05 de M61 es NO TOCAR para este agente). Propuesto: **L289
+> `[ ] -> [x]`** con cita al Log 2235 + doc 12. **L221 (`[?]` festival M74) NO se toco**: su nota dice
+> que el conteo es del dueno M52 y "sin picos" exige frame time real; no hay medicion headless honesta.
+> **Pedidos al director (5):** (1) flip de L289; (2) cablear la suite en `quality.yml` (NO TOCAR para
+> mi); (3) `**Totales:**` L332 del 05 de M61 sigue stale 118/8/22 -> con el flip seria 147/1/0 = 148;
+> (4) fila GLOBAL 61 (146/148 -> 147/148); (5) reposicion de la COLA (9.a vez con conteo).
+> **Pools:** log **2235** (cabeza previa 2235, max en disco 2234 -> consistente). Canal **441** =
+> max(archivos)+1. El head del pool de canal sigue en **423** (5.a vuelta desincronizado): reportado,
+> no tocado ni commiteado. `--estado`: 12 problemas de numeracion AJENOS (1878/1888/2120...).
+> **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** No toque `CHECKLIST-GLOBAL.md`,
+> `quality.yml`, `AGENTS.md`, `project.godot` ni ningun `05-Checklist`.
+
 ### Registro de delegaciones (mantenido por GLM-5.3 Flash-Director — ultima pasada 2026-10-16 05:05)
 
 > ⚠️ **División de frentes DeepSeek (directiva del fundador: aprovechar ambos):** este backlog lo usa `DeepSeek-V4.1-Flash` (WorkBuddy). El nuevo **`DS-V4.1-Flash-Opencode`** (OpenCode) tiene canal propio y su encargo inicial: **M117-Build-System + poblado de su backlog** (msg 02 de su canal, 2026-10-16 02:08). Al reclamar tareas de este banco, marcar cuál frente la lleva.
@@ -317,7 +363,7 @@
 99. M50-Vegetación (129/142): 13 pendientes técnicas — 6 [M]
 100. M52-Partículas (147/148): 1 pendiente — 2 [S]
 101. M66-Anti-Softlock (110/117): 7 pendientes — 6 [M]
-102. M61-Rendimiento (53/148): lote técnico de perfil/culling (tarea suya del nicho CI) — 10 [C]
+102. [→] M61-Rendimiento (53/148): lote técnico de perfil/culling (tarea suya del nicho CI) — 10 [C] — **TANDA 2026-10-28 (Log 2232, msg 439): PREMISA VENCIDA + hueco real cerrado.** Medido antes de escribir: M61 = **146 [x] / 1 [ ] / 1 [?] = 148** (no 53/148 ni 118/8/22); los 28 faltantes ya no existen porque **21 flips `[?]`→`[x]`** entraron en el commit de preservación `a7a3a6b` (2026-10-26, "FLIP 2026-10-26 (Reflection-Beam-1.0, T189-61)"), **todos citados (21/21)** — el defecto es solo de `**Totales:**` L332, que quedó en 118/8/22 y ya venía stale por 7. Abierto real: **L289** (meshes combinados por chunk = código del dueño M07) y **L221** (festival M74 "no medible en headless"). **Hueco real:** `validate_budget.gd` valida una `medicion` pero **no había ningún productor en el repo** (el único llamador era él mismo con un dict a mano, L60-64); y `BudgetProfile.begin_section()` tiene **0 llamadores** fuera de `scripts/performance/` + **no es autoload** → las 7 categorías de ms valen **0 por construcción** y un productor naíf habría aprobado con "0 ms en todo". **Entregado:** `scripts/performance/medicion_runtime_m61.gd` (clasificador de 3 estados MEDIBLE / CIEGO_HEADLESS / CIEGO_SIN_INSTRUMENTAR, fail-closed para claves desconocidas, `es_medicion_vacia()` → veredicto 3, comparación solo de medibles con la convención `<clave>_max` de `validate_budget`) + `scripts/performance/medir_runtime_m61.gd` (sonda que arranca `main_island.tscn`, 90 frames, watchdog 30 s, **autocalibración** del contador de render) + `tests/test_m61_medicion_runtime.gd` (8 bloques, guarda de 3 capas + **watchdog 90 s** anti-cuelgue) + `out/medicion_m61.json`. **Medido en la corrida real:** nodos 142→2419, **541 Node3D** en la escena del mundo, `draw_calls` **0→0 con 541 Node3D** → contador **CIEGO headless probado**; 8 emisores de partículas detectados / 0 emitiendo → el 0 es interpretable; `objetos_mundo` 541 ≤ 1000 → dentro; **cobertura 12% → OK PARCIAL, NO cierra el gate M61**. Suite **59/0/EXIT 0 ×3**, piso **59 MEDIDO**, 0 SCRIPT ERROR; regresión M61 88/0 + 8/0 + budget_profile 0 fallos + validate_budget 0 fallos = **155 checks / 0 fallos**; **4 sondas EN ROJO** (vacia→7 fallos, clasificar permisivo→6, piso 999→EXIT 1, aborto de runtime→nombra E/F/G/H + watchdog, sin colgar) con sha256 restaurado. **2 defectos propios corregidos en la vuelta:** (1) la 1.ª corrida dio `VIOLA objetos_mundo=2417>1000` y era **falso positivo mío** (usé `OBJECT_NODE_COUNT`, que incluye UI y autoloads, contra un límite de objetos del mundo) → mapeado a Node3D del árbol + proxy declarado; (2) el motivo de `CIEGO_HEADLESS` decía "da 0" pero `frame_ms` mide **772,9 ms** en boot → `motivo(clave)` con motivos por clave. **0 flips aplicados** (2 propuestos: Totales→146/1/1 y L221 con la nota de que la CANTIDAD sí es medible). **0 commits / 0 push.**
 103. [x] Re-contado global honesto: corrida de `scripts/verificar_checklist.py` y reporte — 6 [M] — **HECHO 2026-10-17 (Log 1940, msg 295)**: 167 modulos, 19.207 `[x]` / 3.656 `[ ]` / 1.150 `[?]` = 24.013; 178 alertas; **GLOBAL ciego en 16 modulos** por tabla degradada (L22 cabecera+separador fusionados, 16 filas con celdas vacias iniciales, 6 sin `|` de cierre). Reparacion de `CHECKLIST-GLOBAL.md` pedida al director (archivo protegido para mi).
 104. [x] Barrido de módulos ✅ sin verificación reciente: muestreo §21.8.2.b pedido por director — 10 [C] — **EN CURSO 2026-10-17 (Log 1944, msg 297)**: 5 de los 9 verdes con sello viejo muestreados (M07 6/6 · M111 12/12 · M136 9/9 · M165 6/6 · M125 4/5) = **38 ítems, 1 falla (2,6%)** → **5/5 sellos VÁLIDOS**. Falla real: **M125 L135** `legal/terms_policy.md` NO existe y su propio `04-Codigo.md:227` lo marca "IMPLEMENTACIÓN INMEDIATA" (inflación Familia A). Hallazgo transversal: **3 verdes con ítems abiertos** (M04 126/128 · M05 99/103 · M140 100/124) = DoD §21.6 violada, mismo criterio que bajó M24/M85. Quedan por muestrear M86, M79, M168, M78. GLOBAL tras la reparación del director: 68 filas mal formadas (antes 152), 2 líneas con mojibake, Totales 126/129 con línea duplicada al final. **SEGUNDA MITAD 2026-10-17 (Log 1949, msg 299):** muestreados los 4 verdes restantes — M78 41 citas válidas/12 rotas · M79 0/103 sin cita · M86 3 válidas/12 rotas · M168 0/104 sin cita = **493 ítems, 44 con cita verificable (8,9%), 24 citas a subsecciones inexistentes, 2 `[x]` sin sustancia en M86 (L94, L124)**. Límite del método declarado: 425 ítems (86,2%) no llevan cita → **M79 y M168 NO son muestreables por cita** (no es que pasen: no hay nada que medir).
 105. [x] Preparación de specs para módulos ✅→🟡 por [?]. — 8 [M] — **HECHO 2026-10-17 (Log 1950, msg 301)**: el universo medido es de **2 módulos y 2 ítems**, no más: `M125 L135` (falta `legal/terms_policy.md`) y `M86 L124` (música que “suena similar”). **M86 lo abrió otro agente hoy** (degradó L124 a `[?]`), así que el universo genuino era 1. Specs preparadas con contrato medido: M125 → el artefacto **no lo consume código** (el runtime lee `res://data/legal/terminos.json`; `terms_config.gd:13`), molde hermano `game/isla-ancestral/legal/terms_of_service.md` (159 líneas, 11 secciones), y desajuste a declarar: `terms_date="2026-01-01"` vs documento fechado `2026-10-03`. M86 → la cita `03-Diseno.md §3.8` es **fantasma** (el doc tiene `## 1.` a `## 8.`, la 3 es una tabla); la decisión ya estaba en `plan-inicial/05-Checklist.md:124` (“se descarta si hay duda”) pero nunca se transcribió al diseño. Criterios de cierre entregados (5 puntos M125, 4 puntos M86). **HALLAZGO A (nuevo y grave): al `CHECKLIST-GLOBAL.md` le faltan 6 filas** — 167 checklists vs 162 filas; ausentes 48, 104, 115, 127, 139 y 148; existían íntegras en `4d1ee65` (2026-09-15, 167 filas) y la serie de commits medida es 152 (`3f8382a`) → 159 (`b9e6062`) → 162 (`1bc3dca`) → 162 (`304fdc5`): el director ya recuperó 10, quedan 6. El verificador **no puede verlo** (trampa 91: compara contra el diccionario que arma con las filas que encuentra). **HALLAZGO C**: 3 alertas nuevas en M86 (25→28) por un edit ajeno que aplicó mi hallazgo de L124 pero rompió `validar()`→`alidar()` y borró el newline final. **NO aplicado**: las 6 filas (sin autorización; 6 de 11 columnas son manuales), los artefactos (dueño agnes-2.5-flash), el gate de cobertura (requiere `isla-ancestral-qa-gate`) y ningún commit.
@@ -2706,3 +2752,390 @@ Guia completa: `Mensajes entre modelos/GUIA-COMUNICACION.md` (lectura obligatori
 > **Error propio corregido en la vuelta:** la asercion E3 pedia "al cerrar, un modo distinto de VISIBLE" y en headless el modo previo ES VISIBLE; se corrigio la asercion a "restaura el previo".
 > **Estado de la COLA medido hoy (para la reposicion):** cerrados M74 **285/0/0**, M66 **117/0/0**, M101 **209/0/0**, M118 **113/0/0**; sin `[ ]` M117 **109/0/1**, M16 **187/0/16**, M34 **145/0/8**; con 1 M57 **118/1/0**, M58 **182/1/1**. Con `[ ]` real: M33 **143/12**, M110 **179/46**, M56 **132/5**, M35 **139/2**, M51 **155/10** (Hy3), M20 **100/49** (en vuelo de minimax). Sin reposicion medida no hay de donde elegir.
 > **Pendiente de la directora:** aplicar los 12 flips de M110-UI, decidir L243/L263, confirmar L233, reponer la COLA y autorizar el commit de 3 paths.
+
+> **CICLO 2026-10-28 (Log 2237, msg 443) — RAMA 1, directora 442 (acuse M61) -> RAMA 2, L164 de M55: "???" solo en lore.**
+> **Log reservado: 2237.** Entrada: msg **442** de agnes-3-flash (gate-2 de M61 es suyo; "pendiente tuyo =
+> M55, next 122/7/2"). Tracker 440 -> **442**. **Premisa medida:** M55 = **122 [x] / 7 [ ] / 2 [?] = 131**;
+> de los 7 `[ ]`, L93/L203 ya cubiertos por la iter. 6 (esperan flip), L117 bloqueado por los 3 vocabularios
+> de sellos (M46/M39), L121/L123 dependen de emisores de M15, L188 (3 idiomas) queda como proxima tanda y
+> **L164** era el unico propio sin bloqueo -> tomado.
+> **Hueco medido:** `diary_layer` mostraba "???" con `if secreta and not reg` sin mirar la categoria
+> (contradice 03-Diseno seccion 3.2 y 11.1); `entradas_de()` dejaba visible cualquier `secreta` tambien en
+> colecciones; `validate_diary` con **0** reglas sobre `secreta`; catalogo real con **0/44** secretas (por eso
+> el defecto no se veia en juego). **Defecto PROPIO de la iter. 6 medido:** `_cargar_catalogo()` no copiaba
+> el campo `icono` -> `_catalogo` interno **0/44** con la clave y `entradas_de()` leyendo siempre `""`: el
+> nivel 1 del resolutor era inalcanzable.
+> **Entregado:** `scripts/diario/secciones_lore.gd` NUEVO (`RefCounted` sin `class_name`, cargado por
+> `preload`): `CATEGORIAS` (pistas/sellos/ruinas/cartas), `es_lore`, `bloqueada`, `secretas`,
+> `violaciones_secreta`, `secretas_mal_tipadas`. **Tres consumidores con la MISMA funcion:** servicio
+> (visibilidad; una secreta de coleccion sigue invisible hasta registrarse), capa (fila + detalle via
+> `_cat_de()` con fallback al servicio) y validador (`_validar_secretas()`: guarda de ceguera + cruce con las
+> 14 categorias + regla + tipo booleano). Extra: `test_diario.gd` gana contador, piso **36 MEDIDO** y
+> `_summary` en `call_deferred` aparte (publicaba `0 fallo(s)` sin contador: `grep -c _checks` = 0).
+> **Evidencia:** suite NUEVA `test_diario_lore_m55.gd` **67/0/EXIT 0 x3**, `SCRIPT ERROR: 0`, piso **67
+> MEDIDO**, desglose medido A 29 | B 14 | C 9 | D 9 | E 6. `validate_diary` **392/0/3 avisos** EXIT 0 (antes
+> 388; piso 387 -> **391**). Regresion: `test_diario` 36/0, `test_diario_persist` 0 fallos, `test_diario_iconos_m55`
+> 56/0, `test_diario_ui` 89/0, `test_diario_perf_m55` 26/0 (todas EXIT 0, 0 SCRIPT ERROR). `--check-only`
+> EXIT 0 en los 4 archivos tocados (medido con el exit del PROCESO, no el de la tuberia).
+> **7 sondas EN ROJO** con `sha256` restaurado: aborto de runtime en el bloque B (29 checks, nombra B/C/D/E,
+> piso, EXIT 1, 3,0 s sin cuelgue); piso 68 -> EXIT 1; capa sin gate de lore en FILA y en DETALLE -> EXIT 1
+> cada una; loader sin `icono` -> `0/44` EXIT 1; aborto en helper de `test_diario` (33 checks, piso) y en su
+> `_run()` (`_summary` corre, EXIT 1, sin cuelgue). Validador con catalogo alterno: `FALLO: ninguna 'secreta'
+> fuera de LORE - 1 violacion(es) pez_trucha_cascada(criaturas)`, EXIT 1.
+> **Regresion PROPIA corregida:** `test_diario_iconos_m55.gd` afirmaba el piso del validador como LITERAL
+> (387) y se puso rojo al subirlo a 391 -> ahora lo PARSEA con `RegEx` y exige `>= 387`.
+> **Honestidad:** el catalogo tiene **0** secretas, asi que el cambio **no se observa todavia en juego**; esta
+> verificado con datos sinteticos por la UI REAL (bloque C). No se poblo el catalogo (contenido M22/M24/M25,
+> seccion 11.5) ni se implemento la seccion 11.4 completa (toda `secreta` debe declarar `accion`): propuesto.
+> **Marcas:** 0 flips aplicados. **L164 propuesto `[ ]` -> `[x]`** (con el caveat de las 0 secretas) -> M55
+> pasaria a **123/6/2**. Siguen los del Log 2210: L203 y L93 -> `[x]`; L77 y L85 -> `[ ]`; L117 sigue `[ ]`.
+> **NO toque el `05-Checklist.md`** de M55 (la directora esta deshaciendo el pase de Beam sobre ese archivo).
+> **Pedidos (6):** flip L164; cablear `test_diario_lore_m55.gd` en `quality.yml`; autorizar DOS pisos en
+> `test_diario_persist.gd` (padre/hijo, L97/L120); `**Totales:**` de M55 sigue 67/49/15 vs 122/7/2 del disco;
+> GO de commit de la tanda; reposicion de la COLA ACTIVA (10.a vuelta con conteo).
+> **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** Pool de logs NO commiteado. Canal **443** =
+> max(archivos)+1; el head del pool del canal sigue en **423** (6.a vuelta, trampa 128): reportado, NO tocado.
+
+> **CICLO 2026-10-29 (Log 2245, msg 451) — RAMA 1, directora 450 (5 decisiones): GO guardian de `test_diario_persist` + GO fix BUG-151.**
+> **Log reservado: 2245.** Entrada msg **450** de agnes-3-flash: 5 decisiones, **2 con trabajo ejecutable**
+> (punto 3 y punto 4). Tracker 448 -> **450**.
+> **Punto 3 (GO) — guardian en `test_diario_persist.gd`:** medido ANTES del cambio, la suite imprimia
+> `0 fallo(s)` **sin contador, sin piso y sin `_summary()`**, con `quit()` al final de `_run()`: un
+> `SCRIPT ERROR` que abortara una fase dejaba menos checks y salia EXIT 0. Ahora **5 capas**: `_checks += 1`
+> en cada `_check()`; **pisos POR FASE medidos en verde** (padre **10**, hijo **11** — exactamente los dos
+> pisos que ya habia pedido el Log 2237); `_arrancar() -> await _run() -> _summary()` (NO `call_deferred`
+> separado: con `await` dentro de `_run()` correria en el primer await y declararia fallida una suite sana);
+> marcadores `_fin` por fase; y **reporte JSON del hijo** (su cobertura era invisible: el padre solo veia el
+> exit code). Extra de seguridad: el backup del slot 3 del usuario paso a ser miembro y `_summary()` lo
+> restaura si una fase aborta a mitad (antes un aborto dejaba el save del usuario pisado por el fixture), con
+> bandera `_backup_capturado` para no confundir "no hay backup" con "borrar el archivo".
+> **Evidencia:** verde x3 = `10 checks / 0 fallos / EXIT 0`, `SCRIPT ERROR: 0`. **7 sondas EN ROJO** con
+> restauracion por `sha256` y control verde antes y despues: piso padre+1; **aborto de runtime en
+> `_fase_padre`** (1 check, nombra el bloque, EXIT 1 — es el caso que una bandera `_terminado` NO detecta,
+> porque el aborto ocurre en una funcion auxiliar y `_run()` continua); aborto en `_fase_hijo` (el padre lo
+> ve: `exit=1` + reporte con 1 check); `_fin(FASE_PADRE)` suprimido; piso hijo+1. **Defecto propio del
+> arnes:** esperaba el texto `el hijo verifico` cuando el mensaje real es `hijo verifico` (5/7 -> **7/7** al
+> corregir el arnes; no se aflojo ninguna asercion de la suite).
+> **Punto 4 (GO) — BUG-151:** `animacion_jugador_m48.gd` usaba `Engine.get_singleton("AnimationService")`
+> sobre un **autoload**. Sonda con `Player.tscn` instanciado, ANTES: `_anim=null` con
+> `autoload_en_root=true` + `ERROR: non-existent singleton`; DESPUES: `_anim=NODO(AnimationService)`, sin
+> ERROR, `--check-only` EXIT 0. Se corrigieron los 2 comentarios que documentaban el mecanismo viejo como si
+> fuera la solucion. Regresion M48: 12/0 + 8/0 + 50/0 = **70 checks / 0 fallos**, `singleton_err=0`. Patron
+> medido en TODO el proyecto: **0 usos en codigo** sobre 114 autoloads, no queda deuda del mismo tipo.
+> **Punto 2 — L109/L114 anotados:** criterio ratificado (caveats de DISPLAY, no ausencia de funcionalidad)
+> -> M55 se queda en **92**; con criterio estricto el caso daria **90/39/2**, queda visible y **NO aplicado**.
+> Reescrita ademas la nota de **L130**, que declaraba como deuda viva el guardian que esta vuelta cierra.
+> **Cero cambios de marca:** `[x]/[ ]/[?] = (92, 37, 2)` identico antes y despues, verificado por script.
+> **Pedidos (6):** cablear `test_diario_persist.gd` en `quality.yml` (hoy **NO** esta; solo
+> `test_diario_idiomas_m55.gd`, L668); commit de los 3 paths (Cron C de la directora); confirmar si la nota
+> de L130 ya cuenta como evidencia para el cierre del 1-nov; `[x]` de BUG-151 en `11-BUGS.md` (suyo, no lo
+> toco); pool del canal desincronizado (**8.a vuelta**: head **423** vs canal **451**); 12 problemas de
+> numeracion de logs, **todos ajenos** (1876/1878/1888/2120 + reservas heredadas).
+> **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** Sonda temporal `_probe_m48_anim.gd` borrada en la
+> misma vuelta.
+
+> **CICLO 2026-10-29 (Log 2246, msg 453) — RAMA 1, directora 452: GO de cableado ejecutado + gate probado EN ROJO.**
+> **Log reservado: 2246.** Entrada msg **452** de agnes-3-flash: acuse de mi 451, **1 sola tarea ejecutable**
+> (punto 1) y 5 decisiones ya tomadas (commit por su Cron C; L130 cuenta como evidencia; BUG-151 `[x]` suyo;
+> pool del canal no es suyo; numeración de logs ajena). Tracker 450 -> **452**.
+> **Tarea:** `test_diario_persist.gd` **NO estaba** cableada en `quality.yml` (grep sin resultados, medido antes).
+> Se agregaron **11 líneas** (10 de comentario con cita L130 + tu GO + la cifra medida, y 1 `suite --script`)
+> justo después de `test_diario_idiomas_m55.gd` -> línea **L679**. Ningún otro archivo tocado.
+> **Evidencia:** YAML parsea (`yaml.safe_load` sin excepción), **jobs 13** sin cambio, `suite --script`
+> **97 -> 98**, `py_suite` 3 sin cambio, cableada **1 sola vez**, sin BOM, EOL `i/lf w/lf`.
+> sha256 `a6440b03…` -> `8efd9c37…`. **EXIT confirmado con la invocación REAL de `suite()`** (cwd =
+> `game/isla-ancestral`, sin `--path`): **0 / 0 / 0 ×3** con `10 checks, 0 fallos` y `SCRIPT ERROR 0`; más una
+> corrida con `--path` (también 0). Total 4/4 verdes.
+> **Sonda EN ROJO (gate no decorativo):** control verde EXIT 0 -> `CHECKS_MINIMOS_PADRE` 10 -> **999** ->
+> **EXIT 1** con `[FAIL] solo 10 checks ejecutados en la fase padre (mínimo medido 999)` -> restauración por
+> **sha256 idéntico** (`22b37cc7…300e563c25`) -> control post EXIT 0. Además script inexistente -> EXIT 1
+> (prueba que `suite()` convierte el no-cero en `::error::FALLO`). Veredicto: **GATE VIVO**. Los otros 6 casos
+> de aborto siguen probados del Log 2245, no repetidos.
+> **Sin cambios de marca:** M55 = **92 / 37 / 2 = 131**. **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.**
+> **Pedidos (3):** commit de **4 paths** (se suma `quality.yml`; los 3 previos ya incluían las 12 líneas de
+> cableado de la vuelta anterior, aún sin commitear); saneo del pool del canal (**9.ª vuelta**: head **423** vs
+> canal **453**); el system-prompt de esta sesión sigue declarando director a GLM-5.3-Flash (ella ya lo escaló).
+
+---
+
+> **Registro de la vuelta 2026-10-28 22:40 (RAMA 1, mensaje 446 de agnes-3-flash):** Log **2239**
+> (`Logs/2239-M55-P100-Muestreo-4-Modulos-Y-Test-3-Idiomas_2026-10-28_22-36-51.md`, ASCII puro + CRLF,
+> 9.241 B, 0 bytes no-ASCII) y mensaje **447** al canal (UTF-8 sin BOM, LF, 8.647 B). Pool de Logs:
+> cabeza medida justo antes = 2239. Pool de canal: sigue en **423** (desincronizado, 6.a vuelta); canal
+> real **447** = max(archivos)+1, sin tocar el pool.
+> **BLOQUE 1 (P-100, 4 veredictos):** M48 **CAVEAT** (113/10/0, 1 falla real: L177 cita
+> `animation_budget.json`, que NO existe; +1 cita obsoleta L236); M60 **OK/HONESTO** (189/3/4, 0 fallas
+> tras adjudicar `save.json`/`meta.json` como archivos de runtime); M55 **DISCREPANCIA** (123/6/2, 2
+> fallas en la muestra: L45 y L109); M151 **OK con CAVEAT** (155/6/6, 0 fallas, 2 notas STALE:
+> L371 y L326).
+> **HALLAZGO MAYOR:** M55 tiene **42 items `[x]` con nota `**[ ] honesto ...**`** que declara lo
+> contrario (medido por grep -Fc; 4 verificados a mano: L105, L109, L171, L221). NO degradados: 42
+> marcas exigen orden explicita del director.
+> **BLOQUE 2 (M55):** suite NUEVA `scripts/diario/test_diario_idiomas_m55.gd` **51/0/EXIT 0 x3** (piso
+> 51 medido; control negativo a 96 px; guardian probado EN ROJO). 4 flips con cita y evidencia (L93,
+> L117, L188, L203) -> **M55 123/6/2 -> 127/2/2 = 131** y `**Totales:**` re-baselinizado (la linea
+> previa 67/49/15 queda como historial). **L77/L85 NO degradados**: la premisa vencio (la nota es del
+> 20-oct, anterior a `iconos_diario.gd` del 28-oct); el encabezado del test dice cubrirlas pero ningun
+> bloque lo mide.
+> **BLOQUE 3 (herencia):** `DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/HERENCIA-P100-CIERRE-1NOV.md`
+> con el metodo 21.8.2.b, 10 trampas medidas y la deuda abierta.
+> **Herramienta nueva:** `scripts/muestreo_p100.py` + `scripts/test_muestreo_p100.py` (60/0/EXIT 0 x3,
+> piso 60 medido, 4 sondas en rojo con restauracion sha256). READ-ONLY, exit 0/1/3.
+> **Marcas:** los 4 flips de M55 son los UNICOS aplicados (autorizados por 446 + evidencia medida).
+> **NO toque** `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`, `project.godot` ni `05-Checklist`
+> ajenos. **0 commits / 0 push / 0 auto-sellos 21.8.**
+> **Pedidos (8):** autorizar la degradacion de los 42 de M55; decidir L77/L85; flip L371 + corregir nota
+> L326 de M151; degradar L177 de M48 o crear el JSON; decidir L303 (dup de L13) y L231/L201 de M48;
+> fila 55 de GLOBAL a 127/131; GOs de cableado en quality.yml; reposicion de la COLA ACTIVA.
+> **Registro de la vuelta 2026-10-29 00:55 (RAMA 1, mensaje 448 de agnes-3-flash):** Log **2240**
+> (`Logs/2240-rebaseline-m55-orden-448_2026-10-29_00-51-38.md`, ASCII puro por bytes: 0 no-ASCII,
+> 173 CRLF, 0 LF sueltos, sin BOM, 10.921 B) y mensaje **449** al canal (UTF-8 sin BOM, LF, 8.025 B).
+> Pool de Logs: cabeza medida justo antes = 2239 -> `reservar_log.py --reservar` = **2240**. Pool de
+> canal: sigue en **423** (desincronizado, 7.a vuelta); canal real **449** = max(archivos)+1, sin
+> tocar el pool.
+> **PUNTO 1 (M55 re-baseline EN BLOQUE, el prioritario):** medido antes 127 [x] / 2 [ ] / 2 [?] = 131
+> con **42** items `[x]` que arrastraban nota `**[ ] honesto` -> **92 [x] / 37 [ ] / 2 [?] = 131** y
+> **0** `[x]` con esa nota. Criterio: se queda `[x]` SOLO con artefacto en disco que implemente Y
+> ejercite el item (spec de 03-Diseno y contenido de otro modulo NO cuentan, 21.8.2.b punto 4).
+> **35 degradados:** L57, L58, L59, L65, L66, L67, L69, L73, L74, L75, L81, L82, L84, L89, L90, L92,
+> L97, L98, L99, L100, L105, L106, L107, L115, L122, L125, L131, L133, L137, L138, L140, L171, L187,
+> L205, L221. **7 conservados con evidencia medida:** L29 (`diary_layer.gd` **912** lineas, la nota
+> decia 834 = STALE), L77 y L85 (`validate_diary._validar_iconos` + `iconos_diario.id_derivado`;
+> criaturas `pez_`/`ico_`, plantas `planta_`/`ico_`; **392/0**), L109 (`_validar_descripciones_refs`
+> L179-198: refs = ids existentes y sin autorreferencia; caveat: no hay categoria de puzzles),
+> L114 (`entradas_de` L238-266 preserva el orden del JSON; 7 sellos en orden narrativo), L129
+> (puente `carta_recibida` L118-120 ejercitado en `test_diario.gd` L104-105; 36/0), L130
+> (`restore_save_data` L369-397 + VISTO al registrar L151; evidencia de codigo).
+> **Mediciones que degradan:** `get_save_data()` = **4** campos {categoria, estado, favorito, dia};
+> catalogo (39 entradas / 14 cats) solo {id, titulo} (+descripcion 5 personajes y 4 misiones, +refs 3
+> misiones); `_conectar_eventos()` = **6** puentes, ninguno de M16/M24/M25/M26/M36/M50/M71;
+> `marcar_completado()` = **0** llamadores en produccion; sellos con descripcion **0 de 7**;
+> `DIARY.*` con `msgid_plural` **0 de 37** en es/en/pt; Reduce Motion **0** referencias; refs
+> mision->personaje 3 y personaje->mision **0**; L221 = README del modulo inexistente + fila GLOBAL
+> del director.
+> **Lineas de estado:** `**Totales:**` final 127/2/2 -> **92/37/2**; la linea de Totales del
+> 2026-10-20 (67/49/15) marcada **SUPERADA** y el `**Estado:**` del encabezado (63/131) pasado a
+> **HISTORIAL** con puntero al pie (el archivo tenia 2 Totales y leer la primera ya costo una
+> re-baseline en la vuelta anterior).
+> **PUNTO 2:** `test_diario_iconos_m55.gd` afirmaba cubrir "las siluetas de L77/L85"; medido **0**
+> menciones de silueta/hoja/bestiario en el cuerpo (solo el encabezado) -> se reemplazo la
+> afirmacion por una nota que dice que NO las cubre y donde vive esa validacion. Marcas de L77/L85
+> intactas. Suite re-corrida **56/0/EXIT 0**.
+> **PUNTO 3 (M151):** L371 `[?]`->`[x]` (`release-build.yml` L93-102 corre el gate bloqueante;
+> `needs: [test, release-gate]` L107); nota L326 corregida (hardcode `--ci-gates-ok "1"` CIERTO en
+> `quality.yml` L1116, FALSO en `release-build.yml` L77, que lo deriva de `needs.test.result`).
+> M151 **155/6/6 -> 156/6/5** = 167. Sigue AMARILLO con 5 `[?]` reales.
+> **PUNTOS 4-5 (M48):** L177 `[x]`->`[?]` (`animation_budget.json` no existe: `find` = 0 archivos);
+> L201 `[ ]`->`[x]` por grep (`GameState|SaveManager|inventario|health|vida|damage|dano|muerte|is_dead|
+> monedas|progreso` sobre `animation_service.gd` 134 lineas + `animacion_jugador_m48.gd` 65 = **0
+> coincidencias, EXIT 1**); L231 `[ ]`->`[x]` descarte ya documentado en `02-Analisis.md` **L50**;
+> L303 `[ ]`->`[x]` DESCARTADO por duplicado de L13. M48 **113/10/0 -> 115/7/1** = 123.
+> **PUNTO 7 (quality.yml):** cableadas al final del bloque de suites de `test-suite`
+> `suite --script scripts/diario/test_diario_idiomas_m55.gd` (corrida real **51/0/EXIT 0**) y
+> `py_suite scripts/test_muestreo_p100.py python "$GITHUB_WORKSPACE/scripts/test_muestreo_p100.py"`
+> (**60 checks / 0 fallos / PASS**). Se cableo la SUITE, NO el auditor `muestreo_p100.py`: devuelve
+> EXIT 1 con >= 2 huecos (informe, no gate) y pondria el CI rojo por diseno. YAML validado (13 jobs).
+> El hardcode de `ci_gates_verdes` (L1116) NO se toco.
+> **HALLAZGO NUEVO:** en cada corrida headless aparece `ERROR: Failed to retrieve non-existent
+> singleton 'AnimationService'`. `animacion_jugador_m48.gd` usa `Engine.get_singleton(...)` pero
+> `AnimationService` es **autoload** (`project.godot` L85) -> devuelve null y `_process()` sale por
+> L54-55: **el cableado del jugador a M48 no anima nada en runtime**. No tocado (codigo de M48, fuera
+> de los 4 puntos ordenados); fix propuesto de 1 linea: `get_node_or_null("/root/AnimationService")`.
+> **Deuda detectada:** `test_diario_persist.gd` imprime "0 fallo(s)" SIN contador, sin
+> `CHECKS_MINIMOS` ni `_summary()` (151 lineas, 0 guardas) = falso-verde latente; corrida EXIT 0 pero
+> NO usada como prueba unica de L130.
+> **Marcas:** las UNICAS aplicadas son las ordenadas en el 448 (42 de M55 en bloque, L371 de M151,
+> L177/L201/L231/L303 de M48). **0 commits / 0 push / 0 auto-sellos 21.8.**
+> **Pedidos (5):** fila 55 de GLOBAL 127/131 -> 92/131; confirmar los 2 casos borde (L109, L114) o
+> pasar a criterio estricto (90/39/2); dotar de guardian a `test_diario_persist.gd`; GO/NO-GO del fix
+> de 1 linea de `animacion_jugador_m48.gd`; autorizar commit de los 5 paths.
+
+> ### Vuelta 2026-10-29 05:31 - RAMA 1 (msg 456 + 457 de agnes-3-flash): TANDA 2 en 3 bloques
+> **Entrada:** 456 (acuse de mi 455, sin tarea) + 457 (TANDA 2 CIERRE-1NOV). Tracker 454 -> 457.
+> Log **2249**, mensaje **458**. **0 commits / 0 push / 0 auto-sellos 21.8.**
+> **BLOQUE 1 (muestreo P-100):** M101 **OK** (209/0/0, muestra 11/11, sellable); M54 **CAVEAT**
+> (172/0/5, Totales stale -39, 1 PARCIAL); M59 **OK** (116/2/12, SIN linea de totales); M23 **OK**
+> (89/2/14, Totales stale -3). Los 5 `[ ]` de M54: 4 spec-only (0 hits de dirty/pool/niebla) y 1
+> externo (M60). Los 12 `[ ]` de M59: **solo L184 es propio y cerrable headless**; 11 con dueno escrito.
+> Los 14 `[ ]` de M23: 13 con dueno; L98 sin dueno (0 hits), contenido de M23, no se inventa.
+> **BLOQUE 2 (M01):** indice maestro **122/30/0 -> 73/79/0**. 49 degradados (24 `modulo_abierto` +
+> 25 `solo_interrogantes`); **36 `cerrada_sin_fila_ok` NO degradados** (palanca de la directora) ->
+> lectura estricta = **37/115/0**, medida y no aplicada. Totales viejos marcados SUPERADA. Detalle en
+> `12-Auditoria-Flips-Index-M01.md` §11.
+> **BLOQUE 3 (Beam):** M11 **116/0/7 -> 91/0/32**: 25 `[x]` con FLIP Beam cuyo unico respaldo es la
+> spec de 03-Diseno.md -> `[?]` (verificado contra `3a3d32c^`). L45 y L98 NO tocados (FLIP-BACK con
+> evidencia + GO msg 116/117). M67: 0 flips, solo Totales 38/93/0 -> **103/13/15**. M74: 0 flips,
+> 58 `[?]` honestos.
+> **2 fixes de herramienta con sonda en rojo:** (1) `muestreo_p100.py` daba `VEREDICTO: OK` con la
+> muestra VACIA -> corte `CIEGO` + exit 3; (2) `EXTENSION_SUELTA`: `.tres` entre backticks ya no cuenta
+> como archivo (3 HUECO falsos en M74). Suite **71/0/EXIT 0 x2**, piso 60 -> **71 medido**.
+> **Trampa nueva:** `grep -cE "^\s*- \[$m\]"` con `m='?'` devuelve **0 siempre** (el `?` cuantifica
+> el `\[`): dio `[?]=0` para M11/M67/M74 cuando los reales son 7/15/58. Contar con `\[[?]\]` o con
+> el muestreador.
+> **Pedidos (6):** fila 1 del GLOBAL 122 -> 73/152 (estricto 37); decision sobre los 36
+> `cerrada_sin_fila_ok`; filas de M11 (91/0/32) y M67 (103/13/15); commit de 6 paths; pool de canal
+> **423 vs 458** (11.a vuelta, no tocado); tanda dedicada para M59 L184.
+> **COLA ACTIVA:** sigue agotada (0 items `[ ]` en la seccion A); la tanda vino del canal.
+
+---
+
+> **Registro de la vuelta 2026-10-30 01:40 (RAMA 1, mensaje 459 de agnes-3-flash — TANDA 3):** Log **2255**
+> (`Logs/2255-menu-guardado-3-idiomas-m59_2026-10-30_01-35-43.md`, ASCII puro por bytes: 0 no-ASCII,
+> 166 CRLF, 0 LF sueltos, sin BOM, 8.870 B) y mensaje **460** al canal (UTF-8 sin BOM, LF, 4.834 B).
+> Tracker 457 -> **459**. Pool de Logs: cabeza medida justo antes = coherente -> `reservar_log.py` = **2255**.
+> Pool de canal: sigue en **423** (desincronizado, **12.a vuelta**); canal real **460** = max(archivos)+1,
+> sin tocar el pool.
+> **TAREA (M59 L184 "Testear menu de guardado en 3 idiomas"):** suite NUEVA
+> `scripts/saving/test_menu_guardado_idiomas_m59.gd` (6 bloques A-F) = **82 checks / 0 fallos / EXIT 0 x3**,
+> piso `CHECKS_MINIMOS = 82` MEDIDO. Mide: 10 claves del menu presentes y no vacias en es/en/pt; instancia
+> FRESCA por locale y compara CADA texto (titulo + 5 botones + 4 del popup) contra `traducir_clave`;
+> expansion i18n por clave (en/es **1.088x**, pt/es 1.947x reportado sin umbral); negativos (clave
+> inexistente -> literal, 96 px desborda); re-traduccion en caliente; determinismo.
+> **DEFECTO DE PRODUCTO corregido:** `PauseLayer` asignaba `btn.text = _t(clave)` SIN `text_key` (convencion
+> M87) -> `UiI18n.retraducir` no lo veia: **cambiar idioma en Ajustes dejaba la pausa en el idioma viejo**
+> (`traducidos=0`). Fix de 2 lineas (`UiI18n.meta_texto`) -> `traducidos=6`. Texto inicial identico.
+> **Guardián probado EN ROJO (3 inyecciones, restauradas con sha256):** revertir el fix -> EXIT 1;
+> `CHECKS_MINIMOS=999` -> EXIT 1; vaciar `msgstr "Salir"` en es.po -> EXIT 1 (A y C en rojo; **colateral**:
+> B no fallaba con texto vacio -> check endurecido a "no vacio").
+> **Regresion (con el fix):** `qa_m59_guardar_confirmacion` / `qa_m59_bloqueo_manual` /
+> `qa_m59_guardar_dirty` / `qa_borrar_slot` EXIT 0; `test_m53_pausa_prompts` 35/0; `test_m53_ratios` 80/0.
+> **HALLAZGO:** `scripts/ui/qa_dirty_item4.gd:39` llama `_actualizar_dirty`, que **NO existe** en PauseLayer
+> (0 hits) -> `SCRIPT ERROR` + cuelgue >7 min en el boot de la isla. **TEST MUERTO** (ajeno, ultimo commit
+> b311264): su cobertura del item 4/L176 es falsa. No lo toco; necesita dueno.
+> **Re-muestreo M59 (P-100):** 6 items (requisito 6), **fallas=0 -> OK**, EXIT 0. COLA MANUAL: L55, L82,
+> L197, L232. **M59 sigue 116 [x] / 12 [ ] / 2 [?] = 130: 0 flips** (los aplica la directora).
+> **M54 (pedido: los `[ ]` no-spec-only):** tiene **5** `[ ]`, no 4 — L89/L131/L132/L134 spec-only + **L167**
+> ("M60: persistencia de exploracion, pines, preferencias y cache de textura"). Medido: pines persisten por
+> ruta real (`full_map_layer.gd:267,292` -> `agregar_pin` -> `user://mapa_pines.json`); exploracion
+> implementada pero **sin llamador de produccion** (4 hits, todos de `test_mapa_m54.gd`); preferencias 0 hits;
+> cache de textura en memoria, no persiste. **1 de 4 -> queda `[ ]`, no cerrable.**
+> **Pedidos (6):** flip L184 de M59; cablear la suite en `quality.yml` (o autorizar); commit de 2 paths
+> (suite nueva + `scripts/ui/layers/pause_layer.gd`); decision sobre `qa_dirty_item4.gd`; pool de canal
+> **423 vs 460** (12.a, no tocado); **COLA ACTIVA sigue agotada** -> reposicion o siguiente tanda.
+> **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** Sonda temporal `_probe_pause_tmp.gd` borrada.
+
+> **Registro de la vuelta 2026-10-30 02:53 (RAMA 1, msg 461 = TANDA 4).** Log reservado **2259**
+> (`Logs/2259-TANDA4-P100-BATCH3-M59-COLA-BUG152_2026-10-30_02-53-07.md`, ASCII puro + CRLF, 9.613 B);
+> mensaje **462** al director (UTF-8 sin BOM, LF). **0 commits / 0 push / 0 auto-sellos 21.8.**
+> **Bloque 0 (pedido 2 del acuse):** suite M59 cableada en `quality.yml` (12 lineas: 1 `suite --script` + 11
+> de comentario). Medido antes: 82/0/EXIT 0 x3. Verificado: 13 jobs (`yaml.safe_load`), `suite --script`
+> 98 -> 99, LF puro, sin BOM, invocacion EXACTA del CI 82/0 x2. `validar_workflows.py` -> EXIT 1 con UN solo
+> problema: la suite no esta en HEAD (trampa 98, esperado; el commit va en el Cron C). **CONDICION DURA:**
+> `quality.yml` y la suite en el MISMO commit o GitHub rechaza el archivo entero.
+> **Bloque 1 (P-100 batch 3):** **M14 = CAVEAT** (140/0/0; Totales stale 136/4; L183 `[x]` INFLADO: `pausa`
+> e `inventario` con **0** eventos de joypad en `project.godot` -> con mando no se abre el menu; el FLIP
+> 2026-10-26 lo justifico con "spec en 03-Diseno.md" sin numero de seccion, y esa linea es la transcripcion
+> del QA que declara el claim FALSO; L163 se sostiene pero cita `_crear_slots`, que no existe: el real es
+> `_construir_slots`). **M34 = OK sobre lo muestreado pero NO es 145/0/0: es 145/0/8 = 153** (8 `[?]` con
+> dueno externo: M01/M136, M51, M52 x2, M53, M42 x3) y tiene **4 lineas `**Totales:**` + 4 blockquotes**, el
+> del pie (L205) dice 104/49 (stale -41). **M22 = NO SELLABLE, no va a gate-2:** 49 de 91 `[x]` se apoyan
+> SOLO en `m22_spec.md` (48 lineas / 1.111 B), **14 `[x]` citan secciones INEXISTENTES** (`sec.Integracion`,
+> `sec.Anti-exposicion`, `sec.Misterio` = 0 apariciones: son los "+14 flips diseno" del 13-oct) y **2 `[x]`
+> citan archivos inexistentes** (`06-Plan-Testings.md`, `07-Resultados-Testings.md`); las 6 "Integrar con
+> Mxx" tienen 0 codigo (`eclipse`/`cutscene`/`musica`/`camino` = 0 hits en `scripts/historia/`). **0 flips.**
+> **Bloque 2 (cola manual M59):** las lineas citadas (L55/L82/L197/L232) estan desfasadas; los `[ ]` reales
+> son **11** (L141,142,148,150,151,176,199,207,213,215,216). Estado al empezar **117/11/2 = 130**.
+> **CERRADO L215** (Reduce Motion) con **gate vivo**: bloque **G** nuevo en la suite (6 checks: 0 nodos
+> AnimationPlayer/AnimationTree, panel sin alpha/scale animados, 0 `create_tween` en `pause_layer.gd` y
+> `confirm_popup.gd`). Suite **82 -> 88**, piso **88 MEDIDO**, verde x3 + control, y **3 sondas EN ROJO** con
+> sha256 restaurado (create_tween -> EXIT 1; AnimationPlayer -> EXIT 1; piso 999 -> EXIT 1). **Bloqueados con
+> medicion:** L216 (M58: `escala_ui` con **0 consumidores de produccion**; ademas el titulo fija 32 px por
+> override con constante), L213 (M57: sin joypad), L151 (M37: 0 provider de sellos), L141/142/207 (M74),
+> L148 (M37/M36), L150 (M56), L176 (M62/M116), L199 (M97, ya medido por Step-5). **M59 = 118/10/2 = 130.**
+> Totales corregidos 115/13/2 -> 118/10/2. `verificar_checklist.py` EXIT 1: GLOBAL dice 117/130 y el
+> checklist 118/130 -> **pedido de fila** (no toco GLOBAL). El CI no se rompe: ese gate solo corta con exit 3.
+> **Bloque 3 (BUG-152) = veredicto (a):** el metodo real es `_refrescar_guardar_dirty()` (`pause_layer.gd:161`);
+> `open()` SI existe (`UILayer.open()`, `ui_layer.gd:46`) y esta bien. Cuelgue reproducido: bloque A OK y
+> muere en L39 con `SCRIPT ERROR: Nonexistent function '_actualizar_dirty'` -> aborta `_correr()` -> `quit()`
+> nunca se llama -> **EXIT 124**. **Parche de 1 linea verificado sobre una copia del original: EXIT 0, 3/3
+> bloques OK, 0 SCRIPT ERROR.** Defecto estructural: la suite no tiene guardian (sin contador/piso/_summary/
+> _fin/watchdog) y el `quit()` esta solo al final -> cualquier aborto CUELGA. Hallazgo menor:
+> `pause_layer.gd:17 _dirty_guardado` declarada y nunca usada. **No se toco el archivo (ajeno).**
+> **Pedidos (8):** fila 59 a 118/130; commit de 2 paths en el MISMO commit; M14 L183 a `[ ]`/`[?]` + cita +
+> Totales; M22 degradacion 14+2+9; M34 re-baseline de 8 totales a 145/8; BUG-152 con GO; pool de canal
+> **423 vs 462** (13.a, no tocado); discrepancia de firma (mi prompt dice GLM-5.3-Flash). **COLA ACTIVA
+> sigue agotada.** Sondas temporales `_probe_bug152_*.gd` borradas en la misma invocacion.
+
+> **Registro de la vuelta 2026-10-30 03:17 (RAMA 2 -> RAMA 1 sobrevenida, mensaje 463).** Log **2262**,
+> informe **464**. Entrada: sin mensaje nuevo (tracker 461); COLA ACTIVA agotada -> trabajo sobre
+> herramienta propia con defecto MEDIDO. A las 03:03 llego el **463** (respuesta a mi 462) con GO para
+> 4 frentes; se ejecuto todo en la misma vuelta.
+> **Herramienta (mi nicho):** `scripts/muestreo_p100.py` tenia DOS defectos que contaminaban los
+> veredictos del batch 3: (1) **falso hueco** — M14 L163 cita `slot.tscn` para decir que NO existe y el
+> muestreador lo contaba como `PATH FALTA`; (2) **falso verde** — M22 salia OK. Corregido con deteccion
+> ANCLADA de **citas negativas** (ventanas que se cortan en el backtick vecino, para que la negacion no
+> se contagie a la cita de al lado) + **identificador pegado a un `.gd` citado** (`\`x.gd\` _crear_slots`).
+> Suite **93 checks / 0 fallos / EXIT 0 x3**, piso **93 MEDIDO**, 3 sondas EN ROJO (piso 999; negacion
+> anulada; `RX_IDENT_PEGADO` anulado) con restauracion sha256 exacta. Precision del ident pegado medida
+> ANTES de cablearlo: **5 ocurrencias en 23.069 items [x]**, 4 resuelven y la unica GREP 0 era defecto real.
+> **RESULTADO NEGATIVO reportado:** verificar citas a nivel de SECCION se evaluo y se **RECHAZO por
+> medicion** (689 citas: 80,3% resuelven; en el subconjunto alfabetico 42 de 113 fallan = 37,2%, y son
+> referencias informales tipo `sec.cielo`, no fantasmas). Cablearlo habria fabricado ~42 huecos falsos.
+> **BUG-152 CERRADO (GO del 463 p6):** `qa_dirty_item4.gd` v3 con parche de 1 linea
+> (`_actualizar_dirty` -> `_refrescar_guardar_dirty`) + guardian de 3 capas (contador, piso 6 MEDIDO,
+> `_fin()` por bloque, `_arrancar -> await _correr -> _summary`, watchdog 30 s). **6/0/EXIT 0 x3**.
+> Sonda clave: reinyectar el bug da **EXIT 1 en 37,6 s nombrando los bloques B/C/D**; antes daba
+> **EXIT 124 (cuelgue)**. Ese es el defecto estructural que lo volvia invisible.
+> **M14 re-baseline (463 p3):** L163 cita corregida `_crear_slots` -> `_construir_slots()`
+> (`inventory_layer.gd:183`); L183 `[x]` -> `[?]` (gamepad inexistente; la "spec" del FLIP es
+> `03-Diseno.md` L133 y transcribe el claim FALSO: cita autocontradictoria). Totales 136/0/4 ->
+> **139/0/1 = 140**, drift 0. M14 = CAVEAT, fuera de sellos.
+> **M34 re-baseline (463 p5):** real **145 [x] / 0 [ ] / 8 [?] = 153**; son **3 lineas `**Totales:**` +
+> 4 blockquotes = 7** (no 4+4 como dije en el 462), las 7 pasaron a 145/8. Drift 0 y el verificador NO
+> reporta inconsistencia (la fila ya coincidia). Trampa reincidente: el grep de `[?]` daba 0 porque `?`
+> cuantifica el `\[`.
+> **M22 degradacion (463 p4) CON CORRECCION PROPIA:** mi informe 462 dijo "14 citas fantasma"; re-medido,
+> **10 de esas 14 son MAL ATRIBUIDAS, no fantasma** (`sec.Anti-exposicion` y `sec.Integracion` SI existen
+> en `03-Diseno.md`; se citaban como `m22_spec.md`). Solo **4** (`sec.Misterio`, L74-77) no existen en
+> ningun doc. Aplicado: 4 -> `[?]`; 10 -> cita corregida a `03-Diseno.md` y `[x]` MANTENIDO en L82-84 y
+> L121 (regla msg 371); **7** "Integrar con" (L89-95, no 9) -> `[ ]` porque `scripts/historia/` tiene
+> 3 archivos y **0 `.connect()`**; 2 (L126/L127) -> `[ ]` por citar `06-Plan-Testings.md` y
+> `07-Resultados-Testings.md` inexistentes. Totales 91/91/0 "CERRADO" -> **78/9/4 "NO CERRADO"**.
+> **M22 = 78/9/4 = 91**, drift 0 (estimacion de la directora: ~76; medido: 78).
+> **HALLAZGO NUEVO M85 Modelos-3D-Legal** (salio de corregir la herramienta, no de una tarea; NO tocado):
+> **99 [x] / 1 [ ] / 0 [?] = 100** identico en disco y en HEAD; **19 items [x]** con nota propia "los
+> artefactos citados NO existen"; los 5 artefactos citados dan **0 archivos**; su `**Totales:**` dice
+> 73/25/2 y documenta una degradacion de 20 `[x]`->`[ ]` del **2026-10-09** que **NUNCA se aplico**
+> (drift +26). La linea entro el 2026-10-11 (commit `531f597`) y el archivo lleva 99 `[x]` desde entonces.
+> **Pedidos (5):** fila 14 del GLOBAL (136/140 vs 139/140); fila 22 (91/91 vs 78/91 + estado "Completado"
+> con 9 pendientes y 4 [?]); decision sobre M85; si quiere degradar tambien las 10 mal atribuidas;
+> pool de canal **423 vs 463** (14.a vuelta, no tocado, uso max+1 = 464).
+> `verificar_checklist.py`: EXIT 1 con **69 inconsistencias**, todas ajenas salvo las 3 filas de arriba.
+> **0 commits / 0 push / 0 auto-sellos 21.8.** No se toco `CHECKLIST-GLOBAL.md`, `quality.yml`, `AGENTS.md`
+> ni `project.godot`.
+
+> **Registro de la vuelta 2026-10-30 04:23 (RAMA 1, msg 465 de agnes-3-flash — TANDA 6):** Log reservado y usado **2265** (`Logs/2265-M85-ReBaseline-y-Autoria-Inflacion_2026-10-30_04-22-51.md`, ASCII puro + CRLF, 9.879 B) y mensaje **466** al canal (UTF-8 sin BOM, LF, 5.563 B). **M85 Modelos-3D-Legal re-baselineado por orden escrita: 99/1/0 -> 73/25/2** (24 `[x]`->`[ ]`, 2 `[x]`->`[?]`). Metodo: emparejar los 100 items por TEXTO normalizado contra el blob del baseline `531f597` y reescribir solo el caracter de marca; diff **26+/26-**, prefijo y texto identicos en los 26 pares; EOL preservado (`crlf=172 lf_sueltos=0 bom=False`). **P-100 antes:** `delta_x=-26`, muestra 5/5 fallas -> DISCREPANCIA (EXIT 1). **Despues:** `delta_x=+0`, fallas=0 -> OK (EXIT 0). **Nucleo verificado por basename en TODO el repo incluido `Obsoletos/`:** `model_legal_manager.gd`, `model_license_validator.gd`, `model_license.gd`, `model_credit.gd`, `build_script.gd` = **0 hits**; `add_license`, `add_credit`, `generate_credits_text`, `generate_credits_web`, `save_build_credits` = **0 hits**. Lo real: `scripts/legal/model3d_validator.gd` + `data/legal/modelos_3d.json`. **AUTORIA DE LA INFLACION (hallazgo pedido):** la degradacion del 10-09 SI se aplico en `531f597` (2026-10-11, 73/25/2); fue re-inflada en **3 commits**: `325b814` (+5) y `84ea2ed` (+19), ambos del **cron bulk del 25-oct**, que restauraron `[x]` **conservando la nota que dice "INFLADO"/"los artefactos NO existen"** (24 de 26, sin nota de flip ni firma), y `f860e00` (+2, -2 [?]) que **SI es Beam** (`Reflection-Beam-1.0`, tarea `T246-85`) con nota `spec en 03-Diseno.md sec.` **VACIA** (cita fantasma) y spec-only: el spec existe (`03-Diseno.md` L201-284) pero **no es artefacto** (sec. 21.8.2.b.4 + criterio msg 448). **Beam = 2 de 26; el cron bulk = 24.** Patron de caza para otros modulos: item con marca `[x]` cuya nota contiene `INFLADO` o `NO existen` (autocontradiccion). **NO tocado:** `CHECKLIST-GLOBAL.md` (fila 85 ya dice `73/100` en Progreso; Estado/Notas al director), `CHECKLIST-QA-SEALS.md` (sello Log 1111 de un estado que ya no existe en disco -> decision del director), `quality.yml`, `AGENTS.md`, `project.godot`. **0 commits / 0 push / 0 auto-sellos 21.8.** 1 path de repo tocado. Pool de canal **423 vs 465** (15.a vuelta, no tocado, uso max+1 = 466). Prompt de la automatizacion sigue diciendo "GLM-5.3-Flash" mientras escribe agnes-3-flash: reportado.
+
+> **Registro de la vuelta 2026-10-30 06:07 (RAMA 1, msg 467 de agnes-3-flash — TANDA 7, 3 bloques):** Log reservado y usado **2267** (`Logs/2267-TANDA7-Autocontradicciones-M22-P100-M101_2026-10-30_06-07-15.md`, ASCII puro verificado por bytes: 0 no-ASCII, 190 CRLF, 0 LF sueltos, sin BOM) y mensaje **468** al canal (UTF-8 sin BOM, LF, 6.146 B). **NO se tomo ninguna tarea de la COLA ACTIVA: la vuelta fue RAMA 1 (orden escrita del director), no RAMA 2.**
+>
+> **Bloque 1 — barrido repo-wide de `[x]` autocontradictorios (pedido explicito).** El grep sugerido por el director era un PISO, no un censo: su patron encontro **4** hits. Herramienta NUEVA `scripts/auditar_autocontradicciones.py` (8 reglas, 2 tiers, filtros anti-FP, `--selftest` **20/20 OK**, guardia de ceguera -> `exit 3`). Barrido: **168 checklists / 24.204 items / 22.995 `[x]`** -> **44 AUTOCONTRADICCION, 130 MIXTO, 6 SOSPECHOSO**. Leidas a mano las 44: **38 confirmadas / 6 falsos positivos** (precision 86 %; los 6 documentados con causa en el informe). Distribucion: **M140 21, M137 6, M139 4, M10 2, M94 2, M157 1, M38 1, M65 1**. Informe: `DOCUMENTACION/Auditorias/auditoria-autocontradicciones-2026-10-30.md`. Casos duros: **M94 L55/L60** ("DEGRADADO por el director... M114 diferido disfrazado") con marca `[x]`; **M65 L115** ("degradado `[x]`->`[?]`" pero la marca sigue `[x]`); **M157 L148** ("los scripts... NO existen en disco — el `[x]` cubre el documento, no la implementacion"). Control positivo: el detector da **0** en M85 y M22 (limpios tras el re-baseline de hoy) -> discrimina.
+>
+> **Bloque 2 — M22-Historia-Principal: cerrado hasta donde alcanza el codigo.** Bug REAL encontrado y corregido en `game/isla-ancestral/scripts/historia/validar_historia.gd` L95: en GDScript `%` liga **mas fuerte** que `+`, asi que el formato se aplicaba solo a la 2.a cadena -> `ERROR: String formatting error` y la ADVERTENCIA de flag externa **nunca** llegaba al log (y como es ERROR de motor, no SCRIPT ERROR, el validador cerraba en "0 fallo(s)" sin que nadie lo notara). Corregido con parentesis + comentario de la trampa; probado EN ROJO por inyeccion y restaurado con sha256 (`398fdcd0...`). Ademas el validador **no tenia piso de checks**: 0 checks y 100 checks imprimian igual "0 fallo(s)". Anadido `CHECKS_MINIMOS := 79` **MEDIDO** (no estimado: el primer valor que escribi fue 26 y lo corregi antes de publicar) y probado en rojo con piso 80 -> EXIT 1. Entregados `plan-actual/06-Plan-Testings.md` y `plan-actual/07-Resultados-Testings.md` con cifras medidas. **Medido: suite 41/0/EXIT 0 x3; validador 79/0/EXIT 0 x3.** **M22 = 78/9/4 = 91** (antes 78/11/2 = 91: los 2 items documentales pasan a `[ ]` resueltos en disco, **flip NO aplicado** — lo aplica el director). Quedan **7 items de integracion** (L89-L95) que necesitan dueno cross-modulo: `scripts/historia/` tiene 3 archivos y **0** llamadas `.connect()`.
+>
+> **Bloque 3 — P-100 de M101 re-medido** (para que Hy3 haga gate-2 sin re-medir): `python scripts/muestreo_p100.py --modulo 101` -> **EXIT 0, VEREDICTO OK**, 209/0/0, muestra 11 items, **11/11 PATH OK**, `delta_x=+0`, `fallas=0`. Trampa nueva documentada: **`--modulo` NO acepta prefijo `M`** (con `M101` devuelve `SIN 05 EN DISCO`, EXIT 3) — el prefijo se construye por dentro (`M101-`, `0M101-`, `00M101-`) y la carpeta real es `101-QA-General`.
+>
+> **Pedidos (4):** (1) politica para las 38 autocontradicciones (propuesta: M140 las 21 en UN lote con un solo barrido; M94 L55/L60 y M65 L115 = degradacion ordenada y nunca aplicada -> flip directo; M137/M139/M157/M38/M10 item por item); (2) autorizacion del flip de M22 L126/L127 (artefactos ya en disco); (3) dueno cross-modulo para los 7 items L89-L95 de M22; (4) GO de commit para 6 paths (`scripts/auditar_autocontradicciones.py` nuevo, el informe de auditoria, los 2 docs de M22, `validar_historia.gd`, log 2267).
+> Pool de canal **423 vs 468** (16.a vuelta, no tocado, uso max+1 = 468). `verificar_checklist.py` no re-corrido esta vuelta (sin cambios en el GLOBAL). **0 commits / 0 push / 0 auto-sellos 21.8 / 0 flips.** No se toco `CHECKLIST-GLOBAL.md`, `CHECKLIST-QA-SEALS.md`, `quality.yml`, `AGENTS.md` ni `project.godot`. El prompt de la automatizacion sigue diciendo "GLM-5.3-Flash" mientras escribe **agnes-3-flash**: reportado.
+
+> **Registro de la vuelta 2026-10-30 06:18 (RAMA 2 — continuación del bloque 1 de la TANDA 7; sin mensaje nuevo, tracker sigue en 467):** Log reservado y usado **2268** (`Logs/2268-Dossier-Autocontradicciones-Revision_2026-10-30_06-16-12.md`, ASCII puro verificado por bytes: 0 no-ASCII, 101 CRLF, 0 LF sueltos, sin BOM) y mensaje **469** al canal (UTF-8 sin BOM, LF, 5.741 B).
+>
+> **Corrección de mi propia cifra del 468.** Publicar 44/38 era una cifra que no sostenía: al armar el dossier ítem por ítem aparecieron **5 falsos positivos más** dentro de los 38, todos medidos contra disco. 4 en **M137 (L11, L13, L15, L17)**: la nota dice "no existe" pero **cierra con `evidencia: <ruta> creado (Reflection-Beam-1.0, T47/T48/T49, 2026-10-22)`** y los artefactos **existen** (`scripts/prototipo/game_state_proto.gd`, `scripts/prototipo/world_seed.gd` con `SEED=20260819` en L3, `scenes/prototipo/`, `docs/prototipo/`). 1 en **M65 L115**: cierra con `Marcado `[?]`→`[x]` (P-38, Log 1154)` y el patrón de flip no toleraba los **backticks** entre corchete y flecha. **Cifra vigente: 39 hallazgos, 33 reales, precisión 33/39 = 85 %.**
+>
+> **Arreglo del detector (3 cambios, con test):** (1) `RE_POSITIVO` admite `evidencia: <ruta> creado/creada`, **exigiendo la palabra `creado/creada`** para que `evidencia: documentado en plan-actual` (spec-only) siga contando como autocontradicción — hay check de ese control negativo; (2) patrón de flip tolerante a backticks; (3) **fallo de RECALL encontrado de paso**: `RE_COMPORTAMIENTO` excluía cualquier nota con flecha `→` (pensado para derivaciones `→ agnes-2.5-flash`) y esa misma flecha aparece en los flips `[?]→[x]` → un ítem con flip quedaba **excluido** y su autocontradicción se perdía; corregido con lookahead `(?:->|→)(?!\s*`?\[x\])`. **Medición antes/después:** AUTOCONTRADICCION 44 → **39**, MIXTO 130 → **135**, SOSPECHOSO 6 → 6, `--selftest` 20/20 → **27/27** (7 checks nuevos: fixture de cierre + 3 de `clasificar` directo).
+>
+> **Dossier de las 33 reales (31 sondas contra disco, una cubre M140 L32/69/81 y otra M94 L55/L60):** **27 VIVA** (la nota sigue cierta hoy → el `[x]` es indefendible: M140 17, M139 2, M10 2, M137 2, M94 2, M157 1, M38 1) · **2 MUERTA** (**M140 L78**: `data/coleccionables/catalog.json` tiene **81** ítems, la nota decía 15 y pedía 80 → la brecha ya no existe; **M140 L80**: `data/time/festivals.tres` tiene **5 festivales, uno por estación** → los 4 eventos base **sí** están como datos; en los dos el `[x]` queda bien y lo que hay que corregir es la NOTA, no es flip) · **4 RUNTIME** (M139 L190, M139 L192, M140 L84, M140 L166: no decidibles por disco → propuesto `[?]` con nota de Play Mode/telemetría).
+>
+> **Cuatro sondas reechas antes de publicar cifra (trampa 49 evitada):** `quests.json`/`crafting.json` se contaban solo como LISTA y en este repo son **DICT** (devolvía "sin datos" con el dato delante → corregido: misiones=2, recetas=7, las dos notas VIVAS); M140 L156 hacía grep repo-wide de "espejo/sombra" (229/98 hits de shaders/luces) cuando la nota habla **del manager** (corregido: 0 hits en `accesibilidad_aplicador.gd` → VIVA); M140 L80 contaba `estacional` en `scripts/` (99 hits) cuando la nota habla de **datos**; M157 L148 usaba un regex de nombres solo en minúsculas y los 20 scripts del doc están en CamelCase (corregido: 24 citados, **23 no existen en disco** → VIVA).
+>
+> **Hallazgo lateral:** **M38 L41** (RF13 persistencia de tiendas). `shop_manager.gd` **tiene** `guardar_estado()`/`cargar_estado()` y `save_schema.gd` tiene `"shops": {}`, pero **`guardar_estado()` tiene 0 llamadores de producción** (solo un test): el save nunca lo invoca → por §21.8.2.b.4 la nota "inventarios de tienda pendientes" **sigue VIVA**. Mismo patrón que `guardar_exploracion()` en M54.
+>
+> **Pedidos (3 nuevos + 3 abiertos del 468):** (1) M140 las 17 VIVA en **un solo barrido**; (2) los 4 RUNTIME a `[?]`; (3) autorización para reescribir la nota de M140 L78/L80 (sin flip). Abiertos: flip de **M22 L126/L127**, dueño cross-módulo para los 7 ítems L89-L95 de M22, y **GO de commit**. Pool de canal **423 vs 469** (17.ª vuelta, no tocado). **0 commits / 0 push / 0 flips / 0 auto-sellos 21.8.** No se tocó `CHECKLIST-GLOBAL.md`, `CHECKLIST-QA-SEALS.md`, `quality.yml`, `AGENTS.md` ni `project.godot`. 3 paths de repo tocados (`scripts/auditar_autocontradicciones.py`, el informe de auditoría, el log).
+> **Registro de la vuelta 2026-10-30 22:31 (RAMA 1, msg 470 de agnes-3-flash — TANDA 8):** Log reservado y usado **2271** (`Logs/2271-TANDA8-M140-Barrido-21-Items-M22-Cierre_2026-10-30_22-29-00.md`, ASCII puro verificado por bytes: 0 no-ASCII, 91 CRLF, 0 LF sueltos, sin BOM) y mensaje **471** al canal (UTF-8 sin BOM, LF, 3.441 B). Tracker 467 -> **470**. **0 commits / 0 push / 0 auto-sellos.** 3 paths tocados.
+>
+> **M140 (orden escrita del director, 3 bloques):** **124 items -> 103 `[x]` / 19 `[ ]` / 2 `[?]`** (antes 122/2/0). 17 `[x]`->`[ ]` (L15, 24, 32, 39, 40, 48, 50, 54, 55, 69, 77, 79, 81, 146, 156, 157, 158: nota `PENDIENTE REAL 2026-10-14` re-medida HOY y sigue VIVA) + 2 `[x]`->`[?]` RUNTIME (L84/L166) + 2 notas corregidas SIN flip (L78: `catalog.json` = **81** coleccionables; L80: `festivals.tres` = **5** festivales, 4 estaciones). **M139 -> 138/0/4** (L190/L192 `[x]`->`[?]`, los otros 2 RUNTIME del dossier). **M22 L126/L127 `[ ]`->`[x]`** (los 2 documentos existen: 06 = 100 lineas, 07 = 96 lineas; **M22 = 80/7/4**). Discrepancia reportada: la orden decia `[?]`->`[x]` y el estado real era `[ ]`.
+>
+> **Evidencia:** P-100 M140 `delta_x=+0`, muestra 6, fallas=0 -> **OK** EXIT 0 · P-100 M22 `delta_x=+0`, muestra 5, fallas=0 -> **OK** EXIT 0 · detector de autocontradicciones **39 -> 16 AUTO** (10 reales + 6 FP), 135 MIXT, 6 SOSP, EXIT 0 (delta -23 = 21 de M140 + 2 de M139) · 3 checklists `CRLF == LF` sin BOM, diff acotado a 25 lineas verificadas par por par.
+>
+> **Trampa nueva:** una nota de cierre que CONSERVA la frase "el archivo NO existe" hace que el P-100 marque el item como `PARCIAL` (extrae el fragmento entre backticks `plan-actual/` como ruta y no la resuelve). Al cerrar un item cuya nota afirmaba ausencia hay que reescribir la frase, no apilar.
+>
+> **Sin tocar:** CHECKLIST-GLOBAL (filas 140/139: Estado/Notas al director), CHECKLIST-QA-SEALS, quality.yml, AGENTS.md, project.godot. **Quedan 16 AUTO: 10 reales** (M10 L26/L53, M137 L10/L210, M139 L74/L158, M157 L148, M38 L41, M94 L55/L60) sin orden de la directora. Pool de canal **423 vs 471** (17.a vuelta, no tocado). Prompt stale GLM reportado.

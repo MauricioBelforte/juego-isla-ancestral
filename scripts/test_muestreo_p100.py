@@ -31,7 +31,7 @@ import muestreo_p100 as mod  # noqa: E402
 
 # Piso de checks MEDIDO en verde (no estimado). Se evalua ANTES de contarse a si
 # mismo, asi que no puede incluirse en su propio conteo.
-CHECKS_MINIMOS = 60
+CHECKS_MINIMOS = 93
 
 _checks = 0
 _fallos = 0
@@ -87,10 +87,21 @@ FIX_DOC = """# 05 Checklist fixture
 **Totales:** 8 ítems · Completados: 6 · Pendientes: 1 · No resueltos: 1.
 """
 
+# Modulo CIEGO: todo su contenido son enunciados de diseno/meta, sin verbo de
+# creacion y sin citar un solo artefacto -> 0 items muestreables por script.
+FIX_CIEGO = """# 05 Checklist ciego
+
+- [x] Definir el pitch del juego en una frase [M]
+- [x] Documentar la vision a largo plazo [S]
+
+**Totales:** 2 ítems · Completados: 2 · Pendientes: 0 · No resueltos: 0.
+"""
+
 
 def _montar_fixture(base):
     """Repo de mentira con la forma minima que el muestreador espera."""
     _escribir(base, "DOCUMENTACION/48-Fixture/plan-actual/05-Checklist.md", FIX_DOC)
+    _escribir(base, "DOCUMENTACION/77-Ciego/plan-actual/05-Checklist.md", FIX_CIEGO)
     _escribir(base, "DOCUMENTACION/01-Fundamentos/plan-actual/03-Diseno.md", "# diseno\n")
     _escribir(base, "game/isla-ancestral/scripts/foo/bar.gd",
               "extends Node\nclass_name AlphaServicioBeta\n")
@@ -174,6 +185,13 @@ def test_artefactos():
     _ok(idents4 == [], "identificadores demasiado cortos se descartan")
     rutas5, _ = mod.extraer_artefactos("`a.gd` y `a.gd`")
     _ok(rutas5 == ["a.gd"], "deduplica artefactos repetidos")
+    # Una EXTENSION suelta es un FORMATO, no un archivo: sin este corte el muestreo
+    # reporta HUECO "PATH FALTA .tres" (medido 29-oct: 3 huecos falsos en M74).
+    rutas6, idents6 = mod.extraer_artefactos("restricciones: recursos `.tres` y scripts `.gd`")
+    _ok(rutas6 == [], "extension suelta NO es artefacto (dio %r)" % rutas6)
+    _ok(idents6 == [], "extension suelta tampoco es identificador (dio %r)" % idents6)
+    rutas7, _ = mod.extraer_artefactos("el catalogo `festivales.tres` esta en disco")
+    _ok(rutas7 == ["festivales.tres"], "archivo con nombre real SI se extrae (control)")
     _cerrar("extraccion de artefactos")
 
 
@@ -314,6 +332,109 @@ def test_ceguera():
     _cerrar("detector ciego: modulo inexistente -> exit 3")
 
 
+def test_ceguera_muestra_vacia():
+    """Muestra vacia != evidencia. Falso verde medido 29-oct en el indice M01:
+    122 [x], 0 items muestreables, el resumen decia 'fallas=0 -> VEREDICTO: OK'."""
+    _bloque("muestra vacia -> CIEGO / exit 3 (no '0 fallas -> OK')")
+    r = mod.analizar_modulo("77", 5)
+    _ok(r.get("error") is None, "el 05 existe (no es el caso 'sin archivo')")
+    _ok(r["n_muestra"] == 0, "0 items muestreables (dio %d)" % r["n_muestra"])
+    _ok(r["marcas"]["x"] == 2, "2 [x] en el fixture ciego (dio %d)" % r["marcas"]["x"])
+    _ok(r["veredicto"] == "CIEGO",
+        "veredicto CIEGO, no OK (dio %s)" % r["veredicto"])
+    _ok(r["fallas"] == 0, "fallas=0 igual: por eso el corte no puede depender de fallas")
+    cod = mod.main(["--modulo", "77"])
+    _ok(cod == 3, "main devuelve 3 (dio %d)" % cod)
+    # Control negativo: un modulo CON muestra no puede caer en CIEGO.
+    r2 = mod.analizar_modulo("48", 5)
+    _ok(r2["n_muestra"] > 0, "control: el fixture 48 si tiene muestra (dio %d)" % r2["n_muestra"])
+    _ok(r2["veredicto"] != "CIEGO", "control: con muestra el veredicto no es CIEGO")
+    _cerrar("muestra vacia -> CIEGO / exit 3 (no '0 fallas -> OK')")
+
+
+def test_citas_negativas():
+    """Una cita NEGATIVA no es un hueco: el item menciona el artefacto justamente
+    para declararlo inexistente. Medido 30-oct en M14 L163: `slot.tscn` marcaba
+    PATH FALTA y tiraba el item a PARCIAL cuando el propio texto dice "que NO
+    existe". Caso real, sin parche: el repo de verdad."""
+    _bloque("citas negativas: no son huecos")
+    real = ("Panel principal con grilla de slots (botones construidos por codigo en "
+            "`inventory_layer.gd` _crear_slots, sin .tscn) [C] - **QA atria-dawn "
+            "(Log 1047): el claim citaba `slot.tscn`, que NO existe;** la grilla se "
+            "construye con Button.new() dinamico.")
+    rutas, idents, negadas = mod.extraer_artefactos_ex(real)
+    _ok("slot.tscn" in negadas, "slot.tscn se clasifica NEGADA (dio %r)" % (negadas,))
+    _ok("slot.tscn" not in rutas, "slot.tscn NO queda en la lista de rutas")
+    _ok("inventory_layer.gd" in rutas, "la ruta real sigue siendo verificable")
+    v = mod.verificar_item(real)
+    _ok(not any("PATH FALTA slot.tscn" in d for d in v["detalle"]),
+        "ya no reporta 'PATH FALTA slot.tscn'")
+    _ok(any("NEGADO slot.tscn" in d for d in v["detalle"]),
+        "reporta 'NEGADO slot.tscn' (visible, no silencioso)")
+    _ok(any("GREP 0 _crear_slots" in d for d in v["detalle"]),
+        "y sigue cazando el defecto REAL: _crear_slots no existe")
+    # Pero si el item dice "`_crear_slots` no existe", el identificador tampoco es
+    # hueco: la misma regla que para las rutas (medido 30-oct en la nota de M14).
+    _, idents_neg, neg_ident = mod.extraer_artefactos_ex(
+        "Cita corregida: `_crear_slots` no existe; el real es `_construir_slots()`")
+    _ok("_crear_slots" not in idents_neg, "un ident citado como inexistente no es hueco")
+    _ok("_crear_slots" in neg_ident, "y queda registrado como NEGADO (dio %r)" % (neg_ident,))
+    _ok("_construir_slots" in idents_neg, "el ident real si se verifica (dio %r)" % (idents_neg,))
+    _ok(v["resultado"] == "PARCIAL",
+        "el item real sigue PARCIAL, pero por el motivo correcto (dio %s)" % v["resultado"])
+    # CONTROL: un archivo ausente SIN marcador de negacion sigue siendo hueco
+    rutas2, _, neg2 = mod.extraer_artefactos_ex("Agregar `fantasma_inexistente.gd` al pipeline")
+    _ok("fantasma_inexistente.gd" in rutas2 and not neg2,
+        "sin marcador de negacion el archivo sigue siendo HUECO")
+    # CONTROL: la negacion no se contagia a la cita VECINA
+    rutas3, _, neg3 = mod.extraer_artefactos_ex("`a_falta.tscn` no existe y `b_ok.gd` existe")
+    _ok("a_falta.tscn" in neg3, "la cita negada se detecta (dio %r)" % (neg3,))
+    _ok("b_ok.gd" in rutas3, "la cita VECINA no se contagia (dio %r)" % (rutas3,))
+    _ok("b_ok.gd" not in neg3, "y la vecina no aparece como negada")
+    # marcador PRE-anclado
+    _, _, neg4 = mod.extraer_artefactos_ex("en vez de `viejo.tscn` se usa un Button")
+    _ok("viejo.tscn" in neg4, "'en vez de' tambien es marcador negativo")
+    # Solo citas negativas -> HUECO: una ausencia declarada no avala nada.
+    v5 = mod.verificar_item("El claim citaba `no_existe_x.tscn`, que no existe")
+    _ok(v5["resultado"] == "HUECO",
+        "solo citas negativas -> HUECO, ni RESUELTO ni INDETERMINADO (dio %s)"
+        % v5["resultado"])
+    # Caso M85 (medido 30-oct): la nota LISTA los artefactos que no existen. Ahi
+    # la negacion NO absuelve el item: sin evidencia positiva sigue siendo HUECO.
+    v7 = mod.verificar_item(
+        "Crear ModelLegalManager: los artefactos citados NO existen: "
+        "`model_legal_manager.gd`, `model_license.gd` = 0 en disco")
+    _ok(v7["resultado"] == "HUECO",
+        "la nota 'los artefactos NO existen' deja el item en HUECO (dio %s)"
+        % v7["resultado"])
+    # Regresion del fix de 29-oct: la extension suelta sigue sin ser artefacto.
+    r6, _, n6 = mod.extraer_artefactos_ex("restricciones: recursos `.tres` y scripts `.gd`")
+    _ok(r6 == [] and n6 == [], "extension suelta sigue sin ser artefacto (dio %r)" % (r6,))
+    _cerrar("citas negativas: no son huecos")
+
+
+def test_ident_pegado():
+    """El nombre del metodo no siempre va entre backticks: "`x.gd` _crear_slots".
+    Sin esta rama el muestreo AVALA un item que cita una funcion inexistente.
+    Precision medida antes de cablearla: 5 ocurrencias en 23.069 items [x], 4
+    resuelven y la unica GREP 0 es un defecto real -> ruido nulo."""
+    _bloque("identificador suelto pegado a un .gd citado")
+    _, idents, _ = mod.extraer_artefactos_ex(
+        "grilla de slots (botones construidos por codigo en `inventory_layer.gd` "
+        "_crear_slots, sin .tscn)")
+    _ok("_crear_slots" in idents, "extrae _crear_slots (dio %r)" % (idents,))
+    # CONTROL: prosa castellana tras el .gd NO se confunde con un identificador
+    _, idents2, _ = mod.extraer_artefactos_ex("`inventory_layer.gd` extendido con botones")
+    _ok(idents2 == [], "prosa tras el .gd no se extrae (dio %r)" % (idents2,))
+    _, idents3, _ = mod.extraer_artefactos_ex(
+        "`foo.gd` nuevo_modulo y `bar.gd` nuevo_modulo")
+    _ok(idents3 == ["nuevo_modulo"], "deduplica el identificador repetido (dio %r)"
+        % (idents3,))
+    _ok(mod.grep_identificador("_crear_slots") == 0,
+        "y el muestreo lo ve GREP 0: el metodo real es _construir_slots")
+    _cerrar("identificador suelto pegado a un .gd citado")
+
+
 def test_no_escribe():
     _bloque("el muestreador es READ-ONLY")
     p = os.path.join(mod.DOC, "48-Animacion", "plan-actual", "05-Checklist.md")
@@ -345,6 +466,10 @@ def main():
         test_veredicto_deniega()
         test_drift_detectado()
         test_ceguera()
+        with _Parche(base):
+            test_ceguera_muestra_vacia()
+        test_citas_negativas()
+        test_ident_pegado()
         test_no_escribe()
     finally:
         shutil.rmtree(base, ignore_errors=True)

@@ -5,15 +5,27 @@
 # M55: Test de DiaryService (registro por eventos, anti-spoiler, progreso,
 # favoritos, búsqueda, persistencia, integraciones M19/M22/M28).
 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/diario/test_diario.gd
+#
+# Guardian (iter. 7, DeepSeek-V4.1-Flash): la suite publicaba "0 fallo(s)" SIN
+# contador, asi que un SCRIPT ERROR que abortara un _test_* dejaba el verde
+# intacto con la mitad de los checks sin correr (falso verde, trampa 63/85).
+# Ahora cuenta los checks, exige un piso MEDIDO y publica el resumen en un
+# call_deferred aparte (si _run() aborta, el resumen corre igual).
 
 extends SceneTree
 
+## Piso de checks MEDIDO en verde (iter. 7). Se re-mide al crecer la suite.
+const CHECKS_MINIMOS: int = 36
+
 var _fallos: int = 0
+var _checks: int = 0
+var _terminado := false
 var _d: Node = null
 var _bus: Node = null
 
 func _init() -> void:
 	call_deferred("_run")
+	call_deferred("_summary")
 
 func _run() -> void:
 	_d = root.get_node_or_null("Diary")
@@ -21,8 +33,7 @@ func _run() -> void:
 	_check(_d != null, "Diary autoload presente")
 	_check(_bus != null, "EventBus presente")
 	if _d == null or _bus == null:
-		print("=== TEST M55 DIARIO: 1+ fallo(s) ===")
-		quit(1)
+		_terminado = true
 		return
 	_test_catalogo()
 	_test_registro_manual()
@@ -31,13 +42,27 @@ func _run() -> void:
 	_test_progreso()
 	_test_favorito_busqueda()
 	_test_persistencia()
-	print("=== TEST M55 DIARIO: %d fallo(s) ===" % _fallos)
-	quit(1 if _fallos > 0 else 0)
+	_terminado = true
 
 func _check(cond: bool, msg: String) -> void:
+	_checks += 1
 	if not cond:
 		_fallos += 1
 		print("FALLO: " + msg)
+
+
+## Resumen y salida, en un call_deferred APARTE: si _run() aborta por un
+## SCRIPT ERROR, esta funcion CORRE igual y el fallo se ve en vez de
+## colgar el SceneTree o publicar un "0 fallo(s)" vacio.
+func _summary() -> void:
+	if not _terminado:
+		_fallos += 1
+		print("[FAIL] _run() NO termino (posible SCRIPT ERROR que aborto la funcion)")
+	if _checks < CHECKS_MINIMOS:
+		_fallos += 1
+		print("[FAIL] solo %d checks ejecutados (minimo medido %d)" % [_checks, CHECKS_MINIMOS])
+	print("=== TEST M55 DIARIO: %d checks, %d fallo(s) ===" % [_checks, _fallos])
+	quit(1 if _fallos > 0 else 0)
 
 func _test_catalogo() -> void:
 	_check(_d.total_entradas() >= 30, "catálogo >= 30 entradas: %d" % _d.total_entradas())

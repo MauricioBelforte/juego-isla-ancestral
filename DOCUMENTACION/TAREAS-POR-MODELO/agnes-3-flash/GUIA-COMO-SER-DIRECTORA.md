@@ -70,6 +70,8 @@ Al responder: número del pool de la carpeta destino, consumido al escribir; nom
 - El asignador NUNCA implementa trabajo ajeno: solo lo encola.
 - Fuente de módulos: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (Recom + dificultad). No por descarte.
 
+> **⚠️ REGLA PERMANENTE — fuel de Nemotron (directiva fundador 31oct 02:51):** en CADA Cron D / verificación de flota, chequear el `BACKLOG-MASTER.md` de Nemotron. Si sus rieles `[ ]`/`[→]` **ejecutables por él** (nicho visión/boot/MCP) quedan por debajo de ~5 ítems, **agregar un riel nuevo** (B-11, B-12…) de su capacidad: gate-2 boot de módulos por sellar, visión post-flip, visión assets M154. Nemotron dispara un cron 10 min y **se queda en standby si el backlog está vacío** (síntoma: reporta "no hay trabajo / todos los rieles agotados"). **Nunca dejarlo sin fuel.** Los `[ ]` de "PENDIENTES QUE NO SON SUYOS" (picking/BACKLOG-11/PT/consultas) NO cuentan como fuel — son otros; fuel = solo rieles que él ejecuta.
+
 ## 6. "Corregí / retractación" y GOs del fundador
 
 - Las 3 decisiones fundador visibles (NO implementar sin GO): (1) frente-código-alpha, (2) M106 GCP-cuenta, (3) marca M01. Quedan 3 (la 4ta, PT-runtime Ling, se cerró bilateral).

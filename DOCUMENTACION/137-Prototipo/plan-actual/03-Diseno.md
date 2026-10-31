@@ -1,32 +1,32 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
-# 03-Diseno.md â€” MÃ³dulo 137: Prototipo
+# 03-Diseno.md — Módulo 137: Prototipo
 
 ## 1. Arquitectura del Prototipo
 
 ```
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚ Escena principal: prototipo_isla.tscn                           â”‚
-â”‚  â”œâ”€â”€ Player (CharacterBody3D + cÃ¡mara third-person M11/M12)     â”‚
-â”‚  â”œâ”€â”€ VoxelWorld (VoxelTools M08: terreno 64Â³-96Â³, seed fija)    â”‚
+│  ├── Player (CharacterBody3D + cámara third-person M11/M12)     │
+│  ├── VoxelWorld (VoxelTools M08: terreno 64³-96³, seed fija)    │
 â”‚  â”œâ”€â”€ RecursoNode (1 recurso clave: madera, M15)                 â”‚
-â”‚  â”œâ”€â”€ NPC_Prueba (StaticBody simple + diÃ¡logo, M19/M21)          â”‚
+│  ├── NPC_Prueba (StaticBody simple + diálogo, M19/M21)          │
 â”‚  â”œâ”€â”€ Casa (para pruebas, M18)                                   â”‚
 â”‚  â”œâ”€â”€ Ruina (bloque collectible + pista, M25)                    â”‚
 â”‚  â”œâ”€â”€ Puzzle (puerta que abre con herramienta, M24)              â”‚
-â”‚  â”œâ”€â”€ Sky/Sun (ciclo dÃ­a-noche bÃ¡sico, M31)                      â”‚
-â”‚  â””â”€â”€ Clima (lluvia simple de partÃ­culas, M32/M52)               â”‚
+│  ├── Sky/Sun (ciclo día-noche básico, M31)                      │
+│  └── Clima (lluvia simple de partículas, M32/M52)               │
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚ Autoloads                                                        â”‚
-â”‚  game_state.gd      (M59 â€” GameState con slot Ãºnico)            â”‚
-â”‚  world_seed.gd      (M10 â€” seed fija 20260819)                  â”‚
-â”‚  save_manager.gd    (M59/M60 â€” save delta de chunks)            â”‚
+│  game_state.gd      (M59 — GameState con slot único)            │
+│  world_seed.gd      (M10 — seed fija 20260819)                  │
+│  save_manager.gd    (M59/M60 — save delta de chunks)            │
 â”œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”¤
 â”‚ docs/prototipo/                                                 â”‚
 â”‚  â”œâ”€â”€ PLAYTEST.md           (plan + resultados M114)             â”‚
 â”‚  â”œâ”€â”€ FILOSOFIA-CHECK.md    (checks M152/M153)                   â”‚
-â”‚  â”œâ”€â”€ GONOGO.md             (decisiÃ³n final con criterios)       â”‚
+│  ├── GONOGO.md             (decisión final con criterios)       │
 â”‚  â””â”€â”€ RETROSPECTIVA.md      (lecciones â†’ M138)                   â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
@@ -34,34 +34,34 @@
 ## 2. Componentes del Prototipo
 
 ### 2.1 Jugador (M11/M12)
-- `CharacterBody3D` con movimiento en 8 direcciones + salto (decisiÃ³n: sin sprint en el prototipo; la velocidad fija simplifica el feeling test).
+- `CharacterBody3D` con movimiento en 8 direcciones + salto (decisión: sin sprint en el prototipo; la velocidad fija simplifica el feeling test).
 - Colisiones voxel: `move_and_slide()` con shapes por bloque.
-- CÃ¡mara: SpringArm3D + mouse orbit, sin clip contra el terreno (distancias mÃ­nima/mÃ¡xima 2-8 m).
-- Input: teclado/mouse provisional (M57 real llega despuÃ©s).
+- Cámara: SpringArm3D + mouse orbit, sin clip contra el terreno (distancias mínima/máxima 2-8 m).
+- Input: teclado/mouse provisional (M57 real llega después).
 
 ### 2.2 Voxel (M08/M09/M10)
-- `VoxelTerrain` con generador de isla: 1 isla elevada rodeada de agua (sin ocÃ©ano navegable, M51 no aplica).
-- ExtracciÃ³n: raycast desde la mira, `voxel_tool.do_point()` con lÃ­mite de radio 3 (no minar de lejos).
-- ColocaciÃ³n: do_point en cara apuntada; el bloque colocable = 1 recurso de madera.
-- Seed fija (20260819) para que el save delta sea vÃ¡lido.
+- `VoxelTerrain` con generador de isla: 1 isla elevada rodeada de agua (sin océano navegable, M51 no aplica).
+- Extracción: raycast desde la mira, `voxel_tool.do_point()` con límite de radio 3 (no minar de lejos).
+- Colocación: do_point en cara apuntada; el bloque colocable = 1 recurso de madera.
+- Seed fija (20260819) para que el save delta sea válido.
 
 ### 2.3 Inventario y Recurso (M14/M15)
 - 1 slot: {"recursos": N, "herramienta": bool}.
-- La madera se obtiene de Ã¡rboles de bloque (leÃ±a) o del suelo.
-- ConfecciÃ³n mÃ­nima: 2 maderas + nada mÃ¡s = herramienta (M16 esbozado).
+- La madera se obtiene de árboles de bloque (leña) o del suelo.
+- Confección mínima: 2 maderas + nada más = herramienta (M16 esbozado).
 
-### 2.4 NPC y DiÃ¡logo (M19/M21)
-- NPC de prueba ("GuÃ­a") con 3 frases: bienvenida, pista del puzzle, agradecimiento del regalo.
-- InteracciÃ³n: tecla E al mirarlo; caja de diÃ¡logo flotante simple (placeholder UI).
+### 2.4 NPC y Diálogo (M19/M21)
+- NPC de prueba ("Guía") con 3 frases: bienvenida, pista del puzzle, agradecimiento del regalo.
+- Interacción: tecla E al mirarlo; caja de diálogo flotante simple (placeholder UI).
 
 ### 2.5 Puzzle y Ruina (M24/M25)
-- Puzzle: puerta de ruina que se abre si tenÃ©s la herramienta (mÃ­nimo viable).
+- Puzzle: puerta de ruina que se abre si tenés la herramienta (mínimo viable).
 - Ruina: 5-8 bloques decorativos + 1 reliquia decorativa (placeholder).
-- Recompensa del puzzle: mensaje de "Â¡El viento te lo agradece!" (placeholder noble M148).
+- Recompensa del puzzle: mensaje de "¡El viento te lo agradece!" (placeholder noble M148).
 
 ### 2.6 Casa y Ambiente (M18/M31/M32)
-- Casa: caja con puerta que abre y "dormir para pasar el dÃ­a" (recarga): valida el ciclo de dÃ­a/noche.
-- Ciclo dÃ­a/noche: sky procedural simple (M31), ronda en 6 min reales.
+- Casa: caja con puerta que abre y "dormir para pasar el día" (recarga): valida el ciclo de día/noche.
+- Ciclo día/noche: sky procedural simple (M31), ronda en 6 min reales.
 - Lluvia: particles 2D simple (M52 esbozo).
 
 ### 2.7 Guardado Delta (M59/M60)
@@ -78,41 +78,41 @@ save v1 = {
 - Load: regenera mundo con seed y re-aplica chunks modificados.
 
 ### 2.8 Playtest y Pruebas (M114/M61)
-- Script `playtest_runner.gd` (herramienta editor): cÃ¡mara demogrÃ¡fica (grabar 15 min), log de eventos (extracciÃ³n, diÃ¡logo, puzzle).
+- Script `playtest_runner.gd` (herramienta editor): cámara demográfica (grabar 15 min), log de eventos (extracción, diálogo, puzzle).
 - FPS log cada 5 s (M61) con `Engine.get_frames_per_second()`.
-- Encuesta post-sesiÃ³n (5 preguntas, ver RF14).
+- Encuesta post-sesión (5 preguntas, ver RF14).
 
 ## 3. Flujo Principal (bucle de juego del prototipo)
 
 ```
-Spawn en la playa (isla 64Â³)
- â†’ Caminar por el mundo (movimiento + cÃ¡mara)
+Spawn en la playa (isla 64³)
+ → Caminar por el mundo (movimiento + cámara)
  â†’ Extraer madera (voxel_tool) â†’ se siente el voxel
  â†’ 2 maderas â†’ herramienta (crafting esbozo)
- â†’ Hablar con la GuÃ­a (diÃ¡logo: pista del puzzle)
+ → Hablar con la Guía (diálogo: pista del puzzle)
  â†’ Entrar a la ruina â†’ resolver puzzle con herramienta
- â†’ Recompensa: mensaje + regalo a la GuÃ­a + "dormir" en la casa (dÃ­a siguiente)
- â†’ Guardar â†’ sesiÃ³n 15 min â†’ encuesta + observaciÃ³n
+ → Recompensa: mensaje + regalo a la Guía + "dormir" en la casa (día siguiente)
+ → Guardar → sesión 15 min → encuesta + observación
 ```
 
-## 4. Criterios de MediciÃ³n (GO/NO-GO)
+## 4. Criterios de Medición (GO/NO-GO)
 
-| Criterio | MÃ©trica | GO si |
+| Criterio | Métrica | GO si |
 |---|---|---|
-| DiversiÃ³n (RF14) | Encuesta media (M114) | â‰¥ 7/10 |
-| IntenciÃ³n de seguir | % "sÃ­" a "Â¿volverÃ­as a jugar?" | â‰¥ 80% |
+| Diversión (RF14) | Encuesta media (M114) | ≥ 7/10 |
+| Intención de seguir | % "sí" a "¿volverías a jugar?" | ≥ 80% |
 | Rendimiento (RF16) | FPS medio en config media | â‰¥ 60 |
-| Philosophy (RF15) | Checklist M152/M153 | Sin fallos crÃ­ticos |
+| Philosophy (RF15) | Checklist M152/M153 | Sin fallos críticos |
 | Bucle completo (RF1-RF12) | % de testers que completan el bucle | â‰¥ 90% |
-| Save (M59) | Test guardarâ†’salirâ†’cargar | 0 pÃ©rdidas |
-| MÃ©tricas 1-6 | Tabla consolidada en GONOGO.md | 6/6 o 5/6 con plan de mitigaciÃ³n |
+| Save (M59) | Test guardar→salir→cargar | 0 pérdidas |
+| Métricas 1-6 | Tabla consolidada en GONOGO.md | 6/6 o 5/6 con plan de mitigación |
 
 ## 5. Cierre del Hito
 
 1. Limpieza de logs, tag `prototipo-v1`, push.
 2. Retrospectiva (lecciones â†’ M138 Vertical Slice).
 3. GONOGO.md firmado por el equipo con fecha.
-4. Si NO-GO: se documenta el motivo (tÃ©cnico/filosofÃ­a/diversiÃ³n) y se decide: ajustar prototipo (7 dÃ­as) o replanificar alcance (M136/M135).
+4. Si NO-GO: se documenta el motivo (técnico/filosofía/diversión) y se decide: ajustar prototipo (7 días) o replanificar alcance (M136/M135).
 ## Specs Prototipo Voxel (Beam 494)
 
 ### VoxelTerrain isla 64³-96³

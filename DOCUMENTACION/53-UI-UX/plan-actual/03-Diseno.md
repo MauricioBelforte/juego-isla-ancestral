@@ -1,7 +1,7 @@
 **Modelo:** mimo-v2.6-flash-free
 **Plataforma:** opencode
 
-# 03-Diseno.md â€” MÃ³dulo 53: UI/UX
+# 03-Diseno.md — Módulo 53: UI/UX
 
 ## 1. Arquitectura general
 
@@ -13,25 +13,25 @@
 â”Œâ”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ GODOT TREE â”€â”€â”€â”€â”€â”€â”€â–¼â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”
 â”‚ CanvasLayer "UI_ROOT" (layer 100)                                          â”‚
 â”‚ â”œâ”€ HUDScreen               (siempre visible, layer menor, read-only HUD)   â”‚
-â”‚ â”‚   â”œâ”€ StatusBar Â· ClockWidget(M30) Â· SeasonWidget Â· ResourceCounter        â”‚
-â”‚ â”‚   â”œâ”€ HotbarWidget(M11) Â· InteractPrompt(M70) Â· MinimapWidget(M53/M54)     â”‚
+│ │   ├─ StatusBar · ClockWidget(M30) · SeasonWidget · ResourceCounter        │
+│ │   ├─ HotbarWidget(M11) · InteractPrompt(M70) · MinimapWidget(M53/M54)     │
 â”‚ â”‚   â””â”€ NotificationService (cola de toasts)                                 â”‚
-â”‚ â”œâ”€ DialogLayer  (M21: ventana, retrato, opciones, subtÃ­tulos M58)           â”‚
+│ ├─ DialogLayer  (M21: ventana, retrato, opciones, subtítulos M58)           │
 â”‚ â”œâ”€ InventoryLayer (grid + hotbar sync + drag & drop)                        â”‚
-â”‚ â”œâ”€ PauseLayer   (menÃº pausa + acceso a Ajustes/M89)                         â”‚
-â”‚ â”œâ”€ MenusLayer   (M89: menÃº principal, continuar, cargar, ajustes, crÃ©ditos) â”‚
+│ ├─ PauseLayer   (menú pausa + acceso a Ajustes/M89)                         │
+│ ├─ MenusLayer   (M89: menú principal, continuar, cargar, ajustes, créditos) │
 â”‚ â””â”€ GenericLayers... (confirm popup, amount picker, tutorial tips)           â”‚
 â””â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”˜
 ```
-Capas: **HUD** (no modal, sigue al mundo) Â· **Modal Sencillo** (diÃ¡logo: pausa parcial) Â· **Modal Completo** (inventario/pausa: pausa total, bloquea input del mundo) Â· **Popup** (confirmar, notificaciÃ³n, tooltip: no competidor de foco).
+Capas: **HUD** (no modal, sigue al mundo) · **Modal Sencillo** (diálogo: pausa parcial) · **Modal Completo** (inventario/pausa: pausa total, bloquea input del mundo) · **Popup** (confirmar, notificación, tooltip: no competidor de foco).
 
 ## 2. Componentes principales
 
 ### 2.1 UIManager (autoload, `res://ui/core/ui_manager.gd`)
-Orquesta la pila de capas, el foco, la pausa y la distribuciÃ³n de acciones transversales de M57.
+Orquesta la pila de capas, el foco, la pausa y la distribución de acciones transversales de M57.
 
 - Pila de capas: `push_layer(layer)`, `pop_layer(layer)`, `top()`, `close_top()`.
-- Reglas: solo una capa Modal Completo a la vez; las demÃ¡s se encolan; al cerrar se restaura el foco al elemento guardado o al primero de la capa visible.
+- Reglas: solo una capa Modal Completo a la vez; las demás se encolan; al cerrar se restaura el foco al elemento guardado o al primero de la capa visible.
 - Suscribe acciones de M57: `inventory_toggle`, `pause`, `close`, `confirm`, `cancel`, `tab_next/tab_prev`, `menu_open`.
 - `process_mode` por capa: modal completo congela el mundo (pausa M29); HUD usa `PROCESS_MODE_ALWAYS` con refresh bajo demanda.
 - Emite eventos `ui_layers_changed`, `ui_focus_moved`.
@@ -41,70 +41,70 @@ Clase base de toda pantalla modal. Contrato:
 
 - `open(initial_focus: Control)`, `close()` â†’ devuelven `void`; transiciones por `Tween` (fade 120 ms).
 - `on_layer_opened()` / `on_layer_closed()` virtuales (suscribirse/desuscribirse de eventos).
-- Registra en UIManager al entrar al Ã¡rbol; exige `process_mode` coherente con su tipo.
+- Registra en UIManager al entrar al árbol; exige `process_mode` coherente con su tipo.
 - Herencia: `DialogLayer`, `InventoryLayer`, `PauseLayer`, `MenusLayer`, `SettingsLayer` (M89 lo especializa), etc.
 
 ### 2.3 HUDScreen (`res://ui/hud/hud_screen.gd`)
-- Widgets suscritos a EventBus (dominio `ui` y dominios de datos) â€” jamÃ¡s actÃºa sobre gameplay.
-- Refresh por seÃ±al y `Timer` de baja frecuencia (2 Hz) para reloj/estaciÃ³n; sin refresh por frame.
-- Ocultable con una sola acciÃ³n (para M56 FotografÃ­a / captura de pantalla): `set_hud_visible(false)`.
+- Widgets suscritos a EventBus (dominio `ui` y dominios de datos) — jamás actúa sobre gameplay.
+- Refresh por señal y `Timer` de baja frecuencia (2 Hz) para reloj/estación; sin refresh por frame.
+- Ocultable con una sola acción (para M56 Fotografía / captura de pantalla): `set_hud_visible(false)`.
 
 ### 2.4 ThemeUx (`res://ui/theme/theme_ux.gd` + `theme_ux.tres`)
-- `Theme` de Godot construido en runtime desde `theme_ux.tres` + fuentes de M88 (Nunito cuerpo / Fredoka One titulares; jerarquÃ­a H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10).
-- StyleBoxFlat redondeado (radius 12-16), paleta pastel (fondo arena, acento ocre, texto marrÃ³n oscuro, highlight dorado suave); hover/disabled/pressed con variantes de color suaves.
-- API: `apply(scale_ratio)`, `reload_after_font_change()`, `ensure_contrast()` (contraste AA segÃºn M58), `reduce_motion_active`.
+- `Theme` de Godot construido en runtime desde `theme_ux.tres` + fuentes de M88 (Nunito cuerpo / Fredoka One titulares; jerarquía H1 32, H2 24, H3 20, BODY 16, SMALL 12, MICRO 10).
+- StyleBoxFlat redondeado (radius 12-16), paleta pastel (fondo arena, acento ocre, texto marrón oscuro, highlight dorado suave); hover/disabled/pressed con variantes de color suaves.
+- API: `apply(scale_ratio)`, `reload_after_font_change()`, `ensure_contrast()` (contraste AA según M58), `reduce_motion_active`.
 - Notas de accesibilidad: estados distinguibles por forma + color (borde/relleno), no solo color.
 
 ### 2.5 MenuNavigator (`res://ui/core/menu_navigator.gd`)
-- Wrapping circular de foco (`focus_neighbor` explÃ­citos configurados en editor + `_gui_input` de atajos).
+- Wrapping circular de foco (`focus_neighbor` explícitos configurados en editor + `_gui_input` de atajos).
 - `focus_first()`, `focus_last()`, `move_focus(direction)` (direccional 4D con gamepad), `wrap_manager` con ciclo continuo entre extremos de grid.
 - Tooltip por foco: al enfocar un elemento, muestra su tooltip (accesible por teclado, RF6).
 
 ### 2.6 Widgets de datos
-- `ClockWidget`: hora del GameClock M29/M30 (formato cozy "OtoÃ±o 3, 14:30").
-- `MinimapWidget`: textura generada de navegaciÃ³n (M54 provee mapa/POIs), jugador centrado, rotaciÃ³n fija (decisiÃ³n: fija, menos cinetosis, M58), ocultable.
-- `TooltipService`: pool Ãºnico, retardo 0.35 s, clamp de posiciÃ³n a viewport, cierre al mover foco/ratÃ³n.
-- `NotificationService`: cola de toasts (mÃ¡x 3 visibles), tipo (obtenciÃ³n/evento/misiÃ³n) con icono + SFX del bus UI (M91); clicable para abrir detalle (M55).
-- `ActionPromptOverlay`: lee el Action Layer de M57 y muestra el prompt correcto por dispositivo ("E para interactuar", "A" en gamepad, icono Xbox/PS segÃºn M57).
+- `ClockWidget`: hora del GameClock M29/M30 (formato cozy "Otoño 3, 14:30").
+- `MinimapWidget`: textura generada de navegación (M54 provee mapa/POIs), jugador centrado, rotación fija (decisión: fija, menos cinetosis, M58), ocultable.
+- `TooltipService`: pool único, retardo 0.35 s, clamp de posición a viewport, cierre al mover foco/ratón.
+- `NotificationService`: cola de toasts (máx 3 visibles), tipo (obtención/evento/misión) con icono + SFX del bus UI (M91); clicable para abrir detalle (M55).
+- `ActionPromptOverlay`: lee el Action Layer de M57 y muestra el prompt correcto por dispositivo ("E para interactuar", "A" en gamepad, icono Xbox/PS según M57).
 
 ## 3. Flujos principales (texto)
 
 ### 3.1 Abrir inventario
-1. Jugador pulsa acciÃ³n `inventory_toggle` (M57). El jugador la tiene asignada (tecla I / gamepad back).
+1. Jugador pulsa acción `inventory_toggle` (M57). El jugador la tiene asignada (tecla I / gamepad back).
 2. ActionLayer notifica pulsaciones de acciones a UIManager (suscrito).
 3. UIManager: no hay modal completo â†’ `push_layer(InventoryLayer)`; pausa GameClock (M29) si corresponde; bloquea input del mundo; guarda foco previo.
 4. InventoryLayer: `on_layer_opened()` se suscribe a `inventory.changed` (M11); `MenuNavigator.focus_first()` â†’ foco en primera celda.
 5. HUD permanece visible con `process_mode` pausado (no repinta).
 6. Al pulsar `inventory_toggle`/`close`: pop, restaurar foco, reanudar GameClock, HUD reanuda refresh.
 
-### 3.2 DiÃ¡logo con NPC
+### 3.2 Diálogo con NPC
 1. M21 emite `dialog_requested(npc_id, page)` por EventBus (dominio `ui`). La gameplay NO abre la ventana: emite el evento.
 2. UIManager detecta capa `DialogLayer` no abierta â†’ la abre (modal sencillo: pausa reloj, el mundo sigue visibles congelado suavemente).
-3. El jugador avanza con `confirm` (M57) o click en el botÃ³n de pÃ¡g; opciones con foco; velocidad de texto segÃºn M58; subtÃ­tulos si M58 activado; pausa de texto habilitada (M58).
+3. El jugador avanza con `confirm` (M57) o click en el botón de pág; opciones con foco; velocidad de texto según M58; subtítulos si M58 activado; pausa de texto habilitada (M58).
 4. Al final M21 emite `dialog_finished`; DialogLayer se cierra sola; foco restaurado al jugador.
 
 ### 3.3 Pausa
 1. `pause` â†’ UIManager abre PauseLayer (modal completo).
-2. Opciones: Continuar, Inventario, Diario (M55), Mapa (M54), Ajustes (M89: General/Controles M57/Audio M91/GrÃ¡fica M90/Accesibilidad M58), Guardar, Cargar, Salir al menÃº. Deep-linking entre capas: al cerrar una capa hija, el foco vuelve a PauseLayer.
+2. Opciones: Continuar, Inventario, Diario (M55), Mapa (M54), Ajustes (M89: General/Controles M57/Audio M91/Gráfica M90/Accesibilidad M58), Guardar, Cargar, Salir al menú. Deep-linking entre capas: al cerrar una capa hija, el foco vuelve a PauseLayer.
 3. `close`/pausa de nuevo â†’ continuar.
 
 ### 3.4 Tooltip por contexto
-1. RatÃ³n sobre objeto interactuable â†’ M70 pide prompt (HUD); tras 0.35 s el TooltipService muestra texto breve ("Rocas con musgo. Â¿Excavar?").
-2. Foco se mueve en UI â†’ tooltip del elemento enfocado (Ã­cono dÃ©cima favorita del item, precio, uso).
-3. Tooltip se cierra: al mover el ratÃ³n fuera, cambiar foco, o pulsar cualquier acciÃ³n transversal.
+1. Ratón sobre objeto interactuable → M70 pide prompt (HUD); tras 0.35 s el TooltipService muestra texto breve ("Rocas con musgo. ¿Excavar?").
+2. Foco se mueve en UI → tooltip del elemento enfocado (ícono décima favorita del item, precio, uso).
+3. Tooltip se cierra: al mover el ratón fuera, cambiar foco, o pulsar cualquier acción transversal.
 
-### 3.5 NotificaciÃ³n-toast
+### 3.5 Notificación-toast
 1. EventBus `inventory.item_added`, `quest.updated`, `economy.purchase_done` â†’ NotificationService encola toast.
-2. Aparece arriba-derecha bajo el minimapa (lugar fijo, no molesta al centro), fade 0.3 s, vida 4 s, mÃ¡x 3 simultÃ¡neos; se desplazan hacia arriba.
+2. Aparece arriba-derecha bajo el minimapa (lugar fijo, no molesta al centro), fade 0.3 s, vida 4 s, máx 3 simultáneos; se desplazan hacia arriba.
 3. Feedback de sonido del bus UI (M91) asociado al tipo de toast.
 
-### 3.6 Cambio de resoluciÃ³n (M90)
-1. M90 aplica resoluciÃ³n â†’ emite `graphics.resolution_changed`.
+### 3.6 Cambio de resolución (M90)
+1. M90 aplica resolución → emite `graphics.resolution_changed`.
 2. ThemeUx.`reload_after_font_change()` y `apply(scale_ratio)`; UIManager revisa que las capas abiertas respeten anchors (guardas de debug) y recoloca tooltips/popups visibles.
-3. MinimapWidget regenera su textura si el ratio cambiÃ³. Sin cortes en 16:9/16:10 (QA automatizado con lista de resoluciones).
+3. MinimapWidget regenera su textura si el ratio cambió. Sin cortes en 16:9/16:10 (QA automatizado con lista de resoluciones).
 
 ### 3.7 Foco perdido (edge case)
-1. Cerrar capa A sobre la que se abriÃ³ B encima: al hacer pop de B, UIManager restaura el foco guardado de A (guardado al push de B).
+1. Cerrar capa A sobre la que se abrió B encima: al hacer pop de B, UIManager restaura el foco guardado de A (guardado al push de B).
 2. Si al restaurar el control ya no existe (vendido/eliminado), `focus_first()` de la capa visible actual; assert de debug loguea el caso (DOM-UI).
 3. Al perder la ventana (alt-tab), Godot gestiona foco; al volver, `focus_first()` de la capa visible; sin estados colgados.
 
@@ -183,95 +183,95 @@ func set_speed(ratio: float) -> void                   # M58
 func pause_text() -> void
 ```
 
-## 5. IntegraciÃ³n con otros mÃ³dulos
+## 5. Integración con otros módulos
 
-| MÃ³dulo | IntegraciÃ³n |
+| Módulo | Integración |
 |---|---|
-| M57 Interfaz de Control | Ãšnica fuente de acciones; Action Layer notifica a UIManager; prompts dinÃ¡micos por dispositivo; remapeo â†’ la UI re-lee etiquetas; navegaciÃ³n direccional gamepad via foco nativo |
-| M58 Accesibilidad | ParÃ¡metros runtime: `ui_scale` (0.8-1.5 aplicado por ThemeUx), `text_scale`, `high_contrast`, `daltonism_mode` (formas + texturas junto al color), `reduce_motion` (desactiva Tweens/parpadeos), `subtitle_size`, `visual_sound_indicators`, `flash_free`. Todos aplicados en vivo sin reiniciar |
-| M88 Fuentes TipogrÃ¡ficas | ThemeUx usa Nunito (cuerpo) y Fredoka One (tÃ­tulos) con la jerarquÃ­a H1..MICRO y line-heights definidos; subsetting para locales; recarga al cambiar idioma M87 |
-| M89 DiseÃ±o de MenÃºs | Consume UILayer + MenuNavigator; define la lista de pantallas y su orden (menÃº principal, continuar, carga, ajustes, crÃ©ditos); pausa con deep-linking |
-| M90 ConfiguraciÃ³n GrÃ¡fica | En eventos de cambio de resoluciÃ³n/escalado, ThemeUx se re-aplica; guardas de layout en QA multi-resoluciÃ³n |
-| M91 ConfiguraciÃ³n de Audio | Bus UI dedicado para todos los SFX de interfaz; sliders del menÃº operan sobre buses reales (M91) |
-| M21 DiÃ¡logos | `dialog_requested`/`dialog_finished` por EventBus; DialogLayer es la presentaciÃ³n de M21, sin lÃ³gica de historia |
-| M54/M55/M56 | Consumen HUDScreen/Modal framework: minimapa (M54), diario (M55), modo fotografÃ­a oculta HUD (M56) |
-| M30 Reloj / M29 Calendario | ClockWidget/SeasonWidget con la capa de presentaciÃ³n cozy; pausa respetada |
-| M11 Jugador | HotbarWidget y ResourceCounter leen estado por seÃ±ales de dominio, jamÃ¡s por polling directo de nodos |
-| M61 Rendimiento | Presupuesto UI â‰¤ 8% frame; minimapa con textura cachÃ©; labels con cachÃ© de texto; capas pausadas sin repintar |
+| M57 Interfaz de Control | Única fuente de acciones; Action Layer notifica a UIManager; prompts dinámicos por dispositivo; remapeo → la UI re-lee etiquetas; navegación direccional gamepad via foco nativo |
+| M58 Accesibilidad | Parámetros runtime: `ui_scale` (0.8-1.5 aplicado por ThemeUx), `text_scale`, `high_contrast`, `daltonism_mode` (formas + texturas junto al color), `reduce_motion` (desactiva Tweens/parpadeos), `subtitle_size`, `visual_sound_indicators`, `flash_free`. Todos aplicados en vivo sin reiniciar |
+| M88 Fuentes Tipográficas | ThemeUx usa Nunito (cuerpo) y Fredoka One (títulos) con la jerarquía H1..MICRO y line-heights definidos; subsetting para locales; recarga al cambiar idioma M87 |
+| M89 Diseño de Menús | Consume UILayer + MenuNavigator; define la lista de pantallas y su orden (menú principal, continuar, carga, ajustes, créditos); pausa con deep-linking |
+| M90 Configuración Gráfica | En eventos de cambio de resolución/escalado, ThemeUx se re-aplica; guardas de layout en QA multi-resolución |
+| M91 Configuración de Audio | Bus UI dedicado para todos los SFX de interfaz; sliders del menú operan sobre buses reales (M91) |
+| M21 Diálogos | `dialog_requested`/`dialog_finished` por EventBus; DialogLayer es la presentación de M21, sin lógica de historia |
+| M54/M55/M56 | Consumen HUDScreen/Modal framework: minimapa (M54), diario (M55), modo fotografía oculta HUD (M56) |
+| M30 Reloj / M29 Calendario | ClockWidget/SeasonWidget con la capa de presentación cozy; pausa respetada |
+| M11 Jugador | HotbarWidget y ResourceCounter leen estado por señales de dominio, jamás por polling directo de nodos |
+| M61 Rendimiento | Presupuesto UI ≤ 8% frame; minimapa con textura caché; labels con caché de texto; capas pausadas sin repintar |
 
 ## 6. Reglas anti-acoplamiento (verificables)
 
-1. NingÃºn script de `scripts/gameplay/`, `scripts/world/` o `scripts/ai/` importa `res://ui/` (verificaciÃ³n estÃ¡tica en M01/M07).
+1. Ningún script de `scripts/gameplay/`, `scripts/world/` o `scripts/ai/` importa `res://ui/` (verificación estática en M01/M07).
 2. La gameplay emite eventos `ui.*` en EventBus; la UI nunca es llamada con retorno obligatorio.
-3. UIManager autoload es el Ãºnico punto de contacto hacia capas; las capas no se referencian entre sÃ­ (se comunican por eventos).
+3. UIManager autoload es el único punto de contacto hacia capas; las capas no se referencian entre sí (se comunican por eventos).
 4. Los widgets del HUD no mutan estado de gameplay; solo leen.
 5. Toda cadena visible pasa por tr_local (M87), nunca hardcodeada.
 
-## 7. SecciÃ³n Audio de Ajustes â€” SettingsAudioLayer (iter. 2026-10-04, encargo canal 10 "OpciÃ³n A")
+## 7. Sección Audio de Ajustes — SettingsAudioLayer (iter. 2026-10-04, encargo canal 10 "Opción A")
 
-> **Modelo:** mimo-v2.6-flash-free Â· **Plataforma:** opencode Â· **Fecha:** 2026-10-04
-> El M91 dejÃ³ el dominio de audio (AudioConfig) completo, pero **no existÃ­a ningÃºn
-> widget de audio** en Ajustes. Esta secciÃ³n es el puente UIâ†’M91.
+> **Modelo:** mimo-v2.6-flash-free · **Plataforma:** opencode · **Fecha:** 2026-10-04
+> El M91 dejó el dominio de audio (AudioConfig) completo, pero **no existía ningún
+> widget de audio** en Ajustes. Esta sección es el puente UI→M91.
 
-### 7.1 ComposiciÃ³n y posicionamiento
+### 7.1 Composición y posicionamiento
 
 ```
 UIRoot (montaje)
-â”œâ”€ ...capas existentes (pausa, menÃºs, crÃ©ditos, ...)
+├─ ...capas existentes (pausa, menús, créditos, ...)
 â””â”€ SettingsAudioLayer (MODAL_FULL)   â† montado el ÃšLTIMO: se dibuja encima
-     â”œâ”€ TÃ­tulo  SETTINGS.AUDIO_TITULO
+     ├─ Título  SETTINGS.AUDIO_TITULO
      â”œâ”€ Fila slider Master/Music/SFX: [HSlider 0-100] [Label %] [CheckButton mute]
      â”œâ”€ Separador + SETTINGS.OPCIONES
-     â”œâ”€ Rango dinÃ¡mico (OptionButton: quiet/medio/dinÃ¡mico)
-     â”œâ”€ CompresiÃ³n (CheckButton) Â· Dispositivo de salida (OptionButton)
+     ├─ Rango dinámico (OptionButton: quiet/medio/dinámico)
+     ├─ Compresión (CheckButton) · Dispositivo de salida (OptionButton)
      â”œâ”€ LblFallo (feedback, oculto por defecto)
-     â””â”€ BtnVolver  Â·  TimerCommit (0.25 s, one-shot)
+     └─ BtnVolver  ·  TimerCommit (0.25 s, one-shot)
 ```
 
 ### 7.2 Deep-links de `ajustes_pedido` (routing)
 
 Dos emisores, una sola capa; ambos caminos llaman `UIRoot._abrir_ajustes(origen)` â†’
-`SettingsAudioLayer.open()` si no estÃ¡ visible:
+`SettingsAudioLayer.open()` si no está visible:
 
-| Emisor | SituaciÃ³n anterior | SituaciÃ³n nueva |
+| Emisor | Situación anterior | Situación nueva |
 |--------|--------------------|-----------------|
-| `MenusLayer.ajustes_pedido` (M89) | `ui_manager.push_layer(pause_layer)` â€” **no-op**: la capa ya registrada sigue en la pila (push_layer con capa en pila = warning) | `_abrir_ajustes("M89")` â†’ open de la secciÃ³n Audio |
-| `PauseLayer.ajustes_pedido` (T-053-066) | EmitÃ­a **sin listener** (deep-link colgado) | `_abrir_ajustes("T-053-066")` â†’ open de la secciÃ³n Audio |
+| `MenusLayer.ajustes_pedido` (M89) | `ui_manager.push_layer(pause_layer)` — **no-op**: la capa ya registrada sigue en la pila (push_layer con capa en pila = warning) | `_abrir_ajustes("M89")` → open de la sección Audio |
+| `PauseLayer.ajustes_pedido` (T-053-066) | Emitía **sin listener** (deep-link colgado) | `_abrir_ajustes("T-053-066")` → open de la sección Audio |
 
 El registro de la pila lo hace la capa sola en `_enter_tree` (`register_layer`
-es idempotente), patrÃ³n sancionado en `ui_manager.gd`; `open()` no empuja, solo
+es idempotente), patrón sancionado en `ui_manager.gd`; `open()` no empuja, solo
 muestra. Esc/`close_top` â†’ `pop_layer` des-registra; reabrir con `open()`
 **re-registra** (heal verificado por test).
 
 ### 7.3 Flujo forward (widget â†’ AudioConfig â†’ disco)
 
-| Evento de widget | Handler | AcciÃ³n | Persistencia |
+| Evento de widget | Handler | Acción | Persistencia |
 |---|---|---|---|
-| `HSlider.value_changed` | `_on_slider_volumen` | etiqueta % + marca sucio + (re)arranca TimerCommit | **ninguna** (debounce Â§21.4) |
+| `HSlider.value_changed` | `_on_slider_volumen` | etiqueta % + marca sucio + (re)arranca TimerCommit | **ninguna** (debounce §21.4) |
 | `drag_ended(true)` / `TimerCommit.timeout` / `close()` | `commit_*` | `AudioConfig.set_volumen_porcentaje(bus, v)` | `config["audio"][bus]` (DataStore/GestorConfig, M60) |
 | `CheckButton.toggled` (mute) | `_on_mute_toggled` | `set_mute(bus, on)` | `config["audio"]["mutes"]` |
-| `OptionButton.item_selected` / compresiÃ³n `toggled` | `aplicar_opcion(clave, valor)` | `set_opcion()`; si devuelve `false` â†’ feedback | `config["audio"]["opciones"]` |
+| `OptionButton.item_selected` / compresión `toggled` | `aplicar_opcion(clave, valor)` | `set_opcion()`; si devuelve `false` → feedback | `config["audio"]["opciones"]` |
 
 - **Debounce:** un solo `[M60] Config guardada` por commit (no por frame): `value_changed`
   marca pendiente; escriben `drag_ended`, el timer (0.25 s) o el cierre de la capa.
-- **Feedback de fallo:** `aplicar_opcion` con valor invÃ¡lido â†’ devuelve `false`,
-  muestra `SETTINGS.AUDIO_FALLA` en `LblFallo` y el widget revierte por la seÃ±al
-  inversa; un cambio vÃ¡lido posterior oculta el label.
+- **Feedback de fallo:** `aplicar_opcion` con valor inválido → devuelve `false`,
+  muestra `SETTINGS.AUDIO_FALLA` en `LblFallo` y el widget revierte por la señal
+  inversa; un cambio válido posterior oculta el label.
 
 ### 7.4 Flujo reverse (AudioConfig â†’ widget, anti-bucle)
 
 `volumen_cambiado` / `mute_cambiado` / `opcion_cambiada` â†’ los handlers inversos
 usan **`set_value_no_signal` / `set_pressed_no_signal` / `select()`**. Emitir
-`value_changed` desde el reverse cerrarÃ­a el bucle: AudioConfig emite siempre
-(sin guard de igualdad) y `set_value` sÃ­ emite en el Ã¡rbol (medido en 4.7.2).
+`value_changed` desde el reverse cerraría el bucle: AudioConfig emite siempre
+(sin guard de igualdad) y `set_value` sí emite en el árbol (medido en 4.7.2).
 
 ### 7.5 Decisiones y restricciones respetadas
 
 - Sin tocar `scripts/interacciones/`, `mapa/`, `construccion/`, `saving/` (lectura) ni widgets DeepSeek.
 - i18n: 14 claves `SETTINGS.*` nuevas agregadas a `locales/es.po` y `en.po` (LF).
-- DeprecaciÃ³n de los volÃºmenes de `game_settings.gd` (dueÃ±o M07) documentada en su `plan-actual/04-Codigo.md`.
+- Deprecación de los volúmenes de `game_settings.gd` (dueño M07) documentada en su `plan-actual/04-Codigo.md`.
 
-## Umbral de re-render del UI (S62b â€” G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #3)
+## Umbral de re-render del UI (S62b — G-5.3-Flash-Agente, 2026-10-23; apilado CRON F #3)
 
 **Criterio numerico de CUANDO el UI re-renderiza (anti-lag M58/M61):**
 - RE-RENDER DISPARADO SOLO POR: cambio de chunk/POI del jugador (evento del
@@ -283,8 +283,8 @@ usan **`set_value_no_signal` / `set_pressed_no_signal` / `select()`**. Emitir
 - UMBRAL numerico: el re-render de un panel completo debe completar
   <= 8 ms (medible con el QA NFR overhead M58 S45/S48); el delta entre
   cambio de perfil y el frame pintado <= 2 frames.
-- COMO se mide: profiler Godot pestaÃ±a UI raiz (la duraciÃ³n del callback de
-  la seÃ±al) + el QA NFR overhead como patrÃ³n de instrumentacion.
+- COMO se mide: profiler Godot pestaña UI raiz (la duración del callback de
+  la señal) + el QA NFR overhead como patrón de instrumentacion.
 
 
 ## Specs UI/UX (Beam 508)
@@ -733,3 +733,8 @@ tocar el resto del contenido.
 
 ### Remapeo de M57 re-lee las etiquetas de prompts automaticamente
 - Spec: remapeo de M57 re-lee las etiquetas de prompts automaticamente. Coherente with M53 (UI/UX) and M57 (interfaz).
+
+## Specs UI/UX (Beam 708)
+
+### Font subsetting por idioma (M88) para evitar desperdicio de memoria
+- Spec: Font subsetting por idioma (M88) para evitar desperdicio de memoria. theme_ux._try_load_font (theme_ux.gd:193-208) carga las TTF completas con load_dynamic_font sin subsetting — las 3 fuentes (Nunito Regular/Bold, FredokaOne) cargan glifos completos. El subsetting por idioma requiere definir ranges Unicode por locale. M88 ya tiene el subsetter (tools/font_subsetter.py + scripts/fonts/auditar_glifos.gd, con la medicion de 79 codepoints requeridos y 78 cubiertos: falta U+2192). Lo que falta es CONECTARLO al pipeline de carga de theme_ux._try_load_font. Coherente with M53 (UI/UX) and M88 (fuentes).

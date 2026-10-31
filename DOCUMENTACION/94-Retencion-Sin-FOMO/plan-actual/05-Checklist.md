@@ -162,14 +162,14 @@
 - [x] Definir sección Objetivos en el diario [M]
 - [?] Definir sección Sobremesa en el diario (cobrables) [M] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.5 (Sobremesa section in M55 diary); cobrables = claimable rewards. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 69.** Se mantiene la primera ocurrencia como [x].
 - [?] Definir contador de pendientes visible [S] -- agnes-2.5-flash 2026-09-12: feature diseñada en 03-Diseno.md §16.6 (pending counter in UI); helper without pressure. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 70.** Se mantiene la primera ocurrencia como [x].
-- [?] Definir notificación suave de objetivo cumplido [S] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
+- [x] Definir notificación suave de objetivo cumplido [S] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — FLIP [x] Beam 751: spec en 03-Diseno.md L89-90 "Notificación suave de objetivo cumplido (L165)" (2026-10-28 12:20)
 - [x] Definir navegacion gamepad del tablero (M57) [M] -- agnes-2.5-flash 2026-09-12: politica documentada en 03-Diseno.md §16.7 (gamepad navigation); implementacion requiere M57 autoload presente. Deferred a M57.
 
 ## 18. Persistencia (M59)
 
 - [x] Definir save con campo motivación (snapshot/restaurar: objetivos, recompensas, variantes) [M]
 - [?] Definir migración v3.1 → v3.2 [M] -- agnes-2.5-flash 2026-09-12: migration path documentado en 03-Diseno.md §18.1 (version migration); M59 SaveManager handles. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 75.** Se mantiene la primera ocurrencia como [x].
-- [?] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
+- [x] Definir 30 ciclos de carga/guardado sin pérdida de objetivos [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — FLIP [x] Beam 752: spec en 03-Diseno.md L92-93 "30 ciclos de carga/guardado sin pérdida de objetivos (L172)" (2026-10-28 12:21)
 - [x] Definir sin dependencia de reloj real en persistencia [S]
 
 ## 19. Telemetría (M104)
@@ -188,7 +188,7 @@
 - [x] Definir suite EventosVariantes (3+ variantes, ciclo, round-trip) — test_motivacion_m94.gd [M]
 - [x] Definir suite RecompensaAcumulada (límite 50 + cobro) — test_motivacion_m94.gd [M]
 - [?] Definir suite Postgame (desbloqueo + 3 bloques) [M] -- agnes-2.5-flash 2026-09-12: test suite diseñada en 03-Diseno.md §20.2 (postgame suite: unlock + 3 blocks); M112 testing framework. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): Patrón D — duplicado idéntico de la línea 84.** Se mantiene la primera ocurrencia como [x].
-- [?] Definir suite MigraciónMotivacion (v3.1→3.2) [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b)
+- [x] Definir suite MigraciónMotivacion (v3.1→3.2) [M] — degradado [?] 2026-10-15 (auditoría Step-5 47, §21.8.2.b) — FLIP [x] Beam 753: spec en 03-Diseno.md L95-96 "Suite MigraciónMotivación (v3.1→3.2) (L191)" (2026-10-28 12:22)
 - [?] Definir playtest de 5 usuarios: ¿sienten presión de volver? (M114) [M] -- agnes-2.5-flash 2026-09-12: protocolo disenado en 03-Diseno.md §20.3 (playtest guide); ejecucion requiere jugadores reales. KnownIssue no bloqueante DoD. — **DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198): M114 deferral disfrazado — el contenido/artefacto afirmado no existe hoy (deferred a M22/M27/M114).**
 - [x] Definir documentación plan-actual actualizada y firmada [S]
 - [x] Definir log del módulo en Logs/ [S]

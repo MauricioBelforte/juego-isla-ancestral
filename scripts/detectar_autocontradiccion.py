@@ -3,6 +3,9 @@
 # =============================================================================
 # detectar_autocontradiccion.py — Detector repo-wide de autocontradiccion
 # marca <-> nota en los 05-Checklist.md de plan-actual (Ling-3.1-Flash, 2026-10-30).
+# v8 (2026-10-31, vuelta 25): (1) la promotion vecinal NO aplica si la propia linea
+# porta evidencia contraria (CONTRARIA.search) — evita C2 fantasma sobre deuda viva;
+# (2) 'sin implementar' se agrega a CONTRARIOS_A2. Conteos v7->v8 en informe v25.
 #
 # ORIGEN: hallazgo BUG-070 Familia A (M85, Log 2265) + adoption de agnes-3-flash
 # como patron "grep_repowide_autocontradictorio" (estado_director.json) + rec 7
@@ -106,6 +109,7 @@ PEND_REAL = re.compile(r'pendiente real|no inflado', re.I)
 CONTRARIOS_A2 = [
     r'inflado', r'\brevertido', r'\brevertida', r'pendiente real', r'no existe en disco',
     r'archivo no existe', r'artefacto (?:in)?existente', r'sin.codigo.en.disco', r'no implementado',
+    r'sin implementar',
     r'\[x\]\s*(?:→|->|a)\s*\[\?\]', r'\b0 hits\b', r'no hay check', r'no existe tal test',
     r'no existe la constante', r'no existe test', r'no existe log', r'canvas visual no existe',
     r'\bstub\b', r'no existe rol', r'no tiene datos', r'AUSENTE en disco', r'entregable padre no existe',
@@ -181,6 +185,11 @@ def escanear(ruta_doc, solo_modulo=None):
             vec = vecinos_texto(ls2, ln - 1)
             if PRESENTE_AUTODECL.search(s):
                 fijos.append((mod, ln, s))
+            elif CONTRARIA.search(s):
+                # v8 (2026-10-31, vuelta 25): la propia linea porta evidencia
+                # contraria — el vecino resuelto NO promueve a C2; queda A1/A2
+                # (deuda viva honesta, no resolucion textual).
+                fijos.append((mod, ln, s))
             elif VECINO_RESUELTO_FUERTE.search(vec):
                 buckets['C2'].append((mod, ln, s)); promovidos += 1
             else:
@@ -235,7 +244,7 @@ def main():
     salida = '\n'.join(linea)
     print(salida)
     if args.out:
-        with io.open(args.out, 'w', encoding='utf-8') as f:
+        with io.open(args.out, 'w', encoding='utf-8', newline='\n') as f:
             f.write(salida)
         print(f'\nPersistido: {args.out}')
     resumen = {

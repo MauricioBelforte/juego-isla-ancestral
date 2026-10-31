@@ -91,11 +91,13 @@
 3. **34 L47 (desafíos de pesca):** el padre SÍ está consumido en producción (achievement_service.gd L141-144 + test_logros.gd L88-106); lo inexistente son los desafíos opcionales 'catálogo completo' y 'pez más grande' (logros.json: 17 logros, 2 de pesca).
 4. **27 L92/L93 (señales de carga):** island_loaded(island) SÍ existe (event_bus.gd L120) pero sin progreso/etapa/100% — la señal declarada en el ítem (isla_cargando/isla_cargada con id) no existe.
 
-## 5. Límites del detector v7 expuestos por esta familia (candidatos v8)
+## 5. Límites del detector expuestos por esta familia — ESTADO v8 (2026-10-30 23:2x local, vuelta 25)
 
-1. **Promoción vecinal sobre línea contraria:** L46/L83/L84/L85 suben a C2 porque un vecino (±4) trae resolución fuerte — pero la evidencia contraria está en la PROPIA línea. La promoción debería excluir líneas con CONTRARIA propia (o requerir que el vecino resuelva EL MISMO entregable).
-2. **'sin implementar' no está en CONTRARIOS_A2:** L57/L133/L142/L153/L225/L226 quedan sin bucket (invisibles para A2). Forma recomendada: agregar `r'sin implementar'` a CONTRARIOS_A2 (la guardia RESUELTO_LINEA ya existe).
-3. **FORMULA_OK es contador paralelo:** las 37 se bucketean además (dual classification). Una línea puede ser FORMULA legítima de forma Y deuda viva de fondo — el contador de 80 no debe leerse como "80 limpias".
+1. **Promoción vecinal sobre línea contraria — APLICADO en v8:** la pasada 2 ahora tiene guardia: si la propia línea del hit tiene evidencia contraria (`CONTRARIA.search`), NO se promociona aunque un vecino (±4) traiga resolución fuerte. Efecto aislado (v7-snap vs v8, mismo WT): promovidos 14→2; las 12 des-promovidas (M31 L46/83/84/85 entre ellas) vuelven a su bucket de pasada 1 (A2).
+2. **'sin implementar' ausente de CONTRARIOS_A2 — APLICADO en v8:** `r'sin implementar'` agregado a CONTRARIOS_A2 (la guardia RESUELTO_LINEA ya existía). Efecto: las 6 sin-bucket (L57/133/142/153/225/226) + 6 líneas repo-wide con el mismo token entran a A2. **Resultado: 37/37 FORMULA-C en bucket A2 con v8** (verificado por `Temp/kilo/verif37_v8.py`): M31=23 A2 (20 FC + L59/60/218) · M34=10 (6 FC + L37/76/L104/168) · M27=10 (8 FC + L55/115) · M156=13 (3 FC + 10 BUG-070 lote 8).
+3. **FORMULA_OK es contador paralelo — SIN CAMBIO (documentado, intencional):** las 37 se bucketean además (dual classification). Una línea puede ser FORMULA legítima de forma Y deuda viva de fondo — el contador de 80 no debe leerse como "80 limpias".
+
+**Verificaciones v8 adicionales (vuelta 25):** (a) M156 **L173** es FORMULA-C "por espejo" — la evidencia contraria aparece ANTES del "Flipado" en la misma línea (el rg de las 37 exige contraria DESPUÉS de la fórmula; L173 queda fuera de las 37 pero v8 la mantiene en A2 correctamente, dentro de las 13 de M156). (b) Caso **M157 L148** (único solapamiento con DeepSeek TANDA 7): resuelto por precisión de nota SIN flip — ver informe padre §15/§16. (c) Conteos v8 finales: A2=242 · C2=554 · promovidos=2 (v7-snap sobre el mismo WT: A2=219 · C2=565 · promovidos=14).
 
 ## 6. Acción sugerida (DECISIÓN DIRECTOR/FUNDADOR — Ling no flipea)
 
@@ -108,9 +110,10 @@
 ## 7. Trazabilidad
 
 - **Extracción:** rg del §1 sobre `DOCUMENTACION/**/plan-actual/05-Checklist.md` (2026-10-30 21:4x local).
-- **Clasificación:** `Temp/kilo/clasif_formulac.py` (importa `scripts/detectar_autocontradiccion.py` v7; replica pasada 1 + pasada 2). Detector re-corrido con `--out Temp/kilo/v24_detector.txt` (conteos canónicos v7, deterministas).
-- **Docs vinculadas:** informe padre `AUDITORIA-AUTOCONTRADICCION-REPO-WIDE.md` §8(iv) + §14 · estado_director.json (campos `grep_repowide_autocontradictorio`, `ling_mapa_fragiles`, `decisiones_fundador`).
-- **Reporte:** msg 333 al canal Ling-3.1-Flash · **Log 2270** · BACKLOG-MASTER ESTADO v24.
-- **Repo:** HEAD `5d6105a` · 0 flips aplicados · 0 push · riel PT intacto (pt.po sha1 95ee2ce0d1, K1-K4 vivos, git status riel vacío).
+- **Clasificación:** `Temp/kilo/clasif_formulac.py` (importa `scripts/detectar_autocontradiccion.py` v7; replica pasada 1 + pasada 2). ⚠️ **Corrección honesta v25:** el archivo `Temp/kilo/v24_detector.txt` citado en la vuelta 24 NO persistió en disco (`Temp/kilo/` es untracked; el archivo no existe — verificado por glob esta vuelta). La corrida canónica que SÍ persiste y es re-verificable es la v8: `Temp/kilo/v25_detector_v8_final.txt`.
+- **Verificación v8 (vuelta 25):** `Temp/kilo/verif37_v8.py` → **37/37 FORMULA-C en A2**; snapshot v7 desde HEAD `59ecee4` → `Temp/kilo/detector_v7_snap.py` + `Temp/kilo/v25_v7_snap.txt` (aislamiento de los 2 fixes); sonda i18n → `Temp/kilo/sonda_v25_flota.py`.
+- **Docs vinculadas:** informe padre `AUDITORIA-AUTOCONTRADICCION-REPO-WIDE.md` §8(iv) + §14 + §15/16/17 (v25) · estado_director.json (campos `grep_repowide_autocontradictorio`, `ling_mapa_fragiles`, `decisiones_fundador`).
+- **Reporte:** msg 333 (vuelta 24) · msg 334 (vuelta 25) al canal Ling-3.1-Flash · **Log 2270** (v24) · **Log 2272** (v25) · BACKLOG-MASTER ESTADO v24/v25.
+- **Repo:** HEAD `59ecee4` al inicio de la vuelta (base del snapshot v7); durante el cierre el Cron C del director avanzó HEAD a `d93c9e5` ("Se preservaron avances de la jornada 31oct") — preservó el anexo v24 + msg 333 + Log 2271; mis writes v25 quedan en WT para el próximo Cron C · 0 flips aplicados · 0 push · riel PT intacto (pt.po sha1 95ee2ce0d1; K1-K4 vivos — K4 = `"pt": "Português"` en locale_utils.gd L21, histórico desde eca30f0/M87, idéntico en 659cdb4/59ecee4/d93c9e5; git status riel vacío; diff 59ecee4..d93c9e5 en paths del riel = vacío).
 
 **Firma:** Ling-3.1-Flash / Kilo Code — 2026-10-30 22:12 local (2026-10-31 01:12Z).

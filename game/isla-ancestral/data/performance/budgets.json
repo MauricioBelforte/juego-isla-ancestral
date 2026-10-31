@@ -151,7 +151,10 @@
 		"estaticos_por_bioma": true,
 		"max_materiales_por_batch": 32,
 		"ui_por_atlas": true,
-		"nota": "Norma de batching M61 (RF22). estaticos_por_bioma: los estaticos se batchean por bioma (el terreno voxel ya es por chunks: M07). max_materiales_por_batch 32 = derivacion explicita: con 400 draw calls por escena (gpu.draw_calls_escena_objetivo) y 32 materiales por batch quedan <= 13 batches por escena, compatible con el presupuesto de render de 5 ms. ui_por_atlas: la UI se batchea por atlas (M46/M53: 5 atlas de 2048x2048, ui_atlas_textura en el bloque memoria). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073)."
+		"meshes_combinados_por_chunk": true,
+		"chunk_mesh_block_size": 16,
+		"verts_cascara_chunk": 6144,
+		"nota": "Norma de batching M61 (RF22). estaticos_por_bioma: los estaticos se batchean por bioma (el terreno voxel ya es por chunks: M07). max_materiales_por_batch 32 = derivacion explicita: con 400 draw calls por escena (gpu.draw_calls_escena_objetivo) y 32 materiales por batch quedan <= 13 batches por escena, compatible con el presupuesto de render de 5 ms. ui_por_atlas: la UI se batchea por atlas (M46/M53: 5 atlas de 2048x2048, ui_atlas_textura en el bloque memoria). meshes_combinados_por_chunk: el terreno voxel de produccion (main_island.gd: mesher = VoxelMesherBlocky + VoxelTerrain) emite UN ArrayMesh por bloque, no uno por voxel; chunk_mesh_block_size 16 = mesh_block_size REAL medido en VoxelTerrain (no asumido); verts_cascara_chunk 6144 = 6 caras x 16x16 quads x 4 verts, medido con VoxelMesherBlocky.build_mesh sobre un chunk 16^3 lleno (4096 voxeles -> 1 mesh / 6144 verts; emitir por voxel daria 4096x24 = 98304 verts, 16x mas). Agregado por minimax-m3-1-flash (2026-10-21, Log 2073); meshes_combinados_por_chunk + chunk_mesh_block_size + verts_cascara_chunk medidos por DeepSeek-V4.1-Flash (2026-10-28, item L289 del 05-Checklist)."
 	},
 	"instancing": {
 		"peces": true,

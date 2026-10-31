@@ -4905,7 +4905,43 @@ silenciosa de todos los guardados futuros).
 **Fecha:** 2026-10-06 06:57
 
 
-## 9. Historial de Modificaciones de Este Archivo
+
+## BUG-150: EventBus.item_removed — señal declarada en el bus SIN emisor (puente bus-bridge roto)
+
+- **Módulo(s):** M14 (EventBus core) · impacta M53 (UI Inventario) y M59 (Guardado) — dueños del puente
+- **Severidad:** 🟠 Mayor
+- **Estado:** [?] Delegado (escalado al fundador vía agnes-3-flash, msg 434; el fix cambia M59/M53, fuera de mi alcance de corrección)
+- **Descripción:** `EventBus.item_removed` está declarada en `game/isla-ancestral/scripts/core/event_bus.gd:70` pero **0 emisores la emiten al bus**. Los emisores solo existen localmente (`inventario_service.gd`, `inventory_component.gd`) y 2 consumidores del bus están muertos (`save_manager.gd:83`, `hud_screen.gd:120`). Resultado: la remoción de ítems del inventario NO propaga al bus → save/UI pueden perder el evento silenciosamente.
+- **Evidencia (medida por Hy3, sin tocar código ajeno):**
+  - Estático `scripts/red_probe_event_bus.py` (oráculo M14 27oct/28oct): 54 señales declaradas / 20 muertas; `item_removed` en el conjunto de 0-emit.
+  - Runtime `scripts/core/probe_runtime_bus_m14.gd` (boot 60 frames de `main_island.tscn`): 113 señales conectadas, **2 emitidas / 52 declaradas en 0**; `item_removed` en el conjunto de 0.
+  - `grep -rn "item_removed" scripts`: solo emisiones locales (service/component), 0 `EventBus.item_removed.emit`.
+- **Reproducción:** iniciar juego → quitar un ítem del inventario → save_manager/hud no reaccionan vía bus.
+- **Sugerido (NO aplicado por mí):** puentear `inventario_service`/`inventory_component` a `EventBus.item_removed.emit(...)` (parche de ~3 líneas, en ledger del director, pendiente de dueño).
+- **Firma:** Hy3 (WorkBuddy / Hunyuan) — 2026-10-28.
+
+
+## BUG-151: M48 animacion_jugador — `Engine.get_singleton("AnimationService")` devuelve null en runtime (cableado M48 no anima nada)
+
+- **Módulo(s):** M48 (Animación)
+- **Severidad:** 🟠 Mayor
+- **Estado:** [x] Resuelto (2026-10-29, DeepSeek-V4.1-Flash / WorkBuddy, GO agnes-3-flash #450, canal 451): `_anim = get_node_or_null("/root/AnimationService")` + corrección de 2 comentarios que documentaban el defecto como solución. Verificado: sonda pre-fix `_anim=null` + ERROR; post-fix `_anim=NODO(AnimationService)` sin ERROR; regresión M48 70 checks/0 fallos (play 12/0 + service 8/0 + validacion 50/0); el `Failed to retrieve non-existent singleton` que salía en CADA corrida headless del proyecto ahora da 0 (también en suites no-M48). Alcance: `Engine.get_singleton` sin `addons/` = 0 usos en código (solo 2 menciones en ese archivo); sobre 114 autoloads no se repite.
+- **Descripción:** `game/isla-ancestral/scripts/animacion/animacion_jugador_m48.gd` resuelve el servicio con `Engine.get_singleton("AnimationService")`, pero `AnimationService` es un **autoload** (`project.godot` L85), no un singleton de `Engine`. Devuelve `null` + `ERROR: Failed to retrieve non-existent singleton 'AnimationService'` en cada corrida headless → `_process()` sale por `if _fsm == null or _anim == null: return` (L54-55) y **el cableado del jugador a M48 no anima nada en runtime**. Origen: se cambió a `Engine.get_singleton` para que el script compilara en CI (BUG-129/M118) y eso rompió la resolución en runtime.
+- **Reproducción:** cualquier corrida headless → `ERROR: ... 'AnimationService'` en cada frame; el jugador no dispara animaciones.
+- **Fix sugerido (GO, 1 línea):** `_anim = get_node_or_null("/root/AnimationService")`.
+- **Detectado por:** DeepSeek-V4.1-Flash (tanda cierre-1nov, #447/#449) · **GO/registro:** agnes-3-flash (Sapiens AI) / Kilo Code — 2026-10-29.
+
+
+## BUG-152: qa_dirty_item4.gd — TEST MUERTO: llama a `_actualizar_dirty()` inexistente (colga >7 min, false-green L176/ítem 4 de M59)
+
+- **Módulo(s):** M59 (Guardado) / testing — suite `qa_dirty_item4.gd`
+- **Severidad:** 🟠 Mayor
+- **Estado:** [x] RESUELTO (DeepSeek-V4.1-Flash TANDA 5 #464, GO agnes-3-flash #463, Log 2262): parche v3 de `qa_dirty_item4.gd` — `_actualizar_dirty()` → `_refrescar_guardar_dirty()` + guardián 3 capas (contador + CHECKS_MINIMOS=6 medido + watchdog 30 s) + fix colateral `_input_event`→`_unhandled_input`. Sonda: reinyectar el bug = EXIT 1 en 37 s nombrando bloques B/C/D no ejecutados (antes EXIT 124 colgado).
+- **Descripción:** `qa_dirty_item4.gd:39` llama `_actualizar_dirty()`, que **no existe** en `PauseLayer` (grep = 0 hits). Resultado: `SCRIPT ERROR` y el test **se cuelga >7 min** en el boot de la isla. La cobertura que declara de L176/ítem 4 de M59 es **falsa** (suite muerta y verde, patrón BUG-100). Último commit que lo tocó: `b311264`.
+- **Reproducción:** correr `qa_dirty_item4.gd` headless → SCRIPT ERROR + colgado.
+- **Fix sugerido:** validar el nombre del método en `PauseLayer` (¿existe `mark_dirty`/`_actualizar_estado_dirty`? re-encallar la llamada o eliminar la suite muerta y reescribirla). Verificar que L176/ítem 4 tenga test vivo real.
+- **Detectado por:** DeepSeek-V4.1-Flash (WorkBuddy) · **Registro:** agnes-3-flash (Sapiens AI) / Kilo Code — 2026-10-30.
+
 
 - **2026-10-22 19:18** — **Normalización ESTRUCTURAL de BUG-141..BUG-148 (DeepSeek-V4.1-Flash / WorkBuddy, Log 2138, canal 364 P4, autorizada por el director):** los 8 IDs vivían solo en la lista informal `## Bugs abiertos` del final (sin fila §5, sin entrada §6/§7, sin historial). Se transcribieron a la estructura canónica **preservando texto, estado y dueño verbatim**. Estados preservados tal cual: [x] 141, 146, 147 · [ ] 142, 143, 144, 145, 148. La **severidad no existía** en la lista informal: se DERIVÓ del texto y se declara `(derivada del texto: …)` en la celda, con etiqueta medida `Mayor`/`Menor` (sin abrir vocabulario nuevo). Tabla §5 140→148 filas · entradas 133→141 · defectos estructurales 18→18 (gate verde).
 

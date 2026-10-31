@@ -148,7 +148,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [ ] Guardar museo, bestiario y colecciones (M37/M36) [M]
 - [x] Guardar diario del jugador (M55) [M] — **G-5.3-Flash-Agente (2026-10-21):** flip por evidencia: `diary_service.gd` ya es provider del riel M59 (`register_provider` L84-85, `get_section_name()='diary'` L335, `get_save_data/restore_save_data` L339/351) — confirmado por sweep en disco y por `qa_m59_payload_sections.gd` (payload real con ~50 secciones incl. diary; EXIT 0 repeatedly).
 - [ ] Guardar fotos por referencia (ids, no bytes — M56) [M]
-- [ ] Guardar Sellos y ruinas coleccionables [M]
+- [ ] Guardar Sellos y ruinas coleccionables [M] — *dueño: **M37** (colecciones; es la sección O de este checklist, junto a museo/bestiario). Sin provider de sellos en `scripts/saving/`: `grep -rli sellos scripts/saving/` = 0. No cerrable desde M59.*
 - [x] Testear diario 500+ entradas y fotos faltantes (fallback) [C] — **Step-5-WorkBuddy (2026-10-23, Log 2161):** mismo suite, bloque 2 (45 checks / 0 fallos / EXIT 0 x3). Roundtrip real de las 44 entradas del catalogo (`Diary.registrar()` + favorito + `set_ui_prefs` e2e); payload sintetico con 44 validas + 456 huerfanas -> carga OK y quedan 44 (las huerfanas se IGNORAN con print, fallback medido); 300 ids de foto inexistentes -> carga OK y se preservan; documento en disco 24619 B < 120 KB.
 
 ## P. Configuración (M90/M91)
@@ -181,7 +181,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Localizar mensajes de corrupción, recuperación y disco lleno [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Localizar feedback de guardado (M44) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Respetar plurales (horas, minutos) [S] -- Diseno: 03-Diseno.md (guardado definido)
-- [ ] Testear menú de guardado en 3 idiomas [M]
+- [x] Testear menú de guardado en 3 idiomas [M] — **[x] HECHO 2026-10-30 (DeepSeek-V4.1-Flash, canal 460, Log 2255):** suite nueva `scripts/saving/test_menu_guardado_idiomas_m59.gd` 82 checks/0 fallos/EXIT 0 ×3 (6 bloques A-F, piso 82 medido). **Fix de producto:** `pause_layer.gd` 2 líneas (declarar `text_key` vía `UiI18n.meta_texto` en title/btn) — el menú no se re-traducía en vivo (quedaba en el idioma viejo hasta reiniciar). Guardián probado EN ROJO (3 inyecciones, restauradas sha256). Regresión: 4 suites M59 + test_m53 35/0 + ratios 80/0.
 
 ## T. Validación y QA
 
@@ -210,9 +210,9 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 ## W. Accesibilidad (M58)
 
 - [x] Feedback de guardado visible y legible [S] → **G-5.3-Flash-Agente (2026-10-19):** el feedback visual existe y es legible: `pause_layer._toast_guardado(ok, clave)` emite por `EventBus.ui.notify` el toast `guardado_manual` con texto LOCALIZADO (`SETTINGS.GUARDAR_EXITO/FALLO` via Localization) — capturado en runtime en `qa_m59_guardar_confirmacion.gd` (4/0 EXIT 0, «toast GUARDAR_EXITO» dos veces). Legibilidad: toasts `NotificationService` con contraste WCAG corregido por BUG-130 (`test_m53_wcag.gd` 17/0, Ling 3.1).
-- [ ] Confirmaciones accesibles por gamepad (M57) [M]
+- [ ] Confirmaciones accesibles por gamepad (M57) [M] — **DeepSeek-V4.1-Flash (2026-10-30, Log 2259):** MEDIDO y bloqueado por M57. En `project.godot` las acciones `pausa` e `inventario` tienen **0** eventos `InputEventJoypadButton` y **0** `InputEventJoypadMotion` (1 `InputEventKey` cada una), así que con un mando no se puede ni abrir el menú: la confirmación no llega a ser alcanzable. `pause_layer.gd` no tiene mapeo de gamepad (0 `gamepad`/`joypad`/`JOY_BUTTON`) ni navegación por foco. Queda `[ ]` hasta que M57 cablee el mapeo.
 - [x] Diálogos de aviso con opciones claras [S] → **G-5.3-Flash-Agente (2026-10-19):** `confirm_popup.gd` — botones OK/Cancelar con textos LOCALIZADOS (`SETTINGS.CONFIRMAR`; `SETTINGS.CANCELAR`), dispatch limpio `_cerrar(aceptar)` → on_ok / on_cancel, y cancel sin callback definido = no-op seguro (cozy). QA `scripts/saving/qa_m59_popup_opciones.gd` **5/0, EXIT 0** — «botón OK localizado», «botón Cancelar localizado», «cancelar ejecuta la rama de cancelación», «aceptar ejecuta on_ok», «cancel sin on_cancel definido es no-op seguro». El popup real está plateado en el flujo Guardar/Borrar del pause_layer (ítems 1/7).
-- [ ] Testear menú con Reduce Motion (M58) [M]
+- [x] Testear menú con Reduce Motion (M58) [M] — **DeepSeek-V4.1-Flash (2026-10-30, Log 2259):** MEDIDO en las DOS vistas, y queda como gate vivo. RUNTIME: la PauseLayer instanciada no tiene ningún nodo `AnimationPlayer`/`AnimationTree` en el subárbol (0) y su `PanelContainer` tiene `modulate = Color(1,1,1,1)` y `scale = Vector2(1,1)` (sin alpha ni scale animados); el título tampoco arranca transparente. FUENTE: `create_tween` = 0 en `pause_layer.gd` y en `confirm_popup.gd`. Un menú sin movimiento cumple Reduce Motion por construcción. Evidencia: bloque G (6 checks) de `scripts/saving/test_menu_guardado_idiomas_m59.gd`, cableado en `quality.yml`; suite 88 checks / 0 fallos / EXIT 0 ×3, piso `CHECKS_MINIMOS = 88` medido y guardián probado EN ROJO con 3 sondas (`create_tween` en el fuente, `AnimationPlayer` en runtime y piso 999 → las 3 EXIT 1 nombrando el check).
 - [ ] Testear con texto grande (M58) [M]
 
 ## X. Documentación
@@ -238,7 +238,7 @@ unc _conectar_guardar_dirty) — reproducido como boot-parse-error y corregido (
 - [x] Marcar ítems solo al cumplir la DoD (sección 21.6) [S] -- Diseno: 03-Diseno.md (guardado definido)
 - [x] Revisar que plan-inicial == plan-actual (SHA-256) [S] → **G-5.3-Flash-Agente (2026-10-19):** la intención verificable del ítem (plan-inicial INTOCABLE) pasa: `git status --short` y `git diff HEAD --stat` sobre `DOCUMENTACION/59-Guardado/plan-inicial/` = **0 cambios** (idéntico al commit; SHA-comparación equivalente vía git objects). plan-actual sigue vivo por diseño (eso es correcto — no es mutación del plan-inicial).
 - [x] Confirmar 130 ítems exactos [S] → **G-5.3-Flash-Agente (2026-10-19):** medición directa del checklist: **62 [x] + 67 [ ] + 1 [?] = 130 exactos**; Totales normalizados al medido (drift +1 preexistente documentado in situ).
-**Totales:** 130 lineas-item - Completados: 115 - Pendientes: 13 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 3 flips nuevos con evidencia de suite real (L143/L152/L175), Log 2161; 10 flips previos, Logs 2154 + 2155; conteo de disco por prefijo de linea)
+**Totales:** 130 lineas-item - Completados: 118 - Pendientes: 10 - No resueltos: 2. (Step-5-WorkBuddy 2026-10-23: 3 flips nuevos con evidencia de suite real (L143/L152/L175), Log 2161; 10 flips previos, Logs 2154 + 2155; conteo de disco por prefijo de linea)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?].

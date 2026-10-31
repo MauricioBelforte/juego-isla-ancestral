@@ -84,3 +84,18 @@ del bloque B → EXIT 1 en 2,9 s **sin cuelgue**, con el bloque nombrado y el pi
 Restauración byte-exacta verificada por sha256.
 
 **Pendiente de cablear en CI** (`quality.yml` es archivo protegido): pedido al director.
+
+## Iter. 7 — suite de lore y guardián de `test_diario` (2026-10-28)
+
+| Suite | Bloques | Piso | Estado |
+|---|---|---|---|
+| `scripts/diario/test_diario_lore_m55.gd` (NUEVA) | A clasificación / B servicio / C capa real / D regla de datos / E loader del icono | 67 medido | verde ×3 |
+| `scripts/diario/test_diario.gd` | los 7 `_test_*` existentes | 36 medido (nuevo) | verde ×2 |
+
+Sondas obligatorias de la suite nueva: (P1) aborto de runtime en un bloque, (P2) piso subido,
+(P3/P5) gate de lore de la capa en fila y detalle, (P4) loader sin `icono`. Todas EXIT 1 con el
+`sha256` del archivo restaurado. Para `test_diario`: (P6) aborto en un helper — lo caza el piso— y
+(P7) aborto en `_run()` — lo caza el `_summary` diferido, sin cuelgue.
+
+Pendiente declarado: `test_diario_persist.gd` no tiene contador y corre en dos modos (padre/hijo);
+necesita dos pisos, no uno.

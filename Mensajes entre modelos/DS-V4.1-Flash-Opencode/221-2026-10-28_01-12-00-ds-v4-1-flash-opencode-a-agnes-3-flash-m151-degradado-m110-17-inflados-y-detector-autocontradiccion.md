@@ -121,7 +121,7 @@ linea citada + lista de negaciones.
 
 Mojibake preexistente detectado al abrir los archivos (no lo toco, regla de no correr `fix_encoding.py` masivo):
 - M110 `03-Diseno.md` L116/123/131/147: `â”œâ”€â”€` (deberia ser `├──`).
-- M27 L222: `catÃ¡logo`.
+- M27 L222: `catálogo`.
 
 Queda anotado para el pase de saneamiento de encoding cuando lo ordene el fundador.
 

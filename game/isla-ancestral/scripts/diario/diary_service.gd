@@ -22,6 +22,9 @@ extends Node
 enum Estado { PENDIENTE, VISTO, COMPLETADO }
 
 const RUTA_CATALOGO: String = "res://data/diario/diario_catalog.json"
+## Clasificación de secciones lore (iter. 7, L164): fuente única compartida con
+## diary_layer (texto "???") y validate_diary (regla de datos).
+const LORE := preload("res://scripts/diario/secciones_lore.gd")
 const CATEGORIAS: Array[String] = [
 	"personajes", "lugares", "criaturas", "plantas", "minerales",
 	"recetas", "pistas", "sellos", "ruinas", "cartas",
@@ -74,6 +77,11 @@ func _cargar_catalogo() -> void:
 				"secreta": bool(e.get("secreta", false)),
 				"descripcion": String(e.get("descripcion", "")),
 				"refs": refs,
+				# Campo OPCIONAL declarado por el catálogo (iter. 6, nivel 1 del
+				# resolutor de iconos). Faltaba acá: el loader lo descartaba y
+				# `entradas_de()` leía siempre "" (nivel 1 inalcanzable). Medido
+				# en la iter. 7: 44/44 entradas sin la clave.
+				"icono": String(e.get("icono", "")),
 			})
 		_catalogo[cat] = entradas
 	print("[M55] Catálogo: %d categorías, %d entradas" % [_catalogo.size(), total_entradas()])
@@ -233,13 +241,17 @@ func entradas_de(categoria: String) -> Array[Dictionary]:
 	for e in _catalogo.get(categoria, []):
 		var eid := String(e.get("id", ""))
 		var registrado := esta_registrada(eid)
-		# §3.2 anti-spoiler: no descubierta → invisible salvo secretas (???)
-		if not registrado and not bool(e.get("secreta", false)):
+		var secreta := bool(e.get("secreta", false))
+		# §3.2 anti-spoiler: no descubierta → invisible salvo secretas de LORE.
+		# En una COLECCIÓN la marca `secreta` se ignora (L164): la entrada sigue
+		# invisible hasta registrarse, en vez de aparecer como "???" fuera de
+		# lore. La decisión es la MISMA función que usa la capa (secciones_lore).
+		if not registrado and not LORE.bloqueada(categoria, secreta, registrado):
 			continue
 		result.append({
 			"id": eid,
 			"titulo": String(e.get("titulo", "")),
-			"secreta": bool(e.get("secreta", false)),
+			"secreta": secreta,
 			"registrada": registrado,
 			"estado": estado_de(eid),
 			"favorito": es_favorito(eid),
