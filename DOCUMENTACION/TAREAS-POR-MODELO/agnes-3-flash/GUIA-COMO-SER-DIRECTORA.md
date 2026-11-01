@@ -27,7 +27,7 @@
 | | |
 |---|---|
 | Método | Detector por **LAG de acuses** (mtime real, NO slug) sobre los canales activos. |
-| Canales activos (28oct) | DeepSeek-V4.1-Flash, Hy3, Ling-3.1-Flash, Step-5-WorkBuddy, GLM-5.3-Flash, MiniMax-M3.1-Flash, DS-V4.1-Flash-Opencode. **Beam PAUSADO** (auto-avisos NO contar como lag, NO responder — anti-loop). |
+| Canales activos (1nov) | **DeepSeek-V4.1-Flash** (salida 1-nov, herencia), **Hy3** (salida 1-nov, herencia), **Ling-3.1-Flash** (i18n/doc, 1/h), **DS-V4.1-Flash-Opencode** (chase P-100), **Nemotron-3.5-Super-VL** (COLABORADOR PERMANENTE, ver §2.5). **GPT-Luna** (canal GLM, no agente activo). Beam PAUSADO. MiniMax/GLM offline. |
 | Criterio | mensaje agente→directora > 20 min sin acuse = LAG. Mi acuse = mensaje mío (`-a-<agente>`) con mtime posterior al mtime del mensaje. |
 | Cron | A (`0,30`) y B (`15,45`) — detección cada 15 min; G apagado. Ver `CRONOMETROS-AGNES-COMO-CREARLOS.md` (esquema final 29oct). |
 | Trampa | fecha del slug vs mtime real: el slug puede tener timestamp adelantado. **Medir por `os.path.getmtime`.** |
@@ -48,6 +48,23 @@ Al responder: número del pool de la carpeta destino, consumido al escribir; nom
 - **Patrón M68:** el 05 a veces tiene header/Totales STALE; los `[x]` viven en el CUERPO → contar el cuerpo.
 - **Tautología §21.8.2.b (adoptada, DS-OC #219):** un `[x]` que cita una spec que solo REPITE el artefacto faltante = overstatement → `[?]`.
 - **Grep, no slicing:** verificar flags de riel por grep del nombre del componente (falso-negativo K2, Ling #306).
+
+## 2.5. NEMOTRON — COLABORADOR PERMANENTE (directiva fundador 1nov 00:17)
+
+> **El fundador ordenó: "a partir de ahora Nemotron será colaborador tuyo, le podés delegar tareas todo el tiempo."**
+
+- **Rol:** Nemotron-3.5-Super-VL (Kilo Code) es mi **colaborador operativo permanente**. NO es un agente autónomo al que solo le asigno rieles: es un **brazo ejecutor** al que delego trabajo concreto cada vez que lo necesito.
+- **Capacidades que uso:** boot headless (godot_run_project + get_debug_output), Blender MCP (modelado + import + verify), screen capture (visual regression), checklist drift, doc census.
+- **Lo que NO delegar:** P-100 profundo (dominio de DeepSeek/DS-OC), gate-2 runtime suite-level (dominio de Hy3, ahora herencia), code writing complejo, decisiones macro (siempre del fundador).
+- **Comunicación:** canal `Mensajes entre modelos/Nemotron-3.5-Super-VL/`. Le escribo con mi pool, él me responde con su pool. Tandas de 3-5 ítems. Anti-loop: si repite veredicto → 1 línea "sin cambios", no repetir tabla.
+- **Fuel rule (permanente):** verificar en cada Cron D que su BACKLOG-MASTER tenga ≥5 [ ] ejecutables. Si <5 → crear nuevo riel (B-13, B-14, ...). "PENDIENTES QUE NO SON SUYOS" no cuentan como fuel.
+- **Tandas vigentes (1nov):** B-13 (M75 boot) → B-14 (M73 boot+BUG-155) → B-15 (M67 boot+Blender) → B-16 (M87 i18n visual) → B-17 (M129 boot).
+- **Cron propio:** 10 min (plataforma). Reportes por tanda. Si no hay nada nuevo → 1 línea, NO repetir.
+- **Decisiones complicadas = CONJUNTAS (directiva fundador 1nov 00:19):** cuando una decisión es macro (p. ej. BUG-153 859 [x], invalidate sello, degradación masiva), **yo y Nemotron la tomamos juntos**: él mide/boot-verify, yo gate-1/sello/flip. El veredicto final es de los dos, no de uno solo. Escribir "propuesta conjunta" en el mensaje.
+- **Numeración compartida (directiva fundador 1nov 00:19):** cuando YO y NEMOTRON escribimos al mismo canal, **SIEMPRE leer el último NNN en disco ANTES de escribir**. El pool `NUMEROS_DISPONIBLES.txt` es referencia, pero los archivos reales son la fuente de verdad. Si el último archivo en disco es #210, mi próximo es #211 (no el head del pool si es 208). **NUNCA repetir un número.** Colisiones pasadas: #205/#206/#207 (31oct) — corregidas por mtime, no por pool.
+- **Leer canales:** antes de cada TANDA para Nemotron, leer su último mensaje + su último auto-aviso para no repetir lo que ya sabe.
+
+---
 
 ## 3. SELLOS §21.8 (donde gate-1 MÍO + gate-2 del sucesor estén completos)
 

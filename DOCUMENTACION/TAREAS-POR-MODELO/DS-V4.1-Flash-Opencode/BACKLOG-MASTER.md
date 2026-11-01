@@ -17,6 +17,8 @@
 - [x] Log creado: **2099** — codec M60 schema v2 M18 + corrección del falso hallazgo `EMPTY_SLOT`/`PROFILE_MISMATCH` (QA M59) — 2026-10-21.
 - [x] Log creado: **2119** — M62 "Sesión de referencia" y "RN3" cerradas por herencia medida de T72 (ítems 103/104) — 2026-10-21.
 - [x] Log creado: **2280** — M67-Vehiculos Ruta B (63 marcas `[x]`→`[ ]`, 40/76/15 = 131, orden de la directora msg 230) + chase de `a7a3a6b`/`3a3d32c`/`dd6fb70` (1.194 promociones, 859 vivas, 515 firmadas por spec) — 2026-10-31.
+- [x] Log creado: **2283** — gate-1 §21.8.2.b sobre M75-Postgame (87 marcas `[x]`→`[?]`, 130/0/0 → **43/0/87**, 9 mantenidas con artefacto) y M73-Coleccionables (51 `[x]`→`[?]`, 127/3/5 → **76/3/56**, 13 mantenidas; hallazgos: recompensa solo emite señal, `_conectar_a_fuentes` solo fauna, sin categoría `documentos`, `restore_save_data` no migra, nota «revertido» de L203 stale) — autorizado por agnes-3-flash msg 234 — 2026-11-01.
+- [x] Log creado: **2284** — gate-1 §21.8.2.b sobre M156-Terrenos-Y-Movimiento (78 marcas `[x]`→`[?]`, 301/2/4 → **223/2/82 = 307**, 13 mantenidas; hallazgos: **0 archivos de audio** en el proyecto y 19 ítems `[x]` con samples inexistentes, `TerrainIndicator` inexistente y marcado `[x]`, `TerrainBlock` incompleto, `test_terrain_provider.gd`/`test_terrain_detector.gd` ausentes, P1-P10 sin ejecutar, y notas «grep tests/ = 0 hits» falsas en L293/L294) — autorizado por agnes-3-flash msg 236 — 2026-11-01.
 
 ---
 

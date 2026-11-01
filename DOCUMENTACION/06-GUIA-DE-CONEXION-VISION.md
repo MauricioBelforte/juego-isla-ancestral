@@ -1,9 +1,9 @@
 # 06 — Guía de Conexión de Visión del Agente (M154)
 
-**Modelo:** mimo-v2.6-flash-free (último modificador; creación: Hy3)
-**Plataforma:** opencode (creación: Kilo)
+**Modelo:** GPT-5.6 Luna (último modificador; creación: Hy3)
+**Plataforma:** Copilot SDK en VS Code
 **Fecha de creación:** 2026-08-24
-**Última actualización:** 2026-10-09 04:50 (BUG-127 cerrado como **deuda de plataforma** — repro export + investigación upstream sin build web, V3 limitada formalmente a escenas sin voxel, ver V3 §Registro y §Limitación; QA M154 del día: V3 re-verificada estado PEOR que 08-25; descubrimientos V4 nuevos: save_png err=7 con `..`, free() de main_island cuelga sondas — ver §Descubrimientos sobre capturas)
+**Última actualización:** 2026-10-31 21:08 (revalidación empírica V4/V2 en UI de pausa; ver Registro de verificación)
 **Estado:** Viva — se actualiza cada vez que una vía nueva se instala o verifica
 
 > 📍 **Ubicación:** este archivo vive en la **raíz de `DOCUMENTACION/`** (archivo 06, después de `5-FUTURAS-MEJORAS.md`) para que todos los agentes lo encuentren de inmediato. El módulo dueño es `154-Vision-Del-Agente/`; referencias oficiales en `AGENTS.md` (sección 25) y en el `plan-actual/` del M154.
@@ -463,6 +463,8 @@ Con Godot instalado y un proyecto local, probar contra el servidor por el protoc
 - **2026-08-24** — ✅ **Verificación MCP OpenCode completada** por **MiMo V2.5**: `get_debug_output` → "No active Godot process" (esperado, sin proyecto corriendo). `run_project` → proyecto `game/isla-ancestral/` ejecutado correctamente: Godot 4.7.2, D3D12, AMD Radeon Graphics, "Isla Ancestral — Estilo Animal Crossing", sin errores. `stop_project` → detenido correctamente. **MCP godot-mcp completamente funcional en OpenCode.**
 - **2026-08-25** — ✅ **Verificación MCP OpenCode completada** por **MiMo V2.5**: `get_debug_output` → "No active Godot process". `run_project` → "Isla Ancestral — Isla Raíz", WorldManager inicializado (semilla: 42, radio: 64), sin errores. `stop_project` → detenido correctamente. **MCP funcional para run/stop/debug output.**
 - **2026-08-28** — ✅ **Verificada desde Kilo** por **Hy3**: Kilo expone las tools de godot-mcp **nativamente** en el chat (sin `mcp.json` ni configuración): `get_godot_version` → `4.7.2.stable.official.ed1daf0bf`; `get_project_info` → `isla-ancestral` (15 escenas, 101 scripts, 16 assets). Ver sección "Conexión desde Kilo".
+- **2026-10-31** — **GPT-5.6 Luna, Copilot SDK en VS Code:** se inspeccionó una instancia runtime que ya estaba abierta; por eso esta sesión **no vuelve a certificar `run_project`** (`TAREAS-POR-MODELO/GPT-Luna/RIEL-S2-VISION-RUNTIME.md:L20`). Las capturas runtime de pausa y reanudación quedaron guardadas bajo las carpetas de los módulos; para las pruebas de teclas se confirmó la ventana en foreground con `AppActivate` y el PID activo antes de enviar input (`TAREAS-POR-MODELO/GPT-Luna/RIEL-S2-VISION-RUNTIME.md:L20,L38-L47`). Escape abrió la pausa y la captura dejó ver el foco y el botón Guardar atenuado (`TAREAS-POR-MODELO/GPT-Luna/RIEL-S2-VISION-RUNTIME.md:L38-L47`). Es evidencia de esta instancia y estas capturas, no una prueba universal de que toda ventana o sesión reciba el input.
+- **2026-10-31 — límite de análisis visual:** los ítems C1-04, C1-05 y C1-11 se dejaron en skip porque `analyzeImage` devolvió HTTP 404 para esas capturas (`Mensajes entre modelos/GPT-Luna/C1-12-consolidado.json:L11213-L11217,L11220-L11224,L11227-L11231`). Esto no prueba que V2/V4 estén caídas ni autoriza a describir imágenes que no se pudieron inspeccionar; las descripciones S2 se basan en sus capturas runtime registradas (`TAREAS-POR-MODELO/GPT-Luna/RIEL-S2-VISION-RUNTIME.md:L20-L23,L38-L47`).
 
 ### Dependencia para su uso completo
 

@@ -73,3 +73,28 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
 - [ ] B-12-07: Reportar veredicto SOSTENIDO/ROJO por módulo al director (canal Nemotron)
 
 **Fuente:** agnes-3-flash #205 (regla permanente nemotron_fuel, fundador 31oct 02:51)
+
+## B-13..B-17 — TANDA nueva (agnes 1nov 00:15, fuel inmediato)
+
+- [x] B-13: M75 Postgame boot pre-check (godot_run_project + get_debug_output: M75 carga + 0 SCRIPT_ERROR) — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 213, RIEL-B-13-M75-POSTGAME-BOOT.md)
+- [x] B-14: M73 Coleccionables boot pre-check (M73 + autoload coleccionables + BUG-155 verification) — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 216, RIEL-B-14-M73-COLECCIONABLES-BOOT.md)
+- [x] B-15: M67 Vehiculos boot + assets 3D (godot boot + blender_search_assets/import/look) — completado 2026-11-01: boot SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 217, RIEL-B-15-M67-VEHICULOS-BOOT.md); assets 3D [?] honesto (Blender MCP no conectado)
+- [x] B-16: M87 i18n visual check (godot locale=es + screen_capture: HUD en espanol, no placeholders) — completado 2026-11-01: boot SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 219, RIEL-B-16-M87-I18N-VISUAL.md); screen_capture [?] honesto (ventana no encontrada, error 1400)
+- [ ] B-17: M129 Merchandising boot pre-check (cuando agnes libere M129)
+
+**Fuente:** agnes-3-flash #210 (TANDA B-13..B-17, priorization B-13 first)
+
+## B-18 — Boot pre-check 10 módulos BUG-153 top (agnes 1nov 03:05, fuel rule)
+
+- [x] B-18-01: M34 Pesca boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M34] Catálogo: 25 peces, 4 cebos, 3 cañas` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [x] B-18-02: M156 Terrenos boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M156] Terrenos cargados: 7` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [?] B-18-03: M27 Islas boot pre-check — [?] honesto: NO en boot log tras 2 verificaciones (no verificable en este boot)
+- [?] B-18-04: M162 Dialogos boot pre-check — [?] honesto: NO en boot log tras 2 verificaciones (no verificable en este boot)
+- [x] B-18-05: M106 Seguridad boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M106] SecurityManager listo (4 políticas)` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [x] B-18-06: M117 boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M117] BuildConfigManager listo (4 targets, 4 presets)` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [x] B-18-07: M160 boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M160] conexiones bidireccionales reflejadas: 10` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [?] B-18-08: M82 boot pre-check — [?] honesto: NO en boot log tras 2 verificaciones (no verificable en este boot)
+- [x] B-18-09: M69 boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M69] FastTravelService listo (4 anclas, 4 desbloqueadas)` (reporte 225, RIEL-B-18-BUG153-BOOT.md)
+- [x] B-18-10: M50 boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M50] VegetationSpawner: poblando isla...`, `[M50] Plan generado: 109 items`, `[M50] TerrainLocator: found`, `[M50] VegetationSpawner: 65 instanciadas, 44 omitidas (0 sin archivo, 44 en agua)` (reporte 227, RIEL-B-18-BUG153-BOOT.md)
+
+**Fuente:** agnes-3-flash #223 (Cron D fuel rule, BUG-153 top-10 por densidad FG)

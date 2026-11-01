@@ -1,8 +1,8 @@
 # UI, HUD y CanvasLayer — Errores Comunes
 
-> **Modelo:** MiMo V2.5
-> **Plataforma:** OpenCode
-> **Fecha:** 2026-09-09
+> **Modelo:** GPT-5.6 Luna
+> **Plataforma:** Copilot SDK en VS Code
+> **Última actualización:** 2026-10-31
 > **Fuente:** OBSOLETOS/07-GUIA-GODOT.md §9.26/9.27/9.33/9.39/9.46/9.47/9.49/9.51 + §26.29
 > **Validado en:** Isla Ancestral — Godot 4.7.2
 
@@ -204,3 +204,38 @@ canvas_layer.get_visible()  # Método heredado de Node
 | `.get_visible()` | Obtener estado de visibilidad |
 | `.show()` | Mostrar (heredado de Node, NO redefinir) |
 | `.hide()` | Ocultar (heredado de Node, NO redefinir) |
+
+---
+
+## 13. Navegación con foco y botones deshabilitados — M53/M89 (2026-10-31)
+
+**Observación reproducida:** en la pausa, `Guardar` aparece deshabilitado cuando la partida
+no tiene cambios (`game/isla-ancestral/scripts/ui/layers/pause_layer.gd:L80-L84`). La navegación
+se trababa al contar ese botón en el conjunto de candidatos. El filtro vigente centraliza el
+criterio en `MenuNavigator._can_receive_focus()` y rechaza `BaseButton.disabled`
+(`game/isla-ancestral/scripts/ui/core/menu_navigator.gd:L134-L138`), y M89 comprueba que el botón
+deshabilitado no entra en los candidatos y el siguiente habilitado sí
+(`game/isla-ancestral/scripts/ui/test_m89_menus.gd:L205-L209`).
+
+**Resultado medido en este proyecto:** `test_m89_menus.gd` terminó con 58 comprobaciones y 0
+fallos; `test_m53_pausa_prompts.gd`, con 39 y 0 (`DOCUMENTACION/53-UI-UX/plan-actual/07-Resultados-Testings.md:L17-L18`).
+La señal `continuar_pedido` de PauseLayer llega a UIManager y `_on_pausa_continuar()` cierra la capa
+y reanuda el mundo (`game/isla-ancestral/scripts/ui/core/ui_manager.gd:L203-L209,L551-L559`).
+M53 también activa `pressed` en el botón Continuar y verifica que PauseLayer se oculta, el árbol
+reanuda y la capa sale de la pila (`game/isla-ancestral/scripts/ui/test_m53_pausa_prompts.gd:L148-L158`).
+
+**Límite observado:** esto verifica «Continuar» desde la pausa. El «Continuar» del menú principal
+sin PauseLayer solo cambia el estado a `CARGANDO`; en esa rama no se encontró llamada a
+`SceneManager` ni `SaveManager` (`game/isla-ancestral/scripts/ui/ui_root.gd:L206-L223`;
+`DOCUMENTACION/53-UI-UX/plan-actual/07-Resultados-Testings.md:L26`). No usar el test de pausa
+como evidencia de que se carga una partida guardada desde el menú principal.
+
+**Evidencia visual:** la captura de la pausa registra Guardar atenuado y el foco en «Borrar slot 1»;
+la captura posterior registra el mundo reanudado
+(`tools/mcp/godot-mcp/capturas/53-UI-UX/cap_53_2026-10-31_20-39-08_gpt-luna_pausa-salta-guardar.png`;
+`tools/mcp/godot-mcp/capturas/167-Isla-Raiz/cap_167_2026-10-31_20-39-56_gpt-luna_continuar-reanuda.png`).
+La observación de que el texto de controles del mundo trasluce por la pausa también quedó registrada;
+no se cambió ese diseño (`DOCUMENTACION/TAREAS-POR-MODELO/GPT-Luna/RIEL-S2-VISION-RUNTIME.md:L43-L47`).
+
+Este caso no valida todos los menús, entradas o dispositivos: la evidencia se limita a estas dos
+suites y a las capturas indicadas.

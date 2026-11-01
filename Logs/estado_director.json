@@ -2101,7 +2101,7 @@
   "deepseek_cierre_1nov": "DeepSeek #475: inventario P-100 22 módulos, M157 L148 restaurado, herencia recibida. Cierre 1-nov completado.",
   "dsoc_bug153_m75": "BUG-153 registrado + P-100 77 módulos. M75 SELLADO INVALIDADO (drift 72, 96 marcas sin justificación). M75 -> yellow. Gate-1 M75+M73 AUTORIZADO (164 marcas).",
   "m75_sello_invalido": "M75 Postgame: 130 [x] declarado, Totales internos 29/101, 96 marcas dd6fb70 sin nota. Sello INVALIDADO.",
-  "gate1_acumulado": "399 marcas degradadas en 8 módulos (M74 58, M71 44, M105 28, M115 26, M10 16, M67 63, M75 96, M73 68 - pendientes)",
+  "gate1_acumulado": "628 marcas en 11 módulos (M74 58, M71 44, M105 28, M115 26, M10 16, M67 63, M75 87, M73 51, M33 6, M34 0, M156 78)",
   "deepseek_477_13_degradaciones": {
     "pendientes": [
       "M33 L44/L120/L126/L166/L169/L173",
@@ -2115,5 +2115,22 @@
   "bug_154_fogrenderer_m54": "Codigo muerto: FogRenderer declarado, 0 instanciacion/uso",
   "bug_155_autoload_mismatch": "achievement_service.gd:156 get_node_or_null(/root/ColeccionablesManager) -> siempre null (autoload se llama coleccionables)",
   "regla_flip_spec_only": "Rechazar en origen FLIP cuya unica justificacion sea cita de 03-Diseno.md (DeepSeek #477 recomendacion)",
-  "lexico_autorcontradiccion": "Agregar no se flippea / no se flipea a scripts/auditar_autocontradicciones.py"
+  "lexico_autorcontradiccion": "Agregar no se flippea / no se flipea a scripts/auditar_autocontradicciones.py",
+  "nemotron_b13_b17_asignado": "TANDA B-13..B-17: M75 boot, M73 boot+BUG-155, M67 boot+Blender assets, M87 i18n visual, M129 boot. Prioridad B-13 primero. Anti-loop: 1 linea si sin cambios.",
+  "nemotron_fuel": "B-13..B-17 = 5 rieles nuevos, fuel inmediato (no condicionados a otros agentes salvo B-17)",
+  "gpt_luna_aparecio": "GLM creo canal GPT-Luna (28oct→31oct): 8 self-logs + BACKLOG-MASTER + 5 rieles. Bloqueante: investigacion. NO es agente activo (es canal de GLM).",
+  "nemotron_colaborador_permanente": {
+    "directiva": "Fundador 1nov 00:17: Nemotron = colaborador permanente, delegar tareas todo el tiempo",
+    "documentado_en": "GUIA-COMO-SER-DIRECTORA.md §2.5 + estado_director.json",
+    "regla": "Cada Cron D: fuel Nemotron >=5 [ ] ejecutables. Si <5 → nuevo riel. Delegar trabajo concreto.",
+    "capacidades": "boot headless, Blender MCP, screen capture, checklist drift, doc census",
+    "no_delegar": "P-100 profundo, gate-2 suite-level, code writing complejo, decisiones macro"
+  },
+  "nemotron_decisiones_conjuntas": "Directiva fundador 1nov 00:19: decisiones complicadas = conjuntas (yo + Nemotron). El mide/boot-verify, yo gate-1/sello. Veredicto de los dos.",
+  "numeracion_compartida": "Directiva 1nov 00:19: SIEMPRE leer ultimo NNN en disco ANTES de escribir. Pool es referencia, archivos reales = fuente de verdad. NUNCA repetir numero. Colisiones 31oct: 205/206/207 (corregidas por mtime).",
+  "nemotron_b18_asignado": "B-18 boot pre-check 10 modulos BUG-153 top (M34/M156/M27/M162/M106/M117/M160/M82/M69/M50). Fuel rule aplicada.",
+  "dsoc_235_m75_m73_gate1": "DS-OC #235: gate-1 M75 (87 degradadas, 130→43/130) + M73 (51 degradadas, 127→76/135). 138 marcas totales. CHECKLIST-GLOBAL syncado.",
+  "nemotron_b18_confirmado": "Nemotron #224: B-18 aceptado, ejecutando M34 primero.",
+  "dsoc_m156_gate1": "M156: 78 degradadas, 13 mantenidas. Global 223/345. M34/M27 LIMPIOS (sin drift). BUG-153 top-10: 216/859 resueltos.",
+  "nemotron_b18_final": "B-18: 7/10 SOSTENIDO (M34/M156/M106/M117/M160/M69/M50). 3 pending (M27/M162/M82 sin log). 0 SCRIPT_ERROR."
 }

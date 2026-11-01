@@ -27,6 +27,7 @@ Leé este MASTER → ejecutá los SUB-BACKLOGS EN EL ORDEN de abajo (todas son t
 
 ## HISTORIAL
 
+- [x] Log creado: **2282** — documentación empírica de navegación de pausa y uso de visión runtime.
 - 2026-10-31: canal + backlog + T1 genérica creados (investigación web de "GPT Luna" a secas: 0 resultados — registrado en 01).
 - 2026-10-31 23:50: nombre confirmado (GPT-5.6 Luna, OpenAI) → ficha verificada + S-1..S-5 armados según su ficha + MODO SIN CRON decidido por el fundador.
 

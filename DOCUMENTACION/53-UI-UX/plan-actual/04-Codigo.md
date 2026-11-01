@@ -444,7 +444,8 @@ calculada al ancho actual (1) -> el `VBox` hereda esa altura -> el panel crece.
 
 - `test_m53_pausa_prompts.gd:L148-L158`: el bloque H emite `pressed` del botón Continuar y comprueba capa oculta, árbol reanudado y eliminación de la pila.
 - `test_m89_menus.gd:L191-L211`: E9-E15 comprueban foco direccional, cancelación, confirmación, apertura del menú y reanudación.
-- Salida de Godot 4.7.2: M53 **39 checks / 0 fallos / EXIT 0**; M89 **55 checks / 0 fallos / EXIT 0** (`test_m53_pausa_prompts.gd:L245`; `test_m89_menus.gd:L56`).
+- `menu_navigator.gd:L134-L138`: el filtro actual excluye los `BaseButton` deshabilitados; `test_m89_menus.gd:L205-L209` comprueba que Guardar no recibe foco y se salta al siguiente botón habilitado.
+- Salida de Godot 4.7.2: M53 **39 checks / 0 fallos / EXIT 0**; M89 **58 checks / 0 fallos / EXIT 0** (`test_m53_pausa_prompts.gd:L245`; `test_m89_menus.gd:L56`; resultados resumidos en `07-Resultados-Testings.md:L17-L18`).
 - Captura runtime de la pausa tras reanudar: `tools/mcp/godot-mcp/capturas/53-UI-UX/cap_53_2026-10-31_18-58-03_gpt-luna_continuar-reanudado.png`.
 
 ### Alcance pendiente
