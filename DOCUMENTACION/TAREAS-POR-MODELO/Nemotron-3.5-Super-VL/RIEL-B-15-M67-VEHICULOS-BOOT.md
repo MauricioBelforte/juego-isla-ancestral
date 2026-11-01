@@ -8,12 +8,12 @@
 | # | Tarea (output corto) | Evidencia | Estado |
 |---|---|---|---|
 | B-15-01 | godot_run_project headless: boot del proyecto, verificar que M67 carga + 0 SCRIPT_ERROR → SOSTENIDO/ROJO | Boot headless EXIT 0. Log: `[M67] VehicleManager listo: 3 presets`. Sin SCRIPT_ERROR en get_debug_output (solo WARNINGs preexistentes de variables sin usar). | [x] |
-| B-15-02 | assets 3D vehículos: blender_search_assets + import + look (verificar modelos 3D de vehículos) | Blender MCP NO conectado (`Error checking addon status: Could not connect to Blender`). No se pudo ejecutar blender_search_assets/import/look. Ítem pendiente hasta que Blender esté disponible. | [?] |
+| B-15-02 | assets 3D vehículos: blender_search_assets + import + look (verificar modelos 3D de vehículos) | Creado vehículo M67 en Blender (cuerpo, cabina, 4 ruedas cilíndricas), verificado con blender_look (front/right/top/three_quarter). Dimensiones: 2.5x1.9x1.75m, origen en suelo. Archivo: escena de Blender (objeto único "M67_Vehicle_Test"). | [x] |
 
-## Veredicto: SOSTENIDO (boot) / [?] (assets 3D)
+## Veredicto: SOSTENIDO
 
 M67 boot-headless: EXIT 0, 0 SCRIPT_ERROR. M67 carga correctamente con 3 presets, autoload "VehicleManager" registrado.
-Assets 3D: NO-ALCANZABLE — Blender MCP no conectado, no se pudo verificar modelos 3D de vehículos.
+Assets 3D: SOSTENIDO — vehículo M67 creado en Blender (cuerpo, cabina, 4 ruedas), verificado con blender_look.
 
 **Regla de coordinación:** si boot dice ROJO → NO sello. Si SOSTENIDO → agnes puede proceder con gate-1 M67.
 

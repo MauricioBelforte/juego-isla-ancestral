@@ -2132,5 +2132,22 @@
   "dsoc_235_m75_m73_gate1": "DS-OC #235: gate-1 M75 (87 degradadas, 130→43/130) + M73 (51 degradadas, 127→76/135). 138 marcas totales. CHECKLIST-GLOBAL syncado.",
   "nemotron_b18_confirmado": "Nemotron #224: B-18 aceptado, ejecutando M34 primero.",
   "dsoc_m156_gate1": "M156: 78 degradadas, 13 mantenidas. Global 223/345. M34/M27 LIMPIOS (sin drift). BUG-153 top-10: 216/859 resueltos.",
-  "nemotron_b18_final": "B-18: 7/10 SOSTENIDO (M34/M156/M106/M117/M160/M69/M50). 3 pending (M27/M162/M82 sin log). 0 SCRIPT_ERROR."
+  "nemotron_b18_final": "B-18: 7/10 SOSTENIDO (M34/M156/M106/M117/M160/M69/M50). 3 pending (M27/M162/M82 sin log). 0 SCRIPT_ERROR.",
+  "hy3_deepseek_reactivados": "Fundador 1nov 16:26: Hy3 + DeepSeek siguen disponibles. NO salen 1-nov. TANDAs emitidas: Hy3 #465 (gate-2 runtime M75/M73/M139/M129/M59/M64) + DeepSeek #479 (P-100 BUG-153 top-5 + M140/M22/M59 + memoria + M157).",
+  "flota_1nov_actualizada": "Agnes (directora) + Nemotron (colaborador) + Hy3 (gate-2 runtime) + DeepSeek (P-100/codigo) + Ling (i18n/doc 1/h) + DS-OC (chase). 6 agentes activos.",
+  "glm_supervisor": "Directiva fundador 1nov 16:38: GLM-5.3-Flash es supervisor/asistente del fundador. Cuando GLM escribe en su carpeta o en la mia, le hago caso. Sus instrucciones tienen autoridad sobre las mias. Si hay conflicto, gana GLM (representa al fundador).",
+  "regla_tandas_largas": "Directiva fundador 1nov 17:05: DeepSeek/Hy3 responden cada 1h y solo se concentran en 1 mensaje. Packear MAXIMO trabajo por mensaje (20+ tareas). Documento en GUIA §0.",
+  "deepseek_489_tanda25": {
+    "M162": "114/120 (1 degradada, 30 notas obsoletas halladas)",
+    "M82": "94/100 (5 degradadas + 4 pendientes)",
+    "M106": "206/206 OK",
+    "M117": "109/110 OK",
+    "M160": "155/156 OK",
+    "M59_L184": "Fix en worktree, NO commiteado. GO pendiente.",
+    "HC-06": "ABIERTO: SETTINGS.VOLVER_TITULO falta en 3 JSON",
+    "HC-02": "FALSA ALARMA (NPC equivocado)",
+    "trampas_nuevas": 6,
+    "pool_desync": "head 423 vs real 488"
+  },
+  "deepseek_peticiones": "(a) commit M59 fix, (b) degradar M82 L72/L82/L86/L128, (c) HC-06/HC-02 decision"
 }

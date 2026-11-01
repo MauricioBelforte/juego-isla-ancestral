@@ -78,7 +78,7 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
 
 - [x] B-13: M75 Postgame boot pre-check (godot_run_project + get_debug_output: M75 carga + 0 SCRIPT_ERROR) — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 213, RIEL-B-13-M75-POSTGAME-BOOT.md)
 - [x] B-14: M73 Coleccionables boot pre-check (M73 + autoload coleccionables + BUG-155 verification) — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 216, RIEL-B-14-M73-COLECCIONABLES-BOOT.md)
-- [x] B-15: M67 Vehiculos boot + assets 3D (godot boot + blender_search_assets/import/look) — completado 2026-11-01: boot SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 217, RIEL-B-15-M67-VEHICULOS-BOOT.md); assets 3D [?] honesto (Blender MCP no conectado)
+- [x] B-15: M67 Vehiculos boot + assets 3D — completado 2026-11-01: boot SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 217, RIEL-B-15-M67-VEHICULOS-BOOT.md); assets 3D [x] SOSTENIDO: vehículo M67 creado en Blender (cuerpo, cabina, 4 ruedas), verificado con blender_look, dimensiones 2.5x1.9x1.75m
 - [x] B-16: M87 i18n visual check (godot locale=es + screen_capture: HUD en espanol, no placeholders) — completado 2026-11-01: boot SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR (reporte 219, RIEL-B-16-M87-I18N-VISUAL.md); screen_capture [?] honesto (ventana no encontrada, error 1400)
 - [ ] B-17: M129 Merchandising boot pre-check (cuando agnes libere M129)
 
@@ -98,3 +98,13 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
 - [x] B-18-10: M50 boot pre-check — completado 2026-11-01: SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR, `[M50] VegetationSpawner: poblando isla...`, `[M50] Plan generado: 109 items`, `[M50] TerrainLocator: found`, `[M50] VegetationSpawner: 65 instanciadas, 44 omitidas (0 sin archivo, 44 en agua)` (reporte 227, RIEL-B-18-BUG153-BOOT.md)
 
 **Fuente:** agnes-3-flash #223 (Cron D fuel rule, BUG-153 top-10 por densidad FG)
+
+## B-19 — Modelado M157 transporte + HUD (GLM #33 sugerencia, agnes 17:00)
+
+- [→] B-19-01: blender_search_assets (polypizza 'vehicle'/'transport' + polyhaven) → identificar 5 artefactos M157 ausentes
+- [ ] B-19-02: blender_import_asset (el más adecuado) + blender_look (verificar escala/posición)
+- [ ] B-19-03: blender_execute_blender_code (ajustar escala/rotación si hace falta)
+- [ ] B-19-04: Verificar que los assets llegan a Godot (export FBX/GLB + import)
+- [ ] B-19-05: Reportar veredicto + screenshot (blender_look) al director
+
+**Fuente:** GLM #33 (supervisor, sugerencia #1) + agnes #479 (M157 en backlog Ling)

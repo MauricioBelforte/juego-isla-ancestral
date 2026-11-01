@@ -7891,3 +7891,71 @@ Retorna `true` incondicionalmente. El caso "casa fuera de toda ubicación conoci
 | BUG-147 | [x] Resuelto en la misma tanda (fix en line 55 del manager) | AutoAdvanceManager.validate_config() usaba var errors: Array[String] = Array() — asignar un Array generico a un tipo Array[String] LANZA SCRIPT ERROR en Godot 4 (la validacion de config era INUTILIZABLE en runtime). FIX: inicializacion tipada vacia Array[String] = [] (mismo patron correcto que ya usa TypewriterEffect.validate_config). Verificaciones: qa_m21_auto_advance.gd 14/0 EXIT 0 (ciclo completo + pausa en opciones + skip + stop + validate + create_default). **Reportado por:** G-5.3-Flash-Agente (hallazgo por QA del riel M21 turno 2-BIS) | **Modelo:** GLM-5.3-Flash (G-5.3-Flash-Agente) | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 10:45 |
 
 | BUG-148 | [ ] Abierto (generacion M10, derivado al dueno de world-gen) | Cobre de bioma beach: la cobertura de bioma reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico: el muestreo es espiral aurea sin RNG). La lane opt-in lo hizo VISIBLE con el censo/hallazgo de MiniMax 044. **Reportado por:** minimax-m3-1-flash | **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 02:50 |
+
+---
+
+## Hallazgos colaterales — P-100 tanda 479 (DeepSeek-V4.1-Flash, canal 482, Log 2286, 2026-11-01)
+
+Registro de los hallazgos que **no** se degradaron en esta tanda (la directora ordenó degradar solo los 4
+inflados muestreados) y que quedan vivos para que el dueño correspondiente los tome. Todos medidos en disco;
+ninguno se apoya en el bloque `**Totales:**` de su módulo.
+
+### HC-01 — M162: dos notas del mismo módulo se contradicen sobre el mismo dato (L101 vs L127)
+
+`162-Dialogos-Contextuales-De-NPCs/plan-actual/05-Checklist.md` L101 afirma "los 15 grafos de cen_001" y L127
+afirma "cen_001 (13 grafos)". Medido sobre `data/dialogues/contextual/`: **cen_001 tiene 13 grafos**. L127 es
+correcto, L101 no. L101 sigue en `[x]`. Dueño: M162.
+
+### HC-02 — M162 L165: los grafos de la Sanadora no contienen la palabra que el ítem exige
+
+L165 ("Sanadora tenga remedios de hierbas de AUR") cita grafos estacionales de `aur_003`. Medido: "remedio"
+aparece en 4 de 367 grafos — `aur_002_cap1_saludo`, `aur_002_cap2_saludo`, `riz_003_cap1_mision`,
+`riz_006_cap1_mision` — y **ninguno es de `aur_003`**. La nota del ítem ya dice "no verificado"; el `[x]`
+no se sostiene. Dueño: M162.
+
+### HC-03 — M162 L176: el título del ítem declara el pendiente y la marca lo niega
+
+L176: "Verificar que las franjas horarias generan diálogos diferentes — **mecanismo listo, contenido por hora
+pendiente**", marcado `[x]`. El mecanismo está (23 grafos `_noche`); el contenido por hora no. Es la misma
+doctrina que el propio proyecto aplicó en M82 L119 ("si está diferido, no está hecho"). Dueño: M162.
+
+### HC-04 — M82: 9 ítems más con la misma contradicción que L92
+
+Además de L92 (degradado en esta tanda), el módulo tiene 9 ítems cuyo `[x]` contradice su propia nota:
+
+| L# | Defecto |
+|----|---------|
+| L64, L71, L119, L132 | Marca `[x]` + nota "REVERTIDO ... Sin artefacto" |
+| L65, L72, L82, L86, L128 | Marca `[x]` + nota "Deferred a fase lanzamiento / pre-release" |
+
+Agravante medido: `82-Clasificacion-Por-Edades/plan-actual/03-Diseno.md` tiene **4 secciones** (1 a 4) más
+"Specs items degradados T218" en la línea 125. **No existen las secciones 5, 5.2, 5.3 ni 5.4**, que son las
+que citan L65/L72/L82. La nota de L119 ya lo denuncia; queda confirmado leyendo los encabezados del archivo.
+
+Contexto de convención, medido en los 05-Checklist de todo el repo: `[ ]`+REVERTIDO = **70** casos contra
+`[x]`+REVERTIDO = **27**. La convención dominante (72 %) es que un REVERTIDO baja a `[ ]`. M82 aporta 5 de esos 27.
+
+### HC-05 — M106: 9 ítems son transferencias a M77 marcadas como hechas
+
+`106-Seguridad` L64, L69, L71, L76, L134, L140, L149, L150, L176 dicen "esto lo hace M77 / M104 / CI" y
+llevan FLIP spec-only con **cero artefacto** en disco. No son afirmaciones falsas: son ítems **transferidos**
+marcados como completados. La marca honesta es `[?]` con dueño M77, no `[x]`. Si se degradan, M106 pasa de
+206/0/0 a 197/9/0. Dueño: M106 + M77.
+
+### HC-06 — M59: los dos catálogos de i18n están desincronizados
+
+`SETTINGS.VOLVER_TITULO` existe en `locales/es.po:114`, `locales/en.po:114` y `locales/pt.po:118`, pero **no**
+en `data/localizacion/strings_es.json`, `strings_en.json` ni `strings_pt.json`. Cualquier lector que resuelva
+por los JSON no encuentra la clave. Origen: commit 22c2bcf (tanda i18n de Ling). Dueño: Ling / M87.
+
+### HC-07 — M157: el 05-Checklist es el único del repo con EOL LF
+
+`157-Medios-De-Transporte/plan-actual/05-Checklist.md` tiene **0 CRLF** (LF puro) mientras el resto de los
+05-Checklist medidos usa CRLF. Con `core.autocrlf=true` y sin regla `*.md`, el `git add` normaliza a LF y el
+checkout escribe CRLF: cualquier edición futura genera churn de diff en las 132 líneas. Dueño: M157.
+
+### Nota de método
+
+Los 7 hallazgos salen de lectura binaria del ítem más verificación del artefacto citado en disco. Ninguno se
+apoyó en el bloque `**Totales:**` del módulo: de hecho, los `Totales` de M162 (84 completados) y M82 (95
+completados) ya estaban desviados de la realidad medida (118 y 100 respectivamente) antes de esta tanda.

@@ -10,6 +10,43 @@
 >
 > Marcadores: [S] simple · [M] medio · [C] complejo.
 
+## Criterio de aceptación, dueño y ruta destino (agregado 2026-11-01)
+
+> **Por qué este bloque existe:** 95 de los 124 `[ ]` de este archivo son texto pelado —sin criterio de
+> aceptación, sin dueño y sin dependencia declarada—. Un ítem así no lo puede tomar ningún agente. Este bloque
+> define el criterio que **heredan los 124**, para no repetirlo 124 veces.
+
+**Criterio de aceptación (P-100, §21.8.2.b) — aplica a TODO `[ ]` de este archivo:**
+el ítem pasa a `[x]` solo si existe en disco un artefacto que **implemente** la función **y** una suite que la
+**ejerza por ruta real** (no basta el diseño en `03-Diseno.md`, no basta una nota, no basta otro módulo).
+
+**Dueño:** módulo 157 (owner de gameplay **a designar por el fundador**). No hay agente asignado hoy.
+Los 10 ítems de la sección H tienen dueño externo declarado ítem por ítem.
+
+**Condición de arranque:** requiere **GO del fundador** + visión M154 (assets 3D) + owner de gameplay.
+Sin GO, la implementación no debe empezar (§15: no se toca código de otros dueños).
+
+**Ruta destino de los scripts (evita colisión con M68):** los 23 archivos de `04-Codigo.md` van en
+`game/isla-ancestral/scripts/transporte_medios/` (nueva). **NO** en `scripts/transporte/`, que ya pertenece a
+M68 (red de transporte, 16 archivos reales en disco). M157 consume el grafo de rutas de M68; no lo duplica.
+
+**Qué artefacto debe existir por sección:**
+
+| Sec. | Artefacto esperado en disco | Suite esperada |
+|------|-----------------------------|----------------|
+| A | `transporte_medios/transport_manager.gd` (singleton) | `test_transporte_medios_manager.gd` |
+| B | `transporte_medios/transport_def.gd` + registro | `test_transporte_medios_registro.gd` |
+| C | `transporte_medios/{ship,train,plane,cart,walking}_transport.gd` | `test_transporte_medios_tipos.gd` |
+| D | `transporte_medios/journey_instance.gd` | `test_transporte_medios_viaje.gd` |
+| E | `transporte_medios/journey_event.gd` + 7 eventos | `test_transporte_medios_eventos.gd` |
+| F | `transporte_medios/mystery_def.gd` + `mystery_instance.gd` | `test_transporte_medios_misterios.gd` |
+| G | `transporte_medios/journey_hud.gd` | `test_transporte_medios_ui.gd` |
+| H | contratos contra M69/M22/M24/M19/M29 | `test_transporte_medios_integraciones.gd` |
+| I | (usa las suites de A-G) | — |
+| J | documentos 01-06 de `plan-actual/` | (ya cumplidos: J-01..J-04) |
+
+
+
 ---
 
 ## A. Requisitos Funcionales (10 items)
@@ -116,16 +153,16 @@
 
 ## H. Integraciones (10 items)
 
-- [ ] H-01: Integración con M69 (Inventario) - verificación de costos [M]
-- [ ] H-02: Integración con M69 - obtención de items en eventos [M]
-- [ ] H-03: Integración con M22 (NPCs) - spawning en eventos de diálogo [M]
-- [ ] H-04: Integración con M22 - obtención de diálogos [S]
-- [ ] H-05: Integración con M24 (Misiones) - triggers de objetivos [M]
-- [ ] H-06: Integración con M24 - verificación de condiciones [S]
-- [ ] H-07: Integración con M19 (Combate) - delegación en eventos de combate [C]
-- [ ] H-08: Integración con M19 - manejo de resultados de combate [M]
-- [ ] H-09: Integración con M29 (Economía) - comercio durante viaje [M]
-- [ ] H-10: Integración con M29 - costos y recompensas económicas [M]
+- [ ] H-01: Integración con M69 (Inventario) - verificación de costos [M] — Dueño: M69 (contrato externo; M157 consume, no duplica)
+- [ ] H-02: Integración con M69 - obtención de items en eventos [M] — Dueño: M69 (contrato externo; M157 consume, no duplica)
+- [ ] H-03: Integración con M22 (NPCs) - spawning en eventos de diálogo [M] — Dueño: M22 (contrato externo; M157 consume, no duplica)
+- [ ] H-04: Integración con M22 - obtención de diálogos [S] — Dueño: M22 (contrato externo; M157 consume, no duplica)
+- [ ] H-05: Integración con M24 (Misiones) - triggers de objetivos [M] — Dueño: M24 (contrato externo; M157 consume, no duplica)
+- [ ] H-06: Integración con M24 - verificación de condiciones [S] — Dueño: M24 (contrato externo; M157 consume, no duplica)
+- [ ] H-07: Integración con M19 (Combate) - delegación en eventos de combate [C] — Dueño: M19 (contrato externo; M157 consume, no duplica)
+- [ ] H-08: Integración con M19 - manejo de resultados de combate [M] — Dueño: M19 (contrato externo; M157 consume, no duplica)
+- [ ] H-09: Integración con M29 (Economía) - comercio durante viaje [M] — Dueño: M29 (contrato externo; M157 consume, no duplica)
+- [ ] H-10: Integración con M29 - costos y recompensas económicas [M] — Dueño: M29 (contrato externo; M157 consume, no duplica)
 
 ## I. Testing (10 items)
 
@@ -209,7 +246,7 @@
 
 ---
 
-**Totales:** 132 items · Completados: 8 (J-01..J-04 + K-15/K-22/K-24/K-25 documentales, evidencia en disco) · Pendientes: 124 · [?]: 0
+**Totales:** 132 items · Completados: 8 (J-01..J-04 + K-15/K-22/K-24/K-25 documentales, evidencia en disco) · Pendientes: 124 · [?]: 0 · **de los cuales 0 son de implementación** (los 124 pendientes son de código: 0 de los 23 scripts de `04-Codigo.md` existe en disco, medido 2026-11-01).
 
 **Drift documental corregido:** plan-inicial/05 declaraba "106/106 completados" sin marcas `[x]` reales ni implementación en disco. Este plan-actual arranca verificable: 8/132 con evidencia citada por ítem (J-01..J-04 + K-15/K-22/K-24/K-25, todos documentales con artefacto en disco).
 
@@ -255,7 +292,7 @@
 
 
 ### Vuelta 17 (2026-10-31 - TANDA 9 DeepSeek-V4.1-Flash, orden agnes-3-flash msg 472)
-- **J-04 (L148) [x] -> [?]:** el alcance documental del item (04-Codigo.md) esta cerrado, pero la implementacion medida es 0/20 scripts en disco; bajo el criterio de re-baseline la marca [x] no se sostiene. Flip aplicado por orden explicita del director (msg 472, 02:14 del 31-oct).
+- **J-04 (L148) — ESTADO FINAL: `[x]`.** (Historial, para que no se lea al reves: el 31-oct 02:14 se flipeo a `[?]` por orden del msg 472, y el mismo dia el msg 474 lo restauro a `[x]`.) El alcance del item es documental (04-Codigo.md) y esta cerrado; la implementacion del modulo es 0 de 23 scripts en disco y esa deuda es del MODULO, no de este item. Nota consolidada el 2026-11-01 (DeepSeek-V4.1-Flash, canal 486, Log 2288) para eliminar la lectura invertida.
 - **Conflicto cross-agente declarado:** Ling-3.1-Flash (Log 2272, 30-oct 23:26) habia resuelto el mismo caso SIN flip, reformulando la nota para sostener el [x] documental. Mi flip es posterior a esa resolucion y la pisa. Queda a decision del director si se conserva [?] o se restaura [x] con la nota de Ling; el cambio es reversible en un solo caracter.
 - Totales: **7 [x] / 124 [ ] / 1 [?] = 132**. GLOBAL fila 157 queda 8/132 hasta que la directora la sincronice (no edito CHECKLIST-GLOBAL.md).
 - **REVERTIDO el mismo dia (msg 474):** la directora decidio restaurar el [x] de Ling. Vuelve a **8 [x] / 124 [ ] / 0 [?] = 132**; el estado final de J-04 es [x] y la deuda de implementacion (0/20 scripts) queda como deuda del modulo, no del item.

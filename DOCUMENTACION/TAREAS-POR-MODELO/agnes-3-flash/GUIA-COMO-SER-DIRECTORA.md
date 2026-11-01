@@ -11,6 +11,10 @@
 
 ## 0. Reglas de oro (valen para TODA tarea)
 
+> **⚠️ REGLA DE SUPERVISIÓN (directiva fundador 1nov 16:38):** GLM-5.3-Flash es mi **supervisor/asistente del fundador**. Cuando GLM me escribe mensajes (en su carpeta `Mensajes entre modelos/GLM-5.3-Flash/` o en mi carpeta `Mensajes entre modelos/agnes-3-flash/`), **le hago caso**. Sus instrucciones tienen autoridad sobre las mías. Si GLM dice "hacé X", lo hago antes que cualquier otra cosa. Si hay conflicto entre mi juicio y la orden de GLM, **gana GLM** (representa al fundador).
+
+> **⚠️ REGLA DE TANDAS LARGAS (directiva fundador 1nov 17:05):** cuando le dé tareas a **DeepSeek** o a **Hy3**, cada mensaje debe ser **LARGO o con MUCHAS tareas**. Ellos responden cada 1 hora y solo pueden concentrarse en UN mensaje. Si envío 3 mensajes cortos, hacen solo 3 cosas por hora. Si envío 1 mensaje largo con 20 tareas, hacen 20 cosas por hora. **Packear máximo trabajo por mensaje.**
+
 1. **Escritura SIEMPRE Python UTF-8 sin BOM, LF** (`io.open(p,'w',encoding='utf-8',newline='\n')`). Para multi-línea/con quotes anidados → archivo `.py` temporal en `Temp/`. La herramienta `write` está bien para contenido limpio sin quotes anidados. PROHIBIDO PowerShell `>`/`Set-Content` (escribe UTF-16/BOM). Verificador: `python scripts/diagnosticar_mojibake.py`; reparación: `python scripts/fix_encoding.py` (primero `--dry-run`).
 2. **Numeración de mensajes SIEMPRE del pool de la CARPETA DESTINO** (`Mensajes entre modelos/<canal>/NUMEROS_DISPONIBLES.txt`): tomar el número, BORRARLO del pool y ESCRIBIR en el mismo acto. NUNCA numerar a mano. Helper: `python scripts/proximo_numero.py <canal>` y `python scripts/reservar_mensaje.py <canal> <tema> --emisor agnes-3-flash`.
 3. **Sequencia del hilo:** el número de un mensaje = `último_NNN_ + 1` de la carpeta destino. El "número más alto del pool" es solo atajo; si el pool sobrepasa, IGNORAR los sobrantes y usar `último+1` (borrando SOLO ese).

@@ -230,6 +230,29 @@ func _earn_coins(amount: int) -> void:
 
 Scaffold de `plan-actual/` por encargo de agnes-3-flash (canal Ling-3.1-Flash, msg 317, 2026-10-29 06:34Z; vuelta 14 Ling). Copia intacta del `plan-inicial/` (MiMo V2.5, 2026-08-22) como base documental (AGENTS.md §11.7: plan-actual puede arrancar como copia de plan-inicial).
 
-**Verificacion en disco (2026-10-30):** el modulo tiene 0 implementacion en `game/isla-ancestral/scripts/` (glob/grep: sin `TransportManager.gd`, `JourneyInstance.gd`, `*Transport.gd`, `JourneyHUD.gd`, `EventPanel.gd`, `MysteryPanel.gd`, ni carpetas `transport_definitions/` / `journey_events/` / `mysteries/`). Los 20 scripts listados en `04-Codigo.md` son "A Crear". Unicos hits relacionados en disco pertenecen a OTROS modulos: M67 vehiculos recuperables (`core/invariants/vehiculo_invariant.gd`, `softlock_rules.gd` TIEMPO_REAPARICION_VEHICULO), M104 telemetria de puertos (`analytics/telemetria_m104.gd`), y senal de barco/vessel en `core/event_bus.gd` L103.
+**Verificacion en disco (2026-10-30):** el modulo tiene 0 implementacion en `game/isla-ancestral/scripts/` (glob/grep: sin `TransportManager.gd`, `JourneyInstance.gd`, `*Transport.gd`, `JourneyHUD.gd`, `EventPanel.gd`, `MysteryPanel.gd`, ni carpetas `transport_definitions/` / `journey_events/` / `mysteries/`). Los **23** scripts listados en las tablas de arriba son "A Crear" (la nota anterior decia 20: conte los nombres unicos de las tres tablas —8 de Scripts Principales, 5 de Transporte, 7 de Eventos, mas 3 citados en contratos— y son 23). Unicos hits relacionados en disco pertenecen a OTROS modulos: M67 vehiculos recuperables (`core/invariants/vehiculo_invariant.gd`, `softlock_rules.gd` TIEMPO_REAPARICION_VEHICULO), M104 telemetria de puertos (`analytics/telemetria_m104.gd`), y senal de barco/vessel en `core/event_bus.gd` L103.
 
 **Correccion de inflacion:** el `plan-inicial/05-Checklist.md` declara "Totales: 106 items - Completados: 106" con 0 marcas `[x]` reales en disco (patrones M01/M119). El `plan-actual/05-Checklist.md` arranca honesto: 132 items `[ ]`, 0 `[x]`, con seccion K de cubrimiento ampliado (Plan-inicial-minimo + Plan-de-produccion + estandares del proyecto).
+
+
+## Ruta destino y mapeo script -> seccion (agregado 2026-11-01)
+
+**Ruta destino:** los 23 archivos van en `game/isla-ancestral/scripts/transporte_medios/` (carpeta nueva).
+**NO** en `scripts/transporte/`, que ya es de **M68** (red de transporte: 16 archivos reales en disco,
+entre ellos `generar_red_transporte.gd` y `transport_localizer.gd`). M157 **consume** el grafo de rutas de M68;
+no lo duplica ni lo pisa.
+
+| Seccion del 05 | Scripts de este archivo | Suite que debe existir |
+|----------------|-------------------------|------------------------|
+| A | `TransportManager.gd` | `test_transporte_medios_manager.gd` |
+| B | `TransportDef.gd` | `test_transporte_medios_registro.gd` |
+| C | `ShipTransport.gd`, `TrainTransport.gd`, `PlaneTransport.gd`, `CartTransport.gd`, `WalkingTransport.gd` | `test_transporte_medios_tipos.gd` |
+| D | `JourneyInstance.gd` | `test_transporte_medios_viaje.gd` |
+| E | `JourneyEvent.gd`, `EventChoice.gd`, `CombatEvent.gd`, `DialogueEvent.gd`, `DiscoveryEvent.gd`, `EmergencyEvent.gd`, `MysteryEvent.gd`, `TradeEvent.gd`, `RestEvent.gd` | `test_transporte_medios_eventos.gd` |
+| F | `MysteryDef.gd`, `MysteryClue.gd`, `MysteryInstance.gd` | `test_transporte_medios_misterios.gd` |
+| G | `JourneyHUD.gd`, `EventPanel.gd`, `MysteryPanel.gd` | `test_transporte_medios_ui.gd` |
+| H | (contratos contra M69/M22/M24/M19/M29) | `test_transporte_medios_integraciones.gd` |
+
+**Medido 2026-11-01 (DeepSeek-V4.1-Flash, canal 486, Log 2288):** de los 23 nombres, **0 existen en disco**.
+La implementacion del modulo es 0/23. El criterio de aceptacion de cada item esta en el bloque
+"Criterio de aceptación, dueño y ruta destino" del `05-Checklist.md`.

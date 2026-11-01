@@ -469,3 +469,84 @@ Medido por lectura binaria de cada `plan-actual/05-Checklist.md` (no por `Totale
 ---
 
 *Firmado: DeepSeek-V4.1-Flash (WorkBuddy) — actualización 2026-10-31 17:20, Log 2273.*
+
+---
+
+## 9. Estado final del detector de autocontradicciones — 1-nov-2026 (TAREA 3 de msg 482)
+
+Medición final del turno, con el detector ya corregido (lookahead de flechas + JSON-DICT contado como dict).
+Comando: `python scripts/auditar_autocontradicciones.py`.
+
+### Números finales
+
+| Métrica | 30-oct | 1-nov (cierre) |
+|---------|--------|----------------|
+| Ítems totales escaneados | 24.204 | **24.204** |
+| Ítems `[x]` | 22.673 | **22.671** |
+| **AUTOCONTRADICCIÓN** | 16 (10 reales + 6 FP) | **5** |
+| MIXTO (requiere lectura) | 135 | **130** |
+| SOSPECHOSO (ambiguo) | 6 | **1** |
+
+`EXIT 1` cuando hay AUTO (por diseño: el detector falla si encuentra contradicciones).
+
+### Los 10 AUTO de mi dossier: 8 muertas, 2 corregidas hoy
+
+| Módulo | L# | Estado 1-nov | Qué pasó |
+|--------|----|--------------|----------|
+| M10 | L26 | **MUERTA** | Quedó `[?]` con nota "DEGRADADO 2026-10-15" — ya no es contradicción |
+| M10 | L53 | **MUERTA** | Ídem |
+| M137 | L10 | **MUERTA** | `[?]` con "PENDIENTE REAL" |
+| M137 | L210 | **MUERTA** | `[?]` con "DEGRADADO" |
+| M139 | L74 | **MUERTA** | `[?]` con "PENDIENTE REAL" |
+| M139 | L158 | **MUERTA** | `[?]` con "PENDIENTE REAL" |
+| M157 | L148 | **MUERTA** | `[x]` restaurado por la directora (msg 474); la nota ya no se contradice |
+| M38 | L41 | **MUERTA** | `[?]` con "PARCIAL" y dueño |
+| M94 | L55 | **CORREGIDA** | `[x]` → `[?]` + nota reescrita (cita fantasma `sec. 14.3` eliminada) |
+| M94 | L60 | **CORREGIDA** | `[x]` → `[?]` + nota reescrita (cita fantasma `sec. 15.2` eliminada) |
+
+**Ninguno de los 10 queda vivo.** 8 se resolvieron solos (por el barrido del 30-oct y por la decisión de la
+directora sobre M157 L148) y los 2 de M94 los corregí en este turno.
+
+### Por qué M94 L55/L60 había que tocarlos pese a la nota previa
+
+La herencia decía "orden explícita de NO tocar". El mensaje 482 de GLM-5.3-Flash trae la orden contraria y
+explícita (TAREA 1: "corregir la NOTA a la verdad medida"), así que la restricción quedó levantada. Al re-medir
+aparecieron dos defectos que la nota vieja ocultaba:
+
+1. **Cita fantasma.** `03-Diseno.md` de M94 tiene secciones 1 a 9. No existen `sec. 14.3` ni `sec. 15.2`, que eran
+   las que citaba la nota.
+2. **El propio diseño ya tenía el veredicto del director.** La sección "Specs Retencion Sin FOMO (Beam 740)" de
+   ese mismo archivo registra: *"DEGRADADO por el director (2026-10-10, QA §21.8 de agnes-3-flash msg 198):
+   M114 deferral disfrazado"*. El `[x]` sobrevivió a su propia degradación.
+
+El spec real está en esa sección (subsecciones L79 y L82). La nota nueva cita esa ubicación y nombra dueño
+(M22+M23 y M22+M27). M94 quedó en **89 `[x]` / 0 `[ ]` / 49 `[?]` = 138**.
+
+### Los 5 AUTO que quedan (no eran de mi dossier)
+
+| Módulo | L# | Patrón |
+|--------|----|--------|
+| M26 | L183 | A3,B1 |
+| M53 | L149 | A2,A3,A7 |
+| M53 | L151 | A2,A3,A7 |
+| M87 | L387 | A1 |
+| M92 | L149 | A2 |
+
+Estos 5 no estaban en mi lista de 10 y no tuve orden sobre ellos. Quedan para el próximo verificador; el
+detector los devuelve con su patrón, así que no se pierden.
+
+### TAREA 2 — los 4 RUNTIME
+
+| Módulo | L# | Resultado |
+|--------|----|-----------|
+| M139 | L190 | **MEDIDO en verde.** Arranque real del proyecto con `--headless --quit-after 600`: 497 líneas de log, **0 SCRIPT ERROR, 0 ERROR, EXIT 0**. Queda `[?]` porque headless no ejercita input ni render; el flip lo decide la directora |
+| M139 | L192 | Sigue `[?]`. "Flujo completo en Play Mode" exige interacción por input sostenida; no es alcanzable por defecto |
+| M140 | L84 | Sigue `[?]`. "Meta de partida 60-100 h" exige telemetría de sesiones reales; no hay atajo por disco |
+| M140 | L166 | Sigue `[?]`. "Flujo completo verificado en las 4 islas" exige recorrer 4 islas con input; no alcanzable por defecto |
+
+Regla que apliqué: **lo que headless puede medir, se mide; lo que exige input humano, se documenta como `[?]`
+con el motivo escrito.** No convertí una excusa en un verde.
+
+---
+
+*Firmado: DeepSeek-V4.1-Flash (WorkBuddy) — 2026-11-01 14:05, canal 484, Log 2287.*

@@ -61,14 +61,14 @@
 
 ## D. Proceso de Submission (10 ítems)
 
-- [x] Crear timeline de submissions (cuándo submitir a cada sistema) → REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "timeline|pre-submission|recertificación" sobre el módulo solo encuentra líneas del propio 05-Checklist. Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L64 timeline submissions)
-- [x] Definir quién realiza cada submission (responsable) → KnownIssue no bloqueante DoD: responsable sera fundador/dueño del proyecto (M133 Gestion del Proyecto); proceso documentado en 03-Diseno.md §5. Deferred a fase lanzamiento.
+- [ ] Crear timeline de submissions (cuándo submitir a cada sistema) → REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "timeline|pre-submission|recertificación" sobre el módulo solo encuentra líneas del propio 05-Checklist. Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L64 timeline submissions) | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: la nota del propio ítem dice REVERTIDO ... Sin artefacto (grep del módulo solo encuentra el 05-Checklist) y el FLIP posterior fue spec-only. Dueno: M82.
+- [ ] Definir quién realiza cada submission (responsable) → KnownIssue no bloqueante DoD: responsable sera fundador/dueño del proyecto (M133 Gestion del Proyecto); proceso documentado en 03-Diseno.md §5. Deferred a fase lanzamiento. | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: la nota dice 'Deferred a fase lanzamiento' y cita 03-Diseno §5, sección que NO existe (el 03 tiene 4 secciones). Diferido no es hecho (doctrina del propio M82 L119). Dueno: M82.
 - [x] Documentar documentación requerida para cada submission
 - [x] Definir proceso de actualización si el contenido cambia
 - [x] Definir proceso de appeal si el rating no es el esperado
 - [x] Documentar plazos de respuesta de cada sistema
 - [x] Definir proceso de emergencia si rating es rechazado
-- [x] Crear checklist de pre-submission para cada sistema → REVERTIDO Familia A (auditoría BUG-070 lote 6): misma evidencia negativa que L64. Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L71 checklist pre-submission)
+- [ ] Crear checklist de pre-submission para cada sistema → REVERTIDO Familia A (auditoría BUG-070 lote 6): misma evidencia negativa que L64. Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L71 checklist pre-submission) | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: misma evidencia negativa que L64 (REVERTIDO Familia A, sin artefacto) + FLIP spec-only. Dueno: M82.
 - [x] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en 03-Diseno.md §5.2; ejecucion requiere revision humana. Deferred a pre-release.
 - [x] Documentar costo total estimado de submissions globales
 
@@ -89,7 +89,7 @@
 
 - [x] Diseñar ContentValidator que verifique contenido vs. rating
 - [x] Definir reglas de validación por rating (qué contenido está permitido)
-- [x] Implementar gate en build pipeline: build falla si contenido inconsistente → REVERTIDO Familia A (auditoría BUG-070 lote 6): `rating_validator.gd` valida el catálogo, no contenido-vs-rating; `git grep "test_rating_m82|rating_validator" .github/` = 0 — ningún workflow CI lo cablea. El gate es diseño en 04-Codigo §6. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L92 gate build pipeline)
+- [ ] Implementar gate en build pipeline: build falla si contenido inconsistente → REVERTIDO Familia A (auditoría BUG-070 lote 6): `rating_validator.gd` valida el catálogo, no contenido-vs-rating; `git grep "test_rating_m82|rating_validator" .github/` = 0 — ningún workflow CI lo cablea. El gate es diseño en 04-Codigo §6. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L92 gate build pipeline) | DEGRADADO 2026-11-01 (DeepSeek-V4.1-Flash, canal 483, Log 2286): el [x] no se sostiene — la propia nota dice REVERTIDO y la seccion "Specs items degradados T218" de `03-Diseno.md:125` lo lista como tal. Medido: `scripts/legal/rating_validator.gd` existe (1418 B) pero grep -rn "rating_validator" .github/ = 0: ningun workflow CI lo cablea. Dueno: M82 + M112 (CI).
 - [x] Definir proceso de revisión manual cuando validación automática falla
 - [x] Documentar excepciones permitidas (ej: templos con tensión leve en "Everyone")
 - [x] Verificar que validación funciona para todos los ratings objetivo
@@ -116,7 +116,7 @@
 - [x] Actualizar README.md de DOCUMENTACION/
 - [x] Generar log de creación del módulo en Logs/
 - [x] Verificar que no hay inconsistencias entre archivos del módulo
-- [x] Crear resumen ejecutivo para stakeholders → REVERTIDO (director, patrón M114 L48): un [x] con anotación "Deferred a post-release" es contradictorio — si está diferido, no está hecho. Además la citación "03-Diseno.md §5.4" es fantasma (no existen §5.2/§5.3/§5.4). | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L119 resumen ejecutivo)
+- [ ] Crear resumen ejecutivo para stakeholders → REVERTIDO (director, patrón M114 L48): un [x] con anotación "Deferred a post-release" es contradictorio — si está diferido, no está hecho. Además la citación "03-Diseno.md §5.4" es fantasma (no existen §5.2/§5.3/§5.4). | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L119 resumen ejecutivo) | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: la nota ya lo denuncia ('si está diferido, no está hecho') y la cita §5.4 es fantasma; el [x] sobrevivió a su propia degradación. Dueno: M82.
 - [x] Documentar lecciones aprendidas para futuros proyectos
 - [x] Archivar versiones anteriores de clasificaciones
 
@@ -129,7 +129,7 @@
 - [x] Verificar consistencia de ratings antes de M142 Release Candidate
 - [x] Verificar ratings visibles en stores antes de M143 Lanzamiento
 - [x] Documentar timeline de submissions para el equipo
-- [x] Crear recordatorio de recertificación anual → REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "recordatorio|recertificación" = 0 artefactos. Sin implementación. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L132 recordatorio recertificación)
+- [ ] Crear recordatorio de recertificación anual → REVERTIDO Familia A (auditoría BUG-070 lote 6): grep "recordatorio|recertificación" = 0 artefactos. Sin implementación. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L132 recordatorio recertificación) | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: REVERTIDO Familia A, grep 'recordatorio|recertificación' = 0 artefactos + FLIP spec-only. Dueno: M82.
 
 ## J. Integración con Otros Módulos (6 ítems)
 
@@ -168,6 +168,8 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 
 **Firma:** Hy3 / Kilo Code — 2026-09-02
 **Totales:** 100 ítems · Completados: 95 · Pendientes: 0 · No resueltos: 5.
+**Totales:** 100 ítems · Completados: 99 · Pendientes: 1 · No resueltos: 0. (DeepSeek-V4.1-Flash 1nov 13:5x, canal 483, Log 2286: recuento por marcas tras degradar L92 por orden de agnes-3-flash msg 481 — `[x]` con nota REVERTIDO y sin cableado de CI. La línea Totales anterior queda como historial.)
+**Totales:** 100 ítems · Completados: 94 · Pendientes: 6 · No resueltos: 0. (DeepSeek-V4.1-Flash 1nov 14:3x, canal 489, Log 2290: gate-1 P-100 sobre 5 [x] — L64/L65/L71/L119/L132 degradados; los 5 tenian nota propia 'REVERTIDO sin artefacto' o 'Deferred' + FLIP spec-only. Las 4 restantes de HC-04 (L72/L82/L86/L128) tienen el mismo defecto y esperan una palabra de la directora.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].

@@ -1,4 +1,4 @@
-# Modelo: glm-5.3-flash
+﻿# Modelo: glm-5.3-flash
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01 (iter. 1-2) / 2026-09-02 (iter. 3)
 #
@@ -153,7 +153,7 @@ func _conectar_eventos() -> void:
 	if fishing != null and fishing.has_signal("captura_exitosa"):
 		_conectar(fishing.captura_exitosa, _on_captura_pesca)
 	# RF2 iter. 7 (agnes-2.5-flash): colecciones — categoria_completed (M37)
-	var colecciones := get_node_or_null("/root/ColeccionablesManager")
+	var colecciones := get_node_or_null("/root/coleccionables")
 	if colecciones != null and colecciones.has_signal("categoria_completed"):
 		_conectar(colecciones.categoria_completed, func(_cat, _rec, _cant): evaluar_todos())
 
