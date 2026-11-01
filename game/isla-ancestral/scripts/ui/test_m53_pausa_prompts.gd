@@ -38,7 +38,7 @@ const _OVERLAY := preload("res://scripts/ui/widgets/action_prompt_overlay.gd")
 ## Piso MEDIDO en verde (35 en la corrida del 2026-10-26). No estimado.
 const CHECKS_MINIMOS := 35
 
-const BLOQUES := ["A", "B", "C", "D", "E", "F", "G"]
+const BLOQUES := ["A", "B", "C", "D", "E", "F", "G", "H"]
 
 var _checks: int = 0
 var _fallos: int = 0
@@ -71,6 +71,7 @@ func _run() -> void:
 	_bloque_c_esc_cierra()
 	_bloque_d_esc_reabre()
 	_bloque_e_sin_duplicar()
+	_bloque_h_continuar_desde_boton()
 	_bloque_f_prompt_por_dispositivo()
 	_bloque_g_fallback_y_modos()
 
@@ -142,6 +143,19 @@ func _bloque_e_sin_duplicar() -> void:
 			n += 1
 	_check(n == 1, "E2 PauseLayer aparece UNA sola vez en la pila (%d)" % n)
 	_fin("E")
+
+
+func _bloque_h_continuar_desde_boton() -> void:
+	var botones: Array[Button] = _pausa._buttons
+	_check(not botones.is_empty(), "H1 PauseLayer tiene botón Continuar")
+	if botones.is_empty():
+		_fin("H")
+		return
+	botones[0].emit_signal("pressed")
+	_check(not _pausa.visible, "H2 el botón Continuar cierra PauseLayer")
+	_check(not paused, "H3 el botón Continuar reanuda el mundo")
+	_check(not (_pausa in _ui._stack), "H4 la pausa cerrada sale de la pila")
+	_fin("H")
 
 
 func _bloque_f_prompt_por_dispositivo() -> void:

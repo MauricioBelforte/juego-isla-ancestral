@@ -1,5 +1,5 @@
-**Modelo:** MiMo V2.5 (OpenCode)
-**Plataforma:** OpenCode
+**Modelo:** GPT-5.6 Luna
+**Plataforma:** Copilot SDK en VS Code
 
 # 06-Plan-Testings.md — Módulo 53: UI/UX
 
@@ -97,3 +97,13 @@
 | T-43 | UI budget | Medir con Profiler | UI ≤ 8% del frame |
 | T-44 | Draw calls | Escena poblada + HUD | Sin draw calls duplicados |
 | T-45 | Minimapa | Mundo voxel cargado | Sin regeneración por frame |
+
+## 11. Pausa y retorno al menú
+
+| # | Escenario | Pasos | Resultado esperado |
+|---|-----------|-------|-------------------|
+| T-46 | Continuar desde pausa | Abrir pausa y activar «Continuar» | PauseLayer se cierra, el árbol se reanuda y M58 se sincroniza si estaba pausado |
+| T-47 | Volver al menú desde pausa | Activar «Volver al menú principal», cancelar y repetir confirmando; luego activar «Continuar» | Cancelar conserva la pausa; confirmar abre el menú sobre la pausa; Continuar cierra ambas capas y reanuda |
+
+**Modelo:** GPT-5.6 Luna  
+**Plataforma:** Copilot SDK en VS Code

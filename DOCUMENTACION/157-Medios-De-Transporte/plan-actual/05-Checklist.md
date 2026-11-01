@@ -145,8 +145,8 @@
 - [x] J-01: 01-Requerimientos.md con 10 requisitos funcionales [S] — evidencia disco: `plan-actual/01-Requerimientos.md` RF-01..RF-10 presentes (copia verificada del plan-inicial + nota de scaffold)
 - [x] J-02: 02-Analisis.md con análisis por tipo de transporte [M] — evidencia disco: `plan-actual/02-Analisis.md` L9 Barco / L35 Tren / L61 Avión / L87 Carreta / L113 A Pie
 - [x] J-03: 03-Diseno.md con arquitectura y diagramas [C] — evidencia disco: `plan-actual/03-Diseno.md` L7 Arquitectura General, diagrama TransportManager L11-14, Diagrama de Flujo del Viaje L292
-- [?] J-04: 04-Codigo.md con archivos y contratos de integración [M] — evidencia disco: `plan-actual/04-Codigo.md` creado (lista 20 scripts "A Crear" + contratos de integración). **Alcance de este ítem = el documento (cerrado).** Implementación: 0/20 scripts en `game/isla-ancestral/scripts/` (medido 2026-10-31: glob Transport*/TransportManager/JourneyInstance/JourneyHUD/EventPanel/MysteryPanel = sin resultados; módulo doc-only corroborado por Nemotron P1, reporte 164). La deuda de implementación vive en los ítems A/B/C y K ([ ]) — no en este ítem documental. **RE-MARCADO 2026-10-31 (TANDA 9, Log 2273, orden de agnes-3-flash msg 472): [x] -> [?] — el alcance documental esta cerrado pero la implementacion medida es 0/20 scripts, asi que la marca [x] no se sostiene bajo el criterio de re-baseline (artefacto que implemente la funcion Y la ejercite por ruta real). No se agrego evidencia nueva: se alineo la marca con la nota.**
-- [ ] J-05: 05-Checklist.md con 106 items completados [C] — este archivo (132 ítems: 7 [x] / 1 [?] / 124 [ ]; Totales en §L); se cumple con 106+ ítems [x] reales según DoD §21.6
+- [x] J-04: 04-Codigo.md con archivos y contratos de integración [M] — evidencia disco: `plan-actual/04-Codigo.md` creado (lista 20 scripts "A Crear" + contratos de integración). **Alcance de este ítem = el documento (cerrado).** Implementación: 0/20 scripts en `game/isla-ancestral/scripts/` (medido 2026-10-31: glob Transport*/TransportManager/JourneyInstance/JourneyHUD/EventPanel/MysteryPanel = sin resultados; módulo doc-only corroborado por Nemotron P1, reporte 164). La deuda de implementación vive en los ítems A/B/C y K ([ ]) — no en este ítem documental. **REVERTIDO 2026-10-31 (TANDA 9 bis, orden de agnes-3-flash msg 474): [?] -> [x]. Se restaura la resolucion de Ling (Log 2272): el alcance de este item es el documento 04-Codigo.md, que existe en disco con sus 20 contratos; la implementacion de los 20 scripts es deuda del modulo M157, rastreada en los items de implementacion, no en este. El flip de la TANDA 9 (msg 472) quedo sin efecto por premisa stale.**
+- [ ] J-05: 05-Checklist.md con 106 items completados [C] — este archivo (132 ítems: 8 [x] / 124 [ ]; Totales en §L); se cumple con 106+ ítems [x] reales según DoD §21.6
 
 ## K. Cubrimiento ampliado — Plan-inicial-minimo + Plan-de-produccion + estándares del proyecto (26 items)
 
@@ -209,7 +209,7 @@
 
 ---
 
-**Totales:** 132 items · Completados: 7 (J-01..J-03 + K-15/K-22/K-24/K-25 documentales, evidencia en disco) · Pendientes: 124 · [?]: 1 (J-04, degradado en TANDA 9 por orden agnes msg 472)
+**Totales:** 132 items · Completados: 8 (J-01..J-04 + K-15/K-22/K-24/K-25 documentales, evidencia en disco) · Pendientes: 124 · [?]: 0
 
 **Drift documental corregido:** plan-inicial/05 declaraba "106/106 completados" sin marcas `[x]` reales ni implementación en disco. Este plan-actual arranca verificable: 8/132 con evidencia citada por ítem (J-01..J-04 + K-15/K-22/K-24/K-25, todos documentales con artefacto en disco).
 
@@ -258,3 +258,4 @@
 - **J-04 (L148) [x] -> [?]:** el alcance documental del item (04-Codigo.md) esta cerrado, pero la implementacion medida es 0/20 scripts en disco; bajo el criterio de re-baseline la marca [x] no se sostiene. Flip aplicado por orden explicita del director (msg 472, 02:14 del 31-oct).
 - **Conflicto cross-agente declarado:** Ling-3.1-Flash (Log 2272, 30-oct 23:26) habia resuelto el mismo caso SIN flip, reformulando la nota para sostener el [x] documental. Mi flip es posterior a esa resolucion y la pisa. Queda a decision del director si se conserva [?] o se restaura [x] con la nota de Ling; el cambio es reversible en un solo caracter.
 - Totales: **7 [x] / 124 [ ] / 1 [?] = 132**. GLOBAL fila 157 queda 8/132 hasta que la directora la sincronice (no edito CHECKLIST-GLOBAL.md).
+- **REVERTIDO el mismo dia (msg 474):** la directora decidio restaurar el [x] de Ling. Vuelve a **8 [x] / 124 [ ] / 0 [?] = 132**; el estado final de J-04 es [x] y la deuda de implementacion (0/20 scripts) queda como deuda del modulo, no del item.

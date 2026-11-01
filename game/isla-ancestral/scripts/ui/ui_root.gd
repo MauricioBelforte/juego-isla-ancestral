@@ -66,6 +66,7 @@ func _build_layers() -> void:
 		confirm_popup = cp_load.new()
 		confirm_popup.name = "ConfirmPopup"
 		add_child(confirm_popup)
+		_conectar_salida_pausa()
 
 	# Panel de crafting (M16) como capa MODAL_SIMPLE
 	crafting_ui = null
@@ -158,11 +159,7 @@ func _conectar_menu_señales() -> void:
 		)
 	# Continuar → cambiar a CARGANDO (GameState cargaría último save)
 	if menus_layer.has_signal("continuar_pedido"):
-		menus_layer.continuar_pedido.connect(func():
-			if gfm.has_method("cambiar_estado"):
-				gfm.cambiar_estado(gfm.Estado.CARGANDO)
-				print("[M89] Continuar → CARGANDO")
-		)
+		menus_layer.continuar_pedido.connect(_on_menu_continuar)
 	# Ajustes -> MIGRADO a _conectar_ajustes() (frente M53 Opción A): la señal
 	# se cablea recién al montar SettingsAudioLayer, con sus dos deep-links
 	# (menús y pausa). Antes empujaba PauseLayer, que era no-op (ya registrada).
@@ -182,6 +179,48 @@ func _conectar_menu_señales() -> void:
 			get_tree().quit()
 			print("[M89] Salir")
 		)
+
+func _conectar_salida_pausa() -> void:
+	if pause_layer == null or not pause_layer.has_signal("salir_pedido"):
+		return
+	var callback := Callable(self, "_on_pausa_salir")
+	if not pause_layer.is_connected("salir_pedido", callback):
+		pause_layer.connect("salir_pedido", callback)
+
+func _on_pausa_salir() -> void:
+	if confirm_popup == null or not confirm_popup.has_method("configurar"):
+		push_error("[M53] No se puede confirmar la salida de pausa: ConfirmPopup no está disponible.")
+		return
+	confirm_popup.configurar(
+		"SETTINGS.VOLVER_TITULO",
+		"SETTINGS.VOLVER_TITULO_CONFIRMAR",
+		Callable(self, "_volver_al_menu_desde_pausa"))
+
+func _volver_al_menu_desde_pausa() -> void:
+	if menus_layer == null or not menus_layer.has_method("open"):
+		push_error("[M89] No se puede volver al menú: MenusLayer no está disponible.")
+		return
+	if not menus_layer.visible:
+		menus_layer.open()
+
+func _on_menu_continuar() -> void:
+	if pause_layer != null and pause_layer.visible:
+		var um := get_node_or_null("/root/UIManager")
+		if um == null or not um.has_method("pop_layer"):
+			push_error("[M89] No se puede reanudar desde el menú: UIManager no está disponible.")
+			return
+		if menus_layer in um._stack:
+			um.pop_layer(menus_layer)
+		if um.has_method("_on_pausa_continuar"):
+			um.call("_on_pausa_continuar")
+		else:
+			um.pop_layer(pause_layer)
+		return
+
+	var gfm := get_node_or_null("/root/GameFlowManager")
+	if gfm != null and gfm.has_method("cambiar_estado"):
+		gfm.cambiar_estado(gfm.Estado.CARGANDO)
+		print("[M89] Continuar → CARGANDO")
 
 ## M53 frente Opción A (canal 10): cablear los deep-links de `ajustes_pedido`
 ## a SettingsAudioLayer (sección Audio). Dos orígenes:

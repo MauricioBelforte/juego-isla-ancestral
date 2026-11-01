@@ -41,6 +41,8 @@ var _closing: bool = false
 signal device_changed(mode: String)
 
 func _ready() -> void:
+	# El router global debe seguir recibiendo navegación cuando una capa pausa el árbol.
+	process_mode = Node.PROCESS_MODE_ALWAYS
 	# Suscribir eventos de UI del EventBus
 	if has_node("/root/EventBus"):
 		var bus: Node = get_node("/root/EventBus")
@@ -200,6 +202,10 @@ func register_layer(layer: Node) -> void:
 	_stack.append(layer)
 	_apply_process_mode(layer)
 	_restore_focus_for_layer(layer)  # guarda/restaura sin foco forzado
+	if layer.name == "PauseLayer" and layer.has_signal("continuar_pedido"):
+		var continuar := Callable(self, "_on_pausa_continuar")
+		if not layer.is_connected("continuar_pedido", continuar):
+			layer.connect("continuar_pedido", continuar)
 	_log("capa registrada: %s (tipo=%s, pila=%d)" % [layer.name, _get_layer_type_name(layer), _stack.size()])
 
 ## Des-registro automático desde UILayer._exit_tree
@@ -529,9 +535,6 @@ func _conectar_m58() -> void:
 	if acc == null or not acc.has_signal("pausa_instantanea_activada"):
 		return
 	acc.pausa_instantanea_activada.connect(_on_pausa_instantanea)
-	var pausa = _buscar_capa("PauseLayer")
-	if pausa and pausa.has_signal("continuar_pedido"):
-		pausa.continuar_pedido.connect(_on_pausa_continuar)
 
 func _on_pausa_instantanea() -> void:
 	var pausa = _buscar_capa("PauseLayer")
@@ -544,8 +547,14 @@ func _on_pausa_instantanea() -> void:
 		pausa.open()
 	_log("RF18: overlay de pausa abierto por pausa instantánea de M58")
 
-## Al pulsar "Continuar" en el overlay, si M58 había pausado (RF18) se reanuda.
+## Cierra PauseLayer y, si M58 originó la pausa, sincroniza también su estado.
 func _on_pausa_continuar() -> void:
+	var pausa := _buscar_capa("PauseLayer")
+	if pausa != null and pausa.visible:
+		if pausa in _stack:
+			pop_layer(pausa)
+		elif pausa.has_method("close"):
+			pausa.close()
 	var acc := _m58()
 	if acc and acc.has_method("esta_pausado") and acc.esta_pausado() and acc.has_method("reanudar"):
 		acc.reanudar()

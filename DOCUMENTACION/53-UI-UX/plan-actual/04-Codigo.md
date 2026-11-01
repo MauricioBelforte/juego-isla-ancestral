@@ -1,5 +1,5 @@
-**Modelo:** mimo-v2.6-flash-free
-**Plataforma:** opencode
+**Modelo:** GPT-5.6 Luna
+**Plataforma:** Copilot SDK en VS Code
 
 # 04-Codigo.md — Módulo 53: UI/UX
 
@@ -425,3 +425,28 @@ calculada al ancho actual (1) -> el `VBox` hereda esa altura -> el panel crece.
   protección definitiva es el locale, que no existe todavía (L165, bloqueado por M87).
 - **`test_ui_i18n_m53.gd`** sigue colgando (EXIT 124) por `get_locale_actual()` inexistente:
   suite muerta, no cuenta como evidencia.
+
+## Incidencia — Reanudar desde pausa y volver al menú — 2026-10-31
+
+**Modelo:** GPT-5.6 Luna  
+**Plataforma:** Copilot SDK en VS Code
+
+### Cambios verificados
+
+- `ui_manager.gd:L203-L206`: `layer.connect("continuar_pedido", continuar)` conecta la señal de `PauseLayer` al controlador.
+- `ui_manager.gd:L549-L559`: `_on_pausa_continuar()` cierra la capa y sincroniza `AccesibilityManager.reanudar()` cuando M58 sigue pausado.
+- `ui_root.gd:L161-L162`: `continuar_pedido` del menú se conecta a `_on_menu_continuar`.
+- `ui_root.gd:L183-L197` y `ui_root.gd:L199-L223`: el botón de pausa abre `ConfirmPopup`; confirmar abre `MenusLayer`, y `Continuar` desde ese menú cierra ambas capas y reanuda.
+- `pause_layer.gd:L87`: el botón usa `SETTINGS.VOLVER_TITULO`, no la acción genérica de salir.
+- `locales/es.po:L114-L117`, `locales/en.po:L114-L117` y `locales/pt.po:L118-L121`: las dos claves se traducen en los tres idiomas.
+
+### Evidencia
+
+- `test_m53_pausa_prompts.gd:L148-L158`: el bloque H emite `pressed` del botón Continuar y comprueba capa oculta, árbol reanudado y eliminación de la pila.
+- `test_m89_menus.gd:L191-L211`: E9-E15 comprueban foco direccional, cancelación, confirmación, apertura del menú y reanudación.
+- Salida de Godot 4.7.2: M53 **39 checks / 0 fallos / EXIT 0**; M89 **55 checks / 0 fallos / EXIT 0** (`test_m53_pausa_prompts.gd:L245`; `test_m89_menus.gd:L56`).
+- Captura runtime de la pausa tras reanudar: `tools/mcp/godot-mcp/capturas/53-UI-UX/cap_53_2026-10-31_18-58-03_gpt-luna_continuar-reanudado.png`.
+
+### Alcance pendiente
+
+- `MenusLayer` sigue siendo un overlay en la escena actual; no se encontró una escena raíz independiente de título. La suite valida el retorno al overlay y la reanudación, no una transición a una escena de título.

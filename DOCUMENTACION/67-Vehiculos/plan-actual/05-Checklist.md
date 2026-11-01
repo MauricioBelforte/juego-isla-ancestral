@@ -121,7 +121,7 @@
 
 - [x] Definir mejoras por vehículo (velocidad, giro, faroles, baúl) [M] — Step-5 2026-10-21: definicion en 03-Diseno.md §3.1 columna Mejoras (barco vel/giro/faroles/baul 20; dirigible vel/altitud 90/faroles; submarino vel/luces M49/baul 16; locomotora vel/vagon). Tanda 4 (Step-5 2026-10-22): L123 [x] (velocidad/giro por nivel) y la parte de baúl de L124 implementadas con mejoras: Dictionary + nivel en vehicle_preset.gd; L124 sigue [ ] por los faroles (M49)
 - [x] Mejoras de velocidad/giro (niveles) [M] — Step-5 2026-10-22 (tanda 4): implementadas data-driven en vehicle_preset.gd (velocidad_max_efectivo/giro_efectivo + subir_nivel/bajar_nivel, nivel 0 = base) con incrementos y topes en vehicles.json (barco vel 12->15 tope, giro 1.6->2.2; locomotora 20->26 sin habilitar giro). Evidencia: suite 63->99 checks/0 fallos/EXIT 0 x3 + guardián EN ROJO por inyeccion de runtime (63<99, EXIT 1); validador 46->90/0/EXIT 0.
-- [x] Mejoras de faroles (M49) y baúl [M] — Step-5 2026-10-22 (tanda 4): baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino = §3.1, testeado); faroles/luces = M49, dueno externo, sin integracion. Item compuesto: NO se flippea (anti-inflacion). | FLIP 2026-10-26 (Reflection-Beam-1.0, T079-67): spec en 03-Diseno.md § (L124 mejoras faroles/baúl, parcial: baúl implementado, faroles M49)
+- [?] Mejoras de faroles (M49) y baúl [M] — Step-5 2026-10-22 (tanda 4): baúl SÍ implementado (baul_slots_efectivo por nivel, techo 20 barco / 16 submarino = §3.1, testeado); faroles/luces = M49, dueno externo, sin integracion. Item compuesto: NO se flippea (anti-inflacion). | FLIP 2026-10-26 (Reflection-Beam-1.0, T079-67): spec en 03-Diseno.md § (L124 mejoras faroles/baúl, parcial: baúl implementado, faroles M49) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [ ] Comprar en tienda (M39) o artesanales (M16) [M]
 - [ ] Persistencia y visualización de nivel en el HUD [M] | RUTA-B 2026-10-31 DS-V4.1-Flash-Opencode (gate-1, directora msg 230): promovido sin evidencia en dd6fb70, revertido a [ ]
 
@@ -136,7 +136,7 @@
 ## O. Sonido (M43)
 
 - [ ] Sonidos de motor/agua/viento por vehículo [M]
-- [x] LOD de audio: atenuar > 40 m, silenciar > 80 m [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T079-67): spec en 03-Diseno.md § (LOD audio)
+- [?] LOD de audio: atenuar > 40 m, silenciar > 80 m [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T079-67): spec en 03-Diseno.md § (LOD audio) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [ ] Sin fugas de audio al salir [M]
 - [ ] Sonidos de docking/salida y balance con M91 [M]
 - [ ] Testear audio 3D y bajo el agua (amortiguado) [M]

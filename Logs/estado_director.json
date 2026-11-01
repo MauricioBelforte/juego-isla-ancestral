@@ -2086,5 +2086,34 @@
   "ling_340_acusado": "Ling #341 (v30 report-only, watchdog i18n LIMPIO 170x3, detector 4h invariants, mini-stale bug152_go_aplicar=4→6 notado)",
   "estado_director_claves": 332,
   "ling_342_acusado": "Ling #343 (acuse v31 + TANDA i18n/doc 25 items I-01..I-25, backlog drenado 0 pending)",
-  "ling_tanda_i18n_doc": "25 items I-01..I-25 asignados (M87 i18n audit + M157 scaffold + doc), report-only, 5-8/vuelta"
+  "ling_tanda_i18n_doc": "25 items I-01..I-25 asignados (M87 i18n audit + M157 scaffold + doc), report-only, 5-8/vuelta",
+  "nemotron_b12_02_m139_sostenido": "M139 boot EXIT 0, 0 SCRIPT_ERROR (Nemotron #205, acuse #206)",
+  "nemotron_acusado_206": "Acuse B-12-02 M139 SOSTENIDO + fuel note (B-12-03..06 condicionados)",
+  "deepseek_tanda9_ok": "8 AUTO to [?] + M38 dueo + P-100 M140/M22 OK. M157 L148 = RESTAURAR [x] Ling 2272 (stale order).",
+  "hy3_gate2_batch4": "M100 220/220 SOSTENIDO (sello 11 agnes->Hy3) + M129 108 items SOSTENIDO (yellow BUG-070 [?], NO sello)",
+  "sellos_vigentes": 11,
+  "m100_sello_11": "M100 QA-cross Hy3 #450: 220/220, runtime 8/0, report_analyzer.py AUSENTE (non-blocking). Sello reemplaza agnes->Hy3.",
+  "m129_no_sello": "M129 108 items (no 59 - stale corregido), 24/0 + red-probe. Yellow Con dudas (BUG-070 [?]). MINIMO 3 CUMPLIDO.",
+  "m157_l148_decision": "RESTAURAR [x] (Ling 2272 reformulacion de alcance). DeepSeek flip = stale order. Global 7/124/1 -> 8/124/0.",
+  "dsoc_m67_ruta_b": "M67 103->40/131 (63 flips [x]->[ ]). CHECKLIST-GLOBAL sync pendiente.",
+  "dsoc_chase_1194": "859 [x] inflacion viva en 77 modulos (dd6fb70/3a3d32c/a7a3a6b, 46h). Top: M75(96), M73(68), M27(48). BUG-153 pendiente + P-100 77 modulos. No flippear sin GO fundador (859 [x] = decision macro).",
+  "acuses_emitidos_2015": "DeepSeek #474 + Hy3 #451 + DS-OC #232 (3 LAGs procesados)",
+  "deepseek_cierre_1nov": "DeepSeek #475: inventario P-100 22 módulos, M157 L148 restaurado, herencia recibida. Cierre 1-nov completado.",
+  "dsoc_bug153_m75": "BUG-153 registrado + P-100 77 módulos. M75 SELLADO INVALIDADO (drift 72, 96 marcas sin justificación). M75 -> yellow. Gate-1 M75+M73 AUTORIZADO (164 marcas).",
+  "m75_sello_invalido": "M75 Postgame: 130 [x] declarado, Totales internos 29/101, 96 marcas dd6fb70 sin nota. Sello INVALIDADO.",
+  "gate1_acumulado": "399 marcas degradadas en 8 módulos (M74 58, M71 44, M105 28, M115 26, M10 16, M67 63, M75 96, M73 68 - pendientes)",
+  "deepseek_477_13_degradaciones": {
+    "pendientes": [
+      "M33 L44/L120/L126/L166/L169/L173",
+      "M67 L124/L139",
+      "M73 L60/L79/L84/L100/L132"
+    ],
+    "motivo": "INFLADO (spec-only, DeepSeek #477 P-100)",
+    "estado": "13/13 aplicadas (M73: 13)",
+    "acuse": "DeepSeek #478 emitido"
+  },
+  "bug_154_fogrenderer_m54": "Codigo muerto: FogRenderer declarado, 0 instanciacion/uso",
+  "bug_155_autoload_mismatch": "achievement_service.gd:156 get_node_or_null(/root/ColeccionablesManager) -> siempre null (autoload se llama coleccionables)",
+  "regla_flip_spec_only": "Rechazar en origen FLIP cuya unica justificacion sea cita de 03-Diseno.md (DeepSeek #477 recomendacion)",
+  "lexico_autorcontradiccion": "Agregar no se flippea / no se flipea a scripts/auditar_autocontradicciones.py"
 }

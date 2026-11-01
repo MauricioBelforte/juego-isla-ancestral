@@ -335,3 +335,137 @@ encabezado y las marcas quedan como están. **Degradarlas sin más sería tan fa
 ---
 
 *Firmado: DeepSeek-V4.1-Flash (WorkBuddy) — 2026-10-28, Log 2239.*
+---
+
+## 8. Actualización 2026-10-31 (TANDAS 1-9) — lo aprendido después del Log 2239
+
+Esta sección se agrega al cierre. El método de §2 no cambió; lo que cambió es el catálogo de trampas
+(§4 tenía 10, acá van 14 más, todas medidas) y el estado de los módulos (§8.3).
+
+### 8.1 Trampas nuevas (medidas, no teóricas)
+
+**8.1.1 En GDScript `%` liga más fuerte que `+`.**
+`print("a %s" + "b" % [x, y])` formatea SOLO la segunda cadena → `ERROR: String formatting error`.
+Es ERROR de motor, **no** SCRIPT ERROR: el script sigue y el mensaje nunca llega al log. Pasó en
+`scripts/historia/validar_historia.gd:95` (M22): la advertencia de flag externa no se emitía nunca y
+el validador cerraba en "0 fallo(s)". Fix: paréntesis.
+
+**8.1.2 `Engine.get_singleton("X")` NO resuelve un autoload.**
+Devuelve `null` + `ERROR: Failed to retrieve non-existent singleton`. El nodo queda muerto **sin
+fallar el test**. Pasó en `animacion_jugador_m48.gd` con `AnimationService`: el jugador no animaba
+nada en runtime y ninguna suite lo veía. Usar `get_node_or_null("/root/X")`.
+
+**8.1.3 Nodos creados por código sin `name` reciben `@Clase@id`.**
+En 4.7.2 un `VBoxContainer` instanciado sin nombre se llama `@VBoxContainer@123`. `find_child("VBoxContainer")`
+y `get_node_or_null("CenterContainer/...")` devuelven **null**. Buscar **por tipo** (recursivo con
+`get_class()` / `is`), nunca por nombre autogenerado.
+
+**8.1.4 `grep -cE "\s*- \[$m\]"` con `m='?'` devuelve 0 SIEMPRE.**
+El `?` cuantifica el `\[`. Dio `[?]=0` para M11/M67/M74 cuando los reales eran 7/15/58. Contar con
+`\[[?]\]` o directamente con `muestreo_p100.py`. Este error produjo una cifra publicada y corregida.
+
+**8.1.5 Una nota de cierre que CONSERVA "el archivo NO existe" hace que el P-100 marque `PARCIAL`.**
+El extractor toma el fragmento entre backticks (`plan-actual/`) como ruta y no lo resuelve. Al cerrar
+un ítem cuya nota afirmaba ausencia hay que **reescribir** la frase, no apilar una nota nueva encima.
+
+**8.1.6 `--modulo` NO acepta prefijo `M`.**
+`--modulo M101` → `SIN 05 EN DISCO`, exit 3. El prefijo se construye por dentro (`M101-`, `0M101-`,
+`00M101-`); la carpeta real es `101-QA-General`.
+
+**8.1.7 Dos falsos del muestreador, ya corregidos (válido para quien herede la herramienta).**
+(a) **Falso hueco**: un ítem que cita `slot.tscn` para decir que **no** existe se contaba como
+`PATH FALTA`. (b) **Falso verde**: M22 salía OK con 14 citas fantasma. Corregido con detección
+ANCLADA de citas negativas (ventana que corta en el backtick vecino, para que la negación no se
+contagie a la cita de al lado) + identificador pegado a un `.gd` citado. Suite del muestreador:
+**71 checks / 0 fallos** (piso 71 MEDIDO), con 4 sondas en rojo.
+
+**8.1.8 Verificar citas a nivel de SECCIÓN se evaluó y se RECHAZÓ por medición.**
+689 citas: 80,3 % resuelven; en el subconjunto alfabético 42 de 113 fallan (37,2 %) y son referencias
+informales (`sec.cielo`), no fantasmas. Cablearlo habría fabricado ~42 huecos falsos. **Un detector
+que no se mide antes de cablearse inventa deuda.**
+
+**8.1.9 "El método existe" ≠ "está ejercitado".**
+`guardar_estado()` en `shop_manager.gd` (M38 L41) y `guardar_exploracion()` en M54 existen y tienen
+**0 llamadores de producción**: solo los invoca un test. Por §21.8.2.b.4 el ítem no está hecho.
+Patrón de caza: `grep -rn "nombre_del_metodo(" scripts/ | grep -v test_`.
+
+**8.1.10 Una suite que cuelga NO es verde (EXIT 124).**
+`qa_dirty_item4.gd` llamaba a `_actualizar_dirty`, que no existe → SCRIPT ERROR → aborta `_correr()`
+→ `quit()` nunca se llama → cuelgue >7 min. Sin guardián (contador, piso, `_summary()`, `_fin()`,
+watchdog) **cualquier aborto cuelga** y el CI lo lee como "no falló". El test además consagraba el bug:
+su cobertura era falsa.
+
+**8.1.11 Re-baseline masivo por emparejamiento de texto contra el blob de git (método M85).**
+Para degradar 24 ítems sin tocar el resto: `git show <commit>:<archivo>`, emparejar los ítems por
+TEXTO normalizado (no por número de línea, que se corre), reescribir **solo el carácter de marca**.
+Verificación: `diff` debe dar exactamente N+/N- con prefijo y texto idénticos en cada par, y el EOL
+debe quedar preservado. M85: 26 pares, `crlf=172 lf_sueltos=0 bom=False`.
+
+**8.1.12 Un FLIP de Beam con "spec en 03-Diseno.md §X" como ÚNICA justificación es deferral.**
+Verificar la marca **PREVIA** con `git show <commit>^:archivo` antes de creer la nota. Y buscar el
+patrón de inflación del cron bulk del 25-oct: `[x]` que **conserva** la nota que dice `INFLADO` o
+"los artefactos NO existen" (M85: 24 de 26 fueron el cron; Beam solo 2).
+
+**8.1.13 Un verde no se hereda, y se compone de 3 capas.**
+(1) `_fin()` al FINAL del bloque, no en el runner; (2) `CHECKS_MINIMOS` **medido en verde**, nunca
+estimado (escribí 26 de memoria cuando el real era 79); (3) `_summary()` en un `call_deferred` aparte
+si `_run()` tiene `await`. Probar el guardián **EN ROJO por inyección** con valores dinámicos
+(subscript, no literal) y restaurar con sha256 + reintentos (lock de Windows).
+
+**8.1.14 Un validador que solo cuenta fallos no distingue "0 fallos" de "0 checks".**
+Si el runner aborta antes de las aserciones, publica "0 fallo(s)" sin haber corrido nada. Exigir que
+nombre cada bloque que no corrió + piso medido.
+
+### 8.2 Lo que NO cambió
+
+- Contar por prefijo `^\s*- \[([ x?])\]`. `**Totales:**` miente y `grep -c '\[x\]'` infla.
+- Muestra `max(5, techo(5 % de los [x]))`; veredicto OK / CAVEAT / DISCREPANCIA con umbral 2.
+- La nota del ítem manda sobre la marca.
+- `03-Diseno.md` se resuelve primero contra el `plan-actual/` del propio módulo (~40 homónimos).
+- `save.json`, `meta.json`, `mundo_voxel.bin` son `user://`: no son artefactos de repo.
+- Ningún veredicto se firma sin correr la suite del módulo con el Godot real.
+
+### 8.3 Estado medido al 2026-10-31 17:20 (post TANDA 9)
+
+Medido por lectura binaria de cada `plan-actual/05-Checklist.md` (no por `Totales`):
+
+| Módulo | x | [ ] | [?] | Total | Último veredicto P-100 |
+|---|---|---|---|---|---|
+| M01 Fundamentos | 73 | 79 | 0 | 152 | índice maestro, 49 degradados |
+| M10 Generación-Mundo | 88 | 0 | 18 | 106 | 2 AUTO degradados (TANDA 9) |
+| M11 Personaje | 91 | 0 | 32 | 123 | 25 FLIP Beam spec-only degradados |
+| M14 Inventario | 139 | 0 | 1 | 140 | CAVEAT (L183 sin gamepad) |
+| M22 Historia | 80 | 7 | 4 | 91 | OK; NO sellable (7 integraciones, 4 Misterio) |
+| M23 Secundarias | 89 | 14 | 2 | 105 | OK (13 con dueño, L98 sin dueño) |
+| M34 Pesca | 145 | 0 | 8 | 153 | OK sobre lo muestreado; 8 [?] externos |
+| M48 Animación | 115 | 7 | 1 | 123 | CAVEAT (L177 sin `animation_budget.json`) |
+| M54 Mapa | 172 | 5 | 0 | 177 | CAVEAT (4 spec-only + L167 externo) |
+| M55 Diario | 92 | 37 | 2 | 131 | DISCREPANCIA histórica; 42 adjudicados |
+| M59 Guardado | 118 | 10 | 2 | 130 | OK (L215 cerrado con gate vivo) |
+| M60 Datos | 189 | 3 | 4 | 196 | OK / HONESTO |
+| M67 Vehículos | 40 | 76 | 15 | 131 | **cambió fuera de mi vuelta** (yo medí 103/13/15) |
+| M74 Eventos | 227 | 0 | 58 | 285 | 58 [?] honestos |
+| M85 Modelos-3D-Legal | 73 | 25 | 2 | 100 | re-baseline 99/1/0 → 73/25/2 |
+| M101 QA-General | 209 | 0 | 0 | 209 | **OK / SELLABLE** (11/11) |
+| M137 Prototipo | 124 | 0 | 7 | 131 | 2 AUTO degradados (TANDA 9) |
+| M139 Pre-Alpha | 136 | 0 | 6 | 142 | 2 AUTO degradados (TANDA 9) |
+| M140 Alpha | 103 | 19 | 2 | 124 | OK; NO sellable (19 pendientes reales) |
+| M151 Control-Final | 156 | 6 | 5 | 167 | OK con CAVEAT (4 [?] reales) |
+| M156 Terrenos | 301 | 2 | 4 | 307 | 1 AUTO sin orden (L127) |
+| M157 Transporte | 7 | 124 | 1 | 132 | OK; L148 degradado por orden 472 |
+
+### 8.4 Deuda de proceso al cierre
+
+1. **Pool de canal desincronizado**: head `423` vs canal real `472`. Reportado 18 veces, nunca tocado
+   (regla: el pool no se commitea; el número real es `max(archivos)+1`).
+2. **Prompt de la automatización stale**: declara director a GLM-5.3-Flash; quien escribe es
+   `agnes-3-flash`. Escalado al fundador, sin resolver.
+3. **`quality.yml` L1116** pasa `--ci-gates-ok "1"` hardcodeado; `release-build.yml` L77 lo deriva bien.
+   Cualquier lectura de "CI en verde" apoyada en el primero miente.
+4. **Fila 48 duplicada** en `CHECKLIST-GLOBAL.md` (L150 legacy + L151). Dedup pendiente del fundador.
+5. **8 autocontradicciones sin orden**: M94 L55/L60 (orden explícita de NO tocar), M156 L127,
+   M26 L183, M53 L149/L151, M87 L387, M92 L149.
+
+---
+
+*Firmado: DeepSeek-V4.1-Flash (WorkBuddy) — actualización 2026-10-31 17:20, Log 2273.*

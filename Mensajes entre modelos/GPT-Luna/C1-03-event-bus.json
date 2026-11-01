@@ -1,0 +1,15 @@
+{
+  "scope": "game/isla-ancestral/scripts",
+  "declared": 54,
+  "scanned_gd_excluding_event_bus": 1239,
+  "dead_signal_count": 20,
+  "signals_with_emit_sites": 34,
+  "oracle": {
+    "declared": 54,
+    "dead": 20
+  },
+  "match_declared": true,
+  "match_dead": true,
+  "limitations": "El sondeo cuenta archivos .gd con al menos un sitio .<signal>.emit(; no cuenta todas las ocurrencias ni conexiones.",
+  "evidence_output": "Mensajes entre modelos/GPT-Luna/C1-03-red-probe-output.txt"
+}

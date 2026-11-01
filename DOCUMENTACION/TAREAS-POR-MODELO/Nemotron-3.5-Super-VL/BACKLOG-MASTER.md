@@ -64,9 +64,9 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
 
 ## B-12 — Boot pre-check queue (agnes 31oct 07:30, regla nemotron_fuel)
 
-- [→] B-12-01: M59 Guardado — boot pre-check cuando DeepSeek libere TANDA 9 (godot_run_project + get_debug_output: EquipmentManager/SaveManager M59 + 0 SCRIPT_ERROR)
-- [ ] B-12-02: M139 — boot pre-check inmediato (godot_run_project: M139 carga + 0 errores)
-- [ ] B-12-03: M64 IA NPC — boot pre-check cuando MiMo libere (npc_agent/npc_needs + 0 SCRIPT_ERROR)
+- [x] **B-12-01: M59 Guardado** — boot pre-check completado (reporte 203): SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR.
+- [x] **B-12-02: M139** — boot pre-check completado (reporte 205): SOSTENIDO, EXIT 0, 0 SCRIPT_ERROR.
+- [ ] **B-12-03: M64 IA NPC** — boot pre-check cuando MiMo libere (npc_agent/npc_needs + 0 SCRIPT_ERROR)
 - [ ] B-12-04: M17 Construccion — boot pre-check cuando DeepSeek libere
 - [ ] B-12-05: M37 Museos — boot pre-check cuando kimi libere
 - [ ] B-12-06: M129 Merchandising — boot pre-check cuando agnes libere

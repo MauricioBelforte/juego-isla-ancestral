@@ -111,6 +111,12 @@ msgstr "No previous save."
 msgid "SETTINGS.SALIR"
 msgstr "Quit"
 
+msgid "SETTINGS.VOLVER_TITULO"
+msgstr "Return to main menu"
+
+msgid "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+msgstr "Return to the main menu? The game will stay paused. Choose Continue to resume."
+
 msgid "SETTINGS.JUGAR"
 msgstr "Play"
 

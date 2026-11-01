@@ -1,0 +1,59 @@
+{
+  "scope": "game/isla-ancestral/scripts/**/*.gd",
+  "gd_total": 1240,
+  "function_declarations_total": 12397,
+  "function_definition_pattern": "^\\s*(?:static\\s+)?func\\s+Identifier",
+  "folder_grouping": "first directory below scripts, or (root)",
+  "top_10_folders": [
+    {
+      "folder": "ui",
+      "files": 75,
+      "functions": 774
+    },
+    {
+      "folder": "legal",
+      "files": 54,
+      "functions": 396
+    },
+    {
+      "folder": "templos",
+      "files": 43,
+      "functions": 636
+    },
+    {
+      "folder": "rendimiento",
+      "files": 41,
+      "functions": 546
+    },
+    {
+      "folder": "dialogos",
+      "files": 40,
+      "functions": 355
+    },
+    {
+      "folder": "core",
+      "files": 39,
+      "functions": 211
+    },
+    {
+      "folder": "world",
+      "files": 35,
+      "functions": 217
+    },
+    {
+      "folder": "saving",
+      "files": 34,
+      "functions": 316
+    },
+    {
+      "folder": "ia_npc",
+      "files": 26,
+      "functions": 230
+    },
+    {
+      "folder": "security",
+      "files": 22,
+      "functions": 164
+    }
+  ]
+}

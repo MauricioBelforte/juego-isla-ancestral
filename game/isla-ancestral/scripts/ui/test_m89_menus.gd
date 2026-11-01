@@ -182,6 +182,46 @@ func _test_e_uiroot_wiring() -> void:
 		_check(conns.size() > 0, "E7 jugar_pedido cableada a GameFlowManager (%d)" % conns.size())
 		var conns2 = ur.menus_layer.get_signal_connection_list("ajustes_pedido")
 		_check(conns2.size() > 0, "E8 ajustes_pedido cableada a SettingsAudioLayer (%d)" % conns2.size())
+	var pausa: Node = ur.pause_layer
+	var menu: Node = ur.menus_layer
+	var popup: Node = ur.confirm_popup
+	if pausa != null and menu != null and popup != null:
+		pausa.open()
+		var um = root.get_node_or_null("UIManager")
+		var mover_este := InputEventAction.new()
+		mover_este.action = "mover_este"
+		mover_este.pressed = true
+		_check(paused and um.process_mode == Node.PROCESS_MODE_ALWAYS,
+			"E9a UIManager sigue procesando input con el árbol pausado")
+		um._unhandled_input(mover_este)
+		_check(root.gui_get_focus_owner() == pausa._buttons[1],
+			"E9 la acción direccional mueve el foco en la pausa")
+		var tecla_sur := InputEventKey.new()
+		tecla_sur.keycode = KEY_S
+		tecla_sur.physical_keycode = KEY_S
+		tecla_sur.pressed = true
+		_check(tecla_sur.is_action_pressed("mover_sur"),
+			"E9b la tecla física S coincide con mover_sur")
+		pausa._buttons[2].disabled = true
+		var candidatos_foco: Array[Control] = []
+		MenuNavigator._find_all_focusable(pausa, candidatos_foco)
+		_check(pausa._buttons[2] not in candidatos_foco and pausa._buttons[3] in candidatos_foco,
+			"E9c los controles deshabilitados se excluyen del foco")
+		pausa._buttons.back().emit_signal("pressed")
+		_check(popup.visible, "E10 Salir de pausa pide confirmación")
+		popup._cancel_button.emit_signal("pressed")
+		_check(not popup.visible and pausa.visible and not menu.visible and paused,
+			"E11 cancelar conserva la pausa y no abre el menú")
+		pausa._buttons.back().emit_signal("pressed")
+		_check(popup.visible, "E12 se puede volver a solicitar la confirmación")
+		popup._ok_button.emit_signal("pressed")
+		_check(pausa.visible and menu.visible, "E13 confirmar abre el menú sobre la pausa")
+		um._unhandled_input(mover_este)
+		_check(root.gui_get_focus_owner() == menu._buttons[1],
+			"E14 la acción direccional mueve el foco en el menú")
+		menu._buttons[1].emit_signal("pressed")
+		_check(not menu.visible and not pausa.visible and not paused,
+			"E15 Continuar desde el menú cierra ambas capas y reanuda")
 	ur.free()
 
 ## F — Pausa del mundo (RF5): MODAL_FULL congela el árbol y lo reanuda

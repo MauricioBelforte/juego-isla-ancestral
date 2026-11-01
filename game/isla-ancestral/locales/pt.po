@@ -115,6 +115,12 @@ msgstr "Sem salvamento anterior."
 msgid "SETTINGS.SALIR"
 msgstr "Sair"
 
+msgid "SETTINGS.VOLVER_TITULO"
+msgstr "Voltar ao menu principal"
+
+msgid "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+msgstr "Voltar ao menu principal? O jogo continuará pausado. Escolha Continuar para retomar."
+
 msgid "SETTINGS.JUGAR"
 msgstr "Jogar"
 

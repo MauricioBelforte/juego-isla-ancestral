@@ -1,0 +1,24 @@
+{
+  "source": "CHECKLIST-GLOBAL.md",
+  "header_line": 22,
+  "header_columns": [
+    "ID",
+    "Módulo",
+    "Estado",
+    "Progreso",
+    "Prioridad",
+    "Complejidad",
+    "Dependencias",
+    "Recom",
+    "Agente actual",
+    "Última actividad",
+    "Notas"
+  ],
+  "read_only": true,
+  "state_column_index": 2,
+  "read_method": "Clasificación por valor de la columna Estado únicamente; no se consideran emojis dentro de Notas.",
+  "locked_count": 0,
+  "rows_with_extra_columns": 4,
+  "rows_agent_unreadable": 0,
+  "modules": []
+}

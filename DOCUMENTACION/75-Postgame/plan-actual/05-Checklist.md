@@ -21,8 +21,8 @@
 
 ## A. Contenido Post-Historia (RF1)
 
-- [x] Definir el epílogo de la historia (M22) [M]
-- [x] Mostrar "¿Qué sigue?" tras los créditos (M92) [M]
+- [?] Definir el epílogo de la historia (M22) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M22 (deuda cross-módulo)
+- [x] Mostrar "¿Qué sigue?" tras los créditos (M92) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — `sugerir_que_sigue()` postgame_manager.gd L172
 - [x] Mantener el tono cozy en el cierre (M21/M44) [S]
   · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
 - [x] No mostrar pantalla de "Fin" fría [S]
@@ -31,45 +31,45 @@
 
 ## B. Nuevas Islas (RF2)
 
-- [x] Catalogar la isla del Este (FASE 1, M27) [M]
-- [x] Catalogar la isla flotante (FASE 2, M10) [M]
+- [x] Catalogar la isla del Este (FASE 1, M27) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — fila `postgame_isla_este` en data/postgame/actividades.json (fase 1, dueno M27)
+- [x] Catalogar la isla flotante (FASE 2, M10) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — fila `postgame_isla_flotante` (fase 2, hidden=true, dueno M27/M10)
 - [x] Marcar requisito de desbloqueo de cada isla [S] — iter. 1: postgame_isla_este (FASE 1, activada por postgame) y postgame_isla_flotante (FASE 2, requiere streaming M61/M63) en data/postgame/actividades.json con dueño
 - [x] Asignar módulo dueño a cada expansión [S] — iter. 1: campo "dueno" en las 7 actividades (M27/M10/M25/M37/M19/M71/M50/M33/M36/M35/M18/M16)
-- [x] Verificar streaming/LOD de las nuevas islas (M61) [C]
+- [?] Verificar streaming/LOD de las nuevas islas (M61) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)
 
 ## C. Nuevos Vecinos (RF3)
 
-- [x] Diseñar 1-2 vecinos nuevos postgame (M19) [M]
-- [x] Rutinas propias de los vecinos nuevos [M]
+- [?] Diseñar 1-2 vecinos nuevos postgame (M19) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M19 (deuda cross-módulo)
+- [?] Rutinas propias de los vecinos nuevos [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 - [x] Mudanza por invitación (M71) [M] — iter. 1: actividad postgame_vecinos_nuevos (repetible, sin fechas únicas); contador con registrar_actividad(); integración M19/M71 con dueño (conector)
-- [x] Diálogos de vecinos postgame (M21) [M]
+- [?] Diálogos de vecinos postgame (M21) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M21 (deuda cross-módulo)
 - [x] Ningún vecino depende de fechas únicas [S] — iter. 1: actividad repetible sin expiración (coherente M94)
 
 ## D. Nuevos Muebles (RF4)
 
-- [x] Catálogo de muebles postgame (M18) [M]
+- [x] Catálogo de muebles postgame (M18) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — fila `postgame_muebles_evento` en el catálogo (dueno M18/M16)
 - [x] Muebles obtenibles sin grindeo (actividades naturales) [M] — iter. 1: postgame_muebles_evento repetible en catálogo data-driven (obtención real M18/M16 con dueño)
-- [x] Muebles únicos de eventos postgame [M]
-- [x] Recetas de muebles integradas (M16) [M]
+- [?] Muebles únicos de eventos postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Recetas de muebles integradas (M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)
 - [x] Validación de muebles con ids unívocos [S]
   · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 
 ## E. Nuevas Plantas (RF5)
 
-- [x] Especies estacionales postgame (M50/M33) [M]
-- [x] Plantas raras postgame (solo después del final) [M]
+- [?] Especies estacionales postgame (M50/M33) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M50 (deuda cross-módulo)
+- [?] Plantas raras postgame (solo después del final) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 - [x] Hibridación disponible en postgame (M50) [M] — iter. 1: postgame_hibridacion repetible en catálogo; mecánica real M50/M33 con dueño
 - [x] Plantas sin promesa de fase 2 sin arquitectura [S]
   · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
-- [x] Validar temporadas con el calendario (M29) [M]
+- [?] Validar temporadas con el calendario (M29) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M29 (deuda cross-módulo)
 
 ## F. Nuevos Animales (RF6)
 
-- [x] Especies raras solo postgame (M36) [M]
-- [x] Animales libres con ritmos propios (M35) [M]
-- [x] Avistamientos marcados en el diario (M55) [M]
+- [?] Especies raras solo postgame (M36) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M36 (deuda cross-módulo)
+- [?] Animales libres con ritmos propios (M35) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M35 (deuda cross-módulo)
+- [?] Avistamientos marcados en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)
 - [x] Sin grindeo para atraer especies raras [M] — iter. 1: postgame_especies_raras repetible por clima (M32/M28), sin acumulación estresante (coherente M94)
-- [x] Validar aparición por clima (M28) [M]
+- [?] Validar aparición por clima (M28) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M28 (deuda cross-módulo)
 
 ## G. Nuevas Ruinas (RF7)
 
@@ -82,37 +82,37 @@
 
 ## H. Nuevos Puzzles (RF8)
 
-- [x] Puzzle del Sello oculto (FASE 2, M24) [C]
+- [?] Puzzle del Sello oculto (FASE 2, M24) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M24 (deuda cross-módulo)
 - [x] Puzzle opcional, nunca bloquea la historia (M22) [S]
   · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
-- [x] Recompensa del puzzle sin spoilers [M]
-- [x] Puzzle rejugable sin repetir (M24) [M]
-- [x] Validar solución única del puzzle [M]
+- [?] Recompensa del puzzle sin spoilers [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Puzzle rejugable sin repetir (M24) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M24 (deuda cross-módulo)
+- [?] Validar solución única del puzzle [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## I. Nuevas Colecciones (RF9)
 
-- [x] Categorías postgame en el catálogo (M73) [M]
-- [x] Documentos finales de la historia (M73) [M]
-- [x] Colecciones postgame con totales reales [M]
-- [x] Compleción de colección = donación al museo (M37) [M]
+- [?] Categorías postgame en el catálogo (M73) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)
+- [?] Documentos finales de la historia (M73) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)
+- [?] Colecciones postgame con totales reales [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Compleción de colección = donación al museo (M37) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M37 (deuda cross-módulo)
 - [x] Sin duplicación de registro (idempotencia M73) [S]
   · evidencia: 03-Diseno.md secc. Validacion y expansion (P-100, Reflection-Beam-1.0, T71, 2026-10-22)
 
 ## J. Nuevas Herramientas (RF10)
 
-- [x] Herramienta de jardín acuático (FASE 2, M16) [M]
-- [x] Mejora de herramienta postgame (M17) [M]
+- [?] Herramienta de jardín acuático (FASE 2, M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)
+- [?] Mejora de herramienta postgame (M17) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M17 (deuda cross-módulo)
 - [x] Herramientas sin combustible/durabilidad (cozy) [S]
   · evidencia: 03-Diseno.md secc. Diseno en papel postgame (P-100, Reflection-Beam-1.0, T69, 2026-10-22)
-- [x] Herramienta con animación propia (M13) [M]
-- [x] Validar receta de la herramienta postgame [M]
+- [?] Herramienta con animación propia (M13) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M13 (deuda cross-módulo)
+- [?] Validar receta de la herramienta postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## K. Nuevas Mejoras (RF11)
 
-- [x] Mejora del ático postgame (M17) [M]
+- [?] Mejora del ático postgame (M17) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M17 (deuda cross-módulo)
 - [x] Casa con expansión visible al vecindario (M19) [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
-- [x] Mejora con material raro postgame [M]
+- [?] Mejora con material raro postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 - [x] Sin grindeo para conseguir material raro [M] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `validate_postgame.gd` regla `sin_grindeo` sobre las 7 entradas (umbral=0, sin ventana temporal); sonda roja `grindeo_umbral:postgame_hibridacion:25`; `test_postgame.gd` 71/0. § Iter. 3.
   · evidencia: iter. 3 (Log 2200) — regla `sin_grindeo` de validate_postgame.gd sobre las 7 entradas (umbral=0, sin ventana temporal) + sonda roja que caza `grindeo_umbral:postgame_hibridacion:25` (bloque _test_validador).
 - [x] Validar mejoras con M60 (migración) [S]
@@ -120,50 +120,50 @@
 
 ## L. Nuevas Historias (RF12)
 
-- [x] Cadenas secundarias postgame (M23) [M]
-- [x] Historias que cierran arcos de vecinos (M19/M21) [M]
+- [?] Cadenas secundarias postgame (M23) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M23 (deuda cross-módulo)
+- [?] Historias que cierran arcos de vecinos (M19/M21) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M19 (deuda cross-módulo)
 - [x] Historias sin exigencia multijugador [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
-- [x] Diálogos postgame con doblaje si aplica (M93) [M]
+- [?] Diálogos postgame con doblaje si aplica (M93) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M93 (deuda cross-módulo)
 - [x] Conflictos resueltos sin romper eventos (M74/M29) [S]
   · evidencia: 03-Diseno.md secc. Metodos y validacion (P-100, Reflection-Beam-1.0, T75, 2026-10-22)
 
 ## M. Nuevos Eventos (RF13)
 
-- [x] Festivales rotativos postgame (M74) [M]
-- [x] Programación en calendario (M29) [M]
-- [x] Ciclo anual cozy sin fechas únicas [S]
-- [x] Recompensas únicas de festival (M38/M20) [M]
-- [x] Logros de eventos postgame (M72) [S]
+- [?] Festivales rotativos postgame (M74) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M74 (deuda cross-módulo)
+- [?] Programación en calendario (M29) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M29 (deuda cross-módulo)
+- [?] Ciclo anual cozy sin fechas únicas [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Recompensas únicas de festival (M38/M20) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M38 (deuda cross-módulo)
+- [?] Logros de eventos postgame (M72) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)
 
 ## N. Nuevos Secretos (RF14)
 
-- [x] Secretos desbloqueables solo postgame (M71) [M]
-- [x] Secretos anti-spoiler en el diario (M55) [M]
-- [x] Secretos con pistas de exploración natural [M]
-- [x] Sin secuencias bloqueantes en secretos [S]
-- [x] Validar secretos con ids únicos [S]
+- [?] Secretos desbloqueables solo postgame (M71) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M71 (deuda cross-módulo)
+- [?] Secretos anti-spoiler en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)
+- [?] Secretos con pistas de exploración natural [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Sin secuencias bloqueantes en secretos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Validar secretos con ids únicos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## O. Zonas Submarinas (RF15)
 
-- [x] Arrecife profundo (FASE 2, M51) [C]
-- [x] Acceso con submarino (M67) [M]
-- [x] Streaming del arrecife (M61/M10) [C]
-- [x] Fauna/submarina propia (M36/M51) [M]
-- [x] Sin buceo frustrante (oxígeno generoso, cozy) [M]
+- [?] Arrecife profundo (FASE 2, M51) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M51 (deuda cross-módulo)
+- [?] Acceso con submarino (M67) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M67 (deuda cross-módulo)
+- [?] Streaming del arrecife (M61/M10) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)
+- [?] Fauna/submarina propia (M36/M51) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M36 (deuda cross-módulo)
+- [?] Sin buceo frustrante (oxígeno generoso, cozy) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## P. Islas Flotantes (RF16)
 
-- [x] Isla flotante (FASE 2, M10) [C]
-- [x] Acceso con dirigible (M67) [M]
-- [x] Gravedad carismática sin romper mecánicas [M]
-- [x] LOD del terreno flotante (M61) [C]
-- [x] Sin caídas frustrantes (muerte suave, retorno) [M]
+- [?] Isla flotante (FASE 2, M10) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M10 (deuda cross-módulo)
+- [?] Acceso con dirigible (M67) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M67 (deuda cross-módulo)
+- [?] Gravedad carismática sin romper mecánicas [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] LOD del terreno flotante (M61) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)
+- [?] Sin caídas frustrantes (muerte suave, retorno) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## Q. Sistemas Opcionales (RF17)
 
-- [x] Jardín acuático (FASE 2, M16) [M]
-- [x] Criadero de peces (FASE 2, M34) [M]
+- [?] Jardín acuático (FASE 2, M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)
+- [?] Criadero de peces (FASE 2, M34) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M34 (deuda cross-módulo)
 - [x] Sistemas marcados `hidden` hasta lanzamiento [S]
 - [x] Ningún sistema opcional bloquea el 100% de FASE 1 [S]
 - [x] Validar que la FASE 2 no prometa UI al jugador [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `es_visible_al_jugador()` + filtro en `actividades_disponibles()`/`sugerir_que_sigue()` (7 internas vs 6 visibles); `fase`/`hidden` en `actividades.json`; bloque `_test_fase2_invisible`; §2.2. 
@@ -171,52 +171,52 @@
 
 ## R. Objetivos de 100% (RF18)
 
-- [x] Hoja de ruta "Isla al 100%" en el diario (M55) [M]
-- [x] % por categoría derivado (no almacenado) [M]
-- [x] Anti-spoiler: solo se ve lo descubierto (M55) [M]
-- [x] Museo (M37) aporta su % al total [S]
-- [x] Sin grindeo en el 100% (actividades naturales) [S]
+- [?] Hoja de ruta "Isla al 100%" en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)
+- [?] % por categoría derivado (no almacenado) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Anti-spoiler: solo se ve lo descubierto (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)
+- [?] Museo (M37) aporta su % al total [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M37 (deuda cross-módulo)
+- [?] Sin grindeo en el 100% (actividades naturales) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## S. Logros Finales (RF19)
 
-- [x] Categoría "Epílogo" en M72 [M]
-- [x] Logro: colección completa [S]
+- [?] Categoría "Epílogo" en M72 [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)
+- [?] Logro: colección completa [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 - [x] Logro: ruina restaurada [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 08:20Z (DeepSeek #418, Iter. 4, Log 2203):** cadena M75 `registrar_actividad("postgame_ruina_final")` → `_marcar_hito_derivado()` → M71 `hito_ruina_restaurada` → señal `progreso_hito_alcanzado` → M72 `evaluar_todos()` desbloquea el logro. `hitos.json` (+1=26), `logros.json` (+1=18), `achievement_service.gd` (+`epilogo`), `postgame_manager.gd` (hook). `test_postgame.gd` 86/0/EXIT 0 x3 + validador M72 RF14 "18 logros, 0 problemas" + guardian EN ROJO 3 sondas. L180 (M72 categoría Epílogo) deja de estar inflada (epilogo existe + RF14 lo valida). M75 = 130/0/0 → 5to sello (gate-2 Hy3).
   · evidencia: iter. 3 (Log 2200) — `hito_ruina_restaurada()` expuesto y testeado (bloque _test_hito_ruina). La ENTRADA de logro es de M72 y NO existe aun (medido: logros.json = 17 logros, CATEGORIAS_VALIDAS sin "epilogo").
   · evidencia: iter. 4 (Log 2203) — CADENA CERRADA: hito `hito_ruina_restaurada` en M71 (26 hitos) + logro `logro_ruina_restaurada` en M72 (18 logros, categoria `epilogo`, condicion `hito_previo`) + `epilogo` en `CATEGORIAS_VALIDAS`. Al registrar la actividad el logro se desbloquea por la senal `progreso_hito_alcanzado` (bloque `_test_logro_ruina_m72`: 86/0/EXIT 0 x3, 0 SCRIPT ERROR; sondas A/B/C EN ROJO). Marca `[ ]` INTACTA: el flip lo aplica la directora.
-- [x] Logro: primer festival postgame [S]
-- [x] Logro: 100% de la hoja de ruta [M]
+- [?] Logro: primer festival postgame [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Logro: 100% de la hoja de ruta [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## T. Exploración Libre (RF20)
 
-- [x] Mundo 100% abierto tras el final [M]
-- [x] Sin bloqueos de progresión postgame (M71) [S]
-- [x] Transporte accesible a todas las zonas (M68) [M]
-- [x] Exploración recompensada (M73/M71) [M]
-- [x] Cero contenido exclusivo de multijugador [S]
+- [?] Mundo 100% abierto tras el final [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Sin bloqueos de progresión postgame (M71) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M71 (deuda cross-módulo)
+- [?] Transporte accesible a todas las zonas (M68) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M68 (deuda cross-módulo)
+- [?] Exploración recompensada (M73/M71) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)
+- [x] Cero contenido exclusivo de multijugador [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — `scripts/multijugador/validate_mp_contract.gd` L128 exige cero refs de red en scripts v1
 
 ## U. Persistencia y Migración
 
 - [x] `postgame_unlocked` en save global (M59) [M] — iter. 2 (Log 617): clave postgame_unlocked + activo en get_save_data; restore acepta ambas (migración); testeado
-- [x] Hoja de ruta sin duplicación de estado [S]
-- [x] Migración v1.4 del flag (M60) [M]
-- [x] Catálogo como Resource embebido (no serializado) [S]
+- [?] Hoja de ruta sin duplicación de estado [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Migración v1.4 del flag (M60) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el save declara `version: 1`; no existe migración v1.4 (restore acepta `postgame_unlocked`, no una v1.4)
+- [?] Catálogo como Resource embebido (no serializado) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el catálogo es `data/postgame/actividades.json` cargado en runtime, NO un Resource embebido
 - [x] Guardado automático al desbloquear (M59) [S] — iter. 1-2: mark_dirty en activar_postgame() y registrar_actividad() (write-through de M59)
 
 ## V. Reglas Cozy (Diseño)
 
-- [x] Sin grindeo en actividades del 100% [S]
-- [x] Sin fechas únicas missable [S]
-- [x] Sin logros imposibles (validados) [S]
-- [x] Epílogo cálido, no menú frío [S]
-- [x] La isla sigue viva tras los créditos [S]
+- [?] Sin grindeo en actividades del 100% [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [x] Sin fechas únicas missable [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — catálogo sin campos de fecha/expiracion (0 hits de `expira`/`date`); `repite` presente en las 7 filas
+- [?] Sin logros imposibles (validados) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] Epílogo cálido, no menú frío [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
+- [?] La isla sigue viva tras los créditos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)
 
 ## W. UI y Feedback
 
-- [x] "¿Qué sigue?" post-créditos (M92/M44) [M]
-- [x] Pestaña "Isla al 100%" en el diario (M55) [M]
-- [x] Notificación de meta cumplida (M44) [S]
-- [x] Confeti sutil en logros finales (M52) [S]
+- [x] "¿Qué sigue?" post-créditos (M92/M44) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — `sugerir_que_sigue()` L172 + `es_visible_al_jugador()` L118
+- [?] Pestaña "Isla al 100%" en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)
+- [?] Notificación de meta cumplida (M44) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M44 (deuda cross-módulo)
+- [?] Confeti sutil en logros finales (M52) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M52 (deuda cross-módulo)
 - [x] UI sin spoilers de fase 2 [S] — **FLIP APLICADO por la directora agnes-3-flash 2026-10-26 05:20Z (DeepSeek #414, Log 2200):** `fase`+`hidden` en el catálogo + `JSON.stringify(visibles)` sin "Flotante" (medido por bytes); `validador_postgame` regla `fase2_oculta`; § Iter. 3.
   · evidencia: iter. 3 (Log 2200) — 03-Diseno 2.2/Flujo D aplicados: `fase`+`hidden` en el catalogo y la vista del jugador no expone nombres de FASE 2 (bloque _test_fase2_invisible).
 
@@ -224,25 +224,25 @@
 
 - [x] Desbloquear postgame con save sin final (no aplica) [S] — testeado: restore con activo=false queda inactivo; la activación exige sellos M22 (fuente de verdad)
 - [x] Hoja de ruta con sistemas vacíos (0/0) [S]
-- [x] Evento postgame durante viaje (M68) [M]
-- [x] Expansión con módulo ausente en CHECKLIST [S]
-- [x] Probar con profiler: hoja de ruta bajo demanda (M61/M116) [C]
+- [?] Evento postgame durante viaje (M68) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M68 (deuda cross-módulo)
+- [?] Expansión con módulo ausente en CHECKLIST [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no hay manejo de módulo ausente en el catálogo; solo `push_error` si el JSON es inválido (L47)
+- [?] Probar con profiler: hoja de ruta bajo demanda (M61/M116) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)
 
 ## Y. Integración y Dependencias
 
-- [x] Integrar con M22 (epílogo) [M]
-- [x] Integrar con M72 (categoría Epílogo) [M]
-- [x] Integrar con M74/M29 (eventos) [M]
-- [x] Integrar con M73/M37/M55 (100%) [M]
-- [x] Integrar con M92 (tutorial "¿qué sigue?") [S]
+- [?] Integrar con M22 (epílogo) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M22 (deuda cross-módulo)
+- [?] Integrar con M72 (categoría Epílogo) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)
+- [?] Integrar con M74/M29 (eventos) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M74 (deuda cross-módulo)
+- [?] Integrar con M73/M37/M55 (100%) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)
+- [?] Integrar con M92 (tutorial "¿qué sigue?") [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M92 (deuda cross-módulo)
 
 ## Z. Cierre del Módulo
 
-- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S]
-- [x] Firmar los documentos del módulo (modelo y plataforma) [S]
-- [x] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S]
-- [x] Verificar con verificar_checklist.py (sin alertas nuevas) [S]
-- [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+- [x] Agregar notas del agente al 04-Codigo.md (honestidad) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — `## Notas del Agente` presente en plan-actual/04-Codigo.md
+- [x] Firmar los documentos del módulo (modelo y plataforma) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (acta msg 234): MANTENIDO — los 5 archivos de plan-actual llevan `**Modelo:**`
+- [?] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el Global quedó en 130/130 (invalido por §21.8.2.b) y ESTADO-PARALELO.md tiene 0 menciones de M75
+- [?] Verificar con verificar_checklist.py (sin alertas nuevas) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): `verificar_checklist.py` sale con codigo 1 (alertas); el item pide "sin alertas nuevas" -> FALSO
+- [?] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): 130 ítems exactos = verdadero, pero `plan-inicial == plan-actual` es FALSO (4 de 5 archivos difieren)
 
 ## Notas del Agente
 
@@ -292,4 +292,40 @@
 > este archivo no tenía línea de Totales. Conteo real de marcas: 17 [x] / 113 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
-**Totales:** 130 ítems · Completados: 29 · Pendientes: 101 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, postgame: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)
+> **GATE-1 — 87 marcas `[x]` sin respaldo (DS-V4.1-Flash-Opencode, §21.8.2.b, 2026-10-31, autorizado por la
+> directora agnes-3-flash en el mensaje 234, tras invalidar el sello `✅ 130/130` del módulo):**
+> de los **96** ítems que `dd6fb70` (25-oct 00:19) promovió `[ ]`→`[x]` como **pares puros** (texto idéntico
+> salvo la marca, sin nota, sin test, sin artefacto), **87 se degradan a `[?]`** y **9 se mantienen** porque su
+> artefacto existe y es demostrable en el módulo.
+>
+> **Qué SÍ tiene el módulo** (`scripts/postgame/` + `data/postgame/`): `postgame_manager.gd` con `activar_postgame()`
+> L101, `es_visible_al_jugador()` L118, `actividades_disponibles()` L127, `sugerir_que_sigue()` L172,
+> `registrar_actividad()` L201 y `marcar_epilogo_visto()` L238; el catálogo `data/postgame/actividades.json` con
+> **7 filas** (`postgame_isla_este`, `postgame_isla_flotante`, `postgame_ruina_final`, `postgame_vecinos_nuevos`,
+> `postgame_hibridacion`, `postgame_especies_raras`, `postgame_muebles_evento`) con `fase`/`hidden`/`repite`/`dueno`;
+> `test_postgame.gd` y `validate_postgame.gd`. **Eso es el andamiaje, y son los 34 ítems NO promovidos** (los que
+> llevan la evidencia «iter. 1 / iter. 2» con el artefacto citado).
+>
+> **Qué NO tiene:** el **contenido** de las 13 expansiones. Las 7 filas del catálogo declaran su dueño en otro
+> módulo (`M27`, `M27/M10`, `M25/M37`, `M19/M71`, `M50/M33`, `M36/M35`, `M18/M16`) y `postgame_isla_flotante` dice
+> literalmente «FASE 2 — requiere arquitectura de streaming (M61/M63); **interna hasta su lanzamiento**». Un catálogo
+> que apunta al dueño no implementa el contenido del dueño: es **deuda cross-módulo**, que va a `[?]` (criterio
+> ratificado, Log 1849).
+>
+> **Muestreo ampliado (9/87, 10 %):** `Diseñar 1-2 vecinos nuevos (M19)` → 0 hits de rutinas/diseño de NPC en
+> `scripts/postgame/`; `Puzzle del Sello oculto (M24)` → 0 hits de `puzzle`; `Arrecife profundo (M51)` → 0 hits de
+> `arrecife`; `Acceso con submarino (M67)` → 0 hits de `submarino`; `Hoja de ruta "Isla al 100%" en el diario (M55)`
+> → 1 sola mención en `test_postgame.gd` L277 (una lista de literales, no una hoja de ruta); `Herramienta de jardín
+> acuático (M16)` → 0 hits; `Criadero de peces (M34)` → 0 hits; `Logro: 100% de la hoja de ruta (M72)` → 0 hits;
+> `Evento postgame durante viaje (M68)` → 0 hits. **9 de 9 fallas.**
+>
+> **3 ítems de cierre verificados FALSOS** (no por falta de artefacto sino por contradicción medida):
+> `verificar_checklist.py` **sale con código 1** con 10+ módulos `🔵` colgados; `plan-inicial == plan-actual` es
+> **FALSO** (4 de 5 archivos difieren; solo `02-Analisis.md` es idéntico); `ESTADO-PARALELO.md` tiene **0**
+> menciones de M75 y el Global quedó en un `130/130` que §21.8.2.b invalida.
+>
+> **Veredicto: DEGRADAR** (§21.8.2.b: 2+ fallas de 5; muestreo real 9/9). El módulo queda **43/0/87 = 130**.
+> El `Totales` de L295 (29/101/0, del 23-oct) queda tachado como histórico: nunca describió las 130 líneas.
+
+~~**Totales:** 130 ítems · Completados: 29 · Pendientes: 101 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, postgame: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)~~ **SUPERADA** (histórico).
+**Totales:** 130 ítems · Completados: 43 · Pendientes: 0 · No resueltos: 87. (Re-baseline GATE-1 31-oct-2026 DS-V4.1-Flash-Opencode, GO de la directora agnes-3-flash msg 234: 87 de los 96 pares puros de dd6fb70 degradados a [?] por deuda cross-modulo o falta de artefacto; 43 [x] = 34 del baseline con evidencia "iter. 1/2" + 9 promociones verificadas contra disco.)

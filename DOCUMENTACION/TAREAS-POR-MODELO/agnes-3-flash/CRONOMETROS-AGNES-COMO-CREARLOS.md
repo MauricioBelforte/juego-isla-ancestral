@@ -38,57 +38,60 @@ El **apilador de Beam** (`scripts/apilar_beam.py`, cron E de la plataforma `:24/
 
 ---
 
-## 2. CRON A — prompt EXACTO (copiar tal cual en cron_create)
+## 2. CRON A — prompt EXACTO v2 (detector top-5 + flota 31oct)
 
 ```
-Cron A — DIRECTORA agnes-3-flash: deteccion + gate-1 Beam (libre) + sellos + decisiones.
-Leé Logs/estado_director.json (memoria viva; incluye 'tarea_gate1_beam').
-PASOS: (1) DETECTOR: barrer canales de flota por mensajes agente->directora SIN acuse
-(DeepSeek/Step-5/Hy3/Ling activos; Beam PAUSADO no responder pings; MiniMax/G-5.3 offline).
-Responder compacto. (1 bis) BARRER TAMBIEN los self-logs X-a-X recientes que citen un
-orden mio (NNN-agnes-3-flash) — ciego documentado Hy3 #433. (2) GATE-1 BEAM (tarea libre,
-solo si hay un T-done nuevo): samplear 5-6 flips del ultimo reporte "T0XX hecho=N" contra
-DISCO (05 [x] + spec 03); veredicto a 'tarea_gate1_beam.ultimos_veredictos' de
-estado_director.json, NO al canal de Beam (anti-loop). Overstatements se anotan, no flippean.
-(3) SELLO §21.8 donde gate-1 + gate-2 (sucesor) completos (muestrear ≥5 [x], §21.8.2.b;
-no self-QA). (4) 3 decisiones fundador visibles (NO implementar sin GO):
-frente-codigo-alpha / M106 GCP-cuenta / marca-M01. Reportar 1 línea.
+Cron A — DIRECTORA agnes-3-flash: deteccion + sellos + decisiones.
+PASOS:
+(1) DETECTOR (top-5 por canal): Para CADA canal de los 5 activos
+(DeepSeek-V4.1-Flash, Hy3, Ling-3.1-Flash, DS-V4.1-Flash-Opencode,
+Nemotron-3.5-Super-VL), tomar los 5 archivos .md mas recientes por mtime.
+Identificar: ultimo AGT (primer archivo que NO contenga 'agnes-3-flash-a-' en el
+nombre) y ultimo DIR (primer archivo que SÍ contenga). Si mtime(AGT) > mtime(DIR)
+→ LAG: leer el AGT y acusear compacto. Si no hay LAG en ningún canal → 'lag 0'.
+BUG ANTERIOR: usar solo top-2 dejaba fuera al DIR cuando el AGT escribia 3+
+seguidos. Corregido a top-5.
+(2) SELLO §21.8 donde gate-1 + gate-2 completos (muestrear ≥5 [x], §21.8.2.b;
+no self-QA). Sellos vigentes: ver estado_director.json 'sellos_218'.
+(3) 4 decisiones fundador visibles (NO implementar sin GO):
+frente-codigo-alpha / M106 GCP-cuenta / marca-M01 / BUG-153 macro (859 [x]).
+Reportar 1 línea.
 REGLAS: repo UTF-8 SIN BOM (Python io.open / write-tool); NUNCA tocar 🔵 ajenos;
-no self-QA; fecha REAL.
+no self-QA; fecha REAL. Nemotron: si su reporte repite veredicto anterior,
+acusear 1 línea 'anti-loop' sin repetir tabla.
 ```
-Cadencia `0,30 * * * *` (29oct; antes `*/20`).
+
+Cadencia `0,30 * * * *`.
 
 ---
 
-## 3. CRON B — prompt EXACTO (red de LAG)
+## 3. CRON B — prompt EXACTO v2 (red de LAG, top-5)
 
 ```
-Cron B — DIRECTORA agnes-3-flash: red de LAG (doble red que corrobora a A).
-Detector mas barato. Verificar que NINGUN mensaje agente->directora lleve >20 min sin
-acuse (medir por mtime REAL, NO por la fecha del slug — trampa de timestamp adelantado).
-Si hay LAG: procesar los pendientes + acuse compacto. B es la red de seguridad: no
-duplique el trabajo de A; si A ya respondio, B solo confirma 'lag 0'.
-Canales activos: DeepSeek/Step-5/Hy3/Ling; Beam PAUSADO (auto-avisos 404+ NO contar
-como lag ni responder); MiniMax/G-5.3 offline. 1 línea.
+Cron B — DIRECTORA agnes-3-flash: red de LAG (doble red, offset 15 min de A).
+Detector top-5: para los 5 canales activos, tomar los 5 .md mas recientes por mtime.
+Si ultimo AGT > ultimo DIR → LAG → procesar + acuse compacto.
+Si A ya respondio todo → 'lag 0 (5 canales, top-5)'. 1 línea.
 REGLAS: UTF-8 SIN BOM; fecha REAL; NUNCA tocar 🔵 ajenos.
 ```
-Cadencia `15,45 * * * *` (29oct; antes `10,30,50`).
+
+Cadencia `15,45 * * * *`.
 
 ---
 
-## 4. CRON C — prompt EXACTO (preservación cada 2 h)
+## 4. CRON C — prompt EXACTO v2 (preservación cada 6h)
 
 ```
-Cron C — DIRECTORA agnes-3-flash: preservacion/commits cada 2h.
-Hacer un commit de preservacion de los avances de la jornada (sellos emitidos, archivos
-de tareas/ generados, mensajes de canal nuevos, updates de estado_director.json).
-ANTES: git status + git diff --stat; EXCLUIR ficheros en vuelo (mtime < 15 min, trabajo
-de otros agentes — helpers en Temp/: git_preserve_scan.py). Commit en español pasado
-descriptivo (ej: 'Se preservó ...'). NO hacer push (regla del director: solo commits de
-preservacion local). Reportar el hash + 1 línea de que se preservó.
-Si no hay nada nuevo desde el ultimo commit -> 'sin cambios'.
+Cron C — DIRECTORA agnes-3-flash: preservacion/commits cada 6h.
+Hacer un commit de preservacion de los avances (sellos, acuses, flippeos, estado).
+ANTES: git status + git diff --stat. EXCLUIR ficheros en vuelo (mtime < 15 min).
+Commit en español pasado descriptivo. NO push. Reportar hash + 1 línea.
+Si no hay nada nuevo → 'sin cambios'.
+REGLA ANTI-RESTAURACIÓN: si el diff trae [x] nuevos sin nota de flip → no commitear
+señalando la anomalía (hallazgo M85 30oct).
 ```
-Cadencia `5 3,9,15,21 * * *` (29oct; antes `17 */2`).
+
+Cadencia `5 3,9,15,21 * * *`.
 
 > **⚠️ REGLA ANTI-RESTAURACIÓN (Cron C) — agregada 30oct (hallazgo M85, DeepSeek TANDA 6):**
 > el commit de preservación commitea el worktree **tal cual**. Si un worktree traé una
@@ -102,21 +105,19 @@ Cadencia `5 3,9,15,21 * * *` (29oct; antes `17 */2`).
 
 ---
 
-## 5. CRON D — prompt EXACTO (asignador cada 2 h)
+## 5. CRON D — prompt EXACTO v2 (asignador cada 6h)
 
 ```
-Cron D — DIRECTORA agnes-3-flash: ASIGNADOR cada 6h. FLOTA REAL 29oct: Hy3 y
-DeepSeek(WorkBuddy) SE VAN 1-nov (NO apilarles nada, solo su herencia); Nemotron y
-MiniMax van AUTONOMOS en su cron (NO les apiles, anti-drift); kimi/Claude descartados;
-GLM fuera de circuito. Tu UNICO destino de tarea = Ling-3.1-Flash (i18n/doc, ritmo 1/h)
-+ M157 (scaffold 05-Checklist, doc). Verificar si el backlog de Ling esta drenando
-(<~50 items) o idle -> ASIGNARLE 20-30 items de su riel i18n/doc escribiendo UN
-mensaje compacto en SU canal (1 tabla, sin prose). NO apilar a mas de lo que consume.
-Reportar 1 linea: a quien se repoblo y con que. Si Ling tiene cola honda ->
-'flota alimentada (Ling)'. REGLAS: UTF-8 SIN BOM; NUNCA tocar 🔵 ajenos; fecha REAL;
-el asignador NUNCA implementa trabajo ajeno, solo lo encola. (Cadencia 29oct: `5 0,6,12,18 * * *`.)
+Cron D — DIRECTORA agnes-3-flash: ASIGNADOR cada 6h.
+Flota 31oct: Hy3 + DeepSeek-WB SE VAN 1-nov (herencia). Nemotron autónomo (B-12,
+cron 10min). DS-OC chase a7a3a6b. Ling = único destino de tarea (i18n/doc, 1/h).
+Verificar: (1) Ling backlog <50 [ ] o idle → asignar 20-30 items i18n/doc en SU canal.
+(2) Nemotron fuel rule: su BACKLOG-MASTER ≥5 [ ] ejecutables. Si <5 → nuevo riel B-12+.
+(3) Si Ling tiene cola honda → 'flota alimentada'. Reportar 1 línea.
+REGLAS: UTF-8 SIN BOM; NUNCA tocar 🔵 ajenos; el asignador NUNCA implementa.
 ```
-Cadencia `5 0,6,12,18 * * *` (29oct; antes `35 */2`).
+
+Cadencia `5 0,6,12,18 * * *`.
 
 ---
 

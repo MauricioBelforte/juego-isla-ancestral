@@ -57,7 +57,7 @@
 ## G. Categoría Plantas
 
 - [x] Registrar plantas cosechadas (M33) y forrajeadas (M50) [M]
-- [x] Semillas de temporada [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L60 semillas temporada)
+- [?] Semillas de temporada [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L60 semillas temporada) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [x] Recompensa de colección (semilla rara M33) [M]
 - [x] Registrar con CROP_HARVESTED [M]
 - [x] Testear plantas de las 4 estaciones (M29) [M]
@@ -76,12 +76,12 @@
 - [x] Esqueleto completo como recompensa (M37) [M]
 - [x] Excavación con huevos (2 bloques) [M]
 - [x] Registrar con FOSSIL_DUG [M]
-- [x] Testear fósiles en ruinas y montañas [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T256-73): spec en 03-Diseno.md § (L79 testear fósiles)
+- [?] Testear fósiles en ruinas y montañas [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T256-73): spec en 03-Diseno.md § (L79 testear fósiles) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 
 ## J. Categoría Cartas
 
 - [x] Registrar cartas de festival (M74) y correo [M]
-- [x] Cartas de NPC (M19) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L84 cartas NPC)
+- [?] Cartas de NPC (M19) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L84 cartas NPC) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [x] Sobre de regalo como recompensa (M20) [M]
 - [x] Registrar al recibir (CARTA_RECIBIDA) [M]
 - [x] Testear cartas de temporada [M]
@@ -97,7 +97,7 @@
 ## L. Categoría Muebles
 
 - [x] Registrar muebles comprados (M39) y regalados (M20) [M]
-- [x] Muebles de evento (M74) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L100 muebles evento)
+- [?] Muebles de evento (M74) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L100 muebles evento) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [x] Mueble exclusivo como recompensa (M18) [M]
 - [x] Registrar al colocar en la casa (M18) [M]
 - [x] Testear muebles de tienda rotativa [M]
@@ -129,7 +129,7 @@
 ## P. Categoría Mapas
 
 - [x] Registrar mapas de tesoro (M54/M71) [M]
-- [x] Mapas de exploración [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L132 mapas exploración)
+- [?] Mapas de exploración [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L132 mapas exploración) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)
 - [x] Tesoro oculto como recompensa (M71) [M]
 - [x] Registrar al encontrar [M]
 - [x] Testear mapas con coordenadas correctas [M]

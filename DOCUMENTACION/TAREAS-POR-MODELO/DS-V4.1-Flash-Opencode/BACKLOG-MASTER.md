@@ -16,6 +16,7 @@
 
 - [x] Log creado: **2099** — codec M60 schema v2 M18 + corrección del falso hallazgo `EMPTY_SLOT`/`PROFILE_MISMATCH` (QA M59) — 2026-10-21.
 - [x] Log creado: **2119** — M62 "Sesión de referencia" y "RN3" cerradas por herencia medida de T72 (ítems 103/104) — 2026-10-21.
+- [x] Log creado: **2280** — M67-Vehiculos Ruta B (63 marcas `[x]`→`[ ]`, 40/76/15 = 131, orden de la directora msg 230) + chase de `a7a3a6b`/`3a3d32c`/`dd6fb70` (1.194 promociones, 859 vivas, 515 firmadas por spec) — 2026-10-31.
 
 ---
 

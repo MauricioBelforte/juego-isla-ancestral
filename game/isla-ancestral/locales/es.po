@@ -111,6 +111,12 @@ msgstr "Sin guardado previo."
 msgid "SETTINGS.SALIR"
 msgstr "Salir"
 
+msgid "SETTINGS.VOLVER_TITULO"
+msgstr "Volver al menú principal"
+
+msgid "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+msgstr "¿Volver al menú principal? La partida seguirá pausada. Elegí Continuar para reanudarla."
+
 msgid "SETTINGS.JUGAR"
 msgstr "Jugar"
 

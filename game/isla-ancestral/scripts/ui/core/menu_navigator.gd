@@ -112,10 +112,10 @@ static func show_tooltip_for_focused(layer: UILayer) -> void:
 
 ## Busca el primer enfocable en el subárbol
 static func _find_first_focusable(node: Node) -> Control:
-	if node is Control and node.visible and node.focus_mode != Control.FOCUS_NONE:
+	if _can_receive_focus(node):
 		return node as Control
 	for child in node.get_children():
-		if child is Control and child.visible and child.focus_mode != Control.FOCUS_NONE:
+		if _can_receive_focus(child):
 			return child as Control
 		var result := _find_first_focusable(child)
 		if result:
@@ -125,10 +125,18 @@ static func _find_first_focusable(node: Node) -> Control:
 
 ## Recopila todos los enfocables en el subárbol (append al array)
 static func _find_all_focusable(node: Node, result: Array) -> void:
-	if node is Control and node.visible and node.focus_mode != Control.FOCUS_NONE:
+	if _can_receive_focus(node):
 		result.append(node)
 	for child in node.get_children():
 		_find_all_focusable(child, result)
+
+
+static func _can_receive_focus(node: Node) -> bool:
+	if not node is Control or not node.visible or node.focus_mode == Control.FOCUS_NONE:
+		return false
+	if node is BaseButton and node.disabled:
+		return false
+	return true
 
 
 ## Recopila todos los tabs (TabContainer, TabBar) en el subárbol

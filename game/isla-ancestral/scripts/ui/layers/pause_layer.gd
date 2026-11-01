@@ -84,7 +84,7 @@ func _crear_ui() -> void:
 	_boton_guardar.disabled = true
 	_conectar_guardar_dirty()
 	_boton_borrar.add_theme_color_override("font_color", Color(0.85, 0.45, 0.35))  # rojo suave: acción destructiva
-	_agregar_boton(vbox, "SETTINGS.SALIR", func(): salir_pedido.emit())
+	_agregar_boton(vbox, "SETTINGS.VOLVER_TITULO", func(): salir_pedido.emit())
 
 func _agregar_boton(vbox: VBoxContainer, clave: String, cb: Callable) -> Button:
 	var btn := Button.new()

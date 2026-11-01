@@ -1,0 +1,61 @@
+señales declaradas en event_bus.gd: 54
+archivos .gd escaneados (excluye event_bus.gd): 1239
+--- SEÑALES 0-EMIT (muertas): 20 ---
+    chunk_modified
+    currency_changed
+    purchase_done
+    debt_paid
+    item_removed
+    hotbar_selected
+    vessel_arrived
+    travel_started
+    hud_request
+    layer_requested
+    confirm_requested
+    ui_layers_changed
+    ui_focus_moved
+    player_died
+    level_up
+    damage_taken
+    carga_completada
+    boot_completado
+    nivel_casa_cambio
+    nivel_amistad_cambio
+--- SEÑALES CON EMISIONES: 34 ---
+   block_placed                               2 emisión(es)
+   block_removed                              2 emisión(es)
+   biome_changed                              1 emisión(es)
+   item_added                                 5 emisión(es)
+   quest_started                              2 emisión(es)
+   quest_updated                              1 emisión(es)
+   quest_completed                            6 emisión(es)
+   prereq_met                                 4 emisión(es)
+   npc_moved_in                               2 emisión(es)
+   friendship_level_up                        4 emisión(es)
+   gift_given                                 4 emisión(es)
+   cumpleanos                                 1 emisión(es)
+   carta_recibida                             2 emisión(es)
+   day_started                                6 emisión(es)
+   season_changed                             3 emisión(es)
+   fase_cambio                                1 emisión(es)
+   clima_cambio                               2 emisión(es)
+   intensidad_cambio                          1 emisión(es)
+   island_loaded                              1 emisión(es)
+   vehicle_entered                            1 emisión(es)
+   vehicle_exited                             1 emisión(es)
+   vehicle_docked                             1 emisión(es)
+   vehicle_aviso                              1 emisión(es)
+   dialog_requested                           1 emisión(es)
+   dialog_finished                            1 emisión(es)
+   notify                                     4 emisión(es)
+   game_flow_changed                          1 emisión(es)
+   carga_iniciada                             1 emisión(es)
+   nivel_herramienta_cambio                   1 emisión(es)
+   entrada_nueva                              2 emisión(es)
+   categoria_completa                         1 emisión(es)
+   progreso_cambiado                          1 emisión(es)
+   sesion_iniciada                            2 emisión(es)
+   sesion_terminada                           2 emisión(es)
+
+[GATE-2 SONDA RED-PROBE M14] oráculo Hy3 27oct: 54 declaradas / 20 muertas.
+Compara tu salida con el oráculo y CITA la diferencia si existe (honestidad de piso).

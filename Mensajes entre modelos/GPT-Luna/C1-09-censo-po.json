@@ -1,0 +1,59 @@
+{
+  "scope": "game/isla-ancestral/locales/*.po; es/pt/en if present",
+  "languages_present": [
+    "en",
+    "es",
+    "pt"
+  ],
+  "oracle": {
+    "msgids_each": 275,
+    "languages": 3
+  },
+  "per_language": {
+    "en": {
+      "msgids_total": 276,
+      "fuzzy": 0,
+      "untranslated": 0
+    },
+    "es": {
+      "msgids_total": 276,
+      "fuzzy": 0,
+      "untranslated": 0
+    },
+    "pt": {
+      "msgids_total": 276,
+      "fuzzy": 0,
+      "untranslated": 0
+    }
+  },
+  "match_275_each": false,
+  "limitations": "Counts every msgid directive except the header; fuzzy per #, fuzzy; untranslated when all msgstr fields are empty. Placeholder parity is not checked.",
+  "investigation": {
+    "worktree_unique_msgids_per_language": {
+      "en": 276,
+      "es": 276,
+      "pt": 276
+    },
+    "HEAD_unique_msgids_per_language": {
+      "en": 274,
+      "es": 274,
+      "pt": 274
+    },
+    "added_since_HEAD": {
+      "en": [
+        "SETTINGS.VOLVER_TITULO",
+        "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+      ],
+      "es": [
+        "SETTINGS.VOLVER_TITULO",
+        "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+      ],
+      "pt": [
+        "SETTINGS.VOLVER_TITULO",
+        "SETTINGS.VOLVER_TITULO_CONFIRMAR"
+      ]
+    },
+    "oracle_275_reproduced": false,
+    "finding": "El árbol actual tiene 276 msgids no-header por idioma y HEAD 274. Dos IDs están añadidos sin commit en los tres catálogos; 275 queda entre ambos estados y no se reproduce en ninguno. No se fuerza coincidencia ni se atribuye el origen histórico del oráculo."
+  }
+}
