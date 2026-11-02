@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://scripts/debug/debug_menu_ui.gd" id="1"]
 
 [node name="DebugMenuUI" type="CanvasLayer"]
+script = ExtResource("1")
 layer = 100
 
 [node name="RootPanel" type="Panel" parent="."]

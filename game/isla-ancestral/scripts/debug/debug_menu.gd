@@ -18,6 +18,13 @@ const RUTA_CONFIG := "res://data/debug/debug_menu_config.json"
 const RUTA_ESTADO := "user://debug_menu_estado.json"
 const VERSION_ESTADO: int = 1
 
+## M110 (2026-11-02): modulos EXTRAIDOS de este archivo, para cerrar los items
+## de refactor del 05-Checklist (L142, L176, L275, L286, L287). Se consumen por
+## `preload` y no por `class_name` porque este arbol ya sufrio colisiones de
+## `class_name` globales en M110 (BUG-091, `TerrainData`).
+const EXPORTADOR_DIAG := preload("res://scripts/debug/diagnostic_exporter.gd")
+const COMANDOS_DEBUG := preload("res://scripts/debug/debug_commands.gd")
+
 var config: Dictionary = {}
 var visible: bool = false
 ## Estado persistible — seccion N. Configuracion y persistencia.
@@ -591,76 +598,10 @@ func ejecutar_comando(id: String) -> Dictionary:
 	if cmd.is_empty():
 		return {"ok": false, "comando": id, "resultado": "comando inexistente"}
 	_comandos_ejecutados += 1
-	var accion: String = String(cmd.get("accion", ""))
-	var params: Dictionary = cmd.get("parametros", {})
-	match accion:
-		"teleport":
-			# RF1: teleport real a las coords del config.
-			return teleport_player(Vector3(float(params.get("x", 256)), float(params.get("y", 30)), float(params.get("z", 256))))
-		"spawn":
-			# RF5: dar objetos al inventario de verdad (antes era texto plano).
-			return dar_objetos(String(params.get("item", "")), int(params.get("n", 1)))
-		"cambiar_hora":
-			# RF2: antes devolvía solo "hora = N" sin tocar el reloj.
-			return set_game_time(int(params.get("hora", 12)))
-		"cambiar_clima":
-			# RF3: antes devolvía solo "clima = N" sin tocar el clima.
-			return set_weather(int(params.get("clima", 0)))
-		"cambiar_estacion":
-			# RF4: no hay set_estacion público — solicitud + señal (M29/M31).
-			return set_season(int(params.get("estacion", 0)))
-		"avanzar_dia":
-			# RF2-ext: avance de días del calendario (M29).
-			return avanzar_dia(int(params.get("dias", 1)))
-		"set_vida":
-			return set_vida(int(params.get("vida", 100)))
-		"reset_npc":
-			return reset_npc(String(params.get("npc_id", "")))
-		"reset_puzzle":
-			return reset_puzzle(String(params.get("puzzle_id", "")))
-		"toggle_colliders":
-			return _toggle_visual("colliders", bool(params.get("enabled", true)))
-		"toggle_fps":
-			return _toggle_visual("fps", bool(params.get("enabled", true)))
-		"toggle_chunks":
-			return _toggle_visual("chunks", bool(params.get("enabled", true)))
-		"toggle_navigation":
-			return _toggle_visual("navigation", bool(params.get("enabled", true)))
-		"toggle_hitboxes":
-			return _toggle_visual("hitboxes", bool(params.get("enabled", true)))
-		"toggle_ai_states":
-			return _toggle_visual("ai_states", bool(params.get("enabled", true)))
-		"regenerar_chunks":
-			return regenerar_chunk(int(params.get("cx", 0)), int(params.get("cz", 0)))
-		"limpiar_cache":
-			return limpiar_cache()
-		"toggle_flag":
-			var flag: String = String(params.get("flag", ""))
-			var devtools := get_node_or_null("/root/DevTools")
-			var nuevo := false
-			if devtools != null and devtools.has_method("toggle_flag"):
-				nuevo = devtools.toggle_flag(flag)
-			else:
-				nuevo = true
-			return {"ok": true, "comando": id, "resultado": "%s=%s" % [flag, str(nuevo)]}
-		"exportar":
-			# RF20: antes "diagnóstico exportado (stub M102)" — ahora ejecuta el
-			# exportador real (ZIP + metadata + logs + .txt legible).
-			var res: Dictionary = _export_diagnostic_zip()
-			res["comando"] = id
-			return res
-		"ayuda":
-			return {"ok": true, "comando": id, "resultado": "comandos: %s" % str(config.get("comandos", {}).keys())}
-		"estadisticas":
-			return {"ok": true, "comando": id, "resultado": str(metricas_sistema())}
-		"reset_flags":
-			var devtools2 := get_node_or_null("/root/DevTools")
-			if devtools2 != null and devtools2.has_method("set_flag"):
-				devtools2.set_flag("mostrar_debug", false)
-				devtools2.set_flag("mostrar_ui", true)
-			return {"ok": true, "comando": id, "resultado": "flags reseteados"}
-		_:
-			return {"ok": false, "comando": id, "resultado": "acción desconocida"}
+	# El despacho vive en `scripts/debug/debug_commands.gd` (05-Checklist L286).
+	# Este metodo solo resuelve el comando en el catalogo y cuenta la ejecucion;
+	# el contrato de retorno es el mismo que cuando el `match` estaba aqui.
+	return COMANDOS_DEBUG.ejecutar(self, id, cmd, config.get("comandos", {}))
 
 func comandos_ejecutados() -> int:
 	return _comandos_ejecutados
@@ -752,6 +693,40 @@ func seed_generacion() -> int:
 	if typeof(v) == TYPE_FLOAT:
 		return int(v)
 	return ENTORNO_NO_DISPONIBLE
+
+
+func aplicar_seed(valor: int) -> Dictionary:
+	## Fija `world_seed` del generador de isla (M09/M10) desde el panel Mundo.
+	## ⚠️ HONESTO: en el repo NO existe `set_seed()`. `world_seed` es una
+	## propiedad (`world_generator.gd:7`) y el generador REAL se construye en
+	## `_get_island_gen()` (L21), que CACHEA `_island_gen` y solo lo reconstruye
+	## si esta nulo o invalido. Consecuencia medida: asignar `world_seed` y nada
+	## mas cambia lo que devuelve `seed_generacion()` pero deja el terreno con la
+	## semilla vieja — el boton "aplicaria" sin aplicar. Por eso se invalida la
+	## cache; `_instancia_global` (L18) mantiene la referencia fuerte para que los
+	## threads de VoxelTerrain no usen un generador liberado.
+	## Fail-closed: sin generador devuelve ok=false y NO toca nada.
+	var gen := _fuente_generador()
+	if gen == null:
+		return {"ok": false, "resultado": "generador no disponible (sin world_seed en el arbol)"}
+	if not ("world_seed" in gen):
+		return {"ok": false, "resultado": "el generador no expone world_seed"}
+	var anterior: int = seed_generacion()
+	gen.set("world_seed", valor)
+	var invalidada := false
+	if "_island_gen" in gen:
+		gen.set("_island_gen", null)
+		invalidada = true
+	var verificado: int = seed_generacion()
+	var cola: String = "" if invalidada else " (sin cache que invalidar: el terreno puede seguir con la semilla previa)"
+	print("[M110] aplicar_seed: %d -> %d (cache invalidada: %s)" % [anterior, verificado, str(invalidada)])
+	return {
+		"ok": verificado == valor,
+		"resultado": "seed %d -> %d; cache del generador invalidada: %s%s" % [anterior, verificado, str(invalidada), cola],
+		"anterior": anterior,
+		"actual": verificado,
+		"cache_invalidada": invalidada,
+	}
 
 
 func posicion_jugador() -> Dictionary:
@@ -1316,90 +1291,18 @@ const MAX_AI_STATES_RADIO: float = 50.0
 
 
 ## ── J. Diagnostic Export mejorado ──────────────────────────────────────────
+## 2026-11-02: el exportador se EXTRAJO a `scripts/debug/diagnostic_exporter.gd`
+## (05-Checklist L142, L176, L275, L287: "embebido en debug_menu.gd").
+## Estas dos funciones se conservan como delegados de UNA linea para no romper
+## a sus llamadores: `ejecutar_comando("exportar")` y `_export_diag()`.
 
-## Fix RF20 test: también genera archivo .txt legible ademaS del .zip
 func _export_diagnostic_zip() -> Dictionary:
-	var result := _do_export_diagnostic()
-	# Generar tambien un .txt plano para compatibilidad con test existente
-	if result.ok:
-		var txt_path: String = String(result.path).replace(".zip", ".txt")
-		var txt := "DIAGNOSTICO Isla Ancestral\n"
-		txt += "Fecha: %s\n" % Time.get_datetime_string_from_system()
-		txt += "Plataforma: %s\n" % OS.get_name()
-		var meta := _build_metadata()
-		for k in meta:
-			txt += "%s: %s\n" % [k, str(meta[k])]
-		txt += "\n--- Console (%d lineas) ---\n" % _console_lines.size()
-		txt += "\n".join(PackedStringArray(_console_lines))
-		# FIX (iter. atria-dawn): FileAccess.open puede devolver null si el
-		# directorio se invalidó entre la creación del ZIP y esta escritura.
-		var f := FileAccess.open(txt_path, FileAccess.WRITE)
-		if f != null:
-			f.store_string(txt)
-			f.close()
-			print("[M110] RF20 diag exportado: %s + %s" % [result.path, txt_path])
-		else:
-			print("[M110] RF20 diag exportado (solo ZIP, .txt falló): %s" % result.path)
-	return result
+	return EXPORTADOR_DIAG.exportar(_build_metadata(), _console_lines, get_viewport())
 
 
 func _do_export_diagnostic() -> Dictionary:
-	## Crea un ZIP con metadata + logs + screenshot. Retorna {ok, path, error}.
-	var result := {"ok": false, "path": "", "error": ""}
-	var timestamp := Time.get_datetime_string_from_system().replace(":", "").replace("-", "").replace(" ", "_")
-	var filename := "diag_%s.zip" % timestamp
-	var dir_path := "user://diagnostics"
-	# Godot 4.7.2 headless con `--path` relativo: `DirAccess.open("user://")`
-	# devuelve null (medido, igual que M107). Se globaliza para obtener la
-	# ruta real sobre la que SÍ opera DirAccess/ZIPPacker en este entorno.
-	var zip_path := ProjectSettings.globalize_path(dir_path + "/" + filename)
-
-	var dir := DirAccess.open(ProjectSettings.globalize_path("user://"))
-	if dir == null:
-		result.error = "no se puede abrir user://"
-		return result
-	if not dir.dir_exists("diagnostics"):
-		dir.make_dir("diagnostics")
-
-	var zip := ZIPPacker.new()
-	var err := zip.open(zip_path)
-	if err != OK:
-		result.error = "no se pudo crear ZIP: error %d" % err
-		return result
-
-	var meta := _build_metadata()
-	var meta_text := JSON.stringify(meta, "  ")
-	zip.start_file("metadata.json")
-	zip.write_file(meta_text.to_utf8_buffer())
-	## (Godot 4.7: close() finaliza las entradas; finish_file() fue removido)
-
-	var log_path := "user://output.txt"
-	if FileAccess.file_exists(log_path):
-		var log_lines := FileAccess.get_file_as_string(log_path).split("\n")
-		var tail := "".join(log_lines.slice(-200))
-		zip.start_file("logs.txt")
-		zip.write_file(tail.to_utf8_buffer())
-		## (Godot 4.7: close() finaliza las entradas; finish_file() fue removido)
-	else:
-		zip.start_file("logs.txt")
-		zip.write_file("[M110] No output.txt disponible\n".to_utf8_buffer())
-		## (Godot 4.7: close() finaliza las entradas; finish_file() fue removido)
-
-	var vp := get_viewport()
-	if vp != null:
-		var img := vp.get_texture().get_image()
-		# En headless no hay render: `get_image()` es null. Se omite el screenshot.
-		if img != null:
-			var png_path := ProjectSettings.globalize_path(dir_path + "/_diag_screenshot.png")
-			var save_err := img.save_png(png_path)
-			if save_err == OK:
-				var png_data := FileAccess.get_file_as_bytes(png_path)
-				zip.start_file("screenshot.png")
-				zip.write_file(png_data)
-				## (Godot 4.7: close() finaliza las entradas; finish_file() fue removido)
-				DirAccess.remove_absolute(png_path)
-
-	zip.close()
-	result.ok = true
-	result.path = zip_path
-	return result
+	## Alias historico de `_export_diagnostic_zip()`: crea el ZIP y devuelve
+	## {ok, path, error}. Ahora tambien escribe el .txt legible (antes el .txt
+	## se escribia solo en `_export_diagnostic_zip`); no queda ningun llamador
+	## que dependiera de la version sin .txt.
+	return EXPORTADOR_DIAG.exportar(_build_metadata(), _console_lines, get_viewport())

@@ -186,3 +186,44 @@ LF puro sin BOM.
 `_ready` sobre la escena completa. Un refactor que mueva esas llamadas a otra función
 haría fallar G6/G7 — es intencional: si la persistencia deja de estar cableada, es código
 muerto y el ítem no está cerrado.
+
+## 10. Capa visual REAL — iter. 2026-11-01 (DeepSeek-V4.1-Flash, Log 2299)
+
+### Qué se mide
+
+Que el visualizador dibuje **artefactos del mundo** y no cajas decorativas, y que respete
+el gate de visibilidad. La medición es el `ImmediateMesh` resultante: número de segmentos,
+vértices y superficies, más el conteo de nodos enumerados por capa.
+
+Invariantes verificados (bloque A): 1 línea = 1 segmento / 2 vértices / 1 superficie;
+1 caja = 12 aristas / 24 vértices; 1 esfera (3 aros × 12) = 36 segmentos / 72 vértices;
+un camino de 3 puntos = 2 segmentos; mesh vacío = 0 superficies; `NaN`/`INF` rechazados.
+
+### Guardián probado EN ROJO (×3, restauración con sha256 verificado)
+
+| sonda | inyección | resultado |
+|---|---|---|
+| S1 | aborto de RUNTIME dentro del bloque C | EXIT 1, nombra `["C"]`, piso dispara (62 < 66), D/E/F/G/H retoman sin colgarse |
+| S2 | `CHECKS_MINIMOS` 66 → 99 | EXIT 1, "solo 66 checks ejecutados (mínimo medido 99)" |
+| S3 | gate L268 eliminado de `_debe_dibujar()` | EXIT 1, 5 fallos nombrados: B1, B3, B4, B7, H9 |
+
+sha256 de los 3 archivos restaurado byte-exacto en las 3 sondas
+(`78e78983…` suite, `9b17f54e…` visualizer, `255a87e1…` depurador).
+
+### Defectos propios corregidos en la misma vuelta
+
+1. `free()` sobre `Depurador3D` (`RefCounted`) → SCRIPT ERROR que abortaba el bloque **antes**
+   de `_fin(bloque)`, reportándolo como "no ejecutado".
+2. `NavigationAgent3D` **extiende `Node`, no `Node3D`**: no tiene `global_position`.
+3. Doble compuerta (`_activo` local **y** toggle del menú) que podía discrepar.
+4. El cache de clases globales no resuelve `Depurador3D` bajo `--headless --script`
+   (`Parse Error: Could not find type`) → se usa `preload()` por ruta.
+
+### Regresión M110 (9 suites, 326 checks, todas EXIT 0)
+
+`test_m110_ui` 17/0 · `test_m110_ui2` 14/0 · `test_m110_ui3` 17/0 · `test_debug_m110` 18/0 ·
+`test_m110_iter_atria` 27/0 · `test_debug_menu_headless` 22/0 · `test_debug_menu_config_m110`
+75/0 · `test_debug_menu_control_m110` 75/0 · `test_debug_menu_entorno_m110` 61/0.
+
+**Suite nueva:** `scripts/debug/test_debug_visualizer_real_m110.gd` — **66 checks / 0 fallos
+/ EXIT 0 ×3**, piso `CHECKS_MINIMOS = 66` **MEDIDO**, LF puro sin BOM.

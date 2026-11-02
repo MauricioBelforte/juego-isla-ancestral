@@ -560,3 +560,67 @@ escena de M110-UI; el modelo de datos ya esta.
 
 **Suite:** `scripts/debug/test_debug_menu_control_m110.gd` (bloques A-H, piso **75** medido,
 4 sondas EN ROJO con sha256 restaurado).
+
+## Iteración 2026-11-01 — la capa visual dibuja el mundo REAL (Log 2299)
+
+### Por qué `DebugDraw` no se puede implementar
+
+La sección 4 de `03-Diseno.md` escribe `DebugDraw.draw_shape_3d`, `DebugDraw.draw_box_3d`,
+`DebugDraw.draw_line_3d` y `DebugDraw.draw_text_3d`. **Medido en Godot 4.7.2-stable:**
+
+```
+Engine.has_singleton("DebugDraw")     -> false
+ClassDB.class_exists("DebugDraw")     -> false
+ClassDB.class_exists("ImmediateMesh") -> true
+```
+
+`DebugDraw` es un addon de terceros, no una API del motor. El equivalente **nativo** para
+líneas 3D es `ImmediateMesh`: 4 vértices → 1 superficie, `ARRAY_INDEX` nulo,
+`clear_surfaces()` deja 0 superficies.
+
+### Por qué los criterios de enumeración de §4 tampoco servían
+
+| criterio de §4 | medido en el repo |
+|---|---|
+| `get_nodes_in_group("colliders")` | **0** `add_to_group("colliders")` |
+| `get_nodes_in_group("entities")` | **0** `add_to_group("entities")` |
+| `get_nodes_in_group("npcs")` | 1 (solo en `qa_m21_puente_m64.gd`) |
+| `get_nodes_in_group("player")` | 7 |
+| `entity.get_hitbox()` | **0** funciones |
+| `npc.get_ai_state()` | **0** funciones |
+
+Implementar §4 al pie de la letra daba un visualizador **ciego**: 3 de las 5 capas
+enumerarían 0 nodos y el resultado se vería "terminado". La versión anterior
+(`debug_visualizer.gd`, agnes-3-flash, 2026-10-09) era justamente eso: 5 `BoxMesh` fijos
+posados al lado del jugador, sin enumerar un solo nodo.
+
+### Qué hay ahora
+
+| capa | enumeración REAL | dibujo |
+|---|---|---|
+| `colliders` | nodos `CollisionShape3D` (por **clase**) | caja/esfera de la forma real |
+| `chunks` | nodos `VoxelTerrain` presentes | AABB del nodo (granularidad declarada) |
+| `navigation` | `NavigationAgent3D` | `get_current_navigation_path()` real |
+| `hitboxes` | nodos `Area3D` | AABB de sus `CollisionShape3D` hijos |
+| `ai_states` | nodos con `get_state_machine()` | marcador + estado leído de la máquina |
+
+- **`scripts/debug/depurador_3d.gd`** (nuevo): `linea`, `caja`, `caja_transformada`,
+  `esfera`, `camino`, `limpiar`, `cerrar` + contadores `segmentos/vertices/superficies/
+  rechazados`. Guardia de finitud: `ImmediateMesh` acepta `Vector3(NAN,0,0)` **en silencio**
+  (medido) y un solo NaN envenena el mesh, así que toda coordenada no finita se rechaza.
+- Formas no dibujables como alambre (cápsula, cilindro) se **cuentan** en `no_dibujables()`;
+  no se inventan.
+- **Gate L268:** con Debug Menu presente, el menú es la única fuente de verdad
+  (`visualizacion_activa()`, `debug_menu.gd:514`); sin menú no se dibuja nada (fail-closed).
+- **`capa_ciega(tipo)`** distingue "no hay nada que dibujar" de "el visualizador está roto".
+- **L274:** `_registrar_servicio()` / `_desregistrar_servicio()` publican y liberan el
+  contrato `debug_visualizer` en el `ServiceRegistry`.
+
+### Límite declarado
+
+`chunks` dibuja el AABB del nodo `VoxelTerrain`, **no el bloque**. El addon no expone un
+AABB por bloque en esta versión, y el `WorldVoxel.get_chunk_at()` de §4 no existe. Cerrar
+ese pendiente depende de M07.
+
+**Suite:** `scripts/debug/test_debug_visualizer_real_m110.gd` (bloques A-H, piso **66**
+medido, 3 sondas EN ROJO con sha256 restaurado).
