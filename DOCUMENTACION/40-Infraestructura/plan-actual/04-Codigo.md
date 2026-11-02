@@ -306,3 +306,74 @@ Comando: `Godot --headless --path game/isla-ancestral --script res://scripts/cor
 
 - Los 2 `[?]` del checklist corresponden a divergencias deliberadas D8 (BOOT y CARGANDO permiten rutas extra del prototipo sin menú); se mantienen hasta que M89/M63 cierren el flujo canónico.
 - El dominio `infra` es aditivo: 40 módulos existentes emiten por sus propios dominios; no se tocó ninguna señal existente.
+
+## Implementación real iter. 3 (2026-11-01, DeepSeek-V4.1-Flash / WorkBuddy — Log 2297)
+
+**Tarea:** ítem 9 de la COLA ACTIVA — «M40 b3: cierre (integración GameFlowManager/SceneManager)».
+
+### Premisa medida ANTES de escribir (nada heredado)
+
+- M40 en disco: **210 [x] / 1 [ ] / 0 [?] = 211**. El único `[ ]` (L261) es el ítem inválido
+  por diseño ya declarado; no hay implementación pendiente marcada.
+- `SceneManager.cambiar_escena()`: **0 llamadores de producción** (los 6 hits son de las 2 suites);
+  `Bootstrap._load_main_scene()` usaba `change_scene_to_file` directo.
+- Señales locales del SceneManager (`cambio_iniciado` / `cambio_completado` / `cambio_fallido`):
+  **0 consumidores** en todo `game/isla-ancestral`.
+- `GameFlowManager.cambiar_estado(Estado.ERROR)`: **0 llamadores de producción** (sólo suites).
+- `infra.boot_completado`: declarada en `event_bus.gd:171`, **0 emisores**.
+- `escena_actual()`, exigido por `03-Diseno.md` §5.5: **0 apariciones** en `scripts/core/`.
+- `bootstrap.gd` llevaba el flujo a MUNDO con un **`3` literal**.
+
+=> La «integración» era **nominal**: dos APIs correctas y ninguna en una ruta de producción.
+El patrón es el mismo falso verde del `track_*` de M105 (la API existe, el consumidor no).
+
+### Implementado
+
+1. **`scene_manager.gd` (+89/−4).** `MODO_SIN_FLUJO = -1`; `_modo_pendiente`;
+   `cambiar_escena(ruta, modo)` (durante la carga → CARGANDO, al completar → `modo`, si falla →
+   ERROR); `estado_flujo(nombre)` (resuelve el enum **por nombre**, fail-closed a −1);
+   `sincronizar_flujo(nuevo)` (idempotente, avisa nombrando ambos estados, nunca rompe la carga);
+   `_sincronizar_error(modo)`; `escena_actual()`; `verificar()` (auditoría que no muta estado).
+2. **`bootstrap.gd` (+48/−9).** El flujo se lleva a MUNDO **por nombre a través de SceneManager**
+   (fallback al enum del propio GameFlowManager): se eliminó el `3` mágico. Se emite
+   `infra.boot_completado` al final de la secuencia de arranque, con flag de idempotencia.
+3. **`test_infraestructura_m40.gd` (iter. 3).** Bloque nuevo `integracion_flujo` (14 checks) y
+   aserciones de flujo dentro del bloque `scene_manager`.
+
+### Defecto propio encontrado y corregido en la MISMA suite
+
+`_test_scene_manager` es una **corrutina** (`await process_frame`) y se llamaba **sin `await`**
+desde `_run`: `_summary()` corría antes de que la corrutina despertara y `quit(0)` cerraba el árbol.
+Medido en la corrida previa: la suite publicaba **28 checks / 0 fallos / «todos los checks
+pasaron»** y los **2 últimos checks NUNCA se ejecutaban** (`carga_iniciada`, `carga_completada`);
+el `[M40] Escena cargada: …` aparecía **después** del resumen. Falso verde por corrutina no
+esperada, del mismo tipo que el `_summary()` diferido que hubo que introducir en M88/M125.
+También se reemplazó una aserción **infalsificable** (`gfm.has_method("transiciones_permitidas")`)
+por el contrato real (mutar la copia no toca `TRANSICIONES`).
+
+### Evidencia medida (Godot 4.7.2 headless, binario real)
+
+- Suite: **60 checks / 0 fallos / 7 bloques / EXIT 0 ×3**, **0 SCRIPT ERROR**. Piso
+  `CHECKS_MINIMOS = 60` **MEDIDO** en verde (no estimado ni copiado).
+- Guardián **EN ROJO ×3**, con restauración **byte-exacta por sha256** verificado:
+  - **S1** `sincronizar_flujo` neutralizado (no llama al GameFlowManager) → **EXIT 1**,
+    **6 fallos** nombrados: «el flujo quedó en MUNDO estado=0», «transición prohibida MUNDO->BOOT
+    rechazada», «el flujo no mutó tras el rechazo», «carga fallida con modo → flujo en ERROR
+    estado=0», «durante la carga el flujo es CARGANDO estado=0», «tras la carga el flujo es
+    MUNDO estado=0».
+  - **S2** aborto de **runtime** al inicio del bloque `integracion_flujo` → **EXIT 1**,
+    `[FAIL] bloques que NO se ejecutaron: ["integracion_flujo"]` + `[FAIL] solo 37 checks
+    ejecutados (minimo 60)`: la capa de nombres **no** es ciega.
+  - **S3** piso subido a 999 → **EXIT 1** (`solo 60 checks ejecutados (minimo 999)`).
+- Arranque real headless: `[M40] Flujo: 0 -> 3`, `[Bootstrap] GameFlowManager -> MUNDO (via
+  SceneManager)`, `[Bootstrap] infra.boot_completado emitido`, **0 SCRIPT ERROR**.
+
+### Divergencias declaradas (propuestas, NO aplicadas a las marcas)
+
+- **D40-1** — `modo` = estado objetivo **al completar** la carga (no «modo de transición»), y con
+  `MODO_SIN_FLUJO` el flujo no se toca. Es la única lectura que generaliza: cargar un menú debe
+  terminar en MENU, no en MUNDO.
+- **D40-2** — `03-Diseno.md` §4 declara `TRANSICION` y el enum no lo tiene: `estado_flujo("TRANSICION")`
+  devuelve **−1** y la suite lo fija como contrato (fail-closed, no se inventa un estado).
+- **D40-3** — una carga fallida deriva a ERROR **sólo** si el llamador pidió flujo (`modo` ≠ −1):
+  una ruta mala de un llamador legado no debe mandar el juego entero a ERROR.

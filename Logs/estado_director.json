@@ -2091,7 +2091,7 @@
   "nemotron_acusado_206": "Acuse B-12-02 M139 SOSTENIDO + fuel note (B-12-03..06 condicionados)",
   "deepseek_tanda9_ok": "8 AUTO to [?] + M38 dueo + P-100 M140/M22 OK. M157 L148 = RESTAURAR [x] Ling 2272 (stale order).",
   "hy3_gate2_batch4": "M100 220/220 SOSTENIDO (sello 11 agnes->Hy3) + M129 108 items SOSTENIDO (yellow BUG-070 [?], NO sello)",
-  "sellos_vigentes": 11,
+  "sellos_vigentes": 12,
   "m100_sello_11": "M100 QA-cross Hy3 #450: 220/220, runtime 8/0, report_analyzer.py AUSENTE (non-blocking). Sello reemplaza agnes->Hy3.",
   "m129_no_sello": "M129 108 items (no 59 - stale corregido), 24/0 + red-probe. Yellow Con dudas (BUG-070 [?]). MINIMO 3 CUMPLIDO.",
   "m157_l148_decision": "RESTAURAR [x] (Ling 2272 reformulacion de alcance). DeepSeek flip = stale order. Global 7/124/1 -> 8/124/0.",
@@ -2149,5 +2149,9 @@
     "trampas_nuevas": 6,
     "pool_desync": "head 423 vs real 488"
   },
-  "deepseek_peticiones": "(a) commit M59 fix, (b) degradar M82 L72/L82/L86/L128, (c) HC-06/HC-02 decision"
+  "deepseek_peticiones": "(a) commit M59 fix, (b) degradar M82 L72/L82/L86/L128, (c) HC-06/HC-02 decision",
+  "deepseek_491_m82_bug156": "M82 4 degradadas (90/100) + BUG-156 registrado (SETTINGS.VOLVER_TITULO, Menor - runtime lee .po no JSON) + HC-02 refutada (NPC equivocado, contenido en aur_002). M162: 40 notas AUDIT obsoletas (GO pendiente).",
+  "bug_156_i18n_json": "SETTINGS.VOLVER_TITULO en es/en/pt.po pero NO en strings_{es,en,pt}.json. Severidad: MENOR (runtime carga .po, no JSON). DeepSeek #491.",
+  "m73_sello_12": "M73 gate-2 SOSTENIDO (Hy3 #473: BUG-155 fix verificado, 76/3/56=135, 0 drift). Sello 12 aplicado.",
+  "bug_155_resuelto": "achievement_service.gd:156 fix verificado por Hy3 #473 G1-01..03. Null eliminado."
 }

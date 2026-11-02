@@ -46,7 +46,7 @@
 5. M104-Analytics (107/119): QA §21.8 cruzado (integridad PASS: 107[x]/4[ ]/8[?]=119 sin drift vs GLOBAL; test_analytics.gd 24/0/EXIT0 real, red 1/0→EXIT1; verificador≠autor; modulo queda Con dudas por deuda M90/M91) — 8 [M] — [x] Hy3 (Log 2074 / msg 303, 2026-10-21)
 6. M62-Memoria (113/150): QA de delta iter.6 (L98, pureza_save 58/0) — 8 [M] — [x] Hy3 (Log 2076, 2026-10-21): QA §21.8 cruzado; 143[x]/3[ ]/4[?]=150 cuadra Totales; GLOBAL 127/150 obsoleto (no editado); test_m62_pureza_save.gd 60/0/EXIT0 real Godot 4.7.2, RED ciego 60/2->EXIT1; verificador!=autor (DeepSeek-V4.1-Flash); modulo Con dudas por 4[?] no medibles
 7. [x] M108-Pipeline (202/0/3=205 real; 127/205 era milestone lote-1): QA cruzado §21.8 — Hy3 (Log 2152, 2026-10-23: 05-Checklist 202[x]/0[ ]/3[?]=205 por prefijo; linea **Totales:** modulo miente 127/75/3; GLOBAL 202/0/3 OK; headless Godot 4.7.2 test_m108.tscn vacuo 0 err/0 validados EXIT0, RED probe 2 err EXIT2; 3[?] RF1/RF5/RF6 diferidos dueno ajeno; sin flip sello)
-8. M107-Backups (167/176): QA de cierre — 8 [M]
+8. M107-Backups (167/176): QA de cierre — 8 [M] — [?] Hy3 (Log 2293 / msg 475, 2026-11-01: §21.8 cross-QA; body 05-Checklist 182/182 [x] vs GLOBAL 177/182 vs Totales tachado 168/9; divergencia + historia sobre-cierre; artefactos scripts/backup/* + test_backup_ps1.py EXISTEN en disco; veredicto NO certificable, recomiendo hold flip ✅; 0 commit/self-sello)
 9. M112-Testing (211/225): QA de los 211 [x] — 10 [M] — [x] cerrado Hy3 (Log 2002 / msg 268, 2026-10-18, §21.8 APROBADO)
 10. M118-CI/CD (106/106 medido): QA §21.8 re-verif — [x] Hy3 (Log 2008 / msg 270, 2026-10-19): 106/[ ]=0/[?]=0; quality.yml válido (EXIT=0, 6/6); drift Totales L144 105/0/1→106/0/0 pendiente del director (no lo edito)
 11. M117-Build (94/110): QA del sistema de builds — 8 [M] — [x] Hy3 (Log 2144, 2026-10-22: 14 checks/0 fallos Godot 4.7.2 headless EXIT 0; RED probe 14/1 EXIT1; verificador!=autor; §21.8 PASS)
@@ -122,8 +122,8 @@
 
 71-80. Lotes de QA §21.8.X a módulo único (10 módulos a elegir por el director de la lista 🔵→✅ del día) — 10 [M]
 81-88. Verificaciones de flips dudas (cualquier agente que reporte flips → re-verificación Hy3) — 10 [M]
-89. Auditoría de l Logging de la flota (logs nuevos del día: presencia de evidencia) — 8 [M]
-90. Verificación backlogs vs. checklists (`scripts/verificar_backlogs.py` semanal) — 6 [M]
+89. Auditoría de Logging de la flota (logs nuevos del día: presencia de evidencia) — 8 [M] — [x] Hy3 (Log 2295 / msg 477, 2026-11-01: 12 logs del día auditados; 10/12 ASCII+CRLF+evidencia OK; 2283/2284 (DS-V4.1-Flash) evidencia-real pero UTF-8+LF (no ASCII); 0 false-green; mojibake en 2283 L92)
+90. Verificación backlogs vs. checklists (`scripts/verificar_backlogs.py` semanal) — 6 [M] — [x] Hy3 (Log 2298 / canal 479: verificado read-only; 31/33 backlogs, 438 deltas, 21 drift-inverso M62 en backlog DeepSeek, 0 módulos inexistentes)
 91. Verificación de los 5 BACKLOG archivos de glm (coherencia con GLOBAL) — 6 [S]
 92. Verificación de PATRÓN D en reportes de Step 5 (conteos y muestreos) — 8 [M]
 93. Verificación de reportes de agnes cuando hay flips en disputa (lección de msg 2027) — 8 [M]

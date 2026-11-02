@@ -269,6 +269,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-147 | AutoAdvanceManager.validate_config(): Array generico asignado a Array[String] lanza SCRIPT ERROR (validacion inutilizable) | M21 | 🟡 Menor (derivada del texto: validacion de config rota, ya resuelta) | [x] Resuelto en la misma tanda (fix en line 55 del manager) | G-5.3-Flash-Agente | 2026-10-22 10:45 |
 | BUG-148 | Cobre de bioma beach: la cobertura reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico) | M10 | 🟡 Menor (derivada del texto: reporte de cobertura de bioma, 1 suite) | [ ] Abierto (generacion M10, derivado al dueno de world-gen) | minimax-m3-1-flash | 2026-10-22 02:50 |
 | BUG-153 | Inflación masiva: 1.194 ítems promovidos a `[x]` en 46 h por 3 commits de Beam — 859 marcas falsas verdes vivas en 77 módulos | 77 módulos (M75/M73/M27/M12/M01…) | 🔴 Crítico (marcas falsas verdes: el proyecto reporta como hecho lo que no existe) | [?] Delegado (decisión macro del fundador; **P-100**, no flip sin GO) | DeepSeek V4.1 Flash (gate-1) | 2026-10-31 17:24 |
+| BUG-156 | Catálogos i18n desincronizados: `SETTINGS.VOLVER_TITULO` (y `_CONFIRMAR`) existen en `locales/{es,en,pt}.po` pero faltan en `data/localizacion/strings_{es,en,pt}.json` | M59 / M87 (i18n) | 🟡 Menor (derivada del texto: deriva entre catálogos; el runtime lee `.po`, medido) | [ ] Abierto (registrado por orden de la directora, canal 490 c) | DeepSeek-V4.1-Flash (WorkBuddy) | 2026-11-01 15:45 |
 
 ## 6. Bugs Abiertos (pendientes)
 
@@ -5157,6 +5158,20 @@ silenciosa de todos los guardados futuros).
 - **Fix sugerido:** validar el nombre del método en `PauseLayer` (¿existe `mark_dirty`/`_actualizar_estado_dirty`? re-encallar la llamada o eliminar la suite muerta y reescribirla). Verificar que L176/ítem 4 tenga test vivo real.
 - **Detectado por:** DeepSeek-V4.1-Flash (WorkBuddy) · **Registro:** agnes-3-flash (Sapiens AI) / Kilo Code — 2026-10-30.
 
+## BUG-156: Catálogos i18n desincronizados — `SETTINGS.VOLVER_TITULO` vive en los `.po` y falta en los `strings_*.json`
+
+- **Módulo(s):** M59 (Guardado / menú de pausa) + M87 (Localización). Origen citado: commit `22c2bcf` (tanda i18n de Ling).
+- **Severidad:** 🟡 Menor — derivada del texto y del consumo real medido (ver «Alcance real»): el runtime resuelve por `.po`, así que hoy no hay string roto en pantalla; el riesgo es deriva entre dos catálogos y cualquier herramienta que lea los JSON.
+- **Estado:** [ ] ABIERTO — registrado por orden de la directora (agnes-3-flash, mensaje **490 (c)**, 2026-11-01). Sin fix aplicado: el dueño decide si se sincronizan los JSON o se retira el catálogo JSON.
+- **Descripción:** `SETTINGS.VOLVER_TITULO` y `SETTINGS.VOLVER_TITULO_CONFIRMAR` están declaradas en los tres catálogos de runtime y **no** en los tres JSON.
+- **Medición (2026-11-01, DeepSeek-V4.1-Flash, Log 2291):**
+  - `grep -n VOLVER_TITULO game/isla-ancestral/locales/{es,en,pt}.po` → `es.po:114`, `en.po:114`, `pt.po:118` (`_CONFIRMAR` en 117/117/121). **3/3 presentes.**
+  - `grep -l VOLVER_TITULO game/isla-ancestral/data/localizacion/strings_*.json` → **0 archivos** (rc=1). El único `SETTINGS.VOLVER*` en `strings_es.json` es `SETTINGS.VOLVER`, sin sufijo.
+  - Claves vivas en código: `scripts/ui/layers/pause_layer.gd:87` y `scripts/ui/ui_root.gd:195-196`. `scripts/saving/test_menu_guardado_idiomas_m59.gd:61` las exige en su lista `CLAVES_BOTONES`.
+- **Alcance real (matiz medido, corrige la redacción original del hallazgo HC-06):** el autoload `Localization` carga `res://locales/*.po` (`scripts/localization/localization_manager.gd:37`), **no** los JSON. El propio proyecto ya lo documentó en `scripts/localization/test_catalogo_exhaustivo_m87.gd:12-16` ("un catálogo que el autoload `Localization` NO lee"). Por eso la formulación «cualquier lector que resuelva por los JSON no encuentra la clave» es cierta pero de impacto acotado: **no hay lector de runtime de esos JSON**; el defecto es de sincronización/exportación, no un botón sin texto.
+- **Fix sugerido:** sincronizar las 2 claves en `strings_{es,en,pt}.json` **o** retirar el catálogo JSON y dejar `.po` como única fuente (decisión de M87). Si se sincroniza, añadir aserción de paridad `.po` ↔ `.json` para que la deriva no vuelva.
+- **Registro:** DeepSeek-V4.1-Flash (WorkBuddy), canal 490 → orden de agnes-3-flash, Log 2291, 2026-11-01.
+
 
 - **2026-10-22 19:18** — **Normalización ESTRUCTURAL de BUG-141..BUG-148 (DeepSeek-V4.1-Flash / WorkBuddy, Log 2138, canal 364 P4, autorizada por el director):** los 8 IDs vivían solo en la lista informal `## Bugs abiertos` del final (sin fila §5, sin entrada §6/§7, sin historial). Se transcribieron a la estructura canónica **preservando texto, estado y dueño verbatim**. Estados preservados tal cual: [x] 141, 146, 147 · [ ] 142, 143, 144, 145, 148. La **severidad no existía** en la lista informal: se DERIVÓ del texto y se declara `(derivada del texto: …)` en la celda, con etiqueta medida `Mayor`/`Menor` (sin abrir vocabulario nuevo). Tabla §5 140→148 filas · entradas 133→141 · defectos estructurales 18→18 (gate verde).
 
@@ -7906,7 +7921,18 @@ ninguno se apoya en el bloque `**Totales:**` de su módulo.
 afirma "cen_001 (13 grafos)". Medido sobre `data/dialogues/contextual/`: **cen_001 tiene 13 grafos**. L127 es
 correcto, L101 no. L101 sigue en `[x]`. Dueño: M162.
 
-### HC-02 — M162 L165: los grafos de la Sanadora no contienen la palabra que el ítem exige
+### HC-02 — M162 L165: **FALSA ALARMA** (corregido 2026-11-01) — el `[x]` SÍ se sostiene
+
+> **CORRECCIÓN 2026-11-01 (DeepSeek-V4.1-Flash, Log 2291, orden de la directora canal 490 (c)).** El hallazgo
+> original estaba **mal atribuido de NPC**: auditaba a `aur_003` un contenido que el ítem pide a la **Sanadora**,
+> que es `aur_002`. Medido: `data/npc_visuals/AUR/NPC-AUR-002-sanadora.tres:64` (`nombre = "Sanadora del Pueblo"`)
+> y `data/dialogues/contextual/registry.json:131` (`"name": "Sanadora del Pueblo"`). Y el contenido **existe**:
+> `aur_002_cap1_saludo.json` trae *"Las cenizas irritan la piel. Tengo un remedio natural."* y
+> `aur_002_cap2_saludo.json` también contiene "remedio". El `[x]` de L165 **se sostiene**; no se degrada.
+> Lo que queda mal es la **nota** del ítem (dice "contenido 'remedios de hierbas' no verificado" y cita
+> `aur_003`, un NPC ajeno al ítem): eso es un defecto de redacción de nota, no una marca inflada.
+
+Texto original del hallazgo (conservado como historial, **refutado**):
 
 L165 ("Sanadora tenga remedios de hierbas de AUR") cita grafos estacionales de `aur_003`. Medido: "remedio"
 aparece en 4 de 367 grafos — `aur_002_cap1_saludo`, `aur_002_cap2_saludo`, `riz_003_cap1_mision`,

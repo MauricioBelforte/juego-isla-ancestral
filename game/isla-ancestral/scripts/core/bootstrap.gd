@@ -35,6 +35,10 @@ const DOMINIOS_ESPERADOS: Array[String] = [
 ## Escena principal a cargar después del bootstrap
 const MAIN_SCENE_PATH: String = "res://scenes/main_island.tscn"
 
+## M40 b3: `infra.boot_completado` está declarada en EventBus y no la emitía
+## NADIE (0 emisores medidos el 2026-11-01). Este flag la hace idempotente.
+var _boot_anunciado: bool = false
+
 
 func _ready() -> void:
 	print("=== Bootstrap Iniciando ===")
@@ -48,6 +52,7 @@ func _ready() -> void:
 	_autoregistrar_dominios.call_deferred()
 	verificar_integridad_dominios.call_deferred()
 	_load_main_scene.call_deferred()
+	_anunciar_boot_completado.call_deferred()
 
 	print("=== Bootstrap Completado ===")
 
@@ -77,17 +82,55 @@ func _autoregistrar_dominios() -> void:
 			reg.register(contrato, nodo)
 
 
-## M40: el GameFlowManager inicia en BOOT; esta escena es el mundo, así que
+## M40 b3: el GameFlowManager inicia en BOOT; esta escena es el mundo, así que
 ## pasamos a MUNDO (transición válida BOOT->MUNDO según las transiciones del M40).
+## El estado se pide POR NOMBRE a través de SceneManager (dueño de la relación
+## flujo<->escena): antes había un `3` literal que se rompía en silencio si el
+## enum cambiaba de orden o de nombre.
 func _verificar_game_flow() -> void:
 	var gfm = get_node_or_null("/root/GameFlowManager")
 	if gfm == null:
 		print("[Bootstrap] GameFlowManager no montado (build parcial)")
 		return
-	if gfm.has_method("cambiar_estado"):
-		# Estado.MUNDO = 3 en el enum del GameFlowManager (BOOT=0, MENU=1, ...)
-		gfm.cambiar_estado(3)
-		print("[Bootstrap] GameFlowManager -> MUNDO")
+	var sm = get_node_or_null("/root/SceneManager")
+	var objetivo: int = -1
+	if sm != null and sm.has_method("estado_flujo"):
+		objetivo = int(sm.estado_flujo("MUNDO"))
+	if objetivo < 0:
+		# Fallback: resolver el enum directo del GameFlowManager (sin `3` mágico).
+		var valores = gfm.get("Estado")
+		if valores is Dictionary and valores.has("MUNDO"):
+			objetivo = int(valores["MUNDO"])
+	if objetivo < 0:
+		print("[Bootstrap] enum Estado sin MUNDO: flujo no sincronizado")
+		return
+	var aplicado: bool = false
+	if sm != null and sm.has_method("sincronizar_flujo"):
+		aplicado = bool(sm.sincronizar_flujo(objetivo))
+	elif gfm.has_method("cambiar_estado"):
+		aplicado = bool(gfm.cambiar_estado(objetivo))
+	if aplicado:
+		print("[Bootstrap] GameFlowManager -> MUNDO (via SceneManager)")
+	else:
+		print("[Bootstrap] GameFlowManager: MUNDO no aplicado")
+
+
+## M40 b3: cierra el contrato de arranque emitiendo `infra.boot_completado`.
+## Medido: la señal existía en EventBus con 0 emisores (sólo las suites
+## comprobaban que existiera). Hoy tiene 0 consumidores: se emite igual porque
+## el emisor es la mitad del contrato que faltaba, y su ausencia era invisible.
+func _anunciar_boot_completado() -> void:
+	if _boot_anunciado:
+		return
+	_boot_anunciado = true
+	var bus := get_node_or_null("/root/EventBus")
+	if bus == null:
+		return
+	var infra: Variant = bus.get("infra")
+	if infra == null or not (infra is Object) or not infra.has_signal("boot_completado"):
+		return
+	infra.boot_completado.emit()
+	print("[Bootstrap] infra.boot_completado emitido")
 
 
 ## BUG-091/44: ServiceRegistry es autoload; su identificador desnudo no resuelve

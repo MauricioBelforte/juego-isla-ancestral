@@ -766,6 +766,119 @@ def informe_stale(datos):
     return "\n".join(lineas)
 
 
+# ---------------------------------------------------------------------------
+# Diagnostico de la FILA del GLOBAL para los items bloqueado_global (iter. 11)
+#
+# `bloqueado_global` dice "la palanca es la FILA", pero NO dice que tiene mal la
+# fila. Son dos causas con dueños distintos y no son el mismo trabajo:
+#   - `bloqueo_de_etiqueta`: los numeros de la fila YA coinciden con el disco
+#     (checklist 100% cerrada); lo unico que falta es la celda Estado en OK.
+#   - `fila_atrasada`: la fila declara menos completados/total que el disco.
+# Sin esta distincion, N filas parecen N trabajos iguales y se planifica mal.
+# ---------------------------------------------------------------------------
+
+RE_PROGRESO = re.compile(r"(\d+)\s*/\s*(\d+)")
+
+VEREDICTOS_FILA = (
+    ("bloqueo_de_etiqueta", "numeros al dia: solo falta la celda Estado en OK"),
+    ("fila_atrasada", "la fila declara menos que el disco (progreso stale)"),
+    ("progreso_ilegible", "la celda Progreso no se puede parsear"),
+    ("modulo_abierto", "la checklist tiene abiertos: no es palanca de FILA"),
+    ("sin_fila", "el item no tiene fila en el GLOBAL"),
+)
+
+
+def diagnostico_fila(r):
+    """Mide la fila del GLOBAL contra el disco para UN item del indice."""
+    ch = r.get("checklist") or {}
+    glob = r.get("global") or {}
+    real_x = ch.get("x", 0)
+    real_total = ch.get("total", 0)
+    abiertos = ch.get(" ", 0) + ch.get("?", 0)
+    d = {
+        "id": r["id"],
+        "carpeta": r.get("carpeta"),
+        "estado": (glob.get("estado") or "").strip(),
+        "fila_completados": None,
+        "fila_total": None,
+        "real_x": real_x,
+        "real_total": real_total,
+        "abiertos": abiertos,
+        "delta_x": None,
+        "delta_total": None,
+    }
+    if not glob:
+        d["veredicto"] = "sin_fila"
+        return d
+    m = RE_PROGRESO.search(glob.get("progreso") or "")
+    if not m:
+        d["veredicto"] = "progreso_ilegible"
+        return d
+    d["fila_completados"] = int(m.group(1))
+    d["fila_total"] = int(m.group(2))
+    d["delta_x"] = real_x - d["fila_completados"]
+    d["delta_total"] = real_total - d["fila_total"]
+    if abiertos > 0:
+        d["veredicto"] = "modulo_abierto"
+    elif d["delta_x"] == 0 and d["delta_total"] == 0:
+        d["veredicto"] = "bloqueo_de_etiqueta"
+    else:
+        d["veredicto"] = "fila_atrasada"
+    return d
+
+
+def clasificar_filas(datos):
+    """Diagnostica la fila de TODOS los items bloqueado_global.
+
+    Guarda de ceguera: si no se leyo ningun bloqueado_global no hay nada que
+    diagnosticar, y devolver 0 en silencio seria un falso verde.
+    """
+    detalle = []
+    for r in datos["registros"]:
+        if r.get("categoria_pendiente") != "bloqueado_global":
+            continue
+        detalle.append(diagnostico_fila(r))
+    por_veredicto = dict((k, []) for k, _ in VEREDICTOS_FILA)
+    for d in detalle:
+        por_veredicto[d["veredicto"]].append(d["id"])
+    ciego = []
+    if not detalle:
+        ciego.append("no se leyo ningun item bloqueado_global")
+    datos["filas"] = {
+        "total": len(detalle),
+        "por_veredicto": por_veredicto,
+        "detalle": detalle,
+        "ciego": ciego,
+        "atrasadas": list(por_veredicto["fila_atrasada"]),
+        "ilegibles": list(por_veredicto["progreso_ilegible"]),
+    }
+    return datos
+
+
+def informe_filas(datos):
+    f = datos["filas"]
+    lineas = []
+    lineas.append("=== FILAS DEL GLOBAL DE LOS ITEMS bloqueado_global ===")
+    lineas.append("items bloqueado_global : %d" % f["total"])
+    if f["ciego"]:
+        lineas.append("[CIEGO] " + " | ".join(f["ciego"]))
+    lineas.append("")
+    for nombre, desc in VEREDICTOS_FILA:
+        lineas.append("%-22s %3d  %s" % (nombre, len(f["por_veredicto"][nombre]), desc))
+    lineas.append("")
+    lineas.append("-- DETALLE (fila vs disco) --")
+    lineas.append("%-5s %-34s %-12s %-12s %-9s %s"
+                  % ("ID", "CARPETA", "FILA x/tot", "DISCO x/tot", "DELTA", "VEREDICTO"))
+    for d in f["detalle"]:
+        fila = "-" if d["fila_completados"] is None else "%d/%d" % (
+            d["fila_completados"], d["fila_total"])
+        disco = "%d/%d" % (d["real_x"], d["real_total"])
+        delta = "-" if d["delta_x"] is None else "%+d/%+d" % (d["delta_x"], d["delta_total"])
+        lineas.append("%-5s %-34s %-12s %-12s %-9s %s" % (
+            d["id"], (d["carpeta"] or "SIN CARPETA")[:34], fila, disco, delta, d["veredicto"]))
+    return "\n".join(lineas)
+
+
 def informe(datos):
     lineas = []
     lineas.append("=== AUDITOR INDICE MAESTRO M01 ===")
@@ -824,6 +937,8 @@ def main(argv=None):
                     help="con --dependencias: modulos por bloque (default 20)")
     ap.add_argument("--stale", action="store_true",
                     help="clasifica los [x] NO sostenidos hoy (clase + cita del flip)")
+    ap.add_argument("--filas", action="store_true",
+                    help="diagnostica la fila del GLOBAL de cada item bloqueado_global (etiqueta vs progreso stale)")
     args = ap.parse_args(argv)
 
     if args.bloque < 0 or args.tam < 1:
@@ -841,12 +956,17 @@ def main(argv=None):
     datos = clasificar_stale(datos)
     if args.dependencias or args.json:
         datos = clasificar_dependencias(datos)
+    if args.filas or args.json:
+        datos = clasificar_filas(datos)
 
     ciego_dep = bool(args.dependencias and datos["dependencias"]["ciego"])
+    ciego_filas = bool(args.filas and datos["filas"]["ciego"])
 
-    if datos["ciego"] or ciego_dep:
+    if datos["ciego"] or ciego_dep or ciego_filas:
         if args.json:
             print(json.dumps(datos, ensure_ascii=False, indent=1))
+        elif args.filas:
+            print(informe_filas(datos))
         elif args.dependencias:
             print(informe_dependencias(datos, args.bloque, args.tam))
         elif args.stale:
@@ -859,6 +979,8 @@ def main(argv=None):
 
     if args.json:
         print(json.dumps(datos, ensure_ascii=False, indent=1))
+    elif args.filas:
+        print(informe_filas(datos))
     elif args.dependencias:
         print(informe_dependencias(datos, args.bloque, args.tam))
     elif args.stale:
@@ -868,6 +990,8 @@ def main(argv=None):
     else:
         print(informe(datos))
 
+    if args.check and args.filas and (datos["filas"]["atrasadas"] or datos["filas"]["ilegibles"]):
+        return 1
     if args.check and args.stale and datos["stale"]["sin_cita"]:
         return 1
     if args.check and datos["candidatos_nuevos"]:

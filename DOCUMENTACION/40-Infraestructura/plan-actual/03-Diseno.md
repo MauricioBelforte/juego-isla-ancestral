@@ -340,3 +340,13 @@ Reglas:
 - **L81 (RF8: enum Estado BOOT/MENU/CARGANDO/MUNDO/PAUSA/TRANSICION/ERROR):** DEGRADADO G-5.3-Flash-Agente 2026-10-22 (muestreo anti-inflación §21.8.2.b, 2indexo): game_flow_manager.gd enum Estado = BOOT, MENU, CARGANDO, MUNDO, PAUSA, ERROR — TRANSICION NO EXISTE en el disco (flip de presunción previo). Consecuencia en cascada: D8 "TRANSICION solo deriva a CARGANDO o ERROR" no es verificable hasta que el estado exista o el ítem se reinterprete para el flujo CARGANDO real. El resto del enum y las transiciones SÍ están (RF9 verificado aparte). Requiere decisión del dueño: agregar TRANSICION a la enum o reescribir RF8/D8. El patrón coincide con el flip falso L85 de M35 derivado en el 234 del director.
 - **L84 (D8: BOOT deriva a MENU/CARGANDO/MUNDO/ERROR):** tabla de divergencias (step-5-kilocode, Kilo Code, 2026-10-12): el [?] se mantiene porque hay 5 diferencias reales entre 03-Diseno.md sección 4 y game_flow_manager.gd: el diseño declara el estado TRANSICION (que el código no tiene) y restringe BOOT a [MENU, ERROR], CARGANDO a [MUNDO, ERROR], MUNDO a [PAUSA, TRANSICION, ERROR] y ERROR a [BOOT]; el código en cambio permite BOOT a [MENU, CARGANDO, MUNDO, ERROR], CARGANDO a [MUNDO, MENU, ERROR], MUNDO a [PAUSA, CARGANDO, MENU, ERROR] y ERROR a [BOOT, MENU]. Hay que decidir si manda el diseño o el código.
 - **L86 (D8: CARGANDO deriva a MUNDO/MENU/ERROR):** (también permite volver a MENU).
+
+### Nota de implementación §5.5 (2026-11-01, DeepSeek-V4.1-Flash / WorkBuddy — Log 2297)
+
+`SceneManager.cambiar_escena(ruta, modo)` está implementado con `modo` = **estado de flujo objetivo
+al completar la carga** (D40-1); `MODO_SIN_FLUJO = -1` conserva el contrato previo del método, que
+tenía 0 llamadores de producción. `escena_actual()` figuraba en esta especificación §5.5 y **no
+existía en el código** (0 apariciones): ahora existe y la suite la mide. `TRANSICION` (D40-2) sigue
+**sin existir** en el enum de `game_flow_manager.gd`; `estado_flujo("TRANSICION")` devuelve −1 a
+propósito, en vez de inventar un estado. La relación flujo↔escena tiene un solo dueño
+(`SceneManager.sincronizar_flujo`) y `bootstrap.gd` ya no escribe el estado con un `3` literal.

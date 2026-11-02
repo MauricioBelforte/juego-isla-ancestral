@@ -25,7 +25,7 @@ AQUI = os.path.dirname(os.path.abspath(__file__))
 AUDITOR = os.path.join(AQUI, "auditar_indice_m01.py")
 PY = sys.executable
 
-CHECKS_MINIMOS = 79  # medido en verde (79/0 x3) el 2026-10-28; se ajusta SOLO tras medir
+CHECKS_MINIMOS = 98  # medido en verde (98/0 x3) el 2026-11-01 (bloques R/S); se ajusta SOLO tras medir
 
 _checks = 0
 _fallos = 0
@@ -41,11 +41,15 @@ def chequear(cond, desc):
         print("[FALLO] %s" % desc)
 
 
-def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_items=152, estados=None):
+def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_items=152, estados=None,
+              progresos=None):
     """Arma un arbol sintetico. `marcas` = lista de marcas del indice (len n_items).
 
     `estados` (opcional): dict {numero_de_fila: estado} para fijar filas concretas
     del GLOBAL. Las no listadas caen al comportamiento por defecto.
+    `progresos` (opcional): dict {numero_de_fila: "x/y"} para la celda Progreso.
+    Las no listadas quedan en "1/1" (que es lo que declara cada checklist por
+    defecto: un unico "- [x] item cerrado").
     """
     os.makedirs(os.path.join(base, "scripts"))
     shutil.copy2(AUDITOR, os.path.join(base, "scripts", "auditar_indice_m01.py"))
@@ -77,7 +81,8 @@ def construir(base, marcas, estado_global, carpetas=True, con_global=True, n_ite
             estado = (estados or {}).get(num)
             if estado is None:
                 estado = estado_global if i == 0 else "\U0001F7E1 Con dudas"
-            filas.append("| %d | mod-%d | %s | 1/1 | M | 1 | - | - | - | - | nota |" % (num, num, estado))
+            filas.append("| %d | mod-%d | %s | %s | M | 1 | - | - | - | - | nota |"
+                         % (num, num, estado, (progresos or {}).get(num, "1/1")))
         with open(os.path.join(base, "CHECKLIST-GLOBAL.md"), "w", encoding="utf-8", newline="\n") as f:
             f.write("\n".join(filas) + "\n")
 
@@ -428,6 +433,79 @@ def main():
         chequear("FLIPS NO SOSTENIDOS" in out, "P15: el informe legible trae su encabezado")
         chequear("modulo_abierto" in out and "cerrada_sin_fila_ok" in out,
                  "P16: el informe legible lista las clases")
+
+        # --- Bloque R: --filas (diagnostico de la FILA del GLOBAL)
+        # Un item bloqueado_global puede estar bloqueado por DOS causas distintas:
+        # la celda Estado (los numeros ya coinciden) o un progreso stale. El
+        # arbol las separa a proposito, una por item, para que ninguna se coma a
+        # la otra.
+        r = os.path.join(base, "R")
+        construir(r, [" "] * 152, AMARILLO, estados={2: OK},
+                  progresos={3: "1/1", 4: "1/3", 5: "abc"})
+        # M05 -> carpeta 06: checklist ABIERTA -> no es palanca de fila
+        with open(os.path.join(r, "DOCUMENTACION", "06-Modulo-06", "plan-actual", "05-Checklist.md"),
+                  "w", encoding="utf-8", newline="\n") as f:
+            f.write("- [x] cerrado\n- [ ] pendiente\n")
+
+        rc, out = correr(r, "--filas")
+        chequear(rc == 0, "R1: --filas exit 0 sobre el arbol sintetico")
+        chequear("FILAS DEL GLOBAL DE LOS ITEMS bloqueado_global" in out,
+                 "R2: el informe legible trae su encabezado")
+        chequear("items bloqueado_global : 150" in out,
+                 "R3: cuenta 150 bloqueado_global (152 - 1 resoluble - 1 abierto)")
+
+        rc, out = correr(r, "--filas", "--json")
+        fl = json.loads(out)["filas"]
+        chequear(fl["total"] == 150, "R4: el JSON declara 150 filas diagnosticadas")
+        chequear(len(fl["por_veredicto"]["bloqueo_de_etiqueta"]) == 148,
+                 "R5: 148 son bloqueo_de_etiqueta (numeros ya al dia)")
+        chequear(fl["por_veredicto"]["fila_atrasada"] == ["M03"],
+                 "R6: solo M03 es fila_atrasada")
+        chequear(fl["por_veredicto"]["progreso_ilegible"] == ["M04"],
+                 "R7: solo M04 es progreso_ilegible")
+        chequear("M01" not in [d["id"] for d in fl["detalle"]],
+                 "R8: un item resoluble NO entra en el diagnostico de filas (control negativo)")
+        d3 = [d for d in fl["detalle"] if d["id"] == "M03"][0]
+        chequear(d3["delta_total"] == -2,
+                 "R9: M03 mide el delta del total de la fila (1/3 vs 1/1 = -2)")
+        chequear(d3["delta_x"] == 0,
+                 "R10: M03 distingue que los completados coinciden y el total no")
+        d4 = [d for d in fl["detalle"] if d["id"] == "M04"][0]
+        chequear(d4["fila_completados"] is None,
+                 "R11: una celda Progreso ilegible NO inventa numeros")
+
+        rc, _ = correr(r, "--check", "--filas")
+        chequear(rc == 1, "R12: --check --filas exit 1 si queda una fila atrasada")
+        rc, _ = correr(c, "--check", "--filas")
+        chequear(rc == 0, "R13: --check --filas exit 0 cuando todas las filas estan al dia")
+
+        # Ceguera: sin ningun bloqueado_global no hay nada que diagnosticar.
+        rl = os.path.join(base, "Rl")
+        construir(rl, ["x"] * 152, AMARILLO)
+        rc, out = correr(rl, "--filas")
+        chequear(rc == 3, "R14: sin items bloqueado_global -> exit 3 (detector ciego)")
+        chequear("no se leyo ningun item bloqueado_global" in out,
+                 "R15: el informe nombra la causa de la ceguera")
+
+        # --- Bloque S: prueba EN ROJO del diagnostico de filas, por inyeccion
+        copia_r = os.path.join(r, "scripts", "auditar_indice_m01.py")
+        orig_r = open(copia_r, "rb").read()
+        sha_r = hashlib.sha256(orig_r).hexdigest()
+        roto_r = orig_r.replace(b'        d["veredicto"] = "fila_atrasada"\n',
+                                b'        d["veredicto"] = "bloqueo_de_etiqueta"\n')
+        chequear(roto_r != orig_r, "S1: la inyeccion encontro su ancla (el archivo cambio)")
+        with open(copia_r, "wb") as f:
+            f.write(roto_r)
+        rc, out = correr(r, "--filas", "--json")
+        chequear(json.loads(out)["filas"]["por_veredicto"]["fila_atrasada"] == [],
+                 "S2: con el diagnostico ciego la fila atrasada DESAPARECE (sonda ROJA)")
+        with open(copia_r, "wb") as f:
+            f.write(orig_r)
+        chequear(hashlib.sha256(open(copia_r, "rb").read()).hexdigest() == sha_r,
+                 "S3: restauracion byte-exacta por sha256")
+        rc, out = correr(r, "--filas", "--json")
+        chequear(json.loads(out)["filas"]["por_veredicto"]["fila_atrasada"] == ["M03"],
+                 "S4: tras restaurar vuelve el verde")
 
     finally:
         shutil.rmtree(base, ignore_errors=True)

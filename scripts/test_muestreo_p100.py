@@ -31,7 +31,7 @@ import muestreo_p100 as mod  # noqa: E402
 
 # Piso de checks MEDIDO en verde (no estimado). Se evalua ANTES de contarse a si
 # mismo, asi que no puede incluirse en su propio conteo.
-CHECKS_MINIMOS = 93
+CHECKS_MINIMOS = 119
 
 _checks = 0
 _fallos = 0
@@ -210,6 +210,15 @@ def test_resolver(base):
     _ok(p is not None, "tolera el prefijo res://")
     p, modo = mod.resolver_path("DOCUMENTACION/48-Fixture/plan-actual")
     _ok(p is not None and os.path.isdir(p), "acepta un DIRECTORIO como artefacto")
+    # Cita relativa a la RAIZ del modulo: `prefer` es el propio plan-actual, asi que
+    # join() daba "plan-actual/plan-actual" y se reportaba PATH FALTA sobre un
+    # directorio que EXISTE (falso hueco medido en M40 L260/L253).
+    pref = os.path.join(base, "DOCUMENTACION", "48-Fixture", "plan-actual")
+    p, modo = mod.resolver_path("plan-actual/", prefer=pref)
+    _ok(p is not None and modo == "MODULO_RAIZ",
+        "'plan-actual/' desde el modulo -> MODULO_RAIZ (%s)" % modo)
+    p, modo = mod.resolver_path("plan-inicial/", prefer=pref)
+    _ok(p is None, "control negativo: 'plan-inicial/' no existe en el fixture -> hueco")
     _cerrar("resolucion de rutas: DIRECTO / BASENAME / VARIANTE / HUECO")
 
 
@@ -280,6 +289,118 @@ def test_modulo(base):
     textos = " ".join(f["texto"] for f in r["muestra"])
     _ok("Definir el problema" not in textos, "un item 'Definir...' NO entra a la muestra")
     _cerrar("analisis completo de un modulo (fixture)")
+
+
+def test_totales_variantes():
+    _bloque("Totales: variantes de unidad (M40 escribe 'lineas-item')")
+    # Regresion medida: el regex exigia la palabra "items/ítems" y M40 declara
+    # "211 lineas-item" -> el muestreador imprimia "SIN LINEA **Totales:** EN DISCO"
+    # sobre un checklist que SI la tenia, y se perdia el cruce contra el disco.
+    m40 = ("**Totales:** 211 lineas-item - Completados: 180 - Pendientes: 27 - "
+           "No resueltos: 4. (resync director 00:15 23oct, conteo de disco por prefijo)")
+    t = mod.leer_totales([m40])
+    _ok(t is not None, "M40 'lineas-item' PARSEA (antes daba None)")
+    _ok(t is not None and t["total"] == 211, "total=211")
+    _ok(t is not None and (t["x"], t["vacio"], t["q"]) == (180, 27, 4),
+        "x/vacio/q = 180/27/4")
+    t2 = mod.leer_totales(["**Totales:** 120 líneas-ítem · Completados: 114 · "
+                           "Pendientes: 4 · No resueltos: 2"])
+    _ok(t2 is not None and t2["total"] == 120 and t2["x"] == 114, "variante 'líneas-ítem'")
+    t3 = mod.leer_totales(["**Totales:** 50 elementos - Completados: 40 - "
+                           "Pendientes: 8 - No resueltos: 2"])
+    _ok(t3 is not None and t3["total"] == 50, "variante 'elementos'")
+    # Control negativo: sin "Completados" no hay estructura que cruzar. Si esto
+    # parseara, el drift se calcularia sobre numeros inventados.
+    _ok(mod.leer_totales(["**Totales:** 211 lineas-item - Pendientes: 27"]) is None,
+        "control negativo: sin 'Completados' -> None")
+    # Formato de M110/M152: "No resueltos" ANTES de "Pendientes" (orden invertido).
+    t4 = mod.leer_totales(["**Totales:** 225 ítems · [x] Completados: 179 · "
+                           "[?] No resueltos (con dueño): 0 · Pendientes: 46."])
+    _ok(t4 is not None, "M110 orden invertido PARSEA")
+    _ok(t4 is not None and (t4["x"], t4["vacio"], t4["q"]) == (179, 46, 0),
+        "M110 x/pend/nr = 179/46/0")
+    # Formato de M157: parentesis CON DIGITOS dentro de la etiqueta.
+    t5 = mod.leer_totales(["**Totales:** 132 items · Completados: 8 (J-01..J-04 + K-15), "
+                           "evidencias en 07. · Pendientes: 0 · No resueltos: 124."])
+    _ok(t5 is not None and t5["x"] == 8 and t5["total"] == 132,
+        "M157 parentesis con digitos PARSEA (x=8, total=132)")
+    # Formato de M30/M32: "Totales:" sin negrita.
+    t6 = mod.leer_totales(["Totales: 120 items - Completados: 119 - "
+                           "Pendientes: 0 - No resueltos: 1."])
+    _ok(t6 is not None and t6["total"] == 120, "M30 'Totales:' sin negrita PARSEA")
+    # Control negativo: etiquetas sueltas SIN la marca no son una declaracion.
+    _ok(mod.leer_totales(["Completados: 5 · Pendientes: 1 · No resueltos: 0"]) is None,
+        "control negativo: etiquetas sin 'Totales:' -> None")
+    _cerrar("Totales: variantes de unidad (M40 escribe 'lineas-item')")
+
+
+def test_modulos_en_disco(base):
+    _bloque("--todos enumera el DISCO (no una lista hardcodeada)")
+    with _Parche(base):
+        ids = mod.modulos_en_disco()
+    _ok(sorted(ids) == ["48", "77"], "enumera los 2 modulos del fixture (%s)" % ids)
+    # Regresion medida: `--todos` estaba fijo en ["48","60","55","151"], asi que
+    # imprimia 4 modulos y parecia que "no habia mas".
+    _ok("60" not in ids, "NO trae el id hardcodeado 60")
+    # CABLEADO: probar la funcion no prueba que `--todos` la USE. La 1.a version de
+    # este bloque pasaba con el main() hardcodeado (sonda en rojo que NO se ponia
+    # roja). Se ejerce la ruta real: main(["--todos","--json"]).
+    import contextlib
+    import json as _json
+    buf = io.StringIO()
+    with _Parche(base):
+        with contextlib.redirect_stdout(buf):
+            rc = mod.main(["--todos", "--json"])
+    try:
+        salida = _json.loads(buf.getvalue())
+    except ValueError:
+        salida = None
+    _ok(salida is not None and len(salida) == 2,
+        "--todos via main() devuelve los 2 del fixture (no 4 hardcodeados)")
+    _ok(salida is not None and sorted(x["modulo"] for x in salida) == ["48", "77"],
+        "los ids de --todos salen del disco")
+    _ok(rc == 3, "--todos con un modulo CIEGO sale 3 (no 0)")
+    _cerrar("--todos enumera el DISCO (no una lista hardcodeada)")
+
+
+def test_totales_estado():
+    _bloque("Totales: AUSENTE vs NO_PARSEA (ceguera != ausencia)")
+    e = mod.estado_totales(["nada que ver"])
+    _ok(e["estado"] == "AUSENTE", "sin marca -> AUSENTE")
+    e2 = mod.estado_totales(["**Totales:** ver nota del director"])
+    _ok(e2["estado"] == "NO_PARSEA", "marca presente y cuerpo ilegible -> NO_PARSEA")
+    _ok("ver nota del director" in e2["linea"], "NO_PARSEA conserva la linea cruda")
+    e3 = mod.estado_totales(["**Totales:** 8 ítems · Completados: 6 · Pendientes: 1 · "
+                             "No resueltos: 1."])
+    _ok(e3["estado"] == "OK" and e3["totales"]["total"] == 8, "linea sana -> OK")
+    # Una PROSA que menciona la palabra no es una declaracion de totales.
+    e4 = mod.estado_totales(["> este archivo no tenia linea de Totales. Conteo real: 95."])
+    _ok(e4["estado"] == "AUSENTE", "prosa que menciona 'Totales' no cuenta como marca")
+    _cerrar("Totales: AUSENTE vs NO_PARSEA (ceguera != ausencia)")
+
+
+def test_imprime_no_parsea():
+    _bloque("imprimir distingue NO_PARSEA de AUSENTE (mensaje distinto)")
+    import contextlib
+
+    def _capturar(filas):
+        buf = io.StringIO()
+        r = {"modulo": "99", "checklist": "x", "marcas": {"x": 1, " ": 0, "?": 0},
+             "totales": None, "totales_estado": {"estado": filas[0], "linea": filas[1]},
+             "drift": None, "n_muestra": 1, "n_req": 1, "auto_total": 1,
+             "manual_sub": 0, "creacion_total": 0, "muestra": [], "manual_total": 0,
+             "manual_muestra": [], "fallas": 0, "huecos": 0, "parciales": 0,
+             "indeterminados": 0, "negadas": 0, "veredicto": "OK"}
+        with contextlib.redirect_stdout(buf):
+            mod.imprimir(r, verbose=False)
+        return buf.getvalue()
+
+    out_no = _capturar(("NO_PARSEA", "**Totales:** roto"))
+    _ok("NO PARSEA" in out_no, "NO_PARSEA -> mensaje 'NO PARSEA'")
+    _ok("SIN LINEA" not in out_no, "NO_PARSEA NO se reporta como 'SIN LINEA'")
+    out_au = _capturar(("AUSENTE", ""))
+    _ok("SIN LINEA" in out_au, "AUSENTE -> mensaje 'SIN LINEA'")
+    _cerrar("imprimir distingue NO_PARSEA de AUSENTE (mensaje distinto)")
 
 
 def test_veredicto_deniega():
@@ -463,6 +584,11 @@ def main():
             test_verificar_item()
             test_modulo(base)
         test_totales()
+        test_totales_variantes()
+        with _Parche(base):
+            test_modulos_en_disco(base)
+        test_totales_estado()
+        test_imprime_no_parsea()
         test_veredicto_deniega()
         test_drift_detectado()
         test_ceguera()

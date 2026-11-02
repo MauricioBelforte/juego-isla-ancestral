@@ -30,7 +30,19 @@ RAIZ_JUEGO = os.path.join(RAIZ, "game", "isla-ancestral")
 
 # Un item de checklist: guion, corchete, marca, corchete, texto.
 RX_ITEM = re.compile(r"^\s*- \[([ x?])\]\s*(.+)$")
-RX_TOTALES = re.compile(r"^\*\*Totales:\*\*.*?(\d+)\s*(?:items|ítems).*?Completados:\s*(\d+).*?Pendientes:\s*(\d+).*?No resueltos:\s*(\d+)", re.I)
+# La UNIDAD que sigue al conteo NO es normativa y el ORDEN de las etiquetas
+# tampoco: el repo escribe "8 items", "211 lineas-item", "120 líneas-ítem",
+# "Completados ... No resueltos ... Pendientes" (M110/M152) y "Totales:" sin
+# negrita (M30/M32). Un regex posicional reportaba "SIN LINEA" sobre checklists
+# que SI la tienen (medido en M40: "211 lineas-item"). Se parsea por ETIQUETA:
+# cada numero se busca por su nombre, en cualquier orden, con o sin `**`.
+RX_TOTALES_MARCA = re.compile(r"^\s*(?:\*\*)?\s*Totales\s*:\s*(?:\*\*)?", re.I)
+RX_TOT_TOTAL = re.compile(r"^\s*(?:\*\*)?\s*Totales\s*:\s*(?:\*\*)?\s*(\d+)", re.I)
+RX_TOT_COMP = re.compile(r"Completados\s*:\s*(\d+)", re.I)
+RX_TOT_PEND = re.compile(r"Pendientes\s*:\s*(\d+)", re.I)
+# "No resueltos: 0" | "No resueltos (con dueño): 0" | "[?]: 0" (M157 usa el
+# simbolo de la marca como etiqueta: mismo concepto, otro vocabulario).
+RX_TOT_NR = re.compile(r"(?:No\s+resueltos|\[\?\])\s*[^:\d]{0,40}:\s*(\d+)", re.I)
 RX_BACKTICK = re.compile(r"`([^`\n]{2,160})`")
 # Mencion de archivo FUERA de backticks (ej: "jugador_lib.tres 3 clips"). Solo
 # extensiones de codigo/dato: no se extraen identificadores sueltos para no
@@ -321,6 +333,18 @@ def resolver_path(ruta, raices=None, prefer=None):
             return pp, "MODULO"
         if os.path.isdir(pp):
             return pp, "MODULO"
+        # Citas relativas a la RAIZ del modulo (`plan-actual/`, `plan-inicial/`):
+        # `prefer` es el propio plan-actual, asi que join() daba
+        # "plan-actual/plan-actual" y se reportaba PATH FALTA sobre un directorio
+        # que EXISTE (falso hueco medido en M40 L260/L253). Se prueba un nivel
+        # arriba antes de descartar.
+        pr = os.path.dirname(os.path.normpath(prefer))
+        if pr and pr != prefer:
+            pp2 = os.path.join(pr, cand.replace("/", os.sep))
+            if os.path.isfile(pp2):
+                return pp2, "MODULO_RAIZ"
+            if os.path.isdir(pp2):
+                return pp2, "MODULO_RAIZ"
     for raiz in raices:
         p = os.path.join(raiz, cand.replace("/", os.sep))
         if os.path.isfile(p):
@@ -455,15 +479,52 @@ def ruta_checklist(modulo):
     return None
 
 
+def _una(linea):
+    """Los 4 numeros de UNA linea Totales, o None si falta alguno.
+
+    Parseo por etiqueta (no posicional): tolera cualquier orden, cualquier
+    unidad y parentesis con digitos dentro de una etiqueta.
+    """
+    mt = RX_TOT_TOTAL.match(linea)
+    mc = RX_TOT_COMP.search(linea)
+    mp = RX_TOT_PEND.search(linea)
+    mn = RX_TOT_NR.search(linea)
+    if not (mt and mc and mp and mn):
+        return None
+    return {"total": int(mt.group(1)), "x": int(mc.group(1)),
+            "vacio": int(mp.group(1)), "q": int(mn.group(1)), "linea": linea.strip()}
+
+
 def leer_totales(lineas):
     """Ultima linea **Totales:** parseada -> dict o None."""
     ult = None
     for ln in lineas:
-        m = RX_TOTALES.match(ln.strip())
-        if m:
-            ult = {"total": int(m.group(1)), "x": int(m.group(2)),
-                   "vacio": int(m.group(3)), "q": int(m.group(4)), "linea": ln.strip()}
+        if not RX_TOTALES_MARCA.match(ln):
+            continue
+        t = _una(ln)
+        if t:
+            ult = t
     return ult
+
+
+def estado_totales(lineas):
+    """Estado del cruce con `**Totales:**`, sin confundir ausencia con ceguera.
+
+    - AUSENTE:   el checklist no declara Totales -> no hay nada que cruzar.
+    - NO_PARSEA: la linea EXISTE pero el formato no se entiende. Es un fallo de
+      MEDICION, no un "no hay linea": reportarlo igual que AUSENTE fue el defecto
+      medido en M40 (formato "211 lineas-item"). Se devuelve la linea cruda para
+      que quien lea pueda corregir el parser o el checklist.
+    - OK:        parsea; `totales` trae los cuatro numeros.
+    """
+    totales = leer_totales(lineas)
+    if totales:
+        return {"estado": "OK", "linea": totales["linea"], "totales": totales}
+    for ln in lineas:
+        if RX_TOTALES_MARCA.match(ln.strip()):
+            return {"estado": "NO_PARSEA", "linea": ln.strip(), "totales": None}
+    return {"estado": "AUSENTE", "linea": "", "totales": None}
+
 
 
 def analizar_modulo(modulo, n_muestra=5):
@@ -475,6 +536,7 @@ def analizar_modulo(modulo, n_muestra=5):
     marcas = contar_marcas(lineas)
     items = extraer_items(lineas)
     totales = leer_totales(lineas)
+    est_totales = estado_totales(lineas)
     creacion = [(n, t) for (n, mk, t) in items if mk == "x" and es_creacion(t)]
     # Poblacion AUTO-VERIFICABLE: items [x] que citan un artefacto (ruta o identificador).
     # Un item sin artefacto citado no se puede contrastar contra disco por script: va a
@@ -544,7 +606,8 @@ def analizar_modulo(modulo, n_muestra=5):
     else:
         veredicto = "OK"
     return {"modulo": modulo, "checklist": os.path.relpath(p, RAIZ),
-            "marcas": marcas, "totales": totales, "drift": drift,
+            "marcas": marcas, "totales": totales, "totales_estado": est_totales,
+            "drift": drift,
             "muestra": filas, "fallas": fallas, "huecos": huecos,
             "parciales": parciales, "indeterminados": indet,
             "creacion_total": len(creacion), "auto_total": len(auto),
@@ -564,9 +627,14 @@ def imprimir(r, verbose=True):
     print("  marcas medidas por prefijo: [x]=%d  [ ]=%d  [?]=%d  total=%d"
           % (m["x"], m[" "], m["?"], m["x"] + m[" "] + m["?"]))
     d = r["drift"]
+    est = r.get("totales_estado") or {"estado": "AUSENTE", "linea": ""}
     if d:
         print("  Totales declarados: %s   reales: %s   delta_total=%+d delta_x=%+d"
               % (d["totales_declarados"], d["reales_medidos"], d["delta_total"], d["delta_x"]))
+    elif est["estado"] == "NO_PARSEA":
+        # Distinto de AUSENTE a proposito: la linea esta y el parser no la entiende.
+        print("  Totales: LINEA PRESENTE PERO NO PARSEA (revisar formato) -> %s"
+              % est["linea"][:120])
     else:
         print("  Totales: SIN LINEA **Totales:** EN DISCO")
     print("  muestra P-100: %d items (requisito 21.8.2.b = %d; auto-verificables %d, manuales %d)"
@@ -591,6 +659,29 @@ def imprimir(r, verbose=True):
         print("            Muestra vacia NO es evidencia: sello DENEGADO hasta muestreo manual.")
 
 
+def modulos_en_disco():
+    """Todos los M## con `plan-actual/05-Checklist.md` en DOCUMENTACION.
+
+    `--todos` estaba hardcodeado a 4 ids (48/60/55/151): un flag que promete
+    "todos" y escanea cuatro es la trampa del detector ciego con otro disfraz
+    (el resumen sale corto y nadie lo nota). Se enumera el disco, ordenado.
+    """
+    ids = []
+    try:
+        nombres = sorted(os.listdir(DOC))
+    except OSError:
+        return ids
+    for d in nombres:
+        if not os.path.isdir(os.path.join(DOC, d)):
+            continue
+        if not os.path.isfile(os.path.join(DOC, d, "plan-actual", "05-Checklist.md")):
+            continue
+        m = re.match(r"(\d+)", d)
+        if m:
+            ids.append(m.group(1))
+    return ids
+
+
 def main(argv=None):
     ap = argparse.ArgumentParser(description="Muestreo P-100 (21.8.2.b)")
     ap.add_argument("--modulo", action="append", default=[])
@@ -601,7 +692,7 @@ def main(argv=None):
     a = ap.parse_args(argv)
     mods = list(a.modulo)
     if a.todos:
-        mods = ["48", "60", "55", "151"]
+        mods = modulos_en_disco()
     if not mods:
         ap.print_help()
         return 3

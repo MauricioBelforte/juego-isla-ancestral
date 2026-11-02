@@ -163,3 +163,100 @@ python scripts/auditar_indice_m01.py --json           # detalle por ítem
 python scripts/auditar_indice_m01.py                  # vista de candidatos (iter. 8)
 python scripts/test_auditar_indice_m01.py             # 30 checks / 0 fallos
 ```
+
+## 13. Re-clasificacion 2026-11-01 (item 4 del BACKLOG = M01 b3): el bloqueo es de FILA, y son DOS clases
+
+Cierre de "lo factible" del indice maestro. Todo lo de abajo se midio **antes** de escribirlo, con la
+herramienta extendida en esta misma vuelta:
+
+```
+python scripts/auditar_indice_m01.py --pendientes   # 73 [x] / 79 [ ] / 0 [?] = 152
+python scripts/auditar_indice_m01.py --filas        # NUEVO: las 10 filas bloqueantes, fila vs disco
+python scripts/test_auditar_indice_m01.py           # 98 checks / 0 fallos / EXIT 0 x3
+```
+
+### 13.1 Resultado 1 - hoy hay 0 items flipeables
+
+Los 79 `[ ]` del indice, por la condicion que los bloquea:
+
+| Categoria | Items | Que significa |
+|---|---|---|
+| `resoluble_headless` | **0** | nada se puede flipear hoy sin tocar una fila |
+| `bloqueado_global` | **10** | checklist propia cerrada, fila del GLOBAL no OK: la palanca es la FILA |
+| `bloqueado_checklist` | **3** | M27, M52, M72: la fila dice OK y la checklist del modulo esta abierta (sobre-afirmacion) |
+| `bloqueado_ambos` | **66** | depende del cierre del modulo; 34 estan a <= 5 abiertos |
+| `sin_checklist` | **0** | - |
+
+El 23-oct habia **3 resolubles** (M69->70-Interacciones, M98->99-Marketing, M117->118-CI-CD). Hoy son
+**0**: o ya se flipearon, o su fila dejo de estar en OK. **No se repite el metodo de la iter. 8**
+(volveria a dar 0 por la misma razon que entonces).
+
+### 13.2 Resultado 2 - los 10 bloqueados por fila NO son 10 trabajos iguales
+
+`bloqueado_global` decia "la palanca es la fila" pero no **que** tiene mal la fila. El modo `--filas`
+compara la celda `Progreso` del GLOBAL contra el conteo real de la checklist del modulo:
+
+| ID | Carpeta | Fila (x/total) | Disco (x/total) | Delta | Veredicto |
+|---|---|---|---|---|---|
+| M03 | 04-Game-Engine | 126/128 | 128/128 | +2/+0 | `fila_atrasada` |
+| M04 | 05-Lenguaje-Y-Programacion | 103/103 | 103/103 | +0/+0 | `bloqueo_de_etiqueta` |
+| M24 | 25-Ruinas | 106/122 | 122/122 | **+16/+0** | `fila_atrasada` |
+| M28 | 29-Tiempo-Y-Calendario | 193/195 | 195/195 | +2/+0 | `fila_atrasada` |
+| M29 | 30-Reloj-En-Tiempo-Real | 119/120 | 120/120 | +1/+0 | `fila_atrasada` |
+| M46 | 47-Texturas-Y-Materiales | 118/121 | 121/121 | +3/+0 | `fila_atrasada` |
+| M106 | 107-Backups | 177/182 | 182/182 | +5/+0 | `fila_atrasada` |
+| M131 | 132-Produccion-De-Equipo | 104/105 | 105/105 | +1/+0 | `fila_atrasada` |
+| M141 | 142-Release-Candidate | 129/129 | 129/129 | +0/+0 | `bloqueo_de_etiqueta` |
+| M149 | 150-Diseno-Sonoro-Narrativo | 150/150 | 150/150 | +0/+0 | `bloqueo_de_etiqueta` |
+
+- **3 son `bloqueo_de_etiqueta`** (M04, M141, M149): los numeros de la fila **ya coinciden** con el
+  disco. Lo unico que falta es la celda `Estado` en OK (hoy `Con dudas` / `Disponible`).
+  El trabajo es de **1 celda**, no de un modulo.
+- **7 son `fila_atrasada`**: la fila declara menos completados que el disco. El delta mas grande es
+  **M24 (+16)**: 106 declarados contra 122 reales.
+- **0 ilegibles, 0 con el modulo abierto**: las 10 checklists estan en **0 `[ ]` y 0 `[?]`** medido.
+- El delta de **total** es `+0` en las 10: la celda que envejecio es la de **completados**, no la de
+  total. Eso hace que el error se lea como "modulo a medias" cuando el archivo dice cerrado.
+
+### 13.3 Advertencia que va con la tabla (no es letra chica)
+
+**`100 % [x]` y cero `[?]` es una SENAL, no un logro.** Este diagnostico es **administrativo**: dice
+que la fila y el archivo no coinciden, **no** que los items sean ciertos. Un `[x]` se sostiene solo con
+artefacto en disco que implemente la funcion **y** la ejercite por ruta real (criterio ratificado, msg
+448). Por eso aca **no se propone ningun flip del indice**: la secuencia honesta es (1) refrescar las 10
+filas, (2) muestrear 21.8.2.b cada modulo, (3) recien entonces flipear. Los pasos 1 y 3 son del
+director; el paso 2 es una tanda propia si lo autoriza.
+
+### 13.4 Que se agrego a la herramienta
+
+`scripts/auditar_indice_m01.py` - modo `--filas` (**extendido, no duplicado**: reusa el mapeo
+`M## -> carpeta {##+1}`, la lectura del GLOBAL, `contar_marcas` y las guardas de ceguera):
+
+- `diagnostico_fila(r)` -> mide `Progreso` de la fila contra el disco y emite veredicto de 5 valores:
+  `bloqueo_de_etiqueta`, `fila_atrasada`, `progreso_ilegible`, `modulo_abierto`, `sin_fila`.
+- `clasificar_filas(datos)` -> agrega los 10 y **declara ceguera (exit 3)** si no leyo ningun
+  `bloqueado_global`, para que un "0 filas" no se disfrace de verde.
+- `--check --filas` -> **exit 1** si queda alguna `fila_atrasada` o `progreso_ilegible`: sirve de gate
+  para que las filas no vuelvan a envejecer en silencio.
+- Una celda `Progreso` ilegible **no inventa numeros** (`fila_completados = None`, delta `-`).
+
+`scripts/test_auditar_indice_m01.py` - bloques **R** (15 checks) y **S** (4 checks de sonda roja):
+arbol sintetico con las dos clases separadas, control negativo (un `resoluble` no entra en el
+diagnostico), delta medido (+0 completados / -2 total), ilegible sin numeros, gate en verde y en rojo,
+y ceguera. **`CHECKS_MINIMOS` re-MEDIDO 79 -> 98** (no estimado).
+
+Evidencia de que el guardian esta vivo:
+
+- **Sonda de piso**: copia con `CHECKS_MINIMOS = 999` -> `EXIT 1`, `solo 98 checks ejecutados (minimo 999)`.
+- **Sonda roja por inyeccion**: `fila_atrasada` -> `bloqueo_de_etiqueta` en el clasificador -> la fila
+  atrasada **desaparece** (S2 falla), y la restauracion es byte-exacta por sha256 (S3) con el verde de
+  vuelta (S4).
+
+### 13.5 Limites de esta vuelta
+
+- **0 flips** aplicados en el indice maestro y en cualquier checklist de modulo.
+- **0 commits / 0 push.**
+- No se toco `CHECKLIST-GLOBAL.md`, ni el `05-Checklist.md` de M01, ni ningun bloque `Totales`.
+- No se muestreo 21.8.2.b de los 10 modulos: el diagnostico de 13.2 es de **coherencia fila/archivo**.
+- Los 3 `bloqueado_checklist` (M27/M52/M72) quedan **medidos y sin tocar**: la sobre-afirmacion de la
+  fila la corrige el director.

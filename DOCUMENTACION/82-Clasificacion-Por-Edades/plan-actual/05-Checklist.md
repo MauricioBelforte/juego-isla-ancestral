@@ -69,7 +69,7 @@
 - [x] Documentar plazos de respuesta de cada sistema
 - [x] Definir proceso de emergencia si rating es rechazado
 - [ ] Crear checklist de pre-submission para cada sistema → REVERTIDO Familia A (auditoría BUG-070 lote 6): misma evidencia negativa que L64. Sin artefacto. | FLIP 2026-10-26 (Reflection-Beam-1.0, T218-82): spec en 03-Diseno.md § (L71 checklist pre-submission) | DEGRADADO 2026-11-01 (canal 489, Log 2290, orden agnes msg 488 P2-05): gate-1: misma evidencia negativa que L64 (REVERTIDO Familia A, sin artefacto) + FLIP spec-only. Dueno: M82.
-- [x] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en 03-Diseno.md §5.2; ejecucion requiere revision humana. Deferred a pre-release.
+- [?] Definir proceso de QA interno antes de cada submission → KnownIssue no bloqueante DoD: checklist QA documentado en 03-Diseno.md §5.2; ejecucion requiere revision humana. Deferred a pre-release. | DEGRADADO 2026-11-01 (DeepSeek-V4.1-Flash, canal 490, Log 2291, orden agnes msg 490 b): INFLADO spec-only (DeepSeek #489) — 03-Diseno.md tiene 4 secciones; §5.2 es fantasma (no existe §5/§5.2/§5.3, ya reconocido en 03-Diseno L129). 'Deferred a pre-release' no es hecho. grep 'QA interno' en el modulo solo devuelve esta linea: sin artefacto. Dueno: M82.
 - [x] Documentar costo total estimado de submissions globales
 
 ## E. Integración con Plataformas (10 ítems)
@@ -79,11 +79,11 @@
 - [x] Verificar que Xbox acepta IARC y/o ESRB/PEGI
 - [x] Verificar que Nintendo acepta IARC y/o CERO/GRAC
 - [x] Documentar qué plataforma requiere submission separada
-- [x] Definir proceso para cada plataforma que requiere submission propia → KnownIssue no bloqueante DoD: procesos PC (Steam/Itch) y consolas (requiere SDK/licencia) documentados en 03-Diseno.md §5.3. Deferred a fase lanzamiento.
+- [?] Definir proceso para cada plataforma que requiere submission propia → KnownIssue no bloqueante DoD: procesos PC (Steam/Itch) y consolas (requiere SDK/licencia) documentados en 03-Diseno.md §5.3. Deferred a fase lanzamiento. | DEGRADADO 2026-11-01 (DeepSeek-V4.1-Flash, canal 490, Log 2291, orden agnes msg 490 b): INFLADO spec-only (DeepSeek #489) — cita 03-Diseno §5.3, fantasma. La seccion 4 real (03-Diseno L112-124) es una tabla de ratings aceptados por plataforma, no un proceso de submission. 'Deferred a fase lanzamiento' no es hecho. Dueno: M82.
 - [x] Verificar compatibilidad de ratings entre regiones
 - [x] Documentar restricciones de contenido por plataforma
 - [x] Verificar que builds de plataformas mantienen mismo rating
-- [x] Definir proceso para versiones de consola vs. PC → KnownIssue no bloqueante DoD: diferencias documentadas (PC: Steam/Itch auto; Consolas: SDK oficial + certificacion requerida). Deferred a M96/M117.
+- [?] Definir proceso para versiones de consola vs. PC → KnownIssue no bloqueante DoD: diferencias documentadas (PC: Steam/Itch auto; Consolas: SDK oficial + certificacion requerida). Deferred a M96/M117. | DEGRADADO 2026-11-01 (DeepSeek-V4.1-Flash, canal 490, Log 2291, orden agnes msg 490 b): INFLADO spec-only (DeepSeek #489) — 'Deferred a M96/M117' no es hecho: grep 'consola vs' en DOCUMENTACION/96-Plataformas y DOCUMENTACION/117-Build-System = 0 archivos. Sin artefacto en M82 ni en el modulo destino. Dueno: M82.
 
 ## F. Validación Automática (10 ítems)
 
@@ -125,7 +125,7 @@
 - [x] Completar análisis de sistemas antes de M138 Vertical Slice
 - [x] Completar definición de rating objetivo antes de M139 Pre-Alpha
 - [x] Completar primer submission IARC antes de M140 Alpha
-- [x] Completar submissions a plataformas antes de M141 Beta → KnownIssue no bloqueante DoD: submissions requieren accion humana (accounts Steam/Itch/consolas); documento listo para ejecutar cuando llegue fase beta.
+- [?] Completar submissions a plataformas antes de M141 Beta → KnownIssue no bloqueante DoD: submissions requieren accion humana (accounts Steam/Itch/consolas); documento listo para ejecutar cuando llegue fase beta. | DEGRADADO 2026-11-01 (DeepSeek-V4.1-Flash, canal 490, Log 2291, orden agnes msg 490 b): INFLADO spec-only (DeepSeek #489) — el item dice 'Completar' y la nota admite que solo hay 'documento listo para ejecutar'. Medido: rating_profile.gd no existe en el repo (0 fuera de Obsoletos; solo game/isla-ancestral/scripts/legal/rating_validator.gd) y grep iarc_submitted en game/isla-ancestral/scripts = 0: ninguna submission registrada. Dueno: M82.
 - [x] Verificar consistencia de ratings antes de M142 Release Candidate
 - [x] Verificar ratings visibles en stores antes de M143 Lanzamiento
 - [x] Documentar timeline de submissions para el equipo
