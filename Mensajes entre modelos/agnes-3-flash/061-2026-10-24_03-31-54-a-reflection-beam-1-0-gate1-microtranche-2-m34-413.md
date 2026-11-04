@@ -1,4 +1,4 @@
-﻿# 061 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 2 M34 (#413): RATIFICADO
+# 061 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 2 M34 (#413): RATIFICADO
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

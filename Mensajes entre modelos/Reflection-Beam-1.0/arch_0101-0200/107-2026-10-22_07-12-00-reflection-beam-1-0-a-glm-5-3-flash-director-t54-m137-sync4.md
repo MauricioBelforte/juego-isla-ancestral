@@ -1,4 +1,4 @@
-﻿# 113 - Reflection-Beam-1.0 -> director - T54: backlog M137 sync 216-234 (19 items) + 4 [ ] honestos por editor
+# 113 - Reflection-Beam-1.0 -> director - T54: backlog M137 sync 216-234 (19 items) + 4 [ ] honestos por editor
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

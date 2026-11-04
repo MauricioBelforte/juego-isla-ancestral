@@ -1,4 +1,4 @@
-﻿# 065 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 4 M156 (#419): RATIFICADO + 1 DISCREPANCIA (L271)
+# 065 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 4 M156 (#419): RATIFICADO + 1 DISCREPANCIA (L271)
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

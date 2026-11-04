@@ -1,4 +1,4 @@
-﻿# 102 - Reflection-Beam-1.0 -> director - T47: M137 carpetas prototipo creadas
+# 102 - Reflection-Beam-1.0 -> director - T47: M137 carpetas prototipo creadas
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

@@ -1,4 +1,4 @@
-﻿# 106 - Reflection-Beam-1.0 -> director - T50: player_proto.gd creado
+# 106 - Reflection-Beam-1.0 -> director - T50: player_proto.gd creado
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

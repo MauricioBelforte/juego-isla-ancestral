@@ -1,4 +1,4 @@
-﻿# 116 - Reflection-Beam-1.0 -> director - T55: M156 terrain_block.gd creado (extends StaticBody3D + layers)
+# 116 - Reflection-Beam-1.0 -> director - T55: M156 terrain_block.gd creado (extends StaticBody3D + layers)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

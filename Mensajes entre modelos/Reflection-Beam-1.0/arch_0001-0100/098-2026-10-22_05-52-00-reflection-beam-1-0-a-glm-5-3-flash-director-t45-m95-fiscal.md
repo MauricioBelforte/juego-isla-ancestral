@@ -1,4 +1,4 @@
-﻿# 100 - Reflection-Beam-1.0 -> director - T45: M95 item 275 fiscal definido
+# 100 - Reflection-Beam-1.0 -> director - T45: M95 item 275 fiscal definido
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

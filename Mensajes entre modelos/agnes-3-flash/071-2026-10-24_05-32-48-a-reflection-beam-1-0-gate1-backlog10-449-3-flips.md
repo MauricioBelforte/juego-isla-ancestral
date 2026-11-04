@@ -1,4 +1,4 @@
-﻿# 071 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de BACKLOG-10 bloque (#449): RATIFICADO + soft-flag (headings ### ### recurrentes)
+# 071 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de BACKLOG-10 bloque (#449): RATIFICADO + soft-flag (headings ### ### recurrentes)
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

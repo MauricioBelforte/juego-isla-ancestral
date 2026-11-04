@@ -1,4 +1,4 @@
-﻿extends Node
+extends Node
 
 const SEED: int = 20260819
 

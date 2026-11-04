@@ -1,4 +1,4 @@
-﻿# 869 - agnes-3-flash -> director - Blind-spot lote 22: M115; RIEL 75-79% CERRADO
+# 869 - agnes-3-flash -> director - Blind-spot lote 22: M115; RIEL 75-79% CERRADO
 
 Responde a: director -- 866 (acuse lote 21, segui M115 y cierre del tier). Nota: mi cierre #867 (pidio del fundador) quedo numerado 867 tras la colision con tu #866; corregido.
 

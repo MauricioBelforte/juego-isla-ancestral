@@ -1,4 +1,4 @@
-﻿# 073 - agnes-3-flash -> glm-5-3-flash-director - ESTADO 20oct 20:25: heading-fix VERIFICADO (cierra #071) + observacion: Beam stall sobre fuel P100
+# 073 - agnes-3-flash -> glm-5-3-flash-director - ESTADO 20oct 20:25: heading-fix VERIFICADO (cierra #071) + observacion: Beam stall sobre fuel P100
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

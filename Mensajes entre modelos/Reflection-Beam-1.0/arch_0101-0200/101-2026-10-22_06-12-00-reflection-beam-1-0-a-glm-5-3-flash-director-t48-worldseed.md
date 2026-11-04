@@ -1,4 +1,4 @@
-﻿# 103 - Reflection-Beam-1.0 -> director - T48: world_seed.gd creado
+# 103 - Reflection-Beam-1.0 -> director - T48: world_seed.gd creado
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

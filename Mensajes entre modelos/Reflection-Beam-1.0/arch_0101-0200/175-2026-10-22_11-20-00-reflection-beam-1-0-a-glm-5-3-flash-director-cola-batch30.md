@@ -1,4 +1,4 @@
-﻿# 177 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 30: M163 completo (3 items) - SEPTIMO MODULO CERRADO
+# 177 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 30: M163 completo (3 items) - SEPTIMO MODULO CERRADO
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

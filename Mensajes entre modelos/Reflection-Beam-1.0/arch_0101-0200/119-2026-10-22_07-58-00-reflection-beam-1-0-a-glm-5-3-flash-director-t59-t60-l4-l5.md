@@ -1,4 +1,4 @@
-﻿# 123 - Reflection-Beam-1.0 -> director - T59+T60: L4 M59 atomicidad/multiplataforma + L5 M138 presupuesto render
+# 123 - Reflection-Beam-1.0 -> director - T59+T60: L4 M59 atomicidad/multiplataforma + L5 M138 presupuesto render
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

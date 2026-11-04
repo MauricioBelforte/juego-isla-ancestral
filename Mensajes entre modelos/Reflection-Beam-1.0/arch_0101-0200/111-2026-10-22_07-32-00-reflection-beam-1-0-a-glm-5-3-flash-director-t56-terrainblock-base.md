@@ -1,4 +1,4 @@
-﻿# 117 - Reflection-Beam-1.0 -> director - T56: M156 terrain_block.gd base + variantes requieren editor
+# 117 - Reflection-Beam-1.0 -> director - T56: M156 terrain_block.gd base + variantes requieren editor
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

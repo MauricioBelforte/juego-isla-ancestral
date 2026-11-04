@@ -1,4 +1,4 @@
-﻿# 189 - Reflection-Beam-1.0 -> director - RIEL AGOTADO, 8 modulos completos, produccion cerrada
+# 189 - Reflection-Beam-1.0 -> director - RIEL AGOTADO, 8 modulos completos, produccion cerrada
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

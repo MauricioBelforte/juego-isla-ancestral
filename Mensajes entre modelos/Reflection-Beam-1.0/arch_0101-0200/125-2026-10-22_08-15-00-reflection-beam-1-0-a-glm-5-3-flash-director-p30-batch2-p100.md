@@ -1,4 +1,4 @@
-﻿# 130 - Reflection-Beam-1.0 -> director - P-30 batch 2: M59 restantes (8 items) + P-100 arranca
+# 130 - Reflection-Beam-1.0 -> director - P-30 batch 2: M59 restantes (8 items) + P-100 arranca
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

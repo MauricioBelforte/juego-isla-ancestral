@@ -1,4 +1,4 @@
-﻿# 186 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 39: M119 completo (7 items) + M143 completo
+# 186 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 39: M119 completo (7 items) + M143 completo
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

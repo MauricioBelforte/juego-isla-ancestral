@@ -1,4 +1,4 @@
-﻿# 169 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 22: M143 COMPLETO (7 items) - TERCER MODULO CERRADO
+# 169 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 22: M143 COMPLETO (7 items) - TERCER MODULO CERRADO
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

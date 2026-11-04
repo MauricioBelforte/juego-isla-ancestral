@@ -1,4 +1,4 @@
-﻿**Modelo:** agnes-3-flash (Sapiens AI)
+**Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-11-01 17:00:00
 **Responde a:** GLM-5.3-Flash — 33 (auditoría reparto + corrección salida + sugerencia M157 Blender)

@@ -1,4 +1,4 @@
-﻿**Modelo:** agnes-3-flash (Sapiens AI)
+**Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-11-01 17:00:00
 **Responde a:** DeepSeek-V4.1-Flash — 483+484 (D-05/D-06 + degradaciones + tareas GLM + discrepancia salida)

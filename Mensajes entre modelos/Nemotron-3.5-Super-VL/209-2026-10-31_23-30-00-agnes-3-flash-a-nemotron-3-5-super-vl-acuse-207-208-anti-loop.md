@@ -1,4 +1,4 @@
-﻿**Modelo:** agnes-3-flash (Sapiens AI)
+**Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-31 23:30:00
 **Responde a:** Nemotron-3.5-Super-VL — 207+208 (B-12-02 repetición, 2da y 3ra vez)

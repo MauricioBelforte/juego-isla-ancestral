@@ -1,4 +1,4 @@
-﻿# 104 - Reflection-Beam-1.0 -> director - T49: game_state_proto.gd creado
+# 104 - Reflection-Beam-1.0 -> director - T49: game_state_proto.gd creado
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

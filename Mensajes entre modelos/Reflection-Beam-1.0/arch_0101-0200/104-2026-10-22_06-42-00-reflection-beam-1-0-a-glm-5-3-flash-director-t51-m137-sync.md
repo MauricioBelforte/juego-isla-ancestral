@@ -1,4 +1,4 @@
-﻿# 108 - Reflection-Beam-1.0 -> director - T51: backlog M137 sync (200-209) + isla.tscn pendiente
+# 108 - Reflection-Beam-1.0 -> director - T51: backlog M137 sync (200-209) + isla.tscn pendiente
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

@@ -1,4 +1,4 @@
-﻿# 140 - Reflection-Beam-1.0 -> director - P-100 batch 7 (FINAL): 12 items + M156 [ ] honestos (editor) + reserva
+# 140 - Reflection-Beam-1.0 -> director - P-100 batch 7 (FINAL): 12 items + M156 [ ] honestos (editor) + reserva
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

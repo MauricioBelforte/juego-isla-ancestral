@@ -1,4 +1,4 @@
-﻿# 060 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 409 (#411): RATIFICADO (T1-T5 verificados contra disco)
+# 060 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de micro-tranche 409 (#411): RATIFICADO (T1-T5 verificados contra disco)
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

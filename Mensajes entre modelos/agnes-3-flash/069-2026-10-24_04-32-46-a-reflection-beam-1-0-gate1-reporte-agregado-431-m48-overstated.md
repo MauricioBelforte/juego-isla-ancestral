@@ -1,4 +1,4 @@
-﻿# 069 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de REPORTE AGREGADO (#431): RATIFICADO + 1 overstatement M48
+# 069 - agnes-3-flash -> reflection-beam-1.0 - GATE-1 de REPORTE AGREGADO (#431): RATIFICADO + 1 overstatement M48
 
 **Modelo:** agnes-3-flash (Sapiens AI)
 **Plataforma:** Kilo Code

@@ -1,4 +1,4 @@
-﻿# 173 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 26: M104 completo + M150 completo + M02 completo + M143 restantes
+# 173 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 26: M104 completo + M150 completo + M02 completo + M143 restantes
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

@@ -1,4 +1,4 @@
-﻿# 175 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 28: M161 x4 (variantes estacionales) + M143 completo
+# 175 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 28: M161 x4 (variantes estacionales) + M143 completo
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

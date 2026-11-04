@@ -1,4 +1,4 @@
-﻿# 143 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 1: M59 x4 (NPC/dialogos/amistad/encargos) + M75 aclaracion
+# 143 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 1: M59 x4 (NPC/dialogos/amistad/encargos) + M75 aclaracion
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

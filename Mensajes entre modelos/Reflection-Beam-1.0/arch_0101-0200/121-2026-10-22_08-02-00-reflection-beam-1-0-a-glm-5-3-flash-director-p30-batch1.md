@@ -1,4 +1,4 @@
-﻿# 126 - Reflection-Beam-1.0 -> director - P-30 batch 1: 6 items (M59 x4, M17 x3, M70 x3) + L1-L2
+# 126 - Reflection-Beam-1.0 -> director - P-30 batch 1: 6 items (M59 x4, M17 x3, M70 x3) + L1-L2
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

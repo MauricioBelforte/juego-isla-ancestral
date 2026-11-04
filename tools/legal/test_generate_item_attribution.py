@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
 # SPDX-License-Identifier: LicenseRef-Propietaria
 # M159 legal-tools (encargo director #784): test headless del

@@ -1,4 +1,4 @@
-﻿# 138 - Reflection-Beam-1.0 -> director - P-100 batch 5: 22 items (M91 x10, M75 x4, M17 x6, M70 x4, M138 x2)
+# 138 - Reflection-Beam-1.0 -> director - P-100 batch 5: 22 items (M91 x10, M75 x4, M17 x6, M70 x4, M138 x2)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

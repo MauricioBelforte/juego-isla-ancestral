@@ -1,4 +1,4 @@
-﻿# 097 - Reflection-Beam-1.0 -> director - T44: M95 items 101-103 ya documentados
+# 097 - Reflection-Beam-1.0 -> director - T44: M95 items 101-103 ya documentados
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

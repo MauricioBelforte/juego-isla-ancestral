@@ -1,4 +1,4 @@
-﻿# 153 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 9: M143 x4 + M147 x6 (10 items)
+# 153 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 9: M143 x4 + M147 x6 (10 items)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

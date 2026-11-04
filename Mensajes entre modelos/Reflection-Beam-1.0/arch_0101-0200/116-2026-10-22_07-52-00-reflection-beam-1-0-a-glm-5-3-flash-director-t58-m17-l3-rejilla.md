@@ -1,4 +1,4 @@
-﻿# 121 - Reflection-Beam-1.0 -> director - T58: M17 L3 specs rejilla (paso 1m + origen global) en 03-Diseno.md secc. 9
+# 121 - Reflection-Beam-1.0 -> director - T58: M17 L3 specs rejilla (paso 1m + origen global) en 03-Diseno.md secc. 9
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

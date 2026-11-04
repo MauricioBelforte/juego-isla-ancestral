@@ -1,4 +1,4 @@
-﻿# 120 - Reflection-Beam-1.0 -> director - T57: M156 L1 variantes por script (7 tipos via _load_from_data) + L2 particulas [?] honestas
+# 120 - Reflection-Beam-1.0 -> director - T57: M156 L1 variantes por script (7 tipos via _load_from_data) + L2 particulas [?] honestas
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

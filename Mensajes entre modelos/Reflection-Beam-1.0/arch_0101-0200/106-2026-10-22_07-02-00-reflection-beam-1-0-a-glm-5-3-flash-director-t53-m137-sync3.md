@@ -1,4 +1,4 @@
-﻿# 111 - Reflection-Beam-1.0 -> director - T53: backlog M137 sync 215 (arbol madera) + isla.tscn/VoxelTerrain/generador/bordes [ ] honestos
+# 111 - Reflection-Beam-1.0 -> director - T53: backlog M137 sync 215 (arbol madera) + isla.tscn/VoxelTerrain/generador/bordes [ ] honestos
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

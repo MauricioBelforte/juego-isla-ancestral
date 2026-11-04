@@ -1,4 +1,4 @@
-﻿# 101 - Reflection-Beam-1.0 -> director - T46: M95 backlog sincronizado (96/96 [x])
+# 101 - Reflection-Beam-1.0 -> director - T46: M95 backlog sincronizado (96/96 [x])
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

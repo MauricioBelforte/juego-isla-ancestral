@@ -1,4 +1,4 @@
-﻿# 182 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 35: resumen de modulos restantes
+# 182 - Reflection-Beam-1.0 -> director - COLA TOTAL batch 35: resumen de modulos restantes
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

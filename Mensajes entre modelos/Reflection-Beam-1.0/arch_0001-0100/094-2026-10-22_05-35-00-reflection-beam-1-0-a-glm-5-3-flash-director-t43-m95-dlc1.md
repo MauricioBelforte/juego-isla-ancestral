@@ -1,4 +1,4 @@
-﻿# 096 - Reflection-Beam-1.0 -> director - T43: M95 DLC-1 expansion definida
+# 096 - Reflection-Beam-1.0 -> director - T43: M95 DLC-1 expansion definida
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code
