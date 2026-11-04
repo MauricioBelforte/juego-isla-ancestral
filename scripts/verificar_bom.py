@@ -20,6 +20,11 @@ Uso:
     python scripts/verificar_bom.py --estricto       # U+FEFF embebido tambien falla
     echo $?   # 0 = sin BOM, 1 = habia BOM (antes de --fix)
 
+--fix NO toca archivos ignorados por git y FALLA CERRADO si `git check-ignore`
+no responde: antes reescribia pools locales no versionados que el gate de CI
+nunca ve (trampa 63, corolario 2). Regression end-to-end por ruta real:
+`python scripts/test_verificar_bom.py`.
+
 COBERTURA (ampliada 2026-10-18, reincidencia 3 del BOM segun msg 312 del director):
 hasta esta version el escaner leia SOLO los primeros 3 bytes, asi que se le
 escapaban los dos modos de falla reales de la flota:
@@ -39,6 +44,7 @@ escapaban los dos modos de falla reales de la flota:
      deuda este limpia.
 """
 import os
+import subprocess
 import sys
 
 BOM = b'\xef\xbb\xbf'
@@ -127,6 +133,36 @@ def escanear(raiz, prefijos):
     return sorted(d['bom'] + d['utf16'])
 
 
+def rutas_ignoradas(rutas, raiz='.'):
+    """Conjunto de rutas que git IGNORA (no versionadas, excluidas por .gitignore).
+
+    Motivo: el gate de CI corre sobre un checkout limpio, asi que NUNCA ve los
+    archivos ignorados; `--fix` en local si los veia y los reescribia. Caso real
+    2026-11-04: `Mensajes entre modelos/Reflection-Beam-1.0/NUMEROS_DISPONIBLES.txt`
+    (.gitignore:269) perdio su BOM sin estar versionado.
+
+    FALLO CERRADO: si git no esta disponible o `check-ignore` devuelve error,
+    se lanza RuntimeError y el llamador aborta ANTES de mutar ningun archivo.
+    Un fix que no puede distinguir versionado de ignorado no debe adivinar.
+    """
+    if not rutas:
+        return set()
+    datos = b'\0'.join(r.encode('utf-8') for r in rutas) + b'\0'
+    try:
+        proc = subprocess.run(['git', 'check-ignore', '-z', '--stdin'],
+                              cwd=raiz, input=datos,
+                              stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    except OSError as e:
+        raise RuntimeError('no se pudo ejecutar git check-ignore: %s' % e)
+    # rc 0 = alguna ignorada; rc 1 = ninguna ignorada; otro = error real.
+    if proc.returncode not in (0, 1):
+        raise RuntimeError('git check-ignore rc=%d: %s' % (
+            proc.returncode,
+            proc.stderr.decode('utf-8', 'replace').strip()))
+    return set(p.decode('utf-8', 'replace').replace('\\', '/')
+               for p in proc.stdout.split(b'\0') if p)
+
+
 def main():
     args = [a for a in sys.argv[1:]]
     fix = '--fix' in args
@@ -184,8 +220,24 @@ def main():
         print('\nACCION: python scripts/verificar_bom.py --fix [carpeta]')
         return 1
 
+    try:
+        ignorados = rutas_ignoradas(hallados, '.')
+    except RuntimeError as e:
+        print('ABORTADO: %s' % e)
+        print('Fallo cerrado: no se modifico NINGUN archivo.')
+        return 1
+    if ignorados:
+        print('Omitidos %d archivo(s) ignorados por git (no se mutan):'
+              % len(ignorados))
+        for r in sorted(ignorados)[:10]:
+            print('  %s' % r)
+        if len(ignorados) > 10:
+            print('  ... y %d mas' % (len(ignorados) - 10))
+
     ok = 0
     for r in hallados:
+        if r in ignorados:
+            continue
         try:
             with open(r, 'rb') as fh:
                 raw = fh.read()
@@ -195,9 +247,22 @@ def main():
         if not raw.startswith(BOM):
             # UTF-16: no se toca (ver arriba).
             continue
-        # Se preserva el resto del archivo byte a byte: solo se quitan 3 bytes.
-        with open(r, 'wb') as fh:
-            fh.write(raw[3:])
+        # Escritura ATOMICA (trampa 18): un open('wb') in-place puede dejar el
+        # archivo truncado si Windows/AV bloquea la escritura a mitad de camino.
+        # Se preserva el resto byte a byte: solo se quitan los 3 bytes del BOM.
+        tmp = r + '.bomfix.tmp'
+        try:
+            with open(tmp, 'wb') as fh:
+                fh.write(raw[3:])
+            os.replace(tmp, r)
+        except OSError as e:
+            try:
+                if os.path.isfile(tmp):
+                    os.remove(tmp)
+            except OSError:
+                pass
+            print('  [ERR escritura] %s -> %s' % (r, e))
+            continue
         ok += 1
     print('BOM quitado en %d archivo(s).' % ok)
     # Si quedaron UTF-16 sin reparar, el gate NO puede declararse verde.
