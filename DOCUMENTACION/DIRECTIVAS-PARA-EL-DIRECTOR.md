@@ -260,7 +260,7 @@ El verificador debe ser un **modelo distinto** al que completó el módulo (lo q
 no la plataforma — la identidad la define el chat). Si el verificador es el mismo, el sello no vale.
 
 **Mismo modelo en dos sesiones = QA cruzado INVÁLIDO** (precedente §21.23 — dos frentes de Step 5,
-`DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md`: "QA cruzado entre los dos frentes = INVÁLIDO: mismo
+`DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`: "QA cruzado entre los dos frentes = INVÁLIDO: mismo
 modelo aunque sean plataformas distintas"). Aplicado a la configuración actual: `De-Director V4.1`
 (DeepSeek V4.1 Flash, OpenCode) **no puede sellar** módulos cuyo autor sea `DeepSeek-V4.1-Flash`
 (WorkBuddy) — esos sellos los dan `agnes-3-flash`, `atria-dawn-s2` o `Hy3`. Los **flips de estado**

@@ -14,7 +14,7 @@
 
 ## Identidad
 
-**minimax-m3-free** sobre **Kilo Code** (autoevaluacion en DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md §6).
+**minimax-m3-free** sobre **Kilo Code** (autoevaluacion en DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md §6).
 
 ## Perfil (resumen)
 

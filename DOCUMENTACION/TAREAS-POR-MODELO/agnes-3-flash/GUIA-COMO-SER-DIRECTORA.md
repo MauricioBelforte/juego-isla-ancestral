@@ -31,7 +31,7 @@
 | | |
 |---|---|
 | Método | Detector por **LAG de acuses** (mtime real, NO slug) sobre los canales activos. |
-| Canales activos (1nov) | **DeepSeek-V4.1-Flash** (salida 1-nov, herencia), **Hy3** (salida 1-nov, herencia), **Ling-3.1-Flash** (i18n/doc, 1/h), **DS-V4.1-Flash-Opencode** (chase P-100), **Nemotron-3.5-Super-VL** (COLABORADOR PERMANENTE, ver §2.5). **GPT-Luna** (canal GLM, no agente activo). Beam PAUSADO. MiniMax/GLM offline. |
+| Canales activos (4nov) | **DeepSeek-V4.1-Flash** (P-100/gate-1), **Hy3** (gate-2 runtime), **Hy4** (BLENDER, autoría 3D), **Ling-3.1-Flash** (i18n/doc), **DS-V4.1-Flash-Opencode** (chase P-100), **Nemotron-3.5-Super-VL** (boot/headless/doc). **GPT-Luna** (canal GLM). Beam PAUSADO. GLM = supervisor del fundador. |
 | Criterio | mensaje agente→directora > 20 min sin acuse = LAG. Mi acuse = mensaje mío (`-a-<agente>`) con mtime posterior al mtime del mensaje. |
 | Cron | A (`0,30`) y B (`15,45`) — detección cada 15 min; G apagado. Ver `CRONOMETROS-AGNES-COMO-CREARLOS.md` (esquema final 29oct). |
 | Trampa | fecha del slug vs mtime real: el slug puede tener timestamp adelantado. **Medir por `os.path.getmtime`.** |
@@ -89,7 +89,7 @@ Al responder: número del pool de la carpeta destino, consumido al escribir; nom
 - Verificar si el backlog de cada agente activo se está drenando (< ~50 ítems) o está idle (> 45 min sin avance).
 - Si hay que repoblar: asignar 20-30 ítems de su riel (DeepSeek=BACKLOG-11; resto según estado). Escribir UN mensaje compacto (1 tabla, sin prose) en SU canal. NO apilar a más de lo que consume.
 - El asignador NUNCA implementa trabajo ajeno: solo lo encola.
-- Fuente de módulos: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (Recom + dificultad). No por descarte.
+- Fuente de módulos: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (Recom + dificultad). No por descarte.
 
 > **⚠️ REGLA PERMANENTE — fuel de Nemotron (directiva fundador 31oct 02:51):** en CADA Cron D / verificación de flota, chequear el `BACKLOG-MASTER.md` de Nemotron. Si sus rieles `[ ]`/`[→]` **ejecutables por él** (nicho visión/boot/MCP) quedan por debajo de ~5 ítems, **agregar un riel nuevo** (B-11, B-12…) de su capacidad: gate-2 boot de módulos por sellar, visión post-flip, visión assets M154. Nemotron dispara un cron 10 min y **se queda en standby si el backlog está vacío** (síntoma: reporta "no hay trabajo / todos los rieles agotados"). **Nunca dejarlo sin fuel.** Los `[ ]` de "PENDIENTES QUE NO SON SUYOS" (picking/BACKLOG-11/PT/consultas) NO cuentan como fuel — son otros; fuel = solo rieles que él ejecuta.
 

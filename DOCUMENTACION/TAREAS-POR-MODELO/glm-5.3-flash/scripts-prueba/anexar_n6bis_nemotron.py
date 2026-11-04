@@ -30,7 +30,7 @@ ADENDA = """
 Firma adenda: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25.
 """
 
-P = r"DOCUMENTACION\10-GUIA-COMPARATIVA-MODELOS.md"
+P = r"DOCUMENTACION\GUIA-COMPARATIVA-MODELOS\GUIA-COMPARATIVA-MODELOS-V1.md"
 with open(P, "a", encoding="utf-8", newline="\n") as f:
     f.write(ADENDA)
 print("ADENDA ANEXADA")

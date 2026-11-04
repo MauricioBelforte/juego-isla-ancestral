@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — GLM-5.3-Flash — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de GLM-5.3-Flash.** Tu canal (`Mensajes entre modelos/GLM-5.3-Flash/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)
@@ -228,4 +228,4 @@
 - [x] Log reservado y creado: **1877** — M91 cierre heredado de step-5-kilocode: 212→217/239 (+5 flips L201-L204/L210, sliders 7 buses + claves i18n es/en, tests 79/0 + 136/0 + 82/0, liberado 🟡 con deudas externas). *(GLM-5.3-Flash / Kilo Code, 2026-10-16)*
 
 ## TRABAJOS DEL 25-OCT (encargo directo del fundador en chat, fuera de cola)
-- [x] 25oct ~21:35 — Investigacion web de **NVIDIA Nemotron 3.5 Super VL** + ficha N.6 anexada al final de DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md (bloque vigente, sin duplicar copias) + defecto de 64 copias del archivo registrado al fundador. Log **2188**. Encargo: directo en chat.
+- [x] 25oct ~21:35 — Investigacion web de **NVIDIA Nemotron 3.5 Super VL** + ficha N.6 anexada al final de DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md (bloque vigente, sin duplicar copias) + defecto de 64 copias del archivo registrado al fundador. Log **2188**. Encargo: directo en chat.

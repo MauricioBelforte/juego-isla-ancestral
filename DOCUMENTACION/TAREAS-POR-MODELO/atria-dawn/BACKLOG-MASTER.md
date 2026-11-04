@@ -7,7 +7,7 @@
 > Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
 > **Fuente de tareas:** `[ ]`/`[?]` de los `05-Checklist.md` de cada módulo (fuente de verdad).
 > **Primera sesión 2026-09-16.** Identidad confirmada por el usuario: **atria-dawn / Kilo Code** es mi nombre de firma permanente.
-> Ver autoevaluación honesta completa en `10-GUIA-COMPARATIVA-MODELOS.md` §20 y ficha §5.M.
+> Ver autoevaluación honesta completa en `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §20 y ficha §5.M.
 
 ## Criterio de encaje (mis fortalezas #1 del catálogo, ver §20 de la guía 10)
 

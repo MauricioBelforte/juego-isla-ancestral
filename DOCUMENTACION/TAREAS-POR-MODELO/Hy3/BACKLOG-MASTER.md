@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — Hy3 — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de Hy3.** Tu canal (`Mensajes entre modelos/Hy3/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)
@@ -67,7 +67,7 @@
 26. M167-Isla-Raiz (113/114): QA de la configuración fija (CENTRO 2560, radio, spawn) — 6 [M]
 27. M168-Plantilla (104/104): QA de la plantilla — 6 [S]
 28. M166-Perf variedades (112/112): QA — 6 [S]
-29. M85-Modelos-3D-Legal (95/0): verificación de conteo anómalo 95/0 — 4 [S]
+29. M85-Modelos-3D-Legal (73/25/2 medido; 95/0 stale): verificación de conteo anómalo 95/0 — 4 [S] — [x] Hy3 (Log 2309, 2026-11-04: headless 8 checks/0 fallos exit 0 + rojo exit 1; 05-Checklist 73/25/2; capa datos verificada, módulo no 100%)
 30. M86-IA-Generativa (129/129): QA de refresco — 4 [S]
 31. M84-Legal-Audio (99/99) — QA — 4 [S]
 32. M78/M79/M80/M81/M82/M83 (legal, ✅ o 1-2 pendientes): QA rotativo — 10 [S]
@@ -183,7 +183,7 @@
 **Modelo:** Hy3
 **Plataforma:** WorkBuddy (Tencent Hunyuan) — NO soy DeepSeek
 **Fecha:** 2026-09-02 (última actualización de contenido: 2026-09-12, Log 848)
-**Identidad:** Hy3 / WorkBuddy (Tencent Hunyuan). Ver DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md §5.D y §11. Aclaración 2026-09-11 (usuario): Hy3 NO es DeepSeek; las firmas "Deepseek V4 Flash" que aparecen en docs de módulos ajenos corresponden a OTRO modelo colaborador, no a mí.
+**Identidad:** Hy3 / WorkBuddy (Tencent Hunyuan). Ver DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md §5.D y §11. Aclaración 2026-09-11 (usuario): Hy3 NO es DeepSeek; las firmas "Deepseek V4 Flash" que aparecen en docs de módulos ajenos corresponden a OTRO modelo colaborador, no a mí.
 **Rol en el proyecto:** QA cruzado (AGENTS.md §21.8), validación entre modelos, detección de bugs, sistemas de diálogo y narrativa complejos.
 **Relación con otros modelos (paralelo):** `DeepSeek-V4.1-Flash` y `deepseek-v4-flash-vision-exp` son colaboradores en paralelo. Sus carpetas en `DOCUMENTACION/TAREAS-POR-MODELO/` se CONSERVAN INTACTAS (no se borran ni fusionan — decisión usuario 2026-09-12). Este backlog documenta EXCLUSIVAMENTE el trabajo de Hy3/WorkBuddy; cualquier entrada que cite "DeepSeek" es de ellos, no mía.
 
@@ -879,7 +879,7 @@ Atria a 99/100. No repetir.
 ## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **seccion 21.12**.
 
 Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 2:**
 

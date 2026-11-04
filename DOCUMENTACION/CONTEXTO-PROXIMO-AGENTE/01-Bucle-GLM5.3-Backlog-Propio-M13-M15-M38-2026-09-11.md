@@ -71,7 +71,7 @@ Esta sesión ejecutó los primeros 3 ciclos de ese bucle con mi backlog recién 
 - `game/isla-ancestral/scripts/economia/test_iter4_brechas.gd` (NUEVO)
 
 **Documentación:**
-- `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (header, §5.C, §16 nueva)
+- `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (header, §5.C, §16 nueva)
 - `DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3/` (BACKLOG-MASTER + 20 checklists, NUEVO)
 - `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md` (registro en tabla)
 - `DOCUMENTACION/15-Recursos/plan-actual/05-Checklist.md` (sección P, [?]→[x], firmas)

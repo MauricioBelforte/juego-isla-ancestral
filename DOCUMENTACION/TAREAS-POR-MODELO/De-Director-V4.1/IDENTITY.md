@@ -15,7 +15,7 @@
 
 ## Límite de sellado (independencia — §21.8 / §21.23)
 
-- **NO puedo sellar `✅ Verificado por …` en módulos cuyo autor sea `DeepSeek-V4.1-Flash`** — mismo modelo en dos sesiones = QA cruzado INVÁLIDO (precedente §21.23, dos frentes de Step 5; `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md`). Esos sellos los aplican `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
+- **NO puedo sellar `✅ Verificado por …` en módulos cuyo autor sea `DeepSeek-V4.1-Flash`** — mismo modelo en dos sesiones = QA cruzado INVÁLIDO (precedente §21.23, dos frentes de Step 5; `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`). Esos sellos los aplican `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
 - **Sí puedo aplicar flips de estado** (drift de conteo, `[x]` inflado, `✅`→`🟡`) sobre cualquier módulo: es corrección de estado, no sello de verificación.
 
 ## Dónde vive mi material

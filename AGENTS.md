@@ -992,7 +992,7 @@ Cuando un módulo queda `✅ Completado por [MODELO]`, **NO se considera definit
    - **Si encuentra fallos** → el módulo vuelve a `🟡 Con dudas`, se documentan los hallazgos en las `## Notas del Agente` (agregando al historial, sin borrar) y queda para que el siguiente agente lo corrija.
 4. **Regla de independencia:** el verificador debe ser un **modelo distinto** al que completó el módulo. Idealmente de otra plataforma (ej: si lo hizo Claude, que verifique DeepSeek o Gemini). Esto aprovecha que distintos modelos detectan errores distintos.
    - **Ojo (identidad por chat):** dos agentes distintos pueden compartir plataforma (varios modelos corren en chats separados de WorkBuddy). Lo que vale es el **modelo**, no la plataforma; y la firma debe poder rastrearse a un **Log** concreto.
-   - **Mismo modelo en dos sesiones (aunque cambie la plataforma) = QA cruzado INVÁLIDO** (precedente §21.23, dos frentes de Step 5; `10-GUIA-COMPARATIVA-MODELOS.md`). Ejemplo vigente: `De-Director V4.1` (director, OpenCode) y `DeepSeek-V4.1-Flash` (agente, WorkBuddy) son el mismo modelo → **ninguno puede verificar ni sellar módulos del otro**; esos QA los hacen `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
+   - **Mismo modelo en dos sesiones (aunque cambie la plataforma) = QA cruzado INVÁLIDO** (precedente §21.23, dos frentes de Step 5; `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`). Ejemplo vigente: `De-Director V4.1` (director, OpenCode) y `DeepSeek-V4.1-Flash` (agente, WorkBuddy) son el mismo modelo → **ninguno puede verificar ni sellar módulos del otro**; esos QA los hacen `agnes-3-flash`, `atria-dawn-s2` o `Hy3`.
 
 #### 21.8.2.b Muestreo anti-inflación (obligatorio en todo sello ✅)
 
@@ -1460,7 +1460,7 @@ reemplazo), y `Logs/` (registro histórico).
    `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` (estilo checklist, 100+
    tareas disponibles). Cada agente ya sabe que ese archivo existe en su canal.
 2. **El DIRECTOR los mantiene** (`GLM-5.3-Flash-Director`): agrega/marca tareas con evidencia,
-   investigando `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` y el estado real del proyecto.
+   investigando `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` y el estado real del proyecto.
    Solo el backlog PROPIO del director queda en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/`.
 3. **Ciclo del AGENTE (cron propio, en este orden — ciclo DEFINITIVO fundador ~04:55):**
    (1a) **leer su carpeta — el ÚLTIMO archivo** del canal, y si el director dejó instrucciones ahí

@@ -60,7 +60,7 @@ Verificación post: cada pool empieza en `max_archivo + 1`, 100 números consecu
 |---|---|
 | Script | `python scripts/repoblar_backlog.py <carpeta-agente> M87,M91,... [--cota 100]` |
 | Fuente | SOLO `05-Checklist.md` reales de los módulos (el script deja `<!-- fuente: ... -->` por ítem y deduplica contra lo existente) |
-| Capacidad | Elegir módulos por `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (columna Recom + dificultad 1-5) + historial del canal. NUNCA por descarte |
+| Capacidad | Elegir módulos por `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (columna Recom + dificultad 1-5) + historial del canal. NUNCA por descarte |
 | Escalón | Si el frente queda a techo (assets/vision/render bloqueados): documentar + saltar, como agnes en su M45 (789) — rotar al siguiente módulo headless |
 | Backlogs | `DOCUMENTACION/TAREAS-POR-MODELO/<agente>/BACKLOG-MASTER.md` — objetivamente contables en secciones REPOBLACION V3 (casillas `[ ]`); formato numerado sin casillas NO es contable (lección DeepSeek §314) |
 

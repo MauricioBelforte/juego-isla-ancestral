@@ -3,7 +3,7 @@
 
 # BACKLOG MASTER — MiMo V2.5
 
-> Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`. Fuente: columna **Recom** de `CHECKLIST-GLOBAL.md` + bugs asignados + fortalezas del modelo (§12.5 de `10-GUIA-COMPARATIVA-MODELOS.md`).
+> Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`. Fuente: columna **Recom** de `CHECKLIST-GLOBAL.md` + bugs asignados + fortalezas del modelo (§12.5 de `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`).
 
 **Módulos asignados:** 14  |  **Tareas pendientes totales:** ~850
 
@@ -67,7 +67,7 @@
 
 | Fecha | Tarea | Detalle |
 |-------|-------|---------|
-| 2026-09-03 | Limpieza Logs/ (135 archivos) | Eliminé 42 duplicados, renombré 67 archivos, eliminé 26 residuales. stepfun corrompió nombres con prefijos `dup*` y sin `.md`. Documentado en §13 de10-GUIA-COMPARATIVA-MODELOS.md. |
+| 2026-09-03 | Limpieza Logs/ (135 archivos) | Eliminé 42 duplicados, renombré 67 archivos, eliminé 26 residuales. stepfun corrompió nombres con prefijos `dup*` y sin `.md`. Documentado en §13 de DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md. |
 | 2026-09-04 | Corrección logs duplicados (3 rondas) | AGNES creaba logs con números repetidos. Ronda 1: 9 archivos → 610-618. Ronda 2: 3 AGNES → 619-621. Ronda 3: 16 AGNES → 622-637. Referencias docs corregidas (M75 608→617, M162 609→618). §10.17 de GUIA-GODOT/08-terreno-voxel.md creado (cómo modificar terreno correctamente). `ULTIMO_NUMERO.txt` = 637, 622 logs, 0 duplicados. |
 | 2026-09-04 | Fix agua orilla (island_generator.gd) | Corregido dirección de expansión del agua: de 0.94-0.98 → 0.94-1.03 (×3 hacia el mar, no hacia la arena). Sync en get_height, get_block_at, validador_isla_raiz.gd. |
 
@@ -116,7 +116,7 @@
 > **¿Qué hacer ahora?**
 > 1. Leer `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` para configurar MCP
 > 2. Leer `DOCUMENTACION/GUIA-GODOT/INDICE.md` para errores comunes
-> 3. Leer `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` para saber qué modelos funcionan
+> 3. Leer `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` para saber qué modelos funcionan
 > 4. Ejecutar verificación de logs duplicados (tarea recurrente)
 > 5. Revisar `CHECKLIST-GLOBAL.md` para saber el estado del proyecto
 >
@@ -203,7 +203,7 @@ Atria a 99/100. No repetir.
 ## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **seccion 21.12**.
 
 Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 1:**
 

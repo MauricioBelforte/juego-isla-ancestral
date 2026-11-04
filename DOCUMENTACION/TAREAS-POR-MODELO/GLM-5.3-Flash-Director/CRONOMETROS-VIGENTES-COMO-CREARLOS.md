@@ -47,7 +47,7 @@ Definición original (creado 04:41, id `wku_152778f30001fWRhXBrjKMF1MZ`) — **y
 
 **TAREA 2 — INVESTIGACIÓN/REPOBLACIÓN INTELIGENTE** (solo modelos activos):
 - ACTIVO = escribió en su canal en las últimas 2 horas.
-- Backlog < 100 pendientes → `scripts/repoblar_backlog.py` con módulos elegidos por CAPACIDAD: repetida `10-GUIA-COMPARATIVA-MODELOS.md` (Recom, dificultad 1-5) + historial de su canal. Sin delegar por descarte, sin módulos 🔵 ajenos, fuente 05-Checklist reales.
+- Backlog < 100 pendientes → `scripts/repoblar_backlog.py` con módulos elegidos por CAPACIDAD: repetida `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (Recom, dificultad 1-5) + historial de su canal. Sin delegar por descarte, sin módulos 🔵 ajenos, fuente 05-Checklist reales.
 - Reporte: a quién, qué módulos, por qué su capacidad.
 
 ---
@@ -122,7 +122,7 @@ CRON D v2 — ASIGNADOR AL DETALLE POR CAPACIDAD (fundador 2026-10-20 03:16: "la
 
 UNA SOLA TAREA — ANÁLISIS EN DOS DIRECCIONES Y ASIGNACIÓN:
 1. ACTIVO = agente que escribió en su canal en las últimas 2 h (corroborá con `python scripts/verificar_mensajes_nuevos.py`). Para cada activo cuyo backlog tenga menos de 100 pendientes contables, ANÁLISIS EN DOS DIRECCIONES:
-   a) CAPACIDAD DEL AGENTE: repasá `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (Recom + dificultad 1-5) y el HISTORIAL DE SU CANAL: qué frentes cerró bien, qué nichos demostró con QA/medición, qué le bloqueó. Su historial de tandas exitosas define su asignación.
+   a) CAPACIDAD DEL AGENTE: repasá `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (Recom + dificultad 1-5) y el HISTORIAL DE SU CANAL: qué frentes cerró bien, qué nichos demostró con QA/medición, qué le bloqueó. Su historial de tandas exitosas define su asignación.
    b) TRABAJO REAL DISPONIBLE: los 05-Checklists de los módulos candidatos y VERIFICÁ que los ítems [ ] sigan accionables HOY (no cerrados ya por otra tanda, no bloqueados por assets/vision/dueños ausentes, no [?]). Un ítem obsoleto NO es tarea limpia.
 2. ASIGNÁ solo el cruce: nicho demostrado + trabajo disponible. Ejecutá con `python scripts/repoblar_backlog.py <carpeta> <módulos>` (fuente: solo 05-Checklist reales). Objetivo: 100 pendientes LIMPIAS (auditables, con fuente comentada). Si el mejor match requiere módulos 🔵 ajenos, saltalo y documentalo.
 3. Si el agente activo ya está 100+ y productivo: NO toques nada — 'Nombre: al día (N pendientes), sin repoblación'.

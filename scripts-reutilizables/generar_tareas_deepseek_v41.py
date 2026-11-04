@@ -133,7 +133,7 @@ def main():
                   'DeepSeek — `DeepSeek`, `deepseek-v4-flash` y `deepseek-v4-flash-vision-exp` — porque '
                   'DeepSeek **descatalogó** V4 Flash y V4 Flash Vision EXP al lanzar **V4.1 Flash**, que unifica '
                   'texto + visión + agentes en un solo modelo. Los alias viejos se rutean a V4.1 Flash '
-                  '(ver `10-GUIA-COMPARATIVA-MODELOS.md` §5.B3 y §17).')
+                  '(ver `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §5.B3 y §17).')
     master.append('')
     master.append('**Módulos asignados:** %d  |  **Tareas a trabajar:** %d (`[ ]` %d + `[?]` %d)'
                   % (len(mias), total_pend + total_dud, total_pend, total_dud))

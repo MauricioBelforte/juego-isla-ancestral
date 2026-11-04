@@ -94,7 +94,7 @@
 64. Filas GLOBAL: revisión de 10/12 celdas (reparación patrón fila 76/55).
 65. `ESTADO-PARALELO.md`: sin duplicación de cabecera (lección del relevo del director — la cabecera del relevo con título).
 66. Backup de encoding habitual (like el b27caed atrapado — verificable con `verificar_bom.py`).
-67. `10-GUIA-COMPARATIVA-MODELOS.md` (afinar como hago en la ronda: agrega specs nuevas si cambio).
+67. `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (afinar como hago en la ronda: agrega specs nuevas si cambio).
 68. `AGENTS.md`: actualización de reglas nuevas (§10.2 fijo de numeración ya está, §31 relevo ya está).
 69. Propuestas de mejora en la GUIA-COMUNICACION.md (si el flujo lo pide).
 70. Chequear los LISTADOs de pendientes de los mensajes no respondidos (T-19 maduros).

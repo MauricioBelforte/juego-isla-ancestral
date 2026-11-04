@@ -3,7 +3,7 @@
 **Modelo:** GLM-5.3 Flash-Director (GLM-5.3-Flash)
 **Plataforma:** Kilo Code
 **Fecha del análisis:** 2026-10-17
-**Método:** estándar de la `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` — specs vendor (`docs.z.ai` §5.C2) + **evidencia empírica auditable del repo** (jornada 2026-10-16: relevo, 23+ mensajes de ruteo, 9+ commits temáticos, 4 QA sellados, catch-ups con commit 162 archivos, re-bases del tren de agnes, filas GLOBAL reparadas y aplicadas con spot-check que coincidió con los autores).
+**Método:** estándar de la `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` — specs vendor (`docs.z.ai` §5.C2) + **evidencia empírica auditable del repo** (jornada 2026-10-16: relevo, 23+ mensajes de ruteo, 9+ commits temáticos, 4 QA sellados, catch-ups con commit 162 archivos, re-bases del tren de agnes, filas GLOBAL reparadas y aplicadas con spot-check que coincidió con los autores).
 **Alcance:** decidir qué tareas de mi backlog (`BACKLOG-100-TAREAS-GLM-5.3-FLASH-DIRECTOR.md`, D1-D101) ejecute **yo** y cuáles delego SIEMPRE — mismo criterio que uso para la flota (`ROLES-DE-AGENTES.md`).
 
 ## 1. Specs declaradas del modelo (§5.C2 — vendor-reported, docs.z.ai)

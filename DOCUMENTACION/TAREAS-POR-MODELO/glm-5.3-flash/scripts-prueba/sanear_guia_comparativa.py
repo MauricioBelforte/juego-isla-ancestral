@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-"""Saneamiento de 10-GUIA-COMPARATIVA-MODELOS.md (confirmado por el fundador 25oct 21:18).
+"""Saneamiento de GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md (confirmado por el fundador 25oct 21:18).
 
 Arma: zona original (1-3013) + fichas N + notas de la copia F (105804, relativas 1-305)
 + nota 08:42 y 15:14 DES-FUSIONADAS (venian pegadas en una sola linea) + LECCION 15:17
@@ -14,7 +14,7 @@ Verificacion pesada ANTES del reemplazo (atomico temp+os.replace):
 """
 import os
 
-P = r"DOCUMENTACION\10-GUIA-COMPARATIVA-MODELOS.md"
+P = r"DOCUMENTACION\GUIA-COMPARATIVA-MODELOS\GUIA-COMPARATIVA-MODELOS-V1.md"
 TMP = P + ".nuevo.tmp"
 
 lines = open(P, encoding="utf-8").read().split("\n")

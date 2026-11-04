@@ -2,7 +2,7 @@
 
 **Modelo:** GLM-5.3 Flash-Director | **Plataforma:** Kilo Code | **Fecha:** 2026-10-22 23:25
 
-Cada agente activo tiene UN backlog investigado por su nicho (fuente: 10-GUIA-COMPARATIVA-MODELOS.md + historial de
+Cada agente activo tiene UN backlog investigado por su nicho (fuente: DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md + historial de
 canal), con ruta referenciada y respaldado tambien en su BACKLOG-MASTER de canal. REGLA: minimo 20 acumulables en cola;
 onboarding nuevo = 100. El CRON D repuebla BEFORE declarar guardia. Los items citan el 05-Checklist fuente (literal).
 

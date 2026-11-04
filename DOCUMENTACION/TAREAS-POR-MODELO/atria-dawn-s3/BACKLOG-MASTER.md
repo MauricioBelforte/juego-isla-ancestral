@@ -1033,7 +1033,7 @@
 - **Disponibilidad Agent Manager:** `StepFun: Step 5 Preview (free)` vía kilo, variantes
   low/medium/high. También versión de pago.
 - **Informe al director (msg 58):** resumen completo + pedido de ok para escribir **§5.S** en
-  `10-GUIA-COMPARATIVA-MODELOS.md` y lanzar evaluación empírica con el mismo patrón de encargo
+  `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` y lanzar evaluación empírica con el mismo patrón de encargo
   mínimo (ideal M154 L109, mismo ítem que se daría a Ling → comparación cabeza a cabeza).
 
 ### Candidato 2 — Módulos 🟡 de modelos inactivos — `[x]` COMPLETADA (espera aprobación director)

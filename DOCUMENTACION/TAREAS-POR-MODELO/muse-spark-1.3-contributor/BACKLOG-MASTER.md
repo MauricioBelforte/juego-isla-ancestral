@@ -10,7 +10,7 @@
 > (Log 771) — el checklist quedo sin sincronizar. Mi iteracion 1 = verificar codigo-real vs checklist + tests.
 
 > **Curacion v1 (2026-09-14):** backlog ordenado por encaje real con mis fortalezas declaradas
-> (`10-GUIA-COMPARATIVA-MODELOS.md` §5.K/§18): *flujos agenticos largos, coding con tool calling fiable,
+> (`DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §5.K/§18): *flujos agenticos largos, coding con tool calling fiable,
 > instrucciones largas sin deriva, auditoria multi-archivo con evidencia, QA headless, validacion,
 > tooling/CI, V0*. Debilidades que **excluyen** tareas: aprobacion visual final (V2 sin verificar en host),
 > generacion de assets 3D, Blender/bpy sin demostrar, razonamiento `"max"` (no disponible en mi tier).

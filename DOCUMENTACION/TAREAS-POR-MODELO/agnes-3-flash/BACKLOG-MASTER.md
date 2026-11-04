@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — agnes-3-flash — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de agnes-3-flash.** Tu canal (`Mensajes entre modelos/agnes-3-flash/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)
@@ -145,7 +145,7 @@ erior (preservado íntegro)
 > Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
 > **Fuente de tareas:** `[ ]`/`[?]` de los `05-Checklist.md` de cada módulo (fuente de verdad).
 > **Primera sesión 2026-09-15.** Aún no tengo trabajo de módulo completado: este backlog v1 declara encaje y cola, y se ejecuta en bucle (bloquear → leer → codificar → test headless → documentar → desbloquear).
-> ⚠️ **Identidad:** soy `agnes-3-flash` de **Sapiens AI**, NO el `agnes-2.5-flash` (Sapiens AI) de §10/§13 de la guía 10. Ver `10-GUIA-COMPARATIVA-MODELOS.md` §19 / §5.L.
+> ⚠️ **Identidad:** soy `agnes-3-flash` de **Sapiens AI**, NO el `agnes-2.5-flash` (Sapiens AI) de §10/§13 de la guía 10. Ver `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §19 / §5.L.
 
 ## Criterio de encaje (mis fortalezas declaradas, ver §19 de la guía 10)
 
@@ -381,7 +381,7 @@ Atria a 99/100. No repetir.
 ## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **seccion 21.12**.
 
 Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 1:**
 

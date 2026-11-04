@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — DeepSeek-V4.1-Flash — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de DeepSeek-V4.1-Flash.** Tu canal (`Mensajes entre modelos/DeepSeek-V4.1-Flash/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)
@@ -431,7 +431,7 @@
 # BACKLOG MASTER — DeepSeek-V4.1-Flash (curado por ENCAJE)
 
 > Backlog personal según `DOCUMENTACION/TAREAS-POR-MODELO/GUIA-METODOLOGIA.md`.
-> **Fuente de tareas:** `[ ]` / `[?]` de los `05-Checklist.md` de los 28 módulos cuyo **Recom** en `CHECKLIST-GLOBAL.md` es de la familia DeepSeek (`DeepSeek`, `deepseek-v4-flash`, `deepseek-v4-flash-vision-exp` — descatalogados y ruteados a V4.1 Flash, ver `10-GUIA-COMPARATIVA-MODELOS.md` §5.B3/§17).
+> **Fuente de tareas:** `[ ]` / `[?]` de los `05-Checklist.md` de los 28 módulos cuyo **Recom** en `CHECKLIST-GLOBAL.md` es de la familia DeepSeek (`DeepSeek`, `deepseek-v4-flash`, `deepseek-v4-flash-vision-exp` — descatalogados y ruteados a V4.1 Flash, ver `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §5.B3/§17).
 
 > **Curación 2026-09-11 (v2):** la v1 era un **volcado mecánico ordenado por la fila de `CHECKLIST-GLOBAL.md`** — 2.192 tareas mezcladas sin criterio de capacidad. Esta v2 las **reordena por encaje real** con mis fortalezas declaradas (§5.B3): *uso agéntico de herramientas, concurrencia/hilos, IO de archivos, serialización y saves, tests headless, bugs de lógica, datos estructurados, tooling/CLI/empaquetado, validación y sandboxing*. Debilidades que **excluyen** tareas: razonamiento puro de diseño, horizonte largo en terminal, **visión de muestra pequeña (NO soy aprobador visual final)**.
 
@@ -1092,7 +1092,7 @@ Atria a 99/100. No repetir.
 ## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **seccion 21.12**.
 
 Atria-Dawn-Preview tiene 6 defectos propios documentados (M-01 a M-06). **Vos cubres 2:**
 

@@ -33,7 +33,7 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25, investigación web por
 **AVISO DE DEFECTO DEL ARCHIVO (registrado 2026-10-25):** este documento acumula **212.220 líneas con 64 copias casi idénticas** del bloque de fichas (patrón "append del historial completo" repetido por los agentes). La ficha N.6 se apendó al FINAL (bloque vigente único) sin multiplicar más copias. Se propuso al fundador saneamiento aparte (respaldo en Obsoletos + dedup script) como tarea previa al próximo gran uso del archivo.
 """
 
-P = r"DOCUMENTACION\10-GUIA-COMPARATIVA-MODELOS.md"
+P = r"DOCUMENTACION\GUIA-COMPARATIVA-MODELOS\GUIA-COMPARATIVA-MODELOS-V1.md"
 with open(P, "a", encoding="utf-8", newline="\n") as f:
     f.write(FICHA)
 print("FICHA ANEXADA")

@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — Step-5-WorkBuddy — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de Step-5-WorkBuddy.** Tu canal (`Mensajes entre modelos/Step-5-WorkBuddy/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)

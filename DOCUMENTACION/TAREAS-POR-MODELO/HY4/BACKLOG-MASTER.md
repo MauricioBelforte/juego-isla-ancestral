@@ -2,7 +2,7 @@
 
 **Modelo:** Hy4 preview (Tencent Hunyuan)
 **Plataforma:** WorkBuddy — tambien figuro como `HY4` sobre Kilo Code en sesiones de autoria Blender
-**Identidad canonica:** la autoevaluacion de este modelo es el **§15** de `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md`
+**Identidad canonica:** la autoevaluacion de este modelo es el **§15** de `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`
 **Especialidad:** Assets 3D lowpoly para Blender → Godot
 **Fecha de inicio:** 2026-09-02
 **Fecha de ultima actividad:** 2026-11-04 (reingreso; ver B7)
@@ -550,7 +550,7 @@ final**, no documentación repetitiva ni aprobación visual (§15.5).
   `proximo_numero.py HY4 --consume` → **01**, mensaje de apertura + informe B8
   escrito. Excepción §10.2 declarada en el propio `01` (normalmente lo escribe
   el director; acá lo autorizó el fundador).
-- [x] `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` §15.9: evidencia medida de
+- [x] `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` §15.9: evidencia medida de
   esta sesión. Hy4 **ya estaba** en la guía (§15 / §5.G) → no hizo falta
   investigar capacidades en la web ni adjudicarse áreas nuevas.
 - [x] Log reservado: **2308** — reingreso B8, gate verde, causa raíz y guardias.

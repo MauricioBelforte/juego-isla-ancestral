@@ -20,7 +20,7 @@
 4. Verificar que todas las referencias a logs en documentos clave (`CHECKLIST-GLOBAL.md`, `ESTADO-PARALELO.md`, `08-GUIA-ORDEN-DE-IMPLEMENTACION.md`, `plan-actual/05-Checklist.md`, checklist personal) apunten a archivos existentes.
 5. Si se detecta inconsistencia, corregirla o anotarla como `[?]` antes de continuar.
 
-> **Nota (2026-09-03):** La limpieza de Logs/ (135 archivos corruptos con prefijos `dup*`) fue completada por MiMo V2.5. Esta tarea fue removida del backlog de stepfun por corrupción previa de nombres de archivos. Ver §13 de10-GUIA-COMPARATIVA-MODELOS.md para evaluación externa.
+> **Nota (2026-09-03):** La limpieza de Logs/ (135 archivos corruptos con prefijos `dup*`) fue completada por MiMo V2.5. Esta tarea fue removida del backlog de stepfun por corrupción previa de nombres de archivos. Ver §13 de DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md para evaluación externa.
 
 ## Módulos (pendientes)
 

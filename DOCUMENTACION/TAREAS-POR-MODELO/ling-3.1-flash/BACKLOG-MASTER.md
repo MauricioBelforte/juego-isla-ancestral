@@ -1,6 +1,6 @@
 # BACKLOG-MASTER — Ling-3.1-Flash — UNIFICADO (metodología V2, fundador 2026-10-17, corregido 04:56)
 
-**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
+**Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code — actualizado con evidencia y según nicho (GUIA-COMPARATIVA `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` + estado real del proyecto).
 **Unificación 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histórico del BACKLOG-MASTER anterior (preservado íntegro desde git). **ESTE es el único backlog válido de Ling-3.1-Flash.** Tu canal (`Mensajes entre modelos/Ling-3.1-Flash/`) queda SOLO para comunicación (mensajes + pool de numeración).
 
 ## TU CICLO COMO AGENTE (en este orden)
@@ -1127,7 +1127,7 @@ Fuentes primarias: API viva de OpenRouter, Kilo Gateway (verificado in-house), m
 
 ## Orden de trabajo sugerido
 
-1. Leer `AGENTS.md` completo + esta guía + la §5.S de `10-GUIA-COMPARATIVA-MODELOS.md`.
+1. Leer `AGENTS.md` completo + esta guía + la §5.S de `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`.
 2. Esperar la asignación de **L-01** por el director.
 3. Ejecutar L-01 con método: reservar log → implementar → verificar con evidencia objetiva → log → informe en el canal.
 4. Si L-01 pasa, desglosar nichos en L-02…L-100+.

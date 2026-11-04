@@ -8,7 +8,7 @@
 
 - **Modelo:** step-5-kilocode
 - **Plataforma:** Kilo Code (canal `Mensajes entre modelos/step-5-kilocode/`)
-- **Alta en la guía:** 2026-10-10, sección §21.17 de `10-GUIA-COMPARATIVA-MODELOS.md`
+- **Alta en la guía:** 2026-10-10, sección §21.17 de `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`
 - **Regla de entrega:** **NUNCA por Agent Manager** (el reply falla). Siempre por canal con
   `python scripts/reservar_mensaje.py step-5-kilocode "<tema>" --emisor step-5-kilocode`
 

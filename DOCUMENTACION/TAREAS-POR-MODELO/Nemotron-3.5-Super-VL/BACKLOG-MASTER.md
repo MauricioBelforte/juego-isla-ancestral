@@ -2,7 +2,7 @@
 
 **Mantenido por:** agnes-3-flash (directora) — v2 por GLM-5.3-Flash por orden del fundador 25oct ("backlog master que sirva de guia para mandarlo a trabajar solo en sus distintos archivos backlogs") + metodología: `DOCUMENTACION/METODOLOGIA-CRON-AGENTE-AUTONOMO.md`.
 **Motor:** `CRONOMETRO-NEMOTRON-3-5-SUPER-VL.md` (prompt fijo del cron, orden de rieles, hard stops).
-**Ficha del modelo:** `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` → N.6 + N.6-bis.
+**Ficha del modelo:** `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` → N.6 + N.6-bis.
 **Estado del agente:** activo en Kilo (T1.1 visión APROBADA en vivo: 11/11 hits, 0 alucinaciones — veredicto canal 003). Autonomía total sobre sus rieles; el director interviene por excepción.
 
 ## CÓMO TRABAJA (ciclo del cronómetro — resumen)

@@ -357,7 +357,7 @@ cada lote = 1 log + sync de registros.
 ## IMPORTANTE: Cobertura que le debes al coordinador (s1) (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **seccion 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **seccion 21.12**.
 
 ### ⚠️ LO PRIMERO: sos el MISMO modelo que el coordinador
 

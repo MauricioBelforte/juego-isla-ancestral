@@ -32,7 +32,7 @@
 ### Lo que NO sabemos todavía (honestidad)
 
 - **Cero evidencia en este repo.** Todavía no trabajaste acá. Los benchmarks son vendor-reported: hasta que no lo verifiquemos empíricamente, son promesas.
-- Tu primera entrega será verificada con la misma rigurosidad que la §21 de `10-GUIA-COMPARATIVA-MODELOS.md`.
+- Tu primera entrega será verificada con la misma rigurosidad que la §21 de `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md`.
 
 ## Reglas del protocolo (lectura obligatoria)
 
@@ -50,7 +50,7 @@
 ## IMPORTANTE: Cobertura que le debes al coordinador (Atria-Dawn-Preview)
 
 > Directiva del usuario (2026-09-20): los modelos cubren las debilidades del coordinador.
-> Registro completo: `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **sección 21.12**.
+> Registro completo: `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **sección 21.12**.
 
 El coordinador (Atria-Dawn-Preview) es **solo texto — no tiene visión bajo ninguna circunstancia**. Sus 6 defectos documentados (M-01 a M-06) incluyen:
 

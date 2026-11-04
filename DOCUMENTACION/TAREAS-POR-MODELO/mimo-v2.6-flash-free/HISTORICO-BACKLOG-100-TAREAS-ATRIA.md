@@ -89,7 +89,7 @@ agota — el director pickea de aquí cuando algo se atasca.
 47. `GUIA-BLENDER/` — los 10 archivos (V5 Hy4 vuelve: coordinar)
 48. `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` — estado de vías V1-V5
 49. `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` — fases habilitadas tras los cierres
-50. `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` — §21.21-21.23: actualizar con la vuelta 8
+50. `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` — §21.21-21.23: actualizar con la vuelta 8
 51. `AGENTS.md` — vigencia de §30 (asistentes) y §31 (identidad) tras el renombre
 52. `Mensajes entre modelos/GUIA-COMUNICACION.md` — T-12/T-15/T-19 vigentes
 53. `DOCUMENTACION/167-Isla-Raiz/` — recovery procedure vigente (post shore-fade)

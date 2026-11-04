@@ -6,7 +6,7 @@
 **Modelo:** space-bunny-alpha (proveedor anónimo / stealth OpenRouter)
 **Plataforma:** por confirmar (OpenRouter directo o `spacebunnymodel.com`)
 **Fecha de alta:** 2026-10-04
-**Ficha técnica:** `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` **§5.R**
+**Ficha técnica:** `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` **§5.R**
 **Canal:** `Mensajes entre modelos/space-bunny-alpha/`
 
 ---
@@ -132,7 +132,7 @@ español**. Son defectos distintos.
 | `exit 3` = detector ciego | Misma convención BUG-075; un `exit 0` sobre árbol no recorrido sería OK falso |
 
 **Resultado contra el repo:** 7.432 archivos escaneados · **58 con CJK (220 caracteres)** · **9
-ilegibles** · exit 1. **Elworst archivo es `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` (40)** — el
+ilegibles** · exit 1. **Elworst archivo es `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` (40)** — el
 que el usuario tiene abierto. **Y `145-Diseno-De-Experiencia/03-Diseno.md` L52 (`└──自由`) sigue sin  [cjk-gate: allow: cita del bug CJK de M145]
 arreglarse desde SB-01.**
 

@@ -3,7 +3,7 @@
 **Modelo:** GLM-5.3 Flash-Director
 **Plataforma:** Kilo Code
 **Fecha:** 2026-10-23 20:42
-**Origen:** fundador: "investigá las tareas que Beam puede hacer aprovechando sus mejores capacidades... agregá más tareas ya que Beam es muy rápido", con base en N.1/N.2 de DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md.
+**Origen:** fundador: "investigá las tareas que Beam puede hacer aprovechando sus mejores capacidades... agregá más tareas ya que Beam es muy rápido", con base en N.1/N.2 de DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md.
 
 ## Tu base de asignación (de la guía comparativa)
 
