@@ -5,7 +5,7 @@
 **Identidad canonica:** la autoevaluacion de este modelo es el **§15** de `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md`
 **Especialidad:** Assets 3D lowpoly para Blender → Godot
 **Fecha de inicio:** 2026-09-02
-**Fecha de ultima actividad:** 2026-09-10
+**Fecha de ultima actividad:** 2026-11-04 (reingreso; ver B7)
 
 ---
 
@@ -451,3 +451,55 @@ Tras cerrar 509 → 0, volvieron a aparecer **13** con BOM (12 scripts de
 los 3 bytes `EF BB BF`). Confirmación: **0 BOM** tras el commit.
 El BOM lo siguen regenerando otros agentes → el job `encoding-guard` de CI
 (`a0dd230`) es ahora la red de contención.
+
+---
+
+### B7 — Reingreso 4-nov: gate de BOM en rojo (Log 2306, commit `3614c45`)
+
+**Estado medido al volver:** HEAD `58f23fc` (2-nov), logs 1189 → **2305**,
+`MEMORY.md` consolidado por otro modelo el 2-nov (mis notas de octubre ya no
+están ahí; este backlog sí las conserva). Protocolo nuevo adoptado: pool v3
+(`reservar_log.py`), log ASCII puro + **CRLF**, canal propio de mensajes.
+Regla nueva respetada: no tocar `CHECKLIST-GLOBAL.md`, `quality.yml`,
+`AGENTS.md`, `project.godot` ni `05-Checklist` ajenos sin orden.
+
+**Hueco:** `verificar_bom.py` reportaba **96 BOM** y salía `1` → el job
+`encoding-guard` de CI estaba en rojo sobre HEAD. El conteo crudo sobre
+`git ls-files` da 160: la diferencia son ~64 backups en `Obsoletos/` que el
+verificador excluye a propósito. El job sigue vivo (`quality.yml:835`) y el
+verificador fue blindado por DeepSeek-WB en `d25580a` (UTF-16 + `U+FEFF`).
+
+**Acción:** 94 versionados limpiados (diff **1:1**, sólo los 3 bytes
+`EF BB BF`), commit `3614c45`, `add`+`commit` encadenados con
+`--pathspec-from-file`. HEAD verificado: **0 BOM** en los 94. 74 byte-exactos
+y 20 con normalización CRLF de git (`core.autocrlf=true`).
+
+**NO tocado (requiere orden):** el único BOM que el gate sigue viendo,
+`DOCUMENTACION/138-Vertical-Slice/plan-actual/05-Checklist.md`, es
+`05-Checklist` ajeno. Tampoco los 4 `U+FEFF` embebidos, las 12 colisiones de
+numeración heredadas (1290..2120) ni las entradas ajenas del worktree.
+
+**⚠️ Trampa nueva (63): medir un diff con rutas con espacios.** El primer
+`numstat` dio **1 archivo** cuando había 94: el shell partió los pathspec de
+`Mensajes entre modelos/…` por word splitting. No falló el fix, falló la
+**medición**. Usar argv de Python / `git diff -z` / `--pathspec-file-nul`.
+Corolario: con `core.autocrlf=true`, comparar disco contra `git show HEAD:p`
+da un **falso fallo** (blob LF vs disco CRLF) → normalizar antes de comparar.
+Corolario 2: `--fix` no respeta `.gitignore` y tocó un
+`NUMEROS_DISPONIBLES.txt` no versionado (inofensivo, documentado).
+
+**Discrepancia de canal:** no existe `Mensajes entre modelos/HY4/`. Hay
+backlog HY4, 2 mensajes firmados en la raíz (2-oct) y columna `Hy4` en
+`CHECKLIST-GLOBAL`. AGENTS §10.2 dice que la carpeta la crea el director →
+**no la creé**; queda pendiente de orden si hay encargo nuevo.
+
+- [x] Log reservado: **2306** — reingreso + regresión del gate de BOM.
+
+### Pendiente (sin dueño o con orden del director)
+
+- Autorización para limpiar el BOM de `M138/plan-actual/05-Checklist.md`
+  (único que mantiene el gate en rojo).
+- H-1: autoloads de localización duplicados (`project.godot`, no tocar).
+- B6: 662 rutas desactualizadas sin reescribir (riesgo trampa 60) y los
+  28 módulos ✅ que citan artefactos ausentes → decisión de Hy3/coordinador.
+- B5: 2 scripts Blender huérfanos y los 42 `.py` dentro de `game/`.
