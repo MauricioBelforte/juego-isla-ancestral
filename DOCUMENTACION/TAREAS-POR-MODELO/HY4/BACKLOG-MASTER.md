@@ -497,9 +497,61 @@ backlog HY4, 2 mensajes firmados en la raíz (2-oct) y columna `Hy4` en
 
 ### Pendiente (sin dueño o con orden del director)
 
-- Autorización para limpiar el BOM de `M138/plan-actual/05-Checklist.md`
-  (único que mantiene el gate en rojo).
+- ~~Autorización para limpiar el BOM de `M138/plan-actual/05-Checklist.md`~~
+  **RESUELTO en B8** (4-nov, autorización explícita del fundador; gate verde).
 - H-1: autoloads de localización duplicados (`project.godot`, no tocar).
 - B6: 662 rutas desactualizadas sin reescribir (riesgo trampa 60) y los
   28 módulos ✅ que citan artefactos ausentes → decisión de Hy3/coordinador.
 - B5: 2 scripts Blender huérfanos y los 42 `.py` dentro de `game/`.
+
+---
+
+## B8 — 2026-11-04 · Gate de BOM: verde, causa raíz y guardia probada en rojo
+
+**Encuadre:** el fundador autorizó (a) limpiar el único BOM que mantenía rojo el
+`encoding-guard` y (b) crear el canal `Mensajes entre modelos/HY4/`. Para el
+siguiente hueco pidió elegir lo que §15 dice que Hy4 hace mejor que la flota:
+**diagnóstico de causa raíz de tooling + cadenas multi-paso con verificación al
+final**, no documentación repetitiva ni aprobación visual (§15.5).
+
+**Medido antes de escribir:** HEAD `95aab9d`; gate `exit=1` con 1 BOM; 25 canales,
+0 HY4; pool de logs `693 libres (primero=2308)`.
+
+**Cerrado:**
+
+- [x] BOM de `M138/plan-actual/05-Checklist.md`: 3 bytes (`EF BB BF`), diff 1:1,
+  28967→28964 B. Gate real **exit 0** (verde). Quedan 4 `U+FEFF` embebidos como
+  aviso, no bloqueantes por diseño.
+- [x] Causa raíz de la reincidencia medida en 25 commits: los BOM vuelven por
+  **mensajes de canal** de otros agentes (hasta 6 por commit: `6c9eee8`,
+  `b90440a`, `8677142`) y 2 pools, no por código. La limpieza masiva de B7 trató
+  el síntoma; el gate es la contención.
+- [x] `scripts/verificar_bom.py`: `--fix` ahora respeta `.gitignore` vía
+  `git check-ignore -z --stdin`, **falla cerrado** si git no responde y escribe
+  con `os.replace` atómico (trampa 18). Modo informe/CI sin cambios.
+- [x] `scripts/test_verificar_bom.py` (nuevo): prueba end-to-end por ruta real
+  sobre repo temporal. **26 checks / 0 fallos**, `CHECKS_MINIMOS=26` medido en
+  verde. Rojo por inyección: filtro roto → 6 FAIL (exit 1); bloque no llamado →
+  CIEGO (exit 3); control → 0.
+- [x] Canal `Mensajes entre modelos/HY4/` abierto: pool 1..200 (no versionado),
+  `proximo_numero.py HY4 --consume` → **01**, mensaje de apertura + informe B8
+  escrito. Excepción §10.2 declarada en el propio `01` (normalmente lo escribe
+  el director; acá lo autorizó el fundador).
+- [x] `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` §15.9: evidencia medida de
+  esta sesión. Hy4 **ya estaba** en la guía (§15 / §5.G) → no hizo falta
+  investigar capacidades en la web ni adjudicarse áreas nuevas.
+- [x] Log reservado: **2308** — reingreso B8, gate verde, causa raíz y guardias.
+
+**Trampa nueva (64): un `--fix` que no distingue versionado de ignorado miente
+en verde local.** CI corre sobre checkout limpio y nunca ve el archivo ignorado;
+el fix local sí lo mutaba. Corolario: si `git check-ignore` falla, la única
+salida honesta es **abortar sin mutar**, no «seguir con todo». Y el piso de
+checks hay que medirlo en verde y probarlo en rojo quitando un bloque.
+
+**NO hice:** flips de marcas ajenas, QA §21.8, sellos, aprobación visual, tocar
+`AGENTS.md` / `CHECKLIST-GLOBAL.md` / `quality.yml` / `project.godot`, ni push.
+`quality.yml` sigue sin correr la suite nueva → queda pedido a la directora.
+
+**Pendiente que sigue abierto:** H-1, B6 (662 rutas + 28 módulos), B5, 12
+colisiones de numeración heredadas, y ahora: que `encoding-guard` ejecute
+`test_verificar_bom.py` (archivo protegido, requiere orden).

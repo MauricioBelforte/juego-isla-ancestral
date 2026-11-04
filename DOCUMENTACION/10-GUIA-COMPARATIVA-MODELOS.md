@@ -1771,6 +1771,25 @@ La comunicación oficial (28-08-2026) presenta a Hy4 preview como un modelo *"pa
 **Fecha:** 2026-09-06 05:45 · **Ampliada:** 2026-09-07 (§15.4 — las cuatro áreas declaradas por Tencent valoradas una por una; de las cuatro, solo 2 las sostengo con evidencia propia, 2 no me las adjudico. Número real del repo: ~3.900 `.md`, 160 módulos). **Reformulada:** 2026-09-08 (§15.3 — la debilidad de lectura de imágenes pasa de "NO fiable" a "inestable bajo carga, 4/4 OK en log 795" con la evidencia empírica de este cierre; el respaldo numérico sigue siendo obligatorio por §24 de AGENTS.md).
 **Estado:** Autoevaluación honesta agregada (§15). **Fortalezas confirmadas con evidencia:** cadenas multi-paso con verificación, contexto masivo sobre repo grande, diagnóstico de causa raíz (E-91), geometría derivada (`F_PLANO`), depuración de tooling (argv de Blender), respeto de convenciones, game dev vía motor, documentación de lecciones. **Debilidades declaradas:** lectura de imágenes intermitente y no confiable (la más grave), sin generación multimedia, iteración visual lenta, repito benchmarks sin validarlos, tendencia a sobre-documentar, dependencia del socket MCP para operaciones puntuales, no soy la opción más barata para trabajo repetitivo.
 
+### 15.9 Evidencia medida del 2026-11-04 (parcheo de huecos / gate de codificación)
+
+> Agregada por el propio Hy4 al reingresar. **No suma áreas nuevas**: confirma con
+> números medidos dos fortalezas ya declaradas en §15.2 (diagnóstico de causa raíz
+> de tooling; cadenas multi-paso con verificación al final). Va corta a propósito
+> por la debilidad de sobre-documentar declarada en §15.3.
+
+| Capacidad ya declarada | Medición del 4-nov | Artefacto |
+|---|---|---|
+| Contexto masivo sobre repo grande | `AGENTS.md` 1743 líneas + guía de comunicación 1274 + `ESTADO-PARALELO.md` 5331 + `estado_director.json` 377 claves + 25 canales, cruzados en una sesión | Log 2306 / informe de reingreso |
+| Diagnosticar causa raíz, no el síntoma | En los últimos 25 commits los BOM reaparecen en **mensajes de canal** (hasta 6 por commit), no en código. El defecto propio era `--fix` mutando archivos ignorados por git, que CI nunca ve | `scripts/verificar_bom.py` + Log 2308 |
+| Cadena multi-paso con verificación al final | 9 fixtures inyectados → gate rojo (rc=1) → 3 bloqueantes removidos → verde (rc=0) → `--estricto` rojo → `--fix` con `.gitignore` → fail-closed sin git | `scripts/test_verificar_bom.py`: **26 checks / 0 fallos**, `CHECKS_MINIMOS=26` **medido en verde** |
+| Guardia probada en ROJO antes de creerle | Filtro `.gitignore` roto → **6 FAIL (exit 1)**; bloque de suite no llamado → **CIEGO (exit 3)**; control intacto → 0. Inyección sobre copia temporal, sin tocar el repo | Log 2308 |
+
+**Sigue sin adjudicarme:** QA cruzado §21.8, aprobación visual final, generación
+multimedia e investigación científica (§15.4 sin cambios). Hy4 **ya estaba** en
+esta guía (§15 + ficha §5.G), por lo que no hizo falta investigar capacidades en
+la web: se verificaron las que el propio §15 declaraba en 2026-09-06.
+
 ---
 
 ## 16. Autoevaluación honesta — GLM-5.3 (flagship) / Kilo Code (2026-09-10)
