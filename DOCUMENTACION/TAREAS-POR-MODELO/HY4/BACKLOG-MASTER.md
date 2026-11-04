@@ -397,10 +397,22 @@ nombre del blend no quitaba el sufijo `_lowpoly`, así que
 `monton_ramas_lowpoly.blend`. Corregido → 8, y de esos 8 solo 2 eran reales.
 **Regla:** si un detector marca todo, sospechar del detector antes que del repo.
 
+### REAUDITADO 2026-11-04 (B9, Log 2310) — corrección del propio B5
+
+- **Los «2 huérfanos reales» son 0.** El detector buscaba solo `.blend`:
+  `crear_jugador_voxel.py` exporta **GLB directo** y su GLB está versionado;
+  `crear_hierba_alta_lowpoly.py` vive en `50-Vegetacion/scripts/` (no en la
+  raíz del módulo) y tiene 3 `.blend` + GLB + ficha. No hay que generar nada.
+- Los `.py` de `game/` eran **65**, no 42: crecieron 23 entre el 2-oct y el
+  4-nov. 22 se relocalizaron (sin borrar) y quedan 43 congelados por guardia.
+- Ver §B9 para el criterio de selección, el manifiesto y las guardias en rojo.
+
 ### Pendiente (requiere dueño o Blender MCP)
 
-- MCP de Blender caído en esta sesión → **no se generó ningún asset**.
-- Decidir destino de los 2 huérfanos y de los 42 `.py` de `game/`.
+- MCP de Blender caído en esta sesión → **no se generó ningún asset** (ya no
+  hace falta para los ex-huérfanos).
+- 29 scripts de autoría Blender siguen en `game/scripts/` (territorio M36/M50):
+  moverlos en bloque requiere actualizar 13 rutas citadas en documentación.
 - H-1 (localización duplicada) sigue abierto.
 
 ---
@@ -502,7 +514,8 @@ backlog HY4, 2 mensajes firmados en la raíz (2-oct) y columna `Hy4` en
 - H-1: autoloads de localización duplicados (`project.godot`, no tocar).
 - B6: 662 rutas desactualizadas sin reescribir (riesgo trampa 60) y los
   28 módulos ✅ que citan artefactos ausentes → decisión de Hy3/coordinador.
-- B5: 2 scripts Blender huérfanos y los 42 `.py` dentro de `game/`.
+- ~~B5: 2 scripts Blender huérfanos y los 42 `.py` dentro de `game/`.~~
+  **CERRADO en B9** (4-nov): 0 huérfanos reales, 22 relocalizados, 43 congelados.
 
 ---
 
@@ -542,8 +555,11 @@ final**, no documentación repetitiva ni aprobación visual (§15.5).
   investigar capacidades en la web ni adjudicarse áreas nuevas.
 - [x] Log reservado: **2308** — reingreso B8, gate verde, causa raíz y guardias.
 
-**Trampa nueva (64): un `--fix` que no distingue versionado de ignorado miente
-en verde local.** CI corre sobre checkout limpio y nunca ve el archivo ignorado;
+**Trampa nueva (B8, sin número — corregido en B9): un `--fix` que no distingue
+versionado de ignorado miente en verde local.** Nota B9: la etiqueta «64» que
+puso B8 **colisiona** con la numeración heredada de otros agentes (ya existía
+«trampa 64 = logs untracked»). Desde B9 se usan nombres descriptivos.
+CI corre sobre checkout limpio y nunca ve el archivo ignorado;
 el fix local sí lo mutaba. Corolario: si `git check-ignore` falla, la única
 salida honesta es **abortar sin mutar**, no «seguir con todo». Y el piso de
 checks hay que medirlo en verde y probarlo en rojo quitando un bloque.
@@ -552,6 +568,98 @@ checks hay que medirlo en verde y probarlo en rojo quitando un bloque.
 `AGENTS.md` / `CHECKLIST-GLOBAL.md` / `quality.yml` / `project.godot`, ni push.
 `quality.yml` sigue sin correr la suite nueva → queda pedido a la directora.
 
-**Pendiente que sigue abierto:** H-1, B6 (662 rutas + 28 módulos), B5, 12
+**Pendiente que sigue abierto:** H-1, B6 (662 rutas + 28 módulos), 12
 colisiones de numeración heredadas, y ahora: que `encoding-guard` ejecute
 `test_verificar_bom.py` (archivo protegido, requiere orden).
+
+---
+
+## B9 — 2026-11-04 · B5 cerrado: reauditoría de huérfanos + relocalización de scratch
+
+**Encuadre:** el fundador pidió seguir con B5 («si segui con eso el B5»). B5
+quedó abierto en el Log 1190 con tres decisiones pendientes. Encuadre §15:
+diagnóstico de causa raíz de tooling + cadena multi-paso con verificación al
+final. No es QA visual ni sello.
+
+**Medido antes de escribir:** HEAD `c50932e` (entre B8 y la reserva entró un
+commit ajeno `Preservación 4nov 17:27`, sin tocar paths de B5). **127**
+`crear_*.py` (126 en `tools/` + 1 en `game/`), **65** `.py` dentro de `game/`
+(57 versionados + 8 ignorados por `fix_*.py` / `gen_*.py`), **19870** archivos
+versionados escaneados para referencias. El Log 1190 hablaba de 42: crecieron
+**23** en un mes.
+
+### 1. Los «2 huérfanos reales» eran 0 (defecto del detector, no del repo)
+
+| Script citado | Realidad medida |
+|---|---|
+| `crear_jugador_voxel.py` | Declara `RUTA_SALIDA` y `export_format="GLB"`. Su salida `game/isla-ancestral/assets/3d/media/45-Arte3D_jugador_voxel.glb` existe y está versionada (`c1defbc4…`). **Nunca genera `.blend`.** |
+| `crear_hierba_alta_lowpoly.py` | No está en la raíz de `50-Vegetacion/` sino en `50-Vegetacion/scripts/` (versionado `3c152bf6…`). Produce `hierba_alta_lowpoly.blend` + `_baja` + `_media`, 3 GLB y `assets/fichas/50-Vegetacion_hierba_alta.md`. |
+
+**Trampa (nombre descriptivo, sin número): «detector de un solo formato de
+salida».** Definir huérfano como «script sin `.blend` en la raíz del módulo»
+declara huérfano a cualquier generador que exporte GLB directo o que viva en
+una subcarpeta `scripts/`. Corolario: la aserción de cierre debe ser **positiva**
+(el artefacto existe) y no solo «no encontré `.blend`». Quedó fijado con 8
+aserciones positivas en la guardia.
+
+### 2. Clasificación de los 65 `.py`
+
+- **29** scripts Blender (`import bpy`), **28** generadores/flips de un solo
+  uso, **8** otros (herramientas M100/M88/M39 y validadores).
+- **24** tienen referencias en archivos versionados; **41** no tienen ninguna
+  (escaneo completo, incluidos `.gd`, `Logs/` y `Mensajes entre modelos/`).
+- **Trampa (nombre descriptivo): «sin referencias ≠ relocalizable».**
+  `game/isla-ancestral/tools/validate_dialogues.py` no es citado por nadie y
+  sin embargo resuelve `data/dialogues` con `os.path.dirname(__file__)`:
+  moverlo lo rompería. Se dejó en su sitio.
+
+### 3. Relocalización (nunca borrado)
+
+22 scripts muertos (17 `saving/_*.py`, `_flips_t9.py`, `_parche_test_m16.py`,
+`expandir_hitos.py` y 2 `debug_*`): todos versionados, sin cambios ajenos en el
+worktree, **0 referencias**, de un solo uso y con rutas absolutas de esta
+máquina. `git mv` a **`Obsoletos/scratch-hy4-b5-2026-11-04/`** con
+`MANIFIESTO.md` (origen, destino, sha256, bytes, mtime).
+
+- **No se usó** `Obsoletos/raiz-temporales-*/`: `.gitignore:246` lo ignora y
+  explicitamente dice «se conserva en disco, no en el historial». Mover 22
+  archivos **versionados** ahí los habría sacado del repo. El destino elegido
+  está verificado como **versionable** con `git check-ignore` antes de cada `mv`.
+- `sha256` idéntico antes/después en **22/22**; 65 → **43** `.py` en `game/`.
+- Quedan sin mover: 29 de autoría Blender (M36/M50, 13 con rutas citadas en
+  docs), generadores M162, herramientas M100/M88/M39 y el validador vivo.
+
+### 4. Guardia nueva: `scripts/auditar_scratch_game.py`
+
+- `--check`: congela el inventario medido de **43** `.py`; cualquier `.py`
+  nuevo bajo `game/` → rojo. Además exige las **8 evidencias positivas** de los
+  ex-huérfanos. Resultado real: `43 / baseline 43 / nuevos 0 / faltantes 0`,
+  **exit 0**.
+- `--self-test`: end-to-end por ruta real sobre repositorios temporales.
+  **13 checks / 0 fallos**, `CHECKS_MINIMOS=13` **medido en verde**, guardia de
+  alcanzabilidad (si un bloque no se llamó → CIEGO exit 3) y guardia de ceguera
+  (árbol sin `.py` → exit 3, nunca verde heredado).
+- **Probado en rojo por inyección (4 mutaciones):** detector que nunca marca
+  nuevos → 3 FAIL (exit 1); bloque S4 no llamado → CIEGO (exit 3); evidencias
+  positivas hardcodeadas en `True` → FAIL del control negativo (exit 1); guardia
+  CIEGO removida → FAIL (exit 1). Control intacto → 0.
+
+### 5. Cierre y corrección de numeración
+
+- [x] Reauditoría: **0 huérfanos reales**; no se generó ningún asset.
+- [x] 22 scripts relocalizados con manifiesto y sha256 verificado.
+- [x] Guardia nueva, 13/0 en verde y 4 guardias en rojo.
+- [x] Corregida la etiqueta «trampa 64» que B8 se adjudicó: **colisiona** con
+  la numeración heredada de otros agentes. Desde B9, nombres descriptivos.
+- [x] Log reservado: **2310** · mensaje **02** del canal HY4.
+
+**NO hice:** flips de marcas ajenas, QA §21.8, sellos, aprobación visual, tocar
+M18-BIS (MiMo) / M19 / `CHECKLIST-GLOBAL.md` / `quality.yml` / `AGENTS.md` /
+`project.godot` / `05-Checklist.md` ajenos, ni push. Mensaje `02-` (no `002-`
+como sugiere el helper) para conservar el orden lexicográfico con el `01-` del
+hilo; el helper parsea `^(\d{1,3})-` y sigue devolviendo el número correcto.
+
+**Pendiente:** que la directora autorice ejecutar en `encoding-guard` las dos
+suites (`test_verificar_bom.py` y `auditar_scratch_game.py --self-test`); hoy
+existen y pasan, pero CI no las corre. Y la decisión de los dueños M36/M50
+sobre los 29 scripts de autoría que siguen en `game/`.
