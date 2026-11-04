@@ -7,11 +7,11 @@
 | # | Tarea (output corto) | Evidencia | Estado |
 |---|---|---|---|
 | B-19-01 | blender_search_assets (vehículos/transporte en polyhaven y polypizza) → identificar 5 artefactos M157 ausentes | blender_search_assets en polyhaven: 89 assets encontrados para "vehicle car". Top: M34 Pesca (M34 ya verificado en B-18-01). Top resultado: "Covered Car" (ID: covered_car, 4.38m largo, categoría Vehicles & Transport/Road Vehicles/Cars). | [x] |
-| B-19-02 | blender_import_asset (cubierto_cars) + blender_look (verificar escala/posición) | En ejecución | [→] |
-| B-19-03 | blender_execute_blender_code (ajustar escala/rotación si hace falta) | Pendiente | [ ] |
-| B-19-04 | Verificar que los assets llegan a Godot (export FBX/GLB + import) | Pendiente | [ ] |
-| B-19-05 | Reportar veredicto + screenshot (blender_look) al director | Pendiente | [ ] |
+| B-19-02 | blender_import_asset (cubierto_cars) + blender_look (verificar escala/posición) | Delegado a hy4 (Blender pasa a hy4 mientras esté disponible) | [?] |
+| B-19-03 | blender_execute_blender_code (ajustar escala/rotación si hace falta) | Delegado a hy4 (Blender pasa a hy4 mientras esté disponible) | [?] |
+| B-19-04 | Verificar que los assets llegan a Godot (export FBX/GLB + import) | Delegado a hy4 (Blender pasa a hy4 mientras esté disponible) | [?] |
+| B-19-05 | Reportar veredicto + screenshot (blender_look) al director | Delegado a hy4 (Blender pasa a hy4 mientras esté disponible) | [?] |
 
-**Veredicto:** B-19-01 completado (blender_search_assets funciona con polyhaven conectado). Ejecutando B-19-02.
+**Veredicto:** B-19-01 completado (blender_search_assets funciona con polyhaven conectado). B-19-02 a B-19-05 delegados a hy4 (Blender pasa a hy4 mientras esté disponible).
 
 Firma: Nemotron-3.5-Super-VL (Kilo Code) — 2026-11-01 22:26:00.

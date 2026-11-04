@@ -121,13 +121,13 @@ Firma: GLM-5.3-Flash (agente / Kilo Code) — 2026-10-25 20:20.
 - submarino = Perla Ancestral (subagua, -40m)
 - locomotora = Gran Vapor (riel, M68 condicional)
 
-- [→] B-19-01: blender_search_assets polyhaven/polypizza: 'boat'/'canoe' → Barquita de Aurora
-- [ ] B-19-02: blender_search_assets: 'blimp'/'hot air balloon' → Globo del Viento
-- [ ] B-19-03: blender_search_assets: 'submarine' → Perla Ancestral
-- [ ] B-19-04: blender_search_assets: 'steam train'/'locomotive' → Gran Vapor
-- [ ] B-19-05: blender_import_asset + blender_look (verificar escala/posición de cada uno)
-- [ ] B-19-06: blender_execute_blender_code (ajustar escala: barco ~5m, dirigible ~12m, submarino ~8m, tren ~15m)
-- [ ] B-19-07: Exportar FBX/GLB + verificar import en Godot
-- [ ] B-19-08: Reportar 4 screenshots (blender_look) + veredicto al director
+- [→] B-19-01: blender_search_assets polyhaven/polypizza: 'boat'/'canoe' → Barquita de Aurora — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-02: blender_search_assets: 'blimp'/'hot air balloon' → Globo del Viento — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-03: blender_search_assets: 'submarine' → Perla Ancestral — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-04: blender_search_assets: 'steam train'/'locomotive' → Gran Vapor — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-05: blender_import_asset + blender_look (verificar escala/posición de cada uno) — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-06: blender_execute_blender_code (ajustar escala: barco ~5m, dirigible ~12m, submarino ~8m, tren ~15m) — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-07: Exportar FBX/GLB + verificar import en Godot — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
+- [ ] B-19-08: Reportar 4 screenshots (blender_look) + veredicto al director — [?] delegado a hy4 (Blender pasa a hy4 mientras esté disponible)
 
 **Fuente:** fundador 22:30 (vehicles.json: 4 vehículos, NO autos) + GLM #33 + Poly Haven activado
