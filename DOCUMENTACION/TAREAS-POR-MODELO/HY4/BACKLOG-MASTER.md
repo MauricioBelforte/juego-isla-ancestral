@@ -663,3 +663,20 @@ hilo; el helper parsea `^(\d{1,3})-` y sigue devolviendo el número correcto.
 suites (`test_verificar_bom.py` y `auditar_scratch_game.py --self-test`); hoy
 existen y pasan, pero CI no las corre. Y la decisión de los dueños M36/M50
 sobre los 29 scripts de autoría que siguen en `game/`.
+
+## B10 - 2026-11-04 · Columna rota M25 (autoría headless independiente)
+
+- [x] Hueco real medido: `CHECKLIST-OBJETOS-BLENDER.md` L174 `[ ] Columna rota (2 variantes de altura)`; 0 `.blend`/GLB de columna en M25.
+- [x] Generador `25-Ruinas-Templos/scripts/crear_columna_rota_lowpoly.py`: 2 alturas (1.50 / 2.20 m), 12 `SM_` por variante.
+- [x] 6 `.blend` (ALTA/MEDIA/BAJA × 2), 12 capturas orbitales y 2 hojas de 6 capturas, 100 % headless sin socket 9876.
+- [x] `chk_asset.py`: cada blend pasa **su** perfil M166; `z_min=0.0450` en los 6.
+- [x] Guardias positivas: altura real (1.4900 / 2.1900), apoyo por pieza (6/6 en 0.0450) y unión fuste/corona en `z1` sin aire.
+- [x] 4 iteraciones, todas con regeneración completa: ningún artefacto de una versión anterior del generador.
+- [x] Log **2311** · mensaje **03** del canal HY4.
+
+**Decisión de binarios:** `.gitignore:228` (`*.blend`, «usar Git LFS si se necesitan») y `.gitignore:104` (`**/capturas/`) los ignoran a propósito. No se hizo `git add -f`: el único entregable versionable es el generador; los `.blend`/PNG/JPG quedan como artefactos locales reproducibles.
+
+**NO hice:** flip de L174 (se propone), QA §21.8, sellos, aprobación visual, export GLB, tocar archivos protegidos ni cambios ajenos (Hy3), push, `--amend`, `add -A`.
+
+**Pendiente (dirección):** P1 flip L174 · P2 Git LFS sí/no · P3 `exportar_godot.py` si el asset entra al juego · P4 aprobación visual por otro modelo.
+
