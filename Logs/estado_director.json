@@ -1086,22 +1086,7 @@
   },
   "deepseek_reactivado": "#404: M53 L159 [x] confirmada (contraste 12.04:1 AAA) + 2 defectos guardian + 5 [ ] M53 (1 propio+3 deps+1 diseno). DeepSeek REACTIVADO (volveria del idle 13h). M53 casi sellable.",
   "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
-  "sellos_218": {
-    "vigentes": [
-      "M28-Viajes 129/130",
-      "M65-Animales-IA 90/90",
-      "M73-Coleccionables 131/135",
-      "M77-Online-Y-Red 130/130 (gate-2 Hy3 #409)",
-      "M75-Postgame 130/130 (L182 flip #418, gate-2 Hy3 #412/Log 2204)",
-      "M72-Sistema-De-Logros 200/0/0 (L180 desinflado, gate-2 Hy3 #415/Log 2207)",
-      "M87-Localizacion 140/0/0 (gate-1 agnes, gate-2 Hy3 #433/Log 2231, 169 checks/0)",
-      "M53-UI-UX 159/3/2 sello-modulo-deuda (gate-1 agnes, gate-2 Hy3 #433, 0 falsos-verdes)",
-      "Herencia gate-2 Hy3 (9to) — PLAYBOOK-GATE2 + GUIA-GODOT/13 + red_probe_event_bus.py + regla MODEL-AGNOSTIC; gate-1 agnes + gate-2 Hy3 #445 runtime, 0 huecos"
-    ],
-    "total": "9 sellos vigentes (29oct): M28/M65/M73/M77/M75/M72/M87/M53 + herencia-gate-2-Hy3(9to)",
-    "caveat": "M60 (inflado T224, 189/3/4 real), M92 (185/0/0 inflado //tutorial ausente), M55 (122/7/2 estetica cozy), M48/M53 (TIE/deuda externa). M53 presentable 159/3/2/1 → decision fundador: sello-modulo-deuda vs esperar M91/M61/M88.",
-    "aplicado_por": "agnes-3-flash (Kilo Code) 2026-10-28 08:30"
-  },
+  "sellos_218": 13,
   "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
   "ling_design_docs": {
     "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -2279,5 +2264,63 @@
     },
     "sellos": "12 vigentes (sin cambio)",
     "go_fundador": "4 pendientes: frente-codigo-alpha / M106 GCP / marca M01 / BUG-153 macro"
+  },
+  "crons_apagados_6nov": {
+    "cuando": "6nov 22:05",
+    "quien": "agnes-3-flash (Sapiens AI) / Kilo Code",
+    "fundador": "termina lo que estas haciendo y apaga tus cronometros hasta nuevo aviso",
+    "ids_borrados": {
+      "A": "wku_1ae5989e3001zjeK6jhySTVVZB",
+      "B": "wku_1ae59c521001muuNyf5r2q0G2W",
+      "C": "wku_1ae5a06f6001co7twLwrFp4n2G",
+      "D": "wku_1ae5a3de3001PboQDq9whsXoay"
+    },
+    "estado": "APAGADOS. No disparar mas hasta orden del fundador."
+  },
+  "crons_apagados": true,
+  "step5_fuera": {
+    "cuando": "6nov 22:12",
+    "quien": "fundador",
+    "nota": "Step-5 no disponible. M17/M129 codigo reasignados a DS-OC"
+  },
+  "nemotron_desbloqueado": {
+    "cuando": "6nov 22:10",
+    "asignaciones": {
+      "M64": "Hy3 (gate-2)",
+      "M37": "Hy3 (QA, 7 items)",
+      "M17": "DS-OC (codigo)",
+      "M129": "Hy4 (3D) + DS-OC (codigo+boot)",
+      "mouse_filter_bug": "Hy3 (gate-2 runtime)"
+    },
+    "mensajes": [
+      "Nem 273",
+      "Hy3 494",
+      "DS-OC 249"
+    ]
+  },
+  "flota_6nov_actual": [
+    "agnes",
+    "Hy3",
+    "Hy4",
+    "DS-OC",
+    "Nemotron",
+    "GLM",
+    "Ling (reactivado)"
+  ],
+  "fuera_flota": [
+    "Step-5",
+    "MiMo",
+    "kimi-k3",
+    "DeepSeek-WB",
+    "ox-alpha"
+  ],
+  "sello_14_m64": {
+    "cuando": "6nov 23:12",
+    "modulo": "M64 IA-NPC",
+    "gate1": "DS-OC (109/119)",
+    "gate2": "Hy3 (red_probe 54 señales, 19 muertas, SOSTENIDO)",
+    "verificador": "Hy3 (≠ autor MiMo inactivo)",
+    "sello": "agnes-3-flash (Sapiens AI) / Kilo Code",
+    "nota": "MiMo inactivo, Hy3 tomo M64. 109/119 = core testeable sellado. 7 [ ] restantes = no-sellable total."
   }
 }

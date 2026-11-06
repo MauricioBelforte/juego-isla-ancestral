@@ -1,0 +1,10 @@
+CENSOR RIEL v40 (metodo git blob sha) — 4091de8
+manager WT=047eab5ff111 HEAD=047eab5ff111 INTACTO=True
+pt.po   WT=d2b567c48e88 HEAD=d2b567c48e88 INTACTO=True
+pt.po msgids(regex ^msgid ", sin header): 276
+.mo en game/ recursivo: 0
+WT status porcelain count: 25
+git diff HEAD riel i18n: ''
+git log -3 -- Logs: 4091de8 Se preservaron avances de la jornada 6nov: acuses cron A/B/D (Hy3 491-493, Hy4 28-29, Nemotron 270-272), clarificacion B-12 bloqueos inactivos, estado_director, BACKLOGS/ || 390652a feat(blend
+git log -3 -- DOC ling: 4091de8 Se preservaron avances de la jornada 6nov: acuses cron A/B/D (Hy3 491-493, Hy4 28-29, Nemotron 270-272), clarificacion B-12 bloqueos inactivos, estado_director, BACKLOGS/ || 9e08a34 Se preserv
+REFERENCIA v39: manager 047eab5ff111; pt.po d2b567c48e88; HEAD 4091de8.
