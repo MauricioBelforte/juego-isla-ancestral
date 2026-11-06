@@ -23,7 +23,7 @@
 
 ## Decisiones de #07 — acusadas, pendientes de ejecutar
 
-- [ ] **D-01 (prioridad alta)**: re-hornear M50 con `reescalar_v5.py` + commit. Criterio de cierre: `auditar_escalas_vegetacion.py --check` de 2/10 → 10/10.
+- [ ] **D-01 (prioridad alta)**: re-hornear M50 con `reescalar_v5.py` + commit. **Criterio de cierre corregido por B13**: `--check` → 10/10 **con ALTA+MEDIA+BAJA**. El «2/10 → 10/10» aquí escrito era un veredicto MEDIA-only; con la guardia corregida la línea de base real es **1/10** (`fuera por perfil: alta=9, media=8, baja=8`). Alcance aún pendiente de definir por la directora (solo MEDIA o los 3 perfiles); ver mensaje 09 y Log 2319.
 - [x] **D-02**: NO regenerar la estrella. Reportado al fundador vía directora; queda registrado que el generador no reproduce el GLB de disco.
 - [ ] **D-03**: 13 flips `[ ]` → `[x]` con cita en `CHECKLIST-OBJETOS-BLENDER.md`. Autorizado; va en commit propio, no colgado de CI.
 - [x] **D-04**: los 2 `[ ]` del pez se dejan como están. Confirmado.

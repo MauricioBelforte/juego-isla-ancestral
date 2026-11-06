@@ -4,11 +4,21 @@ Auditor de escalas M50 (B11, Hy4, 2026-11-05).
 
 Mide la altura REAL (eje Y glTF) de los 10 GLB de vegetacion horneados por
 `reescalar_v5.py` y la compara con la tabla OBJETIVOS de ese mismo script.
+Mide los TRES perfiles (alta/media/baja) y exige que los tres cumplan.
 
 No modifica ningun asset: solo mide. Existe porque el checklist de M50
 declara "10/10 GLBs horneados a su altura objetivo" mientras `escalas.json`
 tiene todos los multiplicadores en 1.0; si el horneado se pierde, el runtime
 renderiza la altura cruda del GLB sin que ningun gate lo detecte.
+
+CORRECCION B13 (2026-11-05): la version B11 media los 3 perfiles pero decidia
+el veredicto SOLO con `h['media']`. `reescalar_v5.py` hornea unicamente
+`assets/3d/media/`, asi que re-hornear podia dar un 10/10 con ALTA y BAJA
+todavia des escalados: un FALSO VERDE por medicion a medias. Ahora el
+veredicto es positivo sobre los 3 y el selftest lo prueba EN ROJO con una
+fila sintetica donde MEDIA esta bien y ALTA/BAJA no. La columna de delta
+tambien paso a mostrar la PEOR desviacion de los 3 perfiles (antes era
+solo MEDIA y una fila FUERA podia exhibir un delta dentro de tolerancia).
 
 Uso:
     python scripts/auditar_escalas_vegetacion.py --check
@@ -39,7 +49,8 @@ TOLERANCIA = 0.05
 N_OBJETIVOS = 10
 
 # MEDIDO en verde con --self-test antes de fijarlo.
-CHECKS_MINIMOS = 21
+# B11: 21. B13: 26 (se agregaron los 5 checks del bloque E, medidos en verde).
+CHECKS_MINIMOS = 26
 
 
 # --------------------------------------------------------------------------
@@ -144,6 +155,16 @@ def cumple(medido, objetivo, tolerancia=TOLERANCIA):
     return abs(medido - objetivo) <= tolerancia
 
 
+def cumple_fila(alturas, objetivo, tolerancia=TOLERANCIA):
+    """Un asset cumple SOLO si cumplen los 3 perfiles (B13).
+
+    Funcion pura y separada de cmd_check para poder probarla EN ROJO: el
+    defecto de B11 era que el veredicto se tomaba con un unico perfil.
+    """
+    return all(perfil in alturas and cumple(alturas[perfil], objetivo, tolerancia)
+               for perfil in PERFILES)
+
+
 def medir_todos():
     filas = []
     for nombre, objetivo in objetivos():
@@ -178,18 +199,29 @@ def cmd_check():
     filas = medir_todos()
     assert len(filas) == N_OBJETIVOS, 'CIEGO: se midieron %d filas' % len(filas)
     print('%-22s %8s %8s %8s %8s %8s' %
-          ('asset', 'objetivo', 'ALTA', 'MEDIA', 'BAJA', 'delta'))
+          ('asset', 'objetivo', 'ALTA', 'MEDIA', 'BAJA', 'peor_d'))
     ok = 0
+    fuera_por_perfil = dict((p, 0) for p in PERFILES)
     for nombre, objetivo, h in filas:
-        bueno = cumple(h['media'], objetivo)
+        bueno = cumple_fila(h, objetivo)
         ok += int(bueno)
+        for p in PERFILES:
+            fuera_por_perfil[p] += int(not cumple(h[p], objetivo))
+        # B13: el delta tampoco puede ser solo de MEDIA. Sin esto, flor_isla
+        # mostraba -0.006 (MEDIA, dentro de tolerancia) en una fila FUERA
+        # por su ALTA de 1.266: otra vez la mitad presentada como el todo.
+        peor_d = max((h[p] - objetivo for p in PERFILES), key=abs)
         print('%-22s %8.2f %8.3f %8.3f %8.3f %+8.3f  %s' %
               (nombre, objetivo, h['alta'], h['media'], h['baja'],
-               h['media'] - objetivo, 'OK' if bueno else 'FUERA'))
-    print('cumplen objetivo en MEDIA: %d/%d' % (ok, N_OBJETIVOS))
+               peor_d, 'OK' if bueno else 'FUERA'))
+    print('peor_d = mayor desviacion entre ALTA, MEDIA y BAJA (no solo MEDIA)')
+    print('cumplen en ALTA+MEDIA+BAJA: %d/%d' % (ok, N_OBJETIVOS))
+    print('fuera por perfil: ' + ', '.join('%s=%d' % (p, fuera_por_perfil[p])
+                                           for p in PERFILES))
     print('fuente: tools/mcp/blender-mcp/scripts-reutilizables/reescalar_v5.py')
     if ok != N_OBJETIVOS:
-        print('DERIVA DETECTADA: %d GLB fuera de objetivo.' % (N_OBJETIVOS - ok))
+        print('DERIVA DETECTADA: %d GLB fuera de objetivo en ALGUN perfil.'
+              % (N_OBJETIVOS - ok))
         return 2
     return 0
 
@@ -247,14 +279,29 @@ def cmd_self_test():
        'las 30 alturas reales son positivas')
     # Positivo: el detector ve la deriva documentada hoy. Si alguien re-hornea,
     # este check cambia de valor pero NO debe romperse (mide, no consagra).
-    fuera = sum(1 for _, o, h in filas if not cumple(h['media'], o))
+    fuera = sum(1 for _, o, h in filas if not cumple_fila(h, o))
     ck(0 <= fuera <= N_OBJETIVOS, 'conteo de deriva dentro de rango')
+
+    # Bloque E (B13): el veredicto exige los 3 perfiles, probado EN ROJO.
+    # Sin este bloque, regresar a decidir solo por MEDIA daria verde.
+    ejecutado.add('E')
+    ck(cumple_fila({'alta': 6.0, 'media': 6.0, 'baja': 6.0}, 6.0),
+       'verde: los 3 perfiles en objetivo')
+    ck(not cumple_fila({'alta': 3.88, 'media': 6.0, 'baja': 6.0}, 6.0),
+       'ROJO: MEDIA bien pero ALTA des escalada NO debe pasar')
+    ck(not cumple_fila({'alta': 6.0, 'media': 6.0, 'baja': 3.88}, 6.0),
+       'ROJO: MEDIA bien pero BAJA des escalada NO debe pasar')
+    ck(not cumple_fila({'alta': 3.88, 'media': 3.88, 'baja': 3.88}, 6.0),
+       'ROJO: los 3 perfiles fuera NO deben pasar')
+    ck(not cumple_fila({'media': 6.0}, 6.0),
+       'ROJO: perfil ausente NO pasa por omision')
 
     # Guardia de ceguera: todos los bloques corrieron y el piso es real.
     ejecutado.add('FIN')
-    if ejecutado != {'A', 'B', 'C', 'D', 'FIN'}:
+    bloques = {'A', 'B', 'C', 'D', 'E', 'FIN'}
+    if ejecutado != bloques:
         print('CIEGO: bloques no ejecutados: %s' %
-              sorted({'A', 'B', 'C', 'D', 'FIN'} - ejecutado))
+              sorted(bloques - ejecutado))
         return 3
     if checks[0] < CHECKS_MINIMOS:
         print('CIEGO: checks=%d < minimo=%d' % (checks[0], CHECKS_MINIMOS))
