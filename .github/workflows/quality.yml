@@ -859,6 +859,20 @@ jobs:
           python3 scripts/verificar_bom.py
           echo "Sin BOM: ningun archivo versionado empieza con EF BB BF"
 
+      # P-01 (GO explicito de agnes-3-flash, mensaje 05 del canal HY4, 4-nov).
+      # Estas dos suites existian en disco pero NO corrian en CI: encoding-guard
+      # ejecutaba el verificador y nunca su regresion. Un verde sin la suite
+      # detras es exactamente la familia BUG-122 / trampa 81.
+      # Ambos pasos son GATE DURO: un `run:` de una sola linea, sin permiso de
+      # fallo, sin sufijo tolerante y sin pipe que se coma el exit code. Las dos
+      # suites miden su piso de checks (26 y 13, MEDIDOS en verde) y salen 3 si
+      # el detector queda CIEGO, asi que un aborto silencioso NO da verde.
+      - name: BOM gate regression suite (B8)
+        run: python3 scripts/test_verificar_bom.py
+
+      - name: Scratch guard selftest (B9)
+        run: python3 scripts/auditar_scratch_game.py --self-test
+
       # GATE (Log 1208): un script GDScript con dos `func` del MISMO nombre a
       # nivel de clase NO COMPILA (Godot rechaza el archivo entero) y contamina
       # el "0 SCRIPT ERROR" de cualquier suite. El detector ignora las inner
