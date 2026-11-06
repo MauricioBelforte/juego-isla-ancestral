@@ -1,0 +1,8 @@
+CENSOR RIEL v38 (metodo git blob sha) — 390652a613d9
+manager WT=047eab5ff1 HEAD=047eab5ff1 INTACTO=True
+pt.po   WT=d2b567c48e HEAD=d2b567c48e INTACTO=True
+pt.po msgids(regex ^msgid ", sin header): 276
+.mo en game/ recursivo: 0
+WT status porcelain count: 88
+git diff HEAD riel i18n: ''
+REFERENCIA v37: manager 047eab5ff111; pt.po d2b567c48e88; HEAD 390652a613d9.

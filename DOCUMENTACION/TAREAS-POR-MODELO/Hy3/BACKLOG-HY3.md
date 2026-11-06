@@ -8,13 +8,15 @@ conteo cuando dos lectores difieren, verificacion de reproducibilidad de bugs es
 - [x] Encuesta M144-PostLanzamiento (106/106 medido, 0 [?]; Totales L168-172 STALE): RF1-RF9 VERIFICADOS en 03-Diseno; drift reportado (canal 485 / Log 2322)
 - [x] Encuesta M16-Crafting (187/203 vivo; GLOBAL 187/203 OK; linea 188/203 DESFASADA): 22 RF-MR (20[x]+2[?]: RF-MR9 stations.json ausente=[?] real, RF-MR19 sin CHECKS_MINIMOS=[?] honesto) + 16 [?] total. DEGRADADO-2026-10-22 OBSOLETOS (03-Diseno ya tiene "Contrato del bloque MR"). Log 2324 / canal 487. Propuestas director: corregir linea a 187/203+16[?]; limpiar notas DEGRADADO; NO flip RF-MR9/RF-MR19.
 - [x] Encuesta M77-Online (108/130 STALE -> 130/0/0 vivo): matriz net_contract.json VERIFICADA en disco (L201); L21/L203 grep 0 OK; 3 duplicados de marca; GAP L202 validate_net_contract.gd AUSENTE -> escalado al director. Log 2329 / canal 489.
-- [ ] Encuesta M151-Control (155/167): baterias 1-5 G-5.3 + 5 flags del fundador (verificar esquema de evitacion)
+- [x] Encuesta M151-Control (156/167 vivo: 156[x]/6[ ]/5[?]; 6[ ]=5 FLAG FUNDADOR L196/L197/L226/L227/L228 + 1 TEC M60 L148): baterias 1-5 G-5.3 VERIFICADAS en 03-Diseno (L88/145/208/264/326/392); esquema evitacion OK (flags honestos [ ], no falseados). Log 2334 / canal 490. BACKLOG "155/167" STALE -> 156/167.
 
 ## COLA B - Items reproducibles/confirmables (scan 22oct):
 
-- [ ] (67-Vehiculos) - [ ] Confirmar 130 ítems exactos [S]
-- [ ] (75-Postgame) - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
-- [ ] (77-Online-Y-Red) - [ ] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S]
+- [x] (67-Vehiculos) - [x] Confirmar 130 ítems exactos [S] -> REFUTADO: plan-actual = 131 ítems (38[x]/76[ ]/17[?]); GLOBAL 38/131 coherente; no sellado (AMARILLO "Con dudas"). Log 2337 / canal 491.
+- [x] (75-Postgame) - [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] -> count 130 ✓ + igualdad por conteo ✓ (130==130); NO sellado (sello §21.8 INVALIDADO DS-OC #233; 87[?] abiertas). Log 2337 / canal 491.
+- [x] (77-Online-Y-Red) - [x] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] -> CONFIRMADO 130/0/0, sellado (Sello §21.8 agnes 2026-10-26); caveat 3 marca-dup + validate_net_contract.gd ausente (canal 489). Log 2337 / canal 491.
+
+**Nota Hy3 (2026-11-06, canal 491 / Log 2337):** COLA A y COLA B ahora sin `[ ]`. Resta COLA C (tiebreaker agnes↔DS-WB) sin disparador. Backlog requiere reposición del director para la próxima vuelta.
 
 ## COLA C - Tiebreakers en espera (condicionales):
 - [ ] Si agnes y DS-WB discrepan en un conteo (patron live del dia: M108 202/205 vs 209/210) - emite veredicto tercer-verificador

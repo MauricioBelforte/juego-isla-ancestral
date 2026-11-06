@@ -46,3 +46,11 @@
 - [x] Log creado: **2330** — Tanda #343 vuelta 2: 7 veredictos i18n/doc (tanda 25/25 cerrada); bug_156 triageado DeepSeek #491; compilador MO propio PASS (autocorrección 1/3)
 
 - [x] Log creado: **2331** — Vuelta 34: centinela corregido a git-blob-sha (alarma falsa manager resuelta), riel PT íntegro (manager 047eab5ff111 / pt.po d2b567c48e88 WT==HEAD), watchdog i18n LIMPIO, wiring CI quality.yml L679 verificado, detector 6ª hora invariantes estables
+
+- [x] Log creado: **2333** — Vuelta 35: riel PT íntegro (manager 047eab5ff111 / pt.po d2b567c48e88 WT==HEAD), escrituras v34 versionadas en git por Cron C (9e08a34), watchdog LIMPIO, detector 7ª hora 0 delta, HEAD 9e08a34, WT 127→4
+
+- [x] Log creado: **2336** — Vuelta 36: riel íntegro post 60f2e00 (HY4 M25, 9 files docs+GLB, no toca i18n), manager 047eab5ff111 / pt.po d2b567c48e88 WT==HEAD, watchdog LIMPIO, detector 8ª hora 0 delta (invariantes 9ª hora), estado_director 391 claves 0 cambios vs v35, HEAD 60f2e00, autocorrección §12.1 ruta detector
+
+- [x] Log creado: **2339** — Vuelta 37: riel íntegro post 390652a (HY4 M25 capitel, no toca i18n), manager 047eab5ff111 / pt.po d2b567c48e88 WT==HEAD, watchdog LIMPIO, detector 9ª hora [x]=22649 congelado 3ª hora (10ª hora invariantes), estado_director 391 claves 0 cambios vs v36, agnes en COLA B M67/M75/M77 (anti-loop), autocorrección §12.1 SyntaxError propio
+
+- [x] Log creado: **2343** — Vuelta 38: riel íntegro post-390652a (manager 047eab5ff111 / pt.po d2b567c48e88 WT==HEAD), watchdog LIMPIO, detector 11ª hora [x]=22649 congelado (invariantes v34-v38), estado_director 391 claves 0 cambios vs v37, Cron C SIN commit desde 9e08a34 (observación a directora, no bloqueante), WT 91 dinámico (Nemotron activo), salud pools verificada (fallos ajenos), huecos Ling 210/212 nuevos reportados (saneo fundador)

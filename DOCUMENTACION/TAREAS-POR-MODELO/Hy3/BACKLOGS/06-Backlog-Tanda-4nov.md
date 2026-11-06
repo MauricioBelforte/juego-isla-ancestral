@@ -5,13 +5,13 @@
 **Estado:** [→] En progreso
 
 ## Bloque 1: Verificar BUG-155 fix en M73 (3)
-- [→] G1-01: Correr boot headless → verificar `achievement_service.gd:156` resuelve `colecciones` correctamente (no null)
-- [ ] G1-02: Grep `test_coleccionables` o suite de logros → 0 SCRIPT_ERROR
-- [ ] G1-03: Verificar que `categoria_completed` se emite (red_probe_event_bus)
+- [x] G1-01: Correr boot headless → verificar `achievement_service.gd:156` resuelve `colecciones` correctamente (no null) — CONFIRMADO (null-guards L155-158 + boot 0 SCRIPT_ERROR)
+- [x] G1-02: Grep `test_coleccionables` o suite de logros → 0 SCRIPT_ERROR — CONFIRMADO headless (0 fallos, exit 0)
+- [x] G1-03: Verificar que `categoria_completed` se emite (red_probe_event_bus) — CONFIRMADO headless (ROJO 3/4→0, VERDE 4/4→1; aridad 3)
 
 ## Bloque 2: M129 BUG-070 verificación (2)
-- [ ] G2-01: grep `pipeline.*3d|mockup.*merch|render.*merch` en plan-actual M129 → ¿hay artefacto?
-- [ ] G2-02: grep `stock_control|StockControl` en scripts/ → ¿existe? Si sí → BUG-070 resuelto → M129 sello 13°
+- [x] G2-01: grep `pipeline.*3d|mockup.*merch|render.*merch` en plan-actual M129 → 0 artefacto (L134 `[?]` REVERTIDO BUG-070 lote 7, honesto). Log 2342.
+- [x] G2-02: grep `stock_control|StockControl` en código (repo) → 0 hits. BUG-070 NO resuelto → M129 NO sello 13°. Log 2342.
 
 ## Bloque 3: M107 reconciliación (3)
 - [ ] G3-01: M107 body 182/182 vs GLOBAL 177/182 vs Totales 168/9 → reconciliar conteo real

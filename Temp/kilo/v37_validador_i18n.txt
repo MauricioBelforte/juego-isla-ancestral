@@ -1,0 +1,51 @@
+=== WATCHDOG i18n oficial v37 (scripts/validar_i18n_integridad.py) ===
+rc=0
+--- stdout ---
+=== Validador de integridad i18n (M87, Bloque C) ===
+JSON: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\game\isla-ancestral\data\localizacion
+.po : D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\game\isla-ancestral\locales
+
+[ES] 170 claves
+[EN] 170 claves
+[PT] 170 claves
+
+--- Paridad de claves ---
+es->en: 0 solo-es, 0 solo-en
+es->pt: 0 solo-es, 0 solo-pt
+en->pt: 0 solo-en, 0 solo-pt
+
+--- Paridad de placeholders por clave común ---
+discrepancias: 0
+
+--- Copias ES->PT (valores idénticos) ---
+cognatos/neutrales (ok): 31
+sospechosos de copia no traducida: 4
+    REVISAR SETTINGS.HORAS_1 = '1 hora'
+    REVISAR SETTINGS.HORAS_H = '%d horas'
+    REVISAR SETTINGS.MIN_1 = '1 minuto'
+    REVISAR SETTINGS.MIN_M = '%d minutos'
+
+--- Estado cruzado JSON<->.po (insumo conciliación msg 153) ---
+comunes: 159 | solo-JSON: 11 | solo-.po: 117
+    solo-JSON: msg.inventario_lleno
+    solo-JSON: msg.no_materiales
+    solo-JSON: msg.nuevo_dia
+    solo-JSON: npc.adios
+    solo-JSON: npc.hola
+    solo-JSON: ui.diario
+    solo-JSON: ui.guardar
+    solo-JSON: ui.inventario
+    solo-JSON: ui.mapa
+    solo-JSON: ui.opciones
+    solo-JSON: ui.tienda
+    (las 117 solo-.po se listan con --verbose)
+
+=== VEREDICTO ===
+LIMPIO: estructura íntegra. 5 advertencia(s) informativa(s).
+  aviso: copia-ES:SETTINGS.HORAS_1
+  aviso: copia-ES:SETTINGS.HORAS_H
+  aviso: copia-ES:SETTINGS.MIN_1
+  aviso: copia-ES:SETTINGS.MIN_M
+  aviso: divergencia po/json: 159/11/117
+
+--- stderr ---

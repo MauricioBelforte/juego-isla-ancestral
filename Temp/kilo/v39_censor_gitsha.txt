@@ -1,0 +1,10 @@
+CENSOR RIEL v39 (metodo git blob sha) — 390652a613d9
+manager WT=047eab5ff1 HEAD=047eab5ff1 INTACTO=True
+pt.po   WT=d2b567c48e HEAD=d2b567c48e INTACTO=True
+pt.po msgids(regex ^msgid ", sin header): 276
+.mo en game/ recursivo: 0
+WT status porcelain count: 105
+git diff HEAD riel i18n: ''
+git log -3 -- Logs: 390652a feat(blender): M25 columna entera con capitel, 3 GLB + guardia de capitel 27/0 || 60f2e00 feat(blender): B10-bis export 6 GLB columna_rota (M25) + cierre administrativo || 9e08a34 Se preservaron avances de la jornada 5nov: reestructura BACKLOGS/ (8 modelos), 25+ acuses cron, estado_director, scripts parcheados (verificar_pool v2, censo_drift, renumerar_canal)
+git log -3 -- DOC ling: 9e08a34 Se preservaron avances de la jornada 5nov: reestructura BACKLOGS/ (8 modelos), 25+ acuses cron, estado_director, scripts parcheados (verificar_pool v2, censo_drift, renumerar_canal) || bb5f7ee docs: nueva guia comparativa de modelos V1 y actualiza referencias || 88196e6 Preservación 31oct 17:07 — Cierre jornada agnes-3-flash (directora): 111 archivos, 6901+/4446-
+REFERENCIA v38: manager 047eab5ff111; pt.po d2b567c48e88; HEAD 390652a613d9.
