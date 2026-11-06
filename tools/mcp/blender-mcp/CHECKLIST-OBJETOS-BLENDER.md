@@ -45,15 +45,15 @@
 
 ## Módulo 33 — Agricultura 🌾
 
-- [ ] Tierra arada (parche 1x1)
-- [ ] Tierra regada (versión oscura)
+- [x] Tierra arada (parche 1x1) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_tierra_arada.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
+- [x] Tierra regada (versión oscura) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_tierra_regada.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
 - [ ] Semillero brotando (etapa 1)
-- [ ] Planta creciendo (etapa 2)
-- [ ] Planta madura cosechable (etapa 3)
-- [ ] Bananero (cultivo)
-- [ ] Plantación de caña
-- [ ] Compostera
-- [ ] Regadera (objeto colocado)
+- [x] Planta creciendo (etapa 2) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_cultivo_creciendo.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
+- [x] Planta madura cosechable (etapa 3) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_cultivo_madura.glb` y `33-Agricultura_cultivo_lista.glb`, x3 cada uno en `assets/3d/{alta,media,baja}/` + `.glb.import` + fichas; trackeado en HEAD (`5ec9649`). Medido, no inferido.
+- [x] Bananero (cultivo) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_bananero.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
+- [x] Plantación de caña — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_canaveral.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido. **Nota de nombre:** el GLB se llama `canaveral`.
+- [x] Compostera — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_compostera.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
+- [x] Regadera (objeto colocado) — **D-03 (Hy4 2026-11-05)**: `33-Agricultura_regadera.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + ficha; trackeado en HEAD (`5ec9649`). Medido, no inferido.
 - [x] Espantapájaros lowpoly — `crear_espantapajaros_lowpoly.py` (M33 2026-09-02, log 532 original, **log 558 re-trabajo E-73 19:50**, **log 560 re-trabajo E-74 20:05**, **log 561 re-trabajo flecos 20:13**). v1 aprobada 04:50 con 15 SM_; el usuario rechazó el palo horizontal que le cruzaba el pecho (**E-73**, "parece la pinga"). v2 lo reemplazó por **DOS brazos independientes** que nacen dentro del torso (x=±0.16) y bajan ~40° en diagonal hasta manos de paja (16 SM_, techo ALTA). v3 corrigió un segundo problema reportado: las **pajas cilíndricas con eje en Y asomando del pecho** también leían como pico (**E-74**). v3 las cambió a cilindros **verticales con eje Z** que cuelgan del **dobladillo** de la camisa. v4 (este log): el usuario pidió **4 flecos más largos y finos** ("5 veces más de largo hacia abajo"). v4 implementa 4 cilindros r=0.03, h=0.36 (5× los 6.5 cm de v3) en las 4 esquinas del dobladillo, **unidos en 1 objeto vía `bpy.ops.object.join`** (E-70) para no exceder las 16 piezas. **15 SM_ finales** (bajamos del techo), z_min 0.045, toca=20, fp=0.80×0.80, MEDIA 7/360/7, BAJA 6/222/4. 3 GLB + 3 `.import` + 3 `.scn` (E-65 + E-72). Aprobado visualmente en los 6 azimuts.
 
 **E-71 (2026-09-04, log 678):** `Plantación de caña` y `Compostera` estaban
@@ -179,7 +179,7 @@ menos.
 - [x] Arco de entrada de templo — `crear_arco_entrada_templo_lowpoly.py` v4 + 6 capturas orbitales 04-00 (aprobado 2026-09-02 04:00; E-68 descubierto y corregido: `primitive_cube_add(size=1, scale=s)` produce cubo de sx×sy×sz, no 2*sx×2*sy×2*sz; dovelas con `sx = ANCHO_D` y `ANCHO_D = chord*1.04` cierran el wedge gap; ALTA 15 obj/60 caras placeholder→recalculado, MEDIA 3/212/3, BAJA 3/146/3; footprint 2.44×0.64, dovelas se tocan visiblemente en los 6 azimuts; va a unir 2 pilares con semicírculo de 7 dovelas; musgo en basas). 3 GLB exportados + 3 .import + 3 .scn (E-65).
 - [x] Altar ritual central — `crear_altar_ritual_lowpoly.py` + 6 capturas orbitales 19-36 (aprobado, pirámide escalonada + techo + 4 pilares + cristal; z_min 0.045) 2026-08-28
 - [x] Losa con grabado (piso de puzzle) — `crear_losa_grabado_lowpoly.py` + 6 capturas orbitales 19-34 (aprobado, placa + 4 prismas; z_min 0.045) 2026-08-28
-- [ ] Palanca de puzzle (interactuable)
+- [x] Palanca de puzzle (interactuable) — **D-03 (Hy4 2026-11-05)**: `70-Interacciones_palanca_madera.glb` x3 en `assets/3d/{alta,media,baja}/` + 3 `.glb.import` + pieza `data/construccion/piezas/palanca_madera.tres`; trackeado en HEAD (`787ab35`). Medido, no inferido.
 - [x] Cofre ancestral (recompensa) — `crear_cofre_ancestral_lowpoly.py` + 6 capturas orbitales 19-40 (aprobado, tapa medio-cilindro + 5 bandas hierro + falleba; z_min 0.045) 2026-08-28. **v3 2026-08-29 19:55 corrige E-27 (tirador 5 cm de su padre)**: borradas 3 líneas `o.matrix_parent_inverse = padre.matrix_world.inverted()` (en `agregar()` L176, costillas L339, post-parenting L404). **NO se agregó assert AABB-gap** (E-31): el tirador sobresale 5 cm por diseño (es la manija), las asas 1.8 cm, las bisagras traseras 1.2 cm. La separación es geométricamente verdadera pero semánticamente correcta. Source regenerado (36 obj, z_min 0.045), MEDIA (6/784/6), BAJA (6/571/6) — todos los hijos siguen al cuerpo en los 6 ángulos. 3 hojas v3 19-55-26.
 - [x] Antorcha de pared — `crear_antorcha_pared_lowpoly.py` v2 + 6 capturas orbitales 18-14/18-18 (corregido 2026-08-29 18:11 por bug reportado: en v1 el panel de pared del set de captura flotaba a z=0.40 y la placa estaba 0.42 unidades separada del muro. v2: `Set_Pared` asentada en la arena con base ligeramente enterrada y placa montada al ras del muro con sus 4 remaches; z_min 0.045, 7 piezas: placa + brazo + copa + mango + tela + brasa + 4 remaches). Variantes M166 MEDIA (4 obj/94 tris/4 mats) y BAJA (4 obj/80 tris/4 mats) regeneradas desde v2 y aprobadas 2026-08-29 18:18 (ver Tier D).
 - [x] Puerta de templo (doble hoja de piedra) — `crear_puerta_templo_lowpoly.py` + 6 capturas orbitales 19-32 (aprobado, marco azul + paneles; z_min 0.045) 2026-08-28
