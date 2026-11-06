@@ -34,7 +34,7 @@ Si tiene instrucciones o preguntas → RESPONDER PRIMERO creando TU mensaje prop
 gitignoreados). Leer el CUERPO COMPLETO de cada mensaje (pueden ser varios nuevos).
 
 === PASO 2 — BACKLOG (elegir tarea [ ] de la COLA ACTIVA) ===
-SIN MENSAJES NUEVOS → abrir "DOCUMENTACION/TAREAS-POR-MODELO/G-5.3-Flash-Agente/BACKLOG-MASTER.md",
+SIN MENSAJES NUEVOS → abrir "DOCUMENTACION/TAREAS-POR-MODELO/G-5.3-Flash-Agente/BACKLOGS/BACKLOG-MASTER.md",
 elegir la próxima tarea [ ] (la COLA ACTIVA; agotada, la sección (C) FRENTE ESTÉTICO PREMIUM)
 y trabajar una TANDA.
 

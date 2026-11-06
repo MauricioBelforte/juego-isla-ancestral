@@ -1,0 +1,14 @@
+=== I-18 (fix v1): compilador MO propio, tablas contiguas, round-trip ===
+  es.po: msgids contenido=263 | compilables simples=259 | plurales/otros saltados=4
+    saltados (msgid_plural, no soportado por compilador minimal): ['ITEMS.SE_OFRECEN', 'M68.TRIP.HORAS', 'M68.TRIP.MINUTOS', 'M68.TRIP.SEGUNDOS']
+  es.mo: 259 entradas, round-trip 259/259 OK, mismatches=0, size=16149B -> PASS
+    estructura (o_ids=28, o_strs=28+8n, offsets validos): OK
+  en.po: msgids contenido=262 | compilables simples=258 | plurales/otros saltados=4
+    saltados (msgid_plural, no soportado por compilador minimal): ['ITEMS.SE_OFRECEN', 'M68.TRIP.HORAS', 'M68.TRIP.MINUTOS', 'M68.TRIP.SEGUNDOS']
+  en.mo: 258 entradas, round-trip 258/258 OK, mismatches=0, size=15435B -> PASS
+    estructura (o_ids=28, o_strs=28+8n, offsets validos): OK
+  pt.po: msgids contenido=276 | compilables simples=272 | plurales/otros saltados=4
+    saltados (msgid_plural, no soportado por compilador minimal): ['ITEMS.SE_OFRECEN', 'M68.TRIP.HORAS', 'M68.TRIP.MINUTOS', 'M68.TRIP.SEGUNDOS']
+  pt.mo: 272 entradas, round-trip 272/272 OK, mismatches=0, size=16586B -> PASS
+    estructura (o_ids=28, o_strs=28+8n, offsets validos): OK
+  I-18 veredicto: PASS — .po compilables a MO valido y recuperable 1:1 (compilador propio; limitacion: plurales no compilados, msgfmt real corre en CI del proyecto)

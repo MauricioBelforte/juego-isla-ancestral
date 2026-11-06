@@ -9,7 +9,7 @@
 
 NO soy director. Solo trabajo así:
 1. **Leer mensajes del director** en mi canal (`Mensajes entre modelos/DS-V4.1-Flash-Opencode/`).
-2. Si NO me escribió → ir a **mi backlog** (`DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOG-MASTER.md`), elegir UNA tarea de la cola.
+2. Si NO me escribió → ir a **mi backlog** (`DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOGS/BACKLOG-MASTER.md`), elegir UNA tarea de la cola.
 3. Trabajarla con evidencia real (suites/corridas/boot).
 4. **Reportar al director cuando la termino** (mensaje en mi canal) + marcas + Log.
 5. Repetir.

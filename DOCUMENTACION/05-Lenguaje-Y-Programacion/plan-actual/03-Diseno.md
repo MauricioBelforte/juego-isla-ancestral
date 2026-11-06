@@ -251,7 +251,7 @@ en `Logs/` según **AGENTS.md §6**:
 - **Numeración (protocolo v3, §6.1):** el número se **consume** tomando la **primera línea** de
   `Logs/NUMEROS_DISPONIBLES.txt` con `scripts/reservar_log.py --reservar` (un número = un archivo; no
   hay archivo de reserva). El número se anota en el backlog personal
-  (`TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`) antes de escribir el log.
+  (`TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`) antes de escribir el log.
 - **Formato (§6.2):** `Logs/{N}-DESC_AAAA-MM-DD_HH-MM-SS.md`, con header `# Log {N}: ...`, fecha/hora
   reales, modelo, plataforma, resumen, cambios y archivos modificados.
 - **Higiene:** el log es **ASCII puro** (`LC_ALL=C grep -c '[^ -~]'` == 0). `ULTIMO_NUMERO.txt` y

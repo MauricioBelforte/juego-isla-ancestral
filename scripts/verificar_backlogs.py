@@ -2,7 +2,7 @@
 """
 Script de Verificacion de Sincronizacion backlog <-> checklist (LOTE 12).
 
-Recorre DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md de cada
+Recorre DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md de cada
 modelo y verifica que su contenido se corresponda con el estado REAL de los
 `05-Checklist.md` de los modulos que cita:
 

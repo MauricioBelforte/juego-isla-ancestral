@@ -19,7 +19,7 @@ BUCLE DEL AGENTE G-5.3-Flash-Agente (fundador 2026-10-17 — cada 10 min; 3 paso
 archivo es lo nuevo del director. Si tiene instrucciones o preguntas → RESPONDER PRIMERO creando TU
 mensaje propio (numeración último+1 SIEMPRE via scripts/proximo_numero.py G-5.3-Flash-Agente --consume;
 nunca a mano; pools gitignoreados). Leer el CUERPO COMPLETO de cada mensaje (pueden ser varios nuevos).
-[PASO 2] SIN MENSAJES NUEVOS → TU BACKLOG: abrir "DOCUMENTACION/TAREAS-POR-MODELO/G-5.3-Flash-Agente/BACKLOG-MASTER.md",
+[PASO 2] SIN MENSAJES NUEVOS → TU BACKLOG: abrir "DOCUMENTACION/TAREAS-POR-MODELO/G-5.3-Flash-Agente/BACKLOGS/BACKLOG-MASTER.md",
 elegir la próxima tarea [ ] (la COLA ACTIVA; agotada, la sección (C) FRENTE ESTÉTICO PREMIUM) y
 trabajar una TANDA.
 [PASO 3] REPORTE AL DIRECTOR EN CADA VUELTA: escribir en tu canal qué hiciste (tarea(s), estado,

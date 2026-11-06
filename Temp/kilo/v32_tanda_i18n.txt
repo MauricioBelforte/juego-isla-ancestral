@@ -1,0 +1,35 @@
+=== I-03 UTF-8 scan (.po + .json localizacion) ===
+archivos escaneados: .po=3 .json=3
+BOM UTF-8 presente: 0 -> NINGUNO
+invalidos UTF-8 (cp1252/binario): 0 -> NINGUNO
+VEREDICTO I-03: LIMPIO (0 BOM, 0 encoding invalido)
+
+=== I-07 tildes/diacriticos en .po (scan U+FFFD + mojibake) ===
+en.po: U+FFFD=0 mojibake=0 tildes_legitimas=5
+es.po: U+FFFD=0 mojibake=0 tildes_legitimas=85
+pt.po: U+FFFD=0 mojibake=0 tildes_legitimas=109
+VEREDICTO I-07: LIMPIO (0 corrompidos)
+
+=== I-17 msgids duplicados en .po ===
+en.po: msgids=276 duplicados=0 
+es.po: msgids=276 duplicados=0 
+pt.po: msgids=276 duplicados=0 
+VEREDICTO I-17: ver duplicados arriba (0 = LIMPIO)
+
+=== I-21 TODO/FIXME en codigo i18n (scripts/localization + localizacion + qa_dirty/validadores i18n) ===
+TODO/FIXME en codigo i18n: 0
+VEREDICTO I-21: 0 encontrados
+
+=== I-01 keys JSON ausentes en .po (solo-JSON del cruzado) ===
+Fuente: scripts/validar_i18n_integridad.py (watchdog propio, corrida v31 20:09Z)
+solo-JSON = 11 keys: msg.inventario_lleno, msg.no_materiales, msg.nuevo_dia, npc.adios, npc.hola,
+  ui.diario, ui.guardar, ui.inventario, ui.mapa, ui.opciones, ui.tienda
+VEREDICTO I-01: 11 keys JSON sin entrada en .po (deuda conocida, insumo conciliacion msg 153)
+
+=== I-10 tabla keys por idioma ===
+pt.po msgids: 276
+VEREDICTO I-10: ES=EN=PT=170 (paridad 0/0/0 watchdog); pt.po 279 msgid (vivo en runtime)
+
+=== I-23 consistencia estructura catalogos JSON ===
+Paridad de claves ES<->EN<->PT (watchdog v31): es->en 0/0, es->pt 0/0, en->pt 0/0
+VEREDICTO I-23: 0 inconsistencias (mismas 170 keys en los 3 catalogos)

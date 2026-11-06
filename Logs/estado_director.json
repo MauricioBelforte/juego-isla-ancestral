@@ -2153,5 +2153,131 @@
   "deepseek_491_m82_bug156": "M82 4 degradadas (90/100) + BUG-156 registrado (SETTINGS.VOLVER_TITULO, Menor - runtime lee .po no JSON) + HC-02 refutada (NPC equivocado, contenido en aur_002). M162: 40 notas AUDIT obsoletas (GO pendiente).",
   "bug_156_i18n_json": "SETTINGS.VOLVER_TITULO en es/en/pt.po pero NO en strings_{es,en,pt}.json. Severidad: MENOR (runtime carga .po, no JSON). DeepSeek #491.",
   "m73_sello_12": "M73 gate-2 SOSTENIDO (Hy3 #473: BUG-155 fix verificado, 76/3/56=135, 0 drift). Sello 12 aplicado.",
-  "bug_155_resuelto": "achievement_service.gd:156 fix verificado por Hy3 #473 G1-01..03. Null eliminado."
+  "bug_155_resuelto": "achievement_service.gd:156 fix verificado por Hy3 #473 G1-01..03. Null eliminado.",
+  "deepseek_wb_inactivo": "Fundador 4nov: solo DS-OC trabaja. DeepSeek-WB se retira.",
+  "hy3_reintegrada_4nov": "Fundador 4nov: Hy3 WB se une de nuevo por un tiempo. TANDA LARGA #482 (25 tareas gate-2) asignada.",
+  "hy4_blender_specialist": "Fundador 4nov: Hy4 se encarga de TODO Blender. TANDA #05 (T-01..T-04 + 6 pendientes) asignada. B-8/B-5/B-10 done.",
+  "flota_4nov": "agnese (directora) + Nemotron (boot/doc) + Hy3 (gate-2, 4nov reintegrada) + Hy4 (Blender, 4nov nuevo) + DS-OC (chase/pools) + GLM (supervisor). Ling idle 96h. DeepSeek-WB inactivo.",
+  "hy3_backlog_reestructurado": {
+    "cuando": "4nov 23:12",
+    "quien": "agnes-3-flash (Sapiens AI) / Kilo Code",
+    "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/Hy3/BACKLOGS/",
+    "archivos": {
+      "00-Backlog-Original-PreSplit.md": "1287 lineas original (archivo)",
+      "01-Backlog-QA-Cruzado.md": "Bloque A items 1-32",
+      "02-Backlog-Dialogos-Narrativa.md": "Bloque B items 33-50",
+      "03-Backlog-Runtime-Headless.md": "Bloque C items 51-70",
+      "04-Backlog-Verificaciones-Director.md": "Bloque D items 71-105",
+      "05-Backlog-Repo-1016.md": "Bloque W/W2 10/16",
+      "06-Backlog-Tanda-4nov.md": "COLA ACTIVA 25 tareas gate-2",
+      "07-Backlog-Historico.md": "Seccion B historico",
+      "BACKLOG-MASTER.md": "INDICE (46 lineas, pequeno)"
+    },
+    "regla": "Cada modelo: carpeta BACKLOGS/ + BACKLOG-MASTER.md (indice) + 01-N-Backlog-(tema).md"
+  },
+  "metodologia_backlogs_divididos": "Fundador 4nov 23:08: dividir BACKLOG-MASTER por modelo en carpetas BACKLOGS/ con archivos pequenos tematicos. Hy3=primero. Siguiente=a definir.",
+  "hy4_backlog_reestructurado": {
+    "cuando": "4nov 23:25",
+    "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/Hy4/BACKLOGS/",
+    "archivos": {
+      "BACKLOG-MASTER.md": "INDICE (34 lineas)",
+      "01-Backlog-Modulos.md": "Módulos completos/parciales",
+      "02-Backlog-Pendientes-Assets.md": "M36/M25/M40/M35/M18 pendientes",
+      "03-Backlog-Convenciones.md": "Naming, materiales, presupuesto",
+      "04-Backlog-Notas-Historico.md": "Notas 10/09-14/09",
+      "05-Backlog-B1-B6.md": "B1-B6 cerrados",
+      "06-Backlog-B7-B10.md": "B7-B10 reingreso 4nov",
+      "07-Backlog-Tanda-Blender.md": "COLA ACTIVA T-01..T-04 + 6 pendientes",
+      "00-Backlog-Original-PreSplit.md": "545 lineas original"
+    }
+  },
+  "backlogs_reestructurados": [
+    "Hy3",
+    "Hy4",
+    "DS-V4.1-Flash-Opencode",
+    "DeepSeek-V4.1-Flash",
+    "ling-3.1-flash",
+    "Nemotron-3.5-Super-VL",
+    "step-5-workbuddy",
+    "agnes-3-flash"
+  ],
+  "ds_oc_backlog_reestructurado": {
+    "cuando": "4nov 23:45",
+    "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOGS/",
+    "archivos": {
+      "BACKLOG-MASTER.md": "INDICE (30 lineas)",
+      "01-Backlog-Cola-Activa.md": "Items 1-181 CI/Build/Memoria/Economia",
+      "02-Backlog-Bloques-Originales.md": "Bloques A-Z historico",
+      "03-Backlog-Frente-Estetico-Premium.md": "M90 92 items + M91/M158/M147/M15",
+      "04-Backlog-Repoblacion-V3.md": "Items reales 05-Checklist M62/M15/M147/M158",
+      "00-Backlog-Original-PreSplit.md": "651 lineas original"
+    }
+  },
+  "deepseek_v41_flash_backlog_reestructurado": {
+    "cuando": "4nov 23:51",
+    "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/BACKLOGS/",
+    "archivos": {
+      "BACKLOG-MASTER.md": "INDICE (29 lineas)",
+      "01-Backlog-Cola-Activa.md": "356 lineas, 100+ tareas",
+      "02-Backlog-Historico-Encargos.md": "923 lineas, encaje+encargos",
+      "03-Backlog-Ciclos-Posteriores.md": "1470 lineas, ciclos 10/09+",
+      "00-Backlog-Original-PreSplit.md": "2744 lineas original"
+    }
+  },
+  "ling_backlog_reestructurado": {
+    "cuando": "5nov 00:13",
+    "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/BACKLOGS/",
+    "archivos": {
+      "BACKLOG-MASTER.md": "INDICE (30 lineas)",
+      "01-Backlog-Vueltas-31oct.md": "230 lineas, ESTADO v14-v31",
+      "02-Backlog-Tareas-Asignadas.md": "724 lineas, 106 tareas+candidatos",
+      "03-Backlog-Anexos-PT.md": "807 lineas, kit 115+mediciones 255",
+      "00-Backlog-Original-PreSplit.md": "1756 lineas original"
+    }
+  },
+  "backlog_docs_actualizados": {
+    "cuando": "5nov 00:38",
+    "archivos": {
+      "AGENTS.md": "16 refs template + §29.1 item 6 nueva (BACKLOGS/ structure)",
+      "GUIA-COMUNICACION.md": "3 refs",
+      "DS-OC CRONOMETRO": "2 refs",
+      "DS-OC LOOP-AUTOMATICO": "1 ref",
+      "MiniMax CRONOMETRO": "2 refs",
+      "G-5.3 CRONOMETRO-ACTIVO": "1 ref",
+      "G-5.3 COMO-CREAR": "1 ref",
+      "GUIA-CONFIGURACION-OPENCODE": "1 ref"
+    },
+    "regla": "TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md = indice pequeno + NN-Backlog-(tema).md = archivos tematicos"
+  },
+  "crons_v2_reactivados_5nov": {
+    "cuando": "5nov 00:52",
+    "quien": "agnes-3-flash (Sapiens AI) / Kilo Code",
+    "fundador": "si segui con ese (4nov) + activa los cronometros (5nov)",
+    "ids": {
+      "A": "wku_1ae5989e3001zjeK6jhySTVVZB",
+      "B": "wku_1ae59c521001muuNyf5r2q0G2W",
+      "C": "wku_1ae5a06f6001co7twLwrFp4n2G",
+      "D": "wku_1ae5a3de3001PboQDq9whsXoay"
+    },
+    "canales_detector": [
+      "DeepSeek-V4.1-Flash",
+      "Hy3",
+      "Hy4",
+      "DS-V4.1-Flash-Opencode",
+      "Nemotron-3.5-Super-VL"
+    ],
+    "flota": "Hy4=Blender, DeepSeek-WB inactivo, Hy3=gate-2 reintegrada, Ling idle"
+  },
+  "cron_a_5nov_01": {
+    "cuando": "5nov 01:00",
+    "lags": {
+      "Hy3": "#483 TANDA gate-2 25/25 → acuse 484. BUG-155 VERDE. M14 CAVEAT corregido (gamepad SÍ existe).",
+      "HY4": "#06 B11 auditoría. Árboles 2/10 (regresión 841afaf). Estrella de mar scale bug. 12 huecos reales. → acuse 07 + GO D-01 re-hornear.",
+      "DS-OC": "#245 verificador long-path v2 (181 msgs + 180 huecos fantasma). → acuse 246 + GO agrupar_canales.py + GO top-5 tipo A.",
+      "DeepSeek": "lag 0",
+      "Nemotron": "lag 0"
+    },
+    "sellos": "12 vigentes (sin cambio)",
+    "go_fundador": "4 pendientes: frente-codigo-alpha / M106 GCP / marca M01 / BUG-153 macro"
+  }
 }

@@ -605,7 +605,41 @@ Root (Node3D)
 4. **Firmar los cambios:** esta guía lleva firma del último agente que la modificó (regla de AGENTS.md, sección 3).
 5. **Checklist previo al usar V4 (godot-mcp):** antes de invocar cualquier herramienta de Godot MCP, verificar que V4 esté 🟢 operativa y que el proyecto Godot (`game/isla-ancestral/`) esté cerrado si se usarán `run_project` / `launch_editor` (para evitar conflictos de proyecto ya abierto).
 
-## Descubrimiento sobre capturas del juego (2026-08-26 — GLM, Cline — caso M30)
+## Descubrimiento: envío de teclas al juego Godot vía Win32 API (send_keys) — 2026-11-04
+
+### Propósito
+Complementa **V4 (godot-mcp)**: el MCP de Godot lanza y controla el juego pero **no expone tool para enviar teclas** al juego en ejecución. Este script permite navegar por menús, entrar a módulos y hacer QA visual con teclado.
+
+### Script
+`scripts-reutilizables/send_keys_to_window.py` — usa **ctypes** (stdlib Windows, sin dependencias externas) con `PostMessage` (WM_KEYDOWN/WM_KEYUP) y `SendInput` como fallback.
+
+### Teclas confirmadas funcionando en Godot "isla-ancestral (DEBUG)"
+| Tecla | Resultado |
+|-------|-----------|
+| ESC | Abre/ciende menú de pausa ✅ |
+| DOWN, UP, LEFT, RIGHT | Navega menús (probado parcialmente) ✅ |
+| ENTER | Selecciona opción del menú ✅ |
+| SPACE | Acción del juego (interactuar) ✅ |
+| W/A/S/D | Movimiento del personaje ✅ |
+| CTRL+C, ALT+F4, SHIFT+TAB | Combinaciones modificadoras ✅ |
+
+### Flujo recomendado (captura entre cada paso para evitar loops)
+1. `godot_run_project` vía MCP → inicia el juego en ventana separada
+2. `screen.capture_window("isla-ancestral")` → captura de estado actual
+3. `send_keys_to_window.py "isla-ancestral (DEBUG)" ESC` → abre menú de pausa
+4. `screen.capture_window("isla-ancestral")` → verifica menú abierto
+5. `send_keys_to_window.py "isla-ancestral (DEBUG)" DOWN DOWN DOWN ENTER` → navega y selecciona
+6. `screen.capture_window("isla-ancestral")` → verifica resultado
+7. Repetir hasta entrar al módulo objetivo
+
+### Limitaciones conocidas
+- La ventana de Godot debe estar **visible** (no minimizada) para recibir input
+- El título de la ventana puede cambiar: "isla-ancestral (DEBUG)" al correr, distinto al editar
+- Las flechas pueden no mover el cursor de menú si el esquema de controles usa W/S; verificar con capturas entre cada tecla
+
+**Modelo:** Nemotron-3.5-Super-VL
+**Plataforma:** Kilo Code
+**Fecha:** 2026-11-04
 
 - ⚠️ **La herramienta MCP `capture_window` puede devolver frames cacheados/stale** de la ventana del juego: dos capturas seguidas resultaron byte-idénticas (mismo MD5) aunque el juego corría. Otra ventana encima (ej: Configuración de Windows) agrava el problema.
 - ⚠️ **`ImageGrab.grab(bbox=...)` (V2) captura lo visible en pantalla**, no la ventana: si el juego está tapado, captura la ventana de encima (dio "cielo" blanco = ventana de Configuración).

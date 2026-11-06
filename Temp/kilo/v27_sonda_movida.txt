@@ -1,0 +1,27 @@
+SONDA v27 — movida de flota post-v26 (14 archivos, diff HEAD d93c9e5 -> WT 2026-10-31 ~05:0xZ)
+Alcance: lineas AÑADIDAS (+) en game/ y scripts/. Clasificacion: dev-side vs jugador-visible.
+
+===== (1) ACENTOS EN LINEAS AÑADIDAS =====
+total lineas +: 736 | con acento: 45 (dev-side: 34 | sin clasificar directa: 11)
+  REVISAR: _check(not rep.is_empty(), "el hijo dejó su reporte de checks (%s)" % ruta_reporte)
+  REVISAR: "el hijo ejecutó >= %d checks (obtuvo %d)" % [CHECKS_MINIMOS_HIJO, int(rep.get("checks", 0))])
+  REVISAR: "toda sección LORE es una de las 14 categorías del service (fuera: %d)" % fuera)
+  REVISAR: "ninguna 'secreta' fuera de LORE — %d violación(es)%s" % [viol.size(), detalle])
+  REVISAR: "campo 'secreta' booleano cuando está presente — %d mal tipada(s)%s"
+  REVISAR: r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|inexistente[s]?|no\s+hay|"
+  REVISAR: r"no\s+se\s+encontró|eliminad[oa]s?|retirad[oa]s?|borrad[oa]s?|"
+  REVISAR: r"nunca\s+existio|nunca\s+existió)"
+  REVISAR: r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|no\s+aparece|no\s+figura|"
+  REVISAR: r"no\s+se\s+encuentra|no\s+se\s+encontro|no\s+se\s+encontró|"
+  REVISAR: **Totales:** 2 ítems · Completados: 2 · Pendientes: 0 · No resueltos: 0.
+
+===== (2) CLAVES _t(...) NUEVAS EN +lines vs cobertura .po =====
+claves _t() en +lines: 1 unicas | NO cubiertas en ambos .po: 0
+  (todas las claves usadas en +lines ya existen en es.po Y pt.po)
+
+===== (3) NOTAS =====
+- budgets.json: nota extendida (spec para gates QA) = FP i18n, no string jugador-visible.
+- diary_layer.gd: reuso de DIARY.BLOQUEADO (existente) + logica LORE.bloqueada; sin claves nuevas.
+- qa_dirty_item4.gd v3 (BUG-152, DS): strings solo en print/[QA-DIRTY] = dev-side.
+
+RIEL: pt.po sha1=95ee2ce0d1 (canonico 95ee2ce0d1)

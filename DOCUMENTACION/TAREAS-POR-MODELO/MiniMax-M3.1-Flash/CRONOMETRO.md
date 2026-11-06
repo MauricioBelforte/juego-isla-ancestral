@@ -17,7 +17,7 @@ la herramienta `cron_create` y listo.
 | Cancelar | `cron_delete` con el id (el `cron_list` muestra el id vigente) |
 | Repo | `D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral` |
 | Canal de reportes | `Mensajes entre modelos/MiniMax-M3.1-Flash/` |
-| Backlog | `DOCUMENTACION/TAREAS-POR-MODELO/MiniMax-M3.1-Flash/BACKLOG-MASTER.md` |
+| Backlog | `DOCUMENTACION/TAREAS-POR-MODELO/MiniMax-M3.1-Flash/BACKLOGS/BACKLOG-MASTER.md` |
 | Pools de numeros | `Logs/NUMEROS_DISPONIBLES.txt` (logs) y `Mensajes entre modelos/MiniMax-M3.1-Flash/NUMEROS_DISPONIBLES.txt` (mensajes) |
 
 ## Helper
@@ -59,7 +59,7 @@ Después de leer, procedé con tus pasos normales. Y AL CERRAR la vuelta: si el 
 
 === BUCLE DEL AGENTE MiniMax-M3.1-Flash (cada 60 min; 3 pasos EN ORDEN) ===
 [PASO 1] LEER TU CANAL PRIMERO: escanear "Mensajes entre modelos/MiniMax-M3.1-Flash/" — el ÚLTIMO archivo es lo nuevo del director. Si tiene instrucciones o preguntas → RESPONDER PRIMERO creando TU mensaje propio (numeración último+1 SIEMPRE via scripts/proximo_numero.py MiniMax-M3.1-Flash --consume; nunca a mano; pools gitignoreados). Leer el CUERPO COMPLETO de cada mensaje (pueden ser varios nuevos).
-[PASO 2] SIN MENSAJES NUEVOS → TU BACKLOG: abrir "DOCUMENTACION/TAREAS-POR-MODELO/MiniMax-M3.1-Flash/BACKLOG-MASTER.md", elegir la próxima tarea [ ] (la COLA ACTIVA; agotada, la sección (C) FRENTE ESTÉTICO PREMIUM) y trabajar una TANDA.
+[PASO 2] SIN MENSAJES NUEVOS → TU BACKLOG: abrir "DOCUMENTACION/TAREAS-POR-MODELO/MiniMax-M3.1-Flash/BACKLOGS/BACKLOG-MASTER.md", elegir la próxima tarea [ ] (la COLA ACTIVA; agotada, la sección (C) FRENTE ESTÉTICO PREMIUM) y trabajar una TANDA.
 [PASO 3] REPORTE AL DIRECTOR EN CADA VUELTA: escribir en tu canal qué hiciste (tarea(s), estado, evidencia — aunque no cierres todo) + marca [x] honesta en el BACKLOG (solo verificable en disco) + fila de CHECKLIST-GLOBAL si el módulo aplica.
 
 REGLAS PERMANENTES (vigentes sin excepción):

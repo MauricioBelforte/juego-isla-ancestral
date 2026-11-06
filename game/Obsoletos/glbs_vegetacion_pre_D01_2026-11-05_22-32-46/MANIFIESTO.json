@@ -1,0 +1,208 @@
+{
+ "arbol_frutal": {
+  "glb": "50-Vegetacion_arbol_frutal.glb",
+  "objetivo": 6.0,
+  "antes": 3.880000188946724,
+  "sha_antes": "d8ba0a34cb0b5723b019a86205c27b960c93073d3ca1ae017a980194d20e9b94",
+  "bytes_antes": 37752,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 4,
+   "mallas": 4,
+   "materiales": 4,
+   "nombres": [
+    "SM_Frutal_M_Frutal_Corteza",
+    "SM_Frutal_M_Frutal_Fruto",
+    "SM_Frutal_M_Frutal_Hoja",
+    "SM_Frutal_M_Frutal_HojaClr"
+   ]
+  },
+  "alto_backup_viejo": 10.860741659998894
+ },
+ "arbusto_redondo": {
+  "glb": "50-Vegetacion_arbusto_redondo.glb",
+  "objetivo": 1.0,
+  "antes": 1.67929632589221,
+  "sha_antes": "bd537eaafd5a5b6501dfbdcb045d8b384652fe70fb16113f492e6e4ab4d5c0da",
+  "bytes_antes": 16668,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 4,
+   "mallas": 4,
+   "materiales": 4,
+   "nombres": [
+    "SM_Arbusto_M_Arbusto",
+    "SM_Arbusto_M_Arbusto_Claro",
+    "SM_Arbusto_M_Arbusto_Oscuro",
+    "SM_Arbusto_M_Pasto_Base"
+   ]
+  },
+  "alto_backup_viejo": 12.232562780380249
+ },
+ "arbusto_floral": {
+  "glb": "50-Vegetacion_arbusto_floral.glb",
+  "objetivo": 1.0,
+  "antes": 0.9975052624940872,
+  "sha_antes": "a438a1262575dda148686595458273e1ec94d6301fe0ac1823ee1a678d8999cb",
+  "bytes_antes": 33920,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 5,
+   "mallas": 5,
+   "materiales": 5,
+   "nombres": [
+    "SM_ArbustoFloral_M_ArbustoFloral_Hojas",
+    "SM_ArbustoFloral_M_ArbustoFloral_Tallo",
+    "SM_ArbustoFloral_M_Flor_Amarillo",
+    "SM_ArbustoFloral_M_Flor_Blanco",
+    "SM_ArbustoFloral_M_Flor_Rosa"
+   ]
+  },
+  "alto_backup_viejo": 5.174739345908165
+ },
+ "flor_isla": {
+  "glb": "50-Vegetacion_flor_isla.glb",
+  "objetivo": 1.2,
+  "antes": 1.1944999247789383,
+  "sha_antes": "c21acde53e4ff7d50eb912a2091e0a0a6c827ddf41ee206bdd5afdc3117cc233",
+  "bytes_antes": 14508,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 4,
+   "mallas": 4,
+   "materiales": 4,
+   "nombres": [
+    "SM_Tallo_M_Centro_Flor",
+    "SM_Tallo_M_Hoja_Flor",
+    "SM_Tallo_M_Petalo_Flor",
+    "SM_Tallo_M_Tallo_Flor"
+   ]
+  },
+  "alto_backup_viejo": 1.3977569416165352
+ },
+ "hierba_alta": {
+  "glb": "50-Vegetacion_hierba_alta.glb",
+  "objetivo": 0.6,
+  "antes": 0.4164109379053116,
+  "sha_antes": "ca13938669cc0fd51f50e1f270156782ecac478b5aa87e4475f32932e2069566",
+  "bytes_antes": 76516,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 2,
+   "mallas": 2,
+   "materiales": 2,
+   "nombres": [
+    "SM_HierbaBrizna_M_Hierba_Alta",
+    "SM_HierbaBrizna_M_Hierba_Alta_Osc"
+   ]
+  },
+  "alto_backup_viejo": 1.0410273745656013
+ },
+ "helecho_chico": {
+  "glb": "50-Vegetacion_helecho_chico.glb",
+  "objetivo": 0.7,
+  "antes": 0.30000002682209015,
+  "sha_antes": "6f0066d4229972d28cd8e891ffd2278027beb99fe3df08fef977604fff595f01",
+  "bytes_antes": 54888,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 3,
+   "mallas": 3,
+   "materiales": 3,
+   "nombres": [
+    "SM_HelechoChico_M_Hoja_HelechoChico",
+    "SM_HelechoChico_M_Tallo_HelechoChico",
+    "SM_HelechoChico_M_Tronco_HelechoChico"
+   ]
+  },
+  "alto_backup_viejo": 2.100000411272049
+ },
+ "helecho_gigante": {
+  "glb": "50-Vegetacion_helecho_gigante.glb",
+  "objetivo": 2.5,
+  "antes": 0.40000002086162567,
+  "sha_antes": "a6f62105f3b40466594d53d580e113884087f5552a7cbd0283629c4923348dbf",
+  "bytes_antes": 72472,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 3,
+   "mallas": 3,
+   "materiales": 3,
+   "nombres": [
+    "SM_Helecho_M_Helecho_Hoja",
+    "SM_Helecho_M_Helecho_Tallo",
+    "SM_Helecho_M_Helecho_Tronco"
+   ]
+  },
+  "alto_backup_viejo": 1.9384735673666
+ },
+ "palmera_joven": {
+  "glb": "50-Vegetacion_palmera_joven.glb",
+  "objetivo": 3.0,
+  "antes": 2.533477857708931,
+  "sha_antes": "c2642de08a251b7ff736460883f0fd0b193754fe578a2905491d1d772c1d0707",
+  "bytes_antes": 14492,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 3,
+   "mallas": 3,
+   "materiales": 3,
+   "nombres": [
+    "SM_Tronco_M_Corazon_PalmeraJoven",
+    "SM_Tronco_M_Hoja_PalmeraJoven",
+    "SM_Tronco_M_Tronco_PalmeraJoven"
+   ]
+  },
+  "alto_backup_viejo": 5.457467444241047
+ },
+ "palmera": {
+  "glb": "50-Vegetacion_palmera.glb",
+  "objetivo": 7.0,
+  "antes": 4.618966177105904,
+  "sha_antes": "591ca8943f03a702620f97320f59d5e8ff9ece14ebc76fa3204134fa9af0bf1b",
+  "bytes_antes": 22128,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 4,
+   "mallas": 4,
+   "materiales": 4,
+   "nombres": [
+    "SM_Tronco_M_Coco",
+    "SM_Tronco_M_Corazon_Corona",
+    "SM_Tronco_M_Hoja_Palmera",
+    "SM_Tronco_M_Tronco_Palmera"
+   ]
+  },
+  "alto_backup_viejo": 9.57298693060875
+ },
+ "palmera_inclinada": {
+  "glb": "50-Vegetacion_palmera_inclinada.glb",
+  "objetivo": 7.0,
+  "antes": 4.251987054944038,
+  "sha_antes": "8759df332ba7fefdf35ea1b87f6abcbd03b670c979a7c0e384fcf646b997b99d",
+  "bytes_antes": 21484,
+  "backup": true,
+  "backup_igual": false,
+  "estructura_antes": {
+   "nodos": 4,
+   "mallas": 4,
+   "materiales": 4,
+   "nombres": [
+    "SM_Tronco_M_Coco_PalmeraIncl",
+    "SM_Tronco_M_Corazon_PalmeraIncl",
+    "SM_Tronco_M_Hoja_PalmeraIncl",
+    "SM_Tronco_M_Tronco_PalmeraIncl"
+   ]
+  },
+  "alto_backup_viejo": 9.557712957262993
+ }
+}

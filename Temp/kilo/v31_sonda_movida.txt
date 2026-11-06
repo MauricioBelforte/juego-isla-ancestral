@@ -1,0 +1,55 @@
+archivos game/+scripts/ modificados vs HEAD: 14
++lines game/+scripts/: 736
+lineas con acento: 48
+  [diary_service.gd] +## Clasificación de secciones lore (iter. 7, L164): fuente única compartida con
+  [diary_service.gd] +				# Campo OPCIONAL declarado por el catálogo (iter. 6, nivel 1 del
+  [diary_service.gd] +				# resolutor de iconos). Faltaba acá: el loader lo descartaba y
+  [diary_service.gd] +				# `entradas_de()` leía siempre "" (nivel 1 inalcanzable). Medido
+  [diary_service.gd] +		# En una COLECCIÓN la marca `secreta` se ignora (L164): la entrada sigue
+  [diary_service.gd] +		# lore. La decisión es la MISMA función que usa la capa (secciones_lore).
+  [test_diario_iconos_m55.gd] +	# cada vez que validate_diary crece (pasó en la iter. 7: 387 -> 391). Lo que
+  [test_diario_iconos_m55.gd] +	# se afirma es que EXISTE y que no baja del mínimo histórico medido.
+  [test_diario_persist.gd] +# Modelo: mimo-v2.6-flash-free (autor original) | guardián: DeepSeek-V4.1-Flash (2026-10-29)
+  [test_diario_persist.gd] +# Fecha: 2026-10-05 (creación) / 2026-10-29 (guardián de 3 capas)
+  [test_diario_persist.gd] +# GUARDIÁN DE 3 CAPAS (GO del director, msg 450 punto 3):
+  [test_diario_persist.gd] +#   Antes esta suite imprimía `=== TEST M55 PERSISTENCIA: 0 fallo(s) ===` SIN
+  [test_diario_persist.gd] +#   fase dejaba menos checks ejecutados y el proceso salía EXIT 0 con "0 fallo(s)"
+  [test_diario_persist.gd] +#        `await` en `_run()` correría en el PRIMER await y declararía fallo).
+  [test_diario_persist.gd] +#     4. Marcadores `_fin()` por fase: nombra la fase que no llegó a cerrar.
+  [test_diario_persist.gd] +#        cobertura es INVISIBLE para el padre, que solo vería el exit code.
+  [test_diario_persist.gd] +## Reporte del hijo: sin esto, cuánto verificó el hijo es invisible para el padre.
+  [test_diario_persist.gd] +## restaurar" de "hay que restaurar un archivo que no existía" (borrarlo).
+  [test_diario_persist.gd] +## haría que corra en el PRIMER `await` de `_run()` —antes de terminar— y la
+  [test_diario_persist.gd] +## declararía fallida. Secuencia correcta: arrancar -> await _run -> summary.
+  [test_diario_persist.gd] +## Diagnóstico: si `_run()` muere sin reanudar, el resumen igual sale (pero con
+  [test_diario_persist.gd] +## el fallo de piso/marcador). `quit()` desde `_process` NO mata el proceso, así
+  [test_diario_persist.gd] +		print("[FAIL] watchdog 90 s: _run() no terminó (colgado o abortado)")
+  [test_diario_persist.gd] +		print("[FAIL] _run() NO terminó (posible SCRIPT ERROR que abortó la función)")
+  [test_diario_persist.gd] +			print("[FAIL] el bloque %s NO se ejecutó (fase %s)" % [String(n), _fase])
+  [test_diario_persist.gd] +		print("[FAIL] solo %d checks ejecutados en la fase %s (mínimo medido %d)" % [_checks, _fase, piso])
+  [test_diario_persist.gd] +	# El exit code del hijo no dice CUÁNTO verificó: se lee su reporte.
+  [test_diario_persist.gd] +	_check(not rep.is_empty(), "el hijo dejó su reporte de checks (%s)" % ruta_reporte)
+  [test_diario_persist.gd] +		"el hijo ejecutó >= %d checks (obtuvo %d)" % [CHECKS_MINIMOS_HIJO, int(rep.get("checks", 0))])
+  [test_diario_persist.gd] +## Restaura el slot si una fase abortó a mitad (lo llama `_summary()`).
+  [test_diario_persist.gd] +	print("[M55] slot %d restaurado desde el guardián (fase abortada a mitad)" % SLOT_PRUEBA)
+  [validate_diary.gd] +## Clasificación de secciones lore (iter. 7, L164): fuente única compartida con
+  [validate_diary.gd] +## cruce con las 14 categorías, regla §3.2 y tipo del campo).
+  [validate_diary.gd] +## DATOS que dejaría una entrada de colección visible como "???" (lo que L164
+  [validate_diary.gd] +## prohíbe), así que el validador lo marca como fallo.
+  [validate_diary.gd] +## La clasificación NO se escribe acá: se toma de `secciones_lore.gd`, la misma
+  [validate_diary.gd] +	# (a) guarda de ceguera: con la lista de secciones lore VACÍA la regla (b)
+  [validate_diary.gd] +	#     pasaría trivialmente ("0 secretas fuera de lore") sin haber mirado
+  [validate_diary.gd] +			"toda sección LORE es una de las 14 categorías del service (fuera: %d)" % fuera)
+  [validate_diary.gd] +		"ninguna 'secreta' fuera de LORE — %d violación(es)%s" % [viol.size(), detalle])
+  [validate_diary.gd] +	# (c) tipo del campo: un "true" en string sería una marca que nadie lee
+  [validate_diary.gd] +		"campo 'secreta' booleano cuando está presente — %d mal tipada(s)%s"
+  [muestreo_p100.py] +    r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|inexistente[s]?|no\s+hay|"
+  [muestreo_p100.py] +    r"no\s+se\s+encontró|eliminad[oa]s?|retirad[oa]s?|borrad[oa]s?|"
+  [muestreo_p100.py] +    r"nunca\s+existio|nunca\s+existió)"
+  [muestreo_p100.py] +    r"(?:no\s+existe[n]?|no\s+existia|no\s+existía|no\s+aparece|no\s+figura|"
+  [muestreo_p100.py] +    r"no\s+se\s+encuentra|no\s+se\s+encontro|no\s+se\s+encontró|"
+  [test_muestreo_p100.py] +**Totales:** 2 ítems · Completados: 2 · Pendientes: 0 · No resueltos: 0.
+claves _t() en +lines: ['DIARY.BLOQUEADO']
+gaps es.po: []
+gaps pt.po: []
+sha1 pt.po: 95ee2ce0d1 (canonico 95ee2ce0d1)

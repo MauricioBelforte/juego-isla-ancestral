@@ -1,0 +1,757 @@
+=== I-02: keys _t()/tr_ctx()/tr_key() en codigo vs catalogos ===
+archivos .gd escaneados: 1251
+keys unicas usadas en codigo (estatico): 82
+huerfanas code->catalogo (ni JSON ni .po): 7
+  ORPHAN ),  <- scripts\ui\diag_ui_en.gd, scripts\ui\test_diario_ui.gd
+  ORPHAN DIARY.CAT_ <- scripts\diario\validate_diary.gd, scripts\ui\layers\diary_layer.gd
+  ORPHAN MENUS.BOTONES.UI|CERRAR <- scripts\localization\test_localizacion_iter2.gd [tr_key], scripts\localization\test_localizacion_iter4.gd [tr_key]
+  ORPHAN MENUS.SALUDOS.HOLA <- scripts\localization\test_localizacion_iter2.gd [tr_key]
+  ORPHAN NOPE.NOPE.X <- scripts\localization\test_localization.gd [tr_key]
+  ORPHAN narrativa <- scripts\localization\test_localizacion_iter2.gd [ctx], scripts\localization\test_localizacion_iter4.gd [ctx]
+  ORPHAN ui <- scripts\localization\test_localizacion_iter2.gd [ctx], scripts\localization\test_localizacion_iter4.gd [ctx]
+usadas en JSON pero NO en .po: 0 []
+usadas en .po pero NO en JSON (runtime .po-only): 75
+keys JSON sin consumo estatico (huerfanas catalog->code; incluye dinamicas DIARY.CAT_*, data-driven, legado): 2
+placeholder check: ValidadorPO R12 + watchdog v32 ya cubren alineacion {x} (0 discrepancias); scan estatico no captura llamadas con params (limitacion declarada)
+
+=== I-13: literales ES no-log en scripts produccion (proxy estatico) ===
+  scripts\accesibilidad\accesibilidad_manager.gd: 2
+     L160: Una sola mano: acciones agrupadas en la mitad izquierda del teclado + ratón
+     L176: Movilidad reducida: mantener automático, tiempos extendidos, sin doble toque
+  scripts\accesibilidad\accesibilidad_schema.gd: 3
+     L18: tamano_texto inválido: %s
+     L20: contraste inválido: %s
+     L22: modo_daltonismo inválido: %s
+  scripts\arte2d\pack_atlas.gd: 1
+     L86: VACIO: ninguna textura válida en '%s'
+  scripts\arte2d\validar_arte_2d.gd: 3
+     L65: naming: '%s' no matchea patrón %s
+     L84: dimensiones muy pequeñas: %dx%d (%s)
+     L91: dimensiones no múltiplo de 4: %dx%d (%s)
+  scripts\ci\cicd_manager.gd: 1
+     L95: JSON inválido: %s/%s
+  scripts\clock\reloj_hud.gd: 1
+     L76: %s, %d de %s, Año %d
+  scripts\clock\w_reloj.gd: 7
+     L185: ~Lunes, 12 de Primavera, Año 1
+     L201: Otoño
+     L262: Mañana
+     L263: \nSesión: %s
+     L264: \nEstación: %s
+     L269: día %d
+     L270: \nPróximos eventos: %s
+  scripts\coleccionables\collectible_category.gd: 2
+     L107: minería
+     L152: Especies de peces del archipiélago
+  scripts\core\invariants\jugador_invariant.gd: 1
+     L21: Jugador fuera del mundo o en geometría inválida
+  scripts\core\invariants\mision_invariant.gd: 2
+     L55: Objetivo '%s' de '%s' sin ruta alternativa (condición imposible)
+     L56: Misión con objetivo imposible
+  scripts\core\invariants\npc_invariant.gd: 1
+     L27: NPC atascado o con nodo inválido
+  scripts\core\invariants\puzzle_invariant.gd: 1
+     L21: Puzzle irreducible tras diagnóstico de 30 s
+  scripts\core\invariants\vehiculo_invariant.gd: 1
+     L19: Vehículo fuera del mundo
+  scripts\core\softlock_guard.gd: 2
+     L154: Múltiples fallos detectados. Revisa el cofre de recuperación.
+     L164: Recuperación automática: %s
+  scripts\crafting\crafting_feedback.gd: 4
+     L73: ¡Listo! x%d %s
+     L82: ¡Receta ancestral!: %s
+     L86: ¡Receta secreta!: %s
+     L90: ¡Nueva receta!: %s
+  scripts\crafting\crafting_recipe.gd: 1
+     L78: todo el año
+  scripts\crash\crash_alerts.gd: 2
+     L35: Crash crítico
+     L83: (stack vacío)
+  scripts\crash\crash_bug_tracking.gd: 4
+     L43: - Versión: %s\n
+     L51: - Estación: %s\n
+     L52: - Posición: %s\n
+     L54: Prioridad: 🔴 CRÍTICA
+  scripts\crash\crash_prioritizer.gd: 1
+     L20: CRÍTICA
+  scripts\data\generar_seeds_islas.gd: 1
+     L33: Templo tallado en la roca volcanica. Guardián de hilos de piedra.
+  scripts\datos\data_store.gd: 9
+     L359: rechazo del slot %d: versión más nueva que este juego (VERSION_ACTUAL=%d)
+     L361: versión más nueva que este juego (VERSION_ACTUAL=%d)
+     L369: migración fallida en el slot %d (v%d): %s
+     L371: migración fallida: %s
+     L383: contrato inválido en el slot %d: %s
+     L384: contrato inválido: %s
+     L395: Save slot %d cargado y validado (versión %d)
+     L501: la compresión no reduce (%d >= %d)
+  scripts\datos\estructuras_codec.gd: 7
+     L247: demasiadas estructuras: %d (máx %d)
+     L263: pos inválida en %s
+     L281: %s inválida en %s
+     L295: celda de mueble inválida en %s
+     L300: rotación de mueble inválida en %s
+     L321: cantidad de cofre inválida en %s
+     L335: celda de puerta inválida en %s
+  scripts\datos\gestor_slot.gd: 1
+     L138: Aurora Año 1
+  scripts\datos\validador.gd: 1
+     L78: No existe esquema para versión %d
+  scripts\datos\versionador.gd: 2
+     L75: Falta migración v%d -> v%d
+     L81: Migración no avanzó versión (%d -> %d)
+  scripts\datos\writer_atomico.gd: 4
+     L90: contenido vacío
+     L93: formato inválido
+     L116: contenido vacío
+     L119: formato inválido
+  scripts\dialogos\auto_advance_manager.gd: 1
+     L81: Retorna errores de configuración.
+  scripts\dialogos\contextual_dialogue_manager.gd: 1
+     L60: sin diálogo para %s/%s
+  scripts\dialogos\dialog_graph_validator.gd: 1
+     L75: nodo huérfano (inaccesible desde start): '%s'
+  scripts\dialogos\typewriter_effect.gd: 1
+     L92: Retorna errores de configuración.
+  scripts\dialogos\ui\dialogue_ui.gd: 1
+     L503: pág %d/%d
+  scripts\diario\validate_diary.gd: 28
+     L75: catálogo legible: 
+     L93: piso de checks: %d ejecutados (mínimo medido %d)
+     L116: schema_version == 1 (llegó %s)
+     L119: 14 categorías en JSON (llegaron %d)
+     L127: service expone 14 categorías
+     L133: categoría '%s' es de CATEGORIAS
+     L134: categoría '%s' sin duplicar
+     L139: categoría '%s' con 0 entradas (fotografías depende de M56)
+  scripts\economia\barter_system.gd: 2
+     L108: temporada inválida
+     L112: límite diario alcanzado
+  scripts\economia\price_manager.gd: 1
+     L236: poco común
+  scripts\editor\code_quality_check.gd: 11
+     L8: Configuración de Análisis
+     L79: Archivo excede %d líneas (tiene %d)
+     L122: Clase '%s' excede %d líneas (tiene %d)
+     L190: Clase '%s' excede %d líneas (tiene %d)
+     L199: Método '%s' excede %d líneas (tiene %d)
+     L207: Método '%s' tiene complejidad ciclomática %d (máx %d)
+     L215: Método '%s' tiene anidamiento nivel %d (máx %d)
+     L271: Señal '%s' debe ser snake_case
+  scripts\editor\support\dialogo_schema.gd: 1
+     L51: nodo %s opción refiere inexistente: %s
+  scripts\editor\support\recipe_schema.gd: 6
+     L18: id vacío
+     L20: receta vacía
+     L26: categoria inválida: %s
+     L28: estacion inválida: %s
+     L35: coste_recursos vacío o inválido
+     L39: coste inválido: %s
+  scripts\editor\tools\recipe_tool.gd: 1
+     L73: ⚠️ Receta inválida: 
+  scripts\enchantment\shaman_npc.gd: 1
+     L87: Chamán
+  scripts\eventos\event_manager.gd: 12
+     L94: Suscribirse a señales de M29/M30/M32.
+     L302: Evalúa si el jugador puede participar. Retorna {ok: bool, razon: StringName}.
+     L322: Fija estado EN_CURSO del participante. Retorna false si ya participó.
+     L341: Finaliza participación y entrega recompensas.
+     L355: Entrega todas las recompensas del evento con verificación doble.
+     L367: Entrega una recompensa individual con validación de token anti-duplicado.
+     L389: API pública: entrega recompensas de un evento finalizado.
+     L410: Registra una sorpresa si cumple límites semanales y no es día de festival.
+  scripts\eventos\event_state.gd: 1
+     L37: True si se puede entregar recompensa (no duplicada este año).
+  scripts\farm\farm_service.gd: 5
+     L106: otoño
+     L331: ¡Listo para cosechar!
+     L333: Descansa. Volverá en su estación.
+     L337: Recién plantado. Riégalo.
+     L339: Creciendo... %d día(s) restantes (riego diario).
+  scripts\fauna\fauna_auditor.gd: 1
+     L28: catálogo JSON válido
+  scripts\fauna\fauna_schema.gd: 5
+     L19: id vacío
+     L21: display_name vacío
+     L23: bioma inválido: %s
+     L25: rareza inválida: %s
+     L27: clase inválida: %s
+  scripts\fishing\fishing_manager.gd: 1
+     L164: otoño
+  scripts\foto\foto_schema.gd: 2
+     L13: id vacío
+     L15: preset vacío
+  scripts\foto\validate_photo.gd: 3
+     L62: al menos 6 presets fotográficos (RF5): %d
+     L81: PhotoService tiene señal %s
+     L93: Navigator es Camera3D (réplica, un render)
+  scripts\herramientas158\shop_visitor.gd: 3
+     L25: Herrero Nómada
+     L78: item no poseído
+     L89: inventario cambió
+  scripts\herramientas158\tool_tier_system.gd: 3
+     L246: economía no disponible (M38)
+     L292: curso ya aprendido (único)
+     L297: economía no disponible (M38)
+  scripts\historia\story_manager.gd: 1
+     L152: capítulo previo incompleto: %s
+  scripts\historia\validar_historia.gd: 6
+     L35: nodo con id no vacío
+     L36: id único: %s
+     L38: existe prólogo
+     L42: sin huérfanos: %s → %s
+     L71: sin retroceso de capítulo: %s(%d) → %s(%d)
+     L79: catálogo sellos = declarados
+  scripts\historias\quest_chain.gd: 3
+     L31: id vacío
+     L33: titulo vacío
+     L35: contexto vacío o demasiado corto (>=10 chars)
+  scripts\historias\secondary_stories_service.gd: 1
+     L429: %s: título duplicado '%s'
+  scripts\houses\casas_panel.gd: 3
+     L70: Ampliación
+     L70: Sótano/Ático
+     L80: Etapa Máxima
+  scripts\houses\house_decor.gd: 3
+     L74: modo decoración inactivo
+     L88: dimensiones inválidas
+     L102: requiere pared y no está en el borde
+  scripts\houses\house_upgrade.gd: 1
+     L56: misión no completada: %s
+  scripts\houses\house_visit.gd: 6
+     L42: parámetros vacíos
+     L44: ya visitó hoy
+     L78: ¡Qué acogedora está tu casa!
+     L82: ¡Adoro este estilo %s! Has captado mi gusto.
+     L89: Interesante decoración... yo habría elegido el estilo %s.
+     L98: Hmm, yo soy más de estilo %s, pero ¡buen trabajo!
+  scripts\ia_npc\npc_manager.gd: 5
+     L76: Suscribirse a señales de VillagerManager para registrar/desregistrar agentes.
+     L105: Sincronizar agentes registrados con la población actual de M19.
+     L178: Agregar un agente al manager. Busca NPCAgent en la jerarquía del villager.
+     L231: Actualizar niveles de simulación basado en distancia al jugador.
+     L266: Registrar tiempo de tick para métricas de rendimiento.
+  scripts\ia_npc\routine_player.gd: 1
+     L56: Buscar el próximo slot en el futuro.
+  scripts\installer\instalador_config.gd: 2
+     L55: Disco insuficiente: %d MB (mínimo %d)
+     L57: RAM insuficiente: %d MB (mínimo %d)
+  scripts\islas\generar_islas.gd: 12
+     L49: definición %s inválida: %s
+     L87: no se pudo guardar el índice del archipiélago (err=%d)
+     L155: El hogar. Puerto central del archipiélago y única isla siempre cargada.
+     L179: Selva densa y rumor de hojas; la flora más rara del archipiélago.
+     L187: Isla Pequeña
+     L191: Una cala mínima para una tarde tranquila.
+     L203: La caldera duerme; el suelo aún recuerda el fuego.
+     L215: Dunas interminables y un oasis que sólo aparece al mediodía.
+  scripts\islas\island_definition.gd: 8
+     L26: Montaña
+     L27: Volcánico
+     L138: id vacío
+     L142: %s: radio inválido (%d)
+     L152: %s: bioma_base fuera del catálogo M09 (%d)
+     L160: %s: proporción de mezcla negativa (%.3f)
+     L165: %s: anillo inválido (%d)
+     L167: %s: la isla NÚCLEO no puede ser secreta
+  scripts\islas\island_design_catalog.gd: 36
+     L69: Diseñar isla principal
+     L71: Diseñar Isla de Coral
+     L73: Diseñar Isla Verde
+     L75: Diseñar Isla de las Cenizas
+     L76: `cenizas` (MEDIO, radio 200, Volcánico, flag `progreso_medio`)
+     L77: Diseñar Islas del Cielo
+     L79: Diseñar islas de nieve
+     L81: Diseñar islas del desierto
+  scripts\islas\island_ops.gd: 7
+     L370: id de operación duplicado: %d
+     L375: tipo inválido en la operación %d: %s
+     L377: operación %d sin isla
+     L380: dos operaciones vivas idénticas (tipo|isla): %s
+     L384: progreso fuera de [0,1] en la operación %d: %f
+     L386: más de una operación en curso: %d
+     L390: _en_curso apunta a una operación que no está en curso: %d
+  scripts\islas\island_registry.gd: 3
+     L75: definición ilegible: %s
+     L100: FALTA la isla principal (%s): el archipiélago es inválido
+     L316: la isla principal (%s) no está en el centro del archipiélago (d=%.0f)
+  scripts\islas\island_travel_guard.gd: 1
+     L661: la vista está vacía: no hay islas configuradas
+  scripts\islas\islas_schema.gd: 4
+     L16: islas vacío o inválido
+     L24: %s: centro inválido
+     L26: %s: radio inválido
+     L34: %s: color_agua inválido (%s)
+  scripts\legal\artbook_validator.gd: 3
+     L19: Sección sin id
+     L21: Sección duplicada: %s
+     L28: Sin políticas de artbook
+  scripts\legal\audio_legal_manager.gd: 3
+     L156: CC-BY sin atribución: %s
+     L160: Crédito con nombre vacío
+     L162: Crédito con rol no definido: %s
+  scripts\legal\audio_license_report_tool.gd: 5
+     L96: JSON de inventario inválido: %s
+     L134: CC-BY (atribución)
+     L135: CC-BY-SA (atribución-compartir igual)
+     L147: Composición original del estudio
+     L194: \n> ⚠️ **Este build contiene audio sin licencia registrada.** Corregir antes del release (
+  scripts\legal\audio_license_validator.gd: 2
+     L27: %s: CC-BY sin atribución
+     L29: Sin políticas de audio
+  scripts\legal\brand_validator.gd: 1
+     L28: Sin políticas de marca
+  scripts\legal\contract_validator.gd: 1
+     L30: Sin políticas de contratos
+  scripts\legal\copyright_validator.gd: 1
+     L32: Sin políticas de copyright
+  scripts\legal\credits_manager.gd: 4
+     L40: Música y Sonido
+     L41: Arte y Animación
+     L105: Devuelve la sección por indice (con título traducido).
+     L321: ¡Gracias por jugar Isla Ancestral!
+  scripts\legal\credits_validator.gd: 4
+     L19: Sección sin id
+     L21: Sección duplicada: %s
+     L24: %s: sin título
+     L28: Sin políticas de créditos
+  scripts\legal\genai_validator.gd: 2
+     L16: Sin políticas de IA generativa
+     L23: Atribución no requerida
+  scripts\legal\legal_validator.gd: 15
+     L65: %s: campo '%s' vacío
+     L93: %s: campo '%s' vacío
+     L98: %s: fuente no es URL válida (%s)
+     L104: %s: atribución requerida pero texto vacío
+     L122: %s: atribución sin mención de copyright/autor
+     L124: %s: atribución sin mención de licencia
+     L148: %s: licencia NC pero uso_comercial=true — contradicción
+     L167: CONFLICTO DE LICENCIAS: asset CC-BY-SA junto a contenido propietario — evaluar compatibili
+  scripts\legal\license_validator.gd: 1
+     L42: Sin políticas de licencias
+  scripts\legal\marketing_legal_validator.gd: 1
+     L28: Sin políticas de marketing legal
+  scripts\legal\merch_validator.gd: 1
+     L41: Sin políticas de merchandising
+  scripts\legal\minors_validator.gd: 2
+     L26: Región '%s' sin edad de consentimiento
+     L28: Sin políticas de menores
+  scripts\legal\model3d_validator.gd: 1
+     L26: Sin políticas de assets
+  scripts\legal\privacy_validator.gd: 1
+     L30: Sin políticas de privacidad
+  scripts\legal\production_validator.gd: 1
+     L27: Sin políticas de producción
+  scripts\legal\rating_validator.gd: 3
+     L23: %s: sin región
+     L26: %s: contenido '%s' no válido
+     L28: Sin políticas de clasificación
+  scripts\legal\terms_validator.gd: 5
+     L20: Sección sin id
+     L22: Sección duplicada: %s
+     L25: %s: sin título
+     L29: Menos de 3 secciones de términos
+     L31: Sin políticas de términos
+  scripts\licensing\license_scanner.gd: 3
+     L140: INFO: %s: requiere atribución
+     L359: ERROR: %s: CC_BY_NC prohíbe uso comercial
+     L408: ERROR: %s: license_file vacío (%s)
+  scripts\localization\analizador_layout.gd: 5
+     L218: ── AnalizadorLayout: encaje y expansión ──
+     L220: caben en español  : %d
+     L221: caben en inglés   : %d
+     L223: expansión máxima  : %.3f
+     L224: expansión media   : %.3f
+  scripts\localization\auditor_claves.gd: 7
+     L192: ── AuditorClaves: %d archivo(s), %d clave(s) usadas, %d en catálogo
+     L198: USADAS EN CÓDIGO PERO AUSENTES DEL CATÁLOGO
+     L200: EN EL CATÁLOGO SIN USO LITERAL NI DINÁMICO
+     L201: EN EL CATÁLOGO, USADAS POR PREFIJO DINÁMICO
+     L206: RECURSOS (*.tres) ESCANEADOS: %d — claves declaradas: %d — sin entrada en el catálogo: %d
+     L209: DECLARADAS EN *.tres PERO AUSENTES DEL CATÁLOGO
+     L211: Prefijos dinámicos detectados (%d):
+  scripts\localization\glosario.gd: 4
+     L160: ── Glosario: consistencia de terminología ──
+     L161: términos en el glosario : %d
+     L162: términos en uso         : %d
+     L163: términos sin uso        : %d
+  scripts\localization\locale_utils.gd: 1
+     L19: Español
+  scripts\localization\retraductor_ui.gd: 1
+     L129: ── RetraductorUI: re-traducción selectiva ──
+  scripts\localization\validador_po.gd: 14
+     L79: R4 catálogo sin entradas
+     L140: P1 %d clave(s) de la fuente ausentes en la traducción
+     L145: P2 %d clave(s) huérfanas en la traducción
+     L147: P5 %d clave(s) sin traducir (msgstr idéntico a la fuente)
+     L162: Faltantes en la traducción
+     L163: Huérfanas en la traducción
+     L253: R3 el archivo no es UTF-8 válido (posible cp1252)
+     L299: R13 plural sin índice 0: 
+  scripts\lore\lore_auditor.gd: 6
+     L41: %s: canon_ref vacío
+     L47: %s: titulo vacío
+     L49: %s: texto vacío
+     L52: %s: isla vacía
+     L66: Isla '%s': solo %d piezas (mínimo %d)
+     L75: Grafo de pistas vacío (0 pistas)
+  scripts\map\map_schema.gd: 2
+     L16: pois vacío o inválido
+     L32: POI %s categoría inválida: %s
+  scripts\marketing\marketing_validator.gd: 4
+     L18: Sin campañas
+     L21: Campaña sin nombre
+     L23: Campaña '%s' sin canal
+     L25: Campaña '%s' sin fase
+  scripts\marketing\trailer_validator.gd: 5
+     L29: Suma de tomas (%d s) difiere de duración total (%d s)
+     L35: Sin resolución
+     L40: Toma '%s' sin música
+     L44: Menos de 2 idiomas de subtítulos
+     L48: Checklist anti-spoiler vacío
+  scripts\modding\mod_sandbox.gd: 3
+     L41: ruta vacía
+     L57: ruta apunta a la raíz de la base
+     L101: E09: extensión de '%s' no coincide con su prefijo (esquema M108)
+  scripts\modding\mod_validator.gd: 9
+     L20: id duplicado sin override explícito
+     L21: mod sin versión
+     L24: paquete corrupto (campo obligatorio ausente o de tipo erróneo)
+     L27: extensión de asset no coincide con su prefijo (esquema M108)
+     L29: asset supera el límite de 10 MB por dominio
+     L32: prioridad inválida (no numérica)
+     L56: %s: sin versión
+     L75: campo '%s' vacío o de tipo erróneo
+  scripts\monetizacion\monetizacion_manager.gd: 1
+     L67: edición inexistente
+  scripts\monetizacion\scanner_antip2w.gd: 1
+     L22: item_pago '%s' altera la progresión (P2W)
+  scripts\motivacion\antifomo_auditor.gd: 1
+     L24: El tiempo real nunca penaliza (solo día de juego)
+  scripts\museum\collection_registry.gd: 1
+     L125: Exposición completa: 
+  scripts\npc\villager_dialogue_hook.gd: 2
+     L175: ¡Me encanta! ¡Gracias!
+     L177: Hmm... no es lo mío, pero gracias.
+  scripts\npc\villager_profile.gd: 2
+     L41: ¡Hola!
+     L42: ¡Hasta luego!
+  scripts\particles\vfx_pool.gd: 3
+     L41: id vacío
+     L42: presupuesto de partículas
+     L79: secuencia de semillas vacía
+  scripts\particles\vfx_schema.gd: 4
+     L70: vfx vacío o inválido
+     L98: %s: naming inválido (RF16/M108, esperado vfx_<snake_case>)
+     L150: %s: color inválido
+     L169: %s: %s inválido (%s)
+  scripts\player\equipment_manager.gd: 8
+     L53: Rápidos en pavimento, lentos en barro y arena
+     L69: Impermeables para zonas húmedas
+     L85: Aislantes para climas fríos
+     L101: Protección ligera para exploración
+     L109: Aumenta comodidad en frío
+     L125: Ropa básica sin bonos
+     L137: Brújula
+     L141: Muestra dirección en el HUD
+  scripts\player\player.gd: 7
+     L526: Categoría
+     L542: Decoración
+     L542: Iluminación
+     L545: Construcción
+     L650: Buscar ítem...
+     L896: Común
+     L896: Poco común
+  scripts\principios\principios_auditor.gd: 3
+     L28: %s: nombre vacío
+     L30: %s: descripción vacía
+     L37: Auditoría sin prohibiciones totales
+  scripts\progresion\progression_manager.gd: 8
+     L261: Condición → bool sin leer autoloads ni modificar estado del juego.
+     L555: ' tiene recompensas sin condición
+     L647: Valida el catálogo cargado y loguea cualquier problema.
+     L650: Catálogo validado OK: 
+     L654: Catálogo warning: 
+     L818: Título otorgado: 
+     L940: Hito de catálogo antiguo ignorado: 
+     L958:  títulos
+  scripts\proyecto\documentation_validator.gd: 3
+     L10: Categoría sin id
+     L11: Categoría duplicada: %s
+     L15: Sin políticas de documentación
+  scripts\proyecto\fundamentals_validator.gd: 2
+     L24: %s: sin título
+     L28: Sin políticas de fundamentos
+  scripts\proyecto\version_control_validator.gd: 3
+     L19: Política sin id
+     L21: Política duplicada: %s
+     L26: Sin políticas de versionado
+  scripts\proyecto\vision_validator.gd: 1
+     L28: Sin políticas de visión
+  scripts\rendimiento\memoria\generar_budgets.gd: 4
+     L133: %s: disco=%d diseño=%d
+     L139: preset '%s': los 8 topes coinciden con el diseño%s%s
+     L146: preset '%s': la suma en disco (%d) es el total del diseño (%d)
+     L190: dataset regenerado y re-validado contra el diseño §2
+  scripts\rendimiento\memoria\memory_monitor.gd: 5
+     L311: transición a '%s' ENCOLADA (ya hay una en curso)
+     L314: transición a '%s' iniciada
+     L354: transición CANCELADA: %d candidatos drenados
+     L379: cambio de región '%s': liberación FORZADA de %d MB
+     L549: drift %.1f%% supera el máximo de %.1f%% (baseline %.1f MB)
+  scripts\resources\resource_definition.gd: 1
+     L34: otoño
+  scripts\ruinas\preview_antorcha_m25.gd: 1
+     L84: DESPUÉS: E-80, cara inferior +%.2f m
+  scripts\saving\save_loader.gd: 2
+     L45: documento inválido
+     L63: estructura inválida: %s
+  scripts\saving\save_schema.gd: 8
+     L141: time.%s fuera de rango (%d; válido %d..%d)
+     L151: time.%s inválido (%d; mínimo %d)
+     L202: schema_version inválido: %s
+     L220: Falta sección: %s
+     L222: Sección %s no es Dictionary
+     L249: time.acumulador no es numérico
+     L253: time.acumulador fuera de rango (%s; válido 0..%s)
+     L263: meta.playtime_seconds no es numérico
+  scripts\saving\save_writer.gd: 2
+     L165: contenido vacío
+     L168: formato inválido
+  scripts\saving\validate_save.gd: 4
+     L92: documento con checksum y payload válido
+     L110: corrupción detectada (falla checksum)
+     L134: recuperación desde backup (RECOVERED)
+     L161: default_payload es válido
+  scripts\security\security_manager.gd: 9
+     L80: Economía adulterada: plata negativa (%d)
+     L83: Economía adulterada: plata %d excede max_plata
+     L89: Economía adulterada: objetos negativos (%d)
+     L92: Economía adulterada: %d objetos exceden max_objetos_inventario
+     L98: Economía adulterada: nivel negativo (%d)
+     L101: Economía adulterada: nivel %d excede max_nivel
+     L118: Patrón de bot: ráfaga de %d acciones a intervalos < %dms
+     L136: Acceso crítico: %s %s
+  scripts\shops\catalogo_tiendas.gd: 6
+     L52: definición nula
+     L57: sin npc_duenio_id (tienda fija requiere dueño M19)
+     L59: mercader sin calendario de aparición (dias_aparicion_mercader <= 0)
+     L61: catálogo de venta vacío
+     L63: horario incompleto (días o franjas vacías)
+     L69: ítem duplicado en catálogo: %s
+  scripts\store\store_page_validator.gd: 7
+     L23: Descripción corta %s vacía
+     L25: Descripción corta %s excede %d caracteres (%d)
+     L33: Sección About sin título
+     L35: Sección About '%s' sin bullets
+     L41: Más de 20 tags (límite Steamworks)
+     L47: Requisito '%s' vacío
+     L55: Asset '%s' sin dimensión
+  scripts\stress\stress_runner.gd: 3
+     L114: REGRESIÓN (%d métrica(s) > umbral %d%%)
+     L119: sin baseline (primera corrida: sin regresión que medir)
+     L120: ok (sin regresión > %d%%)
+  scripts\support\support_validator.gd: 3
+     L20: Sin categorías de tickets definidas
+     L23: Sin política de respuesta
+     L39: %s: categoría '%s' no definida
+  scripts\templos\templo_checkpoint.gd: 3
+     L71: id de checkpoint vacío
+     L115: checkpoint '%s' corrupto (JSON inválido)
+     L203: checkpoint '%s' dejó un .tmp huérfano
+  scripts\templos\templo_schema.gd: 3
+     L18: salas vacío o inválido
+     L62: guardián en sala inexistente: %s
+     L69: ningún puzzle con recompensa
+  scripts\templos\templo_validadores.gd: 12
+     L140: sala sin conexiones (callejón sin salida): %s
+     L200: rampa %.0f° > %.0f° (permite aceleración por salto)
+     L203: blueprint sin sección voxel
+     L224: blueprint sin sección voxel
+     L264: blueprint sin sección accesibilidad
+     L269: iconografía %d px < %d px (M58)
+     L271: los puzzles no deben tener presión temporal (cozy)
+     L273: faltan subtítulos activables (M43)
+  scripts\time\festival_data.gd: 11
+     L18: Festival de la Floración
+     L19: Celebración del renacimiento de la naturaleza. Las flores cubren la plaza.
+     L38: La vendimia llega a su punto máximo. Frutas y verduras abundan.
+     L57: Las hojas danzan al compás del viento otoñal. Cometas en el cielo.
+     L76: La primera nevada cubre la isla. Muñecos de nieve en cada esquina.
+     L98: Fin de año: miles de faroles iluminan la noche más larga.
+     L118: Cumpleaños de 
+     L119: ¡Feliz cumpleaños! Ven a celebrarlo en la plaza.
+  scripts\time\game_clock.gd: 3
+     L25: Miércoles
+     L25: Sábado
+     L26: Otoño
+  scripts\time\time_calendar.gd: 1
+     L186: %s, %d de %s del año %d
+  scripts\time\time_config.gd: 3
+     L18: Miércoles
+     L18: Sábado
+     L25: Otoño
+  scripts\tools\tool_data.gd: 1
+     L85: Caña de Pescar
+  scripts\transporte\generar_red_transporte.gd: 1
+     L34: Estación Central
+  scripts\transporte\transport_localizer.gd: 18
+     L73: Fuera de horario ({horario}). ¿Esperar?
+     L75: Sólo disponible durante {evento}
+     L78: Duración: {duracion}
+     L97: Viaje al Festival de Otoño
+     L102: Travesía nocturna a los faroles.
+     L104: Travesía nocturna a la Isla Espejo, con recargo.
+     L105: Tour panorámico en dirigible
+     L107: Travesía al Templo de la Brisa
+  scripts\transporte\transport_m69_bridge.gd: 3
+     L172: el fast travel a '%s' no es más caro que el boleto (%d <= %d)
+     L188: M69/M68: %d anclas, %d compartidas, %d huérfanas, %d ofrecibles
+     L196:   huérfanas (M69 sin parada M68): %s
+  scripts\transporte\transport_manager.gd: 4
+     L129: en diálogo (M21)
+     L309: ruta huérfana
+     L600: viaje especial: sólo programado
+     L608: sólo en %s
+  scripts\transporte\transport_narrative_trips.gd: 4
+     L145: requiere el capítulo %d
+     L258: %s: capítulo fuera de rango (%d)
+     L271: %s: sin diálogos a bordo declarados (M21)
+     L289: M68 narrativos: %d viajes, capítulos %s
+  scripts\transporte\transport_network.gd: 1
+     L219: ruta %s: duración no positiva
+  scripts\transporte\transport_route_events.gd: 3
+     L274: %s: sin señal (M43/M44)
+     L276: %s: tipo de señal inválido '%s'
+     L284: %s: tipo inválido '%s'
+  scripts\transporte\transport_route_waypoints.gd: 8
+     L83: plan no válido
+     L124: waypoint %d con índice inconsistente
+     L129: waypoint %d: fracción fuera de [0,1]
+     L131: waypoint %d: fracción no monótona
+     L135: waypoint %d: acumulado no monótono
+     L143: el primer waypoint no tiene fracción 0.0
+     L145: el último waypoint no es el destino
+     L147: el último waypoint no tiene fracción 1.0
+  scripts\transporte\transport_special_trips.gd: 9
+     L189: sólo en luna llena
+     L199: el evento %s no está activo
+     L239: sólo los fines de semana
+     L245: sólo el %d/%d
+     L249: sólo en su estación
+     L256: sólo de %02d:00 a %02d:00
+     L277: %s: tipo inválido '%s'
+     L305: %s: requiere_luna_llena sólo vale para tipo '%s'
+  scripts\transporte\transport_trip_planner.gd: 6
+     L198: orientar la cámara al destino (RF20)
+     L220: duración total no positiva
+     L222: transición no cozy: %.2f s (máx < %.1f)
+     L239: el destino se carga DESPUÉS de mover al jugador (M61/RF20)
+     L250: orientación no unitaria: %s
+     L253: puede_perder_jugador=true en un plan válido
+  scripts\transporte\validate_transport.gd: 1
+     L227: la ruta %s no está disponible: %s
+  scripts\ubicaciones\ubicaciones_schema.gd: 5
+     L19: ubicaciones vacío o inválido
+     L24: ubicación sin id
+     L30: %s: isla inválida
+     L32: %s: tipo inválido (%s)
+     L39: %s: coordenadas inválidas (%s, %s)
+  scripts\ugc\ugc_limits.gd: 9
+     L141: Tipo de contenido no reconocido: '%s' (válidos: %s).
+     L143: El ítem no tiene contenido (0 bytes).
+     L157: Formato '%s' no soportado para fotos (válidos: %s).
+     L167: El ítem no tiene contenido (0 bytes).
+     L170: Alcanzaste el máximo de %d ítems activos: eliminá alguno para publicar otro.
+     L174: Límite diario de fotos alcanzado (%d). Probá mañana.
+     L178: Límite diario de diseños y construcciones alcanzado (%d). Probá mañana.
+     L182: Te queda menos de %s de subida hoy (límite %s).
+  scripts\ugc\ugc_validator.gd: 5
+     L17: Sin tipos válidos definidos
+     L19: Sin estados válidos definidos
+     L21: Sin política UGC
+     L33: %s: tipo '%s' no válido
+     L36: %s: estado '%s' no válido
+  scripts\ui\core\ui_manager.gd: 1
+     L548: RF18: overlay de pausa abierto por pausa instantánea de M58
+  scripts\ui\diag_scroll.gd: 7
+     L77: baseline: filas ≤ ventana máxima (%d ≤ %d)
+     L88: Sintética %03d
+     L91: registrar sintética %03d
+     L92: catálogo con %d entradas (%d + %d)
+     L103: VIRTUALIZACIÓN: %d filas en árbol ≤ %d (L194)
+     L122: primera fila visible = sintética %03d
+     L150: SONDA: virtualización sabotada (esperaba fallar: %d filas)
+  scripts\ui\diag_ui_en.gd: 43
+     L47: InputMap tiene la acción 'diario'
+     L48: InputMap tiene la acción 'favorito'
+     L74: registrada en la pila al entrar al árbol (%d)
+     L81: abre en < 100 ms con el catálogo actual (%d µs)
+     L85: 14 categorías desde get_categorias() (obtuvo %d)
+     L87: 14 pestañas construidas (obtuvo %d)
+     L90: categoría por defecto = personajes
+     L93: ningún texto visible es una clave i18n cruda (DIARY./SETTINGS.)
+  scripts\ui\donation_panel.gd: 2
+     L93: No hay items donables para esta exposición.
+     L128: ¡Gracias! Donaste: 
+  scripts\ui\layers\credits_layer.gd: 9
+     L29: Rápida
+     L100: Créditos
+     L152: Tiempo de visualización
+     L225: [center](catálogo de créditos no disponible)[/center]
+     L294: Detener o reanudar el desplazamiento automático
+     L296: Tamaño: %s
+     L297: Tamaño de letra (S / M / L)
+     L309: Cambiar idioma de los créditos
+  scripts\ui\layers\inventory_layer.gd: 4
+     L18: Decoración
+     L18: Iluminación
+     L21: Construcción
+     L25: Categoría
+  scripts\ui\layers\loading_layer.gd: 2
+     L18: Recuerda regar tus plantas cada día...
+     L23:  fotografía puede capturar momentos únicos...
+  scripts\ui\museo_sign.gd: 1
+     L148: ¡Exposición completada: 
+  scripts\ui\widgets\clock_widget.gd: 2
+     L26: otoño
+     L59: otoño
+  scripts\ui\widgets\season_widget.gd: 1
+     L23: Otoño
+  scripts\vehiculos\vehicle_manager.gd: 7
+     L77: ya hay un vehículo activo (uno a la vez)
+     L81: vehículo desconocido: %s
+     L84: vehículo no docked; espera al atraque
+     L101: no hay vehículo activo
+     L104: velocidad alta: frena o atracá antes de salir
+     L118: no hay vehículo activo
+     L134: no hay vehículo activo
+  scripts\viajes\travel_service.gd: 3
+     L132: línea nocturna disponible solo de noche (M29)
+     L143: economía no disponible (M38)
+     L177: viaje en travesía: no cancelable
+  scripts\viajes\travel_ui.gd: 1
+     L92: Sección 8 AGENTS.md: deshabilitar UI interactiva durante transiciones.
+  scripts\world\block_type.gd: 3
+     L103: Césped
+     L158: Lámpara de Glifo
+     L191: Tierra Arada Húmeda
+  scripts\world\validate_lighting_m49.gd: 1
+     L126: ambient cálido: R=%.2f G=%.2f B=%.2f
+total candidatos (no-log, con tilde): 687 en 166 archivos
+
+=== I-16: strings > 100 chars ===
+  JSON es: 0 values >100 chars
+  JSON en: 0 values >100 chars
+  JSON pt: 0 values >100 chars
+  .po es: 0 msgstr >100 chars
+  .po en: 0 msgstr >100 chars
+  .po pt: 0 msgstr >100 chars
+
+=== I-18: compilador MO propio Python (msgfmt no disponible Windows/WSL-sindistro) ===
+  es.po -> es.mo: 259 entradas compiladas, round-trip 0/259 OK, mismatches=259, size=16149B
+    MISMATCH: ['MAIN_MENU.PLAY', 'MAIN_MENU.OPTIONS', 'HUD.ENERGIA', 'HUD.VIDA', 'ITEMS.MADERA']
+  en.po -> en.mo: 258 entradas compiladas, round-trip 0/258 OK, mismatches=258, size=15435B
+    MISMATCH: ['MAIN_MENU.PLAY', 'MAIN_MENU.OPTIONS', 'HUD.ENERGIA', 'HUD.VIDA', 'ITEMS.MADERA']
+  pt.po -> pt.mo: 272 entradas compiladas, round-trip 0/272 OK, mismatches=272, size=16586B
+    MISMATCH: ['MAIN_MENU.PLAY', 'MAIN_MENU.OPTIONS', 'HUD.ENERGIA', 'HUD.VIDA', 'ITEMS.MADERA']

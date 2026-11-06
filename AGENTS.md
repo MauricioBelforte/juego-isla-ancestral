@@ -324,7 +324,7 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 
 1. **Leer `Logs/NUMEROS_DISPONIBLES.txt`** → tomar la primera línea (el número más bajo disponible).
 2. **BORRAR esa línea** del archivo (el número queda consumido — nadie más lo puede tomar).
-3. **Guardar el número en tu backlog personal** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, metodología V2 §29.1) bajo la tarea que estás completando, en una línea tipo:
+3. **Guardar el número en tu backlog personal** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, metodología V2 §29.1) bajo la tarea que estás completando, en una línea tipo:
    ```
    - [x] Log reservado: **980** — M53 UI-UX avance 78→82%
    ```
@@ -374,7 +374,7 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 - **NUNCA** tomar un número de `NUMEROS_DISPONIBLES.txt` sin borrarlo de la lista.
 - **SIEMPRE** verificar la existencia del archivo de log antes de crearlo.
 - **El número se consume al tomararlo** de la lista — no hay reserva compartida.
-- **Cada agente guarda su número en su backlog personal** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`).
+- **Cada agente guarda su número en su backlog personal** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`).
 - Si dos agentes leen `NUMEROS_DISPONIBLES.txt` simultáneamente, la línea en blanco resultante se detecta y el segundo toma el siguiente válido.
 
 ## 7. Seguimiento de Progreso (Checklist)
@@ -382,13 +382,13 @@ Cada vez que finalices una tarea, genera un informe de cambios:
 ### Flujo de trabajo: Backlog Personal → Módulo → CHECKLIST-GLOBAL
 
 > ⚠️ **IMPORTANTE (METODOLOGÍA V2, fundador 2026-10-17):** cada modelo trabaja desde SU backlog
-> en su canal: `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` — mantenido por
+> en su canal: `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` — mantenido por
 > el DIRECTOR (ver §29.1). La CHECKLIST-GLOBAL es solo un tablero de resumen para el usuario —
 > **NO** es la fuente de trabajo del agente.
 
 **Flujo obligatorio (V2 — ciclo DEFINITIVO, fundador ~04:55):**
 1. **Leer tu carpeta — el ÚLTIMO archivo** → si el director te escribió, RESPONDER primero creando TU mensaje propio (numeración de hilo; cada uno escribe su mensaje)
-2. **Sin mensajes nuevos → ir SIEMPRE a tu BACKLOG-MASTER** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) — **JAMÁS quedarte sin trabajo** (el backlog nunca se vacía)
+2. **Sin mensajes nuevos → ir SIEMPRE a tu BACKLOG-MASTER** (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, cola activa) — **JAMÁS quedarte sin trabajo** (el backlog nunca se vacía)
 3. **Elegir tareas** y bloquearlas → marcar `[→]` en tu backlog + `🔵` en CHECKLIST-GLOBAL (si toca un módulo)
 4. **Ejecutar** las tareas (leer `plan-actual/` del módulo, implementar, documentar)
 5. **Completar** → marcar `[x]` en los 3 lugares (tu BACKLOG-MASTER, `05-Checklist.md`, CHECKLIST-GLOBAL)
@@ -426,18 +426,18 @@ WorkBuddy (y otras plataformas) **hospedan varios LLMs al mismo tiempo**, cada u
 
 1. **La identidad la define el chat, no la plataforma.** Firmar `WorkBuddy` no alcanza: hay que firmar el **modelo** (`Hy4`, `Hy3`, `DeepSeek-V4.1-Flash`, etc.). Hay agentes `Hy3` y `DeepSeek-V4.1-Flash` **reales y activos en otros chats** sobre este mismo repo.
 2. **Antes de firmar, confirmar qué modelo es el de *este* chat.** Si en algún momento se firmó con otro nombre, **corregir la firma** y dejar una nota de identidad en el log afectado; no reescribir el contenido.
-3. **Nunca reclamar ni editar la carpeta de backlog de otro modelo.** Desde la metodología V2 el backlog de cada agente vive en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` y es editado solo por su dueño y por el director (§29.1); `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/` queda como histórico y también no se toca desde otro chat.
+3. **Nunca reclamar ni editar la carpeta de backlog de otro modelo.** Desde la metodología V2 el backlog de cada agente vive en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` y es editado solo por su dueño y por el director (§29.1); `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/` queda como histórico y también no se toca desde otro chat.
 4. **Impacto directo en el §21.8:** una firma equivocada puede hacer que un QA cruzado parezca válido cuando en realidad lo verificó el mismo agente que lo escribió. Ante la duda, citar el **Log** concreto en el que se apoya la atribución.
 5. **Trampa del `IDENTITY.md` compartido (WorkBuddy, detectada 2026-10-03):** WorkBuddy **comparte un único archivo `IDENTITY.md` entre todos sus chats** (Hy3, Hy4, DeepSeek-V4.1-Flash…). El usuario lo edita para decirle a un chat quién es, y **los demás chats lo heredan y se confunden**. Si tu plataforma tiene este archivo: **ignóralo.** Tu identidad se comprueba así:
    - Tu carpeta de canal existe: `Mensajes entre modelos/<MODELO>/` — el nombre de esa carpeta **es** tu identidad (regla §10.2).
-   - Tu backlog existe: `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` (metodología V2 §29.1).
+   - Tu backlog existe: `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` (metodología V2 §29.1).
    Si el `IDENTITY.md` dice un modelo y tu carpeta otro, **gana tu carpeta**. Firma con el modelo de tu carpeta y, si el desajuste te parece relevante, anótalo en tu próximo informe (como hizo Hy3 en su canal, archivo 05).
 - Al agotarse tokens en una sesión, el usuario (o el mismo modelo) reinicia `/bucle` — el estado continúa desde CHECKLIST-GLOBAL.md (fuente de verdad persistida).
 
 TODO agente que abra una sesión de este proyecto debe arrancar su trabajo con `/bucle` (o seguir el ciclo manual si su plataforma no tiene el comando).
 
 Cada vez que completes una tarea:
-1. Leer tu backlog personal (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`)
+1. Leer tu backlog personal (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`)
 2. Marcar como completado cambiando `[ ]` por `[x]` en los 3 lugares.
 
 > **Para tareas masivas (múltiples módulos):** el seguimiento de estado global se realiza mediante **`CHECKLIST-GLOBAL.md`** (sección 21), que resume el progreso de todos los módulos. Los subitems detallados viven en el `05-Checklist.md` de cada módulo.
@@ -578,7 +578,7 @@ Mensajes entre modelos/
    > Así se ve de un vistazo **entre qué modelos** se escribe en cada hilo, incluso cuando no
    > participa el director. El helper `reservar_mensaje.py` rellena ambos campos solo.
 6. **No se mezclan temas dentro de un archivo:** un informe por ítem o por iteración; si hay varios ítems, un archivo por iteración con una sección por ítem.
-7. **El backlog personal sigue siendo la fuente de tareas** (desde 2026-10-17, Metodología V2: vive EN tu canal — `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, mantenido por el director, §29.1). El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
+7. **El backlog personal sigue siendo la fuente de tareas** (desde 2026-10-17, Metodología V2: vive EN tu canal — `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, mantenido por el director, §29.1). El Modo Canal es el *canal de comunicación* (encargos, informes, preguntas, devoluciones); los `[ ]` verificables y el conteo para `CHECKLIST-GLOBAL.md` viven en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`. Al completar un ítem, el agente marca en los 3 lugares (backlog, `05-Checklist.md` del módulo, `CHECKLIST-GLOBAL.md`) **y** escribe su informe en el canal.
 8. **No eliminar mensajes anteriores:** el hilo completo se conserva para trazabilidad.
 9. **Ventaja operativa:** el usuario solo necesita decirle a cada agente "leé tu carpeta en `Mensajes entre modelos/` y respondé ahí" — no hay que copiar prompts largos entre chats.
 10. **Economía de tokens en el chat (regla de oro):** el informe detallado se escribe en la carpeta del modelo; por el chat el agente solo avisa "terminé [ítem], informe en mi carpeta" (o "aborté [ítem]: [motivo de una línea]"). El director lee la carpeta, procesa y responde escribiendo un archivo nuevo en ella — nunca por el chat. El usuario solo necesita decir "fijate los que terminaron" / "terminó [modelo]" al director, y "andá a leer tu carpeta" al agente. Guía completa y obligatoria: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
@@ -1450,14 +1450,14 @@ reemplazo), y `Logs/` (registro histórico).
 > **Actualizado:** 2026-09-11 · **Fuente:** directiva del usuario — cada modelo trabaja desde su propio backlog
 > **⚡ METODOLOGÍA V2 (directiva del fundador 2026-10-17):** los backlogs de flota se MUDAN a los
 > canales. Ver sección 29.1 — **donde esta sección diga `TAREAS-POR-MODELO/<MODELO>/`, léase
-> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`**. El flujo por módulos/Recom
+> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`**. El flujo por módulos/Recom
 > y las marcas siguen vigentes; lo que cambia es la UBICACIÓN y QUIÉN mantiene el archivo
 > (el Director) y el ciclo de trabajo (mensajes primero, tanda del backlog después, reporte al cierre).
 
 ### 29.1 METODOLOGÍA V2 — Backlogs de flota en los canales del director (fundador 2026-10-17)
 
 1. **Ubicación de los backlogs de flota (desde 2026-10-17):**
-   `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` (estilo checklist, 100+
+   `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` (estilo checklist, 100+
    tareas disponibles). Cada agente ya sabe que ese archivo existe en su canal.
 2. **El DIRECTOR los mantiene** (`GLM-5.3-Flash-Director`): agrega/marca tareas con evidencia,
    investigando `DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md` y el estado real del proyecto.
@@ -1466,7 +1466,7 @@ reemplazo), y `Logs/` (registro histórico).
    (1a) **leer su carpeta — el ÚLTIMO archivo** del canal, y si el director dejó instrucciones ahí
    → RESPONDER primero creando SU PROPIO mensaje (cada uno escribe su mensaje, nunca editar el
    de otro); (1b) si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
-   (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, sección A - COLA ACTIVA) y
+   (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, sección A - COLA ACTIVA) y
    trabajar la próxima tarea — **JAMÁS quedarse sin trabajo: el backlog nunca se vacía**
    (el director repone tareas cuando queda corto); (1c) **REPORTE al director EN CADA VUELTA
    del cronómetro** en su canal (qué tarea(s) trabajó esa vuelta, estado, evidencia — aunque no
@@ -1475,17 +1475,26 @@ reemplazo), y `Logs/` (registro histórico).
    (2) verificar que cada BACKLOG-MASTER tenga tareas por hacer (agregar si queda corto, por nicho);
    (3) si un modelo tiene tareas disponibles y pasa mucho tiempo sin avanzar ni responder →
    escribirle un RECORDATORIO en su canal.
-5. **NO cambian:** la numeración de mensajes (hilo último+1, pools por canal gitignoreados),
-   la reserva 🔵 de módulos §21.3, la REGLA CERO de reportes, el QA cruzado §21.8,
-   UTF-8 §28 y los logs de cierre formal en `Logs/`.
+ 5. **NO cambian:** la numeración de mensajes (hilo último+1, pools por canal gitignoreados),
+    la reserva 🔵 de módulos §21.3, la REGLA CERO de reportes, el QA cruzado §21.8,
+    UTF-8 §28 y los logs de cierre formal en `Logs/`.
+ 6. **⚡ ESTRUCTURA BACKLOGS/ (directiva del fundador 5nov 00:38):** cada carpeta `TAREAS-POR-MODELO/<MODELO>/`
+    contiene una subcarpeta `BACKLOGS/` con:
+    - `BACKLOG-MASTER.md` — **ÍNDICE PEQUEÑO** (~30-50 líneas) que referencia los archivos temáticos.
+    - `01-Backlog-(tema).md`, `02-Backlog-(tema).md`, ... — **archivos por bloque/tarea** (pequeños, focales).
+    - `00-Backlog-Original-PreSplit.md` — el archivo original (historial, no se edita).
+
+    **Regla de lectura:** el agente lee el `BACKLOGS/BACKLOG-MASTER.md` (índice) para saber dónde
+    están las tareas activas. Trabaja en el archivo específico (ej: `01-Backlog-Cola-Activa.md`).
+    El índice lo mantiene la directora; los archivos los edita el agente (marcas `[x]`).
 
 ### Flujo de trabajo obligatorio para TODO modelo (VIGENTE versión V2)
 
-> ⚠️ **IMPORTANTE:** La CHECKLIST-GLOBAL.md es solo un **tablero de resumen** para el usuario. Cada modelo **DEBE** trabajar desde su **propio backlog personal** en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` (§29.1).
+> ⚠️ **IMPORTANTE:** La CHECKLIST-GLOBAL.md es solo un **tablero de resumen** para el usuario. Cada modelo **DEBE** trabajar desde su **propio backlog personal** en `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` (§29.1).
 
 **Flujo al iniciar sesión (V2):**
 1. **Leer si el director te escribió** en tu canal → responder primero (numeración de hilo)
-2. **Leer tu backlog personal** → `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`
+2. **Leer tu backlog personal** → `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`
 3. **Buscar tareas pendientes** en los `plan-actual/` de los módulos que te corresponden (por tu `Recom`)
 4. **Elegir una TANDA de tareas** de tu backlog que puedas hacer ahora
 5. **Bloquearlas** → marcar `[→]` en tu checklist personal
@@ -1497,7 +1506,7 @@ reemplazo), y `Logs/` (registro histórico).
 
 ### Estructura del backlog personal (V2)
 
-- **Ubicación (desde 2026-10-17):** `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` — mantenido por el DIRECTOR (§29.1)
+- **Ubicación (desde 2026-10-17):** `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` — mantenido por el DIRECTOR (§29.1)
 - **Guía obligatoria:** `Mensajes entre modelos/GUIA-COMUNICACION.md` (sección METODOLOGÍA V2)
 - **Histórico:** la estructura anterior (`TAREAS-POR-MODELO/<MODELO>/` con `BACKLOG-MASTER.md` y checklists por módulo) queda como referencia histórica; los backlogs de flota migraron a los canales
 - **Excepción (única):** el backlog PROPIO del director vive en `DOCUMENTACION/TAREAS-POR-MODELO/GLM-5.3-Flash-Director/` (el director no tiene canal, §31)
@@ -1510,7 +1519,7 @@ reemplazo), y `Logs/` (registro histórico).
 - **`[?]`** = no resuelta (honestidad)
 
 **Regla de oro:** al completar una tarea T-###, marcar los **TRES lugares**:
-1. Tu checklist personal (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`)
+1. Tu checklist personal (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`)
 2. El `05-Checklist.md` del módulo
 3. La fila de CHECKLIST-GLOBAL (progreso)
 

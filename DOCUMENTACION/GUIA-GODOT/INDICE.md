@@ -30,7 +30,7 @@
 | 12 | [`12-animales-bimodo.md`](12-animales-bimodo.md) | Animales bimodo: estado dual, Quaternion piernas, ground snapping | ✅ |
 | 13 | [`13-sondas-runtime-gate2.md`](13-sondas-runtime-gate2.md) | Sondas de runtime del GATE-2 (RED/GREEN byte-exact, correlacion de logs, anti-inflacion) | ✅ |
 
-### Avanzados / Específicos del juego (16-19)
+### Avanzados / Específicos del juego (16-21)
 
 | # | Archivo | Contenido | Estado |
 |---|---|---|---|
@@ -38,6 +38,8 @@
 | 17 | [`17-disco-plano-verde.md`](17-disco-plano-verde.md) | Disco plano sólido con SurfaceTool (el "plato verde" sobre el agua) | ✅ |
 | 18 | [`18-impostores-terreno.md`](18-impostores-terreno.md) | Impostores del terreno: heightmap completo + anti-tildes + anti-caída + horizonte | ✅ |
 | 19 | [`19-diagnostico-tildes.md`](19-diagnostico-tildes.md) | Diagnóstico y solución de tildes (freeze): protocolo paso a paso, causas C-01 a C-11, checklist | ✅ |
+| 20 | [`20-ventana-juego-al-frente.md`](20-ventana-juego-al-frente.md) | Traer la ventana del juego al frente (PowerShell/Win32): ALT-trick + restore | ✅ |
+| 21 | [`21-send-keys-navegacion-juego.md`](21-send-keys-navegacion-juego.md) | Envío de teclas al juego Godot vía Win32 API (send_keys) — complemento a V4 godot-mcp | ✅ |
 
 ---
 

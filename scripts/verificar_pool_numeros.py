@@ -1,10 +1,17 @@
 # -*- coding: utf-8 -*-
-"""Verifica la salud de todos los pools de numeros: el global (logs) y uno por canal.
+r"""v2 de verificar_pool_numeros.py — inventario tolerante a long-path.
 
-Uso: python scripts/verificar_pool_numeros.py
-Sale con codigo 1 si hay algun problema.
+Cambios respecto de la v1 (dos, ambos de exactitud, ninguno de criterio):
+  1. INVENTARIO: os.walk + stat con prefijo \\?\ en vez de Path.rglob/is_file.
+     En Windows sin long-path habilitado, rglob NO ve los mensajes con ruta > 260
+     chars (los "fantasmas NTFS"): los cuenta como huecos y ademas no detecta un
+     numero usado que siga en el pool.
+  2. DETECTOR: acepta hora HH-MM ademas de HH-MM-SS (misma regex que
+     renumerar_canal.py v2 y saneo de pools), para no ignorar mensajes validos.
+
+Todo lo demas es identico: mismos fails, mismos umbrales, mismo exit code.
 """
-import io, re, sys
+import io, os, re, sys
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8")
 from pathlib import Path
 
@@ -15,10 +22,18 @@ CANALES = ["atria-dawn-s2", "DeepSeek-V4.1-Flash", "Hy3", "agnes-3-flash",
            "kimi-k3", "mimo-v2.6-flash-free", "space-bunny-alpha"]
 
 NUM = re.compile(r"^(\d+)-")
-MENSAJE_RE = re.compile(r"^\d+-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}-\d{2}-")
+MENSAJE_RE = re.compile(r"^\d+-\d{4}-\d{2}-\d{2}_\d{2}-\d{2}(?:-\d{2})?-")
 FECHA_PRIMERO = re.compile(r"^\d{4}-\d{2}-\d{2}_")
 
 fails = []
+
+
+def lp(p):
+    """Ruta absoluta con prefijo long-path en Windows."""
+    p = os.path.abspath(str(p))
+    if os.name != "nt" or p.startswith("\\\\?\\"):
+        return p
+    return "\\\\?\\" + p
 
 
 def leer_sano(path):
@@ -37,6 +52,26 @@ def leer_sano(path):
         if ln.isdigit():
             out.add(int(ln))
     return out, True
+
+
+def inventario(d):
+    """Recorre todas las subcarpetas; devuelve (numeros usados, ilegibles, total)."""
+    usados, ilegibles, total = set(), [], 0
+    for raiz, _dirs, files in os.walk(d):
+        for f in files:
+            if not MENSAJE_RE.match(f):
+                continue
+            ruta = os.path.join(raiz, f)
+            try:
+                os.stat(lp(ruta))
+            except OSError as ex:
+                ilegibles.append(f"{os.path.relpath(ruta, d)} ({ex.__class__.__name__})")
+                continue
+            m = NUM.match(f)
+            if m:
+                usados.add(int(m.group(1)))
+                total += 1
+    return usados, ilegibles, total
 
 
 # --- pool global (logs) ---
@@ -78,15 +113,10 @@ print()
 for c in _canales_disco:
     d = MM / c
     pool, ok = leer_sano(d / "NUMEROS_DISPONIBLES.txt")
-    usados = set()
-    # rglob: los mensajes pueden estar en subcarpetas de rango 0-99/100-199/...
-    # (orden del fundador 2026-10-15)
-    for p in d.rglob("*"):
-        if not p.is_file() or not MENSAJE_RE.match(p.name):
-            continue
-        m = NUM.match(p.name)
-        if m:
-            usados.add(int(m.group(1)))
+    usados, ilegibles, total = inventario(d)
+    if ilegibles:
+        fails.append(f"{c}: {len(ilegibles)} mensaje(s) ilegibles incluso con long-path: "
+                     f"{ilegibles[:5]}")
     fuga = pool & usados
     if fuga:
         fails.append(f"{c}: mensaje(s) ya creado(s) pero su numero sigue en el pool del canal: {sorted(fuga)}")

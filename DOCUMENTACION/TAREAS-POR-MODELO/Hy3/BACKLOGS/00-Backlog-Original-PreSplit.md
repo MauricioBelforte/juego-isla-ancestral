@@ -53,7 +53,7 @@
 12. M110-Debug (150/225): QA del lote de paneles — 8 [M] — [x] Hy3 (Log 2150 / msg 334, 2026-10-23: §21.8 cross-QA; 05-Checklist 150[x]/75[ ]/0[?]=225 == GLOBAL 150/225 sin drift; EOL CRLF limpio sin BOM/NUL; test headless Godot 4.7.2 22/0 EXIT0 + RED probe exit1 anti-falso-verde; verificador s3 != Hy3; modulo queda AMARILLO backend ok / 75 UI pendientes)
 13. M91-Config-Audio (212/239): QA de los avances de step-5-kilocode (232 archivos) — 10 [M]
 14. M90-Config-Grafica (149/249): QA del estado — 8 [M]
-15. M40-Infraestructura (175/211): QA del lote cerrado — 8 [M]
+15. M40-Infraestructura (210/1/0=211, medido 2026-11-04; 175/211 del backlog es stale): QA del lote cerrado — 8 [M] — [x] Hy3 (Log 2313, 2026-11-04: headless 60 checks/0 fallos/7 bloques exit 0 + rojo por inyeccion anti-falso-verde OK; 05-Checklist medido 210[x]/1[ ]/0[?]=211; TRANSICION ausente en disco game_flow_manager.gd:13 -> L81/L89 sobre-marcados; 'Totales' L299 (180/27/4) y GLOBAL (206/211) divergentes/stale; verificador != autor step-5-kilocode; sello §21.8 pendiente autorizacion director)
 16. M64-IA-NPC (102/119): QA runtime del pathfinding actual — 8 [M]
 17. M74-Eventos (227/285): QA del scheduler — 8 [M]
 18. M71-Progresión (168/213): QA de lotes XP — 8 [M]

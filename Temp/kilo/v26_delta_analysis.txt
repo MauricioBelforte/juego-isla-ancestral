@@ -1,0 +1,44 @@
+DELTA v26 — detector v8: snapshot v8-final (2026-10-30 23:26 local) vs WT actual (2026-10-31 ~04:0xZ)
+Fuentes: Temp/kilo/v25_detector_v8_final.txt | Temp/kilo/v26_detector_delta.txt
+Causa del movimiento: degradaciones aplicadas por la FLOTA post-v25 (TANDA 9 DeepSeek-V4.1-Flash: 10 AUTO -> 8 reales a [?] + M38 L41; agnes gate-1 por tanda). Report-only Ling: 0 flips propios esta vuelta.
+
+===== CONTADORES (header del detector) =====
+items [x]              v8=23010  v26=23003  delta -7
+A1-GRAVE               v8=32     v26=29     delta -3
+promovidos C2 vecinos  v8=2      v26=2      delta +0
+R4-GRAVE               v8=239    v26=239    delta +0
+A3-PENDIENTE-REAL      v8=8      v26=4      delta -4
+A2-DEUDA               v8=242    v26=242    delta +0
+C2-RESUELTO            v8=554    v26=554    delta +0
+SOS sostenidos         v8=313    v26=313    delta +0
+FP                     v8=4      v26=4      delta +0
+FORMULA legitimos      v8=80     v26=80     delta +0
+GRIS diseno            v8=209    v26=209    delta +0
+
+===== A1/A3 POR MODULO (diff de dicts de header) =====
+--- A1: total v8=32 -> v26=29 ---
+  10-Generacion-Del-Mundo: 2 -> 0 (-2)
+  137-Prototipo: 2 -> 1 (-1)
+--- A3: total v8=8 -> v26=4 ---
+  137-Prototipo: 4 -> 3 (-1)
+  139-Pre-Alpha: 2 -> 0 (-2)
+  38-Economia: 1 -> 0 (-1)
+
+===== LINEAS A1/A3 SALIDAS ENTRE v8 Y v26 (degradadas por la flota) =====
+--- A1: 32 lineas (v8) -> 29 lineas (v26); salieron 3 ---
+  SALIO 10-Generacion-Del-Mundo L26 :: [A1] 10-Generacion-Del-Mundo L26: - [x] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M] — DEGRADADO 2026-10-15 (step-5 410, muestreo Patron D): fractal_octaves reales 2/3/4 (terrain 4, island
+  SALIO 10-Generacion-Del-Mundo L53 :: [A1] 10-Generacion-Del-Mundo L53: - [x] Diffs del jugador se aplican DESPUÉS de regenerar [M] — DEGRADADO 2026-10-15 (step-5 412, grep repo-wide): 0 hits de reaplicacion de diffs; regenerar_chunk (deb
+  SALIO 137-Prototipo L210 :: [A1] 137-Prototipo L210: - [x] Definir comentarios XML de clase en cada script [S] — DEGRADADO 2026-10-14 (step-5-kilocode): muestreo de 5 scripts con class_name (event_bus, fishing_manager, island_re
+--- A3: 8 lineas (v8) -> 4 lineas (v26); salieron 4 ---
+  SALIO 137-Prototipo L10 :: [A3] 137-Prototipo L10: - [x] Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la escena prin
+  SALIO 139-Pre-Alpha L158 :: [A3] 139-Pre-Alpha L158: - [x] Definir buses: Music, Ambient, SFX, ASMR, UI [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): de los 5 buses que pide el item, 4 existen verificados en audio_config_se
+  SALIO 139-Pre-Alpha L74 :: [A3] 139-Pre-Alpha L74: - [x] Documentar los 60+ ítems del mundo con precio base (M15) [C] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): conteo verificado en disco — de 1691 items con id en data/, so
+  SALIO 38-Economia L41 :: [A3] 38-Economia L41: - [x] RF13: persistencia de saldo, reputación, historial e inventarios de tienda [M] — PARCIAL: saldo (núcleo) + historial (iter.2, log 538) + reputación (iter.3, log 544) persis
+  TOTAL lineas salidas A1+A3: 7 (debe coincidir con delta items [x] = -7)
+
+===== M157 L148 (verificacion directa — debe seguir [x] con nota reformulada) =====
+  L148: - [x] J-04: 04-Codigo.md con archivos y contratos de integración [M] — evidencia disco: `plan-actual/04-Codigo.md` creado (lista 20 scripts "A Crear" + contratos de integración). **Alcance de este ítem = el documento (ce
+  sigue [x]: True | nota reformulada (alcance cerrado 25oct): False
+
+===== BLINDAJE RIEL PT =====
+  pt.po sha1=95ee2ce0d1 (canonico 95ee2ce0d1) | git status riel: VACIO | HEAD=d93c9e5

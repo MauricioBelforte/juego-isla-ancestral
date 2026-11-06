@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Censo de drift entre la linea `Totales` y las marcas reales de cada 05-Checklist.
+"""Censo de drift entre las lineas `Totales` y las marcas reales de cada 05-Checklist.
 
 Herramienta READ-ONLY (no escribe nada). Sirve para priorizar auditorias gate-1
-(AGENTS.md §21.8.2.b): un modulo cuyo `[x]` crecio despues del ultimo `Totales`
-es candidato a promocion silenciosa; uno cuyo `[x]` bajo es un Totales stale
-por degradaciones posteriores.
+(AGENTS.md §21.8.2.b): un modulo cuyo `[x]` en disco supera TODO lo que el
+archivo declara es candidato a promocion silenciosa.
 
 Uso:
     python scripts/censo_drift_totales.py
@@ -14,9 +13,39 @@ Uso:
 
 Criterio de conteo (el canonico del proyecto): lineas que empiezan con
 `- [x]`, `- [ ]` o `- [?]` (con indentado permitido), sobre el archivo en disco.
-La declaracion se toma de la ULTIMA linea `**Totales:**` no tachada, parseada
-por etiqueta (Completados / Pendientes / No resueltos). Si no hay etiquetas se
-acepta `a/b` o `a/b/c`.
+
+DECLARACION — reglas, todas nacidas de falsos positivos medidos contra el repo:
+
+1. Se aceptan lineas de blockquote (`> **Totales:** ...`): la v1 las ignoraba y
+   acababa parseando numeros de prosa ("M30 98/104") como declaracion.
+2. Se descartan las lineas TACHADAS (`~~**Totales:** ...~~`), aunque el tachado
+   empiece despues del `>`: son historial. (M151 declaraba 156/6/5 arriba y
+   tenia una linea tachada 112/49/6 al pie; la v1 leia la tachada.)
+3. Se exige que `**Totales` vaya seguido de `:` antes del cierre del negrita
+   (`**Totales:**`, `**Totales (fecha):**`, `**Totales T-M112:**`). Asi se
+   descarta la prosa que HABLA de totales: M122 tiene
+   `- **Totales inventados** (335/335/0 sobre 265 marcadores)` y la v2.1 lo
+   leia como declaracion de 335, fabricando un tipo B de -79.
+4. Se aceptan las dos notaciones del proyecto:
+   `Completados: N · Pendientes: M · No resueltos: K` y
+   ``N `[x]` · M `[ ]` · K `[?]` `` (M32 usa la segunda y la v1 lo daba por
+   "sin Totales").
+5. Se descartan los SUBTOTALES: una declaracion valida debe sumar el total de
+   items del archivo (x+o+q == marcas). M112 tiene `**Totales T-M112:** 17 [x]`
+   (subtotal de una tanda) y sin este filtro el censo le atribuia 17 items.
+
+VIGENCIA (el punto delicado): un archivo acumula declaraciones y NO hay un
+orden fijo —M49 y M151 tienen la vigente arriba, M71 y M27 abajo, y M27 ademas
+tiene una linea vieja con formato distinto al pie—. Por eso no se elige "la
+ultima" ni "la primera", que produjeron ambos tipos de falso positivo:
+
+  * tipo A: disco [x] > MAXIMO [x] declarado  -> crecimiento no declarado.
+    El delta se mide contra la declaracion mas optimista, asi que es un PISO.
+  * tipo B: disco [x] < MINIMO [x] declarado   -> degradaciones no reflejadas.
+  * tipo C: el [x] del disco cae dentro del rango pero ninguna declaracion
+    coincide en las tres cifras ([ ]/[?] desincronizados).
+  * limpio: alguna declaracion coincide exactamente en x, y ademas el [ ] y el
+    [?] del disco cuadran con esa misma declaracion.
 
 Salida: codigo 0 siempre que pueda leer; 2 si no encuentra checklists.
 """
@@ -30,13 +59,20 @@ import re
 import sys
 
 RE_ITEM = re.compile(r'^\s*-\s*\[([ x?])\]')
-RE_TOT_STRONG = re.compile(r'^\s*\*\*Totales')
-RE_TOT_ANY = re.compile(r'\bTotales\b\s*[:\-]')
+RE_TITULO = re.compile(r'\*\*Totales\s*(?:\([^)\n]*\)|T-[A-Za-z0-9-]+)?\s*:\*\*')
 CLAVES = {'x': 'x', ' ': 'o', '?': 'q'}
 
 
+def es_declaracion(linea):
+    """True si la linea ES una declaracion de totales (no prosa que la menciona)."""
+    m = RE_TITULO.search(linea)
+    if not m:
+        return False
+    return linea[:m.start()].count('~~') % 2 == 0
+
+
 def leer_checklist(path):
-    """Devuelve (conteo, declaracion, linea_declarada)."""
+    """Devuelve (conteo, declaraciones_validas)."""
     with io.open(path, 'rb') as fh:
         texto = fh.read().decode('utf-8', errors='replace')
     lineas = texto.replace('\r\n', '\n').split('\n')
@@ -46,14 +82,19 @@ def leer_checklist(path):
         m = RE_ITEM.match(linea)
         if m:
             conteo[CLAVES[m.group(1)]] += 1
+    total = sum(conteo.values())
 
-    candidatas = [l for l in lineas if RE_TOT_STRONG.match(l) and not l.strip().startswith('~~')]
-    if not candidatas:
-        candidatas = [l for l in lineas
-                      if RE_TOT_ANY.search(l)
-                      and not l.strip().startswith(('~~', '>', '-', '*'))]
-    linea_tot = candidatas[-1] if candidatas else None
-    return conteo, parsear_declaracion(linea_tot) if linea_tot else None, linea_tot
+    candidatas = []
+    for l in lineas:
+        if '**Totales' not in l or not es_declaracion(l):
+            continue
+        decl = parsear_declaracion(l)
+        if decl is None:
+            continue
+        candidatas.append((decl, l))
+
+    con_total = [c for c in candidatas if sum(normalizar(c[0])) == total]
+    return conteo, (con_total or candidatas)
 
 
 def parsear_declaracion(linea):
@@ -65,12 +106,17 @@ def parsear_declaracion(linea):
         m = re.search(patron, linea, re.I)
         return int(m.group(1)) if m else None
 
-    x = numero(r'Completados?\b[^\d]{0,8}(\d+)')
-    o = numero(r'Pendientes?\b[^\d]{0,8}(\d+)')
-    q = numero(r'(?:No\s+resueltos?|Sin\s+resolver)\b[^\d]{0,8}(\d+)')
-    if x is not None and o is not None and q is not None:
+    x = numero(r'Completados?\b[^\d]{0,12}(\d+)')
+    o = numero(r'Pendientes?\b[^\d]{0,12}(\d+)')
+    q = numero(r'(?:No\s+resueltos?|Sin\s+resolver)\b[^\d]{0,12}(\d+)')
+    if x is None:
+        x = numero(r'(\d+)\s*`?\[x\]')
+    if o is None:
+        o = numero(r'(\d+)\s*`?\[ ?\]')
+    if q is None:
+        q = numero(r'(\d+)\s*`?\[\?\]')
+    if x is not None and o is not None:
         return x, o, q
-
     m = re.search(r'(\d+)\s*/\s*(\d+)\s*/\s*(\d+)', linea)
     if m:
         return int(m.group(1)), int(m.group(2)), int(m.group(3))
@@ -78,6 +124,12 @@ def parsear_declaracion(linea):
     if m:
         return int(m.group(1)), int(m.group(2)), None
     return None
+
+
+def normalizar(decl):
+    """None en 'No resueltos' significa 0 declarado, no desconocido."""
+    x, o, q = decl
+    return x, o, (0 if q is None else q)
 
 
 def main():
@@ -93,29 +145,55 @@ def main():
         print('No se encontraron checklists en %s' % patron, file=sys.stderr)
         return 2
 
-    crecio, bajo, limpios, sin_totales = [], [], 0, []
+    crecio, bajo, desinc, limpios, sin_totales = [], [], [], 0, []
+    ambiguos = 0
     for path in archivos:
         modulo = os.path.normpath(path).split(os.sep)[-3]
-        conteo, decl, linea = leer_checklist(path)
+        conteo, cands = leer_checklist(path)
         total = sum(conteo.values())
-        if decl is None:
+        disco = (conteo['x'], conteo['o'], conteo['q'])
+        if not cands:
             sin_totales.append({'modulo': modulo, 'disco': conteo, 'total': total})
-        elif (decl[0], decl[1], decl[2]) == (conteo['x'], conteo['o'], conteo['q']):
+            continue
+
+        norm = [(normalizar(c[0]), c[1]) for c in cands]
+        xs = [n[0][0] for n in norm]
+        exactas = [n for n in norm if n[0] == disco]
+        if exactas:
             limpios += 1
-        elif conteo['x'] > decl[0]:
-            crecio.append({'modulo': modulo, 'disco': conteo, 'declara': decl,
-                           'delta': conteo['x'] - decl[0], 'total': total})
+            if len(cands) > 1:
+                ambiguos += 1
+            continue
+
+        if disco[0] > max(xs):
+            decl, linea = max(norm, key=lambda n: n[0][0])
+            fila = {'modulo': modulo, 'disco': conteo, 'declara': decl, 'total': total,
+                    'linea': linea, 'declaraciones': len(cands),
+                    'declara_todas': [n[0] for n in norm],
+                    'delta': disco[0] - decl[0]}
+            crecio.append(fila)
+        elif disco[0] < min(xs):
+            decl, linea = min(norm, key=lambda n: n[0][0])
+            fila = {'modulo': modulo, 'disco': conteo, 'declara': decl, 'total': total,
+                    'linea': linea, 'declaraciones': len(cands),
+                    'declara_todas': [n[0] for n in norm],
+                    'delta': decl[0] - disco[0]}
+            bajo.append(fila)
         else:
-            bajo.append({'modulo': modulo, 'disco': conteo, 'declara': decl,
-                         'delta': decl[0] - conteo['x'], 'total': total})
+            decl, linea = norm[-1]
+            desinc.append({'modulo': modulo, 'disco': conteo, 'declara': decl, 'total': total,
+                           'linea': linea, 'declaraciones': len(cands),
+                           'declara_todas': [n[0] for n in norm]})
 
     crecio.sort(key=lambda r: -r['delta'])
     bajo.sort(key=lambda r: -r['delta'])
     resumen = {
         'checklists': len(archivos),
         'limpios': limpios,
+        'limpios_con_varias_declaraciones': ambiguos,
         'tipo_A_x_crecio': len(crecio),
         'tipo_B_x_bajo': len(bajo),
+        'tipo_C_desincronizado': len(desinc),
         'sin_totales': len(sin_totales),
         'marcas_crecidas': sum(r['delta'] for r in crecio),
         'marcas_bajadas': sum(r['delta'] for r in bajo),
@@ -123,30 +201,44 @@ def main():
 
     if args.json:
         print(json.dumps({'resumen': resumen, 'tipo_A': crecio, 'tipo_B': bajo,
-                          'sin_totales': sin_totales}, ensure_ascii=False, indent=2))
+                          'tipo_C': desinc, 'sin_totales': sin_totales},
+                         ensure_ascii=False, indent=2))
         return 0
 
     print('CENSO DE DRIFT — Totales vs marcas reales (read-only)')
     print('checklists=%d | limpios=%d | tipo A ([x] crecio)=%d (+%d marcas) | '
-          'tipo B ([x] bajo)=%d (-%d marcas) | sin Totales=%d'
+          'tipo B ([x] bajo)=%d (-%d marcas) | tipo C ([x] igual, [ ]/[?] no cuadran)=%d | '
+          'sin Totales=%d'
           % (resumen['checklists'], limpios, len(crecio), resumen['marcas_crecidas'],
-             len(bajo), resumen['marcas_bajadas'], len(sin_totales)))
+             len(bajo), resumen['marcas_bajadas'], len(desinc), len(sin_totales)))
 
-    print('\n=== TIPO A: [x] crecio despues del ultimo Totales (candidatos a gate-1) ===')
-    print('%-42s %-14s %-14s %s' % ('MODULO', 'DISCO', 'DECLARA', '+[x]'))
+    print('\n=== TIPO A: [x] del disco por encima de TODO lo declarado (candidatos a gate-1) ===')
+    print('%-42s %-14s %-14s %-6s %s' % ('MODULO', 'DISCO', 'DECLARA (max)', '+[x]', 'DECLARACIONES'))
     for r in crecio[:args.top]:
         d, s = r['disco'], r['declara']
-        print('%-42s %-14s %-14s +%d' % (r['modulo'][:42],
-                                         '%d/%d/%d=%d' % (d['x'], d['o'], d['q'], r['total']),
-                                         '%d/%d/%s' % (s[0], s[1], s[2]), r['delta']))
+        print('%-42s %-14s %-14s +%-5d %s' % (r['modulo'][:42],
+                                              '%d/%d/%d=%d' % (d['x'], d['o'], d['q'], r['total']),
+                                              '%d/%d/%d' % s, r['delta'],
+                                              '/'.join(str(x[0]) for x in r['declara_todas'])))
 
-    print('\n=== TIPO B: [x] bajo despues del Totales (degradaciones sin actualizar) ===')
-    print('%-42s %-14s %-14s %s' % ('MODULO', 'DISCO', 'DECLARA', '-[x]'))
+    print('\n=== TIPO B: [x] del disco por debajo de TODO lo declarado (degradaciones sin reflejar) ===')
+    print('%-42s %-14s %-14s %-6s %s' % ('MODULO', 'DISCO', 'DECLARA (min)', '-[x]', 'DECLARACIONES'))
     for r in bajo[:args.top]:
         d, s = r['disco'], r['declara']
-        print('%-42s %-14s %-14s -%d' % (r['modulo'][:42],
-                                         '%d/%d/%d=%d' % (d['x'], d['o'], d['q'], r['total']),
-                                         '%d/%d/%s' % (s[0], s[1], s[2]), r['delta']))
+        print('%-42s %-14s %-14s -%-5d %s' % (r['modulo'][:42],
+                                              '%d/%d/%d=%d' % (d['x'], d['o'], d['q'], r['total']),
+                                              '%d/%d/%d' % s, r['delta'],
+                                              '/'.join(str(x[0]) for x in r['declara_todas'])))
+
+    if desinc:
+        print('\n=== TIPO C: [x] dentro del rango declarado pero sin declaracion exacta ===')
+        print('%-42s %-14s %-14s %s' % ('MODULO', 'DISCO', 'ULTIMA DECLARA', 'DECLARACIONES'))
+        for r in desinc[:args.top]:
+            d, s = r['disco'], r['declara']
+            print('%-42s %-14s %-14s %s' % (r['modulo'][:42],
+                                            '%d/%d/%d=%d' % (d['x'], d['o'], d['q'], r['total']),
+                                            '%d/%d/%d' % s,
+                                            '/'.join(str(x[0]) for x in r['declara_todas'])))
 
     print('\n=== SIN linea de Totales parseable (deuda de higiene) ===')
     for r in sin_totales:

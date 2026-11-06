@@ -1,0 +1,13 @@
+CENSOR RIEL v34 — METODO GIT BLOB SHA (corregido) — 2026-11-06
+HEAD: 13d247158ec9b76802c85a4dd35d8a1ba06fa09e
+manager WT blob:   047eab5ff111dffdc3f3b48f8241c787e104c0a5
+manager HEAD blob: 047eab5ff111dffdc3f3b48f8241c787e104c0a5
+manager INTACTO (WT==HEAD): True
+pt.po WT blob:   d2b567c48e88cfa6d9d22d76eaf31804e1e9028c
+pt.po HEAD blob: d2b567c48e88cfa6d9d22d76eaf31804e1e9028c
+pt.po INTACTO (WT==HEAD): True
+WT archivos trackeados: 19982
+REFERENCIAS: manager blob 047eab5ff111 desde commit 071a2f9 (28oct, GO#4 PT);
+pt.po blob d2b567c48e88 (22c2bcf, +VOLVER_TITULO/_CONFIRMAR); sha1-crudo pt.po 6E5C19683F.
+LECCION v34: centinela SHA vivo debe usar git hash-object/rev-parse;
+hashlib crudo solo es comparable consigo mismo (falso positivo BFDC83CC89 en censor_v34.py).

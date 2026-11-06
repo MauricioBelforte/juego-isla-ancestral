@@ -134,7 +134,7 @@ juego-isla-ancestral/
 - `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md` — Guía completa de MCP (V1-V5)
 - `DOCUMENTACION/GUIA-GODOT/INDICE.md` — Errores comunes de Godot
 - `AGENTS.md` — Reglas globales del proyecto
-- `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.5/BACKLOG-MASTER.md` — Backlog de MiMo
+- `DOCUMENTACION/TAREAS-POR-MODELO/mimo-v2.5/BACKLOGS/BACKLOG-MASTER.md` — Backlog de MiMo
 
 ---
 

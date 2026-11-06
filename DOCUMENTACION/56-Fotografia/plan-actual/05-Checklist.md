@@ -272,7 +272,7 @@
 - [x] Ofrecer tamaño de texto configurable [M]
 - [x] Reducir zoom automático con Reduce Motion activo [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [x] Ofrecer subtítulos en notificaciones [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (subtítulos notificaciones)
+- [ ] Ofrecer subtítulos en notificaciones [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (subtítulos notificaciones) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Evitar estroboscopios en la UI y testear colorblind mode [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
@@ -283,7 +283,7 @@
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M46
 - [x] Definir marcadores de encuadre (rejilla de tercios) con toggle [M] — 03-Diseno sec 5: 2+2 lineas al tercio blanco 40% + cruz centro; toggle G, defecto OFF por preset, solo UI (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
-- [x] Añadir guía de horizonte opcional [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (guía de horizonte)
+- [ ] Añadir guía de horizonte opcional [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (guía de horizonte) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Definir sonido de obturador (M43) y vibración sutil (M57) [S] — 03-Diseno sec 5: obturador_foto -4 dB sincrono con PHOTO_TAKEN; vibracion gamepad 60 ms suave, tolerante a ausencia (2026-10-23 S43)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M43, M57

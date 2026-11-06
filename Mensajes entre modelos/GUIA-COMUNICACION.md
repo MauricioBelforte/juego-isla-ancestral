@@ -12,13 +12,13 @@
 ## ⭐ METODOLOGÍA V2 — Backlog-MASTER unificado en TAREAS-POR-MODELO (directiva del fundador 2026-10-17, corregida 2026-10-17 ~04:45)
 
 > **CORRECCIÓN del fundador (~04:45): los backlogs NO viven en los canales** — viven en
-> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, **UNIFICADOS** (un solo
+> `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, **UNIFICADOS** (un solo
 > archivo por modelo: cola activa de 100+ tareas curada por el director + el registro
 > histórico de avance del master anterior). La Regla de oro, la REGLA CERO, la numeración
 > por hilo (último + 1) y los pools por canal siguen vigentes sin cambio.
 
 1. **Cada modelo tiene UN solo backlog en su carpeta de tareas:**
-   `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md` — unificado (cola activa + estado histórico).
+   `DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md` — unificado (cola activa + estado histórico).
    La carpeta de canal (`Mensajes entre modelos/<MODELO>/`) es SOLO comunicación (mensajes + pool
    de numeración + puntero de revisión) — NO contiene backlog.
 2. **El DIRECTOR (GLM-5.3-Flash-Director) es el responsable de mantener esos archivos
@@ -36,7 +36,7 @@
    - **(1a)** Leer su carpeta — **el ÚLTIMO archivo** — y si el director dejó instrucciones,
      responderle primero creando SU PROPIO mensaje (cada uno escribe su mensaje).
    - **(1b)** Si no hay mensajes → ir SIEMPRE a su BACKLOG-MASTER
-     (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOG-MASTER.md`, cola activa) y trabajar la
+     (`DOCUMENTACION/TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md`, cola activa) y trabajar la
      próxima tarea — **JAMÁS quedarse sin trabajo** (el director repone tareas si queda corto).
    - **(1c)** **REPORTE al director EN CADA VUELTA de su cronómetro** (qué trabajó esa vuelta,
      estado, evidencia — aunque no cierre todo) en su canal.
