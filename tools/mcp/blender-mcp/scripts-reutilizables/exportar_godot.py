@@ -68,7 +68,8 @@ DEST_ROOT = os.path.join(RAIZ, 'game', 'isla-ancestral', 'assets', '3d')
 MODULOS = ('13-Herramientas', '15-Recursos', '16-Crafting', '18-Casas',
            '19-NPCs', '25-Ruinas-Templos', '27-Islas-Ubicaciones',
            '33-Agricultura', '35-Mineria', '36-Fauna',
-           '40-Infraestructura', '45-Arte3D', '50-Vegetacion', '70-Interacciones')
+           '40-Infraestructura', '45-Arte3D', '50-Vegetacion',
+           '67-Vehiculos', '70-Interacciones')
 # E-63 (2026-09-02, NPC base M19): la tupla esta ordenada por numero de modulo.
 # '19-NPCs' va entre '18-Casas' y '25-Ruinas-Templos' — mantener ese orden.
 # E-63: esta tupla es una whitelist. Un modulo nuevo que no este aqui se exporta
@@ -76,6 +77,8 @@ MODULOS = ('13-Herramientas', '15-Recursos', '16-Crafting', '18-Casas',
 # modulo nuevo en tools/mcp/blender-mcp/, AGREGALO ACA o sus GLB nunca llegaran
 # al juego. Caso real: 18-Casas (Tier E) quedo fuera y el export dio
 # {"exportados": 0, "saltados": 0, "errores": 0} sin ninguna senal de falla.
+# 2026-11-06 (T-01a, Hy4): se agrega '67-Vehiculos' en orden numerico.
+# Sin esta entrada los 3 GLB de la Barquita de Aurora no llegaban al juego.
 
 # Por variante, que sufijo gana (primero = mayor prioridad). Ver E-43.
 PRIORIDAD = {
