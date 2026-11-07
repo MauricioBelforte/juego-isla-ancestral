@@ -1,0 +1,53 @@
+BLOQUE CASA_01_CHOZA        ALTA   8 checks / 0 fallos
+BLOQUE CASA_01_CHOZA        BAJA   8 checks / 0 fallos
+BLOQUE CASA_01_CHOZA        MEDIA  8 checks / 0 fallos
+BLOQUE CASA_02_CASA_MEDIANA ALTA   8 checks / 0 fallos
+BLOQUE CASA_02_CASA_MEDIANA BAJA   8 checks / 0 fallos
+BLOQUE CASA_02_CASA_MEDIANA MEDIA  8 checks / 0 fallos
+BLOQUE CASA_03_CASONA       ALTA   8 checks / 0 fallos
+BLOQUE CASA_03_CASONA       MEDIA  8 checks / 0 fallos
+BLOQUE CASA_04_MANSION      ALTA   8 checks / 0 fallos
+BLOQUE CASA_04_MANSION      MEDIA  8 checks / 0 fallos
+BLOQUE CASA_05_CASA_VECINO  ALTA   8 checks / 0 fallos
+BLOQUE CASA_05_CASA_VECINO  BAJA   8 checks / 0 fallos
+BLOQUE CASA_05_CASA_VECINO  MEDIA  8 checks / 0 fallos
+
+=== HALLAZGOS (DATOS, no checks) ===
+CASA_01_CHOZA        ALTA  tris=4100  mats=8  obj=14 y=[0.0450,3.9250] presupuesto=OK          apoyo=OK                     godot=AUSENTE
+CASA_01_CHOZA        BAJA  tris=500   mats=4  obj=14 y=[0.0450,3.9250] presupuesto=obj 14>6    apoyo=OK                     godot=AUSENTE
+CASA_01_CHOZA        MEDIA tris=1416  mats=6  obj=14 y=[0.0450,3.9250] presupuesto=obj 14>8    apoyo=OK                     godot=AUSENTE
+CASA_02_CASA_MEDIANA ALTA  tris=4300  mats=8  obj=17 y=[0.0450,3.8700] presupuesto=obj 17>16   apoyo=OK                     godot=AUSENTE
+CASA_02_CASA_MEDIANA BAJA  tris=404   mats=4  obj=17 y=[0.0450,3.8454] presupuesto=obj 17>6    apoyo=OK                     godot=AUSENTE
+CASA_02_CASA_MEDIANA MEDIA tris=1364  mats=6  obj=17 y=[0.0450,3.8697] presupuesto=obj 17>8    apoyo=OK                     godot=AUSENTE
+CASA_03_CASONA       ALTA  tris=6826  mats=8  obj=21 y=[0.0450,4.3325] presupuesto=tris 6826>6000,obj 21>16 apoyo=OK                     godot=AUSENTE
+CASA_03_CASONA       MEDIA tris=1090  mats=6  obj=21 y=[0.0450,4.3325] presupuesto=obj 21>8    apoyo=OK                     godot=AUSENTE
+CASA_04_MANSION      ALTA  tris=8779  mats=8  obj=27 y=[0.0450,4.9450] presupuesto=tris 8779>6000,obj 27>16 apoyo=OK                     godot=AUSENTE
+CASA_04_MANSION      MEDIA tris=880   mats=6  obj=27 y=[0.0450,4.7750] presupuesto=obj 27>8    apoyo=OK                     godot=AUSENTE
+CASA_05_CASA_VECINO  ALTA  tris=2746  mats=8  obj=14 y=[0.0450,3.5700] presupuesto=OK          apoyo=OK                     godot=game/isla-ancestral/assets/3d/alta/18-Casas_casa_vecino.glb
+CASA_05_CASA_VECINO  BAJA  tris=567   mats=4  obj=14 y=[0.0450,3.5679] presupuesto=obj 14>6    apoyo=OK                     godot=game/isla-ancestral/assets/3d/baja/18-Casas_casa_vecino.glb
+CASA_05_CASA_VECINO  MEDIA tris=1420  mats=6  obj=14 y=[0.0450,3.5700] presupuesto=obj 14>8    apoyo=OK                     godot=game/isla-ancestral/assets/3d/media/18-Casas_casa_vecino.glb
+
+=== LOD ===
+CASA_01_CHOZA        COMPLETO
+CASA_02_CASA_MEDIANA COMPLETO
+CASA_03_CASONA       FALTA BAJA
+CASA_04_MANSION      FALTA BAJA
+CASA_05_CASA_VECINO  COMPLETO
+
+=== DERIVA DE CUMBRERA (y_max del LOD vs ALTA) ===
+CASA_01_CHOZA        MEDIA delta=+0.0000 m  ok
+CASA_01_CHOZA        BAJA  delta=+0.0000 m  ok
+CASA_02_CASA_MEDIANA MEDIA delta=-0.0003 m  ok
+CASA_02_CASA_MEDIANA BAJA  delta=-0.0246 m  DERIVA
+CASA_03_CASONA       MEDIA delta=+0.0000 m  ok
+CASA_04_MANSION      MEDIA delta=-0.1700 m  DERIVA
+CASA_05_CASA_VECINO  MEDIA delta=+0.0000 m  ok
+CASA_05_CASA_VECINO  BAJA  delta=-0.0021 m  ok
+
+=== CATALOGO DE MiMo vs MEDICION REAL ===
+CASONA               catalogo=ALTA supera presupuesto: 6826 tris. No se exporta como  medido=6826 tris
+MANSION              catalogo=ALTA supera presupuesto: 8779 tris. No se exporta como  medido=8779 tris
+CASA_MEDIANA/BAJA    catalogo=El LOD altero el apoyo de la casa.                      medido=y_min=0.0450
+
+CHECKS=104 PASADOS=104 FALLOS=0 BLOQUES=13 CASAS=5 PISO=104
+VERDE: inventario MEDIDO sobre vertices reales; los hallazgos de calidad siguen abiertos

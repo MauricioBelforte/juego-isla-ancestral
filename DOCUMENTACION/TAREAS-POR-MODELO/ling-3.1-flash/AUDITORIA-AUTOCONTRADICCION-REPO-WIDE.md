@@ -563,10 +563,50 @@ HEAD sigue 6a8ab2f (~3h estable). v40 (§32/ESTADO/Log 2348/msg 352) y v41 (§33
 Hy3/498 (21:30 local) cerro tanda 482: QA documental honesto (M59 118/130 liberado, M64 sello 14° confirmado, M17 diferido 135/175 NO liberado, M37 no sellable 141/7/0, M139 [?] sostenidos, M14 gamepad DISCREPANCIA con agnes 497: gamepad existe a nivel proyecto pero 0 hits en capa inventario inventory_layer.gd; Hy3 no lo flipo, va a flip director). Log 2350. agnes activa 22:02 (crons).
 
 ### Escrituras reales v42
-msg 354 (3.135B, pool canal 354->355) · Log 2352 (race pool: assert >=2351 tomo 2352; 2351 ajeno) · §34 (este) · ESTADO v42 + header v14-v42 · check_v42 (36 checks).
+msg 354 (3.135B, pool canal 354->355) · Log 2352 (race pool: assert >=2351 tomo 2352; 2351 ajeno) · §34 (este) · ESTADO v42 + header v14-v42 · check_v42 (38 checks: 34 PASS 1er run + 4 check-bugs fixeados [6 case-sens, 18 regex Totales, 20 substring, 27 umbral Temp]; re-run 38 PASS/0 FAIL; check 12 re-escrito como centinela determinista; check 21 tolerante a msg 355 propio).
 
 ### Bloqueos (sin cambios)
 I-08 runtime ms (sin Godot MCP); bug_156=DS#491; gate-2 runtime PT + captura UI M154 (no míos); R4/gemelos 256/248/deuda 313=fundador; saneo pools/huecos=fundador/directora.
 
 ### Proxima vuelta 43 (~02:07Z)
 ¿Cron C preservo v40/v41/v42? ¿agnes acusa 345-351 / responde 352-354? ¿Respuesta a pregunta limpieza archivos sueltos? ¿Hy3/DS-OC generan flips del detector?
+
+
+### Addendum v42 (cierre extendido 2026-11-07 01:30 local / 04:30Z)
+
+- **Agrupador de canales confirmado legitimo**: las 931 deletions son 100% dentro de `Mensajes entre modelos` (desglose por directorio: 0 fuera); 0 D en game/ ni scripts/ de codigo; canal Ling 0 D/M; WT 33->1286 y siguiendo (agrupador activo: 1223->1420 entries). DS-OC/directora corrieron `scripts/agrupar_canales.py` (respaldos en scripts/Obsoletos/2026-11-06_22-1*). Reestructuracion por centenas (arch_0001-0100...), SOP AGENTS 4.1-b.
+- **Detector 16a-17a hora (centinela)**: items [x] 22649->22654 (+5), C2-RESUELTO 551->552 (+1); invariantes iguales (A1=21 R4=187 A2=233 A3=4 SOS=289 FP=4, 168 checklists); detector 100% determinista (2 corridas diff=0). **Trampa propia descartada**: el "detalle_diff=220" inicial fue ARTIFACTO DE ENCODING de mis snapshots v42/v43 (guardados con mojibake en vez del ∩ limpio del runtime); NO era drift de flota. Diagnostico: Temp/kilo/diag_check12.py + diag_run1/2.txt.
+- **+5 flips ATRIBUIDOS y VERIFICADOS (QA 21.8.2.b; centinela verifica, NO flipea)**: DS-V4.1-Flash-Opencode, Logs 2353 (M129) + 2354 (M17), mtimes checklists M17 22:36:32 / M129 22:26:19 local 6nov, 04-Codigo actualizados ambos, artefactos en disco:
+  - M17-Construccion +4: D97 rejilla 1m, D102 coherencia guardar/cargar, F127 mover sin re-cobro, P256 integracion colocar->guardar->cargar->restaurar; suite NUEVA tests/test_m17_persistencia_rejilla.gd (23 checks 0 fallos); Totales re-medido 139/35/1 = marcas reales 139/35/1.
+  - M129-Merchandising +1: L101 stock+numeracion tiradas limitadas RESUELTO v3 (revertido Familia A BUG-070 lote 7 -> resuelto con codigo real); merch_manager.gd (reservar_unidades/liberar_reserva/confirmar_venta/get_save_data), merch_validator.gd, test_merch_m129.gd 58/0, test_merch_boot_m129.gd B-17 11/0, merchandising.json v3 (artbook 500/vinilo 300/figura 200); Totales 108 = marcas 107/0/1.
+  - Veredicto: flips LEGITIMOS (Logs + codigo + tests + conteos coherentes). Sin inflacion. C2+1 (551->552): dato agregado del detector, modulo no identificable por salida agregada (reportado, no atribuido).
+- **Cron C 6a8ab2f: 6h+ sin preservar** v40+v41+v42 (slots 01:17/02:17/03:17/04:17Z pasados; patron v39 ~55min). ESCALADO al director — no bloqueante: riel PT canonico safe en HEAD 071a2f9; check 25 confirma §32/§33 solo en WT.
+- **Flota silenciosa 7nov**: glob Mensajes entre modelos/**/*2026-11-07*.md = 0 archivos; ultimo latido DS-OC acuse 23:46 local 6nov. estado_director congelado 399 claves mtime 22:02 (agnes NO proceso mi 354; ling_345-351_acusado NO registrado — anti-loop honesto intacto). Posible dormancia de sesiones (patron 6nov 09:22Z).
+- **ESTADO-PARALELO.md stale desde 17-oct** (5331 lineas; head = M159) — tablero de coordinacion sin actualizar 3 semanas; dato para directora.
+- **Temp/kilo limpiado reversible**: 186->14 directos (176 movidos a Temp/kilo/_archivo_v25_v41/, listado en salida de limpiar_temp_v43.py); mis archivos, desechables, no versionados por Cron C.
+
+## 35. VUELTA 43 (2026-11-07 01:30 local / 04:30Z) — CIERRE v42 38/0 + CENTINELA: +5 flips atribuidos DS-OC (legítimos) + agrupador canales + Cron C 6h escalado
+
+**Escrituras reales v43**: msg 355 (3.072B, pool canal 355->356, helper proximo_numero --consume; numeracion no manual) · Log 2355 (ritual assert cabeza>=2355, tomo 2355; pool Logs 2355->2356) · addendum v42 + §35 (este) · ESTADO v43 + header v14-v43 · check_v43.
+
+**CIERRE v42 — check_v42 38 PASS / 0 FAIL**: 4 check-bugs propios fixeados en v42 (6 case-sens; 18 regex Totales `**Totales:** NN` — formato real tiene espacio tras `**`; 20 startswith->substring `/347-`; 27 umbral Temp/kilo 60 realista post-limpieza) + check 12 re-escrito como centinela determinista (2 corridas diff=0; items_x/C2 como dato, no asercion congelada) + check 21 tolerante (>=354; msg 355 propio legitimo en disco al re-runear). Re-run intermedio 37/1 (check 21 stale por diseño) -> re-run final 38/0.
+
+**CENTINELA — HALLAZGO MATERIAL (16a-17a hora)**: detector items [x] 22649->**22654 (+5)** y C2-RESUELTO 551->**552 (+1)**; invariantes estables (A1=21, R4=187, A2=233, A3=4, SOS=289, FP=4, 168 checklists); 0 cambios en detalle de familias de defecto. Trampa propia descartada (ver addendum v42): snapshots v42/v43 con mojibake propio; detector 100% determinista (2 corridas diff=0).
+
+**ATRIBUCION +5 flips (QA 21.8.2.b muestreado: sustento textual + fisico + conteos)**: DS-V4.1-Flash-Opencode, Logs 2353/2354, mtimes 22:26/22:36 local 6nov:
+- M17-Construccion +4 [x]: D97 (OFFSET_MEDIO_VOXEL=0.5 en construccion_mundo.gd), D102, F127 (mover_pieza build_manager.gd L555-597), P256; suite NUEVA tests/test_m17_persistencia_rejilla.gd 23/0; marcas reales 139/35/1 = Totales declarado 139/35/1.
+- M129-Merchandising +1 [x]: L101 stock/numeracion tiradas v3; merch_manager.gd + merch_validator.gd + test_merch_m129.gd 58/0 + test_merch_boot_m129.gd 11/0 + merchandising.json v3 3 tiradas; marcas reales 107/0/1 = Totales 108.
+- Veredicto: flips LEGITIMOS, sin inflacion. Centinela Ling verifica y NO flipea (regla 21.8.2.b: muestreo 5 items con verbos de creacion — implementar/cerrar/verificar/definir/automatizar — todos con artefacto en disco).
+
+**OTROS HALLAZGOS**:
+- Agrupador canales legitimo y activo (0 D codigo; canal Ling intacto; WT ~1420).
+- Cron C 6a8ab2f 6h+ sin preservar v40-v42 — ESCALADO.
+- Flota silenciosa 7nov (0 msgs nuevos; ultimo latido DS-OC 23:46 local 6nov).
+- ESTADO-PARALELO.md stale 17-oct (dato directora).
+- Temp/kilo 186->14 directos (limpieza reversible, 176 a _archivo_v25_v41/).
+
+**Riel i18n (re-verificado v43)**: locales es/en/pt 276 msgids, sha es 954107e1948a / en a601d4f63b76 / pt d2b567c48e88, WT==HEAD x3; localization_manager.gd 047eab5ff111 WT==HEAD; watchdog oficial LIMPIO rc=0 (cwd=RAIZ); 0 .mo; translation/ y ling_i18n_manager.gd siguen ausentes (untracked; pregunta limpieza oficial reiterada en msg 355).
+
+**Pools**: canal Ling cabeza 356 (355 consumido por helper); Logs cabeza 2356 (2355 ritual). Huecos canal Ling: [63,156,157,232,233,234] (saneo fundador).
+
+Firmado: Ling-3.1-Flash (Kilo Code) — 2026-11-07 01:30 local.
