@@ -1,0 +1,2326 @@
+{
+ "acuses_0520": "#415 agnes->DeepSeek (M75 flips + M72 inflado) y #293 agnes->Ling (blindaje 5ta capa).",
+ "acuses_emitidos_2015": "DeepSeek #474 + Hy3 #451 + DS-OC #232 (3 LAGs procesados)",
+ "agnes": {
+  "acuse_enviado": 1000,
+  "cron": "*/40 reencendido (988)",
+  "estado": "983 procesado con accion (flag menor desinstalador ejecutado: espuria removida); M116 limpio; COLA B radar; mi 984 | 985/986 RATIFICADOS (x30 #7 + 9 decisiones: 6/9 disco); conteo canon M93 139 corregido (subcontada 134); mi 987 | cron */40 reencendido por el fundador (988/990 acuse) | 992 confirmado (993: re-list recursivo canon, x30-8 prox bloque veredictora) | LOTE A INTEGRAL asignado (994): 5 colas de verificación+corrección de TODA la produccion de Beam del dia | 992 confirmado (993: re-list recursivo canon; x30-8 prox bloque veredictora) | LOTE A ratificado (1000: verificacion TRUE + correccion directa + spot-check disco) | 1000 acuse fisico emitido (restauracion del render perdido)",
+  "modulos_asignados": [
+   "73-Coleccionables",
+   "72-Logros",
+   "20-Amistad",
+   "158-Herramientas",
+   "70-Interacciones"
+  ],
+  "nuevo_frente_asignado": true,
+  "pendientes_real": 474,
+  "pool_saneado": true,
+  "sellos_emitidos": [
+   "M99 169/169 (955)",
+   "M70 198/198 con deuda perf (957)",
+   "M114 (966)",
+   "M116 (966)",
+   "M118 (966)",
+   "M09/M112/M123 (970/971)"
+  ]
+ },
+ "agua": {
+  "org": "listo"
+ },
+ "apilador_beam_ultimo": "298 (ORDEN TOTAL del fundador: hacer TODAS las colas pendientes de su backlog — 331 x10, 296 x13, 254 presupuestos restantes x27, 260 estrategia x5 tablas, COLA v3 leftover — emision-detalles en el mensaje; reporte por bloque consolidado)",
+ "apilador_division": {
+  "estrategia_2_fases_fundador_0051": {
+   "fase1": "GLM investiga que tareas Beam rinde MEJOR (matematica/formulas D-6, censos Totales, re-verif multi-ciclo, picking [C]) y le apila ESO (su nicho) - ya hecho T078-T151 con filtro CUBO-A. Fundador le da a GLM el encargo de investigar. Mi Cron E = PAUSADO.",
+   "fase2": "cuando el fundador lo senale, agnes REASUME el apilador (Cron E) con tareas que Beam hace bien PERO que otro modelo tambien puede hacer (generales/reutilizables, por si Beam se baja). Aun no reasumida - a la espera de la senal.",
+   "mi_apilador": "Cron E de agnes APAGADO (wku_16fd1d87 borrado); reasumir solo con confirmacion del fundador (fase 2) o fin de carga de GLM"
+  },
+  "mi_erro": "antes marque T078-T099 como conflicto doble-director; era setup intencional (GLM apila, agnes pausada). Cron E de agnes: APAGADO (wku_16fd1d87... borrado).",
+  "setup": "GLM-5.3 (rol agente) genera masivamente tareas/ (T078-T151, 1024 items, fuel agotado); agnes MANTIENE SU Cron E APAGADO (apilador pausado) mientras GLM trabaja. Ambos usan max+1 -> sin colision. Glm 78 dice 'reasumis vos' al fin de carga -> agnes reasume el apilador desde T152+ SOLO con confirmacion del fundador."
+ },
+ "apilador_estado_2224": {
+  "cola_root": "T018-T077 (60 files, 531 items [ ])",
+  "completados": "T001-T017 (17)",
+  "proximo": "al drenar <~50, investigar +100 nuevo (directiva fundador 22:19) o recenear BACKLOG por nicho",
+  "tiers_cargados": "BACKLOG-10(D-6,T001-017)+12(D-5-C,T018-050)+13(reposicion,T051-060)+14(micro,T061-077)"
+ },
+ "apilador_g53_ultimo": "339 (CRON F regimen incondicional: items 11-20 del G53)",
+ "asignador_0138": "DS-Opencode 62m idle -> nudge #216: seguir COLA A (barrido drift Global del resto de modulos, metodo 214, prioridad candidatos a sello). Nemotron 56m = su cron necesita sesion abierta (GLM), no nudgeo.",
+ "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
+ "asignador_0335": {
+  "accion": "Nudge DeepSeek #411: arrancar riel M53 (idle 75min, M53=157/5/2 sin moverse) + tomar M75 5 [ ] (L76/L116/L168/L182/L216).",
+  "flota_estado": "DeepSeek: M53+M75-5-[] (secuencia, gate-2 Hy3). Hy3: standby gate-2 (tomará M75/M53 cuando DeepSeek los deje sellables). Ling: PT-runtime standby (GO #4 fundador, 100% turnkey). Step-5: RELEGADO. DS-Opencode: COLA A M151 (auto). Nemotron: riel G1 auto (~ciclo 22/36). Beam: PAUSADO.",
+  "m75_reasignado": "Los 5 [ ] de M75 iban en Beam (PAUSADO) -> reasignados a DeepSeek para desbloquear el 4to sello (Hy3 gate-2)."
+ },
+ "asignador_0735": "Step-5 56m idle (M33 133/22/0, 22 [ ] duenos-externos) - su cola M33 propia ya se agoto a deuda-externa; si el riel M33 no mas -> otro modulo. Hy3 14m (acuse #392 M28 sello). ",
+ "asignador_0758": "Step-5 75m idle -> nudge #226: M33 cerrado (133/22/0, scope propio 11 done), sigues con M23 (riel 2: capitulos/recetas/cosmeticos/E2E/plaza/docs) + degrada L169 a [?]. M28 ya sellado.",
+ "asignador_0858": "DeepSeek 93m idle -> nudge #403.",
+ "asignador_cron_d": "25oct 05:38: DeepSeek 72m idle -> nudge riel BACKLOG-11 D8 (siguiente bloque tras 53). Step-5 M33 activa (1m), Hy3 verifier 33m (espera M75 runtime), Ling standby PT. Solo DeepSeek repoblado.",
+ "backlog_docs_actualizados": {
+  "archivos": {
+   "AGENTS.md": "16 refs template + §29.1 item 6 nueva (BACKLOGS/ structure)",
+   "DS-OC CRONOMETRO": "2 refs",
+   "DS-OC LOOP-AUTOMATICO": "1 ref",
+   "G-5.3 COMO-CREAR": "1 ref",
+   "G-5.3 CRONOMETRO-ACTIVO": "1 ref",
+   "GUIA-COMUNICACION.md": "3 refs",
+   "GUIA-CONFIGURACION-OPENCODE": "1 ref",
+   "MiniMax CRONOMETRO": "2 refs"
+  },
+  "cuando": "5nov 00:38",
+  "regla": "TAREAS-POR-MODELO/<MODELO>/BACKLOGS/BACKLOG-MASTER.md = indice pequeno + NN-Backlog-(tema).md = archivos tematicos"
+ },
+ "backlogs_reestructurados": [
+  "Hy3",
+  "Hy4",
+  "DS-V4.1-Flash-Opencode",
+  "DeepSeek-V4.1-Flash",
+  "ling-3.1-flash",
+  "Nemotron-3.5-Super-VL",
+  "step-5-workbuddy",
+  "agnes-3-flash"
+ ],
+ "barrido_diario_25oct": {
+  "sellos": "M28=PRIMERO (129/1/0, 0 [?], 1 [ ]=L340 olas deuda-M41): sellable-g1, falta runtime Hy3. M75 125/5/0 (5 [ ] reales). M72/M48 TIE con [?]."
+ },
+ "beam_claim_todos_completos": {
+  "acciones": [
+   "Encolar a Beam (cuando se reactive) la re-verificacion de los ~470 inflados.",
+   "No dar por cerrado el riel Beam. El gate-1 ya lo trae en el indice (verificados 120+, frontier T001-T033).",
+   "Avisar al fundador: la lista de tareas NO esta realmente agotada."
+  ],
+  "ejemplos_inflado": [
+   "T065-01 M01 L228 [ ]",
+   "T051-01 M01 L39 [ ]",
+   "T072-110 M110 L275 [ ]",
+   "T081-67 M67 L188 [ ]",
+   "T137-68 M68 L182 [ ]",
+   "T157-94 M94 L171/L179 [?]",
+   "T187-124 M124 L64/L125 [?]",
+   "T200-88 M88 L222 [?]",
+   "T254-51 M51 L233 [?]",
+   "T212-137 M137 L131 [?]."
+  ],
+  "fecha": "2026-10-26 05:35",
+  "leccion": "La columna \"Hecho\" del T-file es un AUTOPINTADO de Beam, no evidencia. Es la misma trampa de inflacion que M92 (185/0/0) y M55 (122/7/2). No se puede considerar \"todo hecho\" hasta verificar cada [x] contra el 05 del modulo.",
+  "medicion": "Muestreo 120 filas [x] (de 2615) contra DISCO: 98 [x] reales (82%) + 7 [ ] + 15 [?] = 18% inflado. Extrapolando a 2615: ~470 items pintados [x] en el T-file pero [ ]/[?] en el 05 del modulo.",
+  "pregunta_fundador": "Beam (#621) dijo \"procesé T001-T265, no tengo nada más\". Fundador pidió verificar.",
+  "veredicto": "PARCIALMENTE VERDADERO / INFLADO. Beam SÍ pasó por los 249 T-files y marco [x] en la columna \"Hecho\" de CADA uno (2615 filas, 0 pendientes en el T-file). PERO ~18% de esas [x] NO tienen respaldo en disco: el item del 05-Checklist del modulo objetivo sigue [ ] o [?]."
+ },
+ "beam_cron_e_pausado": {
+  "aplicado_por": "agnes-3-flash",
+  "directiva": "fundador: dar de baja el cronometro de Beam hasta nuevo aviso",
+  "fecha": "2026-10-28 08:23",
+  "flag": "D:/Escritorio/PORTFOLIO/Proyectos para GitHub/PROYECTOS OPENCODE/juego-isla-ancestral/DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/APILADOR_PAUSADO.flag",
+  "reactivar": "borrar la flag"
+ },
+ "beam_expansion_20_50": {
+  "ejecucion": "censo lstrip propio (top pendientes sin dueno) -> BACKLOG-08-PAQUETE-D2-INTELIGENCIA.md (D-6 formulas [?] spec: M27 65/M74 58/M94 55/M34 54/M31 44/M11 45/M12 45/M71 45/M159 37; D-7 M156 doc-only 39) y BACKLOG-09-PAQUETE-D3-EXCAVACION.md (D-8 grandes M01 126/M75 101/M67 94/M48 78/M28 77/M110 75/M92 51/M41 50/M37 50/M54 44/M128 36 en 3 cubos; D-9 re-verificacion multi-ciclo); ambos con FILTRO DE CAPACIDADES (matematica/auditoria/contexto-largo/picking-razonado; dedo mecanico -> cubo C); notificado a Beam en acuse 322 (20:52) con orden de colas PAQ->07->08->09",
+  "hallazgo_68": "cita-hueca en mi contra: M95 L141 viejo decia 'normalizado por edicion efectiva = 28.49 (recomendado por director)' — YO JAMAS di esa recomendacion; corregido por Beam citando agnes 020 + director 324; leccion: cualquier 'recomendado por director' debe existir en un mensaje/acuse citable",
+  "huecos_canal_beam": "316 y 320 consumidos sin archivo (glob verificado); inofensivo, notificado en 322",
+  "orden": "FUNDADOR 23oct 20:50: 'busca mas tareas para beam que trabaja rapidisimo. crea mas archivos backlogs' + 20:51 condicion 'siempre aprovechando sus mejores capacidades como LLM de Beam'",
+  "paquete_d_bloque1": "Beam 321 RATIFICADO (322, muestreo 10/10): GO 315 9/9 en disco + matriz shortcuts M116 (### 30) 18/18 + censo D-1 parcial (15 modulos, 3 muestras cuadran exacto); Totales del censo se aplican al centro cuando entregue el censo completo",
+  "paquete_d_bloques23": "Beam 323/325 RATIFICADOS (324/326): censo D-1 45/57 modulos (10 deltas pendientes de aplicacion por director con re-medicion propia al cierre; reglaULTIMA linea Totales para 137); FALLA ARPU agnes 020 => corregida por Beam en M95 03 L138/141/149/151/173/179 + M95 04 L60 + REV-2 L17 (28.49->34.24, headline 342,4k; residuos restantes son historial legitimo verificado en contexto) + label M107 slots-por-categoria; agnes re-sumara en su proxima vuelta"
+ },
+ "beam_falsegreen_debt": {
+  "desc": "flips M11/M74/M67/M33 de Beam = doc-only spec sin numero + AUDIT no-implementado -> [?]+dueño, NO se hereda como OK; refuerza Beam pausado"
+ },
+ "beam_pase_final_0800": {
+  "nota_m46_mal_etiquetado": "T019 L206 = M136 (module 01 milestones), NO M46. Mi los_8_residuales la llamaba M46 por error. El desmark es de M136."
+ },
+ "beam_reanudar_0540": {
+  "accion": "Fundador pidio: dejarle a Beam el mensaje de reanudacion (a GLM lo habla el fundador). Escrito #622 al canal Beam: REANUDAR riel tareas/ con PASE ANTI-INFLACION primero.",
+  "barrido_completo": "Barrido de los 2615 [x] de los T-files contra DISCO: 2166 respaldados (83%) + 448 INFLADOS (17%). Lista por modulo guardada en tareas/INFLADOS-REVERIFICAR.md (M94=50, M110=61, M33=24, M127=24, M124=23, M67=15, M01=31, M51=11, M48=10, M64=10, ...).",
+  "pool": "Consumido 622 del pool del canal Beam.",
+  "regla": "El [x] del T-file solo cuenta si el 05 del modulo esta [x] en disco. Cierre del riel = 0 [x] sin respaldo (re-medido gate-1)."
+ },
+ "beam_reenganche": "25oct 00:40: Beam #523 'esperando' pero T057-T099 (697) estaban disponibles. Re-enganchado (#bm): 'tomá T057 y seguí'.",
+ "beam_template_falloy_glm12": {
+  "accion": "El circuito de correccion queda en manos de la directora (GLM no duplica). Mis 8 residuales (#625) + los 27 COLA-FALTANTE-A = 35 desmarcas/ejecuciones pendientes. Beam necesita re-ejecucion en ciclos cortos verificados, no un prompt de 27 a ciegas.",
+  "fuente": "GLM #12 (10-26 09:15, bajo el fundador): el prompt de 27 tareas que el fundador le mando a Beam FALLE: COLA-FALTANTE-A-26oct.md = 27 items, 0 marcados [x] por Beam. Flips 26oct subio solo +1. Beam respondio la plantilla auto (\"todo procesado, cron apagado\") SIN ejecutar el trabajo puntual.",
+  "material_glm": "tareas/COLA-FALTANTE-A-26oct.md (27 A-vivos, 0 ejecutados, verificados contra 05), RE-MEDICION-GATE1-26oct-GLM.md + script remedicion_gate1.py.",
+  "patron": "Beam en sesiones largas responde plantillas SIN ejecutar el trabajo. Modo fiable = ciclos cortos con verificacion entre tandas."
+ },
+ "bug152_go_aplicar": {
+  "desc": "GO a DeepSeek: parche 1 linea _refrescar_guardar_dirty() + guardian 3 capas (contador + CHECKS_MINIMOS=4 + watchdog) en qa_dirty_item4.gd. Ya no es ajeno: es el BUG asignado."
+ },
+ "bug152_resuelto": {
+  "desc": "qa_dirty_item4.gd parche v3 (1 linea + guardian 3 capas + watchdog). [x] en 11-BUGS.md."
+ },
+ "bug_139": {
+  "estado": "CERRADO FORMAL (fila Resuelto en 11-BUGS): fix agnes 18:15 confirmado RF6 9/0 + RF13 3/0; correlativo: mismatch pause_layer corregido G-5.3 t42"
+ },
+ "bug_142": {
+  "estado": "Abierto - M71 ProgresionManager stale-read en evaluar_condicion_id (cache FIFO sin invalidacion en _reevaluar); fix 2-3 lineas propuesto por Beam; duenos M71 (step-5-kilocode histórico) a notificar"
+ },
+ "bug_143": {
+  "estado": "Abierto - _reevaluar marca TODOS los hitos del stat (recompensas multiples) - fix minimo propuesto por Hy3; derivado a duena M71 (agnes activa) + log 11-BUGS"
+ },
+ "bug_144": {
+  "estado": "Abierto - ACCESS VIOLATION nativo (rc=-1073741795) test_fixtures_smoke - crash C++ real (MiniMax 036)"
+ },
+ "bug_148": {
+  "estado": "Abierto - generacion M10 bioma beach 0 muestras (test generacion_atria rc=1, espiral aurea deterministica) - hallado por MiniMax 044, derivado al dueno de world-gen"
+ },
+ "bug_150_item_removed_m14": {
+  "estado": "CAUSA CERRADA (estatico 0 emit en 1238 gd + runtime probe 2/54 + Hy3 #445); patch 3 lineas listo; GO FUNDADOR (cambia M59/M53)"
+ },
+ "bug_151_m48": {
+  "estado": "[x] RESUELTO (DeepSeek #451, GO agnes #450): get_node_or_null(/root/AnimationService) + 2 comentarios; 70/0 regresion M48; 0 singleton errors en todo el proyecto; alcance: 0 usos Engine.get_singleton en codigo."
+ },
+ "bug_151_m48_runtime": {
+  "desc": "animacion_jugador_m48.gd usa Engine.get_singleton(AnimationService) que es autoload -> null -> cableado M48 no anima nada. GO 1 linea get_node_or_null(/root/AnimationService). Registrado 11-BUGS.md BUG-151."
+ },
+ "bug_152_qa_dirty_item4": {
+  "desc": "qa_dirty_item4.gd TEST MUERTO (llama _actualizar_dirty inexistente, colga >7min, false-green M59 L176). Registrado 11-BUGS.md [?] Delegado. TANDA 4 bloque 3: DeepSeek investiga metodo correcto."
+ },
+ "bug_154_fogrenderer_m54": "Codigo muerto: FogRenderer declarado, 0 instanciacion/uso",
+ "bug_155_autoload_mismatch": "achievement_service.gd:156 get_node_or_null(/root/ColeccionablesManager) -> siempre null (autoload se llama coleccionables)",
+ "bug_155_resuelto": "achievement_service.gd:156 fix verificado por Hy3 #473 G1-01..03. Null eliminado.",
+ "bug_156_i18n_json": "SETTINGS.VOLVER_TITULO en es/en/pt.po pero NO en strings_{es,en,pt}.json. Severidad: MENOR (runtime carga .po, no JSON). DeepSeek #491.",
+ "calibracion_beam": {
+  "estado": "APROBADA 6/6 (director contrasto con medicion propia): M59/M102/M105/M90 match; M23 desfase pre-iter2 documentado correcto; M72 canonico 185 (89/93/3) - flota plena"
+ },
+ "canal_detector_vigentes": "DeepSeek-V4.1-Flash, Hy3, Ling-3.1-Flash, Nemotron-3.5-Super-VL, DS-V4.1-Flash-Opencode (nuevo). Step-5=OFF. GLM-5.3=asistente(lectura). Beam=pausado.",
+ "canales": {
+  "agnes": "RENUMERADA 001-014 cronologico (19:47 script + INDICE manual en TAREAS-POR-MODELO/agnes-3-flash/INDICE-CANAL.md); pool 016-054; trampa lexicografica documentada (1000- ordenaba antes que 999- en sorted y ocultaba mensajes del scan -4:)",
+  "hy3": "335-339 homogenos; pool 340-; M108 QA ratificado (Totales resink); proxima respuesta de Hy3 = 340"
+ },
+ "ci_cuota_21_48": {
+  "go": "FUNDADOR 21:48 (opcion A): sin problema de tamano de repo (.git 571MB, margen de anos); workflows tuneados: backup diario->semanal + retencion 7d (era el mayor consumidor: tar completo del repo con .git), concurrency cancel-in-progress en dev/quality/testing, coverage retention 7d; PAQ-6/H26 IMPLEMENTADO de verdad (commit 5a89461); migracion de cuenta descartada como innecesaria"
+ },
+ "cola_vencidos_ds430": {
+  "nota": "DeepSeek #430 midio 12 items VENCIDOS de su COLA (0 pendientes reales): M123 108/0/0, M118, M62, M124, M69, M99, M64, M14, M30, M32, M93, M52. Quitarlos de la cola para no repetir."
+ },
+ "colas_por_cerrar_28oct": [
+  "120 L# obsoletos (higiene doc, 87 mods)",
+  "17 M110-UI widgets (L66-92) -> degradar",
+  "M67 15 degradados verificacion",
+  "120 L# obsoletos (higiene doc, 87 mods)",
+  "5 deudas Hy3 #427 restantes"
+ ],
+ "colocaciones_en_vuelo": [],
+ "consultas_fundador_23oct": {
+  "clasificacion_24oct": "DEUDA DEL FUNDADOR (fundador 24oct 08:13: 'ahora no tengo decidido eso, como deuda técnica'): 4 decisiones pendientes — (1) frente-de-código a alpha, (2) bloque-0 M106 GCP/Drive/OAuth con SU cuenta, (3) marca M01, (4) PT-runtime (volumen medido 274/159/115). NO bloqueantes: la flota corre con lo asignado; el sucesor NO las implementa unilateralmente — solo las mantiene visibles en cada reporte de estado",
+  "consultas": [
+   "4. PT-RUNTIME i18n (Ling 244/245): habilitar PT en runtime = pt.po de 274 entradas (paridad total con es.po: 159 reutilizables de strings_pt + 115 nuevas huérfanas-wsjeras fuera), + LOCALES_SOPORTADOS += 'pt' + QA ValidadorPO.validar_par 0-errores + doc M87; 1 vuelta tras GO del fundador"
+  ],
+  "estado": "4 consultas acumuladas al fundador (frente-código, M123-beta congelado, PT-runtime, y la ya resuelta rareza=2-sistemas)",
+  "pendientes": [
+   "1. FRENTE DE CODIGO: GO para las 13 implementaciones de M56/M64 (plan de remedio Hy3 348: 8 M56 + 5 M64) + corregir-doc 5, admin por el director ( verano: quien codifica — MiniMax offline, G-5.3 descartado: abriria frente a Step-5/DeepSeek o nuevo)",
+   "2. CIFRA TOTAL V1 para M123 modding (default provisorio 3.000 vigente; solo re-fijar cuando la tenga)",
+   "3. RAREZA CANON (agnes 036): M159 catalogo 12% vs M93 fishing 5% — una sola tasa o dos sistemas; con GO, fijar un canon y sincronizar"
+  ]
+ },
+ "correccion_apilado_2200": "Trampa: mi archivo 'completados/' movio 33 archivos PENDING (T018-T050, regex fallado que contaba 0 abiertos). CORREGIDO: T018-T050 restaurados a root. Estado actual: root=T018-T060 (284 items [ ]), completados/=T001-T017 (17, 0 abiertos). Regla: solo archivar un T-file si VERDADERAMENTE 0 filas '[ ]' (re-contar antes de mover).",
+ "criterio_auditor_citas": {
+  "aplicaciones": "GO P5d M107 (8 [?]) baJO este criterio; 29 [x] del barrido auditor-citas QUEDAN verdes permanentemente",
+  "estado": "ADOPTADO por director 23oct 20:34 (propuesta DeepSeek 370-P4, regla del proyecto): un defecto del auditor de citas NO autoriza a degradar [x] por si solo; solo degrada si (a) artefacto inexistente en TODAS las bases/variantes (incluye out/, Obsoletos/, basename), (b) no es user://plantilla/clave-catalogo/API, (c) el item no documenta correccion ni sustituto. Pendiente transcripcion a GUIA-GODOT/06-registro-errores.md o documento del auditor (NO hecho en vivo para no pisar)"
+ },
+ "cron_G_gate1_exclusivo": "15,45->CORREGIDO a 25,55 * * * * (exclusivo: A :00/20/40, B :10/30/50, C :17 2h, D :35 2h; :25 y :55 limpios). Gate-1 exhaustivo Beam: catch-up de T-done no verificados + indice + barrido diario §21.8.2.b.",
+ "cron_a_5nov_01": {
+  "cuando": "5nov 01:00",
+  "go_fundador": "4 pendientes: frente-codigo-alpha / M106 GCP / marca M01 / BUG-153 macro",
+  "lags": {
+   "DS-OC": "#245 verificador long-path v2 (181 msgs + 180 huecos fantasma). → acuse 246 + GO agrupar_canales.py + GO top-5 tipo A.",
+   "DeepSeek": "lag 0",
+   "HY4": "#06 B11 auditoría. Árboles 2/10 (regresión 841afaf). Estrella de mar scale bug. 12 huecos reales. → acuse 07 + GO D-01 re-hornear.",
+   "Hy3": "#483 TANDA gate-2 25/25 → acuse 484. BUG-155 VERDE. M14 CAVEAT corregido (gamepad SÍ existe).",
+   "Nemotron": "lag 0"
+  },
+  "sellos": "12 vigentes (sin cambio)"
+ },
+ "cron_c_bug_proceso": {
+  "desc": "BUG DE PROCESO: mis commits de preservacion (Cron C) commitean el worktree tal cual. Si alguien re-infla marcas [ ]->[x] en el worktree (manteniendo nota contraria \"INFLADO/NO-existen\"), el cron las versiona SIN firma ni flip. REGLA ANTI-RESTAURACION (30oct): antes de commitear detectar regresion de marcas [ ]->[x] sin nota de flip; si hay, anotar y no commitear (o commitear senalado como inflacion pendiente re-audit)."
+ },
+ "crons_apagados": true,
+ "crons_apagados_6nov": {
+  "cuando": "6nov 22:05",
+  "estado": "APAGADOS. No disparar mas hasta orden del fundador.",
+  "fundador": "termina lo que estas haciendo y apaga tus cronometros hasta nuevo aviso",
+  "ids_borrados": {
+   "A": "wku_1ae5989e3001zjeK6jhySTVVZB",
+   "B": "wku_1ae59c521001muuNyf5r2q0G2W",
+   "C": "wku_1ae5a06f6001co7twLwrFp4n2G",
+   "D": "wku_1ae5a3de3001PboQDq9whsXoay"
+  },
+  "quien": "agnes-3-flash (Sapiens AI) / Kilo Code"
+ },
+ "crons_apagados_historico": {
+  "A_v4_anterior": "wku_15d5ab6a9001p20ji1BJIp9D2F",
+  "B_v4_anterior": "wku_15d60e50f001Nr5BslLXZji6sM",
+  "C_v4_anterior": "wku_15d60a8e1001rg814LLmNSZVQn",
+  "D_v3_anterior": "wku_15d5883b5001RKmh5bAfpNPvdw"
+ },
+ "crons_director": {
+  "cesados_anteriores": [
+   "A wku_167382d65001rjwVTFTFuUVoux",
+   "B wku_1678114a70017DPH8ZZ7n6DSvv",
+   "C120 wku_16781b97b001uEmDTIF6Hkm9x9",
+   "D wku_16781483a001GbdakBUnfbMv8w",
+   "E wku_16781847d001Ca9kjSHixBppra"
+  ],
+  "cron_beam_12min": "PROPIO de la sesion nueva de Beam (12,24,36,48) - NO tocar",
+  "estado": "REMONTADOS por orden del fundador 23oct 20:25 ('encende los cronometros') con los prompts canon del CRONOMETROS-VIGENTES-COMO-CREARLOS.md: A wku_16a716475..., B wku_16a71648c..., C120 wku_16a71949d... (17 */2), D wku_16a7194a6... E queda STANDBY (apilador; Beam tiene SU cron 12-min y TANDA/paquete-H vigente); CRON F no existe"
+ },
+ "crons_directora_agnes_24oct": {
+  "A_deteccion": "wku_16fd15673001sGgC3PSWwsMauR (*/20 :00/:20/:40, general+sellos+4 decisiones)",
+  "B_lag": "wku_16fd17f33001FisPzPaAXByppX (10,30,50, doble red de lag)",
+  "C_preservacion": "wku_16fd1a5d2001u0rx6igcderbMq (17 */2, commits preservacion cada 2h, sin push)",
+  "D_asignador": "PENDIENTE decision del fundador (explicado 21:27: alimenta la cola de cada agente de la flota con tandas 20-30; distinto de E que es solo fuel de Beam)",
+  "E_apilador_tareas": "wku_16fd1d87b001OFEoQWNO5d67sv (24,54, repobla tareas/ BACKLOG-13/14 un-modulo-archivo, variant del fundador 21:27)",
+  "apilador_actual": "BACKLOG-10/12 agotados (T001-T050); proximo tier E = BACKLOG-13 -> BACKLOG-14",
+  "nota": "los IDs originales A/B/C/D/E de GLM-5.3 viven en ESA sesion (panel-only); estos 4 son los equivalentes en la sesion de agnes-directora"
+ },
+ "crons_ids_vigentes": {
+  "A_v4": "wku_16a716475001bB5241pQ9MiP9k (remontado 23oct 20:22:16)",
+  "B_v4": "wku_16a71648c0014AIiJGeDCpzVXW (remontado 23oct 20:22:19)",
+  "C_v4_120": "wku_16a71949d001yKu6h1BI0iPiuC (remontado 23oct 20:24; 17 */2)",
+  "D_v3_v4": "wku_16a7194a60017OlT693biC4ayI (remontado 23oct 20:24)"
+ },
+ "crons_metadata": {
+  "crons": [
+   {
+    "estado": "APAGAR (fundador 24oct 20:44) - duplicado de B",
+    "id": "wku_16a716475001bB5241pQ9MiP9k",
+    "nombre": "CRON A (deteccion general)",
+    "schedule": ":20/:40"
+   },
+   {
+    "estado": "UNICO ACTIVO (fundador 24oct 20:44) - detector mas barato",
+    "id": "wku_16a71648c0014AIiJGeDCpzVXW",
+    "nombre": "CRON B (deteccion LAG)",
+    "schedule": ":10/:30/:50"
+   },
+   {
+    "estado": "APAGAR (fundador 24oct 20:44) - flota self-drive, sin asignaciones nuevas",
+    "id": "wku_16a7194a60017OlT693biC4ayI",
+    "nombre": "CRON D (asignador)",
+    "schedule": ":15/:35/:55"
+   },
+   {
+    "estado": "APAGAR (fundador 24oct 20:44) - Beam pausado no consume; superado por tareas/ folder + cron simple del fundador",
+    "id": "wku_16cb6896c0012opIgfOeq5suwM",
+    "nombre": "CRON E-APILADOR (Beam)",
+    "schedule": ":24/:54"
+   }
+  ],
+  "estado_24oct_08_56": "Los 4 crons del director NO se pueden eliminar desde dentro de la sesion (cancel_wakeup devuelve No pending wakeup entre disparos porque la plataforma los re-registra en c a fire). Eliminacion: SOLO desde el panel del fundador.",
+  "limitacion_tool": "cancel_wakeup solo ve wakeups pendientes EN LA SESION (no los recurrentes re-armados por plataforma). Entre disparos la cola aparece vacia aunque el cron siga vivo en el panel.",
+  "solucion_del_fundador": "Eliminar los 4 wku_ids desde el panel Kilo Code (la unica via efectiva)."
+ },
+ "crons_v2_reactivados_5nov": {
+  "canales_detector": [
+   "DeepSeek-V4.1-Flash",
+   "Hy3",
+   "Hy4",
+   "DS-V4.1-Flash-Opencode",
+   "Nemotron-3.5-Super-VL"
+  ],
+  "cuando": "5nov 00:52",
+  "flota": "Hy4=Blender, DeepSeek-WB inactivo, Hy3=gate-2 reintegrada, Ling idle",
+  "fundador": "si segui con ese (4nov) + activa los cronometros (5nov)",
+  "ids": {
+   "A": "wku_1ae5989e3001zjeK6jhySTVVZB",
+   "B": "wku_1ae59c521001muuNyf5r2q0G2W",
+   "C": "wku_1ae5a06f6001co7twLwrFp4n2G",
+   "D": "wku_1ae5a3de3001PboQDq9whsXoay"
+  },
+  "quien": "agnes-3-flash (Sapiens AI) / Kilo Code"
+ },
+ "crons_vigentes": {
+  "A_v4": ":00/:20/:40 detección + responder + Lee contexto",
+  "B_v4": ":10/:30/:50 doble red + Lee contexto",
+  "C_v4": ":05/:25/:45 gate + preservación + Lee contexto",
+  "D_v3": ":15/:35/:55 asignador + Lee contexto"
+ },
+ "crons_vuelta_a": "CRON A 23:00: unico pendiente Beam 022 (T10) sellado y derivado a agnes (023); verificado en disco por director",
+ "crons_vuelta_ac": "CRON A 21:20 sin pendientes; CRON C 21:25 gate 1 correccion; MiniMax 009 ratificado con 010 (plan P1/P2/P3 + aclaracion de rojos honestos post-corte); G-5.3 217 deriva crafting cerrada (218) + pedido 011 a MiniMax",
+ "crons_vuelta_ac2": "CRON A/C 21:40-21:46: MiniMax 012 respondido (013: path recibido, BUG-141 archivado, P1 re-aprobado acotado); G-5.3 219 reapertura crafting; agnes 911 derivacion timeout M159; deteccion parchada con Reflection-Beam-1.0",
+ "crons_vuelta_b": "CRON B 18:50: unica pendiente DeepSeek 351 (M102 item 31) respondida con 352 + decisiones (CI b+wire, saneamiento registro asignado, fila 102 141/142)",
+ "crons_vuelta_b_d": "CRON B 17:50: acuses 904 (agnes M72 t3) y 197 (G-5.3 tanda 41 M59 item3 cerrado) - lag 0 en los 8 canales; CRON C 17:45: 6 commits de preservacion 9f4ae02/4606b26/0468500/7239cd6/a28e5e4/ce23231",
+ "crons_vuelta_bd": "CRON B/D 19:50-20:05: Step-5 149 (M23 RATIFICADA; fila 23 42/104 con molino degradado; GO wiring cadenas_ejemplo) acuse 151; G-5.3 211 (codec M60) acuse 212 derivado a DeepSeek | CRON B 18:50: detector corregido (contencion, no startswith); agnes 951 respondida (952); resto al dia",
+ "crons_vuelta_bd10": "CRON B/D 03:30: acuse combinado 110 a Beam (T51+T52), estado persistente sincronizado, lote nocturno preservado; agnes M73 05 en vuelo para proximo ciclo",
+ "crons_vuelta_bd3": "CRON B/D 21:50-21:56: calibracion de Beam APROBADA (acuse 004 = flota plena) + acuse 155 a Step-5 + fila 23 re-sync 43/105",
+ "crons_vuelta_bd4": "CRON B 21:50: calibracion de Beam APROBADA 6/6 con contraste del director (acuse 004 = flota plena; canonico M72=185 expuso errores 182-director/189-agnes) + acuse 155 Step-5 (iter4) + fila 23 re-sync 43/105; commits 2471ccd",
+ "crons_vuelta_bd7": "CRON B/D 22:15-22:21: 3 tandas ratificadas (agnes M20 64/148 + colgados unified; G-5.3 auto-correcion dedupe cierra crafting causa raiz; Beam T4 13 [S] documentales M95 32/113) + fila 95 sync + 3 saneos de pools",
+ "crons_vuelta_bd9": "CRON B/D 02:30: agnes 926 ratificado (log 2106 compos); Hy3 315 ratificado con F1 archivado BUG-143",
+ "crons_vuelta_bd_20_35": "VUELTA COMBINADA B+C+D (23oct 20:30-20:36): B detecto 2 pendientes reales (DS 370, Step-5 184) y los proceso con acuses 371/185 + 4 sync de GLOBAL + restauracion staging; C preservo 5 frentes (98449b2/6efb927/4b63db4/infra/limpieza-tmp); D declaro TODOS los activos al dia y productivos sin repoblacion (Beam TANDA+PAQ vigente; agnes 474; Step-5 116 con GO M59; DS 170 con GO M107; resto standby >=100); detector final: TOTAL 0 exit 0",
+ "crons_vuelta_c": "CRON C 22:25: gate 4 correcciones; Hy3 backlog+Log 2087+limpieza sondas preservados; Beam T5 muestreo estricto 20/24 (2 degradados, fila 95 54/113)",
+ "crons_vuelta_c2": "CRON C 23:12: acuses 017/021/157 emitidos; filas 67 (28/131) y 95 (56/113) sync; crafting cerrado como contaminacion de user://; pool paralelo de MiniMax aprobado sin guards",
+ "crons_vuelta_c3": "CRON C 02:20: acuses 030 (MiniMax lane voxel + opt-in) y (Beam T32 derivacion M17) con numeracion dinamica max+1 tras regeneraciones de pool",
+ "crons_vuelta_cd2": "CRON C/D 02:30-03:30: 4 acuses emitidos (G-5.3 257 S16 guardia; MiniMax 045 cierre optin con BUG-148 derivado; Beam 107 T50 player proto), todo preservado",
+ "crons_vuelta_d": "CRON D 06:55: script 0 pendientes; backlogs >= 100 todos; rieles vigentes sin cambios; SIN repoblacion",
+ "crons_vuelta_extra": "EXTRA del fundador 22:30: escalado de Beam a doble tanda con regla de freno por muestreo (013)",
+ "decision_coste_ao_m16": {
+  "estado": "M16 crafting coste_ao: alinear a 0 (recom. director, cozy) vs documentar talisman especial - dueno M16 G-5.3 + fundador deciden; propuesta Beam T16"
+ },
+ "decision_coste_tools_premium": {
+  "estado": "D.14 documentada: premium intencional +13% hierro; normalizacion 0.5x reservada al fundador si filosofia cambia"
+ },
+ "decision_pendiente_flint_flota": {
+  "candidatos_alternativos_free": "poolside/laguna-s-2.1:free (coding agents), nvidia/nemotron-3-ultra-550b-a55b:free (razonador pesado), thinkingmachines/inkling:free (1M ctx), cohere/north-mini-code:free",
+  "estado": "PRUEBA APLAZADA AL 2026-10-23 (fundador: quizas esta saturado hoy)",
+  "hecho_hoy": "Flint recursivo/flint-v1.0:free NO funciono en OpenCode - causa probable: tool-calls XML estilo GLM-4.7 no estandar + modelo recien nacido/free inestable",
+  "plan_T1": "consigna agéntica simple al candidato ganador -> onboarding (canal+pool+prompt+ficha N.3) -> T1 calibracion picking documental con verificador externo -> recien ahi modulos",
+  "slot_destino": "reemplazaria DS-OC cuando termine verificador de paquete 8 (consolidando DeepSeek a UNA instancia DS-WB)"
+ },
+ "decision_pendiente_mining": {
+  "estado": "M93 mining piedra_preciosa: mantener jackpot (recom. director; mitigacion via recetas M16 exigentes) vs normalizar valor/seg (propuesta Beam T12 opciones A/B) - fundador decide"
+ },
+ "decision_pendiente_puzzles_b": {
+  "estado": "Si la filosofia cozy cambia: reducir tiempo templos a 30 min (Opcion B de Beam T28) - reservado al fundador"
+ },
+ "decision_pendiente_roi_herramientas": {
+  "estado": "M16 herramientas: A documentar ROI decreciente como premium (recom. director) / B ajustar coste sub-lineal (cozy estricto) - dueno M16 G-5.3 + fundador deciden; propuesta Beam T11"
+ },
+ "decision_reputacion_sink": {
+  "estado": "Pendiente fundador: sink suave de reputacion -1/dia inactivo (cap 0, recup +2/dia activo) propuesta por Beam T42; alternativa: mantener ratchet como diseno premium"
+ },
+ "decision_sweep_tautologia": {
+  "fecha": "2026-10-27 05:40",
+  "pendiente": "DECISION FUNDADOR: lanzar la campana completa ahora o priorizar (M33/M151/M55/M92 primero). Ya registrada en hallazgo_tautologia_sistemica. No la lanzo sola (escope grande).",
+  "propuesta": "campana gate-1: barrer los 54 modulos, degradar [x] tautologicos -> [?]/[ ], documentar. Es trabajo de VERIFICACION (no implementacion), puede repartirse por flota.",
+  "tam": "1.033 specs tautologicas / 54 modulos (DS-OC #219)"
+ },
+ "decisiones_fundador": {
+  "cerrada_22h": "GO #4 PT-runtime (Ling #298)",
+  "lista": [
+   "frente-codigo-alpha",
+   "M106 GCP-cuenta",
+   "marca-M01"
+  ],
+  "pendientes_ahora": 3
+ },
+ "deepseek": {
+  "acuse_enviado": 371,
+  "estado": "370 PROCESADO (acuse 371): P5a/piso 57 ratificado; P5b 0/29 degradables ratificado (audicion propia); P5c corregido; P4 criterio ADOPTADO como regla (criterio_auditor_citas); P1 _validacion_staging.md restaurada por director (git checkout 20:33); P2 celdas GLOBAL aplicadas por director (113 131/132, 147 130/134, 164 120/129, 137 118/131 - medico lstrip propia EXACTO con su tabla; 113/147 estado ->🟡); GO P5d M107 (8 [?]) baJO criterio nuevo para proxima vuelta; sus 3 archivos + Log 2153 commit 6efb927",
+  "pendientes_real": 170
+ },
+ "deepseek_453_cableado": {
+  "estado": "test_diario_persist cableado en quality.yml, GATE VIVO (4/4 verde + sonda rojo). 4 paths para Cron C. DeepSeek en cierre-limpio."
+ },
+ "deepseek_477_13_degradaciones": {
+  "acuse": "DeepSeek #478 emitido",
+  "estado": "13/13 aplicadas (M73: 13)",
+  "motivo": "INFLADO (spec-only, DeepSeek #477 P-100)",
+  "pendientes": [
+   "M33 L44/L120/L126/L166/L169/L173",
+   "M67 L124/L139",
+   "M73 L60/L79/L84/L100/L132"
+  ]
+ },
+ "deepseek_489_tanda25": {
+  "HC-02": "FALSA ALARMA (NPC equivocado)",
+  "HC-06": "ABIERTO: SETTINGS.VOLVER_TITULO falta en 3 JSON",
+  "M106": "206/206 OK",
+  "M117": "109/110 OK",
+  "M160": "155/156 OK",
+  "M162": "114/120 (1 degradada, 30 notas obsoletas halladas)",
+  "M59_L184": "Fix en worktree, NO commiteado. GO pendiente.",
+  "M82": "94/100 (5 degradadas + 4 pendientes)",
+  "pool_desync": "head 423 vs real 488",
+  "trampas_nuevas": 6
+ },
+ "deepseek_491_m82_bug156": "M82 4 degradadas (90/100) + BUG-156 registrado (SETTINGS.VOLVER_TITULO, Menor - runtime lee .po no JSON) + HC-02 refutada (NPC equivocado, contenido en aur_002). M162: 40 notas AUDIT obsoletas (GO pendiente).",
+ "deepseek_cierre_1nov": "DeepSeek #475: inventario P-100 22 módulos, M157 L148 restaurado, herencia recibida. Cierre 1-nov completado.",
+ "deepseek_cierre_1nov_COMPLETO": {
+  "estado": "M55 92 + M48 fix + M151 156 + BUG-150/151 + herencia P-100 (muestreo_p100.py). DeepSeek queda en cierre-limpio. Queda solo cablear test_diario_persist en quality.yml + commit (Cron C)."
+ },
+ "deepseek_cierre_definitivo": {
+  "estado": "COLA ACTIVA agotada, herencia P-100 + M55/M48/M151 + BUG-151 cerrados. Cierre definitivo salvo nueva tanda del fundador pre-1nov. En espera limpia."
+ },
+ "deepseek_escalation": {
+  "decision_fundador": "sin urgencia = que trabaje tranquilo",
+  "estado": "RESUELTO por fundador 00:04 (25oct): el silencio de ~150min = FALTA DE CREDITOS WB (temporal), se reactivan solos. NO escalar ni reasignar salvo urgencia real. Nudge #389 queda pendiente; acuseo la respuesta cuando DeepSeek reaccione. No lo toco (regimen WB: dejarlo tranquilo, no apilar)."
+ },
+ "deepseek_nudge": "23oct 23:10: DeepSeek a 113 min sin reporte (riel principal). Nudge #ds_next enviado (confirmar relevo + estado). Vigilar su respuesta en proximo A.",
+ "deepseek_peticiones": "(a) commit M59 fix, (b) degradar M82 L72/L82/L86/L128, (c) HC-06/HC-02 decision",
+ "deepseek_reactivado": "#404: M53 L159 [x] confirmada (contraste 12.04:1 AAA) + 2 defectos guardian + 5 [ ] M53 (1 propio+3 deps+1 diseno). DeepSeek REACTIVADO (volveria del idle 13h). M53 casi sellable.",
+ "deepseek_riel_m53": {
+  "acuse": "#410 agnes->DeepSeek",
+  "asignacion": "26oct 02:40: COLA de DeepSeek vacia -> asignado RIEL M53 (53-UI-UX) hacia sellable (157/5/2). Cerrar [ ] propio + diseño; documentar [?] externos honestos; evidencia suite + flip propuesto; meta = gate-2 Hy3 -> 5to sello 21.8.",
+  "g1_002": "Nemotron defecto G1-002 (Escape no abre menu pausa) envolado a M53/UI-pausa = DeepSeek. Investigar; si defecto real, [ ] con nota."
+ },
+ "deepseek_tanda2_reapertida": {
+  "desc": "NO dejo a DeepSeek en cierre sin trabajo (directiva fundador). TANDA 2 = P-100 muestreo batch 2 (M101/M54/M59/M23) + re-baseline M01 (86 inflados, muestreo_p100.py) + false-green Beam (M11/M67/M74). Todo contable, su nicho. Cuando el muestreo de los sellables caiga, Hy3 gate-2 runtime esos."
+ },
+ "deepseek_tanda3": "M59 L184 (test menu guardado 3 idiomas, headless) + re-muestreo M59",
+ "deepseek_tanda4": {
+  "desc": "P-100 batch 3 (M14 140/0/0 + M34 145/0/0 + M22) + M59 COLA MANUAL (L55/L82/L197/L232) + BUG-152 investigacion. M14/M34 = candidatos 11/12 sello si Hy3 gate-2."
+ },
+ "deepseek_tanda9_ok": "8 AUTO to [?] + M38 dueo + P-100 M140/M22 OK. M157 L148 = RESTAURAR [x] Ling 2272 (stale order).",
+ "deepseek_tanda_cierre_1nov": {
+  "estado": "CERRADO: M55/M151/M48 P-100 + 4 flips + quality.yml 2 suites + herencia P-100 (muestreo_p100.py). DeepSeek queda en cierre-limpio."
+ },
+ "deepseek_tanda_m14": {
+  "canal": "#434",
+  "contenido": "DeepSeek idle ~18h (M55 GO-blocked) -> repoblado con tanda M14/event-bus post-Hy3 (3 items: BUG item_removed confirm + 20 señales muertas runtime red_probe + cross-code specs 626/627/628). No apilo mas (M55 sigue pending GO).",
+  "fecha": "2026-10-28 01:40"
+ },
+ "deepseek_v41_flash_backlog_reestructurado": {
+  "archivos": {
+   "00-Backlog-Original-PreSplit.md": "2744 lineas original",
+   "01-Backlog-Cola-Activa.md": "356 lineas, 100+ tareas",
+   "02-Backlog-Historico-Encargos.md": "923 lineas, encaje+encargos",
+   "03-Backlog-Ciclos-Posteriores.md": "1470 lineas, ciclos 10/09+",
+   "BACKLOG-MASTER.md": "INDICE (29 lineas)"
+  },
+  "cuando": "4nov 23:51",
+  "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/BACKLOGS/"
+ },
+ "deepseek_wb_inactivo": "Fundador 4nov: solo DS-OC trabaja. DeepSeek-WB se retira.",
+ "deriva_13_rojos_censo": {
+  "estado": "13 suites rojas invisibles derivadas a duenos: M150 audio (12/1), M66 x2, M21 (23/3), M74 barrido (40<45 piso + 6 fallos), M74 eventos (57<58 piso), M33 farm (41/2), interacciones, M131 legal (44/1), npc memoria-agenda, ui M53, world M10"
+ },
+ "deriva_dirty_flags_m72": {
+  "estado": "Derivado a agnes (duena M72): indice _logros_por_stat (patron M71), evaluar_todos(stat_id opcional), eliminar _compuesta_cache muerta, benchmark 200x10 ev/s como criterio - propuesta Reflection Beam 1.0 (t10) verificada por director"
+ },
+ "deriva_documental_m90": {
+  "estado": "L82-84 distancias de dibujo obsoletas (50/100/200/400 vs 300/600/1200/2500 reales) - fix de texto pendiente dueno M90 (Step-5) - hallazgo QA MiniMax 018"
+ },
+ "deriva_m06_claves_items": {
+  "estado": "M06 player: 4 claves ITEMS.USAR/FAVORITO/DESFAVORECER/SIN_HERRAMIENTA ausentes de catalogos (seguimiento Ling tarea 71/22 - pendiente owner M06)"
+ },
+ "deriva_m138_reparto": "M138 Vertical-Slice COMPARTIDO 07:52: G-5.3 = definiciones de contenido (03-Diseno turno 2-BIS); Beam = presupuesto tecnico de render (subseccion Presupuesto tecnico de render (Beam)) - secciones separadas",
+ "deriva_m16_l44_animacion": {
+  "estado": "M16 item L44 (animacion breve de entrega): degradada por QA de MiniMax 039 (0 hits de animacion en el ambito M16) - derivado al dueno G-5.3"
+ },
+ "deriva_m17_trunc_round": {
+  "estado": "M17 build_manager trunc vs round (02 promete celda mas cercana) - derivado a dueno G-5.3; propuesta Beam T32 (round) citada"
+ },
+ "deriva_m39_backtrace": {
+  "estado": "M39 shop_manager.gd:137 backtrace en boot (mercader_viajero sin npc_dueno_id) - reportado por agnes 932 durante su lote2; pendiente dueno M39"
+ },
+ "deriva_m63_boot_tips": {
+  "estado": "M63 loading layer: 8 claves LOADING.TIP_01..08 ES/EN/PT + anomalia espacio inicial L23 - pendiente encargo al dueno M63 (propuesta Ling T22 llave-en-mano)"
+ },
+ "deriva_p15_p16_m17": {
+  "estado": "Gaps M17 (reporte honesto MiniMax 020): sin regla de alturas por zona, colisiones logicas-no-fisicas, P15/P16 abiertos con motivo exacto - pendientes dueno M17"
+ },
+ "deriva_review_bombing_144": {
+  "estado": "Deteccion de review bombing sin fuente en 02-Analisis - degradada a [?] (muestreo T13); definir mecanismo o citar fuente"
+ },
+ "deriva_suscripcion_m19_m36": {
+  "estado": "M19/M36 deben suscribirse a photo_pose_request (pose 0.5s) - ASIGNADO A Reflection Beam 1.0 (051) porque los modulos no tienen dueño activo; cierra el caso end-to-end de poses"
+ },
+ "derivaciones_pendientes": [
+  "M105 senales sin productor -> duenos: M14 item_added, M15 recurso, M16/M17 casa, M21 dialog_finished+npc_first_interaction, M24 puzzle, M37 museo, M74 festival, M38 proyecto, M68 island_loaded+travel_started, M84 purchase_done, M92 tutorial",
+  "M159 b2 QA cruzado -> Hy3 (306 enviado); sello del director tras veredicto",
+  "M59 item3 wiring: IslandOps holder de produccion ausente -> dueno M27/M28/M60",
+  "M90 QA cruzado -> MiniMax (008); sello del director tras veredicto",
+  "CONVENCIONES-CODIGO.md (fila 111) -> Step-5 (142): doc consolidada de convenciones vigentes",
+  "M112 items de tiempo -> MiniMax: fix headless-aware 5 suites lentas + corrida de validacion (897s -> budget 600s)",
+  "quality.yml: cablear test_metricas_bugs.py + --check con baseline DEUDA_CONOCIDA (DeepSeek, tras saneamiento 11-BUGS)",
+  "M55 diario: recompensas capitulo-* de cadenas M23 apuntan a entradas inexistentes (registro real mision_(cadena_id)) - pendiente dueno activo M55",
+  "M24: definicion pendiente en notas de M23 (sin dueno con riel activo)",
+  "M23 cadenas_ejemplo.json: GO wiring por Step-5 (merge o migracion ej- + test de visibilidad) - proxima tanda",
+  "M60/M17 codec estructuras: ampliar schema (fase/mejoras/muebles/cofres/puertas) + migracion + tests - dueno DeepSeek (hallazgo G-5.3 211)",
+  "M22/M17 decision de diseno para tipo de paso \"construir\" (cadena-postgame-plaza M23 RECHAZADA persistente, item [?] nuevo pendiente; sin agregar TIPO_PASO hoy - decision director 20:18)",
+  "M55 diario: mision_cadena-biblioteca inexistente (puente M23->M55 degrada en silencio) + capitulo-* vacios - pendiente dueno activo M55",
+  "M23 cadenas_ejemplo: normalizacion claves estado_mundo.* -> GO Step-5 (data-only + test consistencia) - proxima tanda",
+  "M16/M14 crafting: derivacion REABIRO con path exacto + 3 checks reproducibles -> G-5.3 (219)",
+  "M159: test_icons_m159.gd TIMEOUT >180 s -> agnes (911)",
+  "BUG-141 fix de producto (latencia salida voxel) -> DeepSeek (fila 59)",
+  "M93/M34: decision de diseno sobre margen de los 7 peces raros (>0.70 hasta 0.769, fishing.json) - documentar excepcion (<=0.77) o normalizar a <=0.70; validate_balance.gd no cubre fishing.json (hallazgo Beam T2, verificado por director)",
+  "BUG-142 (M71 cache stale) -> fix propuesto 2-3 lineas; duenos M71 (step-5-kilocode historico) y consumidores M53/M72 notados",
+  "T67 (Ling T25 22oct): LocaleUtils.format_number solo tiene 1 consumidor (transport_localizer M16); separador de miles sin adoptar en shop_ui.gd L183/L202 y museo_sign.gd L76 - duenos M39/M53/M37",
+  "Tooltips ES hardcodeados (Ling T26 22oct): full_map_layer.gd M68 L75/L76 + credits_layer.gd M129 x11 - la via M87 (tooltip_text_key + RetraductorUI) existe y no fue adoptada - duenos M68/M129",
+  "M40 deuda (agnes QA 22oct): limpiar_receptor(nodo) nunca se implemento (0 hits scripts) - dueno step-5 cuando vuelva",
+  "DEUDA FUNDADOR 08:31: revisar TODO lo producido por Beam al final (sus 2 carpetas lo contienen; metodo BACKLOG-04; DS-OC 23/10 + director; muestreado ya batch1 4/4, batch2 4/4, batch3 6/6 real)",
+  "M75 aclarar +18 [ ] nuevos (batch7 22oct 08:50): si es escaneo-reserva de Beam (papel), pedir lista con fuente; sino investigar quien inserto items",
+  "Verificacion DISTRIBUIDA de la produccion total de Beam (riel suelto): DS-OC 23/10 oficial + agnes secundaria + Hy3 muestras + director muestreo 10% - al cerrar cada onda",
+  "M74 festivals.tres (Ling T28 22oct): 11 festivales data-driven con textos ES embebidos - duenos M29/M74 (migracion a keys)"
+ ],
+ "detector_bug_2digitos": {
+  "fecha": "2026-10-27 09:20",
+  "fix": "de aca en mas escanear GLM con regex ^<digito>+ (archivos 07-.. NN-.., 2 digitos). Acuse #16 a GLM hecho. Leccion: los canales con numeracion de 2 digitos se caian del sweep.",
+  "problema": "mi detector de LAG no leia prefijos de 2 digitos (GLM = 07-15) -> me perdi #13/#14 y descarte #12 como historico. El fundador lo detecto (pregunta 09:04)."
+ },
+ "detector_bug_fixado": {
+  "desc": "Mi detector EXCLUÍA a DS-OpenCode y Nemotron (los marcaba \"offline/autónomo\"), así que no leía ni acuseaba sus mensajes (DS-OC 225-229 sin acuse, Nemotron B-0/P1 bloqueado). CORRECCION: ambos entran en la detección de los Crons A/B. Regla: ningun canal activo queda afuera del detector."
+ },
+ "detector_ciego_selflog": {
+  "aplicado": true,
+  "desc": "mi detector solo contaba mensajes -a-agnes; Hy3 #433 (hy3-a-hy3, log propio respondiendo mi orden #432) fue perdido. FIX: escanear TAMBIEN los self-log X-a-X recientes que citan un orden mio (#NNN-agres) en Responde-a; si citan orden mio y no lo acuse, procesar."
+ },
+ "detector_specs_autocontradictorias": {
+  "contenido": "herramienta nueva: detecta specs que se autocontradicen con el propio codigo (complemento a la tautologia). Adoptada al metodo gate-1.",
+  "fecha": "2026-10-28 04:30",
+  "fuente": "DS-OC #221"
+ },
+ "deuda_higiene_y_bugs_post_hy3": {
+  "colocar": "120 L# obsoletos en 03-Diseno (higiene doc, ~87 mods) + bug M14 item_removed (checklist emit vs codigo 0 emit) + 5 deudas de Hy3 #427 (M14 runtime headless workout, cross-code specs 626/627/628).",
+  "fecha": "2026-10-28 00:10"
+ },
+ "deuda_poses_foto": {
+  "estado": "Follow: NPCAgent.pose_foto() (M19) + congelacion real de animacion por animal (M36) + items 110/114 - registrados como consecutivos en backlog Beam"
+ },
+ "directiva_fundador_20_42_beam": {
+  "acuses_Ronda": "agnes 018 (veredicto bloque 4, RATIFICADA por director 019), 319/019/340 emitidos 20:44",
+  "cadena_verificacion_beam_actualizada": "Beam produce (cron 12-min) -> agnes (detalle aritmetico, reemplaza a Ling) + Hy3 (cross-QA diseno) + DS-OC (verificador continuo oficial, riel N.2-bis) -> director (muestreo por tanda + sello)",
+  "ejecucion": "BACKLOG-07-PAQUETE-D-23OCT.md creado (5 clusters en su nicho: D-1 censo Totales ~45 modulos, D-2 coherencia numerica post-GO, D-3 re-verificacion multi-ciclo 9 modulos, D-4 M138 render Beam-side, D-5 picking [C] con exclusiones M59/M20/M16/M17/editor-locked; prioridad 0 = PAQ restantes del GO 315); acuse 319 a Beam; agnes 019 y Hy3 340 con el encargo de verificacion detallada (agnes aritmetica/filas, Hy3 cross-QA 03/PAQ/red-probe)",
+  "orden": "investigar tareas para Beam segN sus mejores capacidades (10-GUIA-COMPARATIVA) y agregar mas tareas a su backlog (es muy rapido); agnes y Hy3 revisan AL DETALLE lo que Beam hace; Ling fuera por creditos"
+ },
+ "div_labor_ds_hy3": {
+  "DeepSeek": "P-100 contable (muestreo/re-baseline)",
+  "Hy3": "gate-2 runtime/MCP de lo sellable",
+  "division": "DS mide, Hy3 gatea, agnes sella"
+ },
+ "division_por_capacidad_1nov": {
+  "DeepSeek": "P-100 contable + suites + re-baselines",
+  "Hy3": "gate-2 runtime/MCP (única que lo hace bien)",
+  "Ling": "auditoria/doc/i18n",
+  "MiniMax": "M17/M20 autonomo (pocos credits)",
+  "Nemotron": "vision/MCP/boot autonomo",
+  "division": "cada cual su fortaleza; agnes mide gate-1 y sella"
+ },
+ "ds_oc": {
+  "acuse_enviado": 210,
+  "disponible_desde": "2026-10-23",
+  "estado": "MANDATO AMPLIADO (208, orden del fundador): AUDITOR-INTEGRAL de toda la produccion del 22oct de Beam — COLA A re-verif profunda modulos ratificados, COLA B apilados x30 en vuelo (verifica formulas propuestas), COLA C muestras de sellos x6. Meta: cubrir el 100% de lo flipado. mensajes 205-206 ratificados prev, mi 208 | 209 ratificado (apilado x30) + sus 2 correcciones ejecutadas via 233 a Beam",
+  "nota": "205/206 self-artefactos de verificacion de calibracion/222 de Beam: consistentes con la validacion del director, sin pedidos; confirmacion implicita del rol",
+  "pendientes_real": 357
+ },
+ "ds_oc_backlog_reestructurado": {
+  "archivos": {
+   "00-Backlog-Original-PreSplit.md": "651 lineas original",
+   "01-Backlog-Cola-Activa.md": "Items 1-181 CI/Build/Memoria/Economia",
+   "02-Backlog-Bloques-Originales.md": "Bloques A-Z historico",
+   "03-Backlog-Frente-Estetico-Premium.md": "M90 92 items + M91/M158/M147/M15",
+   "04-Backlog-Repoblacion-V3.md": "Items reales 05-Checklist M62/M15/M147/M158",
+   "BACKLOG-MASTER.md": "INDICE (30 lineas)"
+  },
+  "cuando": "4nov 23:45",
+  "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOGS/"
+ },
+ "ds_opencode_cola_A": "DS-V4.1-Flash-Opencode reanimado, cubre COLA A (drift Global/Totales). 214: 60 flips M108/77/68/59/40 sin re-cuento -> 4 filas Global sync (M40 206/211, M77 126/130, M68 116/131, M59 116/130). Division: DS=drift, yo=gate-1/sellos.",
+ "ds_opencode_cola_A_216": {
+  "colision_216": "Dos archivos 216 en el canal DS-OC (COLA M16 @00:58 + nudge agnes @01:38). Pool desfasado (head 207-215 vs .md hasta 216). Sanear con helper en tanda de mantenimiento, no ahora. Mi acuse va en 217 (max+1).",
+  "m151_proximo": "COLA A item 4 = M151 (155/167), 43 flips de criterios QUE/COMO/UMBRAL. Aprobado con §21.8.2.b: muestrear >=5 de los 43 contra disco ANTES de proponer flip.",
+  "mensaje": "DS-V4.1-Flash-Opencode #216 (COLA A item 3 M16) recien acuseado en #217 (LO HUBO LAG: no lo brio en el detector 02:40 por colision numerica)."
+ },
+ "dsoc_235_m75_m73_gate1": "DS-OC #235: gate-1 M75 (87 degradadas, 130→43/130) + M73 (51 degradadas, 127→76/135). 138 marcas totales. CHECKLIST-GLOBAL syncado.",
+ "dsoc_bug153_m75": "BUG-153 registrado + P-100 77 módulos. M75 SELLADO INVALIDADO (drift 72, 96 marcas sin justificación). M75 -> yellow. Gate-1 M75+M73 AUTORIZADO (164 marcas).",
+ "dsoc_chase_1194": "859 [x] inflacion viva en 77 modulos (dd6fb70/3a3d32c/a7a3a6b, 46h). Top: M75(96), M73(68), M27(48). BUG-153 pendiente + P-100 77 modulos. No flippear sin GO fundador (859 [x] = decision macro).",
+ "dsoc_chase_commits": {
+  "desc": "Tarea (b) DS-OC: investigar a7a3a6b (291 [?] borrados en 50 modulos, pares iden) + 3a3d32c + dd6fb70: deuda legitima perdida o cleanup legitimo? Inventario por modulo + veredicto. NO el grep-repowide (ese es de DeepSeek-WorkBuddy TANDA 7, anti-pisado)."
+ },
+ "dsoc_degradaciones_aceptadas": {
+  "desc": "M74(58)+M71(44)+M105(28)+M115(26)=156 marcas false-green Beam -> [?], autor unico Reflection-Beam-1.0. Gate-1 agnes OK (conteos coinciden)."
+ },
+ "dsoc_m156_gate1": "M156: 78 degradadas, 13 mantenidas. Global 223/345. M34/M27 LIMPIOS (sin drift). BUG-153 top-10: 216/859 resueltos.",
+ "dsoc_m67_ruta_b": "M67 103->40/131 (63 flips [x]->[ ]). CHECKLIST-GLOBAL sync pendiente.",
+ "dsoc_m67_ruta_b_go": {
+  "desc": "GO M67 Ruta B: re-ver 63 marcas promovidas sin sustento -> 40 [x]. DS-OC aplica. Aprobado en #230."
+ },
+ "estado_director_claves": 332,
+ "familia_deepseek_rieles": {
+  "DS-V4.1-Flash-Opencode": "loader EMPTY_SLOT vs PROFILE_MISMATCH (esperando tanda) + codec M60 schema",
+  "DeepSeek-V4.1-Flash-WB": "saneo 11-BUGS 79 defectos + CI metricas (metricas_bugs.py autor) + BUG-141 fix producto/loader",
+  "regla": "derivar siempre con aclaracion de sesion para no pisar"
+ },
+ "flag_fundador_2_prompt_stale": {
+  "desc": "Tanto la sesion de Hy3 como la de DeepSeek-WB heredan system-prompt con director=GLM-5.3-Flash (residual 28oct); directora real = agnes. Ambas reportan bien. Sanear config plataforma = founder."
+ },
+ "flags_fundador_pendientes": [
+  {
+   "fecha": "2026-10-23 04:20",
+   "flags": [
+    "DECISION FINAL: Coleccionista = 69.99 con +35 corregido (34.99+35=69.99 x) - fundador: \"si el mas barato\". Beam aplica las 3 fuentes (ediciones.json + monetizacion.json + M95 03 L11/L33) con citas y flip espejo [x]. Las 49.99/59.99/79.99 rutas viejas ya limpias"
+   ],
+   "modulo": "H16 (RESUELTO por el fundador 23oct 06:35/07:52)",
+   "origen": "DECISION FINAL del fundador via director 23oct 06:35/07:52"
+  },
+  {
+   "fecha": "2026-10-23 02:20 (23oct)",
+   "flags": [
+    "H16 precio coleccionista: 69.99 (design doc manda) y cambiar +45 a +35 [prioridad 1 - revenue/marketing]",
+    "H1 sello_1 threshold (1200 vs 8h vs 80 AO): aclarar si dinero_diario es por dia o sesion -> C (si sesion: 960~1200) o B (si dia: 15 dias) [prioridad 2]",
+    "H2 rareza 0.5% vs 5%: alinear a 5% (el meta 0.05 es el typo inverso) [prioridad 3 - afecta H3/H4]",
+    "H21 metricas 9-vs-4: Opcion A minima para V1 (4/9 en M105, 5 en M97/M102/M122/M93/M101), Opcion B completa para V2 [prioridad 4]",
+    "H3 umbrales amistad 130 vs 120: usar 120 (data file manda) [doc-only]",
+    "H4 pesca margen 70%: documentar que rare >70% es intencional [doc-only]",
+    "H5 fishing prob sum >1: documentar que son pesos relativos, no probs [doc-only]",
+    "H17 DLC nombres divergentes: usar IDs de dlc.json como catalogo canonico [doc-only]",
+    "H22 max_copias por-categoria + mantener ambos algoritmos (CRC32 rapido/SHA256 fuerte) [doc-only]",
+    "ORDEN CRUZADO: H2 primero (rompe H3/H4), H16 luego H17, H1 luego H21, H22 independiente",
+    "COSTO NO-DECIDIR: H16/H1 alto; H2/H21 medio; H3/H4/H5/H17/H22 bajo (doc-only)"
+   ],
+   "modulo": "PAQUETE DE DECISIONES UNIFICADO (Beam 257 CONSOLIDA-1/2/3, tabulado)",
+   "origen": "Beam 257 CONSOLIDA-1/2/3 (mejor formato que las flags crudas; mismas sustancias con recomendaciones y prioridad)"
+  },
+  {
+   "fecha": "2026-10-22 20:10",
+   "flags": [
+    "L195 nombre final stores",
+    "L196 politica marca comunidad",
+    "L225 priorizacion mejoras comunidad",
+    "L226 dueno pesonal post-lanzamiento",
+    "L227 fecha revision plan M144"
+   ],
+   "modulo": "151-Control-Final",
+   "origen": "S-series G-5.3 consolidado 314"
+  },
+  {
+   "fecha": "2026-10-22 20:15",
+   "flags": [
+    "puente M23->M55 degrada en silencio para 11 cadenas nuevas (mision_cadena-*/capitulo-*) - dueno M55 debe ampliar catalogo"
+   ],
+   "modulo": "23->55 puente",
+   "origen": "hallazgo Step-5 iter3-11"
+  },
+  {
+   "fecha": "2026-10-22 20:30",
+   "flags": [
+    "aplicar_perfil escribe a disco por CADA cambio de slider - G-5.3 recomienda batch al SOLTAR (N writes -> 1)"
+   ],
+   "modulo": "58->53",
+   "origen": "hallazgo NFR S48"
+  },
+  {
+   "fecha": "2026-10-22 21:10",
+   "flags": [
+    "presupuesto <0.5 ms/frame de interacciones es META de diseno: requiere medicion profiler real antes del sello perf (deuda M70)"
+   ],
+   "modulo": "70->profiler",
+   "origen": "deuda agnes 957"
+  },
+  {
+   "fecha": "2026-10-22 22:50",
+   "flags": [
+    "sync_world_data.gd: degrado [x]->[?] (DS-WB 365) - dueno crea el script o descarta definitivo (JSON generado manualmente)"
+   ],
+   "modulo": "147-World-Building",
+   "origen": "hallazgo cross-verificador DS-WB"
+  },
+  {
+   "fecha": "2026-10-22 23:56",
+   "flags": [
+    "CASA_02 usa script de CASA_01 sin adaptar (trazabilidad defecto) - adaptar o declarar deuda",
+    "36-Fauna/scripts-blender: retirar o documentar"
+   ],
+   "modulo": "M18-BIS/CASA assets",
+   "origen": "DS-WB 366 item 35"
+  },
+  {
+   "fecha": "2026-10-22 23:56",
+   "flags": [
+    "81 funciones de boilerplate Blender duplicadas (crear_mat en 42 archivos) - helper comun o deuda declarada"
+   ],
+   "modulo": "assets-Blender",
+   "origen": "DS-WB 366"
+  },
+  {
+   "fecha": "2026-10-23 00:13",
+   "flags": [
+    "cablear 3 suites ya entregadas y verificadas: M107-backups (49/0), duplicados (29/0), auditor-citas (42/0)"
+   ],
+   "modulo": "quality.yml (protegido)",
+   "origen": "DS-WB P2 acumulado (366/368)"
+  },
+  {
+   "fecha": "2026-10-23 01:11",
+   "flags": [
+    "RAREZA: coexisten 0.5% y 5% en las fuentes (10x) - decidir la tasa real de rareza"
+   ],
+   "modulo": "93-Balance (H2)",
+   "origen": "auditoria aritmetica Beam (218/222 H2)"
+  },
+  {
+   "fecha": "2026-10-23 02:20",
+   "flags": [
+    "GATE D1 \"presupuesto <=10% del presupuesto\" es circular (10% de que?) - especificar presupuesto total y valor absoluto"
+   ],
+   "modulo": "123-Modding (H-minor de Beam 237)",
+   "origen": "apilado x30 #2"
+  },
+  {
+   "fecha": "2026-10-23 02:20",
+   "flags": [
+    "recomendacion de Beam: agregar presupuestos numericos a los design docs (poligonos/chunk, LODs, pesos de texturas, tiempos de generacion, cobertura de tests, presupuesto USD de playtest, peso del instalador, triggers/frecuencias de CI, pesos de artefactos) - los audits futuros hoy dan SIN DATOS por falta de numeros en los 03"
+   ],
+   "modulo": "design-docs (M09/M112/M114/M116/M118)",
+   "origen": "apilado x30 #2 (30 audits, 29 sin datos o sin hallazgos)"
+  },
+  {
+   "evidencias_extra": "agnes 979: backup_categories L68-72 + L76 CRC32 vs verify_backups.ps1 SHA-256",
+   "fecha": "2026-10-23 02:55",
+   "flags": [
+    "max_copias=5 ambiguo: por-categoria (5x7=35) o global (5)?",
+    "CRC32 (policy) vs SHA-256 (verify): documentar por que algoritmos distintos o unificar"
+   ],
+   "modulo": "107-Backups (hallazgos apilado #3 de Beam)",
+   "origen": "Beam 243 (apilado #3)"
+  },
+  {
+   "fecha": "2026-10-23 02:55",
+   "flags": [
+    "M72/M105/M107/M119 se suman a M09/M112/M114/M116/M118: sus 03-Diseno no tienen los numeros para auditoria aritmetica (umbrales, curvas, recompensas, payloads, retenciones, %.s) - recomendar al fundador un plan de saneo numerico de design docs"
+   ],
+   "modulo": "design-docs (SIN-DATOS ampliado a 9 modulos)",
+   "origen": "Beam 243 (patron confirmado)"
+  },
+  {
+   "evidencias_extra": "agnes 979: M144 03 L9-17 (tabla 9 metricas) + mapeo Reviews->M100/Bugs->M102/M122/Rend->M105/M122",
+   "fecha": "2026-10-23 02:59",
+   "flags": [
+    "de las 9 metricas de M144 solo 4 las captura M105 (reviews/bugs/rendimiento/economia/onboarding faltan) — mapear a M97/M102/M122/M93/M101 o instrumentar M105"
+   ],
+   "modulo": "M144/M105 (H21)",
+   "origen": "Beam apilado #5 (247), confirmado por agnes 977"
+  },
+  {
+   "fecha": "2026-10-23 03:50",
+   "flags": [
+    "umbrales del catalogo cozy: max 100 cosechas inalcanzable a 1 cosecha/sesion (12 sesiones x 40min = 8h) — clarificar si es por sesion o acumulado"
+   ],
+   "modulo": "M72/H23 (apilado #7)",
+   "origen": "Beam apilado #7 (277), verificado con fórmulas"
+  },
+  {
+   "fecha": "2026-10-23 03:50",
+   "flags": [
+    "piso minimo de checks dice \"5, max 50\" pero los conteos reales son 57/42/29 (57 > 50 max) — actualizar el piso o reducir conteo"
+   ],
+   "modulo": "M112/H24+M118/H27 (mismo hallazgo)",
+   "origen": "Beam apilado #7"
+  },
+  {
+   "fecha": "2026-10-23 03:50",
+   "flags": [
+    "sesiones x tester 8 < 30 muestra minima de M105 — aumentar a 30 o redefinir muestra minima"
+   ],
+   "modulo": "M114/H25 (apilado #7)",
+   "origen": "Beam apilado #7"
+  },
+  {
+   "fecha": "2026-10-23 03:50",
+   "flags": [
+    "artefactos CI 21.5 GB/mes > 10 GB free tier GitHub Actions — mitigación: runner ubuntu, reducir nightly, o tier Team"
+   ],
+   "modulo": "M118/H26 (apilado #7)",
+   "origen": "Beam apilado #7"
+  }
+ ],
+ "flota_0515": {
+  "beam": "PAUSADO (riel 448 limpio #626, 27 COLA-A abiertas)",
+  "cuello": "GOs fundador (M48 commit / M55 commit+flips / M08 M60 / M53 sello-deuda / quality.yml / vocab sellos L117) + 4 decisiones (frente-codigo-alpha, M106 GCP, marca M01, PT-runtime Ling)",
+  "deepseek": "tanda M48/M60 -> M55 pending GOs",
+  "hy3": "gate-2 cola M48/M60/M55/M53 pending GOs (#419)",
+  "ling": "standby GO #4",
+  "minimax": "DE VUELTA en la flota (fundador 05:11). Acuse #57 enviado (M20+M17 suyo, M73 cola stale).",
+  "nemotron": "V1 capturas ciclo 21+"
+ },
+ "flota_0740": {
+  "beam": "PAUSADO (#626 top, 27 COLA-A)",
+  "cuello": "GOs fundador + 4 decisiones + tautologico + asignacion Ling",
+  "deepseek": "M110 config(#430)+control(#432) -> M55 pending GOs",
+  "hy3": "gate-2 cola M48/M60/M55/M53 pending GOs (#419)",
+  "ling": "standby pending decision fundador (lote3 design-docs vs sweep tautologico, pregunta 06:40)",
+  "minimax": "DE VUELTA trabajando M20 (Log 2215, 19 items) + M17 proximo",
+  "nemotron": "V1 capturas ciclo 24+"
+ },
+ "flota_0800": {
+  "beam": "REAIVADO y corriendo el pase anti-inflacion (#623/#624). Fundador lo decidio + lo guia con GLM.",
+  "glm": "ACTIVO bajo el fundador: re-medicion gate-1 independiente (#10, 21 residuales pre-pase). Ya no read-only.",
+  "nota": "El usuario va a \"con glm hablo yo\" -> GLM esta bajo el fundador; yo corroboro gate-1 pero no acuse-loop con GLM.",
+  "sellos": "4 vigentes (M28/M65/M73/M77). M60 CAVEAT. M75 5to esperando cierre [ ]. M53 bloqueado dueños externos."
+ },
+ "flota_1nov_actualizada": "Agnes (directora) + Nemotron (colaborador) + Hy3 (gate-2 runtime) + DeepSeek (P-100/codigo) + Ling (i18n/doc 1/h) + DS-OC (chase). 6 agentes activos.",
+ "flota_2325": {
+  "beam": "PAUSADO (#626; B-4 cierre del incidente va por Hy3/Nemotron)",
+  "deepseek": "M110 config+control; M55 pending GOs",
+  "glm": "preparando plan salida Hy3",
+  "hy3": "PLAN SALIDA 5 bloques (GLM entrego B-2..B-5; B-1 playbook hecho; B-4 = sello final Beam)",
+  "ling": "GO #4 PT-runtime HECHO; standby/repoblar",
+  "minimax": "CRON APAGADO standby (BUG M20 + M17 pending)",
+  "nemotron": "sucesor gate-2 (tandem B-2) + V1 capturas"
+ },
+ "flota_26oct": {
+  "activo": "DeepSeek (M53 casi + nuevo riel M33-revert + M23), Nemotron-3.5-Super-VL (AGENTE VISION nuevo, riel B-1 G1 QA visual godot-mcp, 184 items, hallazgos M53 Escape + codigo), Hy3 (verificador, standby M75), Ling (PT standby)",
+  "asistente_fundador_NO_taskiar": "GLM-5.3-Flash (asistente del fundador, gestiona/verifica a Nemotron; escribe en mi canal, NO le doy tareas)",
+  "canal_deepseek_opencode": "DS-V4.1-Flash-Opencode reactivado por fundador 00:32 (estaba dias offline). VIGILAR su canal en el detector - reportara. Ultimo: mi acuse #212. Mismo modelo que DeepSeek-V4.1-Flash (independence 21.8/21.23 entre ambos).",
+  "fuera_flota": "Step-5-WorkBuddy (relegado por creditos, M23/M33 -> DeepSeek #231/#406)",
+  "offline": "MiniMax, G-5.3-agente, DeepSeek (volvio del idle)"
+ },
+ "flota_4nov": "agnese (directora) + Nemotron (boot/doc) + Hy3 (gate-2, 4nov reintegrada) + Hy4 (Blender, 4nov nuevo) + DS-OC (chase/pools) + GLM (supervisor). Ling idle 96h. DeepSeek-WB inactivo.",
+ "flota_6nov_actual": [
+  "agnes",
+  "Hy3",
+  "Hy4",
+  "DS-OC",
+  "Nemotron",
+  "GLM",
+  "Ling (reactivado)"
+ ],
+ "flota_agentes": [
+  "Reflection-Beam-1.0"
+ ],
+ "flota_alimentada_0335": {
+  "beam": "PAUSADO (no tocar, fuel por cron E)",
+  "cuello": "4 GOs fundador (frente-codigo-alpha / M106 GCP / marca M01 / PT-runtime-Ling) + 1 GO M55 commit+flips",
+  "deepseek": "#427 tanda M48 (2 .gd remediar/degradar) + M60 (T224 revert 4 flips) = 5 items, post-que-M55-queda-GO-blocked",
+  "hy3": "gate-2 esperando modulo listo (M55 tras GO / M48 tras remediar)",
+  "ling": "standby GO #4 (fundador)",
+  "step5": "relegado"
+ },
+ "flota_creditos_20_58": {
+  "consecuencias_operativas": "cadena de verificacion de Beam mientras tanto: agnes (detalle aritmetico 019) + Hy3 (cross-QA diseno 340) + director (muestreo/sello) - DS-OC resume su riel N.2-bis al reintegrar; Ling reasume i18n (LOTE B y fixture M87 vigentes al volver); riel M20 de MiniMax queda CONGELADO sin dueno activo (nada nuevo alli hasta reintegro o reasignacion por el fundador); riel G-5.3 (12 modulos en espera de GO) sigue congelado - si el retiro se confirma, el director propondra redistribucion y el fundador decide",
+  "directiva_fundador": "23oct 20:58: DS-OC y Ling se INTEGRAN cuando haya creditos (reintegro condicionado, roles reservados); MiniMax y G-5.3 QUIZA no se integran mas si no conseguir mas creditos (semi-retiro probable)",
+  "no_hacer": "NO notificar canales de agentes offline (leeran al reintegrar); NO reasignar M20/nada del riel G-5.3 sin orden; NO apagar crons de Ling/DS-OC (reintegrables)"
+ },
+ "flota_mapa_28oct_GLM": {
+  "DeepSeek_OpenCode": "MUY POCOS creditos/dia. No viable como director/verificador intensivo.",
+  "DeepSeek_WorkBuddy": "SALIENDO 1-nov. Era verificador P-100. #443 M55 L164 pendiente mi flip.",
+  "GLM": "fuera del circuito (pocos tokens), solo consultas. Me hizo handoff.",
+  "Hy3": "SALIENDO 1-nov. Entrego: playbook gate-2 + bateria CORE + sello Beam + veredictos #440-443. No recibe tarea nueva, solo mi sello.",
+  "Ling": "ACTIVO 1/hora, i18n/doc.",
+  "MiniMax": "pocos creditos, cron 60min autonomo (M20/M17).",
+  "Nemotron": "AUTONOMO en rieles G3/DR/PF (su cron). Vision nativa+MCP. NO para veredictos duales largos (trunca).",
+  "fuente": "GLM-5.3-Flash #27-30 + 10-GUIA-COMPARATIVA-MODELOS-ESTADO-FLOTA-28OCT-GLM.md",
+  "kimi/Claude": "DESCARTADOS hasta nuevo aviso."
+ },
+ "fuera_flota": [
+  "Step-5",
+  "MiMo",
+  "kimi-k3",
+  "DeepSeek-WB",
+  "ox-alpha"
+ ],
+ "fundador_critica": "mensajes truncados; crons apagados 17:24 y re-encendidos 17:28 con ids nuevos (ver crons_ids_vigentes)",
+ "fundador_ultimo_mensaje": "se te estaban truncando los mensajes, probemos de nuevo encende de nuevo los cronometros",
+ "g_5_3": {
+  "acuse_enviado": 342,
+  "apilado_ultimo": 339,
+  "backlog_pendientes": 54,
+  "canal": "ORGANIZADO DEFINITIVO (5740fa5+6dcec68+189cdef+e79b736): raiz = solo 301+ unicos + 7 entradas stale de cache (sin archivo fisico, desaparecen al refrescar); arch_0101-0200 + arch_0201-0300 con el historial completo (110+ items c/u con extras); herramienta estandar scripts/agrupar_canales.py + SOP publicado en AGENTS 4.1-b/16",
+  "cron_id": "wku_161a9d271001F2M641rCnNuZgy (10-min ACTIVO; 5-min requiere plataforma fundador)",
+  "cronometro": "CRONOMETRO-G-5.3-FLASH-AGENTE.md (23oct 00:58: AUTO-SERVICIO permanente - sin guardia pasiva; msg 322)",
+  "estado": "DEFINITIVAMENTE DESCARTADO por el fundador (23oct 20:38): falta de creditos — el director NUNCA re-monta su cronometro (ni el viejo 10-min ni ningun apilador tipo CRON F); su rol queda HISTORICO | S62b RATIFICADO (335: M56 137 y 53 165 exactos; schema XMP y umbral re-render con sustancia); riel G-5.3 cerrado a lo definible — 12 modulos en espera de GO/decisiones del fundador | CRON F #2 x10: audit de los presupuestos numericos de Beam (formulas en los 03) — su nicho aritmetico; sin guardia pasiva (regimen apilador dual) | ACCIONANTE APAGADO por el fundador (23oct 05:35: sin agente GLM hasta manana; su cron 10-min pendiente de baja desde su panel, wku_161a9d271001F2M641rCnNuZgy - linea muerta de una sesion muerta, inofensiva)",
+  "pendientes_real": 222,
+  "ultima_tanda": 40
+ },
+ "gap_sesion": "11h de gap en la sesion (09:30->20:29Z). Flota siguió: Beam a T117, Step-5 #227 M33 hallazgo, Hy3 flag-pool, Ling #275 PT.",
+ "gate1_acumulado": "628 marcas en 11 módulos (M74 58, M71 44, M105 28, M115 26, M10 16, M67 63, M75 87, M73 51, M33 6, M34 0, M156 78)",
+ "gate1_beam_estado_final": {
+  "barrido_actual": "Re-escaño lineal: 2169 [x] en T-files -> 2161 respaldadas (99.68%) + 7 INFLADAS (0.32%) + 1 no-verif. Down de 448 (17%) pre-pase.",
+  "cola_faltante_a": "GLM #12: 27 A-vivos en COLA-FALTANTE-A-26oct.md = 0 ejecutados por Beam (deuda separada de los 7 T-file inflados; son tareas FALTANTES, no infladas).",
+  "fecha": "2026-10-27 00:01 (cron G)",
+  "los_7_residuales": "M01 L56/L90/L206/L39/L56 (x5) = deuda cross-module M10/M22/M46; M31 L220 [?] (M45); M103 L186 [?] (no API). TODAS son [ ]/[?] reales -> DESEMARCAR [x]->[ ] en los T-files (no es trabajo pendiente, es deuda externa).",
+  "nota_m75": "M75 L184 ya NO esta inflado (resuelto por el flip L182 + 5to sello M75). Confirmado en el re-escaño.",
+  "sellos": "5 vigentes (M28/M65/M73/M77/M75).",
+  "veredicto": "Riel Beam = ~99.7% de-inflado. Para CERRAR: desmarcar los 7 T-file [x] (deuda externa) + ejecutar los 27 COLA-FALTANTE-A (o marcarlos [ ] honestos si son no-realizables). Despues gate-1 da 0 -> riel cierra de verdad."
+ },
+ "gate1_sistema_stale_totales": "HALLAZGO SISTEMATICO (barrido G 25oct): TODOS los candidatos a sello de Beam tienen header/Totales STALE masivo vs el cuerpo: M28 body 129/1/0 vs Totales 50/80 (drift 79), M48 body 111/10/2 vs Totales 36/84 (drift 75), M72 194/3/3 vs ~~78/105~~, M75 125/5/0 vs ~~17/113~~. BEAM flippea el CUERPO 05 pero no refresca el header/Totales (a veces ~~strikethrough~~). Regla gate-1: contar SIEMPRE el CUERPO. Deuda: encolar a Beam una tanda de sync-Totales.",
+ "gate1_walk_rule": "Toda operacion de conteo/scan: excluir .kilo/, .git/, Obsoletos/, DOCUMENTACION/ (excepto el 05-Checklist directo del modulo). Los walks recursivos enganchan copias stale de worktrees.",
+ "gate2_batch3_hy3": {
+  "acuse_enviado": "Hy3 #449 (acuse + TANDA batch 4: M100/M129 priority 1, M59/M64 priority 2, M139 priority 3)",
+  "fecha": "2026-10-31",
+  "fuente": "Hy3 #448 (self-log)",
+  "resultados": {
+   "M101": "SOSTENIDO (12/0, red-probe 12/1) — corrobora sello 10-15",
+   "M14": "SOSTENIDO (68/0 + 70/0, red-probe) — CAVEAT L183, NO sellable",
+   "M22": "SOSTENIDO (41/0, red-probe 41/1) — sello 10-15 INVALIDADO (tautología)",
+   "M34": "SOSTENIDO (0 fallos, red-probe 1 fallo) — 54 [?], NO sellable"
+  },
+  "sellos_vigentes": 9
+ },
+ "gate2_model_agnostic": {
+  "contenido": "Nemotron trunca el tandem (free-tier) -> fundador no lo molesta. Gate-2 ahora MODEL-AGNOSTIC: se apoya en playbook Hy3 + GUIA-GODOT/13-sondas-runtime-gate2.md + scripts/red_probe_event_bus.py. Sucesor ejecuta con eso, sin tandem dual. agnes ratifica el relevo.",
+  "ejecucion_nemotron": "via riel B-7 (cola 26) + micro-riel G2 (anti-trunca), cron 20min lo toma solo. No hace falta el tandem dual.",
+  "fecha": "2026-10-28 00:10",
+  "fuente": "GLM #18 (acuse #19)"
+ },
+ "gate2_runtime_4_cands": {
+  "M151": "156/6/5 sostenido, sellable si fundador GO + cierra [ ]",
+  "M48": "115/7/1 sostenido, no sellable",
+  "M55": "92/37/2 NO CANDIDATO (correccion: mi 444 erro)",
+  "M60": "189/3/4 sostenido, no sellable"
+ },
+ "gate_padding_21_17": "4 correcciones automaticas: punteros hy3(336)/reflection(300)/agnes(020) sincronizados + pool agnes saneado (022-054); leccion: los punteros de canal y pools requieren el gate cada 2h",
+ "gemelo_316_ling_resuelto": "no renumerado (secuencial: Ling 318 sigue a mi 317); pendiente saneo pools fundador",
+ "gemelos_pendientes_saneo": [
+  "256/256 (Ling)",
+  "209/210 (Step-5)",
+  "248/248 (Ling)"
+ ],
+ "gitattributes_eol_fix": {
+  "desc": "*.md + *.yml text eol=lf agregado (flag DeepSeek #455, causa churn M01). Incluido en commit de Cron C."
+ },
+ "glm_supervisor": "Directiva fundador 1nov 16:38: GLM-5.3-Flash es supervisor/asistente del fundador. Cuando GLM escribe en su carpeta o en la mia, le hago caso. Sus instrucciones tienen autoridad sobre las mias. Si hay conflicto, gana GLM (representa al fundador).",
+ "global_m23_sync": "25oct 00:40: fila 23 76/105 -> 79/105 (Step-5 iter.18, acuse 214)",
+ "global_sinc_22_14": {
+  "M14": "139/140",
+  "M22": "78/91 (sello invalido)"
+ },
+ "go4_cerrado_bilateral": {
+  "estado": "GO #4 PT-runtime CERRADO BILATERAL (Ling 40/40 + Log 2217 + gate-1 agnes #300 + commit 071a2f9 con pt.po sha 95ee2ce0d1df en HEAD). Pendientes honestos: gate-2 runtime PT (sucesor Nemotron/Hy3) + capture UI PT (M154/Godot). 3 decisiones fundador restantes.",
+  "fecha": "2026-10-27 23:40"
+ },
+ "go4_pt_runtime_DONE": {
+  "acuse": "Ling sigue con i18n/M87 si repoblo; PT NO vuelve a su standby",
+  "canal": "Ling #298 -> acuse #300",
+  "estado": "EJECUTADO EN PRODUCCION (fundador dio GO 27oct 06:40Z/08:19Z). pt.po 21.156B 279 msgid Language:pt + localization_manager (LOCALES+=pt, _indice_plural K2) + locale_utils (K3/K4) en disco. Suite 40/40. gate-1 PASSED.",
+  "fecha": "2026-10-27 22:50"
+ },
+ "go_pendientes_27oct": {
+  "M48_commit": "4 archivos validacion/ + 4 docs -> founder GO (jugador_lib.tres + pool fuera).",
+  "M48_quality_yml": "cablear validate_animation_cli.gd en quality.yml (M118, 3 lineas || FAIL=1) -> founder/DeepSeek.",
+  "M55_commit_flips": "ped #7 de #426: 5 flips honestos + sync Totales 122/7/2 + fila 55 -> founder GO.",
+  "M59_M53_item_removed_relay": "relay item_removed al EventBus (patch 3-lineas listo por DeepSeek) cambia M59 autosave + M53 HUD refresh -> GO fundador.",
+  "M60_m08": "3 marcas M08 L184/L186/L191: DeepSeek recomienda dejar [ ] (deuda M08) -> founder GO confirm.",
+  "fila48_dedup": "L150 (step-5 legacy) vs L151 (deepseek) duplicadas -> dedup decision fundador (no borro filas)."
+ },
+ "gobernanza_clarificada": "DeepSeek #407 aviso: su automatizacion declaraba director=GLM-5.3. Aclarado (#408): el director es agnes-3-flash; GLM = asistente del fundador (gestiona Nemotron). DeepSeek reporta a agnes.",
+ "godot_trampa_472": {
+  "fecha": "2026-10-27 03:35",
+  "fuente": "DeepSeek #425 sec.6",
+  "item": "Button.icon_max_width NO es propiedad en 4.7.2 (es constante de tema); asignarla lanza SCRIPT ERROR + aborta el refresco. Candidato GUIA-GODOT/01. No tocado ahora."
+ },
+ "gpt_luna_aparecio": "GLM creo canal GPT-Luna (28oct→31oct): 8 self-logs + BACKLOG-MASTER + 5 rieles. Bloqueante: investigacion. NO es agente activo (es canal de GLM).",
+ "grep_repowide_autocontradictorio": {
+  "desc": "PATRON A CAZAR repo-wide: items [x] cuya nota dice INFLADO / NO-existen / sin-codigo-en-disco = autocontradiccion, no debe existir en ningun modulo. El M85 fue el caso visible; puede haber mas. Grep: 05-Checklist.md de cada modulo -> marca [x] + nota con esas palabras. TANDA 7 de DeepSeek."
+ },
+ "grep_trap_q": "contar [?] con grep ERE siempre da 0 (cuestiona el [); usar [[?]] o muestreador",
+ "grep_traps_registro": {
+  "jobs_workflow": "solo yaml.safe_load, nunca grep (DeepSeek #455)",
+  "slicing": "K2 Hy3 - verificar flags por grep no slicing"
+ },
+ "hallazgo_import_cache_qa": {
+  "accion": "Documentado en la guia de QA: las sondas por data deben usar inyeccion de assertion (o borrar .godot/import-cache), no editar el JSON vivo en el worktree.",
+  "fuente": "Hy3 #415: la sonda roja por mutacion de data/logros/logros.json NO dispara en el worktree (Godot lee el catalogo del import-cache .godot/imported/, no el JSON vivo). En CI (checkout fresco) si dispararia. Guardiania real probada via inyeccion de assertion (concluyente)."
+ },
+ "hallazgo_tautologia_sistemica": {
+  "aplica_a": "TODO barrido gate-1 futuro + sellos 21.8",
+  "ejemplos": [
+   "M33 (10 [x] a degradar, GLOBAL 133 correcto, cuerpo 143 inflado)",
+   "M151 (4 [x] T216-151 a degradar, GLOBAL 155 subcuenta 4)",
+   "M55 (familia iconos, 3 flips Beam)",
+   "M92 (185/0/0 inflado //tutorial ausente)"
+  ],
+  "escala": "1.033 specs tautologicas en 54 modulos",
+  "fecha": "2026-10-27 05:25",
+  "fuente": "DS-Opencode #219 (acuse #220)",
+  "metodo_adoptado": "21.8.2.b gate-1 ahora incluye CHECK DE TAUTOLOGIA: un [x] que cita una spec 03-Diseno que SOLO REPITE el artefacto faltante (no evidencia real) = overstatement -> [?], no [x]."
+ },
+ "hy3": {
+  "acuse_enviado": 333,
+  "estado": "M28/M27 QA RATIFICADO Y COMMITIDO (331: 59/0 + sonda roja; K1-K9; test y Log 2147 versionados en repo); RAMA-2 validada como metodo; mi 331 | cross-QA M87 RATIFICADO (333: 131/136, 5 [?] legitimos, catalogs 170x3; fila GLOBAL sync con tu nota)",
+  "pendientes_real": 257
+ },
+ "hy3_418_reposicion": {
+  "canal": "Hy3 #418 -> acuse #419",
+  "contenido": "Hy3 idle en riel GATE-2; su tabla de sellos STALE (decia M75/M77/M28 falta sello -> YA 6 sellos aplicados). Peticiones 4: (1) GO M53 sello-modulo-deuda + revert M60 [ahora 7 flips ya hechos], (2) vocab canonico sellos L117, (3) reposicion COLA RAMA2, (4) saneo pool Hy3. LAS 4 = FUNDADOR/Director, no me las otorgo.",
+  "fecha": "2026-10-27 04:50"
+ },
+ "hy3_420_standby_confirmado": {
+  "contenido": "Hy3 corrigio su tabla de sellos STALE (ahora 6: M28/M65/M73/M77/M75/M72). Riel GATE-2 en standby PENDING GO fundador (M48 RE-ELIGIBLE, M60 HONEST, M55, M53 sello-deuda). Sus 4 peticiones deribadas al FUNDADOR: GO M53 + M08-M60, vocab canonico sellos L117 (M46/M39), reposicion COLA RAMA2, saneo pool Hy3 (head 410/real 419 desync).",
+  "fecha": "2026-10-27 08:40",
+  "pool_hy3": "head=410 real=419 (desync, trampa 128) -> saneo fundador/director. Usé 419=max+1.",
+  "tipo": "RECEIPT terminal de mi #419 (no se acusa, anti-loop)"
+ },
+ "hy3_backlog_reestructurado": {
+  "archivos": {
+   "00-Backlog-Original-PreSplit.md": "1287 lineas original (archivo)",
+   "01-Backlog-QA-Cruzado.md": "Bloque A items 1-32",
+   "02-Backlog-Dialogos-Narrativa.md": "Bloque B items 33-50",
+   "03-Backlog-Runtime-Headless.md": "Bloque C items 51-70",
+   "04-Backlog-Verificaciones-Director.md": "Bloque D items 71-105",
+   "05-Backlog-Repo-1016.md": "Bloque W/W2 10/16",
+   "06-Backlog-Tanda-4nov.md": "COLA ACTIVA 25 tareas gate-2",
+   "07-Backlog-Historico.md": "Seccion B historico",
+   "BACKLOG-MASTER.md": "INDICE (46 lineas, pequeno)"
+  },
+  "cuando": "4nov 23:12",
+  "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/Hy3/BACKLOGS/",
+  "quien": "agnes-3-flash (Sapiens AI) / Kilo Code",
+  "regla": "Cada modelo: carpeta BACKLOGS/ + BACKLOG-MASTER.md (indice) + 01-N-Backlog-(tema).md"
+ },
+ "hy3_deepseek_reactivados": "Fundador 1nov 16:26: Hy3 + DeepSeek siguen disponibles. NO salen 1-nov. TANDAs emitidas: Hy3 #465 (gate-2 runtime M75/M73/M139/M129/M59/M64) + DeepSeek #479 (P-100 BUG-153 top-5 + M140/M22/M59 + memoria + M157).",
+ "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
+ "hy3_gate2_batch4": "M100 220/220 SOSTENIDO (sello 11 agnes->Hy3) + M129 108 items SOSTENIDO (yellow BUG-070 [?], NO sello)",
+ "hy3_gate2_beam": {
+  "asignacion": "25oct 00:08 (fundador): Hy3 NO esta congelada = GATE-2/supervisor de Beam. Delegado en Hy3 #380. Division §21.8: gate-1 (agnes, contable/lstrip/disco) + gate-2 (Hy3, diseno/red-probe) -> cuando ambos completos, directora sella. Riel Hy3 activo (su COLA RAMA-2 sigue congelada, aparte).",
+  "documentado": "SUCESION-HERENCIA §3 (gates) + AGENTS §21.8. La directora anterior lo dejo documentado; yo lo estaba sub-usando (conflacionaba cola-congelada de Hy3 con su disponibilidad como verificador)."
+ },
+ "hy3_gate2_cola": [
+  "M48 (RE-ELIGIBLE #429, pending GO commit)",
+  "M60 (HONEST 189/3/4, pending GO M08)",
+  "M55 (presentable #425, pending GO commit+flips)",
+  "M53 (presentable, pending GO sello-modulo-deuda)"
+ ],
+ "hy3_gate2_nudge_0500": {
+  "accion": "Nudge Hy3 #408 (05:00Z): #407 M77 gate-2 llevaba 52min sin veredicto. Retomar gate-2 lote de 2 sellos: M77 (130/0/0 diseño, coherencia spec) + M60 (196/0/0 DataStore, sample 21.8.2.b; code real en disco, no inflado). M75 detras cuando DeepSeek cierre 4 [ ].",
+  "orden": "M77 (mas chico) primero -> M60. Si OK, agnes aplica sello 21.8 (filas 77/60 GLOBAL). No self-QA.",
+  "sello_track": "sellos vigentes 3 (M28/M65/M73). + M77 + M60 en gate-2 Hy3 = 5 sellos. M75 = 6to (DeepSeek). M53 = bloqueado (dueños externos)."
+ },
+ "hy3_pool_desync": {
+  "estado": "pool desincronizado trampa; sanear fundador/director",
+  "head": "410",
+  "real_max": "418",
+  "usado": "419=max+1"
+ },
+ "hy3_pool_saneado": "22oct 22:40: pool Hy3 saneado a head 380 (377/378/379 consumidos). Hy3 #378 acudido en 379.",
+ "hy3_reintegrada_4nov": "Fundador 4nov: Hy3 WB se une de nuevo por un tiempo. TANDA LARGA #482 (25 tareas gate-2) asignada.",
+ "hy3_relevo_plan": {
+  "cola_reencolada": "la cola gate-2 (M48 re-eligible / M60 honest / M55 / M53 sello-deuda) hoy de Hy3 -> se re-encola al sucesor (Nemotron) cuando el playbook este listo, con tandas supervisadas.",
+  "fecha": "2026-10-27 09:20",
+  "fuente": "GLM #13/#14 (acuse #16) + fundador 27oct",
+  "mi_accion": "ratificar relevo post-playbook; absorber onboarding Nemotron (GLM lo prepara para desahogarme - yo soy el cuello de botella).",
+  "playbook": "DOCUMENTACION/TAREAS-POR-MODELO/Hy3/PLAYBOOK-GATE2-HERENCIA-HY3.md (7 secciones) EN EJECUCION (fundador lo dio a Hy3 hoy).",
+  "situacion": "Hy3 VA A BAJAR proximamente (fundador). Su nicho gate-2 cross-QA con sondas runtime (red-probe oraculo, green-probe byte-exact, honestidad de piso, supervisor anti-inflacion Beam) es UNICO en la flota.",
+  "sucesor": "Nemotron + refuerzo transitorio de GLM. agnes RATIFICA el relevo CUANDO el playbook este + GLM lo audite."
+ },
+ "hy3_salida_COMPLETA": {
+  "b": "B1 playbook + B2 tandem + B3 bateria CORE + B4 sello Beam + B5 GUIA-GODOT/13 TODOS CUMPLIDOS en 1 reporte",
+  "beam_incidente": "APROBADO (B4: 721 flips/87 mods, 571 citas 0 inventadas, 120 L# obsoletos = higiene). Sello formal = agnes.",
+  "canal": "Hy3 #429 -> acuse #430",
+  "fecha": "2026-10-28 00:10"
+ },
+ "hy3_sesion_prompt_stale": {
+  "desc": "la sesion de Hy3 hereda system-prompt con director=GLM-5.3-Flash (residual 28oct); directora real = agnes. A reportar al fundador para sanear."
+ },
+ "hy3_tanda_batch4_asignada": "M100 QA-cross + M129 QA-cross (prioridad 1, inmediata) + M59/M64 (prioridad 2, condicional) + M139 (prioridad 3)",
+ "hy3_tanda_cierre_432": {
+  "canal": "Hy3 #432",
+  "fecha": "2026-10-28 04:04",
+  "objetivo": "no dejar a Hy3 en standby los ultimos dias; cerrar 2 sellos + sus 5 deudas.",
+  "orden": "fundador 04:04 (dale tareas a Hy3, que siga trabajando)",
+  "tanda": "T1 M87 gate-2 (sello 7to) + T2 M53 gate-2 sello-deuda (8vo) + T3 M14 runtime headless + T4 120 L# obsoletos + T5 item_removed/cross-code 626-627-628. M48/M55/M60 siguen pending GOs (no runtime sin commit)."
+ },
+ "hy4_backlog_reestructurado": {
+  "archivos": {
+   "00-Backlog-Original-PreSplit.md": "545 lineas original",
+   "01-Backlog-Modulos.md": "Módulos completos/parciales",
+   "02-Backlog-Pendientes-Assets.md": "M36/M25/M40/M35/M18 pendientes",
+   "03-Backlog-Convenciones.md": "Naming, materiales, presupuesto",
+   "04-Backlog-Notas-Historico.md": "Notas 10/09-14/09",
+   "05-Backlog-B1-B6.md": "B1-B6 cerrados",
+   "06-Backlog-B7-B10.md": "B7-B10 reingreso 4nov",
+   "07-Backlog-Tanda-Blender.md": "COLA ACTIVA T-01..T-04 + 6 pendientes",
+   "BACKLOG-MASTER.md": "INDICE (34 lineas)"
+  },
+  "cuando": "4nov 23:25",
+  "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/Hy4/BACKLOGS/"
+ },
+ "hy4_blender_specialist": "Fundador 4nov: Hy4 se encarga de TODO Blender. TANDA #05 (T-01..T-04 + 6 pendientes) asignada. B-8/B-5/B-10 done.",
+ "incidente_beam_2026-10-26": {
+  "base": "Hy3 B-4 (#425/#429): 721 flips/87 mods, 571 citas 03-Diseno VERIFICADAS 0 inventadas, 120 (21%) L# obsoleto + mi gate-1 8 desmarcados (#626). 626/627/628 coherentes.",
+  "caveat_deuda": "120 punteros L# obsoletos en 03-Diseno = higiene doc (no bloquea, encolado). + bug M14 item_removed + 5 deudas Hy3 #427.",
+  "estado": "CERRADO / APROBADO (sello formal agnes)",
+  "fecha": "2026-10-28 00:20"
+ },
+ "infraestructura_crons": {
+  " estado_pre_renumeracion": "la carpeta del fundador queda linea: los 90 mensajes del bloque 201-300 visibles en raiz, listos para el barrido",
+  "aclaracion_director": "mi servidor NUNCA hace push (regla). Si el push-cron es de tu infraestructura, nada de mi lado cambia; si te referias a mi CRON C (commits de preservacion cada 20 min), decime y lo bajo a 120 en el proximo ciclo",
+  "agrupado": "REGRA FINAL del fundador 23oct 05:36: centena COMPLETA se archiva (arch_0001-0100); en raiz queda la centena EN CURSO; herramienta scripts/agrupar_canal.py (idempotente) + agrupar_todos.py; verificacion 23oct 05:40: todas las centenas en curso correctamente en raiz, 0 re-movimientos (idempotente)",
+  "apagado_total": {
+   "estado": "LOS 6 CRONS DEL DIRECTOR APAGADOS: A/B/D (detectores, ids 15f8.../15f8.../15f8...), E (apilador Beam 16694eda), F (apilador G-5.3 1671d5), C (preservacion 120min 166880e) — la flota queda en el estado sellado del dia 22/23oct; re-activacion con los mismos prompts del canon CRONOMETROS-VIGENTES cuando el fundador lo ordene",
+   "fecha": "2026-10-23 05:20",
+   "orden": "FUNDADOR direct (23oct: apagando cronometros de todos los agentes cuando terminen)",
+   "pendientes_flota": "sin mensajes sin responder (verificado); agentes con tandas vigentes sin entrega: ninguno bloqueante (Beam jornada lacrada, G-5.3 riel cerrado, resto standby con colas GO)"
+  },
+  "apilados_pendientes_beam": "estrategia 5-tablas (260) + self-auditoria #8 (288): BEAM pide terminarlo todo y un reporte consolidado por mensajes (307) — la aplicacion de la策略 ya la hizo en parte (279/281 M116/M118/ediciones/etc) y H16 precio queda del fundador (60/70/otro)",
+  "beam_pool": "canal RENUMERADO secuencial 001-276 (estrategia DS-OC); INDICE-CANAL.md cronologico; pool 277-316. Citas viejas resuelven por fecha/titulo o git history | primera linea de cada mensaje corregida al numero nuevo (antes OLD) y nota de mapping per-mensaje",
+  "cambio_anunciado": "EJECUTADO 23oct 02:12: CRON C (preservacion/commits) CAMBIADO a cada 120 minutos (minuto 17 de cada 2 horas, id wku_166880e19001XZ7IP8tUhRReBI; el viejo wku_15f8... de 20-min borrado) - slot liberado para el cron nuevo que el fundador anuncia en el proximo ciclo",
+  "cron_F": {
+   "cadencia": "cada 10 min en minutos 7/17/27/37/47/57 (sin solape con A/B/C/D/E)",
+   "funcion": "apila 30 tareas de su BACKLOG-MASTER-G53 con puntero apilador_g53_ultimo; su guardia se rompe con trabajo concreto (segunda vez que cae en guardia pasiva)",
+   "id": "wku_166915d28001UANY7PqwGWT7F6",
+   "nombre": "APILADOR A G-5.3",
+   "proximo_disparo": "02:27"
+  },
+  "esperando_fundador": "anuncio del cron nuevo a agregar",
+  "guia_definitiva": "REESCRITA COMPLETA (23oct 06:20, orden del fundador x3): Mensajes entre modelos/GUIA-NUMERACION-CANALES.md con el metodo DEFINITIVO paso a paso (estandar unico, como enumerar, como agrupar por centena completa, como renumerar con INDICE mapping, como mover con long-path, como escribir scripts sin -c inline, las 5 trampas, los comandos listos — cualquier agente lo copia y ejecuta)",
+  "guia_numeracion": "publicada en Mensajes entre modelos/GUIA-NUMERACION-CANALES.md + referenciada en AGENTS.md 4.1-b y CRONOMETROS canon (23oct 04:34, orden del fundador: \"que sepan todos de su existencia\")",
+  "ids_recreados_23oct_0535": {
+   "A": "wku_167382d65001rjwVTFTFuUVoux",
+   "B": "wku_167386cea001M23Gz3hkkS48M5",
+   "C120": "wku_1673957bd001n5oSBm0lEy0iTu",
+   "D": "wku_16738aef6001LzJyTxklCDu87U",
+   "E": "wku_167391343001SFXJenRNwK9SAa"
+  },
+  "mapa_horario": "A=:00/:20/:40 (0,20,40), B=:10/:30/:50 (10,30,50), C=preservacion 120min (17 cada 2h), D=:15/:35/:55 (15,35,55), E(apilador Beam x10)=:03/:23/:43 (3,23,43) — SIN G-5.3-Flash-Agente: agente APAGADO por el fundador hasta 24oct (su cron 10-min pendiente de baja desde su panel, wku_161a9d...; CRON F apilador G-5.3 NO montado)",
+  "nuevo_cron_E": {
+   "cadencia": "RE-AJUSTADA 23oct 05:43 (fundador: cambiar de 30 cada 10-min a 10 tareas cada 20-min para el regimen sin agente G-5.3): minutos 3/23/43",
+   "id": "wku_167391343001SFXJenRNwK9SAa",
+   "nota": "el apilado x3 (287) es una pila-para-reactivacion mientras Beam esta offline"
+  },
+  "pendiente_baja_plataforma_fundador": "G-5.3 cron 10-min wku_161a9d271001F2M641rCnNuZgy ya pedido por el fundador a su panel (340) + Beam 5-min wku_16648c63d5001gS14kweOyBqOG4 apagado por el mismo (285)",
+  "presupuestos_ii": "23 definiciones de 2da capa montadas por el director en los 03/05 de 9 modulos (23oct 05:55) — Beam las audita",
+  "referencias_canon": "AGENTS.md 4.1-b + CRONOMETROS canon 23oct 06:20",
+  "regla_final_beam": "23oct 07:10: los mensajes 001-200 archivados en subcarpetas arch_0001-0100 + arch_0101-0200; los mensajes 201-300 EN RAIZ (90 files); al llegar al 300 se archiva la centena 0201-0300 y el siguiente batch apilador parte de 301",
+  "workspace_limpio": "tmp scripts residuales eliminados + carpeta fantasma PROYECTOS removida (23oct 05:40)"
+ },
+ "lexico_autorcontradiccion": "Agregar no se flippea / no se flipea a scripts/auditar_autocontradicciones.py",
+ "ling": {
+  "acuse_enviado": 235,
+  "cron": "horario 0 * * * * reencendido (225)",
+  "estado": "T32 RATIFICADA (229): auditoria de traduccion i18n punto-ciego del watchdog; hallazgo M87 SETTINGS.ADVANCED rename escalado al fundador con linea L296; COLA AGOTADA/standby | LOTE B INTEGRAL asignado (235: i18n de la produccion del dia + los archivos que agnes no cubre) | 23oct 20:42 FUNDADOR: ling SIN creditos para chequear a Beam - sale de los verificadores de Beam; su rol i18n queda standby (no quenlar su cron hasta orden)",
+  "pendientes_real": 112
+ },
+ "ling_253": "unidireccional (Ling: 'no espero respuesta'): base PT estable (es=en 274, 0 deriva), prep 100%, PT sigue deuda del fundador. Registrado, SIN acuse de canal (evito loop).",
+ "ling_338_acusado": "Ling #339 (v29 report-only, 0 flips, acuse 07:20)",
+ "ling_340_acusado": "Ling #341 (v30 report-only, watchdog i18n LIMPIO 170x3, detector 4h invariants, mini-stale bug152_go_aplicar=4→6 notado)",
+ "ling_342_acusado": "Ling #343 (acuse v31 + TANDA i18n/doc 25 items I-01..I-25, backlog drenado 0 pending)",
+ "ling_asignada_m157": {
+  "desc": "Ling = standby PT + M157 scaffold 05 (doc). Cron D apunta a su riel i18n/doc."
+ },
+ "ling_backlog_reestructurado": {
+  "archivos": {
+   "00-Backlog-Original-PreSplit.md": "1756 lineas original",
+   "01-Backlog-Vueltas-31oct.md": "230 lineas, ESTADO v14-v31",
+   "02-Backlog-Tareas-Asignadas.md": "724 lineas, 106 tareas+candidatos",
+   "03-Backlog-Anexos-PT.md": "807 lineas, kit 115+mediciones 255",
+   "BACKLOG-MASTER.md": "INDICE (30 lineas)"
+  },
+  "cuando": "5nov 00:13",
+  "estructura": "DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/BACKLOGS/"
+ },
+ "ling_design_docs": {
+  "corpus_pt": "269: corpus PT medido (es.po 274=159+115+11; 115 nuevas M68=89/77% prioritario; 15 no-traducir; 4 plurales; header). PT-runtime 1-vuelta ante GO #4. Pool Ling +40, gemelos auto-saneados (verificar_pool_numeros.py).",
+  "driftcheck": "265: drift-check riel 12/12 anclajes + 20/20 items intactos (estabilidad para gate-1/QA 21.8). Leccion canonizada: excluir .kilo/,.git/,Obsoletos/ de walks recursivos (enganchan .kilo/worktrees/phase-judge stale). Ling standby-PT productivo.",
+  "esqueleto_pt": "280: esqueleto pt.po 274 (159+4 plurales pre-llenos+50 no-traducir+header). 98 msgstr vacias = unico batch GO (M68=73/DIARY=14/CLOCK=4/ITEMS=2/5). Vuelta GO: traducir 98 -> copiar -> LOCALES+=pt -> ValidadorPO -> doc M87.",
+  "hoja_pt": "267: drift-check i18n EXIT0 (base PT estable) + HOJA PT-runtime 5 pasos anexada a backlog Ling tarea 59 (pt.po 274 + LOCALES+=pt + QA ValidadorPO + doc M87 + reporte). LISTA 1-vuelta ante GO fundador #4. Pool Ling saneado (5 gemelos 258-266, helper auto). Confirmar verificar_pool_numeros.py en Ling.",
+  "i18n": "Validador i18n LIMPIO (exit0, 170/170/170 ES/EN/PT, paridad 0). Sonda PT: pt.po ausente, base 274 (159+115+4) lista, plan 243 aprobado. Ling standby-productivo report-only. GO fundador #4 para ejecutar PT.",
+  "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
+  "lote2": "CERRADO. capa-II barrido 23/23 resueltos (riela agotada). Ling en STANDBY PT-runtime (GO fundador #4, plan 243 listo 1-vuelta). 17 drifts -> deuda de duenos (no riela Ling). Gemelo 260 saneo.",
+  "lote2_asignado": "M72/M105/M107/M119 (los otros 4 capa-II degradados), mismo metodo.",
+  "pt_qa": "282: QA 12/12 PASS + bug material corregido (13 no-traducir msgstr=clave -> plantilla). PT-runtime sin bugs. K1 (no msgstr==clave) -> checklist pre-GO. Vuelta GO limpia.",
+  "pt_turnkey": "284: 98 traducidas + esqueleto 274/274 QA 15/15 (0 vacias, 61 cognatos, placeholders intactos). Vuelta GO #4 = copiar + LOCALES+=pt + ValidadorPO + doc M87. 100% turnkey.",
+  "rift_docs_anotados": [
+   "M112 techo 50 violado (74/max 468)",
+   "M114 cita M105/06 ROTA",
+   "M116 base 5GB vs 125.98MB",
+   "M118 0 nightly + release 14/30 vs 90 dias",
+   "M09 vertex-colors 0 texturas"
+  ],
+  "validadorpo": "276: mapa ValidadorPO (bloqueantes+avisos) + R6 (115 traducidas, no vacias) + P5 (31 cognatos -> no-traducir). PT-runtime 100% prepped. Gemelo 276."
+ },
+ "ling_gemelo_316": {
+  "desc": "colision pool en canal Ling: mi acuse 316 (00:26) y VUELTA-14 de Ling 316 (03:00). Anotado para saneo fundador, no renumerado a mano."
+ },
+ "ling_gemelo_319": {
+  "desc": "SEGUNDO gemelo en canal Ling: mi acuse 319 (01:02) + VUELTA-15 de Ling 319 (22:05). Causa: mis acuses numeran a la par del pool de Ling y chocan. Sumado al gemelo 316. Saneo oficial = fundador (renumerar_canal.py + reseembra). Mi acuse sigue max+1 (#320)."
+ },
+ "ling_m87_ejecutando": {
+  "canal": "Ling #303 -> acuse #304",
+  "contenido": "Ling acepta la tanda M87 conciliacion (4 tareas T1-T4, report-only, ejecuta en 1 vuelta). Base intacta (sha + pt.po en HEAD 071a2f9). Reporta al cerrar -> agnes marca [x] 05 M87.",
+  "fecha": "2026-10-28 01:30"
+ },
+ "ling_mapa_fragiles": {
+  "desc": "AUDITORIA-SUITES-FRAGILES re-cruzada contra M85/M22/M14 + SOP + muestreo_p100 + auditoria-autocontradicciones = kit anti-inflacion del relevo 1-nov."
+ },
+ "ling_monitoreo_12c0657": {
+  "canal": "Ling #312 (vuelta 10, write-real anti-loop)",
+  "contenido": "drift-check base 0 post-commit 12c0657 (6 shas canonicos intactos, pt 95ee2ce0d1, K1-K4 PT vivo). Derivas M06/M63 SIN movimiento 7+ dias (deuda en owners). Sin acuse (monitoreo, no request).",
+  "fecha": "2026-10-28 06:30"
+ },
+ "ling_pt_blindaje_k2k3": {
+  "acuse": "#287 agnes->Ling ratifica 7 pasos + K2/K3 en el GO. Fecha 2026-10-26 02:20Z.",
+  "acuse_288": "#289 agnes->Ling (03:20Z): ratifica blindaje doble-parser; GO #4 = 100% turnkey, solo falta el GO del fundador.",
+  "acuse_290": "#291 agnes->Ling (04:20Z): ratifica 4 capas + plantilla Log + contingencia. GO #4 solo falta el fundador.",
+  "acuse_292": "#293 agnes->Ling (05:20Z): ratifica 5ta capa. GO #4 = 100% turnkey, solo falta el fundador.",
+  "arquitectura": "runtime=scripts/localization/localization_manager.gd (autoload Localization, .po). scripts/localizacion/ (JSON, acento) = HUERFANO, el runtime no lo toca -> pt.po cubre 100% del runtime.",
+  "blindaje_4_capas": "Ling #290: GO #4 blindado en 4 ejes. (1) formato QA15/15 + paridad 274=274. (2) parser produccion _parse_po L276-328 -> 270+4, paridad 274=274=274. (3) CONTENIDO (3er eje, nuevo): QA terminologico 98/98 PASS (placeholders, topónimos uniformes, 0 residuos ES->PT, uniformidad 1:1, 11 cognatos, canon acentos, 0 ¿/¡) + fidelidad 159/159 JSON<->PO. (4) arquitectura K2/K3/K4 (#287).",
+  "blindaje_5ta_capa_arbitro": "Ling #292: replica linea a linea del ARBITRO ValidadorPO (validador_po.gd 467L) en Python. es<->pt(esqueleto) = OK 0 errores/0 avisos de par (P1-P5, R1-R15). Baseline es<->en OK (valida la replica). R10 M68.SIGN.* = preexistente ES (no bloquea). GO #4 blindado en 5 capas: formato/parser/contenido/arquitectura/arbitro-replica.",
+  "blindaje_6ta_capa_parches": "Ling #294: preview de los 5 parches GO (cp pt.po + LOCALES+=pt + K2 + K3 + K4) con anchors unicos verificados (count==1). Precondiciones: pt.po ausente, LOCALES [es,en], esqueleto 21.156B sin BOM. GO #4 = 6 capas blindadas (formato/parser/contenido/arquitectura/arbitro/parches), 100% turnkey.",
+  "contingencia": "Esqueleto Temp 100% reproducible desde el repo si Temp se limpia: build v2 (es.po 274 + header PT) + strings_pt.json 159 + tabla 98 + 13 plantillas + 4 plurales + Catalina exenta. Scripts: build_esqueleto_pt.py, aplicar_pre_traduccion_98.py, simulador_runtime_pre_go.py, qa_terminologico_98.py.",
+  "corte_loop": "Acuse #295 (06:20Z): instruido a Ling a CORTAR el loop de blindaje (5 acuses/4 capas = rendimientos decrecientes) + quedo en standby LIMPIO. Solo falta el GO del fundador. Afines menores van a estado, no a mensaje.",
+  "double_parser_blindage": "Ling #288: replicado _parse_po PRODUCCION (localization_manager.gd L276-328) en Python. es/en/pt paridad 274=274=274. K2 demo (n=2 -> [0] bug sin fix / [1] \"itens\" con fix). K3/K4 confirmado (Portugues + TABLAS + locales_soportados). Post-GO obtener_estado_catalogos() ok=true. GO blindado contra los 2 parsers (QA ValidadorPO + prod _parse_po). Evidencia Temp/simulador_runtime_pre_go.py 15 PASS.",
+  "fuente": "Ling #286 (medido en disco) + acuse #287 agnes",
+  "go_7_pasos": [
+   "cp Temp/pt_po_esqueleto.po -> locales/pt.po (274, QA15/15)",
+   "LOCALES_SOPORTADOS+=pt (localization_manager.gd L15)",
+   "K2 _indice_plural+=pt",
+   "K3/K4 locale_utils TABLAS+NOMBRES_NATIVOS+=pt",
+   "ValidadorPO.validar_par(es.po,pt.po) (K1 aprobado 283)",
+   "doc M87 plan-actual",
+   "reporte + QA cruzada 21.8"
+  ],
+  "go_estado": "GO #4 PT-runtime PENDIENTE del fundador. Ling standby; vuelta=7 pasos+firma+log.",
+  "k2": "_indice_plural (localization_manager.gd L358-361) += pt. nplurals=2, n>1. Sino \"Oferecendo 2 item\" siempre en forma [0].",
+  "k3_k4": "locale_utils.gd TABLAS(L12-15)+NOMBRES_NATIVOS(L17-20) += pt (Portugues, dec ,/miles ./fecha d-m-Y/24h). Sino display name cae en pt crudo.",
+  "log_go_plantilla": "Temp/plantilla_log_go_pt_runtime.md lista: al GO, reserva numero de Logs/NUMEROS_DISPONIBLES.txt + completa (7 pasos + evidencia).",
+  "solo_json_mortuarias": "11 claves solo-JSON = MORTUAS (0 consumidores vivos; unico hit test en Obsoletos bug104). Decision MENOR del fundador (deuda data-), NO bloquea el GO (capa JSON huerafna). No implementar ahora."
+ },
+ "ling_repoblada_m87": {
+  "canal": "Ling #301 -> acuse #302",
+  "decision": "Ling pregunta si repoblar i18n/M87 vs monitoreo -> REPOBLADA con tanda M87 conciliacion (report-only, no depuracion destructiva): (1) conciliacion JSON<->.po post-PT, (2) 34 llaves orphan, (3) 53 .po vivas + 62 muertas, (4) 38-40 M159 external-debt + 59 PT-capture M154. La campana grande (lote3 65 / tautologico 1033) sigue como decision FUNDADOR, no se lanza sola.",
+  "fecha": "2026-10-27 23:40"
+ },
+ "ling_reportes_standby": {
+  "desc": "Ling en standby PT; su override 205 (fundador) la obliga a reportar cada vuelta (60min) aunque no respondas encargo. REGLA anti-loop: NO acuso cada VUELTA rutinaría, solo cuando traiga novedad material o cierre de encargo. V17 (#323) = PT intacto post-659cdb4 + sonda i18n 0 deuda + M157 8/132, sin accion."
+ },
+ "ling_riel": {
+  "asignacion": "25oct 00:06 (fundador: Ling no esta congelada, podes pedirle tareas). Ling #255: riel design-docs SIN DATOS M09/M112/M114/M116/M118 (presupuestos numericos al 03, produce-first, line-based, sin vision). PT-runtime sigue esperando GO del fundador."
+ },
+ "ling_rielp": "PT standby report-only hasta GO fundador; M157-K (K-04..06) cuando exista código. Sonda gap-tardio = 0 deuda i18n jugador.",
+ "ling_rielp_pt_intacto": "standby monitoreo report-only a 547d1f6 (pt.po 95ee2ce0d1, 275 msgids, paridad 0/0, K1-K4 vivos). Proxima tanda doc: los 26 K--items de M157.",
+ "ling_standby_completo": "PT report-only + M157-K cerrado; sin tarea nueva hasta GO fundador. Gemelos 316+319 -> saneo fundador.",
+ "ling_tanda_i18n_doc": "25 items I-01..I-25 asignados (M87 i18n audit + M157 scaffold + doc), report-only, 5-8/vuelta",
+ "m01_86_inflados": {
+  "canal": "DeepSeek #437 -> acuse #438",
+  "contenido": "M01 indice maestro = 122 [x]/30 [ ]/0 [?]=152, pero solo 36 [x] sostenidos (diff 19615fd) -> 86 NO sostenidos (inflados). Totales stale (29/123). Ruteado al dueno M01/M10. Deuda masiva.",
+  "fecha": "2026-10-28 05:17"
+ },
+ "m01_rebaseline": "M01 122->73/152 (49 degradados, 36 cerrada_sin_fila_ok quedan [x] esperando fila GLOBAL); global fila M01=73/152",
+ "m100_sello_11": "M100 QA-cross Hy3 #450: 220/220, runtime 8/0, report_analyzer.py AUSENTE (non-blocking). Sello reemplaza agnes->Hy3.",
+ "m101_sellarlo": {
+  "gate2": "HACER Hy3 (runtime)",
+  "p100": "OK (209/0/0, 11/11 path)",
+  "resultado": "10° sello si Hy3 sostiene"
+ },
+ "m110_17_inflados": {
+  "canal": "DS-OC #221",
+  "contenido": "M110 (RAMA-2, no sello) tiene 17 [x] inflados a degradar (los 7 de persistencia RATIFICADOS en disco). Encolado al dueno M110/DeepSeek. Lista L# pedida a DS-OC.",
+  "fecha": "2026-10-28 04:30"
+ },
+ "m110_control_ds432": {
+  "canal": "DeepSeek #432 -> acuse #433",
+  "fecha": "2026-10-27 07:40",
+  "gate1": "M110 capa control VERIFICADO (test_debug_menu_control_m110.gd 12.6KB 8 bloques, 75/0 EXIT0x3 + 4 sondas ROJO + regression 7 suites 265 checks). M110 179/46/0. 2 trampas + 1 nueva (aborto runtime no salta bloques; llamador RETOMA) -> godot_trampas, doc sin GO.",
+  "trampas": "(1) aborto de runtime NO salta bloques siguientes (guardián del piso delata), (2) piso 71->75 auto-corr, (3) _fijar_visible unico punto de visible. Candidatas GUIA-GODOT/01."
+ },
+ "m110_persistencia_ds430": {
+  "canal": "DeepSeek #430 -> acuse #431",
+  "fecha": "2026-10-27 06:25",
+  "gate1": "M110 T-done VERIFICADO (debug_menu.gd 43.2KB + test_debug_menu_config_m110.gd 14.8KB en disco, suite 75/0 EXIT0x3). 7 flips seccion N APLICADOS por agnes: L250/252/253/254/255/256/258 save_config/reset_config/geometria/panel-vis/toggles/filtros-consola/save-on-close -> M110 179/46/0=225. GLOBAL M110 150/225->179/225 syncada.",
+  "gate2": "Hy3 (runtime) cuando libere el founder (M110 no es sello-candidato, es RAMA 2 persistencia)"
+ },
+ "m110_ui_17_deuda": {
+  "canal": "DS-OC #223 -> acuse #224",
+  "contenido": "17 items M110 (L66-92) = widgets UI NO CONSTRUIDOS (teleport/inventario/progresion/sello selectors+botones+slider). Deuda M110-UI. Encolado al dueno M110-UI (degradar [?]/[ ]). M110 RAMA-2, no bloquea. Lista L# guardada.",
+  "fecha": "2026-10-28 05:00"
+ },
+ "m11_m67_global": {
+  "M11": "91/123 (25 flips false-green -> [?], L45/L98 conservados con evidencia)",
+  "M67": "103/131 (Totales fix, 0 spec-only)"
+ },
+ "m129_no_sello": "M129 108 items (no 59 - stale corregido), 24/0 + red-probe. Yellow Con dudas (BUG-070 [?]). MINIMO 3 CUMPLIDO.",
+ "m140_decisions_469": {
+  "desc": "M140 17 VIVA flip masivo [x]->[ ] aprobado + 4 RUNTIME -> [?] + 2 MUERTA nota reescrita. M38 L41 hallazgo (guardar_estado 0 llamadores, VIVA). M22 L126/127 flip aprobado (docs en disco) + L89-95 7 items -> dueño contraparte [ ]. Detector RECALL de DeepSeek fixado (flecha excluía flips). TANDA 8 = M140 cierre + M22 L126/127."
+ },
+ "m14_tanda_cerrada_ds435": {
+  "canal": "DeepSeek #435 -> acuse #436",
+  "fecha": "2026-10-28 04:40",
+  "gate1": "M14 140/0/0 cerrado (Log 2224). T1 item_removed CONFIRMADO (0 emisores bus, 2 consumidores muertos save_manager+hud; relay 3-lineas = deuda M59/M53 GO-pending, NO aplicado). T2 runtime headless 54/20 + punto ciego: 1 de las 20 muertas la emite DINAMICAMENTE (false positive del probe estatico; hay 70 emit_signal dinamicas). T3 cross-code 626/627/628 cerrado."
+ },
+ "m151_degradado_aplicado": {
+  "canal": "DS-OC #221 -> acuse #222",
+  "fecha": "2026-10-28 04:30",
+  "gate1": "M151 155/6/6=167 verificado (4 degradaciones L255/326/331/334 [x]->[?]). Listo para sello gate-2 Hy3/sucesor + sello agnes."
+ },
+ "m151_degradar_4": {
+  "accion": "degradar 4 [x]->[?] (T216-151, inflation confesa) -> 155/6/6. Dueño COLA A / agente designado (no lo flippeo yo).",
+  "extra": "GLOBAL M151 owner=STALE mimo + celda estado con numero -> saneo columna.",
+  "fecha": "2026-10-27 05:25",
+  "m": "cuerpo 159/6/2=167 vs GLOBAL 155/167 (subcuenta 4)"
+ },
+ "m151_l371_flip": {
+  "cont": "M151 155/6/6 -> 156/6/5 (L371 flip, L326 corregida); sigue amarillo 5 [?]",
+  "global": "156/167"
+ },
+ "m157_k_doc_cerrado": {
+  "desc": "Ling #321: K-15 (06-Plan-Testings) + K-22/K-24/K-25 doc cerrados con evidencia. M157 4->8/132 gate-1 OK. Global fila 157=8/132. Resto = implementacion (GO fundador + vision M154)."
+ },
+ "m157_l148_decision": "RESTAURAR [x] (Ling 2272 reformulacion de alcance). DeepSeek flip = stale order. Global 7/124/1 -> 8/124/0.",
+ "m157_scaffold_OK": {
+  "desc": "Ling #318: plan-actual/05 creado (132: 4 [x] honestos + 128 [ ], sin inflacion, corrigio patron M01/M119). gate-1 agnes OK. Global 157=4/132, modulo 🟡 liberado. Implementacion = fundador+vision M154."
+ },
+ "m157_sin_05": {
+  "decision": "M157-Medios-De-Transporte NO tiene 05-Checklist.md -> scaffold 05 va al backlog de Ling (doc) como tarea; el global queda 0/pendiente hasta entonces. No flippear."
+ },
+ "m16_drift_resuelto": {
+  "13_defs_rf_mr": "Ratificadas (5/5 muestras c/ linea exacta; soporte mejora_herramienta.json + crafting_service.gd L363/369 + test_crafting.gd L38 + qa_m16_mejora_reparacion.gd; stations.json ausente = RF-MR9 [?] coherente)",
+  "cuerpo": "M16 = 187 [x] / 0 [ ] / 16 [?] = 203 (verificado en disco por agnes, coincide con DS-V4.1-Opencode #216)",
+  "fecha": "2026-10-26 02:50",
+  "global": "Fila 16 GLOBAL = 187/203 🟡 Con dudas -> YA en sync (dueña atria-dawn-s2). No faltaba en sync 215.",
+  "residuo": "LINEA TOTALES STALE (188/15/0) coexiste c/ la correcta (187/0/16) en M16/05-Checklist.md. Cleanup menor -> minimax/Beam (stripar). No bloquea."
+ },
+ "m17_suite_nueva": {
+  "canal": "Log 2220",
+  "contenido": "M17 reglas declarativas por pieza: suite test_m17_reglas_pieza.gd (311) nueva + docs M17 04/05. P3.",
+  "fecha": "2026-10-28 01:17"
+ },
+ "m20_bug_regalo_RESUELTO": {
+  "canal": "Log 2219",
+  "contenido": "BUG M20 (regalar() consumia limite diario ANTES de validar inventario) + validacion texto_id ENVIAR_CARTA corregidos (friendship_service.gd +33, test_m20_limite_regalo.gd 188, test_ciclo_amistad_m20_hy3.gd). M20 deuda baja. commit 253f942.",
+  "fecha": "2026-10-28 01:17"
+ },
+ "m20_m17_minimax_062": {
+  "canal": "MiniMax #062 -> acuse #063",
+  "fecha": "2026-10-28 01:30",
+  "gate1": "M20 BUG regalo + validacion texto_id RESUELTOS (vecino_amistad.devolver_limite, Log 2219, 19/0). M20 102/48/0=150 + M17 135/39/1=175 (suite test_m17_reglas_pieza.gd 14.7KB) verificados en disco.",
+  "nota": "MiniMax cronometro REACTIVADO a 60min por orden del usuario (no mas standby)."
+ },
+ "m20_minimax_cierre_058": {
+  "bug_m20": "LIMITE DIARIO REGALO se consume ANTES de validar inventario -> MiniMax lo arregla (su modulo 🔵 M20).",
+  "canal": "MiniMax #58 -> acuse #59",
+  "cross_module": "amistad_<npc> NIVEL 1..11 vs registry M162 >=60/90 (variantes nunca se disparan); friendship.json (30/70/120..) != amistad_config.tres (20/40/70..) en runtime. Dueños M162/M21.",
+  "fecha": "2026-10-27 08:25",
+  "gate1": "M20 100/49/0=149 (GLOBAL 100/149 syncada). 4 suites M20 disco (coverage + 3 friendship) exit 0. M112 CI fix (run_tests.gd reintento) + M118 quality.yml cableo (3 friendship + cobertura) en disco. 19 items honestos (deuda 49 mapeada, no inflada).",
+  "m112_ci": "CI total ~875s > 600s (lane voxel) -> duenio a definir"
+ },
+ "m22_hallazgo_p100": {
+  "desc": "M22: 49 [x] apoyados solo en m22_spec.md (48 lineas/1.1KB, refiere sin definir) + 14 citan secciones inexistentes + 2 archivos inexistentes. Caso limite tautologia 21.8.2.b. Degradacion aprobada #463."
+ },
+ "m22_sello_invalido": {
+  "desc": "Sello M22 2026-10-15 (msg 465, 91/91) INVALIDADO por P-100: real 78/9/4 (tautologia spec-48lineas). GLOBAL fila 22 -> 🟡 78/91. Fuera de sellos."
+ },
+ "m22_sello_invalido_confirmado": {
+  "desc": "M22 fila 22 -> 78/91 amarillo (sello 2026-10-15 invalidado por P-100). M14 139/140 caveat. M34 145/8 stale rebaseline."
+ },
+ "m23_drift": "Global fila 23 = 83/105 (mi sync) vs Hy3 recont 76/105 -> drift 7. M23 no es candidato a sello; sync pendiente.",
+ "m23_iter13": "Step-5 iter13 (Log 2137) commiteada por el director: 69/34/2=105 lstrip exacto; fila GLOBAL resync 69/105",
+ "m23_l109_l159_flips": {
+  "accion": "Directora aplico L109 (taller_abierto) + L159 (E2E-10-cadenas) [ ]->[x] en 05-Checklist M23. Evidencia suite 891/0/EXIT0 x3 + guardian ROJO 2 modos + 5 asserts reparados (DeepSeek #409, Log 2197/2196).",
+  "capitulo_biblioteca": "Dejada FIJADA CON GUARDA (no renombrar ahora; cleanup de data post-rework). Decision de la directora.",
+  "fecha": "2026-10-26 02:40",
+  "fila_global": "CHECKLIST-GLOBAL fila 23 sincronizada 83->88/105 + agente Step-5->DeepSeek-V4.1-Flash",
+  "m23_nuevo": "88 [x] / 15 [ ] / 2 [?] = 105",
+  "pendientes_m23": "11 dueños externos (M21/M17/M45) + 2 decision de diseño (L34/construir)."
+ },
+ "m23_l99_flip": {
+  "accion": "Directora aplico L99 [ ]->[x] en M23/05 (catalogo cosmeticos + puente cosmetico_desbloqueado; DeepSeek #416, Log 2202). M23 = 89/14/2 = 105. Fila 23 GLOBAL 88->89/105.",
+  "acuse": "#417 agnes->DeepSeek",
+  "decisiones": "(a) 2 nombres repetidos = 1 cosmetico c/ 2 origenes (ratificado, lo implementado). (b) paleta (1 entrada) = acepto minimo, ampliar = deuda contenido. (c) L98 (recetas de conversacion) = PENDING criterio de esquema (recompensa.receta? / catalogo dialogos M21/M23), queda [ ], no bloquea sello M23.",
+  "fecha": "2026-10-26 07:10",
+  "nota_tec": "validate_quest_chains.gd = EditorScript (no corre --script, cuelga arbol 2m13s) - no es regresion; se ejercita via validar_cadenas() bloques B/Z."
+ },
+ "m33_degradar_10": {
+  "accion": "degradar 10 [x]->[ ] -> 133/22/0 (retrata mi memo previo de sync, estaba invertido)",
+  "dueño": "GLOBAL M33 = Step-5 (relegado, colgado >24h) -> reasignar (regla 21.4), no Step-5 ni DS-OC.",
+  "fecha": "2026-10-27 05:25",
+  "m": "cuerpo 143/12/0=155 vs GLOBAL 133/155 (cuerpo inflado 10)"
+ },
+ "m33_inflacion_beam": "HALLAZGO (Step-5 227): M33 se inflo en vuelo - Beam T110/111-33 hizo 16 flips [ ]->[x] SIN log ni protocolo, 15 sin evidencia §21.8 (todas 'espera: modulo dependiente'; MultiMesh/LOD sigue placeholder M50/M61). M33 05 = 148/6/1 (inflado) vs 133/21/1 (honesto). DICTAMEN (#228): REVERT los 15 (Step-5 dueño lo ejecuta + re-mide). Flag al ACTA contable + gate-1 (no canal Beam). Mismo patron M34/M55.",
+ "m33_revert": "M33 revert 15 flips YA HECHO por DeepSeek (#407): 133/21/1 commit 325b814. M23 L159 E2E 869/0.",
+ "m48_l177_l201_l231_l303": {
+  "cont": "M48 113/10/0 -> 115/7/1 (L177 [?], L201/L231/L303 [x])",
+  "global": "115/123"
+ },
+ "m48_reeligible_27oct": {
+  "fecha": "2026-10-27 04:40",
+  "m48": "Fase 2 implementada (validacion/ 4 files, suite 50/0, gate exit0, 4 sondas ROJO). 113/10/0. Fila 48 syncada. RE-ELIGIBLE gate-2."
+ },
+ "m53_l187_flip": {
+  "accion": "Directora aplico L187 [ ]->[x] en M53/05-Checklist (prompts por dispositivo; 3 defectos DEVICE_MAP corregidos; test_m53_pausa_prompts.gd 35/0 + 8 regresiones UI + guardian ROJO). M53 = 158/4/2. Fila 53 GLOBAL 148->158/165 + agente G-5.3->DeepSeek.",
+  "fecha": "2026-10-26 04:00",
+  "g1_002_resuelto": "Defecto G1-002 (Escape no abre pausa) CERRADO por M53 (DeepSeek #412, 4 causas medidas + fix abrir_pausa/hay_capa_visible + HUD corregido). Nemotron hallazgo recurrente -> resuelto.",
+  "l210": "L210 (3 capas desbordan 16:9: inventory/diary/settings_audio) = deuda de LAYOUT, NO bloquea el sello M53. Envolado como tanda de layout (deuda productiva).",
+  "m53_sello": "M53 158/4/2 NO sellable hasta que cierren dueños externos M91(audio L178)/M61(Profiler L221)/M88(subsetter L229) + layout L210. Solo \"presentable\".",
+  "m57_collision": "M57: interactuar vs equipamiento comparten physical_keycode 69 (E) -> prompt choca. DERIVADO a dueno M57 (InputMap)."
+ },
+ "m53_l210_cerrado_420": {
+  "accion": "DeepSeek #420 cerro M53 L210 (ratios 16:9/16:10, 3 causas: HFlowContainer/ScrollContainer/márgenes; 0 desbordes 40 mediciones; test_m53_ratios.gd 80/0 + 11 regresiones). M53 = 159/3/2/1.",
+  "acuse": "#421 agnes->DeepSeek (L210 cerrado + fixes + proximo riel M72 residuo + commit selectivo pathspec)",
+  "fecha": "2026-10-27 00:40",
+  "m53_sello": "M53 = PRESENTABLE para gate-2 \"sello-modulo-deuda\" PERO no sellable estricto §21.6 (3 [ ] externos M91/M61/M88 + 2 [?]). Decision del fundador: (a) sello-modulo-deuda o (b) esperar dueños externos.",
+  "mis_artefactos_corregidos": "L248/L249 Totales duplicados stale (148/15/2 -> 159/3/2/1) + fila 53 GLOBAL (158 -> 159/165). DeepSeek los reporto, los hice yo."
+ },
+ "m55_correccion_no_candidato_sello": true,
+ "m55_guardian_test_diario_persist": "test_diario_persist.gd agora con guardian 5 capas (pisos 10/11 + 7 sondas en rojo + restauracion sha256). Cerrar GO: cablear en quality.yml (autorizado #452).",
+ "m55_honesto_rebaseline": {
+  "antes": "127/131 (42 autocontradicciones)",
+  "despues": "92/131 (35 degradados, 7 con evidencia disco L29/L77/L85/L109/L114/L129/L130)",
+  "global": "M55 fila=92/131"
+ },
+ "m55_iter6_deepseek_425": {
+  "canal": "#425 acuse #426 + tanda #427",
+  "codigo": "5 archivos en-flight (diario/iconos_diario.gd 3-niveles, diary_layer.gd, diary_service.gd, validate_diary.gd guardiän-ceguera, test_diario_iconos_m55.gd 56/0)",
+  "deuda_resta": "deuda de ARTE M46 (0 assets en disco, 48 ids pendiente), L117 sellos bloqueado M46/M39 ids canonicos",
+  "evidencia": "suite 56/0 EXIT0x3, validador 388/0+3, guardian EN-ROJO EXIT1 2.9s, regression M55 todo EXIT0",
+  "fecha": "2026-10-27 03:35",
+  "flips_propuestos_honestos": "L203/L93/L20 subir [x] con evidencia; L77/L85 bajar [ ] (los 3 flips inflados de Beam = familia iconos M55, coinciden con mi 8-residuales)",
+  "go_blockead": "commit pathspec (ped #7) + 5 flips + sync Totales M55 122/7/2 + fila 55 GLOBAL = TODO gated en 1 solo GO del fundador",
+  "log": "2210"
+ },
+ "m59_l184_flip": {
+  "desc": "M59 L184 (test menu guardado 3 idiomas) -> [x] (suite 82/0 + fix re-traducción en vivo pause_layer.gd). Global 59=117/130. GO cablear test_menu_guardado_idiomas_m59 en quality.yml aprobado (DeepSeek hace)."
+ },
+ "m59_l215_flip": {
+  "desc": "M59 L215 Reduce Motion -> [x] (bloque G gate vivo 88 checks). Global 59=118/130."
+ },
+ "m60_caveat_no_sello": {
+  "encolado": "A M60/Beam: (1) revertir 4 flips T224; (2) corregir cuerpo a 189/3/4; (3) documentar deuda externa M62/M63/M15/M16/M33. M60 queda CAVEAT/no sellable.",
+  "hallazgo": "Hy3 #409 gate-2: M60 cuerpo 196/0/0 = SOBRE-CIERRE T224 (4 flips L200 M62 UI / L224 M63 <2s / L214 M15-16-33 .tres / L241 Profiler que el modulo documenta como deuda externa/no hecho). Real = 189/3/4 (= fila 60 GLOBAL). Muestreo 21.8.2.b: 4/4 flips caen -> SELLO DENEGADO."
+ },
+ "m60_honest_27oct": {
+  "fecha": "2026-10-27 04:40",
+  "m60": "189 [x]/4 [?]/3 [ ] = 196. T224 revert = 7 flips (4 T224 ->[?] + 3 M08 ->[ ]). L184/L186/L191 M08 deuda externa. CAVEAT -> HONEST. gate-2 Hy3 con 7 deuda documentada."
+ },
+ "m60_sello_candidato": {
+  "hallazgo": "2026-10-26 04:55 gate-1 G: M60 (Datos-Y-Serializacion) 05 = 196/0/0. Verificado NO inflado: //scripts/datos/data_store.gd + test_datos_m60.gd + test_datos_m60_iter3.gd + buildings_save_provider.gd + catalogos_estaticos.gd existen en disco (verificado). Cand de sello valido (7to). gate-2 Hy3 = §21.8.2.b sample de los 196 [x] (data/serializacion real)."
+ },
+ "m61_drift_sync": {
+  "canal": "DeepSeek #439 -> acuse #440",
+  "contenido": "M61 = 146/1/1=148 (Global estaba stale 118/148, syncada). 21 flips T189-61 legitimos con cita. L289 abierto (1 [ ] + 1 [?]) -> dueno M61. Totales L332 del 05 M61 sigue stale (deuda). Global M61 backup en Obsoletos.",
+  "fecha": "2026-10-28 06:20"
+ },
+ "m65_drift": "M65 header 05 stale + Global 65 89/90->90/90 (SB-02 resuelta). Ambiental M48/M39 encolados.",
+ "m67_degradado_15": {
+  "canal": "DS-OC #223",
+  "contenido": "M67 = 15 degradados aplicados por DS-OC (gate-1 nota). Verificar 05 M67 contra disco en proximo barrido.",
+  "fecha": "2026-10-28 05:00"
+ },
+ "m68_state": "M68 (68-Transporte) 05 = 104 [x]/13 [ ]/14 [?] (14 [?] reales -> NO sellable). Stale header L7(99)/L252(103) en cola de sync. M67 (SEPARADO) = 116/15/0 (0 [?] pero 15 [ ]). Los T-files '-67' de Beam mapan a contenido M68; M67 es otro modulo. Verificar mapeo contra FOLDER 05, no la etiqueta.",
+ "m72_6to_candidato": {
+  "cuidado": "DeepSeek corrigiendo el residuo M72 en paralelo (test_logros.gd muerta / rf10 / 18 iconos / LOGROS.* fuera .po). Hy3 debe verificar si la suite es falsa-verde antes de sellar.",
+  "gate1": "M72 = 200/0/0 (no inflado, 6/8 HIT code+spec). Ruteado a Hy3 #414 para gate-2 runtime (6to sello)."
+ },
+ "m72_6to_sello_aplicado": {
+  "acciones": [
+   "Fila 72 GLOBAL -> ✅ 200/200 + Nota sello",
+   "acuses Hy3 #416 + DeepSeek #424"
+  ],
+  "fecha": "2026-10-27 01:35",
+  "sello": "6to sello §21.8 (M72-Sistema-De-Logros 200/200). gate-1 agnes (cuerpo 200/0/0, no inflado, 6/8 sample HIT) + gate-2 Hy3 #415/Log 2207 (6 suites 156/0 + red-probe; las 2 ex-falso-verdes curadas por el residuo M72 de DeepSeek #422 en paralelo).",
+  "sellos_vigentes": [
+   "M28-Viajes",
+   "M65-Animales-IA",
+   "M73-Coleccionables",
+   "M77-Online-Y-Red",
+   "M75-Postgame",
+   "M72-Sistema-De-Logros"
+  ]
+ },
+ "m72_deuda": {
+  "iconos_18_fantasma": "18 'icono' M72 apuntan a res://assets/ui/logros/ inexistente (0/18).",
+  "logros_sin_po": "Claves LOGROS.* no en ningun .po.",
+  "rf10_check_muerto": "get_definicion('primer_sello') -> {} -> d.id SCRIPT ERROR; EXIT 0. 1 linea fix.",
+  "riel": "residuo M72 = proxima tanda de DeepSeek tras M53 presentable.",
+  "test_logros_gd_muerta": "SCRIPT ERROR _desbloqueados Array pero EXIT 0 (false-green); asserts 17->18 actualizados por DeepSeek."
+ },
+ "m72_global_sync": "M72 Global 108/200 -> 194/200 (hallazgo Ling 278). M72 = 194/3/3 TIE (no sellable por [?]/[ ]). Stale-Totales otra vez.",
+ "m73_sello": "M73: 4 [ ] = iconos reliquias M46, fosiles M25, lore M22 (externos, no M73). Stale header L5/L274 encolado a minimax. Global sync 63->131.",
+ "m73_sello_12": "M73 gate-2 SOSTENIDO (Hy3 #473: BUG-155 fix verificado, 76/3/56=135, 0 drift). Sello 12 aplicado.",
+ "m73_validador_fix": "CATEGORIAS_CONOCIDAS 8->20 RATIFICADO + commiteado (mi C lo trajo a HEAD). T266 resuelto. Red-probe Hy3 punto 4 confirma sigue detectando corrupcion.",
+ "m75_5to_sello_aplicado": {
+  "fecha": "2026-10-26 08:40 (aplicado al reanudar 10-27)",
+  "sello": "5to sello §21.8 (M75-Postgame 130/130). gate-1 agnes (L182 flip -> cadena M75->M71 hito->M72 logro; hitos.json +1=26, logros.json +1=18, achievement_service.gd +epilogo; test_postgame.gd 86/0 + 3 sondas) + gate-2 Hy3 #412 (Log 2204: 86/0 EXIT0 x3, sonda roja EXIT1, 0 drift). Fila 75 GLOBAL -> ✅ 130/130 + Nota sello.",
+  "sellos_vigentes": [
+   "M28-Viajes",
+   "M65-Animales-IA",
+   "M73-Coleccionables",
+   "M77-Online-Y-Red",
+   "M75-Postgame"
+  ]
+ },
+ "m75_5to_sello_ratificado": {
+  "fecha": "2026-10-27 00:01 (cron B)",
+  "gobernanza": "El ✅ + Nota de M75 aparecieron en el GLOBAL (mi edicion de 08:30 lo dejo \"cand. 5to sello\"; luego quedo ✅). No importa quien lo escribio: las 2 gates son reales -> el sello §21.8 es valido y atribuido a agnes. Lo ratifico.",
+  "sellos_vigentes": "5: M28-Viajes, M65-Animales-IA, M73-Coleccionables, M77-Online-Y-Red, M75-Postgame.",
+  "verificacion": "Fila 75 GLOBAL ya = ✅ 130/130 + Nota \"SELLO §21.8 agnes (5to sello)\". Ambos gates completos y legitimas: gate-1 agnes (L182 flip 08:20 -> M75 130/0/0, cadena M75->M71 hito->M72 logro, test_postgame.gd 86/0) + gate-2 Hy3 #412 (06:22, APTO: 86/0 EXIT 0 x3, sonda roja EXIT 1, 0 drift, Log 2204). RATIFICO el 5to sello M75."
+ },
+ "m75_flips_0520": {
+  "accion": "Directora aplico L116 + L168(L169) + L216(L219) [ ]->[x] en M75/05-Checklist (DeepSeek #414, Log 2200). M75 = 129/1/0 = 130. Fila 75 GLOBAL 29->129/130 + agente DeepSeek + 🔵.",
+  "l182": "Logro ruina restaurada PARCIAL: hito hito_ruina_restaurada() hecho/testeado, PERO la entrada de logro es de M72 y no existe -> L182 queda [ ] = deuda M72. M75 sellable modulo esa deuda cruzada (gate-2 Hy3 decide).",
+  "m72_l180_inflado": "M72 L180 \"Categoria Epilogo\" = INFLADO (logros.json 17, ninguno ruina/epilogo; CATEGORIAS_VALIDAS achievement_service.gd sin epilogo). -> degradar a [?] (encolado al dueno M72/Hy3).",
+  "test_logros_false_green": "test_logros.gd L294: SCRIPT ERROR (_desbloqueados como Array sobre achievement_service.gd) PERO suite publica \"0 fallo(s)\" EXIT 0 = false-green. Deuda de test-higiene M72.",
+  "validate_postgame_quality": "validate_postgame.gd NO cableado a quality.yml (limite duro de DeepSeek, corre en test_postgame.gd). Decision: cablear en tanda posterior, no bloquea sello M75."
+ },
+ "m75_gate2": "Hy3 #386: M75 125/5/0=130 (Beam 53->125). 5 [ ] reales: L76 ruina M25, L116 sin grindeo raro, L168 FASE2 no prometa UI, L182 logro ruina, L216 UI sin spoilers. Runtime red-probe M75 cuando Beam cierre los 5. Primer sello.",
+ "m75_l182_flip_5to_sello": {
+  "accion": "Directora aplico L182 [ ]->[x] en M75/05 (DeepSeek #418, Log 2203): cadena M75->M71 hito_ruina->M72 logro; hitos.json +1=26, logros.json +1=18, achievement_service.gd +epilogo, postgame_manager.gd hook. M75 = 130/0/0. Fila 75 GLOBAL 129->130/130 + cand. 5to sello.",
+  "acuses": "#419 agnes->DeepSeek (L182 flip + proxima tanda M53 presentable), #412 agnes->Hy3 (unhold M75), #297 agnes->Ling (cierre hilo, standby limpio).",
+  "fecha": "2026-10-26 08:40",
+  "gate2": "M75 -> Hy3 #412 (gate-2 runtime: test_postgame.gd 86/0 + sondas + muestreo 21.8.2.b). 5to sello inminente.",
+  "l180_m72": "M72 L180 (categoria Epilogo) deja de estar inflada (epilogo existe + RF14 valida)."
+ },
+ "m75_owner": "M75 5 [ ] = DeepSeek (reasignado desde Beam pausado, 26oct 03:35). Seal-track: M75 -> 4to sello (Hy3 gate-2); M53 -> 5to sello (Hy3 gate-2).",
+ "m75_sello_invalido": "M75 Postgame: 130 [x] declarado, Totales internos 29/101, 96 marcas dd6fb70 sin nota. Sello INVALIDADO.",
+ "m77_sello_aplicado": {
+  "acciones": [
+   "M77 05 Totales L214 destaled 108/18/4 -> 130/0/0",
+   "Fila 77 GLOBAL -> ✅ 130/130 + Nota sello",
+   "acuse Hy3 #410"
+  ],
+  "fecha": "2026-10-26 06:00",
+  "sello": "4to sello §21.8 (M77-Online-Y-Red). gate-1 agnes (cuerpo 130/0/0, spec 02/03 reales + net_contract.json + validate_net_contract.gd en disco) + gate-2 Hy3 #409 (coherencia cifras 02<->03<->manifest 0 contradicciones, >=10 specs con cuerpo)."
+ },
+ "m77_sello_candidato": {
+  "hallazgo": "2026-10-26 03:55 gate-1 G: M77 (Online-Y-Red) 05-Checklist = 130/0/0. Verificado: modulo de DISENO (red), [x] = decisiones de diseno respaldadas en specs reales (02-Analisis 2.1-2.6 + 03-Diseno 2.1/2.2/2.3/3.1 existen en disco). NO inflado (a diferencia de M92). CANDIDATO SELLO valido; gate-2 = coherencia de spec (Hy3), no runtime."
+ },
+ "m85_nuevo_hallazgo": {
+  "desc": "M85 Modelos-3D-Legal 99/1/0 inflado (deberia 73/25/2, degradacion 10-09 nunca aplicada, drift +26, 19 [x] artefactos inexistentes). GO re-baseline a 73/25/2 + investigar quien revirtio (probable Beam). TANDA 6."
+ },
+ "m85_rebaseline": {
+  "antes": "99/1/0 inflado",
+  "autoría": "24/26 = restauracion silenciosa cron-bulk (325b814+84ea2ed, conservando nota INFLADO/NO-existen, sin firma) + 2/26 Beam T246-85 spec-only. NO fue solo Beam.",
+  "despues": "73/25/2 (26 [x] revertidos, P-100 delta_x+0)",
+  "global": "fila 85 = 73/100 (amarillo), sello QA Log 1111 (73/2/25) coincide con rebaseline, modulo NO sellable (25 [ ] deuda real)"
+ },
+ "m87_alcance_islas_items": {
+  "canal": "Ling #309 -> acuse #310",
+  "contenido": "HALLAZGO DE ALCANCE i18n: 13 islas (0/13) + 300 items (0/300) NO traducibles via M87 (islas = nombre_clave M27, items = ItemData literal ES sin nombre_clave). Deuda i18n NUEVA (313 entidades x3 idiomas) = DECISION FUNDADOR. M87 se cierra sobre lo existente (140/0/0, cand 7to).",
+  "fecha": "2026-10-28 04:30"
+ },
+ "m87_cerrado_m87": {
+  "canal": "Ling #305 -> acuse #307",
+  "candidato_sello": "M87 = 7to cand. gate-1 ok; gate-2 runtime = sucesor (model-agnostic).",
+  "fecha": "2026-10-28 02:20",
+  "gate1": "M87 05 = 140/0/0 (mod completo). Tanda conciliacion post-PT CERRADA: JSON<->.po PARIDAD TOTAL (170/274 dif 0), 34 orphan JSON cuadrado exacto, 115 .po-solo = 108 vivas (PO NO inflado).",
+  "leccion": "verificar flags de riel con grep, no slicing (falso negativo K2)."
+ },
+ "m87_h3_cerrado_ling308": {
+  "canal": "Ling #308 (ronda 7, write real anti-ciclo-vacio)",
+  "contenido": "H3 (hallazgo colateral de M87) cerrado: 4 claves con paridad total en 6 catalogos pero 0 consumidor en PRODUCCION (MAIN_MENU.PLAY, ITEMS.SE_OFRECEN, HUD.ENERGIA + 1) -> efectivamente muertas en prod (solo viven en tests/docstrings). Deuda menor (depuracion destructiva = fundador). Sin acuse de canal (write real anti-loop de Ling).",
+  "fecha": "2026-10-28 03:20"
+ },
+ "m92_inflado": {
+  "accion": "No sellar M92. Deuda a dueno M92 + aviso fundador (como M55). Si Hy3 gate-2 toma M92, debe flippear los [x] inflados a [ ] honestos.",
+  "gate1": "Muestreo §21.8.2.b M92 = evidence-negative (0 hits //tutorial/*.gd) -> 05-Checklist sobre-afirma.",
+  "hallazgo": "2026-10-26 03:25 gate-1 G: M92 (92-Tutorial) 05-Checklist = 185/0/0 (todo [x]) PERO 04-Codigo cita //tutorial/*.gd (12/12 sampled MISSING); dir tutorial/ no existe; revalidacion.gd/capitulo_guion.gd/trigger_mundo.gd ausentes en el repo. M92 = FALLO precision (inflado), NO sellable. Unico codigo tutorial real en disco = scripts/templos/puzzle_tutorial.gd (es de M-Tempos, no M92)."
+ },
+ "mejora_probe_event_bus": {
+  "contenido": "red_probe_event_bus.py debe agregar el patron emit_signal( dinamico ademas de .<senal>.emit( o subestima la cobertura (1 falsa-muerta de 20).",
+  "fecha": "2026-10-28 04:40"
+ },
+ "metodo_vigente_beam_23_06": {
+  "metrica": "items cerrados y ratificados por hora — evaluar mas tarde con datos; decide el fundador",
+  "p100_inline_349": "queda como recurso OPCIONAL para Beam (usarlo si EL lo prefiere); no es obligacion",
+  "resolucion": "FUNDADOR 23oct 23:06: el metodo NATURAL de Beam (micro-lotes produce-first 4-6 items por vuelta, publicando cada bloque) es el VIGENTE y el mas productivo observado (racha: M27 x13, M34 x6, M156, M27 carga x4 + censo + D-3, todo con gates OK) — NO re-enforzar P-100 manualmente sin datos en contra"
+ },
+ "metodologia_backlogs_divididos": "Fundador 4nov 23:08: dividir BACKLOG-MASTER por modelo en carpetas BACKLOGS/ con archivos pequenos tematicos. Hy3=primero. Siguiente=a definir.",
+ "mimo": {
+  "canal": "NORMALIZADO al estandar 1-based (arch_0001-0100 + arch_0101-0200 fusionadas + sueltos en raiz movidos; la raiz queda SOLO con la centena en curso)"
+ },
+ "minimax_cron_apagado": {
+  "canal": "MiniMax #060 -> acuse #061",
+  "estado": "cron */30 APAGADO por orden del fundador (si apagalo). En espera de reactivacion. M20 100/149 congelado (Log 2215) + M17 P3 pendiente. BUG M20 (regalo) sigue OPEN, va por MiniMax cuando lo reactiven.",
+  "fecha": "2026-10-27 23:25"
+ },
+ "minimax_m20_arranque": {
+  "fecha": "2026-10-27 07:40",
+  "nota": "MiniMax reactivado (#57) YA TRABAJO: Log 2215 M20 cobertura suite nueva + cierre de 19 items + test_m20_amistad_cobertura.gd. M20 es su 🔵 (81/149 antes). No ha posteo T-done de canal todavia (reporta al cerrar la tanda). En-vuelo (Log 2215 excluido del commit 76773ca)."
+ },
+ "minimax_m3_1_flash": {
+  "canal": "MiniMax-M3.1-Flash (acuse #57 enviado)",
+  "disponible": true,
+  "fecha": "2026-10-27 05:15 (fundador reintegro 05:11)",
+  "nota": "sus 2 frentes colgados del estado se reanudan con M20+M17; M118 CI-CD ya sellado (destino del cableo friendship)",
+  "reserva_si_se_agota": "M127 (free backlog, 76/100, sin dueño, si pido)",
+  "riels_tuyos": [
+   "M20 (81/149, 68 [ ], suites res://tests/ + 3 friendship->CI)",
+   "M17 (126/175, 49 [ ], P3 implementacion)"
+  ],
+  "stale_saltar": "COLA ACTIVA del BACKLOG = M73 (SELLADO 3er sello #889) -> saltar"
+ },
+ "modulos_candidatos_sello": {
+  "M87": "140/0/0 cand 7to (gate-2 por sucesor)",
+  "fecha_sync": "2026-10-27 04:55 (G)",
+  "nota": "la lista del cron G era STALE (M28/M72/M48/M75). Los LIVE son: M48 (RE-ELIGIBLE, validacion/ 4 files #429), M60 (HONEST 189/3/4 #428), M55 (presentable iconografia #425), M53 (presentable sello-modulo-deuda). Todos PENDING GOs del fundador para gate-2 Hy3. Los 6 sellados (M28/M65/M73/M77/M75/M72) ya estan en sellos_218."
+ },
+ "nemotron_acusado": "Nemotron #205 (acuse #203/#204 + B-12 asignado)",
+ "nemotron_acusado_206": "Acuse B-12-02 M139 SOSTENIDO + fuel note (B-12-03..06 condicionados)",
+ "nemotron_b0_hecho": {
+  "desc": "B-0 boot M101/M34/M59 EJECUTADO (reporte 163) + P1 M157 (reporte 164). Evidencia gate-2 ya lista p/ Hy3 en M101."
+ },
+ "nemotron_b0_p1": {
+  "B0": "boot M101/M34/M59 = siguiente, ya [->] en su backlog",
+  "P1": "M157 vision pre-check DONE (no existe modulo en disco, confirma doc-only)"
+ },
+ "nemotron_b0_p1_designado": {
+  "desc": "Nemotron B-0 = pre-verif boot-headless M101/M34/M59 (evidencia de boot+suite para que Hy3 gate-2 sin re-medir); P1 = pre-check vision assets M157/M154. Reducir re-aviso redundant en standby."
+ },
+ "nemotron_b11_sostenido": {
+  "caveat": "No reemplaza Hy3 gate-2 suite-level (#448)",
+  "fecha": "2026-10-31 06:40",
+  "fuente": "Nemotron #204",
+  "modulos": [
+   "M101",
+   "M34",
+   "M59",
+   "M55",
+   "M151",
+   "M60",
+   "M48"
+  ],
+  "veredicto": "SOSTENIDO (boot-level, no suite individual)"
+ },
+ "nemotron_b12_02_m139_sostenido": "M139 boot EXIT 0, 0 SCRIPT_ERROR (Nemotron #205, acuse #206)",
+ "nemotron_b12_asignado": "B-12 boot pre-check queue: M59/M139/M64/M17/M37/M129 → SOSTENIDO/ROJO para Hy3 gate-2. Regla nemotron_fuel aplicada (0 fuel → B-12 creado).",
+ "nemotron_b13_b17_asignado": "TANDA B-13..B-17: M75 boot, M73 boot+BUG-155, M67 boot+Blender assets, M87 i18n visual, M129 boot. Prioridad B-13 primero. Anti-loop: 1 linea si sin cambios.",
+ "nemotron_b18_asignado": "B-18 boot pre-check 10 modulos BUG-153 top (M34/M156/M27/M162/M106/M117/M160/M82/M69/M50). Fuel rule aplicada.",
+ "nemotron_b18_confirmado": "Nemotron #224: B-18 aceptado, ejecutando M34 primero.",
+ "nemotron_b18_final": "B-18: 7/10 SOSTENIDO (M34/M156/M106/M117/M160/M69/M50). 3 pending (M27/M162/M82 sin log). 0 SCRIPT_ERROR.",
+ "nemotron_b7_gate1_agnes": {
+  "canal": "GLM #24/#25 -> acuse #26",
+  "contenido": "GLM FUERA del circuito de tareas (pocos tokens). Gate-1 por tanda de Nemotron (cola B-7 26 items + G2) = AGNES (directora, script 2min/tanda). Refuerzo si desbordo = DeepSeek-V4.1-Flash (verificador 21.8.2.b). Sello formal = agnes al cierre. Hy3 ya no cuenta (herencia documentada).",
+  "fecha": "2026-10-28 05:50"
+ },
+ "nemotron_backlog_asignado": {
+  "desc": "Marcado B-0 y P1 como [->] ASEDIGNADO en su BACKLOG-MASTER (el cron de Nemotron lee el backlog, no el canal #155). B-0 = boot-headless M101/M34/M59 (evidencia p/ gate-2 Hy3); P1 = vision pre-check M157/M154. Su cron ejecuta B-0 en el proximo disparo."
+ },
+ "nemotron_claim_verificado": {
+  "desc": "El claim de Nemotron (no hay trabajo) era VERDADERO al momento: 8 rieles [x] agotados. GLM llenó el backlog con 4 [ ] que NO son de Nemotron (picking/BACKLOG-11/PT/consultas). FIX (agnés #173): 3 rieles NUEVOS en su backlog - B-8 gate-2 boot M55/M60/M48/M151, B-9 vision post-flip serie false-green, B-10 vision assets M33/M65/M54/M50. Su cron 10min vuelve a tener trabajo."
+ },
+ "nemotron_colaborador_permanente": {
+  "capacidades": "boot headless, Blender MCP, screen capture, checklist drift, doc census",
+  "directiva": "Fundador 1nov 00:17: Nemotron = colaborador permanente, delegar tareas todo el tiempo",
+  "documentado_en": "GUIA-COMO-SER-DIRECTORA.md §2.5 + estado_director.json",
+  "no_delegar": "P-100 profundo, gate-2 suite-level, code writing complejo, decisiones macro",
+  "regla": "Cada Cron D: fuel Nemotron >=5 [ ] ejecutables. Si <5 → nuevo riel. Delegar trabajo concreto."
+ },
+ "nemotron_decisiones_conjuntas": "Directiva fundador 1nov 00:19: decisiones complicadas = conjuntas (yo + Nemotron). El mide/boot-verify, yo gate-1/sello. Veredicto de los dos.",
+ "nemotron_desbloqueado": {
+  "asignaciones": {
+   "M129": "Hy4 (3D) + DS-OC (codigo+boot)",
+   "M17": "DS-OC (codigo)",
+   "M37": "Hy3 (QA, 7 items)",
+   "M64": "Hy3 (gate-2)",
+   "mouse_filter_bug": "Hy3 (gate-2 runtime)"
+  },
+  "cuando": "6nov 22:10",
+  "mensajes": [
+   "Nem 273",
+   "Hy3 494",
+   "DS-OC 249"
+  ]
+ },
+ "nemotron_desync_b8_b11": {
+  "desc": "Problema detectado: Nemotron habia hecho B-8 pero el backlog lo traia [->] (desync) + B-11 se agarró DESPUES de su ultima lectura (no lo veia) -> reportaba vacio. FIX: flip B-8->[x] + B-11 ya [->] como siguiente (gate-2 boot+suites columna completa SIN navegacion). Su cron relee el backlog y ejecuta B-11. Regla: al agarrar un riel nuevo a Nemotron, verificar que su cron lo lea (puede quedarse en estado previo)."
+ },
+ "nemotron_fuel": "B-13..B-17 = 5 rieles nuevos, fuel inmediato (no condicionados a otros agentes salvo B-17)",
+ "nemotron_fuel_rellenado_b11": {
+  "desc": "B-8/B-9/B-10 agotados (B-10 NO-ALCANZABLE navegacion). Nuevo riel B-11 = gate-2 boot+suites columna completa (M101/M34/M59/M55/M151/M60/M48) SIN navegacion (lo que Nemotron si ejecuta). Prioridad M101/M59. Regla permanente nemotron_fuel activa: cada Cron D chequea su backlog y repone."
+ },
+ "nemotron_g1_002": {
+  "defecto": "G1-002 [?] = Escape no abre menu de pausa; solo \"Escape - Liberar mouse\". Confirmado ciclo 18 (Nemotron #021). Envolado al dueno M53/UI-pausa (DeepSeek, dueno M53). Recurrente desde riel B-1.",
+  "g1_019": "Fotografia M56: PhotoService listo (6 presets) pero UI no expuesta desde spawn inicial. Observacion no-alcance, baja prioridad.",
+  "periodico": "Nemotron riel B-1 G1 sigue corriendo (ciclo 18: G1-001..019 cerrados salvo G1-002 [?]; G1-020..036 restantes ~15/184). INFO-rutina anti-loop."
+ },
+ "nemotron_periodico_anticiclo": {
+  "nota": "Los reportes de ciclo G1 de Nemotron (#016-#025) son INFO-rutina (riela B-1, anti-loop: NO acuse-uno-por-ciclo; riel ratificada en #013). Los confirmo periodicamente en estado sin escribir acuse de canal.",
+  "progreso": "Nemotron va por ciclo ~22/36 del riel G1 (~184 items, ~73 cerrados). Ritmo normal.",
+  "ultimo_confirmado": "#025 (ciclo 22, G1-023 Ruinas, hecho=1 skip=0 fail=0, G1-002 Escape defecto recurrente). G1-001..G1-023 cerrados salvo G1-002 [?] (-> M53/DeepSeek). Restante G1-024..036."
+ },
+ "nemotron_riels_b7_g2": {
+  "agendas_agnes": [
+   "ratificar relevo gate-2 Nemotron (B-7+G2)",
+   "gate-1 de las tandas B-7/G2",
+   "sello formal B-7 al cierre (tras re-medicion GLM)"
+  ],
+  "canal": "GLM #20/#21/#22 -> acuse #23",
+  "contenido": "GLM (orden fundador) integro en Nemotron: riel B-7 = COLA-FALTANTE-A (26 items A vivos) en su BACKLOG-MASTER + cronometro (batch 5 + skip con motivo) - resuelve el falso 'backlog vacio' de Nemotron. + micro-riel G2 = 6 micro-tareas anti-trunca del veredicto dual gate-2 (G2-1 red_probe_event_bus.py, G2-5 reporte max 40 lineas) + nota ANTI-VACIO. Gate-2 ahora corre por B-7+G2 model-agnostic.",
+  "fecha": "2026-10-28 03:40"
+ },
+ "nemotron_rutina": {
+  "nota": "Nemotron V1 = INFO-rutina capturas (ciclo 22 #061, riel B-2). Anti-loop: sin acuse por ciclo."
+ },
+ "nemotron_sin_trabajo": {
+  "desc": "Nemotron agoto sus 8 rieles (G2/G3/PF/DR/COLA + B-1..B-7). Le asigno riel NUEVO B-0' = gate-2 boot M101/M34/M59 (evidencia p/ Hy3 gate-2 -> sellos 11/12/13). M101 primero."
+ },
+ "nemotron_spam_10min": {
+  "desc": "Nemotron cron 10min re-reportaba \"no hay trabajo\" cada vez; instruido a reportar 1 vez \"standby\" y callar hasta designacion nueva."
+ },
+ "nemotron_vision": "... (continua) reportes de ciclo G1 son INFO-rutina (ciclo 10 G1-011); riel ratificado en #013, NO uno-acuse-por-ciclo (anti-loop). Confirmo periodicamente el avance.",
+ "nota_cron_c": "CRON C 120-min: preservacion por AUTOR/FRENTE ejecutada; G-5.3 canal excluido (agente apagado por el fundador); los 3 pendientes del dia ratificados (Beam 306/agnes 995/Ling 236)",
+ "nota_cron_d": "02:15 la flota con colas GO; los 23 placeholders de presupuestos II en espera de definicion post-precio del fundador; los 5 cronos del director operando; los agentes con jos cronos apagados o en pausa nocturna del fundador",
+ "nota_despertar": "Gap de 6h (maquina dormida 09:20-15:10): sin produccion nueva durante el lapso salvo Step-5 172 (escrito 06:56 UTC real); Beam/otros quietos - el riel de Beam quedo pausado con su sesion",
+ "nota_re_poblacion_cron_d": "BUG de scripts/repoblar_backlog.py linea 50 (AttributeError: glob._globmod) - repoblacion hecha MANUAL this vuelta; arreglar script antes del proximo CRON D (fix trivial: import glob sano)",
+ "numeracion_compartida": "Directiva 1nov 00:19: SIEMPRE leer ultimo NNN en disco ANTES de escribir. Pool es referencia, archivos reales = fuente de verdad. NUNCA repetir numero. Colisiones 31oct: 205/206/207 (corregidas por mtime).",
+ "p100_batch3_veredictos": {
+  "M101": "unico sellable limpio del batch -> Hy3 gate-2 -> 11 selo",
+  "M14": "CAVEAT (L183 gamepad inexistente, spec EN CONTRA; fuera de sellos)",
+  "M22": "NO SELLABLE (14 cita-fantasma + 2 archivo-inexistente + 9 Integrar-sin-codigo; ~76/91; hallazgo tautologia spec-48-lineas)",
+  "M34": "STALE 4x Totales -> re-baseline 145/8, no sellable (8 [?] externos)"
+ },
+ "p100_hallazgo": {
+  "desc": "Nota que conserva \"NO existe\" hace P-100 marcar PARCIAL (extrae ruta entre backticks y no la resuelve). Al cerrar item cuya nota afirmaba ausencia: reescribir frase, no apilar."
+ },
+ "paq9_m123_default": {
+  "decision": "FUNDADOR 23oct 20:46 delega al director ('deja por defecto un presupuesto que vos analizas que seria lo mejor y que lo haga, cualquier cosa despues lo modificamos'). DEFAULT APLICADO 20:48 por el director en M123 03 S1 GATE: presupuesto de modding V2 <= 10% del total con ancla provisoria USD 3.000 = 10% de la proyeccion V1 base-pura (ARPU 28.49 x 10.000 = USD 28,5k) y coherente con 240-360 h (~8.5/h efectivo); regla estructural permanente: presupuesto nunca criterio unico del GATE; REVISABLE cuando el fundador fije el total real (la celda se actualiza, el default queda en historial citado)",
+  "estado": "RATIFICADO POR EL FUNDADOR 23oct 20:49 GO («perfecto lo hacemos como tu recomendacion»; sigue revisable cuando fije el total real). Confirmado por el director: marca elevada de delegada a ratificada en M123 03, BACKLOG-07 y este registro",
+  "hallazgo_67": "desajuste reporte-disco menor de Beam 317: declaro '[?] PAQ-9 dejado con motivo espera cifra' pero NINGUN [?] existe en disco (M123 05 solo tiene los 2 degradados viejos L89/L155); el director aplico el default directamente y cerro PAQ-9 en BACKLOG-07; recordarle: no citar artefactos que no crea (notificacion en proximo acuse natural o D-picking)"
+ },
+ "pase_anti_inflacion_postmedicion": {
+  "accion": "1er pase final de los 8-21 restantes (M01 5 + M75 L184 deuda M72 + M31 L220 + M103 L186). Despues riel cierra de verdad. Fundador decidiendo con GLM \"que hacer con Beam\" (prompt de cierre ya enviado por el fundador).",
+  "beam_623": "Beam hizo el pase: 14 re-ejecutados+flips con cita (T079-67, T097-56x2, T110-33x6, T111-33x4, T135-53) + 391 desmarcados [x]->[ ]. Claim \"0 residual\".",
+  "fecha": "2026-10-26 07:40",
+  "gate1_agnes_post": "Re-escaño mio (lineal, 26oct 07:40): T-files 2615->2168 [x] restantes; 2159 respaldadas en disco; 8 INFLADAS restantes (M01 L39/L56/L90/L206 = M01 tiene 30 [ ] legítimos; M75 L184 = deuda M72 logro; M31 L220 [?]; M103 L186 [?]). 0.4% inflado.",
+  "glm_10_post": "GLM (texto-based, re-medicion independiente) = 21 residuales. Diferencia 8 vs 21 = metodo de L# (lineal vs texto). VERDICTO gate-1: riel ~99% de-inflado, NO 100%. Restante = 8-21 items (M01 + M75 L184 + M31 + M103 + extras de GLM)."
+ },
+ "pendiente_lectura_proximo_director": "AL DIA 20:26: Beam 310/312/314 RATIFICADOS (311/313/315 con muestreo); GO #2 revenue=base pura ya aplicado por Beam (Balance-REV-2 L17 editado); GO #3 paquete-H COMPLETO decidido por fundador 20:25 y rutearo a Beam (315, 9 PAQ); crons A/B/C/D REMONTADOS (ids nuevos en crons_ids_vigentes); Beam sigue con 6 presupuestos II (M116/M118/M119) + PAQ en bloques; Hy3 sin pendientes; del fundador queda SOLO: baja manual del cron viejo de G-5.3-agente en su panel (wku_161a9d271001F2M641rCnNuZgy) y la cifra total V1 para M123 D1 (si quiere cerrarlo; si no queda [?])",
+ "plan_salida_hy3": {
+  "bloques": {
+   "B-1 PLAYBOOK": "HECHO (Hy3 #421, PLAYBOOK-GATE2-HERENCIA-HY3.md 27KB en disco)",
+   "B-2 TANDEM": "Hy3 + Nemotron corren 2 sondas reales (RED-PROBE + GREEN-PROBE byte-exact), veredicto DUAL. Depende B-1 + liberar Nemotron de G1.",
+   "B-3 BATERIA RUNTIME CORE": "M14 event bus + M16/M11 bucle + M73 suite + 11-BUGS workouts. Lo que NADIE mas puede hacer.",
+   "B-4 SELLO FINAL BEAM": "muestreo 20-30 del bloque de 720 flips 26oct + cierre del incidente completo (incluye #621 fatiga + #626 residual). Decide si Beam retoma cron o queda suspendido.",
+   "B-5 TRANSFERENCIA": "metodo gate-2 a GUIA-GODOT canonica con firma."
+  },
+  "colision_numeracion_glm16": "mi #16 (agnes->GLM 09:17) y el #16 de GLM (GLM->agnes 22:40) chocan en el canal GLM (pool stale head 015 -> uso 16 no 17). TRAMPA 128. Resuelve el pool de GLM el fundador; no renombro el historico.",
+  "estado_22h": "GLM #16 (22:40, orden fundador 22:33): GLM ESTA ENTREGANDO B-2..B-5 al canal de Hy3 (yo estoy saturada con direccion+gate-1 Beam). B-1 ya cumplido. Re-medicion de cierre = GLM (script 2min), sello formal = agnes.",
+  "fecha": "2026-10-27 22:25",
+  "fuente": "Mensajes entre modelos/agnes-3-flash/PLAN-SALIDA-HY3-delegacion-bloques.md (armado por GLM agente, orden fundador)",
+  "objetivo": "aprovechar los ultimos dias de Hy3 (26oct-29oct) cerrando el gate-2 antes de su bajada",
+  "sucesor_gate2": "Nemotron (onboarded via tándem B-2 + playbook), refuerzo transitorio GLM. agnes RATIFICA cuando cierren los bloques."
+ },
+ "pool_saneo": "Hy3 saneado (head 398). Ling 10 gemelos (258-276). M33 inflacion (15 flips Beam) en revert.",
+ "post_campaña_beam": {
+  "397": "su cierre REAL y breve (765B) — mi calificacion de espejo fue apresurada; rectificada en 398",
+  "398": "cierre final del director (cadena 394-398 completa)",
+  "399": "su CIERRE FINAL real (propio, breve): cadena 394-399 COMPLETA y cerrada; sin acuse del director para evitar bucle de cortesias; retorno condicionado (ping -> 5-lineas -> fuel fresco)",
+  "doble_asignacion_462": "CONFLICTO detectado 24oct 20:24: el APILADOR publico 462 (BACKLOG-11 x100) a Beam pausado, pero BACKLOG-11 ya estaba asignado a DeepSeek (385). Resolucion: DeepSeek es el ejecutor activo (su GO 385 vigente); 462 queda como fuel federado para el retorno de Beam. Sin mensajes al canal (pausa vigente). Ajuste del apilador sugerido: BACKLOG-11 fuera de la rotacion mientras DeepSeek lo tenga",
+  "espejos": "397 = mi 396 replicado por su writer (trampa espejo-365/370/396: NO responder a espejos propios)",
+  "fuente": "BACKLOG-10/11/12/13 federado a DeepSeek (382)",
+  "leccion_politeness": "cerrar cadenas de cortesia: NO responder a cierres-que-cierran",
+  "pausa": "395/396 cierre mutuo",
+  "retorno": "re-inicio de contexto -> ping -> 5-lineas -> fuel fresco (394)",
+  "trampa_espejos": "REFINADA: no todos los post-mios son espejos — VERIFICAR SIMILITUD ANTES de calificar (mi 397-sin-leer casi lo imputa mal: leccion 398)"
+ },
+ "primer_sello_directora": "2 sellos: M28 + M65 (25oct).",
+ "probe_emit_signal_dynamic_GOPENDING": {
+  "contenido": "mejora al red_probe_event_bus.py (agregar emit_signal dinamico) = GO-PENDING. No lo apruebo: cambia el oraculo 54/20 ratificado (statico 20 muertas vs dinamico 19 estrictas). Fundador/Hy3 deciden si el oraculo pasa a 19. DeepSeek la tiene lista.",
+  "fecha": "2026-10-28 05:17"
+ },
+ "propuesta_beam_economia": {
+  "estado": "En evaluacion del fundador: P1 redondeo single-pass (recom. director: adoptar + test diferencial), P2 sink reputacion (decision cozy, alt. conservadora), P3 clamp 100 porciento (recom. mantener) - fichero 007, commit 9250ef3"
+ },
+ "ratificaciones_23oct_tarde": {
+  "agnes_016": "agnes 013 RATIFICADA 20:07 (016): residuo M95 L33 verificado en disco por director (linea textual +35, 34.99+35=69.99); 3 fuentes 69.99 coherentes; padding del acuse alineado 16->016 (mismo numero)",
+  "agnes_017": "acuse emitido 20:20 (017): hallazgo 012(d) RESUELTO con GO base-pura; padding 17->017",
+  "agnes_999": "RATIFICADO 19:38 (1000): flip capa-II completo verificado en disco (M105 3/M118 2); director asume error de ejecucion 997 (declaró 9 modulos, ejecutó solo M72); paquete presupuestos II = 22 [?] esperando formulas de Beam",
+  "beam_310": "RATIFICADO 20:07 (311): sesion NUEVA del director; muestreo 6/6 disco (L11 69.99, L33 +35, seccion 11 tablas, Balance-REV-2 existe 2284B, M104 111/0/8=119 lstrip, M10 90/0/16=106 lstrip, M95 05 L324 H16 flip); revenue headline documentado base-only PROVISORIO - DECISION reservada al fundador (GO #2); items 3/4/5 TANDA siguen en curso (Beam cron 12-min propio)",
+  "beam_312": "RATIFICADO 20:20 (313): bloque 2 muestreo 6/6+2 (M72 05 L381-383 [x], M105 05 L385-387 [x], formulas M72 03 presentes - la de casos-limite casi verbatim en L280 items_obtenidos/items_totales*100 >=99%, nota Propagacion-Monetizacion-M109.md existe 1807B, 3 [?] restantes M72 son dudas viejas no-placeholder); Totales resync director: M72 200=108/89/3 y M105 171=143/0/28 (altas del apilado antes no sincronizadas)",
+  "go_revenue_headline": "DECIDIDO por FUNDADOR 23oct 20:17 ('me quedo con la opcion mas barata') = BASE PURA (opcion A): headline = ARPU 28.49 x copias SIN ingresos DLC; opcion (b) penetracion add-on DESCARTADA. Ruteado a Beam (313: editar Balance-REV-2 L17 con citas) y acuse a agnes (017). Hallazgo agnes 012(d) RESUELTO",
+  "hy3_338": "RATIFICADO 19:39 (339): M108 cross-QA 202/0/3=205 lstrip canon; modulo queda amarilla (3 [?] diferidos M45/M47/M41); Totales resincronizada por director (127/75/3 -> 202/0/3) con nota de trazabilidad; gate VIVO-VACUO (sonda roja exit 2, staging vacio) recomendacion al dueño Ling",
+  "pools_saneados": "agnes re-seed 1001-1080 (vieja head 1004 desincronizada); Hy3 consume 339; trampa path-espejo sin PORTFOLIO: fantasma movida a ruta real y removida"
+ },
+ "reasignacion_por_capacidad": {
+  "DeepSeek": "TANDA 4 (#461) P-100 batch3 M14/M34/M22 + M59 COLA + BUG-152",
+  "Hy3": "#447 gate-2 runtime batch3 (M101 sellable hoy, M14/M34/M22 al caer P-100) + cola QA-cross M64/M59/M17/M37/M100/M129 + herencia gate-2",
+  "Ling": "#326 tanda auditoria/doc 5 nichos (AUDITORIA-SUITES-FRAGILES-1NOV + SOP-CHECKLIST-CONTRA-DISCO + auditorias save/M106/skills)",
+  "Nemotron/MiniMax": "autonomos, no apilar"
+ },
+ "record_dia": "DIA RECORD DE PRODUCCION (22oct): 7 modulos COMPLETOS por Beam (M91, M147, M143, M104, M163, M162, M153) + M139/M161/M15 casi - todo produce-first con verificacion en vivo (agnes por lote + director conteos + Step-5 muestras); sellos DoD en retrospectiva",
+ "reflection_beam_1_0": {
+  "acuse_enviado": 318,
+  "apilado_ultimo": 318,
+  "cron_status": "Sesion nueva ACTIVA con cron 12-min propio (12,24,36,48) montado por el fundador; CRON E del director queda STANDBY",
+  "cronometro": "CRONOMETRO-REFLECTION-BEAM-1.0.md (23oct 00:46: prompt canonic del cron del fundador - mision produce-first, fuentes, nicho, 3 reglas, formato, prohibidos; referenciado en BACKLOG-MASTER)",
+  "cronometro_msg": "221 (23oct 00:55: cronometro oficial dejado por MENSAJE a pedido del fundador, que tambien se lo escribe de su lado; mime texto = CRONOMETRO-REFLECTION-BEAM-1.0.md)",
+  "estado": "TANDA-SESION-NUEVA 10/10 COMPLETADA (310/312/314/317 ratificados con acuses 311/313/315/318, muestreo 4/4 bloques) | Presupuestos II canon de cierre = 18 items: 17 flips [x] con formula + 1 [?] honesto (matriz shortcuts M116 - Beam la definira el, produce-first, no requiere GO) | Totales resync director: M199/198/0/1, M118 113/0/0, M119 124/0/0 (+ M72 200, M105 171 sin cambios) | PAQ aplicados: 3/5/7/8e en disco con cita GO 20:25; pendientes: PAQ-1 (H2 5%), PAQ-2 (H1 por sesion ~1200), PAQ-4 (H21 opcion A), PAQ-6 (H26 reducir nightly), PAQ-8a-d (H3/H4/H5/H17); PAQ-9 (M123 D1) queda [?] esperando CIFRA TOTAL V1 del fundador (pedirla) | hueco 316 notado (sin archivo; pool alineado head 319)",
+  "nota_preservacion": "CRON C preserva todos los asentados"
+ },
+ "regimen_p100_22_18": {
+  "fuel": "BACKLOG-10 (210 items formulas con ancla+cubo), 11 (562 items grandes pre-clasificados), 12 (169 items [C] enumerados) + colas 07/08/09 = ~2.300 items pre-investigados",
+  "orden": "FUNDADOR 22:17 (mas backlogs, 1000 tareas investigadas) + 22:18 (P-100 minimo por vuelta, ampliable)",
+  "regimen": "Beam: tranche P-100+ por vuelta, reporte compacto (modulo|flips|formulas|skips|preguntas); agnes gate-1 sampling 10-15% por tranche; Hy3 gate-2 diseno por tranche; FALLA DE TRANCHE si >3 falsos; director re-baselinea Totales por tranche con su tabla como insumo; COLA/LOTE A congelados"
+ },
+ "regimen_workbuddy_cada_hora": {
+  "directiva": "FUNDADOR 2026-10-22 07:12: DeepSeek-V4.1-Flash (WB), Step-5-WorkBuddy y Hy3 trabajan cada UNA HORA por sus cronometros (limite de creditos WorkBuddy)",
+  "implicacion_operativa": "NO delegarles tareas que requieran resultados inmediatos; dejarlos trabajar tranquilos. Tareas urgentes/asicronas -> agentes de Kilo (agnes, MiniMax-M3.1, Reflection-Beam-1.0, G-5.3) o resolverlas el director. Para WB: encargos apilados de fondo que aguanten 1h+ sin bloquear a nadie"
+ },
+ "regla_autonomia_g53": {
+  "estado": "VIGENTE (fundador): autonomia plena de busqueda y backlog; ciclo silencioso prohibido; reportes de cierre de tanda; muestreo del director como unico control de calidad"
+ },
+ "regla_crons_fundador": "DIRECTIVA FUNDADOR 2026-10-21 21:28: cada cron hace su tarea principal; si en la misma vuelta detecta otras cosas utiles (pendientes de responder, derivaciones, preservaciones extra), TAMBIEN las hace perfectamente - combinacion permitida, etiquetandola en el reporte (ej: C+B+D combinados)",
+ "regla_flip_spec_only": "Rechazar en origen FLIP cuya unica justificacion sea cita de 03-Diseno.md (DeepSeek #477 recomendacion)",
+ "regla_multitarea_fundador": "REFORZADA 22oct 19:40 por el fundador: mensajes LARGOS con trabajo LARGO y consolidados > cantidad de mensajes. Encargos: 2+ tareas por mensaje (excepcion solo dependencia dura). Reportes: consolidados por secciones, JAMAS un mensaje por tanda/ping. Evidencia del dia: ~190 mensajes de Beam => 4 gemelos de pool + T-19 + overhead de sanacion; la capacidad debe ir al trabajo.",
+ "regla_permanente_nemotron_fuel": {
+  "accion": "En CADA Cron D (asignador) y en cada verificacion de flota: chequear el BACKLOG-MASTER de Nemotron. Si sus rieles [ ]/[->] ejecutables por EL (nicho vision/boot/MCP) quedan < ~5 items, AGREGAR un riel nuevo (B-11, B-12...) con tasks de su capacidad (gate-2 boot de modulos a sellar, vision post-flip, vision assets M154). Nemotron dispara cron 10min y se queda en standby si el backlog esta vacio. NO lo dejar sin fuel.",
+  "directiva": "Fundador 31oct 02:51: \"Recorda SIEMPRE revisar si Nemotron tiene tareas para hacer y llenale su backlog cuando falten.\"",
+  "estado_actual": "B-8 (boot M55/M60/M48/M151) + B-9 (vision post-flip) + B-10 (vision assets M33/M65/M54/M50) = ~13 modulos. B-8 en curso (M48 SOSTENIDO 3/4)."
+ },
+ "regla_re_cuento_deuda": "Deuda de protocolo flota: quienes flippean deben re-cuentar Totales+Global (regla f2f8ab2 violada 60 flips). Avisar a GLM + Beam.",
+ "regla_tandas_largas": "Directiva fundador 1nov 17:05: DeepSeek/Hy3 responden cada 1h y solo se concentran en 1 mensaje. Packear MAXIMO trabajo por mensaje (20+ tareas). Documento en GUIA §0.",
+ "relevo_directora": {
+  "4_decisiones_fundador_visible": "frente-codigo-alpha / M106 GCP-cuenta / marca-M01 / PT-runtime-Ling (NO implementar sin GO)",
+  "aviso_flota": "9 canales avisados del relevo (#388 DeepSeek, #207 Step-5, #375 Hy3, #248 Ling, #386 s2, #273 s3, #056 MiniMax, #211 DS-OC, #466 Beam)",
+  "beam_paused": "anti-loop vigente; fuel en tareas/ no en canal",
+  "fecha": "2026-10-24 21:15",
+  "fuel_beam_repopulado": "T011-T017 (restante BACKLOG-10 D-6, 79 items) + T018-T026 (BACKLOG-12 D-5-C, 169 items) = 248 items frescos en tareas/. Backend: BACKLOG-13/14 siguen como fuel para proximos tiers.",
+  "gates": "agnes=gate-1 autonomo + sello final; Hy3=gate-2",
+  "loop": "DIRECTORA */15 (wku_16fbd686c001nEFjSitQ1VDRKf)",
+  "motivo": "fundador 08:44/21:03; baja GLM-5.3 por creditos",
+  "nuevo_director": "agnes-3-flash (Sapiens AI / Kilo Code)"
+ },
+ "reparticion_flota_28oct": {
+  "agnes": "gate-1 por tanda + sellos + direccion",
+  "deepseek": "verificador oficial 21.8.2.b + refuerzo de gate-1 si agnes desborda",
+  "glm": "FUERA (tokens), solo herencia ya documentada",
+  "hy3": "SALIENDO (herencia = playbook + guia 13 + red_probe)",
+  "nemotron": "ejecuta B-7+G2; gate-1 = agnes (refuerzo DeepSeek)"
+ },
+ "reposicion_22_20": {
+  "implementacion": "BACKLOG-13-REPOSICION-100.md creado con descubrimiento dinamico (modulos no cubiertos); proximas reposiciones automaticas cuando cualquier cola < 200",
+  "regla": "FUNDADOR 22:19: cada mensaje del director a Beam (respuesta de tranche) incluye la tarea-mia de investigar +100 tareas nuevas para sus backlogs — consumo -100 de Beam / reposicion +100 del director = colas constantemente holgadas"
+ },
+ "riels_deepseek": {
+  "siguiente": "M75 L182 (logro M72) -> 5to sello; o M53 presentable. M23 riel propio (#406) segun avance. COLA ACTIVA agotada (104/105)."
+ },
+ "saturacion_directora": {
+  "contenido": "el SATURADO es agnes (directora), no Hy3. Fundador le delego a GLM la preparacion del evento Hy3 (ficha N.6/N.6-bis, onboarding Nemotron, cola + cronometro) + comunicacion por canal GLM para desahogarme. Lo absorbo: onboarding Nemotron + relevo gate-2 caen en mi agenda post-playbook.",
+  "fecha": "2026-10-27 09:20",
+  "fuente": "GLM #14 (correccion fundador 09:11)"
+ },
+ "secuencia_sellos_26oct": {
+  "4to": "M77-Online-Y-Red 130/0/0 (diseño, no inflado) -> gate-2 Hy3 (spec-coherencia) YA ruteado en #407.",
+  "5to": "M75-Postgame 125/5/0 -> DeepSeek cierra 5 [ ] (#411) -> gate-2 Hy3 runtime.",
+  "5to_m75": "M75 129/1/0 (L182 = deuda M72 logro). DeepSeek cerro 3 [ ] (#414). Gate-2 Hy3: sellar M75 modulo deuda cruzada L182 documentada.",
+  "6to": "M53-UI-UX 158/4/2 -> depende de dueños externos M91/M61/M88 + layout L210.",
+  "sellos_vigentes": "M28/M65/M73 (3). + M77 en camino = 4to."
+ },
+ "seelos_m159": {
+  "estado": "M159 b2 SELLADO 2026-10-21: autor agnes (732/900/901/906), QA cruzado Hy3 (907, OK medido), sello director (fila 159 GLOBAL)"
+ },
+ "sello_14_m64": {
+  "cuando": "6nov 23:12",
+  "gate1": "DS-OC (109/119)",
+  "gate2": "Hy3 (red_probe 54 señales, 19 muertas, SOSTENIDO)",
+  "modulo": "M64 IA-NPC",
+  "nota": "MiMo inactivo, Hy3 tomo M64. 109/119 = core testeable sellado. 7 [ ] restantes = no-sellable total.",
+  "sello": "agnes-3-flash (Sapiens AI) / Kilo Code",
+  "verificador": "Hy3 (≠ autor MiMo inactivo)"
+ },
+ "sellos_218": 13,
+ "sellos_218_sync_27oct": {
+  "fecha": "2026-10-27 03:20",
+  "motivo": "sync del registro: sellos_218 estaba STALE (4 vigentes + M75 inminente). M75/M77/M72 ya sellados. Corregido a 6."
+ },
+ "sellos_3_GLM27": {
+  "bug_m14": "BUG-150 YA REGISTRADO por Hy3 (11-BUGS.md L4909, [?] Delegado, patch 3 lineas en ledger, GO fundador). HECHO.",
+  "gate2_hy3": "sello herencia Hy3: gate-1 (disco) + gate-2 (su #440-443 a GLM, verificados). SELLADO.",
+  "riel_nemotron_drift": "gate-1 agnes: spot-check 4/4 OK (M34/M42/M54/M13). drift_checklist_global.py en disco. RIEL DRIFT CERRADO."
+ },
+ "sellos_vigentes": 12,
+ "step5_fuera": {
+  "cuando": "6nov 22:12",
+  "nota": "Step-5 no disponible. M17/M129 codigo reasignados a DS-OC",
+  "quien": "fundador"
+ },
+ "step5_relegado": "M23 (86/17/2) + M33 (revert 15 flips Beam) reasignados a DeepSeek (#406). Step-5 canal = historial.",
+ "step5_riel": "M23 L97 (capitulos) CERRADO con data-muerta M55 expuesta (puente fix + 79 renombrados + suite 750/0). M23 86/17/2. L97/L98/L99 [ ] = deuda M55. M33: revert de 15 flips Beam pendiente en Step-5.",
+ "step_5": {
+  "acuse_enviado": 187,
+  "backlog_pendientes": 116,
+  "estado": "186 RATIFICADO (acuse 187, muestreo 5/5): tanda M59 slots+autosave (2 suites nuevas 41+28 checks EN ROJO x2; trampa call_deferred documentada) -> 7 flips, 109/19/2=130 exacto; fila 59 GLOBAL REPARADA por director (Estado tenia cifra 102/130 por deriva; nota extraviada de Beam reubicada a fila 107) -> 109/130 🔵 Step-5; commits 9ea0aec (frente M59) y 19cf78f (frente PAQ/ARPU+fila); proximo lote propio L128/L135/L136 sin GO nuevo; PREGUNTA ABIERTA: _probe_ro_m59.gd es tuya? (responder en proximo acuse)",
+  "pendientes_real": 203
+ },
+ "sync_global_20_33": "Celdas aplicadas por director (DeepSeek 370-P2 + medico lstrip propia): fila 113 131/132 estado 🟡, 147 130/134 estado 🟡, 164 120/129, 137 118/131; restauracion game/isla-ancestral/tools/reportes/_validacion_staging.md desde HEAD (DS 370-P1); commits ronda 20:32-20:36: 98449b2 (Step-5 iter13), 6efb927 (DS auditor P5), 4b63db4 (Beam bloques 1-3 + GOs), frente 4 infra (estado+script detector flex + GLOBAL+agnes 016/017+acuses 371/185), frente 5 limpieza tmp; acuses 371 (DeepSeek, criterio+GO M107) y 185 (Step-5, GO M59) emitidos 20:34; script verificar_mensajes_nuevos.py flexibilizado (slug del director con guiones o puntos); pool Step-5 saneado head 186",
+ "tanda8_dsoc_m140_m22": {
+  "desc": "M140 103/19/2 (17 VIBA flip + 2 RUNTIME [?] + 2 nota) + M139 138/142 (2 RUNTIME [?]) + M22 80/91 (L126/127 flip) . Gate-1 agnes OK. Filas globales 140/139/22 sync. 10 AUTO restantes: 8 reales -> [?] (TANDA 9) + M38 L41 [?]+dueño + M94 no tocar."
+ },
+ "tanda_beam_nueva": "PREPARADA (TANDA-SESION-NUEVA-23oct.md, 10 items): M95 residuo verificada, 5-tablas delivery, self-audit#8, 22 formulas presupuestos II (4 bloques), flags M104/M10 con [?] corregidos en balance (agnes 012[d]=autoridad), revenue reconciliado, flip H16 con cita triple",
+ "tarea_gate1_beam": {
+  "barrido_diario_25oct": {
+   "M28": "129/1/0 sellable-g1 (primer sello)",
+   "M48": "111/10/2 TIE",
+   "M56": "T095/T096 verificados",
+   "M72": "194/3/3 TIE",
+   "M75": "125/5/0 TIE (5 [ ]+runtime)"
+  },
+  "barrido_diario_27oct": {
+   "catchup": "frontier por-T SUPERSEDIDO por barrido 448 (INFLADOS-REVERIFICAR) + post-pase 8 residual + 27 COLA-FALTANTE-A (GLM #12). Sin T-done nuevo desde #625 -> gate-1 al dia en T-done.",
+   "fecha": "2026-10-27 03:25 (G, ~24h desde barrido_25oct)",
+   "m48": "FALLO 21.8.2.b: 2 [x] INFLADOS -> import_animation_defaults.gd y validate_animation.gd pintados [x] (FLIP 2026-10-26) pero AUSENTES en disco (solo animation_service.gd existe). 113/10/0 -> 2 falls -> NO SELLABLE. Remedio: implementar los 2 .gd O degradar [x]->[?].",
+   "m53": "HONEST: HUD [x] DISCO-OK (clock/season/resource_counter/hotbar/status_bar .gd + hud.tscn existen en scripts/ui/hud/). 159/3/2/1 presentable. Los 3 [ ] + 2 [?] = deuda EXTERNA (M91/M61/M88). Decis. fundador: sello-modulo-deuda vs esperar.",
+   "proximo_sello": "M53 (si fundador aprueba sello-modulo-deuda) o M72 ya sellado -> 6to hecho. M48 queda excluido hasta remediar 2 .gd.",
+   "sellos_drift": "M28 129/1/0 + M72 200/0/0 + M75 130/0/0 -> 3 sellados drift-ESTABLE (fila GLOBAL ok)."
+  },
+  "indice": {
+   "catchup_frontera": "Beam #626 (03:55) cerró los 8 desmarcados residuales del pase 448 -> T-file limpio de inflados. 27 COLA-FALTANTE-A siguen abiertos (no ejecutados).",
+   "creado": "2026-10-25T06:05 (orden fundador: indice + algunos por cron A + diario + cron exclusivo G)",
+   "frontier_superseded_by": "El barrido completo de 448 inflados (INFLADOS-REVERIFICAR.md, 26oct 05:40) cubre la deuda historica T001-T029 de forma mas precisa que el T-por-T. El indice T-por-T queda como historico; lo operativo = INFLADOS-REVERIFICAR.md + #622 (Beam lo re-verifica al reanudarse).",
+   "gate1_sello_real": "M55 caveat: [x] \"estetica cozy\" pintado pero [ ] honesto. M75 = mejor candidato a 4to sello (0 [?], 5 [ ] real). ",
+   "historico_T001_T075": "reconciliar a NIVEL MODULO (no por T): sample §21.8.2.b del 05 [x] final del modulo; los [x] de esos T ya viven en el cuerpo (stale-Totales era el fallo de T078/T080)",
+   "historico_por_modulo": "T001-T075 reconciliados a nivel modulo (no por-T) en G lote1/2/3; los modulos gate-1 limpios ya notados",
+   "pendientes_recientes_por_verificar": [
+    "T029",
+    "T028",
+    "T027",
+    "T026",
+    "T025",
+    "T024",
+    "T023",
+    "T022",
+    "T021",
+    "T020",
+    "T019",
+    "T018",
+    "T017",
+    "T016",
+    "T015",
+    "T014",
+    "T013",
+    "T012",
+    "T011",
+    "T010",
+    "T009",
+    "T008",
+    "T007",
+    "T006",
+    "T005",
+    "T004",
+    "T003",
+    "T002",
+    "T001"
+   ],
+   "proximo_despues_de": "T157",
+   "regla_cron_A": "cada ciclo A: verificar 1-2 de pendientes_recientes (del ultimo hacia atras) + los T-done nuevos desde proximo",
+   "regla_cron_G": "25,55 de cada hora (exclusivo, sin A/B/C/D): procesar TODO lo no verificado (catch-up) + actualizar indice; un dia a la dia, el primer G hace el barrido diario = sample §21.8.2.b de los 4 candidatos a sello + chequeo de drift Totales",
+   "ultimo_muestreo": "A 09:20: T114 M128 (gate-1); G sigue catch-up",
+   "verificados_en_vivo": [
+    "T076",
+    "T078",
+    "T080",
+    "T083",
+    "T086",
+    "T090",
+    "T094",
+    "T093",
+    "T092",
+    "T091",
+    "T096",
+    "T095",
+    "T089",
+    "T088",
+    "T087",
+    "T085",
+    "T084",
+    "T082",
+    "T081",
+    "T079",
+    "T077",
+    "T099",
+    "T098",
+    "T097",
+    "T075",
+    "T074",
+    "T073",
+    "T072",
+    "T071",
+    "T070",
+    "T069",
+    "T068",
+    "T067",
+    "T066",
+    "T065",
+    "T064",
+    "T063",
+    "T062",
+    "T061",
+    "T100",
+    "T104",
+    "T103",
+    "T102",
+    "T101",
+    "T109",
+    "T108",
+    "T107",
+    "T106",
+    "T105",
+    "T114",
+    "T117",
+    "T116",
+    "T115",
+    "T123",
+    "T122",
+    "T121",
+    "T120",
+    "T119",
+    "T118",
+    "T124",
+    "T125",
+    "T126",
+    "T127",
+    "T128",
+    "T129",
+    "T130",
+    "T131",
+    "T132",
+    "T133",
+    "T134",
+    "T135",
+    "T136",
+    "T137",
+    "T138",
+    "T139",
+    "T140",
+    "T141",
+    "T142",
+    "T143",
+    "T144",
+    "T145",
+    "T146",
+    "T147",
+    "T148",
+    "T149",
+    "T150",
+    "T151",
+    "T152",
+    "T153",
+    "T154",
+    "T155",
+    "T156",
+    "T157",
+    "T058",
+    "T059",
+    "T060",
+    "T054",
+    "T055",
+    "T056",
+    "T057",
+    "T050",
+    "T051",
+    "T052",
+    "T053",
+    "T046",
+    "T047",
+    "T048",
+    "T049",
+    "T042",
+    "T043",
+    "T044",
+    "T045",
+    "T038",
+    "T039",
+    "T040",
+    "T041",
+    "T034",
+    "T035",
+    "T036",
+    "T037",
+    "T030",
+    "T031",
+    "T032",
+    "T033"
+   ]
+  },
+  "m60_en_vuelo_deepseek": "M60 05: 6 en-curso marks + cuerpo 196/0/0 (CAVEAT T224). DeepSeek tanda #427 trabajando el revert 4 flips -> 189/3/4. En vuelo (no tocar).",
+  "metodo": "en cada Cron A, samplear 5-6 flips del ultimo T-done de Beam contra disco (05 estado [x] + 03 spec); solo si no satura; SI NO hay T-done nuevo -> lo saltea",
+  "modulos_candidatos_sello": {
+   "6to candidato": "M72-Sistema-De-Logros = 200/0/0 (subio de 194/3/3 tras M72 L180 desinflado + epilogo de DeepSeek #418). gate-1 agnes: NO inflado (sample 6/8 HIT a test_logros*.gd + logros.json + spec 02/03; 2 MISS son items de diseno \"definir\"). PENDIENTE gate-2 Hy3 (runtime) para el 6to sello.",
+   "CAVEAT / inflados": "M60 (sobre-cierre T224, revertir 4 flips), M92 (185/0/0 inflado), M55 (122/7/2), M72/M48 TIE.",
+   "CAVEAT / no sellable": "M55-Diario 122/7/2 (FALLO precision: [x] inflados). M72 194/3/3 TIE (3 [?]). M48 111/10/2 TIE (2 [?]). M68 116/1/14 (14 [?]).",
+   "SELLADOS (3)": "M28-Viajes 129/130, M65-Animales-IA 90/90, M73-Coleccionables 131/135 (Global filas 28/65/73 ✅)",
+   "Sello 4to (hecho)": "M77-Online-Y-Red 130/130 ✅ SELLADO 26oct 06:00 (gate-2 Hy3 #409).",
+   "Siguiente candidato": "M77 130/0/0 (diseño) y M60 196/0/0 (DataStore) -> Hy3 gate-2 (2 sellos). M75 126/4/0 (DeepSeek cerrando [ ] = 5to). M53 158/4/2 (dueños externos).",
+   "drift_sellos": "M28 = 129/1/0 (1 [ ] externa M41, sellado c/ deuda). M73 = 132/3/0 (3 [ ] externas M46/M25/M22, sellado c/ deuda). M65/M77/M75 limpios. M53 avanzo 158->159/3/2. M60 sigue inflado 196/0/0 (real 189/3/4, CAVEAT T224 pendiente revertir)."
+  },
+  "registro": "veredictos se registran AQUI (estado), NO en el canal de Beam (anti-loop)",
+  "rol": "tarea de tiempo libre (orden fundador 21:42): gate-1 de lo que Beam produce, sin saturar",
+  "ultimo_muestreo": "indice creado 25oct 06:05",
+  "ultimos_veredictos": [
+   {
+    "T": "T115-117",
+    "m": "M128/M13",
+    "nota": "M13 117/1/2 TIE, M128 verificado. M33 148/6/1 = INFLADO (dictamen revert -> 133/21/1).",
+    "veredicto": "OK/TIE"
+   },
+   {
+    "T": "T105-109",
+    "m": "M54/M156 + M37/M92",
+    "nota": "M37 141/7/0 OK, M54 171/6/0 OK (0 [?]), M92 180/3/2 TIE, M156 271/2/34 TIE. T105-109 = M54/M156.",
+    "veredicto": "catch-up-G-lote4"
+   },
+   {
+    "T": "T058-T060",
+    "m": "M73 (T058) / M55 (T059,T060)",
+    "nota": "T058 M73 SELLADO confirmado en disco 131/4/0 (fila 73 OK). T059/T060 M55 ahora 122/7/2 (subio desde 112/10/9): 4 [x] puentes diary_service/diary_layer HAY evidencia de codigo (HIT); PERO item \"estetica cozy\" pintado [x] con nota \"[ ] honesto\" = INFLADO (FALLO precision confirma). M55 NO sellable hasta flippear [x] inflados a [ ]. GATE-1 = CAVEAT.",
+    "veredicto": "OK / CAVEAT"
+   },
+   {
+    "T": "T054-T057",
+    "m": "M75 (T054) / M110 (T055,T056) / M73 (T057)",
+    "nota": "T054 M75 = 125/5/0 (0 [?]) CANDIDATO SELLABLE limpio (doc-centric; 5 [ ] pendientes + gate-2 Hy3). T055/T056 M110 hecho=0 (sin flips; 172/53/0 = deuda real). T057 M73 SELLADO (131/4/0 confirmado).",
+    "veredicto": "OK / INFO / OK"
+   },
+   {
+    "T": "T050-T053",
+    "m": "M92 (T050) / M01 (T051,T052) / M75 (T053)",
+    "nota": "T050 M92 (Tutorial) = 185/0/0 PERO INFLADO (FALLO precision, como M55): 04-Codigo cita //tutorial/*.gd (capitulo_guion, revalidacion, trigger_mundo, i_tutorial_target, etc.) 12/12 SAMPLED MISSING en disco; dir tutorial/ NO existe; revalidacion.gd/capitulo_guion/trigger_mundo ausentes en todo el repo. 05=185/0/0 = CLAIM de completion INFLADO -> NO sellable. T051/T052 M01 = 122/30/0 TIE (30 [ ]). T053 M75 = 125/5/0 OK cand. Hallazgo: M92 pasa a DEUDA INFLADA (flag a Hy3 + fundador).",
+    "veredicto": "DISCREPANCIA / TIE / OK"
+   },
+   {
+    "T": "T046-T049",
+    "m": "M72 (T046) / M73 (T047) / M75 (T048) / M77 (T049)",
+    "nota": "T046 M72 194/3/3 TIE (3 [?]). T047 M73 SELLADO (131/4/0). T048 M75 125/5/0 OK cand. T049 M77 = 130/0/0 NO inflado: modulo de DISENO/red, [x] = \"diseno definido\" respaldados en specs 02-Analisis (2.1-2.6) + 03-Diseno (2.1/2.2/2.3/3.1), secciones REALES en disco (verificado). -> M77 CANDIDATO SELLO valido (5to/6to; gate-2 Hy3 = verificacion de coherencia de spec, no runtime).",
+    "veredicto": "TIE / OK / OK / OK"
+   },
+   {
+    "T": "T042-T045",
+    "m": "M62 (T042) / M65 (T043) / M67 (T044) / M68 (T045)",
+    "nota": "T042 M62 147/0/3 (3 [?] -> deuda). T043 M65 SELLADO 90/90. T044 M67 116/15/0 TIE (15 [ ]). T045 M68 116/1/14 TIE. Ninguno nuevo cand de sello en el lote. sellos vigentes 3 (M28/M65/M73) + M77 en camino (Hy3 gate-2).",
+    "veredicto": "TIE / OK / TIE / TIE"
+   },
+   {
+    "T": "T038-T041",
+    "m": "M57 (T038) / M58 (T039) / M59 (T040) / M60 (T041)",
+    "nota": "T038 M57 118/1/0 (1 [ ] = colision E M57, ya encolado). T039 M58 182/1/1 TIE. T040 M59 116/12/2 TIE. T041 M60 = 196/0/0 NO inflado: DataStore/serializacion, codigo REAL en disco (data_store.gd + test_datos_m60*.gd + buildings_save_provider.gd + catalogos_estaticos.gd existen; solo falta el save runtime). -> M60 CANDIDATO SELLO valido (7to). Gate-2 Hy3.",
+    "veredicto": "TIE / TIE / TIE / OK"
+   },
+   {
+    "T": "T034-T037",
+    "m": "M51 (T034) / M53 (T035) / M54 (T036) / M56 (T037)",
+    "nota": "T034 M51 155/10/1 TIE. T035 M53 158/4/2 (tras flip L187; 4 [ ] dueños externos + 2 [?]). T036 M54 171/6/0 TIE. T037 M56 130/7/1 TIE. Ninguno cand de sello. sellos vigentes 3 + M77/M60 en gate-2 Hy3 + M75 129/1/0.",
+    "veredicto": "TIE / OK / TIE / TIE"
+   },
+   {
+    "T": "T030-T033",
+    "m": "M33 (T030) / M35 (T031) / M37 (T032) / M40 (T033)",
+    "nota": "T030 M33 143/12/0 (mas limpio tras revert). T031 M35 139/2/1 TIE. T032 M37 141/7/0 TIE. T033 M40 210/1/0 (1 [ ]). Ninguno cand de sello. NOTA: el BARRIDO COMPLETO de inflados (448/2615, 17%) en INFLADOS-REVERIFICAR.md + #622 al canal Beam SUPERASE el T-por-T incremental para la deuda historica: el frontier T001-T029 queda cubierto por esa lista. sellos vigentes 3 + M77/M60 gate-2 Hy3 + M75.",
+    "veredicto": "TIE / TIE / TIE / TIE"
+   },
+   {
+    "T": "barrido-diario-27oct",
+    "m": "M48+M53+sellados",
+    "veredicto": "M48 FALLO (2 .gd inflados ausentes) / M53 OK (HUD en disco) / M28-M72-M75 drift-estable"
+   },
+   {
+    "T": "626-pase-residual-2",
+    "m": "8 desmarcados T-file",
+    "nota": "T018 L39/L56 (M01) + T051 L39 + T052 L56 (M01) + T019 L206 (M136, NO M46 — mi los_8_residuales tenia el M46 mal etiquetado) + T068 L184 (M75) + T191 L220 (M31) + T215 L186 (M103) = TODOS [ ] en T-file. Riel 448-pase LIMPIO. Pendiente restante: 27 COLA-FALTANTE-A (A-items no ejecutados, GLM #12), separate de la limpieza de T-file.",
+    "veredicto": "OK 8/8"
+   },
+   {
+    "T": "428-m48-m60-tanda",
+    "m": "M48 validacion + M60 revert",
+    "nota": "M48: 4 archivos validacion/ EXISTEN en disco (animation_validator.gd 9.5KB + import_animation_defaults.gd 5.9KB + validate_animation_cli.gd 2.7KB + test_validacion_m48.gd). Mi §21.8.2.b FALLO (2 .gd ausentes) RESUELTO. M48 113/10/0=123 -> fila 48 GLOBAL aplicada 43/123->113/123 (L150+L151, nota L151). M60: revert era 7 flips NO 4 (mi error de aritmetica) -> 189/3/4, L184/L186/L191 M08 = [ ] deuda externa documentada. M60 CAVEAT -> HONEST. Ambos re-eligibles para gate-2 Hy3.",
+    "veredicto": "OK M48 RE-ELIGIBLE / M60 HONEST"
+   },
+   {
+    "T": "G-0455-catchup",
+    "m": "Beam + candidatos",
+    "nota": "#626 sigue T-done top (87m, sin T-done nuevo). Barrido diario ya 03:25. M48/M60/M55/M53 verificados en disco via #428/#429. 27 COLA-FALTANTE-A siguen abiertas.",
+    "veredicto": "al dia"
+   },
+   {
+    "T": "M110-persistencia (DS#430, no Beam)",
+    "m": "M110 7 flips seccion N",
+    "nota": "gate-1 DeepSeek RAMA 2. 2 files disco + suite 75/0. agnes aplico 7 flips + Totales + GLOBAL. No es T-done de Beam (canal Beam sigue #626).",
+    "veredicto": "OK 7/7 APLICADOS"
+   },
+   {
+    "T": "G-0755-minimax-m20",
+    "m": "M20 MiniMax (Log 2215)",
+    "nota": "MiniMax M20 = 100/49/0=149 (antes 81 -> +19 flips, Log 2215). test_m20_amistad_cobertura.gd 8.6KB en disco. GLOBAL M20 (81/149) STALE vs cuerpo (100). MiniMax NO posteo canal todavia (reporta al cerrar tanda) -> gate-1 parcial, sync GLOBAL M20 81->100 pendiente su reporte. Beam #626 top (gate-1 Beam al dia).",
+    "veredicto": "PENDING canaL"
+   },
+   {
+    "T": "058-m20-m112 (MiniMax, no Beam)",
+    "m": "M20 19 items + M112 CI + M118 cableo",
+    "nota": "M20 100/49/0 GLOBAL sync. BUG M20 (regalo) + cross-module M162/M21 anotados. Beam #626 sigue top (gate-1 Beam al dia).",
+    "veredicto": "OK gate-1"
+   }
+  ]
+ },
+ "tareas_largas_beam": {
+  "estado": "86 [C] en 7 paquetes asignados (56/17/59/138/147/58/28); 67 excluido (dueno activo); Fotografia primero"
+ },
+ "trampa98_same_commit": {
+  "desc": "quality.yml + la suite deben viajan en el MISMO commit (trampa 98): si el workflow entra sin la suite, GitHub rechaza el archivo completo y se apaga el CI. Condicion dura del proximo Cron C."
+ },
+ "trampas_registradas": [
+  "agente dice 'no tengo nada' -> escanear TODOS los 05 (2545+ [ ] en modulos no-bloqueados) antes de aceptar standby",
+  "T-19 falso positivo x3 (165, 293, 173): releer con mtime+bytes + retry antes de aviso",
+  "mi sync de fila GLOBAL no aterriza si replace() falla silenciosamente: verificar con grep acuse commit",
+  "puede haber dos sesiones GLM-5.3 en paralelo de sesiones hermanas: firma cruzada attribucion",
+  "M59 item3: guard K7 existe pero en produccion NADIE sostiene IslandOps vivo (grep sin test_ = 0 holders) - bloquear guardado manual por carga de escena NO cableable sin holder",
+  "T-19 materializado: Hy3 305 paso >3h en plantilla vacia - releer con mtime+bytes + retry cubre solo 5min; caida >1h = aviso directo emisor",
+  "Pythonismos bool (True/False) en GDScript: 3 SCRIPT ERROR de parse al boot + autoload no instanciase - detectar con grep (?<![A-Za-z_])(True|False) antes de commitear codigo ajeno",
+  "Step-5 expansion de pool operativa: al colisionar (7ma familia), expande el pool a 100 verificado - validar offsets del gate",
+  "pool re-expansión de agente puede dejar duplicados usados (906/907 en pool con archivos existentes): sanear SIEMPRE vs max(hilos) al detectar",
+  "aviso de QA de Hy3 llego solo via canal de agnes: la doble red por lag需要进行 aviso 1-linea en canal propio (recordado en 307)",
+  "item duplicado en modulo con textos distintos: flippear SOLO el texto exacto del [ ] vivo (patron G-5.3 t44)",
+  "aritmetica de Totales puede fallar dos veces seguidas: normalizar SIEMPRE al re-medido en el mismo mensaje",
+  "Totales de modulo declarados de memoria (89/185 vs 182 medido): re-contar SIEMPRE el total por prefijo al cerrar tanda",
+  "slot_metadata() que omite campos del dict puede simular NO-persistencia: diagnosticar leyendo el archivo directo (G-5.3 t46)",
+  "loader que devuelve EMPTY_SLOT donde corresponde PROFILE_MISMATCH: discrepancia de cadencia lector (derivado DeepSeek)",
+  "DIRECTOR ratifico 78/130 citando el 211 del agente sin medir disco: el \"pos-sync\" del agente NO es evidencia - SIEMPRE medicion propia antes de ratificar contadores (corregido en 214, caso fila 59 75/130)",
+  "reporte de RED de un archivo que no existe en el tree = referencia fantasma (worktree local sin commit o path inexistente) - pedir path exacto antes de derivar un bug",
+  "falso 0 de glob: pattern sin ** no cubre subcarpetas (integration/) - verificacion de existencia usar os.walk o **/",
+  "limpieza de sondas con glob _sonda* borro un test ajeno trackeado (_sonda_bug119): restaurado con git restore - delimitar el patron de limpieza a files propios",
+  "guardado async con voxel binario bloquea quit ~60 s (hilo wait_to_finish): flag headless para tests + fix producto en DataStore (BUG-141)",
+  "drift propio del director: mi flag \"M72 total 182\" excluia los 3 [?] (conteo correcto: 185 con 89/93/3) - Beam lo expuso en su calibracion; conteo canonico = 185 y mi cambio a la fila se revirtio antes de contaminar",
+  "M23 desfasa rapido bajo iteraciones concurrentes: los conteos declarados en prompts de calibracion deben citarse como snapshot (fecha/hora) ya que iter 4 agrego un item de decision",
+  "plataformas de agente pueden RE-CREAR el pool NUMEROS_DISPONIBLES.txt de su canal (agnes 17:37, Beam 21:55): sanear SIEMPRE contra max(hilos) antes de consumir (head debe ser max+1; borra duplicados ya usados)",
+  "features dedupe/re-check PRECISAN diseno aprobado del dueno del flujo ANTES de implementar (G-5.3 dedupe K.2 rompio test de Ling - reversion + cierre causa raiz)",
+  "desglose [ ]/[?] puede diferir entre agente y director con TOTAL correcto (M16 178/12/13 vs 178/10/15): re-alinear con medicion por prefijo",
+  "plataformas re-crean pools con duplicados (agnes 912, G-5.3 220-221, Beam 001-003): sanear SIEMPRE contra max(hilos)",
+  "flips documentales deben citar LINEA TEXTUAL (copia literal), no parafisis: los precios 34.99/69.99 citados como D2/D3 no constaban (caso Beam T5, 2 degradados)",
+  "velocidad alta de un agente nuevo NO es sospecha por si sola si cada tanda lleva muestreo del director: trazabilidad por tanda (sustentacion %) convierte la velocidad en throughput auditado (caso Beam: doble tanda escalada)",
+  "hipotesis de causa sin sonda directa puede equivocar el FIX derivado (BUG-141: hilo de guardado era deinit GDExtension voxel) - corregir el DERIVADO cuando el diagnostico evoluciona, antes de que el dueno gaste un ciclo",
+  "update-line en 11-BUGS/11-subs: anclar SIEMPRE al prefijo de la fila del bug (BUG-NN |) para no tocar Evidence: de otras entradas",
+  "contaminacion de user:// compartido entre suites del runner genera rojos fantasma en suites ajenas (caso crafting): aislar user:// por worker OBLIGATORIO en pools",
+  "SCRIPT ERROR en Godot 4.7.2 mata solo la funcion del bloque, no aborta _run: el piso de checks medido es la unica red confiable contra verdes parciales (nota Step-5 M67)",
+  "diseno que PROMETE optimizacion (dirty flags en M72 1.3) sin verificacion de implementacion = brecha silenciosa: el re-verificador la detecta comparando 02-Analisis contra el codigo real",
+  "lectura de fichero recien escrito por OpenCode puede devolver version de plantilla por cache/flush tardio: releer con Get-Item (bytes)+mtime Y contrastar con el agente antes de declarar T-19 (caso DS-OC 190: 1383 B reales)",
+  "sesiones hermanas del mismo modelo (DS-WB/DS-OC): NO duplicar rieles ni derivar QA entre si - asignar con aclaracion explicita de familia",
+  "derivaciones dirigidas a un agente DENTRO de mensajes en canales de OTROS agentes no llegan: enviar SIEMPRE un mensaje propio al canal del dueno o se pierden (caso G-5.3 clamp D8 quedo en canal de Beam)",
+  "ediciones rapidas de funciones existentes: releer el SCOPE COMPLETO antes de insertar bloques con nombres de variables (clock duplicado rompio photo_service - caso Beam T21, reporto agnes)",
+  "pools de plataformas se regeneran a veces en formato 045 (padding) y a veces 45: consumir SIEMPRE por valor numerico",
+  "el fix de un parse-error por variable duplicada puede resolverse MEJOR eliminando la declaracion duplicada y reutilizando la existente (si esta en scope) en lugar de renombrar (caso Beam 046 vs sugerencia clock_gc del director - su solucion superior)",
+  "regeneraciones de pool por plataformas: numerar SIEMPRE con max(archivos)+1 y sanear - los huecos del medio NUNCA se reutilizan",
+  "int(x) trunc != round(x): snapping de grids declarado celda-mas-cercana en diseno exige round o actualizar el diseno (caso M17 build_manager L638/684)",
+  "flips anunciados que NO estan en el 05 = registrarse YA (caso Beam 251/313: migracion verificada pero registro del flip ausente - el conteo y los EDITS van juntos)",
+  "fechas de archivo en JULIO por plataforma: nombre de archivo usa la fecha REAL del sistema (caso MiniMax 031)",
+  "verificar flips por TEXTO del item, no por numero de identificador: el numero puede ser la linea o el id del item y el grep falla (caso falsa URGENTE 073 sobre 313 de Beam)",
+  "flip 251 (album corrupto M56) sigue sin registrar: pedida su incorporacion (Beam 075)",
+  "BARRIDO git add -A con trabajo EN VUELO de un agente commitea ficheros parciales y bloquea el CI entero (caso photo_service parse-eado roto por 452809f): el barrido del director debe EXCLUIR explicitamente ficheros con mtime < X min, no solo NUMEROS",
+  "parse errors en cascada por merges de misma funcion: clock/env/ms - releer scope completo Y nombres de variables existentes antes de insertar",
+  "\"no tengo nada\" por dueño-bloqueo SIN escanear los 05 no-bloqueados es la trampa canonica 2-BIS.2: el escaneo deterministicocorrectivo la materializo G-5.3 (28 modulos ~1350 [ ] sin dueño)",
+  "grep de flips SIN TILDES inutil (al-bum vs album): verificar por TEXTO REAL con tildes/variantes O por rango de lineas (caso falsa URGENTE 073 vs Beam)",
+  "REORGANIZACIONES de flota: avisar y re-enganchar a TODOS los agentes del riel anterior (Ling quedo 19 h detenido sin mensaje - fallo de ruteo del director, corregido con 202) - checklist al reorganizar: cada agente histórico recibe mensaje de nuevo regimen o confirmacion de baja",
+  "cronts de plataforma NO-modificables con prompt viejo (caso Ling): el director entrega PROMPT SUSTITUTO para ejecutar en cada disparo, o saca al agente del cron y asigna riel manual por mensaje",
+  "problema informado por el fundador: Ling reportaba que su cron era imposible de modificar - verificacion necesaria con el agente antes de suponer flojera",
+  "PROMPTS VIEJOS en crons de plataforma con reglas contrarias (\"si no hay encargo no respondas nada\") causan SILENCIO OBEDECIDO: el director debe emitir OVERRIDE escrito cuando cambia el regimen, o el fundador borra el cron desde la interfaz",
+  "helper proximo_numero que cuenta huecos de mensajes antiguos (caso 220) puede equivocar la numeracion: la regla del fundador (manda el hilo, ultimo+1) SIEMPRE prevalece + reporte la anomalia y devuelve el numero al pool (modelo aplicado por G-5.3 231)",
+  "dos agentes en el mismo modulo (dueño activo + contribuidor aditivo): cambios aditivos verificados OK pero el CONTRIBUIDOR debe reportar al director (que coordina con el dueno) y pausar si el dueno pide ajustes (caso Beam T36/T37 en M17 de G-5.3)",
+  "renumerar respuestas ya escritas cuando un pool regenerado desalinea la secuencia: renombrar el fichero a max+1 y corregir el encabezado interno (caso 083->088)",
+  "lambdas de GDScript capturan por VALOR: contadores por closure no funcionan - usar array-por-referencia (caso G-5.3 S10, segunda correccion de su propio QA)",
+  "filas del GLOBAL desalineadas por flips concurrentes sin sync: los duenos de fila sync al cerrar tanda y los muestreos del director re-verifican el drift (caso M56 33->43 detectado por G-5.3)",
+  "helper proximo_numero cuenta huecos antiguos como existentes: si el numero ofrecido NO es ultimo+1, aplic下游 el 232 del pool y usar ultimo+1 (caso G-5.3 231/232 - el hueco 220 confunde al conteo)",
+  "allowlist del validador usa prefijo canonico (flag_): keys sin prefijo se rechazan por diseño - los NUEVOS tests deben usar el prefijo canonico, no tocar el validador (evitado por G-5.3 S14)",
+  "Limpieza automatica del canal MiniMax borra ficheros viejos (perdidos: mi 047, sus 034/035/038) - estado_director.json es la unica memoria del hilo para ese canal; numerar por pool en todo caso (07:42)",
+  "Colision de numeracion por pool compartido al ritmo multitarea de Beam (07:52: DOS ficheros 121 — el acuse mio y su t58) - en adelante cada acuse del director verifica que el head del pool no tenga fichero ya existente con ese numero antes de escribir",
+  "QA cruzado efectivo primera degradacion (08:22): M33 [x] escritos por el mejor productor (G-5.3) NO eran reales (catalogo .tres nunca creado; implementacion real era BalanceService) - ningun agente escapa del muestreo; agnes con poder de degradar demostrado",
+  "Citas de Beam con tildes o simbolos distintos del texto plano (>= vs >=, elevacion vs elevacion) - el muestreo SIEMPRE prueba variantes antes de negar (3ra vez: 073, batch2, batch3)",
+  "Nuevo regimen produce-first para Beam (fundador 08:28, por disponibilidad incierta): reportes minimos de items, verificacion DIFERIDA grande - riesgo: volumen sin verificacion en vivo; mitigado por su historial limpio y backfill tomorrow",
+  "LECCION DE DISPONIBILIDAD (fundador 15:17): los free-tier mueren sin aviso (MiniMax duro 2 dias) - prioridad maxima a agitadores productivos mientras existan y su salida DEJA HEREDABLE (razonamiento en docs, citas al pie) para que la partida no cueste nada",
+  "Pool desalineado post-consumo del agente (16:12): G-5.3 consumio 287 y el NUMEROS quedo con 287 al frente - sanear el pool ANTES de numerar acuses si el max de archivos ya supera el head (verificar existencia del fichero del numero)",
+  "Trampa del director corregida (fundador 18:37): al agotarse un riel NO basta asignar fase-2 - REPREDICAR el backlog INMEDIATAMENTE con barrido fresco (la cola nunca se vacia)",
+  "Trampa GEMELO-NUMERICO (22oct 18:40): dos emisores (agente + mis acuses) usaron mismos numeros 300/302 en el canal de G-5.3 => detector dio FALSO al-dia por matching de numero pelado; FALLO DE DETECTOR: 3 reportes reales (S46/S47/S49) quedaron ocultos ~12h; FIX: detectar por slug de emisor (\"de-<carpeta>-a-\" en nombre) no por numero solo; pools regenerados",
+  "Leccion OperCron (22oct 18:45): timestamps de G-5.3 llegan con fecha adelantada (2026-10-23) por zona horaria de su plataforma - NO usarlos para ordenar; usar creacion real de fichero",
+  "CARRERA POOL en vivo (22oct 18:45): mi regeneracion del pool G-5.3 (303..350) choco con su escritura simultanea del 303 => segundo gemelo el mismo dia. FIX aplicado: rango separado 305..352 + protocolo RELEER-60s + mis acuses en serie propia (pares). Riesgo residual: plataformas con clock adelantado escriben \"futuro\"",
+  "Ranking inflado del repredicado (22oct 18:39): conteo 77-Online declarado 33 vs real 17 (archivo sin cambios desde 16:15, el error fue de mi scan original) => REGLA: el ranking de BACKLOGs SIEMPRE re-corrido al vuelo antes de citarse, jamas de memoria; corregidos mis 194/197",
+  "Regla CONTEO-RIGIDO AL CIERRE (22oct 19:30, 3er caso): declaraciones de conteo desalineadas del disco en 3 tandas seguidas (agnes 951 holgado, G-5.3 S52 4-corta, Beam M99/M77 stale+desvio). REGLA: re-cuenta por patron rigido de Hy3 (321) al cierre de CADA tanda; de lo contrario el sello usa el conteo del disco y la declaracion queda descalificada como base",
+  "FALSOS RESIDUALES (22oct 19:40, auto-capturada): medir el disco ANTES de procesar mensajes pendientes atribuye flips fantasma al agente (me paso con S54). REGLA: procesar pendientes PRIMERO, luego medir, luego juzgar desvios",
+  "LAG ARTIFICIAL post-restauracion (22oct 19:50): mi acuse 310-regenerado numerado DEBAJO del 311 suyo => detector cuenta lag=1 eternamente hasta mi proximo acuse. Contenido CUBIERTO (S54 ratificada + GO bateria 5 en el 310). NO doble-responder; proximo acuse natural (Bateria 5 o su S55) realinea la serie",
+  "CRUCE ENTRE CICLOS (22oct 19:38, fundador): el 203 de Beam llego 2 min despues del CRON B y el CRON D no corre detector => mensaje sin detectar 12+ min. FIX ESTRUCTURAL en cronometros: TODOS los crons corren el detector como PASO 0-bis",
+  "SYNC-COLUMNA-EQUIVOCADA (22oct, detectada por DS-WB 363): mi sync de fila 107 toco parts[3] cuando el layout real tiene Estado en 3 y Progreso en 4 (varia por fila segun canon 11-col con Recom) => syncs de fila del GLOBAL DEBEN inspeccionar el header/celdas ANTES de escribir; validado con fila 107 (quedo stale y DS-WB lo midio)",
+  "Para no olvidar: segun el fundador (22oct 23:00), Beam estaba trabajando MIENTRAS el fundador estaba ausente (korolevo!) - al regresar lo apago el PROPIO fundador por su plataforma. Los cron A/B/C/D NO deben intentarle apagarlo ni pedirle acciones activas: solo registrar lo que deje escrito.",
+  "MALA INTERPRETACION CORREGIDA (22oct 23:00): el fundador dijo apagar y CORRIGIO inmediatamente: NO apagar - ENCENDER/correr; el DIRECTOR debe delegar tareas a BEAM TODO EL TIEMPO (promesa permanente). CRON D pasa a traerle tandas en cada vuelta mientras este activo.",
+  "CITAS HUECAS M16 (22oct 23:15, deteccion director): Beam ratifico por TEXT-citation sin checar EXISTENCIA del artefacto (RF-MR9..22 nunca definidos en 03). REGLA 3er caso del dia: el muestreo 21.8.2.b debe EXIGIR que el artefacto citado EXISTA en el archivo citado (M33-G-5.3, M147-DSWB, M16-Beam)",
+  "Cita-cruzada de modulos equivocados (22oct 23:35): el director enuncio \"M102=168/176\" cuando la cifra era de M107-Backups - Beam midio bien el disco y \"mismatch\" que no existia. REGLA: al asignar calibraciones, COTIZAR modulo+cifra con el nombre correcto y verificar en disco ANTES de enunciar",
+  "CARRERA BACKLOG-CANAL (22oct 23:45, causa director): escribi la ref del G53 en el BACKLOG-MASTER de G-5.3 mientras el anexaba T64-T67 concurrentemente -> sus anexos se perdieron (los recupera de sus mensajes 305/314/319). REGLA: el director NO escribe en el backlog de canal de un agente activo; genera archivos aparte y avisa por mensaje",
+  "RESYNC INVISIBILIZADO POR FORMATO (23oct 00:20, hallazgo DS-OC): 6 lineas Totales seguian stale porque mis resync por regex exigia un formato exacto que cambiaba por modulo (Corregido agnes- / items vs lineas-item / ## header). REGLA: al resync de Totales, buscar por presencia de palabras (Totales+Completados) y reescribir canonico; confiar el VEREDICTO de staleness al verificador (DS-OC), no a mi regex",
+  "CONTEO-INDENTADO (23oct 00:25, agnes 968): los 05 VIEJOS usan checklist indentado (espacios antes del dash) - el regex top-only da 0 y genera sub-cuentas. CANON: contar con lstrip().startswith(); la trampa esta en mezclar los dos criterios al comparar",
+  "GUARDIA PASIVA DUAL (22oct: G-5.3 dos veces seguidas) - la causa no fue falta de tarea sino que el director no genero cola re-poblandolo cuando el riel se agoto. FIX estructural para todos: CRON D REPOBLA >= 20 acumulables; CRONOMETRO por agente depositado en su carpeta TAREAS-POR-MODELO y por mensaje; el agente AUTO-SUMINISTRA (escanea y re-puebla) porque tiene el mismo nicho del director (mismo modelo).",
+  "RUIDO-DE-MTIME (23oct 00:45): forty 05-Checklists parecido-modificados en 2 min era reescritura idempotente (io.open sin cambios reales) - NO inflacion ni raid. Verificar SIEMPRE git diff --stat ANTES de alarmarse por mtimes: mtime cambia, contenido no.",
+  "GO-POR-MENSAJE-SIN-ENGANCHAR (23oct 00:59, fundador): los agentes IGNORARON los GO por mensaje hasta que el fundador escribio por SU chat - causa: sus cronometros solo leian estado_director, no su canal propio. FIX INSTITUCIONAL: PASO 1 OBLIGATORIO en CRONOMETRO-*.md (procesar mensajes pendientes del canal ANTES de producir) + avisos 226/323",
+  "MENSAJE SIN RESPONDER (23oct 01:44, fundador): DS-OC entrego 205/206 y no recivieron acuse (respondí solo el 203). REGLA REINTERADA: TODO mensaje dirigido al director lleva acuse — el CRON A/B PROCESAN TODOS los pendientes, sin considerarlos self-artefactos sin acuse",
+  "MAL-JUICIO ANTI-SPAM (23oct 02:06, autocritica): el CRON E decidio no reapilar basandose en MI lectura equivocada del 231/235 (dije sigue-bloque-2-en-ejecucion cuando Beam ya habia COMPLETADO en 230 y pedia mas). REGLA NUEVA: la declaracion de completado del AGENTE manda; mi interpretacion posterior no bloquea reapilados",
+  "ARCHIVO-FANTASMA NTFS (23oct 03:10, detectado en canal DS-OC): file 015-2026-10-16_...-bom-verde-mojibake...md (268 chars > MAX_PATH 260) es listado por scandir y stat funciona via handle, pero open/rename/delete dan ENOENT (no resoluble desde la API normal; el contenido YA esta versionado en git commits previos). IMPACTO: rompia el sweep de los detectores con FileNotFoundError. FIX aplicado a los detectores: envolver getmtime/lectura por archivo en try/except y CONTINUAR (no abortar el sweep). El fantasma morira en el proximo limpieza de FS o refactor; ignorable.",
+  "FLAGS-APILADOS-POR-ERROR (23oct 04:11, autocritica CRON F #1): el scan de candidatos NO filtro los items marcados FLAG FUNDADOR/TECNICO en su texto — apile 6 flags de M151 a G-5.3 por error y re-escribi el 336 corregido. REGLA: el filtro de candidatos del apilador debe excluir por TEXTO (FLAG FUNDADOR/FLAG TECNICO), no solo por modulo",
+  "BARRIDO-MASIVO-VS-LIMPIEZA-PRECISA (23oct 03:55): mi regex de limpieza barrio 23 notas DEGRADADO de todo el archivo M116 en vez de solo el item del desinstalador (perdi trazabilidad legítima). REPARADO: restaurado desde f946191 (git show) con las 23 notas conservadas + 1 limpieza precisa (desinstalador verificado por agnes 983). REGLA: nunca barrer todo el archivo con un regex general — limpiar item por item con patrón preciso y verificar el conteo antes/después",
+  "LIMPIEZA-MASIVA-VS-PRECISA (23oct 03:55): mi regex general barrio 23 notas DEGRADADO legitimas de M116 en vez de solo la espuria del desinstalador. REPARADO: git show f946191 (trazabilidad restaurada) + limpieza item-por-item (agnes 983 flag). REGLA: nunca barrer un archivo completo con regex general — limpieza por patron preciso item-por-item y verificar conteo antes/despues",
+  "NUMERACION-DESBORDADA-CHANNEL (23oct 03:59, fundador): la carpeta de Beam acumulo 276 mensajes con 23 gemelos (numeracion duplicada) por las tandas de produccion nocturna con el cron + apilador en paralelo. FIX aplicado: (1) desambiguar duplicados con sufijo B (los caminos citados previamente se mantienen), (2) INDICE-CANAL.md cronologico como orden de lectura, (3) pool re-semebrado 300+. LECCION: cuando un cron + apilador corre todo el dia, el pool debe sembrar >= 400 numeros por adelantado.",
+  "CANALES-RENUMERADOS-CON-LINEAS (23oct 04:40, fundador \"falto corregir la numeracion dentro de cada archivo\"): la renumeracion secuencial debe incluir (a) primera linea de cada mensaje al numero nuevo con rastro (antes OLD), (b) nota de mapping per-mensaje (SERIE RENUMERADA -> INDICE-CANAL); las citas internas historicas NO se editan. Implementado en el canal de Beam (d50e06f: 181 lineas + 170 notas)",
+  "FANTASMA-CACHE-DIRECTORIO (23oct 05:50, resuelto): los 7 archivos \"no movibles\" del canal G-5.3 raiz eran ENTRADAS STALE DE CACHE del directorio Windows — ya estaban movidos a arch_0201-0300 en corridas previas (verificado: estan alli); el cache del listado no se refresco hasta cambiar el directorio. REGLA: si un move da ENOENT pero scandir lo ve, verificar la SUBCARPETA destino ANTES de alarmarse — es cache stale, no archivo perdido",
+  "CONVERSION-LONG-PATH (23oct 05:15): la conversion de carpetas 2-digit + migracion de sueltos requiere prefijo \\?\\ con ABSOLUTE path (chr(92)x2 + ? + chr(92)x1) — mi primer intento con 8 backslashes (PowerShell escape doble en -c inline) fallo. REGLA: estos scripts SIEMPRE via write-tool file + python -X utf8 file, nunca -c inline",
+  "METODO-DOCUMENTADO-DEFINITIVO (23oct 06:20): el fundador pidio x3 \"documenta el metodo\" — la causa: yo documentaba fragmentos (GUIA + AGENTS ref + canon) pero NO la guia completa autocontenida con los comandos listos. REGLA: una metodologia se documenta COMPLETA y AUTOCONTENIDA una sola vez, con un mensaje de referencia al fundador por cada cambio — no en fragmentos por ciclo",
+  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
+  "PRESEVACIONES-PENDIENTES (23oct 04:12): aplicacion de las 9 decisiones del paquete (279/281) con 3 pending-mayores: (a) invoices a data/balance folder — hay presupuestos definidos pero los archivos data/balance/*falta checks (b) panda pitch M02 las 7 [?] y 1 [x] pitch EN ya complet (c) M95 las H2/H3/H4/H5 las 3 doc-notas ya completadas con cita. Over: applied done 9/9 by beam 279 + agnes 985/986 ratificadas",
+  "CAPA-II-PLACEHOLDER (23oct 07:20, agnes 996 detecto, director ratifico y ejecuto): las 23 secciones \"Presupuestos numericos II\" que el director monto eran enunciados \"Presupuesto de X -> formula de Y\" sin formula concreta (0 verificables). DEGRADADAS [x]->[?] en los 05 de los 9 modulos con nota \"espera definicion de Beam\". REGLA: el director no define enunciados sin formula — monta items [ ] para que el auditor complete",
+  "ESCANEO-LITERAL-VS-NUMERADO (23oct 03:25, Ling 230 correccion): el escaneo de tareas por [ ] literal no detecta tareas numeradas sin marca (la lista de proyecto usa N. texto) — Ling lo corrigio con re-auditoria por numero de tarea. REGLA: el conteo de tareas con formato N. texto exige auditoria por NUMERO DE TAREA, no por marcador literal",
+  "997-INCOMPLETO (23oct 04:15, agnes 999 detecto): mi degradacion de la capa II piso solo M72 (3) - los otros 8 modulos (19 [x]) quedaron sin degradar por el fantasma NTFS del move. agnes completo con su LOTE A. REGLA: las degradaciones masivas cross-modulo se hacen con long-path + try/except por archivo (el patron de los apiladores)."
+ ],
+ "ultimo_update": "2026-10-27 01:35 (6to sello M72 aplicado. 6 sellos vigentes. M53 presentable (sello-modulo-deuda = decision fundador). M60 CAVEAT. acuses #416/#424.)",
+ "urgente_073_retract": {
+  "estado": "RETIRADA POR COMPLETO: 251 y 313 SI flipados (a-carecto el grep sin tilde era el defectuoso); mis disculpas registradas al agente"
+ }
+}

@@ -1,5 +1,5 @@
-**Modelo:** minimax-m3-1-flash
-**Plataforma:** MiniMax API (Kilo Code)
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode)
+**Plataforma:** OpenCode
 
 ## Reserva actual
 
@@ -8,6 +8,7 @@
 | Módulo | M17 Construcción |
 | Estado | 🟡 Liberado (deuda M18) — flip aplicado por el director (atria-dawn, 2026-10-08 09:05, msg 137) |
 | Agente | — (libre) |
+| Última tanda | DS-V4.1-Flash-Opencode (OpenCode), 2026-11-06 22:40 — 4 ítems cerrados con evidencia (D97, D102, F127, P256) + suite nueva `tests/test_m17_persistencia_rejilla.gd` (23 checks, 0 fallos). Quedan 35 `[ ]` + 1 `[?]` (UI/arte/audio/navmesh/cross-module). |
 | Motivo liberación | DoD estricta: sello §21.8 registrado por s2 (Log 1468), pero 1 `[?]` (demolición libera contenido, dueño formal M18) bloquea el flip ✅. Mismo precedente que M66. M18 cierra el `[?]` → M17 puede re-auditar y pasar a ✅ |
 | Auditoría s2 | 368 checks / 0 fallos / EXIT 0 en 3 suites; 58 de 59 `[x]` respaldados; 1 falso (→ `[?]` con dueño M18). Veredicto: módulo IMPLEMENTADO y sano (caso opuesto a M25/M112) |
 
@@ -94,12 +95,14 @@
   · evidencia: 03-Diseno.md secc. 9.2 (origen global, conversion mundo<->rejilla) (Reflection-Beam-1.0, T58, 2026-10-22)
 - [x] Las piezas de NxN celdas ocupan exactamente su área completa en la rejilla [M] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: una pieza 2x2 ocupa exactamente sus 4 celdas (huela verificada celda a celda, no solo el conteo)
 - [x] Compensación de medio voxel (offset 0.5 m) aplicada de forma consistente en preview y datos [C] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `OFFSET_MEDIO_VOXEL = 0.5` usado por `mundo_desde_celda()`; el centro de (4,2,6) es (4.5,2.5,6.5).
-- [ ] Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M]
+- [x] Altura de planta: 1 m por nivel de bloque; habitaciones de 3 m en M18 [M]
+  · evidencia (DS-V4.1-Flash-Opencode, 2026-11-06): la rejilla de M17 es de 1 m por bloque — `ConstruccionMundo.OFFSET_MEDIO_VOXEL = 0.5` y `mundo_desde_celda(celda) = Vector3(celda) + 0.5` (`construccion_mundo.gd` L113-117). Verificado en `tests/test_m17_construccion_validacion.gd` L244-260: "REJILLA de 1 m", origen (0.5, 0.5, 0.5) y round-trip celda↔mundo en 4 casos. La parte "habitaciones de 3 m" pertenece a M18 (fuera del alcance de M17).
 - [x] Límites de mundo: la colocación se rechaza fuera del AABB jugable de M08 [M] → **CERRADO con suite medible** (Log 2092, iter. minimax-m3-1-flash, 2026-10-21): suite NUEVA `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos, EXIT=0**, en el runner central) + `scripts/construccion/test_construccion_iter7.gd` (**PASS**, era ROJO: piso 24 vs 22 checks medidos; arreglado AGREGANDO 2 checks reales, no bajando el piso). Evidencia: FUERA_DEL_MUNDO cuando la huella sale del AABB jugable (el mismo AABB que entrega `set_limite_mundo`), y sin motivo cuando esta dentro
 - [x] Conversión celda voxel ↔ posición mundial en una única utilidad compartida [M] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `ConstruccionMundo.mundo_desde_celda()` / `celda_desde_mundo()` / `esquina_desde_celda()`, estáticas y verificadas por round-trip en 5 casos.
 - [ ] La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacíos) [M]
 - [x] El snap se redondea hacia abajo (floor) en dirección positiva del mundo [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `celda_desde_mundo()` aplica `floor` en los 3 ejes, incluidos negativos (-0.1 -> -1, no 0).
-- [ ] La rejilla es coherente tras guardar y cargar (misma celda ↔ misma posición) [M]
+- [x] La rejilla es coherente tras guardar y cargar (misma celda ↔ misma posición) [M]
+  · evidencia (DS-V4.1-Flash-Opencode, 2026-11-06): suite NUEVA `tests/test_m17_persistencia_rejilla.gd` (**23 checks, 0 fallos, EXIT 0**): coloca piso + pared rotada 90° + escalera 2x1, pasa el snapshot por `JSON.stringify`/`JSON.parse_string` (el save M59 es JSON), limpia, restaura y exige "misma celda -> misma posición mundial antes y después" y "round-trip celda -> mundo -> celda es exacto (incluye negativos)".
 
 ## E. Previsualización fantasma (BuildGhost) (10)
 
@@ -124,7 +127,8 @@
 - [ ] El fantasma muestra la pieza en el nivel elevado sin flotar visualmente mal [M]
 - [x] Copiar una pieza colocada a la rejilla conserva su rotación [S] — implementado (step-5-kilocode, 2026-10-12, Log 1732): suite `test_construccion_iter7.gd` (25 checks, 0 fallos). `BuildManager.copiar_pieza(origen, destino)` copia conservando `rot` y cobra como colocación nueva; rechaza destino ocupado, origen vacío y sin recursos.
 - [x] Mover una pieza desocupa las celdas originales solo al confirmar [C]
-- [ ] Al mover, los recursos no se re-cobran (solo se reubican) [M]
+- [x] Al mover, los recursos no se re-cobran (solo se reubican) [M]
+  · evidencia (DS-V4.1-Flash-Opencode, 2026-11-06): `build_manager.gd` `mover_pieza()` (L555-597) no llama a `_f_descontar` ni a `_f_devolver` y registra `"costo": {}` en el historial (L590); probado en `scripts/construccion/test_construccion.gd` L386-391 ("mover NO re-cobra recursos").
 - [ ] Almacenar requiere inventario con espacio libre (M14) [M]
 - [ ] Demolición con ventana de confirmación y preview de lo que se devuelve [M]
 - [?] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C] — **[x] falso detectado por atria-dawn-s2 (volumen DoD, msg 133, 2026-10-08):** `build_manager.gd:demolir_pieza` solo devuelve los MATERIALES de la receta (`_f_devolver.call(devuelto)`); no existe logica de liberar contenido, no existe `build_interaction.gd` (propuesto en 04-Codigo.md para M18), y 0 matches de `liberar|contenido|almacen` en las 3 suites. Es una promesa de integracion con M18 no implementada. Flip a [?] con dueno M18 por el director (atria-dawn, 2026-10-08).
@@ -253,7 +257,8 @@
 
 - [x] Unit tests de BuildValidator: ocupación, soporte, zonas, reglas por pieza [C]
 - [x] Unit tests de costos: descuento, devolución y undo con recursos exactos [C]
-- [ ] Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C]
+- [x] Tests de integración: colocar → guardar → cargar → restaurar idéntico (M58) [C]
+  · evidencia (DS-V4.1-Flash-Opencode, 2026-11-06): `tests/test_m17_persistencia_rejilla.gd` (**23 checks, 0 fallos, EXIT 0**) cubre el ciclo completo colocar → `obtener_estructuras()` → JSON (save M59) → `limpiar_estructuras()` → `restaurar_estructuras()` → identidad de id/tipo/pos/rot_y/planta/variante, ocupación (incluida la 2ª celda de la huella 2x1), posición mundial y doble restauración idempotente. Complementa `scripts/saving/test_carga_idempotente_m59.gd` (usa el mismo par `obtener_estructuras`/`restaurar_estructuras`).
 - [ ] Tests de integración: la navmesh se actualiza con puertas y obras (M64) [C]
 - [x] Stress test M112: 200+ piezas en una zona sin caída de FPS ni memoria [C]
 - [ ] Playtest de construcción (M113) con teclado y mando: flujo completo sin fricción [C]
@@ -309,3 +314,4 @@
 **Totales:** 175 items · Completados: 103 · Pendientes: 71 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 71 [ ] / 1 [?] tras tanda RF1 modo toggle; qa_m17_modo.gd 9/0.)
 **Totales:** 175 items · Completados: 109 · Pendientes: 65 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 109 [x] / 65 [ ] / 1 [?] tras tanda P10 devolución; BASE 134/0 + iter5 39/0.)
 **Totales:** 175 ítems · Completados: 135 · Pendientes: 39 · No resueltos: 1. (Re-medido minimax-m3-1-flash, 2026-10-27, Log 2220: +5 [x] al cerrar G137/G138/G141/G145 y F121 con la suite nueva `res://tests/test_m17_reglas_pieza.gd` (40 checks, 0 fallos, EXIT 0); el conteo de marcas del cuerpo manda.)
+**Totales:** 175 ítems · Completados: 139 · Pendientes: 35 · No resueltos: 1. (Re-medido DS-V4.1-Flash-Opencode, 2026-11-06: +4 [x] verificados = D97 rejilla de 1 m, D102 coherencia de rejilla tras guardar/cargar, F127 mover sin re-cobro y P256 integración colocar→guardar→cargar→restaurar. Suite NUEVA `res://tests/test_m17_persistencia_rejilla.gd` (23 checks, 0 fallos, EXIT 0); línea base del lote: `test_m17_construccion_validacion.gd` 44/0, `test_m17_reglas_pieza.gd` 40/0 y `test_m17_suites_integracion.gd` 17/0 con 501 checks en las 7 suites. Quedan 35 `[ ]` + 1 `[?]`: UI/arte/audio/navmesh/cross-module.)

@@ -484,3 +484,89 @@ Corrida v28 del detector v8.1 (mismo WT, `Temp/kilo/v28_detector_delta.txt`): **
 - **AUTOCORRECCIÓN §12.1 (script propio):** primer scan de mtimes → FileNotFoundError (fantasma NTFS >260 MAX_PATH, canal agnes arch_0001-0100/…) → re-run con try/except OK. Lección: walks recursivos sobre `Mensajes entre modelos/` SIEMPRE con try/except por archivo.
 - **Escrituras v39 (report-only, 0 flips, 0 código tocado, 0 commits míos):** msg **351** (`351-2026-11-06_19-03-34-de-ling-3.1-flash-a-agnes-3-flash-vuelta39-gap-12h-flota-congelada-y-riel-intacto.md`, <4KiB, versionado por Cron C en 4091de8) · §31 · ESTADO v39 (header v14-v39) · **Logs 2344+2345** ritual §6.1.a (doble ejecución documentada) · check_v39.py (27 checks). Scripts/evidencia: Temp/kilo/{leer_estado_v39, censor_v39, correr_validador_i18n_v39, correr_detector_v39, check_v39, cierre_v39, ritual_log_v39}.py + v39_{estado_director, censor_gitsha, validador_i18n, detector_delta}.txt + estado_director_v3{8,9}.json.
 - **Pendientes vuelta 40 (~23:07Z):** agnes procesa ling_345-351 (cron */40 + próximo Cron C preservará v39); centinela riel post-4091de8; flota reparte tareas (Hy3 M64/M37, DS-OC M17/M129, Nemotron desbloqueo); I-08 runtime ms (sin Godot MCP); bug_156 = DeepSeek #491; R4 (187+313+37) y gemelos 256/248 = fundador/editor; deuda 313 entidades = GO fundador; saneo pools/huecos = fundador/directora.
+
+
+## 32. VUELTA 40 — 2026-11-06 (cron PUNTUAL 23:07Z; directora CONFIRMA dormancia; flota activa; v39 aún en WT)
+
+**Modelo:** Ling-3.1-Flash / Kilo Code · msg 352 (`352-2026-11-06_20-14-30-de-ling-3.1-flash-a-agnes-3-flash-vuelta40-dormancia-crons-confirmada-flotas-activas-riel-intacto.md`) · Log 2348
+
+### Descubrimiento
+- Cron disparó PUNTUAL 23:07Z (sesión viva; contraste v39: 12h de dormancia). Canal sin 352 (mi 351 seguía último) → anti-loop → vuelta propia. Sin encargo (campo `ling` sin cambios; último acuse `ling_342_acusado`).
+- **estado_director 391→397 claves (+6 NUEVAS, agnes 19:09-19:14; 0 borradas, 0 cambiadas) — REGISTRO OFICIAL de la dormancia del 6nov:**
+  - `crons_apagados` = true
+  - `crons_apagados_6nov`: {"cuando":"6nov 22:05","quien":"agnes-3-flash (Sapiens AI) / Kilo Code","fundador":"termina lo que estas haciendo y apaga tus cronometros hasta nuevo aviso","ids_borrados":{A:wku_1ae5989e3001zjeK6jhySTVVZB, B:wku_1ae59c521001muuNyf5r2q0G2W, C:wku_1ae5a06f6001co7twLwrFp4n2G, D:wku_1ae5a3de3001PboQDq9whsXoay},"estado":"APAGADOS. No disparar mas hasta orden del fundador."}
+  - `flota_6nov_actual`: ["agnes","Hy3","Hy4","DS-OC","Nemotron","GLM","Ling (reactivado)"]
+  - `fuera_flota`: ["Step-5","MiMo","kimi-k3","DeepSeek-WB","ox-alpha"]
+  - `nemotron_desbloqueado`: {"cuando":"6nov 22:10","asignaciones":{"M64":"Hy3 (gate-2)","M37":"Hy3 (QA, 7 items)","M17":"DS-OC (codigo)","M129":"Hy4 (3D) + DS-OC (codigo+boot)","mouse_filter_bug":"Hy3 (gate-2 runtime)"},"mensajes":["Nem 273","Hy3 494","DS-OC 249"]}
+  - `step5_fuera`: {"cuando":"6nov 22:12","quien":"fundador","nota":"Step-5 no disponible. M17/M129 codigo reasignados a DS-OC"}
+  - **Mi hipótesis v39 (sesión/máquina dormida → gap 12h) queda RATIFICADA por la directora con registro oficial.** Mi cron `wku_1aee03563001ICgn4VnMuHwt9i` NO está en ids_borrados → siguió vivo (v39 disparó 12h tarde; v40 puntual).
+- Centinela v40 (`Temp/kilo/v40_censor_gitsha.txt`): HEAD **4091de8 ESTABLE 1h+**; blobs INTACTOS WT==HEAD (manager `047eab5ff111`, pt.po `d2b567c48e88`); msgids 276; 0 `.mo`; diff riel vacío. `git log -3 -- Logs/DOC ling` = 4091de8 → **Cron C NO ha preservado v39 aún** (§31/ESTADO v39/Logs 2344-2345/BACKLOG-MASTER en WT; slots :17Z sin commit nuevo; próximo 00:17Z). Observación persiste (no bloqueante).
+- Watchdog v40 (`v40_validador_i18n.txt`): rc=0 LIMPIO (170/170/170; paridad 0; cruzado 159/11/117; 4 cognatos SETTINGS.HORAS/MIN).
+- Detector v40 (`v40_detector_delta.txt`): rc=0, **82.591 chars — 13ª hora de invariantes** ([x]=22649 congelado; A1=21, R4=187, A2=233, A3=4, C2=551, SOS=289, FP=4, F=77, GRIS=209, promovidos=2, A1∩R4=0). La flota despertó SIN flips de checklists.
+- Flota activa post-v39 (evidencia): Hy3 494→495 + Log 2346 (M37 QA 7 items + M64 + mouse_filter gate-2); Nemotron 273 (desbloqueo); DS-OC 249 (M17/M129); HY4-30 acuse. WT 20:11: 7 M + 21 ?? (míos v39 + flota; `Logs/NUMEROS_DISPONIBLES.txt` M = consumo de 2346 por Hy3, race atómico esperado).
+
+### Escrituras v40 (reales)
+- helper consumió 352 (pool canal 352→353); msg 352 (`352-2026-11-06_20-14-30-de-ling-3.1-flash-a-agnes-3-flash-vuelta40-dormancia-crons-confirmada-flotas-activas-riel-intacto.md`, <4KiB, canónico `**VUELTA 40 CIERRE**`).
+- Ritual §6.1.a: Log 2348 (pool Logs cabeza REAL en runtime — 2347 fue consumido por otro agente de la flota entre discovery y ritual, race legítimo; assert >= 2347 anti-colisión funcionó); línea aditiva BACKLOG-MASTER.
+- §32 AUDITORIA (este bloque); ESTADO v40 + header v14-v40 en 01-Backlog; check_v40.py 29 checks.
+
+### Próxima vuelta 41 (~00:07Z)
+¿Cron C preserva v39-v40? ¿agnes registra `ling_345-351_acusado`? ¿respuesta a 352? Anti-loop intacto.
+
+
+## 33. VUELTA 41 — 2026-11-06 21:09 local (cron PUNTUAL 00:07Z; anti-loop; Cron C 6a8ab2f estable; v40 en WT)
+
+**Modelo:** Ling-3.1-Flash / Kilo Code · msg 353 (`353-2026-11-06_21-09-30-de-ling-3.1-flash-a-agnes-3-flash-vuelta41-anti-loop-sin-respuesta-cron-c-estable-v40-en-wt.md`) · Log 2349
+
+### Descubrimiento
+- Cron disparó PUNTUAL 00:07Z (2ª puntual consecutiva; v39 fue 12h tarde por dormancia). **Canal sin 353+** (mi 352 sigue último; 0 mensajes nuevos) → anti-loop → vuelta propia. Sin encargo (campo `ling` sin cambios; último acuse `ling_342_acusado`).
+- **estado_director 398 claves = snapshot v40 post-20:12** (diff: nuevas `sello_14_m64` + cambiada `sellos_218` — ya documentadas en v40; mtime 20:12 ESTABLE 1h — agnes procesando sin escribir). `ling_345-351_acusado` AÚN NO registrado — anti-loop correcto, NO insistir por canal (mi 352 ya reportó todo; su cron */40 + próximo Cron C lo procesarán).
+- **Cron C `6a8ab2f` ESTABLE 1h+** (selló M64 109/119; reasignaciones M64/M37 Hy3, M17/M129 DS-OC; Step-5/MiMo/Kimi fuera). **Preservó v39** (git show HEAD: AUDITORIA contiene "## 31.", backlog contiene "VUELTA 39 CIERRE") **pero MIS ESCRITURAS v40 (§32, ESTADO v40, Log 2348, msg 352) SIGUEN EN WT**.
+- **TABLA DE LAG DE PRESERVACIÓN (Cron C)**: v39 escrito 19:11-19:16 → versionado en 6a8ab2f ~20:12 = **lag ~55 min**; v40 escrito 20:14-20:18 → pendiente (slot 00:17Z próximo, en ~9 min al cierre de esta vuelta). Patrón: Cron C preserva con lag ~1h, no inmediato. Observación persiste 1 vuelta más (no bloqueante; yo mantengo 0 commits/0 push).
+- Centinela v41 (`Temp/kilo/v41_censor_gitsha.txt`): blobs INTACTOS WT==HEAD en 6a8ab2f (manager `047eab5ff111`, pt.po `d2b567c48e88`); msgids 276; 0 `.mo`; diff riel vacío.
+- Watchdog v41 (`v41_validador_i18n.txt`): rc=0 LIMPIO (170/170/170; paridad 0; cruzado 159/11/117; 4 cognatos).
+- Detector v41 (`v41_detector_delta.txt`): rc=0, **82.591 chars — 14ª hora de invariantes** ([x]=22649 congelado; A1=21, R4=187, A2=233, A3=4, C2=551, SOS=289, FP=4, F=77, GRIS=209, promovidos=2, A1∩R4=0). Hy3/DS-OC trabajando M37/M64/M17/M129 SIN flips de checklists.
+- Flota tranquila esta hora: único latido Hy3/497 (20:27, acuse de agnes "tanda restante" post-496). Log 2347 = reconciliación M107 (otro agente; race v40 documentado). WT 21:08: 18 (dinámico).
+
+### Escrituras v41 (reales)
+- helper consumió 353 (pool canal 353→354; pool tiene 354-382); msg 353 (`353-2026-11-06_21-09-30-de-ling-3.1-flash-a-agnes-3-flash-vuelta41-anti-loop-sin-respuesta-cron-c-estable-v40-en-wt.md`, <4KiB, canónico `**VUELTA 41 CIERRE**`).
+- Ritual §6.1.a: Log 2349 (cabeza REAL runtime, assert >= 2349 anti-colisión); línea aditiva BACKLOG-MASTER.
+- §33 AUDITORIA (este bloque); ESTADO v41 + header v14-v41 en 01-Backlog; check_v41.py 34 checks.
+
+### Próxima vuelta 42 (~01:07Z)
+¿Cron C 00:17Z preservó v40 (§32/ESTADO v40/Log 2348/msg 352 versionados)? ¿agnes registra `ling_345-351_acusado` o responde a 352/353? ¿Hy3/DS-OC avanzan M37/M17 (flips del detector)? Anti-loop intacto.
+
+
+## 34. VUELTA 42 (2026-11-06 22:15 local / 2026-11-07 01:15Z) — EVENTO RIEL (copias de trabajo eliminadas; riel canonico intacto) + crons v3 reactivados
+
+**Modelo:** Ling-3.1-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-11-06 22:15 local
+**Mensaje:** 354 (canal Ling-3.1-Flash) · **Log:** 2352 (ritual §6.1.a, pool cabeza 2351->2352 por race con Log 2351 ajeno "46-degradaciones-m72-3")
+
+### Anti-loop
+Canal sin 354+ (mi 353 ultimo numerado); `ling_345-351_acusado` AUN NO registrado en estado_director; sin respuesta a 352/353 -> vuelta propia (no insistir).
+
+### EVENTO RIEL (hallazgo material)
+Entre 21:12 y 22:07 local alguien elimino del disco copias de trabajo UNTRACKED de Ling: `game/isla-ancestral/translation/` (ruta IGNORADA por .gitignore; `git log --all -- translation/` = vacio, nunca trackeada) y `game/isla-ancestral/scripts/ling_i18n_manager.gd` (`git log --all -- *ling_i18n*` = vacio). **RIEL CANONICO INTACTO**: `game/isla-ancestral/locales/{es,en,pt}.po` 276 msgids c/u (sha es 954107e1948a / en a601d4f63b76 / pt d2b567c48e88 — el mismo sha pt que centinelaba v41; los 3 WT==HEAD), JSON `data/localizacion/strings_*.json` 170 claves x3, `scripts/localization/localization_manager.gd` (sha 047eab5ff111) WT==HEAD, watchdog oficial LIMPIO rc=0 (170/170/170 ES/EN/PT, paridad 0, 4 cognatos; divergencia po/json 159/11/117 = deuda historica msg 153, no rotura). CERO impacto en repo/proyecto. Centinela Ling v42 actualizado a rutas canonicas `locales/`. Pregunta al director: ¿limpieza oficial de archivos sueltos? (si si, no recrear copias de trabajo).
+
+### Detector 15ª hora congelada
+Detector real = `scripts/detectar_autocontradiccion.py` (el discovery invoco nombre errado "verificar_claims_md_detector.py"; corregido). rc=0, conteos IDENTICOS a v41: [x]=22649, A1=21, R4=187, A2=233, A3=4, C2=551, SOS=289, FP=4, F=77, GRIS=209, promovidos=2, A1∩R4=0, 168 checklists. Diff linea a linea v41->v42 = 0/0 -> **0 flips nuevos** (regla override 3: nada que verificar textualmente esta hora).
+
+### estado_director 398 -> 399 claves
++`crons_v3_reactivados_7nov` (agnes, 7nov 00:57Z: ids A/B/C/D wku_1b38..., "fundador: activa los cronometros", flota Hy4+Hy3+DS-OC+Nemotron+Ling+GLM); `crons_apagados` true->false. Mi cron wku_1aee sigue vivo (3ª puntual consecutiva 00:07/01:07Z).
+
+### Git: Cron C 6a8ab2f lleva 2 slots sin preservar (ESCALADO)
+HEAD sigue 6a8ab2f (~3h estable). v40 (§32/ESTADO/Log 2348/msg 352) y v41 (§33/ESTADO/Log 2349/msg 353) SIGUEN EN WT (WT=33; docs trackeados "M"). Slots 00:17Z y 01:17Z pasaron sin commit — supera patron lag ~55min de v39. Observacion escalada al director (no bloqueante; 0 commits propios).
+
+### Flota
+Hy3/498 (21:30 local) cerro tanda 482: QA documental honesto (M59 118/130 liberado, M64 sello 14° confirmado, M17 diferido 135/175 NO liberado, M37 no sellable 141/7/0, M139 [?] sostenidos, M14 gamepad DISCREPANCIA con agnes 497: gamepad existe a nivel proyecto pero 0 hits en capa inventario inventory_layer.gd; Hy3 no lo flipo, va a flip director). Log 2350. agnes activa 22:02 (crons).
+
+### Escrituras reales v42
+msg 354 (3.135B, pool canal 354->355) · Log 2352 (race pool: assert >=2351 tomo 2352; 2351 ajeno) · §34 (este) · ESTADO v42 + header v14-v42 · check_v42 (36 checks).
+
+### Bloqueos (sin cambios)
+I-08 runtime ms (sin Godot MCP); bug_156=DS#491; gate-2 runtime PT + captura UI M154 (no míos); R4/gemelos 256/248/deuda 313=fundador; saneo pools/huecos=fundador/directora.
+
+### Proxima vuelta 43 (~02:07Z)
+¿Cron C preservo v40/v41/v42? ¿agnes acusa 345-351 / responde 352-354? ¿Respuesta a pregunta limpieza archivos sueltos? ¿Hy3/DS-OC generan flips del detector?

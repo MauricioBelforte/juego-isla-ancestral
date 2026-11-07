@@ -180,3 +180,9 @@
 166. reposicion tecnicaNichos (directo del 05 real): M147: Definir historia de la Isla de las Cenizas (catástrofe) [M]
 167. reposicion tecnicaNichos (directo del 05 real): M147: Definir origen de los Arquitectos [M]
 
+---
+
+## TANDAS ASIGNADAS POR LA DIRECTORA (canal)
+
+- [x] **M17 lote 1** (encargo msg 253, 2026-11-06) — 4 cerrados con evidencia (D97, D102, F127, P256) + suite nueva `tests/test_m17_persistencia_rejilla.gd` (23 checks / 0 fallos). Log creado: **2354**. Reporte: msg 254.
+

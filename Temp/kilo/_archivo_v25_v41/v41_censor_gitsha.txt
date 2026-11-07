@@ -1,0 +1,10 @@
+CENSOR RIEL v41 (metodo git blob sha) — 6a8ab2f
+manager WT=047eab5ff111 HEAD=047eab5ff111 INTACTO=True
+pt.po   WT=d2b567c48e88 HEAD=d2b567c48e88 INTACTO=True
+pt.po msgids(regex ^msgid ", sin header): 276
+.mo en game/ recursivo: 0
+WT status porcelain count: 20
+git diff HEAD riel i18n: ''
+git log -3 -- Logs: 6a8ab2f Se selló M64 IA-NPC (sello 14°, Hy3 gate-2, 109/119). Se desbloqueó Nemotron B-12. Se reasignaron M17/M129 a DS-OC, M64/M37 a Hy3. Se corrigió flota: Step-5/MiMo/Kimi fuera. || 4091de8 Se pres
+git log -3 -- DOC ling: 6a8ab2f Se selló M64 IA-NPC (sello 14°, Hy3 gate-2, 109/119). Se desbloqueó Nemotron B-12. Se reasignaron M17/M129 a DS-OC, M64/M37 a Hy3. Se corrigió flota: Step-5/MiMo/Kimi fuera. || 4091de8 Se pres
+REFERENCIA v40: manager 047eab5ff111; pt.po d2b567c48e88; HEAD 6a8ab2f.

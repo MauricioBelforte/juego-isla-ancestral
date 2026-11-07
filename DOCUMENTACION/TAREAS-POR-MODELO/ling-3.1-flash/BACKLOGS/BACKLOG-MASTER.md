@@ -58,3 +58,9 @@
 - [x] Log creado: **2344** — Vuelta 39 (GAP 12h, sesión dormida): flota congelada desde 09:22Z (evidencia mtimes: último latido 06:22 local; 0 commits 12h+; estado_director mtime 2026-11-05 22:08); riel íntegro post-390652a, watchdog LIMPIO, detector 12ª hora invariante [x]=22649; Cron C 6 slots sin disparo (explicación: máquina dormida, no negligencia); corrección honesta hueco 2341 (race de segundos, era Log HY4 M18BIS); check_v39 26 PASS
 
 - [x] Log creado: **2345** — Vuelta 39 (GAP 12h, sesión dormida): flota congelada desde 09:22Z (evidencia mtimes: último latido 06:22 local; 0 commits 12h+; estado_director mtime 2026-11-05 22:08); riel íntegro post-390652a, watchdog LIMPIO, detector 12ª hora invariante [x]=22649; Cron C 6 slots sin disparo (explicación: máquina dormida, no negligencia); corrección honesta hueco 2341 (race de segundos, era Log HY4 M18BIS); check_v39 26 PASS
+- [x] Log creado: **2348** — Vuelta 40 (dormancia crons confirmada por directora, flota activa, riel intacto; msg 352)
+- [x] Log creado: **2349** — Vuelta 41 (anti-loop sin respuesta agnes, Cron C 6a8ab2f estable, v40 en WT, riel intacto; msg 353)
+
+- [x] Log creado: **2352** — vuelta 42: evento riel (copias trabajo Ling eliminadas; riel canonico intacto) + crons v3 reactivados + Cron C 2 slots sin preservar (msg 354)
+
+- [x] Log creado: **2355** — vuelta 43: cierre v42 38/0 + centinela +5 flips atribuidos DS-OC M17+4/M129+1 (legítimos, sustento verificado) + agrupador canales + Cron C 6h escalado (msg 355)

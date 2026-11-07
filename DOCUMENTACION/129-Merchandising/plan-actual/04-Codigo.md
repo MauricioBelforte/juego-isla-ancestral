@@ -1,5 +1,5 @@
-**Modelo:** SWE-1.6
-**Plataforma:** DEVIN
+**Modelo:** DeepSeek V4.1 Flash
+**Plataforma:** OpenCode
 
 # 04-Codigo.md — Módulo 129: Merchandising
 
@@ -133,3 +133,51 @@ merch/
   y el módulo puede sellar ✅ (0 `[?]`).
 - `MerchManager` expone la capa de datos; la integración real con una tienda (carrito, checkout,
   impuestos) es M95/M39/M125, no este módulo.
+
+## 7. Notas del Agente — Iteración v3 (stock + numeración de tiradas limitadas)
+
+**Modelo:** DeepSeek V4.1 Flash
+**Plataforma:** OpenCode
+**Fecha:** 2026-11-06 22:25:00
+**Estado:** Completado (item L101); queda 1 `[?]` de dueño externo (L134 → Hy4)
+
+### Qué se implementó (item L101, antes `[?]` por Familia A)
+- **Datos (`data/legal/merchandising.json`) v3:** sección `tiradas_limitadas` con 3 SKUs —
+  `artbook_pasta_dura` (500), `vinilo_soundtrack` (300), `figura_resina_8in` (200) — cada uno con
+  `producto_id` que apunta al catálogo. La versión sube de 2 a 3 por el cambio de esquema.
+- **Servicio (`scripts/legal/merch_manager.gd`):** estado dinámico por SKU
+  (`vendidas` / `reservadas` / `numeros`) y API:
+  `get_tiradas`, `get_tirada`, `get_tirada_ids`, `es_tirada_limitada`, `unidades_totales`,
+  `unidades_vendidas`, `unidades_reservadas`, `unidades_disponibles`, `get_numeros_asignados`,
+  `reservar_unidades`, `liberar_reserva`, `confirmar_venta`, `reiniciar_tiradas`.
+  Reglas: reservar no asigna número; confirmar venta consume primero reservas y asigna
+  correlativos 1..N únicos y sin huecos; sobreventa y sobre-reserva se rechazan con motivo;
+  los productos sin tirada devuelven `-1` disponibles y `sku_no_limitado`.
+- **Persistencia (contrato M59):** `get_section_name() == "merch"`, `get_save_data()` y
+  `restore_save_data()` con saneamiento (correlativos reconstruidos si el save viene inconsistente),
+  registrado como proveedor de `SaveManager` en `_ready()`. Ya no es solo una fachada de lectura.
+- **Validador (`scripts/legal/merch_validator.gd`):** valida la sección nueva — `sku` no vacío y
+  único, `producto_id` existente en `productos`, `unidades > 0`.
+- **Test (`scripts/legal/test_merch_m129.gd`):** v3, **58 checks / 0 fallos**. Cubre datos,
+  validador (incluye tiradas malformadas), rangos y ciclo completo de stock:
+  reserva → venta parcial → consumo de reserva → rechazos → save/restore → reinicio.
+- **Boot pre-check (`scripts/legal/test_merch_boot_m129.gd`):** B-17/B-12-06, **11 checks / 0 fallos**
+  sobre el arranque real: autoload cargado, contrato `"merch"` en `ServiceRegistry` apuntando al
+  autoload y sección `"merch"` presente en el payload de `SaveManager.snapshot.collect()`.
+
+### Evidencia de ejecución (Godot 4.7.2, headless)
+- `godot --headless --path game/isla-ancestral -s res://scripts/legal/test_merch_m129.gd` → EXIT 0,
+  `=== Resumen M129: 58 checks, 0 fallos ===`.
+- `godot --headless --path game/isla-ancestral -s res://scripts/legal/test_merch_boot_m129.gd` →
+  EXIT 0, `=== Resumen boot M129: 11 checks, 0 fallos ===`.
+- Boot del proyecto (`--quit-after 600`): EXIT 0, sin `SCRIPT ERROR`/`Parse Error`, y
+  `[M129] MerchManager listo (10 productos, 3 tiradas limitadas)`.
+
+### Lo que NO se hizo (honestidad)
+- **L134 (pipeline de mockups 3D):** reasignado a **Hy4** (parte 3D). Sigue `[?]`.
+- La integración con una tienda real (carrito/checkout/impuestos) es de M95/M39/M125, no de M129.
+- No se tocó `quality.yml` (requiere autorización del fundador); los dos scripts de test son
+  ejecutables a mano y quedan listos para que el runner los cablee.
+
+### Respaldos
+`game/isla-ancestral/scripts/legal/Obsoletos/2026-11-06_22-18-40_*` (manager, validator, test y JSON previos).

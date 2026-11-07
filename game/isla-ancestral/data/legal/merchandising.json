@@ -1,5 +1,5 @@
 {
-  "version": 2,
+  "version": 3,
   "modulo": "M129-Merchandising",
   "productos": [
     {"id": "camisetas", "producto": "Camisetas", "tipo": "textil", "estado": "diseno",
@@ -47,6 +47,14 @@
     {"id": "pack_stickers", "producto": "Pack de stickers", "tipo": "fisico", "estado": "idea",
      "materiales": "Papel vinilico laminado, corte die-cut",
      "precio_usd": [4, 7], "margen": [0.60, 0.70], "produccion": "print on demand"}
+  ],
+  "tiradas_limitadas": [
+    {"sku": "artbook_pasta_dura", "producto_id": "artbook", "unidades": 500,
+     "descripcion": "Artbook de pasta dura numerado (500 ejemplares)"},
+    {"sku": "vinilo_soundtrack", "producto_id": "soundtrack", "unidades": 300,
+     "descripcion": "Vinilo de coleccionista numerado (300 ejemplares)"},
+    {"sku": "figura_resina_8in", "producto_id": "figuras", "unidades": 200,
+     "descripcion": "Figura de resina 8in numerada (200 ejemplares)"}
   ],
   "politicas": {
     "post_lanzamiento": true,

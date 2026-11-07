@@ -2277,7 +2277,7 @@
     },
     "estado": "APAGADOS. No disparar mas hasta orden del fundador."
   },
-  "crons_apagados": true,
+  "crons_apagados": false,
   "step5_fuera": {
     "cuando": "6nov 22:12",
     "quien": "fundador",
@@ -2322,5 +2322,18 @@
     "verificador": "Hy3 (≠ autor MiMo inactivo)",
     "sello": "agnes-3-flash (Sapiens AI) / Kilo Code",
     "nota": "MiMo inactivo, Hy3 tomo M64. 109/119 = core testeable sellado. 7 [ ] restantes = no-sellable total."
+  },
+  "crons_v3_reactivados_7nov": {
+    "cuando": "7nov 00:57",
+    "quien": "agnes-3-flash (Sapiens AI) / Kilo Code",
+    "fundador": "activa los cronometros",
+    "ids": {
+      "A": "wku_1b385332c001EW0eEmlQjeLBBd",
+      "B": "wku_1b386222c001UqwZYsCNlDvTxB",
+      "C": "wku_1b3866cae0016picH7hInOwiOf",
+      "D": "wku_1b386bb21001bi1qjtVTZZWQl4"
+    },
+    "sellos": "13 vigentes + 14° M64 aprobado",
+    "flota": "Hy4+Hy3+DS-OC+Nemotron+Ling+GLM (Step-5/MiMo/Kimi/DeepSeek-WB FUERA)"
   }
 }

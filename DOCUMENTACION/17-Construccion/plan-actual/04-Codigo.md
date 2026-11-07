@@ -418,3 +418,76 @@ Las 3 suites de M17 que ya corrían en CI (`scripts/construccion/test_construcci
 `test_construccion_iter2.gd`, `test_construccion_iter3.gd`) NO se tocaron en esta tanda (no se
 modificó ningún `.gd` de `scripts/construccion/`). La suite nueva es aditiva.
 
+## 8. Tanda persistencia + rejilla (2026-11-06 22:40) — 4 ítems cerrados
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode)
+**Plataforma:** OpenCode
+
+### 8.1 Qué se añadió
+
+Suite NUEVA `res://tests/test_m17_persistencia_rejilla.gd` → **23 checks, 0 fallos, EXIT 0**
+(Godot 4.7.2 headless). No se tocó ningún `.gd` de `scripts/construccion/`: la suite es aditiva y
+`tests/run_tests.gd` la descubre sola (recorre `res://tests/` de forma recursiva), por lo que NO
+hizo falta tocar `quality.yml`.
+
+La suite recorre el ciclo real del save: coloca `piso_tablones` en (2,0,3), `pared_madera` rotada
+90° encima en (2,1,3) y `escalera_doble` 2x1 en (4,0,-1) con `planta=1`; toma
+`obtener_estructuras()`; lo pasa por `JSON.stringify`/`JSON.parse_string` (el save M59 es JSON: los
+enteros vuelven como float); `limpiar_estructuras()`; `restaurar_estructuras()`; y exige identidad
+de campos, reconstrucción de la ocupación (incluida la segunda celda de la huella 2x1), misma
+posición mundial por celda y doble restauración idempotente.
+
+### 8.2 Ítems cerrados
+
+| Ítem | Evidencia (texto literal de los checks / ruta) |
+|---|---|
+| **D97** Altura de planta 1 m por bloque | `ConstruccionMundo.OFFSET_MEDIO_VOXEL = 0.5` + `mundo_desde_celda(celda) = Vector3(celda) + 0.5` (`construccion_mundo.gd` L113-117). `test_m17_construccion_validacion.gd` L244-260: "OFFSET_MEDIO_VOXEL == 0.5", "el origen de la rejilla coincide con el origen global del mundo voxel" (0.5, 0.5, 0.5) y round-trip en 4 casos. |
+| **D102** Rejilla coherente tras guardar/cargar | Suite nueva: "misma celda -> misma posicion mundial antes y despues" y "round-trip celda -> mundo -> celda es exacto (incluye negativos)". |
+| **F127** Mover no re-cobra | `mover_pieza()` (L555-597) no llama a `_f_descontar` ni a `_f_devolver` y registra `"costo": {}` (L590); `test_construccion.gd` L386-391: "mover NO re-cobra recursos". |
+| **P256** Integración colocar→guardar→cargar→restaurar | Suite nueva (23 checks); complementa `scripts/saving/test_carga_idempotente_m59.gd` (mismo par `obtener_estructuras`/`restaurar_estructuras`). |
+
+### 8.3 Línea base del lote (Godot 4.7.2 headless)
+
+| Suite | Checks | Fallos | EXIT |
+|---|---|---|---|
+| `tests/test_m17_construccion_validacion.gd` | 44 | 0 | 0 |
+| `tests/test_m17_reglas_pieza.gd` | 40 | 0 | 0 |
+| `tests/test_m17_suites_integracion.gd` | 17 (501 en las 7 suites) | 0 | 0 |
+| `tests/test_m17_persistencia_rejilla.gd` (NUEVA) | 23 | 0 | 0 |
+
+### 8.4 Los 36 abiertos, clasificados por dueño (no son deuda de código de M17)
+
+- **M18 / capa UI y escena (12):** C78 (entrada por herramienta/tecla), C80 (HUD con categorías y
+  costo), C81 (suspender movimiento), C82 (mundo activo), C83 (selección por categorías), C84
+  (desbloqueos visibles), C85 (tutorial), C86 (indicador de celda en el mundo), F124 (fantasma
+  elevado: la matemática está verificada — `y = celda.y + altura/2`, `test_construccion_iter3.gd`
+  L298-303 — falta el juicio visual), F129 (ventana de confirmación + preview de devolución), O250
+  (admirar desde la cámara), P261 (QA Play Mode entrar/salir).
+- **M14 inventario (2):** I128 (espacio libre al almacenar), I166 (almacenar convierte la pieza en
+  ítem sin perder receta).
+- **M18 contenido funcional (2):** F130 `[?]` (demolición libera contenido), K191 (ampliaciones de
+  la casa).
+- **M64 IA/navmesh (3):** G144 (no bloquear la única salida), O249 (NPC miran la obra), P257
+  (navmesh con puertas y obras).
+- **M08 terreno cargado (1):** D100 (la rejilla solo sobre terreno cargado — el adaptador devuelve
+  "aire" sin terreno, pero falta la prueba con chunks reales en runtime).
+- **M25 (1):** K192 (ruinas `deconstruible=false`) — deuda de DATA: 0 recetas de ruina en el
+  catálogo; el guard está implementado y probado con receta sintética.
+- **M73 (1):** K194 (recetas de festival `devolucion=0`) — 0 recetas de festival en el catálogo.
+- **M31 (1):** K196 (faroles al ciclo día/noche).
+- **M92 (1):** I169 (tabla de costos de referencia de M92 en las recetas).
+- **M93 (2):** H157 (señal a M93), K199 (proyectos de meta larga cuentan piezas). ⚠️ Discrepancia:
+  en `CHECKLIST-GLOBAL.md` M93 = **Balance**, no "proyectos"; la numeración de K199 es de un plan
+  viejo. Se reporta, no se adivina.
+- **M51/M43 VFX/audio (3):** O244 (polvo), O245 (sonido por material), O246 (ambiente de obra).
+- **Polish UX (2):** O247 (aura verde), O248 (aviso amable + vibración).
+- **Optimización (1):** M223 (materiales compartidos entre instancias).
+- **Input/render (1):** M221 (raycast 1/frame: la cache de celda existe en `BuildPreview`, el
+  raycast vive en la capa de input/UI — el throttle actual de 1/4 frames es de M70
+  `interaction_manager.gd`, no de M17).
+- **Playtest/QA manual (2):** P259 (playtest M113 teclado+mando), P260 (recorrido M114 en M18).
+- **Regla de escalera (1):** G139 (apoyo sí — `soportes_minimos=1` + `superficie_ok`; "no bloquea
+  la circulación" no tiene implementación en el validador lógico).
+
+Total: 12 + 2 + 2 + 3 + 1 + 1 + 1 + 1 + 1 + 2 + 3 + 2 + 1 + 1 + 2 + 1 = 36.
+

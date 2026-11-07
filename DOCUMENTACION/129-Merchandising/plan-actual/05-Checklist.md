@@ -1,5 +1,5 @@
-**Modelo:** SWE-1.6
-**Plataforma:** DEVIN
+**Modelo:** DeepSeek V4.1 Flash
+**Plataforma:** OpenCode
 
 # 05-Checklist.md — Módulo 129: Merchandising
 
@@ -84,11 +84,11 @@
 - [x] Diseñar prueba de calidad de peluches (material, costura)
 - [x] Diseñar prueba de calidad de figuras (material, pintura)
 
-**Totales:** 108 ítems · Completados: 101 · Pendientes: 0 · No resueltos: 7.
+**Totales:** 108 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 1.
 
 **Total de ítems:** 108
-**Ítems resueltos por documentación:** 103
-**Ítems pendientes de implementación:** 0 · **No resueltos `[?]:** 5 (dueño externo: M45/M46 arte, M41 música, M53 tienda web) — la capa de servicio `MerchManager`/`MerchConfig` está **IMPLEMENTADA** (T-A1 agnes-3-flash, Log 1299): `data/legal/merchandising.json` v2 + `merch_manager.gd` (autoload, contrato `"merch"`) + `merch_catalog.md` + test 24/0.
+**Ítems resueltos por implementación/documentación:** 107
+**Ítems pendientes de implementación:** 0 · **No resueltos `[?]`:** 1 (`L134` pipeline de renderizado 3D de mockups → dueño **Hy4**, parte 3D en curso). La capa de servicio `MerchManager` está **IMPLEMENTADA** (T-A1 agnes-3-flash, Log 1299: JSON v2 + autoload contrato `"merch"` + `merch_catalog.md` + test 24/0) y **ampliada v3** (DS-V4.1-Flash-Opencode, 2026-11-06): stock + numeración de tiradas limitadas + persistencia M59; test 58/0 y boot B-17 11/0.
 
 ## Extensión QA cruzado (consolidación 2026-08-20)
 
@@ -98,7 +98,7 @@
 - [x] Crear manual técnico de especificaciones y resoluciones requeridas para productos Print on Demand (POD) [S]
 - [x] Establecer perfiles de color CMYK estandarizados para impresión de camisetas, tazas, láminas y artbook [S]
 - [x] Diseñar protocolo de validación y control de calidad de prototipos físicos (peluches y figuras) antes de producción [M]
-- [?] Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7, Ling 3.1 Flash, director confirma): `merch_manager.gd` (99 líneas) tiene **0 matches** de "stock|numer|limit"; sus 11 funciones (cargar/get_productos/get_product/get_product_ids/get_margen/get_precio_usd/get_politicas/validar/esta_cargado) no incluyen ninguna de stock; el JSON `politicas` no tiene claves de stock/numeración. Verbo "Implementar" + 0 código.
+- [x] Implementar sistema de control de stock y numeración para tiradas limitadas físicas (artbooks de pasta dura, vinilos) [M] → REVERTIDO Familia A en BUG-070 lote 7 (era spec sin código). **RESUELTO v3 (DS-V4.1-Flash-Opencode, 2026-11-06):** `merchandising.json` v3 con 3 tiradas (`artbook_pasta_dura` 500, `vinilo_soundtrack` 300, `figura_resina_8in` 200); `merch_manager.gd` implementa `reservar_unidades`/`liberar_reserva`/`confirmar_venta` con numeración correlativa única por SKU (1..N, sin huecos), rechazo de sobreventa/sobre-reserva y persistencia por el contrato M59 (`get_section_name`/`get_save_data`/`restore_save_data`, sección `merch`); `merch_validator.gd` valida la sección. Evidencia: `test_merch_m129.gd` **58 checks / 0 fallos** + boot pre-check B-17 **11 checks / 0 fallos**.
 - [x] Definir estándares de packaging ecológico, biodegradable y protección reforzada para envíos frágiles [S]
 - [x] Crear protocolo de pruebas de seguridad para peluches (costuras reforzadas, ojos de seguridad, telas hipoalergénicas) [M]
 - [x] Diseñar matriz automatizada de cálculo de costos, aranceles, margen objetivo (40-50%) y precio de venta al público [M]
@@ -131,7 +131,7 @@
 - [x] Estandarizar formatos y dimensiones de cajas para optimizar tarifas de envío por volumen en couriers [S]
 - [x] Implementar modelo de preventa (pre-orders) para financiar tiradas físicas sin asumir riesgos de sobrestock [M]
 - [x] Automatizar el cálculo de impuestos y gastos de aduana en el checkout de la tienda online [M]
-- [?] Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "mockup|pipeline render|render 3D" en todo plan-actual → 0 artefacto (las únicas menciones de "renders" son de concept art del juego en 01/02/03, no de mockups de merch). Sin artefacto.
+- [?] Crear pipeline de renderizado 3D de mockups realistas de merchandising para catálogo web [M] → REVERTIDO Familia A (auditoría BUG-070 lote 7): tokens "mockup|pipeline render|render 3D" en todo plan-actual → 0 artefacto (las únicas menciones de "renders" son de concept art del juego en 01/02/03, no de mockups de merch). Sin artefacto. **PARTE 3D reasignada a Hy4** (agnes-3-flash msg 249, 2026-11-06): sigue `[?]` hasta que Hy4 entregue el pipeline; la parte de código/lógica de M129 la asumió DS-V4.1-Flash-Opencode.
 - [x] Realizar auditorías de homologación de proveedores para certificar condiciones de trabajo ético (fair labor) [M]
 - [x] Diseñar sistema de consolidación de paquetes para pedidos combinados con múltiples artículos [S]
 
@@ -186,3 +186,8 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 68 [x] / 40 [ ] / 0 [?].
 > Las marcas no se tocaron.
+
+> **Actualización v3 (DS-V4.1-Flash-Opencode / OpenCode, 2026-11-06):**
+> implementado el control de stock y numeración de tiradas limitadas (L101). Conteo real de marcas
+> tras la implementación: **107 [x] / 0 [ ] / 1 [?] = 108**. El único `[?]` es L134 (pipeline de
+> mockups 3D), reasignado a Hy4. No se tocaron marcas de otros dueños.

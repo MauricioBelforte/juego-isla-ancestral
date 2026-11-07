@@ -1,0 +1,15 @@
+estado_director v41: 398 claves (snapshot v40: 398) | nuevas=1 borradas=0 cambiadas=1 | mtime=2026-11-06 20:12
+NUEVAS: sello_14_m64
+ELIMINADAS: (ninguna)
+CAMBIADAS: sellos_218
+
+[ling] {"estado": "T32 RATIFICADA (229): auditoria de traduccion i18n punto-ciego del watchdog; hallazgo M87 SETTINGS.ADVANCED rename escalado al fundador con linea L296; COLA AGOTADA/standby | LOTE B INTEGRAL asignado (235: i18n de la produccion del dia + los archivos que agnes no cubre) | 23oct 20:42 FUNDADOR: ling SIN creditos para chequear a Beam - sale de los verificadores de Beam; su rol i18n queda standby (no quenlar su cron hasta orden)", "pendientes_real": 112, "acuse_enviado": 235, "cron": "horario 0 * * * * reencendido (225)"}
+
+[bug_156_i18n_json] "SETTINGS.VOLVER_TITULO en es/en/pt.po pero NO en strings_{es,en,pt}.json. Severidad: MENOR (runtime carga .po, no JSON). DeepSeek #491."
+
+[hy3] {"estado": "M28/M27 QA RATIFICADO Y COMMITIDO (331: 59/0 + sonda roja; K1-K9; test y Log 2147 versionados en repo); RAMA-2 validada como metodo; mi 331 | cross-QA M87 RATIFICADO (333: 131/136, 5 [?] legitimos, catalogs 170x3; fila GLOBAL sync con tu nota)", "pendientes_real": 257, "acuse_enviado": 333}
+
+--- claves ling* con acuse/vuelta ---
+  ling_338_acusado = "Ling #339 (v29 report-only, 0 flips, acuse 07:20)"
+  ling_340_acusado = "Ling #341 (v30 report-only, watchdog i18n LIMPIO 170x3, detector 4h invariants, mini-stale bug152_go_aplicar=4→6 notado)"
+  ling_342_acusado = "Ling #343 (acuse v31 + TANDA i18n/doc 25 items I-01..I-25, backlog drenado 0 pending)"

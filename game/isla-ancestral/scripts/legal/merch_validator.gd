@@ -37,8 +37,33 @@ static func validar(data: Dictionary) -> Array:
 		errores.append_array(_validar_rango(p, "precio_usd", "precio", etiqueta))
 		errores.append_array(_validar_margen(p, etiqueta))
 		errores.append_array(_validar_listas(p, etiqueta))
+	errores.append_array(_validar_tiradas(data, ids))
 	if data.get("politicas", {}).is_empty():
 		errores.append("Sin políticas de merchandising")
+	return errores
+
+
+## Valida la seccion opcional "tiradas_limitadas" (stock/numeracion, v3):
+## sku unico y no vacio, producto_id existente en "productos" y unidades > 0.
+static func _validar_tiradas(data: Dictionary, ids: Dictionary) -> Array:
+	var errores: Array = []
+	var vistos: Dictionary = {}
+	for t in data.get("tiradas_limitadas", []):
+		var sku := String(t.get("sku", ""))
+		var etiqueta := sku if not sku.is_empty() else "(tirada_sin_sku)"
+		if sku.is_empty():
+			errores.append("Tirada limitada sin sku")
+		elif vistos.has(sku):
+			errores.append("Tirada limitada duplicada: %s" % sku)
+		vistos[sku] = true
+		var pid := String(t.get("producto_id", ""))
+		if pid.is_empty():
+			errores.append("%s: sin producto_id" % etiqueta)
+		elif not ids.has(pid):
+			errores.append("%s: producto_id '%s' no existe en productos" % [etiqueta, pid])
+		var unidades := int(t.get("unidades", 0))
+		if unidades <= 0:
+			errores.append("%s: unidades debe ser > 0 (%d)" % [etiqueta, unidades])
 	return errores
 
 static func _validar_rango(p: Dictionary, clave: String, nombre: String, etiqueta: String) -> Array:
