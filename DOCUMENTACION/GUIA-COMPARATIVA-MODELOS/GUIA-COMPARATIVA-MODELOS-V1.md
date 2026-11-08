@@ -195,13 +195,110 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 ## Modelo en integración (puede incorporarse en cualquier momento)
 
-| Modelo | Plataforma | Rol | Estado |
-|--------|-----------|-----|--------|
-| Crouton Alpha | Stealth (Kilo Code) | Sub-agente de bajo costo para tareas repetitivas de agente: escaneo de código, análisis de logs, tool calling, documentación, tareas de alto volumen | En prueba — supervisado por Nemotron-3.5-Super-VL |
-| Stealth Glyph Cluster | Stealth (Kilo Code) | Razonamiento y análisis de arquitectura: revisión de código, debugging complejo, planificación de refactors, análisis de largo contexto | En prueba — supervisado por Nemotron-3.5-Super-VL |
-| Reflection Beam 1.0 | NVIDIA (Kilo Code) | Razonamiento, auditoría de conteos, picking documental, verificación de balance matemático | En prueba — supervisado por Nemotron-3.5-Super-VL |
+### Crouton Alpha — Sub-agente de bajo costo, alto volumen (escanéo estático, logs, tool calling)
 
-> Los modelos no listados arriba (Atria-Dawn-Preview, Kimi K3, Claude Haiku 5.5, StepFun Step 5, Nemotron 3 Ultra, Thinking Machines Inkling, Poolside Laguna S 2.1) están en la versión histórica completa (`obsoletos/10-GUIA-COMPARATIVA-MODELOS.md`). Si el fundador decide integrar alguno, se agrega aquí y se crea una V2.
+| Campo | Valor |
+|-------|-------|
+| Modelo | Crouton Alpha (`stealth/crouton-alpha`) |
+| Plataforma | Stealth (Kilo Code / OpenRouter) |
+| Tipo | Razonamiento ligero para agentic workflows |
+| Contexto | 1,048,576 tokens (entrada) / hasta 943,718 (salida) |
+| Modalidades de entrada | Texto, imagen, video, archivo (PDF), audio → salida solo texto |
+| Razonamiento | Siempre ON, 6 niveles (default `max`) |
+| Tool calling | Soportado (`tool_choice: auto` solo); structured outputs (JSON schema) |
+| Precio | $0 input / $0 output (preview, puede retirarse sin aviso) |
+| Proveedor | Anónimo (terceros, no revelado) |
+| Data | Prompts/completions pueden ser retenidos por el proveedor, no usados para entrenamiento |
+| Liberado | 2026-11-03 |
+| Estado | En prueba — supervisado por Nemotron-3.5-Super-VL |
+
+**Fortalezas (observadas empíricamente):** escaneo estático masivo de archivos `.gd` (auditó 114 archivos en una sola pasada, encontró 23 problemas con archivo:línea), análisis de logs de rendimiento (rotación, fuga de memoria, flush por línea), detección de `mouse_filter`/`CanvasLayer` en escenas UI, validación de assets `.import`/rutas rotas, manejo de tool calling y estructuración de reportes concisos.
+
+**Debilidades (observadas empíricamente):** no es un modelo de razonamiento profundo (no diseña arquitectura), puede pasar por alto problemas de lógica compleja que requieran contexto cruzado entre múltiples archivos, reasoning siempre ON lo hace más lento para tareas simples.
+
+**Regla de asignación:** tareas repetitivas de bajo costo y alto volumen: escaneo de código, análisis de logs, tool calling, documentación, verificación de assets/rutas, cleanup de vars/imports/funciones sin usar. NO asignar: diseño de arquitectura, debugging complejo, refactors que requieran entender múltiples sistemas a la vez.
+
+**Método de trabajo:** lotes → suite con binario real → piso CHECKS_MINIMOS medido → sonda rojo demostrada → `[x]` solo con suite en verde.
+
+**Pruebas empíricas (Isla Ancestral, 2026-11-07/08):**
+- Escaneó 114 archivos `.gd` en `scripts/core/` y `scripts/ui/` en una sola pasada; encontró 23 problemas (2 imports sin usar, 7 parámetros sin usar, 11 funciones vacías, 3 vars miembro sin usar) con archivo:línea exactos. 88% código limpio.
+- Detectó correctamente que `event_bus.gd` y `softlock_rules.gd` son APIs públicas verificadas (no código muerto), sin falsos positivos.
+- Analizó logs de rendimiento: identificó fuga de RAM por lecturas completas en memoria, flush por línea, ausencia de rotación de logs. Propuso 2 mejoras con código específico.
+- Revisó 13 escenas UI: encontró 13 problemas de `mouse_filter`, colisión de capas (HUD vs UIRoot), `RelojWidget` sin filtro.
+- Verificó 833 archivos `.import`, 69 escenas `.tscn`, 479 archivos `.tres`, 1586 scripts `.gd`: 0 referencias rotas a assets reales del juego.
+
+---
+
+### Stealth Glyph Cluster — Razonamiento y análisis de arquitectura
+
+| Campo | Valor |
+|-------|-------|
+| Modelo | Stealth Glyph Cluster (`stealth/glyph-cluster`) |
+| Plataforma | Stealth (Kilo Code / Vercel AI Gateway) |
+| Tipo | Razonamiento para coding y largo contexto |
+| Contexto | 256,000 tokens (entrada) / 256,000 (salida) |
+| Modalidades de entrada | Texto solo |
+| Razonamiento | Sí, niveles: low, medium, high, xhigh |
+| Tool calling | Soportado (funciones definidas por el usuario) |
+| Structured outputs | No soportado |
+| Precio | $0 input / $0 output (preview, puede retirarse sin aviso) |
+| Proveedor | Anónimo (terceros, no revelado) |
+| Data | Prompts y respuestas pueden ser retenidos y usados para entrenamiento; Zero Data Retention no disponible |
+| Liberado | 2026-10-07 |
+| Estado | En prueba — supervisado por Nemotron-3.5-Super-VL |
+
+**Benchmark público (stealthmodels.com, 09-oct-2026):** GPQA Diamond 56.4% (31/55 correctos) en subset de 55 preguntas de biología, química y física.
+
+**Fortalezas (observadas empíricamente):** análisis de arquitectura EventBus/ServiceRegistry (detectó acoplamiento fuerte en bootstrap, 12 señales huérfanas/a medio cablear, validaciones faltantes críticas en `ServiceRegistry.register/unregister`), análisis de sistema de guardado (pipeline maduro JSON determinista, `.tmp→.save` atómico, backups rotados, HMAC-SHA256, brechas: contratos paralelos `ISaveProvider`/`ISaveable`, migración por sección ausente, clave HMAC en `user://` accesible), análisis de sistema de audio (SFXManager pool lógico sin players reales, ducking directo sobre bus, reproducción dispersa, falta de `AudioBusLayout` versionado), análisis de input (fragmentación entre `ControlInput` y polling directo por `KEY_*`, conflicto `interactuar`/`equipamiento` compartiendo `KEY_E`, 12 señales sin uso), análisis de inventario (descarte de UI llama a `remove_item(0, índice)` con firma incompatible; `split_stack` no valida `stack_max` ni instancia; `swap_items` permite sobreescribir slots bloqueados), análisis de combate/salud (`HealthComponent` no valida daño negativo/nulo/NaN, muerte repetible sin `is_dead`, señal `died` desalineada con `IDamageable`), análisis de misiones (dos modelos de quest paralelos `SecondaryStoriesService` vs `QuestChainService` sin unificación, `MisionInvariant` no conectada al runtime), análisis de partículas/VFX (director "mudo" por señal `evento_generico` inexistente, desalignación presupuesto pool 1200 vs cámara 500).
+
+**Debilidades (observadas empíricamente):** contexto menor (256K vs 1M de Crouton/Beam), solo texto (no multimodal), no soporta structured outputs, data policy más restrictiva (puede usarse para entrenamiento).
+
+**Regla de asignación:** revisión de código, debugging complejo, planificación de refactors, análisis de largo contexto, arquitectura de sistemas, detección de acoplamiento y dependencias circulares. NO asignar: tareas que requieran visión/imagen, tareas de alto volumen repetitivo (usar Crouton Alpha), análisis de contadores/matemática (usar Beam).
+
+**Método de trabajo:** análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica.
+
+**Pruebas empíricas (Isla Ancestral, 2026-11-07/08):**
+- Analizó `event_bus.gd` y `service_registry.gd`: detectó acoplamiento fuerte en bootstrap (catálogo hardcodeado, resolución mixta `/root`), 12 señales sin uso o a medio cablear, sin dependencias circulares, validaciones faltantes en `register`/`unregister`. Propuso 2 mejoras de diseño concretas y accionables.
+- Analizó sistema de guardado: validó pipeline atómico y HMAC-SHA256; detectó contratos paralelos y migración faltante.
+- Analizó input: documentó fragmentación entre `ControlInput` (autoload M57) y polling directo en `player.gd`; conflicto `interactuar`/`equipamiento` en `KEY_E`; 12 señales sin uso en `EventBus`.
+- Analizó inventario: encontró bug en descarte de UI (`remove_item(0, índice)` firma incompatible con el servicio), `split_stack` sin validar `stack_max`/instancia, `swap_items` sobreescribiendo slots bloqueados.
+- Analizó misiones: detectó dos modelos de quest paralelos no autoloaded, `MisionInvariant` sin conexiones runtime, riesgo de misiones incompletables.
+
+---
+
+### Reflection Beam 1.0 — Razonamiento, auditoría de conteos y documentación
+
+| Campo | Valor |
+|-------|-------|
+| Modelo | Reflection: Beam 1.0 (`reflection/beam-1.0-501b-a23b`) |
+| Plataforma | NVIDIA (Kilo Code / OpenRouter / Hugging Face) |
+| Tipo | Sparse Mixture-of-Experts (MoE) para razonamiento y agentic workflows |
+| Arquitectura | 501.3B parámetros totales, 23.4B activos por token; 52 capas (3 densas + 49 MoE); 256 expertos, 8 enrutados por token; atención Gated GQA + Sliding Window + NoPE full attention cada 6 capas |
+| Contexto | 1,048,576 tokens (entrada) / hasta 131,072 (salida) |
+| Modalidades de entrada | Texto solo |
+| Razonamiento | Siempre ON, niveles: minimal, low, medium, high, xhigh, max |
+| Tool calling | Soportado (grammar dedicada) |
+| Structured outputs | Soportado |
+| Precio | $0.25/M input / $1.00/M output (Cache Read $0.05/M) |
+| Proveedor | Reflection (abierto, Apache 2.0) |
+| Liberado | 2026-10-16 |
+| Estado | En prueba — supervisado por Nemotron-3.5-Super-VL |
+
+**Fortalezas (observadas empíricamente):** auditoría de fórmulas de balance y progresión (auditó `price_manager.gd`, `economy_manager.gd`, `player_profile.gd`, `progression_manager.gd`; detectó magic number `0.02`, verificó topes de descuento y venta, 0 divisiones por cero), auditoría de contadores y totales (detectó `depositar_monedas(total=0)` inflando reputación, caché desincronizada en `coleccionables_manager`, off-by-one en umbrales), verificación de CHECKLIST-GLOBAL.md (encontró 10-12 bloqueos 🔵 huérfanos, 5 IDs duplicados, ~45 filas con drift interno, ~15 filas con progreso=total pero sin ✅), análisis de documentación (AGENTS.md §24 describe Unity/C# cuando el proyecto es Godot 4.x; director vigente vs histórico en §10.2/§10.3), verificación de assets `.import`/rutas rotas (833 `.import`, 69 `.tscn`, 479 `.tres`, 1586 `.gd`: 0 referencias rotas reales), manejo de errores en GDScript (102 archivos de producción con I/O sin manejo, 3 `assert` totales, 78 `push_warning` sin acción), análisis de escenas principales (load_steps desfasado en 4 escenas, NPCs fuera de centro isla).
+
+**Debilidades (observadas empíricamente):** más lento y costoso que Crouton Alpha para tareas simples, no es multimodal (texto solo), overkill para escaneos estáticos simples.
+
+**Regla de asignación:** auditoría de consistencia y conteos, verificación de balance matemático, picking documental, verificación de CHECKLIST-GLOBAL.md, análisis de documentación, manejo de errores, verificación de assets y escenas. NO asignar: escaneo estático masivo de código (usar Crouton Alpha), análisis de arquitectura profunda (usar Glyph Cluster).
+
+**Método de trabajo:** análisis cuantitativo → tablas de hallazgos con archivo:línea → 2 acciones de corrección concretas → conclusión ejecutiva.
+
+**Pruebas empíricas (Isla Ancestral, 2026-11-07/08):**
+- Auditó fórmulas de balance en 7 archivos: encontró 1 magic number (`0.02` en `price_manager.gd:496`), verificó 0 divisiones por cero, confirmó topes de descuento (15% amistad + 15% volumen, tope 20%) y venta (60% de compra).
+- Auditó contadores: encontró `depositar_monedas(total=0)` inflando reputación, caché desincronizada en `coleccionables_manager.gd`, off-by-one en `price_manager.gd:263,543`.
+- Verificó CHECKLIST-GLOBAL.md: 10-12 bloqueos 🔵 huérfanos (M158 con 64 días sin actividad), 5 IDs duplicados (48, 115, 127, 139, 148), ~45 filas con drift interno de progreso.
+- Auditó documentación: encontró que AGENTS.md §24, §14, §18, §22 describen Unity/C# (proyecto es Godot 4.x/GDScript); director vigente (GLM-5.3 Flash-Director) vs histórico (De-Director V4.1) desalineado en §10.2/§10.3.
+- Verificó 833 `.import`, 69 `.tscn`, 479 `.tres`, 1586 `.gd`: 0 referencias rotas reales; 8 `.glb` en tests son fixtures intencionales.
+- Auditó manejo de errores: 102 archivos de producción con I/O sin manejo, 3 `assert` totales, 78 `push_warning` sin acción. Propuso helper de resultado unificado y aserciones de desarrollo.
 
 ---
 
@@ -222,6 +319,6 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 - Protocolo de comunicación: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 - Protocolo multiagente: `CHECKLIST-GLOBAL.md` §21.
 
-**Modelo:** Nemotron-3.5-Super-VL
-**Plataforma:** Kilo Code
-**Fecha:** 2026-11-07
+**Modelo:** Nemotron-3.5-Super-VL  
+**Plataforma:** Kilo Code  
+**Fecha:** 2026-11-08

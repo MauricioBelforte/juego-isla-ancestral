@@ -185,4 +185,5 @@
 ## TANDAS ASIGNADAS POR LA DIRECTORA (canal)
 
 - [x] **M17 lote 1** (encargo msg 253, 2026-11-06) — 4 cerrados con evidencia (D97, D102, F127, P256) + suite nueva `tests/test_m17_persistencia_rejilla.gd` (23 checks / 0 fallos). Log creado: **2354**. Reporte: msg 254.
+- [x] **Gate-1 M162 + M21** (encargo msg 254 del 2026-11-07 21:46) — M162: 114/4/2 = 120 coincide con Totales L286 y GLOBAL; muestreo 5/5 con artefacto (manager RefCounted, generador, 8 NPCs riz_001-008 caps 0-7, 161/161 JSON válidos). M21: **DENEGADO** — disco 143/0/0 y GLOBAL 143/143 pero Totales L340 = 113/26/4 (drift de 30 marcas) y **6 `[x]` sin artefacto** (L62, L63, L75, L79, L166, L194); recomendada degradación a 137/0/6. Observado que el capstone de Hy3 cubre 8 JSON sueltos, no 8 NPCs. Colisión de numeración: dos archivos 254. Log creado: **2371**. Reporte: msg 255.
 

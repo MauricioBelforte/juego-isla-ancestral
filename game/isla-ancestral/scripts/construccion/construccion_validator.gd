@@ -35,11 +35,15 @@
 class_name ConstruccionValidator
 extends RefCounted
 
+## Modelo puro de conectividad (L148). Se preload-ea para que funcione tambien
+## bajo `--script`, donde no todos los `class_name` estan registrados.
+const CIRC := preload("res://scripts/construccion/circulacion.gd")
+
 ## Orden de aplicacion de las reglas (03-Diseno §5). Documentado, no decorativo:
 ## la zona se consulta antes que la regla de pieza, y los recursos al final.
 ## "mundo" (limite jugable) va antes del limite de zona: si la celda no existe,
 ## no tiene sentido hablar de zonas.
-const ORDEN: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "mundo", "limite", "recursos"]
+const ORDEN: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "mundo", "limite", "recursos", "circulacion"]
 
 ## Vecinos horizontales (para la regla "requiere pared").
 const VECINOS_H: Array[Vector3i] = [
@@ -79,12 +83,16 @@ static func validar(receta: PlacementRule, celda: Vector3i, rotacion: int, ctx: 
 				detalle.append("ocupacion: %s" % str(c))
 
 	# 3) SOPORTE — al menos `soportes_minimos` celdas de la base apoyan bien.
-	if not tiene_soporte(receta, celda, rotacion, ctx):
+	# L143: una escalera puede apoyarse en una PARED contigua aunque la base no
+	# alcance; `apoyo_alternativo` declara esas superficies por receta.
+	if not tiene_soporte(receta, celda, rotacion, ctx) \
+			and not tiene_apoyo_alternativo(receta, celda, rotacion, ctx):
 		motivos.append(ConstruccionTipos.Motivo.SIN_SOPORTE)
-		detalle.append("soporte: %d/%d celdas de base apoyan en %s" % [
+		detalle.append("soporte: %d/%d celdas de base apoyan en %s (alternativo=%s)" % [
 			contar_soportes(receta, celda, rotacion, ctx),
 			maxi(0, receta.soportes_minimos),
-			str(receta.superficie_ok)])
+			str(receta.superficie_ok),
+			str(receta.apoyo_alternativo)])
 
 	# 4) REGLA ESPECIFICA — puertas/ventanas requieren pared contigua.
 	if receta.requiere_pared and not tiene_pared_contigua(celda, ctx):
@@ -115,6 +123,19 @@ static func validar(receta: PlacementRule, celda: Vector3i, rotacion: int, ctx: 
 	if not puede_pagar(receta, ctx):
 		motivos.append(ConstruccionTipos.Motivo.RECURSOS_INSUFICIENTES)
 		detalle.append("recursos: costo %s no pagable" % str(receta.costo))
+
+	# 9) CIRCULACION — la huella no puede tapar ni aislar la unica salida (L148).
+	# Solo corre si el dueno de la zona provee `ctx["circulacion"]`; sin datos no
+	# bloquea (y no anota detalle, para no ensuciar los contextos parciales).
+	if ctx.has("circulacion"):
+		var circ: Variant = ctx["circulacion"]
+		if circ is Dictionary:
+			var cfg: Dictionary = circ as Dictionary
+			var analisis: Dictionary = CIRC.analizar(
+				cfg.get("zona", []), cfg.get("salidas", []), cfg.get("ocupadas", []), celdas)
+			if bool(analisis.get("bloquea", false)):
+				motivos.append(ConstruccionTipos.Motivo.BLOQUEA_SALIDA)
+				detalle.append("circulacion: %s" % str(analisis.get("motivo", "")))
 
 	if motivos.is_empty():
 		var ok: Dictionary = ConstruccionTipos.resultado_ok(celdas)
@@ -152,6 +173,23 @@ static func contar_soportes(receta: PlacementRule, celda: Vector3i, rotacion: in
 		if receta.superficie_ok.has(_superficie(ctx, abajo)):
 			n += 1
 	return n
+
+## true si alguna celda CONTIGUA a la huella (4 horizontales + la de abajo)
+## tiene una superficie declarada en `receta.apoyo_alternativo`. Caso L143: la
+## escalera se apoya en una pared contigua aunque el piso no alcance.
+static func tiene_apoyo_alternativo(receta: PlacementRule, celda: Vector3i, rotacion: int, ctx: Dictionary) -> bool:
+	if receta == null or receta.apoyo_alternativo.is_empty():
+		return false
+	if not ctx.has("superficie"):
+		return false
+	for c in receta.celdas(celda, rotacion):
+		var candidatas: Array[Vector3i] = [c + Vector3i(0, -1, 0)]
+		for d in VECINOS_H:
+			candidatas.append(c + d)
+		for cand in candidatas:
+			if receta.apoyo_alternativo.has(_superficie(ctx, cand)):
+				return true
+	return false
 
 ## true si TODA la huella cae en el permiso requerido por la receta.
 static func dentro_de_zona(receta: PlacementRule, celda: Vector3i, rotacion: int, ctx: Dictionary) -> bool:

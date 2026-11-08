@@ -48,6 +48,12 @@ extends Resource
 ## Puertas y ventanas: exige una celda contigua con superficie "pared".
 @export var requiere_pared: bool = false
 
+## Apoyos ALTERNATIVOS a la base: si la base no alcanza `soportes_minimos`, la
+## pieza igual se considera apoyada cuando alguna celda CONTIGUA (4 horizontales
+## o la de abajo) tiene una de estas superficies. Caso real: la escalera puede
+## apoyarse en una pared contigua en vez de en el piso (L143).
+@export var apoyo_alternativo: Array[StringName] = []
+
 ## Las piezas de ruina (M25) y de evento (M73) no se demuelen/devuelven.
 @export var deconstruible: bool = true
 
@@ -143,6 +149,12 @@ static func desde_dict(d: Dictionary) -> PlacementRule:
 		r.superficie_ok = arr
 	r.sobre_agua = bool(d.get("sobre_agua", false))
 	r.requiere_pared = bool(d.get("requiere_pared", false))
+	var aa: Variant = d.get("apoyo_alternativo", null)
+	if aa is Array and not (aa as Array).is_empty():
+		var arr_aa: Array[StringName] = []
+		for s in (aa as Array):
+			arr_aa.append(StringName(String(s)))
+		r.apoyo_alternativo = arr_aa
 	r.deconstruible = bool(d.get("deconstruible", true))
 	r.devolucion = float(d.get("devolucion", 0.5))
 	var c: Variant = d.get("costo", null)
@@ -174,6 +186,7 @@ func a_dict() -> Dictionary:
 		"superficie_ok": superficie_ok.map(func(s: StringName) -> String: return String(s)),
 		"sobre_agua": sobre_agua,
 		"requiere_pared": requiere_pared,
+		"apoyo_alternativo": apoyo_alternativo.map(func(s: StringName) -> String: return String(s)),
 		"deconstruible": deconstruible,
 		"devolucion": devolucion,
 		"costo": costo.duplicate(),

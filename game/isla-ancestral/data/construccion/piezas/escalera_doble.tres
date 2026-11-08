@@ -13,3 +13,4 @@ costo = {
 "planks": 6
 }
 bloque = 8
+apoyo_alternativo = Array[StringName]([&"pared"])

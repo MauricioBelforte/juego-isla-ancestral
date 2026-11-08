@@ -1,0 +1,33 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Info: Total files 0 | Changed 0 | Failed 0
+ASENTADO: z_min 0.0450 -> 0.0450 (delta +0.0000)
+HUELLA: toca=24  footprint=1.90 x 0.56
+APOYO_PIEZA SM_Dintel_Cuerpo_NOFUNDIR        z_min=0.0450
+APOYO_PIEZA SM_Dintel_Fragmento_NOFUNDIR     z_min=0.0450
+APOYO_PIEZA SM_Dintel_Escombro_NOFUNDIR      z_min=0.0450
+APOYO_PIEZA SM_Dintel_Grieta_NOFUNDIR        z_min=0.3370
+APOYO_PIEZA SM_Dintel_Glifo_1                z_min=0.3370
+APOYO_PIEZA SM_Dintel_Glifo_2                z_min=0.3370
+APOYO_PIEZA SM_Dintel_Glifo_3                z_min=0.3370
+APOYO_PIEZA SM_Dintel_Faja                   z_min=0.3370
+APOYO_PIEZA SM_Dintel_Musgo_1                z_min=0.3380
+APOYO_PIEZA SM_Dintel_Musgo_2                z_min=0.3380
+ALTURA_REAL cuerpo z=[0.0450..0.3450] alto=0.3000 | relieve z_max=0.3530 (+0.0080) | HUELLA_CONJUNTO=1.900x0.560
+ESQUINA_APOYADA x=-0.70 y=-0.20 z=0.0450
+ESQUINA_APOYADA x=-0.70 y=0.20 z=0.0450
+ASTILLADO x_max=0.70 | dientes=[0.7, 0.6, 0.66] | niveles_x=5
+DESPRENDIDO SM_Dintel_Fragmento_NOFUNDIR     x=[0.750..0.930] z0=0.0450
+DESPRENDIDO SM_Dintel_Escombro_NOFUNDIR      x=[-0.970..-0.830] z0=0.0450
+RELIEVE SM_Dintel_Grieta_NOFUNDIR        z=[0.3370..0.3530] cruza 0.3450
+RELIEVE SM_Dintel_Glifo_1                z=[0.3370..0.3530] cruza 0.3450
+RELIEVE SM_Dintel_Glifo_2                z=[0.3370..0.3530] cruza 0.3450
+RELIEVE SM_Dintel_Glifo_3                z=[0.3370..0.3530] cruza 0.3450
+RELIEVE SM_Dintel_Faja                   z=[0.3370..0.3530] cruza 0.3450
+RELIEVE SM_Dintel_Musgo_1                z=[0.3380..0.3520] cruza 0.3450
+RELIEVE SM_Dintel_Musgo_2                z=[0.3380..0.3520] cruza 0.3450
+Info: Saved "dintel_caido_lowpoly.blend"
+OK — SM_: 10 — blend: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\dintel_caido_lowpoly.blend
+VARIANTE dintel_caido | SM_=10 | criticas=4 | alto=0.30 | z_min=0.0450 | toca=24 | fp=1.90x0.56
+LISTO — dintel caido (1 asset M25, cota derivada de muro_vano 1x2)
+
+Blender quit

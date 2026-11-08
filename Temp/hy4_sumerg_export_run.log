@@ -1,0 +1,57 @@
+INFO Draco mesh compression is available, use library at D:\Archivos de programa\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+02:11:09 | INFO: Starting glTF 2.0 export
+02:11:09 | INFO: Extracting primitive: Cube
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.005
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.008
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.010
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.012
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.013
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.014
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.015
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Finished glTF 2.0 export in 0.01810288429260254 s
+
+02:11:09 | INFO: Starting glTF 2.0 export
+02:11:09 | INFO: Extracting primitive: SM_Sumerg_M_Sumerg_Algas
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: SM_Sumerg_M_Sumerg_Tallado
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.005
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.008
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.010
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Finished glTF 2.0 export in 0.015138626098632812 s
+
+02:11:09 | INFO: Starting glTF 2.0 export
+02:11:09 | INFO: Extracting primitive: SM_Sumerg_M_Sumerg_Algas.001
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: SM_Sumerg_M_Sumerg_Tallado.001
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.005
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.008
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Extracting primitive: Cube.010
+02:11:09 | INFO: Primitives created: 1
+02:11:09 | INFO: Finished glTF 2.0 export in 0.013002872467041016 s
+
+RESUMEN_EXPORT __{"exportados": 3, "saltados": 39, "errores": 0, "detalle": {"exportados": [["25-Ruinas-Templos", "estructura_sumergida", "alta", "ok 20KB 8objs"], ["25-Ruinas-Templos", "estructura_sumergida", "media", "ok 17KB 6objs"], ["25-Ruinas-Templos", "estructura_sumergida", "baja", "ok 17KB 6objs"]], "errores": []}}__
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\estructura_sumergida_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\estructura_sumergida_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\estructura_sumergida_lowpoly_baja.blend"
+
+Blender quit

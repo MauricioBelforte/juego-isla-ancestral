@@ -48,6 +48,7 @@ enum Motivo {
 	FUERA_DEL_MUNDO,
 	DOBLE_CONFIRMACION,
 	SOSTIENE_OTRA_PIEZA,
+	BLOQUEA_SALIDA,
 }
 
 ## ── Motivos TEMPORALES (edge case L de M17) ────────────────────────────────
@@ -84,6 +85,7 @@ const TEXTO: Dictionary = {
 	Motivo.FUERA_DEL_MUNDO: "fuera de los limites de la isla",
 	Motivo.DOBLE_CONFIRMACION: "confirmacion demasiado rapida (espera un instante)",
 	Motivo.SOSTIENE_OTRA_PIEZA: "hay una pieza apoyada arriba (demole la de arriba primero)",
+	Motivo.BLOQUEA_SALIDA: "taparia la unica salida de la zona",
 }
 
 ## Texto de un motivo. Tolerante a valores desconocidos.
