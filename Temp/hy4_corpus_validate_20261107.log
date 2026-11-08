@@ -1,0 +1,39 @@
+VALIDATE 67-Vehiculos/barquita_aurora_lowpoly_baja.blend             328 ->  325  delta=3    esperado=3    CIERRA mods=0
+    SM_Barquita_M_Barquita_MaderaClara               32 ->   30 (-2) validate=True
+    SM_Barquita_M_Barquita_Aurora                    14 ->   13 (-1) validate=True
+VALIDATE 67-Vehiculos/globo_del_viento_lowpoly_baja.blend            363 ->  357  delta=6    esperado=6    CIERRA mods=0
+    SM_Globo_M_Globo_Acento                         103 ->  101 (-2) validate=True
+    SM_Globo_M_Globo_Farol                           16 ->   14 (-2) validate=True
+    SM_Globo_M_Globo_MaderaOscura                    70 ->   68 (-2) validate=True
+VALIDATE 67-Vehiculos/perla_ancestral_lowpoly_baja.blend             371 ->  369  delta=2    esperado=2    CIERRA mods=0
+    SM_Perla_M_Perla_Cristal                         84 ->   82 (-2) validate=True
+VALIDATE 67-Vehiculos/gran_vapor_lowpoly_baja.blend                  646 ->  626  delta=20   esperado=20   CIERRA mods=0
+    SM_Vapor_M_Vapor_Hierro                         322 ->  310 (-12) validate=True
+    SM_Vapor_M_Vapor_Verde                          126 ->  122 (-4) validate=True
+    SM_Vapor_M_Vapor_Laton                           98 ->   94 (-4) validate=True
+VALIDATE 157-Medios-De-Transporte/carreta_ancestral_lowpoly.blend    792 ->  704  delta=88   esperado=88   CIERRA mods=0
+    SM_Carreta_Aros                                 128 ->   64 (-64) validate=True
+    SM_Carreta_Ruedas                               200 ->  176 (-24) validate=True
+VALIDATE 157-Medios-De-Transporte/carreta_ancestral_lowpoly_baja.blend  491 ->  479  delta=12   esperado=12   CIERRA mods=0
+    SM_Carreta_M_Carreta_Madera                     150 ->  148 (-2) validate=True
+    SM_Carreta_M_Carreta_Lona                        70 ->   68 (-2) validate=True
+    SM_Carreta_M_Carreta_Hierro                     182 ->  174 (-8) validate=True
+VALIDATE 25-Ruinas-Templos/columna_entera_lowpoly_baja.blend         350 ->  348  delta=2    esperado=2    CIERRA mods=0
+    SM_ColEnt_M_ColEnt_Tallado                      106 ->  104 (-2) validate=True
+VALIDATE 18-Casas/casa_mansion_lowpoly_baja.blend                    676 ->  530  delta=146  esperado=146  CIERRA mods=0
+    SM_Mansion_M_Mansion_Madera                     154 ->  114 (-40) validate=True
+    SM_Mansion_M_Mansion_Piedra                     206 ->  132 (-74) validate=True
+    SM_Mansion_M_Mansion_Acento                      76 ->   56 (-20) validate=True
+    SM_Mansion_M_Mansion_Jade                        60 ->   48 (-12) validate=True
+HY4_CORPUS_VALIDATE_OK=8
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\barquita_aurora_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\globo_del_viento_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\perla_ancestral_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\gran_vapor_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_entera_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_baja.blend"
+
+Blender quit

@@ -1,0 +1,23 @@
+--- generando variante MEDIA (ratio 0.7, decima_media=False, max_mats=8) ---
+MERGE: 9 objetos -> 2 mallas
+PODA MATERIALES: no hace falta (4 materiales <= 8)
+RE-ASENTADO: z_min 0.045 -> 0.045 (delta -0.000)
+Info: Saved "bloque_tallado_lowpoly_media.blend"
+VARIANTE MEDIA OK -> D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly_media.blend
+  objetos=6  tris=188  materiales=4
+
+--- generando variante BAJA (ratio 0.7, decima_media=False, max_mats=4) ---
+PODA BAJA: 0 piezas eliminadas -> ninguna
+MERGE: 9 objetos -> 2 mallas
+DECIMATE BAJA: ratio 0.70 aplicado a 2 mallas fundidas (criticas intactas)
+PODA MATERIALES: no hace falta (4 materiales <= 4)
+RE-ASENTADO: z_min 0.045 -> 0.045 (delta -0.000)
+Info: Saved "bloque_tallado_lowpoly_baja.blend"
+VARIANTE BAJA OK -> D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly_baja.blend
+  objetos=6  tris=144  materiales=4
+
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend"
+
+Blender quit

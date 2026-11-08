@@ -1,0 +1,14 @@
+HY4_DUMP INICIO tools/mcp/blender-mcp/18-Casas/casa_mansion_lowpoly_baja.blend
+HY4_DUMP VALIDATE SM_Mansion_M_Mansion_Acento                antes=76    copia=76    validar_cambio=True despues=56    delta=-20
+HY4_DUMP VALIDATE SM_Mansion_M_Mansion_Jade                  antes=60    copia=60    validar_cambio=True despues=48    delta=-12
+HY4_DUMP VALIDATE SM_Mansion_M_Mansion_Madera                antes=154   copia=154   validar_cambio=True despues=114   delta=-40
+HY4_DUMP VALIDATE SM_Mansion_M_Mansion_Piedra                antes=206   copia=206   validar_cambio=True despues=132   delta=-74
+HY4_DUMP VALIDATE SM_Mansion_Pedestal_NOFUNDIR               antes=120   copia=120   validar_cambio=False despues=120   delta=0
+HY4_DUMP VALIDATE SM_Mansion_Zocalo_NOFUNDIR                 antes=60    copia=60    validar_cambio=False despues=60    delta=0
+HY4_DUMP TOTAL_OBJETOS=6 TOTAL_TRIS=676 TOTAL_VALIDADO=530
+HY4_DUMP JSON_ESCRITO=Temp/hy4_mansion_baja_tris_20261107.json bytes=93986
+HY4_DUMP FIN
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_baja.blend"
+
+Blender quit

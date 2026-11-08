@@ -1,0 +1,33 @@
+INFO Draco mesh compression is available, use library at D:\Archivos de programa\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+18:53:09 | INFO: Starting glTF 2.0 export
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Bastidor
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Tablones
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Lona
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | WARNING: Mesh SM_Carreta_Aros is not valid, and may be exported wrongly
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Aros
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | WARNING: Mesh SM_Carreta_Ruedas is not valid, and may be exported wrongly
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Ruedas
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Eje
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Cubos
+18:53:09 | INFO: Primitives created: 1
+18:53:09 | INFO: Extracting primitive: SM_Carreta_Limones
+18:53:10 | INFO: Primitives created: 1
+18:53:10 | INFO: Extracting primitive: SM_Carreta_Carga
+18:53:10 | INFO: Primitives created: 1
+18:53:10 | INFO: Extracting primitive: SM_Carreta_Farol
+18:53:10 | INFO: Primitives created: 1
+18:53:10 | INFO: Extracting primitive: SM_Carreta_Herrajes
+18:53:10 | INFO: Primitives created: 1
+18:53:10 | INFO: Finished glTF 2.0 export in 0.02400493621826172 s
+
+HY4_REEXPORT objets_SM=11 bytes=44448/44448 sha=2deda8c23193/2deda8c23193 IDENTICOS=True
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly.blend"
+
+Blender quit

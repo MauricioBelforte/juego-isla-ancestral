@@ -1,0 +1,242 @@
+[
+ {
+  "base": "67-Vehiculos_barquita_aurora",
+  "lod": "alta",
+  "tris_blend": 474,
+  "objetos": 15,
+  "mats": 6,
+  "rel": "67-Vehiculos/barquita_aurora_lowpoly.blend"
+ },
+ {
+  "base": "67-Vehiculos_barquita_aurora",
+  "lod": "media",
+  "tris_blend": 474,
+  "objetos": 6,
+  "mats": 6,
+  "rel": "67-Vehiculos/barquita_aurora_lowpoly_media.blend"
+ },
+ {
+  "base": "67-Vehiculos_barquita_aurora",
+  "lod": "baja",
+  "tris_blend": 328,
+  "objetos": 6,
+  "mats": 4,
+  "rel": "67-Vehiculos/barquita_aurora_lowpoly_baja.blend"
+ },
+ {
+  "base": "67-Vehiculos_globo_del_viento",
+  "lod": "alta",
+  "tris_blend": 526,
+  "objetos": 15,
+  "mats": 6,
+  "rel": "67-Vehiculos/globo_del_viento_lowpoly.blend"
+ },
+ {
+  "base": "67-Vehiculos_globo_del_viento",
+  "lod": "media",
+  "tris_blend": 526,
+  "objetos": 6,
+  "mats": 6,
+  "rel": "67-Vehiculos/globo_del_viento_lowpoly_media.blend"
+ },
+ {
+  "base": "67-Vehiculos_globo_del_viento",
+  "lod": "baja",
+  "tris_blend": 363,
+  "objetos": 6,
+  "mats": 4,
+  "rel": "67-Vehiculos/globo_del_viento_lowpoly_baja.blend"
+ },
+ {
+  "base": "67-Vehiculos_perla_ancestral",
+  "lod": "alta",
+  "tris_blend": 534,
+  "objetos": 15,
+  "mats": 4,
+  "rel": "67-Vehiculos/perla_ancestral_lowpoly.blend"
+ },
+ {
+  "base": "67-Vehiculos_perla_ancestral",
+  "lod": "media",
+  "tris_blend": 534,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "67-Vehiculos/perla_ancestral_lowpoly_media.blend"
+ },
+ {
+  "base": "67-Vehiculos_perla_ancestral",
+  "lod": "baja",
+  "tris_blend": 371,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "67-Vehiculos/perla_ancestral_lowpoly_baja.blend"
+ },
+ {
+  "base": "67-Vehiculos_gran_vapor",
+  "lod": "alta",
+  "tris_blend": 924,
+  "objetos": 13,
+  "mats": 4,
+  "rel": "67-Vehiculos/gran_vapor_lowpoly.blend"
+ },
+ {
+  "base": "67-Vehiculos_gran_vapor",
+  "lod": "media",
+  "tris_blend": 924,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "67-Vehiculos/gran_vapor_lowpoly_media.blend"
+ },
+ {
+  "base": "67-Vehiculos_gran_vapor",
+  "lod": "baja",
+  "tris_blend": 646,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "67-Vehiculos/gran_vapor_lowpoly_baja.blend"
+ },
+ {
+  "base": "157-Medios-De-Transporte_carreta_ancestral",
+  "lod": "alta",
+  "tris_blend": 792,
+  "objetos": 11,
+  "mats": 4,
+  "rel": "157-Medios-De-Transporte/carreta_ancestral_lowpoly.blend"
+ },
+ {
+  "base": "157-Medios-De-Transporte_carreta_ancestral",
+  "lod": "media",
+  "tris_blend": 704,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "157-Medios-De-Transporte/carreta_ancestral_lowpoly_media.blend"
+ },
+ {
+  "base": "157-Medios-De-Transporte_carreta_ancestral",
+  "lod": "baja",
+  "tris_blend": 491,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "157-Medios-De-Transporte/carreta_ancestral_lowpoly_baja.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_alta",
+  "lod": "alta",
+  "tris_blend": 464,
+  "objetos": 12,
+  "mats": 5,
+  "rel": "25-Ruinas-Templos/columna_rota_alta_lowpoly.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_alta",
+  "lod": "media",
+  "tris_blend": 464,
+  "objetos": 5,
+  "mats": 5,
+  "rel": "25-Ruinas-Templos/columna_rota_alta_lowpoly_media.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_alta",
+  "lod": "baja",
+  "tris_blend": 303,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "25-Ruinas-Templos/columna_rota_alta_lowpoly_baja.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_baja",
+  "lod": "alta",
+  "tris_blend": 464,
+  "objetos": 12,
+  "mats": 5,
+  "rel": "25-Ruinas-Templos/columna_rota_baja_lowpoly.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_baja",
+  "lod": "media",
+  "tris_blend": 464,
+  "objetos": 5,
+  "mats": 5,
+  "rel": "25-Ruinas-Templos/columna_rota_baja_lowpoly_media.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_rota_baja",
+  "lod": "baja",
+  "tris_blend": 304,
+  "objetos": 4,
+  "mats": 4,
+  "rel": "25-Ruinas-Templos/columna_rota_baja_lowpoly_baja.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_entera",
+  "lod": "alta",
+  "tris_blend": 492,
+  "objetos": 13,
+  "mats": 4,
+  "rel": "25-Ruinas-Templos/columna_entera_lowpoly.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_entera",
+  "lod": "media",
+  "tris_blend": 492,
+  "objetos": 5,
+  "mats": 4,
+  "rel": "25-Ruinas-Templos/columna_entera_lowpoly_media.blend"
+ },
+ {
+  "base": "25-Ruinas-Templos_columna_entera",
+  "lod": "baja",
+  "tris_blend": 350,
+  "objetos": 5,
+  "mats": 4,
+  "rel": "25-Ruinas-Templos/columna_entera_lowpoly_baja.blend"
+ },
+ {
+  "base": "18-Casas_casa_mansion",
+  "lod": "alta",
+  "tris_blend": 1428,
+  "objetos": 10,
+  "mats": 4,
+  "rel": "18-Casas/casa_mansion_lowpoly.blend"
+ },
+ {
+  "base": "18-Casas_casa_mansion",
+  "lod": "media",
+  "tris_blend": 1428,
+  "objetos": 6,
+  "mats": 4,
+  "rel": "18-Casas/casa_mansion_lowpoly_media.blend"
+ },
+ {
+  "base": "18-Casas_casa_mansion",
+  "lod": "baja",
+  "tris_blend": 676,
+  "objetos": 6,
+  "mats": 4,
+  "rel": "18-Casas/casa_mansion_lowpoly_baja.blend"
+ },
+ {
+  "base": "18-Casas_casa_vecino",
+  "lod": "alta",
+  "tris_blend": 2746,
+  "objetos": 14,
+  "mats": 8,
+  "rel": "18-BIS-Casas-Grandes/CASA_05_CASA_VECINO/ALTA/SM_CASA_05_CASA_VECINO_ALTA.blend"
+ },
+ {
+  "base": "18-Casas_casa_vecino",
+  "lod": "media",
+  "tris_blend": 1420,
+  "objetos": 14,
+  "mats": 6,
+  "rel": "18-BIS-Casas-Grandes/CASA_05_CASA_VECINO/MEDIA/SM_CASA_05_CASA_VECINO_MEDIA.blend"
+ },
+ {
+  "base": "18-Casas_casa_vecino",
+  "lod": "baja",
+  "tris_blend": 567,
+  "objetos": 14,
+  "mats": 4,
+  "rel": "18-BIS-Casas-Grandes/CASA_05_CASA_VECINO/BAJA/SM_CASA_05_CASA_VECINO_BAJA.blend"
+ }
+]

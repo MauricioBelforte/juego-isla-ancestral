@@ -1,0 +1,68 @@
+INFO Draco mesh compression is available, use library at D:\Archivos de programa\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+19:51:59 | INFO: Starting glTF 2.0 export
+19:51:59 | INFO: Extracting primitive: Cube
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.001
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.002
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.003
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cylinder
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.004
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.005
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.006
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.007
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.008
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.009
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.010
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.011
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Finished glTF 2.0 export in 0.0286562442779541 s
+
+19:51:59 | INFO: Starting glTF 2.0 export
+19:51:59 | INFO: Extracting primitive: SM_Bloque_M_Bloque_Tallado
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: SM_Bloque_M_Bloque_Musgo
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.001
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.002
+19:51:59 | INFO: Primitives created: 1
+19:51:59 | INFO: Extracting primitive: Cube.003
+19:51:59 | INFO: Primitives created: 1
+19:52:00 | INFO: Finished glTF 2.0 export in 0.016582727432250977 s
+
+19:52:00 | INFO: Starting glTF 2.0 export
+19:52:00 | WARNING: Mesh SM_Bloque_M_Bloque_Tallado.001 is not valid, and may be exported wrongly
+19:52:00 | INFO: Extracting primitive: SM_Bloque_M_Bloque_Tallado.001
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Extracting primitive: SM_Bloque_M_Bloque_Musgo.001
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Extracting primitive: Cube
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Extracting primitive: Cube.001
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Extracting primitive: Cube.002
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Extracting primitive: Cube.003
+19:52:00 | INFO: Primitives created: 1
+19:52:00 | INFO: Finished glTF 2.0 export in 0.016714811325073242 s
+
+RESUMEN_EXPORT __{"exportados": 3, "saltados": 33, "errores": 0, "detalle": {"exportados": [["25-Ruinas-Templos", "bloque_tallado", "alta", "ok 22KB 13objs"], ["25-Ruinas-Templos", "bloque_tallado", "media", "ok 15KB 6objs"], ["25-Ruinas-Templos", "bloque_tallado", "baja", "ok 13KB 6objs"]], "errores": []}}__
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly_baja.blend"
+
+Blender quit

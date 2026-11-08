@@ -1,0 +1,39 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_baja.blend"
+OK   casa_mansion_lowpoly.blend                 C1  objetos SM_ = 10
+OK   casa_mansion_lowpoly.blend                 C2  z_min=0.0450 (Z_APOYO=0.0450)
+OK   casa_mansion_lowpoly.blend                 C3  z_max=4.9950 (techo/cumbrera presentes, >4.95)
+OK   casa_mansion_lowpoly.blend                 C4  huella_zocalo=14.0000x10.0000 esquinas=4/4 (spec 14x10)
+OK   casa_mansion_lowpoly.blend                 C5  escalon=2 verts saliente=0.4700 m (0 < s < 0.50)
+OK   casa_mansion_lowpoly.blend                 C6  puerta: piedra_en_vano=0 dintel=12 verts
+OK   casa_mansion_lowpoly.blend                 C7  materiales por cara=4 ['MAT_Mansion_Acento', 'MAT_Mansion_Jade', 'MAT_Mansion_Madera', 'MAT_Mansion_Piedra']
+OK   casa_mansion_lowpoly.blend                 C8  6 ambientes con contenido=biblioteca:72,cocina:28,dormitorio:32,jardin:48,museo:72,vestibulo:88
+OK   casa_mansion_lowpoly.blend                 C9  sombrerete=8 verts z=4.3750 > techo 3.7431 + 0.30
+OK   casa_mansion_lowpoly.blend                 C10 vidrios/jardín Jade=96 verts (>=30)
+OK   casa_mansion_lowpoly.blend                 C11 portico=20 verts apoyados y_min=5.3400 z_postes=2.6950 (muro 4.90)
+OK   casa_mansion_lowpoly_media.blend           C1  objetos SM_ = 6
+OK   casa_mansion_lowpoly_media.blend           C2  z_min=0.0450 (Z_APOYO=0.0450)
+OK   casa_mansion_lowpoly_media.blend           C3  z_max=4.9950 (techo/cumbrera presentes, >4.95)
+OK   casa_mansion_lowpoly_media.blend           C4  huella_zocalo=14.0000x10.0000 esquinas=4/4 (spec 14x10)
+OK   casa_mansion_lowpoly_media.blend           C5  escalon=2 verts saliente=0.4700 m (0 < s < 0.50)
+OK   casa_mansion_lowpoly_media.blend           C6  puerta: piedra_en_vano=0 dintel=12 verts
+OK   casa_mansion_lowpoly_media.blend           C7  materiales por cara=4 ['MAT_Mansion_Acento', 'MAT_Mansion_Jade', 'MAT_Mansion_Madera', 'MAT_Mansion_Piedra']
+OK   casa_mansion_lowpoly_media.blend           C8  6 ambientes con contenido=biblioteca:72,cocina:28,dormitorio:32,jardin:48,museo:72,vestibulo:88
+OK   casa_mansion_lowpoly_media.blend           C9  sombrerete=8 verts z=4.3750 > techo 3.7431 + 0.30
+OK   casa_mansion_lowpoly_media.blend           C10 vidrios/jardín Jade=96 verts (>=30)
+OK   casa_mansion_lowpoly_media.blend           C11 portico=20 verts apoyados y_min=5.3400 z_postes=2.6950 (muro 4.90)
+OK   casa_mansion_lowpoly_baja.blend            C1  objetos SM_ = 6
+OK   casa_mansion_lowpoly_baja.blend            C2  z_min=0.0450 (Z_APOYO=0.0450)
+OK   casa_mansion_lowpoly_baja.blend            C3  z_max=4.9950 (techo/cumbrera presentes, >4.95)
+OK   casa_mansion_lowpoly_baja.blend            C4  huella_zocalo=14.0000x10.0000 esquinas=4/4 (spec 14x10)
+OK   casa_mansion_lowpoly_baja.blend            C5  escalon=2 verts saliente=0.4700 m (0 < s < 0.50)
+OK   casa_mansion_lowpoly_baja.blend            C6  puerta: piedra_en_vano=0 dintel=6 verts
+OK   casa_mansion_lowpoly_baja.blend            C7  materiales por cara=4 ['MAT_Mansion_Acento', 'MAT_Mansion_Jade', 'MAT_Mansion_Madera', 'MAT_Mansion_Piedra']
+OK   casa_mansion_lowpoly_baja.blend            C8  6 ambientes con contenido=biblioteca:40,cocina:14,dormitorio:18,jardin:26,museo:36,vestibulo:44
+OK   casa_mansion_lowpoly_baja.blend            C9  sombrerete=4 verts z=4.3350 > techo 3.7431 + 0.30
+OK   casa_mansion_lowpoly_baja.blend            C10 vidrios/jardín Jade=50 verts (>=30)
+OK   casa_mansion_lowpoly_baja.blend            C11 portico=6 verts apoyados y_min=5.3860 z_postes=2.6950 (muro 4.90)
+CHECKS=33 PASADOS=33 FALLOS=0 MINIMO=33 BLOQUES=3
+VERDE: mansión íntegra en 3 blends

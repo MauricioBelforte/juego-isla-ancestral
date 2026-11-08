@@ -1,0 +1,42 @@
+HY4_SONDA INICIO blend=tools/mcp/blender-mcp/18-Casas/casa_mansion_lowpoly_baja.blend
+HY4_SONDA OBJ SM_Mansion_M_Mansion_Acento                tris=76    polis=44    verts=66    mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA OBJ SM_Mansion_M_Mansion_Jade                  tris=60    polis=38    verts=50    mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA OBJ SM_Mansion_M_Mansion_Madera                tris=154   polis=86    verts=135   mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA OBJ SM_Mansion_M_Mansion_Piedra                tris=206   polis=107   verts=189   mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA OBJ SM_Mansion_Pedestal_NOFUNDIR               tris=120   polis=60    verts=80    mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA OBJ SM_Mansion_Zocalo_NOFUNDIR                 tris=60    polis=30    verts=40    mats=1 hide_render=False hide_viewport=False mods=[]
+HY4_SONDA TOTAL_OBJETOS=6 TOTAL_TRIS_BASE=676
+HY4_SONDA EVAL SM_Mansion_M_Mansion_Acento                tris=76    polis=44    verts=66   
+HY4_SONDA EVAL SM_Mansion_M_Mansion_Jade                  tris=60    polis=38    verts=50   
+HY4_SONDA EVAL SM_Mansion_M_Mansion_Madera                tris=154   polis=86    verts=135  
+HY4_SONDA EVAL SM_Mansion_M_Mansion_Piedra                tris=206   polis=107   verts=189  
+HY4_SONDA EVAL SM_Mansion_Pedestal_NOFUNDIR               tris=120   polis=60    verts=80   
+HY4_SONDA EVAL SM_Mansion_Zocalo_NOFUNDIR                 tris=60    polis=30    verts=40   
+HY4_SONDA TOTAL_TRIS_EVAL=676
+HY4_SONDA PURGA_OK objetos_SM=6
+INFO Draco mesh compression is available, use library at D:\Archivos de programa\Blender Foundation\Blender 4.2\4.2\python\lib\site-packages\extern_draco.dll
+18:32:15 | INFO: Starting glTF 2.0 export
+18:32:15 | WARNING: Mesh SM_Mansion_M_Mansion_Madera.001 is not valid, and may be exported wrongly
+18:32:15 | INFO: Extracting primitive: SM_Mansion_M_Mansion_Madera.001
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | WARNING: Mesh SM_Mansion_M_Mansion_Piedra.001 is not valid, and may be exported wrongly
+18:32:15 | INFO: Extracting primitive: SM_Mansion_M_Mansion_Piedra.001
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | WARNING: Mesh SM_Mansion_M_Mansion_Acento.001 is not valid, and may be exported wrongly
+18:32:15 | INFO: Extracting primitive: SM_Mansion_M_Mansion_Acento.001
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | WARNING: Mesh SM_Mansion_M_Mansion_Jade.001 is not valid, and may be exported wrongly
+18:32:15 | INFO: Extracting primitive: SM_Mansion_M_Mansion_Jade.001
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | INFO: Extracting primitive: Cube
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | INFO: Extracting primitive: Cube.051
+18:32:15 | INFO: Primitives created: 1
+18:32:15 | INFO: Finished glTF 2.0 export in 0.01966118812561035 s
+
+HY4_SONDA GLB_ESCRITO=Temp/hy4_mansion_baja_reexport_20261107.glb bytes=38392
+HY4_SONDA FIN
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_baja.blend"
+
+Blender quit

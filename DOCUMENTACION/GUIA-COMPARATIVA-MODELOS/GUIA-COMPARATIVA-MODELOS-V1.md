@@ -197,7 +197,9 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 | Modelo | Plataforma | Rol | Estado |
 |--------|-----------|-----|--------|
-| (pendiente) | (pendiente) | (pendiente) | — |
+| Crouton Alpha | Stealth (Kilo Code) | Sub-agente de bajo costo para tareas repetitivas de agente: escaneo de código, análisis de logs, tool calling, documentación, tareas de alto volumen | En prueba — supervisado por Nemotron-3.5-Super-VL |
+| Stealth Glyph Cluster | Stealth (Kilo Code) | Razonamiento y análisis de arquitectura: revisión de código, debugging complejo, planificación de refactors, análisis de largo contexto | En prueba — supervisado por Nemotron-3.5-Super-VL |
+| Reflection Beam 1.0 | NVIDIA (Kilo Code) | Razonamiento, auditoría de conteos, picking documental, verificación de balance matemático | En prueba — supervisado por Nemotron-3.5-Super-VL |
 
 > Los modelos no listados arriba (Atria-Dawn-Preview, Kimi K3, Claude Haiku 5.5, StepFun Step 5, Nemotron 3 Ultra, Thinking Machines Inkling, Poolside Laguna S 2.1) están en la versión histórica completa (`obsoletos/10-GUIA-COMPARATIVA-MODELOS.md`). Si el fundador decide integrar alguno, se agrega aquí y se crea una V2.
 
@@ -210,6 +212,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 3. **No incluir** modelos que ya no van a volver; esos ya viven en `obsoletos/` como histórico.
 4. **UTF-8 sin BOM** siempre (§28 AGENTS.md).
 5. **Firmar** toda edición con modelo, plataforma y fecha.
+6. **Modelos en prueba (supervisados):** Crouton Alpha, Stealth Glyph Cluster y Reflection Beam 1.0 están supervisados por Nemotron-3.5-Super-VL. No se les asignan módulos críticos sin previa revisión de Nemotron. Los reportes de sus tareas se escriben en `Mensajes entre modelos/<MODELO>/REPORTES-Prueba-Paralela/`. Beam tiene su propio BACKLOG-MASTER en `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md`.
 
 ---
 
@@ -221,4 +224,4 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Modelo:** Nemotron-3.5-Super-VL
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-04
+**Fecha:** 2026-11-07

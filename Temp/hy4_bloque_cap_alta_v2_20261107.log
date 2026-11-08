@@ -1,0 +1,69 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend"
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:02.97 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:03.49 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:03.94 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:04.16 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az000.png'
+Time: 00:04.43 (Saving: 00:00.25)
+
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.06 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.51 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.98 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.26 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az060.png'
+Time: 00:01.38 (Saving: 00:00.09)
+
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.10 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.58 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.07 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.34 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az120.png'
+Time: 00:01.45 (Saving: 00:00.09)
+
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.07 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.42 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.81 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.01 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az180.png'
+Time: 00:01.12 (Saving: 00:00.08)
+
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.03 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.45 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.89 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.14 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az240.png'
+Time: 00:01.24 (Saving: 00:00.07)
+
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.06 | Rendering 1 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.49 | Rendering 25 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:00.93 | Rendering 50 / 64 samples
+Fra:1 Mem:57.62M (Peak 57.62M) | Time:00:01.21 | Rendering 64 / 64 samples
+Saved: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az300.png'
+Time: 00:01.32 (Saving: 00:00.08)
+
+ARCHIVO_ABIERTO: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend
+OBJETOS_ENCUADRADOS: 13 (prefijo 'SM_Bloque_')
+  · SM_Bloque_Cornisa_NOFUNDIR
+  · SM_Bloque_Cuerpo
+  · SM_Bloque_Glifo_1
+  · SM_Bloque_Glifo_2
+  · SM_Bloque_Glifo_3
+  · SM_Bloque_Glifo_4
+  · SM_Bloque_Medallon
+  · SM_Bloque_Musgo_1
+  · SM_Bloque_Musgo_2
+  · SM_Bloque_Panel_NOFUNDIR
+  · SM_Bloque_Pilastra_1
+  · SM_Bloque_Pilastra_2
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az000.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az060.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az120.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az180.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az240.png
+OK  D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\capturas\bloque_tallado_alta_az300.png
+---
+Revisa TODAS estas capturas: en ninguna debe verse luz/aire
+entre el objeto y la base (E-13).
+
+Blender quit

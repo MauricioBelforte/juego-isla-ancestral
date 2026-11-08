@@ -1,0 +1,64 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\barquita_aurora_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\barquita_aurora_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\barquita_aurora_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\globo_del_viento_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\globo_del_viento_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\globo_del_viento_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\perla_ancestral_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\perla_ancestral_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\perla_ancestral_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\gran_vapor_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\gran_vapor_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\67-Vehiculos\gran_vapor_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\157-Medios-De-Transporte\carreta_ancestral_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_alta_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_alta_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_alta_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_baja_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_baja_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_rota_baja_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_entera_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_entera_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENBLEND 67-Vehiculos_barquita_aurora               alta  tris=474   obj=15 mats=6
+BLEND 67-Vehiculos_barquita_aurora               media tris=474   obj=6  mats=6
+BLEND 67-Vehiculos_barquita_aurora               baja  tris=328   obj=6  mats=4
+BLEND 67-Vehiculos_globo_del_viento              alta  tris=526   obj=15 mats=6
+BLEND 67-Vehiculos_globo_del_viento              media tris=526   obj=6  mats=6
+BLEND 67-Vehiculos_globo_del_viento              baja  tris=363   obj=6  mats=4
+BLEND 67-Vehiculos_perla_ancestral               alta  tris=534   obj=15 mats=4
+BLEND 67-Vehiculos_perla_ancestral               media tris=534   obj=4  mats=4
+BLEND 67-Vehiculos_perla_ancestral               baja  tris=371   obj=4  mats=4
+BLEND 67-Vehiculos_gran_vapor                    alta  tris=924   obj=13 mats=4
+BLEND 67-Vehiculos_gran_vapor                    media tris=924   obj=4  mats=4
+BLEND 67-Vehiculos_gran_vapor                    baja  tris=646   obj=4  mats=4
+BLEND 157-Medios-De-Transporte_carreta_ancestral alta  tris=792   obj=11 mats=4
+BLEND 157-Medios-De-Transporte_carreta_ancestral media tris=704   obj=4  mats=4
+BLEND 157-Medios-De-Transporte_carreta_ancestral baja  tris=491   obj=4  mats=4
+BLEND 25-Ruinas-Templos_columna_rota_alta        alta  tris=464   obj=12 mats=5
+BLEND 25-Ruinas-Templos_columna_rota_alta        media tris=464   obj=5  mats=5
+BLEND 25-Ruinas-Templos_columna_rota_alta        baja  tris=303   obj=4  mats=4
+BLEND 25-Ruinas-Templos_columna_rota_baja        alta  tris=464   obj=12 mats=5
+BLEND 25-Ruinas-Templos_columna_rota_baja        media tris=464   obj=5  mats=5
+BLEND 25-Ruinas-Templos_columna_rota_baja        baja  tris=304   obj=4  mats=4
+BLEND 25-Ruinas-Templos_columna_entera           alta  tris=492   obj=13 mats=4
+BLEND 25-Ruinas-Templos_columna_entera           media tris=492   obj=5  mats=4
+BLEND 25-Ruinas-Templos_columna_entera           baja  tris=350   obj=5  mats=4
+BLEND 18-Casas_casa_mansion                      alta  tris=1428  obj=10 mats=4
+BLEND 18-Casas_casa_mansion                      media tris=1428  obj=6  mats=4
+BLEND 18-Casas_casa_mansion                      baja  tris=676   obj=6  mats=4
+BLEND 18-Casas_casa_vecino                       alta  tris=2746  obj=14 mats=8
+BLEND 18-Casas_casa_vecino                       media tris=1420  obj=14 mats=6
+BLEND 18-Casas_casa_vecino                       baja  tris=567   obj=14 mats=4
+HY4_CORPUS_BLEND_OK=30
+CODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\columna_entera_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_media.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-Casas\casa_mansion_lowpoly_baja.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-BIS-Casas-Grandes\CASA_05_CASA_VECINO\ALTA\SM_CASA_05_CASA_VECINO_ALTA.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-BIS-Casas-Grandes\CASA_05_CASA_VECINO\MEDIA\SM_CASA_05_CASA_VECINO_MEDIA.blend"
+Read blend: "D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\18-BIS-Casas-Grandes\CASA_05_CASA_VECINO\BAJA\SM_CASA_05_CASA_VECINO_BAJA.blend"
+
+Blender quit

@@ -1,0 +1,223 @@
+[
+ {
+  "rel": "67-Vehiculos/barquita_aurora_lowpoly_baja.blend",
+  "antes": 328,
+  "despues": 325,
+  "delta": 3,
+  "esperado": 3,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Barquita_M_Barquita_MaderaClara",
+    32,
+    30,
+    2,
+    true
+   ],
+   [
+    "SM_Barquita_M_Barquita_Aurora",
+    14,
+    13,
+    1,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "67-Vehiculos/globo_del_viento_lowpoly_baja.blend",
+  "antes": 363,
+  "despues": 357,
+  "delta": 6,
+  "esperado": 6,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Globo_M_Globo_Acento",
+    103,
+    101,
+    2,
+    true
+   ],
+   [
+    "SM_Globo_M_Globo_Farol",
+    16,
+    14,
+    2,
+    true
+   ],
+   [
+    "SM_Globo_M_Globo_MaderaOscura",
+    70,
+    68,
+    2,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "67-Vehiculos/perla_ancestral_lowpoly_baja.blend",
+  "antes": 371,
+  "despues": 369,
+  "delta": 2,
+  "esperado": 2,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Perla_M_Perla_Cristal",
+    84,
+    82,
+    2,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "67-Vehiculos/gran_vapor_lowpoly_baja.blend",
+  "antes": 646,
+  "despues": 626,
+  "delta": 20,
+  "esperado": 20,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Vapor_M_Vapor_Hierro",
+    322,
+    310,
+    12,
+    true
+   ],
+   [
+    "SM_Vapor_M_Vapor_Verde",
+    126,
+    122,
+    4,
+    true
+   ],
+   [
+    "SM_Vapor_M_Vapor_Laton",
+    98,
+    94,
+    4,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "157-Medios-De-Transporte/carreta_ancestral_lowpoly.blend",
+  "antes": 792,
+  "despues": 704,
+  "delta": 88,
+  "esperado": 88,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Carreta_Aros",
+    128,
+    64,
+    64,
+    true
+   ],
+   [
+    "SM_Carreta_Ruedas",
+    200,
+    176,
+    24,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "157-Medios-De-Transporte/carreta_ancestral_lowpoly_baja.blend",
+  "antes": 491,
+  "despues": 479,
+  "delta": 12,
+  "esperado": 12,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Carreta_M_Carreta_Madera",
+    150,
+    148,
+    2,
+    true
+   ],
+   [
+    "SM_Carreta_M_Carreta_Lona",
+    70,
+    68,
+    2,
+    true
+   ],
+   [
+    "SM_Carreta_M_Carreta_Hierro",
+    182,
+    174,
+    8,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "25-Ruinas-Templos/columna_entera_lowpoly_baja.blend",
+  "antes": 350,
+  "despues": 348,
+  "delta": 2,
+  "esperado": 2,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_ColEnt_M_ColEnt_Tallado",
+    106,
+    104,
+    2,
+    true
+   ]
+  ]
+ },
+ {
+  "rel": "18-Casas/casa_mansion_lowpoly_baja.blend",
+  "antes": 676,
+  "despues": 530,
+  "delta": 146,
+  "esperado": 146,
+  "cierra": true,
+  "modificadores": 0,
+  "piezas": [
+   [
+    "SM_Mansion_M_Mansion_Madera",
+    154,
+    114,
+    40,
+    true
+   ],
+   [
+    "SM_Mansion_M_Mansion_Piedra",
+    206,
+    132,
+    74,
+    true
+   ],
+   [
+    "SM_Mansion_M_Mansion_Acento",
+    76,
+    56,
+    20,
+    true
+   ],
+   [
+    "SM_Mansion_M_Mansion_Jade",
+    60,
+    48,
+    12,
+    true
+   ]
+  ]
+ }
+]

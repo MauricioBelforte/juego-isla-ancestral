@@ -1,0 +1,15 @@
+=== TRIANGULOS DE RUNTIME (GLB, no .blend) ===
+alta  tris=1428  verts=4284  meshes=10 mats=4  y=[0.0450,4.9950] sha=03570f082e93  declarado=1428 deriva=+0
+media tris=1428  verts=4284  meshes=6  mats=4  y=[0.0450,4.9950] sha=c1e2e5137775  declarado=1428 deriva=+0
+baja  tris=530   verts=1590  meshes=6  mats=4  y=[0.0450,4.9950] sha=c34707b57f82  declarado=676 deriva=+146
+
+=== DETALLE POR PRIMITIVA (ultimo GLB) ===
+  SM_Mansion_M_Mansion_Madera.001                 114 tris
+  SM_Mansion_M_Mansion_Piedra.001                 132 tris
+  SM_Mansion_M_Mansion_Acento.001                  56 tris
+  SM_Mansion_M_Mansion_Jade.001                    48 tris
+  Cube                                             60 tris
+  Cube.051                                        120 tris
+
+CHECKS=24 PASADOS=24 FALLOS=0 BLOQUES=3 PISO=24
+VERDE

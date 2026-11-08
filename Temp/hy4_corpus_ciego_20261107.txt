@@ -1,0 +1,12 @@
+=== PRESUPUESTO M166 SOBRE GLB DE RUNTIME (no .blend) ===
+
+base                                       lod   runtime   blend   deriva   obj  mats  y_min
+----------------------------------------------------------------------------------------
+18-Casas_casa_mansion                      alta     1428       -        -    10     4 0.0450
+18-Casas_casa_mansion                      baja      530       -        -     6     4 0.0450
+18-Casas_casa_mansion                      media    1428       -        -     6     4 0.0450
+----------------------------------------------------------------------------------------
+Derivas .blend -> GLB: 0 de 3 pares (suma |deriva|=0). DATO, no check.
+
+CHECKS=33 PASADOS=33 FALLOS=0 BLOQUES=3 BASES=1 PISO=330
+CIEGO: faltan bloques, bases o checks ejecutados (3/30 bloques, 1/10 bases, 33/330 checks)

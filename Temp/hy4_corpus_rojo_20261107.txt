@@ -1,0 +1,40 @@
+=== PRESUPUESTO M166 SOBRE GLB DE RUNTIME (no .blend) ===
+
+base                                       lod   runtime   blend   deriva   obj  mats  y_min
+----------------------------------------------------------------------------------------
+157-Medios-De-Transporte_carreta_ancestral alta      704       -        -    11     4 0.0450
+157-Medios-De-Transporte_carreta_ancestral baja      479       -        -     4     4 0.0450
+157-Medios-De-Transporte_carreta_ancestral media     704       -        -     4     4 0.0450
+18-Casas_casa_mansion                      alta     1428       -        -    10     4 0.0450
+18-Casas_casa_mansion                      baja      530       -        -     6     4 0.0450
+18-Casas_casa_mansion                      media    1428       -        -     6     4 0.0450
+18-Casas_casa_vecino                       alta     2746       -        -    14     8 0.0450
+18-Casas_casa_vecino                       baja      567       -        -    14     4 0.0450
+18-Casas_casa_vecino                       media    1420       -        -    14     6 0.0450
+25-Ruinas-Templos_columna_entera           alta      492       -        -    13     4 0.0450
+25-Ruinas-Templos_columna_entera           baja      348       -        -     5     4 0.0450
+25-Ruinas-Templos_columna_entera           media     492       -        -     5     4 0.0450
+25-Ruinas-Templos_columna_rota_alta        alta      464       -        -    12     5 0.0450
+25-Ruinas-Templos_columna_rota_alta        baja      303       -        -     4     4 0.0450
+25-Ruinas-Templos_columna_rota_alta        media     464       -        -     5     5 0.0450
+25-Ruinas-Templos_columna_rota_baja        alta      464       -        -    12     5 0.0450
+25-Ruinas-Templos_columna_rota_baja        baja      304       -        -     4     4 0.0450
+25-Ruinas-Templos_columna_rota_baja        media     464       -        -     5     5 0.0450
+67-Vehiculos_barquita_aurora               alta      474       -        -    15     6 0.0450
+67-Vehiculos_barquita_aurora               baja      325       -        -     6     4 0.0450
+67-Vehiculos_barquita_aurora               media     474       -        -     6     6 0.0450
+67-Vehiculos_globo_del_viento              alta      526       -        -    15     6 0.0450
+67-Vehiculos_globo_del_viento              baja      357       -        -     6     4 0.0450
+67-Vehiculos_globo_del_viento              media     526       -        -     6     6 0.0450
+67-Vehiculos_gran_vapor                    alta      924       -        -    13     4 0.0450
+67-Vehiculos_gran_vapor                    baja      626       -        -     4     4 0.0450
+67-Vehiculos_gran_vapor                    media     924       -        -     4     4 0.0450
+67-Vehiculos_perla_ancestral               alta      534       -        -    15     4 0.0450
+67-Vehiculos_perla_ancestral               baja      369       -        -     4     4 0.0450
+67-Vehiculos_perla_ancestral               media     534       -        -     4     4 0.0450
+----------------------------------------------------------------------------------------
+Derivas .blend -> GLB: 0 de 30 pares (suma |deriva|=0). DATO, no check.
+
+   FAIL C4 FALLO: SM_Cama_MESH count=115 no multiplo de 3; SM_Cama_MESH indice fuera de rango
+CHECKS=330 PASADOS=329 FALLOS=1 BLOQUES=30 BASES=10 PISO=330
+ROJO

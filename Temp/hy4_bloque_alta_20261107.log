@@ -1,0 +1,35 @@
+Blender 4.2.23 LTS (hash d0cbe84903e8 built 2026-07-21 01:34:46)
+Info: Total files 0 | Changed 0 | Failed 0
+ASENTADO: z_min 0.0450 -> 0.0450 (delta -0.0000)
+HUELLA: toca=4  footprint=1.00 x 0.40
+APOYO_PIEZA SM_Bloque_Zocalo_NOFUNDIR    z_min=0.0450
+APOYO_PIEZA SM_Bloque_Cuerpo             z_min=0.2250
+APOYO_PIEZA SM_Bloque_Cornisa_NOFUNDIR   z_min=1.8450
+APOYO_PIEZA SM_Bloque_Panel              z_min=0.4450
+APOYO_PIEZA SM_Bloque_Medallon           z_min=0.8650
+APOYO_PIEZA SM_Bloque_Glifo_1            z_min=0.6050
+APOYO_PIEZA SM_Bloque_Glifo_2            z_min=0.6050
+APOYO_PIEZA SM_Bloque_Glifo_3            z_min=1.3650
+APOYO_PIEZA SM_Bloque_Glifo_4            z_min=1.3650
+APOYO_PIEZA SM_Bloque_Pilastra_1         z_min=0.4050
+APOYO_PIEZA SM_Bloque_Pilastra_2         z_min=0.4050
+APOYO_PIEZA SM_Bloque_Musgo_1            z_min=0.1150
+APOYO_PIEZA SM_Bloque_Musgo_2            z_min=0.1150
+ALTURA_REAL z=[0.0450..2.0450] alto=2.0000 HUELLA=1.0000x0.4000
+UNION SM_Bloque_Zocalo_NOFUNDIR -> SM_Bloque_Cuerpo         z=0.2250 sin aire
+UNION SM_Bloque_Cuerpo         -> SM_Bloque_Cornisa_NOFUNDIR z=1.8450 sin aire
+UNION SM_Bloque_Medallon           empotrado (y -0.2350..-0.2050 vs plano -0.2160)
+UNION SM_Bloque_Glifo_1            empotrado (y -0.2320..-0.2080 vs plano -0.2160)
+UNION SM_Bloque_Glifo_2            empotrado (y -0.2320..-0.2080 vs plano -0.2160)
+UNION SM_Bloque_Glifo_3            empotrado (y -0.2320..-0.2080 vs plano -0.2160)
+UNION SM_Bloque_Glifo_4            empotrado (y -0.2320..-0.2080 vs plano -0.2160)
+UNION SM_Bloque_Pilastra_1         empotrado (y -0.2140..-0.1900 vs plano -0.2000)
+UNION SM_Bloque_Pilastra_2         empotrado (y -0.2140..-0.1900 vs plano -0.2000)
+UNION SM_Bloque_Musgo_1            empotrado (y -0.2140..-0.1940 vs plano -0.2000)
+UNION SM_Bloque_Musgo_2            empotrado (y -0.2140..-0.1940 vs plano -0.2000)
+Info: Saved "bloque_tallado_lowpoly.blend"
+OK — SM_: 13 — blend: D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\25-Ruinas-Templos\bloque_tallado_lowpoly.blend
+VARIANTE bloque_tallado | SM_=13 | ALTO=2.00 | z_min=0.0450 | toca=4 | fp=1.00x0.40
+LISTO — bloque de piedra tallada (1 asset, spec muro_recto 1x2 voxel)
+
+Blender quit
