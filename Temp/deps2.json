@@ -1,0 +1,475 @@
+{
+ "deps": {
+  "TermsManager": [],
+  "EventBus": [],
+  "WorldState": [
+   "Friendship",
+   "SaveManager",
+   "TimeCalendar",
+   "Weather"
+  ],
+  "DialogueManager": [
+   "EventBus",
+   "Localization",
+   "WorldState"
+  ],
+  "GameSettings": [],
+  "ServiceRegistry": [],
+  "GameLogger": [
+   "CrashReporter",
+   "ServiceRegistry"
+  ],
+  "AnalyticsDirector": [
+   "GameLogger",
+   "ServiceRegistry"
+  ],
+  "TelemetryDirector": [
+   "AnalyticsDirector",
+   "EventBus",
+   "GameLogger",
+   "ServiceRegistry"
+  ],
+  "SaveManager": [
+   "DataStore",
+   "EventBus"
+  ],
+  "TimeCalendar": [
+   "GameTime",
+   "SaveManager"
+  ],
+  "ItemDatabase": [],
+  "EconomyManager": [
+   "EventBus",
+   "SaveManager",
+   "TimeCalendar"
+  ],
+  "SoftlockGuard": [
+   "EventBus",
+   "SaveManager"
+  ],
+  "ShopManager": [
+   "EconomyManager",
+   "GameTime",
+   "Inventario",
+   "TimeCalendar"
+  ],
+  "Inventario": [
+   "ItemDatabase",
+   "SaveManager"
+  ],
+  "Friendship": [
+   "EventBus",
+   "GameTime",
+   "Inventario",
+   "ItemDatabase",
+   "SaveManager",
+   "TimeCalendar",
+   "VillagerManager"
+  ],
+  "GameTime": [
+   "EventBus",
+   "SaveManager",
+   "eventos"
+  ],
+  "RelojHud": [],
+  "Bootstrap": [
+   "EventBus",
+   "GameFlowManager",
+   "SceneManager",
+   "ServiceRegistry"
+  ],
+  "UIManager": [
+   "AccesibilityManager",
+   "ControlInput",
+   "EventBus",
+   "GameSettings",
+   "Localization",
+   "ThemeService",
+   "TooltipService"
+  ],
+  "TooltipService": [],
+  "NotificationService": [
+   "EventBus"
+  ],
+  "TerrainLocator": [],
+  "VillagerManager": [
+   "EventBus",
+   "GameTime",
+   "SaveManager",
+   "TerrainLocator",
+   "TimeCalendar"
+  ],
+  "ControlInput": [
+   "eventos"
+  ],
+  "ResourceManager": [
+   "GameTime",
+   "Inventario",
+   "SaveManager"
+  ],
+  "mineria": [],
+  "interacciones": [],
+  "fauna_registry": [],
+  "fauna": [],
+  "credits_manager": [],
+  "MerchManager": [
+   "SaveManager",
+   "ServiceRegistry"
+  ],
+  "animal_ai": [],
+  "coleccionables": [],
+  "hotbar": [],
+  "inventario_helper": [
+   "ItemDatabase",
+   "Localization",
+   "ShopManager",
+   "hotbar"
+  ],
+  "inventario_iter5": [],
+  "Localization": [
+   "DataStore"
+  ],
+  "Balance": [],
+  "Tutorial": [
+   "EventBus",
+   "GameLogger",
+   "SaveManager",
+   "VillagerManager",
+   "eventos"
+  ],
+  "ThemeService": [
+   "Localization"
+  ],
+  "Crafting": [
+   "Balance",
+   "EconomyManager",
+   "GameTime",
+   "Inventario",
+   "ItemDatabase",
+   "SaveManager"
+  ],
+  "AssetProfile": [
+   "GameSettings"
+  ],
+  "BrandConfig": [],
+  "DebugMenu": [
+   "EconomyManager",
+   "GameLogger",
+   "GameTime",
+   "Historia",
+   "Inventario",
+   "MapManager",
+   "MemoryMonitor",
+   "ServiceRegistry",
+   "TerrainLocator",
+   "TimeCalendar",
+   "TravelService",
+   "VillagerManager",
+   "Weather"
+  ],
+  "CatalogoTiendas": [
+   "ItemDatabase",
+   "ShopManager"
+  ],
+  "Farm": [
+   "Balance",
+   "EventBus",
+   "Inventario",
+   "SaveManager",
+   "TerrainLocator",
+   "TimeCalendar"
+  ],
+  "Fishing": [
+   "CollectionRegistry",
+   "EventBus",
+   "GameTime",
+   "Inventario",
+   "TimeCalendar",
+   "Weather"
+  ],
+  "Weather": [
+   "EventBus",
+   "GameTime",
+   "SaveManager"
+  ],
+  "Historia": [
+   "EventBus",
+   "Inventario",
+   "SaveManager",
+   "WorldState"
+  ],
+  "Historias": [
+   "Diary",
+   "EventBus",
+   "Historia",
+   "Inventario",
+   "SaveManager",
+   "WorldState"
+  ],
+  "Barter": [
+   "Friendship",
+   "GameTime",
+   "Inventario",
+   "SaveManager",
+   "TimeCalendar"
+  ],
+  "TravelService": [
+   "EconomyManager",
+   "GameTime",
+   "SaveManager",
+   "ServiceRegistry",
+   "TimeCalendar",
+   "Weather",
+   "WorldState"
+  ],
+  "CollectionRegistry": [
+   "EventBus",
+   "Inventario",
+   "SaveManager",
+   "TimeCalendar"
+  ],
+  "DonationService": [
+   "CollectionRegistry",
+   "EventBus",
+   "Inventario",
+   "PlayerProfile"
+  ],
+  "Diary": [
+   "EventBus",
+   "GameTime",
+   "SaveManager"
+  ],
+  "PlayerProfile": [],
+  "ProgressionManager": [
+   "Barter",
+   "CollectionRegistry",
+   "EconomyManager",
+   "EventBus",
+   "GameLogger",
+   "GameTime",
+   "Historia",
+   "PlayerProfile",
+   "SaveManager"
+  ],
+  "Achievements": [
+   "AnalyticsDirector",
+   "EventBus",
+   "Fishing",
+   "GameLogger",
+   "GameSettings",
+   "GameTime",
+   "ProgressionManager",
+   "SaveManager",
+   "coleccionables"
+  ],
+  "Vehiculos": [
+   "EventBus",
+   "SaveManager"
+  ],
+  "Postgame": [
+   "EventBus",
+   "GameTime",
+   "Historia",
+   "ProgressionManager",
+   "SaveManager"
+  ],
+  "EscalasGlobales": [],
+  "AccesibilityManager": [],
+  "AnimationService": [],
+  "PhotoService": [
+   "UIManager"
+  ],
+  "Tiers": [
+   "EconomyManager",
+   "EventBus",
+   "Inventario",
+   "ProgressionManager",
+   "SaveManager"
+  ],
+  "AudioConfig": [
+   "DataStore",
+   "SaveManager"
+  ],
+  "DataStore": [
+   "GameLogger",
+   "SaveManager",
+   "ServiceRegistry"
+  ],
+  "SubtitleManager": [
+   "DataStore"
+  ],
+  "StreamManager": [
+   "MemoryMonitor",
+   "SaveManager"
+  ],
+  "PantallaCarga": [
+   "GameTime",
+   "StreamManager"
+  ],
+  "MonetizacionManager": [],
+  "TerrainProvider": [
+   "ServiceRegistry"
+  ],
+  "GameFlowManager": [
+   "EventBus"
+  ],
+  "SceneManager": [
+   "EventBus",
+   "GameFlowManager"
+  ],
+  "MotivacionManager": [
+   "ServiceRegistry"
+  ],
+  "PlatformManager": [
+   "ServiceRegistry"
+  ],
+  "WorldBible": [
+   "ServiceRegistry"
+  ],
+  "MemoryMonitor": [
+   "GameLogger",
+   "ServiceRegistry"
+  ],
+  "MusicDirector": [
+   "ServiceRegistry"
+  ],
+  "AmbientDirector": [
+   "ServiceRegistry"
+  ],
+  "SFXManager": [
+   "DialogueManager",
+   "ServiceRegistry"
+  ],
+  "FeedbackDirector": [
+   "ServiceRegistry"
+  ],
+  "NarrativeSound": [
+   "EventBus",
+   "ServiceRegistry",
+   "TravelService"
+  ],
+  "CrashReporter": [
+   "ServiceRegistry"
+  ],
+  "CiCdManager": [
+   "ServiceRegistry"
+  ],
+  "InstaladorConfig": [
+   "ServiceRegistry"
+  ],
+  "MapManager": [
+   "ServiceRegistry",
+   "TerrainLocator"
+  ],
+  "HardwareManager": [
+   "ServiceRegistry"
+  ],
+  "BuildConfigManager": [
+   "ServiceRegistry"
+  ],
+  "UpdateManager": [
+   "ServiceRegistry"
+  ],
+  "DevTools": [
+   "ServiceRegistry"
+  ],
+  "MaterialesRecursos": [],
+  "BotPaseoM09": [],
+  "MundoRaiz": [],
+  "SecurityManager": [
+   "ServiceRegistry"
+  ],
+  "FontCatalog": [
+   "ServiceRegistry"
+  ],
+  "BackupManager": [
+   "ServiceRegistry"
+  ],
+  "DlcManager": [
+   "SaveManager",
+   "ServiceRegistry"
+  ],
+  "SupportManager": [
+   "ServiceRegistry"
+  ],
+  "ModdingManager": [
+   "ServiceRegistry"
+  ],
+  "UgcManager": [
+   "ServiceRegistry"
+  ],
+  "CommunityManager": [
+   "ServiceRegistry"
+  ],
+  "NPCManager": [
+   "MemoryMonitor",
+   "PhotoService",
+   "SaveManager",
+   "VillagerManager"
+  ],
+  "eventos": [
+   "EventBus",
+   "Friendship",
+   "GameTime",
+   "Inventario",
+   "SaveManager",
+   "TimeCalendar",
+   "Weather"
+  ],
+  "EquipmentManager": [
+   "Inventario",
+   "SaveManager"
+  ],
+  "NPCVisualDatabase": [],
+  "WorldLocations": [],
+  "EnchantmentSystem": [
+   "SaveManager"
+  ],
+  "TransportManager": [
+   "DialogueManager",
+   "EconomyManager",
+   "EventBus",
+   "Friendship",
+   "GameLogger",
+   "GameTime",
+   "Historia",
+   "Inventario",
+   "SaveManager",
+   "ServiceRegistry",
+   "TimeCalendar",
+   "Weather",
+   "WorldState",
+   "eventos"
+  ],
+  "IslandRegistry": [
+   "SaveManager",
+   "WorldState"
+  ],
+  "gem_currency": [],
+  "combat_island": [],
+  "Construccion": [
+   "Inventario"
+  ],
+  "HouseManager": [
+   "GameTime",
+   "Inventario",
+   "ServiceRegistry",
+   "TerrainLocator",
+   "WorldLocations"
+  ]
+ },
+ "cycles": [
+  [
+   "DataStore",
+   "SaveManager"
+  ],
+  [
+   "Friendship",
+   "GameTime",
+   "TimeCalendar",
+   "VillagerManager",
+   "Weather",
+   "eventos"
+  ]
+ ]
+}

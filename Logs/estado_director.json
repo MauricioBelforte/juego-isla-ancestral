@@ -1086,7 +1086,7 @@
   },
   "deepseek_reactivado": "#404: M53 L159 [x] confirmada (contraste 12.04:1 AAA) + 2 defectos guardian + 5 [ ] M53 (1 propio+3 deps+1 diseno). DeepSeek REACTIVADO (volveria del idle 13h). M53 casi sellable.",
   "hy3_gate2": "Hy3 standby (#399), listo para M73 gate-2 cuando cierre sus 4 [ ]. pool head 400. 2 sellos vigentes (M28+M65).",
-  "sellos_218": 13,
+  "sellos_218": 14,
   "asignador_0140": "Ling nudgued (#256, riel design-docs 85min sin reporte). Step-5 NO necesita M33 (M23 aún 49[x]... 49 [ ]+26 [?]). DeepSeek BACKLOG-11 honda. Hy3 gate-2 continuo. M33 sigue held.",
   "ling_design_docs": {
     "lote1": "CERRADO 25oct: 13/13 items M09/M112/M114/M116/M118 con cita + grep 13/13. Log 2175.",
@@ -2345,5 +2345,17 @@
   "criticos_12_ds_oc": {
     "cuando": "8nov 05:41",
     "detalle": "12 criticos de evaluacion Nemotron delegados a DS-OC (antes M17/M129). VfxDirector + HealthComponent primero."
+  },
+  "sello_15_m162": {
+    "cuando": "8nov 06:30",
+    "modulo": "M162 Dialogos Contextuales NPCs",
+    "gate1": "DS-OC #255 (gate-1 pasa, conteo verificado)",
+    "gate2": "Hy3 #505 (DGV runtime headless GREEN, 4 suites)",
+    "verificador": "Hy3 (gate-2) + DS-OC (gate-1)",
+    "sello": "agnes-3-flash (Sapiens AI) / Kilo Code"
+  },
+  "m21_denegado_6_inflados": {
+    "cuando": "8nov",
+    "detalle": "DS-OC #255: M21 gate-1 DENEGADO. 6 [x] inflados. NO sello 16."
   }
 }
