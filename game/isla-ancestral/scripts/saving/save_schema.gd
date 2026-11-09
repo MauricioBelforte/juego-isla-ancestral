@@ -33,6 +33,34 @@ const MAX_CLOCK_ACUMULADOR: float = 3600.0
 static func slot_valido(slot: int) -> bool:
 	return slot >= 1 and slot <= SLOT_COUNT
 
+## Secciones cuyo contenido ES progreso del jugador. Si su proveedor falla y la
+## sección se omite, el save quedaría con los DEFAULTS en esa área y al recargar
+## se perdería el avance en silencio. `validar_previo_a_guardar()` rechaza el
+## guardado en ese caso (crítico de la evaluación Nemotron, 2026-11-08).
+const SECCIONES_CRITICAS := ["world", "player", "inventory", "buildings", "quests"]
+
+## Pre-validación OBLIGATORIA antes de escribir un save.
+##
+## Devuelve la lista de problemas (vacía = se puede escribir). Combina:
+##  1. `validate()` — estructura/tipos del payload completo.
+##  2. `omitidas` — secciones que `SaveSnapshot.collect()` tuvo que saltear
+##     porque su proveedor devolvió un tipo inválido. Si una de ellas es crítica,
+##     escribir el save haría que el jugador pierda ese progreso al recargar y,
+##     peor, la UI reportaría "guardado OK" (falso). Mejor fallar visible.
+##
+## NO escribe nada: la decisión (rotar/no rotar, emitir `save_failed`) es del
+## SaveManager, que llama a esta función ANTES de tocar el disco.
+static func validar_previo_a_guardar(payload: Dictionary, omitidas: Array = []) -> Array[String]:
+	var errors: Array[String] = []
+	if payload.is_empty():
+		errors.append("payload vacio: no hay nada que guardar")
+		return errors
+	errors.append_array(validate(payload))
+	for seccion in SECCIONES_CRITICAS:
+		if omitidas.has(seccion):
+			errors.append("seccion critica '%s' omitida: su proveedor fallo y se perderia progreso" % seccion)
+	return errors
+
 ## Devuelve un payload nuevo con los defaults de TODOS los sistemas.
 ## Los sistemas aún no implementados quedan con estructuras vacías pero
 ## presentes, para que el schema sea estable y forward-compatible.

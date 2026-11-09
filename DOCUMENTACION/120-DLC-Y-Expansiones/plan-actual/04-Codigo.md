@@ -585,3 +585,35 @@ M145 para `isla_hielo` y M146 para `pack_aurora`), pero conviene registrarlo:
   declarado del JSON (ver seccion 11.3).
 - **Sin impacto en runtime:** las suites lo cubren (bloque F de
   `test_dlc_servicios_m120.gd` verifica los 3 bundles por id + descuento declarado).
+
+### 13.3 Crítico Nemotron (2026-11-08) — gate de propiedad del DLC
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+
+**Diagnóstico:** `activar(id)` activaba **cualquier** DLC del manifiesto sin verificar
+compra; `cargar_contenido()` cargaba contenido de un DLC **no activo**; y
+`restore_save_data()` activaba los DLC que el save listaba aunque no hubiera propiedad
+—un save editado otorgaba entitlement—.
+
+**Corrección (gate cerrado por defecto):**
+
+| API | Comportamiento |
+|---|---|
+| `set_proveedor_propiedad(cb)` | Fuente externa (Steam/tienda/cuenta); debe devolver `bool`. |
+| `registrar_propiedad(id)` / `revocar_propiedad(id)` | Compra local; acepta **DLC o bundle**; `false` si el id no está en el manifiesto. |
+| `posee(id)` | Resuelve DLC directo, bundle contenedor o proveedor. |
+| `activar(id)` | **Rechaza sin propiedad** (`push_warning` + contador). |
+| `restore_save_data()` | Un save **no** otorga entitlement: lo no poseído va a `dlcs_faltantes`. |
+| `cargar_contenido(tipo, id)` | Rechaza el contenido de un DLC **no activo** (aunque se posea). |
+| `bloqueos_por_propiedad()` | Contador de rechazos (telemetría/tests). |
+
+**Evidencia (Godot 4.7.2 headless):** `tests/unit/dlc/test_dlc_manager.gd`
+**50 checks / 0 fallos / EXIT 0** (bloques F, I, J y K actualizados). El bloque F prueba:
+rechazo sin propiedad, conteo del rechazo, propiedad por DLC, propiedad **por bundle**
+(`bundle_deluxe` habilita `pack_aurora`), rechazo de id inexistente, carga bloqueada sin
+activación y permitida tras activar. El bloque J prueba que un save **sin** propiedad no
+activa nada y que con propiedad el round-trip preserva ambos DLC.
+
+**Nota de data (no tocada):** el manifest sigue declarando los 2 DLC como `planificado`;
+el gate es independiente del estado comercial.
+

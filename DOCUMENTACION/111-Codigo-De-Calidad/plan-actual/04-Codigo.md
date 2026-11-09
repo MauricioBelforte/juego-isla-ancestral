@@ -434,3 +434,35 @@ Verificado una por una el 2026-10-08:
 - **`code_quality_check.gd`** está correctamente documentado en §12 (L370) como
   `scripts/editor/code_quality_check.gd` — es la única ruta real que el documento acertó fuera
   del árbol §1.
+
+## Crítico Nemotron (2026-11-08) — HealthComponent sin validación y muerte repetible
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+
+**Diagnóstico (evaluación Nemotron, Glyph Cluster / Crouton Alpha):**
+`scripts/utils/components/health_component.gd` era el componente más débil del riel:
+`damage(amount)` restaba **cualquier** float (un daño negativo **curaba** y un `NaN` se
+propagaba a `current_health`, porque el `clamp` de Godot no filtra `NaN`); la muerte era
+**repetible** (`died` se emitía en cada golpe con la salud ya en 0); `died` no coincidía
+con el contrato `IDamageable` (`died(killer: Node)`) y faltaba la API del contrato
+(`take_damage/get_health/get_max_health/is_alive`).
+
+**Corrección aplicada** (reescritura del componente, mismo `class_name`):
+
+- `damage()` / `heal()` / `set_health()` rechazan `NaN`, `INF` y valores `<= 0` (daño 0
+  tampoco emite señales falsas) y devuelven `bool` (¿se aplicó?).
+- `is_dead` + `died` **una sola vez**; `revive(fraccion)` explícito (no revive a un vivo).
+- Señales alineadas: `health_changed(current, max_value, delta)` y `died(killer: Node)`;
+  nueva `cambio_ignorado(amount, motivo)` para telemetría.
+- API del contrato por duck-typing: `take_damage`, `get_health`, `get_max_health`,
+  `is_alive`, `set_health`, `revive`.
+- `max_health` inválido (0, negativo, NaN) se sanea a 100 en `_ready` con warning.
+
+**Evidencia (Godot 4.7.2 headless):** `tests/unit/components/test_health_component.gd`
+(NUEVA) **46 checks / 0 fallos / EXIT 0** (bloques A-F: daño válido, daño inválido,
+muerte única con killer, curación, contrato `IDamageable`, máximo inválido).
+
+**Deuda honesta:** al 2026-11-08 **ningún sistema del runtime instancia este componente**
+(grep de `HealthComponent` en `scripts/`: solo él mismo). La integración con
+jugador/NPCs sigue siendo de M64 y **no se simula** en esta corrección.
+

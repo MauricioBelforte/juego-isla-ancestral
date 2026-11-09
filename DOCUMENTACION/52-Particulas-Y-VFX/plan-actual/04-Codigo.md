@@ -316,3 +316,36 @@ la cobertura de los 24 nombres.
   final de `_run`, un aborto temprano dejaba el proceso **colgado** (nunca se
   llamaba a `quit()`, sin exit code, muerto por timeout a los 300 s). Ahora
   `_summary()` se encola también desde `_init()` y es idempotente.
+
+## 9. Crítico Nemotron (2026-11-08) — el director VFX estaba mudo
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+
+**Diagnóstico (evaluación Nemotron, Crouton Alpha / Glyph Cluster):** `vfx_director.gd`
+se conectaba a `EventBus.evento_generico`, una señal que **no existe** en el EventBus
+real (que es namespaced: `world.block_removed`, `calendar.season_changed`, …). Además no
+tenía `_process()` (nadie llamaba `actualizar()`, los emisores no volvían al pool) ni
+`_exit_tree()` (los nodos del pool quedaban huérfanos al cerrar), y `VfxTrigger.conectar()`
+descartaba los argumentos de la señal: todo VFX se disparaba en `Vector3.ZERO`.
+
+**Corrección aplicada:**
+
+| Archivo | Cambio |
+|---|---|
+| `scripts/particles/vfx_trigger.gd` | `conectar()` propaga los args de la señal en `contexto["args"]` (antes `{}`). |
+| `scripts/particles/vfx_director.gd` | Usa `VfxTrigger` contra `/root/EventBus`; `buses_faltantes()` / `buses_conectados()`; `_process()` → `actualizar(delta)`; `_exit_tree()` → `finalizar()`; contenedor propio `VfxContainer`; posición desde `Vector3`/`Vector3i` del evento o proveedor/cámara; `set_posicion_proveedor()` / `ultima_posicion()`. |
+
+**Evidencia (Godot 4.7.2 headless):**
+
+| Suite | Checks | Fallos | EXIT |
+|---|---|---|---|
+| `tests/integration/test_vfx_director_vida_m52.gd` (NUEVA) | 16 | 0 | 0 |
+| `scripts/particles/test_vfx_director_headless.gd` | 4 | 0 | 0 |
+| `scripts/particles/test_vfx_pool_m52.gd` | 89 | 0 | 0 |
+| `scripts/particles/test_vfx_m52_iter6.gd` | 76 | 0 | 0 |
+
+La suite nueva prueba contra el bus REAL: 13/13 buses conectados, 0 faltantes,
+`world.block_removed` dispara `bloque_roto` en `(4,5,6)` y `world.block_placed`
+dispara `bloque_colocado` en `(1,2,3)`; `_exit_tree()` vacía el pool y es idempotente.
+También confirma que `evento_generico` **no existe** (causa raíz).
+

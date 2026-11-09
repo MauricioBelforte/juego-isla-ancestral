@@ -92,8 +92,14 @@ func conectar(raiz: Node, al_disparar: Callable) -> Dictionary:
 		# Lambda con 4 parámetros por defecto: las señales del EventBus real
 		# llevan hasta 2 argumentos, y una Callable NO puede recibir MÁS de los
 		# que declara. Con defaults amplios, cualquier aridad conecta sin error.
-		var cb := func(_a = null, _b = null, _c = null, _d = null) -> void:
-			al_disparar.call(bus, {})
+		#
+		# 2026-11-08 (DS-V4.1-Flash-Opencode, crítico Nemotron): antes el contexto
+		# se descartaba (`{}`), así que un VFX de impacto no sabía DÓNDE ocurrió
+		# el evento y todos se disparaban en Vector3.ZERO. Ahora los argumentos
+		# de la señal viajan en `contexto["args"]` (el consumidor decide qué
+		# hacer con ellos; `condicion` sigue leyendo claves planas del contexto).
+		var cb := func(a = null, b = null, c = null, d = null) -> void:
+			al_disparar.call(bus, {"args": [a, b, c, d]})
 		obj.connect(senal, cb)
 		conectados += 1
 	return {"conectados": conectados, "faltantes": faltantes}

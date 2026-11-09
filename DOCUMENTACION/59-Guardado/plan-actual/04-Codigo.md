@@ -441,3 +441,32 @@ test_slots_m59 22/0 · test_slots_perfiles_m59 41/0 x2 · test_autosave_m59 0 fa
 ### Flips al 05-Checklist (3, con cita de suite)
 
 L143, L152, L175 -> M59 = 115 [x] / 13 [ ] / 2 [?] = 130 (Totales sincronizados). Ofrecidos a revertir.
+
+### Crítico Nemotron (2026-11-08) — pre-validación del payload antes de guardar
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+
+**Diagnóstico (evaluación Nemotron):** `SaveSnapshot.collect()` arranca con los DEFAULTS del
+schema y, si un proveedor devuelve algo que no es `Dictionary`, omite su sección con
+`push_error`. `_process_queue()` escribía igual y emitía `save_completed`: la UI decía
+"guardado OK" y al recargar esa sección volvía a los defaults (**progreso perdido en
+silencio**). El camino de cierre (`NOTIFICATION_WM_CLOSE_REQUEST`) escribía directo, sin
+ninguna validación.
+
+**Corrección aplicada:**
+
+| Archivo | Cambio |
+|---|---|
+| `scripts/saving/save_snapshot.gd` | `ultimas_omitidas` / `ultimos_errores` registran qué secciones se saltearon y por qué; se limpian en cada `collect()`. |
+| `scripts/saving/save_schema.gd` | `SECCIONES_CRITICAS` (world, player, inventory, buildings, quests) + `validar_previo_a_guardar(payload, omitidas)`: combina `validate()` con las omisiones críticas. |
+| `scripts/saving/save_manager.gd` | `_process_queue()` y el guardado de cierre validan ANTES de rotar/escribir; si hay problemas: `save_failed`, `push_error`, contador `guardados_rechazados()` y `errores_ultimo_guardado()`. El save anterior queda intacto. |
+
+**Evidencia (Godot 4.7.2 headless):** `scripts/saving/test_prevalidacion_payload_m59.gd`
+(NUEVA) **25 checks / 0 fallos / EXIT 0**, incluido el control positivo (payload sano →
+`save_completed` + archivo escrito) y el negativo (proveedor crítico roto → `save_failed`,
+0 rechazos falsos, **contenido del save anterior idéntico byte a byte**).
+
+Regresión: `test_rotate_m59` 43/0 · `test_save_collect_robust` 10/0 · `test_autosave_m59`
+0 fallos · `test_close_save` 6/0 · `test_slots_m59` 22/0 · boot headless EXIT 0 sin
+`SCRIPT ERROR`.
+

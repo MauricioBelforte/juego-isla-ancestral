@@ -491,3 +491,85 @@ posición mundial por celda y doble restauración idempotente.
 
 Total: 12 + 2 + 2 + 3 + 1 + 1 + 1 + 1 + 1 + 2 + 3 + 2 + 1 + 1 + 2 + 1 = 36.
 
+## 9. Tanda circulación + apoyo alternativo (2026-11-08) — 2 ítems cerrados
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode)
+**Plataforma:** OpenCode
+
+### 9.1 Qué se añadió
+
+1. **`scripts/construccion/circulacion.gd` (NUEVO, modelo puro).** `class_name Circulacion`,
+   sin dependencias de escena ni de `Node`. API:
+   - `analizar(zona: Dictionary, nuevas: Array, salidas: Array) -> Dictionary` — devuelve
+     `{bloquea, motivo, salidas_aisladas, salidas_tapadas, libres_antes, libres_despues,
+     componentes_antes, componentes_despues}`.
+   - `bloquea(...) -> bool` — atajo booleano.
+   - BFS **4-direccional en x/z** (las plantas se evalúan por separado: una escalera no conecta
+     plantas para este chequeo). `MAX_VISITAS = 200000` como cota dura anti-cuelgue.
+
+   Detecta tres casos: (a) pieza que **tapa** una salida, (b) dos o más salidas que **dejan de
+   estar conectadas** entre sí, (c) **salida única que queda aislada**. Si una salida ya estaba
+   aislada **antes** de la pieza, no se le atribuye a la pieza nueva (evita falsos positivos).
+
+2. **Paso 9 del validador (`construccion_validator.gd`).** `ORDEN` pasa de 8 a **9 reglas**:
+   `["zona","ocupacion","soporte","regla","npc","mundo","limite","recursos","circulacion"]`.
+   El paso **solo corre si el dueño de la zona provee `ctx["circulacion"]`** (un `Dictionary` con
+   `zona` y `salidas`); sin datos devuelve `sin_datos` y **no bloquea** (política fail-open, para no
+   romper llamadas existentes que no conocen la zona).
+
+3. **Motivo nuevo `BLOQUEA_SALIDA`** en `ConstruccionTipos` (texto al jugador: «taparia la unica
+   salida de la zona»), tratado como **permanente** (no reintentable: mover la pieza no arregla el
+   problema si la pieza está en el paso).
+
+4. **`PlacementRule.apoyo_alternativo: Array[StringName]`** (export nuevo + round-trip en
+   `a_dict()`/`desde_dict()`). `ConstruccionValidator.tiene_apoyo_alternativo(receta, celda,
+   rotacion, ctx)` acepta el paso de soporte si la celda vecina declarada como alternativa existe
+   físicamente en el mundo (p. ej. `&"pared"`).
+
+5. **Data:** `escalera_recta.tres` y `escalera_doble.tres` declaran
+   `apoyo_alternativo = Array[StringName]([&"pared"])`, que es exactamente lo que pide L143
+   («apoyo en piso **o** pared»).
+
+### 9.2 Ítems cerrados
+
+| Ítem | Evidencia (texto literal de los checks / ruta) |
+|---|---|
+| **L148** Las piezas no pueden bloquear la única salida de la zona | `circulacion.gd` (BFS) + paso 9 del validador. Suite `tests/test_m17_circulacion.gd` A1-A16 (modelo): "A1 zona vacia -> sin_datos y NO bloquea", "A3 pieza en el medio de un pasillo de 2 salidas -> BLOQUEA — aisla 2 salida(s)", "A8 pieza justo sobre una salida -> BLOQUEA — tapa 1 salida(s)", "A11 unica salida, pieza contigua -> la deja AISLADA y bloquea", "A13 salida ya aislada ANTES por otra pieza -> no se culpa a la nueva". Integración B1-B7 sobre el validador, incluida huella 2x1. |
+| **L143** Escalera exige apoyo en piso o pared y no bloquea la circulación | `PlacementRule.apoyo_alternativo` + `tiene_apoyo_alternativo()` + data de las dos escaleras. Suite nueva C1-C12: "C? piso normal acepta", "pared contigua sin piso acepta", "sin piso ni pared -> SIN_SOPORTE", "huella 2x1 con apoyo junto a la segunda celda acepta" y "regresión: receta sin `apoyo_alternativo` NO acepta pared". |
+
+### 9.3 Línea base del lote (Godot 4.7.2 headless)
+
+| Suite | Checks | Fallos | EXIT |
+|---|---|---|---|
+| `tests/test_m17_circulacion.gd` (NUEVA) | 36 | 0 | 0 |
+| `tests/test_m17_construccion_validacion.gd` | 44 | 0 | 0 |
+| `tests/test_m17_reglas_pieza.gd` | 40 | 0 | 0 |
+| `tests/test_m17_suites_integracion.gd` | 17 (501 en las 7 suites) | 0 | 0 |
+| `tests/test_m17_persistencia_rejilla.gd` | 23 | 0 | 0 |
+
+### 9.4 Corrección de la clasificación de §8.4 y deuda honesta
+
+- **`G139` y `G144` no existen como líneas del `05-Checklist.md` de M17.** Son IDs legacy citados
+  en §8.4; las líneas reales son **L143** (escalera con apoyo en piso o pared) y **L148** (no
+  bloquear la única salida). Ambas quedaron cerradas en esta tanda, así que **los dos bullets
+  «Regla de escalera (1)» y «M64 IA/navmesh (3): G144…» de §8.4 están vencidos**: de los 36
+  abiertos quedan **34** (33 `[ ]` + 1 `[?]`).
+- **Deuda real que queda (no tapada):** el paso 9 está implementado y probado **a nivel de
+  validador**, pero `BuildManager` todavía **no arma `ctx["circulacion"]`** al validar. El cableado
+  necesita que el dueño de la zona (M18 escena / M64 navmesh) exponga zona y salidas; mientras no
+  lo haga, el paso 9 devuelve `sin_datos` y no bloquea. Es deuda de **integración**, no del modelo
+  de circulación (que está cubierto por 16 checks de modelo puro).
+- **Límite del modelo:** la circulación es **por planta**. Una escalera no se considera conexión
+  vertical para el BFS: si la zona tiene salidas en plantas distintas, el chequeo las evalúa como
+  componentes separados. Se documenta para que el cableado de M18/M64 no asuma lo contrario.
+
+### 9.5 Regresión
+
+- `tests/test_m17_construccion_validacion.gd` se actualizó de 8 a 9 reglas esperadas en `ORDEN`
+  (aserción de contrato, no de comportamiento).
+- `tests/test_m17_suites_integracion.gd`: el watchdog usaba `w.start()` en `_initialize()`, cuando
+  el `Window` raíz todavía no está en el árbol, y Godot emitía
+  `ERROR: Unable to start the timer because it's not inside the scene tree`. Se cambió a
+  `w.autostart = true` + `add_child()`; el error desapareció y la suite sigue en 17/0 (501 checks).
+- Ningún `.gd` de las 7 suites históricas (`test_construccion.gd` … `iter7`) se modificó.
+

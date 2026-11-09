@@ -50,6 +50,20 @@ var last_reason: String = ""
 ## completar un save. La UI de guardado manual (M53) usa is_dirty().
 var _dirty: bool = false
 
+## Pre-validación (crítico Nemotron 2026-11-08): problemas que impidieron el
+## último guardado. Vacío si el último intento pasó la validación.
+var ultimos_errores_guardado: Array[String] = []
+## Guardados rechazados por la pre-validación (telemetría/tests).
+var _guardados_rechazados: int = 0
+
+## Errores de la última pre-validación (copia segura).
+func errores_ultimo_guardado() -> Array[String]:
+	return ultimos_errores_guardado.duplicate()
+
+## Cantidad de guardados rechazados por payload inválido desde el arranque.
+func guardados_rechazados() -> int:
+	return _guardados_rechazados
+
 func _ready() -> void:
 	loader.snapshot = snapshot
 	_process_init_cleanup()
@@ -139,10 +153,22 @@ func _notification(what: int) -> void:
 			push_warning("[SAVE] Cierre durante una escritura en curso (slot %d); se omite el guardado de cierre para no intercalar" % current_slot)
 			return
 		_writing = true
+		# Pre-validación también al cerrar: un proveedor roto no debe dejar un
+		# save incompleto solo porque el jugador cerró la ventana (crítico Nemotron).
+		var payload_cierre := _payload_para_slot(current_slot)
+		var problemas_cierre: Array[String] = SaveSchema.validar_previo_a_guardar(
+			payload_cierre, snapshot.ultimas_omitidas)
+		if not problemas_cierre.is_empty():
+			_guardados_rechazados += 1
+			ultimos_errores_guardado = problemas_cierre.duplicate()
+			for p in problemas_cierre:
+				push_error("[SAVE] pre-validacion (cierre) slot %d: %s" % [current_slot, p])
+			emit_signal("save_failed", current_slot, "cierre")
+			_writing = false
+			return
 		if not SaveBackup.rotate(current_slot):
 			push_warning("[SAVE] Guardado de cierre: la rotación de backup del slot %d falló" % current_slot)
-		var payload := _payload_para_slot(current_slot)
-		if SaveWriter.write_atomic(current_slot, payload):
+		if SaveWriter.write_atomic(current_slot, payload_cierre):
 			_dirty = false
 			print("[SAVE] Guardado de cierre OK slot %d" % current_slot)
 		else:
@@ -218,6 +244,24 @@ func _process_queue() -> void:
 	last_reason = reason
 
 	var payload := _payload_para_slot(slot)
+
+	# PRE-VALIDACIÓN (crítico de la evaluación Nemotron, 2026-11-08): antes de
+	# rotar el backup y escribir, se valida el payload. Si falta una sección
+	# crítica (un proveedor falló) o la estructura es inválida, NO se toca el
+	# disco: el save anterior queda intacto y el fallo se reporta como
+	# `save_failed` (antes se escribía un save incompleto y la UI decía OK).
+	var problemas: Array[String] = SaveSchema.validar_previo_a_guardar(payload, snapshot.ultimas_omitidas)
+	if not problemas.is_empty():
+		_writing = false
+		_guardados_rechazados += 1
+		ultimos_errores_guardado = problemas.duplicate()
+		for p in problemas:
+			push_error("[SAVE] pre-validacion slot %d: %s" % [slot, p])
+		emit_signal("save_failed", slot, reason)
+		if not _queue.is_empty():
+			_process_queue()
+		return
+	ultimos_errores_guardado.clear()
 
 	# BUG CRÍTICO corregido en M59 iter. 2 (DeepSeek-V4.1-Flash):
 	# rotate() estaba DESPUÉS de write_atomic(). write_atomic renombra

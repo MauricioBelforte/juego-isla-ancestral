@@ -21,7 +21,7 @@ extends SceneTree
 const TIMEOUT_SEG := 60.0
 ## Piso MEDIDO en verde (se fija tras la 1a corrida).
 const CHECKS_MINIMOS := 31
-const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O']
+const BLOQUES_ESPERADOS: Array[String] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
 
 
 ## Unit tests para EconomyManager (M38)
@@ -70,6 +70,7 @@ func _run() -> void:
 	_bloque_M()
 	_bloque_N()
 	_bloque_O()
+	_bloque_P()
 
 
 func _on_watchdog() -> void:
@@ -217,6 +218,18 @@ func _bloque_H() -> void:
 	var result = _economy.depositar_monedas(-50)
 	_check("result .is_false()", (result) == false)
 	_check("_economy.saldo .is_equal_to(100)", (_economy.saldo) == (100))
+	# Crítico Nemotron 2026-11-08: depositar 0 NO es un ingreso. Antes devolvia
+	# true, sumaba reputacion y registraba una transaccion vacia.
+	var rep_antes: int = _economy.get_reputacion()
+	var hist_antes: int = _economy.obtener_historial().size()
+	_check("depositar 0 devuelve false", (_economy.depositar_monedas(0)) == false)
+	_check("depositar 0 no mueve el saldo", (_economy.saldo) == (100))
+	_check("depositar 0 no suma reputacion", (_economy.get_reputacion()) == (rep_antes))
+	_check("depositar 0 no registra transaccion",
+		(_economy.obtener_historial().size()) == (hist_antes))
+	_check("depositar negativo no suma reputacion",
+		(_economy.depositar_monedas(-100)) == false
+		and (_economy.get_reputacion()) == (rep_antes))
 
 	after_test()
 	_fin("H. test_depositar_monedas_negative")
@@ -318,3 +331,61 @@ func _bloque_O() -> void:
 
 	after_test()
 	_fin("O. test_restore_save_data_clamp")
+
+
+func _bloque_P() -> void:
+	_ini("P. test_retiro_cero_y_tope_de_saldo")
+	# Hallazgo 2026-11-08 (evaluación Nemotron — economía): el retiro de 0 era el
+	# gemelo del depósito de 0 ya corregido. `puede_pagar(0)` es true (consulta
+	# válida), pero `retirar_monedas(0)` NO es una transacción: devolvía true,
+	# emitía `saldo_cambiado` y registraba un "retiro" de 0 en el historial.
+	before_test()
+	var hist_antes: int = _economy.obtener_historial().size()
+	var emisiones: Array[int] = []
+	_economy.saldo_cambiado.connect(func(s: int) -> void: emisiones.append(s))
+	_check("retirar 0 devuelve false", (_economy.retirar_monedas(0)) == false)
+	_check("retirar 0 no mueve el saldo", (_economy.saldo) == (100))
+	_check("retirar 0 no registra transaccion",
+		(_economy.obtener_historial().size()) == (hist_antes))
+	_check("retirar 0 no emite saldo_cambiado", emisiones.is_empty(), str(emisiones))
+	_check("retirar negativo devuelve false", (_economy.retirar_monedas(-10)) == false)
+	_check("puede_pagar(0) sigue siendo true (consulta)", (_economy.puede_pagar(0)) == true)
+	after_test()
+
+	# Tope de saldo: el depósito se recorta, pero la transacción debe registrar
+	# lo que REALMENTE entró (el historial es la fuente de M103/M104; si dice
+	# +200 cuando entraron +99, la contabilidad miente).
+	before_test()
+	_economy.saldo = 999900
+	var txs: Array = []  # las lambdas capturan por VALOR: mutar el Array sí se ve
+	_economy.transaccion_registrada.connect(func(tx: Dictionary) -> void: txs.append(tx))
+	var rep_ini: int = _economy.get_reputacion()
+	_check("deposito sobre el tope devuelve true", (_economy.depositar_monedas(200)) == true)
+	_check("saldo queda en MAX_SALDO", (_economy.saldo) == (999999))
+	var tx: Dictionary = txs[0] if txs.size() > 0 else {}
+	_check("la tx registra el monto REAL acreditado (99)",
+		int(tx.get("monto", -1)) == 99, str(tx))
+	_check("la tx registra el saldo final", int(tx.get("saldo", -1)) == 999999, str(tx))
+	_check("expone depositos_clampeados()", _economy.has_method("depositos_clampeados"))
+	if _economy.has_method("depositos_clampeados"):
+		_check("contabiliza el deposito clampeado",
+			(_economy.depositos_clampeados()) == (1), str(_economy.depositos_clampeados()))
+	_check("un ingreso parcial si suma reputacion", (_economy.get_reputacion()) == (rep_ini + 1),
+		str(_economy.get_reputacion()))
+	after_test()
+
+	# Tope LLENO: no entra nada. Aceptar el depósito y evaporar las monedas del
+	# jugador en silencio es peor que rechazarlo.
+	before_test()
+	_economy.saldo = 999999
+	var txs_lleno: Array = []
+	_economy.transaccion_registrada.connect(func(tx: Dictionary) -> void: txs_lleno.append(tx))
+	var rep_lleno: int = _economy.get_reputacion()
+	_check("deposito con el tope LLENO devuelve false",
+		(_economy.depositar_monedas(200)) == false)
+	_check("el saldo no cambia", (_economy.saldo) == (999999))
+	_check("no registra transaccion", txs_lleno.is_empty(), str(txs_lleno))
+	_check("no suma reputacion", (_economy.get_reputacion()) == (rep_lleno))
+	after_test()
+	_fin("P. test_retiro_cero_y_tope_de_saldo")
+

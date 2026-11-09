@@ -36,7 +36,7 @@
 ### M35 Mineria (4 pendientes — el encabezado decia 3, corregido 2026-09-13)
 - [ ] Cana de pescar
 - [ ] Pez capturable (compartido con fauna)
-- [ ] Cangrejo ermitano (recompensa rara)
+- [x] Cangrejo ermitano (recompensa rara)
 - [ ] Carrito de vias (26 subterraneo)
 
 ### M18-BIS Casas grandes — **TRASPASADO A MiMo (directiva del usuario 2026-09-11)**

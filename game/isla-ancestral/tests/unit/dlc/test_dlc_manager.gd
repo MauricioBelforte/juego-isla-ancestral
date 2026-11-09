@@ -185,8 +185,24 @@ func _bloque_E() -> void:
 func _bloque_F() -> void:
 	_ini("F. test_activar_desactivar")
 	var inst = _nueva_instancia()
+	# Gate de propiedad (crítico Nemotron 2026-11-08): sin propiedad NO activa.
+	_check("activar sin propiedad .is_false()", (inst.activar("isla_hielo")) == false)
+	_check("el rechazo se cuenta en bloqueos_por_propiedad()",
+		(inst.bloqueos_por_propiedad()) == 1)
+	_check("registrar_propiedad(isla_hielo) .is_true()", (inst.registrar_propiedad("isla_hielo")) == true)
 	_check("activar(isla_hielo) .is_true()", (inst.activar("isla_hielo")) == true)
 	_check("esta_activo(isla_hielo) .is_true()", (inst.esta_activo("isla_hielo")) == true)
+	# Propiedad por BUNDLE: comprar bundle_deluxe habilita pack_aurora.
+	_check("registrar_propiedad(bundle_deluxe) .is_true()", (inst.registrar_propiedad("bundle_deluxe")) == true)
+	_check("posee(pack_aurora) via bundle .is_true()", (inst.posee("pack_aurora")) == true)
+	# Carga de contenido: sin activación no se carga (aunque se posea).
+	_check("cargar_contenido de DLC poseido pero no activo .is_false()",
+		(inst.cargar_contenido("cosmeticos", "pack_aurora")) == false)
+	_check("activar(pack_aurora) .is_true()", (inst.activar("pack_aurora")) == true)
+	_check("cargar_contenido de DLC activo .is_true()",
+		(inst.cargar_contenido("cosmeticos", "pack_aurora")) == true)
+	_check("registrar_propiedad(id inexistente) .is_false()",
+		(inst.registrar_propiedad("__no_existe__")) == false)
 	inst.desactivar("isla_hielo")
 	_check("esta_activo .is_false() tras desactivar", (inst.esta_activo("isla_hielo")) == false)
 	_check("activar(id inexistente) .is_false()", (inst.activar("__no_existe__")) == false)
@@ -223,6 +239,7 @@ func _bloque_H() -> void:
 func _bloque_I() -> void:
 	_ini("I. test_get_save_data")
 	var inst = _nueva_instancia()
+	inst.registrar_propiedad("isla_hielo")
 	inst.activar("isla_hielo")
 	var data: Dictionary = inst.get_save_data()
 	_check("data tiene 'activos'", (data.has("activos")) == true)
@@ -237,10 +254,21 @@ func _bloque_I() -> void:
 func _bloque_J() -> void:
 	_ini("J. test_roundtrip_persistencia")
 	var src = _nueva_instancia()
+	src.registrar_propiedad("isla_hielo")
+	src.registrar_propiedad("pack_aurora")
 	src.activar("isla_hielo")
 	src.activar("pack_aurora")
 	var data: Dictionary = src.get_save_data()
+	# Un save NO otorga entitlement: sin propiedad el DLC queda faltante.
+	var dst_sin = _nueva_instancia()
+	dst_sin.restore_save_data(data)
+	_check("restore sin propiedad NO activa isla_hielo", (dst_sin.esta_activo("isla_hielo")) == false)
+	_check("restore sin propiedad lo registra como faltante",
+		("isla_hielo" in dst_sin.dlcs_faltantes()) == true)
+	dst_sin.free()
 	var dst = _nueva_instancia()
+	dst.registrar_propiedad("isla_hielo")
+	dst.registrar_propiedad("pack_aurora")
 	dst.restore_save_data(data)
 	_check("roundtrip preserva isla_hielo", (dst.esta_activo("isla_hielo")) == true)
 	_check("roundtrip preserva pack_aurora", (dst.esta_activo("pack_aurora")) == true)
@@ -254,6 +282,9 @@ func _bloque_J() -> void:
 func _bloque_K() -> void:
 	_ini("K. test_reconciliacion_dlc_ausente")
 	var dst = _nueva_instancia()
+	# Gate de propiedad (crítico Nemotron 2026-11-08): el DLC INSTALADO solo se
+	# activa si hay propiedad; el AUSENTE va a faltantes aunque el save lo pida.
+	dst.registrar_propiedad("isla_hielo")
 	dst.restore_save_data({"activos": ["isla_hielo", "__dlc_desinstalado__"], "version_base": "1.0.0"})
 	_check("activa el DLC instalado", (dst.esta_activo("isla_hielo")) == true)
 	_check("NO activa el DLC ausente", (dst.esta_activo("__dlc_desinstalado__")) == false)

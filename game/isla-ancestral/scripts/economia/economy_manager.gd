@@ -36,6 +36,9 @@ var saldo: int = SALDO_INICIAL
 var precios: RefCounted = null  # PriceManager (vía preload, sin race de autoloads)
 var _historial: Array = []      # [{tipo, monto, saldo, dia, ts}] — RF15
 var reputacion: int = REPUTACION_INICIAL  # RF13
+## Depósitos que el tope MAX_SALDO recortó (telemetría/tests). El aviso
+## DOM-ECO-SALDO existe como warning; este contador lo hace verificable.
+var _depositos_clampeados: int = 0
 
 func _ready() -> void:
 	_asegurar_precios()
@@ -89,8 +92,17 @@ func precio_venta_vigente(item_id: String) -> int:
 func puede_pagar(total: int) -> bool:
 	return total >= 0 and saldo >= total
 
-## Retira monedas. Devuelve false si no alcanza (saldo intacto).
+## Cantidad de depósitos que el tope MAX_SALDO tuvo que recortar desde el arranque.
+func depositos_clampeados() -> int:
+	return _depositos_clampeados
+
+## Retira monedas. Devuelve false si no alcanza (saldo intacto) o si `total <= 0`.
+## 2026-11-08 (DS-V4.1-Flash-Opencode, evaluación Nemotron — economía): retirar 0
+## es el gemelo del depósito de 0. Devolvía true, emitía `saldo_cambiado` y
+## registraba un "retiro" de 0 en el historial: no es una transacción.
 func retirar_monedas(total: int) -> bool:
+	if total <= 0:
+		return false
 	if not puede_pagar(total):
 		return false
 	saldo -= total
@@ -99,11 +111,27 @@ func retirar_monedas(total: int) -> bool:
 	return true
 
 func depositar_monedas(total: int) -> bool:
-	if total < 0:
+	# 2026-11-08 (DS-V4.1-Flash-Opencode, crítico Nemotron): antes solo se
+	# rechazaba `total < 0`, así que `depositar_monedas(0)` devolvía true,
+	# registraba una transacción de 0 y SUmaba reputación con el pueblo sin que
+	# hubiera ingresado nada (farmeo de reputación con depósitos vacíos).
+	if total <= 0:
 		return false
-	saldo = mini(saldo + total, MAX_SALDO)
+	var saldo_antes := saldo
+	if saldo_antes >= MAX_SALDO:
+		# Tope lleno: no entra nada. Aceptar el depósito y evaporar las monedas
+		# del jugador en silencio es peor que rechazarlo (RNF10).
+		push_warning("[DOM-ECO-SALDO] deposito de %d rechazado: saldo en el tope %d" % [total, MAX_SALDO])
+		return false
+	saldo = mini(saldo_antes + total, MAX_SALDO)
+	var acreditado := saldo - saldo_antes
+	if acreditado < total:
+		_depositos_clampeados += 1
+		push_warning("[DOM-ECO-SALDO] deposito de %d recortado a %d: tope %d alcanzado" % [total, acreditado, MAX_SALDO])
 	saldo_cambiado.emit(saldo)
-	_registrar_tx("deposito", total)
+	# RNF10: la transacción registra lo REALMENTE acreditado. Antes anotaba el
+	# monto pedido y el historial (fuente de M103/M104) mentía con el saldo.
+	_registrar_tx("deposito", acreditado)
 	# RF13 (cozy): cada ingreso honesto suma confianza con el pueblo (tope REPUTACION_MAX).
 	ajustar_reputacion(1)
 	return true

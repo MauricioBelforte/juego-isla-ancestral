@@ -455,3 +455,122 @@ la tabla §1.2 es la que quedó desactualizada.
 - **1 recurso** existe en otra ruta con otro nombre (`econ_prices.tres`).
 - **5 recursos** no existen (tiendas y ofertas de ejemplo) — todos "Pendiente de implementación".
 - **Ningún `[x]`** de la tabla afirma la existencia de los archivos faltantes.
+
+## Crítico Nemotron (2026-11-08) — depósito de 0 monedas
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+
+**Diagnóstico:** `EconomyManager.depositar_monedas(total)` solo rechazaba `total < 0`.
+Con `total == 0` devolvía `true`, emitía `saldo_cambiado`, registraba una transacción de
+0 y **sumaba 1 de reputación** (`ajustar_reputacion(1)`): farmeo de reputación con
+depósitos vacíos.
+
+**Corrección:** `if total <= 0: return false` (sin señal, sin transacción, sin reputación).
+
+**Evidencia:** `tests/unit/economia/test_economy_manager.gd` **36 checks / 0 fallos /
+EXIT 0**. El bloque H ahora verifica: depósito negativo `false`; depósito 0 `false`;
+saldo intacto; **reputación sin cambio**; **sin transacción nueva** en el historial.
+
+## Tanda económica (2026-11-08) — retiro de 0, monto real acreditado y tope lleno
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+**Suite:** `tests/unit/economia/test_economy_manager.gd` — bloque **P** (17 checks nuevos)
+
+### Diagnóstico (3 defectos, medidos en RED antes de tocar código)
+
+1. **`retirar_monedas(0)` — gemelo del depósito de 0.** Solo se validaba el saldo, así que
+   `retirar_monedas(0)` devolvía `true`, emitía `saldo_cambiado` y **registraba una transacción
+   de 0** en el historial. No es una transacción: es una consulta. (`puede_pagar(0)` sí debe seguir
+   devolviendo `true`, porque es una consulta válida y la usan las tiendas y el crafting.)
+2. **El historial anotaba el monto pedido, no el acreditado.** `depositar_monedas(200)` con el saldo
+   a 999 900 recortaba el saldo a `MAX_SALDO` (999 999) pero registraba `monto: 200` cuando habían
+   entrado 99. El historial es la fuente de M103/M104: si miente, la contabilidad y el analytics
+   mienten.
+3. **Tope lleno: el depósito se aceptaba y las monedas se evaporaban.** Con `saldo == MAX_SALDO`,
+   `depositar_monedas(200)` devolvía `true`, emitía `saldo_cambiado` (con el mismo saldo), registraba
+   la transacción y sumaba reputación: el jugador perdía las monedas y recibía un "OK".
+
+### Hallazgo colateral: `DOM-ECO-SALDO` no existía
+
+`grep` sobre todo `game/isla-ancestral` devolvía **0 coincidencias** de `DOM-ECO-SALDO`, pese a que
+este checklist marca `[x]` **RNF10 "clamp de saldo a MAX_SALDO con log de advertencia"** (L56) y
+**"Saldo en MAX_SALDO: depósitos se clampan con aviso DOM-ECO-SALDO"** (L172). El clamp existía; el
+aviso, no. Esta tanda **vuelve verdadera la marca** (no hubo que degradar nada): las dos ramas de
+recorte emiten el warning.
+
+### Corrección
+
+```gdscript
+## Cantidad de depósitos que el tope MAX_SALDO tuvo que recortar desde el arranque.
+func depositos_clampeados() -> int:
+	return _depositos_clampeados
+
+func retirar_monedas(total: int) -> bool:
+	if total <= 0:
+		return false            # antes: true + señal + tx de 0
+	if not puede_pagar(total):
+		return false
+	saldo -= total
+	saldo_cambiado.emit(saldo)
+	_registrar_tx("retiro", total)
+	return true
+
+func depositar_monedas(total: int) -> bool:
+	if total <= 0:
+		return false
+	var saldo_antes := saldo
+	if saldo_antes >= MAX_SALDO:
+		push_warning("[DOM-ECO-SALDO] deposito de %d rechazado: saldo en el tope %d" % [total, MAX_SALDO])
+		return false            # antes: true, monedas evaporadas
+	saldo = mini(saldo_antes + total, MAX_SALDO)
+	var acreditado := saldo - saldo_antes
+	if acreditado < total:
+		_depositos_clampeados += 1
+		push_warning("[DOM-ECO-SALDO] deposito de %d recortado a %d: tope %d alcanzado" % [total, acreditado, MAX_SALDO])
+	saldo_cambiado.emit(saldo)
+	_registrar_tx("deposito", acreditado)   # antes: `total`
+	ajustar_reputacion(1)
+	return true
+```
+
+Nuevo estado interno `_depositos_clampeados` + accesor `depositos_clampeados()`: el warning no es
+verificable desde un test, el contador sí. Es telemetría, no gameplay.
+
+**Sinergia con la corrección anterior:** la reputación se sigue sumando **una vez por depósito
+aceptado**. Un depósito recortado (entró algo) suma; un depósito rechazado por tope lleno o por
+monto `<= 0` no suma. El invariante queda: *la reputación cuenta ingresos reales, no llamadas*.
+
+### Evidencia
+
+- **RED inicial (antes del fix):** 6 fallos — retiro 0 `true`; tx de retiro de 0 registrada; `saldo_cambiado`
+  espurio con `[100]`; la tx del depósito recortado traía `monto: 200` (y el Dictionary llegaba vacío por
+  captura por valor de la lambda, corregido con un `Array`); `depositos_clampeados()` inexistente.
+- **VERDE:** `test_economy_manager.gd` **53 checks / 0 fallos / EXIT 0** (36 previos + 17 del bloque P).
+  Warnings observados en la corrida real:
+  `[DOM-ECO-SALDO] deposito de 200 recortado a 99: tope 999999 alcanzado` y
+  `[DOM-ECO-SALDO] deposito de 200 rechazado: saldo en el tope 999999`.
+- **Regresión (9 suites que llaman `retirar_monedas`/`depositar_monedas`), todas 0 fallos / EXIT 0:**
+  `scripts/shops/test_tiendas.gd` (0 fallos) · `scripts/shops/test_tiendas_iter_glm.gd` 39/0 ·
+  `scripts/economia/test_iter4_brechas.gd` 20/0 · `scripts/economia/test_m38_economia_smoke.gd` 7/0 ·
+  `scripts/economia/test_tabla_dia_transacciones.gd` 29/0 · `tests/integration/test_economy_npc_shop.gd` 19/0 ·
+  `tests/integration/test_inventory_economy.gd` 52/0 · `tests/regression/test_stable_flows.gd` 32/0 ·
+  `scripts/crafting/test_pergaminos_tienda.gd` (0 fallos).
+- **Riesgo de crafting descartado antes de correr la regresión:** `crafting_service.gd` L291 llama
+  `retirar_monedas(coste_ao * cantidad)`, pero está guardado por `if receta.coste_ao > 0:` (L286) y
+  `cantidad < 1` se rechaza al entrar (L269): nunca llega un 0 a `retirar_monedas`. Las recetas
+  gratuitas siguen crafteándose.
+
+### Notas para el próximo agente
+
+- **`[?]` L172 no es mía:** el checklist de este módulo arrastra **caracteres perdidos** de una
+  reparación de encoding vieja (`dep?sitos` en L172, `inv?lidas` en L211, `? escalones` en L91).
+  Son prosa, no marcas: se arreglan con un `?` → letra acentuada cuando alguien tenga el GO del
+  dueño del módulo. El flujo `fix_encoding.py` no las recupera porque el byte ya se perdió.
+- **Deuda detectada y NO tocada:** `price_manager.gd` acepta `recargo_pct` sin tope; el comentario
+  de L120-123 dice "recargo opcional de mercaderes viajeros" pero nada limita el porcentaje. Un
+  `recargo_pct` de 500 convertiría un ítem de 10 AO en 60. Es de M39 (dueño del recargo), no de
+  esta tanda.
+- **Dos líneas `**Totales:**` en el checklist:** la primera (164/164/0/0) está vieja; la última
+  (163 completados / 0 pendientes / 1 no resuelto) coincide con el disco
+  (**163 `[x]` / 0 `[ ]` / 1 `[?]` = 164**).
+

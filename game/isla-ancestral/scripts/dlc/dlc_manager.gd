@@ -14,6 +14,18 @@
 # (b) compatibilidad de saves: DlcManager es ISaveProvider (seccion "dlc") —
 #     persiste los DLCs activos + la version base y reconcilia al cargar los
 #     DLCs que el save referencia pero ya no estan instalados (`dlcs_faltantes`).
+#
+# 2026-11-08 (DeepSeek-V4.1-Flash / OpenCode) — CRÍTICO de la evaluación
+# Nemotron (Glyph Cluster): `activar(id)` activaba CUALQUIER DLC del manifiesto
+# sin verificar propiedad, y `cargar_contenido()` cargaba contenido sin que el
+# DLC estuviera activo. Ahora hay un GATE CERRADO POR DEFECTO:
+#   - `registrar_propiedad(id)` / `set_proveedor_propiedad(cb)` declaran la
+#     propiedad (compra local, bundle o fuente externa tipo Steam).
+#   - `posee(id)` resuelve DLC, bundle contenedor o proveedor.
+#   - `activar()` rechaza sin propiedad; `restore_save_data()` NO activa un DLC
+#     sin propiedad (un save no otorga entitlement) y lo registra en `_faltantes`.
+#   - `cargar_contenido()` rechaza el contenido de un DLC no activo.
+#   - `bloqueos_por_propiedad()` cuenta los rechazos (telemetría/tests).
 
 extends Node
 
@@ -27,6 +39,55 @@ var _activos: Array = []
 var _faltantes: Array = []
 ## Version del juego base al momento de guardar (para detectar downgrade).
 var _version_guardada: String = ""
+## ── Gate de propiedad (2026-11-08, crítico de la evaluación Nemotron) ──
+## ANTES: `activar(id)` activaba CUALQUIER DLC del manifiesto sin verificar
+## compra, y `cargar_contenido()` cargaba contenido de un DLC no activo. Ahora
+## el gate es CERRADO POR DEFECTO: sin propiedad registrada (o un proveedor de
+## entitlement que la confirme), no se activa ni se carga nada.
+var _propietarios: Array = []                  # ids de DLC o de bundle comprados
+var _proveedor_propiedad: Callable = Callable()
+var _bloqueos: int = 0                         # activaciones/cargas rechazadas
+
+## Fuente externa de propiedad (Steam, tienda, cuenta). Debe devolver bool.
+func set_proveedor_propiedad(cb: Callable) -> void:
+	_proveedor_propiedad = cb
+
+## ¿El jugador posee este DLC? Acepta el id del DLC o el de un bundle que lo
+## contenga. Consulta, en orden: lista local, bundles comprados y proveedor.
+func posee(id: String) -> bool:
+	if id.is_empty():
+		return false
+	if id in _propietarios:
+		return true
+	for bid in bundles_que_contienen(id):
+		if bid in _propietarios:
+			return true
+	if _proveedor_propiedad.is_valid():
+		var r: Variant = _proveedor_propiedad.call(id)
+		return r == true
+	return false
+
+## Registra una compra (id de DLC o de bundle). Idempotente. Devuelve false si
+## el id no es un DLC ni un bundle conocido.
+func registrar_propiedad(id: String) -> bool:
+	if id.is_empty():
+		return false
+	if dlc(id).is_empty() and bundle(id).is_empty():
+		push_warning("[M120] registrar_propiedad('%s'): no es DLC ni bundle del manifiesto" % id)
+		return false
+	if id not in _propietarios:
+		_propietarios.append(id)
+	return true
+
+func revocar_propiedad(id: String) -> void:
+	_propietarios.erase(id)
+
+func propietarios() -> Array:
+	return _propietarios.duplicate()
+
+## Activaciones/cargas rechazadas por falta de propiedad (telemetría/tests).
+func bloqueos_por_propiedad() -> int:
+	return _bloqueos
 
 func _ready() -> void:
 	_cargar_manifest()
@@ -114,9 +175,15 @@ static func _parsear_version(v: String) -> Array[int]:
 static func version_base_actual() -> String:
 	return String(ProjectSettings.get_setting("application/config/version", "0.0.0"))
 
+## Activa un DLC SOLO si el jugador lo posee (gate cerrado por defecto).
+## Devuelve false si el id no existe o si no hay propiedad registrada.
 func activar(id: String) -> bool:
 	var d := dlc(id)
 	if d.is_empty():
+		return false
+	if not posee(id):
+		_bloqueos += 1
+		push_warning("[M120] activar('%s') rechazado: no hay propiedad registrada" % id)
 		return false
 	if id not in _activos:
 		_activos.append(id)
@@ -172,6 +239,13 @@ func restore_save_data(data: Dictionary) -> void:
 			# faltante en vez de activarlo a ciegas.
 			if sid not in _faltantes:
 				_faltantes.append(sid)
+		elif not posee(sid):
+			# Instalado pero SIN propiedad (save de otra cuenta/maquina): no se
+			# activa. Un save no otorga entitlement (crítico de seguridad).
+			if sid not in _faltantes:
+				_faltantes.append(sid)
+			_bloqueos += 1
+			push_warning("[M120] save pide '%s' pero no hay propiedad: no se activa" % sid)
 		elif sid not in _activos:
 			_activos.append(sid)
 
@@ -227,6 +301,12 @@ func bundle_manager() -> Variant:
 ## de esos modulos; aca se lleva el registro consultable del DLC.
 func cargar_contenido(tipo: String, id: String) -> bool:
 	if tipo.is_empty() or id.is_empty():
+		return false
+	# Si el id ES un DLC del manifiesto, su contenido no se carga sin propiedad
+	# y sin activación explícita (antes se cargaba a ciegas — crítico Nemotron).
+	if not dlc(id).is_empty() and not esta_activo(id):
+		_bloqueos += 1
+		push_warning("[M120] cargar_contenido('%s','%s') rechazado: el DLC no esta activo" % [tipo, id])
 		return false
 	if not _contenido.has(tipo):
 		_contenido[tipo] = []

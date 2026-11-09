@@ -223,7 +223,7 @@ menos.
 
 - [ ] Caña de pescar
 - [ ] Pez capturable (compartido con fauna)
-- [ ] Cangrejo ermitaño (recompensa rara)
+- [x] Cangrejo ermitaño (recompensa rara)
 - [x] Pico de piedra — `crear_pico_piedra_lowpoly.py` v2 (2026-08-29 19-29) + 6 orbitales 19-29-26. **v2 corrige E-27 (separación 9.7 cm entre mango y cabeza/ataduras/pomo)**: hijo() sin tocar matrix_parent_inverse, mango con rotación identidad, pose vertical nativa, assertion anti-regresión en el asentado. MEDIA 3/82, BAJA 3/76, ALTA 7/716, ALTA_MEDIA 3/716, z_min 0.045 en todas.
 - [x] Pico de hierro — `crear_pico_hierro_lowpoly.py` v2 (2026-08-29 19-33) + 6 orbitales 19-33-32. **Mismo E-27 que pico_piedra (separación 9.3 cm)**: v2 corrige con el mismo patrón (hijo() sin matrix_parent_inverse, mango vertical identidad, assertion). MEDIA 3/92, BAJA 3/87, ALTA 8/956, ALTA_MEDIA 3/956, z_min 0.045.
 - [x] Carretilla de minero — `crear_carretilla_minero_lowpoly.py` (M35 2026-09-02 04:46, log 532) + 6 capturas orbitales 04-43. **APROBADO**: rueda 14 lados + eje + 2 largueros horizontales (y=±0.26) que soportan la batea en tronco de pirámide (laterales abiertos ±16.7° en X) + batea con piso/2 lados abiertos/frente inclinado 14°/trasera + 2 patas traseras + 2 mangos (de larguero a (x=-1.20, z=0.48), +23.2° en Y) + 2 tepes de mineral asomando. **15 SM_**, z_min 0.045, toca=10, fp=1.51×0.60. Variantes MEDIA (4/252/4), BAJA (4/176/4). E-50✓ (trípode rueda+2patas), E-37 validado: silueta lee como carretilla en los 6 azimuts (rueda+laterales abiertos+mangos = carretilla), la rueda no atraviesa el frente de la batea (avanzada a x=+0.75). 3 GLB + 3 `.import` + 3 `.scn` (E-65).

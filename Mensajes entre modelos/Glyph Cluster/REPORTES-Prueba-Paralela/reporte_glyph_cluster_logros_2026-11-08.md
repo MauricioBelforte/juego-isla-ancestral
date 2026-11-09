@@ -1,116 +1,86 @@
-# Reporte — Sistema de Logros / Achievements
-
+# Reporte: Sistema de Logros / Achievements / Medallas / Desbloqueables
 **Modelo:** Glyph Cluster  
+**Plataforma:** Kilo Code (glyph-cluster)  
 **Fecha:** 2026-11-08  
-**Alcance analizado:** `game/isla-ancestral/scripts/logros/`, `game/isla-ancestral/data/logros/logros.json`, `game/isla-ancestral/project.godot`, integraciones visibles en `scripts/audio/*`, `scripts/postgame/*`, `scripts/progresion/*` y tests de `scripts/logros/*`.
+**Alcance analizado:** `game/isla-ancestral/scripts/` (`.gd`) y datos relacionados de logros.
 
-## Archivos relevantes
+## Archivos relevantes encontrados
 
-| Archivo | Rol observado | Líneas clave |
+| Archivo | Rol | Líneas clave |
 |---|---|---|
-| `game/isla-ancestral/scripts/logros/achievement_service.gd` | Núcleo del sistema (autoload `Achievements`). Carga catálogo, valida condiciones, evalúa, desbloquea, persiste, notifica. | `5-30` diseño; `33-102` carga/validación; `111-158` conexiones event-driven; `213-265` evaluación/desbloqueo; `321-338` progreso; `343-437` API/UI; `439-579` validación de catálogo; `584-622` persistencia M59. |
-| `game/isla-ancestral/data/logros/logros.json` | Catálogo data-driven de 18 logros (`schema_version: 2`). Define id, i18n, icono, categoría, orden, condición, oculto y dependencias. | `1-285` catálogo completo; dependencias en `33-35` y `280-282`; oculto en `98-110`; progresos parciales en `52-66`, `143-157`, `159-173`, `190-204`, `221-235`, `252-266`. |
-| `game/isla-ancestral/project.godot` | Registra el servicio como autoload global. | `80` → `Achievements="*res://scripts/logros/achievement_service.gd"`. |
-| `game/isla-ancestral/scripts/logros/test_logros.gd` | Suite principal endurecida (72 checks mínimos, 20 bloques). Cubre catálogo, RF14, evento, idempotencia, fechas, API, progreso, porcentaje, ocultos, amistad, pesca, persistencia, migración, retroactividad, toasts RN7, doble desbloqueo, compuesta, cache, guardado RF9 y panel RF7. | `1-399`; checks mínimos en `20-31,92-95`. |
-| `game/isla-ancestral/scripts/logros/test_logros_depende_de_m72.gd` | Verifica gate `depende_de` (RF2): no desbloquea sin dependencia, desbloquea con dependencia cumplida, idempotencia. | `1-55`; casos clave `37-52`. |
-| `game/isla-ancestral/scripts/logros/test_logros_rf10_m72.gd` | Verifica API de consulta RF10: `is_unlocked`, `get_definicion`, `get_todos`, `get_estado`. | `1-104`; contrato id inexistente → dict vacío en `50-59`. |
-| `game/isla-ancestral/scripts/logros/test_logros_rf13_m72.gd` | Verifica trazabilidad RF13: desbloqueo registra evento en `AnalyticsDirector` (M104). | `1-44`; aserción en `34-41`. |
-| `game/isla-ancestral/scripts/logros/test_logros_m72_statids.gd` | Test adicional de stat IDs (presente en carpeta). No leído en detalle por límite de foco; existe como evidencia de cobertura específica de stats. | Archivo detectado. |
-| `game/isla-ancestral/scripts/logros/test_logros_rf1_e.gd` | Test adicional RF1. No leído en detalle. | Archivo detectado. |
-| `game/isla-ancestral/scripts/audio/sfx_manager.gd` | Integración de feedback sonoro: escucha `Achievements.logro_desbloqueado`. | `239` conexión; `255-256` handler. |
-| `game/isla-ancestral/scripts/audio/test_sfx_m43.gd` | Verifica conexión SFX ↔ logro desbloqueado. | `297`, `314`. |
-| `game/isla-ancestral/scripts/postgame/test_postgame.gd` | Consume definiciones de logros para validar contenido postgame (usa `get_definicion`/`get_todos`). | `74`, `334`, `340`, `352`. |
-| `game/isla-ancestral/scripts/progresion/progression_manager.gd` | Fuente delegada de evaluación de condiciones (`evaluar_condicion`) y stats de progresión. M72 depende de este contrato M71. | Conexiones de stats `149-175`; `dias_jugados` soportado `278,449,570,688,711,861`; `evaluar_condicion` `702-730`; `progreso_parcial` `874-885`. |
+| `game/isla-ancestral/scripts/logros/achievement_service.gd` | Núcleo del sistema M72 (`AchievementService`, autoload `Achievements`). Carga catálogo, evalúa condiciones, desbloquea, persiste, notifica. | L5-622 (completo). Catálogo: L61-103. Evaluación: L130-234. Desbloqueo: L236-265. Progreso: L322-338. API/UI: L359-437. Validación catálogo: L439-579. Persistencia M59: L582-622. |
+| `game/isla-ancestral/data/logros/logros.json` | Catálogo data-driven de logros (schema v2). | L1-285. 18 logros declarados (ids `logro_primer_sello` … `logro_ruina_restaurada`). |
+| `game/isla-ancestral/project.godot` | Registro del autoload. | L80: `Achievements="*res://scripts/logros/achievement_service.gd"` |
+| `game/isla-ancestral/scripts/logros/test_logros.gd` | Test principal M72 (catalogo, RF14, evento, idempotencia, fechas, API, progreso, %, ocultos, amistad, pesca, persistencia, migración v1, retroactividad, toasts, edge cases, panel). | L1-399 |
+| `game/isla-ancestral/scripts/logros/test_logros_rf10_m72.gd` | Test RF10 (API consulta). | Referenciado en grep (usa autoload `Achievements`). |
+| `game/isla-ancestral/scripts/logros/test_logros_rf13_m72.gd` | Test RF13 (trazabilidad: analytics/log al desbloquear). | L1-44 (grep). Verifica `AnalyticsDirector.registrar_evento("logro_desbloqueado")`. |
+| `game/isla-ancestral/scripts/logros/test_m72_rf6_m72.gd` | Test RF6 (agrupación de toasts). | L1-71 (grep). |
+| `game/isla-ancestral/scripts/logros/test_logros_depende_de_m72.gd` | Test de dependencias `depende_de`. | L1+ (grep). |
+| `game/isla-ancestral/scripts/logros/test_logros_m72_statids.gd` | Test aditivo de stat IDs (no modifica core). | L11 (grep). |
+| `game/isla-ancestral/scripts/logros/test_logros_rf1_e.gd` | Test RF1 (campos catálogo/UI). | L21,43-44 (grep). |
+| `game/isla-ancestral/scripts/logros/test_m72_deuda_assets.gd` | Test de deuda de assets (iconos/i18n ausentes). | L28-29 (grep). |
+| `game/isla-ancestral/scripts/audio/sfx_manager.gd` | Integración SFX: escucha desbloqueo de logros. | L239: conecta `Achievements.logro_desbloqueado`; L254-256: handler reproduce `"logro"`. |
+| `game/isla-ancestral/scripts/audio/test_sfx_m43.gd` | Verifica conexión SFX↔logros. | L297, L314, L365-369 (grep). |
+| `game/isla-ancestral/scripts/postgame/test_postgame.gd` | Referencia al autoload `Achievements` en postgame. | L74, L334 (grep). |
+| `game/isla-ancestral/scripts/editor/_colector_sintaxis.gd` | Preload del servicio para recolección de sintaxis/editor. | L565 (grep): `preload("res://scripts/logros/achievement_service.gd")`. |
+
+**Búsquedas realizadas:** `**/logro*.gd` (solo tests), `**/achievement*.gd` (encontrado `achievement_service.gd`), `**/medalla*.gd` (sin resultados), grep `logro|achievement|medalla|desbloque` en `scripts/` (100+ matches; se priorizó el dominio de logros M72). No se encontró un sistema paralelo de “medallas” en scripts; las menciones a “desbloqueo” fuera de M72 corresponden a otros sistemas (zonas de combate, gates de herramientas, fast travel, debug, etc.).
 
 ## 1) ¿Cómo se gestionan los logros?
 
-**Arquitectura:** el sistema está centralizado en un autoload `Achievements` (`project.godot:80`) implementado por `achievement_service.gd`. No hay `class_name` porque es autoload (`achievement_service.gd:30-31`).
-
-**Catálogo data-driven:** los logros se cargan desde `res://data/logros/logros.json` (`achievement_service.gd:33,61-102`; `logros.json:1-285`). Cada entrada incluye metadatos de presentación (`nombre_i18n`, `descripcion_i18n`, `icono`, `categoria`, `orden`, `oculto`), condición evaluable y dependencias (`depende_de`). El servicio conserva el `id` dentro de la definición para evitar el residuo histórico donde `get_definicion()` no lo incluía (`achievement_service.gd:74-96`).
-
-**Modelo de estado:** mantiene `_logros` (definiciones), `_desbloqueados` (orden de consecución) y `_fechas` por logro (`achievement_service.gd:41-46`). La fecha es determinista usando `GameTime.dia_absoluto()`/`get_hora()` y evita reloj real (`achievement_service.gd:268-277`). Esto soporta persistencia estable y retroactividad.
-
-**Evaluación:** es **event-driven**, nunca por frame (`achievement_service.gd:111-158`). Se conecta a `ProgressionManager` (`progreso_hito_alcanzado`, `progreso_desbloqueado`) y a señales de dominio vía `EventBus` (`inventory.item_added`, `economy.purchase_done`, `npc.gift_given`, `quest.quest_completed`, `npc.friendship_level_up`), además de `Fishing.captura_exitosa` y `coleccionables.categoria_completed`. Ante eventos relevantes llama `evaluar_todos()`.
-
-**Desbloqueo:** `desbloquear()` es idempotente (`achievement_service.gd:239-265`). Comprueba existencia, estado previo y dependencias (`depende_de`, `242-246`). Al desbloquear: agrega id, registra fecha, emite `logro_desbloqueado`, loguea `[DOM-LOGRO]`, hace write-through con `SaveManager.mark_dirty()`, registra analytics en `AnalyticsDirector` (RF13), registra log en `GameLogger` y emite toast no bloqueante por `EventBus.ui.notify` (RF6) + `panel_solicitado` (RF7).
-
-**Progreso/UI:** expone `progreso_de()`, `get_progreso_humano()` (“X de Y”), `porcentaje_real()`, `get_todos()`, `get_estado()`, `get_desbloqueados()`, `get_en_progreso()`, `listado_para_ui()` (`achievement_service.gd:321-437`). Los logros ocultos no desbloqueados se muestran como `???` (`397-401`).
-
-**Persistencia M59:** implementa `get_section_name/get_save_data/restore_save_data` con sección `"achievements"` y versión 2 (`achievement_service.gd:584-622`). Guarda solo JSON-safe. Migra formato v1 (array sin fechas) a v2 (`601-607`). Tras restaurar no re-emite señales de logros ya restaurados y lanza `re_evaluar_todo()` diferido para retroactividad RF5 (`620-622`).
+- **Arquitectura:** `AchievementService` es un **autoload** global `Achievements` (`project.godot:80`, `achievement_service.gd:5,31,106-109`). No usa `class_name` (nota de pitfall Godot 4 en L30).
+- **Catálogo data-driven:** los logros se cargan desde `res://data/logros/logros.json` (`achievement_service.gd:33,61-103`; `logros.json:1-285`, `schema_version: 2`, 18 entradas). Cada entrada define `id`, nombre/desc + claves i18n, `icono`, `categoria`, `orden`, `condicion`, opcionales `oculto`, `progreso_parcial`, `depende_de`, `logro_steam_id`.
+- **Modelo en memoria:** `_logros` (definiciones por id), `_desbloqueados` (`Array[String]` en orden de consecución), `_fechas` (`logro_id -> {dia,hora}`), buffer de toasts (`achievement_service.gd:41-52,114-116`).
+- **Evaluación event-driven (no por frame):** conecta señales de `ProgressionManager` y de `EventBus` (inventory, economy, npc gift/amistad, quest), además de `Fishing.captura_exitosa` y colecciones; cada evento dispara `evaluar_todos()` (`achievement_service.gd:111-159,182-210`).
+- **Notificación/UI:** emite `logro_desbloqueado(logro_id,nombre)`, `logro_progreso`, `panel_solicitado`; envía toast no bloqueante vía `EventBus.ui.notify` con agrupación en frame (`achievement_service.gd:36-39,250,280-315`). `SfxManager` escucha el desbloqueo para reproducir SFX (`sfx_manager.gd:239,254-256`).
+- **Trazabilidad:** al desbloquear registra evento en `AnalyticsDirector` (`logro_desbloqueado`) y log en `GameLogger` si existen (`achievement_service.gd:256-262`; verificado por `test_logros_rf13_m72.gd:34-41`).
+- **API de consulta:** `evaluar_todos`, `re_evaluar_todo`, `desbloquear`, `esta_desbloqueado/is_unlocked`, `progreso_de`, `get_progreso_humano`, `porcentaje_real/get_porcentaje_completado`, `get_todos/get_estado/get_definicion/get_desbloqueados/get_en_progreso/listado_para_ui`, `fecha_de`, `validar_catalogo` (`achievement_service.gd:212-437,458-579`).
 
 ## 2) ¿Hay validación de condiciones para desbloquear logros?
 
-**Sí, hay validación en dos niveles:**
+Sí, con validación estructural y evaluación delegada:
 
-1. **Validación de catálogo al arrancar (`validar_catalogo`, RF14):** se ejecuta tras cargar `logros.json` (`achievement_service.gd:99-102,458-579`). Detecta problemas accionables:
-   - id vacío (`467-471`).
-   - id duplicado (`472-475`).
-   - icono vacío (`476-479`).
-   - categoría fuera del vocabulario cerrado (`480-485`, vocabulario en `451-455`).
-   - `logro_steam_id` duplicado (`486-493`).
-   - condición vacía (`494-498`).
-   - tipo de condición desconocido frente a vocabulario M71 (`441-446,566-572`).
-   - `stat_min` sin `stat_id` (`573-575`).
-   - validación recursiva de condiciones compuestas (`576-578`).
-
-2. **Validación/delegación de evaluación en runtime:** la condición de cada logro se evalúa delegando a `ProgressionManager.evaluar_condicion()` (`achievement_service.gd:10-12,213-223,321-332`). `ProgressionManager` soporta tipos como `stat_min`, `dias_jugados`, `sello_historia`, `capitulo_historia`, `riqueza_acumulada`, `primera_vez`, `hito_previo`, `coleccion_completa`, `nivel_modulo`, `compuesta` (`progression_manager.gd:702-730`, también validaciones en otras zonas del archivo). M72 no duplica lógica de evaluación.
-
-**Validación adicional de dependencias:** `desbloquear()` aplica gate `depende_de` antes de otorgar (`achievement_service.gd:242-246`), cubierto por `test_logros_depende_de_m72.gd:37-52`.
-
-**Deuda/dependencias externas reportadas (no error de forma):** `iconos_ausentes()` y `claves_i18n_ausentes()` miden recursos faltantes fuera del formato del catálogo (`achievement_service.gd:503-563`). Esto es útil, pero no bloquea por sí mismo salvo que el flujo consumidor lo trate como error.
+- **Delegación de evaluación (sin duplicar lógica):** las condiciones usan el mismo vocabulario/contrato de M71; `AchievementService` delega a `ProgressionManager.evaluar_condicion(cond)` (`achievement_service.gd:7-12,214-223,322-332`). Para progreso `stat_min` consulta `pm.profile.get_stat(...)` (`achievement_service.gd:327-331`).
+- **Validación de catálogo al arrancar:** `_cargar_catalogo()` llama `validar_catalogo()` y emite `push_warning` si hay problemas (`achievement_service.gd:98-103`). `validar_catalogo()` revisa: `id` vacío, ids duplicados, `icono` vacío, categoría fuera de vocabulario, `logro_steam_id` duplicado, condición vacía, tipo de condición desconocido, `stat_min` sin `stat_id`, y valida recursivamente hijos de `compuesta` (`achievement_service.gd:439-579`). Los tipos válidos están listados en `TIPOS_CONDICION_VALIDOS` (L442-446) y categorías en `CATEGORIAS_VALIDAS` (L451-455).
+- **Condiciones observadas en el catálogo:** `sello_historia`, `stat_min`, `coleccion_completa`, `hito_previo` (`logros.json:13-15,29-31,47-48,77-79,108-109,277-278`, etc.).
+- **Gate de dependencias:** antes de desbloquear, verifica que todos los `depende_de` estén desbloqueados (`achievement_service.gd:242-246`; `logros.json:33-35,280-282`). El test dedicado `test_logros_depende_de_m72.gd` existe (grep).
+- **Limitación de validación:** `validar_catalogo()` valida **forma/estructura** y tipos conocidos, pero **no prueba alcanzabilidad semántica** de las condiciones (si un `stat_id` se incrementa en runtime, si un `milestone_id/coleccion_id` existe, si el umbral es coherente). Por eso la validación estructural puede pasar con logros difíciles/imposibles de obtener por datos o por falta de productor de stat.
 
 ## 3) ¿Hay logros que no se pueden conseguir?
 
-**No encontré evidencia de un bloqueo absoluto en el núcleo de desbloqueo**, pero sí hay **riesgos fuertes de inconsistencia de catálogo/estado** que pueden hacer que varios logros no se obtengan en condiciones normales o no representen lo que su texto promete.
+**Evidencia de riesgo alto (potencialmente imposibles o mal mapeados) en el catálogo actual:**
 
-### Hallazgos concretos
+1. **Reuso del mismo `stat_id` (`regalos_dados`) para logros de dominios distintos**, lo que hace que el progreso/desbloqueo no represente la acción descrita:
+   - `logro_vecino` (amistad, “un vecino se mudó…”, umbral 1) usa `regalos_dados` (`logros.json:68-80`).
+   - `logro_primer_cultivo` (agricultura, “plantaste y cosechaste tu primera semilla”) usa `regalos_dados` umbral 1 (`logros.json:175-187`).
+   - `logro_cosecha_diez` (agricultura, 10 cultivos) usa `regalos_dados` umbral 10 (`logros.json:190-203`).
+   - `logro_primer_mineral` (minería) usa `regalos_dados` umbral 1 (`logros.json:206-218`).
+   - `logro_minero_veterano` (minería, 25 minerales) usa `regalos_dados` umbral 25 (`logros.json:221-234`).
+   **Impacto:** no son necesariamente “imposibles” si `regalos_dados` se incrementa, pero **se desbloquearían por dar regalos**, no por cultivar/minar. Además `logro_vecino` y `logro_primer_cultivo` comparten la misma condición, por lo que se obtienen juntos al alcanzar `regalos_dados >= 1`; esto contradice la semántica del logro y puede romper diseño/progresión.
 
-1. **Catálogo usa `stat_id` no alimentados por el progreso estándar para agricultura/minería/días.**
-   - `logro_primer_cultivo` y `logro_cosecha_diez` usan `stat_min` sobre `regalos_dados` (`logros.json:175-203`), aunque sus descripciones hablan de plantar/cosechar (`178-179,194`). `regalos_dados` sí se incrementa con `npc.gift_given` (`progression_manager.gd:156-157`), por lo que estos logros **se desbloquearían por regalar**, no por cosechar.
-   - `logro_primer_mineral` y `logro_minero_veterano` usan `regalos_dados` (`logros.json:206-234`), aunque describen extraer minerales (`210,225`).
-   - `logro_dias_en_aurora` usa `stat_min` sobre `viajes_realizados` con umbral 30 (`logros.json:252-265`), mientras su descripción dice “30 días en Aurora” (`256`). El evaluador M71 sí soporta `dias_jugados` (`progression_manager.gd:278-281,711-714`), pero el catálogo **no lo usa** aquí.
-   - **Impacto:** estos logros pueden ser **obtenibles por la stat equivocada** o **difíciles/imposibles según el sentido narrativo**. Desde diseño funcional, son candidatos a “logros mal cableados”; desde código, dependen de que alguien produzca `regalos_dados`/`viajes_realizados`, no de agricultura/minería/días.
+2. **`logro_dias_en_aurora` (“30 días en Aurora”) usa `viajes_realizados` umbral 30** (`logros.json:252-265`), no un stat de días. **Impacto:** se comporta como “30 viajes”, no como “30 días”. Podría ser alcanzable o no según cuántos viajes haga el jugador, pero **no cumple la condición descrita**.
 
-2. **Todos los iconos declarados faltan en disco.**
-   - Comprobación sobre `logros.json`: los 18 PNG declarados bajo `res://assets/ui/logros/*.png` no existen (`assets/ui/logros/` no existe). `achievement_service.iconos_ausentes()`/arranque lo reportan como deuda (`achievement_service.gd:503-530`), pero no impide desbloquear. Aun así, afecta visibilidad/UI y puede romper presentación si la UI asume textura válida.
+3. **Dependencia de productores de stats externos no validada por RF14:** logros como `logro_coleccionista` (`coleccion_completa`, `flora`, L38-49), `logro_viajero/primera_isla/dias_en_aurora` (`viajes_realizados`, L52-65,237-249,252-265), `logro_amigo_cercano/alma_de_la_isla` (`amistad_max_catalina_oso`, L113-140), `logro_pescador_principiante/mar_adentro_10` (`peces_capturados`, L143-172), etc., dependen de que M71/Progression/Profile y los sistemas productores (pesca, colecciones, navegación, amistad, historia) emitan/incrementen exactamente esos ids. `AchievementService` sí alimenta algunos casos (amistad/pesca, `achievement_service.gd:148-210`), pero **RF14 no verifica existencia/producción de stats, hitos o colecciones**; por tanto, un logro puede quedar inalcanzable si el productor no existe o usa otro id.
 
-3. **Dependencia externa de claves i18n.**
-   - El catálogo declara `LOGROS.*.NOMBRE/DESC` para todos los logros (`logros.json:6-7`, etc.). `claves_i18n_ausentes()` revisa `res://locales/es.po` (`achievement_service.gd:532-563`). No verifiqué exhaustivamente cada clave en `.po`; si faltan, la UI puede mostrar claves crudas o fallback, sin impedir desbloqueo.
+4. **No se detectó en este análisis un caso probado como “imposible por código de AchievementService”** (el servicio desbloquea cuando `evaluar_condicion` devuelve true y dependencias OK). La imposibilidad/riesgo proviene principalmente de **mapeo semántico de datos** y de **dependencias externas**.
 
-4. **Cobertura de integración limitada fuera del núcleo.**
-   - Encontré integración de audio con `logro_desbloqueado` (`sfx_manager.gd:239,255-256`; tests SFX) y uso en postgame/tests. No encontré referencias externas a `Achievements/listado_para_ui/get_todos/panel_solicitado` fuera de `scripts/logros`, `scripts/audio`, `scripts/postgame` y `project.godot` en la búsqueda realizada. Esto **no prueba imposibilidad de obtención**, pero sugiere que la presentación/UI de logros puede estar incompleta o desacoplada; un logro desbloqueado podría no ser visible al jugador si no hay panel consumidor.
+## 4) ¿Hay persistencia de logros desbloqueados?
 
-5. **El validador RF14 no detecta incoherencias semánticas de stats.**
-   - RF14 valida forma (id, icono declarado, categoría, tipo, `stat_min` con `stat_id`) pero no valida que el `stat_id` sea uno efectivamente emitido por gameplay/progression para ese logro (`achievement_service.gd:458-579`). Por eso los casos de agricultura/minería/días pueden pasar validación formal y aun así estar semánticamente mal conectados.
+Sí, integrada con el sistema de guardado M59:
 
-**Conclusión sobre imposibilidad:** no hay un logro con condición vacía o tipo inválido en el catálogo actual según RF14; el gate `depende_de` es correcto y testeado. Sin embargo, **5 logros** (`logro_primer_cultivo`, `logro_cosecha_diez`, `logro_primer_mineral`, `logro_minero_veterano`, `logro_dias_en_aurora`) presentan **mapeo de stats inconsistente con su descripción/objetivo** y deben considerarse **de alto riesgo de no ser conseguibles como se espera** hasta alinear catálogo y fuentes de stats.
+- **Proveedor de guardado:** `AchievementService` se registra en `SaveManager` (`achievement_service.gd:105-109`) y expone `get_section_name() = "achievements"`, `get_save_data()`, `restore_save_data()` (`achievement_service.gd:584-622`).
+- **Formato v2 (actual):** guarda `version: 2` y `desbloqueados` como diccionario `logro_id -> {dia, hora}` (JSON-safe). La fecha es determinista (día/hora de `GameTime` M29, sin reloj real) (`achievement_service.gd:34,236-278,587-594`).
+- **Migración v1:** si `desbloqueados` llega como `Array` (formato viejo sin fechas), migra a v2 usando fecha placeholder `{-1,-1}` (`achievement_service.gd:597-609`; test `test_logros.gd:280-287`).
+- **Restauración segura:** ignora/purga logros desconocidos del catálogo viejo, limpia estado antes de restaurar, **no re-emite señales** de logros restaurados, y dispara `re_evaluar_todo()` diferido para retroactividad (`achievement_service.gd:597-622`; tests `test_logros.gd:262-296`).
+- **Write-through:** tras cada desbloqueo llama `SaveManager.mark_dirty()` si existe (`achievement_service.gd:252-255`).
+- **Cobertura de tests:** round-trip, restore vacío, purga de ids viejos, migración v1, fechas persistidas, retroactividad RF5 (`test_logros.gd:262-296,364-383`).
 
-## 4) Dos mejoras sugeridas
+## 5) Sugerencias de mejora (2)
 
-### Mejora 1 — Validación semántica de `stat_id` y coherencia catálogo↔progresión
-**Problema:** RF14 valida forma, pero no que `stat_min.stat_id` corresponda a una estadística real/esperada para el dominio del logro (`achievement_service.gd:573-575` no cruza con stats disponibles). Esto permitió casos como cultivos/minería usando `regalos_dados` y “30 días” usando `viajes_realizados` (`logros.json:175-266`).
+1. **Auditoría y corrección de mapeo `stat_id`/condiciones del catálogo (alta prioridad).** Corregir logros cuyo stat no corresponde a la acción descrita, especialmente los que usan `regalos_dados` para agricultura/minería y `viajes_realizados` para “30 días”. Definir o reutilizar stats específicos (`cultivos_cosechados`, `minerales_extraidos`, `dias_jugados`/stat equivalente) y asegurar que los sistemas productores los incrementen. Agregar un test de contrato que falle si un logro de categoría `agricultura/mineria/progresion` usa un `stat_id` semánticamente incompatible (lista blanca por categoría o por logro). Esto evita logros engañosos o percibidos como imposibles.
 
-**Mejora propuesta:**
-- Añadir en `validar_catalogo()` una lista/blanco de `stat_id` conocidos (o consultar a `ProgressionManager`/registro de stats si existe) y emitir warning accionable cuando un `stat_id` no sea reconocido.
-- Añadir regla semántica opcional por categoría: `agricultura` debería usar stats de cultivo/cosecha, `mineria` de extracción/mineral, `progresion` temporal debería considerar `dias_jugados` cuando la descripción hable de días.
-- Corregir el catálogo: crear/conectar stats reales (`cultivos_cosechados`, `minerales_extraidos`, `dias_jugados`/`dias_en_aurora`) y cambiar las condiciones de los 5 logros afectados.
-- Añadir test de regresión que falle si un logro usa `regalos_dados`/`viajes_realizados` en categorías donde esa stat no tiene sentido.
-
-**Beneficio:** evita logros “falsos positivos” o imposibles por cableado incorrecto, sin debilitar la validación actual.
-
-### Mejora 2 — Exponer deuda de assets/i18n como reporte estructurado y gate opcional de QA
-**Problema:** los iconos y claves i18n faltantes se detectan/reportan (`achievement_service.gd:503-563`), pero no hay salida estructurada consumible por herramientas/QA ni política clara de severidad. Actualmente faltan los 18 iconos declarados, lo que puede degradar la UI.
-
-**Mejora propuesta:**
-- Hacer que `validar_catalogo()` devuelva o exponga un `Dictionary` detallado: `{problemas_forma, iconos_ausentes, claves_i18n_ausentes, ids_afectados}` además del conteo entero (manteniendo compatibilidad con el retorno actual si se necesita).
-- Añadir un modo estricto para CI/headless (`validar_catalogo(estricto_assets=false/true)`) donde assets/i18n faltantes puedan contar como fallo en entornos de release, pero no en prototipo.
-- Integrar con el pipeline de M154/UI: test que verifique que cada logro visible tenga icono resoluble y claves traducibles antes de sellar el módulo.
-- Registrar evidencia en logs/QA con ids afectados para facilitar corrección artística.
-
-**Beneficio:** convierte deuda invisible en deuda medible y accionable, reduce sorpresas en UI y mejora la confiabilidad del módulo sin romper el flujo actual de desarrollo.
+2. **Extender `validar_catalogo()` (RF14) con validación de alcanzabilidad referencial en modo diagnóstico.** Manteniendo la validación estructural actual, añadir checks opcionales/no bloqueantes al arranque o en tests: existencia de `stat_id` conocidos en el perfil/progresión, existencia de `milestone_id`/`coleccion_id` referenciados (cuando los catálogos estén disponibles), y detección de condiciones duplicadas entre logros distintos. Reportar como `[M72][RF14][WARN]` con acción sugerida. Complementar con el test de deuda de assets ya existente (`test_m72_deuda_assets.gd`) y una verificación de que los PNG de `icono` realmente existen en disco (el servicio ya expone `iconos_ausentes()`, `achievement_service.gd:520-530`), para que los logros no queden “desbloqueables” pero invisibles/rotos en UI.
 
 ## Conclusión final
 
-El sistema de logros está **bien estructurado para V0/V1**: autoload `Achievements` registrado (`project.godot:80`), catálogo data-driven (`logros.json`), evaluación event-driven delegada a M71, desbloqueo idempotente con dependencias, fechas deterministas, persistencia M59 con migración v1→v2, retroactividad, toasts/accesibilidad, trazabilidad analytics/log y una batería de tests amplia en `scripts/logros/`.
-
-No observé un fallo obvio que impida desbloquear **todos** los logros por diseño del núcleo; las dependencias testeadas y la validación formal funcionan. Sin embargo, el estado actual presenta **riesgo funcional alto** en 5 logros cuyo `stat_id` no coincide con la intención descrita (`cultivo/minería/días` mapeados a `regalos_dados`/`viajes_realizados`) y **deuda de presentación** total en iconos (18/18 ausentes). Recomendación: priorizar la alineación semántica catálogo↔stats antes de considerar el sistema de logros confiable para gameplay y QA visual.
+El proyecto **sí cuenta con un sistema de logros centralizado y bastante maduro** (M72, autoload `Achievements`) en `game/isla-ancestral/scripts/logros/achievement_service.gd`, con catálogo JSON, evaluación event-driven delegada a M71, dependencias, soporte de logros ocultos/progreso parcial, toasts accesibles, trazabilidad, API completa y **persistencia robusta** (M59 v2 + migración v1 + retroactividad). No se halló un subsistema separado de “medallas” en scripts. La principal debilidad observada no está en el motor de desbloqueo, sino en el **catálogo de datos**: varios logros usan `stat_id` que no coinciden con su descripción (agricultura/minería y “30 días” mapeados a `regalos_dados`/`viajes_realizados`), lo que puede producir desbloqueos incorrectos o experiencias percibidas como logros imposibles/engañosos. Además, RF14 valida forma pero no alcanzabilidad referencial de stats/hitos/colecciones. Priorizar la corrección del mapeo de condiciones y una validación referencial diagnóstica reduciría significativamente el riesgo funcional del sistema.

@@ -10,6 +10,15 @@ extends RefCounted
 ## Diccionario de proveedores registrados: sección -> ISaveProvider
 var _providers: Dictionary = {}
 
+## Secciones que el ÚLTIMO `collect()` tuvo que omitir porque su proveedor
+## devolvió un tipo que no es Dictionary (o falló). El SaveManager las usa para
+## la pre-validación: guardar con una sección crítica omitida perdería progreso
+## en silencio (crítico de la evaluación Nemotron, 2026-11-08).
+var ultimas_omitidas: Array[String] = []
+
+## Mensajes de error del último `collect()` (uno por sección omitida).
+var ultimos_errores: Array[String] = []
+
 ## Slots de sistema aún no reclamados por un proveedor (usuarios del schema)
 var _reserved_sections: Array[String] = [
 	"world", "player", "inventory", "buildings", "npc",
@@ -45,6 +54,8 @@ func register_provider(provider) -> bool:
 ## falla, se OMITE con push_error y el resto del snapshot se guarda igual.
 func collect(profile_id: String = "") -> Dictionary:
 	var payload := SaveSchema.default_payload(profile_id)
+	ultimas_omitidas.clear()
+	ultimos_errores.clear()
 	for section in _providers:
 		# Sin tipo estricto: los proveedores reales son autoloads Node
 		# (duck-typing del contrato); un ISaveProvider tipado rompe con
@@ -57,7 +68,10 @@ func collect(profile_id: String = "") -> Dictionary:
 		# saltea y los demas se conservan.
 		var raw: Variant = provider.get_save_data()
 		if typeof(raw) != TYPE_DICTIONARY:
-			push_error("[SAVE] Proveedor '%s' no devolvio un Dictionary (tipo %d); seccion omitida, el resto se guarda" % [section, typeof(raw)])
+			var msg := "proveedor '%s' no devolvio un Dictionary (tipo %d); seccion omitida" % [section, typeof(raw)]
+			ultimas_omitidas.append(String(section))
+			ultimos_errores.append(msg)
+			push_error("[SAVE] " + msg + ", el resto se guarda")
 			continue
 		payload[section] = raw
 	return payload

@@ -216,8 +216,10 @@ func _correr() -> void:
 		bool(res_rec.get("temporal", false)))
 
 	# ── J. ORDEN de las reglas (documentado en el validador) ──
-	var orden_esperado: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "mundo", "limite", "recursos"]
-	_check("el validador expone las 8 reglas en el orden documentado",
+	# 2026-11-08 (DS-V4.1-Flash-Opencode): el paso 9 "circulacion" (L148) se
+	# agrego al final; el orden documentado ahora tiene 9 reglas.
+	var orden_esperado: Array[String] = ["zona", "ocupacion", "soporte", "regla", "npc", "mundo", "limite", "recursos", "circulacion"]
+	_check("el validador expone las 9 reglas en el orden documentado",
 		ConstruccionValidator.ORDEN == orden_esperado, str(ConstruccionValidator.ORDEN))
 
 	# ── K. MOTIVOS: temporales vs permanentes ──

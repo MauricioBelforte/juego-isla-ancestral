@@ -46,8 +46,11 @@ func _initialize() -> void:
 	w.timeout.connect(func() -> void:
 		print("WATCHDOG: el suite excedio 300 s -> salida forzada con codigo 1")
 		quit(1))
+	# El root (Window) todavia no esta dentro del arbol en `_initialize()`: con
+	# `start()` explicito el Timer avisa "not inside the scene tree". `autostart`
+	# lo arranca solo cuando el root entre al arbol.
+	w.autostart = true
 	root.add_child(w)
-	w.start()
 	call_deferred("_correr")
 
 
