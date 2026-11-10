@@ -222,7 +222,7 @@
 - [x] Test en preset Baja con 4 GB de RAM: sesión completa sin OOM y jugable [C] — **[?] 2026-10-20 (Tanda 87, DS-Opencode): NO MEDIBLE en esta sesión; parcial medido.** El preset Baja está configurado y verificado (`budgets.json` total **1.500 MB**, 8 sistemas; `test_m62_preset_baja_m27.gd` **13/0**, T76), y la sesión de 30 min de T72 tiene pico **178.2 MB static (T72) y 44.7 MB VRAM (probe T82, corrida separada)**, muy por debajo de 4 GB. Pero **no hay hardware de 4 GB ni simulador de OOM**: correr headless no impone el límite de 4 GB y no prueba la degradación/fallo del allocator; además “jugable” exige input/Play Mode real, y el arnés `--script` no itera a 60 Hz (medido: 8 physics frames en 10 s). Marcar `[x]` sería un verde falso. **Falta:** playtest del usuario en una máquina de 4 GB o un Job Object de Windows con `ProcessMemoryLimit=4GB` + escena con input. Evidencia parcial: T72 (`out/tanda72/sesion_audio_30min.log`) y T76 (`out/tanda76/preset_baja_m27.log`). Log 2059. | FLIP 2026-10-26 (Reflection-Beam-1.0, T225-62): spec en 03-Diseno.md § (L222 test preset Baja 4GB)
 
 
-**Totales:** 150 items - Completados: 145 - Pendientes: 1 - No resueltos: 4. (Tanda 89: 143/3/4 → 145/1/4; se cerraron "Sesión de referencia: 30 min" y "RN3" por herencia medida de T72.)
+**Totales:** 150 items - Completados: 147 - Pendientes: 0 - No resueltos: 3. (saneo Hy3 2026-11-09: recount por marcas = 147/0/3; línea previa 145/1/4 era stale por drift post-Tanda-89; autorizado por director 540.)
 
 ## Notas del Agente — auditoría Patrón D de los 37 `[ ]` (2026-10-15, step-5-kilocode / Kilo Code)
 

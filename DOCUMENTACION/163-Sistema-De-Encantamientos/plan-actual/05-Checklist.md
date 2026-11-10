@@ -318,4 +318,4 @@ Totales: 120 items - Completados: 98 - Pendientes: 7 - No resueltos: 15. (Correg
 > este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 101 [ ] / 0 [?].
 > Las marcas no se tocaron.
 
-**Totales:** 120 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 15. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería.)
+**Totales:** 120 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 7. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería. saneo Hy3 2026-11-09: recount por marcas = 113/0/7; línea previa 105/0/15 stale; autorizado por director 540.)

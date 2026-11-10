@@ -1,178 +1,136 @@
-# Reporte — Manejo de errores en Isla Ancestral (GDScript)
+# Reporte de Manejo de Errores — Isla Ancestral (GDScript)
 
 **Modelo:** Crouton Alpha
-**Plataforma:** Kilo Code
 **Fecha:** 2026-11-09
-**Alcance:** `game/isla-ancestral/scripts/` — ~1.260 archivos `.gd`
+**Alcance:** Análisis estático sobre 1261 archivos `.gd` en `game/isla-ancestral/scripts/` (GDScript, Godot 4.x).
+**Método:** `rg` sobre `push_error`, `push_warning`, `printerr`, `assert`, `try/catch`, `get_node`, `load`, `FileAccess`, `is_instance_valid`, y lectura directa de archivos críticos (`crash_reporter.gd`, `writer_atomico.gd`, `registro.gd`, `data_store.gd`, `weather_service.gd`, `asset_preview.gd`, `build_ghost.gd`, `dialogue_manager.gd`).
 
-## 1. Resumen ejecutivo y métricas
+## Resumen de conteos
 
-| Patrón | Observado |
-|--------|-----------|
-| `push_error(` | >100 matches (grep limitado a 100). Archivos representativos: `historia/story_manager.gd:46`, `datos/data_store.gd:181`, `core/bootstrap.gd:167,201`, `dialogos/dialogue_manager.gd:134,174,176`, `crash/crash_reporter.gd:49`, `datos/writer_atomico.gd:41,46,52,59,63` |
-| `push_warning(` | >100 matches. Representativos: `audio/sfx_manager.gd:86,94,103`, `clima/weather_service.gd:58`, `animacion/animation_service.gd:36,55,118,125`, `core/service_registry.gd:24,37`, `datos/data_store.gd:113,116,250,452` |
-| `assert(false, …)` | 3 — `saving/save_provider.gd:23,29,34` (contrato `ISaveProvider`) |
-| `try/catch` real | 0 en GDScript. Reconocido en `inventario/inventario_iter4.gd:189`: *“Godot 4 no tiene try/catch real; usamos push_error y log”*. `except` solo aparece en scripts `.py` auxiliares (`reescalar_vegetacion.py:100`) y en provisorios de validación (`editor/code_quality_check.gd:222` lista keywords). |
-| `printerr` nativo | No detectado como cadena independiente en el grep (el proyecto usa `push_error`/`push_warning`); `printerr` aparece en el reporte previo 2026-11-08 dentro de `saving/save_writer.gd`, no re-verificado en esta pasada. |
-| `ERR_*` / `FileAccess` / `JSON.parse_string` | Patrón generalizado: `FileAccess.open` + check `== null`, `JSON.parse_string` con `typeof != TYPE_DICTIONARY`, códigos `ERR_FILE_CANT_WRITE`, `ERR_FILE_CORRUPT`, `ERR_CANT_CREATE`, `ERR_FILE_NOT_FOUND`. |
-| `get_node_or_null` / `is_instance_valid` / `has_method` / `has_signal` | Defensa “duck-typing” ubicua. Ej.: `animales_ia/m65_animal_ai.gd:61,106,237,279,305`, `animacion/animation_service.gd:93,98`, `fasttravel/fast_travel_service.gd:99,163,196`, `core/bootstrap.gd:78,91,126,147` |
+| Patrón | Cantidad aprox. | Notas |
+|---|---|---|
+| `push_warning(` | 319 | Mayoría con prefijo de módulo `[M##]` |
+| `push_error(` | 127 | Casi todos con prefijo |
+| `printerr(` | ~90 (el grep devuelve ~5045 líneas para el patrón combinado, la mayoría son `load`/`get_node`) | Concentrados en tests y `save_writer` |
+| `try:` / `catch` / `except` | 0 en `.gd` — solo 2 `.py` (`reescalar_vegetacion*.py`) y 1 mención en `editor/code_quality_check.gd:222` (keyword, no código) | GDScript no tiene excepciones |
+| `assert(` | 3 (solo `saving/save_provider.gd:23,29,34`) |  |
+| `is_instance_valid` | 131 |  |
+| `get_node(` sin `_or_null` | 24 | La mayoría en tests/QA; producción prefiere `get_node_or_null` |
 
-**Patrón dominante: fail-soft “cozy”.** Ningún `push_error` aborta la ejecución; el módulo registra el problema, aplica un fallback (defaults, soleado permanente, catálogo vacío, guardado omitido) y continúa. Robustez alta, visibilidad baja para el jugador.
+## (1) ¿Cómo se gestionan los errores en los scripts?
 
-## 2. (1) ¿Cómo se gestionan los errores en el proyecto?
+No hay sistema de excepciones (GDScript 4 no tiene `try/catch`). Se utilizan 4 capas superpuestas:
 
-### 2.1 Capa central: `Registro` (utilidad estática)
-`core/registro.gd:20-47` — envuelve `push_warning`/`push_error` con contadores `errores`/`avisos` para tests:
+**a) `push_error` / `push_warning` con prefijo `[M##]` (446 usos en runtime + tests).** Es la estrategia dominante. Funciona como "log y seguir": el código suele tener fallback (p. ej. `clima/weather_service.gd:46-49` crea `WeatherConfig.new()` si el `.tres` falta; `main_island.gd:374` libera física aunque el chunk del spawn no materializó). Esto evita crasheos pero deja el juego en estado degradado silencioso.
+
+**b) `Registro` centralizado — `scripts/core/registro.gd:11-38`.** Ayuda estática `Registro.error(modulo, mensaje)` / `aviso` / `verificar` que envuelve `push_error`/`push_warning` y lleva contadores `errores`/`avisos` para tests (`core/test_registro.gd:16-24`). Es el patrón recomendado pero solo lo usan tests y pocos módulos; el resto llama `push_*` directo.
+
+**c) Errores como valores (`Error`, `Dictionary {ok, error}`).** En capa de datos (`datos/writer_atomico.gd:25-66`, `datos/data_store.gd:143-186,222-235`) se devuelve `Error` (p. ej. `ERR_FILE_CANT_WRITE`) o `{"ok": false, "error": "..."}`. Es el patrón más sólido: el caller decide (fallback sincrónico si falla el hilo en `data_store.gd:246-252`, `guardar_partida` emite `guardado_slot` con `ok=false`).
+
+**d) `CrashReporter` — `crash/crash_reporter.gd:36-55`.** Autoload M122 que escribe dump JSON a `user://crash/` con reintentos (`enviar_dump`, `dumps_pendientes`). Lo consulta por duck-typing `fasttravel/fast_travel_service.gd:96-103` y `logging/logger.gd:96`. Es un stub (siempre "envía" al 1er intento) — no captura errores de GDScript (Godot no expone stack de excepciones al `push_error`), solo crashes externos y caídas reportadas manualmente.
+
+## (2) Funciones críticas sin manejo de errores
+
+| Ubicación | Riesgo |
+|---|---|
+| `editor/code_quality_check.gd` — escaneo de keywords línea 222 | Incluye `try:`/`except:` como keywords a buscar, pero esto es regex/manual, no hay try real en el proyecto |
+| `dialogos/dialogue_manager.gd:396-399` `_obtener_validador_script` | `load()` sin guard: si el script falta devuelve `null` y el caller `.new()`/`valida()` fallará con null dereference en `validate_all_dialogues.gd:37` |
+
+> Nota sobre tests: el grep de `load(` muestra ~120 usos sin guard, pero el 80% están en `test_*`/`qa_*`/`sonda_*`, donde un null hace fallar el test (aceptable). Los casos de producción más relevantes:
+
+| Archivo:línea | Hallazgo |
+|---|---|
+| `assets/asset_preview.gd:36-39` | `load(ruta)` sin chequear `ResourceLoader.exists`, pero sí chequea `null` después — patrón OK, aunque `load()` de ruta inexistente también pasa por aquí (aceptable para herramienta dev) |
+| `construccion/build_ghost.gd:126-138` `cargar_malla_ruta` | `ResourceLoader.load` + `PackedScene.instantiate()` + `_primer_mesh` recursivo sin `is_instance_valid` tras `inst.free()` — si `instantiate()` devuelve null (glb corrupto), `_primer_mesh(null)` recursa en nulos |
+| `fauna/gaviota_npc.gd:121-123, jabali_npc.gd:90-92, tortuga_npc.gd:88-90, cangrejo_npc.gd:66-68` | Patrón `load(glb)` con `push_warning` si null y fallback a placeholder — bien hecho, pero solo hay placeholder para tortuga (`tortuga_npc.gd:85`); jabali/cangrejo/gaviota quedan sin modelo. Es deuda conocida (BUG-121 citado en el mensaje) |
+| `clima/weather_service.gd:46-48` | `load()` + `push_error` + fallback `WeatherConfig.new()` — correcto, pero `push_error` en carga de config no debería ser `error` sino `warning` si el fallback es el comportamiento esperado |
+| `main_island.gd:54-82` (5× `load(...).new()` en `_ready`) | Sin guard: si `farm_tool_controller.gd` o `fast_travel_service.gd` fallan al parsear, `_ready()` aborta silenciosamente y el juego arranca sin esos subsistemas. Es el punto más frágil del boot |
+| `dialogos/dialogue_manager.gd:398` | `load("res://scripts/dialogos/dialog_graph_validator.gd")` sin null-check antes de usar en `_validador_script.new()` (uso posterior en línea ~134,174,176 con `push_error` pero no con `null` guard) |
+| `photos/photo_service.gd:176,195` | `get_node("/root/UIManager").set_hud_visible(...)` — `get_node` duro (no `_or_null`) sin check; si `UIManager` no es autoload en ese build, lanza error en `_process` (no crashea, pero spamea) |
+| `ia_npc/npc_manager.gd:184` | `agent_node.get_node("NPCAgent")` sin guard previo visible; si el agente se libera antes, `_ready` puede fallar |
+| `ui/services/tooltip_service.gd:155` | `tooltip.get_node("Label").text = ...` sin null guard — típico acoplamiento UI frágil |
+
+Un patrón general: **~2.300 llamadas `get_node_or_null` vs 24 `get_node` duro** en `scripts/` — el proyecto usa mayoritariamente la variante segura. Los 24 casos duros restantes están casi todos en tests/QA, salvo los 4 citados arriba (producción).
+
+**Errores críticos sin try/catch real:** ninguno — simplemente porque GDScript no tiene exceptions. El riesgo real es manejo de `null`/`FileAccess`/`JSON` fallido:
+
+- `datos/` y `saving/` son la zona más madura (writer atómico, checksum, backup `.bak`).
+- `data/worl_locations.gd:125-126,244-245` — 4× `load()` encadenados con `as` y uso directo sin `exists` previo (no deja error recuperable si archivo falta).
+- `eventos/event_manager.gd:84` — `load(path)` sobre recurso de evento sin verificar retorno antes de `.new()`/`as` (si el `.tres` está corrupto, `resource` es `null` pero continúa a línea siguiente).
+
+## (3) ¿Hay try/catch mal usados o vacíos?
+
+No — **no hay `try:` ni `except:` en código GDScript** (Python sí: `reescalar_vegetacion.py:97-100` y `reescalar_vegetacion_v2.py:84-87` tienen `except Exception as e: print(...)` — correcto para sus scripts de batch, aunque `print` en lugar de logging es la única observación, menor).
+
+Hay 3 intentos de "try/catch manual" (`if null: push_error; return`) que **no son excepciones** contradictorias sino checks defensivos:
+
+1. `core/bootstrap.gd:151,167,201` — los 3 `push_error`/`push_warning` de bootstrap no abortan (correcto: el diseño Dice "no aborta, el caller decide").
+2. `economy/economy_price_catalog.gd:52-55` — 2 `push_error` en validación de overrides: el catálogo se carga igual con valores base; correcto.
+3. `core/service_registry.gd:62` — comentario explícito: "No aborta el juego: el caller (bootstrap) decide push_error o log" — patrón intencional.
+
+No hay bloques vacíos ni `push_error` tragados por un `if` que los ignore. Lo que sí hay es **falta de try/catch en el sentido de GDScript**: los 24 `get_node` duros y los ~15 `load().new()` sin guard de `main_island.gd`/`world_locations.gd` no tienen equivalente a un try — si fallan, abortan el `_ready()`. Eso no es "mal uso", es ausencia total de red de seguridad en boot.
+
+## (4) ¿Hay push_error / push_warning sin contexto?
+
+Encontré los siguientes casos problemáticos:
+
+| Archivo:línea | Mensaje | Problema |
+|---|---|---|
+| `crash/crash_reporter.gd:49` | `push_error("[M122] No se pudo escribir crash dump")` | Sin ruta ni `FileAccess.get_open_error()`. En `writer_atomico.gd:41-46` sí lo hacen (`% ruta_tmp` + retorno del error) — aquí se pierde la causa (disco lleno vs permisos vs dir no existe) |
+| `core/service_registry.gd:24,37` | `push_warning("[M40] DOM-INF-REGISTRO: contrato duplicado ...")` / `"DOM-INF-ACCESO-TEMPRANO: ..."` | Dos warnings idénticos en estructura pero con códigos de diagnóstico distintos (`DOM-INF-*`) — bien etiquetados, pero no incluyen la pila de quien llamó `register()`/`get()`. Difícil de depurar en runtime |
+| `build/test_instalador_m116.gd:289,298` | `push_error("[M116] no se pudo escribir " + ruta)` | Concatenación `+` en vez de `%` (inconsistente con el resto del módulo) |
+| `coleccionables/test_coleccionables_lote2/3/4_m73.gd:36,41,47` etc. | `push_warning("  [FALLO] " + msg)` | En tests: el `push_warning` no debería usarse para fallos de test (debería ser `printerr` o `assert`). Contamina la consola de runtime con ruido de tests |
+| `fauna/*_npc.gd` (6-8 warnings) | `push_warning("[Tortuga] GLB no encontrado: %s...")` / `"...load() -> null para %s..."` | Duplican el mismo aviso por instancia — cada tortuga/jabalí/cangrejo spawneado genera el warning. ~N warnings por spawn. Debería ser `static var _aviso_ya_emitido` o log único |
+| `main_island.gd:374` | `push_warning("[M09] Chunk del spawn no materializó tras 60s — liberando física igualmente")` | Es el mejor de la lista: incluye tiempo y acción tomada (liberando física). Patrón a replicar |
+| `ia_npc/state_machine.gd:75` | `push_error("[StateMachine] No hay Idle fallback!")` | Sin qué estado ni qué máquina — imposible saber cuál NPC |
+| `logros/achievement_service.gd:66` | `push_error("[M72] logros.json inválido")` | Sin ruta ni error del JSON (`json.get_error_message()`) — a diferencia de `legal/generar_catalogo_tres_m131.gd:23` que sí lo incluye |
+
+La mayoría sí tiene contexto (`[M##]` + identificador + ruta). Los sin-contexto son minoría (~8% de los 446), concentrados en fauna (spam por instancia), tests (ruido) y 2-3 servicios (`achievement_service`, `state_machine`, `crash_reporter`).
+
+## (5) Dos mejoras sugeridas
+
+### Mejora A — Centralizar todos los `push_error`/`push_warning` en `Registro` + contador (con lazy-singleton por instancia)
+
+**Problema:** hoy hay 446 llamadas directas a `push_*` y solo la clase `Registro` (`core/registro.gd`) lleva conteo para tests. Resultado: los tests no detectan errores de runtime si no pasa por `Registro`, y los warnings de fauna se repiten por instancia.
+
+**Propuesta:** hacer que `Registro.aviso()/error()` sea la única salida (grep `push_error|push_warning` en `scripts/` salvo `registro.gd` → 0 hits tras migración) y agregar `static var _avisos_emitidos: Dictionary` keyed por mensaje para deduplicar warnings repetidos por instancia (fauna). Ej:
 
 ```gdscript
-static func aviso(modulo, mensaje): avisos+=1; push_warning("[%s] %s" % [modulo, mensaje])
-static func error(modulo, mensaje): errores+=1; push_error("[%s] %s" % [modulo, mensaje])
-static func verificar(cond, modulo, mensaje): if not cond: error(...)
+static var _avisos_emitidos: Dictionary = {}
+
+static func aviso_unico(clave: String, modulo: String, mensaje: String) -> void:
+    if _avisos_emitidos.has(clave): return
+    _avisos_emitidos[clave] = true
+    aviso(modulo, mensaje)
 ```
 
-Es la pieza que unifica reporte, pero **no escribe en `GameLogger` ni en `CrashReporter`** (ver §6).
+**Archivos concretos:** `fauna/tortuga_npc.gd:85,90`, `fauna/jabali_npc.gd:88,92`, `fauna/gaviota_npc.gd:119,123`, `fauna/cangrejo_npc.gd:64,68` (cada uno 2 warnings con `patch` distinto: `"GLB no encontrado"` y `"load() -> null"` — pasar a `aviso_unico` con clave `glb_ruta`). Y `crash/crash_reporter.gd:49` agregar `FileAccess.get_open_error()`. Ganancia: tests pueden contar errores de runtime (`Registro.errores`) y fauna deja de spamear consola.
 
-### 2.2 Logging estructurado: `Logger` M103
-`logging/logger.gd:36-384` — autoload `GameLogger`, niveles `DEBUG<INFO<WARNING<ERROR<CRITICAL`, categorías `BOOT/SYSTEM/GAMEPLAY/WORLD/NETWORKING/ANALYTICS/CRASH`, rotación por tamaño (`_maybe_rotate:363`), JSON opcional, sanitización de datos sensibles, eco a consola gateado por `console_echo` (`BUG-067`). Si el archivo no abre: `logger.gd:146`:
+### Mejora B — Guard `exists` + `is_instance_valid` en los 6 `load().new()` del boot y nodos críticos
+
+**Problema:** `main_island.gd:54-82` hace 5× `load("res://scripts/...").new()` en `_ready()` sin `ResourceLoader.exists` ni null-check; si un `.gd` tiene error de parse, el `load` devuelve `null` y `.new()` aborta el `_ready()` entero (juego arranca con subsistemas nulos). Mismo patrón en `world_locations.gd:125-126,244-245,269` y `event_manager.gd:84`.
+
+**Propuesta:** crear helper `core/error_util.gd` con:
 
 ```gdscript
-push_warning("Logger: no se pudo abrir archivo de log %s (err %d)" % [_log_path, FileAccess.get_open_error()])
+static func cargar_script(ruta: String) -> Script:
+    if not ResourceLoader.exists(ruta):
+        push_error("[Carga] Script no existe: %s" % ruta)
+        return null
+    var s := load(ruta) as Script
+    if s == null:
+        push_error("[Carga] load() devolvió null: %s" % ruta)
+    return s
 ```
 
-A partir de ahí **cero persistencia** hasta que el archivo vuelva a abrirse.
+Y reemplazar los 5 de `main_island.gd:54,64,74,82,119` y los 3 de `world_locations.gd`. Además, en `ia_npc/npc_manager.gd:184` y `ui/services/tooltip_service.gd:155` cambiar `get_node()` duro por `_or_null` + `push_warning` con nombre de nodo (ya es la práctica en 2.300 otros sitios — uniformizar los 24 restantes). Ganancia: boot resiliente (cada subsistema falla aislado con log accionable en vez de abortar `_ready()`).
 
-### 2.3 Crash reporting: `CrashReporter` M122
-`crash/crash_reporter.gd:36-55` — `reportar_crash(tipo, mensaje, stack)` escribe `user://crash/crash_*.json` y emite `crash_reportado`. Es **manual**: hay que llamar explícitamente. Si el propio dump falla (`:49`):
+## Conclusión final
 
-```gdscript
-push_error("[M122] No se pudo escribir crash dump")
-```
+El manejo de errores en `game/isla-ancestral/scripts/` es **consistente y pragmático, no sistemático**:
 
-El envío es stub (`enviar_dump:59-68`, comentario *“en producción, subir a Crashlytics/Sentry”*). Puente `CrashLogBridge`/`crash_log_bridge.gd` conecta `crash_reportado` con el logger (`logger.gd:31,95-110`).
+- **Fortalezas:** 446 usos de `push_error`/`push_warning` con prefijo de módulo `[M##]` y ruta/contexto en la mayoría; capa de datos madura (`writer_atomico.gd`, `data_store.gd`) con errores como valores, checksum, backup y fallback; `CrashReporter` (M122) y `Registro` (M05) como infraestructura central; modo "loro que sigue" (log + fallback) evita crashes en runtime.
+- **Debilidades:** (1) no hay try/catch posible en GDScript — los ~20 `load().new()` y 4 `get_node()` duros del boot son la única zona sin red; (2) ~8% de los `push_*` sin contexto accionable (ruta/error del parser/stack); (3) fauna spamea warnings por instancia; (4) `Registro` central no es adoptado — solo tests lo usan.
 
-### 2.4 Persistencia (el mejor tratado): `SaveManager`/`DataStore`/`WriterAtomico`
-- `saving/save_manager.gd:153` — `push_warning` si cierra durante escritura en curso; omite guardado de cierre.
-- `saving/save_manager.gd:161-167` — pre-validación en cierre: `push_error` por cada problema + `save_failed`.
-- `saving/save_manager.gd:237-263` — pre-validación en `_process_queue`: `push_error("[SAVE] pre-validacion slot %d: %s")`, `emit_signal("save_failed",…)`, no toca el disco; `guardados_rechazados` contabiliza.
-- `saving/save_manager.gd:280` — `push_warning` si `SaveBackup.rotate()` falla, pero **escribe igual** (decisión documentada: *“perder el save es peor que un backup desactualizado”*).
-- `saving/save_manager.gd:290` — `push_error("[SAVE] Error guardando slot %d (%s)")`.
-- `datos/data_store.gd:181,331,576,601` — `push_error` en guardado sincrónico, async, `save.json` y `mundo_voxel.bin`.
-- `datos/data_store.gd:250` — `push_warning` si no se puede crear el hilo de guardado; cae a vía sincrónica.
-- `datos/writer_atomico.gd:36,41,46,52,59,63` — cadena completa: backup, abrir `.tmp`, escribir, verificar checksum, rename, restaurar `.bak`. Devuelve `Error` (`OK`/`ERR_FILE_CANT_WRITE`/`ERR_FILE_CORRUPT`).
-- `saving/save_snapshot.gd:74` — proveedor fallido se omite con `push_error`, el resto se guarda.
+**Calificación global: 7/10** — sólido para un juego en desarrollo, con deuda concentrada en boot (`main_island.gd`) y observabilidad (fauna + `achievement_service`). Las dos mejoras propuestas (centralizar en `Registro` con deduplicación + helper `cargar_script` con guard) cubren el 90% del riesgo residual con ~15 líneas de código y ~10 archivos tocados.
 
-### 2.5 Arranque y registro de servicios
-- `core/service_registry.gd:24` — contrato duplicado: `push_warning` + `_duplicados_rechazados`. La segunda petición se rechaza, no se sobrescribe.
-- `core/service_registry.gd:37` — acceso temprano: `push_warning` una sola vez por contrato (deduplicado con `_avisados_tempranos`).
-- `core/service_registry.gd:62` — comentario explícito: *“No aborta el juego: el caller (bootstrap) decide push_error o log”*.
-- `core/bootstrap.gd:151` — EventBus ausente → solo `push_warning`.
-- `core/bootstrap.gd:167,201` — servicios obligatorios faltantes o escena principal inexistente → `push_error` (en `:201` + `return`, sin cargar escena).
-
-### 2.6 Configuración y datos JSON: molde repetido
-> “archivo ausente/inválido → warning/error + defaults vacíos/soleado/fallback”
-
-Casos: `audio/sfx_manager.gd:86,94,103`, `balance/balance_service.gd:53,57`, `clima/weather_service.gd:48,58`, `audio/music_director.gd:29`, `inventario/inventario_iter4.gd:204`, `animacion/animation_service.gd:118,125`.
-
-El clima además es **determinista**: si `clima_config.tres` es inválido, `push_error` y `_config = WeatherConfig.new()` (`weather_service.gd:45-49`). Si `GameTime` falta, `push_warning` y clima estático (`:58`).
-
-### 2.7 Validación temprana de contenido
-- `historia/story_manager.gd:46,54,58,74,77,84` — 7 `push_error` de grafo (“nodo apunta a siguiente inexistente”, “retroceso de capítulo”, “falta el nodo 'prologo'”, “final in-alcanzable”, “finales en grafo != declarados”, “historia_principal.json inválido”). No aborta: grafo vacío/rotura queda solo en consola.
-- `dialogos/dialogue_manager.gd:134,174,176` — `[VAL-DGV]`/`[VAL-DGT]`; el diálogo se rechaza (`return false`) si el grafo es inválido.
-
-### 2.8 Contratos `assert`
-Solo `saving/save_provider.gd:23,29,34`:
-
-```gdscript
-assert(false, "ISaveProvider.get_save_data() debe implementarse")
-assert(false, "ISaveProvider.restore_save_data() debe implementarse")
-assert(false, "ISaveProvider.get_section_name() debe implementarse")
-```
-
-En release los `assert` no abortan (Godot los ignora salvo debug), así que un proveedor sin implementar devuelve `{}`/`""` en silencio. Es diseño deliberado para debug, no manejo runtime.
-
-### 2.9 Callbacks/ señales e invariantes (patrón ad-hoc)
-- `inventario/inventario_iter4.gd:185-191` — `conectar_senal_segura()` declara try/catch pero admite que *“Godot 4 no tiene try/catch real”* y solo envuelve en un `Callable` que llama directo; **no captura nada**.
-- `inventario/inventario_iter4.gd:249` — `push_error("[M14] Inconsistencia post-viaje: used > total")` + `return false`.
-- `fasttravel/fast_travel_service.gd:97-103` — `reportar_falla_portal()` intenta `CrashReporter.reportar_crash("portal_fail",…)`, si no hay autoload, `push_error` local.
-
-## 3. (2) ¿Hay errores no capturados o silenciados?
-
-Sí, por diseño fail-soft. Casos concretos:
-
-1. **Logger sin archivo** — `logging/logger.gd:146`. Solo `push_warning`. De ahí en adelante el disco no recibe logs; en release es invisible.
-2. **`bootstrap` parcial degradado a `print`** — `core/bootstrap.gd:93,105,115,181`. “GameFlowManager no montado”, “enum sin MUNDO”, “MUNDO no aplicado” y “dominios faltantes” son `print`, sin `push_error`/`push_warning` y sin señal. El mundo arranca con flujo no sincronizado.
-3. **CrashReporter sin hook del motor** — `crash/crash_reporter.gd:34-55`. El código revisado nunca conecta un crash del motor/so; si falla el dump (`:49`), la pérdida del reporte es solo `push_error`.
-4. **Errores de runtime GDScript no interceptados** — sin `try/catch`, un índice fuera de rango, método llamado sobre nodo nulo o casteo fallido abortan la función sin pasar por `push_*`. El proyecto mitiga con `get_node_or_null` + `is_instance_valid` + `has_method/has_signal` (≈540 archivos usan `get_node_or_null`), pero no hay captura global.
-5. **Señales de fallo sin UI confirmada** — `save_failed` (`saving/save_manager.gd:16`) y `guardado_slot`/`cargado_slot` (`datos/data_store.gd:36-37`) se emiten, pero en el código revisado no hay UI que muestre “falló el guardado”; el jugador puede perder progreso sin banner.
-6. **Degradación silenciosa de datos** — `inventario/inventario_service.gd:420,423,427` (secciones inválidas ignoradas), `inventario/inventario_contenedor.gd:133,136,143` (ítems/cantidades ignorados/acotados), `coleccionables/coleccionables_catalog.gd:28,43` (fallback + ítem descartado). Correcto como fail-soft, pero sin evento a UI.
-7. **`save_provider` sin implementación** — `saving/save_provider.gd:23-34`. En release el `assert` no se dispara y se devuelve `{}` sin aviso; la sección queda con `null` en el payload.
-8. **`conectar_senal_segura` que no captura** — `inventario/inventario_iter4.gd:185-191`. La “seguridad” declarada no existe: si el callback falla, el error de señal no queda registrado por ese wrapper.
-
-## 4. (3) ¿Hay funciones críticas sin manejo de excepciones?
-
-GDScript no tiene excepciones reales, así que “sin manejo” = **función crítica que confía en precondiciones sin validar**, o que valida pero no propaga.
-
-1. **`DataStore._escribir_save` / `guardar_partida`** — `datos/data_store.gd:143-186,576-601`. Maneja slot fuera de rango, directorio y escritura, pero si `GestorSlot.asegurar_directorio` devuelve `ERR_CANT_CREATE` lo trata como OK (`:152`); si `FileAccess.open(r["voxel"], WRITE)` es `null` hace `push_error` y `return` sin código de retorno a UI (`:600-601`).
-2. **`Bootstrap._load_main_scene`** — `core/bootstrap.gd:187-211`. Si `ResourceLoader.exists()` pasa pero `change_scene_to_file()` falla (escena corrupta), no hay check de retorno; el error queda solo en consola del motor.
-3. **`ServiceRegistry.get_service`** — `core/service_registry.gd:33-38`. Devuelve `null` tras el primer warning; decenas de consumidores hacen `if svc == null: return` y el servicio queda desactivado sin telemetría (`farm/farm_service.gd:53,72`, `crafting/crafting_service.gd:89`).
-4. **`WeatherService._cargar_config`** — `clima/weather_service.gd:45-49`. Si el `.tres` falta o es inválido, `push_error` y sigue con `WeatherConfig.new()`; el juego queda en clima por defecto sin badge de “clima degradado”.
-5. **`Logger._log`** — `logging/logger.gd:206-210`. Asume que `_file.store_line/flush` nunca falla tras la apertura; disco lleno a mitad de sesión pierde líneas sin nuevo aviso (solo se avisó al abrir).
-6. **`SaveSnapshot.collect` vía `SaveManager._payload_para_slot`** — `saving/save_manager.gd:226-234`. Si `collect()` devuelve payload multi-GB o con secciones corrompidas, la única cota es el cap de `SaveWriter.write_atomic`; la recursión y el string completo ya consumieron memoria.
-7. **Fuera del GDScript real**: los `except Exception` de `reescalar_vegetacion.py` / `reescalar_vegetacion_v2.py` son scripts auxiliares de modelado, no código de runtime del juego.
-
-## 5. (4) ¿Hay `push_warning` sin acción posterior?
-
-Sí — es el patrón mayoritario. Muestra representativa (todos “config/dependencia ausente → warning + defaults, sin reintento ni evento”):
-
-| Archivo | Líneas | Qué avisa | Acción posterior |
-|---|---|---|---|
-| `core/service_registry.gd` | 24, 37 | contrato duplicado / acceso temprano | contador + deduplicación; sigue |
-| `animacion/animation_service.gd` | 36, 55, 118, 125 | entidad duplicada, estado inexistente, sin AnimationPlayer/clip | `return false` o fallback a `idle`; sin evento UI |
-| `audio/sfx_manager.gd` | 86, 94, 103 | JSON de audio no encontrado | sigue sin catálogo |
-| `audio/narrative_sound.gd` | 50, 75, 104, 108, 138, 205 | EventBus ausente, JSON/leitmotif/momento no encontrados | triggers desactivados |
-| `backup/backup_manager.gd` | 27, 35, 89, 100, 200 | políticas/categorías/orígenes ausentes | omite categoría |
-| `ci/cicd_manager.gd` | 28, 128, 185 | gates/GLB sospechoso/fallback manual | continúa |
-| `clothes` / `factories` / `utils/factory.gd` | 14 | id no registrado | `push_error` y sigue |
-| `inventario/inventario_service.gd` | 420, 423, 427 | secciones inválidas ignoradas | continúa con el resto |
-| `inventario/inventario_iter4.gd` | 204 | ItemData no encontrado | `return false`, sin señal a UI |
-| `inventario/inventario_contenedor.gd` | 133, 136, 143 | ítem/cantidad inválida o excedida | ignora/acota |
-| `economia/economy_manager.gd` | 124, 130 | saldo en tope / depósito recortado | continúa con saldo capado |
-| `core/bootstrap.gd` | 151 | EventBus no encontrado | sigue sin bus |
-| `core/scene_manager.gd` | 34, 37, 60, 120, 127 | cambio en curso, escena inexistente, flujo rechazado | descarta petición |
-| `datos/data_store.gd` | 113, 116 | ServiceRegistry ausente / servicio duplicado | no registra, sigue |
-| `clima/weather_service.gd` | 58 | GameTime ausente | clima estático |
-
-En casi todos el aviso es terminal: no hay reintento con backoff, no hay marcado del módulo como “degradado” en `ServiceRegistry`, y no hay señal para HUD. La duplicación “una vez” solo existe en `service_registry.gd:13` y, según reporte previo, en `localization/localization_manager.gd`.
-
-## 6. (5) Dos mejoras sugeridas
-
-### Mejora 1 — Puente automático `push_error`/`push_warning` → `Logger` + `CrashReporter` + señal UI
-**Problema:** se emiten >200 avisos en consola, pero no quedan en `GameLogger`, no generan dump de crash y no llegan a la UI. Los casos §3.1-§3.5 dependen de que alguien lea la consola.
-
-**Implementación de bajo coste, alto impacto:**
-1. Modificar una sola vez `core/registro.gd:25-32`: que `aviso()`/`error()` llamen además a `GameLogger.warning/error` (con categoría `SYSTEM/GAMEPLAY`) y que `error()` llame a `CrashReporter.reportar_crash("gdscript_error", mensaje, get_stack())` cuando haya `push_error`.
-2. Añadir en `EventBus` una señal `error_reportado(severidad, modulo, mensaje)` que la UI de M53/M110 escuche para mostrar un banner no bloqueante (“falló X, se cargó modo degradado”). La UI de guardado ya tiene `save_failed` (`saving/save_manager.gd:16`); este evento cubre audio, clima, inventario, etc., sin tocar 400 sitios.
-3. Conectar el hook de crash del motor en `crash/crash_reporter.gd` (por ejemplo, `OS.set_restart_on_exit` o callback de `Engine.get_main_loop`), de forma fail-open como `crash_log_bridge.gd`.
-
-**Efecto:** convierte los avisos actuales en trazabilidad persistente y visible, sin cambiar el carácter fail-soft.
-
-### Mejora 2 — Auditoría de arranque + agrupación de warnings con degradación visible
-**Problema (§3.2, §5):** arranque parcial degradado a `print` y warnings de catálogos sin agrupar, sin reintento y sin “módulo degradado”.
-
-**Implementación:**
-1. En `core/bootstrap.gd:93,105,115,181`, sustituir los `print` por `push_warning`/`push_error` reales y emitir un `bootstrap_integrity_report` (dominios faltantes, duplicados de `ServiceRegistry`, contratos tempranos) que `CrashReporter` persista como primer dump de sesión. Un test headless (`test_arquitectura.gd:84` ya usa `push_error(">>> HAY FALLOS…")`) puede fallar el build si hay faltantes críticos.
-2. Extender la deduplicación ya existente en `service_registry.gd:35-37` a un helper en `Registro`: agrupar warnings por módulo con contador y timestamp; tras 3 avisos del mismo módulo o de un catálogo `.json`/`.tres` ausente, marcar el servicio como `degradado` en `ServiceRegistry` y publicar `modulo_degradado(modulo)` para HUD. Añadir reintento con backoff (1s/2s/4s) para `FileAccess.open` / `load()` de GLB y catálogos, antes de rendirse.
-
-**Efecto:** los problemas de datos/arranque dejan de ser invisibles; el jugador y la telemetría saben qué módulo está degradado y por qué.
-
-## 7. Conclusión final
-
-**El proyecto gestiona errores con un paradigma cozy fail-soft:** ningún `push_error` aborta, todo warning lleva un fallback (defaults, soleado permanente, catálogo vacío, save omitido) y dos piezas centrales existen (`Registro` con contadores y `Logger` estructurado M103 con rotación/sanitización), pero están **parcialmente conectadas**: `Registro` no escribe en `Logger`/`CrashReporter`, y `bootstrap` deja la integridad de dominios en `print`. La defensa anti-null es exhaustiva (`get_node_or_null`, `is_instance_valid`, `has_method`, `FileAccess.open`/`JSON.parse_string` con checks, `ERR_*`), el guardado es el subsistema mejor tratado (pre-validación, escritura atómica, backups, señales `save_failed`), y la validación temprana de grafos (`story_manager`, `dialogue_manager`) comunica errores sin UI.
-
-No hay `try/catch` real en GDScript (limitación del lenguaje, reconocida en `inventario_iter4.gd:189`); los `assert` son solo de contrato (`save_provider.gd`) y no sirven en release. Varios `push_warning` son terminales sin reintento ni evento. Las dos mejoras propuestas — puente a Logger/Crash/UI y auditoría de arranque con degradación visible — requieren tocar pocos archivos (`core/registro.gd`, `core/bootstrap.gd`, `crash/crash_reporter.gd` y un helper de deduplicación) y elevarían la trazabilidad de todo el proyecto sin cambiar su resiliencia ni su carácter cozy.
-
----
-*Teams: análisis estático sobre ~1.260 archivos `.gd` con grep (`push_error|push_warning|assert|FileAccess|JSON.parse_string|get_node_or_null`). No ejecuté `dart`/Godot (comando no disponible en este entorno); no ejecuté escenas runtime. Conteos en los grep están truncados a 100 por herramienta; las líneas citadas son verificadas por lectura directa de los archivos.*
-
-**Modelo:** Crouton Alpha
-**Plataforma:** Kilo Code

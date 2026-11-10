@@ -307,7 +307,7 @@
   convence, entra en la misma confirmación estética `[ ]`. **Clasificado: duplicado/obsoleto,
   sin bug nuevo.**
 
-**Totales:** 166 ítems · Completados: 140 · Pendientes: 25 · No resueltos: 1.
+**Totales:** 166 ítems · Completados: 155 · Pendientes: 10 · No resueltos: 1. (saneo Hy3 2026-11-09: recount por marcas = 155/10/1; línea previa 140/25/1 era stale; autorizado por director 540.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 35 [x] / 130 [ ] /
