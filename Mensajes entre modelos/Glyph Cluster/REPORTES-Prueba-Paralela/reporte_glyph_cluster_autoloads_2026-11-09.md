@@ -1,213 +1,245 @@
-﻿# Reporte: Autoloads y Singletons — Isla Ancestral
+﻿# Reporte: Autoloads / Singletons en `game/isla-ancestral/scripts`
 
+**Fecha:** 2026-11-09  
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code  
-**Fecha:** 2026-11-09  
-**Alcance:** `game/isla-ancestral/project.godot` (sección `[autoload]`) y scripts en `game/isla-ancestral/scripts/`
+**Alcance:** `game/isla-ancestral/project.godot` (sección `[autoload]`) y scripts `.gd` referenciados como autoloads bajo `res://scripts/`.
+
+## Metodología
+
+- Fuente de verdad de autoloads: `game/isla-ancestral/project.godot:15-131` (bloque `[autoload]`).
+- Conteo de autoloads de script: entradas con ruta `res://scripts/...` en `project.godot` (**116 autoloads**).
+- Acoplamiento/dependencias: análisis estático por búsqueda de referencias `NombreAutoload.` dentro del código de cada autoload registrado. **No** incluye dependencias por `get_node("/root/...")`, señales conectadas dinámicamente desde escenas externas, ni llamadas indirectas vía `ServiceRegistry`.
+- Líneas: conteo de líneas del archivo `.gd` referenciado.
 
 ## 1) ¿Cuántos autoloads hay y cuáles son?
 
-**Fuente:** `game/isla-ancestral/project.godot:19-136` (sección `[autoload]`).
+**Total:** 116 autoloads apuntando a scripts en `game/isla-ancestral/scripts/` (declarados en `game/isla-ancestral/project.godot:16-131`).
 
-- **Total de entradas autoload:** **116**.
-- **Formato observado:** casi todas usan `*res://...` (nodo singleton cargado por el motor). **Excepción:** `TermsManager="res://scripts/legal/terms_manager.gd"` (`project.godot:21`) no tiene prefijo `*`; las demás entradas listadas (`:22-136`) sí lo tienen. Esto puede indicar una diferencia de registro/carga respecto al resto (conviene verificar en editor/runtime si `TermsManager` se comporta como autoload global esperado).
+| Autoload | Script | Líneas |
+|---|---|---:|
+| `TermsManager` | `scripts/legal/terms_manager.gd` | 72 |
+| `EventBus` | `scripts/core/event_bus.gd` | 199 |
+| `WorldState` | `scripts/dialogos/world_state_service.gd` | 132 |
+| `DialogueManager` | `scripts/dialogos/dialogue_manager.gd` | 427 |
+| `GameSettings` | `scripts/core/game_settings.gd` | 81 |
+| `ServiceRegistry` | `scripts/core/service_registry.gd` | 75 |
+| `GameLogger` | `scripts/logging/logger.gd` | 384 |
+| `AnalyticsDirector` | `scripts/analytics/analytics_director.gd` | 232 |
+| `TelemetryDirector` | `scripts/telemetry/telemetry_director.gd` | 533 |
+| `SaveManager` | `scripts/saving/save_manager.gd` | 373 |
+| `TimeCalendar` | `scripts/time/time_calendar.gd` | 274 |
+| `ItemDatabase` | `scripts/data/item_database.gd` | 140 |
+| `EconomyManager` | `scripts/economia/economy_manager.gd` | 227 |
+| `SoftlockGuard` | `scripts/core/softlock_guard.gd` | 178 |
+| `ShopManager` | `scripts/shops/shop_manager.gd` | 346 |
+| `Inventario` | `scripts/inventario/inventario_service.gd` | 444 |
+| `Friendship` | `scripts/friendship/friendship_service.gd` | 708 |
+| `GameTime` | `scripts/time/game_clock.gd` | 263 |
+| `RelojHud` | `scripts/clock/reloj_hud.gd` | 120 |
+| `Bootstrap` | `scripts/core/bootstrap.gd` | 223 |
+| `UIManager` | `scripts/ui/core/ui_manager.gd` | 645 |
+| `TooltipService` | `scripts/ui/services/tooltip_service.gd` | 235 |
+| `NotificationService` | `scripts/ui/services/notification_service.gd` | 203 |
+| `TerrainLocator` | `scripts/core/terrain_locator.gd` | 73 |
+| `VillagerManager` | `scripts/npc/villager_manager.gd` | 777 |
+| `ControlInput` | `scripts/controls/control_input.gd` | 388 |
+| `ResourceManager` | `scripts/resources/resource_manager.gd` | 367 |
+| `mineria` | `scripts/mineria/mining_manager.gd` | 768 |
+| `interacciones` | `scripts/interacciones/interaction_manager.gd` | 340 |
+| `fauna_registry` | `scripts/fauna/fauna_registry.gd` | 208 |
+| `fauna` | `scripts/fauna/fauna_manager.gd` | 133 |
+| `credits_manager` | `scripts/legal/credits_manager.gd` | 330 |
+| `MerchManager` | `scripts/legal/merch_manager.gd` | 296 |
+| `animal_ai` | `scripts/animales_ia/m65_animal_ai.gd` | 351 |
+| `coleccionables` | `scripts/coleccionables/coleccionables_manager.gd` | 231 |
+| `hotbar` | `scripts/inventario/hotbar_state.gd` | 117 |
+| `inventario_helper` | `scripts/inventario/inventario_iter4.gd` | 336 |
+| `inventario_iter5` | `scripts/inventario/inventario_iter5.gd` | 344 |
+| `Localization` | `scripts/localization/localization_manager.gd` | 377 |
+| `Balance` | `scripts/balance/balance_service.gd` | 180 |
+| `Tutorial` | `scripts/tutorial/tutorial_manager.gd` | 814 |
+| `ThemeService` | `scripts/ui/theme/theme_service.gd` | 66 |
+| `Crafting` | `scripts/crafting/crafting_service.gd` | 459 |
+| `AssetProfile` | `scripts/rendimiento/asset_profile.gd` | 158 |
+| `BrandConfig` | `scripts/brand/brand_config.gd` | 46 |
+| `DebugMenu` | `scripts/debug/debug_menu.gd` | 1308 |
+| `CatalogoTiendas` | `scripts/shops/catalogo_tiendas.gd` | 168 |
+| `Farm` | `scripts/farm/farm_service.gd` | 515 |
+| `Fishing` | `scripts/fishing/fishing_manager.gd` | 496 |
+| `Weather` | `scripts/clima/weather_service.gd` | 230 |
+| `Historia` | `scripts/historia/story_manager.gd` | 255 |
+| `Historias` | `scripts/historias/secondary_stories_service.gd` | 470 |
+| `Barter` | `scripts/economia/barter_system.gd` | 214 |
+| `TravelService` | `scripts/viajes/travel_service.gd` | 380 |
+| `CollectionRegistry` | `scripts/museum/collection_registry.gd` | 364 |
+| `DonationService` | `scripts/museum/donation_service.gd` | 95 |
+| `Diary` | `scripts/diario/diary_service.gd` | 407 |
+| `PlayerProfile` | `scripts/progresion/player_profile.gd` | 117 |
+| `ProgressionManager` | `scripts/progresion/progression_manager.gd` | 959 |
+| `Achievements` | `scripts/logros/achievement_service.gd` | 622 |
+| `Vehiculos` | `scripts/vehiculos/vehicle_manager.gd` | 203 |
+| `Postgame` | `scripts/postgame/postgame_manager.gd` | 283 |
+| `EscalasGlobales` | `scripts/core/escalas_globales.gd` | 56 |
+| `AccesibilityManager` | `scripts/accesibilidad/accesibilidad_manager.gd` | 461 |
+| `AnimationService` | `scripts/animacion/animation_service.gd` | 134 |
+| `PhotoService` | `scripts/foto/photo_service.gd` | 406 |
+| `Tiers` | `scripts/herramientas158/tool_tier_system.gd` | 360 |
+| `AudioConfig` | `scripts/audio/audio_config_service.gd` | 309 |
+| `DataStore` | `scripts/datos/data_store.gd` | 650 |
+| `SubtitleManager` | `scripts/ui/subtitle_manager.gd` | 359 |
+| `StreamManager` | `scripts/stream/stream_manager.gd` | 527 |
+| `PantallaCarga` | `scripts/stream/pantalla_carga.gd` | 186 |
+| `MonetizacionManager` | `scripts/monetizacion/monetizacion_manager.gd` | 134 |
+| `TerrainProvider` | `scripts/terrenos/terrain_provider.gd` | 106 |
+| `GameFlowManager` | `scripts/core/game_flow_manager.gd` | 73 |
+| `SceneManager` | `scripts/core/scene_manager.gd` | 160 |
+| `MotivacionManager` | `scripts/motivacion/motivacion_manager.gd` | 180 |
+| `PlatformManager` | `scripts/plataformas/platform_manager.gd` | 118 |
+| `WorldBible` | `scripts/world/world_bible.gd` | 73 |
+| `MemoryMonitor` | `scripts/rendimiento/memoria/memory_monitor.gd` | 641 |
+| `MusicDirector` | `scripts/audio/music_director.gd` | 101 |
+| `AmbientDirector` | `scripts/audio/ambient_director.gd` | 72 |
+| `SFXManager` | `scripts/audio/sfx_manager.gd` | 400 |
+| `FeedbackDirector` | `scripts/audio/feedback_director.gd` | 83 |
+| `NarrativeSound` | `scripts/audio/narrative_sound.gd` | 243 |
+| `CrashReporter` | `scripts/crash/crash_reporter.gd` | 94 |
+| `CiCdManager` | `scripts/ci/cicd_manager.gd` | 298 |
+| `InstaladorConfig` | `scripts/installer/instalador_config.gd` | 81 |
+| `MapManager` | `scripts/mapa/mapa_manager.gd` | 304 |
+| `HardwareManager` | `scripts/hardware/hardware_manager.gd` | 92 |
+| `BuildConfigManager` | `scripts/build/build_config_manager.gd` | 74 |
+| `UpdateManager` | `scripts/updates/update_manager.gd` | 92 |
+| `DevTools` | `scripts/dev/dev_tools.gd` | 77 |
+| `MaterialesRecursos` | `scripts/arte3d/materiales_recursos.gd` | 183 |
+| `BotPaseoM09` | `scripts/world/bot_paseo_m09.gd` | 243 |
+| `MundoRaiz` | `scripts/world/mundo_raiz.gd` | 35 |
+| `SecurityManager` | `scripts/security/security_manager.gd` | 243 |
+| `FontCatalog` | `scripts/fonts/font_catalog.gd` | 100 |
+| `BackupManager` | `scripts/backup/backup_manager.gd` | 407 |
+| `DlcManager` | `scripts/dlc/dlc_manager.gd` | 343 |
+| `SupportManager` | `scripts/support/support_manager.gd` | 134 |
+| `ModdingManager` | `scripts/modding/modding_manager.gd` | 125 |
+| `UgcManager` | `scripts/ugc/ugc_manager.gd` | 63 |
+| `CommunityManager` | `scripts/community/community_manager.gd` | 54 |
+| `NPCManager` | `scripts/ia_npc/npc_manager.gd` | 385 |
+| `eventos` | `scripts/eventos/event_manager.gd` | 901 |
+| `EquipmentManager` | `scripts/player/equipment_manager.gd` | 392 |
+| `NPCVisualDatabase` | `scripts/data/npc_visual_database.gd` | 56 |
+| `WorldLocations` | `scripts/data/world_locations.gd` | 343 |
+| `EnchantmentSystem` | `scripts/enchantment/enchantment_system.gd` | 151 |
+| `TransportManager` | `scripts/transporte/transport_manager.gd` | 702 |
+| `IslandRegistry` | `scripts/islas/island_registry.gd` | 472 |
+| `gem_currency` | `scripts/combat/gem_currency.gd` | 108 |
+| `combat_island` | `scripts/combat/combat_island_system.gd` | 212 |
+| `Construccion` | `scripts/construccion/build_manager.gd` | 803 |
+| `HouseManager` | `scripts/houses/house_manager.gd` | 338 |
 
-| Línea | Nombre (autoload) | Script |
-|---:|---|---|
-| 21 | `TermsManager` | `res://scripts/legal/terms_manager.gd` |
-| 22 | `EventBus` | `res://scripts/core/event_bus.gd` |
-| 23 | `WorldState` | `res://scripts/dialogos/world_state_service.gd` |
-| 24 | `DialogueManager` | `res://scripts/dialogos/dialogue_manager.gd` |
-| 25 | `GameSettings` | `res://scripts/core/game_settings.gd` |
-| 26 | `ServiceRegistry` | `res://scripts/core/service_registry.gd` |
-| 27 | `GameLogger` | `res://scripts/logging/logger.gd` |
-| 28 | `AnalyticsDirector` | `res://scripts/analytics/analytics_director.gd` |
-| 29 | `TelemetryDirector` | `res://scripts/telemetry/telemetry_director.gd` |
-| 30 | `SaveManager` | `res://scripts/saving/save_manager.gd` |
-| 31 | `TimeCalendar` | `res://scripts/time/time_calendar.gd` |
-| 32 | `ItemDatabase` | `res://scripts/data/item_database.gd` |
-| 33 | `EconomyManager` | `res://scripts/economia/economy_manager.gd` |
-| 34 | `SoftlockGuard` | `res://scripts/core/softlock_guard.gd` |
-| 35 | `ShopManager` | `res://scripts/shops/shop_manager.gd` |
-| 36 | `Inventario` | `res://scripts/inventario/inventario_service.gd` |
-| 37 | `Friendship` | `res://scripts/friendship/friendship_service.gd` |
-| 38 | `GameTime` | `res://scripts/time/game_clock.gd` |
-| 39 | `RelojHud` | `res://scripts/clock/reloj_hud.gd` |
-| 40 | `Bootstrap` | `res://scripts/core/bootstrap.gd` |
-| 41 | `UIManager` | `res://scripts/ui/core/ui_manager.gd` |
-| 42 | `TooltipService` | `res://scripts/ui/services/tooltip_service.gd` |
-| 43 | `NotificationService` | `res://scripts/ui/services/notification_service.gd` |
-| 44 | `TerrainLocator` | `res://scripts/core/terrain_locator.gd` |
-| 45 | `VillagerManager` | `res://scripts/npc/villager_manager.gd` |
-| 46 | `ControlInput` | `res://scripts/controls/control_input.gd` |
-| 47 | `ResourceManager` | `res://scripts/resources/resource_manager.gd` |
-| 48 | `mineria` | `res://scripts/mineria/mining_manager.gd` |
-| 49 | `interacciones` | `res://scripts/interacciones/interaction_manager.gd` |
-| 50 | `fauna_registry` | `res://scripts/fauna/fauna_registry.gd` |
-| 51 | `fauna` | `res://scripts/fauna/fauna_manager.gd` |
-| 52 | `credits_manager` | `res://scripts/legal/credits_manager.gd` |
-| 53 | `MerchManager` | `res://scripts/legal/merch_manager.gd` |
-| 54 | `animal_ai` | `res://scripts/animales_ia/m65_animal_ai.gd` |
-| 55 | `coleccionables` | `res://scripts/coleccionables/coleccionables_manager.gd` |
-| 56 | `hotbar` | `res://scripts/inventario/hotbar_state.gd` |
-| 57 | `inventario_helper` | `res://scripts/inventario/inventario_iter4.gd` |
-| 58 | `inventario_iter5` | `res://scripts/inventario/inventario_iter5.gd` |
-| 59 | `Localization` | `res://scripts/localization/localization_manager.gd` |
-| 60 | `Balance` | `res://scripts/balance/balance_service.gd` |
-| 61 | `Tutorial` | `res://scripts/tutorial/tutorial_manager.gd` |
-| 62 | `ThemeService` | `res://scripts/ui/theme/theme_service.gd` |
-| 63 | `Crafting` | `res://scripts/crafting/crafting_service.gd` |
-| 64 | `AssetProfile` | `res://scripts/rendimiento/asset_profile.gd` |
-| 65 | `BrandConfig` | `res://scripts/brand/brand_config.gd` |
-| 66 | `DebugMenu` | `res://scripts/debug/debug_menu.gd` |
-| 67 | `CatalogoTiendas` | `res://scripts/shops/catalogo_tiendas.gd` |
-| 68 | `Farm` | `res://scripts/farm/farm_service.gd` |
-| 69 | `Fishing` | `res://scripts/fishing/fishing_manager.gd` |
-| 70 | `Weather` | `res://scripts/clima/weather_service.gd` |
-| 71 | `Historia` | `res://scripts/historia/story_manager.gd` |
-| 72 | `Historias` | `res://scripts/historias/secondary_stories_service.gd` |
-| 73 | `Barter` | `res://scripts/economia/barter_system.gd` |
-| 74 | `TravelService` | `res://scripts/viajes/travel_service.gd` |
-| 75 | `CollectionRegistry` | `res://scripts/museum/collection_registry.gd` |
-| 76 | `DonationService` | `res://scripts/museum/donation_service.gd` |
-| 77 | `Diary` | `res://scripts/diario/diary_service.gd` |
-| 78 | `PlayerProfile` | `res://scripts/progresion/player_profile.gd` |
-| 79 | `ProgressionManager` | `res://scripts/progresion/progression_manager.gd` |
-| 80 | `Achievements` | `res://scripts/logros/achievement_service.gd` |
-| 81 | `Vehiculos` | `res://scripts/vehiculos/vehicle_manager.gd` |
-| 82 | `Postgame` | `res://scripts/postgame/postgame_manager.gd` |
-| 83 | `EscalasGlobales` | `res://scripts/core/escalas_globales.gd` |
-| 84 | `AccesibilityManager` | `res://scripts/accesibilidad/accesibilidad_manager.gd` |
-| 85 | `AnimationService` | `res://scripts/animacion/animation_service.gd` |
-| 86 | `PhotoService` | `res://scripts/foto/photo_service.gd` |
-| 87 | `Tiers` | `res://scripts/herramientas158/tool_tier_system.gd` |
-| 88 | `AudioConfig` | `res://scripts/audio/audio_config_service.gd` |
-| 89 | `DataStore` | `res://scripts/datos/data_store.gd` |
-| 90 | `SubtitleManager` | `res://scripts/ui/subtitle_manager.gd` |
-| 91 | `StreamManager` | `res://scripts/stream/stream_manager.gd` |
-| 92 | `PantallaCarga` | `res://scripts/stream/pantalla_carga.gd` |
-| 93 | `MonetizacionManager` | `res://scripts/monetizacion/monetizacion_manager.gd` |
-| 94 | `TerrainProvider` | `res://scripts/terrenos/terrain_provider.gd` |
-| 95 | `GameFlowManager` | `res://scripts/core/game_flow_manager.gd` |
-| 96 | `SceneManager` | `res://scripts/core/scene_manager.gd` |
-| 97 | `MotivacionManager` | `res://scripts/motivacion/motivacion_manager.gd` |
-| 98 | `PlatformManager` | `res://scripts/plataformas/platform_manager.gd` |
-| 99 | `WorldBible` | `res://scripts/world/world_bible.gd` |
-| 100 | `MemoryMonitor` | `res://scripts/rendimiento/memoria/memory_monitor.gd` |
-| 101 | `MusicDirector` | `res://scripts/audio/music_director.gd` |
-| 102 | `AmbientDirector` | `res://scripts/audio/ambient_director.gd` |
-| 103 | `SFXManager` | `res://scripts/audio/sfx_manager.gd` |
-| 104 | `FeedbackDirector` | `res://scripts/audio/feedback_director.gd` |
-| 105 | `NarrativeSound` | `res://scripts/audio/narrative_sound.gd` |
-| 106 | `CrashReporter` | `res://scripts/crash/crash_reporter.gd` |
-| 107 | `CiCdManager` | `res://scripts/ci/cicd_manager.gd` |
-| 108 | `InstaladorConfig` | `res://scripts/installer/instalador_config.gd` |
-| 109 | `MapManager` | `res://scripts/mapa/mapa_manager.gd` |
-| 110 | `HardwareManager` | `res://scripts/hardware/hardware_manager.gd` |
-| 111 | `BuildConfigManager` | `res://scripts/build/build_config_manager.gd` |
-| 112 | `UpdateManager` | `res://scripts/updates/update_manager.gd` |
-| 113 | `DevTools` | `res://scripts/dev/dev_tools.gd` |
-| 114 | `MaterialesRecursos` | `res://scripts/arte3d/materiales_recursos.gd` |
-| 115 | `BotPaseoM09` | `res://scripts/world/bot_paseo_m09.gd` |
-| 116 | `MundoRaiz` | `res://scripts/world/mundo_raiz.gd` |
-| 117 | `SecurityManager` | `res://scripts/security/security_manager.gd` |
-| 118 | `FontCatalog` | `res://scripts/fonts/font_catalog.gd` |
-| 119 | `BackupManager` | `res://scripts/backup/backup_manager.gd` |
-| 120 | `DlcManager` | `res://scripts/dlc/dlc_manager.gd` |
-| 121 | `SupportManager` | `res://scripts/support/support_manager.gd` |
-| 122 | `ModdingManager` | `res://scripts/modding/modding_manager.gd` |
-| 123 | `UgcManager` | `res://scripts/ugc/ugc_manager.gd` |
-| 124 | `CommunityManager` | `res://scripts/community/community_manager.gd` |
-| 125 | `NPCManager` | `res://scripts/ia_npc/npc_manager.gd` |
-| 126 | `eventos` | `res://scripts/eventos/event_manager.gd` |
-| 127 | `EquipmentManager` | `res://scripts/player/equipment_manager.gd` |
-| 128 | `NPCVisualDatabase` | `res://scripts/data/npc_visual_database.gd` |
-| 129 | `WorldLocations` | `res://scripts/data/world_locations.gd` |
-| 130 | `EnchantmentSystem` | `res://scripts/enchantment/enchantment_system.gd` |
-| 131 | `TransportManager` | `res://scripts/transporte/transport_manager.gd` |
-| 132 | `IslandRegistry` | `res://scripts/islas/island_registry.gd` |
-| 133 | `gem_currency` | `res://scripts/combat/gem_currency.gd` |
-| 134 | `combat_island` | `res://scripts/combat/combat_island_system.gd` |
-| 135 | `Construccion` | `res://scripts/construccion/build_manager.gd` |
-| 136 | `HouseManager` | `res://scripts/houses/house_manager.gd` |
-
-**Observación de naming/coherencia:** hay mezcla de `PascalCase`, `snake_case` y nombres por iteración (`inventario_helper` → `inventario_iter4.gd:57`, `inventario_iter5` → `inventario_iter5.gd:58`), lo que sugiere deuda de consolidación en el árbol global de autoloads.
+**Observación:** hay 116 singletons globales. El orden de carga en `project.godot` importa; varios sistemas dependen de otros ya inicializados (p. ej. `Bootstrap` usa `get_node_or_null("/root/ServiceRegistry")` en `scripts/core/bootstrap.gd:139-141, 150-151, 174-175, 184-185`).
 
 ## 2) ¿Hay acoplamiento fuerte entre autoloads?
 
-**Sí, hay evidencia de acoplamiento fuerte y extendido.**
+Sí. El acoplamiento fuerte aparece en dos formas: **dependencias directas por nombre global** y **autocomposición de responsabilidades**.
 
-### 2.1 Búsquedas directas a `/root/*` (acoplamiento por nombre global)
-- **181 referencias** en `game/isla-ancestral/scripts/**/*.gd` (excl. addons/tests en el conteo usado) a autoloads clave vía `/root/EventBus|SaveManager|UIManager|ServiceRegistry`.
-- Ejemplos representativos:
-  - `game/isla-ancestral/scripts/build/build_config_manager.gd:52` → `get_node_or_null("/root/ServiceRegistry")`
-  - `game/isla-ancestral/scripts/backup/backup_manager.gd:42` → `ServiceRegistry`
-  - `game/isla-ancestral/scripts/ci/cicd_manager.gd:35` → `ServiceRegistry`
-  - `game/isla-ancestral/scripts/analytics/analytics_director.gd:53,206,212` → `ServiceRegistry`, `GameLogger`
-  - `game/isla-ancestral/scripts/main_island.gd:47,90,94,103,106,215,251,299,302,401,404` → múltiples autoloads (`UIManager`, `MundoRaiz`, `TerrainLocator`, `ResourceManager`)
-  - `game/isla-ancestral/scripts/dlc/dlc_manager.gd:118,127` → `ServiceRegistry`, `SaveManager`
-  - `game/isla-ancestral/scripts/herramientas158/tool_tier_system.gd:71,119,198,234,244,257,261,295,303` → `EventBus`, `SaveManager`, `Inventario`, `EconomyManager`, `ProgressionManager`
-  - `game/isla-ancestral/scripts/saving/save_manager.gd:88` y `game/isla-ancestral/scripts/ui/core/ui_manager.gd:47,56,60` → acceso directo a `EventBus`/servicios relacionados.
+| Autoload | Script | Referencias directas a otros autoloads (detectadas) | Nº |
+|---|---|---|---:|
+| `TelemetryDirector` | `scripts/telemetry/telemetry_director.gd` | `ServiceRegistry`, `GameLogger`, `AnalyticsDirector`, `eventos` | 4 |
+| `eventos` | `scripts/eventos/event_manager.gd` | `EventBus`, `TimeCalendar`, `GameTime`, `Weather` | 4 |
+| `Achievements` | `scripts/logros/achievement_service.gd` | `EventBus`, `SaveManager`, `Fishing`, `ProgressionManager` | 4 |
+| `Balance` | `scripts/balance/balance_service.gd` | `Friendship`, `Crafting`, `Fishing` | 3 |
+| `ProgressionManager` | `scripts/progresion/progression_manager.gd` | `EventBus`, `Barter` | 2 |
+| `Crafting` | `scripts/crafting/crafting_service.gd` | `Inventario`, `GameTime` | 2 |
+| `Inventario` | `scripts/inventario/inventario_service.gd` | `Crafting` | 1 (parte de ciclo) |
+| `DebugMenu` | `scripts/debug/debug_menu.gd` | `GameLogger`, `Weather` | 2 |
+| `VillagerManager` | `scripts/npc/villager_manager.gd` | `EventBus` | 1 |
+| `Friendship` | `scripts/friendship/friendship_service.gd` | `EventBus`, `VillagerManager` | 2 |
 
-**Impacto:** cualquier renombre de autoload, cambio de ruta, orden de inicialización o disponibilidad parcial rompe múltiples sistemas en runtime (mitigado parcialmente por `get_node_or_null`, pero la dependencia semántica sigue siendo fuerte).
+**Casos concretos (líneas):**
+- `scripts/core/event_bus.gd:11-12, 194` documenta/usa dominio de pesca (`fishing`/`Fishing`) dentro del bus global; además el grafo estático detecta referencia `EventBus -> Fishing` y señales de pesca se emiten desde `scripts/fishing/fishing_manager.gd:211, 298`.
+- `scripts/fishing/fishing_manager.gd:469` menciona integración directa con `DonationService.donate(...)`.
+- `scripts/museum/donation_service.gd:16` depende conceptualmente de diario/eventos y el grafo detecta `DonationService -> EventBus, Diary`.
+- `scripts/eventos/event_manager.gd:100, 108` se suscribe a `GameTime.dia_cambio` y `EventBus.weather.clima_cambio`.
+- `scripts/time/game_clock.gd:142, 153-154` expone/utiliza estado temporal global consumido por otros dominios.
+- `scripts/crafting/crafting_service.gd:79, 84, 196` lee/manipula tiempo e inventario; `scripts/inventario/inventario_service.gd:22, 295` menciona consumo de pergamino por `Crafting` y operaciones de equipamiento.
+- `scripts/dialogos/world_state_service.gd:17` consulta amistad desde `Friendship.get_nivel`; `scripts/friendship/friendship_service.gd:9-12` emite eventos NPC en `EventBus`.
 
-### 2.2 Uso de `EventBus` como hub global
-- **67 usos** de `EventBus.` en scripts (conteo de referencias).
-- `EventBus` define dominios tipados amplios (`world`, `economy`, `inventory`, `quest`, `npc`, `calendar`, `time`, `weather`, `travel`, `vehicle`, `ui`, `player`, `infra`, `diary`, `progresion`, `fishing`) en `game/isla-ancestral/scripts/core/event_bus.gd:14-44,48-199`.
-- Esto es un patrón válido de desacoplamiento *si* se usa de forma consistente, pero en la práctica coexiste con accesos directos a `/root/*`, por lo que el acoplamiento se vuelve **mixto** (eventos + llamadas directas).
+**Conclusión parcial:** el acoplamiento es moderado-alto en dominios de gameplay (inventario, crafting, amistad, eventos, pesca, progresión) y alto en infraestructura transversal (`TelemetryDirector`, `eventos`, `DebugMenu`).
 
-### 2.3 `ServiceRegistry` existe, pero su adopción es parcial
-- `ServiceRegistry` implementa registro/lookup por contrato (`game/isla-ancestral/scripts/core/service_registry.gd:22-75`) y `Contratos` centraliza nombres (`game/isla-ancestral/scripts/core/contratos.gd:1-40`).
-- `Bootstrap` registra core y luego **auto-registra dominios deferred** con mapeo explícito de nombres de autoload (`game/isla-ancestral/scripts/core/bootstrap.gd:43-83,143-160`). También valida servicios requeridos e integridad de dominios (`:164-183`).
-- Sin embargo, el uso real de `ServiceRegistry.get_service(...)` en código de producción es bajo frente al volumen de `/root/*` (muestra: `telemetry_director.gd:56` menciona/usa lookup por registry; la mayoría de sistemas siguen resolviendo por `get_node_or_null("/root/...")`).
+## 3) ¿Hay dependencias circulares?
 
-### 2.4 Dependencia de orden de inicialización
-- `Bootstrap` difiere varias acciones con `call_deferred` (`bootstrap.gd:49-55`) porque `GameFlowManager` y dominios se montan después según orden de autoloads. Esto evidencia **fragilidad por orden de carga**: el sistema funciona, pero depende del orden global y de inicialización diferida.
+Sí, se detectan **3 ciclos** por referencias directas entre autoloads:
 
-## 3) ¿Hay dependencias circulares entre autoloads?
+1. **Ciclo directo (2 nodos):** `Crafting -> Inventario -> Crafting`  
+   - `scripts/crafting/crafting_service.gd` referencia `Inventario` y `GameTime`.  
+   - `scripts/inventario/inventario_service.gd` referencia `Crafting` (p. ej. consumo de pergamino, `scripts/inventario/inventario_service.gd:22`).  
+   - Riesgo: orden de inicialización, dificultad para pruebas aisladas y cambios en cadena.
 
-**No se detectó evidencia clara de ciclos de carga estática (preload/class_name circular) entre los autoloads revisados**, pero **sí hay dependencia mutua en runtime y riesgo estructural de ciclos lógicos**.
+2. **Ciclo de 3 nodos:** `DonationService -> EventBus -> Fishing -> DonationService`  
+   - `scripts/museum/donation_service.gd` usa `EventBus`/`Diary` (grafo: `EventBus`, `Diary`).  
+   - `scripts/core/event_bus.gd` expone dominio `fishing` y contiene acoplamiento conceptual/documental con pesca (`scripts/core/event_bus.gd:194`); el grafo estático marca `EventBus -> Fishing`.  
+   - `scripts/fishing/fishing_manager.gd` emite en `EventBus.fishing.*` (`:211`, `:298`) y menciona `DonationService.donate(...)` (`:469`).  
+   - Riesgo: EventBus deja de ser un bus neutro si depende o conoce dominios concretos; el ciclo mezcla infraestructura y gameplay.
 
-- Evidencia de acceso cruzado en runtime (no ciclo de carga probado, pero acoplamiento bidireccional potencial por nombres globales):
-  - `SaveManager` consulta/conecta con `EventBus` y otros managers (`game/isla-ancestral/scripts/saving/save_manager.gd:88,108-119`).
-  - `UIManager` consulta `EventBus`, `ControlInput`, `GameSettings` y reacciona a foco/capas (`game/isla-ancestral/scripts/ui/core/ui_manager.gd:47-77,84-112`).
-  - `Bootstrap` resuelve `ServiceRegistry`, `GameFlowManager`, `SceneManager`, `EventBus` (`bootstrap.gd:78-133`).
-  - `GameFlowManager` emite por `EventBus.infra` (`game/isla-ancestral/scripts/core/game_flow_manager.gd:66-73`).
-  - `main_island.gd` (escena) orquesta varios autoloads de mundo/UI/terreno (`:47,90,94,103,215,251,299,401-404`), reforzando un grafo denso.
+3. **Ciclo directo (2 nodos):** `GameTime -> eventos -> GameTime`  
+   - `scripts/time/game_clock.gd:142` gestiona eventos temporales; `scripts/eventos/event_manager.gd:100` se suscribe a `GameTime.dia_cambio`.  
+   - El grafo también detecta `eventos -> EventBus, TimeCalendar, GameTime, Weather`.  
+   - Riesgo: cambios en reloj/calendario pueden romper agenda de eventos y viceversa.
 
-**Conclusión sobre ciclos:** con 116 autoloads y resolución por `/root`, el riesgo de **dependencias circulares lógicas** (A llama B, B depende de estado/señal de A durante init o flujo) es alto. No afirmo un ciclo concreto de import/preload entre autoloads sin un análisis de grafo completo de llamadas/señales, pero la arquitectura actual favorece ese tipo de regresión.
+**Nota:** `ServiceRegistry -> Bootstrap` aparece en el grafo por referencia de código, pero `Bootstrap` no figura como autoload registrado (es script de arranque/infra); no debe tratarse como ciclo autoload-autoload sin verificar su montaje real. `Bootstrap` accede a `ServiceRegistry` vía `/root/ServiceRegistry` (`scripts/core/bootstrap.gd:139-141`).
 
-## 4) ¿Hay autoloads que actúan como dios-objeto?
+## 4) ¿Hay autoloads con demasiadas responsabilidades?
 
-**Sí, hay candidatos claros por tamaño y/o centralidad de responsabilidades.**
+Sí. Indicadores: tamaño elevado, múltiples dominios, o rol transversal con muchas dependencias.
 
-| Autoload / archivo | Tamaño (bytes) | Señales de “dios-objeto” / concentración |
-|---|---:|---|
-| `DebugMenu` — `game/isla-ancestral/scripts/debug/debug_menu.gd` | 51,704 | Autoload de debug con config, estado persistible, geometría, filtros, toggles visuales múltiples, señales, consola/logger, extracción parcial a módulos (`:1-80`). Alta concentración funcional en una sola fachada global. |
-| `ProgressionManager` — `game/isla-ancestral/scripts/progresion/progression_manager.gd` | 35,973 | Orquesta catálogo, perfil, logger, guardado/proveedor, eventos, caché de evaluación de condiciones, hitos, desbloqueos, títulos (`:1-90`). Mucho estado y reglas de dominio en un singleton. |
-| `UIManager` — `game/isla-ancestral/scripts/ui/core/ui_manager.gd` | 24,154 | Gestiona pila de capas, foco, pausa, integración con `EventBus`/`ControlInput`/`GameSettings`, tooltips, hover, restore de foco (`:1-120`). Centraliza política transversal de UI. |
-| `SaveManager` — `game/isla-ancestral/scripts/saving/save_manager.gd` | 16,625 | Cola de guardado, bloqueo, snapshot/loader, dirty tracking, conexión a múltiples dominios vía `EventBus` y managers, auto-save por eventos, control de diálogo/minijuego (`:1-120`). Punto crítico con muchas responsabilidades de coordinación. |
-| `EventBus` — `game/isla-ancestral/scripts/core/event_bus.gd` | 9,585 | No es “dios” por lógica de negocio, pero sí **hub global** de comunicación (muchos dominios/señales, `:14-199`). Su centralidad amplifica el impacto de cambios. |
+| Autoload | Script | Líneas | Señales de responsabilidad excesiva |
+|---|---|---:|---|
+| `DebugMenu` | `scripts/debug/debug_menu.gd` | 1308 | Superficie de depuración muy grande; riesgo de convertirse en “god object” de diagnóstico/editor/runtime. |
+| `ProgressionManager` | `scripts/progresion/progression_manager.gd` | 959 | Progresión global; depende de `EventBus` y `Barter`; probable orquestación de múltiples sistemas. |
+| `eventos` | `scripts/eventos/event_manager.gd` | 901 | Agenda, clima, tiempo y bus; 4 dependencias directas (`EventBus`, `TimeCalendar`, `GameTime`, `Weather`). Alto riesgo de acoplamiento temporal. |
+| `Tutorial` | `scripts/tutorial/tutorial_manager.gd` | 814 | Flujo de onboarding potencialmente extenso; depende de `eventos`. |
+| `Construccion` | `scripts/construccion/build_manager.gd` | 803 | Construcción completa en un único singleton. |
+| `VillagerManager` | `scripts/npc/villager_manager.gd` | 777 | Gestión NPC/aldeanos centralizada. |
+| `mineria` | `scripts/mineria/mining_manager.gd` | 768 | Dominio de minería con integración a inventario. |
+| `TransportManager` | `scripts/transporte/transport_manager.gd` | 702 | Transporte global; depende de `Friendship`. |
+| `Friendship` | `scripts/friendship/friendship_service.gd` | 708 | Amistad, regalos, cumpleaños/cartas y eventos NPC (`scripts/friendship/friendship_service.gd:9-12`). |
+| `DataStore` | `scripts/datos/data_store.gd` | 650 | Almacenamiento/datos globales; nombre sugiere responsabilidad amplia. |
+| `UIManager` | `scripts/ui/core/ui_manager.gd` | 645 | Coordinación UI central; depende de `GameTime`. |
+| `MemoryMonitor` | `scripts/rendimiento/memoria/memory_monitor.gd` | 641 | Monitoreo de memoria/rendimiento; tamaño alto para un monitor. |
+| `Achievements` | `scripts/logros/achievement_service.gd` | 622 | Escucha/procesa eventos de varios dominios (`EventBus`, `SaveManager`, `Fishing`, `ProgressionManager`). |
+| `TelemetryDirector` | `scripts/telemetry/telemetry_director.gd` | 533 | Telemetría con dependencias a servicios, logger, analytics y eventos. |
 
-**Matiz:** algunos (como `EventBus`) cumplen un rol legítimo de infraestructura; el riesgo de “dios-objeto” es mayor en `DebugMenu`, `ProgressionManager`, `SaveManager` y `UIManager` por acumulación de estado, reglas y coordinación.
+**Umbral práctico usado:** >500 líneas o >3 dependencias directas a otros autoloads como señal de revisión. No implica defecto automático, pero sí costo alto de mantenimiento.
 
-## 5) Dos acciones para reducir acoplamiento
+## 5) Sugerencias de mejora (2)
 
-### Acción 1 — Migrar accesos directos `/root/*` a contratos vía `ServiceRegistry` + `Contratos` (con regla incremental)
-- **Qué hacer:** reemplazar progresivamente `get_node_or_null("/root/X")` por `ServiceRegistry.get_service(Contratos.X)` (o helper tipado) en sistemas de dominio/UI, empezando por los puntos con mayor fan-out (ej. `main_island.gd:47-404`, `tool_tier_system.gd:71-303`, `save_manager.gd:88+`).
-- **Cómo:** usar `Bootstrap` como punto único de registro ya existente (`bootstrap.gd:63-83,143-160`) y exigir que todo contrato nuevo pase por `Contratos` (`contratos.gd:1-40`).
-- **Beneficio:** reduce acoplamiento por nombre de nodo, facilita stubs/tests, hace visibles dependencias y permite detectar faltantes temprano (`ServiceRegistry.get_service` ya advierte acceso temprano, `service_registry.gd:30-38`).
-- **Riesgo a controlar:** mantener compatibilidad durante la migración (fallback temporal a `/root` solo donde sea imprescindible) y no ocultar dependencias reales.
+### Mejora 1: Romper ciclos con contratos/eventos neutros y dependencias inyectadas
 
-### Acción 2 — Separar responsabilidades de los autoloads “pesados” y formalizar límites por eventos
-- **Qué hacer:** extraer submódulos puros/servicios internos de `DebugMenu`, `SaveManager`, `ProgressionManager` y `UIManager` (estado, persistencia, evaluación, UI de capas, comandos) dejando al autoload como **fachada delgada**.
-- **Cómo:**
-  - En `SaveManager` (`save_manager.gd:1-120`), aislar `AutoSavePolicy` (qué eventos disparan/bloquean) y `SaveQueue` de la conexión directa a múltiples dominios; consumir señales de `EventBus` en adaptadores pequeños.
-  - En `UIManager` (`ui_manager.gd:43-112`), separar router de input/pausa/foco en componentes con interfaces claras.
-  - En `DebugMenu` (`debug_menu.gd:25-77`), continuar la extracción ya iniciada (`EXPORTADOR_DIAG`, `COMANDOS_DEBUG`) hacia módulos por pestaña/responsabilidad.
-  - En `ProgressionManager` (`progression_manager.gd:18-90`), extraer evaluación de condiciones/caché y persistencia a servicios testables.
-- **Beneficio:** disminuye el radio de cambio, reduce ciclos lógicos, mejora testeabilidad y permite evolucionar módulos sin tocar el singleton global.
+**Objetivo:** eliminar los ciclos `Crafting<->Inventario`, `DonationService->EventBus->Fishing->DonationService` y `GameTime<->eventos`.
+
+**Acciones concretas:**
+- `Inventario` (`scripts/inventario/inventario_service.gd`) no debe llamar/depender de `Crafting` para consumir pergaminos; publicar un evento de uso de ítem (`item_used`/`scroll_used`) en `EventBus` y que `Crafting` se suscriba. Revisar `scripts/inventario/inventario_service.gd:22`.
+- `Crafting` (`scripts/crafting/crafting_service.gd`) puede recibir una interfaz/adapter de inventario o usar señales para operaciones que hoy requieran conocimiento bidireccional.
+- `EventBus` (`scripts/core/event_bus.gd`) debe permanecer neutral: evitar referencias/documentación ejecutable acoplada a dominios concretos como `Fishing`. Revisar `scripts/core/event_bus.gd:194` y las emisiones/consumos cruzados con `scripts/fishing/fishing_manager.gd:211,298,469`.
+- `DonationService` (`scripts/museum/donation_service.gd:16`) debe depender solo de contratos de donación/diario; la integración con pesca debe ocurrir en un controlador de gameplay o por eventos, no mediante referencias mutuas.
+- Separar “reloj/calendario” de “agenda de eventos”: `eventos` puede consumir ticks/señales, pero `GameTime` no debería depender de la capa de agenda (`scripts/eventos/event_manager.gd:100`, `scripts/time/game_clock.gd:142`).
+
+**Criterio de éxito:** grafo de autoloads sin ciclos; `EventBus` sin dependencias de dominio; tests unitarios posibles con dobles para inventario/crafting/pesca.
+
+### Mejora 2: Reducir el número efectivo de singletons y dividir “god objects”
+
+**Objetivo:** bajar complejidad global (116 autoloads) y responsabilidades por archivo.
+
+**Acciones concretas:**
+- Priorizar refactor de los más grandes: `DebugMenu` (1308), `ProgressionManager` (959), `eventos` (901), `Tutorial` (814), `Construccion` (803), `VillagerManager` (777), `mineria` (768).
+- Extraer submódulos puros (sin `Node` autoload cuando sea posible): validadores, cálculos, carga de datos, reglas, formateo, queries. Mantener el autoload solo como fachada/orquestador.
+- Agrupar autoloads de infraestructura relacionados cuando tengan ciclo de vida común (audio: `AudioConfig`/directores; UI: `UIManager`/`TooltipService`/`NotificationService`/`ThemeService`/`SubtitleManager`) detrás de servicios registrados en `ServiceRegistry` (`scripts/core/service_registry.gd`).
+- Revisar autoloads experimentales o específicos de módulo (`BotPaseoM09`, iteraciones de inventario `inventario_helper`/`inventario_iter5`) y convertirlos en nodos de escena/sistemas bajo demanda si no necesitan estado global permanente.
+- Establecer presupuesto: límite de líneas por autoload (p. ej. 300-400) y límite de dependencias directas a otros autoloads (p. ej. <=2), con excepción documentada.
+
+**Criterio de éxito:** menos autoloads globales, archivos más pequeños, dependencias explícitas, menor riesgo al modificar un dominio.
 
 ## Conclusión final
 
-El proyecto usa una arquitectura **altamente centralizada en autoloads**: **116 singletons registrados** en `project.godot:21-136`. Hay **acoplamiento fuerte** demostrado por el uso extensivo de resolución global (`/root/*`, 181 refs a singletons clave) y por la mezcla de acceso directo con `EventBus`/`ServiceRegistry` (este último subutilizado en producción). No se identificó un ciclo de carga estático obvio en la muestra, pero el grafo de dependencias en runtime es denso y propenso a **dependencias circulares lógicas** y fallos por orden de inicialización. Existen **dios-objetos/fachadas sobrecargadas** claros (`DebugMenu`, `ProgressionManager`, `UIManager`, `SaveManager`). Priorizar la migración a contratos (`ServiceRegistry`/`Contratos`) y la descomposición de autoloads pesados reduciría el acoplamiento sin cambiar el modelo global de golpe.
+El proyecto declara **116 autoloads** en `game/isla-ancestral/project.godot:15-131`, una cantidad alta para mantener orden de inicialización, testabilidad y acoplamiento bajo control. El análisis estático detecta **acoplamiento fuerte** en dominios centrales (inventario/crafting, amistad/NPC, tiempo/eventos, pesca/museo, progresión/logros) y **3 dependencias circulares**: `Crafting<->Inventario`, `DonationService->EventBus->Fishing->DonationService` y `GameTime<->eventos`. También hay varios autoloads con **responsabilidad potencialmente excesiva** por tamaño o número de dependencias (`DebugMenu` 1308, `ProgressionManager` 959, `eventos` 901, entre otros).
+
+La prioridad técnica recomendada es: (1) **romper ciclos** usando eventos neutros y contratos inyectados, especialmente sacando conocimiento de dominio fuera de `EventBus` y eliminando la bidireccionalidad entre inventario y crafting; (2) **reducir y dividir singletons** grandes en módulos con responsabilidades claras, manteniendo solo como autoload lo que realmente requiera estado global y acceso temprano.

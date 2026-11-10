@@ -263,7 +263,7 @@
 artes, no por M46).** Checklist archivo 0/110 (cierre no reflejado) — **flag para el dueño M46**. Liberado
 🟡 para que el dueño re-marque / lo asuman M45/M108.
 
-**Totales:** 110 ítems · Completados: 101 · Pendientes: 9 · No resueltos: 0. (S50 G-5.3-Flash-Agente 2026-10-23: 10 flips de verificacion del inventario_2d.json 48 ids; queda la prueba visual 32px L46 y los items no-Definir restantes) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 91 [x] / 19 [ ] / 0 [?]; el bloque declaraba 0/110/0 - el peor de los 16.)
+**Totales:** 110 ítems · Completados: 109 · Pendientes: 1 · No resueltos: 0. (Re-medido Hy3 2026-11-10, verif 21.8: 109 x / 1 pend / 0 duda = 110; saneo Totales autorizado director msg 547.) (S50 G-5.3-Flash-Agente 2026-10-23: 10 flips de verificacion del inventario_2d.json 48 ids; queda la prueba visual 32px L46 y los items no-Definir restantes) (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 91 [x] / 19 [ ] / 0 [?]; el bloque declaraba 0/110/0 - el peor de los 16.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 110 [ ] /

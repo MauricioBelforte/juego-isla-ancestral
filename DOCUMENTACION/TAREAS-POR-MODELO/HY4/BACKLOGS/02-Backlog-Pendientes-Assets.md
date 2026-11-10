@@ -16,7 +16,7 @@
 > pendientes") estaban mal y se corrigen abajo.
 
 ### M36 Fauna (5 pendientes)
-- [ ] Pez tropical (2 variantes de color)
+- [x] Pez tropical (2 variantes de color)
 - [ ] Lagarto de isla
 - [ ] Cabra
 - [ ] Gallina

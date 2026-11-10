@@ -48,6 +48,13 @@ const _VOLUMEN_TRAMOS := [
 const DESCUENTO_VOLUMEN_MAX: float = 0.15
 const DESCUENTO_TOTAL_MAX: float = 0.20  # amistad + volumen nunca superan 20%
 
+## Tope del recargo de mercaderes viajeros (M39 → "topes de M38").
+## shop_data.gd L83 documenta "solo mercaderes viajeros (±10-15%)" y el único
+## recargo real del catálogo es 12 % (catalogo_tiendas.gd L156). Antes de este
+## tope, price_manager multiplicaba por CUALQUIER recargo: 500 % convertía un
+## precio de 100 en 600, e INF generaba basura silenciosa vía int(round(INF)).
+const RECARGO_MAX_PCT: float = 15.0
+
 ## Límites diarios de venta por banda (tabla §8): común/comida=3, procesado/fino=2, raro=1
 const LIMITE_VENTA_DEFAULT: int = 3
 
@@ -79,6 +86,9 @@ var _cache_desc_amistad: Dictionary = {}
 ## plenas de ~15 ítems superan holgadamente cualquier caso real; el pop_front
 ## del podado ya acota por día, esto acota el array ante picos artificiales).
 const MAX_ENTRADAS_VENTANA: int = 120
+
+## Contador de recargos clampeados/no finitos (observabilidad DOM-ECO-RECARGO).
+var _recargos_clampeados: int = 0
 
 ## Estado de mercado (RF9 estación, RF14 ferias) — duck-typed, no acopla módulos vecinos
 var _estacion_forzado: String = ""          # override de estación (test/control externo)
@@ -119,9 +129,32 @@ func precio_compra_vigente(item_id: String, npc_id: String = "", cantidad: int =
 	var final := int(round(float(mercado) * (1.0 - desc_total)))
 	# M39 iter. glm (Log 1004): recargo opcional de mercaderes viajeros, declarado
 	# por la tienda (topes de M38); 0.0 = sin cambio de comportamiento (retrocompatible).
+	# El tope RECARGO_MAX_PCT (15 %) hace verdadera la marca de M39 "recargos dentro
+	# de topes de M38": sin él, el valor de la tienda se aplicaba tal cual.
 	if recargo_pct > 0.0:
-		final = int(round(float(final) * (1.0 + recargo_pct / 100.0)))
+		var recargo := recargo_pct
+		if not is_finite(recargo):
+			# NaN: valor corrupto → se ignora. ±INF: se satura al tope (nunca basura).
+			if is_nan(recargo):
+				recargo = 0.0
+			else:
+				recargo = RECARGO_MAX_PCT
+			_recargos_clampeados += 1
+			push_warning("[DOM-ECO-RECARGO] item=%s recargo_no_finito=%s -> %.1f%%" % [
+				item_id, str(recargo_pct), recargo])
+		elif recargo > RECARGO_MAX_PCT:
+			_recargos_clampeados += 1
+			push_warning("[DOM-ECO-RECARGO] item=%s recargo=%.2f%% excede tope -> %.1f%%" % [
+				item_id, recargo, RECARGO_MAX_PCT])
+			recargo = RECARGO_MAX_PCT
+		if recargo > 0.0:
+			final = int(round(float(final) * (1.0 + recargo / 100.0)))
 	return maxi(1, final)
+
+## Recargos de mercader que se clampearon al tope (o se descartaron por no
+## finitos) desde que existe el PriceManager. Observabilidad de DOM-ECO-RECARGO.
+func recargos_clampeados() -> int:
+	return _recargos_clampeados
 
 ## M38 iter 4 (GLM-5.3 — Log 819): interpola entre precio base y precio de mercado
 ## según PriceDefinition.variabilidad_mercado (0.0 = fijo, 1.0 = sensible).

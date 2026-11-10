@@ -23,8 +23,8 @@ extends SceneTree
 #     + _summary() diferido. Autorizado por el director GLM-5.3 Flash-Director
 #     (msg 280, 2026-10-16, hallazgo B). Piso = checks reales MEDIDOS en verde.
 #     NO cambia logica ni aserciones; solo agrega contador + control de bloques.
-const CHECKS_MINIMOS := 20
-const _WB_BLOQUES: Array[String] = ["carga", "cantidad_invalida", "mayorista", "venta", "clamp", "bandas_catalogo", "registro_venta", "reseteo_dia"]
+const CHECKS_MINIMOS := 28
+const _WB_BLOQUES: Array[String] = ["carga", "cantidad_invalida", "mayorista", "venta", "clamp", "recargo", "bandas_catalogo", "registro_venta", "reseteo_dia"]
 var _checks := 0
 var _wb_vistos: Dictionary = {}
 var _wb_cerrado := false
@@ -102,6 +102,30 @@ func _ejecutar() -> void:
 	item.set("precio_compra", 1)
 	_check("precio base 1 con descuento → clamp a >=1", int(_pm.precio_compra_vigente(ITEM, "", 20)) >= 1)
 	_fin("clamp")
+
+	# ── Recargo de mercader viajero: los "topes de M38" que M39 da por hechos ──
+	# M39 declara el `[x]` "recargos dentro de topes de M38" (05-Checklist L50) y
+	# shop_data.gd L83 documenta "solo mercaderes viajeros (±10-15%)", pero
+	# price_manager aceptaba CUALQUIER recargo: 500 % convertía 100 AO en 600.
+	# Tampoco filtraba INF (el `int(round(INF))` es basura) ni NaN.
+	item.set("precio_compra", 100)
+	_check("sin recargo → base (100)", int(_pm.precio_compra_vigente(ITEM, "", 1, 0.0)) == 100)
+	_check("recargo real del mercader (12%) → 112",
+		int(_pm.precio_compra_vigente(ITEM, "", 1, 12.0)) == 112)
+	_check("recargo en el tope (15%) → 115",
+		int(_pm.precio_compra_vigente(ITEM, "", 1, 15.0)) == 115)
+	_check("recargo 500% → CLAMP 15 (115), no 600",
+		int(_pm.precio_compra_vigente(ITEM, "", 1, 500.0)) == 115)
+	_check("recargo INF → CLAMP 15 (115), no basura",
+		int(_pm.precio_compra_vigente(ITEM, "", 1, INF)) == 115)
+	_check("recargo NaN → ignorado (100)", int(_pm.precio_compra_vigente(ITEM, "", 1, NAN)) == 100)
+	_check("recargo negativo no abarata (100)",
+		int(_pm.precio_compra_vigente(ITEM, "", 1, -50.0)) == 100)
+	_check("expone recargos_clampeados()", _pm.has_method("recargos_clampeados"))
+	if _pm.has_method("recargos_clampeados"):
+		_check("contabiliza los 2 recargos clampeados (500 e INF)",
+			int(_pm.recargos_clampeados()) == 2)
+	_fin("recargo")
 	# Restaurar valores originales del item real
 	item.set("precio_compra", pc_orig)
 	item.set("precio_venta", pv_orig)
