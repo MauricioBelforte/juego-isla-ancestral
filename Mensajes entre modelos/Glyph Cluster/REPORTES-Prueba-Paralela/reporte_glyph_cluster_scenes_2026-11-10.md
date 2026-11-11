@@ -1,132 +1,122 @@
-﻿# Reporte de análisis de escenas `.tscn` (Godot) — Isla Ancestral
+﻿# Reporte de análisis de escenas `.tscn` — Isla Ancestral
 
 **Modelo:** Glyph Cluster  
-**Plataforma:** Kilo Code (Vercel AI Gateway)  
-**Fecha:** 2026-11-10 03:50 (UTC)  
-**Alcance solicitado:** `game/isla-ancestral/scenes/` — escenas principales (`main.tscn`, `main_island.tscn`) y escenas de inicio/mundo.  
-**Método:** análisis estático de archivos `.tscn` y `project.godot` (lectura de estructura, recursos externos, instancias y referencias `res://`). No se ejecutó Godot en runtime.
+**Plataforma:** Kilo Code  
+**Fecha:** 2026-11-10 23:58:26Z  
+**Alcance:** `game/isla-ancestral/scenes/**/*.tscn` (49 archivos) con foco en escenas principales (`main.tscn`, `main_island.tscn`, `main_simple.tscn`, `main_test.tscn`, `main_test2.tscn`) y escena de inicio/mundo.
 
 ---
 
-## 1) Estructura de las escenas principales
+## 1. Estructura de las escenas principales
 
-### 1.1 Configuración del proyecto
-- **Escena principal configurada:** `run/main_scene="res://scenes/main_island.tscn"` (`game/isla-ancestral/project.godot:15`).
-- **Nombre/versión:** `config/name="isla-ancestral"`, `config/version="0.0.6"` (`project.godot:13-14`).
-- **Motor/features:** Godot 4.7, Forward+ (`project.godot:16`).
-- **Autoloads:** extensa lista de singletons/scripts globales (`project.godot`, sección `[autoload]`, ~líneas 20-120 aprox.), lo que implica fuerte acoplamiento de arranque a servicios globales.
+### 1.1 Escena de inicio configurada
+- `game/isla-ancestral/project.godot:13` — `run/main_scene="res://scenes/main_island.tscn"`.
+- La escena de entrada/mundo principal del proyecto es **`scenes/main_island.tscn`**.
+- `project.godot` declara numerosos autoloads (p. ej. `TerrainLocator`, `SceneManager`, `UIManager`, `GameFlowManager`, líneas ~21–120), lo que implica que la carga de `main_island.tscn` depende del estado global inicializado por autoloads.
 
-### 1.2 `scenes/main_island.tscn` (escena de inicio/mundo principal)
-- **Archivo:** `game/isla-ancestral/scenes/main_island.tscn` (210 líneas).
-- **Cabecera:** `[gd_scene format=3]` (sin `load_steps`/`uid` explícitos en cabecera) (`main_island.tscn:1`).
-- **Raíz:** `Main` (`Node3D`) con script `res://scripts/main_island.gd` (`:3`, `:56-57`).
-- **Recursos externos declarados (19):** scripts de mundo/cámara/jugador/NPC/UI/fauna/vegetación y recursos (`day_night_cycle.gd`, `agua_animada.gd`, `terreno_horizonte.gd`, `follow_camera.gd`, `player.gd`, `Player.tscn`, `w_reloj.gd`, `villager.gd`, `catalina_oso.tres`, widgets HUD, scripts de fauna, spawners) (`:3-21`).
-- **Subrecursos internos:** `ProceduralSkyMaterial`, `Sky`, `Environment`, `StyleBoxFlat` (`:24-54`).
-- **Jerarquía principal (nodos bajo `Main`):**
-  - Entorno/iluminación: `WorldEnvironment` (`:59-60`), `DirectionalLight` (`:87-95`), `DirLightLuna` (`:97-101`).
-  - Sistemas/mundo: `VegetationSpawner` (`:62-63`), `FaunaSpawner` (`:65-66`), `VoxelTerrain` (`:67`), `VoxelViewer` (`:69`), `DayNightCycle` (`:154-155`), `AguaAnimada` (`:157-159`, transform centrado en 2560,4.05,2560), `TerrenoHorizonte` (`:161-163`, centrado en 2560,0,2560).
-  - Jugador/cámara: `Player` (`CharacterBody3D`, instanciado desde `Player.tscn` pero redefinido en línea, ver §2/§3) (`:72-75`), `Camera3D` con `follow_camera.gd` (`:77-79`).
-  - UI embebida (`CanvasLayer UI`): `FPSLabel`, `ControlsLabel`, `RelojWidget`, `StatusBar`, `InteractPrompt`, `MinimapWidget` (`:103-152`).
-  - NPCs/fauna colocados en escena: `CatalinaOso` (`:148-152`), `TortugaNPC`, `CangrejoNPC`, `JabaliNPC`, `JabaliAdultoNPC`, `GaviotaNPC` (`:166-188`).
-- **Observaciones estructurales:** escena monolítica de mundo (terreno, clima/día-noche, spawners, jugador, cámara, HUD parcial y fauna/NPC) concentrada en un único `.tscn`; mezcla instanciación de escena (`Player.tscn`) con composición inline y UI duplicada respecto a `scenes/ui/hud.tscn`.
+### 1.2 `scenes/main_island.tscn` (mundo principal)
+- **Raíz y script:** `:57` `[node name="Main" type="Node3D" ...]`, `:58` `script = ExtResource("1_main")` → `res://scripts/main_island.gd`.
+- **Entorno y ciclo día/noche:** `:60` `WorldEnvironment` (SubResource `Env_1`, líneas 24–54), `:162` `DayNightCycle` → `scripts/world/day_night_cycle.gd` (`:4`).
+- **Mundo/terreno:** `:68` `VoxelTerrain` (Voxel Tools), `:70` `VoxelViewer` (sibling de raíz), `:165` `AguaAnimada` → `scripts/world/agua_animada.gd` (`:5`), `:169` `TerrenoHorizonte` → `scripts/world/terreno_horizonte.gd` (`:6`), `:63` `VegetationSpawner` → `scripts/vegetacion/vegetation_spawner.gd` (`:20`), `:66` `FaunaSpawner` → `scripts/fauna/fauna_spawner.gd` (`:21`).
+- **Jugador (instancia + override):** `:72` `[node name="Player" type="CharacterBody3D" parent="." unique_id=1575828482 instance=ExtResource("3_player")]`, `:73` transform `(256? / local 0,5,0 inicial)`, `:74` `script = ExtResource("3_ff3n1")` → `res://scripts/player/player.gd` (`:8`). La escena instancia `res://scenes/player/Player.tscn` (`:9`) pero además sobreescribe su script en la instancia.
+- **Cámara:** `:77` `Camera3D` hija directa de `Main` con `:79` `script = ExtResource("2_cam")` → `res://scripts/follow_camera.gd` (`:7`), `:78` transform fijo inicial. No usa `scenes/CameraRig.tscn` ni el rig de `main.tscn`.
+- **Iluminación:** `:81` `DirectionalLight` (sol), `:91` `DirLightLuna` (luna, energía baja, sin sombras).
+- **UI embebida (`CanvasLayer` en `:97`):** `:99` `FPSLabel`, `:107` `ControlsLabel`, `:119` `RelojWidget` → `scripts/clock/w_reloj.gd`, `:122` `StatusBar` → `scripts/ui/widgets/status_bar.gd`, `:132` `InteractPrompt` → `scripts/ui/widgets/interact_prompt.gd`, `:142` `MinimapWidget` → `scripts/ui/widgets/minimap_widget.gd`. UI construida inline (no instancia `scenes/ui/hud.tscn`).
+- **NPCs/fauna colocados en escena:** `:156` `CatalinaOso` → `villager.gd` + perfil `res://data/villagers/catalina_oso.tres`, `:174` `TortugaNPC`, `:178` `CangrejoNPC`, `:182` `JabaliNPC` (etapa joven), `:187` `JabaliAdultoNPC`, `:192` `GaviotaNPC` con scripts de fauna dedicados (`:14–:19`).
 
-### 1.3 `scenes/main.tscn` (escena principal alternativa/simplificada)
-- **Archivo:** `game/isla-ancestral/scenes/main.tscn` (86 líneas).
-- **Cabecera:** `[gd_scene load_steps=6 format=3 uid="uid://c1234568aa0"]` (`:1`).
-- **Raíz:** `Main` (`Node3D`) + `main.gd` (`:3`, `:28-29`).
-- **Dependencias externas:** `camera_rig.gd`, `camera_spring.gd`, `Player.tscn` (`:4-6`).
-- **Estructura:** `WorldEnvironment`, `VoxelTerrain`, instancia limpia de `Player` (`:33`), `CameraRig` → `CameraSpring` (+ `RayCast3D`) + `Camera3D` como hijo del rig, `DirectionalLight`, `UI` con labels FPS/controles (`:31-85`).
-- **Comparación con `main_island`:** más modular en cámara (rig/spring separados) y usa instancia de jugador sin override de script; carece de ciclo día/noche, spawners, NPCs, agua/horizonte y HUD completo.
+### 1.3 `scenes/main.tscn` (variante con rig de cámara embebido)
+- **Raíz:** `:25` `Main` (`Node3D`) + `:26` `script` → `res://scripts/main.gd`.
+- **Entorno/terreno:** `:28` `WorldEnvironment`, `:31` `VoxelTerrain`.
+- **Jugador:** `:33` instancia `res://scenes/player/Player.tscn` (`:6`).
+- **Cámara (rig embebido, no PackedScene):** `:35` `CameraRig` → `scripts/camera/camera_rig.gd` (`:4`), `:38` `CameraSpring` → `scripts/camera/camera_spring.gd` (`:5`, con `max_distance`, `smooth_time`, colisión), `:46` `RayCast3D`, `:52` `Camera3D` (`fov = 70`). La lógica replica parcialmente `scenes/CameraRig.tscn` pero con distinta configuración.
+- **Luz/UI:** `:56` `DirectionalLight`, `:61` `UI` con `:63` `FPSLabel` y `:71` `ControlsLabel`.
 
-### 1.4 `scenes/main_simple.tscn` (variante de inicio ligera)
-- **Archivo:** `game/isla-ancestral/scenes/main_simple.tscn` (64 líneas).
-- **Raíz:** `Main` (`Node3D`) + `main_simple.gd`; usa `simple_camera.gd` y `Player.tscn` (`:3-5`, `:27-28`, `:32`, `:34-38`).
-- **Estructura:** entorno, `VoxelTerrain`, jugador instanciado, `SimpleCamera` (Camera3D directa), luz direccional y UI mínima (FPS/controles) (`:30-63`).
-- **Patrón:** similar a `main.tscn` pero con cámara simplificada (sin rig/spring).
+### 1.4 `scenes/main_simple.tscn` y `scenes/main_test.tscn` (escenas ligeras/prueba)
+- **`main_simple.tscn`:** `:24` raíz `Main` + `scripts/main_simple.gd`, `:30` `VoxelTerrain`, `:32` `Player` instanciado, `:34` `SimpleCamera` → `scripts/camera/simple_camera.gd`, `:40` luz direccional, `:45` UI básica.
+- **`main_test.tscn`:** `:34` raíz `Main` + `scripts/main_test.gd`, **sin** `VoxelTerrain`; usa `:40` `Floor` (`StaticBody3D`, `:43` mesh 60x1x60, `:47` colisión) como suelo plano, `:50` `Player`, `:53` `SimpleCamera`, `:59` luz, `:64` UI. Orientada a prueba sin dependencia de voxel.
 
-### 1.5 Otras escenas de arranque/mundo/prueba detectadas
-- `scenes/main_test.tscn`, `scenes/main_test2.tscn`, `scenes/simple_walk.tscn`, `scenes/test_terrain.tscn`, `scenes/minimal_test.tscn`, etc. (inventario completo vía glob: 40+ `.tscn` bajo `scenes/`, incluyendo `player/`, `npc/`, `ui/`, `museo/`, `terrenos/`, `tests/`, `debug/`).
+### 1.5 `scenes/main_test2.tscn` y `scenes/minimal_test.tscn` (variantes voxel/diagnóstico)
+- **`main_test2.tscn`:** `:24` raíz + `scripts/main_test2.gd`, `:30` `VoxelTerrain`, `:32` `WorldManager` → `scripts/world/world_manager.gd` (`world_seed`, `island_radius`, `max_height`), `:38` `Player`, `:41` `Camera3D` con `:44` `VoxelViewer` hijo de cámara (`view_distance = 256.0`), `:47` luz.
+- **`scenes/minimal_test.tscn`:** `:4` raíz `MinimalTest` + `scripts/minimal_test.gd`, `:7` `Camera3D` con `:10` `VoxelViewer` hijo, `:13` `DirectionalLight3D`, `:17` `VoxelTerrain`. Sin jugador ni UI; escena mínima de diagnóstico de terreno.
 
-### 1.6 Escenas de composición reutilizable relevantes
-- **Jugador:** `scenes/player/Player.tscn` — raíz `CharacterBody3D` + `player.gd`; hijos: `ModeloVoxel` (instancia GLB), colisión cápsula, `TerrainDetector`, `TerrainFootprints`, `TerrainParticles`, `NucleoM11`, `AnimacionM48` con `AnimationPlayer` y librería (`Player.tscn:1-54`).
-- **HUD modular:** `scenes/ui/hud.tscn` — `CanvasLayer HUDScreen` con widgets (status, reloj, estación, recursos, hotbar, interact, action prompt, minimapa, mapa completo) y scripts dedicados (`hud.tscn:1-154`).
-- **Cámara reusable:** `scenes/CameraRig.tscn` — `Node3D CameraRig` → `CameraSpring` → `RayCast3D` y `Camera3D` (`CameraRig.tscn:1-18`).
+### 1.6 Escenas auxiliares relevantes
+- **`scenes/player/Player.tscn`** (base instanciada por las mains): `:16` raíz `CharacterBody3D` + `scripts/player/player.gd` (`:3`), `:23` `ModeloVoxel` (GLB), `:25` `BodyCollision`, `:29` `TerrainDetector` (`RayCast3D`, `collision_mask = 32`), `:36` `TerrainFootprints`, `:39` `TerrainParticles`, `:42` `NucleoM11`, `:45` `AnimacionM48` con `:48` `AnimationPlayer`.
+- **`scenes/CameraRig.tscn`:** `:6` raíz `CameraRig` → `scripts/camera/camera_rig.gd`, `:9` `CameraSpring` → `camera_spring.gd`, `:12` `RayCast3D` (`target_position = 0,0,0`), `:15` `Camera3D`. Definida como PackedScene pero no instanciada por ninguna otra `.tscn` del árbol `scenes/`.
+- **`scenes/ui/hud.tscn`:** HUD completo en `CanvasLayer` (`:15`), con múltiples widgets (`:26+`). No es instanciado por las escenas `main*` analizadas (estas usan UI inline).
+
+### 1.7 Patrón estructural observado
+- Jerarquía plana bajo `Main` (`Node3D`) con hijos de primer nivel para entorno, terreno voxel, jugador, cámara, luces, UI y entidades de mundo; subárboles claros (`CameraRig/CameraSpring/RayCast3D`, `UI/*`, `AnimacionM48/AnimationPlayer`).
+- Variación de patrones según propósito: cámara embebida en raíz (`main_island`), rig embebido (`main`), `SimpleCamera` (`main_simple`, `main_test`), cámara con `VoxelViewer` hijo (`main_test2`, `minimal_test`). Esto sugiere ramas de evolución paralelas de la escena principal.
 
 ---
 
-## 2) ¿Hay nodos huérfanos o sin padre?
+## 2. Nodos huérfanos o sin padre
 
-**Conclusión:** no se identificaron nodos huérfanos en el sentido de Godot (nodos definidos fuera de la jerarquía de la escena sin `parent` válido) en las escenas revisadas.
+- **Resultado del análisis estructural:** `0` nodos huérfanos detectados en las 49 escenas.
+- **Criterio usado:** para cada archivo `.tscn` se inspeccionaron todas las declaraciones `[node ...]`; el primer nodo del archivo se considera raíz (válido sin `parent`), y todo nodo posterior debe declarar `parent=...` dentro de su árbol.
+- **Hallazgos:**
+  - Ningún nodo no-raíz carece de `parent`.
+  - Ninguna raíz declara `parent`.
+  - Todas las instancias de nodos en escenas principales (`main*.tscn`, `CameraRig.tscn`, `player/Player.tscn`) presentan jerarquía coherente (hijos con `parent="."`, subhijos con rutas válidas como `CameraRig/CameraSpring`, `Floor`, `AnimacionM48`, `UI`).
+- **Conclusión:** no se observaron nodos huérfanos en el sentido de nodos declarados fuera de la jerarquía de escena.
 
-**Evidencia y matices:**
-- Toda escena `.tscn` válida debe tener exactamente **un nodo raíz** (declarado sin atributo `parent`). Las escenas inspeccionadas (`main.tscn`, `main_island.tscn`, `main_simple.tscn`, `Player.tscn`, `hud.tscn`, `CameraRig.tscn`, `simple_walk.tscn`, `preview_particles.tscn`) presentan una raíz única y el resto de nodos con `parent="."` o `parent="Ruta/Hijo"` consistente.
-- Un conteo heurístico automático por regex marcó como anómalas (`root_count=2`) varias escenas (`main.tscn`, `main_simple.tscn`, `main_test.tscn`, `main_test2.tscn`, `Player.tscn`), pero la inspección manual muestra que se debe al formato Godot 4 (`unique_id`, orden de atributos) y **no** a múltiples raíces reales ni a nodos huérfanos.
-- **Casos a vigilar (no huérfanos, pero estructuralmente atípicos):**
-  - `simple_walk.tscn`: el nodo raíz es `Game` (`CharacterBody3D`) que además contiene un hijo `Player` (`CharacterBody3D`) y componentes de mundo/luz/cámara (`simple_walk.tscn:56-127`). No es huérfano, pero duplica rol de cuerpo controlable/escena y puede confundir ownership de lógica.
-  - `main_island.tscn`: `Player` se declara como nodo con `instance=ExtResource("3_player")` y a la vez `type="CharacterBody3D"` + `script=ExtResource("3_ff3n1")` (`main_island.tscn:72-75`). No es huérfano; es una **instancia sobrescrita inline** que puede generar ambigüedad frente a la definición canónica de `Player.tscn`.
-
----
-
-## 3) ¿Hay dependencias entre escenas que puedan causar problemas de carga?
-
-Sí, se observan varias dependencias/riesgos potenciales:
-
-1. **Cadena crítica de arranque dependiente de autoloads masivos**  
-   - `project.godot` define decenas de autoloads (núcleo, UI, mundo, audio, economía, etc.) antes/de forma paralela al arranque de `main_island.tscn` (`project.godot:[autoload]`).  
-   - **Riesgo:** orden de inicialización, dependencias cíclicas o fallos en cualquier singleton pueden impedir la carga/ejecución de la escena principal.
-
-2. **Instanciación + override del jugador en `main_island.tscn`**  
-   - `Player` se instancia desde `res://scenes/player/Player.tscn` pero además se fuerza `type`, `script` y transform en la escena padre (`main_island.tscn:9,72-75`).  
-   - **Riesgo:** divergencia con la escena de jugador canónica (`scenes/player/Player.tscn` define su propio script, hijos y configuración). Cambios futuros en `Player.tscn` pueden no reflejarse o chocar con overrides locales.
-
-3. **Duplicación de UI entre escena de mundo y HUD modular**  
-   - `main_island.tscn` incluye widgets UI propios (`RelojWidget`, `StatusBar`, `InteractPrompt`, `MinimapWidget`) con scripts directos (`main_island.tscn:10,13-15,120-152`), mientras existe `scenes/ui/hud.tscn` con un HUD completo y solapamiento funcional (`hud.tscn`).  
-   - **Riesgo:** doble lógica/estado de UI, señales desconectadas o inconsistencias visuales al mantener dos implementaciones.
-
-4. **Dependencia de subsistemas de voxel/terreno**  
-   - Las escenas principales usan `VoxelTerrain`/`VoxelViewer` (`main.tscn:31`, `main_simple.tscn:30`, `main_island.tscn:67,69`).  
-   - **Riesgo:** si el módulo/extensión Voxel Tools no está disponible o falla, la carga de estas escenas fallará en runtime/editor.
-
-5. **Dependencia de recursos de datos y assets externos**  
-   - `main_island.tscn` referencia `res://data/villagers/catalina_oso.tres` (`:12`, usado en `CatalinaOso` `:151-152`). `Player.tscn` referencia GLB y librería de animación (`res://assets/3d/media/45-Arte3D_jugador_voxel.glb`, `res://scripts/animacion/libraries/jugador_lib.tres`, `Player.tscn:4,7,23,51-53`).  
-   - **Riesgo:** cualquier movimiento/renombrado de estos assets rompe la carga de escenas dependientes (la validación estática de existencia se detalla en §4).
-
-6. **Posibles incoherencias de mundo/posicionamiento**  
-   - En `main_island.tscn`, elementos de entorno se ubican en torno a `2560` (`AguaAnimada`, `TerrenoHorizonte` en `:158,162`) mientras NPCs/fauna aparecen en coordenadas ~232-285 (`:149,167,171,175,179,183`).  
-   - **Riesgo funcional:** entidades pueden aparecer fuera del área jugable/terreno esperado al cargar la escena (no es error de parseo de `.tscn`, pero sí dependencia espacial frágil).
+> Nota: "nodo huérfano" aquí se refiere a la estructura declarada en `.tscn` (ausencia de `parent` en nodos no-raíz). No detecta nodos creados dinámicamente en runtime ni problemas de `owner` en escenas instanciadas.
 
 ---
 
-## 4) ¿Hay archivos `.tscn` con referencias a escenas/recursos que no existen?
+## 3. Dependencias entre escenas y posibles problemas de carga
 
-**Resultado de verificación estática (referencias `res://` en todos los `.tscn` de `scenes/`):**  
-- **No se encontraron referencias `res://` inexistentes en disco** dentro del alcance `game/isla-ancestral/scenes/**/*.tscn`.
+### 3.1 Dependencias escena→escena (PackedScene instanciadas en `.tscn`)
+Total: **5** referencias de escena encontradas, todas válidas en disco:
 
-**Detalle de la comprobación:**
-- Se extrajeron todos los atributos `path="res://..."` de los `.tscn` bajo `scenes/` y se verificó la existencia de cada archivo en `game/isla-ancestral/`.
-- Rutas muestreadas y existentes (ejemplos): `res://scenes/player/Player.tscn` (usada en `main.tscn:6,33`, `main_island.tscn:9,72`, `main_simple.tscn:5,32`, `main_test*.tscn`), `res://scripts/main_island.gd`, `res://scripts/main.gd`, `res://scripts/main_simple.gd`, `res://data/villagers/catalina_oso.tres`, `res://assets/3d/media/45-Arte3D_jugador_voxel.glb`, `res://scripts/animacion/libraries/jugador_lib.tres`, scripts de UI/cámara/fauna/spawners referenciados.
-- **Limitación:** esta verificación cubre rutas `res://` declaradas en `.tscn`. No valida referencias cargadas dinámicamente por código GDScript (`load()`/`preload()`/`change_scene_to_file()` en scripts), UIDs huérfanos, ni recursos generados en runtime.
+| Escena origen | Línea | Recurso instanciado | Existe |
+|---|---:|---|:---:|
+| `scenes/main.tscn` | 6, 33 | `res://scenes/player/Player.tscn` | Sí |
+| `scenes/main_island.tscn` | 9, 72 | `res://scenes/player/Player.tscn` | Sí |
+| `scenes/main_simple.tscn` | 5, 32 | `res://scenes/player/Player.tscn` | Sí |
+| `scenes/main_test.tscn` | 5, 50 | `res://scenes/player/Player.tscn` | Sí |
+| `scenes/main_test2.tscn` | 4, 38 | `res://scenes/player/Player.tscn` | Sí |
+
+- `Player.tscn` es el único nodo de escena compartido entre las mains; su propia dependencia crítica externa es el asset `res://assets/3d/media/45-Arte3D_jugador_voxel.glb` (`scenes/player/Player.tscn:4,23`).
+- No se detectaron instancias cruzadas entre escenas `main*` ni cadenas de carga profundas entre `.tscn` (el grafo escena→escena es superficial, tipo estrella hacia `Player.tscn`).
+
+### 3.2 Dependencias de scripts/recursos (ext_resource)
+- Se inspeccionaron **80** `ext_resource` en las 49 escenas: **0 rutas rotas** en disco.
+- `main_island.tscn` concentra alta densidad de dependencias (scripts de mundo, fauna, NPC, UI, recurso `.tres` de perfil en `:12` → `res://data/villagers/catalina_oso.tres`), lo que aumenta la superficie de fallo por errores de script/autoload al cargar la escena principal.
+
+### 3.3 Observaciones/riesgos de carga o mantenimiento (no roturas comprobadas)
+
+1. **Override de instancia en la escena principal:** `scenes/main_island.tscn:72` instancia `Player.tscn` pero declara `type="CharacterBody3D"` y `script = ExtResource("3_ff3n1")` (`:74`, `res://scripts/player/player.gd`, también declarado en `:8`). `Player.tscn` ya define ese script (`scenes/player/Player.tscn:16`). Esto es válido en Godot como override, pero duplica la fuente de verdad y puede desincronizar comportamiento/propiedades si `Player.tscn` cambia.
+2. **Duplicación de rig de cámara:** `scenes/CameraRig.tscn` existe como escena reutilizable (`:6–:16`, scripts `camera_rig.gd`, `camera_spring.gd`) pero `scenes/main.tscn` embebe una estructura equivalente inline (`:35–:54`) con parámetros distintos; `main_island.tscn` usa un enfoque diferente (`Camera3D` directo + `follow_camera.gd`). Riesgo de divergencia funcional y mantenimiento.
+3. **Posicionamiento inconsistente de `VoxelViewer`:** en `main_island.tscn` es hijo directo de `Main` (`:70`), mientras en `main_test2.tscn` (`:44`) y `minimal_test.tscn` (`:10`) cuelga de `Camera3D`. Dependiendo de cómo Voxel Tools y/o scripts gestionen el viewer activo, esto puede afectar streaming/carga de chunks al iniciar o al mover cámara.
+4. **`main_island.tscn` mezcla transform de instancia del jugador con lógica de spawn por script:** `:72–:73` posiciona `Player` en `(0,5,0)` en la instancia, pero `:58` delega en `main_island.gd`; además hay NPCs con coordenadas fijas elevadas/heterogéneas (p. ej. `:157`, `:165`, `:169`, `:175–:194`). No es una referencia rota, pero es un punto sensible si el terreno/altura de spawn cambia.
+5. **HUD duplicado conceptualmente:** `scenes/ui/hud.tscn` define un HUD completo, mientras `main_island.tscn` monta widgets de UI propios inline. Riesgo de drift entre HUD de escena y HUD embebido en la main real.
 
 ---
 
-## 5) Sugerencias: 2 acciones de verificación
+## 4. Referencias a escenas inexistentes
 
-1. **Carga/runtime headless de la escena principal y revisión de errores**
-   - **Acción:** ejecutar Godot en modo headless (o con ventana) cargando la escena principal configurada y capturar el log completo.
-   - **Comando sugerido (desde `game/isla-ancestral/`):**
-     - `godot --headless --path . --scene res://scenes/main_island.tscn` (o `--quit-after 60` si se desea cierre automático tras inicialización), según versión/flags disponibles.
-   - **Qué validar:** errores de carga de recursos, fallos de autoloads, nodos/tipos no disponibles (p. ej. `VoxelTerrain`), scripts con errores de parseo, y warnings de dependencias. Complementar con `get_debug_output` si se usa el MCP de Godot.
+- **Búsqueda:** se revisaron todos los `ext_resource` con `path="res://..."` en las 49 escenas (`80` referencias totales).
+- **Resultado:** **0 referencias rotas**. No se encontraron `.tscn` (ni otros recursos externos referenciados por escenas) que apunten a rutas inexistentes en disco.
+- **Dependencias `.tscn` específicas:** las 5 instancias de `res://scenes/player/Player.tscn` desde las escenas `main*` apuntan a un archivo existente (`scenes/player/Player.tscn`).
+- **Otros recursos verificados presentes:** scripts `.gd`, el recurso de datos `res://data/villagers/catalina_oso.tres` (`scenes/main_island.tscn:12`), librería de animación `.tres` y assets referenciados por escenas inspeccionadas existen según la validación de rutas en disco.
 
-2. **Validación automática de integridad de escenas (`.tscn`) en CI/local**
-   - **Acción:** crear/ejecutar un script de verificación estática que, para cada `scenes/**/*.tscn`: (a) confirme referencias `res://` existentes, (b) verifique raíz única y nodos con `parent` resoluble, (c) detecte instancias con overrides conflictivos (ej. `instance=` + `type=`/`script=` redundante como en `main_island.tscn:72-75`), y (d) compare uso de HUD modular (`scenes/ui/hud.tscn`) vs. UI embebida.
-   - **Criterio de éxito:** 0 referencias rotas, 0 nodos huérfanos, reporte de overrides/duplicaciones para decisión de refactor. Ejecutar en cada cambio de escenas o antes de merge.
+---
+
+## 5. Acciones de verificación sugeridas
+
+1. **Carga y smoke-test de escenas principales con reporte de errores de runtime:** ejecutar Godot en modo headless/editor para abrir y/o correr `res://scenes/main_island.tscn` (escena de inicio, `project.godot:13`) y, de forma comparativa, `res://scenes/main.tscn`, `res://scenes/main_simple.tscn`, `res://scenes/main_test.tscn`, capturando `get_debug_output`/stderr. Objetivo: confirmar que autoloads, scripts y overrides (especialmente `main_island.tscn:72,74` sobre `Player.tscn`) no generan errores/warnings de carga, nodos faltantes o fallos de Voxel Tools.
+2. **Verificación de consistencia cámara/streaming y normalización de instancias:** (a) validar en runtime que el `VoxelViewer` activo corresponde al patrón esperado por el proyecto (comparar comportamiento en `main_island.tscn:70` vs `main_test2.tscn:44`/`minimal_test.tscn:10`) observando carga de chunks y seguimiento de cámara; (b) auditar y unificar el uso de `scenes/CameraRig.tscn` y `scenes/ui/hud.tscn` frente a las versiones embebidas en `main.tscn`/`main_island.tscn` para reducir divergencias y puntos de fallo en futuras cargas.
 
 ---
 
 ## Conclusión final
 
-- **Escena de inicio real:** `res://scenes/main_island.tscn` (configurada en `project.godot`). Es una escena de mundo rica pero monolítica, con múltiples subsistemas integrados (terreno voxel, ciclo día/noche, agua/horizonte, spawners, NPC/fauna, UI parcial y jugador).
-- **Coherencia de referencias estáticas:** no se hallaron rutas `res://` rotas en los `.tscn` de `scenes/` según la verificación en disco.
-- **Nodos huérfanos:** no se evidenciaron huérfanos reales; las anomalías detectadas por heurística se explican por formato Godot 4 y requieren validación manual/editor.
-- **Riesgos de carga/mantenimiento:** dependencia fuerte de autoloads, uso de nodos de voxel, override inline del `Player` instanciado en `main_island.tscn`, y duplicación de UI frente a `scenes/ui/hud.tscn`. Estos puntos son los principales focos para pruebas de carga y refactor.
-- **Próximo paso recomendado:** ejecutar la verificación runtime de la escena principal y establecer un chequeo automático de integridad de `.tscn` para prevenir regresiones de dependencias.
+- Se inventariaron **49** escenas `.tscn` bajo `game/isla-ancestral/scenes/`; la escena de inicio es `res://scenes/main_island.tscn` (`project.godot:13`).
+- Las escenas principales comparten una estructura clara basada en `Node3D` raíz (`Main`) con entorno, terreno voxel, jugador instanciado desde `scenes/player/Player.tscn`, cámara, iluminación y UI, pero con **variantes de arquitectura** (cámara embebida/rig/simple, UI inline, ubicación de `VoxelViewer`) que reflejan distintas etapas o propósitos de prueba.
+- **Nodos huérfanos/sin padre:** ninguno detectado (0/49 escenas).
+- **Referencias rotas a escenas o recursos externos:** ninguna detectada (80 `ext_resource` analizados, 5 dependencias `.tscn` válidas, todas hacia `Player.tscn`).
+- **Riesgo principal observado:** no hay roturas de ruta, sino **riesgos de consistencia/mantenimiento y carga lógica** — override de script en instancia de `Player` (`main_island.tscn:72,74`), duplicación `CameraRig`/HUD embebidos vs escenas dedicadas, y patrón distinto de `VoxelViewer` entre mains — que conviene validar en ejecución (acciones 1 y 2).
+
+**Estado global del análisis estático de escenas:** sin huérfanos ni referencias inexistentes detectadas; estructura funcionalmente coherente con puntos de atención en consistencia entre variantes.  
+**Firma:** Glyph Cluster / Kilo Code — 2026-11-10 23:58:26Z
