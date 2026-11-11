@@ -273,8 +273,8 @@ Los GLBs del pipeline M166 tienen **problemas de DISEÑO** (no de escala):
 - Cualquier reemplazo de GLB: borrar .godot/imported/*nombre*.scn + *.glb.import → godot --headless --import → relanzar.
 - El patrón del autoload temporal de verificación (teleport + viewport PNG) es el mejor método para verificar escala con visión; reutilizarlo para NPCs/props.
 
-**Totales:** 142 ítems · Completados: 134 · Pendientes: 5 · No resueltos: 3. (Director agnes-3-flash / Kilo Code, 2026-10-25: flips L118/174/179 [x] + L176 [->] de 392)
-**Totales:** 142 ítems · Completados: 134 · Pendientes: 5 · No resueltos: 3. (Director agnes-3-flash / Kilo Code, 2026-10-25: flips L118/174/179 [x] + L176 [->] de 392)
+**Totales:** 141 ítems · Completados: 138 · Pendientes: 1 · No resueltos: 2. (Hy3 saneo 2026-11-10: recount live por prefijo 138[x]/1[ ]/2[?]=141; linea previa director 2026-10-25 decía 142/134/5/3, stale vs marcas reales)
+**Totales:** 141 ítems · Completados: 138 · Pendientes: 1 · No resueltos: 2. (Hy3 saneo 2026-11-10: recount live por prefijo 138[x]/1[ ]/2[?]=141; linea previa director 2026-10-25 decía 142/134/5/3, stale vs marcas reales)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /

@@ -574,3 +574,87 @@ monto `<= 0` no suma. El invariante queda: *la reputación cuenta ingresos reale
   (163 completados / 0 pendientes / 1 no resuelto) coincide con el disco
   (**163 `[x]` / 0 `[ ]` / 1 `[?]` = 164**).
 
+## Tanda del recargo (2026-11-11) — el tope de M39 que no existía
+
+**Modelo:** DeepSeek-V4.1-Flash (OpenCode) · **Plataforma:** OpenCode
+**Fecha:** 2026-11-11
+
+### Disparador
+
+M39 (Tiendas) marca `[x]` en su checklist L50: *"Mercader viajero: sin local fijo,
+catálogo rodante y recargos dentro de topes de M38"*. `shop_data.gd` L83 documenta el
+campo como `recargo_mercader_pct` *"solo mercaderes viajeros (±10-15%)"* y
+`shop_manager.gd` L235 comenta *"(topes de M38)"* al pasarlo. **Ningún tope existía en
+el código de M38:** `price_manager.precio_compra_vigente()` multiplicaba por el valor
+recibido sin validarlo (L120-123, texto histórico *"declarado por la tienda (topes de
+M38)"* sin implementación detrás).
+
+El único recargo real del catálogo es **12 %** (`catalogo_tiendas.gd` L156), dentro del
+rango documentado. El defecto se activa con cualquier valor fuera de rango — incluido el
+que llegue desde datos o desde un `@export` mal cargado.
+
+### RED medido antes de tocar código
+
+Bloque `recargo` nuevo (8 checks) en `scripts/economia/test_edge_cases_precio.gd`,
+con `"recargo"` sumado a `_WB_BLOQUES` y sobre un precio base controlado de 100:
+
+| Caso | Esperado | Medido en RED |
+|---|---|---|
+| `recargo 500 %` | CLAMP 15 → 115 | **600** (multiplicaba literal) |
+| `recargo INF` | CLAMP 15 → 115 | **basura silenciosa** (`int(round(INF))` no lanza error) |
+| `recargos_clampeados()` | existe | **no existe** |
+
+Controles que ya pasaban y siguen pasando: sin recargo 100 · 12 % → 112 · 15 % → 115 ·
+NaN → 100 (ignorado) · negativo → 100 (no abarata).
+
+Corrida RED: **28 checks, 3 fallos, EXIT 1**.
+
+### Corrección (3 piezas)
+
+1. **`const RECARGO_MAX_PCT: float = 15.0`** junto a los demás topes de la clase
+   (`DESCUENTO_VOLUMEN_MAX`, `DESCUENTO_TOTAL_MAX`). 15 % es el extremo superior del
+   rango documentado en `shop_data.gd` L83 y deja holgado el 12 % real del mercader.
+2. **Saneo del parámetro** en `precio_compra_vigente()`: `NaN` → se ignora (0, sin
+   abaratar); `+INF`/`-INF` → se satura al tope; `> RECARGO_MAX_PCT` → se clampea.
+   Cada caso emite `push_warning("[DOM-ECO-RECARGO] …")` con item, valor recibido y
+   valor aplicado.
+3. **Observabilidad:** contador `_recargos_clampeados` + accesor
+   `recargos_clampeados()` (mismo patrón que `guardados_rechazados()` de M59 y
+   `depositos_clampeados()` de la tanda anterior).
+
+El recargo sigue aplicándose **después** de amistad/volumen/estacionalidad, así que no
+interfiere con el tope `DESCUENTO_TOTAL_MAX` ni con el clamp `maxi(1, final)`.
+
+### Evidencia (Godot 4.7.2 headless)
+
+- `scripts/economia/test_edge_cases_precio.gd` → **29 checks, 0 fallos, EXIT 0**, con
+  `CHECKS_MINIMOS` subido de 20 a 28 y los dos warnings `DOM-ECO-RECARGO` visibles para
+  500 % e INF.
+- **Regresión de economía (8 suites, todas EXIT 0 / 0 fallos):** `test_topos_banda` 11 ·
+  `test_minorista_mayorista` 14 · `test_mercado_estacion_ferias` 23 · `test_t7_amistad` 12 ·
+  `test_iter5_jkl` 33 · `test_iter4_brechas` 20 · `test_t9_rendimiento` 6 ·
+  `tests/unit/economia/test_economy_manager` (P, 53 checks).
+- **Regresión de tiendas (8 suites, todas EXIT 0 / 0 fallos):** `test_tiendas` (0 fallos) ·
+  `test_tiendas_iter_glm` 39 · `test_m38_economia_smoke` 7 · `test_tabla_dia_transacciones` 29 ·
+  `test_economy_npc_shop` 19 · `test_inventory_economy` 52 · `test_stable_flows` 32 ·
+  `test_pergaminos_tienda` (0 fallos).
+
+### Marcas: qué se tocó y qué NO
+
+- **No se flipeó ninguna marca.** M39 es módulo ajeno y la regla §21.4 lo impide sin GO.
+- El fix **vuelve verdadera** la marca `[x]` de M39 L50 (*"recargos dentro de topes de
+  M38"*) que hasta hoy se apoyaba en un comentario: ahora el tope existe, está testeado y
+  es observable. También respalda L132 y L216 del mismo checklist.
+
+### Notas para el próximo agente
+
+- El tope aplica a `precio_compra_vigente()`, que es el único consumidor del recargo
+  (`shop_manager.gd` L236). Si en el futuro aparece una segunda vía de recargo (p. ej.
+  venta al jugador), debe reutilizar `RECARGO_MAX_PCT` para no abrir el mismo agujero.
+- Los warnings `DOM-ECO-RECARGO` son intencionalmente `push_warning` y no `print`: son
+  anomalías de datos, no eventos de juego. En headless pueden aparecer duplicados al
+  mezclar stdout/stderr; es cosmético.
+- **`RECARGO_MAX_PCT` no debe confundirse con `DESCUENTO_TOTAL_MAX`:** el primero acota el
+  recargo del mercader (encarece), el segundo acota los descuentos combinados
+  (abaratan). Son topes independientes por diseño.
+

@@ -17,7 +17,7 @@
 
 ### M36 Fauna (5 pendientes)
 - [x] Pez tropical (2 variantes de color)
-- [ ] Lagarto de isla
+- [x] Lagarto de isla
 - [ ] Cabra
 - [ ] Gallina
 - [ ] Mariposa (alas simples para animar)
