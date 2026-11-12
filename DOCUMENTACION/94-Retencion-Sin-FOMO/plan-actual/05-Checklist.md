@@ -222,7 +222,7 @@
 - [x] Re-corrido con binario real: **EXIT 0 — 38 checks, 0 fallos** (antes 38/5). Ver
   `11-BUGS.md` §7 BUG-061.
 
-**Totales:** 138 ítems · Completados: 83 · Pendientes: 0 · No resueltos: 55. — (+4 degradados por auditoría §21.8.2.b, Step-5 47, 2026-10-15)
+**Totales:** 138 ítems · Completados: 89 · Pendientes: 0 · No resueltos: 49. — (+4 degradados por auditoría §21.8.2.b, Step-5 47, 2026-10-15; alineado Hy3 por GO 552, 2026-11-11: marcas vivas 89[x]/0[ ]/49[?]=138)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:

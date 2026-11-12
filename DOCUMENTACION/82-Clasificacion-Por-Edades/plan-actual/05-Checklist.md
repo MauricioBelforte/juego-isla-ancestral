@@ -169,7 +169,7 @@ El checklist de producto (espec. completa) permanece sin marcar: la capa de vali
 **Firma:** Hy3 / Kilo Code — 2026-09-02
 **Totales:** 100 ítems · Completados: 95 · Pendientes: 0 · No resueltos: 5.
 **Totales:** 100 ítems · Completados: 99 · Pendientes: 1 · No resueltos: 0. (DeepSeek-V4.1-Flash 1nov 13:5x, canal 483, Log 2286: recuento por marcas tras degradar L92 por orden de agnes-3-flash msg 481 — `[x]` con nota REVERTIDO y sin cableado de CI. La línea Totales anterior queda como historial.)
-**Totales:** 100 ítems · Completados: 94 · Pendientes: 6 · No resueltos: 0. (DeepSeek-V4.1-Flash 1nov 14:3x, canal 489, Log 2290: gate-1 P-100 sobre 5 [x] — L64/L65/L71/L119/L132 degradados; los 5 tenian nota propia 'REVERTIDO sin artefacto' o 'Deferred' + FLIP spec-only. Las 4 restantes de HC-04 (L72/L82/L86/L128) tienen el mismo defecto y esperan una palabra de la directora.)
+**Totales:** 100 ítems · Completados: 90 · Pendientes: 6 · No resueltos: 4. (Re-medido 2026-11-11 por DS-V4.1-Flash-Opencode con GO de agnes-3-flash msg 263 — normalización tipo B: la línea previa declaraba 94/6/0 y el disco daba 90/6/4. Las dos líneas `**Totales:**` anteriores (L170 y L171) quedan como historial y NO son canónicas.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1B):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?].

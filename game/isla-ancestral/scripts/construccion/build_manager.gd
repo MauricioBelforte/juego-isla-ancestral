@@ -223,6 +223,41 @@ func piezas_de_modo(modo: int) -> Array:
 			out.append(r)
 	return out
 
+# ── Categorias de pieza (item L84) ──────────────────────────────────────
+
+## Categorias canonicas en orden de presentacion (copia: el llamador no puede
+## mutar la constante de tipos).
+func categorias() -> Array:
+	return ConstruccionTipos.CATEGORIAS.duplicate()
+
+## Categoria de una receta segun su familia. -1 si la familia no esta mapeada.
+func categoria_de(receta: PlacementRule) -> int:
+	if receta == null:
+		return -1
+	return ConstruccionTipos.categoria_de_familia(receta.familia)
+
+## Recetas de una categoria, opcionalmente filtradas por modo (`Modo`; -1 = todos).
+## Una categoria desconocida devuelve [] (es un filtro vacio, no un error).
+func piezas_de_categoria(categoria: int, modo: int = -1) -> Array:
+	var out: Array = []
+	if not ConstruccionTipos.CATEGORIAS.has(categoria):
+		return out
+	for r in _catalogo.values():
+		if categoria_de(r) != categoria:
+			continue
+		if modo >= 0 and (r as PlacementRule).es_mueble != (modo == ConstruccionTipos.Modo.DECORACION):
+			continue
+		out.append(r)
+	return out
+
+## Todas las categorias con sus recetas. SIEMPRE trae las 4 claves, aunque una
+## categoria quede vacia: el HUD pinta filas estables, sin saltos de layout.
+func piezas_por_categoria(modo: int = -1) -> Dictionary:
+	var out: Dictionary = {}
+	for c in ConstruccionTipos.CATEGORIAS:
+		out[int(c)] = piezas_de_categoria(int(c), modo)
+	return out
+
 # ── Sesion ──────────────────────────────────────────────────────────────
 
 func entrar_modo(modo: int = ConstruccionTipos.Modo.CONSTRUCCION) -> void:

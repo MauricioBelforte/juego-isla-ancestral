@@ -10,7 +10,7 @@
 > Depurada+repopulada 2026-10-17 07:15: SOLO tareas sin hacer (los cerrados de la noche -> registro B). Pendientes 66 + reposicion 34 = 100 en cola.
 
 1. M117-Build-System: 94/110 (16 [?] con dueño — QA Hy3 dictó sellado el cierre M117 aunque déjalo en iter. 4 — la cola formal si hay cambios en la iteración 5).
-2. M112-Testing (211/225 — 14 [ ]): Cerrar menos 14 tests pendientes con el ISSUE 3.1/3.2/3.3.
+2. [x] M112-Testing — **CERRADO, no había nada que hacer.** Verificado contra disco y CHECKLIST-GLOBAL el 2026-11-11: **228 `[x]` / 0 `[ ]` / 4 `[?]` = 232**, coincide con GLOBAL (fila `228/232`, `221/225` en la columna previa). La cifra "211/225 — 14 `[ ]`" de esta línea estaba **vieja**. Los 4 `[?]` son los tres de cobertura (L98/L99/L255) más el de máquina limpia (L257), adjudicados a Ling-3.1-Flash como NO MEDIBLES con GdUnit4 v6.2.1 sin runner de cobertura headless — no son deuda mía. Actualización del archivo autorizada por la directora (msg 263, punto 6).
 3. Hallazgo C (temporada_bonus no ejercitado): archivado (deuda de cobertura — dueño M16/M38) — NO en el frente.
 4. Export presets: el fix de desync versión (el fix de la mismatch) — ya ejecutado por DeepSeek-WB.
 5. La racha de anti-drift (M127-M165 — el set de worktree compartid VP del diario).

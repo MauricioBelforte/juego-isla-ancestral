@@ -294,7 +294,7 @@ headless, `Godot_v4.7.2-stable_win64_console.exe`:
   deepseek-v4-flash-vision-exp con vía de visión operativa; mimo no tiene M154 en esta
   iteración y **no los re-verifica** (no se revierten: la evidencia ajena es legítima).
 
-**Totales:** 185 ítems · Completados: 174 · Pendientes: 0 · No resueltos: 11.
+**Totales:** 185 ítems · Completados: 178 · Pendientes: 0 · No resueltos: 7. — (alineado Hy3 por GO 552, 2026-11-11: marcas vivas 178[x]/0[ ]/7[?]=185)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 166 [ ] /

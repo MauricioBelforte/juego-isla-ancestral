@@ -20,6 +20,63 @@ enum Modo {
 	DECORACION,     ## mismo sistema, catalogo filtrado a muebles y decoracion
 }
 
+## Categoria de pieza (item L84 del checklist): eje de AGRUPACION del catalogo.
+##
+## Es ORTOGONAL al modo: `Modo.DECORACION` filtra por `es_mueble`, mientras que la
+## categoria clasifica por FAMILIA. Un puente con `es_mueble = true` aparece en modo
+## decoracion pero pertenece a la categoria estructura (no se reclasifica por modo).
+enum Categoria {
+	ESTRUCTURA,    ## pared, piso, techo, puerta, ventana, escalera, camino, cerca, puente
+	MOBILIARIO,    ## mueble
+	ILUMINACION,   ## iluminacion
+	DECORACION,    ## decoracion
+}
+
+## Orden canonico de presentacion en el HUD: es el orden de este array, no el del
+## diccionario de familias (los Dictionary no garantizan orden de insercion estable
+## para el consumidor).
+const CATEGORIAS: Array = [
+	Categoria.ESTRUCTURA,
+	Categoria.MOBILIARIO,
+	Categoria.ILUMINACION,
+	Categoria.DECORACION,
+]
+
+## Familia del catalogo -> categoria. Cubre las 12 familias reales medidas en
+## `data/construccion/piezas/` (2026-11-11: 46 recetas). Una familia NUEVA que no
+## figure aqui devuelve -1 en `categoria_de_familia()`: no se inventa categoria.
+const CATEGORIA_DE_FAMILIA: Dictionary = {
+	&"pared": Categoria.ESTRUCTURA,
+	&"piso": Categoria.ESTRUCTURA,
+	&"techo": Categoria.ESTRUCTURA,
+	&"puerta": Categoria.ESTRUCTURA,
+	&"ventana": Categoria.ESTRUCTURA,
+	&"escalera": Categoria.ESTRUCTURA,
+	&"camino": Categoria.ESTRUCTURA,
+	&"cerca": Categoria.ESTRUCTURA,
+	&"puente": Categoria.ESTRUCTURA,
+	&"mueble": Categoria.MOBILIARIO,
+	&"iluminacion": Categoria.ILUMINACION,
+	&"decoracion": Categoria.DECORACION,
+}
+
+## Texto legible por categoria (para el selector del HUD).
+const TEXTO_CATEGORIA: Dictionary = {
+	Categoria.ESTRUCTURA: "estructura",
+	Categoria.MOBILIARIO: "mobiliario",
+	Categoria.ILUMINACION: "iluminacion",
+	Categoria.DECORACION: "decoracion",
+}
+
+## Categoria de una familia del catalogo. -1 si la familia no esta mapeada
+## (el llamador decide que hacer: el manager la reporta como desconocida).
+static func categoria_de_familia(familia: StringName) -> int:
+	return int(CATEGORIA_DE_FAMILIA.get(familia, -1))
+
+## Texto de una categoria. Tolerante a valores desconocidos.
+static func texto_categoria(categoria: int) -> String:
+	return String(TEXTO_CATEGORIA.get(categoria, "categoria desconocida (%d)" % categoria))
+
 ## Permiso de una zona (RF6). Una celda pertenece a lo sumo a una zona efectiva:
 ## la de AABB mas pequena que la contiene (la mas especifica).
 enum Permiso {

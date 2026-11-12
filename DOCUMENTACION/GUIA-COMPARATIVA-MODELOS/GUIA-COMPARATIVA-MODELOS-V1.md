@@ -327,6 +327,53 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 ---
 
+### ERNIE-5.5-Flash-Preview (Baidu) — Razonamiento de largo horizonte, análisis multimodal y modelado 3D
+
+| Campo | Valor |
+|-------|-------|
+| Modelo | ERNIE-5.5-Flash-Preview (`baidu/ernie-5.5-flash-preview`) |
+| Plataforma | Stealth/Baidu (Kilo Code / OpenRouter / Qianfan) |
+| Tipo | Razonamiento de largo horizonte (TEMPO), análisis multimodal, modelado 3D, conocimiento profundo |
+| Contexto | 1,048,576 tokens (entrada) / hasta 921,600 (salida) |
+| Modalidades de entrada | Texto, imagen, video, audio → texto |
+| Razonamiento | Sí, TEMPO (test-time-scaled reasoning para largo horizonte) |
+| Tool calling | Sí (funciones definidas por el usuario) |
+| Structured outputs | Sí (JSON schema) |
+| Precio | $0.28/M input / $1.13/M output (preview, puede retirarse sin aviso) |
+| Proveedor | Baidu |
+| Data | Prompts y respuestas pueden ser retenidos por el proveedor |
+| Liberado | 2026-11-11 |
+| Estado | En prueba — supervisado por Nemotron-3.5-Super-VL |
+
+**Benchmark público (Baidu, 2026-11-11):** Terminal-Bench 4.0 46.5%, DeepSWE v1.1 71.2%, AutomationBench 61.9%, APEX-Agents 1.1 64.2%, DRACO 84.9%, SpreadsheetBench V2 36.4%, OfficeQA Pro V2 67.9%. Benchmarks de terceros: Terminal-Bench-Science 21.0, NL2Repo-Bench 64.8, Toolathlon-Verified 79.0, MCP-Atlas 84.6, BrowseComp 87.4, HLE sin tools 46.4, BlenderWorld text-only 79.0.
+
+**Fortalezas (observadas en investigación web):**
+- Razamiento de largo horizonte (TEMPO): descompone tareas complejas en macro-steps con auto-evaluación entre cada paso
+- Contexto de 1M tokens: ideal para análisis de grandes bases de código sin fragmentar
+- Multimodal de entrada: texto, imagen, video, audio → texto (ideal para revisar texturas, modelos 3D, escenas .tscn con imágenes, documentación con diagramas)
+- Modelado 3D: capacidades demostradas en Blender y CAD (paramétrico, espacial, generación de objetos 3D desde texto)
+- Conocimiento profundo: documente, research, deep research (DRACO 84.9%)
+- Código y agentic coding: Terminal-Bench 46.5%, DeepSWE 71.2%, Toolathlon 79.0
+
+**Debilidades (observadas en investigación web):**
+- Texto solo como salida (no genera imágenes, video, audio directamente; solo los entiende como entrada)
+- Preview: entrenamiento no terminado, algunas capacidades pueden fallar, no hay benchmarks independientes verificados (todos son de Baidu)
+- Precio de pago: $0.28/M input / $1.13/M output (no es gratuito como Crouton/Glyph)
+
+**Regla de asignación:** tareas de razonamiento de largo horizonte, análisis multimodal (texturas, modelos 3D, escenas .tscn con imágenes), documentación con diagramas, modelado 3D procedural (Blender/CAD), deep research, tareas que requieren contexto de 1M tokens. NO asignar: tareas de salida de imagen/audio/video, escaneo estático masivo de código (usar Crouton Alpha), análisis de arquitectura pura (usar Glyph Cluster).
+
+**Método de trabajo:** análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica. Para tareas de largo horizonte: descomponer en macro-steps con auto-evaluación entre cada paso.
+
+## Reportes escritos
+
+Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/REPORTES-Prueba-Paralela/`
+
+## Supervisión
+
+Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa revisión. Razonamiento: high.
+
+---
+
 ## Reglas de uso
 
 1. **Solo modelos aprobados por el fundador** se agregan a la tabla de activos.
@@ -334,7 +381,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 3. **No incluir** modelos que ya no van a volver; esos ya viven en `obsoletos/` como histórico.
 4. **UTF-8 sin BOM** siempre (§28 AGENTS.md).
 5. **Firmar** toda edición con modelo, plataforma y fecha.
-6. **Modelos en prueba (supervisados):** Crouton Alpha y Stealth Glyph Cluster están supervisados por Nemotron-3.5-Super-VL y son modelos gratuitos (preview). Reflection Beam 1.0 es de pago ($0.25/M input / $1.00/M output); el fundador evalúa si se mantiene. No se les asignan módulos críticos sin previa revisión de Nemotron. Los reportes de sus tareas se escriben en `Mensajes entre modelos/<MODELO>/REPORTES-Prueba-Paralela/`. Beam tiene su propio BACKLOG-MASTER en `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md`.
+6. **Modelos en prueba (supervisados):** Crouton Alpha (retirado), Stealth Glyph Cluster (activo), Reflection Beam 1.0 (modelo de pago), ERNIE-5.5-Flash-Preview (modelo de pago, en prueba — supervisado por Nemotron-3.5-Super-VL y es gratuito en preview). No se les asignan módulos críticos sin previa revisión de Nemotron. Los reportes de sus tareas se escriben en `Mensajes entre modelos/<MODELO>/REPORTES-Prueba-Paralela/`. Beam tiene su propio BACKLOG-MASTER en `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md`.
 
 ---
 
@@ -346,4 +393,4 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Modelo:** Nemotron-3.5-Super-VL
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-09
+**Fecha:** 2026-11-11

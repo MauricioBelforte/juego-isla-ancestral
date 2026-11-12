@@ -1,0 +1,19 @@
+alta  tris=228  mats=7 mallas=10 verts=456  x=[-0.2200..0.3650] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.5850 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 12, 0.335: 24} hocico=12 barba=12 trasero=12 cima=24 ojos=24 manchas=36 zona_vacia=[]
+   niveles_x=[-0.22, -0.19, -0.13, -0.095, -0.09, -0.07, -0.05, -0.025, 0.03, 0.05, 0.06, 0.09, 0.105, 0.13, 0.15, 0.175, 0.21, 0.22, 0.255, 0.2925, 0.305, 0.3275, 0.345, 0.35, 0.365]
+   niveles_y=[0.045, 0.085, 0.125, 0.155, 0.165, 0.185, 0.1875, 0.215, 0.2225, 0.225, 0.245, 0.265, 0.335]
+   niveles_z=[-0.18, -0.13, -0.105, -0.095, -0.09, -0.08, -0.075, -0.07, -0.06, -0.05, -0.03, -0.025, 0.025, 0.03, 0.05, 0.06, 0.07, 0.075, 0.08, 0.09, 0.095, 0.13, 0.18]
+   materiales=['MAT_Cabra_Barba', 'MAT_Cabra_Cabeza', 'MAT_Cabra_Cuerno', 'MAT_Cabra_Cuerpo', 'MAT_Cabra_Mancha', 'MAT_Cabra_Ojo', 'MAT_Cabra_Roca']
+media tris=228  mats=7 mallas=7 verts=456  x=[-0.2200..0.3650] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.5850 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 12, 0.335: 24} hocico=12 barba=12 trasero=12 cima=24 ojos=24 manchas=36 zona_vacia=[]
+   niveles_x=[-0.22, -0.19, -0.13, -0.095, -0.09, -0.07, -0.05, -0.025, 0.03, 0.05, 0.06, 0.09, 0.105, 0.13, 0.15, 0.175, 0.21, 0.22, 0.255, 0.2925, 0.305, 0.3275, 0.345, 0.35, 0.365]
+   niveles_y=[0.045, 0.085, 0.125, 0.155, 0.165, 0.185, 0.1875, 0.215, 0.2225, 0.225, 0.245, 0.265, 0.335]
+   niveles_z=[-0.18, -0.13, -0.105, -0.095, -0.09, -0.08, -0.075, -0.07, -0.06, -0.05, -0.03, -0.025, 0.025, 0.03, 0.05, 0.06, 0.07, 0.075, 0.08, 0.09, 0.095, 0.13, 0.18]
+   materiales=['MAT_Cabra_Barba', 'MAT_Cabra_Cabeza', 'MAT_Cabra_Cuerno', 'MAT_Cabra_Cuerpo', 'MAT_Cabra_Mancha', 'MAT_Cabra_Ojo', 'MAT_Cabra_Roca']
+baja  tris=156  mats=4 mallas=4 verts=312  x=[-0.2200..0.3500] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.5700 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 12, 0.335: 24} hocico=12 barba=0 trasero=12 cima=24 ojos=0 manchas=0 zona_vacia=[]
+   niveles_x=[-0.22, -0.19, -0.13, -0.095, -0.09, -0.025, 0.06, 0.09, 0.105, 0.175, 0.21, 0.22, 0.255, 0.305, 0.35]
+   niveles_y=[0.045, 0.085, 0.125, 0.155, 0.225, 0.245, 0.265, 0.335]
+   niveles_z=[-0.18, -0.13, -0.09, -0.08, -0.075, -0.07, -0.06, -0.05, -0.03, 0.03, 0.05, 0.06, 0.07, 0.075, 0.08, 0.09, 0.13, 0.18]
+   materiales=['MAT_Cabra_Cabeza', 'MAT_Cabra_Cuerno', 'MAT_Cabra_Cuerpo', 'MAT_Cabra_Roca']
+PROBE_JSON D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\Temp\hy4_cabra_glb_probe_20261111.json

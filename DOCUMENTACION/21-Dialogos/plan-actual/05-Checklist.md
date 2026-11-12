@@ -59,8 +59,8 @@
 
 - [x] Definir esquema JSON de grafo con dialogue_id y start_node_id [S] — barrido M21 (Ling-3.1-Flash/Kilo, 2026-10-12, encargo msg 94): dialogue_graph.gd L11-13 (@export dialogue_id/start_node_id/nodes); load_from_json lee "id"/"start" L27-28
 - [x] Implementar DialogueGraph.load_from_json con parsing tolerante [S] — barrido M21 (encargo msg 94): dialogue_graph.gd L17-51 (FileAccess nulo / JSON inválido → push_error + grafo vacío, no crashea)
-- [x] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L62 reportar JSON malformado)
-- [x] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L63 detectar IDs duplicados)
+- [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L62 reportar JSON malformado) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): spec en 03-Diseno no es implementacion: `DialogGraphValidator` reporta JSON invalido SIN linea/columna (el propio parentesis del item lo admite)
+- [?] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L63 detectar IDs duplicados) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): "no aplicable" no es un item hecho: `load_from_json` usa Dictionary y colapsa duplicados, la deteccion no existe ni puede existir post-carga
 - [x] Detectar next_id apuntando a nodo inexistente [S] — barrido M21 (encargo msg 94): dialogue_graph.gd validate() L71-72 ("apunta a next inexistente"); test_validacion_5_invalidos_m21.gd 6 checks 0 fallos
 - [x] Detectar goto_id apuntando a nodo inexistente [S] — barrido M21 (encargo msg 94): dialogue_graph.gd validate() L73-74 ("apunta a goto inexistente"); test_validacion_5_invalidos_m21.gd ("OK: detecta goto_id inexistente")
 - [x] Detectar nodo sin start_node_id alcanzable (nodo huerfano) [S] — barrido M21 (encargo msg 94): dialog_graph_validator.gd _alcanzables() BFS L94-113 + validar() L72-75 ("nodo huérfano (inaccesible desde start)"); test_validacion_grafo_m21.gd 9 checks 0 fallos
@@ -72,11 +72,11 @@
 - [x] Gate CI/editor de validacion: validate_all_dialogues.gd (extends SceneTree) valida res://data/dialogues/*.json con DialogGraphValidator y sale !=0 en problemas; start_dialogue tambien corre el validador (nodos huerfanos + operadores) como gate en runtime ([VAL-DGV]); test_validacion_ci_m21.gd 0 fallos (Log 309) [S]
 - [x] Emitir log [VAL-DGT] con conteo de errores y advertencias [S] **flip 2026-10-16 (Hy3 lote 1 msg 244, sello director): _resumen_validacion con conteo N errores/M advertencias + resumen persistido en _ultimo_resumen_validacion**
 - [x] Fallback amigable al usar un grafo invalido (mensaje por defecto) [S] — barrido M21 (encargo msg 94): dialogue_manager.gd start_dialogue() L97-101 (validate() con problemas → logs [VAL-DGT] + return false, sin crashear; ídem H.149)
-- [x] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M]
+- [?] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): 0 archivos con `@tool` en `scripts/dialogos/` (grep 2026-11-11): no hay herramienta de recarga en caliente del grafo
 
 ## D. UI y tipografía progresiva (16)
 
-- [x] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S]
+- [?] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `scripts/dialogos/ui/dialogue_ui.gd` existe pero **NO hay** `dialogue_ui.tscn` en el repo (glob 2026-11-11): la escena CanvasLayer no fue creada
 - [x] Crear caja de dialogo con nombre y retrato del hablante [S] (retrazo grafico NpcPortraitUI: 150x150, tint por expresion feliz/feliz_intenso/neutral, set_speaker + set_expression; iter 5 / Log 299)
 - [x] Implementar tipografia progresiva letra a letra [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
 - [x] Configurar velocidad de tipeo por caracteres por minuto [S] **flip 2026-10-17 (Hy3 lote 2, acuse dir 255): commit 2e611a3 + Log 1936/1937; 12/12 suites M21 0 fallos**
@@ -163,7 +163,7 @@
 
 ## I. Optimización (7)
 
-- [x] Cache de grafos cargados con descarte LRU por limite de memoria [M]
+- [?] Cache de grafos cargados con descarte LRU por limite de memoria [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `dialogue_manager.gd` L294-307: `_grafos_cache` es un Dictionary SIN limite ni politica de descarte -> no hay LRU
 - [x] Cero allocs apreciables por frame durante el tipeo (strings precalculadas) [S]
 - [x] Evaluacion de condiciones en lote con get_snapshot (una sola lectura) [S] — iter 9 (Hy3/WorkBuddy): _combinar_estado usa ws.get_snapshot(claves) en vez de N get_value
 - [x] UI oculta con visibility, sin procesos en idle cuando no hay dialogo [S] — barrido M21 (encargo msg 102): ui/dialogue_ui.gd: CanvasLayer con hide()/show() (visibility), sin _process(); _input() L142-144 early-return cuando no está visible
@@ -191,7 +191,7 @@
 
 ## L. Testing y QA (7)
 
-- [x] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren). | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L194 test pipeline end-to-end)
+- [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren). | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L194 test pipeline end-to-end) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `dialogo_ejemplo.json` no existe (la propia linea lo anota) y no hay test play-mode del pipeline; las suites headless no lo cubren
 - [x] Test de salto rapido: tipeo, linea, nodo y salto completo (test_skip_m21.gd: skip hasta FIN, se detiene en OPCIONES, efectos aplicados, choose_option tras skip) 0 fallos (Log 309) [S] — verificado barrido M21 (encargo msg 102, 2026-10-12): 13 checks 0 fallos headless
 - [x] Test de ramas: cada condicion verdadera y falsa evaluada [M] — barrido M21 R1: test_condiciones_mundo.gd evalúa AMBAS ramas — _test_condiciones_nodo L105-108 (estacion==0 entra / !=0 saltado, adaptativo al estado real) y _test_condicion_sesion L161-171 (amistad 1.0 → rama bloqueada [falsa]; amistad 5.0 → rama entra [verdadera]); 8 checks 0 fallos headless
 - [x] Test de validacion: 5 grafos invalidos propositados detectados en editor [M] — iter 9 (Hy3/WorkBuddy): test_validacion_5_invalidos_m21.gd (huérfano/operador/clave/next/goto) 0 fallos — verificado barrido M21 (encargo msg 102, 2026-10-12): 6 checks 0 fallos headless
@@ -337,4 +337,4 @@ Alcance verificado por el director (msg 255): 12/12 suites M21 en verde, 0 fallo
 
 ### CHECKLIST-GLOBAL.md (fila 21) - NO editado
 Por directiva de la automatizacion (nunca editar CHECKLIST-GLOBAL.md ni quality.yml) y porque es archivo protegido/degradado (ver MEMORY), NO aplique el conteo a la fila 21 del GLOBAL. Conteo real para que el director lo aplique: **M21 = 105/34/4 (143)**.
-**Totales:** 143 items · Completados: 113 · Pendientes: 26 · No resueltos: 4. (Re-medido G-5.3-Flash-Agente 2026-10-22: 113 [x] / 26 [ ] / 4 [?] tras tanda puente M21->M64; qa_m21_puente_m64.gd 8/0; regresion condiciones 8/0 + eventos 35/0 + dialogos 19/0.) (Re-medido G-5.3-Flash-Agente 2026-10-22: 111 [x] / 28 [ ] / 4 [?] tras tanda condicionales + FIX BUG-147; qa_m21_contexto_mundo.gd 8/0; regresion condiciones/skip/dialogos 8/0+13/0+19/0.) (Re-medido G-5.3-Flash-Agente 2026-10-22: 107 [x] / 32 [ ] / 4 [?] tras tanda RF8 auto-advance + FIX BUG-147 validate_config; qa_m21_auto_advance.gd 14/0.) (Re-medido G-5.3-Flash-Agente 2026-10-22: 106 [x] / 33 [ ] / 4 [?] tras tanda RF3 typewriter+BUG-146; qa_m21_typewriter.gd 11/0; riel typewriter/skip verde 19/0 + 13/0.)
+**Totales:** 143 items · Completados: 137 · Pendientes: 0 · No resueltos: 6. (Re-medido 2026-11-11 por DS-V4.1-Flash-Opencode tras degradacion gate-1 con GO msg 263: 6 marcas [x] sin artefacto pasaron a [?] — L62, L63, L75, L79, L166, L194. Conteo real por regex: 137 [x] / 0 [ ] / 6 [?] = 143.)
