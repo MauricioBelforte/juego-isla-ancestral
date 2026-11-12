@@ -18,26 +18,26 @@
 ### M36 Fauna (5 pendientes)
 - [x] Pez tropical (2 variantes de color)
 - [x] Lagarto de isla
-- [ ] Cabra
-- [ ] Gallina
+- [x] Cabra
+- [x] Gallina
 - [ ] Mariposa (alas simples para animar)
 
 ### M25 Ruinas (6 pendientes — el encabezado decia 2, corregido 2026-09-13)
 - [ ] Columna rota (2 variantes de altura)
 - [ ] Columna entera con capitel
-- [ ] Bloque de piedra tallada (modulo de muro)
-- [ ] Dintel caido
+- [x] Bloque de piedra tallada (modulo de muro)
+- [x] Dintel caido
 - [ ] Palanca de puzzle (interactuable)
-- [ ] Estructura sumergida parcial (marea)
+- [x] Estructura sumergida parcial (marea)
 
 ### M40 Infraestructura (1 pendiente)
-- [ ] Valla de madera (modulo recto + esquina)
+- [x] Valla de madera (modulo recto + esquina)
 
 ### M35 Mineria (4 pendientes — el encabezado decia 3, corregido 2026-09-13)
-- [ ] Cana de pescar
+- [x] Cana de pescar
 - [ ] Pez capturable (compartido con fauna)
 - [x] Cangrejo ermitano (recompensa rara)
-- [ ] Carrito de vias (26 subterraneo)
+- [x] Carrito de vias (26 subterraneo)
 
 ### M18-BIS Casas grandes — **TRASPASADO A MiMo (directiva del usuario 2026-09-11)**
 HY4 cerro 3/5 (mediana log 806, choza ampliada log 808, casona log 844) y deja el

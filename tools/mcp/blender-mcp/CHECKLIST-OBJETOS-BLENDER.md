@@ -173,8 +173,8 @@ menos.
 
 - [ ] Columna rota (2 variantes de altura)
 - [ ] Columna entera con capitel
-- [ ] Bloque de piedra tallada (módulo de muro)
-- [ ] Dintel caído
+- [x] (B15) Bloque de piedra tallada (módulo de muro)
+- [x] (B16) Dintel caído
 - [x] Estatua ancestral erosionada — `crear_estatua_ancestral_erosionada_lowpoly.py` + 6 capturas orbitales 04-15 (aprobado 2026-09-02 04:15; E-50 fix inicial: pedestal de cubo (4 verts) → cilindro de 12 verts en base + cubo de transición; E-37 validado: silueta lee como estatua humanoide — pedestal cilíndrico + monolito torso+piernas + hombros anchos + 2 brazos inclinados ±10° + cabeza aplanada con nariz y 2 ojos + 3 manchas de musgo; ALTA 15 obj/15 SM_, MEDIA 5/260/5, BAJA 5/178/4; footprint 1.10×1.10, toca=12; 3 GLB + 3 .import + 3 .scn en Godot).
 - [x] Arco de entrada de templo — `crear_arco_entrada_templo_lowpoly.py` v4 + 6 capturas orbitales 04-00 (aprobado 2026-09-02 04:00; E-68 descubierto y corregido: `primitive_cube_add(size=1, scale=s)` produce cubo de sx×sy×sz, no 2*sx×2*sy×2*sz; dovelas con `sx = ANCHO_D` y `ANCHO_D = chord*1.04` cierran el wedge gap; ALTA 15 obj/60 caras placeholder→recalculado, MEDIA 3/212/3, BAJA 3/146/3; footprint 2.44×0.64, dovelas se tocan visiblemente en los 6 azimuts; va a unir 2 pilares con semicírculo de 7 dovelas; musgo en basas). 3 GLB exportados + 3 .import + 3 .scn (E-65).
 - [x] Altar ritual central — `crear_altar_ritual_lowpoly.py` + 6 capturas orbitales 19-36 (aprobado, pirámide escalonada + techo + 4 pilares + cristal; z_min 0.045) 2026-08-28
@@ -184,14 +184,14 @@ menos.
 - [x] Antorcha de pared — `crear_antorcha_pared_lowpoly.py` v2 + 6 capturas orbitales 18-14/18-18 (corregido 2026-08-29 18:11 por bug reportado: en v1 el panel de pared del set de captura flotaba a z=0.40 y la placa estaba 0.42 unidades separada del muro. v2: `Set_Pared` asentada en la arena con base ligeramente enterrada y placa montada al ras del muro con sus 4 remaches; z_min 0.045, 7 piezas: placa + brazo + copa + mango + tela + brasa + 4 remaches). Variantes M166 MEDIA (4 obj/94 tris/4 mats) y BAJA (4 obj/80 tris/4 mats) regeneradas desde v2 y aprobadas 2026-08-29 18:18 (ver Tier D).
 - [x] Puerta de templo (doble hoja de piedra) — `crear_puerta_templo_lowpoly.py` + 6 capturas orbitales 19-32 (aprobado, marco azul + paneles; z_min 0.045) 2026-08-28
 - [x] Puente de cuerda colgante (25/28 viajes) — **DUPLICADO**, cerrado 2026-09-02 04:24 (log 531). Cubierto por `- [x] Puentes de cuerda (M25)` = `crear_puente_cuerda_lowpoly.py`, aprobado 2026-08-29 21:12 con sus 3 GLB ya importados. **No generar un segundo puente para esta línea.** (El asset nuevo `40-Infraestructura_puente_cuerda_colgante` de M40 es OTRO ítem, añadido aparte en la sección M40.)
-- [ ] Estructura sumergida parcial (marea)
+- [x] (B17) Estructura sumergida parcial (marea)
 
 ## Módulo 40 — Infraestructura 🌉
 
 - [x] Muelle de madera (tablas + pilotes) — `crear_muelle_madera_lowpoly.py` + 6 capturas orbitales 19-38 (aprobado, 4 pilotes + tabla + barandilla; z_min 0.045) 2026-08-28
 - [x] Bote de pesca amarrado — `crear_bote_pesca_lowpoly.py` + 6 capturas orbitales 19-43 (aprobado, casco + costillas + proa cónica + poste + cabo; z_min 0.045) 2026-08-28
 - [x] Farola de fuego (poste + brasero) — `crear_farola_fuego_lowpoly.py` + 6 capturas orbitales 19-42 (aprobado, base + poste + brasero + llama; z_min 0.045) 2026-08-28
-- [ ] Valla de madera (módulo recto + esquina)
+- [x] (B18, 6 GLB) Valla de madera (módulo recto + esquina)
 - [x] Cartel indicador (poste con tabla) — `crear_cartel_indicador_lowpoly.py` + 6 capturas orbitales 17:39 (aprobado, 5 obj, z_min 0.045). Ver Tier D arriba.
 - [x] Pozo de piedra
 - [x] **Puente de cuerda colgante (M40, NUEVO 2026-09-02 04:24, log 531)** — `crear_puente_cuerda_colgante_lowpoly.py` v2. **APROBADO**: 2 basas de piedra + 2 postes + **6 segmentos de cable principal (3 por lado)** en parábola + 3 tablones de tablero + 2 barandillas de cuerda. **15 SM_ / 15 obj** (ALTA ≤16 ✓). z_min 0.0450, toca=8, footprint 4.85×0.45. Variantes MEDIA (**4 obj / 244 tris / 4 mats**) y BAJA (**4 obj / 168 tris / 4 mats**) generadas y aprobadas. 3 GLB + 3 `.import` + 3 `.scn` verificados (E-65). **Lección de curva:** para tablero con carga uniformemente distribuida la curva real es una **parábola**, no una catenaria `cosh`: `z(x) = Z_CENTRO + (x/HALF_SPAN)^2 * (Z_POSTE_TOP - Z_CENTRO)`. Se aproxima con N segmentos cortos de cilindro girados con `direccion.to_track_quat('Z','Y').to_euler()` (E-58). **Lección de presupuesto (v1→v2):** 6 segmentos por lado = 21 obj, EXCEDE el tope ALTA de ≤16. Bajar a 3 por lado (6 total) → 15 obj. Contar los SM_ ANTES de generar. **NO confundir** con `- [x] Puentes de cuerda (M25)` = `crear_puente_cuerda_lowpoly.py` (2026-08-29), que es OTRO asset (postes de piedra + tablones en catenaria).
@@ -204,8 +204,8 @@ menos.
 - [x] Pez tropical (2 variantes de color)
 - [x] Lagarto de isla
 - [x] Jabalí — `crear_jabali_lowpoly.py` v12b (2026-09-02, log 555, glm-5.3/Kilo Code) + 6 capturas orbitales (hojas v1..v11). **APROBADO por el usuario tras 8 iteraciones** — el caso que fijó el estándar de detalle orgánico (§9 de la guía 09, directiva del usuario). Composición: tronco de 10 anillos asimétricos (cruz alta + grupa estrecha + hump dorsal + **trasero redondo por contracción de anillos, corto**), cabeza grande en cuña con perfil cóncavo rotada en husmeo (+8°, **detalles anclados con matrix_world** + assert de signo), cresta mohawk de rombos proyectados sobre el lomo, 2 colmillos marfil con **base plantada sobre la superficie de la boca** (la tapa del cono embebida 1.2 cm), cola-cuerda curva de 5 puntos con tangentes (1 malla bmesh, pivote en grupa), 4 patas con pezuñas planas y pivote en cadera (traseras más largas). **16 SM_ / 972 tris / 6 mats** · z_min 0.0450 · huella 24 verts. Variantes MEDIA (6 obj/972) y BAJA (4 obj/422, ojos+trompa+mechón podados) + 3 GLB (72/58/28 KB) + 3 `.import` + 3 `.scn` (E-65). **NPC:** `jabali_npc.gd` — trote diagonal (FL+BR vs FR+BL), rebote del cuerpo, cola meneando, cabeza baja a olfatear en pausas, **escala_modelo 1.5** (feedback usuario: a escala real se veía chico). Log 555.
-- [ ] Cabra
-- [ ] Gallina
+- [x] (B24) Cabra
+- [x] Gallina
 - [ ] Mariposa (alas simples para animar)
 - [x] Tortuga marina — `crear_tortuga_marina_lowpoly.py` v5 (2026-09-02, log 533, glm-5.3/Kilo Code) + 6 capturas orbitales (hojas v2..v5; la v5 es la aprobada). **APROBADA por el usuario** tras 4 iteraciones de feedback directo (V1): v3 remos+escudos proyectados → v4 mix (sin pico, traseras remo elíptico) → v5 cola v2 restaurada + espejo E-74 + cabeza grande. Composición: plastrón cilíndrico 12 lados + falda cónica 16 + domo elipsoide + anillo marginal torus + **9 escudos proyectados sobre la curvatura real del domo** (1 malla bmesh) + cuello cónico + cabeza esférica r 0.12 con 2 ojos + 2 aletas delanteras **remo bmesh loftado** (6 anillos, ensancha a pala) + 2 traseras remo elíptico compacto (±150°) + cola cono. **14 SM_ / 1430 tris reales / 5 mats** · z_min 0.0450 · huella 19 verts 0.75×0.89 · E-32 v2 (volumen firmado) en cada isla bmesh. Variantes MEDIA (5 obj/1430) y BAJA (4 obj/982, ojos podados) + 3 GLB (103/80/61 KB) + 3 `.import` + 3 `.scn` (E-65). **E-74 descubierto:** espejo de piezas pareadas entre lados = NEGAR el ángulo Z, nunca `π−áng` (con el bug la aleta izquierda cruzaba por debajo del cuerpo y quedaba oculta: "una sola pata").
 
@@ -221,13 +221,13 @@ menos.
 
 ## Módulo 34 — Pesca / 35 — Minería 🎣
 
-- [ ] Caña de pescar
+- [x] (B19) Caña de pescar
 - [ ] Pez capturable (compartido con fauna)
 - [x] Cangrejo ermitaño (recompensa rara)
 - [x] Pico de piedra — `crear_pico_piedra_lowpoly.py` v2 (2026-08-29 19-29) + 6 orbitales 19-29-26. **v2 corrige E-27 (separación 9.7 cm entre mango y cabeza/ataduras/pomo)**: hijo() sin tocar matrix_parent_inverse, mango con rotación identidad, pose vertical nativa, assertion anti-regresión en el asentado. MEDIA 3/82, BAJA 3/76, ALTA 7/716, ALTA_MEDIA 3/716, z_min 0.045 en todas.
 - [x] Pico de hierro — `crear_pico_hierro_lowpoly.py` v2 (2026-08-29 19-33) + 6 orbitales 19-33-32. **Mismo E-27 que pico_piedra (separación 9.3 cm)**: v2 corrige con el mismo patrón (hijo() sin matrix_parent_inverse, mango vertical identidad, assertion). MEDIA 3/92, BAJA 3/87, ALTA 8/956, ALTA_MEDIA 3/956, z_min 0.045.
 - [x] Carretilla de minero — `crear_carretilla_minero_lowpoly.py` (M35 2026-09-02 04:46, log 532) + 6 capturas orbitales 04-43. **APROBADO**: rueda 14 lados + eje + 2 largueros horizontales (y=±0.26) que soportan la batea en tronco de pirámide (laterales abiertos ±16.7° en X) + batea con piso/2 lados abiertos/frente inclinado 14°/trasera + 2 patas traseras + 2 mangos (de larguero a (x=-1.20, z=0.48), +23.2° en Y) + 2 tepes de mineral asomando. **15 SM_**, z_min 0.045, toca=10, fp=1.51×0.60. Variantes MEDIA (4/252/4), BAJA (4/176/4). E-50✓ (trípode rueda+2patas), E-37 validado: silueta lee como carretilla en los 6 azimuts (rueda+laterales abiertos+mangos = carretilla), la rueda no atraviesa el frente de la batea (avanzada a x=+0.75). 3 GLB + 3 `.import` + 3 `.scn` (E-65).
-- [ ] Carrito de vías (26 subterráneo)
+- [x] (B20) Carrito de vías (26 subterráneo)
 
 ## Módulo 16 — Crafting / 14 — Inventario (representables en mano) 🔨
 

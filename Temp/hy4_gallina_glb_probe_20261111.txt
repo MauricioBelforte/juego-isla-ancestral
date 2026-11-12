@@ -1,0 +1,19 @@
+alta  tris=228  mats=7 mallas=10 verts=456  x=[-0.2800..0.3800] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.6600 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 48, 0.285: 36, 0.335: 12} hocico=24 pico=12 cola=12 alas=12 cima=12 ojos=24 plumas=36 zona_vacia=[]
+   niveles_x=[-0.28, -0.22, -0.19, -0.16, -0.13, -0.09, -0.07, -0.05, 0.03, 0.05, 0.06, 0.075, 0.09, 0.125, 0.13, 0.15, 0.21, 0.22, 0.25, 0.2925, 0.31, 0.3275, 0.35, 0.38]
+   niveles_y=[0.045, 0.085, 0.125, 0.14, 0.155, 0.17, 0.1875, 0.2, 0.2225, 0.225, 0.24, 0.245, 0.265, 0.285, 0.335]
+   niveles_z=[-0.18, -0.12, -0.1, -0.095, -0.09, -0.08, -0.075, -0.07, -0.05, -0.035, -0.025, -0.02, -0.01, 0.01, 0.02, 0.025, 0.035, 0.05, 0.07, 0.075, 0.08, 0.09, 0.095, 0.1, 0.12, 0.18]
+   materiales=['MAT_Gallina_Apendice', 'MAT_Gallina_Cabeza', 'MAT_Gallina_Cuerpo', 'MAT_Gallina_Ojo', 'MAT_Gallina_Pico', 'MAT_Gallina_Pluma', 'MAT_Gallina_Roca']
+media tris=228  mats=7 mallas=7 verts=456  x=[-0.2800..0.3800] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.6600 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 48, 0.285: 36, 0.335: 12} hocico=24 pico=12 cola=12 alas=12 cima=12 ojos=24 plumas=36 zona_vacia=[]
+   niveles_x=[-0.28, -0.22, -0.19, -0.16, -0.13, -0.09, -0.07, -0.05, 0.03, 0.05, 0.06, 0.075, 0.09, 0.125, 0.13, 0.15, 0.21, 0.22, 0.25, 0.2925, 0.31, 0.3275, 0.35, 0.38]
+   niveles_y=[0.045, 0.085, 0.125, 0.14, 0.155, 0.17, 0.1875, 0.2, 0.2225, 0.225, 0.24, 0.245, 0.265, 0.285, 0.335]
+   niveles_z=[-0.18, -0.12, -0.1, -0.095, -0.09, -0.08, -0.075, -0.07, -0.05, -0.035, -0.025, -0.02, -0.01, 0.01, 0.02, 0.025, 0.035, 0.05, 0.07, 0.075, 0.08, 0.09, 0.095, 0.1, 0.12, 0.18]
+   materiales=['MAT_Gallina_Apendice', 'MAT_Gallina_Cabeza', 'MAT_Gallina_Cuerpo', 'MAT_Gallina_Ojo', 'MAT_Gallina_Pico', 'MAT_Gallina_Pluma', 'MAT_Gallina_Roca']
+baja  tris=156  mats=4 mallas=4 verts=312  x=[-0.2800..0.3500] y=[0.0450..0.3350] z=[-0.1800..0.1800] xr=0.6300 zr=0.36 apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.245: 36, 0.265: 12, 0.285: 0, 0.335: 12} hocico=12 pico=0 cola=12 alas=12 cima=12 ojos=0 plumas=0 zona_vacia=[]
+   niveles_x=[-0.28, -0.22, -0.19, -0.16, -0.13, -0.09, -0.05, 0.06, 0.075, 0.09, 0.125, 0.21, 0.22, 0.25, 0.31, 0.35]
+   niveles_y=[0.045, 0.085, 0.125, 0.14, 0.155, 0.225, 0.24, 0.245, 0.265, 0.335]
+   niveles_z=[-0.18, -0.12, -0.1, -0.09, -0.08, -0.075, -0.07, -0.05, -0.035, -0.02, 0.02, 0.035, 0.05, 0.07, 0.075, 0.08, 0.09, 0.1, 0.12, 0.18]
+   materiales=['MAT_Gallina_Apendice', 'MAT_Gallina_Cabeza', 'MAT_Gallina_Cuerpo', 'MAT_Gallina_Roca']
+PROBE_JSON D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\Temp\hy4_gallina_glb_probe_20261111.json

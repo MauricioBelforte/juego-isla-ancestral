@@ -1,145 +1,173 @@
-# Reporte de verificación de UID en `.tscn` / `.tres`
+# Reporte de análisis UID / referencias — `game/isla-ancestral`
 
 **Modelo:** Glyph Cluster  
-**Plataforma:** Kilo Code (Glyph Cluster / stealth)  
-**Fecha:** 2026-11-10 21:10  
-**Alcance:** `game/isla-ancestral/` (recursivo), excluyendo copias/worktrees/backups fuera de esa ruta (`.kilo/worktrees`, `Obsoletos`, etc.) para evitar duplicar hallazgos de artefactos no activos.
+**Plataforma:** Kilo Code (sesión paralela)  
+**Fecha:** 2026-11-12  
+**Alcance analizado:** `game/isla-ancestral/` (raíz del proyecto Godot, donde reside `project.godot`)  
+**Método:** escaneo estático de archivos `.tscn`, `.gd` y `.uid` mediante expresiones regulares sobre `ext_resource`, cabeceras `gd_scene`/`gd_resource`, `uid=`, `res://`, `preload()`/`load()` y resolución de rutas `res://` al sistema de archivos.
 
-## Resumen ejecutivo
+## Resumen cuantitativo
 
 | Métrica | Valor |
 |---|---:|
-| Archivos `.tscn`/`.tres` escaneados | 548 |
-| Archivos con UID propio declarado en cabecera (`uid="uid://..."`) | 21 |
-| UIDs propios declarados (cabecera) | 21 |
-| UID duplicados entre escenas/recursos (misma cabecera UID en >1 archivo) | **0** |
-| Referencias `uid="uid://..."` a UID no declarados en cabeceras de `.tscn/.tres` escaneados | **303 UID** (303 ocurrencias `ext_resource`) |
-| Referencias/cabeceras UID con formato mal formado | **0** |
-| Ocurrencias del patrón literal `[uid=` | **0** |
-| Ocurrencias de `unique_id=` | **160** (13 archivos) |
-| Valores `unique_id` con formato numérico inválido | **0** |
-| Archivos sin `uid` en cabecera | 527 |
+| Archivos `.tscn` | 69 (53 del proyecto, 16 del addon `gdUnit4`) |
+| Archivos `.gd` | 1590 |
+| Archivos `.uid` (sidecar) | 1621 |
+| Referencias rotas en `.tscn` (`ext_resource` / `path=res://`) | **0** |
+| Referencias `res://` rotas detectadas en `.gd` | **173** (ver clasificación) |
+| UIDs de escena únicos detectados | 21 |
+| UIDs de escena duplicados entre archivos de escena distintos | **0** |
+| Aristas de dependencia PackedScene (`.tscn` → `.tscn`) | 17 |
+| Dependencias circulares entre escenas | **0** |
+| Referencias `unique_id` en `.gd` | **0** |
 
-**Conclusión general:** no se detectaron **UID de recurso/escena duplicados** ni **UID mal formados** en cabeceras/referencias dentro de `game/isla-ancestral/`. El hallazgo principal es un volumen alto de **referencias `uid://` a assets externos** (texturas/iconos) cuyo UID no aparece como cabecera en ningún `.tscn/.tres` escaneado; esto es consistente con dependencias a recursos importados (`.png`, etc.) que en Godot pueden tener su UID en metadatos de importación/`.uid`, pero requiere verificación de integridad de assets. También hay uso extendido de `unique_id=` en nodos de escena (atributo de instancia de nodo en Godot 4), sin valores mal formados detectados.
+---
 
-## 1) ¿Hay UID duplicados entre escenas?
+## 1) Archivos `.tscn` con referencias a recursos que no existen
 
-**Resultado: No.**
+**Resultado:** No se detectaron referencias a recursos inexistentes dentro de archivos `.tscn` del alcance.
 
-- Se detectaron 21 UIDs propios declarados en cabecera (`[gd_scene ... uid=...]` / `[gd_resource ... uid=...]`), cada uno en un único archivo.
-- No hay ningún caso donde el mismo `uid://...` aparezca como UID propio de cabecera en dos o más archivos.
+- `ext_resource` con `path="res://..."` sin archivo destino: **0**.
+- Rutas inline `path="res://..."` en nodos/propiedades sin archivo destino: **0**.
+- Errores de lectura de `.tscn`: **0**.
 
-### UIDs declarados en cabecera (21)
+**Evidencia de cobertura (escenas del proyecto, muestra con conteo de recursos):**
 
-| UID | Archivo | Línea |
-|---|---|---:|
-| `uid://c1234568aa0` | `game/isla-ancestral/scenes/main.tscn` | 1 |
-| `uid://caso_reloj_001` | `game/isla-ancestral/scenes/caso_reloj.tscn` | 1 |
-| `uid://cm27t001` | `game/isla-ancestral/scenes/tests/test_m108.tscn` | 1 |
-| `uid://com4osvg1vnk8` | `game/isla-ancestral/scenes/test_anillo_arena.tscn` | 1 |
-| `uid://dm0w488a2kgyd` | `game/isla-ancestral/scenes/main.tscn` | 1 |
-| `uid://gadunitinspector` | `game/isla-ancestral/addons/gdUnit4/src/ui/GdUnitInspector.tscn` | 1 |
-| `uid://gadunitstatusbar` | `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn` | 1 |
-| `uid://gadunittoolbar` | `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn` | 1 |
-| `uid://gadunittree` | `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` | 1 |
-| `uid://gareportpanel` | `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn` | 1 |
-| `uid://gasettingshooks` | `game/isla-ancestral/addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn` | 1 |
-| `uid://hus0v3sy6ned` | `game/isla-ancestral/scenes/CameraRig.tscn` | 1 |
-| `uid://main_island_debug001` | `game/isla-ancestral/scenes/main_island.tscn` | 1 |
-| `uid://particles_preview` | `game/isla-ancestral/scenes/preview_particles.tscn` | 1 |
-| `uid://ppisos4qhbmkb` | `game/isla-ancestral/addons/gdUnit4/src/ui/menu/GdUnitContextMenu.tscn` | 1 |
-| `uid://pvkrbo2gu4n1v` | `game/isla-ancestral/addons/gdUnit4/src/ui/menu/EditorFileSystemContextMenuHandler.tscn` | 1 |
-| `uid://pvksq6s8jkugj` | `game/isla-ancestral/addons/gdUnit4/src/ui/menu/ScriptEditorContextMenuHandler.tscn` | 1 |
-| `uid://simplewalk001` | `game/isla-ancestral/scenes/simple_walk.tscn` | 1 |
-| `uid://test_arch_001` | `game/isla-ancestral/scenes/test_arquitectura.tscn` | 1 |
-| `uid://test_m155_3d` | `game/isla-ancestral/scenes/test_m155_3d.tscn` | 1 |
-| `uid://test_m155_ui` | `game/isla-ancestral/scenes/test_m155_ui.tscn` | 1 |
+| Escena | `ext_resource` | refs `res://` | UID cabecera |
+|---|---:|---:|---|
+| `scenes/main.tscn` | 4 | 4 | `uid://c1234568aa0` |
+| `scenes/main_island.tscn` | 19 | 19 | (sin uid) |
+| `scenes/main_simple.tscn` | 3 | 3 | (sin uid) |
+| `scenes/main_test.tscn` | 3 | 3 | (sin uid) |
+| `scenes/main_test2.tscn` | 3 | 3 | (sin uid) |
+| `scenes/player/Player.tscn` | 8 | 8 | (sin uid) |
+| `scenes/CameraRig.tscn` | 2 | 2 | `uid://y7owcvev8t76` |
+| `scenes/ui/hud.tscn` | 10 | 10 | `uid://hud_m53_screen` |
+| `scenes/tests/test_m108.tscn` | 1 | 1 | `uid://bqv5xj7k2m3r` |
+| `scenes/preview_particles.tscn` | 1 | 1 | `uid://c4ewhaonnk2g8` |
+| `scenes/test_anillo_arena.tscn` | 1 | 1 | `uid://test_anillo_arena_m09` |
 
-> Nota: varios UIDs usan identificadores legibles/personalizados (`uid://caso_reloj_001`, `uid://main_island_debug001`, etc.). Son sintácticamente válidos para el patrón `uid://<id>` pero difieren del formato hash típico generado por Godot; no se clasifican como mal formados por regex ni como duplicados.
+**Observación:** Muchas escenas del proyecto no declaran `uid="..."` en la cabecera `[gd_scene ...]` (p. ej. `scenes/player/Player.tscn:1`, `scenes/main_island.tscn:1`, `scenes/main_simple.tscn:1`, la mayoría de previews/terrenos/tests/fixtures). No es una ruta rota, pero implica dependencia de resolución por `res://` o de UIDs gestionados externamente; conviene validar con el editor de Godot si el flujo del proyecto lo requiere.
 
-## 2) ¿Hay referencias a UID que no existen?
+---
 
-**Resultado: Sí (según definición estricta contra cabeceras de `.tscn/.tres` escaneados).**
+## 2) UIDs duplicados entre escenas
 
-- **303 UIDs referenciados** no tienen una declaración de cabecera correspondiente en ningún `.tscn/.tres` dentro de `game/isla-ancestral/`.
-- **303 ocurrencias** encontradas (todas en `ext_resource` con `uid=... path=...`).
-- Patrón observado: referencias a texturas/iconos de items bajo `res://assets/2d/items_m159/...` desde recursos `.tres` de datos.
+**Resultado:** No se encontraron UIDs duplicados entre archivos `.tscn` distintos.
 
-### Ejemplos representativos (archivo, línea, UID referenciado, recurso)
+- UIDs de escena detectados en cabeceras `[gd_scene ... uid="..."]`: 21.
+- Casos donde el mismo UID aparece en más de un archivo de escena: **0**.
 
-| Archivo | Línea | UID referenciado | Path referenciado |
+**Listado de UIDs de escena y archivo asociado (evidencia):**
+
+| UID | Archivo(s) |
+|---|---|
+| `uid://0xyeci1tqebj` | `addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn` |
+| `uid://2eahgaw88y6q` | `addons/gdUnit4/src/update/GdUnitUpdate.tscn` |
+| `uid://41l7a46fol5m` | `addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn` |
+| `uid://belidlfknh74r` | `addons/gdUnit4/src/core/runners/GdUnitTestRunner.tscn` |
+| `uid://bjcc71p2h1trr` | `addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn` |
+| `uid://bqfpidewtpeg0` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` |
+| `uid://bqv5xj7k2m3r` | `scenes/tests/test_m108.tscn` |
+| `uid://c1234568aa0` | `scenes/main.tscn` |
+| `uid://c22l4odk7qesc` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn` |
+| `uid://c4ewhaonnk2g8` | `scenes/preview_particles.tscn` |
+| `uid://cn5mp3tmi2gb1` | `addons/gdUnit4/src/network/GdUnitServer.tscn` |
+| `uid://dga8nhaxnyr53` | `addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn` |
+| `uid://dm0wvfyeew7vd` | `addons/gdUnit4/src/ui/GdUnitConsole.tscn` |
+| `uid://dte0m2endcgtu` | `addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn` |
+| `uid://dva3tonxsxrlk` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn` |
+| `uid://dx7xy4dgi3wwb` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn` |
+| `uid://hud_m53_screen` | `scenes/ui/hud.tscn:1` |
+| `uid://mpo5o6d4uybu` | `addons/gdUnit4/src/ui/GdUnitInspector.tscn` |
+| `uid://pmnkxrhglak5` | `addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn` |
+| `uid://test_anillo_arena_m09` | `scenes/test_anillo_arena.tscn:1` |
+| `uid://y7owcvev8t76` | `scenes/CameraRig.tscn:1` |
+
+**Nota:** `uid://hud_m53_screen` y `uid://test_anillo_arena_m09` no siguen el formato alfanumérico típico generado por Godot, pero son únicos dentro del proyecto analizado. Requieren confirmación de validez/estabilidad en el editor.
+
+---
+
+## 3) Dependencias circulares entre escenas
+
+**Resultado:** No se detectaron ciclos de dependencia entre escenas `.tscn`.
+
+- Grafo analizado: instancias de `PackedScene` declaradas como `ext_resource type="PackedScene"` en `.tscn` y resueltas a archivos `.tscn` existentes.
+- Aristas: **17**.
+- Ciclos encontrados (DFS con normalización): **0**.
+
+**Grafo de dependencias detectado (archivo:línea implícita en `ext_resource` de cada origen):**
+
+| Origen | Destino |
+|---|---|
+| `addons/gdUnit4/src/ui/GdUnitInspector.tscn` | `addons/gdUnit4/src/network/GdUnitServer.tscn` |
+| `addons/gdUnit4/src/ui/GdUnitInspector.tscn` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn` |
+| `addons/gdUnit4/src/ui/GdUnitInspector.tscn` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn` |
+| `addons/gdUnit4/src/ui/GdUnitInspector.tscn` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn` |
+| `addons/gdUnit4/src/ui/GdUnitInspector.tscn` | `addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` |
+| `addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` | `addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn` |
+| `addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` | `addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn` |
+| `addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn` | `addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn` |
+| `addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn` | `addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn` |
+| `addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn` | `addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn` |
+| `addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn` | `addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn` |
+| `addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn` | `addons/gdUnit4/src/update/GdUnitUpdate.tscn` |
+| `scenes/main.tscn` | `scenes/player/Player.tscn` |
+| `scenes/main_island.tscn` | `scenes/player/Player.tscn` |
+| `scenes/main_simple.tscn` | `scenes/player/Player.tscn` |
+| `scenes/main_test.tscn` | `scenes/player/Player.tscn` |
+| `scenes/main_test2.tscn` | `scenes/player/Player.tscn` |
+
+**Interpretación:** El grafo del addon es un DAG de UI/update; las escenas principales comparten `Player.tscn` como hoja de composición sin referencias inversas.
+
+---
+
+## 4) Archivos `.tscn` con rutas rotas
+
+**Resultado para `.tscn`:** No se encontraron archivos `.tscn` con rutas rotas (`res://` inexistentes) en recursos externos o propiedades `path=`.
+
+**Hallazgos relacionados en `.gd` (contexto solicitado: referencias en `.tscn` y `.gd`):** se detectaron **173** ocurrencias de rutas `res://` que no resuelven a un archivo/carpeta existente en el proyecto (tras deduplicación por archivo/línea/ruta/tipo). Se clasifican así:
+
+| Categoría | Cant. aprox. | Ejemplos (archivo:línea → ruta) | Riesgo |
 |---|---:|---|---|
-| `game/isla-ancestral/data/items/stone.tres` | 4 | `uid://04obc05kum5s` | `res://assets/2d/items_m159/ico_stone.png` |
-| `game/isla-ancestral/data/items/ancient_crystal.tres` | 4 | `uid://r3oie0pv35qn` | `res://assets/2d/items_m159/ico_ancient_crystal.png` |
-| `game/isla-ancestral/data/items/baya_roja.tres` | 4 | `uid://cvyxq1riytmlw` | `res://assets/2d/items_m159/ico_baya_roja.png` |
-| `game/isla-ancestral/data/items/clay.tres` | 4 | `uid://b75l6je0kr8ip` | `res://assets/2d/items_m159/ico_clay.png` |
-| `game/isla-ancestral/data/items/item_obj_nat_004.tres` | 4 | `uid://0d0aaw7ecsre` | (ver archivo) |
-| `game/isla-ancestral/data/items/item_obj_her_006.tres` | 4 | `uid://0obnpcal1arv` | (ver archivo) |
+| Addon `gdUnit4` — documentación/ejemplos/snippets embebidos en comentarios o strings de API | ~41 | `addons/gdUnit4/src/GdUnitSceneRunner.gd:31` → `res://scenes/simple_scene.tscn`; `addons/gdUnit4/src/GdUnitTestSuite.gd:239` → `res://TestScene.tscn`; `.../GdUnitTestSuite.gd:263` → `res://foo/my_scne.tscn`; `addons/gdUnit4/src/core/templates/test_suite/GdUnitTestSuiteTemplate.gd:36` → `res://folder/my_class.gd` | Bajo (ejemplos); pueden generar ruido en validadores automáticos. |
+| Addon `gdUnit4` — rutas dinámicas/placeholders o tokens mal parseados (backticks, BBCode, `%s`, `...`) | varios | `addons/gdUnit4/src/dotnet/GdUnit4CSharpApiLoader.gd:66` → `res://%s.csproj`; `addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.gd:1115` → `res://%s.json`; `addons/gdUnit4/src/update/GdMarkDownReader.gd:13` → `res://addons/gdUnit4/src/update/assets/horizontal-line2.png[/img` | Bajo/medio (falsos positivos de parseo o recursos opcionales). |
+| Addon `gdUnit4` — rutas de runtime/update opcional ausentes | varios | `addons/gdUnit4/src/update/GdUnitUpdate.gd:266` → `res://update.zip`; `addons/gdUnit4/src/update/GdUnitUpdateNotify.gd:166` → `res://addons/.gdunit_update/GdUnitUpdate.tscn`; `addons/gdUnit4/src/core/GdUnitRunnerConfig.gd:12` → `res://addons/gdUnit4/GdUnitRunner.cfg` | Medio según uso del updater/config. |
+| Scripts/tests del proyecto — rutas intencionalmente inexistentes para pruebas negativas/fallback | ~50+ | `scripts/ci/test_gates_m118.gd:88` → `res://no/existe.json`; `scripts/core/test_infraestructura.gd:91` → `res://no_existe.tscn`; `scripts/crash/test_crash_m122_offline.gd:106` → `res://escena.tscn`; `scripts/localization/test_validador_po_m87.gd:176` → `res://locales/NO_EXISTE.po` | Bajo (intencional) si los tests esperan fallo controlado. |
+| Scripts del proyecto — plantillas/placeholders en documentación o formato dinámico | varios | `scripts/data/item_database.gd:8` → `res://data/items/\``; `scripts/debug/debug_menu.gd:16` → ``res://` ``; `scripts/rendimiento/asset_profile.gd:124` → `res://assets/3d/%s/%s.glb`; `scripts/vegetacion/vegetation_spawner.gd:70` → `res://assets/3d/media/%s.glb` | Medio: validar que el formateo runtime siempre produzca rutas válidas. |
+| Scripts del proyecto — referencias a assets/datos potencialmente pendientes o externos | varios | `scripts/ci/cicd_manager.gd:8` → `res://scripts/ci/escanear_assets.py`; `scripts/data/world_locations.gd:148` → `res://data/locations/RIZ/%s.tres`; `scripts/dialogos/test_validacion_grafo_m21.gd:77` → `res://data/dialogues/%s.json`; `scripts/arte2d/pack_atlas.gd:47` → `res://assets/2d/<atlas>.png\`` | A revisar por módulo (puede ser deuda de contenido/datos). |
+| Tools del proyecto | varios | `tools/asset_pipeline/asset_memory_reporter_logic.gd:104` → `res://assets/final/_memory_report.md`; `tools/asset_pipeline/promote_asset_logic.gd:51` → `res://assets/final/_APROBADAS.md`; `tools/asset_pipeline/retire_asset_logic.gd:51` → `res://assets/archive/_RETIRADOS.md`; `tools/validate_dialogues.gd:6` → `res://tools/validation_result.txt` | Esperable si son salidas generadas; confirmar rutas de escritura. |
 
-### Contexto observado (muestra)
+**Muestra representativa de hallazgos en `.gd` (archivo:línea, tipo, ruta):**
+- `addons/gdUnit4/src/GdUnitSceneRunner.gd:31` — `res_path` — `res://scenes/simple_scene.tscn`
+- `addons/gdUnit4/src/GdUnitTestSuite.gd:239` — `preload/load` — `res://TestScene.tscn`
+- `addons/gdUnit4/src/core/GdUnitRunnerConfig.gd:12` — `res_path` — `res://addons/gdUnit4/GdUnitRunner.cfg`
+- `addons/gdUnit4/src/update/GdUnitUpdate.gd:266` — `res_path` — `res://update.zip`
+- `scripts/ci/cicd_manager.gd:8` — `res_path` — `res://scripts/ci/escanear_assets.py`
+- `scripts/ci/test_gates_m118.gd:88` — `res_path` — `res://no/existe.json`
+- `scripts/core/test_infraestructura.gd:91` — `res_path` — `res://no_existe.tscn`
+- `scripts/crash/test_crash_m122_offline.gd:106` — `res_path` — `res://escena.tscn`
+- `scripts/data/item_database.gd:8` — `res_path` — ``res://data/items/` ``
+- `scripts/data/world_locations.gd:148` — `res_path` — `res://data/locations/RIZ/%s.tres`
+- `scripts/dialogos/test_validacion_grafo_m21.gd:77` — `res_path` — `res://data/dialogues/%s.json`
+- `scripts/rendimiento/memoria/sesion_m62_baselines.gd:58` — `res_path` — `res://scenes/main_menu.tscn`
+- `scripts/vegetacion/vegetation_spawner.gd:70` — `res_path` — `res://assets/3d/media/%s.glb`
+- `tests/run_tests.gd:55` — `res_path` — `res://tests/test_debug_menu.gd,` (posible token con coma capturado por regex)
+- `tools/validate_dialogues.gd:6` — `res_path` — `res://tools/validation_result.txt`
 
-`game/isla-ancestral/data/items/stone.tres:4`
-```text
-[ext_resource type="CompressedTexture2D" uid="uid://04obc05kum5s" path="res://assets/2d/items_m159/ico_stone.png" id="2"]
-```
+> **Nota metodológica:** el detector en `.gd` captura literales `res://...` y argumentos de `preload/load`; puede incluir placeholders (`%s`, `<atlas>`, `**`), rutas de salida esperadas o fragmentos con caracteres de formato/BBCode. Cada hallazgo debe triagarse antes de considerarlo bug.
 
-### Interpretación técnica
+---
 
-- Estos `uid://` **no existen como UID propios en cabeceras de `.tscn/.tres`**, pero sí pueden pertenecer a assets importados por Godot (imágenes, etc.).
-- Verificación puntual: `game/isla-ancestral/assets/2d/items_m159/ico_stone.png` y `ico_stone.png.import` existen; **no se encontró `ico_stone.png.uid`** en esa carpeta durante el muestreo.
-- Por lo tanto, no se puede afirmar automáticamente que sean referencias rotas en runtime/editor sin contrastar el estado de importación de Godot (`.godot/`, `.import`, `.uid` asociados) y la resolución real en el editor. Sí se reporta como **desalineación entre referencias UID y UIDs declarados en `.tscn/.tres`**.
+## 5) Dos acciones de verificación sugeridas
 
-## 3) ¿Hay escenas con `unique_id` mal formado?
+1. **Validación dentro del editor Godot (canónica) con informe de dependencias y UIDs:** abrir `game/isla-ancestral/project.godot` en Godot 4.x, ejecutar "Reimportar" / "Scan" del filesystem y revisar el panel *Debugger → Errors* y *Output* al cargar escenas clave (`scenes/main.tscn`, `scenes/main_island.tscn`, `scenes/player/Player.tscn`, `scenes/ui/hud.tscn`). Complementar con una búsqueda en editor de referencias rotas y verificar que UIDs no estándar (`uid://hud_m53_screen`, `uid://test_anillo_arena_m09`) y escenas sin `uid` en cabecera no generen advertencias en el flujo del proyecto.
+2. **Triaging automatizado de referencias `res://` en `.gd` con filtro por contexto:** ejecutar un script/CI que clasifique cada coincidencia en *real rota*, *placeholder dinámico*, *ruta de salida*, *test negativo* o *ejemplo de addon* (p. ej. excluir `addons/gdUnit4/**` de severidad alta, ignorar patrones `%s`/`<...>`/`**`, y validar en runtime las plantillas usadas por `data/items`, `data/dialogues`, `assets/3d/media/%s.glb`, etc.). Para los casos de proyecto marcados como deuda de contenido (`scripts/ci/cicd_manager.gd:8`, `scripts/data/world_locations.gd:148`, `scripts/rendimiento/memoria/sesion_m62_baselines.gd:58`, `tests/run_tests.gd:55`), confirmar existencia o corregir/eliminar la referencia.
 
-**Resultado: No se detectaron valores mal formados; sí hay uso de `unique_id`.**
-
-- Patrón literal `[uid=`: **0** ocurrencias.
-- Atributo `unique_id=`: **160** ocurrencias en **13** archivos `.tscn`.
-- Todos los valores observados son enteros (positivos/negativos permitidos por regex de validación numérica; en la práctica positivos en este muestreo). **0 valores con formato inválido**.
-
-### Archivos con `unique_id=` (conteo por archivo)
-
-| Archivo | Ocurrencias | Rango de líneas (aprox.) |
-|---|---:|---|
-| `game/isla-ancestral/addons/gdUnit4/src/ui/GdUnitInspector.tscn` | 3 | 20, 29, 50 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/menu/GdUnitContextMenu.tscn` | 1 | 9 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn` | 2 | 16, 27 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn` | 34 | 20–356 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn` | 13 | 53–134 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn` | 8 | 47–126 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn` | 4 | 5–40 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn` | 22 | 69–216 |
-| `game/isla-ancestral/addons/gdUnit4/src/ui/settings/GdUnitSettingsTabShortcuts.tscn` | 21 | 58–185 |
-| `game/isla-ancestral/scenes/CameraRig.tscn` | 4 | 6–15 |
-| `game/isla-ancestral/scenes/main_island.tscn` | 23 | 57–192 |
-| `game/isla-ancestral/scenes/preview_particles.tscn` | 8 | 22–49 |
-| `game/isla-ancestral/scenes/simple_walk.tscn` | 15 | 57–112 |
-
-### Ejemplos
-
-- `game/isla-ancestral/scenes/main_island.tscn:57` — `[node name="Main" type="Node3D" unique_id=1675065870]`
-- `game/isla-ancestral/scenes/CameraRig.tscn:6` — `[node name="CameraRig" type="Node3D" unique_id=1636214823]`
-- `game/isla-ancestral/scenes/simple_walk.tscn:57` — `[node name="Game" type="CharacterBody3D" unique_id=1217130252]`
-- `game/isla-ancestral/addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn:20` — `[node name="StatusBar" type="Control" unique_id=443133780]`
-
-> Aclaración: `unique_id` en nodos de escena (Godot 4) no es lo mismo que el `uid="uid://..."` de recurso/escena en cabecera; su presencia no implica error por sí misma.
-
-## 4) Hallazgos adicionales relevantes
-
-- **Archivos sin UID de cabecera:** 527 de 548 (predominan `.tres` de datos/configuración y varias escenas). No es necesariamente un error, pero reduce trazabilidad por UID.
-- **UIDs de cabecera con formato no hash:** presentes (p.ej. `uid://main_island_debug001`, `uid://simplewalk001`) — válidos como identificadores pero poco habituales; conviene normalizarlos si se busca consistencia.
-- **`.uid` sidecar:** se encontraron archivos `.gd.uid` en el proyecto (herramientas/scripts), pero en el muestreo de assets referenciados (`assets/2d/items_m159/*.png`) no había `.uid` junto al `.png` (sí `.import`), lo que puede explicar parte de las 303 referencias no resueltas contra cabeceras `.tscn/.tres`.
-
-## 5) Sugerencias de verificación (2 acciones)
-
-1. **Validación en el editor Godot (fuente de verdad de importación):** abrir `game/isla-ancestral/project.godot` con Godot 4.x, forzar reimportación si es necesario y revisar el panel de errores/Output al cargar escenas clave (`scenes/main.tscn`, `scenes/main_island.tscn`, escenas con `unique_id`) y recursos de datos (`data/items/*.tres`). Confirmar si las 303 referencias `uid://...` a assets (p.ej. `res://assets/2d/items_m159/ico_stone.png`) se resuelven correctamente o si el editor solicita regenerar/actualizar UIDs.
-2. **Auditoría de consistencia UID↔asset en disco:** ejecutar una comprobación automatizada que cruce cada `ext_resource` con `uid` y `path` contra (a) existencia del `path` en `res://`/filesystem, (b) presencia de `.uid`/`.import` correspondiente y (c) UID esperado en metadatos de importación (`.godot/imported/*` si existe). Priorizar el lote `data/items/*.tres` y, si se detectan inconsistencias reales, regenerar UIDs/recursos desde el editor (o con herramientas oficiales) y volver a escanear para confirmar que las referencias pendientes bajan a 0.
+---
 
 ## Conclusión final
 
-- **UID duplicados entre escenas/recursos:** no detectados.
-- **UID mal formados en cabeceras/referencias:** no detectados.
-- **`unique_id` mal formado en escenas:** no detectado (160 usos, todos numéricos válidos, concentrados en addons gdUnit4 y 4 escenas del juego).
-- **Riesgo/hallazgo a revisar:** 303 referencias `uid://` no resueltas contra UIDs de cabecera en `.tscn/.tres` (principalmente texturas de items), que requieren verificación en Godot para distinguir "UID externo/importado válido" de "referencia rota" tras cambios de assets/importación.
+En el análisis estático del proyecto Godot `game/isla-ancestral/` (69 `.tscn`, 1590 `.gd`) **no se detectaron problemas estructurales críticos en escenas**: no hay referencias rotas en `.tscn`, no hay UIDs de escena duplicados entre archivos distintos y no hay dependencias circulares entre escenas (17 aristas, DAG coherente con `Player.tscn` como dependencia compartida).
 
-**Estado del análisis:** completado sobre el alcance indicado, con evidencia de archivos y líneas incluidas en este reporte.
+Los hallazgos relevantes se concentran en **173 referencias `res://` no resolubles en scripts `.gd`**, en su mayoría atribuibles a ejemplos/documentación del addon `gdUnit4`, pruebas negativas intencionales y plantillas/rutas dinámicas; aun así, existe un subconjunto de referencias de proyecto y tools que amerita triage manual/CI para descartar deuda real de assets, datos o rutas de salida. Como mejora de higiene, se recomienda normalizar/confirmar los UIDs no estándar y la ausencia de UID en cabeceras de muchas escenas mediante verificación en el editor.

@@ -1,0 +1,1348 @@
+{
+  "tscn_total": 69,
+  "gd_total": 1590,
+  "scene_uids_total": 21,
+  "scene_uids_unique": 21,
+  "duplicate_scene_uids": {},
+  "uid_ref_total": 24,
+  "uid_refs_by_kind": {
+    "scene_header": 21,
+    "ext_resource": 3
+  },
+  "refs": [
+    {
+      "file": "addons/gdUnit4/src/core/runners/GdUnitTestRunner.tscn",
+      "line": 1,
+      "uid": "belidlfknh74r",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=3 format=3 uid=\"uid://belidlfknh74r\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/network/GdUnitServer.tscn",
+      "line": 1,
+      "uid": "cn5mp3tmi2gb1",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=3 format=3 uid=\"uid://cn5mp3tmi2gb1\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 1,
+      "uid": "dm0wvfyeew7vd",
+      "kind": "scene_header",
+      "context": "[gd_scene format=4 uid=\"uid://dm0wvfyeew7vd\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 1,
+      "uid": "mpo5o6d4uybu",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://mpo5o6d4uybu\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn",
+      "line": 1,
+      "uid": "bjcc71p2h1trr",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://bjcc71p2h1trr\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "line": 1,
+      "uid": "dva3tonxsxrlk",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dva3tonxsxrlk\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 1,
+      "uid": "c22l4odk7qesc",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://c22l4odk7qesc\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 1,
+      "uid": "dx7xy4dgi3wwb",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dx7xy4dgi3wwb\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 1,
+      "uid": "bqfpidewtpeg0",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://bqfpidewtpeg0\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 1,
+      "uid": "dga8nhaxnyr53",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dga8nhaxnyr53\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn",
+      "line": 1,
+      "uid": "pmnkxrhglak5",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://pmnkxrhglak5\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 1,
+      "uid": "41l7a46fol5m",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://41l7a46fol5m\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn",
+      "line": 1,
+      "uid": "dte0m2endcgtu",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dte0m2endcgtu\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/update/GdUnitUpdate.tscn",
+      "line": 1,
+      "uid": "2eahgaw88y6q",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=6 format=3 uid=\"uid://2eahgaw88y6q\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn",
+      "line": 1,
+      "uid": "0xyeci1tqebj",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=4 format=3 uid=\"uid://0xyeci1tqebj\"]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 1,
+      "uid": "y7owcvev8t76",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://y7owcvev8t76\"]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 3,
+      "uid": "w4vl1b10xb1p",
+      "kind": "ext_resource",
+      "context": "[ext_resource type=\"Script\" uid=\"uid://w4vl1b10xb1p\" path=\"res://scripts/camera/camera_rig.gd\" id=\"1_rig\"]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 4,
+      "uid": "dvke765611m8o",
+      "kind": "ext_resource",
+      "context": "[ext_resource type=\"Script\" uid=\"uid://dvke765611m8o\" path=\"res://scripts/camera/camera_spring.gd\" id=\"2_spring\"]"
+    },
+    {
+      "file": "scenes/main.tscn",
+      "line": 1,
+      "uid": "c1234568aa0",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=6 format=3 uid=\"uid://c1234568aa0\"]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 1,
+      "uid": "c4ewhaonnk2g8",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://c4ewhaonnk2g8\"]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 3,
+      "uid": "ba6ma7swo32h3",
+      "kind": "ext_resource",
+      "context": "[ext_resource type=\"Script\" uid=\"uid://ba6ma7swo32h3\" path=\"res://scripts/particles/preview_particles.gd\" id=\"1_script\"]"
+    },
+    {
+      "file": "scenes/test_anillo_arena.tscn",
+      "line": 1,
+      "uid": "test_anillo_arena_m09",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://test_anillo_arena_m09\"]"
+    },
+    {
+      "file": "scenes/tests/test_m108.tscn",
+      "line": 1,
+      "uid": "bqv5xj7k2m3r",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://bqv5xj7k2m3r\"]"
+    },
+    {
+      "file": "scenes/ui/hud.tscn",
+      "line": 1,
+      "uid": "hud_m53_screen",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=10 format=3 uid=\"uid://hud_m53_screen\"]"
+    }
+  ],
+  "unique_id_total": 160,
+  "unique_id_refs": [
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 5,
+      "context": "[node name=\"Control\" type=\"Control\" unique_id=1838139573]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 19,
+      "context": "[node name=\"VBoxContainer\" type=\"VBoxContainer\" parent=\".\" unique_id=1582573516]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 31,
+      "context": "[node name=\"Header\" type=\"Control\" parent=\"VBoxContainer\" unique_id=1823073031]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 38,
+      "context": "[node name=\"header_title\" type=\"RichTextLabel\" parent=\"VBoxContainer/Header\" unique_id=20617532]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 56,
+      "context": "[node name=\"Console\" type=\"ScrollContainer\" parent=\"VBoxContainer\" unique_id=547060555]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 61,
+      "context": "[node name=\"TextEdit\" type=\"RichTextLabel\" parent=\"VBoxContainer/Console\" unique_id=1121183605]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 10,
+      "context": "[node name=\"GdUnit\" type=\"Control\" unique_id=272268338]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 22,
+      "context": "[node name=\"VBoxContainer\" type=\"VBoxContainer\" parent=\".\" unique_id=1550259230]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 33,
+      "context": "[node name=\"Header\" type=\"VBoxContainer\" parent=\"VBoxContainer\" unique_id=876343251]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 38,
+      "context": "[node name=\"ToolBar\" parent=\"VBoxContainer/Header\" unique_id=185399834 instance=ExtResource(\"1\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 42,
+      "context": "[node name=\"ProgressBar\" parent=\"VBoxContainer/Header\" unique_id=360281822 instance=ExtResource(\"2\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 47,
+      "context": "[node name=\"StatusBar\" parent=\"VBoxContainer/Header\" unique_id=625414847 instance=ExtResource(\"3\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 51,
+      "context": "[node name=\"MainPanel\" parent=\"VBoxContainer\" unique_id=1133307707 instance=ExtResource(\"7\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 56,
+      "context": "[node name=\"event_server\" parent=\".\" unique_id=756999253 instance=ExtResource(\"7_721no\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn",
+      "line": 45,
+      "context": "[node name=\"contextMenu\" type=\"PopupMenu\" unique_id=1824556050]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "line": 8,
+      "context": "[node name=\"MarginContainer\" type=\"MarginContainer\" unique_id=542070056]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "line": 19,
+      "context": "[node name=\"ProgressBar\" type=\"ProgressBar\" parent=\".\" unique_id=419200362]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "line": 29,
+      "context": "[node name=\"progess_counter\" type=\"Label\" parent=\"ProgressBar\" unique_id=648033469]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 11,
+      "context": "[node name=\"StatusBar\" type=\"VBoxContainer\" unique_id=214621769]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 20,
+      "context": "[node name=\"tree_tools\" type=\"HBoxContainer\" parent=\".\" unique_id=1524945370]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 24,
+      "context": "[node name=\"Label\" type=\"Label\" parent=\"tree_tools\" unique_id=226892195]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 31,
+      "context": "[node name=\"timings\" type=\"HBoxContainer\" parent=\"tree_tools\" unique_id=1494080859]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 37,
+      "context": "[node name=\"time_icon\" type=\"TextureRect\" parent=\"tree_tools/timings\" unique_id=156277722]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 44,
+      "context": "[node name=\"time_value\" type=\"Label\" parent=\"tree_tools/timings\" unique_id=387690970]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 55,
+      "context": "[node name=\"tree_buttons\" type=\"HBoxContainer\" parent=\"tree_tools\" unique_id=1600307316]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 61,
+      "context": "[node name=\"VSeparator\" type=\"VSeparator\" parent=\"tree_tools/tree_buttons\" unique_id=1191926359]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 64,
+      "context": "[node name=\"btn_tree_sync\" type=\"Button\" parent=\"tree_tools/tree_buttons\" unique_id=2138788372]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 70,
+      "context": "[node name=\"btn_tree_sort\" type=\"MenuButton\" parent=\"tree_tools/tree_buttons\" unique_id=1452127838]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 77,
+      "context": "[node name=\"btn_tree_mode\" type=\"MenuButton\" parent=\"tree_tools/tree_buttons\" unique_id=1744382439]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 84,
+      "context": "[node name=\"HSeparator\" type=\"HSeparator\" parent=\".\" unique_id=1416084348]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 89,
+      "context": "[node name=\"MarginContainer\" type=\"MarginContainer\" parent=\".\" unique_id=89354949]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 97,
+      "context": "[node name=\"status_bar\" type=\"HFlowContainer\" parent=\"MarginContainer\" unique_id=1576624226]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 102,
+      "context": "[node name=\"icon_template\" type=\"SpinBox\" parent=\"MarginContainer/status_bar\" unique_id=1487498266]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 107,
+      "context": "[node name=\"ERROR\" type=\"HBoxContainer\" parent=\"MarginContainer/status_bar\" unique_id=310880909]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 111,
+      "context": "[node name=\"value\" type=\"LineEdit\" parent=\"MarginContainer/status_bar/ERROR\" unique_id=1630464164]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 129,
+      "context": "[node name=\"icon\" type=\"TextureRect\" parent=\"MarginContainer/status_bar/ERROR/value\" unique_id=729348405]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 143,
+      "context": "[node name=\"buttons\" type=\"VBoxContainer\" parent=\"MarginContainer/status_bar/ERROR\" unique_id=541942806]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 147,
+      "context": "[node name=\"up\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/ERROR/buttons\" unique_id=1146002542]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 152,
+      "context": "[node name=\"down\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/ERROR/buttons\" unique_id=1867410350]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 158,
+      "context": "[node name=\"FAILED\" type=\"HBoxContainer\" parent=\"MarginContainer/status_bar\" unique_id=1390016421]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 162,
+      "context": "[node name=\"value\" type=\"LineEdit\" parent=\"MarginContainer/status_bar/FAILED\" unique_id=75554621]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 180,
+      "context": "[node name=\"icon\" type=\"TextureRect\" parent=\"MarginContainer/status_bar/FAILED/value\" unique_id=1889621378]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 194,
+      "context": "[node name=\"buttons\" type=\"VBoxContainer\" parent=\"MarginContainer/status_bar/FAILED\" unique_id=699611313]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 198,
+      "context": "[node name=\"up\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/FAILED/buttons\" unique_id=1774403865]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 203,
+      "context": "[node name=\"down\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/FAILED/buttons\" unique_id=1605438045]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 209,
+      "context": "[node name=\"FLAKY\" type=\"HBoxContainer\" parent=\"MarginContainer/status_bar\" unique_id=480870974]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 213,
+      "context": "[node name=\"value\" type=\"LineEdit\" parent=\"MarginContainer/status_bar/FLAKY\" unique_id=2059394293]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 231,
+      "context": "[node name=\"icon\" type=\"TextureRect\" parent=\"MarginContainer/status_bar/FLAKY/value\" unique_id=885817973]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 245,
+      "context": "[node name=\"buttons\" type=\"VBoxContainer\" parent=\"MarginContainer/status_bar/FLAKY\" unique_id=968503310]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 249,
+      "context": "[node name=\"up\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/FLAKY/buttons\" unique_id=1127861257]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 254,
+      "context": "[node name=\"down\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/FLAKY/buttons\" unique_id=949128796]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 260,
+      "context": "[node name=\"SKIPPED\" type=\"HBoxContainer\" parent=\"MarginContainer/status_bar\" unique_id=2053554589]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 264,
+      "context": "[node name=\"value\" type=\"LineEdit\" parent=\"MarginContainer/status_bar/SKIPPED\" unique_id=1877800941]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 282,
+      "context": "[node name=\"icon\" type=\"TextureRect\" parent=\"MarginContainer/status_bar/SKIPPED/value\" unique_id=932936779]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 296,
+      "context": "[node name=\"buttons\" type=\"VBoxContainer\" parent=\"MarginContainer/status_bar/SKIPPED\" unique_id=1650258492]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 300,
+      "context": "[node name=\"up\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/SKIPPED/buttons\" unique_id=357027687]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 305,
+      "context": "[node name=\"down\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/SKIPPED/buttons\" unique_id=603266459]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 311,
+      "context": "[node name=\"ORPHAN\" type=\"HBoxContainer\" parent=\"MarginContainer/status_bar\" unique_id=1284157443]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 315,
+      "context": "[node name=\"value\" type=\"LineEdit\" parent=\"MarginContainer/status_bar/ORPHAN\" unique_id=629163801]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 333,
+      "context": "[node name=\"icon\" type=\"TextureRect\" parent=\"MarginContainer/status_bar/ORPHAN/value\" unique_id=2121368482]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 347,
+      "context": "[node name=\"buttons\" type=\"VBoxContainer\" parent=\"MarginContainer/status_bar/ORPHAN\" unique_id=433516040]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 351,
+      "context": "[node name=\"up\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/ORPHAN/buttons\" unique_id=159317457]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 356,
+      "context": "[node name=\"down\" type=\"TextureButton\" parent=\"MarginContainer/status_bar/ORPHAN/buttons\" unique_id=1357830825]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 53,
+      "context": "[node name=\"ToolBar\" type=\"HBoxContainer\" unique_id=295615556]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 60,
+      "context": "[node name=\"tools\" type=\"HBoxContainer\" parent=\".\" unique_id=753222103]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 65,
+      "context": "[node name=\"help\" type=\"Button\" parent=\"tools\" unique_id=1834372497]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 70,
+      "context": "[node name=\"tool\" type=\"Button\" parent=\"tools\" unique_id=144277615]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 76,
+      "context": "[node name=\"controls\" type=\"HBoxContainer\" parent=\".\" unique_id=108317981]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 82,
+      "context": "[node name=\"VSeparator3\" type=\"VSeparator\" parent=\"controls\" unique_id=1244151035]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 85,
+      "context": "[node name=\"run_overall\" type=\"Button\" parent=\"controls\" unique_id=95775836]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 94,
+      "context": "[node name=\"run\" type=\"Button\" parent=\"controls\" unique_id=121281977]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 104,
+      "context": "[node name=\"debug\" type=\"Button\" parent=\"controls\" unique_id=1188465777]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 114,
+      "context": "[node name=\"stop\" type=\"Button\" parent=\"controls\" unique_id=2086070257]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 124,
+      "context": "[node name=\"VSeparator4\" type=\"VSeparator\" parent=\"controls\" unique_id=1661024234]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 127,
+      "context": "[node name=\"CenterContainer\" type=\"HBoxContainer\" parent=\".\" unique_id=1521483443]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 134,
+      "context": "[node name=\"version\" type=\"Label\" parent=\"CenterContainer\" unique_id=558200171]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 47,
+      "context": "[node name=\"MainPanel\" type=\"Control\" unique_id=944258025]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 59,
+      "context": "[node name=\"contextMenu\" parent=\".\" unique_id=73764904 instance=ExtResource(\"2_o6s0p\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 68,
+      "context": "[node name=\"split\" type=\"VSplitContainer\" parent=\".\" unique_id=1044515559]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 83,
+      "context": "[node name=\"Panel\" type=\"Panel\" parent=\"split\" unique_id=290722553]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 89,
+      "context": "[node name=\"Tree\" type=\"Tree\" parent=\"split/Panel\" unique_id=741772884]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 107,
+      "context": "[node name=\"discover_hint\" type=\"HBoxContainer\" parent=\"split/Panel\" unique_id=555683311]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 114,
+      "context": "[node name=\"spinner\" type=\"Button\" parent=\"split/Panel/discover_hint\" unique_id=200472082]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 126,
+      "context": "[node name=\"report\" parent=\"split\" unique_id=1465857421 instance=ExtResource(\"3_miuuy\")]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 5,
+      "context": "[node name=\"report\" type=\"Panel\" unique_id=1075065511]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 17,
+      "context": "[node name=\"message\" type=\"RichTextLabel\" parent=\".\" unique_id=1680360176]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 31,
+      "context": "[node name=\"ScrollContainer\" type=\"ScrollContainer\" parent=\".\" unique_id=385317760]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 40,
+      "context": "[node name=\"report_list\" type=\"VBoxContainer\" parent=\"ScrollContainer\" unique_id=1467163528]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 69,
+      "context": "[node name=\"Hooks\" type=\"ScrollContainer\" unique_id=659565185]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 81,
+      "context": "[node name=\"HBoxContainer\" type=\"HBoxContainer\" parent=\".\" unique_id=1746177026]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 86,
+      "context": "[node name=\"hooks_content\" type=\"VBoxContainer\" parent=\"HBoxContainer\" unique_id=1756623882]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 92,
+      "context": "[node name=\"Panel\" type=\"Panel\" parent=\"HBoxContainer/hooks_content\" unique_id=1467652907]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 97,
+      "context": "[node name=\"hook_scroll\" type=\"ScrollContainer\" parent=\"HBoxContainer/hooks_content/Panel\" unique_id=1296435931]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 106,
+      "context": "[node name=\"hook_list\" type=\"VBoxContainer\" parent=\"HBoxContainer/hooks_content/Panel/hook_scroll\" unique_id=1329270012]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 112,
+      "context": "[node name=\"hook_description\" type=\"RichTextLabel\" parent=\"HBoxContainer/hooks_content\" unique_id=1554657128]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 121,
+      "context": "[node name=\"hook_actions\" type=\"VBoxContainer\" parent=\"HBoxContainer\" unique_id=1441205618]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 128,
+      "context": "[node name=\"btn_move_up\" type=\"Button\" parent=\"HBoxContainer/hook_actions\" unique_id=1909528536]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 135,
+      "context": "[node name=\"btn_move_down\" type=\"Button\" parent=\"HBoxContainer/hook_actions\" unique_id=1385113071]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 142,
+      "context": "[node name=\"btn_add_hook\" type=\"Button\" parent=\"HBoxContainer/hook_actions\" unique_id=338115845]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 148,
+      "context": "[node name=\"btn_delete_hook\" type=\"Button\" parent=\"HBoxContainer/hook_actions\" unique_id=642037387]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 155,
+      "context": "[node name=\"select_hook_dlg\" type=\"FileDialog\" parent=\".\" unique_id=2043681690]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 165,
+      "context": "[node name=\"error_msg_popup\" type=\"AcceptDialog\" parent=\".\" unique_id=1430197292]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 170,
+      "context": "[node name=\"row_template\" type=\"Panel\" parent=\".\" unique_id=2068077019]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 178,
+      "context": "[node name=\"HBoxContainer\" type=\"HBoxContainer\" parent=\"row_template\" unique_id=421161803]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 186,
+      "context": "[node name=\"Spacer1\" type=\"MarginContainer\" parent=\"row_template/HBoxContainer\" unique_id=1388548361]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 195,
+      "context": "[node name=\"Indicator\" type=\"ColorRect\" parent=\"row_template/HBoxContainer/Spacer1\" unique_id=695255812]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 200,
+      "context": "[node name=\"HookName\" type=\"Label\" parent=\"row_template/HBoxContainer\" unique_id=167022167]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 205,
+      "context": "[node name=\"SystemBadge\" type=\"PanelContainer\" parent=\"row_template/HBoxContainer\" unique_id=1220764160]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 210,
+      "context": "[node name=\"Label\" type=\"Label\" parent=\"row_template/HBoxContainer/SystemBadge\" unique_id=1972968522]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 216,
+      "context": "[node name=\"Enabled\" type=\"CheckButton\" parent=\"row_template/HBoxContainer\" unique_id=365063095]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 6,
+      "context": "[node name=\"CameraRig\" type=\"Node3D\" unique_id=1636214823]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 9,
+      "context": "[node name=\"CameraSpring\" type=\"Node3D\" parent=\".\" unique_id=1659115623]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 12,
+      "context": "[node name=\"RayCast3D\" type=\"RayCast3D\" parent=\"CameraSpring\" unique_id=558445508]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 15,
+      "context": "[node name=\"Camera3D\" type=\"Camera3D\" parent=\".\" unique_id=1772303481]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 57,
+      "context": "[node name=\"Main\" type=\"Node3D\" unique_id=1675065870]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 60,
+      "context": "[node name=\"WorldEnvironment\" type=\"WorldEnvironment\" parent=\".\" unique_id=737641712]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 63,
+      "context": "[node name=\"VegetationSpawner\" type=\"Node\" parent=\".\" unique_id=999777666]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 68,
+      "context": "[node name=\"VoxelTerrain\" type=\"VoxelTerrain\" parent=\".\" unique_id=679045721]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 70,
+      "context": "[node name=\"VoxelViewer\" type=\"VoxelViewer\" parent=\".\" unique_id=859911694]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 72,
+      "context": "[node name=\"Player\" type=\"CharacterBody3D\" parent=\".\" unique_id=1575828482 instance=ExtResource(\"3_player\")]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 77,
+      "context": "[node name=\"Camera3D\" type=\"Camera3D\" parent=\".\" unique_id=294267703]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 81,
+      "context": "[node name=\"DirectionalLight\" type=\"DirectionalLight3D\" parent=\".\" unique_id=1298805569]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 91,
+      "context": "[node name=\"DirLightLuna\" type=\"DirectionalLight3D\" parent=\".\" unique_id=999123456]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 97,
+      "context": "[node name=\"UI\" type=\"CanvasLayer\" parent=\".\" unique_id=1978615821]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 99,
+      "context": "[node name=\"FPSLabel\" type=\"Label\" parent=\"UI\" unique_id=55939601]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 107,
+      "context": "[node name=\"ControlsLabel\" type=\"Label\" parent=\"UI\" unique_id=1997514694]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 119,
+      "context": "[node name=\"RelojWidget\" type=\"PanelContainer\" parent=\"UI\" unique_id=732444007]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 122,
+      "context": "[node name=\"StatusBar\" type=\"Control\" parent=\"UI\" unique_id=276185017]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 132,
+      "context": "[node name=\"InteractPrompt\" type=\"Control\" parent=\"UI\" unique_id=1446751419]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 142,
+      "context": "[node name=\"MinimapWidget\" type=\"Control\" parent=\"UI\" unique_id=999144675]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 156,
+      "context": "[node name=\"CatalinaOso\" type=\"CharacterBody3D\" parent=\".\" unique_id=651469255]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 162,
+      "context": "[node name=\"DayNightCycle\" type=\"Node3D\" parent=\".\" unique_id=671106117]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 174,
+      "context": "[node name=\"TortugaNPC\" type=\"CharacterBody3D\" parent=\".\" unique_id=884620771]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 178,
+      "context": "[node name=\"CangrejoNPC\" type=\"CharacterBody3D\" parent=\".\" unique_id=884620772]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 182,
+      "context": "[node name=\"JabaliNPC\" type=\"CharacterBody3D\" parent=\".\" unique_id=884620773]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 187,
+      "context": "[node name=\"JabaliAdultoNPC\" type=\"CharacterBody3D\" parent=\".\" unique_id=884620774]"
+    },
+    {
+      "file": "scenes/main_island.tscn",
+      "line": 192,
+      "context": "[node name=\"GaviotaNPC\" type=\"CharacterBody3D\" parent=\".\" unique_id=884620775]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 22,
+      "context": "[node name=\"ParticlesPreview\" type=\"Node3D\" unique_id=2127030393]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 25,
+      "context": "[node name=\"WorldEnvironment\" type=\"WorldEnvironment\" parent=\".\" unique_id=1415601078]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 28,
+      "context": "[node name=\"Tree\" type=\"Node3D\" parent=\".\" unique_id=1722337912]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 30,
+      "context": "[node name=\"PollenEmitter\" type=\"CPUParticles3D\" parent=\".\" unique_id=1961596221]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 40,
+      "context": "[node name=\"CameraDemo\" type=\"Camera3D\" parent=\".\" unique_id=157102351]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 44,
+      "context": "[node name=\"DirectionalLight\" type=\"DirectionalLight3D\" parent=\".\" unique_id=2064228835]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 47,
+      "context": "[node name=\"UI\" type=\"CanvasLayer\" parent=\".\" unique_id=540894720]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 49,
+      "context": "[node name=\"FPSLabel\" type=\"Label\" parent=\"UI\" unique_id=1797186848]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 57,
+      "context": "[node name=\"Game\" type=\"CharacterBody3D\" unique_id=1217130252]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 60,
+      "context": "[node name=\"WorldEnvironment\" type=\"WorldEnvironment\" parent=\".\" unique_id=759275071]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 63,
+      "context": "[node name=\"Ground\" type=\"StaticBody3D\" parent=\".\" unique_id=1359860249]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 65,
+      "context": "[node name=\"Mesh\" type=\"MeshInstance3D\" parent=\"Ground\" unique_id=1829616801]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 69,
+      "context": "[node name=\"Shape\" type=\"CollisionShape3D\" parent=\"Ground\" unique_id=1675309427]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 72,
+      "context": "[node name=\"Player\" type=\"CharacterBody3D\" parent=\".\" unique_id=1026463894]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 75,
+      "context": "[node name=\"Body\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=1438492210]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 80,
+      "context": "[node name=\"Head\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=1251862500]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 85,
+      "context": "[node name=\"LeftArm\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=902311374]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 90,
+      "context": "[node name=\"RightArm\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=144697849]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 95,
+      "context": "[node name=\"LeftLeg\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=828641122]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 100,
+      "context": "[node name=\"RightLeg\" type=\"MeshInstance3D\" parent=\"Player\" unique_id=834471447]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 105,
+      "context": "[node name=\"CollisionShape\" type=\"CollisionShape3D\" parent=\"Player\" unique_id=1712375699]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 108,
+      "context": "[node name=\"Camera3D\" type=\"Camera3D\" parent=\".\" unique_id=1343326356]"
+    },
+    {
+      "file": "scenes/simple_walk.tscn",
+      "line": 112,
+      "context": "[node name=\"DirectionalLight\" type=\"DirectionalLight3D\" parent=\".\" unique_id=341269663]"
+    }
+  ],
+  "known_uid_count": 2505,
+  "known_scene_uids": [
+    "uid://0xyeci1tqebj",
+    "uid://2eahgaw88y6q",
+    "uid://41l7a46fol5m",
+    "uid://belidlfknh74r",
+    "uid://bjcc71p2h1trr",
+    "uid://bqfpidewtpeg0",
+    "uid://bqv5xj7k2m3r",
+    "uid://c1234568aa0",
+    "uid://c22l4odk7qesc",
+    "uid://c4ewhaonnk2g8",
+    "uid://cn5mp3tmi2gb1",
+    "uid://dga8nhaxnyr53",
+    "uid://dm0wvfyeew7vd",
+    "uid://dte0m2endcgtu",
+    "uid://dva3tonxsxrlk",
+    "uid://dx7xy4dgi3wwb",
+    "uid://hud_m53_screen",
+    "uid://mpo5o6d4uybu",
+    "uid://pmnkxrhglak5",
+    "uid://test_anillo_arena_m09",
+    "uid://y7owcvev8t76"
+  ],
+  "missing_uid_refs": [
+    {
+      "file": "addons/gdUnit4/src/core/runners/GdUnitTestRunner.tscn",
+      "line": 1,
+      "uid": "belidlfknh74r",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=3 format=3 uid=\"uid://belidlfknh74r\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/network/GdUnitServer.tscn",
+      "line": 1,
+      "uid": "cn5mp3tmi2gb1",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=3 format=3 uid=\"uid://cn5mp3tmi2gb1\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitConsole.tscn",
+      "line": 1,
+      "uid": "dm0wvfyeew7vd",
+      "kind": "scene_header",
+      "context": "[gd_scene format=4 uid=\"uid://dm0wvfyeew7vd\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/GdUnitInspector.tscn",
+      "line": 1,
+      "uid": "mpo5o6d4uybu",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://mpo5o6d4uybu\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn",
+      "line": 1,
+      "uid": "bjcc71p2h1trr",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://bjcc71p2h1trr\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "line": 1,
+      "uid": "dva3tonxsxrlk",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dva3tonxsxrlk\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "line": 1,
+      "uid": "c22l4odk7qesc",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://c22l4odk7qesc\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "line": 1,
+      "uid": "dx7xy4dgi3wwb",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dx7xy4dgi3wwb\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+      "line": 1,
+      "uid": "bqfpidewtpeg0",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://bqfpidewtpeg0\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+      "line": 1,
+      "uid": "dga8nhaxnyr53",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dga8nhaxnyr53\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn",
+      "line": 1,
+      "uid": "pmnkxrhglak5",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://pmnkxrhglak5\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "line": 1,
+      "uid": "41l7a46fol5m",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://41l7a46fol5m\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn",
+      "line": 1,
+      "uid": "dte0m2endcgtu",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://dte0m2endcgtu\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/update/GdUnitUpdate.tscn",
+      "line": 1,
+      "uid": "2eahgaw88y6q",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=6 format=3 uid=\"uid://2eahgaw88y6q\"]"
+    },
+    {
+      "file": "addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn",
+      "line": 1,
+      "uid": "0xyeci1tqebj",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=4 format=3 uid=\"uid://0xyeci1tqebj\"]"
+    },
+    {
+      "file": "scenes/CameraRig.tscn",
+      "line": 1,
+      "uid": "y7owcvev8t76",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://y7owcvev8t76\"]"
+    },
+    {
+      "file": "scenes/main.tscn",
+      "line": 1,
+      "uid": "c1234568aa0",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=6 format=3 uid=\"uid://c1234568aa0\"]"
+    },
+    {
+      "file": "scenes/preview_particles.tscn",
+      "line": 1,
+      "uid": "c4ewhaonnk2g8",
+      "kind": "scene_header",
+      "context": "[gd_scene format=3 uid=\"uid://c4ewhaonnk2g8\"]"
+    },
+    {
+      "file": "scenes/test_anillo_arena.tscn",
+      "line": 1,
+      "uid": "test_anillo_arena_m09",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://test_anillo_arena_m09\"]"
+    },
+    {
+      "file": "scenes/tests/test_m108.tscn",
+      "line": 1,
+      "uid": "bqv5xj7k2m3r",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=2 format=3 uid=\"uid://bqv5xj7k2m3r\"]"
+    },
+    {
+      "file": "scenes/ui/hud.tscn",
+      "line": 1,
+      "uid": "hud_m53_screen",
+      "kind": "scene_header",
+      "context": "[gd_scene load_steps=10 format=3 uid=\"uid://hud_m53_screen\"]"
+    }
+  ],
+  "uid_sidecar_count": 1621,
+  "import_uid_count": 863,
+  "scene_graph_edges": 18,
+  "scenes_with_instance_deps": {
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn": [
+      "addons/gdUnit4/src/network/GdUnitServer.tscn",
+      "addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+      "addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+      "addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+      "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn"
+    ],
+    "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn": [
+      "addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn",
+      "addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn"
+    ],
+    "addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn": [
+      "addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn",
+      "addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+      "addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn",
+      "addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn"
+    ],
+    "addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn": [
+      "addons/gdUnit4/src/update/GdUnitUpdate.tscn"
+    ],
+    "scenes/main.tscn": [
+      "scenes/player/Player.tscn"
+    ],
+    "scenes/main_island.tscn": [
+      "scenes/player/Player.tscn"
+    ],
+    "scenes/main_simple.tscn": [
+      "scenes/player/Player.tscn"
+    ],
+    "scenes/main_test.tscn": [
+      "scenes/player/Player.tscn"
+    ],
+    "scenes/main_test2.tscn": [
+      "scenes/player/Player.tscn"
+    ],
+    "scenes/player/Player.tscn": [
+      "assets/3d/media/45-Arte3D_jugador_voxel.glb"
+    ]
+  },
+  "edge_details": {
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn -> addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn": [
+      {
+        "line": 38,
+        "ext_id": "1",
+        "path": "res://addons/gdUnit4/src/ui/parts/GdUnitInspectorToolBar.tscn",
+        "ext_line": 3
+      }
+    ],
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn -> addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn": [
+      {
+        "line": 42,
+        "ext_id": "2",
+        "path": "res://addons/gdUnit4/src/ui/parts/GdUnitInspectorProgressBar.tscn",
+        "ext_line": 5
+      }
+    ],
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn -> addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn": [
+      {
+        "line": 47,
+        "ext_id": "3",
+        "path": "res://addons/gdUnit4/src/ui/parts/GdUnitInspectorStatusBar.tscn",
+        "ext_line": 6
+      }
+    ],
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn -> addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn": [
+      {
+        "line": 51,
+        "ext_id": "7",
+        "path": "res://addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn",
+        "ext_line": 7
+      }
+    ],
+    "addons/gdUnit4/src/ui/GdUnitInspector.tscn -> addons/gdUnit4/src/network/GdUnitServer.tscn": [
+      {
+        "line": 56,
+        "ext_id": "7_721no",
+        "path": "res://addons/gdUnit4/src/network/GdUnitServer.tscn",
+        "ext_line": 8
+      }
+    ],
+    "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn -> addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn": [
+      {
+        "line": 59,
+        "ext_id": "2_o6s0p",
+        "path": "res://addons/gdUnit4/src/ui/menu/GdUnitInspectorContextMenu.tscn",
+        "ext_line": 4
+      }
+    ],
+    "addons/gdUnit4/src/ui/parts/GdUnitInspectorTreeMainPanel.tscn -> addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn": [
+      {
+        "line": 126,
+        "ext_id": "3_miuuy",
+        "path": "res://addons/gdUnit4/src/ui/parts/GdUnitReportPanel.tscn",
+        "ext_line": 5
+      }
+    ],
+    "addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn -> addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn": [
+      {
+        "line": 230,
+        "ext_id": "4_nf72w",
+        "path": "res://addons/gdUnit4/src/ui/settings/GdUnitSettingsTabHooks.tscn",
+        "ext_line": 6
+      }
+    ],
+    "addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn -> addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn": [
+      {
+        "line": 273,
+        "ext_id": "4",
+        "path": "res://addons/gdUnit4/src/ui/templates/GdUnitTestSuiteTemplatePanel.tscn",
+        "ext_line": 5
+      }
+    ],
+    "addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn -> addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn": [
+      {
+        "line": 278,
+        "ext_id": "5_n1jtv",
+        "path": "res://addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn",
+        "ext_line": 7
+      }
+    ],
+    "addons/gdUnit4/src/ui/settings/GdUnitSettingsDialog.tscn -> addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn": [
+      {
+        "line": 284,
+        "ext_id": "5_xu3j8",
+        "path": "res://addons/gdUnit4/src/ui/settings/GdUnitInputCapture.tscn",
+        "ext_line": 8
+      }
+    ],
+    "addons/gdUnit4/src/update/GdUnitUpdateNotify.tscn -> addons/gdUnit4/src/update/GdUnitUpdate.tscn": [
+      {
+        "line": 66,
+        "ext_id": "3_x87h6",
+        "path": "res://addons/gdUnit4/src/update/GdUnitUpdate.tscn",
+        "ext_line": 5
+      }
+    ],
+    "scenes/main.tscn -> scenes/player/Player.tscn": [
+      {
+        "line": 33,
+        "ext_id": "4_player",
+        "path": "res://scenes/player/Player.tscn",
+        "ext_line": 6
+      }
+    ],
+    "scenes/main_island.tscn -> scenes/player/Player.tscn": [
+      {
+        "line": 72,
+        "ext_id": "3_player",
+        "path": "res://scenes/player/Player.tscn",
+        "ext_line": 9
+      }
+    ],
+    "scenes/main_simple.tscn -> scenes/player/Player.tscn": [
+      {
+        "line": 32,
+        "ext_id": "3_player",
+        "path": "res://scenes/player/Player.tscn",
+        "ext_line": 5
+      }
+    ],
+    "scenes/main_test.tscn -> scenes/player/Player.tscn": [
+      {
+        "line": 50,
+        "ext_id": "3_player",
+        "path": "res://scenes/player/Player.tscn",
+        "ext_line": 5
+      }
+    ],
+    "scenes/main_test2.tscn -> scenes/player/Player.tscn": [
+      {
+        "line": 38,
+        "ext_id": "3_player",
+        "path": "res://scenes/player/Player.tscn",
+        "ext_line": 4
+      }
+    ],
+    "scenes/player/Player.tscn -> assets/3d/media/45-Arte3D_jugador_voxel.glb": [
+      {
+        "line": 23,
+        "ext_id": "2_voxel",
+        "path": "res://assets/3d/media/45-Arte3D_jugador_voxel.glb",
+        "ext_line": 4
+      }
+    ]
+  },
+  "cycles": []
+}
