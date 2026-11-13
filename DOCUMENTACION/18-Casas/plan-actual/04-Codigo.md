@@ -202,3 +202,118 @@ Test: scripts/houses/test_m18_sistemas_s2.gd — 79 checks, 0 fallos, EXIT 0 (si
 - En headless no hay InventarioService ni AmistadManager/MisionManager: las transferencias y requisitos degradan sin crash.
 - HouseInterior._habitaciones_por_etapa(5) = 6 habitaciones (living + dormitorio + cocina + taller + sótano + ático).
 - Pendiente (35 [ ]): cocina/taller funcionales con M16, jardín M33, visuales M154 (cimientos, exterior por etapa), integración M17/M21 real, tests de flujo completo.
+
+---
+
+## 8. Assets nuevos de casas grandes (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> **v2:** las cifras de §8.1–8.5 son de la primera versión; la vigente es §8.6 (20×15 / 28×20, 0 solapes).
+
+### 8.1 Archivos creados
+
+| Archivo | Tipo | Contenido |
+|---|---|---|
+| `tools/mcp/blender-mcp/18-Casas/build_casas_grandes.py` | Script Blender | Genera Casona 16×12 y Mansión 22×16 con interiores, materiales, cámara y luces |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_grandes_2026-11-12.blend` | .blend | Escena `Casas_Grandes` con ambas casas + escena `Scene` con las casas pequeñas |
+| `tools/mcp/blender-mcp/18-Casas/CAPTURAS/casas_grandes_exterior_2026-11-12.png` | Render | Vista general de ambas casas |
+| `.../casona_exterior_2026-11-12.png` | Render | Casona del Gremio exterior |
+| `.../casona_interior_2026-11-12.png` | Render | Casona con techo oculto (vista de muñeca) |
+| `.../mansion_exterior_2026-11-12.png` | Render | Mansión del Museo exterior |
+| `.../mansion_interior_2026-11-12.png` | Render | Mansión con techo oculto |
+
+### 8.2 Funciones del script Blender
+
+| Función | Responsabilidad |
+|---|---|
+| `box / cyl / cone / sph / roof` | Malla directa con `bmesh` (sin `bpy.ops` por objeto) |
+| `wall_x / wall_y` | Muros con huecos de puerta y dintel |
+| `stairs` | Escalera recta con baranda y balaustres |
+| `slab_hole` | Losa de planta alta con hueco de escalera |
+| `table / chair / bed / wardrobe / shelf` | Mobiliario base |
+| `chandelier / plant / painting / display_case / armor` | Decoración y piezas de museo |
+| `telescope / piano / harp / armillary / billiard / hammock` | Objetos originales |
+
+### 8.3 Rutas propuestas en Godot
+
+| Asset | Ruta | Notas |
+|---|---|---|
+| Casona exterior | `res://assets/3d/alta/18-Casas_casona_gremio.glb` | LOD0 ≤6.000 tris; variantes `_media/_baja` |
+| Casona interior | `res://assets/3d/alta/18-Casas_casona_gremio_interior.glb` | Escena interior; muebles + shell |
+| Mansión exterior | `res://assets/3d/alta/18-Casas_mansion_museo.glb` | Dividida en alas si supera 6.000 tris |
+| Mansión interior | `res://assets/3d/alta/18-Casas_mansion_museo_interior.glb` | Escena interior |
+| Objetos | `res://assets/3d/alta/18-Casas_<objeto>.glb` | Ej.: `18-Casas_biblioteca_caracol.glb` |
+| Recetas M17 | `res://data/construccion/piezas/<objeto>.tres` | Solo para piezas construibles (pared, piso, techo, puerta, ventana) |
+
+### 8.4 Integración en Godot (pendiente)
+
+1. Exportar cada casa con `exportar_godot.py` (módulo `18-Casas`) y verificar `glb == .import == .scn`.
+2. Importar con `meshes/generate_lods=true` y `visibility_range` 30/60/120 m.
+3. Crear `scenes/houses/house_casona_gremio.tscn` y `house_mansion_museo.tscn` con `House` + `Area3D` de puerta + colisión.
+4. Colocar con `TerrainLocator.posicionar_sobre_terreno()`; validar huella y pendiente.
+5. Registrar en `HouseManager.registrar_casa()`; añadir `HouseInterior` con habitaciones por etapa.
+6. Añadir los objetos nuevos al catálogo M159 y a `HouseDecor` (celdas, `requiere_pared`, `requiere_superficie`).
+7. QA: `godot_get_debug_output` sin errores, capturas orbitales y prueba de entrar/salir.
+
+### 8.5 Presupuesto y materiales
+
+| Métrica | Casona | Mansión |
+|---|---:|---:|
+| Piezas Blender | 608 | 845 |
+| Tris ALTA | 12.608 | 19.866 |
+| Materiales | 16 | 15 |
+| LOD objetivo exterior | ≤6.000 | ≤6.000 por ala |
+| Materiales objetivo en Godot | ≤8 | ≤8 |
+
+> Los materiales exceden el objetivo de 8; se unifican con `generar_variante.py --media --baja` o con el atlas M47 (1024², 32 px/tile). El color por vértice se conserva como fuente de autoría.
+
+### 8.6 v2 — casas 20×15 y 28×20, 0 solapes (2026-11-12)
+
+| Archivo | Contenido |
+|---|---|
+| `tools/mcp/blender-mcp/18-Casas/build_casas_grandes_v2.py` | Script v2 con generador y **validador de AABB** |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_grandes_v2_2026-11-12.blend` | Escena `Casas_Grandes_v2` + `Scene` (casas pequeñas) |
+| `CAPTURAS/casas_grandes_v2_exterior_2026-11-12.png` | Vista general |
+| `CAPTURAS/casona_v2_exterior/interior_2026-11-12.png` | Casona v2 |
+| `CAPTURAS/mansion_v2_exterior/interior_2026-11-12.png` | Mansión v2 |
+
+| Métrica | Casona v2 | Mansión v2 |
+|---|---:|---:|
+| Dimensiones | 20×15 m | 28×20 m |
+| Piezas | 568 | 826 |
+| Tris ALTA | 11.896 | 19.874 |
+| Materiales | 16 | 15 |
+| BBox | 21,1×16,0×10,3 m | 30,2×22,8×12,9 m |
+| Solapes mueble-estructura | **0** | **0** |
+| Solapes mueble-mueble | **0** | **0** |
+| Objetos sobre el hueco de escalera | **0** | **0** |
+
+**Validación:** AABB mundial por malla, tolerancia 0,10 m; se excluyen uniones intended (chimenea-techo, base/respaldo de sofá, tapa/cuerpo de piano, anillos de esfera armilar). El script imprime el resultado al construir.
+
+**Pendiente de Godot:** exportar GLB exterior/interior, LODs ≤6.000 tris, `TerrainLocator`, escenas `house_casona_gremio_v2.tscn` / `house_mansion_museo_v2.tscn`, y registro de los 21 objetos en M18/M159.
+
+### 8.7 Casas extra y detalle exterior/interior (2026-11-12)
+
+| Archivo | Contenido |
+|---|---|
+| `tools/mcp/blender-mcp/18-Casas/build_casas_extra.py` | Genera Agricultor (18×13) y Mercader (16×12) |
+| `tools/mcp/blender-mcp/18-Casas/add_exterior_detail.py` | Ventanas, chimeneas, vigas de esquina, zócalos, aleros, sendero, cerca, pozo, farol |
+| `tools/mcp/blender-mcp/18-Casas/add_interior_detail.py` | Zócalos interiores, vigas de techo, marcos de puertas, cuadros, vajilla |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_extra_2026-11-12.blend` | Escena `Casas_Extra` + `Casas_Grandes_v2` + `Scene` |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_v2_guardadas_2026-11-12.blend` | Respaldo v2 con detalle |
+| `CAPTURAS/casas_grandes_v2_exterior_2026-11-12.png` | Exterior v2 con ventanas/chimeneas |
+| `CAPTURAS/casona_v2_interior_2026-11-12.png` | Interior Casona |
+| `CAPTURAS/mansion_v2_interior_2026-11-12.png` | Interior Mansión |
+| `CAPTURAS/casas_extra_exterior_2026-11-12.png` | Exterior Agricultor/Mercader |
+| `CAPTURAS/agricultor_interior_2026-11-12.png` | Interior Agricultor |
+| `CAPTURAS/mercader_interior_2026-11-12.png` | Interior Mercader |
+
+| Métrica | Casona | Mansión | Agricultor | Mercader |
+|---|---:|---:|---:|---:|
+| Piezas | 807 | 1.091 | 546 | 592 |
+| Tris | 18.708 | 27.502 | 12.330 | 12.708 |
+| Materiales | 18 | 17 | 17 | 18 |
+| Ventanas | 240 | 280 | 160 | 120 |
+| Solapes AABB | 0 | 0 | 0 | 0 |
+| Sobre el hueco | 0 | 0 | 0 | 0 |
+
+> **Nota:** los objetos de ventana (640 en total) y el detalle (zócalos, vigas, marcos, cuadros, vajilla) se excluyen del conteo de muebles del validador por ser piezas **ancladas** al muro, piso o techo. El QA de muebles sigue dando 0.

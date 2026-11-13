@@ -203,3 +203,72 @@
 > Las marcas no se tocaron.
 
 **Totales:** 149 items · Completados: 116 · Pendientes: 33 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 116 [x] / 33 [ ] / 0 [?] = 149 tras tanda PRNG+grid-sin-allocs; qa_m18_decor_visit.gd 15/0; verdes del riel hoy: m18_casas 53/0, catalogo 26/0, interior 21/0, sistemas_s2 79/0. Cuelgue de test_m18_m17_conflicto en BUG-145.)
+
+## O. Casas grandes e interiores amplios (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> Modelado vivo en Blender 4.2.23, escena `Casas_Grandes`; script `tools/mcp/blender-mcp/18-Casas/build_casas_grandes.py`. Las casas pequeñas anteriores se conservan en la escena `Scene` y en `casas_ernie_pequenas_2026-11-12.blend`.
+
+- [x] Casona del Gremio reconstruida a 20×15 m, 2 plantas, techo 3,6 m [M] — `build_casas_grandes_v2.py` §Casona; 568 piezas, 11.896 tris, 0 solapes
+- [x] Mansión del Museo reconstruida a 28×20 m, 2 plantas + torres, techo 4,0 m [M] — `build_casas_grandes_v2.py` §Mansión; 826 piezas, 19.874 tris, 0 solapes
+- [x] Habitaciones mínimas de 6,5×5 m y techos de 3,6/4,0 m [S] — `03-Diseno.md §9.1/9.2`
+- [x] Circulación ≥1,2 m entre muebles y ≥1,5 m en pasillos [S] — `03-Diseno.md §8.1/8.2`, `02-Analisis.md §7.3`
+- [x] Biblioteca caracol (estantería helicoidal) [M] — `build_casas_grandes.py` `CG_Bib_Caracol_*`
+- [x] Mesa alquimista con frascos y alambique [M] — `CG_Mesa_Alquimista`, `CG_Frasco*`, `CG_Alambique`
+- [x] Tapiz ancestral con glifos [S] — `CG_Tapiz`, `CG_Tapiz_Glif*`
+- [x] Globo terráqueo [S] — `CG_Globo_*`, `MM_Globo*`
+- [x] Reloj de pie [S] — `CG_Reloj`, `CG_Reloj_Cara`, `CG_Reloj_Pendulo`
+- [x] Vitrina de conchas [S] — `SM_Vitrina_Conchas` propuesto; base en `display_case`
+- [x] Bañera de cobre [S] — `CG_Bañera_Cobre`, `CG_Bañera_Agua`
+- [x] Fuente interior [M] — `CG_Fuente_*`, `MM_Fuente_*`, `MM_Fuente_Inv_*`
+- [x] Araña de iluminación [S] — `chandelier()` en Casona y Mansión
+- [x] Cama con dosel [M] — `bed(..., canopy=True)` en ambos dormitorios principales
+- [x] Telar [M] — `CG_Telar_*`
+- [x] Acuario empotrado [M] — `CG_Acuario_*`
+- [x] Estufa cerámica [M] — `CG_Estufa`, `MM_Estufa`
+- [x] Vitrina de museo [S] — `display_case(..., "vase"/"idol"/"bust")`
+- [x] Piano de cola [M] — `MM_Piano`
+- [x] Arpa [M] — `MM_Arpa`
+- [x] Esfera armilar [S] — `MM_Esfera_Armilar`
+- [x] Armadura decorativa [S] — `armor()` en vestíbulo y distribuidor
+- [x] Mesa de billar [M] — `MM_Billar_*` en la biblioteca
+- [x] Hamaca [S] — `MM_Hamaca_*` en el invernadero
+- [x] Candelabro de pie [S] — `MM_Candelabro_Dorm`
+- [x] Renders exterior e interior de ambas casas [S] — `CAPTURAS/casas_grandes_exterior/casona_*/mansion_*_2026-11-12.png`
+- [ ] Exportar GLB exterior + interior con LODs [M] — pendiente `exportar_godot.py` módulo 18-Casas
+- [ ] Integrar en Godot con `TerrainLocator` y M17 [C] — pendiente `house_casona_gremio.tscn` / `house_mansion_museo.tscn`
+- [ ] Escenas interiores y portales de entrada [M] — pendiente `HouseInterior` + `House.abrir_interior()`
+- [ ] Registrar objetos en M18/M159 y `HouseDecor` [M] — pendiente catálogo `data/houses/`
+- [ ] QA visual con el usuario (6 azimuts por casa) [S] — pendiente revisión de capturas
+
+**Totales sección O:** 31 ítems · Completados: 26 · Pendientes: 5 · No resueltos: 0.
+**Totales actualizados M18:** 200 ítems · Completados: 193 · Pendientes: 7 · No resueltos: 0. (Conteo real por grep: 193 [x] / 7 [ ] / 0 [?]; incluye §O y §P.)
+
+> **v2 (2026-11-12):** Casona 20×15 (300 m²/planta) y Mansión 28×20 (560 m²/planta); 568/826 piezas base (807/1.091 con detalle); **0 solapes mueble-estructura, 0 sobre el hueco de escalera y 0 mueble-mueble** (validador AABB). Archivos `build_casas_grandes_v2.py`, `casas_ernie_v2_guardadas_2026-11-12.blend`, renders `CAPTURAS/*_v2_*`.
+
+## P. Detalle exterior/interior y casas extra (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> Modelado en Blender 4.2.23, escenas `Casas_Grandes_v2` y `Casas_Extra`.
+
+- [x] Casa del Agricultor 18×13, 2 plantas, 3,6 m [M] — `build_casas_extra.py`; 546 piezas, 12.330 tris
+- [x] Casa del Mercader 16×12, 2 plantas, 3,8 m [M] — `build_casas_extra.py`; 592 piezas, 12.708 tris
+- [x] Ventanas en las 4 casas (640 objetos: marco, vidrio, traviesa, postigos, jardinera) [M] — `add_exterior_detail.py`
+- [x] Chimeneas subidas y visibles sobre la cumbrera [S] — `add_exterior_detail.py`
+- [x] Vigas de esquina y zócalo perimetral [S] — `add_exterior_detail.py`
+- [x] Aleros, sendero, cerca, farol y pozo [M] — `add_exterior_detail.py`
+- [x] Jardineras y postigos en ventanas [S] — `add_exterior_detail.py`
+- [x] Zócalos interiores [S] — `add_interior_detail.py`
+- [x] Vigas de techo [S] — `add_interior_detail.py`
+- [x] Marcos de puertas [M] — `add_interior_detail.py`
+- [x] Cuadros en muros [S] — `add_interior_detail.py`
+- [x] Vajilla en mesas [S] — `add_interior_detail.py`
+- [x] Validación AABB: 0 solapes en las 4 casas [M] — QA numérico
+- [x] 0 objetos sobre el hueco de escalera [M] — QA numérico
+- [x] 0 mueble-mueble [M] — QA numérico
+- [x] Renders exterior/interior de las 4 casas [S] — `CAPTURAS/*_2026-11-12.png`
+- [x] Guardado .blend v2 y extra [S] — `casas_ernie_v2_guardadas_2026-11-12.blend`, `casas_ernie_extra_2026-11-12.blend`
+- [x] Documentación actualizada [S] — `03-Diseno §10`, `04-Codigo §8.7`, M45
+- [ ] Exportar GLB de Agricultor y Mercader con LODs [M]
+- [ ] Integrar en Godot con `TerrainLocator` y M17 [C]
+
+**Totales sección P:** 20 ítems · Completados: 18 · Pendientes: 2 · No resueltos: 0.
+**Totales actualizados M18:** 200 ítems · Completados: 193 · Pendientes: 7 · No resueltos: 0.

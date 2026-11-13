@@ -269,3 +269,56 @@ Cada set tiene una temática y un bono social al completarlo:
 | **M159** — Catálogo de Objetos | Este módulo lo necesita |
 | **M160** — Diseño de Ubicaciones del Mundo | Este módulo lo necesita |
 
+---
+
+## 7. Casas grandes de lujo (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> Contexto: el usuario pidió casas más grandes con interiores sofisticados y objetos nuevos. Esta sección actualiza los requerimientos vigentes; el diseño y los assets están en `03-Diseno.md §8` y `04-Codigo.md §8`.
+
+### 7.1 Requerimientos funcionales nuevos
+
+| ID | Requerimiento | Criterio de aceptación |
+|---|---|---|
+| RF13 | Casas grandes de 2 plantas | Casona 20×15 m y Mansión 28×20 m, 2 plantas habitables |
+| RF14 | Interiores amplios | Habitación mínima 4×4 m; techo 3,4 m (casona) / 3,8 m (mansión) |
+| RF15 | Circulación holgada | ≥1,2 m entre muebles; pasillos ≥1,5 m |
+| RF16 | Objetos originales | 21 objetos nuevos con ID `SM_` y función propia |
+| RF17 | Vista de muñeca (cutaway) | Fachada frontal y techo desmontables para ver el interior |
+| RF18 | LOD exterior/interior | Exterior LOD0 ≤6.000 tris; interior como escena separada |
+| RF19 | Registro en M18/M159 | Cada casa/objeto nuevo con ID, colisión, costo y save |
+
+### 7.2 Objetos nuevos (catálogo propuesto)
+
+| ID | Objeto | Función | Dónde va |
+|---|---|---|---|
+| SM_Biblioteca_Caracol | Estantería helicoidal | Libros + decoración | Estudio/biblioteca |
+| SM_Mesa_Alquimista | Mesa de trabajo | Frascos, alambique | Estudio/taller |
+| SM_Tapiz_Ancestral | Tapiz de pared | Decoración + lore | Sala/estudio |
+| SM_Globo_Terraqueo | Globo terráqueo | Exploración/lore | Estudio/biblioteca |
+| SM_Reloj_Pie | Reloj de pie | Decoración + hora | Vestíbulo |
+| SM_Vitrina_Conchas | Vitrina | Colección marina | Sala |
+| SM_Bañera_Cobre | Bañera | Baño | Baño |
+| SM_Fuente_Interior | Fuente | Decoración + sonido | Vestíbulo |
+| SM_Lampara_Araña | Araña | Iluminación | Comedor/vestíbulo |
+| SM_Cama_Dosel | Cama con dosel | Dormir | Dormitorio principal |
+| SM_Telar | Telar | Decoración + artesanía | Taller |
+| SM_Acuario_Empotrado | Acuario | Decoración + pecera | Sala |
+| SM_Estufa_Ceramica | Estufa | Cocina + calefacción | Cocina |
+| SM_Vitrina_Museo | Vitrina de museo | Colección | Galería |
+| SM_Piano_Cola | Piano de cola | Música | Sala de música |
+| SM_Arpa | Arpa | Música | Sala de música |
+| SM_Escultura_Armilar | Esfera armilar | Observación | Observatorio |
+| SM_Armadura | Armadura decorativa | Decoración | Vestíbulo |
+| SM_Mesa_Billar | Mesa de billar | Ocio | Sala de estar |
+| SM_Hamaca | Hamaca | Descanso | Terraza/invernadero |
+| SM_Candelabro_Pie | Candelabro | Iluminación | Dormitorio/comedor |
+
+### 7.3 Reglas de espacio (obligatorias)
+
+- Habitación mínima habitable: **4×4 m** (16 m²).
+- Techo mínimo: **3,2 m**; recomendado 3,4–3,8 m en casas grandes.
+- Separación entre muebles: **≥1,2 m**; en circulación principal **≥1,5 m**.
+- Puertas interiores: **≥1,5 m** de ancho en casas grandes.
+- No colocar más de **1 mueble grande por 6 m²** (≈0,17 muebles/m²).
+- El techo y la fachada frontal deben poder ocultarse para la vista de interior.
+

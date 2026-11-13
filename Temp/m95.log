@@ -1,0 +1,366 @@
+Godot Engine v4.7.2.stable.official.ed1daf0bf - https://godotengine.org
+
+[M125] TermsManager listo (v1)
+[M40] ServiceRegistry listo (0 servicios registrados)
+[2026-11-12T20:02:10] [INFO] [BOOT] Logger inicializado
+[2026-11-12T20:02:10] [DEBUG] [ANALYTICS] analytics: sesion_inicio
+[2026-11-12T20:02:10] [INFO] [ANALYTICS] AnalyticsDirector inicializado
+[2026-11-12T20:02:10] [INFO] [ANALYTICS] Telemetry: servicio inicializado (opt-in OFF — sin captura)
+[TimeCalendar] Configuración cargada: día 1440 min, año 336 días, 4 estaciones
+=== Bootstrap Iniciando ===
+[Bootstrap] Registrando servicios core...
+[Bootstrap] Servicios core registrados (5): ["logger", "analytics", "telemetry", "event_bus", "service_registry"]
+[Bootstrap] Todos los servicios obligatorios están registrados
+=== Bootstrap Completado ===
+[VillagerManager] Inicializado (población max: 10)
+[M19] Catálogo de vecinos: 14 perfiles (0 duplicados descartados)
+[M35] Catalogo de vetas mineras cargado: 6 vetas
+[M36] FaunaManager ready: 7 especies en catalogo
+[M129] MerchManager listo (10 productos, 3 tiradas limitadas) + registrado como 'merch'
+[M73] ColeccionablesManager ready: 81 items, 19 categorias
+[M92] Triggers EventBus conectados: ["inventory.item_added", "world.block_placed", "npc.gift_given"]
+[M53] Tema cozy global aplicado (escala 1.00)
+[M16] RF17: use_item de M14 conectado (pergaminos)
+[M110] RF H conectado a GameLogger.line_emitted
+[M110] DebugMenu listo (5 pestañas)
+WARNING: [M39] Tienda 'mercader_viajero' sin npc_duenio_id (validar en editor)
+   at: push_warning (core/variant/variant_utility.cpp:1033)
+   GDScript backtrace (most recent call first):
+       [0] registrar_tienda (res://scripts/shops/shop_manager.gd:137)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:86)
+       [2] _registrar_mercader_viajero (res://scripts/shops/catalogo_tiendas.gd:168)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:41)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:32)
+[M39] Catálogos definitivos registrados: tienda_general, herreria, mercader_viajero
+[M34] Catálogo: 25 peces, 4 cebos, 3 cañas
+[M23] Cadenas cargadas: 82 (ejemplos: añadidas 1, conflictos 1, rechazadas 1)
+[M28] Rutas cargadas: 4
+[M37] Exposiciones cargadas: 4
+[M37][RF14] Catálogo OK: 4 exposiciones, 0 problemas
+[M55] Catálogo: 14 categorías, 44 entradas
+[2026-11-12T20:02:10] [INFO] [WORLD] Hitos cargados: 26
+[2026-11-12T20:02:10] [INFO] [WORLD] ProgressionManager ready, 26 hitos cargados
+[2026-11-12T20:02:10] [INFO] [WORLD] Catálogo validado OK: 26 hitos, 0 errores
+[M72] Logros cargados: 18
+[M72][DEUDA] 18 icono(s) declarados sin archivo en disco (arte: 18 PNG) y 36 clave(s) i18n fuera de locales/es.po
+[M72][RF14] Catálogo OK: 18 logros, 0 problemas
+[M72] Accesibilidad conectada: toasts_disabled=false
+[M67] VehicleManager listo: 3 presets
+[M75] Actividades postgame cargadas: 7
+[M75] PostgameManager listo: 7 actividades, activo=false
+[Escalas] Tabla cargada: 48 tipos
+[M56] PhotoService listo (6 presets fotográficos)
+[M158] ToolTierSystem listo: 4 tiers, 6 gates, 4 forjas, 4 cursos
+[M60] DataStore registrado en ServiceRegistry como 'datos'
+[M60] Provider 'buildings' registrado (fuente activa: true)
+[M60] DataStore listo (VERSION_ACTUAL=1)
+[M95] MonetizacionManager listo (3 ediciones, 2 DLC)
+[M156] Terrenos cargados: 7
+[M94] MotivacionManager listo (7 objetivos en catálogo)
+[M96] PlatformManager listo: bridge=SteamBridge, plataforma=windows, 10 plataformas en matriz
+[M147] WorldBible listo: canon 1.0.0 (6 personajes, 8 lugares)
+[M62] MemoryMonitor listo (preset=media, total=2000 MB)
+[M41] MusicDirector listo (24 temas)
+[M42] AmbientDirector listo (13 biomas)
+[M43] SFXManager listo (9 superficies, 21 tonos, catálogo OK)
+[M44] FeedbackDirector listo (8 recetas)
+[M150] NarrativeSound listo (35 momentos, 8 leitmotifs)
+[M122] CrashReporter listo (sesión 2026-11-12T23:02:10_2204796)
+[M118] CiCdManager listo (3 gates)
+[M116] InstaladorConfig listo (3 plataformas, 5 pasos)
+[M54] MapManager listo (6 marcadores, 0 pines)
+[M115] HardwareManager listo (3 perfiles)
+[M117] BuildConfigManager listo (4 targets, 4 presets)
+[M119] Versión persistida en user://version.tres: 1.0.0 (estable)
+[M119] UpdateManager listo (canal estable, versión 1.0.0)
+[M109] DevTools listo (4 atajos, 3 flags)
+[M47] Tabla de materiales cargada: 24 tipos
+[BOT] Desactivado (modo humano — lanza con `-- paseo` para activar el paseo automático)
+[M106] SecurityManager listo (4 políticas)
+[M88] FontCatalog listo (4 fuentes)
+[M107] BackupManager listo (max 5 copias, 7 categorias)
+[M120] DlcManager listo (2 DLC, 4 bundles)
+[M121] SupportManager listo (15 FAQ, 3 canales)
+[M123] ModdingManager listo (2 mods)
+[M124] UgcManager listo (3 piezas UGC)
+[M100] CommunityManager listo (5 canales, 4 eventos)
+[NPCManager] Inicializado (burbujas: full=30m med=60m light=100m)
+[NPCManager] Suscrito a VillagerManager.poblacion_cambio
+[NPCManager] BudgetRegistry registrado (tope: 32 MB)
+[NPCManager] Watchdog anti-atascos inicializado
+[NPCManager] Suscrito a PhotoService.photo_pose_request
+[EventManager] Inicializando M74...
+[EventManager] Cargado: festival_invierno (festival_invierno_nombre)
+[EventManager] Cargado: festival_luces (festival_luces_nombre)
+[EventManager] Cargado: festival_otono (festival_otono_nombre)
+[EventManager] Cargado: festival_primavera (festival_primavera_nombre)
+[EventManager] Cargado: festival_verano (festival_verano_nombre)
+[EventManager] Cargado: feria_colmena (feria_colmena_nombre)
+[EventManager] Cargado: concurso_minero (concurso_minero_nombre)
+[EventManager] Cargado: desafio_agricola (desafio_agricola_nombre)
+[EventManager] Cargado: torneo_pesca (torneo_pesca_nombre)
+[EventManager] Cargado: ceremonia_templos (ceremonia_templos_nombre)
+[EventManager] Cargado: vigilia_luna (vigilia_luna_nombre)
+[EventManager] Cargado: aurora_boreal (aurora_boreal_nombre)
+[EventManager] Cargado: niebla_faro (niebla_faro_nombre)
+[EventManager] Cargado: regalo_puerta (regalo_puerta_nombre)
+[EventManager] Cargado: visita_sorpresa (visita_sorpresa_nombre)
+[EventManager] Cargado: historia_c1_mural (eventos.historia_c1_nombre)
+[EventManager] Cargado: historia_c2_puente (eventos.historia_c2_nombre)
+[EventManager] Cargado: historia_c3_faro (eventos.historia_c3_nombre)
+[EventManager] Cargado: historia_c4_templo_brisa (eventos.historia_c4_nombre)
+[EventManager] Cargado: historia_c5_eclipse (eventos.historia_c5_nombre)
+[EventManager] Cargado: historia_c6_geoda (eventos.historia_c6_nombre)
+[EventManager] Cargado: historia_c7_camara_sello (eventos.historia_c7_nombre)
+[EventManager] Suscrito a GameTime.dia_cambio
+[EventManager] Suscrito a TimeCalendar.evento_activado
+[EventManager] Suscrito a EventBus.weather.clima_cambio
+[EventManager] Catálogo cargado: 22 eventos
+[EquipmentManager] Catálogo cargado: 16 prendas
+[EquipmentManager] Tabla de bonos por terrain cargada
+[EquipmentManager] Registrado en SaveManager (M59)
+[NPCVisualDatabase] Cargados 23 diseños visuales
+[M160] conexiones bidireccionales reflejadas: 10
+[M160] catálogo JSON: 39 cargadas, 0 omitidas (.tres), 0 errores
+[M160] Ubicaciones cargadas: 48
+[TRP] red cargada: 10 paradas, 20 rutas
+[Islands] Registry cargado: 13 islas (principal: OK)
+[M17] Construccion listo (catalogo=46, terreno=false, inventario=true)
+=== [M95] Test de Monetización ===
+--- Ediciones: Standard/Deluxe/Coleccionista ---
+  [OK] 3 ediciones
+  [OK] standard existe
+  [OK] deluxe existe
+  [OK] coleccionista existe
+  [OK] standard historia completa
+  [OK] deluxe historia completa
+  [OK] coleccionista historia completa
+  [OK] inexistente -> {} y false
+  [OK] standard precio 24.99
+--- DLC: roadmap expansión + cosmético ---
+  [OK] 2 DLC planificados
+  [OK] DLC-1 expansión
+  [OK] DLC-2 cosmético
+  [OK] DLC-2 no es cosmético? no
+  [OK] DLC-1 no es cosmético (es expansión)
+  [OK] roadmap ordenado (2 items)
+  [OK] roadmap orden: expansión primero
+--- AntiP2W: detección de ítems que alteran progresión ---
+  [OK] catálogo vacío -> OK
+  [OK] acelerador detectado (P2W)
+  [OK] poción tipo ventaja detectada
+  [OK] sombrero NO detectado (cosmético)
+  [OK] solo cosmético -> OK
+  [OK] reporte OK cuando limpio
+--- AntiLootbox: detección de cajas de azar ---
+  [OK] sin sistemas -> OK
+  [OK] caja_misteriosa detectada (pago+azar)
+  [OK] cofre de pesca NO detectado (azar sin pago)
+  [OK] regalo_azar detectado (azar+exclusivo)
+  [OK] reporte OK cuando limpio
+=== Resumen M95: 27 checks, 0 fallos ===
+TEST M95 OK — todos los checks pasaron
+[M40] Flujo: 0 -> 3
+[Bootstrap] GameFlowManager -> MUNDO (via SceneManager)
+[Bootstrap] DOM-INF integridad OK: 9 dominios de juego verificados
+[Bootstrap] Cargando escena principal: res://scenes/main_island.tscn
+[Bootstrap] infra.boot_completado emitido
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: aria_ciervo
+[VillagerManager] aria_ciervo registrado (1 activos)
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: bruno_sapo
+[VillagerManager] bruno_sapo registrado (2 activos)
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: catalina_oso
+[VillagerManager] catalina_oso registrado (3 activos)
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: finneas_zorro
+[VillagerManager] finneas_zorro registrado (4 activos)
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: luna_zorra
+[VillagerManager] luna_zorra registrado (5 activos)
+[Villager] ? creado (especie=?)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: mateo_mapache
+[VillagerManager] mateo_mapache registrado (6 activos)
+[M19] Población de arranque: 6 vecinos activados (P1)
+[M48] Cableado jugador listo (FSM con 11 estados)
+[DEV] move_speed=25.0
+[Player] Conectado a EquipmentManager.terrain_bonus_updated
+[Player] TerrainDetector montado (interval 0.10s, ray 2.0m)
+[Player] VoxelBoxMover listo, terrain encontrado
+[MinimapWidget] Conectado a MapManager
+[Villager] Catalina creado (especie=oso)
+[DayNightCycle] Curvas data-driven cargadas (data/light/)
+[DayNightCycle] Ramps de color cargados (sun/sky) — M49 iter. 3
+[DayNightCycle] fog_curve.tres cargado (niebla por hora)
+[DayNightCycle] season_mod.tres cargado (modulacion estacional, diseno sec. 4)
+[M51] Agua animada lista: plano 6200x6200 en y=6.00 (shader olas+fresnel)
+[Tortuga] nodos animables: 5/5
+[Tortuga] deambulando por la isla (spawn 268, 250)
+[Cangrejo] en la playa (spawn 245, 262) — 8 patas, 2 pinzas, 2 ojos
+[Jabali joven] troteando por la isla (spawn 232, 240) — 4 patas, cola: si, cabeza: si
+[Jabali adulto] troteando por la isla (spawn 285, 224) — 4 patas, cola: si, cabeza: si
+[Gaviota] volando (centro 3860,3860 r 30) — 2 alas, 2 puntas
+[M09] Isla Aurora — terreno con biomas (semilla: 42)
+[M08] Jugador voxel M45 en uso — override azul omitido
+[DOM-UI] capa registrada: DialogLayer (tipo=MODAL_FULL, pila=1)
+[DOM-UI] capa registrada: PauseLayer (tipo=MODAL_FULL, pila=2)
+[DOM-UI] capa registrada: MenusLayer (tipo=MODAL_FULL, pila=3)
+[DOM-UI] capa registrada: ConfirmPopup (tipo=MODAL_FULL, pila=4)
+[DOM-UI] capa registrada: CraftingUI (tipo=MODAL_FULL, pila=5)
+[DOM-UI] capa registrada: InventoryLayer (tipo=MODAL_FULL, pila=6)
+[DOM-UI] capa registrada: ShopUI (tipo=MODAL_FULL, pila=7)
+[DOM-UI] capa registrada: EquipmentLayer (tipo=MODAL_FULL, pila=8)
+[DOM-UI] capa registrada: DiaryLayer (tipo=MODAL_FULL, pila=9)
+[DOM-UI] capa registrada: LoadingLayer (tipo=MODAL_FULL, pila=10)
+[DOM-UI] capa registrada: CreditsLayer (tipo=MODAL_FULL, pila=11)
+[DOM-UI] capa registrada: SettingsAudioLayer (tipo=MODAL_FULL, pila=12)
+[DOM-UI] UIRoot: capas montadas (dialogo=true pausa=true menus=true confirm=true crafting=true inventario=true tienda=true equipamiento=true diario=true carga=true creditos=true ajustes=true)
+[M15] Recursos alrededor de (3860, 3860)
+[M16] Mesa de trabajo colocada en (3866, ~, 3862)
+[M33] FarmToolController montado
+[M69] FastTravelService listo (4 anclas, 4 desbloqueadas)
+[M69] FastTravelService montado (anclas + provider fast_travel)
+[M163] Chaman del Monte spawneado en (2320.0, 35.0, 2300.0)
+[M163] IncenseSpawner: 0 puntos creados (24 fallas de altura en centro (2320.0, 2300.0)) — reintento armado (esperando terreno)
+[M163] IncenseSpawner montado
+[BUG-128] capa UI registrada en UIManager._hud
+Isla Ancestral — Isla Raíz
+[M13] Equipada: Pico de Cobre (dur 150/150)
+[Player] Hotbar 1: Pico de Cobre
+[M13] Hotbar inicial: 5 herramientas
+[M13] ToolsSaveProvider registrado (sección herramientas_m13)
+[StateMachine] Estado registrado: Idle (prioridad=10)
+[StateMachine] Estado registrado: Movement (prioridad=30)
+[StateMachine] Estado registrado: Work (prioridad=25)
+[StateMachine] Estado registrado: Social (prioridad=20)
+[StateMachine] Estado registrado: Eat (prioridad=35)
+[StateMachine] Estado registrado: Sleep (prioridad=40)
+[StateMachine] Estado registrado: React (prioridad=50)
+[StateMachine] Estado registrado: Interact (prioridad=45)
+[Idle] Entrando en Idle
+[PlanStack] Push: Idle (profundidad=1)
+[NPCAgent] NPCAgent:  -> Idle
+[StateMachine] Transición:  -> Idle
+[NPCAgent] NPCAgent inicializado (perfil=unknown)
+[NPCManager] Agente registrado: CatalinaOso
+[VillagerManager] CatalinaOso registrado (7 activos)
+[M09-IMP] muestreando TODA la isla (filas -140..5260, 6/frame, paso 64m)
+[M15] Nodo madera_roble en (3869, 30, 3860) y=30 estado=0
+[M15] Nodo madera_roble en (3866, 30, 3866) y=30 estado=0
+[M15] Nodo madera_roble en (3860, 30, 3869) y=30 estado=0
+[M15] Nodo madera_roble en (3854, 30, 3866) y=30 estado=0
+[M15] Nodo piedra_caliza en (3867, 30, 3860) y=30 estado=0
+[M15] Nodo fibra_algodon en (3869, 30, 3860) y=30 estado=0
+[M15] Nodo baya_roja en (3867, 30, 3860) y=30 estado=0
+[M15] Nodo mineral_cobre en (3870, 30, 3860) y=30 estado=0
+[M15] Nodo fragmento_ancestral en (3866, 30, 3860) y=30 estado=0
+[M15] Nodo veta_cobre en (3866, 30, 3860) y=30 estado=0
+[M15] Nodo veta_hierro en (3867, 30, 3860) y=30 estado=0
+[M15] Nodo veta_oro en (3867, 30, 3860) y=30 estado=0
+[DOM-UI] capa des-registrada: SettingsAudioLayer (pila=11)
+[DOM-UI] capa des-registrada: CreditsLayer (pila=10)
+[DOM-UI] capa des-registrada: LoadingLayer (pila=9)
+[DOM-UI] capa des-registrada: DiaryLayer (pila=8)
+[DOM-UI] capa des-registrada: EquipmentLayer (pila=7)
+[DOM-UI] capa des-registrada: ShopUI (pila=6)
+[DOM-UI] capa des-registrada: InventoryLayer (pila=5)
+[DOM-UI] capa des-registrada: CraftingUI (pila=4)
+[DOM-UI] capa des-registrada: ConfirmPopup (pila=3)
+[DOM-UI] capa des-registrada: MenusLayer (pila=2)
+[DOM-UI] capa des-registrada: PauseLayer (pila=1)
+[DOM-UI] capa des-registrada: DialogLayer (pila=0)
+[NPCManager] Agente removido: CatalinaOso
+[VillagerManager] CatalinaOso desregistrado (6 activos)
+[NPCManager] Agente removido: mateo_mapache
+[VillagerManager] mateo_mapache desregistrado (5 activos)
+[NPCManager] Agente removido: luna_zorra
+[VillagerManager] luna_zorra desregistrado (4 activos)
+[NPCManager] Agente removido: finneas_zorro
+[VillagerManager] finneas_zorro desregistrado (3 activos)
+[NPCManager] Agente removido: catalina_oso
+[VillagerManager] catalina_oso desregistrado (2 activos)
+[NPCManager] Agente removido: bruno_sapo
+[VillagerManager] bruno_sapo desregistrado (1 activos)
+[NPCManager] Agente removido: aria_ciervo
+[VillagerManager] aria_ciervo desregistrado (0 activos)
+[2026-11-12T20:02:11] [DEBUG] [ANALYTICS] analytics: sesion_fin

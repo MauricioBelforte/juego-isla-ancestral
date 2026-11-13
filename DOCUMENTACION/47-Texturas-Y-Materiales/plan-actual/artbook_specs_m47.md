@@ -202,3 +202,20 @@ Variantes por bioma: 3 por superficie/bioma (barajado determinista por seed).
 - Desfase numeración: plan maestro §46 = M47.
 - Módulo DELEGABLE.
 - Dependencia implementación: hito M1.
+
+## X. Nuevos materiales de casas (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> Creados para las casas grandes (Casona del Gremio y Mansión del Museo). Se suman a la paleta low-poly existente; no usan imágenes de textura.
+
+| Material | RGB sRGB | Roughness | Metallic | Alpha | Uso |
+|---|---|---:|---:|---:|---|
+| `MAT_Vino` | (120, 45, 55) | 0.80 | 0.0 | 1.0 | Tapizados, mantas, alfombras, tapices |
+| `MAT_OroViejo` | (190, 150, 70) | 0.45 | 0.70 | 1.0 | Marcos, espejos, arañas, herrajes |
+| `MAT_VerdeSage` | (110, 140, 100) | 0.90 | 0.0 | 1.0 | Plantas, fieltro de billar, globos |
+| `MAT_Agua` | (80, 150, 170) | 0.15 | 0.0 | 0.55 | Fuentes, acuarios, bañeras |
+| `MAT_Libro` | (150, 110, 80) | 0.90 | 0.0 | 1.0 | Libros de estanterías |
+| `MAT_Cobre` | (170, 100, 60) | 0.40 | 0.80 | 1.0 | Bañera, ollas, detalles |
+| `MAT_Marfil` | (230, 220, 195) | 0.70 | 0.0 | 1.0 | Estatuas, velas, porcelana |
+| `MAT_Coral` | (220, 130, 110) | 0.80 | 0.0 | 1.0 | Macetas, boyas, peces |
+
+**Validación:** los 8 materiales usan Principled BSDF con color base + roughness + metallic constantes; el color se hornea en vertex colors (`COLOR_0`) al exportar. Para Godot se unifican a ≤8 materiales por casa con `generar_variante.py --media --baja` o atlas M47 (1024², 32 px/tile).

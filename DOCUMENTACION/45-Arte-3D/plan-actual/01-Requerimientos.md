@@ -169,3 +169,34 @@ Definir el sistema de arte 3D del juego: guía de estilo (estilo voxel redondead
 | **M085** — Modelos 3D — Legal | Este módulo lo necesita |
 | **M108** — Pipeline de Assets | Este módulo lo necesita |
 
+---
+
+## Presupuesto de casas grandes (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+| Casa | Tris ALTA medidos | Materiales | LOD0 objetivo exterior | LOD1 | LOD2 |
+|---|---:|---:|---:|---:|---:|
+| Casona del Gremio (16×12) | 12.608 | 16 | ≤6.000 | 1.500 | 650 |
+| Mansión del Museo (22×16) | 19.866 | 15 | ≤6.000 por ala | 1.500 | 650 |
+
+> Las casas grandes actuales superan el pipeline de 6.000 tris usado por `crear_casa_01_choza.py:815` (que rechazó casona 6.826 y mansión 8.779). Para el juego se separa **exterior** e **interior**: el exterior se decima a ≤6.000 tris y el interior se carga por portal (M18 §2, Alternativa A). La Mansión se divide en 2–3 alas si no alcanza. Los 16/15 materiales se unen a ≤8 con `generar_variante.py` o atlas M47.
+
+### v2 — 20×15 y 28×20 (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+| Casa | Tris ALTA | Materiales | LOD0 objetivo exterior | LOD1 | LOD2 | Solapes |
+|---|---:|---:|---:|---:|---:|---:|
+| Casona v2 (20×15) | 11.896 | 16 | ≤6.000 | 1.500 | 650 | **0** |
+| Mansión v2 (28×20) | 19.874 | 15 | ≤6.000 por ala | 1.500 | 650 | **0** |
+
+> v2 no baja los tris (los muebles siguen detallados), pero **elimina los solapes** medidos por AABB y aumenta la superficie a 300/560 m² por planta. El objetivo de LOD0 exterior ≤6.000 tris sigue vigente; el interior se separa como escena de portal.
+
+### Casas extra y detalle (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+| Casa | Tris ALTA con detalle | Materiales | LOD0 objetivo exterior | LOD1 | LOD2 |
+|---|---:|---:|---:|---:|---:|
+| Agricultor (18×13) | 12.330 | 17 | ≤6.000 | 1.500 | 650 |
+| Mercader (16×12) | 12.708 | 18 | ≤6.000 | 1.500 | 650 |
+| Casona v2 con detalle | 18.708 | 18 | ≤6.000 | 1.500 | 650 |
+| Mansión v2 con detalle | 27.502 | 17 | ≤6.000 por ala | 1.500 | 650 |
+
+> El detalle (640 ventanas, vigas, zócalos, marcos, cuadros, vajilla, cerca, pozo) sube los tris del archivo de autoría. El LOD0 de exportación se mantiene ≤6.000 por volumen; el interior se separa como escena de portal.
+

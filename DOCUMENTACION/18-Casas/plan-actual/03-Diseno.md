@@ -283,3 +283,247 @@ Versión del esquema incluida; migración en el cargador (M58).
 
 ### Test: obra en curso sin softlocks (M66)
 - Spec: test: obra en curso sin softlocks (M66). Coherente with M18 (casas) and M66 (anti-softlock).
+
+---
+
+## 8. Casas grandes y objetos nuevos (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> **Superado por §9 (v2, 20×15 / 28×20).** Las cifras de §8 corresponden a la primera versión (16×12 / 22×16) y se conservan como histórico.
+
+> Modelado vivo en Blender 4.2.23 (escena `Casas_Grandes`) y guardado en `tools/mcp/blender-mcp/18-Casas/casas_ernie_grandes_2026-11-12.blend`. Script fuente: `tools/mcp/blender-mcp/18-Casas/build_casas_grandes.py`.
+
+### 8.1 Casona del Gremio — 16×12 m, 2 plantas
+
+- **Uso:** vivienda-taller de un gremio artesano; 6 ambientes por planta.
+- **Estructura:** zócalo de piedra 0,30 m; planta baja 0,45–3,85 m; planta alta 4,00–7,40 m; techo a dos aguas 2,20 m.
+- **Fachada:** abierta al frente (vista de muñeca); muros laterales y posterior completos.
+- **Escalera:** recta de 16 escalones, 1,6 m de ancho, con baranda.
+- **Materiales:** 16 detectados (madera clara/oscura, paja, piedra, tela, metal, cristal, vino, oro, verde, agua, libro, cobre, marfil, musgo, coral, faro). Para Godot se recomienda merge a ≤8.
+
+| Planta | Ambiente | Dimensiones | m² | Mobiliario principal |
+|---|---|---:|---:|---|
+| PB | Sala de estar | 5,4×8 | 43,2 | Sofá, 2 sillones, mesa ratonera, chimenea, estantería, tapiz, acuario, planta |
+| PB | Vestíbulo | 5,6×8 | 44,8 | Fuente interior, consola, espejo, reloj de pie, araña |
+| PB | Comedor | 5,0×8 | 40,0 | Mesa 3,4×1,5, 6 sillas, aparador, araña |
+| PB | Cocina | 5,4×4 | 21,6 | Estufa cerámica, mesada, estante, mesa + 4 banquetas |
+| PB | Estudio/biblioteca | 5,6×4 | 22,4 | Escritorio, biblioteca caracol, mesa alquimista, globo |
+| PB | Baño | 5,0×4 | 20,0 | Bañera de cobre, lavabo, espejo |
+| PA | Dormitorio principal | 5,4×8 | 43,2 | Cama con dosel, armario, 2 mesas de noche, 2 sillones |
+| PA | Distribuidor | 5,6×8 | 44,8 | Alfombra, consola, araña, planta |
+| PA | Dormitorio infantil | 5,0×8 | 40,0 | Cama, escritorio, baúl, estantería |
+| PA | Taller/observatorio | 5,4×4 | 21,6 | Mesa de trabajo, telescopio, telar, estantería |
+| PA | Estudio | 5,6×4 | 22,4 | Escritorio, estantería, globo |
+| PA | Vestidor/baño | 5,0×4 | 20,0 | Armario, banco, espejo |
+
+- **Medidas:** 608 piezas, **12.608 tris**, 16 materiales, bbox 17,7×13,1×9,7 m. Sin piezas bajo el suelo.
+
+### 8.2 Mansión del Museo — 22×16 m, 2 plantas + torres
+
+- **Uso:** mansión nobiliaria con galería de museo, biblioteca, invernadero y sala de música.
+- **Estructura:** zócalo 0,35 m; planta baja 0,50–4,30 m; planta alta 4,45–8,25 m; techo 2,60 m; dos torres cilíndricas de r=1,6 m y 9,5 m de alto.
+- **Fachada:** abierta al frente; torres en las esquinas delanteras.
+- **Escalera:** monumental de 18 escalones, 2,0 m de ancho.
+- **Materiales:** 15 detectados (misma paleta + vino/oro/verde/agua/libro/cobre/marfil). Merge a ≤8 recomendado.
+
+| Planta | Ambiente | Dimensiones | m² | Mobiliario principal |
+|---|---|---:|---:|---|
+| PB | Galería de museo | 7,4×11 | 81,4 | 3 vitrinas, 4 cuadros, escultura, barreras, banco |
+| PB | Vestíbulo | 7,8×11 | 85,8 | Fuente, araña, mesa de recepción, 2 armaduras, plantas |
+| PB | Biblioteca | 6,8×11 | 74,8 | 3 estanterías, 2 mesas de lectura, 8 sillas, 2 globos, chimenea |
+| PB | Invernadero | 7,4×5 | 37,0 | 6 jardineras, fuente, banco, techo de cristal |
+| PB | Cocina | 7,8×5 | 39,0 | Estufa grande, mesada, estante, mesa + 6 sillas |
+| PB | Comedor de gala | 6,8×5 | 34,0 | Mesa 5,4×1,8, 12 sillas, aparador, araña |
+| PA | Dormitorio principal | 7,4×11 | 81,4 | Cama con dosel, armario, 2 sillones, candelabro |
+| PA | Distribuidor | 7,8×11 | 85,8 | Alfombra, consola, armadura, araña |
+| PA | Dormitorio de invitados | 6,8×11 | 74,8 | Cama, escritorio, armario |
+| PA | Observatorio | 7,4×5 | 37,0 | Telescopio, esfera armilar, estantería, carta estelar |
+| PA | Sala de música | 7,8×5 | 39,0 | Piano de cola, arpa, 3 sillas |
+| PA | Estudio | 6,8×5 | 34,0 | Escritorio, estantería, globo, chimenea |
+| PA | Terraza | 7,0×2 | 14,0 | Baranda, 2 plantas, telescopio, mesa bistró |
+
+- **Medidas:** 845 piezas, **19.866 tris**, 15 materiales, bbox 23,9×18,6×11,7 m. Sin piezas bajo el suelo.
+
+### 8.3 Objetos nuevos y dónde se usan
+
+| Objeto | Casona | Mansión |
+|---|---|---|
+| Biblioteca caracol | Estudio PB | — |
+| Mesa alquimista | Estudio PB | — |
+| Tapiz ancestral | Sala PB | — |
+| Globo terráqueo | Estudio PB/PA | Biblioteca/estudio |
+| Reloj de pie | Vestíbulo PB | — |
+| Vitrina de conchas | — | Galería |
+| Bañera de cobre | Baño PB | — |
+| Fuente interior | Vestíbulo PB | Vestíbulo PB / invernadero |
+| Araña | Vestíbulo/comedor | Vestíbulo/comedor/distribuidor |
+| Cama con dosel | Dormitorio principal | Dormitorio principal |
+| Telar | Taller PA | — |
+| Acuario empotrado | Sala PB | — |
+| Estufa cerámica | Cocina PB | Cocina PB |
+| Vitrina de museo | — | Galería |
+| Piano de cola | — | Sala de música |
+| Arpa | — | Sala de música |
+| Esfera armilar | — | Observatorio |
+| Armadura | — | Vestíbulo/distribuidor |
+| Mesa de billar | — | Biblioteca |
+| Hamaca | — | Invernadero |
+| Candelabro de pie | — | Dormitorio principal |
+
+### 8.4 Presupuesto y LOD
+
+| Casa | ALTA actual | Objetivo exterior LOD0 | LOD1 | LOD2 | Estrategia |
+|---|---:|---:|---:|---:|---|
+| Casona | 12.608 | ≤6.000 | 1.500 | 650 | Quitar interior del exterior; interior como escena aparte |
+| Mansión | 19.866 | ≤6.000 por ala | 1.500 | 650 | Dividir en 2–3 alas/pabellones; interior aparte |
+
+> La cifra ALTA incluye muebles y libros. Para el juego, el **exterior** se decima a ≤6.000 tris y el **interior** se carga por portal (M18 §2, Alternativa A). Los 16/15 materiales se unen a ≤8 con `generar_variante.py` o atlas M47.
+
+---
+
+## 9. Casas grandes v2 — 20×15 y 28×20 (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> **Vigente.** Reemplaza las proporciones de §8 (16×12 / 22×16), que el usuario reportó como apretadas y con objetos superpuestos. Se midió el solape real con AABB en Blender y se corrigió hasta **0 solapes**.
+
+### 9.1 Casona del Gremio v2 — 20×15 m, 2 plantas, 3,6 m
+
+- **Estructura:** zócalo 20,4×15,4 m; planta baja 0,45–4,05 m; planta alta 4,20–7,80 m; techo a dos aguas 2,40 m.
+- **Fachada:** abierta al frente; muros laterales y posterior completos.
+- **Escalera:** recta de 18 escalones, 1,8 m de ancho, hueco de losa y −7,3..−1,0 m.
+- **Materiales:** 16; **568 piezas**, **11.896 tris**, bbox 21,1×16,0×10,3 m.
+
+| Planta | Ambiente | Dimensiones | m² | Mobiliario principal |
+|---|---|---:|---:|---|
+| PB | Sala de estar | 7,0×10 | 70,0 | Sofá 3 m, mesa, 2 sillones, chimenea, estantería, tapiz, acuario |
+| PB | Vestíbulo | 5,8×10 | 58,0 | Fuente, consola, espejo, reloj de pie, araña |
+| PB | Comedor | 7,2×10 | 72,0 | Mesa 3,6×1,6, 6 sillas, aparador, araña |
+| PB | Cocina | 7,0×5 | 35,0 | Estufa, mesada, estante, mesa + 4 banquetas |
+| PB | Estudio/biblioteca | 6,5×5 | 32,5 | Escritorio, biblioteca caracol, alquimia, globo |
+| PB | Baño | 6,5×5 | 32,5 | Bañera de cobre, lavabo, espejo |
+| PA | Dormitorio principal | 7,0×10 | 70,0 | Cama con dosel, armario, 2 mesas, 2 sillones |
+| PA | Distribuidor | 6,5×10 | 65,0 | Alfombra, consola, araña, planta |
+| PA | Dormitorio infantil | 6,5×10 | 65,0 | Cama, escritorio, baúl, estantería |
+| PA | Taller/observatorio | 7,0×5 | 35,0 | Mesa de trabajo, telescopio, telar, estante |
+| PA | Estudio | 6,5×5 | 32,5 | Escritorio, estantería, globo |
+| PA | Vestidor/baño | 6,5×5 | 32,5 | Armario, banco, espejo |
+
+### 9.2 Mansión del Museo v2 — 28×20 m, 2 plantas + torres, 4,0 m
+
+- **Estructura:** zócalo 28,4×20,4 m; planta baja 0,50–4,50 m; planta alta 4,65–8,65 m; techo 2,80 m; dos torres de r=1,8 m y 10,5 m de alto.
+- **Escalera:** monumental de 20 escalones, 2,2 m de ancho, hueco y −9,8..−2,8 m.
+- **Materiales:** 15; **826 piezas**, **19.874 tris**, bbox 30,2×22,8×12,9 m.
+
+| Planta | Ambiente | Dimensiones | m² | Mobiliario principal |
+|---|---|---:|---:|---|
+| PB | Galería de museo | 9,5×14 | 133,0 | 3 vitrinas, 4 cuadros, escultura, barreras, banco |
+| PB | Vestíbulo | 9,5×14 | 133,0 | Fuente, araña, recepción, 2 armaduras, plantas |
+| PB | Biblioteca | 9,0×14 | 126,0 | 3 estanterías, 2 mesas, 8 sillas, 2 globos, chimenea, billar |
+| PB | Invernadero | 9,5×6 | 57,0 | 6 jardineras, fuente, banco, hamaca, techo de cristal |
+| PB | Cocina | 9,5×6 | 57,0 | Estufa grande, mesada, estante, mesa + 6 sillas |
+| PB | Comedor de gala | 9,0×6 | 54,0 | Mesa 6,0×2,0, 12 sillas, aparador, araña |
+| PA | Dormitorio principal | 9,5×14 | 133,0 | Cama con dosel, armario, 2 sillones, candelabro |
+| PA | Distribuidor | 9,5×14 | 133,0 | Alfombra, consola, armadura, araña |
+| PA | Dormitorio de invitados | 9,0×14 | 126,0 | Cama, escritorio, armario |
+| PA | Observatorio | 9,5×6 | 57,0 | Telescopio, esfera armilar, estantería, carta estelar |
+| PA | Sala de música | 9,5×6 | 57,0 | Piano de cola, arpa, 3 sillas |
+| PA | Estudio | 9,0×6 | 54,0 | Escritorio, estantería, globo, chimenea |
+| PA | Terraza | 9,0×2,5 | 22,5 | Baranda, 2 plantas, telescopio, mesa bistró |
+
+### 9.3 Validación de solapes (medida, no estimada)
+
+Se calculó el AABB mundial de cada malla y se buscaron intersecciones con tolerancia de 0,10 m.
+
+| Casa | Muebles | Estructura | Solapes mueble-estructura | Solapes mueble-mueble |
+|---|---:|---:|---:|---:|
+| Casona v2 | 496 | 72 | **0** | **0** |
+| Mansión v2 | 708 | 118 | **0** | **0** |
+
+> Se excluyen las uniones intended (chimenea que atraviesa el techo, base/respaldo de sofá, tapa/cuerpo de piano, anillos de la esfera armilar). Con esa exclusión, el resultado es 0.
+
+### 9.4 Por qué cambió
+
+| Métrica | v1 (16×12 / 22×16) | v2 (20×15 / 28×20) |
+|---|---:|---:|
+| m² por planta | 192 / 352 | **300 / 560** |
+| Piezas | 608 / 845 | 568 / 826 |
+| Densidad | 3,17 / 2,40 piezas/m² | **1,89 / 1,48 piezas/m²** |
+| Solapes mueble-estructura | 76 / 100 | **0 / 0** |
+| Solapes mueble-mueble | 210 / 339 | **0 / 0** |
+
+### 9.5 Archivos v2
+
+| Archivo | Contenido |
+|---|---|
+| `tools/mcp/blender-mcp/18-Casas/build_casas_grandes_v2.py` | Script generador v2 con validador de AABB |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_grandes_v2_2026-11-12.blend` | Escena `Casas_Grandes_v2` + `Scene` (casas pequeñas) |
+| `CAPTURAS/casas_grandes_v2_exterior_2026-11-12.png` | Vista general |
+| `CAPTURAS/casona_v2_exterior/interior_2026-11-12.png` | Casona v2 |
+| `CAPTURAS/mansion_v2_exterior/interior_2026-11-12.png` | Mansión v2 |
+
+### 9.6 Correcciones de ubicación (2026-11-12, reporte del usuario)
+
+El usuario detectó una mesa atravesando la pared y la alfombra de la cama sobre la escalera. Se midió y corrigió:
+
+| Problema | Causa | Corrección |
+|---|---|---|
+| Mesa del comedor atravesaba el tabique | Tabique en x=3,5; mesa de 3,6 m llegaba a x=3,2 | Tabique E1/E2 movido a x=2,8; comedor pasa a 7,2 m de ancho |
+| Alfombra de la cama tapa la escalera (Mansión) | Cama/alfombra de invitados sobre el hueco x 10,0..12,5 | Cama y alfombra movidas a x=7,5; escritorio/silla a y=0,0/−0,9 |
+| Mesa de lectura 2 sobre el hueco | Reading table en x=11,5 | Movida a (8,0; 1,5) |
+| Billar sobre el hueco | Billar en x=9,0 | Movido a (7,5; −1,5) |
+| Cama infantil de la Casona sobre el hueco | Cama/escritorio/alfombra en x 6,8–8,8 | Cama a x=5,8; escritorio a y=0,5; alfombra a x=5,2 |
+| Estanterías/consolas a 0,07 m de muros | Márgenes insuficientes | Estanterías, consolas, espejo y caracol corridos |
+| Plantas sobre tabiques | AABB de hojas | Plantas movidas |
+
+**Validación final (AABB + hueco de escalera):**
+
+| Casa | Muebles | Solapes mueble-estructura | Objetos sobre el hueco | Solapes mueble-mueble |
+|---|---:|---:|---:|---:|
+| Casona v2 | 496 | **0** | **0** | **0** |
+| Mansión v2 | 708 | **0** | **0** | **0** |
+
+---
+
+## 10. Casas extra y detalle exterior/interior (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> El usuario pidió casas más detalladas, habitables y con exteriores más reales; además detectó que las casas anteriores no tenían ventanas y que las chimeneas quedaban ocultas. Se agregaron ventanas, chimeneas visibles y detalle exterior/interior a las cuatro casas.
+
+### 10.1 Casa del Agricultor — 18×13 m, 2 plantas, 3,6 m
+
+- **Uso:** granja; PB: cocina/comedor, vestíbulo, granero/establo, despensa, almacén de herramientas, cuarto de ordeño. PA: dormitorio principal, distribuidor, dormitorio infantil, taller, almacén de semillas, lavadero.
+- **Exterior:** chimenea visible, silo, pacas de heno, carretilla, cerca, pozo, farol, sendero, jardineras y postigos.
+- **Interior:** zócalos, vigas de techo, marcos de puertas, cuadros, vajilla, alacena, mantequera, costales, herramientas, telar.
+- **Métricas:** 546 piezas, **12.330 tris**, 17 materiales, bbox 21,5×17,9×11,4 m (incluye cerca/pozo).
+- **Validación:** 0 solapes mueble-estructura, 0 objetos sobre el hueco, 0 mueble-mueble.
+
+### 10.2 Casa del Mercader — 16×12 m, 2 plantas, 3,8 m
+
+- **Uso:** tienda + vivienda. PB: tienda (mostrador, estanterías, balanza, caja fuerte), vestíbulo, almacén, trastienda/oficina, cocina, baño. PA: dormitorio principal, distribuidor, dormitorio de invitados, estudio/contabilidad, sala de estar, vestidor.
+- **Exterior:** toldo, cartel, escaparate, barriles/cajas, chimenea visible, sendero, cerca, pozo, farol, jardineras.
+- **Interior:** zócalos, vigas, marcos, cuadros, vajilla, estanterías de mercancía, balanza, caja fuerte, sofá, chimenea.
+- **Métricas:** 592 piezas, **12.708 tris**, 18 materiales, bbox 17,1×16,9×12,0 m (incluye cerca/pozo).
+- **Validación:** 0 solapes mueble-estructura, 0 objetos sobre el hueco, 0 mueble-mueble.
+
+### 10.3 Ventanas y chimeneas (las cuatro casas)
+
+- **640 objetos de ventana**: marco, vidrio, traviesa, postigos, jardinera y flores.
+- **Chimeneas**: subidas a 3,4–3,6 m y acercadas a la cumbrera; topes por encima del techo:
+
+| Casa | Tope chimenea | Cumbrera | Estado |
+|---|---:|---:|---|
+| Casona v2 | 11,38 m | 10,20 m | Visible |
+| Mansión v2 | 12,43 m | 11,45 m | Visible |
+| Agricultor | 11,38 m | 10,20 m | Visible |
+| Mercader | 12,02 m | 10,85 m | Visible |
+
+- **Detalle exterior:** vigas de esquina, zócalo perimetral, aleros, sendero, cerca, farol, pozo, jardineras.
+- **Detalle interior:** zócalos, vigas de techo, marcos de puertas, cuadros, vajilla.
+
+### 10.4 Métricas finales con detalle
+
+| Casa | Piezas | Tris | Materiales |
+|---|---:|---:|---:|
+| Casona v2 | 807 | 18.708 | 18 |
+| Mansión v2 | 1.091 | 27.502 | 17 |
+| Agricultor | 546 | 12.330 | 17 |
+| Mercader | 592 | 12.708 | 18 |
+
+> El detalle exterior/interior sube los tris del archivo de autoría. El LOD0 de exportación sigue siendo ≤6.000 tris por volumen (exterior) y el interior se separa como escena de portal.

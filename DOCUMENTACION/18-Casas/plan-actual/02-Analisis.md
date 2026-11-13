@@ -70,3 +70,46 @@ Alternativa B queda descartada por costo de renderizado, pero se reserva como pa
 - **Visita de vecino durante reubicación:** la casa cancela visitas pendientes y avisa con diálogo (M21) antes de mover.
 - **Mudanza de muebles con objetos dentro:** al levantar un mueble, su contenido se intercepta (va al inventario) o se muestra aviso antes de confirmar.
 - **Obra en curso:** el interior queda inaccesible hasta el día siguiente (progreso por M29), con cartel indicador.
+
+## 7. Análisis de densidad espacial (2026-11-12, ERNIE-5.5-Flash-Preview)
+
+> **Actualización:** §7.1–7.5 describen v1 (16×12 / 22×16); la versión vigente es §7.6 (20×15 / 28×20, 0 solapes).
+
+### 7.1 Problema
+
+La primera versión de las casas grandes (10×8 m y 14×10 m) concentraba ~600–845 objetos en plantas de 80–140 m². El usuario reportó que "se siente apretado para un juego". La causa no era la cantidad de objetos en sí, sino la **densidad**: 1,5–2,5 objetos/m² y pasillos de menos de 1 m entre muebles.
+
+### 7.2 Alternativas analizadas
+
+| Alternativa | Pros | Contras |
+|---|---|---|
+| A. Reducir objetos | Baja la densidad de inmediato | Pierde la sofisticación pedida |
+| B. Agrandar las casas (elegida) | Mantiene objetos y da aire; permite habitaciones reales | Más tris y draw calls; exige LODs |
+| C. Escalar muebles a 0,8× | Rápido | Techos/muebles desproporcionados; se nota "casa de muñecas" |
+
+### 7.3 Decisión
+
+Agrandar las casas a **16×12 m (Casona del Gremio)** y **22×16 m (Mansión del Museo)**, con habitaciones de 5×4 a 8×11 m, techos de 3,4/3,8 m y circulación ≥1,2 m. Se mantiene la cantidad de objetos, pero la densidad baja a ≈1,2–1,6 objetos/m².
+
+### 7.4 Métricas medidas
+
+| Casa | m² por planta | Plantas | Objetos | Densidad |
+|---|---:|---:|---:|---:|
+| Casona del Gremio | 192 | 2 | 608 | 1,58/m² |
+| Mansión del Museo | 352 | 2 | 845 | 1,20/m² |
+
+### 7.5 Consecuencias
+
+- El kit de muebles actual (M18) sigue siendo válido; solo cambia la **distribución**.
+- Las casas grandes se modelan como **exterior + interior separados** para no superar el presupuesto de 6.000 tris por volumen.
+- El techo y la fachada frontal se modelan como objetos aparte para la vista de muñeca.
+
+### 7.6 Actualización v2 (2026-11-12)
+
+El usuario reportó que las casas seguían apretadas y con objetos superpuestos. Se midió el solape real con AABB en Blender y se rediseñó:
+
+- **Casona 20×15 m** (300 m²/planta) y **Mansión 28×20 m** (560 m²/planta).
+- **568 / 826 piezas**; densidad **1,89 / 1,48 piezas/m²** (frente a 3,17 / 2,40 en v1).
+- **0 solapes mueble-estructura** y **0 mueble-mueble** (excluyendo uniones intended: chimenea-techo, base/respaldo, tapa/cuerpo de piano, anillos de la esfera armilar).
+- Techos de **3,6 m** (Casona) y **4,0 m** (Mansión); habitaciones de 6,5×5 a 9,5×14 m.
+- La corrección se aplicó sobre los 7/13 solapes reales que quedaban tras el primer rediseño (armarios, vitrinas, chimeneas, armadura y araña).

@@ -466,3 +466,18 @@ func restaurar_estructuras(lista: Array) -> void:
 7. **Acción recomendada inmediata:** (a) decidir si la casona/mansión se dividen en alas o se modelan a 6.000 tris; (b) crear los `.blend` y scripts de los dos diseños en `tools/mcp/blender-mcp/18-Casas/`; (c) exportar solo tras aprobación visual del usuario; (d) validar con `godot_get_debug_output` y capturas orbitales antes de integrar.
 
 **Estado del reporte:** diseño completo, listo para modelado. No se modificó código ni assets.
+
+---
+
+## Addendum 2026-11-12 — Casas grandes v2 en Blender
+
+- **Casona del Gremio v2:** 20×15 m, 2 plantas, 568 piezas, 11.896 tris, 16 materiales.
+- **Mansión del Museo v2:** 28×20 m, 2 plantas + torres, 826 piezas, 19.874 tris, 15 materiales.
+- **Interiores amplios:** habitaciones de 6,5×5 a 9,5×14 m, techos de 3,6/4,0 m, circulación ≥1,2 m.
+- **0 solapes:** validador AABB sin mueble-estructura ni mueble-mueble (excluidas uniones intended).
+- **21 objetos nuevos:** biblioteca caracol, mesa alquimista, tapiz, globo, reloj, vitrina, bañera de cobre, fuente, araña, cama con dosel, telar, acuario, estufa, piano, arpa, esfera armilar, armadura, billar, hamaca, candelabro.
+- **Archivos:** `tools/mcp/blender-mcp/18-Casas/build_casas_grandes_v2.py`, `casas_ernie_grandes_v2_2026-11-12.blend`, 5 renders `*_v2_*` en `CAPTURAS/`.
+- **Documentación actualizada:** M18 `plan-actual` 01–05, M45, M47, `CHECKLIST-GLOBAL.md`, Log 2404.
+- **Pendiente:** exportar GLB con LODs, integrar en Godot con `TerrainLocator`, QA visual del usuario.
+
+> Las casas pequeñas (`TALLER_MAREA` y `REFUGIO_PESCADOR`) se conservan en la escena `Scene` y en `casas_ernie_pequenas_2026-11-12.blend`.
