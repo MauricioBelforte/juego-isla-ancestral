@@ -1,137 +1,159 @@
-# Reporte de arquitectura: `EventBus` y `ServiceRegistry`
+# Reporte de análisis: `EventBus` y `ServiceRegistry`
 
 **Modelo:** Glyph Cluster  
-**Plataforma:** Kilo Code  
+**Plataforma:** Kilo Code (Agent Manager)  
 **Fecha:** 2026-11-12  
-**Alcance:** análisis estático de `game/isla-ancestral/scripts/core/event_bus.gd` y `game/isla-ancestral/scripts/core/service_registry.gd`, con contraste puntual contra usos/emisiones/conexiones en `game/isla-ancestral/scripts` y `game/isla-ancestral/tests`.
+**Alcance:** `game/isla-ancestral/scripts/core/event_bus.gd`, `game/isla-ancestral/scripts/core/service_registry.gd` (+ referencias cruzadas en `game/isla-ancestral/scripts` y `game/isla-ancestral/tests`)
 
 ---
 
-## 1) Acoplamiento entre sistemas
+## 1) Acoplamiento fuerte que debería ser más suelto
 
-### 1.1 `event_bus.gd` — desacoplamiento por señales, acoplamiento a infraestructura global
+### 1.1 Contratos de eventos duplicados / divergentes (bus global vs señales locales)
 
-**Hallazgos**
-- `event_bus.gd:3-13` define explícitamente el patrón “Signal Up, Call Down” y declara: “EventBus NO importa ningún dominio (solo define tipos)”. La implementación confirma esto: no hay `preload`/`load`/referencias a sistemas de dominio; solo señales tipadas agrupadas por clases internas (`WorldEvents`, `EconomyEvents`, etc., `:48-199`) instanciadas como miembros (`:15-43`).
-- Esto **reduce el acoplamiento directo productor↔consumidor** (no necesitan conocerse entre sí), pero introduce **acoplamiento fuerte a un punto global compartido**:
-  - Todos los sistemas dependen del autoload/singleton `EventBus` y de la forma exacta del contrato de cada señal (nombre, dominio y tipos de parámetros). Cualquier cambio de firma (p.ej. `gift_given(npc_id, item_id, clase)` en `:92`) es un cambio de ruptura transversal.
-  - El bus es **monolítico** (16 dominios en un único archivo). Agregar o modificar dominios exige tocar `core/event_bus.gd`, concentrando conflictos de edición y acoplamiento de cambio (violación práctica de apertura/cierre a nivel de archivo).
-  - Existe acoplamiento semántico cruzado por dominio: p.ej. `ProgresionEvents.nivel_amistad_cambio` (`:180`) convive con eventos de amistad en `NPCEvents` (`:88`), lo que obliga a los consumidores a conocer en qué subdominio vive cada señal.
+El patrón base de `EventBus` es correcto para desacoplar dominios (documentado en `event_bus.gd:5-12`, sin imports de dominio), pero hay casos donde el contrato efectivo queda partido entre el bus y señales locales con el mismo nombre o propósito:
 
-**Conclusión (1):** no se observa acoplamiento fuerte *directo* entre sistemas de dominio dentro del bus (correcto para un event bus), pero sí **acoplamiento fuerte y centralizado a la infraestructura global y a sus contratos**. El riesgo principal es el “god-bus” como punto único de dependencia/cambio.
+| Caso | Evidencia | Impacto |
+|---|---|---|
+| `travel_started` declarado en el bus pero no usado como contrato global | Declaración: `event_bus.gd:117-118` (`TravelEvents.travel_started(from_island, to_island)`). Emisión real encontrada: `scripts/viajes/travel_service.gd:23` (señal propia) y `scripts/viajes/travel_service.gd:270` (`travel_started.emit(_ruta_actual.route_id)`). Consumo real encontrado: `scripts/viajes/travel_layer.gd:29` (`ts.travel_started.connect(...)`, sobre `TravelService`). No se hallaron `.emit/.connect` sobre `EventBus.travel.travel_started`. | Acoplamiento directo `TravelLayer`/consumidores ↔ `TravelService` (instancia concreta) en lugar de contrato por bus; además la firma difiere (1 arg vs 2 args en el bus), lo que dificulta migrar a un flujo realmente desacoplado. |
+| `ui_layers_changed` / `ui_focus_moved` definidos en el bus pero la UI usa sus propias señales | Declaración en bus: `event_bus.gd:148-150`. `UIManager` define sus propias señales homónimas: `scripts/ui/core/ui_manager.gd:22,24`, las emite/conecta internamente (`ui_manager.gd:64,66,247,276,358,368,457,643`) y solo conecta `EventBus.ui.hud_request` hacia adentro (`ui_manager.gd:51-52,476`). No se hallaron emisiones hacia `EventBus.ui.ui_layers_changed`/`EventBus.ui.ui_focus_moved`. | Dos fuentes de verdad para el mismo concepto de UI; otros sistemas que escuchen el bus no recibirán estos eventos, mientras los que escuchen `UIManager` quedan acoplados al nodo concreto. |
+| `island_loaded` existe en bus pero sin emisor de dominio claro | Declaración: `event_bus.gd:119-120`. Consumos: `scripts/audio/narrative_sound.gd:55`, `scripts/diario/diary_service.gd:114`, `scripts/telemetry/*`, tests (`scripts/diario/test_diario.gd:98`, etc.). Comentario explícito: `scripts/audio/narrative_sound.gd:57` indica que `EventBus.travel.island_loaded` existe pero ningún dominio lo emite (y el código cae a una señal real de `M63`). | Consumidores acoplados a un evento que puede no dispararse en runtime real, obligando a fallbacks/adaptadores y generando comportamiento dependiente del contexto. |
 
-### 1.2 `service_registry.gd` — Service Locator con dependencias implícitas
-
-**Hallazgos**
-- Registro dinámico por clave string (`_registry: Dictionary`, `:11`) con `register/get_service/has/unregister` (`:22-46`). `get_service` devuelve `Variant` (`:33`), sin tipado de la instancia recuperada.
-- El patrón Service Locator **suelta el acoplamiento de construcción/importación directa** en muchos casos, pero **endurece el acoplamiento implícito en tiempo de ejecución**:
-  - Los consumidores quedan acoplados al nombre de contrato y a la API concreta del servicio obtenido (acoplamiento por convención, no verificable en compilación). Ej.: `contratos.gd` documenta el uso `ServiceRegistry.get_service(Contratos.ECONOMY_MANAGER)` (`scripts/core/contratos.gd:12-13`), pero el tipo real no se impone.
-  - Dependencias ocultas: no son visibles en la firma/constructor del consumidor; fallan tarde (null + warning de acceso temprano, `:34-38`) o por API inesperada.
-  - Centraliza descubrimiento pero no ciclo de vida/orden: la corrección depende de que alguien registre antes (de ahí el aviso `DOM-INF-ACCESO-TEMPRANO`).
-
-**Conclusión (1):** acoplamiento “suelto” a nivel de referencias directas entre clases, pero **acoplamiento implícito y no tipado a contratos de servicio** (locator global). Es un trade-off razonable para autoloads, aunque frágil ante refactors y errores de orden de inicialización.
+**Conclusión (1):** El bus reduce acoplamiento en la mayoría de dominios, pero hay **contratos huérfanos o paralelos** (viajes/UI/carga de isla) que reintroducen acoplamiento fuerte o ambigüedad de integración. Esto es un problema de diseño de contrato más que de implementación del bus en sí.
 
 ---
 
-## 2) Señales declaradas sin emisión y/o sin conexión
+## 2) Señales declaradas que nunca se emiten o nunca se conectan
 
-Búsqueda realizada sobre `game/` y `scripts/` (incluye tests) por `.señal.emit/.connect` y por `emit_signal/connect("señal")` (sin resultados por nombre string para las candidatas). Clasificación:
+> Nota metodológica: análisis estático por búsqueda de `.emit(` / `.connect(` en `game/isla-ancestral` (scripts y tests). Puede haber emisiones/conexiones dinámicas no detectables por patrón literal (el propio código lo advierte, p.ej. `scripts/core/probe_runtime_bus_m14.gd:7`); los hallazgos abajo son evidencia estática.
 
-| Dominio/Señal | Declaración | Emisión detectada | Conexión detectada | Estado |
-|---|---:|---|---|---|
-| `world.chunk_modified` | `event_bus.gd:54` | No | No | **Huérfana** (sin emisor ni receptor) |
-| `economy.debt_paid` | `event_bus.gd:64` | No | No | **Huérfana** |
-| `calendar.vessel_arrived` | `event_bus.gd:104` | No | No | **Huérfana** |
-| `ui.layer_requested` | `event_bus.gd:142` | No | No | **Huérfana** |
-| `ui.confirm_requested` | `event_bus.gd:144` | No | No | **Huérfana** |
-| `player.player_died` | `event_bus.gd:154` | No | No | **Huérfana** |
-| `player.level_up` | `event_bus.gd:156` | No | No | **Huérfana** (distinta de `npc.friendship_level_up`) |
-| `player.damage_taken` | `event_bus.gd:158` | No | No | **Huérfana** |
-| `ui.hud_request` | `event_bus.gd:136` | No | Sí: `scripts/ui/core/ui_manager.gd:52` | **Conectada, nunca emitida** (contrato inerte) |
-| `ui.ui_layers_changed` | `event_bus.gd:148` | Sí: `scripts/ui/core/ui_manager.gd:247,276` | No | **Emitida, sin suscriptores** |
-| `travel.island_loaded` | `event_bus.gd:120` | Solo test: `scripts/diario/test_diario.gd:98` | Sí (prod): `scripts/audio/narrative_sound.gd:55`, `scripts/diario/diary_service.gd:114` | **Sin emisor en producción** (contrato roto en runtime real); `narrative_sound.gd:57` documenta que ningún dominio la emite |
-| `ui.dialog_requested` | `event_bus.gd:138` | Solo test: `scripts/saving/test_autosave_m59.gd:64` | Sí (prod): `ui_manager.gd:54`, `ui/layers/dialog_layer.gd:56`, `saving/save_manager.gd:118` | **Sin emisor en producción detectado** (usada en tests para ejercer listeners) |
-| `ui.dialog_finished` | `event_bus.gd:140` | Solo test: `scripts/saving/test_autosave_m59.gd:74` | Sí (prod): `ui/layers/dialog_layer.gd:58`, `saving/save_manager.gd:119` | **Sin emisor en producción detectado** |
+### 2.1 Señales sin emisión detectada en el árbol analizado
 
-**Señales verificadas como activas (emisión y conexión presentes):** entre otras, `travel.travel_started` (`viajes/travel_service.gd:270` ↔ `viajes/travel_layer.gd:29`), `ui.notify` (múltiples emisores/receptores), `ui.ui_focus_moved` (emitida y conectada en `ui_manager.gd`), `npc.friendship_level_up`, `fishing.sesion_iniciada/terminada`, dominios `weather/time/infra/progresion/diary` con uso en scripts de producción.
+| Dominio / señal | Declaración | Emisiones detectadas | Conexiones detectadas | Observación |
+|---|---:|---:|---:|---|
+| `economy.currency_changed` | `event_bus.gd:60` | 0 | 2 (`ui/hud/hud_screen.gd:134`, `saving/save_manager.gd:95`) | Consumidores existen (HUD/save dirty) pero no se ve productor. Riesgo de UI/guardado desactualizado si nadie emite. |
+| `economy.purchase_done` | `event_bus.gd:62` | 0 | 0 | Contrato sin uso observado. |
+| `economy.debt_paid` | `event_bus.gd:64` | 0 | 0 | Contrato sin uso observado. |
+| `world.chunk_modified` | `event_bus.gd:54` | 0 | 0 | Sin uso observado. |
+| `world.biome_changed` | `event_bus.gd:56` | 1 (spy/test infra: `core/qa_m40_spy.gd:51`) | 0 | Solo emisión de prueba/QA, sin consumidor. |
+| `calendar.vessel_arrived` | `event_bus.gd:104` | 0 | 0 | Sin uso observado. |
+| `travel.travel_started` (EventBus) | `event_bus.gd:118` | 0 | 0 | El flujo real usa `TravelService.travel_started` (ver §1.1). |
+| `ui.hud_request` | `event_bus.gd:136` | 0 | 1 (`ui/core/ui_manager.gd:52`) | `UIManager` escucha, pero no se halló emisor del bus. |
+| `ui.layer_requested` | `event_bus.gd:142` | 0 | 0 | Sin uso observado. |
+| `ui.confirm_requested` | `event_bus.gd:144` | 0 | 0 | Sin uso observado. |
+| `ui.ui_layers_changed` (EventBus) | `event_bus.gd:148` | 0 (en bus) | 0 (en bus) | `UIManager` emite/conecta sus propias señales homónimas (`ui_manager.gd:22,247,276,...`). |
+| `ui.ui_focus_moved` (EventBus) | `event_bus.gd:150` | 0 (en bus) | 0 (en bus) | Ídem anterior (`ui_manager.gd:24,358,368,457,643,...`). |
+| `player.player_died` | `event_bus.gd:154` | 0 | 0 | Sin uso observado. |
+| `player.level_up` (EventBus.player) | `event_bus.gd:156` | 0 | 0 | Sin uso observado (existen otros `level_up` locales en otros dominios, no este). |
+| `player.damage_taken` | `event_bus.gd:158` | 0 | 0 | Sin uso observado. |
+| `progresion.nivel_casa_cambio` | `event_bus.gd:178` | 0 | 0 | Sin uso observado. |
+| `progresion.nivel_amistad_cambio` | `event_bus.gd:180` | 0 | 0 | Sin uso observado. |
 
-**Conclusión (2):** hay **8 señales completamente huérfanas**, **1 conectada sin emisión**, **1 emitida sin suscriptores** y **3 con suscriptores de producción pero emisión solo en tests** (o ausente en producción). Esto indica deriva de contrato/API muerta o incompleta.
+### 2.2 Señales con emisión/conexión asimétrica relevante (riesgo de contrato incompleto)
+
+| Señal | Evidencia | Lectura |
+|---|---|---|
+| `travel.island_loaded` | Declarada `event_bus.gd:120`; conectada en `scripts/audio/narrative_sound.gd:55`, `scripts/diario/diary_service.gd:114`; emisiones vistas en tests/QA (`scripts/diario/test_diario.gd:98`) y comentario `scripts/audio/narrative_sound.gd:57` ("ningún dominio lo emite"). | Contrato consumido en runtime, pero productor de dominio real no confirmado por análisis estático. |
+| `infra.boot_completado` | Declarada `event_bus.gd:171`; emitida por `scripts/core/bootstrap.gd:132`; sin `.connect` detectado. | Evento publicado pero sin suscriptores actuales (puede ser intencional para futuro). |
+| `infra.carga_completada` / `infra.game_flow_changed` | Emitidas (`scripts/ui/layers/loading_layer.gd:46`, `scripts/core/game_flow_manager.gd:73`, tests) y conectadas en tests/guard (`scripts/core/test_infraestructura_m40.gd`, `scripts/core/softlock_guard.gd:73`). | Uso concentrado en infraestructura/tests; pocos consumidores de gameplay (coherente con M40, pero conviene vigilar adopción). |
+
+**Conclusión (2):** Hay un conjunto no trivial de señales del bus **sin emisor real**, **sin consumidor**, o con **uso solo en pruebas/spies**. Esto aumenta el coste de mantenimiento y puede ocultar integraciones rotas (especialmente `currency_changed`, `travel_started` del bus y `island_loaded`).
 
 ---
 
 ## 3) Dependencias circulares entre servicios
 
-**Entre los dos módulos analizados:**
-- `event_bus.gd` no referencia `ServiceRegistry` ni servicios registrados.
-- `service_registry.gd` no referencia `EventBus` ni dominios de juego.
-- **No existe dependencia circular directa entre `EventBus` y `ServiceRegistry`.**
+### 3.1 Hallazgos
 
-**Entre servicios registrados (visión limitada al core analizado):**
-- `ServiceRegistry` es un contenedor pasivo (`Dictionary` contrato→instancia) sin resolución automática ni inicialización de dependencias; no impone ni puede crear por sí mismo ciclos estructurales. Los usos observados en el ámbito inspeccionado son puntuales (`contratos.gd`, `test_datos_m60_iter4.gd:694`, referencia en `telemetry_director.gd`) y no evidencian ciclos.
-- **No puede afirmarse la ausencia total de ciclos entre todos los servicios del proyecto** solo con estos dos archivos; para confirmarlo haría falta un grafo de dependencias de todos los `register/get_service` en runtime/código.
+- **`event_bus.gd`** (`game/isla-ancestral/scripts/core/event_bus.gd:1-199`): `extends Node`, `class_name EventBus_`, define únicamente clases internas de eventos y señales; **no referencia `ServiceRegistry` ni dominios concretos**.
+- **`service_registry.gd`** (`game/isla-ancestral/scripts/core/service_registry.gd:1-75`): `extends Node`, almacena `Object` por contrato en `Dictionary`; **no referencia `EventBus` ni otros servicios concretos** (solo `push_warning/print`).
+- **`bootstrap.gd`** orquesta el registro (`scripts/core/bootstrap.gd:78-82,136-154,217-223`) obteniendo nodos por `/root/...` y registrándolos; la dependencia es **unidireccional** (bootstrap → autoloads), no circular entre `EventBus` y `ServiceRegistry`.
 
-**Conclusión (3):** sin ciclos en el núcleo analizado; **sin evidencia de ciclos** entre servicios a partir de la muestra disponible, pero la verificación exhaustiva queda fuera del alcance de este análisis estático de los dos ficheros core.
+### 3.2 Evaluación
+
+No se identificaron **dependencias circulares directas ni indirectas** entre `EventBus` y `ServiceRegistry`. La relación observada es de composición/registro externo vía bootstrap, que es adecuada.
 
 ---
 
 ## 4) Funciones críticas sin validación de entrada
 
-### 4.1 `ServiceRegistry.register` — validación insuficiente (crítico)
+### 4.1 `ServiceRegistry.register` — sin validar contrato/instancia
 
-`service_registry.gd:22-28`:
+**Archivo/líneas:** `game/isla-ancestral/scripts/core/service_registry.gd:22-28`
+
 ```gdscript
 func register(contract: String, instance: Object) -> bool:
 	if _registry.has(contract):
-		...
+		push_warning("[M40] DOM-INF-REGISTRO: contrato duplicado '%s' — segundo registro rechazado" % contract)
+		_duplicados_rechazados += 1
 		return false
 	_registry[contract] = instance
 	return true
 ```
-- **No valida `contract` vacío o en blanco**: permite registrar `""` (o variantes sin sentido) como clave válida, contaminando el registro y haciendo difícil el diagnóstico.
-- **No valida `instance == null`**: acepta registrar `null` (tipado `Object` permite casos límite en GDScript). Consecuencia: `has(contract)` devolvería `true`, pero `get_service` (`:33-38`) retorna `null` y emite `DOM-INF-ACCESO-TEMPRANO` en la primera consulta (porque compara `svc == null`), reportando erróneamente “no registrado/aún no disponible” cuando en realidad hay una entrada corrupta. Esto es una **inconsistencia de estado** difícil de depurar.
-- Es una función crítica: un registro inválido rompe el descubrimiento de servicios del que dependen subsistemas (bootstrap/validaciones como `validate_required`, `:63-68`).
 
-### 4.2 Otras funciones (menor severidad)
+**Problemas:**
+- No valida `contract` vacío o solo espacios (`""` sería una clave válida pero semánticamente inválida).
+- No valida `instance == null`; permitiría registrar `null` y que `has()` devuelva `true` mientras `get_service()` propague `null` como si fuera un servicio válido, dificultando el diagnóstico (además `get_service` solo avisa en acceso temprano cuando devuelve `null` por ausencia, no por registro explícito de `null`).
 
-- `get_service/has/unregister` (`:33-46`): no validan el contrato de entrada; impacto bajo (devuelven null/no-op) pero podrían normalizar/rechazar entradas vacías por higiene.
-- `validate_required` (`:63-68`): asume elementos convertibles a `String`; robusto en la práctica pero sin guarda explícita ante elementos nulos/no string.
-- `EventBus` carece de métodos ejecutables con entrada externa; el riesgo no está en sus APIs sino en el contrato de señales consumido por terceros.
+### 4.2 `ServiceRegistry.validate_required` — asume elemento convertible a contrato válido
 
-**Conclusión (4):** sí, **`register` carece de validación crítica de entradas** (contrato vacío/blanco e instancia nula), con posibilidad de estado inconsistente observable.
+**Archivo/líneas:** `game/isla-ancestral/scripts/core/service_registry.gd:63-68`
+
+```gdscript
+func validate_required(required: Array) -> Array[String]:
+	var missing: Array[String] = []
+	for svc in required:
+		if not _registry.has(String(svc)):
+			missing.append(String(svc))
+	return missing
+```
+
+**Problemas menores:** no filtra entradas vacías/nulas en `required`; podría reportar faltantes espurios (`""`) o enmascarar errores de configuración del llamador. Es menos crítico que `register`, pero es una superficie de validación débil en una función usada para chequeos de integridad (p.ej. bootstrap).
+
+### 4.3 `EventBus`
+
+`event_bus.gd` no expone funciones críticas propias más allá de la inicialización de dominios (`event_bus.gd:15-44`); el contrato se basa en señales tipadas de Godot. No se detectaron funciones de entrada sin validación dentro de este archivo (la validación efectiva recae en los emisores/consumidores).
 
 ---
 
 ## 5) Dos mejoras concretas de diseño
 
-### Mejora 1 — Endurecer el contrato de `ServiceRegistry.register` (guardas + semántica clara)
+### Mejora A — API segura y observable en `ServiceRegistry` (validación + contrato explícito)
 
-**Cambio propuesto (concreto):**
-- En `register` (`service_registry.gd:22`):
-  - Rechazar si `contract.strip_edges().is_empty()` → `push_error("[M40] DOM-INF-REGISTRO: contrato vacío/inválido")` y `return false`.
-  - Rechazar si `instance == null` → `push_error("[M40] DOM-INF-REGISTRO: instancia nula para '%s'" % contract)` y `return false`.
-  - (Opcional) normalizar clave con `contract = contract.strip_edges()` antes de almacenar/consultar para evitar duplicados por espacios.
-- En `get_service`, distinguir “no registrado” de “registrado como null” es innecesario si `register` prohíbe null; con la guarda anterior, la semántica queda inequívoca.
-- Añadir prueba unitaria específica (ya existen `test_smoke_core_hy3.gd`/`test_infraestructura_m40.gd` en el árbol) que verifique: rechazo de `""`, rechazo de `"   "` y rechazo de `null`, sin alterar entradas válidas.
+**Objetivo:** evitar registros inválidos y mejorar diagnósticos en arranque.
 
-**Beneficio:** elimina estados corruptos, hace el fallo explícito y temprano, y mejora la fiabilidad del diagnóstico `DOM-INF-ACCESO-TEMPRANO`.
+**Cambios sugeridos (compatibles hacia atrás):**
+1. Endurecer `register` (`service_registry.gd:22-28`):
+   - Rechazar `contract.strip_edges().is_empty()` con `push_warning` y `return false`.
+   - Rechazar `instance == null` con `push_warning` y `return false` (o contador específico `registros_invalidos`).
+2. Normalizar contrato internamente (`contract = contract.strip_edges()`), y opcionalmente exponer `get_service_or_error(contract)` / aserción en debug para fallos tempranos.
+3. En `validate_required` (`service_registry.gd:63-68`), ignorar/advertir elementos vacíos para no contaminar el reporte de faltantes.
+4. (Opcional) Añadir `register_typed(contract, instance, expected_script_or_class)` en builds de debug para detectar wiring incorrecto temprano.
 
-### Mejora 2 — Gobernanza y saneamiento del contrato de señales del `EventBus`
+**Beneficio:** elimina estados "registrado pero inutilizable", reduce bugs silenciosos de bootstrap/autoload y hace el sistema de servicios más robusto ante refactors.
 
-**Cambio propuesto (concreto):**
-- **Auditar y resolver señales en deriva** identificadas en la sección 2:
-  - *Eliminar o mover a un bloque `# RESERVADO/NO IMPLEMENTADO`* las huérfanas sin caso de uso actual: `world.chunk_modified`, `economy.debt_paid`, `calendar.vessel_arrived`, `ui.layer_requested`, `ui.confirm_requested`, `player.player_died`, `player.level_up`, `player.damage_taken`.
-  - *Cerrar asimetrías*: implementar emisor de producción para `travel.island_loaded` (hoy solo test, pero con receptores en `narrative_sound`/`diary_service`) y para `ui.dialog_requested`/`ui.dialog_finished` si el flujo de UI debe ser event-driven; o bien eliminar listeners/contrato si el flujo real es por llamada directa. Conectar o retirar `ui.ui_layers_changed`; emitir o retirar `ui.hud_request`.
-- **Institucionalizar verificación automática**: incorporar una comprobación en CI/tests (apoyándose en el enfoque ya presente en el repo, p.ej. `scripts/red_probe_event_bus.py` y suites de core) que reporte señales declaradas sin al menos un emisor y un receptor en código de producción (excluyendo tests), para evitar regresiones de contrato.
-- **Documentar el contrato por señal** (emisor dueño + consumidores esperados) junto a la declaración para que el acoplamiento contractual sea explícito.
+### Mejora B — Higiene y verificación de contratos del `EventBus`
 
-**Beneficio:** reduce superficie de API muerta, evita integraciones que “escuchan” eventos que nunca ocurren en producción (`island_loaded`/diálogos), y hace sostenible la evolución del bus monolítico.
+**Objetivo:** que el bus sea una fuente de verdad confiable (un evento = un contrato, con productor y consumidor claros).
+
+**Cambios sugeridos:**
+1. **Auditoría de señales huérfanas/duplicadas:** resolver los casos detectados en §1 y §2:
+   - Unificar `travel_started`: o emitir/consumir `EventBus.travel.travel_started` desde `TravelService`/UI, o retirar la señal del bus y documentar el contrato local.
+   - Alinear `ui_layers_changed`/`ui_focus_moved`: emitir en `EventBus.ui` desde `UIManager` (además o en lugar de señales locales) o eliminar del bus si no es API pública.
+   - Garantizar un emisor real de `travel.island_loaded` en el flujo de carga (SceneManager/Travel) o formalizar el adaptador que hoy menciona `scripts/audio/narrative_sound.gd:57`.
+2. **Convención de documentación por señal:** en `event_bus.gd` anotar para cada señal `@emitter` y `@consumer` (módulo/owner esperado) y marcar explícitamente las reservadas/futuras; esto evita que señales como `purchase_done`, `chunk_modified`, `hud_request` queden ambiguas.
+3. **Chequeo automatizable:** añadir un script/herramienta (editor o CI) que compare declaraciones de señales del bus vs referencias `.emit/.connect` y reporte huérfanos (con lista blanca para casos dinámicos como advierte `scripts/core/probe_runtime_bus_m14.gd:7`).
+
+**Beneficio:** reduce acoplamiento accidental, evita integraciones "medio cableadas" (consumidores esperando eventos que nunca llegan) y facilita el trabajo paralelo entre módulos.
 
 ---
 
-## Resumen ejecutivo
+## Conclusión final
 
-1. **Acoplamiento:** el bus evita acoplamiento directo entre dominios pero centraliza dependencia/contratos en un singleton monolítico; el registry es un Service Locator con dependencias implícitas y sin tipado de retorno.
-2. **Señales:** 8 huérfanas, 1 conectada sin emisión, 1 emitida sin conexión y 3 sin emisión en producción pese a tener listeners (incl. `travel.island_loaded` reconocido en código como no emitido).
-3. **Ciclos:** no hay dependencia circular entre `EventBus` y `ServiceRegistry`; no se evidencian ciclos entre servicios en la muestra, sin prueba exhaustiva global.
-4. **Validación:** `ServiceRegistry.register` no valida contrato vacío ni instancia nula (riesgo de estado inconsistente).
-5. **Mejoras:** (a) guardas estrictas en `register` + test; (b) saneamiento/gobernanza del contrato de señales con verificación automática de emisores/receptores.
+- **Acoplamiento:** `EventBus` y `ServiceRegistry` están bien desacoplados entre sí y del dominio en su estructura, pero existen **contratos de eventos duplicados o no unificados** (`travel_started`, señales de UI, `island_loaded`) que generan acoplamiento indirecto y ambigüedad de integración.
+- **Señales:** se detectan múltiples señales **sin emisión y/o sin conexión** en análisis estático (economía/jugador/UI/viaje/progresión y otras), además de contratos consumidos cuyo productor real no es evidente. Requiere saneamiento para que el bus sea confiable.
+- **Dependencias circulares:** **no se observaron** entre `event_bus.gd` y `service_registry.gd` ni vía bootstrap.
+- **Validación de entrada:** el punto crítico es `ServiceRegistry.register` (y en menor medida `validate_required`), que acepta contratos/instancias inválidos; conviene endurecerlos.
+- **Prioridad recomendada:** (1) validar y sanear `ServiceRegistry.register/validate_required`, (2) unificar o deprecar contratos huérfanos del `EventBus` (`travel_started`, señales UI, `island_loaded`) y establecer una política de emisor/consumidor por señal.
+
+**Estado del análisis:** basado en inspección estática del código y referencias del repositorio al 2026-11-12. Hallazgos de "sin uso" deben confirmarse considerando posibles emisiones/conexiones dinámicas en runtime.

@@ -317,3 +317,32 @@ Test: scripts/houses/test_m18_sistemas_s2.gd — 79 checks, 0 fallos, EXIT 0 (si
 | Sobre el hueco | 0 | 0 | 0 | 0 |
 
 > **Nota:** los objetos de ventana (640 en total) y el detalle (zócalos, vigas, marcos, cuadros, vajilla) se excluyen del conteo de muebles del validador por ser piezas **ancladas** al muro, piso o techo. El QA de muebles sigue dando 0.
+
+### 8.8 Ventanas reales y corrección de choques (2026-11-13)
+
+| Archivo | Cambio |
+|---|---|
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_v2_guardadas_2026-11-12.blend` | Huecos de ventana (Boolean), ventanas a PB/PA, torre este en (16,9), muebles despejados |
+| `tools/mcp/blender-mcp/18-Casas/casas_ernie_extra_2026-11-12.blend` | Huecos de ventana, tabiques E movidos, muebles despejados |
+| `CAPTURAS/casas_grandes_v2_exterior_2026-11-12.png` | Exterior v2 con ventanas reales |
+| `CAPTURAS/casona_v2_interior_2026-11-12.png` | Interior Casona (ventanas visibles) |
+| `CAPTURAS/mansion_v2_interior_2026-11-12.png` | Interior Mansión |
+| `CAPTURAS/casas_extra_exterior_2026-11-12.png` | Exterior Agricultor/Mercader |
+| `CAPTURAS/agricultor_interior_2026-11-12.png` | Interior Agricultor |
+| `CAPTURAS/mercader_interior_2026-11-12.png` | Interior Mercader |
+
+**Procedimiento:**
+
+1. Reposicionar las ventanas a `z=2,2/2,4` (PB) y `z=5,7/6,2` (PA).
+2. Cortar el hueco con un **cubo Boolean DIFFERENCE** de 1,5×0,6×1,4 m (muros N) o 0,6×1,5×1,4 m (muros O/E), aplicado sobre los muros exteriores.
+7. Validar con **raycast desde el interior** hacia cada ventana: el primer impacto debe ser el vidrio/marco, no el muro.
+8. Mover los muebles que tapaban ventanas y revalidar AABB.
+
+**Resultado:**
+
+| Casa | Ventanas visibles | Solapes escalera | Solapes mueble-estructura |
+|---|---:|---:|---:|
+| Casona v2 | 18/18 | 0 | 0 |
+| Mansión v2 | 20/20 | 0 (torre) | 0 |
+| Agricultor | 14/14 | 0 (tabique) | 0 |
+| Mercader | 12/12 | 0 (tabique) | 0 |

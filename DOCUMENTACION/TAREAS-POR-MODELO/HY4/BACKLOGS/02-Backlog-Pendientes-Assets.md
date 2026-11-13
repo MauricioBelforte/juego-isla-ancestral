@@ -20,7 +20,7 @@
 - [x] Lagarto de isla
 - [x] Cabra
 - [x] Gallina
-- [ ] Mariposa (alas simples para animar)
+- [x] Mariposa (alas simples para animar)
 
 ### M25 Ruinas (6 pendientes — el encabezado decia 2, corregido 2026-09-13)
 - [ ] Columna rota (2 variantes de altura)

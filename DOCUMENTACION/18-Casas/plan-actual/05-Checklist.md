@@ -243,6 +243,25 @@
 **Totales sección O:** 31 ítems · Completados: 26 · Pendientes: 5 · No resueltos: 0.
 **Totales actualizados M18:** 200 ítems · Completados: 193 · Pendientes: 7 · No resueltos: 0. (Conteo real por grep: 193 [x] / 7 [ ] / 0 [?]; incluye §O y §P.)
 
+## Q. Ventanas reales y corrección de choques (2026-11-13, ERNIE-5.5-Flash-Preview)
+
+- [x] 68 ventanas con hueco real (Boolean DIFFERENCE en muros exteriores) [M] — `casas_ernie_v2_guardadas_2026-11-12.blend`, `casas_ernie_extra_2026-11-12.blend`
+- [x] Ventanas reposicionadas a planta baja y planta alta [S] — `z=2,2/2,4` y `z=5,7/6,2`
+- [x] Raycast interior: Casona 18/18, Mansión 20/20, Agricultor 14/14, Mercader 12/12 [M] — QA numérico
+- [x] Muebles que tapaban ventanas movidos (estantes, espejo, chimenea; tapiz oculto) [M] — QA numérico
+- [x] Torre este de la Mansión reubicada a (16, 9) fuera del interior [S] — `MM_Torre.003`, `MM_Torre_Banda.003`, `MM_Torre_Techo.003`
+- [x] Escalera-torre de la Mansión: 0 solapes [S] — QA AABB
+- [x] Tabiques E de Agricultor/Mercader movidos a x=3,8/3,2 [S] — `AG_Tab_E1/E2`, `ME_Tab_E1/E2`
+- [x] Escalera-tabique de Agricultor/Mercader: 0 solapes [S] — QA AABB
+- [x] AABB 0 mueble-estructura en las cuatro casas [M] — QA AABB
+- [x] AABB 0 mueble-mueble en las cuatro casas [M] — QA AABB
+- [x] Renders exterior/interior actualizados [S] — `CAPTURAS/*_2026-11-12.png`
+- [ ] Exportar GLB de las cuatro casas con LODs [M]
+- [ ] Integrar en Godot con `TerrainLocator` y M17 [C]
+
+**Totales sección Q:** 13 ítems · Completados: 11 · Pendientes: 2 · No resueltos: 0.
+**Totales actualizados M18:** 213 ítems · Completados: 204 · Pendientes: 9 · No resueltos: 0.
+
 > **v2 (2026-11-12):** Casona 20×15 (300 m²/planta) y Mansión 28×20 (560 m²/planta); 568/826 piezas base (807/1.091 con detalle); **0 solapes mueble-estructura, 0 sobre el hueco de escalera y 0 mueble-mueble** (validador AABB). Archivos `build_casas_grandes_v2.py`, `casas_ernie_v2_guardadas_2026-11-12.blend`, renders `CAPTURAS/*_v2_*`.
 
 ## P. Detalle exterior/interior y casas extra (2026-11-12, ERNIE-5.5-Flash-Preview)

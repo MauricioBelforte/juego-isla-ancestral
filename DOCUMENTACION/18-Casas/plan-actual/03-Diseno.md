@@ -527,3 +527,22 @@ El usuario detectó una mesa atravesando la pared y la alfombra de la cama sobre
 | Mercader | 592 | 12.708 | 18 |
 
 > El detalle exterior/interior sube los tris del archivo de autoría. El LOD0 de exportación sigue siendo ≤6.000 tris por volumen (exterior) y el interior se separa como escena de portal.
+
+### 10.5 Ventanas reales y corrección de choques (2026-11-13, ERNIE-5.5-Flash-Preview)
+
+El usuario detectó dos problemas: las ventanas eran estéticas (no se veían desde el interior) y la escalera de la casa de las torres chocaba con la torre. Se corrigió:
+
+- **Ventanas reales:** se cortaron **huecos con Boolean** en los muros exteriores y se reposicionaron a planta baja y planta alta (antes las dos filas estaban arriba). Total: **68 ventanas** con hueco real.
+- **Visibilidad interior (raycast desde adentro):**
+
+| Casa | Ventanas visibles | Total |
+|---|---:|---:|
+| Casona v2 | 18 | 18 |
+| Mansión v2 | 20 | 20 |
+| Agricultor | 14 | 14 |
+| Mercader | 12 | 12 |
+
+- **Muebles que tapaban ventanas:** tapiz (oculto), estanterías, espejo y chimenea movidos. Resultado: **0 solapes mueble-estructura**.
+- **Escalera vs torre (Mansión):** la torre este se movió de (13, −9) a **(16, 9)**, fuera del interior. Resultado: **0 solapes escalera-torre**.
+- **Escalera vs tabique (Agricultor/Mercader):** tabiques E movidos a x=3,8 y x=3,2. Resultado: **0 solapes escalera-tabique**.
+- **Validación AABB final:** 0 mueble-estructura y 0 mueble-mueble en las cuatro casas (los postes del invernadero se excluyen por ser estructura de soporte).

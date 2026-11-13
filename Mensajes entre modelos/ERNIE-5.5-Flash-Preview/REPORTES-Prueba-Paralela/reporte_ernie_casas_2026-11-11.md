@@ -1,483 +1,396 @@
-# Reporte — Diseño de casas 3D para el juego (Isla Ancestral)
+# Reporte: Casas, construcciones y edificios (M17 Construcción / M18 Casas)
 
-**Modelo:** ERNIE-5.5-Flash-Preview
+**Modelo:** ERNIE-5.5-Flash-Preview (baidu)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-11 (verificación de repositorio: 2026-11-12 01:00)
-**Módulo principal:** M18 — Casas
-**Módulos consultados:** M17 (Construcción), M45 (Arte 3D), M47 (Texturas y Materiales), M61 (Rendimiento), M108 (Pipeline de Assets), M167 (Isla Raíz), M168 (Plantilla de Isla)
-**Alcance:** (1) tipos de casas, (2) materiales y texturas, (3) polígonos recomendados, (4) integración con el terreno de Godot, (5) dos diseños concretos. No se modificó código; este archivo es el único entregable.
+**Fecha:** 2026-11-12
+**Alcance:** análisis estático de `game/isla-ancestral/scripts/` (y su data asociada) sobre casas, construcciones y edificios. No se ejecutó el motor: todo lo que sigue es lectura de código.
 
 ---
 
-## 0. Resumen ejecutivo
+## 0. Método y archivos efectivamente leídos
 
-El juego ya tiene una base sólida para casas: **120 GLB** de la familia `18-Casas` en `game/isla-ancestral/assets/3d/` (**60 en `alta/`**, 30 en `media/`, 30 en `baja/`), 46 recetas de construcción en `game/isla-ancestral/data/construccion/piezas/`, y la lógica M18 implementada en `game/isla-ancestral/scripts/houses/` (8 scripts, suites `test_m18_*`). Lo que falta es **cerrar la familia visual**: las casas grandes actuales se modelaron con un pipeline de 6.000 tris que **rechazó la casona (6.826 tris) y la mansión (8.779 tris)**, mientras que M45 permite hasta 15.000 tris por edificio. Esa discrepancia es la principal decisión de diseño pendiente.
+Se localizaron **3 subsistemas distintos** que tocan "casas". Es importante no confundirlos:
 
-La recomendación es trabajar con **cinco tipos de casa** (choza, cabaña, casa mediana, casona/artesano, mansión), **3 LODs** (ALTA ≤6.000 tris para el pipeline actual; MEDIA 1.500; BAJA 700), **materiales low-poly con color por vértice + Principled BSDF** (el repo no usa imágenes de textura en `assets/3d/`), y **integración por `TerrainLocator` + M17**, nunca con posiciones hardcodeadas.
+| Subsistema | Carpeta | Qué modela |
+|---|---|---|
+| **M17 Construcción** | `scripts/construccion/` | Colocación de **piezas voxel** 1×1 (paredes, pisos, techos, muebles) con validación declarativa |
+| **M18 Casas** | `scripts/houses/` | **Casa como entidad**: etapas de mejora, interior, muebles, almacenamiento, visitas de vecinos |
+| **M117 Build System** | `scripts/build/` | Build/instalador del ejecutable (nada que ver con casas; solo comparte el `class_name BuildValidator`) |
 
-| Pregunta | Respuesta corta |
-|---|---|
-| (1) Tipos | Choza, cabaña costera, casa mediana, casa artesano/taller, casona, mansión, casa de vecino |
-| (2) Materiales | Madera clara/oscura, paja, piedra, tela, musgo, metal forjado; color por vértice; atlas opcional 1024²/32 px |
-| (3) Polígonos | LOD0 2.500–5.800 tris (casas); LOD1 ~1.500; LOD2 ~650; techo M45 15.000 tris |
-| (4) Integración | `TerrainLocator.get_height()+1`, validación de huella, M17/`.tres`, colisión, portal interior, guardado M18/M60 |
-| (5) Diseños | **Casa del Artesano "Taller de Marea"** (8×6 m) y **Cabaña del Litoral "Refugio del Pescador"** (5×4 m) |
+Archivos leídos íntegramente (con nº de líneas):
 
----
+| Archivo | Líneas | Rol |
+|---|---|---|
+| `scripts/houses/house_data.gd` | 26 | Recurso de huella/costo de la casa |
+| `scripts/houses/house.gd` | 89 | Nodo exterior de la casa (etapa, obra, puerta) |
+| `scripts/houses/house_manager.gd` | 338 | Autoload central (etapas, costos, muebles, guardado) |
+| `scripts/houses/house_upgrade.gd` | 118 | Obra por etapas con días de juego |
+| `scripts/houses/house_upgrade_data.gd` | 35 | Recurso de etapa de mejora |
+| `scripts/houses/house_interior.gd` | 70 | Habitaciones desbloqueables por etapa |
+| `scripts/houses/house_decor.gd` | 200 | Grid de decoración a 0,25 m |
+| `scripts/houses/house_storage.gd` | 129 | Contenedores (cofre/estantería) |
+| `scripts/houses/house_visit.gd` | 174 | Visitas de vecinos + gustos decorativos |
+| `scripts/houses/furniture_data.gd` | 21 | Recurso de mueble |
+| `scripts/houses/casas_panel.gd` | 127 | UI modal de casas |
+| `scripts/construccion/construccion_tipos.gd` | 186 | Enums, motivos, resultados |
+| `scripts/construccion/placement_rule.gd` | 199 | **Regla declarativa por pieza (dimensiones)** |
+| `scripts/construccion/build_catalog_db.gd` | 185 | Catálogo data-driven de recetas |
+| `scripts/construccion/construccion_validator.gd` | 319 | **Única autoridad "puede colocar"** |
+| `scripts/construccion/build_ghost.gd` | 345 | Fantasma visual (tamaño real de malla) |
+| `scripts/construccion/build_manager.gd` | 838 | Orquestador: colocar/demoler/copiar/mover/estructuras |
+| `scripts/construccion/construccion_mundo.gd` | 177 | Adaptador al mundo voxel real |
+| `scripts/houses/test_m18_casas.gd` | 166 | Suite headless M18 |
 
-## 1. Tipos de casas que necesita el juego
-
-### 1.1 Criterio de clasificación
-
-Las casas se clasifican por **función de gameplay**, **etapa de progresión** y **bioma**, no por tamaño estético. La fuente canónica es `DOCUMENTACION/18-Casas/plan-actual/01-Requerimientos.md:56-76` (progresión de la casa) y `:182-209` (familia de casas grandes habitables).
-
-| Tipo | Función | Etapa M18 | Uso en el mundo | Evidencia |
-|---|---|---|---|---|
-| **Choza** | Vivienda inicial del jugador; techo de paja; 1 ambiente | 0–1 | Parcela del jugador | `01-Requerimientos.md:58` (etapa 0 "Choza"); `:202` |
-| **Cabaña del litoral** | Refugio de pescador; pequeña, cerca de agua; opcional palafito | 0–1 | Costa / orilla; NPC pescador | `:202` (choza ampliada 5×4 m); `mundo_raiz.gd:22` (orilla r≈1700) |
-| **Casa mediana** | Vivienda de familia NPC; 2 ambientes; cocina + dormitorio | 2 | Pueblo / pradera | `:203` (8×6 m); `CASA_02/INFORME.json:5-10` |
-| **Casa artesano / taller** | Vivienda + taller funcional (M16); cobertizo, yunque, mesa de trabajo | 2–3 | Zona de talleres / pueblo | `:27` (RF8 taller); `:204` (casona 10×8 m) |
-| **Casona** | Casa amplia de 3–4 ambientes; sala de estar; familia acomodada | 3 | Pueblo grande / colina | `:204`; `CASA_03_CASONA/INFORME.json:3-10` (10×8 m) |
-| **Mansión** | Mansión multi-habitación; biblioteca / sala de museo; final de progresión | 4 | Ladera / zona noble | `:205` (14×10 m); `CASA_04_MANSION/INFORME.json:3-10` |
-| **Casa de vecino** | Vivienda NPC reutilizable; 1 vecino por casa; visitas M19 | 1–5 | Pueblo; parcelas NPC | `house_manager.gd:153-168`; `01-Requerimientos.md:29` (RF10/RF12) |
-
-### 1.2 Casas que ya existen (inventario medido)
-
-| Asset | Dimensiones (m) | Tris ALTA | Materiales | Estado |
-|---|---|---|---|---|
-| `18-Casas_casa_choza_ampliada.glb` | 5.60 × 4.60 × 3.88 | **4.100** | 8 | Exportado; LOD BAJA 665 tris |
-| `18-Casas_casa_mediana.glb` | 8.60 × 7.09 × 3.83 | **4.300** | 8 | Exportado; LOD BAJA con error de apoyo |
-| `18-Casas_casa_casona.glb` | — | **6.826** | — | **No exportado** (supera el presupuesto de 6.000 del pipeline) |
-| `18-Casas_casa_mansion.glb` | — | **8.779** | — | **No exportado** (mismo motivo) |
-| `18-Casas_casa_vecino.glb` | 7.60 × 7.10 × 3.52 | **2.746** | 8 | Exportado; LOD BAJA sin errores |
-| `18-Casas_casa_completa_ejemplo.glb` | — | — | — | Solo referencia visual, **no habitable** |
-
-Fuentes: `CASA_01_CHOZA/INFORME_CASA_01.json:6-12`, `CASA_02_CASA_MEDIANA/INFORME.json:231-236`, `CATALOGO_CASAS_02_05.json` (errores de casona y mansión), `18-Casas/plan-actual/01-Requerimientos.md:174-180`.
-
-### 1.3 Brecha detectada: presupuesto de 6.000 vs 15.000 tris
-
-- M45 permite **15.000 tris** para edificios (`45-Arte-3D/plan-actual/01-Requerimientos.md:62,71`).
-- El script de las casas grandes usa un `assert alta["triangulos"] <= 6000` (`crear_casa_01_choza.py:815`) y LODs de 1.500/700 tris (`:1106-1107`).
-- Consecuencia: **casona y mansión quedaron fuera del pipeline**, aunque el diseño M18 las pide (`01-Requerimientos.md:204-205`).
-- Recomendación: **no subir el presupuesto global a 15.000 por defecto**. Mantener 6.000 tris por **casa individual** y, para casona/mansión, usar **grupos jerárquicos** (alas/pabellones de ≤6.000 tris) o componerlas con módulos M17. Así se respeta el presupuesto de escena de 150.000 tris (`45-Arte-3D/.../01-Requerimientos.md:87`) y los 200 draw calls.
+Data asociada: **46 recetas** `.tres` en `data/construccion/piezas/`, **59 fichas** de asset en `assets/fichas/18-Casas_*.md`, y **6 modelos GLB de casa completa** en `assets/3d/{alta,media,baja}/18-Casas_casa_*.glb`.
 
 ---
 
-## 2. Materiales y texturas por estilo
+## 1. ¿Qué tipos de casas existen?
 
-### 2.1 Realidad del pipeline (medida, no supuesta)
+Hay que separar **tres planos** que en el código están solo parcialmente conectados.
 
-- `game/isla-ancestral/assets/3d/` contiene **487 GLB** y **0 archivos de imagen** (`.png/.jpg/.jpeg/.webp/.exr/.hdr`).
-- Los materiales son **Principled BSDF con Base Color + Roughness + Metallic constantes**; el color se hornea en **vertex colors** (`COLOR_0`) en los scripts Blender.
-- M47 define además un **atlas de bloques 1024×1024, 32 px/tile** (`artbook_specs_m47.md:49-56`) y **4 niveles de madera** (Base / Oscura / Teñida / Ancestral, `:71-74`), pero ese atlas **no se usa aún en las casas**.
+### 1.1 Casas como etapas de progresión (M18, el único plano "jugable")
 
-**Conclusión de materiales:** para casas, usar **color por vértice + 6–8 materiales** (barato, mergeable, sin VRAM de texturas). Reservar el atlas M47 para superficies que exijan detalle fino (tejas, piedra, madera con vetas) y solo si el presupuesto de draw calls lo permite.
-
-### 2.2 Paleta base copiada del pipeline real
-
-`tools/mcp/blender-mcp/18-BIS-Casas-Grandes/CASA_01_CHOZA/BAJA/crear_casa_01_choza.py:62-82` define la paleta y los materiales usados por la choza. Es la referencia canónica para toda la familia:
-
-| Clave | RGB sRGB | Uso | Material | Roughness | Metallic | Alpha |
-|---|---|---|---|---|---|---|
-| `MADERA` | (180, 140, 90) | Madera clara: paredes, vigas, muebles | `MAT_MaderaClara` | 0.85 | 0.0 | 1.0 |
-| `OSCURA` | (90, 65, 40) | Madera oscura: vigas, marcos, ribetes | `MAT_MaderaOscura` | 0.90 | 0.0 | 1.0 |
-| `PAJA` | (210, 180, 120) | Techo de paja / caña | `MAT_PajaClara` | 0.95 | 0.0 | 1.0 |
-| `PIEDRA` | (130, 125, 120) | Cimientos, zócalo, chimenea | `MAT_Piedra` | 0.95 | 0.0 | 1.0 |
-| `TELA` | (200, 190, 170) | Cortinas, mantas, toldos | `MAT_TelaCrudo` | 0.80 | 0.0 | 1.0 |
-| `MUSGO` | (110, 120, 100) | Piedra con musgo, techos viejos | `MAT_PiedraMoss` | 0.95 | 0.0 | 1.0 |
-| `CORTINA` | (200, 190, 170) | Cortinas semitransparentes | `MAT_CortinaCrudo` | 0.80 | 0.0 | 0.70 |
-| `METAL` | (91, 83, 72) | Bisagras, herramientas, ancla | `MAT_MetalForjado` | 0.65 | 0.65 | 1.0 |
-
-### 2.3 Materiales recomendados por estilo de casa
-
-| Estilo | Materiales dominantes | Acentos | Evidencia / nota |
-|---|---|---|---|
-| **Choza / cabaña** | Madera clara, paja, piedra, musgo | Tela cruda, metal forjado | Paleta `crear_casa_01_choza.py:62-82`; techo `techo_paja.tres` |
-| **Casa mediana** | Madera clara + oscura, piedra, paja/teja | Tela, metal | `CASA_02/INFORME.json:5-10`; recetas `pared_madera.tres`, `techo_dos_aguas.glb` |
-| **Casa artesano** | Madera oscura (estructura), piedra (taller), metal (yunque/herramientas) | Paja, tela | RF8 taller (`18-Casas/01-Requerimientos.md:27`) |
-| **Casona** | Piedra + madera oscura, teja, vidrio | Tela, metal, cristal | `CASA_03_CASONA/INFORME.json:3-10` |
-| **Mansión** | Piedra tallada, madera noble, cristal, metal | Oro viejo / latón, tela fina | `CASA_04_MANSION/INFORME.json:3-10` |
-| **Casa de vecino** | Madera clara, paja, piedra | Tela, flores | `18-Casas_casa_vecino.glb` (2.746 tris, 8 mats) |
-| **Estilo oceánico** | Madera de deriva, coral, conchas, cuerda | Azul turquesa, rosa coral | Set "Oceánico" en `18-Casas/01-Requerimientos.md:123` |
-| **Estilo ancestral** | Piedra con glifos, madera oscura, emisión sutil | Verde musgo, dorado | Set "Ancestral" `:121`; `47/artbook_specs_m47.md:76-85` |
-
-### 2.4 Texturas: cuándo sí y cuándo no
-
-| Caso | Recomendación |
-|---|---|
-| Paredes, pisos, techos vistos a >10 m | **Color por vértice** (sin textura). Merge por material. |
-| Primer plano (interior, cámara cercana) | **Atlas M47 1024², 32 px/tile** para madera/piedra/paja; 3 variantes por bioma (`artbook_specs_m47.md:49-56,140-146`) |
-| Muebles | **4 niveles de madera** por material (Base/Oscura/Teñida/Ancestral), no 4 mallas (`:71-74`) |
-| Emisivos (faroles, glifos) | Shader `emisivo_ancestral`, emisión ≤1.5, sin bloom agresivo (`:81-85`) |
-| Cristal / ventanas | Transparencia + refracción ligera; **máx. 2 instancias por escena** (`:100-104`) |
-| Prohibido | Texturas 4K, textura individual por bloque, regenerar texturas en runtime (`:149-158`) |
-
----
-
-## 3. Polígonos recomendados por casa
-
-### 3.1 Techo por categoría (fuente M45)
-
-`45-Arte-3D/plan-actual/01-Requerimientos.md:64-92`:
-
-| Categoría | LOD0 | LOD1 | LOD2 | Distancias LOD |
-|---|---:|---:|---:|---|
-| Edificios (`bld_`) | **15.000** | 6.000 | 2.000 | 30 / 60 / 120 m |
-| Muebles (`furn_`) | 1.200 | 400 | 150 | 10 / 25 / 50 m |
-| Props (`prop_`) | 200 | 80 | — | — |
-| Vegetación (`veg_`) | 3.000 | 1.200 | 400 | 15 / 35 / 70 m |
-| **Presupuesto de escena** | **150.000 tris visibles** (incluye ~50.000 del terreno) | | | |
-| **Draw calls** | **200 por escena** | | | |
-
-### 3.2 Presupuesto recomendado para casas (3 niveles)
-
-| Tipo | LOD0 (ALTA) | LOD1 (MEDIA) | LOD2 (BAJA) | Materiales | Objetos `SM_` | Notas |
-|---|---:|---:|---:|---:|---:|---|
-| Cabaña del litoral | 2.800–3.400 | 1.100 | 450 | ≤6 | 10–12 | 1 ambiente + porche; base `choza` 4.100 → reducir ~20 % |
-| Choza ampliada | 3.800–4.200 | 1.400 | 600 | ≤8 | 14 | Ya medida: 4.100 / 1.426 / 665 (`INFORME_CASA_01.json`) |
-| Casa de vecino | 2.500–2.800 | 1.000 | 420 | ≤8 | 14 | Ya medida: 2.746 (`CATALOGO_CASAS_02_05.json`) |
-| Casa mediana | 4.000–4.400 | 1.400 | 600 | ≤8 | 17 | Ya medida: 4.300 / 1.420 (`INFORME.json:231`) |
-| Casa artesano | 5.000–5.800 | 1.500 | 650 | ≤8 | 18–20 | Taller + vivienda; un solo volumen |
-| Casona | 5.800–6.000 por ala | 1.500 | 650 | ≤8 | ≤20 por ala | Dividir en 2 alas si supera 6.000 |
-| Mansión | 5.800–6.000 por ala | 1.500 | 650 | ≤8 | ≤20 por ala | 2–3 alas + pabellón |
-
-**Reglas de aplicación:**
-
-1. **LOD obligatorio si >500 tris** (`45-Arte-3D/.../01-Requerimientos.md:85`).
-2. **Una casa = un GLB con LODs** o un grupo jerárquico; nunca 60 objetos sueltos en escena.
-3. **`meshes/generate_lods=true`** ya está activo en los `.import` (verificado en `18-Casas_casa_mediana.glb.import`).
-4. **`z_min = 0.045`** para todas las variantes (regla E-12; `GUIA-BLENDER/05-checklist-asset.md:32,38`).
-5. **Misma altura entre LODs**: si `z_min` cambia, el objeto "salta" al cambiar de LOD (`GUIA-BLENDER/05:53`).
-6. **≤8 materiales por casa**; el merge por material baja los draw calls ~80 % (`GUIA-BLENDER/05:40`).
-
-### 3.3 Presupuesto por escena (ejemplo de aldea)
-
-| Elemento | Tris |
-|---|---:|
-| Terreno voxel visible | ~50.000 |
-| 6 casas (promedio 3.500) | ~21.000 |
-| 20 props × 200 | ~4.000 |
-| 30 muebles × 400 | ~12.000 |
-| Vegetación (30 × 1.200) | ~36.000 |
-| **Total** | **~123.000** (< 150.000) |
-
-Conclusión: **se pueden tener ~6 casas visibles** sin exceder el presupuesto, siempre que cada casa esté en LOD1/LOD2 a partir de 30 m.
-
----
-
-## 4. Integración en el terreno de Godot
-
-### 4.1 Principio único: `TerrainLocator`
-
-El posicionamiento **nunca** se hace con coordenadas fijas ni con un generador clonado. La fuente de verdad es el autoload `TerrainLocator` (`game/isla-ancestral/scripts/core/terrain_locator.gd`):
-
-- `get_height(x: int, z: int) -> int` — altura del suelo real (`:45-52`).
-- `posicionar_sobre_terreno(nodo, x, z) -> bool` — coloca el nodo en `y = altura + 1` (`:56-61`).
-- `esta_sobre_superficie(nodo) -> bool` — verificación de que no flota (`:64-73`).
-
-La regla está documentada en `DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md:190-202` y en `167-Isla-Raiz/plan-actual/MAPA-OBJETOS.md` ("SIEMPRE usar `TerrainLocator`").
-
-### 4.2 Constantes del mundo (Isla Raíz)
-
-`game/isla-ancestral/scripts/world/mundo_raiz.gd:15-29`:
-
-| Constante | Valor |
-|---|---|
-| `CENTRO` | `Vector2(2560, 2560)` |
-| `RADIO_ISLA` | `1800.0` |
-| `RADIO_ORILLA` | `1700.0` |
-| `SPAWN_JUGADOR` | `Vector3(3860, 0, 3860)` |
-
-Las casas van **dentro del radio de orilla** y a **≥20 m** de otra casa (`house_manager.gd:20`, `MIN_DISTANCIA_CASAS = 20.0`).
-
-### 4.3 Dos vías de integración
-
-#### Vía A — Casa modular con recetas M17 (recomendada para el jugador)
-
-Cada pieza (pared, piso, techo, puerta, ventana) es un `.tres` de `PlacementRule` en `game/isla-ancestral/data/construccion/piezas/`. El catálogo los carga recursivamente (`build_catalog_db.gd:32-54`) y los agrupa en 12 familias (`:17-21`).
-
-Ejemplo real de receta (`pared_madera.tres`):
+`house_manager.gd:11-18` define la escalera de 5 etapas:
 
 ```gdscript
-[resource]
-id = &"pared_madera"
+const MAX_ETAPAS := 5
+const ETAPAS := { 1: "choza", 2: "ampliacion", 3: "cocina", 4: "taller", 5: "sotano_atico" }
+```
+
+Y `house_manager.gd:245-251` desbloquea habitaciones por etapa (coincide con `house_interior.gd:46-59`):
+
+| Etapa | Nombre | Habitaciones | Costo (`house_manager.gd:106-112`) | Slots muebles (`:171`) |
+|---|---|---|---|---|
+| 1 | Choza | living | 10 wood + 5 grass | 2 |
+| 2 | Ampliación | + dormitorio | 20 wood + 10 stone | 4 |
+| 3 | Cocina | + cocina | 30 wood + 15 stone + 5 copper_ore | 6 |
+| 4 | Taller | + taller | 40 wood + 20 stone + 10 iron_ore | 8 |
+| 5 | Sótano/Ático | + sótano + ático | 50 wood + 25 stone + 5 crystal | 12 |
+
+**Es una casa única que crece**, no un catálogo de casas distintas. `house_data.gd:8` declara un único `@export var display_name = "Choza"` y `house_manager.registrar_casa()` (`:32-42`) no recibe tipo: todas las casas del mundo son iguales y solo difieren en etapa.
+
+### 1.2 Casas como modelos 3D (data sin usar)
+
+Existen **6 mallas de casa completa** en `assets/3d/{alta,media,baja}/` con sus fichas:
+
+| GLB | Ficha | Estado |
+|---|---|---|
+| `18-Casas_casa_choza_ampliada.glb` | sí | `PENDIENTE-REVIEW` |
+| `18-Casas_casa_mediana.glb` | sí | `PENDIENTE-REVIEW` |
+| `18-Casas_casa_casona.glb` | sí | `PENDIENTE-REVIEW` |
+| `18-Casas_casa_mansion.glb` | sí | `PENDIENTE-REVIEW` |
+| `18-Casas_casa_vecino.glb` | sí | `PENDIENTE-REVIEW` |
+| `18-Casas_casa_completa_ejemplo.glb` | sí | `PENDIENTE-REVIEW` |
+
+**Hallazgo (importante):** una búsqueda de estos nombres en `scripts/**.gd` devuelve **0 usos**. Los `mesh_path` de las recetas apuntan a piezas sueltas (`18-Casas_pared_madera.glb`, `18-Casas_techo_paja.glb`, etc.), nunca a `casa_*`. `house.gd:21-23` dice:
+
+```gdscript
+## Devuelve la etapa visual actual (cambia el modelo exterior).
+func etapa_actual() -> int:
+	return etapa
+```
+
+El comentario promete un cambio de modelo exterior por etapa, pero la función **solo devuelve un entero**: no hay `MeshInstance3D`, ni carga de GLB, ni swap de escena en ningún archivo de `scripts/houses/`. **Los 6 modelos de casa completa están creados, catalogados y muertos.**
+
+### 1.3 Casas como piezas voxel (M17, el único plano construible por el jugador)
+
+`build_catalog_db.gd:18-21` declara 12 familias y el catálogo tiene **46 recetas** (verificado con `Get-ChildItem data/construccion/piezas/*.tres` → 46). Cobertura por familia:
+
+| Familia | Recetas presentes |
+|---|---|
+| pared | `pared_madera`, `pared_piedra`, `pared_esquina`, `pared_pilar` |
+| piso | `piso_tablones`, `piso_piedra`, `piso_terraza` |
+| techo | `techo_paja`, `techo_losa` |
+| puerta | `puerta_madera`, `puerta_piedra` |
+| ventana | `ventana_marco`, `ventana_arco` |
+| escalera | `escalera_recta`, `escalera_doble` |
+| puente | `puente_1..4` |
+| camino | `camino_arena`, `camino_cesped`, `camino_piedra` |
+| cerca | `cerca_madera`, `cerca_piedra`, `cerca_bambu` |
+| iluminacion | `farol_piso`, `farol_colgante`, `antorcha_ancestral` |
+| mueble | `mesa`, `silla`, `cama`, `estanteria`, `cofre_ancestral`, `comoda`… |
+| decoracion | `alfombra`, `cuadro`, `totem`, `fuente`, `maceta`… |
+
+**Conclusión del punto 1:** el jugador construye **piezas**, no casas. Existe una casa abstracta de 5 etapas sin geometría propia, y 6 casas completas con geometría pero sin integración. **No hay un solo "tipo de casa" seleccionable** (ni cabaña, ni casona, ni casa de vecino) en el código.
+
+---
+
+## 2. ¿Hay validación de dimensiones y proporciones?
+
+### 2.1 Lo que SÍ existe
+
+**(a) Dimensiones declarativas por pieza.** `placement_rule.gd:32-35`:
+
+```gdscript
+@export var tamano: Vector2i = Vector2i.ONE   # huella (x, z)
+@export var altura: float = 1.0                # alto en metros
+```
+
+`placement_rule.gd:101-110` (`celdas()`) deriva la huella ocupada y **intercambia ancho/fondo en rotaciones impares**, con ancla en la esquina de menor x/z. Esto está bien resuelto y testeado (`test_construccion.gd:135`).
+
+**(b) Validación de huella mínima.** `house_data.gd:13-15`:
+
+```gdscript
+func huella_valida() -> bool:
+	return huella_voxel.x > 0 and huella_voxel.y > 0
+```
+
+Y `build_catalog_db.gd:156-157` dentro de `validar()`:
+
+```gdscript
+if r.tamano.x < 1 or r.tamano.y < 1:
+	problemas.append("%s: tamano invalido %s" % [String(id), str(r.tamano)])
+```
+
+**(c) Validación geométrica de colocación** (no de proporción, pero sí de encaje): `construccion_validator.gd` valida soporte (`:167-175 contar_soportes`), apoyo alternativo (`:180-192`), pared contigua (`:247-253`), fuera del mundo (`:219-227`) y **no permite demoler una pieza que sostiene otra** (`build_manager.gd:503-518 piezas_apoyadas_en` + `:533-541`).
+
+**(d) Validación de muebles.** `house_decor.gd:84-89` rechaza dimensiones no positivas:
+
+```gdscript
+var ancho: float = float(mueble.get("ancho", 1.0))
+var profundo: float = float(mueble.get("profundo", 1.0))
+if ancho <= 0.0 or profundo <= 0.0:
+	out["razon"] = "dimensiones inválidas"
+```
+
+### 2.2 Lo que FALTA (huecos reales de validación)
+
+**F1 — No hay validación de proporciones.** En ningún archivo se compara `tamano` contra `altura`, ni se exige una relación mínima (p. ej. que una pared de 2 m de alto tenga al menos 1×1 de base, o que un techo cubra toda la huella). El validador solo comprueba `>= 1`. Un `tamano = Vector2i(9, 9)` con `altura = 0.1` pasaría `build_catalog_db.validar()` sin objeción.
+
+**F2 — Nadie verifica que la malla coincida con `tamano`/`altura`.** `build_ghost.gd:179-197` calcula la caja de respaldo desde `tamano`/`altura`, pero si la receta declara `mesh_path`, **usa la malla tal cual** (`_mesh.mesh = malla`) sin escalarla ni comparar su AABB con la huella declarada. Consecuencia: una receta puede decir `tamano = 1×1, altura = 1.0` y mostrar un GLB de 4 m de ancho; el fantasma se ve bien, la validación dice 1×1, y el voxel ocupa 1 celda. **La discrepancia visual/jurídica no se detecta nunca.**
+
+**F3 — 36 de 46 recetas no declaran `tamano`** (medido: `Select-String "^tamano"` sobre los 46 `.tres`). Viven del default `Vector2i.ONE`. Esto hace que `pared_madera`, `pared_esquina`, `pared_pilar`, `pared_piedra`, `ventana_marco` y `ventana_arco` sean **indistinguibles en huella** (1×1): una esquina ocupa lo mismo que una pared recta, y una ventana lo mismo que un pilar.
+
+**F4 — 21 de 46 recetas no declaran `altura`** (medido). `pared_madera`, `pared_piedra`, `ventana_marco`, `piso_terraza`, `escalera_recta`, `pared_esquina` usan el default `1.0`, mientras `puerta_madera` declara `altura = 2.0`. Resultado: **una puerta de 2 m de alto se apoya en una pared de 1 m de alto** (relación de altura incoherente, sin validación que la rechace).
+
+**F5 — No hay validación de altura libre interior.** `interior_camera.gd:13` fija `ALTURA_CAMARA := 1.6` m, pero nada comprueba que el techo quede por encima (2,0 m mínimos). Con `altura` por defecto de 1,0 m el jugador cabría de pie dentro de una pared.
+
+**F6 — Dos grids incompatibles sin conversión compartida.** `build_manager`/`construccion_mundo.gd:113-121` trabajan en celdas de **1,0 m** (`OFFSET_MEDIO_VOXEL = 0.5`), mientras `house_decor.gd:11-12` usa `CELDA_TAMANO := 0.25` con `CELDAS_POR_METRO := 4`. No existe una función puente entre ambos: colocar un mueble de 1×1 m del grid fino ocupa 4×4 celdas del grid grueso, y nadie lo traduce.
+
+**F7 — Borde de habitación hardcodeado.** `house_decor.gd:197-200`:
+
+```gdscript
+const BORDE := 31  # 8 m / 0.25 m = 32 celdas
+return celda.x <= 0 or celda.x >= BORDE or celda.z <= 0 or celda.z >= BORDE
+```
+
+La restricción "solo contra la pared" asume **siempre** una habitación de 8×8 m. Una casa de 4×4 o de 12×6 tiene los bordes mal calculados.
+
+**F8 — Dos convenciones distintas para la puerta de la casa.** `house.gd:34-35` usa `global_position + Vector3.FORWARD * 2.0` (FORWARD = −Z), y `house_manager.gd:196-201` usa `pos + Vector3(0, 0, 3.0)` (+Z). **Misma entidad, dos posiciones de puerta opuestas**, sin constante compartida.
+
+---
+
+## 3. ¿Hay problemas de ensamblaje de piezas?
+
+Sí, y son el punto más débil del subsistema. Listados por severidad.
+
+### 3.1 Variante sin geometría propia (visual)
+
+`data/construccion/piezas/pared_esquina.tres`:
+
+```
+id = &"pared_esquina"
+variante = "esquina"
 mesh_path = "res://assets/3d/alta/18-Casas_pared_madera.glb"
-familia = &"pared"
-costo = { "planks": 4 }
+tamano = (default 1x1)
+```
+
+`pared_pilar.tres` hace exactamente lo mismo (misma malla, `variante = "pilar"`, `bloque = 3` = piedra). **La esquina y el pilar se dibujan con la malla de la pared recta.** Al ensamblar cuatro paredes en cuadrado, las esquinas se solapan visualmente (dos mallas de pared en la misma celda) y no existe una pieza que cierre el encuentro en L. Es un ensamblaje **visualmente roto por diseño de datos**, no por bug de código.
+
+### 3.2 Falta el zócalo / cimiento
+
+Existe el asset `18-Casas_zocalo_piedra.glb` (alta/media/baja) con ficha `18-Casas_zocalo_piedra.md`, **pero no hay receta `.tres` de zócalo**. Como el piso (`piso_tablones`) se apoya sobre terreno con `altura = 0.5` y las paredes sobre el piso, la casa **nace a nivel del terreno sin base de piedra**: en terreno irregular (la isla usa `get_height()` con perfil en capas, ver `167-Isla-Raiz`) el piso queda a distintas alturas y las paredes dejan huecos bajo el zócalo. No hay validación de "casa nivelada".
+
+### 3.3 Techo: 2 recetas para 4 pendientes, sin cumbrera
+
+`techo_paja.tres` y `techo_losa.tres` declaran `tamano = Vector2i(2, 2)`, `altura = 0.5`, `soportes_minimos = 2`, `superficie_ofrecida = &"techo"`. Problemas:
+
+- `techo_losa.tres` usa `mesh_path = 18-Casas_techo_dos_aguas.glb` (un techo **a dos aguas**) pero la pieza se declara como **losa plana 2×2 de 0,5 m**. La malla y la semántica no coinciden.
+- No hay **cumbrera**, ni **alero**, ni **tapa de hastial**: al cerrar un rectángulo de 4×6 con piezas de 2×2, el encuentro de dos aguas queda abierto (no hay pieza que resuelva la arista).
+- `superficie_ok` incluye `&"techo"`: se pueden apilar techos sobre techos sin límite, y `soportes_minimos = 2` permite que una losa de 2×2 se apoye con solo dos celdas tocando pared — el otro lado queda volando.
+
+### 3.4 Huecos de pared no modelados
+
+`puerta_madera.tres` declara `requiere_pared = true` (igual `ventana_marco`), pero **no existe receta de "pared con hueco"**. El validador exige pared contigua (`construccion_validator.gd:98-100` + `:247-253`), de modo que la puerta se coloca *al lado* de una pared, no *dentro* de un vano. El asset `18-Casas_pared_puerta.glb` y `18-Casas_pared_ventana.glb` existen y **no tienen receta**. Resultado: no se puede cerrar una casa dejando una puerta practicable; el vano hay que simularlo dejando la celda vacía, lo que a su vez rompe la continuidad de `superficie_ofrecida = &"pared"` (el techo de la celda contigua pierde soporte).
+
+### 3.5 La escalera no comunica plantas
+
+`escalera_recta.tres`:
+
+```
+familia = &"escalera"
+altura = 1.0        (default: no declarado)
 bloque = 8
-superficie_ofrecida = &"pared"
+apoyo_alternativo = [&"pared"]
 ```
 
-Reglas de colocación declarativas (`placement_rule.gd:31-90`): `tamano`, `altura`, `soportes_minimos`, `superficie_ok`, `requiere_pared`, `deconstruible`, `devolucion`, `mesh_path`, `variantes_disponibles`.
+Una escalera de 1 m de altura no salva la distancia entre una planta baja y un primer piso (que la losa declara en 0,5 m de espesor + altura de pared). `house_interior.gd:58` desbloquea "atico" en etapa 5 y `house_manager.gd:245-251` "sotano", pero **no hay ninguna pieza de escalera que conecte dos niveles de voxels de la casa construida**: el sótano/ático son habitaciones lógicas, no espacios accesibles.
 
-Flujo: el jugador entra en modo construcción (M17), elige la pieza, el fantasma valida celda/soporte/zona, y al confirmar se descuenta el costo de M14. La casa resultante es un `House` (`house.gd`) con `etapa`, `en_obra`, `parcela_id`.
+### 3.6 La "casa" no es una entidad: son N estructuras sueltas
 
-#### Vía B — Casa prearmada (GLB único) para NPC/pueblo
+`build_manager.confirmar_colocacion()` (`:393-446`) registra **cada pieza** como una estructura independiente en `_estructuras` y `_ocupacion` (`:728 _alta_estructura`, `:767 _baja_estructura`). No existe el concepto "conjunto de piezas = una casa". Consecuencias:
 
-Para casas de vecinos y decorados del pueblo se usa un GLB completo (ej. `18-Casas_casa_vecino.glb`) instanciado como `Node3D`, con un `Area3D` en la puerta y un `House` adyacente para la lógica. Es más barato de colocar y no requiere que el jugador construya.
+- No hay puerta que abra al interior de lo construido: `house.gd:38-47 abrir_interior()` instancia un `HouseInterior` lógico independiente de la geometría.
+- No hay conteo de "piezas de esta casa" para costos, límites ni guardado.
+- Demoler es por pieza (`:521`), con el único cuidado de no tirar la que sostiene otra (`:533-541`).
 
-### 4.4 Validación de parcela (antes de colocar)
+### 3.7 Perfiles de malla hardcodeados a "alta"
 
-`house_manager.gd:116-125` ya implementa:
+`placement_rule.gd:74` + `build_ghost.gd:101-110`: si `mesh_path` empieza con `res://`, se usa **tal cual**; solo las rutas "base" pasan por `AssetProfile.ruta()`. Las 46 recetas declaran rutas `res://assets/3d/alta/...` → **las variantes `media` y `baja` nunca se usan** en el fantasma. El sistema de degradación M166 queda fuera de la ruta real de render del construir.
 
-```gdscript
-func parcela_despejada(pos: Vector3) -> bool:
-    if hay_casa_en(pos, MIN_DISTANCIA_CASAS):
-        return false
-    var tl = get_node_or_null("/root/TerrainLocator")
-    if tl != null and tl.has_method("get_height"):
-        var h := int(tl.get_height(int(pos.x), int(pos.z)))
-        if h <= 0:
-            return false
-    return true
-```
+### 3.8 Bug conocido en la integración (registrado, no resuelto)
 
-Falta validar **pendiente** y **huella completa**. Recomendación: muestrear las 4 esquinas + centro de la huella y exigir que la diferencia de altura sea ≤1 bloque; si no, rechazar o nivelar con cimientos.
+`11-BUGS.md` BUG-135 (línea 7823) documenta que `house_manager.gd:231-238` llama a `WorldLocations.buscar_cerca()`, **método que no existe** → el guard `has_method` es siempre falso y `casa_en_ubicacion_conocida()` **devuelve `true` siempre**. Además `test_m18_casas.gd:117` consagra el comportamiento degradado. Es la misma familia que BUG-116 (arista viva en el grafo, muerta en runtime).
 
-### 4.5 Colisión, puerta y portal interior
-
-- **Colisión exterior:** `StaticBody3D` con `BoxShape3D` por volumen (más barato que trimesh) o `trimesh` solo para casas prearmadas.
-- **Puerta:** `Area3D` + `prompt` de interacción; `House.obtener_entrada()` devuelve `global_position + Vector3.FORWARD * 2.0` (`house.gd:33-35`).
-- **Interior:** escena separada `HouseInterior` (`house_interior.gd`), no voxel. `House.abrir_interior()` instancia el interior y emite `interior_abierto` (`house.gd:37-47`). Las habitaciones se desbloquean por etapa (`house_interior.gd:45-59`).
-- **Techo removible:** las casas grandes traen techos desmontables por objetos para inspección (`INFORME_CASA_01.json: notas`), lo que facilita la vista aérea y el QA.
-
-### 4.6 Guardado y persistencia
-
-`house_manager.gd:291-326`:
-
-```gdscript
-func obtener_estructuras() -> Array:
-    # {id, tipo:"casa", pos:[x,y,z], rot_y, planta, variante}
-func restaurar_estructuras(lista: Array) -> void:
-    # reconstruye _casas, _vecinos y la parcela del jugador
-```
-
-- La posición se guarda como enteros; la rotación como `rot_y`.
-- El interior (muebles, almacenamiento) se guarda aparte vía `HouseInterior.recolectar_estado()` (`house_interior.gd:61-70`) y el contrato `BuildingsSaveProvider` (M60).
-- No guardar en el save la malla ni el LOD: se derivan del `id`/`variante`.
-
-### 4.7 Rendimiento y draw calls
-
-| Técnica | Implementación |
-|---|---|
-| LOD | `meshes/generate_lods=true` en el `.import`; `visibility_range` 30/60/120 m |
-| Merge por material | `generar_variante.py --media --baja` (merge lossless, −80 % draw calls; `GUIA-BLENDER/05:40`) |
-| Un GLB por casa | Evita 14–20 nodos sueltos; el `.blend` de autoría queda en `tools/`, no se exporta |
-| Culling de muebles | `HouseDecor` / `HouseInterior` desactivan muebles fuera de la habitación |
-| Presupuesto | 150.000 tris/escena, 200 draw calls (`45-Arte-3D/.../01-Requerimientos.md:87-88`) |
-
-### 4.8 Verificación con MCP de Godot (obligatoria)
-
-1. `godot_run_project` con la escena de prueba.
-2. `godot_get_debug_output` → 0 errores.
-3. Captura orbital (6 azimuts) y comparación con `capturas/{ID}-Casas/`.
-4. Validar `z_min`, bounds y materiales con `scripts-reutilizables/auditar_presupuesto.py`.
-5. Solo después de la aprobación visual del usuario, exportar el GLB a `game/isla-ancestral/assets/3d/` (`GUIA-BLENDER/09:104-122`).
+Y BUG-145 (línea 542): `test_m18_m17_conflicto.gd` cuelga en headless (60 s sin salida), lo que sugiere que **la integración M17↔M18 nunca se verificó en runtime**.
 
 ---
 
-## 5. Dos diseños concretos
+## 4. ¿Qué tipos de casas faltan?
 
-### 5.1 Diseño A — Casa del Artesano "Taller de Marea"
+### 4.1 Casas (tipos) ausentes del catálogo
 
-**Rol:** casa-taller de un artesano NPC (o del jugador en etapa 2–3). Combina vivienda y taller funcional (RF8, M16). Pensada para la **zona de talleres del pueblo** o el borde del bosque, no para la playa.
+Existiendo `casa_vecino.glb` sin usar, no hay **ninguna** casa de NPC diferenciada (el vecino habita la misma choza genérica). Faltan:
 
-**Silueta:** volumen rectangular de 8×6 m, **una planta + altillo**, techo a dos aguas con cumbrera a 3,4 m. La mitad izquierda es el taller (puerta doble ancha), la derecha es la vivienda (puerta de 1,0 m). Un cobertizo exterior de 2×2 m adosa leña y herramientas.
+1. **Casa de vecino/NPC con rol** — el GLB existe; falta la entidad y la asignación (M19 solo asigna un `vecino_id` a una casa del jugador, `house_manager.gd:154-160`).
+2. **Cabaña de pescador sobre pilotes** — hay `muelle_madera`, `puente_1..4` y `bote_pesca`, pero ninguna pieza de **pilote/zanco** ni receta de plataforma elevada sobre agua.
+3. **Casa en el árbol** — no hay plataforma, ni tronco habitable, ni escalera que suba.
+4. **Casa de piedra / casona de dos plantas** — los GLB `casa_casona` y `casa_mansion` existen; falta la escalera funcional (3.5) y la losa de entrepiso.
+5. **Casa comunal / granero / taller-almacén** — etapa 4 "taller" existe como etiqueta, sin geometría ni puerta ancha.
+6. **Casa abandonada / habitable en ruina** — hay `generador_ruina.gd` en M25, pero sin integración con M18 (no se puede reparar una ruina y habitarla).
+7. **Casa de invitados / segunda vivienda** — `house_manager` permite registrar varias casas (`:32-42`) pero `obtener_casa_jugador()` (`:46-57`) resuelve siempre la primera; no hay selección de casa activa.
 
-**Exterior:**
+### 4.2 Piezas estructurales ausentes (impiden ensamblar cualquier casa)
 
-| Elemento | Detalle |
+| Pieza faltante | Por qué es necesaria |
 |---|---|
-| Zócalo | Piedra de 0,25 m de alto, perímetro completo |
-| Paredes | Madera clara (180,140,90) con **vigas vistas** en madera oscura (90,65,40) cada 2 m |
-| Techo | Teja de madera/paja a dos aguas, alero 0,30 m; cumbrera decorada |
-| Puerta taller | Doble hoja 1,8×2,2 m, bisagras de metal forjado |
-| Puerta vivienda | 1,0×2,1 m, marco oscuro |
-| Ventanas | 4 (2 taller, 2 vivienda), 0,6×0,6 m, marco de madera y postigo |
-| Letrero | Tabla colgante con símbolo de yunque/martillo |
-| Exterior | Mesa de trabajo 2×0,8 m, rack de tablones, barrica, farol de pared |
-
-**Interior:**
-
-| Ambiente | Muebles |
-|---|---|
-| Taller (4×6 m) | Mesa de trabajo 2×0,8, yunque de piedra, estantería de herramientas, estufa de leña, nevera rústica, taburete |
-| Vivienda (4×6 m) | Cama doble 2×2, mesa 2×2, 4 sillas, cómoda, cofre, alfombra, lámpara de pie |
-| Altillo | Estantería, baúl, cuadro ancestral |
-
-**Materiales:** `MAT_MaderaClara`, `MAT_MaderaOscura`, `MAT_Piedra`, `MAT_PajaClara`, `MAT_MetalForjado`, `MAT_TelaCrudo` (6 materiales; ≤8).
-
-**Polígonos objetivo:**
-
-| LOD | Tris | Materiales | Objetos `SM_` |
-|---|---:|---:|---:|
-| ALTA | **5.400** | 6 | 18 |
-| MEDIA | **1.500** | 4 | 18 |
-| BAJA | **640** | 3 | 18 |
-
-**Colores (mismos del pipeline):** madera (180,140,90), oscura (90,65,40), piedra (130,125,120), paja (210,180,120), tela (200,190,170), metal (91,83,72).
-
-**Integración:**
-
-1. Modelar en `tools/mcp/blender-mcp/18-Casas/casa_artesano_lowpoly.py` (función `crear_casa_artesano()`), guardar `.blend` + `.blend_media` + `.blend_baja`.
-2. Exportar a `game/isla-ancestral/assets/3d/alta/18-Casas_casa_artesano.glb` (y variantes).
-3. Crear `game/isla-ancestral/scenes/houses/house_artesano.tscn` con `House` + `Area3D` puerta + colisión.
-4. Colocar en el pueblo con `TerrainLocator.posicionar_sobre_terreno()`; validar huella 8×6 y pendiente ≤1 bloque.
-5. Registrar en `HouseManager.registrar_casa(pos, "casa_artesano")`; asignar vecino artesano.
-6. Añadir recetas M17 opcionales: `pared_artesano`, `techo_artesano`, `puerta_taller` (reutilizando `PlacementRule`).
-
-**Aceptación:** 0 errores en `get_debug_output`; `z_min=0.045` en los 3 LODs; ≤8 materiales; el taller permite colocar mesa/yunque/estantería en el grid de `HouseDecor`; la puerta abre al interior.
+| **Zócalo / cimiento** | El asset existe; sin receta la casa no asienta en terreno irregular |
+| **Pared con vano de puerta** | Sin vano no se puede cerrar una casa con puerta practicable |
+| **Pared con vano de ventana** | Ídem para `ventana_marco` / `ventana_arco` |
+| **Dintel / viga** | Falta el remate superior del vano |
+| **Pilar de esquina real** | La "esquina" actual usa malla de pared recta (3.1) |
+| **Entrepiso / losa de planta** | Sin él no hay segundo piso |
+| **Escalera de 2+ m** | La actual es de 1 m (3.5) |
+| **Cumbrera / caballete** | No hay cierre de dos aguas (3.3) |
+| **Alero / goterón** | Sin él el agua entra bajo el techo |
+| **Baranda / balcón** | No hay protección de desnivel |
+| **Porche / galería** | No hay transición exterior-interior |
+| **Chimenea / estufa** | El asset `estufa_lena` existe sin receta |
+| **Puerta de doble hoja / portón** | Para granero/almacén |
 
 ---
 
-### 5.2 Diseño B — Cabaña del Litoral "Refugio del Pescador"
+## 5. Dos diseños concretos de casas
 
-**Rol:** refugio pequeño de pescador (etapa 0–1), junto a la orilla. Puede ser **palafito** (sobre pilotes en aguas poco profundas) o cabaña de playa. Aporta variedad de silueta y un punto de interés costero.
+Ambos están pensados para implementarse con el sistema actual (piezas de 1 m + recetas .tres), declarando explícitamente las piezas nuevas necesarias y su validación. Se respeta la convención de placement_rule.gd (ancla en la esquina de menor x/z, tamano en celdas, altura en metros, superficie_ofrecida para el encadenado).
 
-**Silueta:** 5×4 m, **una planta + altillo de dormir**, techo de paja muy inclinado (cumbrera 3,2 m). Porche frontal de 5×1,2 m con dos pilotes y baranda. Si es palafito, 6 pilotes de madera de deriva de 1,5 m levantan el piso sobre el agua.
+### 5.1 Diseño A — Cabaña del Pescador (etapa 1-2, 4x5 m, sobre pilotes)
 
-**Exterior:**
+Concepto: vivienda mínima de madera sobre la línea de playa, con piso elevado 0,6 m sobre pilotes de piedra y un pequeño muelle propio. Es el primer hogar del jugador y sirve de tutorial de ensamblaje.
 
-| Elemento | Detalle |
-|---|---|
-| Estructura | 6 pilotes de madera de deriva (0,18 m de diámetro) + vigas |
-| Paredes | Tablas horizontales de madera clara/verdeada, 2,4 m de alto |
-| Techo | Paja/cáñamo muy inclinado, alero 0,35 m; remate con cuerda |
-| Puerta | 1,0×2,1 m, madera oscura, bisagra de metal |
-| Ventanas | 2 (0,6×0,6 m), sin vidrio o con mica; postigo de madera |
-| Porche | 5×1,2 m, baranda de cuerda, 2 postes |
-| Accesorios | Red de pesca colgada, 3 boyas de corcho, remo, nasa, farol de aceite |
-| Muelle | Pantalán de 3×1,5 m (receta `muelle_madera.tres` ya existe) |
+Huella y volumetría
 
-**Interior:**
+| Elemento | Celdas | Altura | Notas |
+|---|---|---|---|
+| Zócalo (pilotes) | 4 pilotes de 1x1 en las 4 esquinas | 0,6 m | Pieza nueva: zocalo_pilote |
+| Piso | 4x5 = 20 losas de 1x1 | 0,15 m | piso_tablones (existente) |
+| Paredes perimetrales | 14 celdas de perímetro | 2,0 m | pared_madera + 4 esquinas reales |
+| Vano de puerta | 1x2 en el frente | 2,0 m | pared_puerta_vano (nueva) + puerta_madera (hoja) |
+| Vano de ventana | 1x1 en el lateral izquierdo | 1,0 m | pared_ventana_vano (nueva) + ventana_marco (hoja) |
+| Techo | 3 losas de 2x2 (= 12 celdas) | 0,5 m | techo_paja (existente) |
+| Muelle | 2x4 sobre agua | 0,3 m | muelle_madera (existente) |
 
-| Ambiente | Muebles |
-|---|---|
-| Dormitorio/sala (4×3 m) | Cama 2×0,9, cofre, mesa chica, taburete, estantería, lámpara de aceite |
-| Altillo | Paja, manta, baúl pequeño |
-| Exterior | Pescadero (mesa de limpiar), cubo, cañas |
+Piezas nuevas requeridas (4):
 
-**Materiales:** `MAT_MaderaClara`, `MAT_MaderaOscura`, `MAT_PajaClara`, `MAT_Piedra`, `MAT_TelaCrudo`, `MAT_MetalForjado` (6 materiales; ≤6 recomendado).
+1. zocalo_pilote — familia cimiento (familia nueva a registrar en BuildCatalogDB.FAMILIAS), tamano 1x1, altura 0.6, soportes_minimos 1, superficie_ok [terreno, arena], superficie_ofrecida cimiento, bloque 3 (piedra), mesh_path res://assets/3d/alta/18-Casas_zocalo_piedra.glb. Es la receta que hoy falta aunque el asset exista (ver 3.2).
+2. pared_puerta_vano — familia pared, tamano 1x2, altura 2.0, requiere_pared false (es la pared que ofrece el vano), superficie_ofrecida pared, mesh_path res://assets/3d/alta/18-Casas_pared_puerta.glb (asset existente sin receta).
+3. pared_ventana_vano — familia pared, tamano 1x1, altura 1.0, requiere_pared false, superficie_ofrecida pared, mesh_path res://assets/3d/alta/18-Casas_pared_ventana.glb (asset existente sin receta).
+4. puerta_madera (hoja) — ya existe; se apoya en el vano en vez de en pared contigua (requiere_pared true -> falso con apoyo_alternativo [vano]).
 
-**Polígonos objetivo:**
+Validación específica a añadir (cubre los huecos de 2.2):
 
-| LOD | Tris | Materiales | Objetos `SM_` |
-|---|---:|---:|---:|
-| ALTA | **3.200** | 6 | 12 |
-| MEDIA | **1.100** | 4 | 12 |
-| BAJA | **450** | 3 | 12 |
+- Soporte de zócalo: en construccion_validator.contar_soportes (L167-175), una pieza con familia cimiento exige que la celda de abajo sea terreno o arena; si es agua, rechazar (hoy el agua solo se permite a puentes).
+- Altura mínima de pared: en build_catalog_db.validar (L148-174), exigir altura >= 2.0 en toda receta con familia pared y con familia puerta (hoy el default 1,0 lo incumple: F4).
+- Cierre perimetral: nuevo validador de conjunto que cuenta las celdas de perímetro con superficie_ofrecida == pared y exige que sea igual al perímetro teórico de la huella antes de permitir colocar techo (hoy no existe: 3.3 y 3.4).
 
-**Integración:**
+Integración M17-M18: al colocar la última losa de techo, BuildManager emite la señal pieza_colocada; un listener nuevo (house_manager o un conector dedicado) agrupa las piezas de la zona y llama a registrar_casa(pos) con etapa 1; al mejorar a etapa 2 (house_manager.avanzar_etapa) se desbloquea el dormitorio en house_interior.
 
-1. Modelar en `tools/mcp/blender-mcp/18-Casas/casa_pescador_lowpoly.py`; partir de `crear_casa_01_choza.py` y reducir ~20 % (quitar muebles internos, simplificar chimenea).
-2. Exportar a `game/isla-ancestral/assets/3d/alta/18-Casas_casa_pescador.glb` (+ media/baja).
-3. Crear `game/isla-ancestral/scenes/houses/house_pescador.tscn`.
-4. Colocar en la **orilla**: radio 1.650–1.700 m desde el centro (2560,2560), con `TerrainLocator.get_height()` > 0; si es palafito, permitir el muelle con `sobre_agua=true` solo para la receta del pantalán (`placement_rule.gd:45-46`).
-5. Registrar en `HouseManager`; asignar NPC pescador (M19); conectar el muelle como punto de pesca (M34).
-6. Añadir `muelle_madera.tres` (ya existe) y, si hace falta, `cabaña_pilote` como variante de `PlacementRule`.
+Por qué es viable: reutiliza 6 recetas existentes; solo exige 4 recetas nuevas (2 de ellas con asset ya presente) y una validación de cierre perimetral que además corrige los huecos F1/F4 y 3.2/3.4.
 
-**Aceptación:** 0 errores de runtime; `z_min=0.045`; la cabaña no flota (verificar con `esta_sobre_superficie`); el muelle no bloquea la navegación; el interior es accesible por la puerta; el techo se puede quitar para la vista aérea.
+### 5.2 Diseño B — Casa-Taller de dos plantas con porche (etapa 3-5, 6x7 m)
+
+Concepto: la casa del artesano. Planta baja abierta al taller (piezas grandes, portón doble), planta alta con dormitorio y balcón, y porche de acceso. Es la casa visible en el tramo medio del juego y la que justifica las etapas 3-5 (cocina, taller, sótano/ático) que hoy solo desbloquean habitaciones lógicas sin geometría.
+
+Huella y volumetría
+
+| Nivel | Elemento | Celdas | Altura acumulada |
+|---|---|---|---|
+| 0 | Zócalo corrido de piedra | perímetro 6x7 | 0 → 0,4 m |
+| 0 | Piso de planta baja | 42 losas | 0,4 m |
+| 0 | Paredes portantes | 22 celdas de perímetro | 0,4 → 2,6 m |
+| 0 | Portón doble (2x2) + 2 ventanas | 3 celdas | — |
+| 1 | Entrepiso (losa 6x7 con hueco de escalera 1x3) | 39 losas | 2,6 → 2,8 m |
+| 1 | Escalera recta de 2,2 m + descansillo | 4 celdas | 0,4 → 2,6 m |
+| 1 | Paredes de planta alta | 22 celdas | 2,8 → 4,8 m |
+| 1 | Vano de balcón (1x2) + ventana | 2 celdas | — |
+| 2 | Techo a dos aguas (cumbrera + 2 faldones) | 4 losas 2x2 + 1 cumbrera | 4,8 → 6,3 m |
+| 0 | Porche: 6 losas + 4 pilares + baranda | 10 celdas | 0,4 → 2,4 m |
+
+Piezas nuevas requeridas (7):
+
+1. zocalo_corrido — familia cimiento, tamano 1x1, altura 0.4, superficie_ofrecida cimiento. Variante de zocalo_pilote para base continua.
+2. pared_puerta_vano — la misma del Diseño A (reutilizada).
+3. losa_entrepiso — familia piso, tamano 2x2, altura 0.2, soportes_minimos 2, superficie_ok [pared], superficie_ofrecida piso. Es la pieza que hoy no existe y sin la cual no hay segundo piso.
+4. escalera_larga — familia escalera, tamano 1x3, altura 2.2, apoyo_alternativo [pared], superficie_ofrecida aire. Reemplaza a escalera_recta (1 m) en 3.5.
+5. cumbrera — familia techo, tamano 1x1, altura 0.4, soportes_minimos 2, superficie_ok [techo, pared], superficie_ofrecida techo. Cierra la arista del techo a dos aguas (3.3).
+6. alero — familia techo, tamano 1x1, altura 0.15, soportes_minimos 1, superficie_ofrecida techo. Vuela 0,5 m sobre la pared.
+7. baranda — familia cerca, tamano 1x1, altura 0.5, superficie_ofrecida aire. Protege balcón y porche.
+
+Validación específica a añadir:
+
+- Nivelación por niveles: nueva función en construccion_validator que exige que todas las celdas de una misma planta compartan el mismo y de zócalo; hoy no existe nada que impida colocar la planta alta a media altura.
+- Alineación vertical de muros portantes: exigir que cada celda de pared de planta N tenga pared o losa debajo (hoy solo se valida el soporte de la fila inferior, L167-175).
+- Continuidad de escalera: exigir que una escalera_larga tenga al menos una celda de llegada con superficie piso a 2,6 m; hoy la escalera se apoya en cualquier pared y no lleva a ningún lado.
+- Cierre de cumbrera: exigir que una cumbrera tenga faldón a ambos lados (dos celdas contiguas con superficie_ofrecida techo); hoy se apila techo sobre techo sin límite (3.3).
+
+Integración M17-M18: el entrepiso habilita la habitación atico de etapa 5 (house_interior L46-59) como espacio real; la escalera larga la conecta con la planta baja. El taller de etapa 4 se materializa como el vano de portón doble de la planta baja.
+
+Por qué es viable: la losa de entrepiso resuelve el hueco de atico (etapa 5) y la escalera larga resuelve el 3.5; el porche da la transición exterior-interior que hoy no existe.
 
 ---
 
-## 6. Archivos y líneas de referencia
+---
 
-### 6.1 Documentación
+## 6. Recomendaciones priorizadas
 
-| Archivo | Líneas | Qué aporta |
-|---|---|---|
-| `DOCUMENTACION/18-Casas/plan-actual/01-Requerimientos.md` | 56-76 | Progresión de la casa y grid de decoración |
-| | 174-243 | Sección 6: casas grandes habitables, familia, mobiliario, reglas técnicas |
-| `DOCUMENTACION/18-Casas/plan-actual/02-Analisis.md` | 10-45 | Alternativa A (portal interior) y justificación |
-| `DOCUMENTACION/18-Casas/plan-actual/03-Diseno.md` | 8-35 | Arquitectura `House`/`HouseInterior` y diagrama |
-| | 168-285 | Specs RF/P de casas |
-| `DOCUMENTACION/18-Casas/plan-actual/04-Codigo.md` | 7-25 | Rutas `res://` de scripts y escenas |
-| | 30-156 | Firmas GDScript y Resources |
-| `DOCUMENTACION/18-Casas/plan-actual/05-Checklist.md` | 1-205 | Estado real M18 (implementado) |
-| `DOCUMENTACION/45-Arte-3D/plan-actual/01-Requerimientos.md` | 62-92 | Techo de polígonos por categoría, LOD, presupuesto |
-| `DOCUMENTACION/45-Arte-3D/plan-actual/ART_STYLE_3D.md` | 8-41 | Estilo, paleta y métricas |
-| | 53-92 | Nombres, herramientas y checklist |
-| `DOCUMENTACION/47-Texturas-Y-Materiales/plan-actual/artbook_specs_m47.md` | 49-56 | Atlas 1024² / 32 px |
-| | 71-85 | Madera (4 niveles) y materiales luminosos |
-| | 111-126 | Validación, naming y presupuesto |
-| `DOCUMENTACION/GUIA-BLENDER/05-checklist-asset.md` | 32-53 | `z_min`, multi-ángulo, variantes |
-| | 40 | Merge por material (−80 % draw calls) |
-| `DOCUMENTACION/GUIA-BLENDER/09-nivel-detalle-modelado.md` | 104-122 | `.blend` primero, GLB después |
-| `DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md` | 190-202 | Regla de oro `TerrainLocator` |
-| `DOCUMENTACION/167-Isla-Raiz/plan-actual/MAPA-OBJETOS.md` | 1-45 | Centro, radio, spawn, posicionamiento |
-
-### 6.2 Código
-
-| Archivo | Líneas | Qué aporta |
-|---|---|---|
-| `game/isla-ancestral/scripts/core/terrain_locator.gd` | 43-73 | `get_height`, `posicionar_sobre_terreno`, `esta_sobre_superficie` |
-| `game/isla-ancestral/scripts/world/mundo_raiz.gd` | 15-29 | `CENTRO`, `RADIO_ISLA`, `RADIO_ORILLA`, `SPAWN_JUGADOR` |
-| `game/isla-ancestral/scripts/houses/house_manager.gd` | 11-20 | Etapas, `MIN_DISTANCIA_CASAS=20` |
-| | 105-125 | Costes por etapa, `parcela_despejada` |
-| | 170-201 | Slots de muebles, posición de puerta |
-| | 245-258 | Habitaciones por etapa |
-| | 291-326 | Guardado/restauración (M60) |
-| `game/isla-ancestral/scripts/houses/house.gd` | 33-47 | Entrada, `abrir_interior`, `cerrar_interior` |
-| `game/isla-ancestral/scripts/houses/house_interior.gd` | 45-70 | Habitaciones por etapa, persistencia |
-| `game/isla-ancestral/scripts/construccion/placement_rule.gd` | 31-90 | Campos declarativos de la receta |
-| | 101-127 | Huella con rotación, costo, devolución |
-| `game/isla-ancestral/scripts/construccion/build_catalog_db.gd` | 17-21 | 12 familias |
-| | 32-66 | Carga recursiva y registro |
-| `game/isla-ancestral/scripts/construccion/construccion_tipos.gd` | 28-61 | Categorías y mapa familia→categoría |
-| `game/isla-ancestral/data/construccion/piezas/pared_madera.tres` | 1-14 | Receta de pared |
-| `.../techo_paja.tres` | 1-16 | Receta de techo 2×2, soportes 2 |
-| `.../puerta_madera.tres` | 1-15 | Puerta 1×2, `requiere_pared` |
-
-### 6.3 Assets y pipeline Blender
-
-| Archivo | Líneas / clave | Qué aporta |
-|---|---|---|
-| `game/isla-ancestral/assets/3d/alta/18-Casas_casa_choza_ampliada.glb` | — | Casa 5,6×4,6×3,88 m |
-| `.../18-Casas_casa_mediana.glb` | — | Casa 8,6×7,09×3,83 m |
-| `.../18-Casas_casa_vecino.glb` | — | Casa 7,6×7,10×3,52 m |
-| `.../18-Casas_casa_casona.glb` | — | No exportado (6.826 tris) |
-| `.../18-Casas_casa_mansion.glb` | — | No exportado (8.779 tris) |
-| `tools/mcp/blender-mcp/18-BIS-Casas-Grandes/CASA_01_CHOZA/INFORME_CASA_01.json` | 6-12 | 4.100 / 1.426 / 665 tris; 14 meshes; 8 mats |
-| `.../CASA_02_CASA_MEDIANA/INFORME.json` | 5-10, 231-236 | 8×6 m; 4.300 tris; 8,6×7,09×3,83 |
-| `.../CASA_03_CASONA/INFORME.json` | 3-10 | 10×8 m; 6.826 tris (rechazado) |
-| `.../CASA_04_MANSION/INFORME.json` | 3-10 | 14×10 m; 8.779 tris (rechazado) |
-| `.../CASA_05_CASA_VECINO/INFORME.json` | 3-10 | 7×5 m; 2.746 tris |
-| `.../CATALOGO_CASAS_02_05.json` | — | Resumen de exportación y errores |
-| `.../CASA_01_CHOZA/BAJA/crear_casa_01_choza.py` | 62-82 | Paleta y 8 materiales |
-| | 815 | `assert alta["triangulos"] <= 6000` |
-| | 1106-1107 | Presupuestos LOD 1.500 / 700 |
+| # | Acción | Archivos | Esfuerzo |
+|---|---|---|---|
+| 1 | **Conectar los 6 GLB de casa completa** al menos como decoración de `casa_vecino` en el mundo (hoy están muertos) | `scripts/houses/house.gd:21-23`, `scripts/world/` | M |
+| 2 | **Receta de zócalo** + validación de nivelación | `data/construccion/piezas/zocalo_piedra.tres` (nuevo), `construccion_validator.gd` | S |
+| 3 | **Recetas de pared con vano** (puerta/ventana) usando `pared_puerta.glb` / `pared_ventana.glb` | `data/construccion/piezas/pared_puerta.tres`, `pared_ventana.tres` (nuevos) | S |
+| 4 | **Geometría propia para esquina y pilar** (o declarar `tamano`/`altura` distintos) | `data/construccion/piezas/pared_esquina.tres`, `pared_pilar.tres` | S |
+| 5 | **Validación de proporción** `tamano` vs `altura` y AABB de malla vs huella declarada | `build_catalog_db.gd:148-174`, `build_ghost.gd:186-197` | M |
+| 6 | **Declarar `tamano` y `altura` explícitos en las 46 recetas** (hoy 36 y 21 los omiten) | `data/construccion/piezas/*.tres` | M |
+| 7 | **Unificar la posición de puerta** (−Z a 2 m vs +Z a 3 m) | `house.gd:34-35`, `house_manager.gd:196-201` | S |
+| 8 | **Completar el catálogo de techo** (cumbrera, alero, hastial) | `data/construccion/piezas/techo_*.tres` | M |
+| 9 | **Arreglar BUG-135** (`buscar_cerca` inexistente) y revisar la aserción del test | `house_manager.gd:231-238`, `test_m18_casas.gd:117` | S |
+| 10 | **Puente de grids** 1,0 m ↔ 0,25 m para muebles | `house_decor.gd:11-12`, `construccion_mundo.gd:113` | M |
 
 ---
 
 ## 7. Conclusión final
 
-1. **El juego necesita cinco tipos principales de casa** —choza, cabaña costera, casa mediana, casa artesano/taller, casona y mansión—, más la reutilizable **casa de vecino**. La progresión M18 (etapas 0–5) ya define el tamaño y las habitaciones; el diseño 3D debe seguir esa escalera, no inventar una paralela.
+**El proyecto tiene un sistema de construcción voxel sólido y bien validado en lo que respecta a reglas de colocación (soporte, ocupación, permisos, mundo, recursos, circulación, orden de demolición), pero el ensamblaje de casas está incompleto en tres frentes:**
 
-2. **El estilo es "cozy voxel redondeado + low-poly"** (`ART_STYLE_3D.md:8-16`): siluetas suaves, proporciones amables, sin bordes agresivos. La paleta real del pipeline (madera 180,140,90; oscura 90,65,40; paja 210,180,120; piedra 130,125,120) es coherente con la paleta pastel de M09 y debe reutilizarse.
+1. **No existe el tipo de casa.** M18 modela una sola casa abstracta que crece en 5 etapas etiquetadas (choza → ampliación → cocina → taller → sótano/ático), sin geometría propia: `house.gd:21-23` promete "cambia el modelo exterior" y solo devuelve un entero. Los **6 modelos de casa completa** (`casa_choza_ampliada`, `casa_mediana`, `casa_casona`, `casa_mansion`, `casa_vecino`, `casa_completa_ejemplo`) existen en `assets/3d/` con sus fichas, pero **ningún script los referencia**: son assets huérfanos. El jugador construye **piezas de 1 m**, no casas.
 
-3. **Materiales:** color por vértice + Principled BSDF, 6–8 materiales por casa, **sin imágenes de textura** en `assets/3d/` (0 confirmadas). El atlas M47 1024²/32 px queda como opción para primer plano; no es necesario para la silueta.
+2. **Falta toda la validación de proporciones.** Lo que hay es validación de *huella mínima* (`> 0`) y de *encaje* (soporte, pared contigua, no demoler lo que sostiene). No hay relación `tamano`/`altura`, no se compara la malla GLB contra la huella declarada, y **36 de 46 recetas omiten `tamano`** (viven del default 1×1) mientras **21 omiten `altura`** (default 1,0 m). Una puerta de 2 m se apoya en paredes de 1 m y nadie lo objeta; el fantasma puede mostrar un GLB de 4 m en una celda de 1 m.
 
-4. **Polígonos:** LOD0 **2.500–5.800 tris** por casa (cabaña ~3.200; mediana ~4.300; artesano ~5.400), LOD1 ~1.500, LOD2 ~450–650. El techo M45 de 15.000 tris es el máximo teórico, pero el pipeline actual de casas usa 6.000: **casona y mansión deben dividirse en alas** o aceptar el techo de 6.000 por volumen.
+3. **El ensamblaje no cierra.** La "esquina" y el "pilar" se dibujan con la malla de la pared recta; no hay zócalo (el asset existe sin receta), no hay vano de puerta/ventana (los assets `pared_puerta.glb`/`pared_ventana.glb` existen sin receta), el techo a dos aguas se declara como losa plana de 2×2 sin cumbrera ni alero, la escalera mide 1 m y no comunica plantas, y la casa no es una entidad sino N estructuras independientes. A esto se suman dos convenciones de puerta incompatibles (−Z×2 m vs +Z×3 m) y un BUG-135 registrado que deja muerta la integración M18→M160.
 
-5. **Integración:** `TerrainLocator` es obligatorio; validar huella y pendiente; usar M17/`.tres` para construcción del jugador y GLB único para NPC/pueblo; colisión estática + `Area3D` de puerta; interior por portal (`HouseInterior`), no voxel; guardado por IDs en `house_manager.gd`.
-
-6. **Los dos diseños propuestos** —"Taller de Marea" (artesano, 8×6 m, 5.400 tris) y "Refugio del Pescador" (cabaña costera, 5×4 m, 3.200 tris)— son viables con el pipeline actual, respetan los 8 materiales y los 3 LODs, y cubren dos huecos reales: **taller funcional** (RF8) y **variedad costera** (M34/M167).
-
-7. **Acción recomendada inmediata:** (a) decidir si la casona/mansión se dividen en alas o se modelan a 6.000 tris; (b) crear los `.blend` y scripts de los dos diseños en `tools/mcp/blender-mcp/18-Casas/`; (c) exportar solo tras aprobación visual del usuario; (d) validar con `godot_get_debug_output` y capturas orbitales antes de integrar.
-
-**Estado del reporte:** diseño completo, listo para modelado. No se modificó código ni assets.
+**En una frase:** el andamiaje de datos y validación de M17 es de buena calidad, pero **la casa como objeto construible no está ensamblada**: faltan las piezas de unión (zócalo, vanos, cumbrera, entrepiso, escalera larga), falta la validación de proporción malla/huella, y falta decidir si la casa es geometría (M17) o entidad (M18) — hoy no es ninguna de las dos por completo.
 
 ---
 
-## Addendum 2026-11-12 — Casas grandes v2 en Blender
-
-- **Casona del Gremio v2:** 20×15 m, 2 plantas, 568 piezas, 11.896 tris, 16 materiales.
-- **Mansión del Museo v2:** 28×20 m, 2 plantas + torres, 826 piezas, 19.874 tris, 15 materiales.
-- **Interiores amplios:** habitaciones de 6,5×5 a 9,5×14 m, techos de 3,6/4,0 m, circulación ≥1,2 m.
-- **0 solapes:** validador AABB sin mueble-estructura ni mueble-mueble (excluidas uniones intended).
-- **21 objetos nuevos:** biblioteca caracol, mesa alquimista, tapiz, globo, reloj, vitrina, bañera de cobre, fuente, araña, cama con dosel, telar, acuario, estufa, piano, arpa, esfera armilar, armadura, billar, hamaca, candelabro.
-- **Archivos:** `tools/mcp/blender-mcp/18-Casas/build_casas_grandes_v2.py`, `casas_ernie_grandes_v2_2026-11-12.blend`, 5 renders `*_v2_*` en `CAPTURAS/`.
-- **Documentación actualizada:** M18 `plan-actual` 01–05, M45, M47, `CHECKLIST-GLOBAL.md`, Log 2404.
-- **Pendiente:** exportar GLB con LODs, integrar en Godot con `TerrainLocator`, QA visual del usuario.
-
-> Las casas pequeñas (`TALLER_MAREA` y `REFUGIO_PESCADOR`) se conservan en la escena `Scene` y en `casas_ernie_pequenas_2026-11-12.blend`.
+*Reporte generado por ERNIE-5.5-Flash-Preview (baidu) sobre Kilo Code — 2026-11-12. Análisis estático; no se ejecutó el motor ni se corrieron las suites headless.*

@@ -1,0 +1,40 @@
+alta  tris=192  mats=7 mallas=10 nodos=10 verts=384  x=[-0.2200..0.2400] alt=[0.0450..0.3100] lat=[-0.2200..0.2200] apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.265: 36} niveles_ala={0.105: 24, 0.205: 24, 0.21: 24, 0.31: 24} zona_vacia=[] lat_ext022=24 lat_int004=72
+   niveles_x=[-0.22, -0.19, -0.13, -0.11, -0.09, -0.05, -0.03, 0.01, 0.03, 0.06, 0.09, 0.11, 0.1925, 0.22, 0.2275, 0.24]
+   niveles_alt=[0.045, 0.085, 0.105, 0.155, 0.185, 0.205, 0.21, 0.215, 0.2175, 0.225, 0.2525, 0.265, 0.305, 0.31]
+   niveles_lat=[-0.22, -0.18, -0.08, -0.075, -0.067, -0.06, -0.057, -0.055, -0.05, -0.04, -0.02, 0.02, 0.04, 0.05, 0.055, 0.06, 0.075, 0.08, 0.18, 0.22]
+   ALAS:
+     SM_Mariposa_Ala_L_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaL'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[0.04, 0.22]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[0.04, 0.18, 0.22]
+     SM_Mariposa_Ala_R_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaR'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[-0.22, -0.04]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[-0.22, -0.18, -0.04]
+   CONTACTO ala-cuerpo (vertices BIN)={'SM_Mariposa_Ala_L_NOFUNDIR': 18, 'SM_Mariposa_Ala_R_NOFUNDIR': 18}
+   materiales=['MAT_Mariposa_AlaL', 'MAT_Mariposa_AlaR', 'MAT_Mariposa_Antena', 'MAT_Mariposa_Cuerpo', 'MAT_Mariposa_Mancha', 'MAT_Mariposa_Ojo', 'MAT_Mariposa_Roca']
+   colores={'MAT_Mariposa_Roca': [0.52, 0.5, 0.47], 'MAT_Mariposa_Cuerpo': [0.2, 0.18, 0.34], 'MAT_Mariposa_AlaL': [0.42, 0.32, 0.72], 'MAT_Mariposa_AlaR': [0.3, 0.46, 0.78], 'MAT_Mariposa_Ojo': [0.08, 0.08, 0.1], 'MAT_Mariposa_Antena': [0.96, 0.94, 0.86], 'MAT_Mariposa_Mancha': [0.98, 0.88, 0.4]}
+media tris=192  mats=7 mallas=7 nodos=7 verts=384  x=[-0.2200..0.2400] alt=[0.0450..0.3100] lat=[-0.2200..0.2200] apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.265: 36} niveles_ala={0.105: 24, 0.205: 24, 0.21: 24, 0.31: 24} zona_vacia=[] lat_ext022=24 lat_int004=72
+   niveles_x=[-0.22, -0.19, -0.13, -0.11, -0.09, -0.05, -0.03, 0.01, 0.03, 0.06, 0.09, 0.11, 0.1925, 0.22, 0.2275, 0.24]
+   niveles_alt=[0.045, 0.085, 0.105, 0.155, 0.185, 0.205, 0.21, 0.215, 0.2175, 0.225, 0.2525, 0.265, 0.305, 0.31]
+   niveles_lat=[-0.22, -0.18, -0.08, -0.075, -0.067, -0.06, -0.057, -0.055, -0.05, -0.04, -0.02, 0.02, 0.04, 0.05, 0.055, 0.06, 0.075, 0.08, 0.18, 0.22]
+   ALAS:
+     SM_Mariposa_Ala_L_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaL'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[0.04, 0.22]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[0.04, 0.18, 0.22]
+     SM_Mariposa_Ala_R_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaR'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[-0.22, -0.04]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[-0.22, -0.18, -0.04]
+   CONTACTO ala-cuerpo (vertices BIN)={'SM_Mariposa_Ala_L_NOFUNDIR': 18, 'SM_Mariposa_Ala_R_NOFUNDIR': 18}
+   materiales=['MAT_Mariposa_AlaL', 'MAT_Mariposa_AlaR', 'MAT_Mariposa_Antena', 'MAT_Mariposa_Cuerpo', 'MAT_Mariposa_Mancha', 'MAT_Mariposa_Ojo', 'MAT_Mariposa_Roca']
+   colores={'MAT_Mariposa_Ojo': [0.08, 0.08, 0.1], 'MAT_Mariposa_Antena': [0.96, 0.94, 0.86], 'MAT_Mariposa_Mancha': [0.98, 0.88, 0.4], 'MAT_Mariposa_Roca': [0.52, 0.5, 0.47], 'MAT_Mariposa_Cuerpo': [0.2, 0.18, 0.34], 'MAT_Mariposa_AlaL': [0.42, 0.32, 0.72], 'MAT_Mariposa_AlaR': [0.3, 0.46, 0.78]}
+baja  tris=120  mats=4 mallas=4 nodos=4 verts=240  x=[-0.2200..0.2200] alt=[0.0450..0.3100] lat=[-0.2200..0.2200] apoyo=12
+   escalones={0.155: 12, 0.225: 12, 0.265: 12} niveles_ala={0.105: 24, 0.205: 24, 0.21: 24, 0.31: 24} zona_vacia=[] lat_ext022=24 lat_int004=48
+   niveles_x=[-0.22, -0.19, -0.13, -0.11, -0.09, 0.01, 0.03, 0.06, 0.09, 0.22]
+   niveles_alt=[0.045, 0.085, 0.105, 0.155, 0.205, 0.21, 0.225, 0.265, 0.31]
+   niveles_lat=[-0.22, -0.18, -0.08, -0.06, -0.05, -0.04, 0.04, 0.05, 0.06, 0.08, 0.18, 0.22]
+   ALAS:
+     SM_Mariposa_Ala_L_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaL'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[0.04, 0.22]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[0.04, 0.18, 0.22]
+     SM_Mariposa_Ala_R_NOFUNDIR             verts=48  mats=['MAT_Mariposa_AlaR'] x=[-0.11, 0.03] alt=[0.105, 0.31] lat=[-0.22, -0.04]
+       niveles_alt=[0.105, 0.205, 0.21, 0.31] niveles_lat=[-0.22, -0.18, -0.04]
+   CONTACTO ala-cuerpo (vertices BIN)={'SM_Mariposa_Ala_L_NOFUNDIR': 18, 'SM_Mariposa_Ala_R_NOFUNDIR': 18}
+   materiales=['MAT_Mariposa_AlaL', 'MAT_Mariposa_AlaR', 'MAT_Mariposa_Cuerpo', 'MAT_Mariposa_Roca']
+   colores={'MAT_Mariposa_Roca': [0.52, 0.5, 0.47], 'MAT_Mariposa_Cuerpo': [0.2, 0.18, 0.34], 'MAT_Mariposa_AlaL': [0.42, 0.32, 0.72], 'MAT_Mariposa_AlaR': [0.3, 0.46, 0.78]}
+PROBE_JSON D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\Temp\hy4_mariposa_glb_probe_20261113.json

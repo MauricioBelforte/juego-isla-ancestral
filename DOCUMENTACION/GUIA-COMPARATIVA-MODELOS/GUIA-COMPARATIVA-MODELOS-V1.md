@@ -195,7 +195,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 ## Modelo activo — Crouton Alpha (supervisado)
 
-### Crouton Alpha — Sub-agente de bajo costo, alto volumen (escanéo estático, logs, tool calling)
+### Crouton Alpha — Sub-agente de bajo costo, alto volumen (RETIRADO — ya no disponible gratuitamente)
 
 | Campo | Valor |
 |-------|-------|
@@ -206,34 +206,20 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 | Modalidades de entrada | Texto, imagen, video, archivo (PDF), audio → salida solo texto |
 | Razonamiento | Siempre ON, 6 niveles (default `max`) |
 | Tool calling | Soportado (`tool_choice: auto` solo); structured outputs (JSON schema) |
-| Precio | $0 input / $0 output (preview, puede retirarse sin aviso) |
+| Precio | $0 input / $0 output (preview, retirada) |
 | Proveedor | Anónimo (terceros, no revelado) |
 | Data | Prompts/completions pueden ser retenidos por el proveedor, no usados para entrenamiento |
 | Liberado | 2026-11-03 |
-| Estado | **Activo formal — supervisado por Nemotron-3.5-Super-VL** |
+| Estado | **Retirado — ya no disponible gratuitamente** |
 
-**Fortalezas (observadas empíricamente, 28 reportes escritos):**
-- Escaneo estático masivo de archivos `.gd` (auditó 114 archivos en una sola pasada; encontró 23 problemas con archivo:línea exactos)
-- Análisis de logs de rendimiento (fuga de RAM, flush por línea, ausencia de rotación de logs)
-- Detección de `mouse_filter`/`CanvasLayer` en escenas UI (13 problemas)
-- Validación de 833 `.import`, 69 `.tscn`, 479 `.tres`, 1586 scripts `.gd`: 0 referencias rotas a assets reales del juego
-- Auditoría de escenas y recursos `.tscn`/`.tres`: 53 escenas, 81 dependencias externas, todas válidas; 0 rutas rotas; 0 nodos huérfanos; 0 ciclos de instanciación
-- Manejo de errores en GDScript: paradigma fail-soft, 100+ `push_error`, 0 `try/catch` real; 102 archivos con I/O sin manejo
+**Historial de trabajo completado:**
+- 28 reportes entregados en scripts/core/, scripts/ui/, scripts/npc/, scripts/ia_npc/, scripts/inventario/, scripts/coleccionables/, scripts/logging/
+- 114 archivos .gd escaneados en una sola pasada, 23 problemas verificados (2 imports sin usar, 7 parámetros sin usar, 11 funciones vacías, 3 vars miembro sin usar), 88% código limpio
+- 13 problemas UI detectados (mouse_filter, CanvasLayer, debug_menu)
+- 100 archivos .gd analizados, 88% código limpio
+- 0 referencias rotas en 833 archivos .import, 69 .tscn, 479 .tres, 1586 .gd
 
-**Debilidades (observadas empíricamente):** no es un modelo de razonamiento profundo (no diseña arquitectura), puede pasar por alto problemas de lógica compleja que requieran contexto cruzado entre múltiples archivos, reasoning siempre ON lo hace más lento para tareas simples, un incidente de reporte faltante (audio detallado no escrito una sesión).
-
-**Regla de asignación:** tareas repetitivas de bajo costo y alto volumen: escaneo de código, análisis de logs, tool calling, documentación, verificación de assets/rutas, cleanup de vars/imports/funciones sin usar, auditoría de escenas y recursos. NO asignar: diseño de arquitectura, debugging complejo, refactors que requieran entender múltiples sistemas a la vez (usar Glyph Cluster).
-
-**Método de trabajo:** lotes → suite con binario real → piso CHECKS_MINIMOS medido → sonda rojo demostrada → `[x]` solo con suite en verde.
-
-**Pruebas empíricas (Isla Ancestral, 2026-11-07 a 2026-11-09):**
-- Escaneó 114 archivos `.gd` en `scripts/core/` y `scripts/ui/` en una sola pasada; encontró 23 problemas (2 imports sin usar, 7 parámetros sin usar, 11 funciones vacías, 3 vars miembro sin usar) con archivo:línea exactos. 88% código limpio.
-- Detectó correctamente que `event_bus.gd` y `softlock_rules.gd` son APIs públicas verificadas (no código muerto), sin falsos positivos.
-- Analizó logs de rendimiento: identificó fuga de RAM por lecturas completas en memoria, flush por línea, ausencia de rotación de logs. Propuso 2 mejoras con código específico.
-- Revisó 13 escenas UI: encontró 13 problemas de `mouse_filter`, colisión de capas (HUD vs UIRoot), `RelojWidget` sin filtro.
-- Verificó 833 archivos `.import`, 69 escenas `.tscn`, 479 archivos `.tres`, 1586 scripts `.gd`: 0 referencias rotas a assets reales del juego.
-- Auditó 53 escenas `.tscn` y 479 archivos `.tres`: 0 rutas rotas, 0 nodos huérfanos, 0 ciclos de instanciación, 634 `class_name` cubriendo todos los `script_class` usados.
-- Auditó manejo de errores en ~1.260 archivos `.gd`: 100+ `push_error`, 0 `try/catch` real, 78 `push_warning` sin acción, paradigma fail-soft.
+**Estado final:** Retirado del flujo activo el 2026-11-12. No se le asignan nuevas tareas.
 
 ---
 
