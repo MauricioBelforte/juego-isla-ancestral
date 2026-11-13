@@ -57,22 +57,47 @@
 #   modulo ni se toca el exportador.
 #
 # ===========================================================================
-# COTAS (DECISION DE AUTORIA)
+# COTAS (DECISION DE AUTORIA) - REVISADAS TRAS HALLAZGO VISUAL B26
 # ===========================================================================
 #   1 voxel = 1.00 m · Z_APOYO = 0.045 (E-12, arena top 0.05 / E-67).
 #   RODELA .................. 3 franjas 0.44 x 0.10 x 0.04, 12 vertices
 #      apoyados, huella 0.44 x 0.36. Una mariposa suelta tendria ~0.20x0.10
 #      y FALLARIA E-50 (min_fp=0.30, min_toca=8 DEFAULT, NO relajado).
-#   CUERPO .................. 3 cajas escalonadas DELGADAS (sy=0.10/0.12).
+#   CUERPO .................. 3 cajas escalonadas DELGADAS (sy=0.10/0.12),
+#      z 0.085..0.265, |y| <= 0.06.
 #   ALAS (2 objetos) ........ `SM_Mariposa_Ala_L/R_NOFUNDIR`, 2 cajas cada
-#      una (superior + inferior), en y=+-0.15/0.16. PIEZAS SEPARADAS con
-#      materiales `AlaL`/`AlaR` DISTINTOS -> jamas se fusionan.
+#      una (superior + inferior). PANELES VERTICALES en el plano Y-Z con
+#      grosor sx=0.02, borde INTERIOR |y|=0.04 (DENTRO del cuerpo) y
+#      borde EXTERIOR |y|=0.22. Superior z=0.21..0.31, inferior
+#      z=0.105..0.205. PIEZAS SEPARADAS con materiales `AlaL`/`AlaR`
+#      DISTINTOS -> jamas se fusionan en ningun LOD.
 #   DETALLES (6) ............ 2 ojos + 2 antenas + 2 manchas, TODOS
-#      podables en BAJA por volumen_bbox < 1e-4.
-#   ZONA VACIA (0.27,0.28) .. 0 niveles: solo hay vertices en 0.265 y
-#      0.29. Anti-cunia para la guardia. Y_CIMA = 0.31 (ala superior).
+#      podables en BAJA por volumen_bbox < 1e-4 y TODOS solapando el
+#      cuerpo (sin piezas flotantes de detalle).
+#   ZONA VACIA (0.27,0.28) .. 0 niveles: los vecinos son 0.265 (techo del
+#      cuerpo / base de antenas) y 0.305/0.31 (antenas / alas). Anti-cunia
+#      para la guardia. Y_CIMA = 0.31 (ala superior).
 #   1 MATERIAL POR CRITICA => en BAJA quedan EXACTAMENTE 4 materiales.
 #   GEOMETRIA AXIS-ALIGNED .. guardia POSITIVA por NIVELES DE COORDENADA.
+#
+# ---------------------------------------------------------------------------
+# HALLAZGO REAL DE LA REVISION VISUAL DE AUTORIA (B26, 2026-11-13)
+# ---------------------------------------------------------------------------
+# La PRIMERA version (absorbida por el fundador en bfcd568) ponia las alas
+#   como PLACAS HORIZONTALES en z=0.29..0.31 y |y|=0.10..0.22, con el
+#   cuerpo hasta |y|=0.06 y z=0.265. Resultado MEDIDO en las hojas de
+#   contacto: las alas FLOTABAN 4 cm en Y y 2.5 cm en Z, visibles como
+#   barras sueltas sobre el cuerpo en az000/az180. chk_asset.py daba OK
+#   (mide COSTE, no FORMA) y la sonda geometrica daba 0 defectos (todas
+#   las caras seguian siendo axis-aligned): NINGUNO de los dos detecta una
+#   pieza DESCONECTADA. Misma familia del hallazgo de B23 (cresta flotante),
+#   y exige una guardia POSITIVA DE CONTACTO, no solo de plano.
+# Correccion: alas como PANELES VERTICALES anclados en |y|=0.04, con
+#   interseccion AABB REAL contra al menos una caja del cuerpo en los 3
+#   ejes. Se añade `alas_apoyadas()` y el check C18 en la guardia sobre el
+#   BIN del GLB. Regeneracion completa de 3 .blend + 18 PNG + 3 hojas.
+#   NO es QA ni sello: es revision de AUTORIA.
+# ---------------------------------------------------------------------------
 #
 # ===========================================================================
 # PRESUPUESTO M166 Y DISENO DE LOS 3 LOD (A VERIFICAR, NO HEREDADO)
@@ -141,21 +166,23 @@ CUERPO = (
     ( 0.14, 0.0, 0.175, 0.16, 0.12, 0.18),   # cabeza   0.085..0.265
 )
 
-# ALAS: 2 cajas por lado. Superior e inferior, SIMPLES y SEPARADAS.
+# ALAS: 2 cajas por lado, PANELES VERTICALES en el plano Y-Z.
 # (x, y, z, sx, sy, sz). y>0 = Ala_R (azul), y<0 = Ala_L (violeta).
-ALA_SUP = (0.02, 0.16, 0.300, 0.18, 0.12, 0.02)   # z 0.29..0.31
-ALA_INF = (-0.10, 0.15, 0.250, 0.14, 0.10, 0.02)  # z 0.24..0.26
+# El borde INTERIOR |y|=0.04 queda DENTRO del cuerpo (|y|<=0.06): las
+# alas estan UNIDAS, no flotan (hallazgo visual B26).
+ALA_SUP = (0.02, 0.13, 0.260, 0.02, 0.18, 0.10)   # y 0.04..0.22 z 0.21..0.31
+ALA_INF = (-0.10, 0.11, 0.155, 0.02, 0.14, 0.10)  # y 0.04..0.18 z 0.105..0.205
 
 # DETALLES (6), TODOS podables en BAJA por volumen_bbox < UMBRAL_PODA.
 OJO_SX, OJO_SY, OJO_SZ = 0.035, 0.02, 0.035    # 2.45e-5 m3
 OJO_X, OJO_Z = 0.210, 0.235                     # 0.2175..0.2525
-OJO_YS = (-0.075, 0.075)   # sobresalen de la cabeza (+-0.06)
+OJO_YS = (-0.065, 0.065)   # solapan la cabeza (+-0.06), no flotan
 ANT_SX, ANT_SY, ANT_SZ = 0.02, 0.02, 0.04       # 1.6e-5 m3
 ANT_X, ANT_Z = 0.230, 0.285                     # 0.265..0.305
 ANT_YS = (-0.03, 0.03)
 MAN_SX, MAN_SY, MAN_SZ = 0.02, 0.01, 0.03       # 6e-6 m3
 MAN_XS = (-0.04, 0.10)
-MAN_Y, MAN_Z = 0.065, 0.200                     # 0.185..0.215
+MAN_Y, MAN_Z = 0.062, 0.200                     # 0.185..0.215, solapa el cuerpo
 
 Y_CIMA = 0.31
 VACIA_LO, VACIA_HI = 0.27, 0.28   # zona anti-cunia: 0 niveles autorizados
@@ -166,8 +193,11 @@ assert abs(Y_CIMA - 0.31) < 1e-9, 'cota superior incoherente'
 assert AR_SX > 0.30 and (AR_YS[-1] + AR_SY / 2.0) * 2.0 > 0.30, \
     'la rodela no satisface E-50 (min_fp=0.30)'
 assert len(AR_YS) * 4 >= 8, 'la rodela no aporta 8 vertices de apoyo'
-assert 0.265 < VACIA_LO < VACIA_HI < 0.29, \
-    'la zona vacia no queda entre el lomo y el ala superior'
+assert 0.265 < VACIA_LO < VACIA_HI < 0.305, \
+    'la zona vacia no queda entre el techo del cuerpo y las antenas'
+assert abs(ALA_SUP[1] - ALA_SUP[4] / 2.0 - 0.04) < 1e-9 and \
+       abs(ALA_INF[1] - ALA_INF[4] / 2.0 - 0.04) < 1e-9, \
+    'borde interior de las alas NO anclado en |y|=0.04'
 for _s, _v in (('ojo', OJO_SX * OJO_SY * OJO_SZ),
                ('antena', ANT_SX * ANT_SY * ANT_SZ),
                ('mancha', MAN_SX * MAN_SY * MAN_SZ)):
@@ -185,6 +215,52 @@ def vertices(o):
 
 def niveles_z(objetos):
     return sorted({round(w.z, 4) for o in objetos for w in vertices(o)})
+
+
+def aabb(o):
+    """AABB de mundo sobre VERTICES reales (E-24)."""
+    vs = vertices(o)
+    return tuple((min(w[i] for w in vs), max(w[i] for w in vs))
+                 for i in range(3))
+
+
+def solapan(a, b, tol=1e-9):
+    """Interseccion con VOLUMEN positivo en los 3 ejes (no solo arista)."""
+    return all(max(a[i][0], b[i][0]) + tol < min(a[i][1], b[i][1])
+               for i in range(3))
+
+
+def cajas_cuerpo(delta_z):
+    """AABB de las 3 cajas del cuerpo, desde la constante CUERPO."""
+    out = []
+    for x, y, z, sx, sy, sz in CUERPO:
+        out.append(((x - sx / 2.0, x + sx / 2.0),
+                    (y - sy / 2.0, y + sy / 2.0),
+                    (z - sz / 2.0 + delta_z, z + sz / 2.0 + delta_z)))
+    return out
+
+
+def paneles_ala(signo, delta_z):
+    """AABB de los 2 PANELES de un ala (NO el AABB global de su union).
+
+    El AABB global de las 2 cajas unidas es demasiado permisivo: podria dar
+    verde aunque un panel estuviera desconectado. Se exige contacto POR PANEL.
+    """
+    out = []
+    for x, y, z, sx, sy, sz in (ALA_SUP, ALA_INF):
+        yy = y * signo
+        out.append(((x - sx / 2.0, x + sx / 2.0),
+                    (yy - sy / 2.0, yy + sy / 2.0),
+                    (z - sz / 2.0 + delta_z, z + sz / 2.0 + delta_z)))
+    return out
+
+
+def dentro(w, caja, tol=1e-4):
+    # tol=1e-4: los vertices de Blender son float32 y los AABB se calculan
+    # en float64; con 1e-9 un vertice en -0.04 quedaba FUERA de su propia
+    # caja por redondeo (falso rojo medido en B26). 0.1 mm << 1 voxel.
+    return all(caja[i][0] - tol <= w[i] <= caja[i][1] + tol
+               for i in range(3))
 
 
 def unir(nombre_activo, objetos):
@@ -338,20 +414,52 @@ def construir():
 
     # --- Guardia POSITIVA de silueta de mariposa ---
     vc = vertices(cuerpo)
+    delta_z = z_fin - Z
     for _tope in (0.155, 0.225, 0.265):
-        assert any(abs(w.z - _tope) < 1e-4 for w in vc), \
+        assert any(abs(w.z - (_tope + delta_z)) < 1e-4 for w in vc), \
             'falta el escalon del cuerpo en z=%.3f' % _tope
     vl, vr = vertices(ala_l), vertices(ala_r)
-    assert any(abs(w.z - Y_CIMA) < 1e-4 for w in vl + vr), \
+    assert any(abs(w.z - (Y_CIMA + delta_z)) < 1e-4 for w in vl + vr), \
         'falta el tope del ala superior'
     assert any(abs(w.y + 0.22) < 1e-4 for w in vl), \
         'falta el borde exterior del ala L en y=-0.22'
     assert any(abs(w.y - 0.22) < 1e-4 for w in vr), \
         'falta el borde exterior del ala R en y=+0.22'
-    assert any(abs(w.z - 0.24) < 1e-4 for w in vl + vr), \
-        'falta el ala inferior (z=0.24)'
-    print('ENSAMBLE rodela->cuerpo(3 escalones)->2 ALAS(2 cajas c/u) '
-          '->6 detalles OK | y=+-0.22 | z=[0.24,0.31]')
+    for _nivel in (0.105, 0.205, 0.21, 0.31):
+        assert any(abs(w.z - (_nivel + delta_z)) < 1e-4 for w in vl + vr), \
+            'falta el nivel de ala z=%.3f' % _nivel
+
+    # --- Guardia POSITIVA de CONTACTO (hallazgo visual B26) ---
+    # chk_asset.py mide COSTE y la sonda mide PLANOS: NINGUNO detecta una
+    # pieza DESCONECTADA. Esto exige interseccion AABB con VOLUMEN positivo
+    # contra alguna de las 3 cajas REALES del cuerpo.
+    cajas = cajas_cuerpo(delta_z)
+    contactos = {}
+    for _lado, _signo, _ala in (('L', -1, ala_l), ('R', 1, ala_r)):
+        _vs = vertices(_ala)
+        _hits = []
+        for _p in paneles_ala(_signo, delta_z):
+            _hit = [i for i, c in enumerate(cajas) if solapan(_p, c)]
+            assert _hit, \
+                'ALA %s FLOTANTE: panel %s no toca ninguna caja del cuerpo' \
+                % (_lado, _p)
+            # Vertices REALES del .blend dentro de ESE panel y de alguna
+            # caja del cuerpo: el contacto no es solo algebraico.
+            n = sum(1 for w in _vs if dentro(w, _p)
+                    and any(dentro(w, c) for c in cajas))
+            assert n >= 1, \
+                'ALA %s: panel %s sin vertices reales dentro del cuerpo' \
+                % (_lado, _p)
+            _hits.append((_hit, n))
+        contactos[_lado] = _hits
+    yc = aabb(cuerpo)[1]
+    assert yc[0] < -0.04 and yc[1] > 0.04, \
+        'el borde interior |y|=0.04 no queda dentro del cuerpo'
+    print('ALAS APOYADAS L=%s R=%s | borde interior |y|=0.04 dentro del '
+          'cuerpo y=[%.3f..%.3f]'
+          % (contactos['L'], contactos['R'], yc[0], yc[1]))
+    print('ENSAMBLE rodela->cuerpo(3 escalones)->2 ALAS(2 paneles c/u) '
+          '->6 detalles OK | y=+-0.22 | z=[0.105,0.31]')
 
     camara(escena, 'CAM_Mariposa_Lunar', (1.45, -1.60, 0.90),
            (0.0, 0.0, 0.19))
