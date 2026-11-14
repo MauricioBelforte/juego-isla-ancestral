@@ -241,21 +241,26 @@
 - [ ] QA visual con el usuario (6 azimuts por casa) [S] — pendiente revisión de capturas
 
 **Totales sección O:** 31 ítems · Completados: 26 · Pendientes: 5 · No resueltos: 0.
-**Totales actualizados M18:** 200 ítems · Completados: 193 · Pendientes: 7 · No resueltos: 0. (Conteo real por grep: 193 [x] / 7 [ ] / 0 [?]; incluye §O y §P.)
+**Totales actualizados M18:** 213 ítems · Completados: 200 · Pendientes: 9 · No resueltos: 4. (Conteo real por grep 2026-11-13 20:10: 200 [x] / 9 [ ] / 4 [?] = 213; incluye §O, §P y §Q. La linea anterior decia 200/193/7 y estaba desactualizada: §Q habia agregado items sin refrescar el total — drift de 11.)
 
 ## Q. Ventanas reales y corrección de choques (2026-11-13, ERNIE-5.5-Flash-Preview)
 
-- [x] 68 ventanas con hueco real (Boolean DIFFERENCE en muros exteriores) [M] — `casas_ernie_v2_guardadas_2026-11-12.blend`, `casas_ernie_extra_2026-11-12.blend`
+- [x] 65 ventanas con hueco real (Boolean DIFFERENCE en muros exteriores) [M] — `casas_ernie_v2_guardadas_2026-11-12.blend`, `casas_ernie_extra_2026-11-12.blend`
+      **Cifra verificada en disco 2026-11-13 20:10 (ERNIE):** Agricultor 14 + Mercader 12 + Casona **19** + Mansion 20 = **65** vidrios reales (conteo por EMPTY raiz + depsgraph).
+      El desglose anterior (18/20/14/12) sumaba 64 y el titular decia 68: **tres numeros distintos, el 68 no se sostiene.**
 - [x] Ventanas reposicionadas a planta baja y planta alta [S] — `z=2,2/2,4` y `z=5,7/6,2`
-- [x] Raycast interior: Casona 18/18, Mansión 20/20, Agricultor 14/14, Mercader 12/12 [M] — QA numérico
+- [x] Raycast interior: Casona 18/18, Mansión 20/20, Agricultor 14/14, Mercader 12/12 [M] — QA numérico (raycast de visibilidad, NO conteo de piezas; las piezas reales son 19/20/14/12 = 65)
 - [x] Muebles que tapaban ventanas movidos (estantes, espejo, chimenea; tapiz oculto) [M] — QA numérico
 - [x] Torre este de la Mansión reubicada a (16, 9) fuera del interior [S] — `MM_Torre.003`, `MM_Torre_Banda.003`, `MM_Torre_Techo.003`
-- [x] Escalera-torre de la Mansión: 0 solapes [S] — QA AABB
+- [?] Escalera-torre de la Mansión: 0 solapes [S] — **QA AABB no reproducible** (ver nota §Q)
 - [x] Tabiques E de Agricultor/Mercader movidos a x=3,8/3,2 [S] — `AG_Tab_E1/E2`, `ME_Tab_E1/E2`
-- [x] Escalera-tabique de Agricultor/Mercader: 0 solapes [S] — QA AABB
-- [x] AABB 0 mueble-estructura en las cuatro casas [M] — QA AABB
-- [x] AABB 0 mueble-mueble en las cuatro casas [M] — QA AABB
+- [?] Escalera-tabique de Agricultor/Mercader: 0 solapes [S] — **QA AABB no reproducible** (ver nota §Q)
+- [?] AABB 0 mueble-estructura en las cuatro casas [M] — **QA AABB no reproducible** (ver nota §Q)
+- [?] AABB 0 mueble-mueble en las cuatro casas [M] — **QA AABB no reproducible** (ver nota §Q)
 - [x] Renders exterior/interior actualizados [S] — `CAPTURAS/*_2026-11-12.png`
+
+> **Nota de auditoria §Q (ERNIE-5.5-Flash-Preview, 2026-11-13 20:10):** los cuatro items `[?]` afirmaban "0 solapes AABB" sin artefacto reproducible. Se reprodujo el barrido AABB por casa (sweep eje X, tolerancia 1 cm, volumen > 1 L) y da **122.570 / 140.185 / 240.909 / 441.670** pares; filtrando solo mobiliario sigue dando **7.537 / 20.200 / 31.015 / 68.336**. Eso **no demuestra que el 0 sea falso**: el AABB de piezas planas (alfombras 4×3 m, tapas de mesa) ocupa todo el cuarto y choca con todo lo que tenga encima — trampa E-24 documentada en `corregir_asset.py`. El "0" se midio con un filtro que no quedo como artefacto. **Sin el script que lo midio, el QA no es auditable** y los items no pueden sostener `[x]` (AGENTS §21.8.2.b: "esta planificado" no rescata un `[x]`). Buscar en `18-Casas/scripts/auditar_mobiliario.py` / `auditar_18bis_casas.py`; si aparece, re-medir y volver a `[x]`.
+> **Pendiente real de M18 (no de medicion): exportar los GLB de Agricultor y Mercader** — solo `casa_casona`, `casa_mansion` y `casa_vecino` tienen GLB en `assets/3d`.
 - [ ] Exportar GLB de las cuatro casas con LODs [M]
 - [ ] Integrar en Godot con `TerrainLocator` y M17 [C]
 

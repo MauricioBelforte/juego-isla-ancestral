@@ -1,0 +1,201 @@
+{
+  "alta": {
+    "alt": [
+      0.045,
+      3.0
+    ],
+    "apoyo_pares": 16,
+    "apoyo_verts": 48,
+    "banda_espuria": [],
+    "bytes": 38248,
+    "caras_abaco": 4,
+    "caras_equino": 64,
+    "caras_remate": 4,
+    "huella_apoyo": [
+      1.0,
+      1.0
+    ],
+    "lat": [
+      -0.5,
+      0.514
+    ],
+    "mallas": 13,
+    "materiales": [
+      "MAT_ColEnt_Musgo",
+      "MAT_ColEnt_Piedra",
+      "MAT_ColEnt_PiedraOsc",
+      "MAT_ColEnt_Tallado"
+    ],
+    "mats": 4,
+    "niveles_alt": [
+      0.045,
+      0.0775,
+      0.1525,
+      0.18,
+      0.185,
+      0.198,
+      0.345,
+      0.395,
+      2.4,
+      2.48,
+      2.54,
+      2.62,
+      2.78,
+      2.92,
+      3.0
+    ],
+    "nodos": 13,
+    "nodos_sm": [
+      "SM_ColEnt_Abaco_NOFUNDIR",
+      "SM_ColEnt_Basa",
+      "SM_ColEnt_Collar",
+      "SM_ColEnt_Equino",
+      "SM_ColEnt_Fuste",
+      "SM_ColEnt_Glifo_1",
+      "SM_ColEnt_Glifo_2",
+      "SM_ColEnt_Glifo_3",
+      "SM_ColEnt_Glifo_4",
+      "SM_ColEnt_Musgo_1",
+      "SM_ColEnt_Musgo_2",
+      "SM_ColEnt_Plinto_NOFUNDIR",
+      "SM_ColEnt_Remate"
+    ],
+    "sha": "160a839654ed",
+    "triangulos": 492,
+    "tris": 492,
+    "verts": 890,
+    "verts_media_losa": 0,
+    "x": [
+      -0.5,
+      0.5
+    ]
+  },
+  "baja": {
+    "alt": [
+      0.045,
+      3.0
+    ],
+    "apoyo_pares": 16,
+    "apoyo_verts": 48,
+    "banda_espuria": [],
+    "bytes": 23392,
+    "caras_abaco": 4,
+    "caras_equino": 64,
+    "caras_remate": 4,
+    "huella_apoyo": [
+      1.0,
+      1.0
+    ],
+    "lat": [
+      -0.5,
+      0.514
+    ],
+    "mallas": 5,
+    "materiales": [
+      "MAT_ColEnt_Musgo",
+      "MAT_ColEnt_Piedra",
+      "MAT_ColEnt_PiedraOsc",
+      "MAT_ColEnt_Tallado"
+    ],
+    "mats": 4,
+    "niveles_alt": [
+      0.045,
+      0.0775,
+      0.1525,
+      0.18,
+      0.185,
+      0.186,
+      0.192,
+      0.198,
+      0.345,
+      0.394,
+      0.395,
+      2.48,
+      2.54,
+      2.62,
+      2.78,
+      2.92,
+      3.0
+    ],
+    "nodos": 5,
+    "nodos_sm": [
+      "SM_ColEnt_Abaco_NOFUNDIR",
+      "SM_ColEnt_M_ColEnt_Musgo",
+      "SM_ColEnt_M_ColEnt_Piedra",
+      "SM_ColEnt_M_ColEnt_Tallado",
+      "SM_ColEnt_Plinto_NOFUNDIR"
+    ],
+    "sha": "32d475ed4c23",
+    "triangulos": 348,
+    "tris": 348,
+    "verts": 667,
+    "verts_media_losa": 0,
+    "x": [
+      -0.5,
+      0.5
+    ]
+  },
+  "media": {
+    "alt": [
+      0.045,
+      3.0
+    ],
+    "apoyo_pares": 16,
+    "apoyo_verts": 48,
+    "banda_espuria": [],
+    "bytes": 29596,
+    "caras_abaco": 4,
+    "caras_equino": 64,
+    "caras_remate": 4,
+    "huella_apoyo": [
+      1.0,
+      1.0
+    ],
+    "lat": [
+      -0.5,
+      0.514
+    ],
+    "mallas": 5,
+    "materiales": [
+      "MAT_ColEnt_Musgo",
+      "MAT_ColEnt_Piedra",
+      "MAT_ColEnt_PiedraOsc",
+      "MAT_ColEnt_Tallado"
+    ],
+    "mats": 4,
+    "niveles_alt": [
+      0.045,
+      0.0775,
+      0.1525,
+      0.18,
+      0.185,
+      0.198,
+      0.345,
+      0.395,
+      2.4,
+      2.48,
+      2.54,
+      2.62,
+      2.78,
+      2.92,
+      3.0
+    ],
+    "nodos": 5,
+    "nodos_sm": [
+      "SM_ColEnt_Abaco_NOFUNDIR",
+      "SM_ColEnt_M_ColEnt_Musgo",
+      "SM_ColEnt_M_ColEnt_Piedra",
+      "SM_ColEnt_M_ColEnt_Tallado",
+      "SM_ColEnt_Plinto_NOFUNDIR"
+    ],
+    "sha": "b313ced9f3bc",
+    "triangulos": 492,
+    "tris": 492,
+    "verts": 890,
+    "verts_media_losa": 0,
+    "x": [
+      -0.5,
+      0.5
+    ]
+  }
+}

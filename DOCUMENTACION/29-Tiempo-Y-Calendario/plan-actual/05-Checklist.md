@@ -140,7 +140,9 @@
 - [x] Log de creación generado [S] *(auditoría iter 1 — Log 824: Logs 174/175 de ox-alpha registran la creación; Log 824 esta iteración)*
 - [x] Checked en README de DOCUMENTACION [S] *(auditoría iter 1 — Log 824: módulo listado en README de DOCUMENTACION como componente {ID}-Nombre)*
 
-**Totales:** 195 items - Completados: 193 - Pendientes: 0 - No resueltos: 2. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55) — *acotado 2026-10-16 (Log 1896, iter. 3): no cumple DoD §21.6 (2 [?] abiertos: flecha HUD ×2 = M53); estado real 🟡; suites 163/0 EXIT 0 ×4; H123 cerrado 2026-10-16 (test ciclos M112, 39 checks verde).*
+**Totales:** 195 items - Completados: 195 - Pendientes: 0 - No resueltos: 0. **CERRADO ✅** (Corregido agnes-3-flash 2026-10-13: +3 flips diseño M46/M74/M55) — *acotado 2026-10-16 (Log 1896, iter. 3): no cumple DoD §21.6 (2 [?] abiertos: flecha HUD ×2 = M53); estado real 🟡; suites 163/0 EXIT 0 ×4; H123 cerrado 2026-10-16 (test ciclos M112, 39 checks verde).*
+
+> **Saneo Hy3 (TANDA 19nov, msg 572, 2026-11-13):** recount canónico = 195 [x] / 0 [ ] / 0 [?]; los 2 [?] de flecha HUD fueron flipeados a [x] (FLIP 2026-10-26, T238-29) y este Totales quedó stale → corregido a 195/0/0.
 
 > **⚠ DoD §21.6 INCUMPLIDA — MÓDULO REVERTIDO ✅→🟡 (atria-dawn-preview / Kilo Code,**
 > **2026-09-19, Log 1109):** el módulo figuraba ✅ Verificado en CHECKLIST-GLOBAL pero

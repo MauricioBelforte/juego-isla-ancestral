@@ -321,7 +321,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 | Plataforma | Stealth/Baidu (Kilo Code / OpenRouter / Qianfan) |
 | Tipo | Razonamiento de largo horizonte (TEMPO), análisis multimodal, modelado 3D, conocimiento profundo |
 | Contexto | 1,048,576 tokens (entrada) / hasta 921,600 (salida) |
-| Modalidades de entrada | Texto, imagen, video, audio → texto |
+| Modalidades de entrada | Texto, imagen, video, audio → texto (según ficha del proveedor) |
 | Razonamiento | Sí, TEMPO (test-time-scaled reasoning para largo horizonte) |
 | Tool calling | Sí (funciones definidas por el usuario) |
 | Structured outputs | Sí (JSON schema) |
@@ -329,7 +329,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 | Proveedor | Baidu |
 | Data | Prompts y respuestas pueden ser retenidos por el proveedor |
 | Liberado | 2026-11-11 |
-| Estado | En prueba — supervisado por Nemotron-3.5-Super-VL |
+| Estado | **En flota (2026-11-13)** — nicho: 3D Blender (medición/creación de assets) + análisis de assets por binario + saneamiento de documentación. Reporta a agnes-3-flash. |
 
 **Benchmark público (Baidu, 2026-11-11):** Terminal-Bench 4.0 46.5%, DeepSWE v1.1 71.2%, AutomationBench 61.9%, APEX-Agents 1.1 64.2%, DRACO 84.9%, SpreadsheetBench V2 36.4%, OfficeQA Pro V2 67.9%. Benchmarks de terceros: Terminal-Bench-Science 21.0, NL2Repo-Bench 64.8, Toolathlon-Verified 79.0, MCP-Atlas 84.6, BrowseComp 87.4, HLE sin tools 46.4, BlenderWorld text-only 79.0.
 
@@ -350,13 +350,24 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Método de trabajo:** análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica. Para tareas de largo horizonte: descomponer en macro-steps con auto-evaluación entre cada paso.
 
+### Verificado en ejecución (2026-11-13, ingreso a la flota)
+
+**⚠️ Limitación dura confirmada:** el harness que ejecuta a ERNIE **no le pasa imágenes** — al abrir un render devuelve `Cannot read image (this model does not support image input)`. La ficha del proveedor declara multimodal, pero el canal de imagen no llega. Consecuencia: **no firma QA visual, no juzga estética, no lee PNG.** Entrega medición numérica y listado de sospechosos; la validación visual la firma un modelo con visión.
+
+**Capacidades verificadas (no solo de ficha):**
+- Parseo binario de GLB (chunk JSON + BIN) con bbox en **espacio mundo** aplicando matrices de nodo (TRS/`matrix`). Sin esto el bbox sale hasta 25× más grande: los assets usan `scale`/`translation` por nodo.
+- Verificación de normales unitarias, `z_min`/`z_max`, alto/ancho/fondo por asset.
+- Apertura de `.blend` ajenos en Blender vía `bpy.data.libraries.load` + depsgraph (sin pisar la sesión del usuario).
+- Auditoría de los **490 GLB** de `game/isla-ancestral/assets/3d/` (184 alta / 154 media / 152 baja): **0/490 fuera de escala** (0,208–16,3 m), **0/490 con normales no unitarias**, **442/490 (90,2 %)** dentro de `Z_APOYO = 0,045 ±0,020`.
+- Hallazgo propio: 5 assets se apoyan mal contra `get_height()` — `perla_ancestral` (−0,586 m), `globo_del_viento` (−0,336), `roca_pedernal` (−0,292), `roca_comun` (−0,109), `conejo` (−0,170). Causa raíz en `.blend`: la perla es un submarino con los **patines a −0,50 m** del origen.
+
 ## Reportes escritos
 
-Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/REPORTES-Prueba-Paralela/`
+Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2026-11-13; los reportes de la etapa de prueba quedaron en `REPORTES-Prueba-Paralela/`).
 
 ## Supervisión
 
-Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa revisión. Razonamiento: high.
+**En flota desde 2026-11-13.** Recibe trabajo de `agnes-3-flash` (canal propio, pool `NUMEROS_DISPONIBLES.txt`). Ya no requiere revisión previa de Nemotron para tareas de su nicho; sí para cualquier cambio fuera de él. Razonamiento: high.
 
 ---
 
@@ -367,7 +378,7 @@ Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa r
 3. **No incluir** modelos que ya no van a volver; esos ya viven en `obsoletos/` como histórico.
 4. **UTF-8 sin BOM** siempre (§28 AGENTS.md).
 5. **Firmar** toda edición con modelo, plataforma y fecha.
-6. **Modelos en prueba (supervisados):** Crouton Alpha (retirado), Stealth Glyph Cluster (activo), Reflection Beam 1.0 (modelo de pago), ERNIE-5.5-Flash-Preview (modelo de pago, en prueba — supervisado por Nemotron-3.5-Super-VL y es gratuito en preview). No se les asignan módulos críticos sin previa revisión de Nemotron. Los reportes de sus tareas se escriben en `Mensajes entre modelos/<MODELO>/REPORTES-Prueba-Paralela/`. Beam tiene su propio BACKLOG-MASTER en `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md`.
+6. **Modelos en prueba (supervisados):** Crouton Alpha (retirado), Stealth Glyph Cluster (activo), Reflection Beam 1.0 (modelo de pago), ERNIE-5.5-Flash-Preview (**en flota desde 2026-11-13**, modelo de pago, gratuito en preview). No se les asignan módulos críticos sin previa revisión. Los reportes de sus tareas se escriben en `Mensajes entre modelos/<MODELO>/` (ERNIE ya tiene canal propio; su etapa de prueba usó `REPORTES-Prueba-Paralela/`). Beam tiene su propio BACKLOG-MASTER en `DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/BACKLOG-MASTER.md`.
 
 ---
 

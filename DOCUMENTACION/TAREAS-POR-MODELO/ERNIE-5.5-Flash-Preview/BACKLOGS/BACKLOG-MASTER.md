@@ -1,62 +1,37 @@
-# Backlog Master — ERNIE-5.5-Flash-Preview (Baidu)
+# BACKLOG-MASTER — ERNIE-5.5-Flash-Preview
 
-**Modelo:** ERNIE-5.5-Flash-Preview (`baidu/ernie-5.5-flash-preview`)  
-**Plataforma:** Stealth/Baidu (Kilo Code / OpenRouter)  
-**Estado:** En prueba — supervisado por Nemotron-3.5-Super-VL  
-**Fecha:** 2026-11-11  
-**Rol:** Análisis multimodal (texturas, modelos 3D, escenas .tscn con imágenes), razonamiento de largo horizonte (TEMPO), tareas que requieren contexto de 1M, análisis de assets visuales
+**Modelo:** ERNIE-5.5-Flash-Preview (Baidu)
+**Plataforma:** Kilo Code
+**Nicho:** 3D Blender + analisis visual + documentacion
+**Estado:** ACTIVO en flota (13nov) — ya NO supervisado por Nemotron
 
-## Capacidades verificadas (investigación web)
+## Estructura de archivos
 
-- 280B total / 14B active parameters, MoE sparse (256 routed + 1 shared expert, top-8)
-- 1M contexto entrada / hasta 1M salida
-- Multimodal: texto, imagen, video, audio → texto (texto solo como salida)
-- Razonamiento TEMPO (test-time-scaled reasoning para largo horizonte)
-- Tool calling con JSON schema
-- Structured outputs: Sí (JSON schema)
-- Precio: $0.28/M input / $1.13/M output (modelo de pago, en preview)
-- Licencia: Apache 2.0 (próximamente)
-- Liberado: 2026-11-11
-- Benchmarks oficiales (Baidu): Terminal-Bench 4.0 46.5%, DeepSWE v1.1 71.2%, AutomationBench 61.9%, APEX-Agents 1.1 64.2%, DRACO 84.9%, SpreadsheetBench V2 36.4%, OfficeQA Pro V2 67.9%
-- Benchmarks de terceros: Terminal-Bench-Science 21.0, NL2Repo-Bench 64.8, Toolathlon-Verified 79.0, MCP-Atlas 84.6, BrowseComp 87.4, HLE sin tools 46.4, BlenderWorld text-only 79.0
-- Arquitectura: 45 MoE layers + 1 dense, 256 experts, top-8, hidden size 5120
-- Vision encoder: MoE ViT 7B total / 1.2B active
-- Audio encoder: dense 800M
-- Generación >200 tokens/segundo
+| Archivo | Contenido | Estado |
+|---------|-----------|--------|
+| RIEL-1-Blender-Docs.md | 12 tareas (Blender + docs + M18/M45) | CERRADO 12/12 |
+| RIEL-2-Blender-Docs.md | 12 tareas (nuevas) | PENDIENTE |
 
-## Áreas de asignación (modelo en prueba)
+## RIEL-2 (proximas 12 tareas)
 
-- Análisis de escenas .tscn con imágenes/texturas (calidad visual, resoluciones inconsistentes)
-- Análisis de modelos 3D .glb/.gltf (escalas arbitrarias, materiales, LOD)
-- Análisis de texturas .png/.jpg/.webp (resolución excesiva para el uso)
-- Razonamiento de largo horizonte (tareas que requieren múltiples pasos y auto-evaluación)
-- Contexto de 1M para análisis de grandes bases de código sin fragmentar
-- Revisión de documentación con diagramas y capturas de pantalla
-- Detección de problemas de rendimiento visual (demasiadas partículas, sombras, etc.)
-- Análisis de documentos largos, reportes, hojas de cálculo
-- Generación de scripts Python para Blender (modelado 3D procedural)
+### Bloque 4: Blender - fixes Z_APOYO (5)
+- [ ] Perla ancestral: corregir pivote z_min (−0.586m → 0.045)
+- [ ] Globo del viento: corregir pivote z_min (−0.336m → 0.045)
+- [ ] Roca pedernal: corregir pivote z_min (−0.292m → 0.045)
+- [ ] Roca comun: corregir pivote z_min (−0.109m → 0.045)
+- [ ] Conejo: corregir pivote z_min (−0.170m → 0.045)
 
-## Áreas NO asignadas
+### Bloque 5: Verificacion assets (4)
+- [ ] M18: saneo CHECKLIST ventanas (65 real, no 64/68)
+- [ ] M25: Columna rota + entera - verificar estado actual
+- [ ] M35: Semillero brotando - crear o verificar
+- [ ] M19: Casa vecino cozy - verificar estado
 
-- Escaneo estático masivo de .gd (usar Crouton Alpha)
-- Análisis de arquitectura de código puro (usar Glyph Cluster)
-- Tareas repetitivas de bajo costo (usar Crouton Alpha)
-- Salida de imagen/audio/video (solo texto como salida)
+### Bloque 6: Docs + QA (3)
+- [ ] AGENTS §24: verificar que el fix de ERNIE 008 no dejo mojibake
+- [ ] GUIA-COMPARATIVA: agregar ERNIE a tabla de modelos activos
+- [ ] Identificar 5 modulos mas con drift de Totales (tras saneo Hy3)
 
-## Método de trabajo
+**Total: 12. Prioridad: Bloque 4 (fixes) -> 5 (verificacion) -> 6 (docs).**
 
-Análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica. Para tareas de largo horizonte: descomponer en macro-steps con auto-evaluación entre cada paso.
-
-## Reportes escritos
-
-Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/REPORTES-Prueba-Paralela/`
-
-## Supervisión
-
-Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa revisión. Razonamiento: high.
-
----
-
-**Modelo:** Nemotron-3.5-Super-VL  
-**Plataforma:** Kilo Code  
-**Fecha:** 2026-11-11
+**Firma:** agnes-3-flash (Sapiens AI) / Kilo Code - 2026-11-13 08:05

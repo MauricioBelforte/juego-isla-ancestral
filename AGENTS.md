@@ -450,7 +450,7 @@ Toda tarea de larga duración (carga de assets, generación procedural, operacio
 
 ## 9. Modularidad y Desacoplamiento
 - **Separación de Responsabilidades:** La lógica de gameplay, IA, sistemas de combate, generación procedural y operaciones de I/O debe estar separada de la capa de UI (Canvas/UI Toolkit).
-- **Arquitectura por capas:** Los MonoBehaviours de UI solo deben llamar a funciones expuestas por managers/servicios (ScriptableObject-based, singletons o service locators). Usar patrones como MVC, MVP o ECS según la complejidad del sistema.
+- **Arquitectura por capas:** Los `Node` de UI (`Control`/`CanvasLayer`) solo deben llamar a funciones expuestas por managers/servicios (autoloads como `ServiceRegistry`, `Resource`-based, singletons o service locators). Usar patrones como MVC, MVP o ECS según la complejidad del sistema.
 - **No acoplar** lógica de gameplay, persistencia o networking directamente en los scripts de UI.
 - **Componentes reutilizables:** Preferir la composición de componentes sobre la herencia profunda. Usar interfaces (`IInteractable`, `IDamageable`, etc.) para definir contratos entre sistemas.
 
@@ -688,8 +688,8 @@ Antes de integrar un nuevo módulo al proyecto y realizar la primera prueba manu
 ### Requisitos del Plan de Testings
 
 1. **Tipos de pruebas a incluir:**
-   - Pruebas unitarias de cada función/componente (Unity Test Framework — Edit Mode Tests)
-   - Pruebas de integración entre sistemas (Unity Test Framework — Play Mode Tests)
+   - Pruebas unitarias de cada función/componente (GdUnit4 — `tests/unit`)
+   - Pruebas de integración entre sistemas (GdUnit4 — `tests/integration`)
    - Pruebas de casos límite (edge cases: valores nulos, listas vacías, condiciones de borde)
    - Pruebas de manejo de errores (excepciones, fallbacks, estados inválidos)
    - Pruebas de rendimiento si aplica (Profiler, frame budget, memory leaks, draw calls)
@@ -724,7 +724,7 @@ Cuando se desarrolle una funcionalidad nueva que comparta lógica con sistemas e
 1. **Identificar el flujo nuevo vs existente:** Si el nuevo sistema tiene requisitos diferentes o puede necesitar cambios que afecten a sistemas que ya funcionan, se debe crear un script/manager/componente separado.
 2. **No tocar lo que funciona:** Si un sistema ya funciona correctamente (ej: sistema de combate, movimiento del jugador, IA de NPCs), no modificarlo para agregar funcionalidad nueva. En su lugar:
    - Agregar **nuevos scripts/managers** para el nuevo flujo.
-   - El nuevo script puede REUTILIZAR funciones auxiliares compartidas (utility classes, ScriptableObjects, interfaces) pero debe tener su propia lógica de orquestación.
+   - El nuevo script puede REUTILIZAR funciones auxiliares compartidas (utility classes, `Resource`, interfaces) pero debe tener su propia lógica de orquestación.
    - Esto permite que el nuevo sistema pueda hacer cambios agresivos sin riesgo de romper los sistemas existentes.
 3. **Documentar la decisión:** En los archivos del componente (`03-Diseno.md` o `04-Codigo.md`), explicar por qué se optó por un sistema separado y qué comparte con los sistemas existentes.
 
@@ -768,37 +768,44 @@ Logs/
 └── NUMEROS_DISPONIBLES.txt           ← Lista de números disponibles (cada agente toma el primero)
 ```
 
-### Implementación en Código (Unity/C#)
+### Implementación en Código (Godot 4.x / GDScript)
 
-> **Nota:** En Unity, el logging en tiempo de ejecución usa `Debug.Log`, `Debug.LogWarning` y `Debug.LogError`. Para logging persistente en archivos, usar un sistema custom o una librería como `Unity.Logging`.
+> **Nota:** el proyecto usa el autoload **`GameLogger`** (`res://scripts/logging/logger.gd`). No se escribe a mano: ya implementa niveles, categorías, rotación, compresión y sanitizado de datos sensibles.
+
+**API real (verificada en disco):**
+
+| Método | Firma |
+|---|---|
+| `GameLogger.debug(msg, category, context)` | nivel DEBUG |
+| `GameLogger.info(msg, category, context)` | nivel INFO |
+| `GameLogger.warning(msg, category, context)` | nivel WARNING |
+| `GameLogger.error(msg, category, context)` | nivel ERROR |
+| `GameLogger.critical(msg, category, context)` | nivel CRITICAL |
+
+- **Categorías:** `Category.BOOT`, `SYSTEM`, `GAMEPLAY`, `WORLD`, `NETWORKING`, `ANALYTICS`, `CRASH`.
+- **Salida:** `user://logs/game.log` (ruta resuelta por el autoload, **no** `res://`).
+- **Rotación ya resuelta:** `max_file_size_mb = 10.0`, `max_rotated_files = 5`, `compress_old_logs = true`. **No implementar rotación propia.**
 
 **Configuración:**
-- `MAX_LOG_SIZE` - Umbral de rotación (ej: 500KB)
-- `LOG_DIR` - Directorio de logs (fuera de `Assets/` para no disparar reimport)
-- `LOG_ROTATED_DIR` - Directorio de logs rotados
-
-**Función de rotación:**
-- Verificar el tamaño del log actual después de cada write
-- Si el tamaño >= umbral, renombrar el archivo a `logs/rotated/nombre-YYYY-MM-DD.log`
-- Crear automáticamente un nuevo log vacío
-- Registrar la rotación con mensaje `[LOG ROTATION]`
+- `LOG_DIR` → resuelto por `GameLogger` en `user://logs/`
+- `MAX_LOG_SIZE` → `GameLogger.max_file_size_mb`
+- `LOG_ROTATED_DIR` → `user://logs/rotated/` (lo maneja el autoload)
 
 **Comportamiento:**
-- Las carpetas de logs se crean automáticamente si no existen
-- La rotación es transparente para el usuario
-- Los logs rotados conservan la fecha en el nombre para trazabilidad
-- En Unity, los logs de consola de runtime se capturan automáticamente en `Application.persistentDataPath` si se configura un custom logger
+- Las carpetas se crean solas si no existen (`DirAccess.make_dir_recursive_absolute`).
+- La rotación es transparente para el usuario y conserva la fecha en el nombre.
+- `console_echo = true` y `console_min_level = Level.DEBUG` controlan qué se ve en consola.
+- `sanitize_sensitive = true` evita que se filtren tokens/claves al archivo.
 
 ### Reglas para Nuevos Logs
 
 Si necesitas agregar logging en el código:
-1. **Usar el sistema de logging de Unity** (`Debug.Log()`, `Debug.LogWarning()`, `Debug.LogError()`) para mensajes de desarrollo
-2. **Para logging persistente a archivo** (ej: analytics, crash reports), usar un sistema centralizado que escriba fuera de `Assets/`
-3. **No crear archivos de log adicionales** dentro de `Assets/` — Unity los importa y genera .meta innecesarios
-4. **Si necesitas un log separado** (ej: para un sistema específico como IA o networking):
-   - Implementar rotación similar en el script del sistema
-   - Usar el mismo formato de nomenclatura: `NN-nombre-YYYY-MM-DD.log`
-   - Guardar en `logs/rotated/` cuando se rote
+1. **Usar `GameLogger`** (`info`, `warning`, `error`, `critical`) con la categoría que corresponda. `print()` queda solo para diagnósticos temporales de una sesión.
+2. **Nunca escribir a `res://`.** Godot no lo empaqueta bien y ensucia el export. El destino es `user://`.
+3. **No crear archivos de log sueltos** con `FileAccess` propio: pisan la rotación y el sanitizado de `GameLogger`.
+4. **Si necesitas un log separado** (ej: para un sistema específico):
+   - Reutilizar `GameLogger` con `Category` propia, o
+   - Escribir en `user://logs/` con el formato `NN-nombre-YYYY-MM-DD.log` y rotación equivalente.
 
 ### Formato de Nomenclatura para Logs Rotados
 
@@ -1079,36 +1086,36 @@ Para proyectos muy grandes se recomienda crear scripts que automaticen el protoc
 
 > **Regla:** ejecutar `test_scripts.py` después de modificar cualquier script o antes de usarlos en un proyecto grande. Los scripts no reemplazan la honestidad del agente: un `[x]` materialmente incorrecto seguirá dependiendo de que el agente lo haya implementado bien.
 
-## 22. Empaquetado y Distribución (Unity Build Pipeline)
+## 22. Empaquetado y Distribución (Godot Export Pipeline)
 
 Para generar el artefacto distribuible del proyecto:
 
 ### Plataformas objetivo
-- **PC (Windows/Mac/Linux):** Build standalone desde `File > Build Settings` o vía script con `BuildPipeline.BuildPlayer()`.
-- **Consolas (Switch/PS/Xbox):** Requiere SDK oficiales y licencias de plataforma. Build desde módulos de Unity específicos.
-- **Mobile (iOS/Android):** Solo si se decide portar. Build desde los módulos correspondientes.
+- **PC (Windows/Mac/Linux):** preset propio en `export_presets.cfg` + `godot --export-release "<Preset>"`.
+- **Web (HTML5):** preset `Web` ya configurado (`export_path="../build/web/index.html"`).
+- **Mobile (iOS/Android):** solo si se decide portar; requiere preset y plantillas de export.
+- **Consolas (Switch/PS/Xbox):** requieren SDK y licencias de plataforma (exportadores oficiales de Godot).
 
 ### Proceso de Build
 
-```csharp
-// Script de build automatizado (Assets/Editor/BuildScript.cs)
-BuildPipeline.BuildPlayer(scenes, outputPath, BuildTarget.StandaloneWindows64, BuildOptions.None);
+```bash
+# listar presets disponibles
+godot --headless --path game/isla-ancestral --export-release "Windows Desktop" ../build/windows/isla-ancestral.exe
 ```
 
 **Qué hace:**
-1. Compilación de todos los scripts C# del proyecto
-2. Empaquetado de assets (texturas, modelos, audio, prefabs, ScriptableObjects)
-3. Generación del ejecutable y carpeta de datos (`.exe` + `_Data/` en Windows)
-4. Aplicación de Addressables/AssetBundles si están configurados
+1. Compila todos los scripts GDScript del proyecto.
+2. Empaqueta los recursos (`.tscn`, `.tres`, texturas, modelos, audio) en un `.pck`.
+3. Genera el ejecutable (`isla-ancestral.exe` + `.pck`, o un solo binario con `--export-pack`).
+4. Aplica los filtros de `export_presets.cfg` (`exclude_filter`, `encrypt_*`).
 
-**Output:** Carpeta `Builds/[Plataforma]/` en la raíz del proyecto (fuera de `Assets/`).
+**Output:** carpeta `build/[plataforma]/` en la raíz del proyecto. **Nunca** dentro de `game/` ni de `res://`.
 
 **Notas:**
-- Verificar que las escenas estén agregadas en `Build Settings` antes de compilar.
-- Los builds de desarrollo (`Development Build`) incluyen profiling y logs de consola.
-- Los builds de release deben deshabilitar `Debug.Log` en producción (usar `#if UNITY_EDITOR` o Conditional attributes).
-- Respetar la configuración de `Player Settings` (resolución, calidad, splash screen, etc.).
-- Los assets de gran tamaño (terrenos, texturas 4K) deben usar compresión adecuada para la plataforma objetivo.
+- Los presets viven en `game/isla-ancestral/export_presets.cfg` y se editan desde `Proyecto → Exportar` (no a mano).
+- Verificar que la escena principal esté seteada en `project.godot` (`run/main_scene`).
+- Los assets grandes (terrenos, texturas 4K) deben usar compresión VRAM/ETC2/ASTC según plataforma.
+- **No exportar `Godot/`** (carpeta de datos de build) ni `capturas/`: ya están en `exclude_filter`.
 
 ## 23. Instalación del Protocolo en un Proyecto Nuevo
 
@@ -1165,61 +1172,59 @@ Este archivo (`AGENTS.md`) junto con `CHECKLIST-GLOBAL.md` y la carpeta `scripts
 | `scripts/test_scripts.py` | Ejecutable y muestra `8 PASS, 0 FAIL` |
 | `scripts/backups/` | Carpeta creada (recibe los backups automáticos) |
 
-> **Nota:** El kit es agnóstico al lenguaje/framework del proyecto. Los scripts de automatización (`scripts/`) son Python por portabilidad (no requieren Unity para ejecutarse). Los scripts de Unity Editor (`Assets/Editor/`) se escriben en C# y se ejecutan dentro del editor. Si se necesitan scripts de automatización adicionales dentro de Unity, deben ir en `Assets/Editor/` y no en la carpeta de runtime.
+> **Nota:** El kit es agnóstico al lenguaje/framework del proyecto. Los scripts de automatización (`scripts/`) son Python por portabilidad (no requieren el motor para ejecutarse). Los scripts de editor de Godot (`res://addons/`, `res://tools/`) se escriben en GDScript (`@tool` / `EditorScript`) y se ejecutan dentro del editor. Si se necesitan scripts de automatización adicionales del editor, deben ir en `res://addons/` o `res://tools/`, no en la carpeta de runtime.
 
 ## 24. Stack Tecnológico del Proyecto
 
 ### Motor y Lenguaje
-- **Motor:** Unity (versión LTS más reciente recomendada)
-- **Lenguaje:** C# (.NET Standard 2.1 / .NET Framework según configuración de Unity)
-- **IDE recomendado:** Visual Studio 2022 / Rider con integración Unity
+- **Motor:** **Godot 4.7** (`config/features=PackedStringArray("4.7", "Forward Plus")` en `project.godot`).
+- **Lenguaje:** **GDScript** (no C#). Excepciones puntuales en `.gd` de tooling.
+- **Render:** Forward Plus (`gl_compatibility` solo si se pide compat web baja).
+- **Escena principal:** `res://scenes/main_island.tscn` (`run/main_scene`).
+- **IDE recomendado:** editor de Godot 4.7; extensiones Kilo/VS Code con LSP de GDScript.
 
 ### Arquitectura de Código
-- **Patrones recomendados:** Composición sobre herencia, ScriptableObject Architecture, interfaces para contratos entre sistemas
-- **Estructura de carpetas Unity:**
+- **Patrones recomendados:** composición sobre herencia, autoloads como servicios (`ServiceRegistry`), señales (`EventBus`), interfaces por contrato (`class_name` + duck typing), `Resource` para datos.
+- **Estructura real del proyecto:**
   ```
-  Assets/
-  ├── _Project/              ← Toda la lógica del juego
-  │   ├── Scripts/
-  │   │   ├── Core/          ← Managers, singletons, bootstrapping
-  │   │   ├── Gameplay/      ← Mecánicas de juego, jugador, NPCs
-  │   │   ├── AI/            ← Sistemas de IA, behavior trees, pathfinding
-  │   │   ├── UI/            ← Scripts de interfaz de usuario
-  │   │   ├── World/         ← Generación de mundo, biomas, terreno
-  │   │   ├── Data/          ← ScriptableObjects, configuraciones
-  │   │   ├── Audio/         ← Managers de audio, mixers
-  │   │   ├── Networking/    ← Multijugador, sincronización (si aplica)
-  │   │   └── Utils/         ← Utilidades, extensiones, helpers
-  │   ├── Prefabs/
-  │   ├── Materials/
-  │   ├── Textures/
-  │   ├── Models/
-  │   ├── Animations/
-  │   ├── Audio/
-  │   ├── Scenes/
-  │   ├── Shaders/
-  │   └── ScriptableObjects/
-  ├── Editor/                ← Scripts solo para el editor (build scripts, tools)
-  ├── Plugins/               ← Paquetes de terceros
-  └── StreamingAssets/       ← Datos que no se procesan por Unity
+  game/isla-ancestral/
+  ├── project.godot          ← configuración, autoloads, main_scene
+  ├── export_presets.cfg     ← presets de export (Web, Windows, ...)
+  ├── scripts/               ← GDScript (core/, saving/, dialogos/, logging/, ...)
+  ├── scenes/                ← .tscn
+  ├── assets/                ← 3d/ (GLB alta/media/baja), 2d/, ...
+  ├── data/                  ← datos del juego
+  ├── resources/             ← .tres
+  ├── materials/             ← materiales
+  ├── shaders/               ← shaders
+  ├── locales/               ← traducciones
+  ├── tests/                 ← unit/ integration/ regression/ + run_tests.gd
+  ├── addons/                ← plugins de editor
+  ├── tools/                 ← tooling (MCP blender/godot, capturas)
+  ├── legal/                 ← docs legales
+  └── docs/                  ← material complementario (NO canónico, ver §3)
   ```
 
-### Herramientas de Unity Relevantes
-- **Input System:** New Input System (paquete oficial)
-- **Rendering:** URP o HDRP según las necesidades gráficas del proyecto
-- **Física:** PhysX integrado de Unity
-- **UI:** UI Toolkit o Canvas/UGUI según la complejidad
-- **Audio:** AudioMixer + ScriptableObject-based audio system
-- **Testing:** Unity Test Framework (NUnit) para Edit Mode y Play Mode tests
-- **Profiling:** Unity Profiler, Frame Debugger, Memory Profiler
-- **Version Control:** Git + `.gitignore` específico para Unity (ignorar `Library/`, `Temp/`, `obj/`, etc.)
+### Herramientas de Godot Relevantes
+- **Input:** `InputMap` en `project.godot` + `Input.is_action_pressed()`.
+- **Rendering:** Forward Plus; `WorldEnvironment` + `Environment` para cielo/niebla.
+- **Física:** servidor de física integrado (Jolt/GodotPhysics), `CharacterBody3D` para el jugador.
+- **UI:** `Control` + `CanvasLayer` (tema en `resources/`), señales para el HUD.
+- **Audio:** `AudioStreamPlayer` + buses de audio (no hay mixer tipo Unity).
+- **Testing:** **GdUnit4** (`tests/unit`, `tests/integration`, `tests/regression`, `tests/run_tests.gd`).
+- **Profiling:** Profiler del editor, `--print-fps`, `Performance.get_monitor()`.
+- **Version Control:** Git; `.gitignore` ignora `.godot/`, `build/`, `capturas/`, `.import` transitorios.
 
-### Convenciones de Código C#
-- **Namespaces:** `IslaAncestral.[Sistema]` (ej: `IslaAncestral.Gameplay`, `IslaAncestral.AI`, `IslaAncestral.UI`)
-- **Nomenclatura:** PascalCase para clases, métodos y propiedades públicas. camelCase para variables locales y campos privados con prefijo `_` (ej: `_playerHealth`)
-- **Comentarios:** Documentar con `///` (XML docs) las clases y métodos públicos
-- **Regiones:** Usar `#region` con moderación, solo para agrupar secciones grandes
-- **Serialización:** Usar `[SerializeField]` en vez de campos `public` cuando sea posible
+### Convenciones de Código GDScript
+- **`class_name`** para tipos globales; **autoload** para servicios (ver `[autoload]` de `project.godot`).
+- **Nomenclatura:** `PascalCase` para clases, `snake_case` para métodos, variables y señales; `_` como prefijo de privado (`_player_health`).
+- **Tipado:** anotar tipos siempre que se pueda (`var x: int`, `-> void`) — el parser lo exige en varios paths.
+- **Señales:** declarar con `signal nombre(arg: Tipo)`; emitir con `nombre.emit(arg)`.
+- **Recursos:** `preload()` para constantes, `load()` para rutas dinámicas; `Resource` para datos (`save`/config).
+- **Nada de `snake_case` en nombres de archivo de escena?** Sí: `.tscn` en `snake_case`.
+- **Errores:** usar `push_error()` / `push_warning()` y `GameLogger` (§18), no `print()` en código de producción.
+
+> ⚠️ **Regla de paridad:** este proyecto **no usa C# ni Unity**. Si una sección de `AGENTS.md` menciona `MonoBehaviour`, `ScriptableObject`, `Assets/` o `Debug.Log`, está desactualizada: el equivalente es `Node`, `Resource`, `res://` y `GameLogger`.
 
 ### Convención de Scripts Temporales y Reutilizables + Capturas por Módulo
 

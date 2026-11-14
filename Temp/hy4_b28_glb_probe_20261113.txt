@@ -1,0 +1,21 @@
+alta  tris=492  triangulos=492  mats=4 mallas=13 nodos=13 verts=890  alt=[0.0450..3.0000] sha=160a839654ed
+   huella_apoyo=[1.0, 1.0] pares=16 verts=48 | caras ABACO=4 REMATE=4 EQUINO=64
+   banda_espuria(2.79,2.91)=[] verts_media_losa=0
+   niveles_alt=[0.045, 0.0775, 0.1525, 0.18, 0.185, 0.198, 0.345, 0.395, 2.4, 2.48, 2.54, 2.62, 2.78, 2.92, 3.0]
+   materiales=['MAT_ColEnt_Musgo', 'MAT_ColEnt_Piedra', 'MAT_ColEnt_PiedraOsc', 'MAT_ColEnt_Tallado']
+   nodos_sm=['SM_ColEnt_Abaco_NOFUNDIR', 'SM_ColEnt_Basa', 'SM_ColEnt_Collar', 'SM_ColEnt_Equino', 'SM_ColEnt_Fuste', 'SM_ColEnt_Glifo_1', 'SM_ColEnt_Glifo_2', 'SM_ColEnt_Glifo_3', 'SM_ColEnt_Glifo_4', 'SM_ColEnt_Musgo_1', 'SM_ColEnt_Musgo_2', 'SM_ColEnt_Plinto_NOFUNDIR', 'SM_ColEnt_Remate']
+media tris=492  triangulos=492  mats=4 mallas=5  nodos=5  verts=890  alt=[0.0450..3.0000] sha=b313ced9f3bc
+   huella_apoyo=[1.0, 1.0] pares=16 verts=48 | caras ABACO=4 REMATE=4 EQUINO=64
+   banda_espuria(2.79,2.91)=[] verts_media_losa=0
+   niveles_alt=[0.045, 0.0775, 0.1525, 0.18, 0.185, 0.198, 0.345, 0.395, 2.4, 2.48, 2.54, 2.62, 2.78, 2.92, 3.0]
+   materiales=['MAT_ColEnt_Musgo', 'MAT_ColEnt_Piedra', 'MAT_ColEnt_PiedraOsc', 'MAT_ColEnt_Tallado']
+   nodos_sm=['SM_ColEnt_Abaco_NOFUNDIR', 'SM_ColEnt_M_ColEnt_Musgo', 'SM_ColEnt_M_ColEnt_Piedra', 'SM_ColEnt_M_ColEnt_Tallado', 'SM_ColEnt_Plinto_NOFUNDIR']
+baja  tris=348  triangulos=348  mats=4 mallas=5  nodos=5  verts=667  alt=[0.0450..3.0000] sha=32d475ed4c23
+   huella_apoyo=[1.0, 1.0] pares=16 verts=48 | caras ABACO=4 REMATE=4 EQUINO=64
+   banda_espuria(2.79,2.91)=[] verts_media_losa=0
+   niveles_alt=[0.045, 0.0775, 0.1525, 0.18, 0.185, 0.186, 0.192, 0.198, 0.345, 0.394, 0.395, 2.48, 2.54, 2.62, 2.78, 2.92, 3.0]
+   materiales=['MAT_ColEnt_Musgo', 'MAT_ColEnt_Piedra', 'MAT_ColEnt_PiedraOsc', 'MAT_ColEnt_Tallado']
+   nodos_sm=['SM_ColEnt_Abaco_NOFUNDIR', 'SM_ColEnt_M_ColEnt_Musgo', 'SM_ColEnt_M_ColEnt_Piedra', 'SM_ColEnt_M_ColEnt_Tallado', 'SM_ColEnt_Plinto_NOFUNDIR']
+=== CONSISTENCIA ENTRE LOD ===
+tris=492/492/348 caras_abaco=4/4/4 verts_media=0/0/0
+PROBE_JSON D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\Temp\hy4_b28_glb_probe_20261113.json

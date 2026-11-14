@@ -1,0 +1,45 @@
+columna_rota_alta    alta  tris=464   mats=5  mallas=12  nodos=12  verts=857   alt=[0.0450..2.1900] h=2.1450 apoyo=28  sha=1bf86f118a3d
+    niveles_alt=[0.045, 0.0631, 0.0633, 0.0925, 0.1147, 0.1153, 0.125, 0.145, 0.165, 0.1675, 0.1919, 0.1932, 0.2, 0.205, 0.22, 0.255, 0.283, 0.285, 0.3741, 0.3768, 0.4513, 0.4547, 0.5029, 0.5067, 0.521, 0.525, 1.84, 1.92, 1.94, 1.96, 1.97, 1.98, 1.99, 2.01, 2.03, 2.04, 2.06, 2.09, 2.11, 2.12, 2.14, 2.15, 2.16, 2.18, 2.19]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Glifo', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+columna_rota_alta    media tris=464   mats=5  mallas=5   nodos=5   verts=857   alt=[0.0450..2.1900] h=2.1450 apoyo=28  sha=9efad4314acf
+    niveles_alt=[0.045, 0.0631, 0.0633, 0.0925, 0.1147, 0.1153, 0.125, 0.145, 0.165, 0.1675, 0.1919, 0.1932, 0.2, 0.205, 0.22, 0.255, 0.283, 0.285, 0.3741, 0.3768, 0.4513, 0.4547, 0.5029, 0.5067, 0.521, 0.525, 1.84, 1.92, 1.94, 1.96, 1.97, 1.98, 1.99, 2.01, 2.03, 2.04, 2.06, 2.09, 2.11, 2.12, 2.14, 2.15, 2.16, 2.18, 2.19]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Glifo', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+columna_rota_alta    baja  tris=303   mats=4  mallas=4   nodos=4   verts=605   alt=[0.0450..2.1907] h=2.1457 apoyo=24  sha=37c9e997844e
+    niveles_alt=[0.045, 0.0472, 0.0477, 0.0631, 0.0633, 0.0807, 0.085, 0.1147, 0.125, 0.145, 0.1485, 0.1503, 0.165, 0.1919, 0.2, 0.205, 0.2067, 0.2133, 0.22, 0.254, 0.255, 0.283, 0.298, 0.3239, 0.3323, 0.3329, 0.3741, 0.4513, 0.4827, 0.4926, 0.5029, 0.521, 0.525, 1.92, 1.94, 1.955, 1.968, 1.9787, 2.04, 2.0871, 2.1604, 2.1649, 2.19, 2.1907]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+    >> altura ALTA=2.1450 MEDIA=2.1450 BAJA=2.1457 | tris=464/464/303 | mats=5/5/4
+columna_rota_baja    alta  tris=464   mats=5  mallas=12  nodos=12  verts=857   alt=[0.0450..1.4900] h=1.4450 apoyo=28  sha=d8cc0a0cdae7
+    niveles_alt=[0.045, 0.0631, 0.0633, 0.0925, 0.1147, 0.1153, 0.125, 0.145, 0.165, 0.1675, 0.1919, 0.1932, 0.2, 0.205, 0.22, 0.255, 0.283, 0.285, 0.3741, 0.3768, 0.4513, 0.4547, 0.5029, 0.5067, 0.521, 0.525, 1.14, 1.22, 1.24, 1.26, 1.27, 1.28, 1.29, 1.31, 1.33, 1.34, 1.36, 1.39, 1.41, 1.42, 1.44, 1.45, 1.46, 1.48, 1.49]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Glifo', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+columna_rota_baja    media tris=464   mats=5  mallas=5   nodos=5   verts=857   alt=[0.0450..1.4900] h=1.4450 apoyo=28  sha=84e84e72efd4
+    niveles_alt=[0.045, 0.0631, 0.0633, 0.0925, 0.1147, 0.1153, 0.125, 0.145, 0.165, 0.1675, 0.1919, 0.1932, 0.2, 0.205, 0.22, 0.255, 0.283, 0.285, 0.3741, 0.3768, 0.4513, 0.4547, 0.5029, 0.5067, 0.521, 0.525, 1.14, 1.22, 1.24, 1.26, 1.27, 1.28, 1.29, 1.31, 1.33, 1.34, 1.36, 1.39, 1.41, 1.42, 1.44, 1.45, 1.46, 1.48, 1.49]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Glifo', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+columna_rota_baja    baja  tris=304   mats=4  mallas=4   nodos=4   verts=626   alt=[0.0450..1.4907] h=1.4457 apoyo=24  sha=4e2c20df7541
+    niveles_alt=[0.045, 0.0472, 0.0477, 0.0631, 0.0633, 0.0807, 0.085, 0.1147, 0.125, 0.145, 0.1485, 0.1503, 0.165, 0.1919, 0.2, 0.205, 0.2067, 0.2133, 0.22, 0.2539, 0.255, 0.283, 0.298, 0.3239, 0.3323, 0.3329, 0.3741, 0.4513, 0.4827, 0.4926, 0.5029, 0.521, 0.525, 1.1356, 1.22, 1.24, 1.255, 1.268, 1.2787, 1.34, 1.3871, 1.4604, 1.4649, 1.49, 1.4907]
+    materiales=['MAT_ColRota_CorteFresco', 'MAT_ColRota_Musgo', 'MAT_ColRota_Piedra', 'MAT_ColRota_PiedraOsc']
+    >> altura ALTA=1.4450 MEDIA=1.4450 BAJA=1.4457 | tris=464/464/304 | mats=5/5/4
+cultivo_brote        alta  tris=152   mats=3  mallas=4   nodos=4   verts=252   alt=[0.0450..0.1998] h=0.1548 apoyo=13  sha=e3cd5706e5ac
+    niveles_alt=[0.045, 0.075, 0.09, 0.0948, 0.1002, 0.1044, 0.1088, 0.1097, 0.1139, 0.1193, 0.1234, 0.1288, 0.133, 0.1383, 0.1443, 0.1482, 0.15, 0.1513, 0.1551, 0.1622, 0.1632, 0.1661, 0.167, 0.1771, 0.1781, 0.1809, 0.1819, 0.189, 0.1928, 0.196, 0.1998]
+    materiales=['MAT_Cultivo_Hoja', 'MAT_Cultivo_Tallo', 'MAT_Cultivo_Tierra']
+cultivo_brote        media tris=152   mats=3  mallas=3   nodos=3   verts=252   alt=[0.0450..0.1998] h=0.1548 apoyo=13  sha=0d847ae66853
+    niveles_alt=[0.045, 0.075, 0.09, 0.0948, 0.1002, 0.1044, 0.1088, 0.1097, 0.1139, 0.1193, 0.1234, 0.1288, 0.133, 0.1383, 0.1443, 0.1482, 0.15, 0.1513, 0.1551, 0.1622, 0.1632, 0.1661, 0.167, 0.1771, 0.1781, 0.1809, 0.1819, 0.189, 0.1928, 0.196, 0.1998]
+    materiales=['MAT_Cultivo_Hoja', 'MAT_Cultivo_Tallo', 'MAT_Cultivo_Tierra']
+cultivo_brote        baja  tris=102   mats=3  mallas=3   nodos=3   verts=216   alt=[0.0450..0.1979] h=0.1529 apoyo=10  sha=6d74f6554016
+    niveles_alt=[0.045, 0.0455, 0.075, 0.09, 0.0903, 0.0975, 0.1044, 0.107, 0.1088, 0.1097, 0.1139, 0.1166, 0.1193, 0.1234, 0.1261, 0.1288, 0.1357, 0.1463, 0.15, 0.1513, 0.1551, 0.1632, 0.1641, 0.167, 0.1771, 0.18, 0.1809, 0.189, 0.1928, 0.1979]
+    materiales=['MAT_Cultivo_Hoja', 'MAT_Cultivo_Tallo', 'MAT_Cultivo_Tierra']
+    >> altura ALTA=0.1548 MEDIA=0.1548 BAJA=0.1529 | tris=152/152/102 | mats=3/3/3
+palanca_madera       alta  tris=516   mats=3  mallas=1   nodos=1   verts=1068  alt=[0.0450..0.6155] h=0.5705 apoyo=4   sha=c6cb92bbdf62
+    niveles_alt=[0.045, 0.0504, 0.0528, 0.0635, 0.1665, 0.1772, 0.1796, 0.185, 0.1904, 0.1928, 0.2035, 0.2438, 0.2468, 0.2491, 0.2496, 0.2588, 0.2597, 0.262, 0.3602, 0.3612, 0.3634, 0.3721, 0.374, 0.3763, 0.3816, 0.385, 0.3855, 0.3909, 0.395, 0.405, 0.415, 0.4191, 0.425, 0.4265, 0.4284, 0.4337, 0.436, 0.4372, 0.4379, 0.4396, 0.445, 0.4466, 0.4488, 0.4491, 0.4498, 0.548, 0.5503, 0.5512, 0.5519, 0.5604, 0.5609, 0.5632, 0.5662, 0.6155]
+    materiales=['MAT_Hierro_Perno', 'MAT_Madera_Pal_Cla', 'MAT_Madera_Pal_Osc']
+palanca_madera       media tris=516   mats=3  mallas=1   nodos=1   verts=1068  alt=[0.0450..0.6155] h=0.5705 apoyo=4   sha=5540f6ef839e
+    niveles_alt=[0.045, 0.0504, 0.0528, 0.0635, 0.1665, 0.1772, 0.1796, 0.185, 0.1904, 0.1928, 0.2035, 0.2438, 0.2468, 0.2491, 0.2496, 0.2588, 0.2597, 0.262, 0.3602, 0.3612, 0.3634, 0.3721, 0.374, 0.3763, 0.3816, 0.385, 0.3855, 0.3909, 0.395, 0.405, 0.415, 0.4191, 0.425, 0.4265, 0.4284, 0.4337, 0.436, 0.4372, 0.4379, 0.4396, 0.445, 0.4466, 0.4488, 0.4491, 0.4498, 0.548, 0.5503, 0.5512, 0.5519, 0.5604, 0.5609, 0.5632, 0.5662, 0.6155]
+    materiales=['MAT_Hierro_Perno', 'MAT_Madera_Pal_Cla', 'MAT_Madera_Pal_Osc']
+palanca_madera       baja  tris=66    mats=3  mallas=1   nodos=1   verts=166   alt=[0.0450..0.6155] h=0.5705 apoyo=4   sha=3d3f87a4cb5e
+    niveles_alt=[0.045, 0.185, 0.2406, 0.3784, 0.3851, 0.3855, 0.4022, 0.4077, 0.4187, 0.4316, 0.445, 0.4491, 0.5519, 0.5694, 0.6155]
+    materiales=['MAT_Hierro_Perno', 'MAT_Madera_Pal_Cla', 'MAT_Madera_Pal_Osc']
+    >> altura ALTA=0.5705 MEDIA=0.5705 BAJA=0.5705 | tris=516/516/66 | mats=3/3/3
+=== DIFERENCIA ENTRE VARIANTES DE COLUMNA ROTA ===
+alta  alta_h=2.1450 baja_h=1.4450 diff=0.7000 | topes 2.1900 / 1.4900 | tris 464 / 464
+media alta_h=2.1450 baja_h=1.4450 diff=0.7000 | topes 2.1900 / 1.4900 | tris 464 / 464
+baja  alta_h=2.1457 baja_h=1.4457 diff=0.7000 | topes 2.1907 / 1.4907 | tris 303 / 304
+PROBE_JSON D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\Temp\hy4_b27_glb_probe_20261113.json

@@ -249,7 +249,7 @@ Tercera pasada de vigilancia continua (240 → 407 → 619 → 685 archivos): el
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 4)
 Los [107 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: `test_reloj_hud.gd 14/0` = scripts/clock/ (reloj_hud) en disco; 13 [?] in-flight NO tocados.
 
-Totales: 120 items - Completados: 119 - Pendientes: 0 - No resueltos: 1. (conteo director msg 184, 2026-10-13)
+Totales: 120 items - Completados: 120 - Pendientes: 0 - No resueltos: 0. (recount canónico Hy3 TANDA 19nov msg 572 2026-11-13: 120 [x]/0 [ ]/0 [?]; el 1 [?] de L71 fue cerrado por medición del director 2026-10-16 Log 1898; la línea 144 de reconciliación 2026-09-18 con 107/13 queda stale histórica).
 
 ---
 
