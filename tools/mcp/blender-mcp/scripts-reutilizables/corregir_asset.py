@@ -72,7 +72,7 @@ def zmin_de(objs):
     en objetos rotados -> falso hundido -> asentar SOBREELVA el conjunto.
     Caso real: roca_comun SM_Roca_Comun_Chica con rot (0.2, -0.2, 1.1) daba
     bbox_min=-0.1092 cuando sus vertices reales solo bajan a 0.0450 ->
-    asentar por AABB hundi'a a la roca 15 cm por encima del suelo."""
+    asentar por AABB hundia a la roca 15 cm por encima del suelo."""
     p = []
     for o in objs:
         if len(o.data.vertices) == 0:

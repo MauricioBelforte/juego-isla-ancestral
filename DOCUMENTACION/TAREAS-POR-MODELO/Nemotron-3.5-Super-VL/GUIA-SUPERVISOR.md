@@ -28,7 +28,14 @@ Todas las tareas se lanzan a través de `agent_manager` (acción `prompt` sobre 
 
 ### 3.1 Elegir el modelo correcto
 
-**Nunca asumas que una sesión es un modelo solo por su nombre.** Los nombres de sesión son genéricos (ej. "Análisis de arquitectura core en Godot") y no identifican al modelo.
+**Nunca asumas que una sesión es un modelo solo por su nombre.** Los nombres de sesión son genéricos y no identifican al modelo.
+
+### Mapeo de sesiones Agent Manager actuales
+
+| Sesión ID | Nombre de sesión | Modelo |
+|-----------|-----------------|--------|
+| `ses_e2921bd21ffeOLG3GoKH08ZiGo` | "Auditoría de fórmulas de balance y economía" | **Reflection-Beam-1.0** |
+| `ses_e2921bc74ffe2ya1Llti9hViGL` | "Confirmación de configuración de sesión" | **Glyph Cluster** |
 
 Al crear una sesión, especificar explícitamente el parámetro `model`:
 - `model: "Glyph Cluster"` → proveedor kilo
