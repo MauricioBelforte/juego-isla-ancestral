@@ -46,8 +46,36 @@ def limpiar():
 
 
 # ---------- 2) Materiales ----------
+def _normalizar_emisivo(emisivo):
+    """Devuelve ((r,g,b), fuerza) sin romper el contrato documentado.
+
+    B30 (2026-11-14): ademas de `((r,g,b), strength)` se acepta un
+    `color_rgb` PLANO de 3 floats, interpretado como `(rgb, 1.0)`.
+    Motivo: en B26 se llamo `mat(..., emisivo=(0.35, 0.30, 0.10))` y la
+    rama original hacia `(*emisivo[0], 1.0)` sobre un float -> TypeError.
+    NO era un bug de la plantilla: la API estaba documentada y 7 generadores
+    la usan bien. Fue un error de LLAMADA. Esta tolerancia evita que el
+    mismo error vuelva a reventar en silencio y da un mensaje claro para
+    cualquier otra forma. Los llamadores correctos NO cambian de resultado.
+    """
+    try:
+        n = len(emisivo)
+    except TypeError:
+        n = -1
+    if n == 2 and isinstance(emisivo[0], (tuple, list)) \
+            and len(emisivo[0]) == 3:
+        return tuple(float(v) for v in emisivo[0]), float(emisivo[1])
+    if n == 3 and all(isinstance(v, (int, float)) for v in emisivo):
+        return tuple(float(v) for v in emisivo), 1.0
+    raise TypeError('emisivo debe ser ((r,g,b), strength) o (r,g,b); '
+                    'recibido %r' % (emisivo,))
+
+
 def mat(nombre, color, rough=0.95, spec=0.08, emisivo=None):
-    """Principled BSDF. `emisivo` = (color_rgb, strength) para lava/luces (E-59)."""
+    """Principled BSDF. `emisivo` = (color_rgb, strength) para lava/luces (E-59).
+
+    Tambien acepta un `color_rgb` plano (fuerza 1.0); ver `_normalizar_emisivo`.
+    """
     m = bpy.data.materials.new(nombre)
     m.use_nodes = True
     b = m.node_tree.nodes.get('Principled BSDF')
@@ -55,8 +83,9 @@ def mat(nombre, color, rough=0.95, spec=0.08, emisivo=None):
     b.inputs['Roughness'].default_value = rough
     b.inputs['Specular IOR Level'].default_value = spec
     if emisivo:
-        b.inputs['Emission Color'].default_value = (*emisivo[0], 1.0)
-        b.inputs['Emission Strength'].default_value = emisivo[1]
+        rgb, fuerza = _normalizar_emisivo(emisivo)
+        b.inputs['Emission Color'].default_value = (*rgb, 1.0)
+        b.inputs['Emission Strength'].default_value = fuerza
     return m
 
 
