@@ -1,0 +1,209 @@
+{
+  "conteo": {
+    "CIEGO": 1,
+    "ROJO": 3,
+    "VERDE": 21
+  },
+  "resultados": [
+    {
+      "detalle": "CHECKS=33 PASADOS=33 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/18-Casas/scripts/verificar_casa_mansion.py",
+      "tipo": "BLENDER",
+      "ultima": "VERDE: mansión íntegra en 3 blends"
+    },
+    {
+      "detalle": "RC=3",
+      "estado": "CIEGO",
+      "rc": 3,
+      "ruta": "tools/mcp/blender-mcp/18-Casas/scripts/verificar_casa_vecino.py",
+      "tipo": "PYTHON",
+      "ultima": "CIEGO: faltan bloques por ejecutar (no se hereda ningun verde)"
+    },
+    {
+      "detalle": "CHECKS=24 PASADOS=24 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/18-Casas/scripts/verificar_triangulos_runtime.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE"
+    },
+    {
+      "detalle": "CHECKS=47 PASADOS=47 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_bloque_tallado.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del bloque tallado en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=27 PASADOS=27 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_entera.py",
+      "tipo": "BLENDER",
+      "ultima": "VERDE: capitel íntegro en 3 blends"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_entera_glb.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: capitel integro en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=114 PASADOS=114 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_rota.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: 2 variantes de altura de columna_rota en 6 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=63 PASADOS=63 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_rota_blends.py",
+      "tipo": "BLENDER",
+      "ultima": "VERDE: forma de columna_rota integra en 6 blends"
+    },
+    {
+      "detalle": "CHECKS=53 PASADOS=53 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_dintel_caido.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del dintel caido en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=56 PASADOS=56 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_estructura_sumergida.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de la estructura sumergida en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=52 PASADOS=52 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/35-Mineria/scripts/verificar_cana_pescar.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de la cana de pescar en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=55 PASADOS=55 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/35-Mineria/scripts/verificar_carrito_vias.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del carrito de vias en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_cabra.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de la cabra en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_cangrejo_ermitano.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del cangrejo ermitano en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_gallina.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de la gallina en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_lagarto_isla.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del lagarto de isla en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=58 PASADOS=58 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_mariposa.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de la mariposa en 3 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=114 PASADOS=114 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/36-Fauna/scripts/verificar_pez_tropical.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva del pez tropical en 6 GLB de runtime"
+    },
+    {
+      "detalle": "CHECKS=100 PASADOS=100 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/40-Infraestructura/scripts/verificar_valla_madera.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: forma positiva de recto + esquina en 6 GLB de runtime"
+    },
+    {
+      "detalle": "RC=1",
+      "estado": "ROJO",
+      "rc": 1,
+      "ruta": "tools/mcp/blender-mcp/scripts-prueba/verificar_ojos_coco.py",
+      "tipo": "BLENDER",
+      "ultima": "Error: script failed, file: 'D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\scripts-prueba\\verifica"
+    },
+    {
+      "detalle": "RC=1",
+      "estado": "ROJO",
+      "rc": 1,
+      "ruta": "tools/mcp/blender-mcp/scripts-reutilizables/verificar_bounds.py",
+      "tipo": "BLENDER",
+      "ultima": "Error: script failed, file: 'D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\scripts-reutilizables\\v"
+    },
+    {
+      "detalle": "CHECKS=114 PASADOS=114 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/scripts-reutilizables/verificar_pendientes_M33_M70.py",
+      "tipo": "PYTHON",
+      "ultima": "VERDE: 6 GLB pendientes verificados en 6 bloques"
+    },
+    {
+      "detalle": "RC=1",
+      "estado": "ROJO",
+      "rc": 1,
+      "ruta": "tools/mcp/blender-mcp/scripts-reutilizables/verificar_visual.py",
+      "tipo": "BLENDER",
+      "ultima": "Error: script failed, file: 'D:\\Escritorio\\PORTFOLIO\\Proyectos para GitHub\\PROYECTOS OPENCODE\\juego-isla-ancestral\\tools\\mcp\\blender-mcp\\scripts-reutilizables\\v"
+    },
+    {
+      "detalle": "CHECKS=6 PASADOS=6 FALLOS=0",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/scripts-reutilizables/test_mat_emisivo.py",
+      "tipo": "BLENDER",
+      "ultima": "VERDE: contrato emisivo intacto + tolerancia B30 activa"
+    },
+    {
+      "detalle": "FUERA : 43",
+      "estado": "VERDE",
+      "rc": 0,
+      "ruta": "tools/mcp/blender-mcp/scripts-reutilizables/auditar_glb_490.py",
+      "tipo": "PYTHON",
+      "ultima": "  media 18-Casas_techo_paja.glb                        zmin=  2.6450  alto= 0.840  v=312"
+    }
+  ]
+}

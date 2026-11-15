@@ -1,0 +1,31 @@
+VERDE     BLENDER RC=0   verificar_casa_mansion.py                                      CHECKS=33 PASADOS=33 FALLOS=0
+CIEGO     PYTHON  RC=3   verificar_casa_vecino.py                                       RC=3
+VERDE     PYTHON  RC=0   verificar_triangulos_runtime.py                                CHECKS=24 PASADOS=24 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_bloque_tallado.py                                    CHECKS=47 PASADOS=47 FALLOS=0
+VERDE     BLENDER RC=0   verificar_columna_entera.py                                    CHECKS=27 PASADOS=27 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_columna_entera_glb.py                                CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_columna_rota.py                                      CHECKS=114 PASADOS=114 FALLOS=0
+VERDE     BLENDER RC=0   verificar_columna_rota_blends.py                               CHECKS=63 PASADOS=63 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_dintel_caido.py                                      CHECKS=53 PASADOS=53 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_estructura_sumergida.py                              CHECKS=56 PASADOS=56 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_cana_pescar.py                                       CHECKS=52 PASADOS=52 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_carrito_vias.py                                      CHECKS=55 PASADOS=55 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_cabra.py                                             CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_cangrejo_ermitano.py                                 CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_gallina.py                                           CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_lagarto_isla.py                                      CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_mariposa.py                                          CHECKS=58 PASADOS=58 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_pez_tropical.py                                      CHECKS=114 PASADOS=114 FALLOS=0
+VERDE     PYTHON  RC=0   verificar_valla_madera.py                                      CHECKS=100 PASADOS=100 FALLOS=0
+ROJO      BLENDER RC=1   verificar_ojos_coco.py                                         RC=1
+ROJO      BLENDER RC=1   verificar_bounds.py                                            RC=1
+VERDE     PYTHON  RC=0   verificar_pendientes_M33_M70.py                                CHECKS=114 PASADOS=114 FALLOS=0
+ROJO      BLENDER RC=1   verificar_visual.py                                            RC=1
+VERDE     BLENDER RC=0   test_mat_emisivo.py                                            CHECKS=6 PASADOS=6 FALLOS=0
+VERDE     PYTHON  RC=0   auditar_glb_490.py                                             FUERA : 43
+
+RESUMEN_B31 CIEGO=1 ROJO=3 VERDE=21
+TOTAL=25
+SIN_EVIDENCIA=0 []
+ROJO_O_ERROR=3 ['tools/mcp/blender-mcp/scripts-prueba/verificar_ojos_coco.py', 'tools/mcp/blender-mcp/scripts-reutilizables/verificar_bounds.py', 'tools/mcp/blender-mcp/scripts-reutilizables/verificar_visual.py']
+SALIDAS Temp\hy4_b31_barrido_20261115.json / Temp\hy4_b31_barrido_20261115.txt

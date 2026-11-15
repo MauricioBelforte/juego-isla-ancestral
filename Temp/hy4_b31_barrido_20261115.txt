@@ -1,0 +1,39 @@
+VERDE     BLENDER RC=0   tools/mcp/blender-mcp/18-Casas/scripts/verificar_casa_mansion.py | CHECKS=33 PASADOS=33 FALLOS=0 | VERDE: mansión íntegra en 3 blends
+CIEGO     PYTHON  RC=3   tools/mcp/blender-mcp/18-Casas/scripts/verificar_casa_vecino.py | RC=3 | CIEGO: faltan bloques por ejecutar (no se hereda ningun verde)
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/18-Casas/scripts/verificar_triangulos_runtime.py | CHECKS=24 PASADOS=24 FALLOS=0 | VERDE
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_bloque_tallado.py | CHECKS=47 PASADOS=47 FALLOS=0 | VERDE: forma positiva del bloque tallado en 3 GLB de runtime
+VERDE     BLENDER RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_entera.py | CHECKS=27 PASADOS=27 FALLOS=0 | VERDE: capitel íntegro en 3 blends
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_entera_glb.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: capitel integro en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_rota.py | CHECKS=114 PASADOS=114 FALLOS=0 | VERDE: 2 variantes de altura de columna_rota en 6 GLB de runtime
+VERDE     BLENDER RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_columna_rota_blends.py | CHECKS=63 PASADOS=63 FALLOS=0 | VERDE: forma de columna_rota integra en 6 blends
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_dintel_caido.py | CHECKS=53 PASADOS=53 FALLOS=0 | VERDE: forma positiva del dintel caido en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/25-Ruinas-Templos/scripts/verificar_estructura_sumergida.py | CHECKS=56 PASADOS=56 FALLOS=0 | VERDE: forma positiva de la estructura sumergida en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/35-Mineria/scripts/verificar_cana_pescar.py | CHECKS=52 PASADOS=52 FALLOS=0 | VERDE: forma positiva de la cana de pescar en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/35-Mineria/scripts/verificar_carrito_vias.py | CHECKS=55 PASADOS=55 FALLOS=0 | VERDE: forma positiva del carrito de vias en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_cabra.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: forma positiva de la cabra en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_cangrejo_ermitano.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: forma positiva del cangrejo ermitano en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_gallina.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: forma positiva de la gallina en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_lagarto_isla.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: forma positiva del lagarto de isla en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_mariposa.py | CHECKS=58 PASADOS=58 FALLOS=0 | VERDE: forma positiva de la mariposa en 3 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/36-Fauna/scripts/verificar_pez_tropical.py | CHECKS=114 PASADOS=114 FALLOS=0 | VERDE: forma positiva del pez tropical en 6 GLB de runtime
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/40-Infraestructura/scripts/verificar_valla_madera.py | CHECKS=100 PASADOS=100 FALLOS=0 | VERDE: forma positiva de recto + esquina en 6 GLB de runtime
+ROJO      BLENDER RC=1   tools/mcp/blender-mcp/scripts-prueba/verificar_ojos_coco.py | RC=1 | Error: script failed, file: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\scripts-prueba\verifica
+ROJO      BLENDER RC=1   tools/mcp/blender-mcp/scripts-reutilizables/verificar_bounds.py | RC=1 | Error: script failed, file: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\scripts-reutilizables\v
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/scripts-reutilizables/verificar_pendientes_M33_M70.py | CHECKS=114 PASADOS=114 FALLOS=0 | VERDE: 6 GLB pendientes verificados en 6 bloques
+ROJO      BLENDER RC=1   tools/mcp/blender-mcp/scripts-reutilizables/verificar_visual.py | RC=1 | Error: script failed, file: 'D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\tools\mcp\blender-mcp\scripts-reutilizables\v
+VERDE     BLENDER RC=0   tools/mcp/blender-mcp/scripts-reutilizables/test_mat_emisivo.py | CHECKS=6 PASADOS=6 FALLOS=0 | VERDE: contrato emisivo intacto + tolerancia B30 activa
+VERDE     PYTHON  RC=0   tools/mcp/blender-mcp/scripts-reutilizables/auditar_glb_490.py | FUERA : 43 |   media 18-Casas_techo_paja.glb                        zmin=  2.6450  alto= 0.840  v=312
+RESUMEN_B31 CIEGO=1 ROJO=3 VERDE=21 TOTAL=25
+
+=== RECTIFICACION B31 (00:42, diagnostico por salida completa) ===
+Barrido crudo: VERDE=21 ROJO=3 CIEGO=1 SIN_EVIDENCIA=0 TOTAL=25
+Corregido    : VERDE=22 NO_APLICA_ENTORNO=3 HERRAMIENTA=1 ROJO_REAL=0 CIEGO_REAL=0
+casa_vecino  : requiere 3 GLB por argv; con ellos 36/36/0 VERDE. Los 36 fallos
+               con Blender eran '-b' tomado como ruta (error de invocacion MIO).
+bounds / ojos_coco : ConnectionRefusedError socket MCP 9876 -> NO_APLICA.
+verificar_visual   : ModuleNotFoundError PIL -> NO_APLICA.
+auditar_glb_490    : 43 FUERA son FALSOS POSITIVOS de criterio (techos z=2.645,
+               decoracion colgada z=0.52-0.59, gaviota, piezas NPC, vegetacion
+               con origen 0). Z_APOYO solo aplica a props apoyados en el suelo.
+RESULTADO    : 0 guardias MUERTAS Y VERDES, 0 regresiones.
+Detalle      : Temp/hy4_b31_clasificacion_corregida_20261115.json

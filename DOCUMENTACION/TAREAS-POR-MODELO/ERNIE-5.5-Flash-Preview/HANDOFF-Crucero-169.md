@@ -8,9 +8,23 @@
 
 ```
 tools/mcp/blender-mcp/169-Crucero/crucero_exterior_lowpoly.blend
-colección: M169_Crucero · 102 objetos · 6.469 vértices · 12 materiales
+colección: M169_Crucero · 101 objetos · 8.205 vértices · 12 materiales
 z: 0,0450 … 16,93 m   (Z_APOYO correcto; el mástil de radar es el punto más alto)
 ```
+
+**Mejoras del 2026-11-14 (segunda pasada, sin ver el render):**
+
+| Mejora | Detalle |
+|---|---|
+| **Ventanas en cinta (ribbon)** en los 3 niveles | el nivel 1 era una **pared blanca lisa de 33 m**; ahora tiene banda vidriada continua de 0,95 a 2,15 m sobre el piso de cada nivel |
+| **Pilares cada 2,4 m** | 3 objetos (uno por nivel) con todas las islas → dan ritmo de ventanas |
+| **Viseras sobre cada banda** | sobresalen 42-52 mm de la pared |
+| **24 ventanas sueltas eliminadas** | 14 ojos de buey + 10 del comedor quedaban dentro de la cinta |
+| **6 puertas de paseo más** | 12 en total en el nivel 1 |
+| **Cartel de popa** | espejo del de proa |
+| **Chimeneas simétricas** | estaban en y=−6 y +8 → ahora **±6** |
+
+**Bug que corregí en el camino:** la banda vidriada quedaba primero **0,29 m dentro de la pared** (pasaba `z` absoluta donde el cálculo del contorno espera `z` local) y después **0,15 m flotando** (la pared se inclina: anillos a 1,00 / 0,995 / 0,965 / 0,930 y la banda se escalaba 1,006 fijo). Ahora sigue la inclinación real y queda a **+6/7 mm** de la pared.
 
 ## Decisiones de diseño ya tomadas (no renegociar sin orden)
 

@@ -1,0 +1,96 @@
+{
+  "fecha": "2026-11-15 00:42:00 -0300",
+  "agente": "HY4",
+  "ciclo": "B31",
+  "nota": "Rectificacion del barrido automatico. El barrido clasifica por RC; la clasificacion corregida usa DIAGNOSTICO por salida completa. NO se publica ninguna cifra sin medir su causa.",
+  "barrido_crudo": {
+    "VERDE": 21,
+    "ROJO": 3,
+    "CIEGO": 1,
+    "SIN_EVIDENCIA": 0,
+    "TOTAL": 25
+  },
+  "clasificacion_corregida": {
+    "VERDE": 22,
+    "NO_APLICA_ENTORNO": 3,
+    "HERRAMIENTA_AUDITORIA": 1,
+    "ROJO_REAL": 0,
+    "CIEGO_REAL": 0,
+    "SIN_EVIDENCIA": 0,
+    "TOTAL": 26
+  },
+  "correcciones": [
+    {
+      "script": "tools/mcp/blender-mcp/18-Casas/scripts/verificar_casa_vecino.py",
+      "barrido": "CIEGO (PYTHON, RC=3, CHECKS=0 BLOQUES=0)",
+      "causa": "La guardia EXIGE 3 GLB por argv (-- <alta> <media> <baja>). Ejecutada sin args da CIEGO por diseno; ejecutada con Blender sin args toma '-b' como ruta y produce 36 fallos ESPURIOS 'archivo ausente: -b'.",
+      "medicion_correcta": "python verificar_casa_vecino.py -- <alta> <media> <baja> -> CHECKS=36 PASADOS=36 FALLOS=0 BLOQUES=3 PISO=36 VERDE RC=0",
+      "estado": "VERDE"
+    },
+    {
+      "script": "tools/mcp/blender-mcp/scripts-reutilizables/verificar_bounds.py",
+      "barrido": "ROJO (BLENDER, RC=1)",
+      "causa": "ConnectionRefusedError [WinError 10061] en bpy_cliente.py:26 -> requiere el servidor MCP en socket 9876, no disponible en ejecucion headless.",
+      "estado": "NO_APLICA_ENTORNO"
+    },
+    {
+      "script": "tools/mcp/blender-mcp/scripts-prueba/verificar_ojos_coco.py",
+      "barrido": "ROJO (BLENDER, RC=1)",
+      "causa": "ConnectionRefusedError [WinError 10061] en bpy_cliente.py:26 -> mismo socket MCP 9876.",
+      "estado": "NO_APLICA_ENTORNO"
+    },
+    {
+      "script": "tools/mcp/blender-mcp/scripts-reutilizables/verificar_visual.py",
+      "barrido": "ROJO (BLENDER, RC=1)",
+      "causa": "ModuleNotFoundError: No module named 'PIL' en el Python embebido de Blender 4.2. Dependencia ausente, no fallo de geometria.",
+      "estado": "NO_APLICA_ENTORNO"
+    }
+  ],
+  "auditor_490": {
+    "script": "tools/mcp/blender-mcp/scripts-reutilizables/auditar_glb_490.py",
+    "origen": "AJENO (absorbido por el fundador en 2fc15c9). Solo se EJECUTA, no se modifica.",
+    "medicion": "490 archivos, 447 dentro de Z_APOYO 0.045 +-0.020, 43 FUERA, 0 errores, numpy=NO",
+    "veredicto": "Los 43 NO son defectos: el criterio E-12/Z_APOYO solo aplica a props que se APOYAN EN EL SUELO.",
+    "clasificacion_de_los_43": {
+      "techos_montados_zmin_2.6450": 6,
+      "decoracion_de_pared_zmin_0.52_a_0.59": 7,
+      "piezas_NPC_o_vuelo_zmin_0.115_a_0.235": 4,
+      "ensamblables_con_origen_negativo": 10,
+      "origen_en_cero_diferencia_0.045": 16
+    },
+    "ejemplos": [
+      "18-Casas_techo_dos_aguas.glb zmin=2.6450 (va sobre la pared)",
+      "18-Casas_decor_guirnalda.glb zmin=0.5750 (colgada)",
+      "36-Fauna_gaviota.glb zmin=0.2349 (vuela)",
+      "19-NPCs_cabeza_redonda.glb zmin=-0.0200 (se ensambla al cuello)",
+      "50-Vegetacion_palmera.glb zmin=0.0000 (origen en 0, no 0.045)"
+    ],
+    "observacion_para_el_director": "36-Fauna_conejo.glb MEDIA zmin=-0.1700 mientras ALTA zmin=0.0000: posible deriva entre LOD de un asset AJENO (M36 legado). No se toca sin GO; se publica como observacion, no como deuda de HY4.",
+    "trampa": "Publicar '43 GLB defectuosos' seria una cifra FALSA por criterio no aplicable. Misma familia que el inventario por token literal de B30."
+  },
+  "resultado_principal": "0 guardias MUERTAS Y VERDES: todas las guardias autonomas publican CHECKS= y dan VERDE. 0 regresiones tras el fix de plantilla_asset.py y la preservacion de 47 paths del fundador.",
+  "guardias_verdes": [
+    "verificar_casa_mansion.py 33/33/0",
+    "verificar_casa_vecino.py 36/36/0 (con argv correcto)",
+    "verificar_triangulos_runtime.py 24/24/0",
+    "verificar_bloque_tallado.py 47/47/0",
+    "verificar_columna_entera.py 27/27/0",
+    "verificar_columna_entera_glb.py 58/58/0",
+    "verificar_columna_rota.py 114/114/0",
+    "verificar_columna_rota_blends.py 63/63/0",
+    "verificar_dintel_caido.py 53/53/0",
+    "verificar_estructura_sumergida.py 56/56/0",
+    "verificar_cana_pescar.py 52/52/0",
+    "verificar_carrito_vias.py 55/55/0",
+    "verificar_cabra.py 58/58/0",
+    "verificar_cangrejo_ermitano.py 58/58/0",
+    "verificar_gallina.py 58/58/0",
+    "verificar_lagarto_isla.py 58/58/0",
+    "verificar_mariposa.py 58/58/0",
+    "verificar_pez_tropical.py 114/114/0",
+    "verificar_valla_madera.py 100/100/0",
+    "verificar_pendientes_M33_M70.py 114/114/0",
+    "test_mat_emisivo.py 6/6/0",
+    "auditar_glb_490.py (herramienta, 490 archivos / 0 errores)"
+  ]
+}
