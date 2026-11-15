@@ -329,7 +329,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 | Proveedor | Baidu |
 | Data | Prompts y respuestas pueden ser retenidos por el proveedor |
 | Liberado | 2026-11-11 |
-| Estado | **En flota (2026-11-13)** — nicho: 3D Blender (medición/creación de assets) + análisis de assets por binario + saneamiento de documentación. Reporta a agnes-3-flash. |
+| Estado | **En flota (2026-11-13)** — nicho: **modelado de OBJETOS/props en Blender** (mobiliario, herramientas, decoración, estructuras pequeñas), **auditoría de assets por binario** (GLB/·blend: escala, normales, z_min, vértices, materiales) y **saneamiento de documentación**. Reporta a agnes-3-flash. |
 
 **Benchmark público (Baidu, 2026-11-11):** Terminal-Bench 4.0 46.5%, DeepSWE v1.1 71.2%, AutomationBench 61.9%, APEX-Agents 1.1 64.2%, DRACO 84.9%, SpreadsheetBench V2 36.4%, OfficeQA Pro V2 67.9%. Benchmarks de terceros: Terminal-Bench-Science 21.0, NL2Repo-Bench 64.8, Toolathlon-Verified 79.0, MCP-Atlas 84.6, BrowseComp 87.4, HLE sin tools 46.4, BlenderWorld text-only 79.0.
 
@@ -349,6 +349,20 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 **Regla de asignación:** tareas de razonamiento de largo horizonte, análisis multimodal (texturas, modelos 3D, escenas .tscn con imágenes), documentación con diagramas, modelado 3D procedural (Blender/CAD), deep research, tareas que requieren contexto de 1M tokens. NO asignar: tareas de salida de imagen/audio/video, escaneo estático masivo de código (usar Crouton Alpha), análisis de arquitectura pura (usar Glyph Cluster).
 
 **Método de trabajo:** análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica. Para tareas de largo horizonte: descomponer en macro-steps con auto-evaluación entre cada paso.
+
+### ⛔ NO PERSONAJES (directiva del fundador, 2026-11-14)
+
+Se le encargó diseñar un NPC (Mayordomo del Pueblo, M161 §4.1). Resultado: el modelo
+**no tiene precisión para diseño de personajes** — sin visión no puede juzgar proporción,
+silueta ni si una pieza lee bien, y el intento (2 iteraciones) quedó con piezas mal
+proporcionadas y superpuestas. Veredicto del fundador: **"no se te da bien el diseño de
+personajes con precisión... te doy la creación de objetos pero no de personajes"**.
+
+- **SÍ:** modelado procedural de **objetos** (props, mobiliario, herramientas, estructuras),
+  con medidas verificadas numéricamente contra el asset del juego.
+- **NO:** diseño de **personajes** (cuerpo, rostro, proporción, silueta, vestimenta ajustada),
+  ni **QA visual** de ningún tipo.
+- **Regla derivada:** si una tarea requiere juzgar cómo *se ve* algo, **no es para este modelo**.
 
 ### Verificado en ejecución (2026-11-13, ingreso a la flota)
 

@@ -4,22 +4,19 @@
 **Fecha:** 2026-11-13 08:05
 **Base:** RIEL-1 CERRADO 12/12
 
-## Bloque 4: Fixes Z_APOYO (5)
-> 🟡 **ESTADO REAL 2026-11-14 00:55 (msg 016): 4 de los 5 estaban PERFECTOS. Solo el conejo tiene desvio real.**
-> Re-export ejecutado (76 GLB, 0 errores) → `git status` sobre `assets/3d` = **0 archivos modificados**: los GLB ya estaban al dia.
-> La causa de mi "5 hundidos" fue medir **esquinas de AABB** por la matriz del nodo (trampa E-24). Con vertices reales:
-> perla/globo/pedernal/comun = **+0,0450 exacto**. `conejo` alta 0,0000 y media −0,1700.
-> **No hay fix de .blend ni de pipeline.** El unico pendiente real es el conejo (M36, de HY4).
-- [x] Perla ancestral: fix pivote z_min → **sin fix**: `.blend` zmin=0.0450 (patines). GLB desfasado: -0.586
-- [x] Globo del viento: fix pivote z_min → **sin fix**: `.blend` zmin=0.0450 (patines). GLB desfasado: -0.336
-- [x] Roca pedernal: fix pivote z_min → **sin fix**: `.blend` zmin=0.0450 (ambas mallas). GLB desfasado: -0.292
-- [x] Roca comun: fix pivote z_min → **sin fix**: `.blend` zmin=0.0450 (ambas mallas). GLB desfasado: -0.109
-- [x] Conejo: fix pivote z_min → **sin fix**: `.blend` zmin=0.0450 (patas). GLB desfasado: -0.170
+## Bloque 4: Fixes Z_APOYO (5) — ⛔ **ANULADO por agnes-3-flash (msg 017)**
+> **No hay trabajo en este bloque.** Los 5 GLB estaban correctos desde el principio (+0,0450 exacto).
+> El "hundido" era mi metodo: transformar **esquinas de AABB** por la matriz del nodo (trampa E-24, documentada en `corregir_asset.py` L71-75).
+> Re-export ejecutado (76 GLB, 0 errores) → `git status` sobre `assets/3d` = **0 archivos modificados**: no-op.
+> **Unico real: `36-Fauna_conejo.glb`** — alta 0,0000 / media −0,1700 (el `.blend` v12 = +0,0450). agnes lo acepta como pieza plana (017). Es M36 (HY4), no lo toco.
+- [x] Perla ancestral — **ANULADA**: GLB +0,0450 correcto
+- [x] Globo del viento — **ANULADA**: GLB +0,0450 correcto
+- [x] Roca pedernal — **ANULADA**: GLB +0,0450 correcto
+- [x] Roca comun — **ANULADA**: GLB +0,0450 correcto
+- [x] Conejo — **ANULADA como fix**: queda como observacion M36 (alta 0,0000, media −0,1700)
 
-**Accion real pendiente (requiere GO):** `EXPORT_FORZAR=1 EXPORT_MODULOS=15-Recursos;67-Vehiculos;36-Fauna` dentro de Blender
-→ re-exporta 76 GLB (mtime skip E-49 los saltea hoy). **No lo ejecuto solo: son assets de M15/M67/M36, ajenos a mi nicho.**
-
-**Dato de respaldo:** 13 `.blend` respaldados en `Obsoletos/2026-11-13_23-25-26_fix-z_apoyo-riel2/` antes de medir.
+**Respaldo:** 13 `.blend` en `Obsoletos/2026-11-13_23-25-26_fix-z_apoyo-riel2/` (nombres unicos, sin colision).
+⚠️ Mi respaldo de GLB (`Obsoletos/2026-11-13_23-29-15_glb-antes-reexport/`) **es inservible**: copie alta/media/baja a carpeta plana y los nombres se pisan (quedaron 27 de 78). Declarado en msg 016 §3.
 
 ## Bloque 5: Verificacion (4)
 - [x] M18 saneo ventanas (65) — **HECHO 2026-11-13 20:15** (msg 013): el saneo no estaba aplicado (acuse sin guardar); lo aplique yo. 65 verificado en disco, 4 QA AABB a `[?]`, drift de 11 corregido, CHECKLIST sincronizado (verificar_checklist.py ya no marca M18).

@@ -518,3 +518,65 @@
 - **Aplica a:** generación de variantes MEDIA/BAJA de cualquier mueble con patas,
   peanas o tacos.
 - **Relacionado:** E-96 (poda por caras), E-104, E-50.
+
+
+---
+
+### E-106 - El exportador de GLB no corre desde el addon MCP: `Context object has no attribute 'active_object'`
+
+**Descubierto:** 2026-11-13/14 por ERNIE-5.5-Flash-Preview (Kilo Code).
+**Modulo:** exportacion a Godot (cualquiera que use `exportar_godot.py` o `bpy.ops.export_scene.gltf`).
+
+**Sintoma.** Se intenta exportar desde la sesion viva de Blender (por `execute_blender_code`
+del addon MCP, o desde `bpy_cliente.py`) y **todos** los archivos fallan con:
+
+```
+AttributeError: 'Context' object has no attribute 'active_object'
+  File ".../addons_core/io_scene_gltf2/blender/exp/gltf2_blender_export.py", line 23, in save
+    if bpy.context.active_object is not None:
+```
+
+El exportador de glTF de Blender 4.2 **necesita un contexto con `active_object`**. El contexto
+restringido con el que corre el addon MCP no lo expone, asi que `bpy.ops.export_scene.gltf`
+revienta **antes** de escribir un solo byte. En el resumen del exportador se ve como
+`errores: 76` con el mismo traceback repetido por archivo.
+
+**Causa raiz.** No es el asset ni el script: es **donde se ejecuta**. `execute_blender_code`
+corre dentro del contexto del addon (sin `active_object`); `blender -b --python` corre con un
+contexto completo de Blender.
+
+**Solucion (unica valida): correr headless.**
+
+```powershell
+$env:EXPORT_FORZAR = "1"
+$env:EXPORT_MODULOS = "15-Recursos;67-Vehiculos;36-Fauna"
+& "D:\Archivos de programa\Blender Foundation\Blender 4.2\blender.exe" `
+    -b --factory-startup --python "tools\mcp\blender-mcp\scripts-reutilizables\exportar_godot.py"
+```
+
+Notas:
+- `exportar_godot.py` **esta disenado para headless**: no recibe argv comodo en `-b --python`,
+  por eso lee opciones de variables de entorno (`EXPORT_DRY`, `EXPORT_ONLY`, `EXPORT_MODULOS`,
+  `EXPORT_FORZAR`).
+- Sin `EXPORT_FORZAR=1` saltea todo por mtime (E-49) y el resumen dice `exportados: 0,
+  saltados: N`. Eso **no es un error**: es el guard funcionando.
+- `EXPORT_DRY=1` **se hereda entre llamadas** si lo pusiste en `os.environ` dentro de Blender:
+  en la sesion siguiente el export sigue en dry-run y devuelve `"planned"` en cada item.
+  Si ves `"planned"` en el detalle, es dry-run pegado: `os.environ.pop('EXPORT_DRY', None)`.
+
+**Verificacion de que el export sirvio de verdad.** El resumen `{"exportados": 76, "errores": 0}`
+**no alcanza**: el exportador puede decir "ok" y no cambiar nada. Comprobar con
+
+```powershell
+git status --short -- game/isla-ancestral/assets/3d
+```
+
+Si sale **vacio**, los GLB ya estaban al dia (el export es determinista y no-op). Si sale una
+lista, esos son los archivos realmente reescritos. **Un "0 errores" no prueba que se exporto.**
+
+**Aplica a:** cualquier agente que intente exportar/convertir geometria desde la sesion MCP en
+vez de headless. Si el error aparece en otro operador (`export_scene.fbx`, `wm.save_as_mainfile`
+con contexto restringido), la causa y la salida son las mismas.
+
+**Relacionado:** E-45 (auditar en headless, no en GUI), E-49 (salto por mtime), E-63 (whitelist
+de modulos del exportador: un modulo nuevo fuera de la tupla exporta 0 en silencio).

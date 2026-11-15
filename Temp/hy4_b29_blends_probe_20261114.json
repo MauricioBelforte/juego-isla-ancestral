@@ -1,0 +1,2320 @@
+{
+  "columna_rota_alta_lowpoly": {
+    "alta": {
+      "altura": 2.145,
+      "apoyo_verts": 28,
+      "bandas": [
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0925,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.0925
+        },
+        {
+          "a": 0.1153,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1153
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1675,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.1675
+        },
+        {
+          "a": 0.1932,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1932
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.285,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.285
+        },
+        {
+          "a": 0.3768,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3768
+        },
+        {
+          "a": 0.4547,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4547
+        },
+        {
+          "a": 0.5067,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5067
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.84,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.92,
+          "caras_laterales": 24,
+          "de": 1.84
+        },
+        {
+          "a": 1.94,
+          "caras_laterales": 0,
+          "de": 1.92
+        },
+        {
+          "a": 1.96,
+          "caras_laterales": 0,
+          "de": 1.94
+        },
+        {
+          "a": 1.97,
+          "caras_laterales": 0,
+          "de": 1.96
+        },
+        {
+          "a": 1.98,
+          "caras_laterales": 0,
+          "de": 1.97
+        },
+        {
+          "a": 1.99,
+          "caras_laterales": 0,
+          "de": 1.98
+        },
+        {
+          "a": 2.01,
+          "caras_laterales": 0,
+          "de": 1.99
+        },
+        {
+          "a": 2.03,
+          "caras_laterales": 0,
+          "de": 2.01
+        },
+        {
+          "a": 2.04,
+          "caras_laterales": 0,
+          "de": 2.03
+        },
+        {
+          "a": 2.06,
+          "caras_laterales": 0,
+          "de": 2.04
+        },
+        {
+          "a": 2.09,
+          "caras_laterales": 0,
+          "de": 2.06
+        },
+        {
+          "a": 2.11,
+          "caras_laterales": 0,
+          "de": 2.09
+        },
+        {
+          "a": 2.12,
+          "caras_laterales": 0,
+          "de": 2.11
+        },
+        {
+          "a": 2.14,
+          "caras_laterales": 0,
+          "de": 2.12
+        },
+        {
+          "a": 2.15,
+          "caras_laterales": 0,
+          "de": 2.14
+        },
+        {
+          "a": 2.16,
+          "caras_laterales": 0,
+          "de": 2.15
+        },
+        {
+          "a": 2.18,
+          "caras_laterales": 0,
+          "de": 2.16
+        },
+        {
+          "a": 2.19,
+          "caras_laterales": 0,
+          "de": 2.18
+        }
+      ],
+      "bytes": 1024756,
+      "caras": 220,
+      "huella": [
+        1.228,
+        0.9498
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Glifo",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 45,
+      "niveles": {
+        "0.045": 28,
+        "0.0631": 4,
+        "0.0633": 4,
+        "0.0925": 8,
+        "0.1147": 4,
+        "0.1153": 4,
+        "0.125": 4,
+        "0.145": 4,
+        "0.165": 4,
+        "0.1675": 8,
+        "0.1919": 4,
+        "0.1932": 4,
+        "0.2": 8,
+        "0.205": 36,
+        "0.22": 8,
+        "0.255": 24,
+        "0.283": 4,
+        "0.285": 4,
+        "0.3741": 4,
+        "0.3768": 4,
+        "0.4513": 4,
+        "0.4547": 4,
+        "0.5029": 4,
+        "0.5067": 4,
+        "0.521": 2,
+        "0.525": 2,
+        "1.84": 24,
+        "1.92": 41,
+        "1.94": 1,
+        "1.96": 1,
+        "1.97": 1,
+        "1.98": 1,
+        "1.99": 1,
+        "2.01": 1,
+        "2.03": 1,
+        "2.04": 1,
+        "2.06": 1,
+        "2.09": 1,
+        "2.11": 1,
+        "2.12": 1,
+        "2.14": 1,
+        "2.15": 1,
+        "2.16": 1,
+        "2.18": 1,
+        "2.19": 1
+      },
+      "objetos": 12,
+      "por_obj": [
+        {
+          "caras": 96,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_Fuste",
+          "tris": 168,
+          "verts": 97,
+          "z": [
+            0.205,
+            1.92
+          ]
+        },
+        {
+          "caras": 32,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Corona",
+          "tris": 48,
+          "verts": 33,
+          "z": [
+            1.92,
+            2.19
+          ]
+        },
+        {
+          "caras": 14,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_Basa",
+          "tris": 44,
+          "verts": 24,
+          "z": [
+            0.045,
+            0.205
+          ]
+        },
+        {
+          "caras": 18,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_Fragmento",
+          "tris": 60,
+          "verts": 32,
+          "z": [
+            0.045,
+            0.521
+          ]
+        },
+        {
+          "caras": 18,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_Fragmento_Banda",
+          "tris": 60,
+          "verts": 32,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_Musgo_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_Musgo_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_Glifo_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_Glifo_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.145
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.125
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_3",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.165
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_alta_lowpoly.blend",
+      "sha12": "e89932d511c4",
+      "tris": 464,
+      "verts": 274,
+      "zmax": 2.19,
+      "zmin": 0.045
+    },
+    "baja": {
+      "altura": 2.1457,
+      "apoyo_verts": 24,
+      "bandas": [
+        {
+          "a": 0.0472,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0477,
+          "caras_laterales": 0,
+          "de": 0.0472
+        },
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.0477
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0807,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.085,
+          "caras_laterales": 0,
+          "de": 0.0807
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.085
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.1485,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1503,
+          "caras_laterales": 0,
+          "de": 0.1485
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.1503
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.2067,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.2133,
+          "caras_laterales": 0,
+          "de": 0.2067
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.2133
+        },
+        {
+          "a": 0.254,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.254
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.298,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3239,
+          "caras_laterales": 0,
+          "de": 0.298
+        },
+        {
+          "a": 0.3323,
+          "caras_laterales": 0,
+          "de": 0.3239
+        },
+        {
+          "a": 0.3329,
+          "caras_laterales": 0,
+          "de": 0.3323
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.3329
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4827,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.4926,
+          "caras_laterales": 0,
+          "de": 0.4827
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4926
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.92,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.94,
+          "caras_laterales": 0,
+          "de": 1.92
+        },
+        {
+          "a": 1.955,
+          "caras_laterales": 0,
+          "de": 1.94
+        },
+        {
+          "a": 1.968,
+          "caras_laterales": 0,
+          "de": 1.955
+        },
+        {
+          "a": 1.9787,
+          "caras_laterales": 0,
+          "de": 1.968
+        },
+        {
+          "a": 2.04,
+          "caras_laterales": 0,
+          "de": 1.9787
+        },
+        {
+          "a": 2.0871,
+          "caras_laterales": 0,
+          "de": 2.04
+        },
+        {
+          "a": 2.1604,
+          "caras_laterales": 0,
+          "de": 2.0871
+        },
+        {
+          "a": 2.1649,
+          "caras_laterales": 0,
+          "de": 2.1604
+        },
+        {
+          "a": 2.19,
+          "caras_laterales": 0,
+          "de": 2.1649
+        },
+        {
+          "a": 2.1907,
+          "caras_laterales": 0,
+          "de": 2.19
+        }
+      ],
+      "bytes": 977764,
+      "caras": 160,
+      "huella": [
+        1.228,
+        0.9475
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 44,
+      "niveles": {
+        "0.045": 24,
+        "0.0472": 1,
+        "0.0477": 1,
+        "0.0631": 4,
+        "0.0633": 1,
+        "0.0807": 1,
+        "0.085": 2,
+        "0.1147": 4,
+        "0.125": 2,
+        "0.145": 4,
+        "0.1485": 1,
+        "0.1503": 2,
+        "0.165": 4,
+        "0.1919": 4,
+        "0.2": 4,
+        "0.205": 36,
+        "0.2067": 2,
+        "0.2133": 2,
+        "0.22": 4,
+        "0.254": 8,
+        "0.255": 8,
+        "0.283": 4,
+        "0.298": 1,
+        "0.3239": 1,
+        "0.3323": 1,
+        "0.3329": 1,
+        "0.3741": 4,
+        "0.4513": 4,
+        "0.4827": 2,
+        "0.4926": 2,
+        "0.5029": 4,
+        "0.521": 2,
+        "0.525": 1,
+        "1.92": 29,
+        "1.94": 1,
+        "1.955": 1,
+        "1.968": 1,
+        "1.9787": 1,
+        "2.04": 1,
+        "2.0871": 1,
+        "2.1604": 1,
+        "2.1649": 1,
+        "2.19": 1,
+        "2.1907": 1
+      },
+      "objetos": 4,
+      "por_obj": [
+        {
+          "caras": 84,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Piedra",
+          "tris": 158,
+          "verts": 94,
+          "z": [
+            0.045,
+            1.92
+          ]
+        },
+        {
+          "caras": 39,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_CorteFresco",
+          "tris": 57,
+          "verts": 39,
+          "z": [
+            0.045,
+            2.1907
+          ]
+        },
+        {
+          "caras": 27,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_PiedraOsc",
+          "tris": 72,
+          "verts": 40,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 10,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Musgo",
+          "tris": 16,
+          "verts": 12,
+          "z": [
+            0.2,
+            0.22
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_alta_lowpoly_baja.blend",
+      "sha12": "db06b845393f",
+      "tris": 303,
+      "verts": 185,
+      "zmax": 2.1907,
+      "zmin": 0.045
+    },
+    "media": {
+      "altura": 2.145,
+      "apoyo_verts": 28,
+      "bandas": [
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0925,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.0925
+        },
+        {
+          "a": 0.1153,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1153
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1675,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.1675
+        },
+        {
+          "a": 0.1932,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1932
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.285,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.285
+        },
+        {
+          "a": 0.3768,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3768
+        },
+        {
+          "a": 0.4547,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4547
+        },
+        {
+          "a": 0.5067,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5067
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.84,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.92,
+          "caras_laterales": 24,
+          "de": 1.84
+        },
+        {
+          "a": 1.94,
+          "caras_laterales": 0,
+          "de": 1.92
+        },
+        {
+          "a": 1.96,
+          "caras_laterales": 0,
+          "de": 1.94
+        },
+        {
+          "a": 1.97,
+          "caras_laterales": 0,
+          "de": 1.96
+        },
+        {
+          "a": 1.98,
+          "caras_laterales": 0,
+          "de": 1.97
+        },
+        {
+          "a": 1.99,
+          "caras_laterales": 0,
+          "de": 1.98
+        },
+        {
+          "a": 2.01,
+          "caras_laterales": 0,
+          "de": 1.99
+        },
+        {
+          "a": 2.03,
+          "caras_laterales": 0,
+          "de": 2.01
+        },
+        {
+          "a": 2.04,
+          "caras_laterales": 0,
+          "de": 2.03
+        },
+        {
+          "a": 2.06,
+          "caras_laterales": 0,
+          "de": 2.04
+        },
+        {
+          "a": 2.09,
+          "caras_laterales": 0,
+          "de": 2.06
+        },
+        {
+          "a": 2.11,
+          "caras_laterales": 0,
+          "de": 2.09
+        },
+        {
+          "a": 2.12,
+          "caras_laterales": 0,
+          "de": 2.11
+        },
+        {
+          "a": 2.14,
+          "caras_laterales": 0,
+          "de": 2.12
+        },
+        {
+          "a": 2.15,
+          "caras_laterales": 0,
+          "de": 2.14
+        },
+        {
+          "a": 2.16,
+          "caras_laterales": 0,
+          "de": 2.15
+        },
+        {
+          "a": 2.18,
+          "caras_laterales": 0,
+          "de": 2.16
+        },
+        {
+          "a": 2.19,
+          "caras_laterales": 0,
+          "de": 2.18
+        }
+      ],
+      "bytes": 986564,
+      "caras": 220,
+      "huella": [
+        1.228,
+        0.9498
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Glifo",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 45,
+      "niveles": {
+        "0.045": 28,
+        "0.0631": 4,
+        "0.0633": 4,
+        "0.0925": 8,
+        "0.1147": 4,
+        "0.1153": 4,
+        "0.125": 4,
+        "0.145": 4,
+        "0.165": 4,
+        "0.1675": 8,
+        "0.1919": 4,
+        "0.1932": 4,
+        "0.2": 8,
+        "0.205": 36,
+        "0.22": 8,
+        "0.255": 24,
+        "0.283": 4,
+        "0.285": 4,
+        "0.3741": 4,
+        "0.3768": 4,
+        "0.4513": 4,
+        "0.4547": 4,
+        "0.5029": 4,
+        "0.5067": 4,
+        "0.521": 2,
+        "0.525": 2,
+        "1.84": 24,
+        "1.92": 41,
+        "1.94": 1,
+        "1.96": 1,
+        "1.97": 1,
+        "1.98": 1,
+        "1.99": 1,
+        "2.01": 1,
+        "2.03": 1,
+        "2.04": 1,
+        "2.06": 1,
+        "2.09": 1,
+        "2.11": 1,
+        "2.12": 1,
+        "2.14": 1,
+        "2.15": 1,
+        "2.16": 1,
+        "2.18": 1,
+        "2.19": 1
+      },
+      "objetos": 5,
+      "por_obj": [
+        {
+          "caras": 114,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Piedra",
+          "tris": 228,
+          "verts": 129,
+          "z": [
+            0.045,
+            1.92
+          ]
+        },
+        {
+          "caras": 50,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_CorteFresco",
+          "tris": 84,
+          "verts": 57,
+          "z": [
+            0.045,
+            2.19
+          ]
+        },
+        {
+          "caras": 32,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_PiedraOsc",
+          "tris": 104,
+          "verts": 56,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 12,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Musgo",
+          "tris": 24,
+          "verts": 16,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 12,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Glifo",
+          "tris": 24,
+          "verts": 16,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_alta_lowpoly_media.blend",
+      "sha12": "25a1761eefb5",
+      "tris": 464,
+      "verts": 274,
+      "zmax": 2.19,
+      "zmin": 0.045
+    }
+  },
+  "columna_rota_baja_lowpoly": {
+    "alta": {
+      "altura": 1.445,
+      "apoyo_verts": 28,
+      "bandas": [
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0925,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.0925
+        },
+        {
+          "a": 0.1153,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1153
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1675,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.1675
+        },
+        {
+          "a": 0.1932,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1932
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.285,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.285
+        },
+        {
+          "a": 0.3768,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3768
+        },
+        {
+          "a": 0.4547,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4547
+        },
+        {
+          "a": 0.5067,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5067
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.14,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.22,
+          "caras_laterales": 24,
+          "de": 1.14
+        },
+        {
+          "a": 1.24,
+          "caras_laterales": 0,
+          "de": 1.22
+        },
+        {
+          "a": 1.26,
+          "caras_laterales": 0,
+          "de": 1.24
+        },
+        {
+          "a": 1.27,
+          "caras_laterales": 0,
+          "de": 1.26
+        },
+        {
+          "a": 1.28,
+          "caras_laterales": 0,
+          "de": 1.27
+        },
+        {
+          "a": 1.29,
+          "caras_laterales": 0,
+          "de": 1.28
+        },
+        {
+          "a": 1.31,
+          "caras_laterales": 0,
+          "de": 1.29
+        },
+        {
+          "a": 1.33,
+          "caras_laterales": 0,
+          "de": 1.31
+        },
+        {
+          "a": 1.34,
+          "caras_laterales": 0,
+          "de": 1.33
+        },
+        {
+          "a": 1.36,
+          "caras_laterales": 0,
+          "de": 1.34
+        },
+        {
+          "a": 1.39,
+          "caras_laterales": 0,
+          "de": 1.36
+        },
+        {
+          "a": 1.41,
+          "caras_laterales": 0,
+          "de": 1.39
+        },
+        {
+          "a": 1.42,
+          "caras_laterales": 0,
+          "de": 1.41
+        },
+        {
+          "a": 1.44,
+          "caras_laterales": 0,
+          "de": 1.42
+        },
+        {
+          "a": 1.45,
+          "caras_laterales": 0,
+          "de": 1.44
+        },
+        {
+          "a": 1.46,
+          "caras_laterales": 0,
+          "de": 1.45
+        },
+        {
+          "a": 1.48,
+          "caras_laterales": 0,
+          "de": 1.46
+        },
+        {
+          "a": 1.49,
+          "caras_laterales": 0,
+          "de": 1.48
+        }
+      ],
+      "bytes": 1024756,
+      "caras": 220,
+      "huella": [
+        1.228,
+        0.9498
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Glifo",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 45,
+      "niveles": {
+        "0.045": 28,
+        "0.0631": 4,
+        "0.0633": 4,
+        "0.0925": 8,
+        "0.1147": 4,
+        "0.1153": 4,
+        "0.125": 4,
+        "0.145": 4,
+        "0.165": 4,
+        "0.1675": 8,
+        "0.1919": 4,
+        "0.1932": 4,
+        "0.2": 8,
+        "0.205": 36,
+        "0.22": 8,
+        "0.255": 24,
+        "0.283": 4,
+        "0.285": 4,
+        "0.3741": 4,
+        "0.3768": 4,
+        "0.4513": 4,
+        "0.4547": 4,
+        "0.5029": 4,
+        "0.5067": 4,
+        "0.521": 2,
+        "0.525": 2,
+        "1.14": 24,
+        "1.22": 41,
+        "1.24": 1,
+        "1.26": 1,
+        "1.27": 1,
+        "1.28": 1,
+        "1.29": 1,
+        "1.31": 1,
+        "1.33": 1,
+        "1.34": 1,
+        "1.36": 1,
+        "1.39": 1,
+        "1.41": 1,
+        "1.42": 1,
+        "1.44": 1,
+        "1.45": 1,
+        "1.46": 1,
+        "1.48": 1,
+        "1.49": 1
+      },
+      "objetos": 12,
+      "por_obj": [
+        {
+          "caras": 96,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_Fuste",
+          "tris": 168,
+          "verts": 97,
+          "z": [
+            0.205,
+            1.22
+          ]
+        },
+        {
+          "caras": 32,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Corona",
+          "tris": 48,
+          "verts": 33,
+          "z": [
+            1.22,
+            1.49
+          ]
+        },
+        {
+          "caras": 14,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_Basa",
+          "tris": 44,
+          "verts": 24,
+          "z": [
+            0.045,
+            0.205
+          ]
+        },
+        {
+          "caras": 18,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_Fragmento",
+          "tris": 60,
+          "verts": 32,
+          "z": [
+            0.045,
+            0.521
+          ]
+        },
+        {
+          "caras": 18,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_Fragmento_Banda",
+          "tris": 60,
+          "verts": 32,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_Musgo_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_Musgo_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_Glifo_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_Glifo_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_1",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.145
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_2",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.125
+          ]
+        },
+        {
+          "caras": 6,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_Escombro_3",
+          "tris": 12,
+          "verts": 8,
+          "z": [
+            0.045,
+            0.165
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_baja_lowpoly.blend",
+      "sha12": "665f1d91ed9b",
+      "tris": 464,
+      "verts": 274,
+      "zmax": 1.49,
+      "zmin": 0.045
+    },
+    "baja": {
+      "altura": 1.4457,
+      "apoyo_verts": 24,
+      "bandas": [
+        {
+          "a": 0.0472,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0477,
+          "caras_laterales": 0,
+          "de": 0.0472
+        },
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.0477
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0807,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.085,
+          "caras_laterales": 0,
+          "de": 0.0807
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.085
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.1485,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1503,
+          "caras_laterales": 0,
+          "de": 0.1485
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.1503
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.2067,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.2133,
+          "caras_laterales": 0,
+          "de": 0.2067
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.2133
+        },
+        {
+          "a": 0.2539,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.2539
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.298,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3239,
+          "caras_laterales": 0,
+          "de": 0.298
+        },
+        {
+          "a": 0.3323,
+          "caras_laterales": 0,
+          "de": 0.3239
+        },
+        {
+          "a": 0.3329,
+          "caras_laterales": 0,
+          "de": 0.3323
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.3329
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4827,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.4926,
+          "caras_laterales": 0,
+          "de": 0.4827
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4926
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.1356,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.22,
+          "caras_laterales": 16,
+          "de": 1.1356
+        },
+        {
+          "a": 1.24,
+          "caras_laterales": 0,
+          "de": 1.22
+        },
+        {
+          "a": 1.255,
+          "caras_laterales": 0,
+          "de": 1.24
+        },
+        {
+          "a": 1.268,
+          "caras_laterales": 0,
+          "de": 1.255
+        },
+        {
+          "a": 1.2787,
+          "caras_laterales": 0,
+          "de": 1.268
+        },
+        {
+          "a": 1.34,
+          "caras_laterales": 0,
+          "de": 1.2787
+        },
+        {
+          "a": 1.3871,
+          "caras_laterales": 0,
+          "de": 1.34
+        },
+        {
+          "a": 1.4604,
+          "caras_laterales": 0,
+          "de": 1.3871
+        },
+        {
+          "a": 1.4649,
+          "caras_laterales": 0,
+          "de": 1.4604
+        },
+        {
+          "a": 1.49,
+          "caras_laterales": 0,
+          "de": 1.4649
+        },
+        {
+          "a": 1.4907,
+          "caras_laterales": 0,
+          "de": 1.49
+        }
+      ],
+      "bytes": 977784,
+      "caras": 161,
+      "huella": [
+        1.228,
+        0.9475
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 45,
+      "niveles": {
+        "0.045": 24,
+        "0.0472": 1,
+        "0.0477": 1,
+        "0.0631": 4,
+        "0.0633": 1,
+        "0.0807": 1,
+        "0.085": 2,
+        "0.1147": 4,
+        "0.125": 2,
+        "0.145": 4,
+        "0.1485": 1,
+        "0.1503": 2,
+        "0.165": 4,
+        "0.1919": 4,
+        "0.2": 4,
+        "0.205": 33,
+        "0.2067": 2,
+        "0.2133": 2,
+        "0.22": 4,
+        "0.2539": 8,
+        "0.255": 8,
+        "0.283": 4,
+        "0.298": 1,
+        "0.3239": 1,
+        "0.3323": 1,
+        "0.3329": 1,
+        "0.3741": 4,
+        "0.4513": 4,
+        "0.4827": 2,
+        "0.4926": 2,
+        "0.5029": 4,
+        "0.521": 2,
+        "0.525": 1,
+        "1.1356": 8,
+        "1.22": 23,
+        "1.24": 1,
+        "1.255": 1,
+        "1.268": 1,
+        "1.2787": 1,
+        "1.34": 1,
+        "1.3871": 1,
+        "1.4604": 1,
+        "1.4649": 1,
+        "1.49": 1,
+        "1.4907": 1
+      },
+      "objetos": 4,
+      "por_obj": [
+        {
+          "caras": 85,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Piedra",
+          "tris": 159,
+          "verts": 93,
+          "z": [
+            0.045,
+            1.22
+          ]
+        },
+        {
+          "caras": 39,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_CorteFresco",
+          "tris": 57,
+          "verts": 39,
+          "z": [
+            0.045,
+            1.4907
+          ]
+        },
+        {
+          "caras": 27,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_PiedraOsc",
+          "tris": 72,
+          "verts": 40,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 10,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Musgo",
+          "tris": 16,
+          "verts": 12,
+          "z": [
+            0.2,
+            0.22
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_baja_lowpoly_baja.blend",
+      "sha12": "a47c8bacca8a",
+      "tris": 304,
+      "verts": 184,
+      "zmax": 1.4907,
+      "zmin": 0.045
+    },
+    "media": {
+      "altura": 1.445,
+      "apoyo_verts": 28,
+      "bandas": [
+        {
+          "a": 0.0631,
+          "caras_laterales": 0,
+          "de": 0.045
+        },
+        {
+          "a": 0.0633,
+          "caras_laterales": 0,
+          "de": 0.0631
+        },
+        {
+          "a": 0.0925,
+          "caras_laterales": 0,
+          "de": 0.0633
+        },
+        {
+          "a": 0.1147,
+          "caras_laterales": 0,
+          "de": 0.0925
+        },
+        {
+          "a": 0.1153,
+          "caras_laterales": 0,
+          "de": 0.1147
+        },
+        {
+          "a": 0.125,
+          "caras_laterales": 0,
+          "de": 0.1153
+        },
+        {
+          "a": 0.145,
+          "caras_laterales": 0,
+          "de": 0.125
+        },
+        {
+          "a": 0.165,
+          "caras_laterales": 0,
+          "de": 0.145
+        },
+        {
+          "a": 0.1675,
+          "caras_laterales": 0,
+          "de": 0.165
+        },
+        {
+          "a": 0.1919,
+          "caras_laterales": 0,
+          "de": 0.1675
+        },
+        {
+          "a": 0.1932,
+          "caras_laterales": 0,
+          "de": 0.1919
+        },
+        {
+          "a": 0.2,
+          "caras_laterales": 0,
+          "de": 0.1932
+        },
+        {
+          "a": 0.205,
+          "caras_laterales": 0,
+          "de": 0.2
+        },
+        {
+          "a": 0.22,
+          "caras_laterales": 0,
+          "de": 0.205
+        },
+        {
+          "a": 0.255,
+          "caras_laterales": 0,
+          "de": 0.22
+        },
+        {
+          "a": 0.283,
+          "caras_laterales": 0,
+          "de": 0.255
+        },
+        {
+          "a": 0.285,
+          "caras_laterales": 0,
+          "de": 0.283
+        },
+        {
+          "a": 0.3741,
+          "caras_laterales": 0,
+          "de": 0.285
+        },
+        {
+          "a": 0.3768,
+          "caras_laterales": 0,
+          "de": 0.3741
+        },
+        {
+          "a": 0.4513,
+          "caras_laterales": 0,
+          "de": 0.3768
+        },
+        {
+          "a": 0.4547,
+          "caras_laterales": 0,
+          "de": 0.4513
+        },
+        {
+          "a": 0.5029,
+          "caras_laterales": 0,
+          "de": 0.4547
+        },
+        {
+          "a": 0.5067,
+          "caras_laterales": 0,
+          "de": 0.5029
+        },
+        {
+          "a": 0.521,
+          "caras_laterales": 0,
+          "de": 0.5067
+        },
+        {
+          "a": 0.525,
+          "caras_laterales": 0,
+          "de": 0.521
+        },
+        {
+          "a": 1.14,
+          "caras_laterales": 0,
+          "de": 0.525
+        },
+        {
+          "a": 1.22,
+          "caras_laterales": 24,
+          "de": 1.14
+        },
+        {
+          "a": 1.24,
+          "caras_laterales": 0,
+          "de": 1.22
+        },
+        {
+          "a": 1.26,
+          "caras_laterales": 0,
+          "de": 1.24
+        },
+        {
+          "a": 1.27,
+          "caras_laterales": 0,
+          "de": 1.26
+        },
+        {
+          "a": 1.28,
+          "caras_laterales": 0,
+          "de": 1.27
+        },
+        {
+          "a": 1.29,
+          "caras_laterales": 0,
+          "de": 1.28
+        },
+        {
+          "a": 1.31,
+          "caras_laterales": 0,
+          "de": 1.29
+        },
+        {
+          "a": 1.33,
+          "caras_laterales": 0,
+          "de": 1.31
+        },
+        {
+          "a": 1.34,
+          "caras_laterales": 0,
+          "de": 1.33
+        },
+        {
+          "a": 1.36,
+          "caras_laterales": 0,
+          "de": 1.34
+        },
+        {
+          "a": 1.39,
+          "caras_laterales": 0,
+          "de": 1.36
+        },
+        {
+          "a": 1.41,
+          "caras_laterales": 0,
+          "de": 1.39
+        },
+        {
+          "a": 1.42,
+          "caras_laterales": 0,
+          "de": 1.41
+        },
+        {
+          "a": 1.44,
+          "caras_laterales": 0,
+          "de": 1.42
+        },
+        {
+          "a": 1.45,
+          "caras_laterales": 0,
+          "de": 1.44
+        },
+        {
+          "a": 1.46,
+          "caras_laterales": 0,
+          "de": 1.45
+        },
+        {
+          "a": 1.48,
+          "caras_laterales": 0,
+          "de": 1.46
+        },
+        {
+          "a": 1.49,
+          "caras_laterales": 0,
+          "de": 1.48
+        }
+      ],
+      "bytes": 986564,
+      "caras": 220,
+      "huella": [
+        1.228,
+        0.9498
+      ],
+      "mats": [
+        "MAT_ColRota_CorteFresco",
+        "MAT_ColRota_Glifo",
+        "MAT_ColRota_Musgo",
+        "MAT_ColRota_Piedra",
+        "MAT_ColRota_PiedraOsc"
+      ],
+      "n_niveles": 45,
+      "niveles": {
+        "0.045": 28,
+        "0.0631": 4,
+        "0.0633": 4,
+        "0.0925": 8,
+        "0.1147": 4,
+        "0.1153": 4,
+        "0.125": 4,
+        "0.145": 4,
+        "0.165": 4,
+        "0.1675": 8,
+        "0.1919": 4,
+        "0.1932": 4,
+        "0.2": 8,
+        "0.205": 36,
+        "0.22": 8,
+        "0.255": 24,
+        "0.283": 4,
+        "0.285": 4,
+        "0.3741": 4,
+        "0.3768": 4,
+        "0.4513": 4,
+        "0.4547": 4,
+        "0.5029": 4,
+        "0.5067": 4,
+        "0.521": 2,
+        "0.525": 2,
+        "1.14": 24,
+        "1.22": 41,
+        "1.24": 1,
+        "1.26": 1,
+        "1.27": 1,
+        "1.28": 1,
+        "1.29": 1,
+        "1.31": 1,
+        "1.33": 1,
+        "1.34": 1,
+        "1.36": 1,
+        "1.39": 1,
+        "1.41": 1,
+        "1.42": 1,
+        "1.44": 1,
+        "1.45": 1,
+        "1.46": 1,
+        "1.48": 1,
+        "1.49": 1
+      },
+      "objetos": 5,
+      "por_obj": [
+        {
+          "caras": 114,
+          "mats": [
+            "MAT_ColRota_Piedra"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Piedra",
+          "tris": 228,
+          "verts": 129,
+          "z": [
+            0.045,
+            1.22
+          ]
+        },
+        {
+          "caras": 50,
+          "mats": [
+            "MAT_ColRota_CorteFresco"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_CorteFresco",
+          "tris": 84,
+          "verts": 57,
+          "z": [
+            0.045,
+            1.49
+          ]
+        },
+        {
+          "caras": 32,
+          "mats": [
+            "MAT_ColRota_PiedraOsc"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_PiedraOsc",
+          "tris": 104,
+          "verts": 56,
+          "z": [
+            0.045,
+            0.525
+          ]
+        },
+        {
+          "caras": 12,
+          "mats": [
+            "MAT_ColRota_Musgo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Musgo",
+          "tris": 24,
+          "verts": 16,
+          "z": [
+            0.2,
+            0.22
+          ]
+        },
+        {
+          "caras": 12,
+          "mats": [
+            "MAT_ColRota_Glifo"
+          ],
+          "nombre": "SM_ColRota_M_ColRota_Glifo",
+          "tris": 24,
+          "verts": 16,
+          "z": [
+            0.0925,
+            0.1675
+          ]
+        }
+      ],
+      "ruta": "tools/mcp/blender-mcp/25-Ruinas-Templos/columna_rota_baja_lowpoly_media.blend",
+      "sha12": "1939688aad3f",
+      "tris": 464,
+      "verts": 274,
+      "zmax": 1.49,
+      "zmin": 0.045
+    }
+  }
+}
