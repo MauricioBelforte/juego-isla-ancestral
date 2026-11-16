@@ -415,7 +415,7 @@ líneas/rutas están stale. No lo corrijo: glm tiene `scripts/shops/` 🔵 con c
 
 **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-19
 
-**Totales:** 164 ítems · Completados: 164 · Pendientes: 0 · No resueltos: 0.
+**Totales (STALE histórica, iter.5b 2026-09-11 — contradice el conteo vivo; ver L428):** 164 ítems · Completados: 164 · Pendientes: 0 · No resueltos: 0. (Reemplazada por TANDA 9 L428 = 163 [x]/0 [ ]/1 [?], que es el conteo canónico vivo Hy3 TANDA 21nov.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 2):**
 > este archivo no tenía línea de Totales de ítems (la L284 resume suites, no ítems).

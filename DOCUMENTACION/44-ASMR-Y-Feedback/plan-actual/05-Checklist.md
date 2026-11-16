@@ -170,7 +170,7 @@
 - **Al cerrar:** este bloque · Totales · CG fila 44 · ESTADO · backlog · log · mensaje 46.
 
 
-**Totales:** 113 ítems · Completados: 107 · Pendientes: 0 · No resueltos: 6.
+**Totales:** 113 ítems · Completados: 110 · Pendientes: 0 · No resueltos: 3. (Saneo Hy3 TANDA 21nov: recount canónico = 110 [x]/0 [ ]/3 [?]; línea previa stale 107/0/6)
 **Nota (T-M4):** 32 `[x]` nuevos con cita por ítem (diseño 01-03 + datos reales `feedback_recetas.json`/`blacklist.json` + §8 nuevo); los 5 `[?]` son integraciones sin cablear (4, dueño AGENTE DELEGADO) y el recorrido de fatiga M114 (dueño M114).
 diseño, recetas, blacklist y reglas contextuales cierran aquí.
 

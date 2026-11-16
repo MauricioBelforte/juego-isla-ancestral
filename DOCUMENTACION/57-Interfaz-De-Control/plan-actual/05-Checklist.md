@@ -406,7 +406,7 @@
 
 
 
-**Totales:** 119 ítems · Completados: 94 · Pendientes: 24 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 94 [x] / 24 [ ] / 1 [?] = 119 tras tanda PromptDB+sugerencia-libre; qa_m57_prompts.gd 18/0 + test_control_input 0 fallos + migracion 0 fallos.)
+**Totales:** 119 ítems · Completados: 118 · Pendientes: 1 · No resueltos: 0. (Saneo Hy3 TANDA 21nov: recount canónico = 118 [x]/1 [ ]/0 [?]; línea Re-medido G-5.3-Flash-Agente 2026-10-22 stale 94/24/1)
 
 
 

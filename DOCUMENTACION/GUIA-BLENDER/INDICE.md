@@ -75,7 +75,7 @@
 | `02-errores-comunes-e01-e35.md` | E-01 a E-35 |
 | `04-errores-avanzados.md` | E-36 en adelante |
 
-**Total:** 106 errores documentados (E-01 a E-106). Ultimo agregado: **E-106** (el exportador de GLB no corre desde el addon MCP → usar `blender -b`).
+**Total:** 107 errores documentados (E-01 a E-107). Ultimo agregado: **E-107** (aberturas sobre una pared existente: extraer la pared, no aproximarla).
 
 ---
 
@@ -87,6 +87,7 @@ La guía Blender es **complementaria** a la guía Godot (`DOCUMENTACION/GUIA-GOD
 |---|---|---|
 | Pipeline de creación de assets | `01-conexion-mcp-convenciones.md` | `11-blender-godot.md` |
 | Errores de exportación glTF | `04-errores-avanzados.md` (E-44, E-45, E-106) | `11-blender-godot.md` |
+| Ventanas / puertas sobre una pared | `04-errores-avanzados.md` (E-107) | `11-blender-godot.md` |
 | Animales bimodo (Blender) | `10-animales-bimodo.md` | `12-animales-bimodo.md` (Godot side) |
 | Nivel de detalle orgánico | `09-nivel-detalle-modelado.md` | — |
 | Optimización de assets | `05-checklist-asset.md` | `05-checklist-referencias.md` |

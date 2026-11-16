@@ -417,4 +417,4 @@
   M110, WIP sin commitear de otro agente) que revienta toda la suite GdUnit4 (rc=105).
   No se tocó ese archivo (perteneciente a otro módulo en vuelo).
 **Totales:** 137 items · Completados: 60 · Pendientes: 75 · No resueltos: 2. (S62b G-5.3-Flash-Agente 2026-10-23: +4 schema XMP/indicador/orden-galeria; delta 1 con el conteo del peer 59 documentado para revision; re-cuentro top-level del disco)
-**Totales:** 138 ítems · Completados: 60 · Pendientes: 76 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:52: re-acotacion del flag miniatura-320px de agnes 022 [x]->[x LazyLoad]+[ ] generacion, con verificacion de codigo de Beam 329 D-3.2; lineas previas quedan como historial.)
+**Totales:** 138 ítems · Completados: 130 · Pendientes: 7 · No resueltos: 1. (Saneo Hy3 TANDA 21nov: recount canónico = 130 [x]/7 [ ]/1 [?]; líneas previas stale: L359 26/109/2, L419 60/75/2)

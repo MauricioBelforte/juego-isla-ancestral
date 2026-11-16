@@ -580,3 +580,116 @@ con contexto restringido), la causa y la salida son las mismas.
 
 **Relacionado:** E-45 (auditar en headless, no en GUI), E-49 (salto por mtime), E-63 (whitelist
 de modulos del exportador: un modulo nuevo fuera de la tupla exporta 0 en silencio).
+
+
+---
+
+### E-107 - Aberturas (ventanas, puertas, ojos de buey) sobre una pared existente: extraer la pared, nunca aproximarla
+
+**Descubierto:** 2026-11-13/14 por ERNIE-5.5-Flash-Preview (Kilo Code), iterando el crucero M169.
+**Modulos:** cualquiera que ponga aberturas sobre una superficie ya modelada (casas M18/M19, vehiculos,KA estructuras).
+
+**Sintoma (lo que ve el usuario, no siempre se ve en un script):**
+
+- La ventana se ve **torcida**, "con punto de fuga conico".
+- La ventana **se mete dentro de la pared blanca** y el color se funde (z-fighting).
+- La ventana **queda flotando** cuando la pared se curva o cuando termina el tramo recto.
+- En una pared poligonal (7 facetas) la abertura **corta en diagonal** entre facetas.
+
+**Causa raiz (una sola, con tres variantes):** la abertura se modela como **una pieza
+independiente** (caja, banda de puntos, tira) y **se aproxima** la pared:
+
+| Variante | Que se hizo | Por que falla |
+|---|---|---|
+| a) Caja recta sobre pared curva | `create_cube` + raycast al centro | la caja es recta, la pared se curva -> se sale del redondeado o queda flotando |
+| b) Banda con factor fijo | anillos a `esc=1.006` sobre el contorno | la pared **se inclina** (anillos 1,00/0,995/0,965): arriba la banda queda 15 cm afuera |
+| b') Factor copiado de la pared | `f0 = factor(z0)`, `f1 = factor(z1)` | la abertura **tambien se inclina**: el usuario ve "punto de fuga conico" (no son verticales) |
+| c) Banda de raycast | 23 rayos a 10 grados | entre faceta y faceta la banda corta en diagonal y **se mete en la pared** (7,1 cm adentro) |
+| d) Objeto reescalado despues | crear la abertura y luego escalar/mover la pared en un eje | la abertura deja de coincidir: nace incrustada |
+
+**Solucion: la abertura se EXTRAE de la pared. Nunca se aproxima.**
+
+```python
+import bpy, bmesh
+
+pared = bpy.data.objects['SM_MiPared']
+Z0, Z1, OFF = 1.30, 2.55, 0.030          # banda de la abertura + separacion en metros
+
+bm = bmesh.new()
+bm.from_mesh(pared.data)
+
+# 1) bisecar la pared en las dos alturas (sin borrar nada todavia)
+g = bm.verts[:] + bm.edges[:] + bm.faces[:]
+bmesh.ops.bisect_plane(bm, geom=g, plane_co=(0, 0, Z0), plane_no=(0, 0, 1))
+g = bm.verts[:] + bm.edges[:] + bm.faces[:]
+bmesh.ops.bisect_plane(bm, geom=g, plane_co=(0, 0, Z1), plane_no=(0, 0, 1))
+
+# 2) quedarse SOLO con las caras de la banda
+kill = [f for f in bm.faces
+        if f.calc_center_median().z < Z0 - 1e-4 or f.calc_center_median().z > Z1 + 1e-4]
+bmesh.ops.delete(bm, geom=kill, context='FACES')
+
+# 3) separar en ventanas (opcional): conservar las caras dentro de la ventana angular
+#    y borrar el resto para que quede pared blanca entre una y otra
+paso  = 2*math.pi/20
+ancho = paso*0.64
+keep = []
+for f in bm.faces:
+    c = f.calc_center_median()
+    a = math.atan2(c.y, c.x) % (2*math.pi)
+    if (a % paso) < ancho:
+        keep.append(f)
+bmesh.ops.delete(bm, geom=[f for f in bm.faces if f not in keep], context='FACES')
+
+# 4) desplazar por la normal del VERTICE (no del AABB): separacion uniforme real
+bm.normal_update()
+for v in bm.verts:
+    v.co += v.normal * OFF
+
+me = bpy.data.meshes.new('SM_MiPared_Vidrio')
+bm.to_mesh(me); bm.free(); me.update()
+ob = bpy.data.objects.new('SM_MiPared_Vidrio', me)
+bpy.context.scene.collection.objects.link(ob)
+ob.data.materials.append(bpy.data.materials['MAT_MiPared_Vidrio'])
+```
+
+**Por que funciona:** el vidrio hereda **los mismos vertices y las mismas facetas** que la pared.
+No puede salirse en las curvas, no puede cortar en diagonal entre facetas, y no se inclina si la
+pared no se inclina (el desplazamiento es por normal de vertice, que es perpendicular a la superficie
+en cada punto).
+
+## Verificacion obligatoria (numerica, no visual)
+
+Para cada vertice del vidrio, distancia con signo a la pared: `(p - loc).length` con signo segun
+`(p - loc).dot(normal)`. **Debe ser constante e igual al offset, y no debe haber ni un vertice adentro.**
+
+```python
+dg = bpy.context.evaluated_depsgraph_get(); dg.update()
+ds = []
+for v in vidrio.data.vertices:
+    p = vidrio.matrix_world @ v.co
+    ok, loc, nor, idx = pared.closest_point_on_mesh(p)
+    if ok:
+        ds.append((p - loc).length * (1 if (p - loc).dot(nor) >= 0 else -1))
+print("min %.4f  max %.4f  adentro: %d" % (min(ds), max(ds), len([d for d in ds if d < -0.005])))
+```
+
+Resultado esperado: `min == max == offset` (en M169 dio **0,0300 / 0,0300 con 0 vertices adentro**
+en el puente y en los tres niveles). Si `min` y `max` difieren mas de 1 cm, la abertura **no**
+sigue la pared: volvio a ser una aproximacion.
+
+## Errores que este metodo evita (casos reales de M169)
+
+| Caso real | Numero que lo delato |
+|---|---|
+| Vidrio del puente incrustado | `min -0,071 / max +0,071` -> **7,1 cm adentro** |
+| Banda con factor fijo sobre pared inclinada | 13,4 cm de vuelo (0,03 de factor = 3% de 4,45 m) |
+| Ventanas "conicas" | 10,5 cm de desplazamiento horizontal en 1,25 m de alto = **4,8 grados** |
+| Cajas rectas en pared curva | islas de 56 m de largo (la malla se cerro sobre si misma) |
+
+**Aplica a:** ventanas, puertas, ojos de buey, claraboyas, rejillas, paneles, cualquier abertura
+que vaya sobre una superficie ya modelada. **No aplica** a piezas que son parte del mismo mesh
+ahorrado desde el principio (ahí la abertura va modelada en la pared desde el inicio).
+
+**Relacionado:** E-24 (vertices vs AABB), E-45 (auditar en headless), E-49 (salto por mtime), E-106
+(el exportador no corre desde el addon MCP).
