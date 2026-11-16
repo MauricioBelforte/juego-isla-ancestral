@@ -1,0 +1,103 @@
+{
+  "_meta": {
+    "modulo": "169-Crucero",
+    "version": 1,
+    "descripcion": "Tipos de camara/camarote. Las medidas son del modelo 3D (metros) y se usan para el aforo y el precio.",
+    "unidad": "metros"
+  },
+  "camarotes": [
+    {
+      "id": "interno",
+      "nombre": "Camarote interno",
+      "ancho": 2.6,
+      "fondo": 3.2,
+      "alto": 2.4,
+      "camas": ["litera"],
+      "capacidad": 2,
+      "ventana": false,
+      "banio": "ducha",
+      "precio_base": 30
+    },
+    {
+      "id": "exterior",
+      "nombre": "Camarote exterior",
+      "ancho": 2.8,
+      "fondo": 3.4,
+      "alto": 2.4,
+      "camas": ["individual", "individual"],
+      "capacidad": 2,
+      "ventana": "ojo_de_buey",
+      "banio": "ducha",
+      "precio_base": 50
+    },
+    {
+      "id": "balcon",
+      "nombre": "Camarote con balcon",
+      "ancho": 3.0,
+      "fondo": 3.6,
+      "alto": 2.4,
+      "balcon": { "ancho": 2.0, "fondo": 1.2 },
+      "camas": ["individual", "individual", "sofa_cama"],
+      "capacidad": 3,
+      "ventana": "puerta_corredera",
+      "banio": "ducha",
+      "precio_base": 70
+    },
+    {
+      "id": "familiar",
+      "nombre": "Camarote familiar",
+      "ancho": 3.6,
+      "fondo": 4.0,
+      "alto": 2.4,
+      "balcon": { "ancho": 2.4, "fondo": 1.4 },
+      "camas": ["individual", "individual", "litera"],
+      "capacidad": 4,
+      "ventana": "ventanal",
+      "banio": "ducha+tina",
+      "precio_base": 90
+    },
+    {
+      "id": "suite",
+      "nombre": "Suite",
+      "ancho": 5.0,
+      "fondo": 4.6,
+      "alto": 2.6,
+      "balcon": { "ancho": 3.4, "fondo": 1.8 },
+      "camas": ["matrimonial", "sofa_cama"],
+      "capacidad": 3,
+      "ventana": "ventanal",
+      "banio": "tina+ducha",
+      "precio_base": 160
+    },
+    {
+      "id": "suite_duo",
+      "nombre": "Suite duplex",
+      "ancho": 4.4,
+      "fondo": 4.2,
+      "alto": 5.2,
+      "niveles": 2,
+      "balcon": { "ancho": 3.0, "fondo": 2.0 },
+      "camas": ["matrimonial", "individual", "individual"],
+      "capacidad": 4,
+      "ventana": "ventanal+claraboya",
+      "banio": "tina+ducha+bide",
+      "precio_base": 300
+    },
+    {
+      "id": "tripulacion",
+      "nombre": "Camarote de tripulacion",
+      "ancho": 2.0,
+      "fondo": 2.6,
+      "alto": 2.2,
+      "camas": ["litera"],
+      "capacidad": 1,
+      "ventana": false,
+      "banio": "comun",
+      "precio_base": 0,
+      "no_vendible": true
+    }
+  ],
+  "ocupacion_inicial": {
+    "casona": 0
+  }
+}

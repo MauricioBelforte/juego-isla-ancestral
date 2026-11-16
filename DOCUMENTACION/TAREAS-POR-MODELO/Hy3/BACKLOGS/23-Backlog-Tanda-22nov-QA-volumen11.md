@@ -17,10 +17,10 @@
 - [x] M54: re-saneo + suite
 
 ### Bloque X: Saneo + suites (4)
-- [→] M4/M13/M15: suite batch headless
-- [ ] M29/M30/M33: suite batch headless
-- [ ] M44/M54: verificacion post-saneo
-- [ ] Boot global 300s post-M4/M13/M15
+- [x] M4/M13/M15: suite batch headless
+- [x] M29/M30/M33: suite batch headless
+- [x] M44/M54: verificacion post-saneo
+- [x] Boot global 300s post-M4/M13/M15 (PASS: 300s sin crash, solo cleanup warnings RID/PagedAllocator, EXIT 0)
 
 **Total: 12. Orden: W -> X. Si no hay .gd suite, [?].**
 

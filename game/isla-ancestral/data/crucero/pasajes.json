@@ -1,0 +1,39 @@
+{
+  "_meta": {
+    "modulo": "169-Crucero",
+    "version": 1,
+    "descripcion": "Clases de pasaje del Crucero Real. El precio se cobra con EconomyManager (M38) y la ruta la valida TransportManager (M68).",
+    "moneda": "monedas"
+  },
+  "clases": [
+    {
+      "id": "tercera",
+      "nombre": "Tercera clase",
+      "precio": 30,
+      "camarote": "interno",
+      "incluye": ["litera", "pasillo comun", "comedor comun"],
+      "acceso_cubiertas": [1, 2, 3]
+    },
+    {
+      "id": "segunda",
+      "nombre": "Segunda clase",
+      "precio": 70,
+      "camarote": "exterior",
+      "incluye": ["cama", "ventana", "comedor"],
+      "acceso_cubiertas": [1, 2, 3, 4]
+    },
+    {
+      "id": "primera",
+      "nombre": "Primera clase",
+      "precio": 140,
+      "camarote": "suite",
+      "incluye": ["suite", "balcon", "comedor", "casino", "puente", "servicio"],
+      "acceso_cubiertas": [1, 2, 3, 4]
+    }
+  ],
+  "recargos": {
+    "temporada_alta": 1.25,
+    "clima_severo": 0.0,
+    "cancelacion_devuelve": 0.5
+  }
+}

@@ -32,8 +32,8 @@ import bpy
 from mathutils import Vector
 
 def zmin_real(o):
-    """E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
-    en objetos rotados -> falso hundido -> asentar SOBREELVA el conjunto."""
+    '''E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
+    en objetos rotados -> falso hundido -> asentar SOBREELVA el conjunto.''
     if len(o.data.vertices) == 0:
         return min((o.matrix_world @ Vector(c)).z for c in o.bound_box)
     return min((o.matrix_world @ v.co).z for v in o.data.vertices)

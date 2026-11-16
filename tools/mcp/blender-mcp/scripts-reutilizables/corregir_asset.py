@@ -59,8 +59,8 @@ if not obs:
     raise SystemExit
 
 def pts_de(objs):
-    """AABB corners en mundo: correcto para 'centro visual' y 'footprint'
-    (que es lo que ven los auditores y lo que ocupa la pieza en escena)."""
+    '''AABB corners en mundo: correcto para 'centro visual' y 'footprint'
+    (que es lo que ven los auditores y lo que ocupa la pieza en escena).''
     p = []
     for o in objs:
         for c in o.bound_box:
@@ -68,11 +68,11 @@ def pts_de(objs):
     return p
 
 def zmin_de(objs):
-    """E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
+    '''E-24: vertices reales en mundo. bound_box AABB da esquinas vacias
     en objetos rotados -> falso hundido -> asentar SOBREELVA el conjunto.
     Caso real: roca_comun SM_Roca_Comun_Chica con rot (0.2, -0.2, 1.1) daba
     bbox_min=-0.1092 cuando sus vertices reales solo bajan a 0.0450 ->
-    asentar por AABB hundia a la roca 15 cm por encima del suelo."""
+    asentar por AABB hundia a la roca 15 cm por encima del suelo.''
     p = []
     for o in objs:
         if len(o.data.vertices) == 0:
@@ -84,15 +84,15 @@ def zmin_de(objs):
     return min(q.z for q in p)
 
 def centro_de(objs):
-    """Centro del AABB en mundo: es el 'centro visual' que ven los auditores."""
+    '''Centro del AABB en mundo: es el 'centro visual' que ven los auditores.''
     p = pts_de(objs)
     mn = [min(q[i] for q in p) for i in range(3)]
     mx = [max(q[i] for q in p) for i in range(3)]
     return Vector([(mn[i] + mx[i]) / 2.0 for i in range(3)])
 
 def dims_de(objs):
-    """Dimensiones del AABB en mundo: lo que ocupa la pieza en escena
-    (incluso si esta rotada, esto refleja su footprint real)."""
+    '''Dimensiones del AABB en mundo: lo que ocupa la pieza en escena
+    (incluso si esta rotada, esto refleja su footprint real).''
     p = pts_de(objs)
     return [max(q[i] for q in p) - min(q[i] for q in p) for i in range(3)]
 

@@ -201,3 +201,72 @@ godot --headless --path game/isla-ancestral --script tests/run_tests.gd
 3. El pivote va en la **línea de flotación** (`z = 0`), no en la quilla: un crucero se posa en el agua.
 4. Verificar con `auditar_glb_490.py` que el `z_min` quede en `0,045 ± 0,020`.
 5. El exportador **no corre desde el addon MCP** (E-106): usar `blender -b`.
+
+
+---
+
+## 8. Estado real a 2026-11-16 (implementacion en curso)
+
+**Modelo:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-16 03:05
+
+### 8.1 Lo que SI existe en disco
+
+**Modelo 3D (exterior) — iteracion 1 completa:**
+
+```
+tools/mcp/blender-mcp/169-Crucero/crucero_exterior_lowpoly.blend
+tools/mcp/blender-mcp/169-Crucero/crucero_grande_v1..v21.blend   (historial de iteraciones)
+```
+
+Medidas verificadas (v21):
+
+| Metrica | Valor |
+|---|---|
+| Eslora | 72,0 m (pequeno) / **230,4 m** (grande) |
+| Manga | 13,58 m / 43,8 m (52,2 con pasarelas) |
+| Cubiertas | 4, altura libre **5,60 m** |
+| Vertices | 6.742 (pequeno) / **16.544** (grande) |
+| `z_min` | **0,045** exacto (convencion del proyecto) |
+| Materiales | 12 `MAT_Crucero_*` (sin texturas) |
+
+**Scripts que lo construyen (reutilizables):**
+
+| Script | Que hace |
+|---|---|
+| `tools/mcp/blender-mcp/169-Crucero/construir_crucero.py` | casco (loft de 13 estaciones), 4 cubiertas, 3 niveles, `ESC` = escala de planta |
+| `tools/mcp/blender-mcp/169-Crucero/detalles_crucero.py` | ventanas por E-107 (extraidas de la pared), puertas, chimeneas |
+| `tools/mcp/blender-mcp/169-Crucero/detalles_crucero2.py` | puente, alas, mastil, radar, barandas, botes, pileta |
+
+### 8.2 Lecciones de implementacion (ya pagadas)
+
+| # | Leccion |
+|---|---|
+| 1 | **E-107**: las aberturas (ventanas/puertas) se EXTRAEN de la pared (bisecar + desplazar por la normal). Aproximarlas con cajas o bandas da z-fighting y piezas incrustadas. |
+| 2 | Si una malla procedural no encaja con un corte, el arreglo **no es filtrar mas fino**: es que la malla **nazca con los cortes alineados**. 3 intentos de filtrado no lo resolvieron; 1 reconstruccion alineada si. |
+| 3 | `bpy.data.libraries.load()` **no vincula a la escena** → `matrix_world` queda stale. Hay que linkear explicito y llamar `view_layer.update()`. |
+| 4 | Despues de editar `v.co` hay que **actualizar el depsgraph**; si no, `evaluated_get()` devuelve la malla vieja. |
+| 5 | El **AABB es cota cuadrada**: en piezas planas (alfombras, toldos, alas) o rotadas da intersecciones falsas. Para verificar de verdad hay que comparar mallas o usar la manga interpolada. |
+| 6 | El **exportador de GLB no corre desde el addon MCP** (`Context has no attribute 'active_object'`): usar `blender -b --factory-startup --python` (GUIA-BLENDER E-106). |
+| 7 | Los **templates de Blender** no pueden contener un docstring con triple comilla doble: cierra el string externo. Usar comillas simples dentro. |
+
+### 8.3 Lo que NO existe todavia
+
+| Pendiente | Bloque |
+|---|---|
+| Codigo GDScript (`crucero_manager.gd`, `crucero_interior.gd`, etc.) | 10 |
+| Los 4 interiores (camarotes, comedor, casino, puente) | 10 |
+| LODs media/baja del grande | 11 |
+| Export a GLB | 11 |
+| Integracion con M68 / M74 / M63 / M28 | 10 |
+| Tests (unit + integracion) | 12 |
+
+### 8.4 Hallazgos que afectan a otros modulos
+
+| Hallazgo | Modulo | Detalle |
+|---|---|---|
+| **LOD `media` con `z_min = 0,0000`** | M50, M15, M45, M36 | 13 GLB: el `alta`/`baja` estan en +0,045 y el `media` en 0,0000. Es la exportacion del lote `media`. Ver `auditar_glb_490.py`. |
+| **3 scripts rotos** (arreglados) | tooling | `corregir_asset.py`, `asentar_en_base.py`, `auditar_apoyos.py`: docstring interno con triple comilla doble dentro de un template de triple comilla doble. |
+| **M45 artbook corrupto** | M45 | `artbook_specs_m47.md`: 62/221 lineas con mojibake cp1252. Requiere `fix_encoding.py` (OK del dueno). |
+| **Drift de Totales** | 106, 104, 129, 107, 103 | Ver `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/031`. |
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-16 03:05
