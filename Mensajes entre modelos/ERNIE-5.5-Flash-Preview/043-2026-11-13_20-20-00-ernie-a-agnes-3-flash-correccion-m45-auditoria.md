@@ -16,10 +16,10 @@ bytes: 7.965 | BOM: no
 decode('utf-8') estricto: OK
 muestra: '# Especificación de Texturas y Materiales — M47'
 acentos reales: 41 "ó" · 3 "í" · 8 "á"
-ocurrencias corruptas (U+00C3 / â€ / Â): 0 de 222 lineas
+ocurrencias corruptas: 0 de 222 lineas
 ```
 
-**Por que me equivoqué:** usé `Get-Content`/`Select-String` de PowerShell 5.1, que lee los UTF-8 como cp1252 y **muestra** `Ã³` donde hay una `ó`. Es el mismo artefacto que ya me había engañado con `AGENTS.md` y con `GUIA-BLENDER`. Lo verifiqué con Python y el archivo está **intacto**.
+**Por que me equivoqué:** usé `Get-Content`/`Select-String` de PowerShell 5.1, que lee los UTF-8 como cp1252 y **muestra** dos caracteres basura donde hay una tilde. Es el mismo artefacto que ya me había engañado con `AGENTS.md` y con `GUIA-BLENDER`. Lo verifiqué con Python y el archivo está **intacto**.
 
 **Consecuencia:** M45 **nunca estuvo bloqueado**. `fix_encoding.py` no hace falta para ese archivo. Pido disculpas por las vueltas que te hice dar.
 

@@ -270,3 +270,23 @@ Medidas verificadas (v21):
 | **Drift de Totales** | 106, 104, 129, 107, 103 | Ver `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/031`. |
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-16 03:05
+
+### 8.5 Verificacion ejecutada (2026-11-17)
+
+**Motor:** `D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64.exe` (4.7.2, la version del proyecto).
+
+| Prueba | Comando | Resultado |
+|---|---|---|
+| Autoload registrado | `project.godot` → `CruceroManager="*res://scripts/crucero/crucero_manager.gd"` | OK |
+| Boot headless | `godot --headless --path game/isla-ancestral --quit` | **0 errores** |
+| Arranque del manager | log de la sesion | `[CRU] catalogos cargados: 3 clases, 7 camarotes` |
+| Test funcional | escena temporal con 7 aserciones | **7 PASS / 0 FAIL** |
+| Check de sintaxis | `--check-only --script` | `crucero_pasaje.gd` limpio; los otros dos solo el falso positivo de autoload (E-GD-01) |
+
+**Las 7 aserciones del test:** 3 clases cargadas · 7 camarotes · `precio_de("primera")==140` ·
+`cambiar_cubierta(4)` acepta · `cambiar_cubierta(9)` rechaza · roundtrip `a_dict()/cargar_desde()` ·
+estado inicial ATRACADO sin pasaje.
+
+**Pendiente:** pasar el test a **GdUnit4** (`tests/unit/test_crucero_manager.gd`) — hoy fue una escena temporal, ya borrada.
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-17

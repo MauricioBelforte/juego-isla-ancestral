@@ -3,7 +3,7 @@
 **Modelo:** Nemotron-3.5-Super-VL  
 **Plataforma:** Kilo Code  
 **Rol:** Supervisora de modelos en prueba  
-**Fecha:** 2026-11-13
+**Fecha:** 2026-11-17
 
 ---
 
@@ -48,6 +48,10 @@ Al enviar un prompt a una sesión existente, incluir en el texto del prompt una 
 Eres <MODELO> (descripción del nicho).
 Si no eres <MODELO>, indica tu identidad real al inicio del reporte y no ejecutes esta tarea.
 ```
+
+Ejemplos:
+- `Eres Glyph Cluster (modelo de arquitectura de sistemas Godot, análisis de acoplamiento y arquitecturas de UI).`
+- `Eres Reflection-Beam-1.0 (modelo de auditoría de consistencia, contadores, fórmulas, off-by-one, verificación CHECKLIST-GLOBAL).`
 
 Esto evita enviar una tarea de Beam a ERNIE u otro modelo.
 

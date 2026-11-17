@@ -94,9 +94,9 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 ---
 
-### 6. Hy3 (Tencent Hunyuan / WorkBuddy)
+### 6. Hy3 (Tencent Hunyuan / WorkBuddy) — **RETIRADO** (ya no disponible)
 
-**Rol:** QA cruzado, red probes, verificación de runtime.
+**Rol:** QA cruzado, red probes, verificación de runtime. **Estado: RETIRADO — ya no disponible.**
 
 **Evidencia empírica verificada:**
 - ~40 verificaciones §21.8 acumuladas; crítico más fiable de la flota.
@@ -106,13 +106,13 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Debilidades:** No actualiza CHECKLIST-GLOBAL al revertir (drift que debe corregirse); colisión de numeración de bugs (debe verificar antes de nombrar).
 
-**Regla de asignación:** QA cruzado, red probes, verificación de runtime, verificación cruzada de familia (no hermano del mismo modelo). NO asignar implementación nueva (su nicho es verificar). Cerrar el ciclo en CHECKLIST-GLOBAL, no solo el 05-Checklist del módulo.
+**Regla de asignación:** **No asignar nuevas tareas.** Modelo retirado.
 
 ---
 
-### 7. Hy4 (Tencent Hunyuan / WorkBuddy)
+### 7. Hy4 (Tencent Hunyuan / WorkBuddy) — **RETIRADO** (ya no disponible)
 
-**Rol:** Arte 3D, Blender, generación de assets.
+**Rol:** Arte 3D, Blender, generación de assets. **Estado: RETIRADO — ya no disponible.**
 
 **Evidencia empírica verificada:**
 - 770B totales / 49B activos, MoE, contexto 1M tokens.
@@ -122,7 +122,7 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Debilidades:** Visión intermitente (6 de 7 hojas de contacto de M19 filtradas en log 678) — no debe ser el único que apruebe activos visuales por lectura de capturas.
 
-**Regla de asignación:** Coding complejo long-horizon, game dev, Blender 3D, assets. NO aprobar visual final solo por capturas (QA numérico obligatorio como respaldo).
+**Regla de asignación:** **No asignar nuevas tareas.** Modelo retirado.
 
 ---
 
@@ -433,6 +433,26 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 
 ---
 
+### 12. HY4 Flash (Tencent Hunyuan / Kilo Code) — **NUEVO — En flota** (lanzado 2026-11-16)
+
+**Rol:** Tareas de alto volumen repetitivo, limpieza de backlogs, revisión de formato/documentación, verificación de checklists (formato, no contenido profundo), deep search ligero, documentación de tareas, bug triage asistido (no root-cause profundo).
+
+**Evidencia empírica verificada (fuente oficial Tencent):**
+- 224B total params (64B Engram), 12B active/token.
+- Nativamente multimodal (imagen + texto), 1M contexto, >150 tps.
+- Arquitectura: hybrid attention, LatentMoE, Engram. KV cache 1/24 de Hy3, 1/6 de Hy4.
+- Precio aprox 1/20 de Hy4 (muy bajo costo).
+- Benchmarks: DeepSWE 64.6, OSWorld 68.1, MMMU-Pro 75.8, AutomationBench 52.2, HLE 55.2, APEX-Agents 63.1.
+- WorkIndex: user satisfaction close to Claude Haiku 5.5, shortest end-to-end completion time.
+- En game R&D bug analysis: matched DeepSeek-V4.1-Flash-1017 y GLM-5.3-Flash en root-cause localization, -22% a -39% menos peticiones del modelo, -40% a -61% menos tokens.
+- **No recomendado para:** ingeniería de software de largo horizonte, workloads complejos de código (Tencent recomienda Hy4 para esos).
+
+**Debilidades:** Menor inteligencia pura que Hy4 para cargas de trabajo complejas de largo horizonte; salida solo texto (no genera imágenes/video/audio).
+
+**Regla de asignación:** deep search, procesamiento de documentos, slides simples, demos frontend simples, computer use, bug triage asistido, limpieza de backlogs, revisión de formato/documentación, verificación de checklists (formato). **NO para:** código crítico largo-horizonte, análisis de arquitectura profunda, matemática de balance compleja (esos son para Glyph Cluster / Beam).
+
+---
+
 ## Reglas de uso
 
 1. **Solo modelos aprobados por el fundador** se agregan a la tabla de activos.
@@ -450,6 +470,6 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 - Protocolo de comunicación: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 - Protocolo multiagente: `CHECKLIST-GLOBAL.md` §21.
 
-**Modelo:** Gemini 3.8 Flash
+**Modelo:** Gemini 3.8 Flash / Nemotron-3.5-Super-VL (editor)
 **Plataforma:** Kilo Code
 **Fecha:** 2026-11-17

@@ -13,6 +13,7 @@
 |------------|------------|-------|---------------------|
 | Glyph Cluster | Kilo Code | Arquitectura de sistemas Godot, análisis GDScript, acoplamiento, dependencias circulares, arquitecturas de UI, progresión, físicas, colisiones | `Mensajes entre modelos/Glyph Cluster/REPORTES-Prueba-Paralela/` |
 | Reflection-Beam-1.0 | Kilo Code | Auditoría de consistencia, contadores, fórmulas, off-by-one, verificación CHECKLIST-GLOBAL, conteos exactos | `Mensajes entre modelos/Reflection-Beam-1.0/REPORTES-Prueba-Paralela/` |
+| HY4 Flash | Kilo Code | Tareas de alto volumen repetitivo, limpieza de backlogs, revisión de formato/documentación, verificación de checklists (formato, no contenido profundo), deep search ligero, documentación de tareas, bug triage asistido (no root-cause profundo), tareas de escritorio/oficina | `Mensajes entre modelos/HY4/REPORTES-Prueba-Paralela/` |
 
 ---
 

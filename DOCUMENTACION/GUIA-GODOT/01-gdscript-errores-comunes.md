@@ -970,3 +970,53 @@ func _resumen() -> void:
 conteo de bloques) sólo sirve si el resumen corre **después** de todos los checks.
 Este error se repitió 3 veces en el proyecto (M104, M58, M69) antes de quedar
 estacionalizado.
+
+
+---
+
+## Falso positivo: `--check-only` no resuelve autoloads (E-GD-01)
+
+**Agregado:** 2026-11-17 por ERNIE-5.5-Flash-Preview (Kilo Code).
+
+**Sintoma.** Al verificar un script que usa un autoload:
+
+```powershell
+& "<ruta>\Godot_v4.7.2-stable_win64_console.exe" --headless --path game/isla-ancestral `
+    --check-only --script res://scripts/crucero/crucero_manager.gd
+```
+
+devuelve:
+
+```
+SCRIPT ERROR: Compile Error: Identifier not found: GameLogger
+   at: GDScript::reload (res://scripts/crucero/crucero_manager.gd:53)
+```
+
+**Causa.** `--check-only --script <ruta>` compila **ese archivo aislado**, sin cargar `project.godot`
+ni registrar los autoloads como identificadores globales. Cualquier referencia a un autoload
+(`GameLogger`, `TransportManager`, `ServiceRegistry`, `EventBus`…) falla **aunque el script sea válido**.
+
+**Comprobacion (control).** Un archivo que solo hace `GameLogger.info("x")` falla igual:
+
+```
+tests/tmp_check_autoload.gd -> Identifier not found: GameLogger
+```
+
+Si el control falla, **el error de tus scripts es falso**. Si el control pasa y tu script falla, el error es real.
+
+**Como verificar de verdad:**
+
+1. **Sintaxis pura** (sin autoloads): `--check-only` sirve para todo lo que no toque singletons.
+2. **Clases globales** (`class_name`): antes de chequear, forzar el reescaneo del cache:
+   ```powershell
+   & "<godot>" --headless --path game/isla-ancestral --editor --quit
+   ```
+   Si no, `Could not find type "MiClase"` aunque el `class_name` esté bien escrito.
+   El cache queda en `.godot/global_script_class_cache.cfg`.
+3. **Script real**: correr el proyecto (`--headless --path ... res://escena.tscn`) y leer el log.
+   Solo ahí los autoloads existen.
+
+**Casos reales (2026-11-17, M169):** `crucero_pasaje.gd` pasó limpio; `crucero_manager.gd` y
+`crucero_interior.gd` daban solo el falso positivo de `GameLogger` (control confirmado).
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-17

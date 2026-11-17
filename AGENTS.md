@@ -1449,6 +1449,41 @@ reemplazo), y `Logs/` (registro histórico).
 
 ---
 
+
+### 28.2 El falso positivo de PowerShell 5.1 al LEER UTF-8 (no es mojibake del archivo)
+
+> Agregado 2026-11-17 por ERNIE-5.5-Flash-Preview (Kilo Code) tras reportar **cuatro veces**
+> un mojibake inexistente en `artbook_specs_m47.md` y bloquear M45 por eso.
+
+**Sintoma:** al abrir un archivo UTF-8 con `Get-Content` o `Select-String` en PowerShell 5.1 y
+imprimirlo por consola, las tildes y las eñes se ven como dos caracteres basura
+(la `ó` se ve como una `Ã` seguida de un signo raro). **El archivo está perfecto.**
+
+**Causa:** PowerShell 5.1 lee los archivos sin BOM usando la página de códigos del sistema
+(cp1252 en Windows es-ES) aunque el archivo sea UTF-8. Es un problema de **lectura y
+presentación**, no de contenido. `Select-String` hereda el mismo comportamiento.
+
+**Regla obligatoria:** para verificar codificación, **usar Python con UTF-8 estricto**, nunca
+`Get-Content`/`Select-String`:
+
+```powershell
+python -X utf8 -c "import io; b=open(r'ruta','rb').read(); print(len(b), b[:3]==b'ï»¿'); t=b.decode('utf-8'); print(t.count(chr(0xc3)))"
+```
+
+Si `decode('utf-8')` no falla y `count(U+00C3) == 0`, **el archivo está limpio** — el problema
+es la consola.
+
+**Casos reales en los que el veredicto se dio vuelta:**
+
+| Vez | Archivo | Lo que "se veía" | Realidad |
+|---|---|---|---|
+| 1 | `AGENTS.md` | `documentaciÃ³n`, `estÃ¡` | UTF-8 perfecto (3 ocurrencias, todas en §28) |
+| 2 | `GUIA-BLENDER/*.md` | `habrÃ­a`, `sÃ­ntoma` | UTF-8 perfecto |
+| 3 | `artbook_specs_m47.md` | 62/221 líneas corruptas | **0 de 222** — M45 bloqueado 4 mensajes por nada |
+
+**Coste del error:** un falso bloqueo de módulo, cuatro mensajes de director y una
+retractación pública. **Antes de reportar mojibake: verificar en bytes con Python.**
+
 ## 29. Tareas por Modelo — Checklists Personales (metodología multiagente)
 
 > **Agregado:** 2026-09-02 · **Fuente:** directiva del usuario · **Primero en usar:** deepseek-v4-flash-vision-exp / Kilo Code
