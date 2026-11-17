@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://scripts/crucero/crucero_interior.gd" id="1_crucero"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_piso"]
+size = Vector3(50.0, 10.5, 0.20)
+
+[sub_resource type="StandardMaterial3D" id="Mat_piso"]
+albedo_color = Color(0.705882, 0.52549, 0.294118, 1)
+
+[sub_resource type="SphereShape3D" id="Forma_puerta"]
+radius = 1.2
+
+[node name="Interior_Cubierta2" type="Node3D"]
+script = ExtResource("1_crucero")
+
+[node name="Piso" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10, 0)
+mesh = SubResource("BoxMesh_piso")
+surface_material_override/0 = SubResource("Mat_piso")
+
+[node name="Spawn" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 10.5/2 - 3)
+
+[node name="Luz" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
+light_energy = 1.4
+omni_range = 16.0
+
+[node name="Puerta" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 10.5/2 - 0.6)
+
+[node name="Colision" type="CollisionShape3D" parent="Puerta"]
+shape = SubResource("Forma_puerta")

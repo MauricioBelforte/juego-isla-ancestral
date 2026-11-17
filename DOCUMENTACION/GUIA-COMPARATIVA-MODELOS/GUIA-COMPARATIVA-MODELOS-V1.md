@@ -1,9 +1,9 @@
 # GUIA COMPARATIVA DE MODELOS — V1
 
-**Modelo:** Nemotron-3.5-Super-VL
+**Modelo:** Gemini 3.8 Flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-04
-**Estado:** V1 inicial — 11 modelos activos de la flota con información útil resumida.
+**Fecha:** 2026-11-17
+**Estado:** V1 — 12 modelos activos de la flota con información útil resumida.
 
 ## Propósito
 
@@ -385,6 +385,54 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 
 ---
 
+### Gemini 3.8 Flash (Google DeepMind) — Ingeniería de software de largo horizonte, agentes autónomos y análisis multimodal
+
+| Campo | Valor |
+|-------|-------|
+| Modelo | Gemini 3.8 Flash (`gemini-3.8-flash` / `coarena/gemini-3-8-flash`) |
+| Desarrollador / Proveedor | Google DeepMind / Google AI Studio / Vertex AI |
+| Plataforma | Kilo Code / OpenRouter / AI Studio |
+| Tipo | Modelo multimodal de alta velocidad y razonamiento adaptativo para ingeniería de software de largo horizonte, orquestación de agentes y flujos complejos |
+| Contexto | 1,048,576 tokens (1M entrada) / hasta 65,536 tokens (64K salida) |
+| Modalidades de entrada | Texto, imagen, video, audio, archivos (PDF) nativo |
+| Modalidades de salida | Texto |
+| Razonamiento | Thinking adaptativo con niveles configurables (`low`, `medium` [default], `high`). `minimal` no soportado. Test-time reasoning para verificar pasos intermedios. |
+| Tool calling | Nativo avanzado: function calling paralelo, ejecución determinista de tools, verificación pre-tool y manejo de multi-turn sin prefill |
+| Structured outputs | Sí (JSON schema nativo y tipos estrictos) |
+| Herramientas integradas | Code Execution (Python sandbox), Computer Use, Context Caching, Google Search Grounding, File Search, URL Context |
+| Precio | $0.75 / 1M input / $3.75 / 1M output (introductorio hasta 31/12/2026; estándar $1.50/M in, $7.50/M out desde 01/01/2027) |
+| Liberado | Septiembre 2026 (estable). Motor default del Antigravity Agent y Antigravity SDK. |
+| Estado | **En flota activa** — Agente autónomo para ingeniería de software de largo horizonte, refactorización multi-archivo, auditoría multimodal y orquestación con tools. |
+
+**Fortalezas (verificadas en documentación oficial Google DeepMind / ai.google.dev):**
+- **Ingeniería de software de largo horizonte:** Diseñado específicamente para tareas de desarrollo extensas, refactorizaciones multi-archivo y ejecución determinista de herramientas sin desviarse del objetivo.
+- **Orquestación de agentes autónomos:** Resiliencia en flujos multi-paso con auto-verificación intermedia y corrección de bucles fallidos.
+- **Ventana de contexto de 1M tokens con Context Caching:** Permite cargar repositorios completos, especificaciones extensas o documentación pesada con bajo costo y latencia reducida.
+- **Entrada multimodal completa:** Comprensión nativa de texto, imágenes, video, audio y documentos PDF, permitiendo auditar capturas de pantalla, diagramas y assets visuales.
+- **Control de razonamiento (thinking levels):** Permite sintonizar el balance entre latencia e inteligencia según la tarea (`low` para tareas rápidas/streaming, `medium` para código y agentes, `high` para deep reasoning y matemática).
+- **Herramientas avanzadas integradas:** Soporte de Computer Use, Code Execution en sandbox y llamada a funciones robusta.
+
+**Debilidades y restricciones (verificadas):**
+- Salida solo texto (no genera audio, imágenes ni video directamente).
+- Nivel de thinking `minimal` no está soportado (arroja error de API si se solicita).
+- Mayor consumo de tokens en tareas complejas debido a los pasos de auto-verificación e iteración de tools por diseño.
+- Parámetros antiguos de muestreo (`temperature`, `top_p`, `top_k`, `candidate_count`) deprecados/no soportados en la API de Gemini 3.
+
+**Regla de asignación para Isla Ancestral:**
+- Implementación de código GDScript y refactorizaciones complejas que abarcan múltiples archivos y dependencias.
+- Diagnóstico y resolución de bugs sutiles que requieran razonamiento paso a paso y verificación de llamadas a tools.
+- Auditoría técnica y sincronización de documentación técnica (planes actuales, checklists, guías y logs).
+- Análisis multimodal de diagramas, capturas de interfaz y flujo visual (M154).
+- NO asignar: generación directa de assets binarios (audio/texturas directas sin scripts), tareas que requieran modelos puramente sin reasoning cuando se busca latencia ultra baja sin verificación.
+
+**Método de trabajo:**
+1. Planificación metódica con descomposición en pasos verificables.
+2. Ejecución directa con herramientas (`read`, `write`, `edit`, `bash`, `glob`, `grep`, `webfetch`).
+3. Auto-verificación de cambios mediante tests o análisis estático antes de concluir.
+4. Comunicación directa, técnica y concisa (sin muletillas ni fórmulas conversacionales).
+
+---
+
 ## Reglas de uso
 
 1. **Solo modelos aprobados por el fundador** se agregan a la tabla de activos.
@@ -402,6 +450,6 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 - Protocolo de comunicación: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 - Protocolo multiagente: `CHECKLIST-GLOBAL.md` §21.
 
-**Modelo:** Nemotron-3.5-Super-VL
+**Modelo:** Gemini 3.8 Flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-11
+**Fecha:** 2026-11-17
