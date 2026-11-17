@@ -1,0 +1,112 @@
+# 16-Backlog: Cross-referencias + Firmas
+
+> Creada por: agnes-3-flash - 2026-11-17 07:55
+> Verificar que las referencias a archivos en DOCUMENTACION/ resuelven.
+> Verificar que los docs de plan-actual/ tienen firma Modelo/Plataforma/Fecha.
+
+## Cross-referencias (50 tareas)
+
+- [ ] T16-01: Verificar referencias en DOCUMENTACION/ batch 1
+- [ ] T16-02: Verificar referencias en DOCUMENTACION/ batch 2
+- [ ] T16-03: Verificar referencias en DOCUMENTACION/ batch 3
+- [ ] T16-04: Verificar referencias en DOCUMENTACION/ batch 4
+- [ ] T16-05: Verificar referencias en DOCUMENTACION/ batch 5
+- [ ] T16-06: Verificar referencias en DOCUMENTACION/ batch 6
+- [ ] T16-07: Verificar referencias en DOCUMENTACION/ batch 7
+- [ ] T16-08: Verificar referencias en DOCUMENTACION/ batch 8
+- [ ] T16-09: Verificar referencias en DOCUMENTACION/ batch 9
+- [ ] T16-10: Verificar referencias en DOCUMENTACION/ batch 10
+- [ ] T16-11: Verificar referencias en DOCUMENTACION/ batch 11
+- [ ] T16-12: Verificar referencias en DOCUMENTACION/ batch 12
+- [ ] T16-13: Verificar referencias en DOCUMENTACION/ batch 13
+- [ ] T16-14: Verificar referencias en DOCUMENTACION/ batch 14
+- [ ] T16-15: Verificar referencias en DOCUMENTACION/ batch 15
+- [ ] T16-16: Verificar referencias en DOCUMENTACION/ batch 16
+- [ ] T16-17: Verificar referencias en DOCUMENTACION/ batch 17
+- [ ] T16-18: Verificar referencias en DOCUMENTACION/ batch 18
+- [ ] T16-19: Verificar referencias en DOCUMENTACION/ batch 19
+- [ ] T16-20: Verificar referencias en DOCUMENTACION/ batch 20
+- [ ] T16-21: Verificar referencias en DOCUMENTACION/ batch 21
+- [ ] T16-22: Verificar referencias en DOCUMENTACION/ batch 22
+- [ ] T16-23: Verificar referencias en DOCUMENTACION/ batch 23
+- [ ] T16-24: Verificar referencias en DOCUMENTACION/ batch 24
+- [ ] T16-25: Verificar referencias en DOCUMENTACION/ batch 25
+- [ ] T16-26: Verificar referencias en DOCUMENTACION/ batch 26
+- [ ] T16-27: Verificar referencias en DOCUMENTACION/ batch 27
+- [ ] T16-28: Verificar referencias en DOCUMENTACION/ batch 28
+- [ ] T16-29: Verificar referencias en DOCUMENTACION/ batch 29
+- [ ] T16-30: Verificar referencias en DOCUMENTACION/ batch 30
+- [ ] T16-31: Verificar referencias en DOCUMENTACION/ batch 31
+- [ ] T16-32: Verificar referencias en DOCUMENTACION/ batch 32
+- [ ] T16-33: Verificar referencias en DOCUMENTACION/ batch 33
+- [ ] T16-34: Verificar referencias en DOCUMENTACION/ batch 34
+- [ ] T16-35: Verificar referencias en DOCUMENTACION/ batch 35
+- [ ] T16-36: Verificar referencias en DOCUMENTACION/ batch 36
+- [ ] T16-37: Verificar referencias en DOCUMENTACION/ batch 37
+- [ ] T16-38: Verificar referencias en DOCUMENTACION/ batch 38
+- [ ] T16-39: Verificar referencias en DOCUMENTACION/ batch 39
+- [ ] T16-40: Verificar referencias en DOCUMENTACION/ batch 40
+- [ ] T16-41: Verificar referencias en DOCUMENTACION/ batch 41
+- [ ] T16-42: Verificar referencias en DOCUMENTACION/ batch 42
+- [ ] T16-43: Verificar referencias en DOCUMENTACION/ batch 43
+- [ ] T16-44: Verificar referencias en DOCUMENTACION/ batch 44
+- [ ] T16-45: Verificar referencias en DOCUMENTACION/ batch 45
+- [ ] T16-46: Verificar referencias en DOCUMENTACION/ batch 46
+- [ ] T16-47: Verificar referencias en DOCUMENTACION/ batch 47
+- [ ] T16-48: Verificar referencias en DOCUMENTACION/ batch 48
+- [ ] T16-49: Verificar referencias en DOCUMENTACION/ batch 49
+- [ ] T16-50: Verificar referencias en DOCUMENTACION/ batch 50
+
+## Firmas (50 tareas)
+
+- [ ] T16-51: Verificar firma en DOCUMENTACION/plan-actual/ batch 1
+- [ ] T16-52: Verificar firma en DOCUMENTACION/plan-actual/ batch 2
+- [ ] T16-53: Verificar firma en DOCUMENTACION/plan-actual/ batch 3
+- [ ] T16-54: Verificar firma en DOCUMENTACION/plan-actual/ batch 4
+- [ ] T16-55: Verificar firma en DOCUMENTACION/plan-actual/ batch 5
+- [ ] T16-56: Verificar firma en DOCUMENTACION/plan-actual/ batch 6
+- [ ] T16-57: Verificar firma en DOCUMENTACION/plan-actual/ batch 7
+- [ ] T16-58: Verificar firma en DOCUMENTACION/plan-actual/ batch 8
+- [ ] T16-59: Verificar firma en DOCUMENTACION/plan-actual/ batch 9
+- [ ] T16-60: Verificar firma en DOCUMENTACION/plan-actual/ batch 10
+- [ ] T16-61: Verificar firma en DOCUMENTACION/plan-actual/ batch 11
+- [ ] T16-62: Verificar firma en DOCUMENTACION/plan-actual/ batch 12
+- [ ] T16-63: Verificar firma en DOCUMENTACION/plan-actual/ batch 13
+- [ ] T16-64: Verificar firma en DOCUMENTACION/plan-actual/ batch 14
+- [ ] T16-65: Verificar firma en DOCUMENTACION/plan-actual/ batch 15
+- [ ] T16-66: Verificar firma en DOCUMENTACION/plan-actual/ batch 16
+- [ ] T16-67: Verificar firma en DOCUMENTACION/plan-actual/ batch 17
+- [ ] T16-68: Verificar firma en DOCUMENTACION/plan-actual/ batch 18
+- [ ] T16-69: Verificar firma en DOCUMENTACION/plan-actual/ batch 19
+- [ ] T16-70: Verificar firma en DOCUMENTACION/plan-actual/ batch 20
+- [ ] T16-71: Verificar firma en DOCUMENTACION/plan-actual/ batch 21
+- [ ] T16-72: Verificar firma en DOCUMENTACION/plan-actual/ batch 22
+- [ ] T16-73: Verificar firma en DOCUMENTACION/plan-actual/ batch 23
+- [ ] T16-74: Verificar firma en DOCUMENTACION/plan-actual/ batch 24
+- [ ] T16-75: Verificar firma en DOCUMENTACION/plan-actual/ batch 25
+- [ ] T16-76: Verificar firma en DOCUMENTACION/plan-actual/ batch 26
+- [ ] T16-77: Verificar firma en DOCUMENTACION/plan-actual/ batch 27
+- [ ] T16-78: Verificar firma en DOCUMENTACION/plan-actual/ batch 28
+- [ ] T16-79: Verificar firma en DOCUMENTACION/plan-actual/ batch 29
+- [ ] T16-80: Verificar firma en DOCUMENTACION/plan-actual/ batch 30
+- [ ] T16-81: Verificar firma en DOCUMENTACION/plan-actual/ batch 31
+- [ ] T16-82: Verificar firma en DOCUMENTACION/plan-actual/ batch 32
+- [ ] T16-83: Verificar firma en DOCUMENTACION/plan-actual/ batch 33
+- [ ] T16-84: Verificar firma en DOCUMENTACION/plan-actual/ batch 34
+- [ ] T16-85: Verificar firma en DOCUMENTACION/plan-actual/ batch 35
+- [ ] T16-86: Verificar firma en DOCUMENTACION/plan-actual/ batch 36
+- [ ] T16-87: Verificar firma en DOCUMENTACION/plan-actual/ batch 37
+- [ ] T16-88: Verificar firma en DOCUMENTACION/plan-actual/ batch 38
+- [ ] T16-89: Verificar firma en DOCUMENTACION/plan-actual/ batch 39
+- [ ] T16-90: Verificar firma en DOCUMENTACION/plan-actual/ batch 40
+- [ ] T16-91: Verificar firma en DOCUMENTACION/plan-actual/ batch 41
+- [ ] T16-92: Verificar firma en DOCUMENTACION/plan-actual/ batch 42
+- [ ] T16-93: Verificar firma en DOCUMENTACION/plan-actual/ batch 43
+- [ ] T16-94: Verificar firma en DOCUMENTACION/plan-actual/ batch 44
+- [ ] T16-95: Verificar firma en DOCUMENTACION/plan-actual/ batch 45
+- [ ] T16-96: Verificar firma en DOCUMENTACION/plan-actual/ batch 46
+- [ ] T16-97: Verificar firma en DOCUMENTACION/plan-actual/ batch 47
+- [ ] T16-98: Verificar firma en DOCUMENTACION/plan-actual/ batch 48
+- [ ] T16-99: Verificar firma en DOCUMENTACION/plan-actual/ batch 49
+- [ ] T16-100: Verificar firma en DOCUMENTACION/plan-actual/ batch 50
+

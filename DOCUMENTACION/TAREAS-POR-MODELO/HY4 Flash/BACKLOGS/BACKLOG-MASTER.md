@@ -78,3 +78,17 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 04-Backlog-Verificacion-Progreso-GLOBAL.md (12 tareas, creada 17nov 04:03)
 
 - 05-Backlog-Verificacion-Masiva-GLOBAL.md (12 tareas, creada 17nov 06:06)
+
+- 06-Backlog-Verificacion-GLOBAL-M01-M12.md (12, creada 17nov 07:55)
+- 07-Backlog-Verificacion-GLOBAL-M13-M26.md (12, creada 17nov 07:55)
+- 08-Backlog-Verificacion-GLOBAL-M27-M39.md (12, creada 17nov 07:55)
+
+- 09-Backlog-GLOBAL-M41.md (129 tareas)
+- 10-Backlog-Completitud-Modulos.md (5 tareas)
+- 11-Backlog-Triage-BUGS.md (152 tareas)
+- 12-Backlog-UTF8-Encoding.md (213 tareas)
+- 13-Backlog-Test-Scene-Integrity.md (124 tareas)
+- 14-Backlog-Asset-Data-Orphans.md (140 tareas)
+- 15-Backlog-Log-Integrity.md (118 tareas)
+- 16-Backlog-CrossRef-Firmas.md (100 tareas)
+- 17-Backlog-CHECKLIST-GLOBAL-Consistencia.md (9 tareas)

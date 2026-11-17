@@ -1,0 +1,133 @@
+# 13-Backlog: Test + Scene integrity (71 tests, 53 scenes)
+
+> Creada por: agnes-3-flash - 2026-11-17 07:55
+
+## Tests: verificar que cada .gd en tests/ referencia un modulo valido
+
+- [ ] T13-01: test game/isla-ancestral/tests\Obsoletos\2026-09-01_00-00-00_test_debug_menu_v1_api_muerta.gd - referencia M___ ?
+- [ ] T13-02: test game/isla-ancestral/tests\Obsoletos\2026-10-07_22-00-01_run_tests.gd - referencia M___ ?
+- [ ] T13-03: test game/isla-ancestral/tests\_sonda_bug119.gd - referencia M___ ?
+- [ ] T13-04: test game/isla-ancestral/tests\_verify_bug106.gd - referencia M___ ?
+- [ ] T13-05: test game/isla-ancestral/tests\fixtures\fixture_terrain.gd - referencia M___ ?
+- [ ] T13-06: test game/isla-ancestral/tests\helpers\autoload_overrides.gd - referencia M___ ?
+- [ ] T13-07: test game/isla-ancestral/tests\helpers\test_helpers.gd - referencia M___ ?
+- [ ] T13-08: test game/isla-ancestral/tests\integration\test_crafting_inventory.gd - referencia M___ ?
+- [ ] T13-09: test game/isla-ancestral/tests\integration\test_economy_npc_shop.gd - referencia M___ ?
+- [ ] T13-10: test game/isla-ancestral/tests\integration\test_farming_inventory.gd - referencia M___ ?
+- [ ] T13-11: test game/isla-ancestral/tests\integration\test_fishing_economy.gd - referencia M___ ?
+- [ ] T13-12: test game/isla-ancestral/tests\integration\test_fixtures_smoke.gd - referencia M___ ?
+- [ ] T13-13: test game/isla-ancestral/tests\integration\test_inventory_economy.gd - referencia M___ ?
+- [ ] T13-14: test game/isla-ancestral/tests\integration\test_time_calendar_events.gd - referencia M___ ?
+- [ ] T13-15: test game/isla-ancestral/tests\integration\test_time_cycles_year.gd - referencia M___ ?
+- [ ] T13-16: test game/isla-ancestral/tests\integration\test_vfx_director_vida_m52.gd - referencia M___ ?
+- [ ] T13-17: test game/isla-ancestral/tests\integration\test_villager_social.gd - referencia M___ ?
+- [ ] T13-18: test game/isla-ancestral/tests\pack_atlas_m46.gd - referencia M___ ?
+- [ ] T13-19: test game/isla-ancestral/tests\regression\test_stable_flows.gd - referencia M___ ?
+- [ ] T13-20: test game/isla-ancestral/tests\run_tests.gd - referencia M___ ?
+- [ ] T13-21: test game/isla-ancestral/tests\test_asset_profile_m166.gd - referencia M___ ?
+- [ ] T13-22: test game/isla-ancestral/tests\test_brand_contrast_m128.gd - referencia M___ ?
+- [ ] T13-23: test game/isla-ancestral/tests\test_brand_runtime_m128.gd - referencia M___ ?
+- [ ] T13-24: test game/isla-ancestral/tests\test_bug124_shaman_visual.gd - referencia M___ ?
+- [ ] T13-25: test game/isla-ancestral/tests\test_bug125_bug126_fix.gd - referencia M___ ?
+- [ ] T13-26: test game/isla-ancestral/tests\test_bug128_hud_real.gd - referencia M___ ?
+- [ ] T13-27: test game/isla-ancestral/tests\test_eventos.gd - referencia M___ ?
+- [ ] T13-28: test game/isla-ancestral/tests\test_ia_npc.gd - referencia M___ ?
+- [ ] T13-29: test game/isla-ancestral/tests\test_iconos_m159.gd - referencia M___ ?
+- [ ] T13-30: test game/isla-ancestral/tests\test_m111_patrones_cobertura.gd - referencia M___ ?
+- [ ] T13-31: test game/isla-ancestral/tests\test_m111_utils_headless.gd - referencia M___ ?
+- [ ] T13-32: test game/isla-ancestral/tests\test_m122_fallbacks_datos_invalidos.gd - referencia M___ ?
+- [ ] T13-33: test game/isla-ancestral/tests\test_m166_h12_variantes.gd - referencia M___ ?
+- [ ] T13-34: test game/isla-ancestral/tests\test_m166_heroes_placement.gd - referencia M___ ?
+- [ ] T13-35: test game/isla-ancestral/tests\test_m17_categorias.gd - referencia M___ ?
+- [ ] T13-36: test game/isla-ancestral/tests\test_m17_circulacion.gd - referencia M___ ?
+- [ ] T13-37: test game/isla-ancestral/tests\test_m17_construccion_validacion.gd - referencia M___ ?
+- [ ] T13-38: test game/isla-ancestral/tests\test_m17_persistencia_rejilla.gd - referencia M___ ?
+- [ ] T13-39: test game/isla-ancestral/tests\test_m17_reglas_pieza.gd - referencia M___ ?
+- [ ] T13-40: test game/isla-ancestral/tests\test_m17_suites_integracion.gd - referencia M___ ?
+- [ ] T13-41: test game/isla-ancestral/tests\test_m20_amistad_cobertura.gd - referencia M___ ?
+- [ ] T13-42: test game/isla-ancestral/tests\test_m20_amistad_suites.gd - referencia M___ ?
+- [ ] T13-43: test game/isla-ancestral/tests\test_m20_limite_regalo.gd - referencia M___ ?
+- [ ] T13-44: test game/isla-ancestral/tests\test_m56_tomar_foto.gd - referencia M___ ?
+- [ ] T13-45: test game/isla-ancestral/tests\test_m61_allocations_hotloop.gd - referencia M___ ?
+- [ ] T13-46: test game/isla-ancestral/tests\test_m61_batching_chunk.gd - referencia M___ ?
+- [ ] T13-47: test game/isla-ancestral/tests\test_m61_medicion_runtime.gd - referencia M___ ?
+- [ ] T13-48: test game/isla-ancestral/tests\test_m61_normas_performance.gd - referencia M___ ?
+- [ ] T13-49: test game/isla-ancestral/tests\test_m65.gd - referencia M___ ?
+- [ ] T13-50: test game/isla-ancestral/tests\test_terrain_biome_seed_fijo.gd - referencia M___ ?
+- [ ] T13-51: test game/isla-ancestral/tests\test_terrain_footprints_m156.gd - referencia M___ ?
+- [ ] T13-52: test game/isla-ancestral/tests\unit\components\test_health_component.gd - referencia M___ ?
+- [ ] T13-53: test game/isla-ancestral/tests\unit\data\test_item_data.gd - referencia M___ ?
+- [ ] T13-54: test game/isla-ancestral/tests\unit\data\test_npc_visual_database.gd - referencia M___ ?
+- [ ] T13-55: test game/isla-ancestral/tests\unit\debug\test_debug_menu.gd - referencia M___ ?
+- [ ] T13-56: test game/isla-ancestral/tests\unit\dlc\test_dlc_manager.gd - referencia M___ ?
+- [ ] T13-57: test game/isla-ancestral/tests\unit\economia\test_economy_manager.gd - referencia M___ ?
+- [ ] T13-58: test game/isla-ancestral/tests\unit\editor\test_recipe_schema.gd - referencia M___ ?
+- [ ] T13-59: test game/isla-ancestral/tests\unit\foto\test_photo_service.gd - referencia M___ ?
+- [ ] T13-60: test game/isla-ancestral/tests\unit\interfaces\test_i_damageable.gd - referencia M___ ?
+- [ ] T13-61: test game/isla-ancestral/tests\unit\interfaces\test_i_interactable.gd - referencia M___ ?
+- [ ] T13-62: test game/isla-ancestral/tests\unit\interfaces\test_i_saveable.gd - referencia M___ ?
+- [ ] T13-63: test game/isla-ancestral/tests\unit\inventario\test_contenedor_inventario.gd - referencia M___ ?
+- [ ] T13-64: test game/isla-ancestral/tests\unit\inventario\test_inventory_slot.gd - referencia M___ ?
+- [ ] T13-65: test game/isla-ancestral/tests\unit\player\test_equipment_manager.gd - referencia M___ ?
+- [ ] T13-66: test game/isla-ancestral/tests\unit\terrain\test_terrain_modifiers.gd - referencia M___ ?
+- [ ] T13-67: test game/isla-ancestral/tests\unit\test_crucero_eventos.gd - referencia M___ ?
+- [ ] T13-68: test game/isla-ancestral/tests\unit\test_crucero_manager.gd - referencia M___ ?
+- [ ] T13-69: test game/isla-ancestral/tests\unit\time\test_time_calendar.gd - referencia M___ ?
+- [ ] T13-70: test game/isla-ancestral/tests\unit\ui\test_equipment_layer.gd - referencia M___ ?
+- [ ] T13-71: test game/isla-ancestral/tests\unit\ui\test_inventory_unificado.gd - referencia M___ ?
+
+## Scenes: verificar que cada .tscn existe y no esta huerafo
+
+- [ ] T13-01+S: scene game/isla-ancestral/scenes\CameraRig.tscn - referenciada en docs ?
+- [ ] T13-02+S: scene game/isla-ancestral/scenes\asset_preview.tscn - referenciada en docs ?
+- [ ] T13-03+S: scene game/isla-ancestral/scenes\bench_scene_a.tscn - referenciada en docs ?
+- [ ] T13-04+S: scene game/isla-ancestral/scenes\captura_playa.tscn - referenciada en docs ?
+- [ ] T13-05+S: scene game/isla-ancestral/scenes\caso_reloj.tscn - referenciada en docs ?
+- [ ] T13-06+S: scene game/isla-ancestral/scenes\crucero\interior_cubierta_1.tscn - referenciada en docs ?
+- [ ] T13-07+S: scene game/isla-ancestral/scenes\crucero\interior_cubierta_2.tscn - referenciada en docs ?
+- [ ] T13-08+S: scene game/isla-ancestral/scenes\crucero\interior_cubierta_3.tscn - referenciada en docs ?
+- [ ] T13-09+S: scene game/isla-ancestral/scenes\crucero\interior_cubierta_4.tscn - referenciada en docs ?
+- [ ] T13-10+S: scene game/isla-ancestral/scenes\debug\debug_menu.tscn - referenciada en docs ?
+- [ ] T13-11+S: scene game/isla-ancestral/scenes\gaviota_demo_parada.tscn - referenciada en docs ?
+- [ ] T13-12+S: scene game/isla-ancestral/scenes\main.tscn - referenciada en docs ?
+- [ ] T13-13+S: scene game/isla-ancestral/scenes\main_island.tscn - referenciada en docs ?
+- [ ] T13-14+S: scene game/isla-ancestral/scenes\main_simple.tscn - referenciada en docs ?
+- [ ] T13-15+S: scene game/isla-ancestral/scenes\main_test.tscn - referenciada en docs ?
+- [ ] T13-16+S: scene game/isla-ancestral/scenes\main_test2.tscn - referenciada en docs ?
+- [ ] T13-17+S: scene game/isla-ancestral/scenes\minimal_test.tscn - referenciada en docs ?
+- [ ] T13-18+S: scene game/isla-ancestral/scenes\museo\exhibit_slot.tscn - referenciada en docs ?
+- [ ] T13-19+S: scene game/isla-ancestral/scenes\museo\museum.tscn - referenciada en docs ?
+- [ ] T13-20+S: scene game/isla-ancestral/scenes\npc\npc_agent.tscn - referenciada en docs ?
+- [ ] T13-21+S: scene game/isla-ancestral/scenes\npc\villager.tscn - referenciada en docs ?
+- [ ] T13-22+S: scene game/isla-ancestral/scenes\player\Player.tscn - referenciada en docs ?
+- [ ] T13-23+S: scene game/isla-ancestral/scenes\preview_antorcha_m25.tscn - referenciada en docs ?
+- [ ] T13-24+S: scene game/isla-ancestral/scenes\preview_assets.tscn - referenciada en docs ?
+- [ ] T13-25+S: scene game/isla-ancestral/scenes\preview_equipment.tscn - referenciada en docs ?
+- [ ] T13-26+S: scene game/isla-ancestral/scenes\preview_herramientas.tscn - referenciada en docs ?
+- [ ] T13-27+S: scene game/isla-ancestral/scenes\preview_particles.tscn - referenciada en docs ?
+- [ ] T13-28+S: scene game/isla-ancestral/scenes\preview_personaje.tscn - referenciada en docs ?
+- [ ] T13-29+S: scene game/isla-ancestral/scenes\preview_reloj.tscn - referenciada en docs ?
+- [ ] T13-30+S: scene game/isla-ancestral/scenes\preview_vfx_m52.tscn - referenciada en docs ?
+- [ ] T13-31+S: scene game/isla-ancestral/scenes\prueba_arquitectura.tscn - referenciada en docs ?
+- [ ] T13-32+S: scene game/isla-ancestral/scenes\ruina_preview.tscn - referenciada en docs ?
+- [ ] T13-33+S: scene game/isla-ancestral/scenes\simple_walk.tscn - referenciada en docs ?
+- [ ] T13-34+S: scene game/isla-ancestral/scenes\terrenos\huella_agua.tscn - referenciada en docs ?
+- [ ] T13-35+S: scene game/isla-ancestral/scenes\terrenos\huella_arena.tscn - referenciada en docs ?
+- [ ] T13-36+S: scene game/isla-ancestral/scenes\terrenos\huella_barro.tscn - referenciada en docs ?
+- [ ] T13-37+S: scene game/isla-ancestral/scenes\terrenos\huella_ceped.tscn - referenciada en docs ?
+- [ ] T13-38+S: scene game/isla-ancestral/scenes\terrenos\huella_nieve.tscn - referenciada en docs ?
+- [ ] T13-39+S: scene game/isla-ancestral/scenes\terrenos\huella_pavimento.tscn - referenciada en docs ?
+- [ ] T13-40+S: scene game/isla-ancestral/scenes\terrenos\huella_rocas.tscn - referenciada en docs ?
+- [ ] T13-41+S: scene game/isla-ancestral/scenes\terrenos\particulas_agua.tscn - referenciada en docs ?
+- [ ] T13-42+S: scene game/isla-ancestral/scenes\terrenos\particulas_arena.tscn - referenciada en docs ?
+- [ ] T13-43+S: scene game/isla-ancestral/scenes\terrenos\particulas_barro.tscn - referenciada en docs ?
+- [ ] T13-44+S: scene game/isla-ancestral/scenes\terrenos\particulas_ceped.tscn - referenciada en docs ?
+- [ ] T13-45+S: scene game/isla-ancestral/scenes\terrenos\particulas_nieve.tscn - referenciada en docs ?
+- [ ] T13-46+S: scene game/isla-ancestral/scenes\terrenos\particulas_pavimento.tscn - referenciada en docs ?
+- [ ] T13-47+S: scene game/isla-ancestral/scenes\terrenos\particulas_rocas.tscn - referenciada en docs ?
+- [ ] T13-48+S: scene game/isla-ancestral/scenes\test_anillo_arena.tscn - referenciada en docs ?
+- [ ] T13-49+S: scene game/isla-ancestral/scenes\test_arquitectura.tscn - referenciada en docs ?
+- [ ] T13-50+S: scene game/isla-ancestral/scenes\test_runner.tscn - referenciada en docs ?
+- [ ] T13-51+S: scene game/isla-ancestral/scenes\test_terrain.tscn - referenciada en docs ?
+- [ ] T13-52+S: scene game/isla-ancestral/scenes\tests\test_m108.tscn - referenciada en docs ?
+- [ ] T13-53+S: scene game/isla-ancestral/scenes\ui\hud.tscn - referenciada en docs ?

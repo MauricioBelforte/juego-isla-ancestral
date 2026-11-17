@@ -1,0 +1,71 @@
+{
+  "_meta": {
+    "modulo": "169-Crucero",
+    "version": 1,
+    "descripcion": "Actividades a bordo. Cada una se engancha a M74 (EventManager) por evento_id. El limite diario se cuenta con el reloj de M29.",
+    "contrato_m74": "puede_participar(evento_id) / iniciar_participacion(evento_id) / finalizar_evento(evento_id, resultado)"
+  },
+  "actividades": [
+    {
+      "id": "crucero_casino_cartas",
+      "nombre": "Casino: mesa de cartas",
+      "cubierta": 3,
+      "tipo": "azar",
+      "apuesta_min": 5,
+      "apuesta_max": 50,
+      "limite_diario": 3,
+      "premio_max": 120,
+      "requiere": [],
+      "evento_m74": ""
+    },
+    {
+      "id": "crucero_casino_ruleta",
+      "nombre": "Casino: ruleta",
+      "cubierta": 3,
+      "tipo": "azar",
+      "apuesta_min": 10,
+      "apuesta_max": 100,
+      "limite_diario": 2,
+      "premio_max": 260,
+      "requiere": [],
+      "evento_m74": ""
+    },
+    {
+      "id": "crucero_torneo_cubierta",
+      "nombre": "Torneo de cubierta",
+      "cubierta": 2,
+      "tipo": "habilidad",
+      "apuesta_min": 0,
+      "apuesta_max": 0,
+      "limite_diario": 1,
+      "premio_max": 80,
+      "requiere": [],
+      "evento_m74": ""
+    },
+    {
+      "id": "crucero_espectaculo",
+      "nombre": "Espectáculo del comedor",
+      "cubierta": 3,
+      "tipo": "dialogo",
+      "apuesta_min": 0,
+      "apuesta_max": 0,
+      "limite_diario": 1,
+      "premio_max": 40,
+      "requiere": [],
+      "evento_m74": ""
+    },
+    {
+      "id": "crucero_vigia",
+      "nombre": "Vigía: catalejo",
+      "cubierta": 4,
+      "tipo": "observacion",
+      "apuesta_min": 0,
+      "apuesta_max": 0,
+      "limite_diario": 1,
+      "premio_max": 30,
+      "requiere": [],
+      "evento_m74": ""
+    }
+  ],
+  "climas_bloqueantes": [3, 7]
+}
