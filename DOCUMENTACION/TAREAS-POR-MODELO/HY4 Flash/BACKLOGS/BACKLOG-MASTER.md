@@ -92,3 +92,9 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 15-Backlog-Log-Integrity.md (118 tareas)
 - 16-Backlog-CrossRef-Firmas.md (100 tareas)
 - 17-Backlog-CHECKLIST-GLOBAL-Consistencia.md (9 tareas)
+
+## PRUEBAS (nuevos nichos - si se aprueban, quedan permanentes)
+- 18-Backlog-VISUAL-QA-PRUEBA.md (60 tareas - vision/capturas)
+- 19-Backlog-CrossDoc-Contradicciones-PRUEBA.md (10 tareas - 1M context)
+- 20-Backlog-Bug-RootCause-PRUEBA.md (30 tareas - diagnostico)
+- 21-Backlog-I18N-Volumen-PRUEBA.md (100 tareas - tr/ .po)

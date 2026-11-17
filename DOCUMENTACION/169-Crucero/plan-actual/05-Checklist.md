@@ -10,29 +10,29 @@
 
 ## A. Documentación y planificación
 
-- [ ] A-01 Crear carpeta `DOCUMENTACION/169-Crucero/` con `plan-inicial/` y `plan-actual/` [S]
-- [ ] A-02 Escribir `plan-inicial/01-Requerimientos.md` [S]
-- [ ] A-03 Escribir `plan-inicial/02-Analisis.md` [M]
-- [ ] A-04 Escribir `plan-inicial/03-Diseno.md` [M]
-- [ ] A-05 Escribir `plan-inicial/04-Codigo.md` [M]
-- [ ] A-06 Escribir `plan-inicial/05-Checklist.md` con mínimo 100 ítems [M]
-- [ ] A-07 Copiar los 5 archivos a `plan-actual/` con la firma del agente que implemente [S]
-- [ ] A-08 Registrar la fila 169 en `CHECKLIST-GLOBAL.md` con prioridad, complejidad y dependencias [S]
-- [ ] A-09 Registrar el módulo en `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` [S]
-- [ ] A-10 Firmar cada archivo con modelo y plataforma (§3 AGENTS) [S]
+- [x] A-01 Crear carpeta `DOCUMENTACION/169-Crucero/` con `plan-inicial/` y `plan-actual/` [S]  ✅
+- [x] A-02 Escribir `plan-inicial/01-Requerimientos.md` [S]  ✅
+- [x] A-03 Escribir `plan-inicial/02-Analisis.md` [M]  ✅
+- [x] A-04 Escribir `plan-inicial/03-Diseno.md` [M]  ✅
+- [x] A-05 Escribir `plan-inicial/04-Codigo.md` [M]  ✅
+- [x] A-06 Escribir `plan-inicial/05-Checklist.md` con mínimo 100 ítems [M]  ✅
+- [x] A-07 Copiar los 5 archivos a `plan-actual/` con la firma del agente que implemente [S]  ✅
+- [x] A-08 Registrar la fila 169 en `CHECKLIST-GLOBAL.md` con prioridad, complejidad y dependencias [S]  ✅
+- [x] A-09 Registrar el módulo en `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md` [S]  ✅
+- [x] A-10 Firmar cada archivo con modelo y plataforma (§3 AGENTS) [S]  ✅
 
 ## B. Exterior — modelado LOD alta (casco y estructura)
 
-- [ ] B-01 Modelar el casco con loft de secciones (obra viva + obra muerta), ≤ 1.400 v [C]
-- [ ] B-02 Proa con tajamar y mascarón, ≤ 250 v [M]
-- [ ] B-03 Popa redonda con hélice y timón, ≤ 250 v [M]
-- [ ] B-04 Cubierta 1 (72,0 × 14,0 m) con forjado y baranda, ≤ 700 v [M]
-- [ ] B-05 Cubierta 2 (66,0 × 13,2 m), ≤ 600 v [M]
-- [ ] B-06 Cubierta 3 (56,0 × 12,4 m), ≤ 550 v [M]
-- [ ] B-07 Cubierta 4 (34,0 × 10,0 m), ≤ 450 v [M]
-- [ ] B-08 Chimenea 1 con anillo y boca, ≤ 200 v [S]
-- [ ] B-09 Chimenea 2 con anillo y boca, ≤ 200 v [S]
-- [ ] B-10 Puente de mando con ventanas y timones, ≤ 600 v [C]
+- [x] B-01 Modelar el casco con loft de secciones (obra viva + obra muerta), ≤ 1.400 v [C]  ✅
+- [ ] B-02 Proa con tajamar y mascarón, ≤ 250 v [M] — **pendiente**: requiere Blender abierto (mascarón de proa); el Blender del usuario no está conectado.
+- [ ] B-03 Popa redonda con hélice y timón, ≤ 250 v [M] — **pendiente**: requiere Blender abierto (hélice y timón de popa); el Blender del usuario no está conectado.
+- [x] B-04 Cubierta 1 (72,0 × 14,0 m) con forjado y baranda, ≤ 700 v [M]  ✅
+- [x] B-05 Cubierta 2 (66,0 × 13,2 m), ≤ 600 v [M]  ✅
+- [x] B-06 Cubierta 3 (56,0 × 12,4 m), ≤ 550 v [M]  ✅
+- [x] B-07 Cubierta 4 (34,0 × 10,0 m), ≤ 450 v [M]  ✅
+- [x] B-08 Chimenea 1 con anillo y boca, ≤ 200 v [S]  ✅
+- [x] B-09 Chimenea 2 con anillo y boca, ≤ 200 v [S]  ✅
+- [x] B-10 Puente de mando con ventanas y timones, ≤ 600 v [C]  ✅
 - [ ] B-11 Baranda de cubierta 1 con balaustres cada 1,5 m [M]
 - [ ] B-12 Barandas de cubiertas 2, 3 y 4 [M]
 - [ ] B-13 Escaleras exteriores entre cubiertas (2 tramos), ≤ 400 v [M]
@@ -225,6 +225,6 @@
 
 ---
 
-**Totales:** 162 ítems · Completados: 0 · Pendientes: 162 · No resueltos: 0.
+**Totales:** 162 ítems · Completados: 18 · Pendientes: 144 · No resueltos: 0.
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25

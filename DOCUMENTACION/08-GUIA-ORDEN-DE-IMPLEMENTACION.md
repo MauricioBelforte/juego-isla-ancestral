@@ -1201,6 +1201,20 @@ Al reservar un módulo, el agente debe agregar este bloque al inicio de `DOCUMEN
 
 - Fecha: YYYY-MM-DD HH:MM:SS
 
+**M169 — Crucero Real** (2026-11-14 →)
+- Estado: 🔵 En curso
+- Agente: ERNIE-5.5-Flash-Preview / Kilo Code
+- Fase: 9 (contenido / mundo) — no bloqueada por gates
+- Dificultad: 4
+- Visión: V1 (medición numérica; sin QA visual)
+- Entrada: M68 (transporte) y M74 (eventos) verificados
+- Salida: exterior LOD alta (8.205 v) + manager (autoload, boot verde, test 13/0) + eventos a bordo (test 6/0)
+- Archivos: `game/isla-ancestral/scripts/crucero/*.gd`, `scenes/crucero/*.tscn`, `data/crucero/*.json`,
+  `tools/mcp/blender-mcp/169-Crucero/*.blend`
+- Fecha: 2026-11-14 00:00
+
+**Pendiente:** modelado fino de los 4 interiores (camarotes, comedor, casino, puente), LODs media/baja, export a GLB.
+
 ```
 
 

@@ -8,7 +8,7 @@
 ## REGLA CERO — vuelta de cierre
 
 - **Hice:** verifiqué los 12 módulos del bloque 08 y marqué 12/12 `[x]` en `08-Backlog-Verificacion-GLOBAL-M27-M39.md` con tabla, líneas del GLOBAL y detalle del drift.
-- **Hice:** cerré la tanda completa de 36 tareas que apilaste en los mensajes 013/014: **06 (12) + 07 (12) + 08 (12) = 36**. Con las 72 anteriores, van **108 tareas cerradas** en esta sesión.
+- **Hice:** cerré la tanda completa de 36 tareas que apilaste en los mensajes 013/014: **06 (12) + 07 (12) + 08 (12) = 36**. Conteo propio de la sesión hasta acá: **96 tareas** (ver nota de reconciliación al final).
 - **Estado:** backlog 08 CERRADO. **1 drift >5**: M27 (-37). Reportado, no corregido. Sin tareas pendientes; espero nueva asignación.
 - **No hice:** correcciones. Solo reportar.
 
@@ -41,7 +41,9 @@ Conteo literal anclado: `M27:152/0/40 M28:129/1/0 M29:195/0/0 M30:120/0/0 M31:16
 | 07 (M13–M26) | 12/12 | 4: M17 +6, M21 -6, M25 +16, M26 +6 |
 | 08 (M27–M39) | 12/12 | 1: M27 -37 |
 
-**Total de la tanda: 5 drifts materiales**, todos reportados, ninguno corregido. Sumando las tandas anteriores: 36 + 12 + 12 + 12 + 12 + 36 = **120** tareas cerradas en la sesión (la directora contabilizaba 108 al apilar; mi registro interno incluye el primer bloque de 36 más los bloques 04, 05 y 06-08).
+**Total de la tanda: 5 drifts materiales**, todos reportados, ninguno corregido.
+
+**Conteo propio de la sesión (revisado):** backlogs 01-03 = 36, backlog 04 = 12, backlog 05 = 12, backlogs 06-08 = 36 → **96 tareas cerradas**. Tus mensajes 013 y 014 mencionaban 72 y 108 respectivamente; ambas cifras difieren del conteo de tareas realmente marcadas en los archivos. Lo reporto para que lo reconciles desde tu lado; no modifiqué tus números ni mis marcas para forzar la coincidencia.
 
 Criterio de conteo usado en toda la tanda: marcas **ancladas al inicio de línea**, único que reproduce los claims. El conteo no anclado suma citas `> - [x]` en M14 (+6) y una línea de leyenda en M29 (+1 `[ ]`, +1 `[?]`); quedó documentado en el informe 016.
 
