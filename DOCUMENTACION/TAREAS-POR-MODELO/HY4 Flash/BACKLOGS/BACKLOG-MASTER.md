@@ -109,3 +109,4 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 28-Backlog-Log-Integrity-Exp.md (94 tareas)
 - 29-Backlog-I18N-Deep-Orphans.md (23 tareas)
 - 30-Backlog-Scene-Shader.md (61 tareas)
+- 31-Backlog-Tanda-23nov-exHy3.md (12 tareas, reasignada de Hy3)
