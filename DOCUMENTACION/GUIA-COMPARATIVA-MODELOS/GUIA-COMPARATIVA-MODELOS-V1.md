@@ -350,6 +350,13 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Método de trabajo:** análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica. Para tareas de largo horizonte: descomponer en macro-steps con auto-evaluación entre cada paso.
 
+**Evidencia empírica (proyecto, 13-18nov 2026):**
+- **RIEL-4: 15/15 COMPLETO.** M169-Crucero funcional: `crucero_manager.gd` (241 líneas, 4 estados, 5 señales), `crucero_interior.gd` (77 líneas), 4 escenas `.tscn`, `pasajes.json` + `camarotes.json` + `juegos_a_bordo.json`, autoload registrado, boot headless VERDE, test 13/0 + eventos 6/0.
+- **Bug real detectado y fixeado:** 4 escenas interior tenían expresiones Python (`11.0/2 - 3`) en el `.tscn` → parse error. Corregió a literales y validó con `godot --headless --quit`. Lección documentada.
+- **Documentación:** AGENTS §28.3 (técnica token-a-token para mojibake "irrecuperable"), GUIA-BLENDER E-106/E-107, GUIA-GODOT E-GD-01 (falso positivo `--check-only` con autoloads).
+- **Honestidad:** retractó su propio hallazgo de "5 assets hundidos" (bug de medición AABB vs vertices). Retractó "8+ 03-Diseno mojibake" (7 de 8 eran falso positivo PowerShell §28.2).
+- **Limitación detectada:** Blender MCP cerrado = B-02/B-03 bloqueados. Lo reportó en vez de forzar.
+
 ### ⛔ NO PERSONAJES (directiva del fundador, 2026-11-14)
 
 Se le encargó diseñar un NPC (Mayordomo del Pueblo, M161 §4.1). Resultado: el modelo
@@ -433,23 +440,27 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 
 ---
 
-### 12. HY4 Flash (Tencent Hunyuan / Kilo Code) — **NUEVO — En flota** (lanzado 2026-11-16)
+### 12. HY4 Flash (Tencent Hunyuan / Kilo Code) — **En flota** (lanzado 2026-11-17, 5 nichos aprobados)
 
-**Rol:** Tareas de alto volumen repetitivo, limpieza de backlogs, revisión de formato/documentación, verificación de checklists (formato, no contenido profundo), deep search ligero, documentación de tareas, bug triage asistido (no root-cause profundo).
+**Rol:** Agente de volumen + visión + diagnóstico. 5 nichos permanentes: limpieza/triage/formato, Visual QA (multimodal), Cross-doc (1M context), Bug root-cause (diagnóstico), i18n volumen.
 
-**Evidencia empírica verificada (fuente oficial Tencent):**
-- 224B total params (64B Engram), 12B active/token.
-- Nativamente multimodal (imagen + texto), 1M contexto, >150 tps.
-- Arquitectura: hybrid attention, LatentMoE, Engram. KV cache 1/24 de Hy3, 1/6 de Hy4.
-- Precio aprox 1/20 de Hy4 (muy bajo costo).
-- Benchmarks: DeepSWE 64.6, OSWorld 68.1, MMMU-Pro 75.8, AutomationBench 52.2, HLE 55.2, APEX-Agents 63.1.
-- WorkIndex: user satisfaction close to Claude Haiku 5.5, shortest end-to-end completion time.
-- En game R&D bug analysis: matched DeepSeek-V4.1-Flash-1017 y GLM-5.3-Flash en root-cause localization, -22% a -39% menos peticiones del modelo, -40% a -61% menos tokens.
-- **No recomendado para:** ingeniería de software de largo horizonte, workloads complejos de código (Tencent recomienda Hy4 para esos).
+**Evidencia empírica (proyecto, 17-18nov 2026):**
+- **1335 tareas cerradas en ~14.5h** (~92 tareas/h). Cierre 990/990 en ~10 min.
+- **5/5 nichos PRUEBA aprobados** (criterio 70%+ [x] con evidencia real):
+  - Visual QA: 60/60 capturas inspeccionadas, 58 PROBLEMA con descripción concreta, 0 [?]
+  - Cross-doc: 10/10 grupos, 7 contradicciones reales con línea exacta (island size, zoom, day duration, gold ore, venta direction, routes, endings)
+  - Bug root-cause: 30/30 diagnosticados (17 alta / 10 media / 3 baja confianza), 0 [?]
+  - i18n: 100/100 batches, **corrigió premisa falsa del director** (tr() → _t/traducir_clave), 106/106 claves OK
+  - Limpieza: 36+990 tareas de conteo/drift/verificación en <1h
+- **Honestidad:** 4 correcciones de falsos positivos propios antes de publicar. Detectó error aritmético del director (58-53=5 → real 8). Dijo "no ejecutado" en vez de inventar.
+- **Multimodal confirmado:** leyó 60 PNG de capturas del juego y anotó 58 problemas visuales reales (cápsula azul, triángulos verdes, HUD tapando inventario, franjas horarias indistinguibles).
+- **Root-cause match:** 20/20 bugs diagnosticados contra código vivo con archivo:línea. Confianza alta en 15/20.
+- **Fuentes oficiales (Tencent):** 224B total (12B active), multimodal nativo, 1M context, >150 tps, 1/20 costo de Hy4. Benchmarks: DeepSWE 64.6, OSWorld 68.1, MMMU-Pro 75.8.
+- **No recomendado para:** ingeniería de software largo horizonte, código crítico complejo, arquitectura profunda.
 
-**Debilidades:** Menor inteligencia pura que Hy4 para cargas de trabajo complejas de largo horizonte; salida solo texto (no genera imágenes/video/audio).
+**Debilidades:** Velocidad muy alta puede invitar a dar trabajo excesivo (necesita apilado constante). No es multimodal para video/audio. La velocidad no implica profundidad: en tareas de razonamiento largo sigue por debajo de Hy4/GLM.
 
-**Regla de asignación:** deep search, procesamiento de documentos, slides simples, demos frontend simples, computer use, bug triage asistido, limpieza de backlogs, revisión de formato/documentación, verificación de checklists (formato). **NO para:** código crítico largo-horizonte, análisis de arquitectura profunda, matemática de balance compleja (esos son para Glyph Cluster / Beam).
+**Regla de asignación:** VOLUMEN + VISIÓN + DIAGNÓSTICO. Barridos masivos (drift, conteo, UTF-8, orphan), QA visual de capturas, cross-doc de 5+ módulos a la vez, diagnóstico de bugs sin fix, verificación i18n. **NO para:** código GDScript, arquitectura, balance de números, trabajo crítico de una sola pieza.
 
 ---
 
@@ -470,6 +481,6 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 - Protocolo de comunicación: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 - Protocolo multiagente: `CHECKLIST-GLOBAL.md` §21.
 
-**Modelo:** Gemini 3.8 Flash / Nemotron-3.5-Super-VL (editor)
+**Modelo:** agnes-3-flash (directora, edición empírica) / Gemini 3.8 Flash / Nemotron-3.5-Super-VL (editor)
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-17
+**Fecha:** 2026-11-18

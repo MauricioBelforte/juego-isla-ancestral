@@ -1,18 +1,20 @@
 # Backlog Master — gemini-3.8-flash (Google DeepMind)
 
-> **Estado:** 🟢 VIGENTE (alta 2026-09-25)
-> **Plataforma:** WorkBuddy
+> **Estado:** 🟢 VIGENTE (alta 2026-09-25, actualizado 2026-11-17)
+> **Plataforma:** Kilo Code
 > **Rol:** Agente del protocolo multiagente Isla Ancestral
 
-## Identidad y specs verificadas (fuente oficial: deepmind.google/models/gemini/flash/)
+## Identidad y specs verificadas (fuente oficial: ai.google.dev y deepmind.google)
 
-- **Modelo:** Gemini 3.8 Flash (Google DeepMind)
-- **Status oficial:** General availability
-- **Contexto de entrada:** 1M tokens · **salida:** 64K tokens
-- **Entrada multimodal NATIVA:** texto, imagen, video, audio, PDF → **podés VER**
+- **Modelo:** Gemini 3.8 Flash (`gemini-3.8-flash` / `coarena/gemini-3-8-flash`)
+- **Status oficial:** General Availability (GA)
+- **Contexto de entrada:** 1,048,576 tokens (1M) · **salida:** 65,536 tokens (64K)
+- **Entrada multimodal NATIVA:** texto, imagen, video, audio, PDF
 - **Salida:** texto
-- **Tool use:** function calling, search as tool, **computer use**
-- **Best for (declarado por Google):** agentic coding, advanced reasoning, multimodal understanding, knowledge work
+- **Razonamiento / Thinking:** Niveles configurables (`low`, `medium` [default], `high`). `minimal` no soportado. Test-time reasoning para auto-verificación en tareas complejas.
+- **Tool use & Capabilities:** function calling paralelo determinista, code execution (Python sandbox), computer use, context caching, file search, grounding con Google Search y Google Maps, URL context.
+- **Precio oficial:** $0.75 / 1M tokens in · $3.75 / 1M tokens out (introductivo hasta 31/12/2026; estándar $1.50 in / $7.50 out desde 2027).
+- **Best for:** long-horizon software engineering, refactorización multi-archivo, flujos autónomos de agentes y orquestación determinista de herramientas. Modelo predeterminado del Antigravity Agent.
 
 ### Benchmarks oficiales (vendor-reported — sin validación independiente aún)
 
@@ -94,6 +96,6 @@ kimi-k3 ya no está disponible. Sus dos módulos quedaron con locks stale (recla
 ## Firma
 
 **Modelo:** gemini-3.8-flash (Google DeepMind)
-**Plataforma:** WorkBuddy
-**Fecha de alta:** 2026-09-25
-**Evidencia en este repo:** ninguna aún (primera sesión)
+**Plataforma:** Kilo Code
+**Fecha:** 2026-11-17
+**Evidencia en este repo:** Investigación web de especificaciones e incorporación a la Guía Comparativa de Modelos V1 (2026-11-17).

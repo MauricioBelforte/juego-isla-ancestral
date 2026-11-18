@@ -216,3 +216,104 @@
 - **KnownIssue no bloqueante:** `scripts/blender/setup_estudio.py` y `scripts/blender/personaje_voxel.py` marcados `[x]` (bloque K, V5) pero **ausentes en el repo** (verificado con `find`). No afecta la conectividad de visión ya operativa.
 - **Veredicto:** ✅ **Verificado por hy3 (Log 1216) 2026-10-03**.
 **Nota:** la documentación del módulo está completa (incluida la Vía V5 Blender agregada el 2026-08-22); los ítems pendientes son de **implementación operativa** (instalación de MCPs, tests reales), que requieren el proyecto Godot base (M04), Blender instalado, o decisiones del usuario sobre qué herramienta comunitaria adoptar. **V5 quedó operativa y verificada el 2026-08-24** (Blender 4.2.3 LTS + addon + test get_scene_info exitoso), y se creó la guía maestra de conexión `06-GUIA-DE-CONEXION-VISION.md`. **V4 (godot-mcp) quedó operativa y verificada el 2026-08-24** (Coding-Solo/godot-mcp clonado y compilado, registrado en cline_mcp_settings.json con GODOT_PATH, tests get_godot_version 4.7.2 y get_project_info exitosos).
+
+## Barrido HY4 Flash 17nov — 58 hallazgos visuales (capturas)
+
+> **Origen:** prueba 18 (backlog `18-Backlog-VISUAL-QA-PRUEBA.md`, reporte `Mensajes entre modelos/HY4 Flash/029-...`).
+> 60 capturas inspeccionadas individualmente: **2 OK** (T18-24, T18-25) y **58 PROBLEMA**. 0 `[?]`.
+> Rutas relativas a `tools/mcp/godot-mcp/capturas/`. **No se modifican marcas ni el sello §21.8 existente**:
+> esta seccion es evidencia de hallazgos, no una verificacion del modulo.
+
+### 1. Capturas inutilizables para QA (15)
+
+- T18-05 · 09-Terreno-Y-Geografia · `cap_9_2026-09-06_19-19-20_isla_10x_interior.png` — solo splash de Godot; no se ve ninguna escena de juego
+- T18-18 · 49-Iluminacion · `cap_49_2026-09-06_07-29-57_mediodia_1200.png` — captura completamente negra, sin escena
+- T18-26 · 10-Generacion-Del-Mundo · `cap_10_2026-09-02_23-49-00_chunks_384.png` — solo splash de Godot sobre el editor; no se ven chunks
+- T18-27 · 10-Generacion-Del-Mundo · `cap_10_2026-09-02_23-50-00_chunks_384b.png` — solo splash de Godot sobre el editor; no se ven chunks
+- T18-28 · 10-Generacion-Del-Mundo · `cap_10_2026-09-02_23-53-00_chunks_320.png` — solo splash de Godot sobre el editor; no se ven chunks
+- T18-29 · 10-Generacion-Del-Mundo · `cap_10_2026-09-02_23-55-00_chunks_320b.png` — solo splash de Godot sobre el editor; no se ven chunks
+- T18-30 · 10-Generacion-Del-Mundo · `cap_10_2026-09-03_05-26-00_chunks_512.png` — dos ventanas solapadas con splash; no se ve terreno
+- T18-33 · 50-Vegetacion · `cap_50_2026-09-06_07-57-03_panoramica_inicial_escala.png` — captura negra con una franja del IDE
+- T18-37 · 01-Fundamentos-Del-Proyecto · `cap_01_2026-08-25_00-31-24.png` — captura del IDE, no del juego
+- T18-38 · 01-Fundamentos-Del-Proyecto · `cap_01_2026-08-25_00-33-51.png` — captura del IDE, no del juego
+- T18-40 · 01-Fundamentos-Del-Proyecto · `cap_01_2026-08-25_00-49-27.png` — captura de documento de texto, no del juego
+- T18-52 · 155-Vestimenta-Y-Accesorios · `cap_155_2026-09-01_19-30-00_ui_equipamiento.png` — captura del IDE, no de la UI de equipamiento
+- T18-53 · 155-Vestimenta-Y-Accesorios · `cap_155_2026-09-01_19-33-00_ui_equip2.png` — solo splash de Godot sobre el IDE
+- T18-54 · 155-Vestimenta-Y-Accesorios · `cap_155_2026-09-01_19-34-00_ui_equip3.png` — solo splash de Godot sobre el IDE
+- T18-55 · 155-Vestimenta-Y-Accesorios · `cap_155_2026-09-01_19-36-00_ui_equip4.png` — solo splash de Godot sobre el IDE
+
+### 2. Personaje como capsula azul (19)
+
+- T18-06 · 25-Ruinas · `cap_21_2026-08-29_17-25-04_dialogo-catalina.png` — costuras negras profundas entre bloques de terreno;NPC representado como cápsula azul
+- T18-07 · 25-Ruinas · `cap_21_2026-08-29_17-29-01_dialogo-catalina2.png` — gran vacío blanco, franja marrón y plano azul recortado; cápsula azul
+- T18-08 · 25-Ruinas · `cap_21_2026-08-29_17-52-38_dialogo-fijado.png` — terreno ausente, todo azul plano; diálogo visible y objetos flotando
+- T18-09 · 25-Ruinas · `cap_21_2026-08-29_18-19-42_spawn-arena.png` — cápsula azul gigante ocupa el encuadre; no se ve terreno
+- T18-16 · 49-Iluminacion · `cap_49_2026-09-06_07-24-15_atardecer_1800.png` — iluminación verde-amarilla uniforme, sin rasgo de atardecer; editor al fondo
+- T18-17 · 49-Iluminacion · `cap_49_2026-09-06_07-29-09_amanecer_0600_v2.png` — misma luz verde-amarilla que en atardecer; no se distingue el amanecer
+- T18-19 · 49-Iluminacion · `cap_49_2026-09-06_07-31-35_amanecer_0600_v3.png` — misma luz que en atardecer; cápsula azul y animales sobre repisas
+- T18-20 · 49-Iluminacion · `cap_49_2026-09-06_07-31-50_mediodia_1200_v2.png` — misma luz, animal sobre repisa; sin diferencia de mediodía
+- T18-32 · 50-Vegetacion · `cap_50_2026-09-02_23-25-00_poblada.png` — franja marrón uniforme en el horizonte y personaje como cápsula azul
+- T18-44 · 13-Herramientas · `cap_13_2026-08-28_19-19-35_fase3-estado-inicial.png` — personaje como cápsula azul bajo el agua; cámara sumergida
+- T18-45 · 13-Herramientas · `cap_13_2026-08-28_19-24-22_fase3-tras-golpes-pala.png` — cápsula azul y objeto flotando frente al acantilado
+- T18-46 · 101-QA-General · `cap_101_2026-09-01_22-58-00_1_spawn.png` — cápsula azul, franja marrón en el horizonte y editor visible
+- T18-47 · 101-QA-General · `cap_101_2026-09-01_22-58-00_2_tras_caminar.png` — cápsula azul y pared verde oscura con líneas diagonales
+- T18-48 · 101-QA-General · `cap_101_2026-09-01_23-00-00_3_click_extraccion.png` — misma cápsula y pared; no se aprecia feedback de extracción
+- T18-49 · 101-QA-General · `cap_101_2026-09-01_23-03-00_4_debugmenu.png` — no se ve menú debug, solo escena con cápsula azul
+- T18-50 · 101-QA-General · `cap_101_2026-09-01_23-15-00_debug_menu_F12.png` — ventanas solapadas y sin menú debug visible
+- T18-51 · 155-Vestimenta-Y-Accesorios · `cap_155_2026-09-01_18-50-00_jugador.png` — cápsula azul, sin ropa visible, editor detrás
+- T18-56 · 167-Isla-Raiz · `cap_167_2026-09-01_12-28-00_overview.png` — cápsula azul, pared con líneas diagonales y SCRIPT ERROR en consola
+- T18-58 · 167-Isla-Raiz · `cap_167_2026-09-01_22-40-00_smoke_regresion.png` — cápsula azul, bloques grises flotando y errores en consola
+
+### 3. Triangulos verdes flotando (5)
+
+- T18-01 · 09-Terreno-Y-Geografia · `anillo_arena_0.png` — pequeños triángulos verdes flotando sobre el terreno; HUD y reloj visibles
+- T18-02 · 09-Terreno-Y-Geografia · `anillo_arena_1.png` — triángulos verdes dispersos y objeto blanco diminuto en el cielo
+- T18-03 · 09-Terreno-Y-Geografia · `anillo_arena_2.png` — triángulos verdes sobre el terreno y punto en el cielo
+- T18-22 · 51-Agua · `cap_51_2026-09-06_16-30-00_agua_costa_suroeste.png` — triángulos verdes flotando en la esquina inferior izquierda
+- T18-23 · 51-Agua · `cap_51_2026-09-06_16-30-00_agua_playa_sur.png` — triángulos verdes sobre el terreno; agua solo en franja lejana
+
+### 4. Reloj HUD tapando la cabecera del inventario (4)
+
+- T18-11 · 53-UI-UX · `cap_53_2026-10-08_23-28-20_inventario_unificado_overlay.png` — el reloj HUD tapa la cabecera del inventario (contador 0/24 y pestañas Ropa/Arte)
+- T18-12 · 53-UI-UX · `cap_53_2026-10-08_23-37-29_inventario_unificado_overlay.png` — el reloj HUD tapa la cabecera del inventario (contador 0/24 y pestañas Ropa/Arte)
+- T18-13 · 53-UI-UX · `cap_53_2026-10-08_23-56-44_inventario_unificado_overlay.png` — el reloj HUD tapa la cabecera del inventario (contador 0/24 y pestañas Ropa/Arte)
+- T18-14 · 53-UI-UX · `cap_53_2026-10-09_00-08-13_inventario_unificado_overlay.png` — el reloj HUD tapa la cabecera del inventario (contador 0/24 y pestañas Ropa/Arte)
+
+### 5. Franjas horarias indistinguibles (5)
+
+- T18-16 · 49-Iluminacion · `cap_49_2026-09-06_07-24-15_atardecer_1800.png` — iluminación verde-amarilla uniforme, sin rasgo de atardecer; editor al fondo
+- T18-17 · 49-Iluminacion · `cap_49_2026-09-06_07-29-09_amanecer_0600_v2.png` — misma luz verde-amarilla que en atardecer; no se distingue el amanecer
+- T18-18 · 49-Iluminacion · `cap_49_2026-09-06_07-29-57_mediodia_1200.png` — captura completamente negra, sin escena
+- T18-19 · 49-Iluminacion · `cap_49_2026-09-06_07-31-35_amanecer_0600_v3.png` — misma luz que en atardecer; cápsula azul y animales sobre repisas
+- T18-20 · 49-Iluminacion · `cap_49_2026-09-06_07-31-50_mediodia_1200_v2.png` — misma luz, animal sobre repisa; sin diferencia de mediodía
+
+### 6. Terreno blanco, costuras negras y SCRIPT ERROR (9)
+
+- T18-04 · 09-Terreno-Y-Geografia · `cap_09_2026-09-19_21-45-49_impostor_1300m.png` — captura recortada con el editor al fondo; zona blanca vacía y personaje en el borde
+- T18-06 · 25-Ruinas · `cap_21_2026-08-29_17-25-04_dialogo-catalina.png` — costuras negras profundas entre bloques de terreno;NPC representado como cápsula azul
+- T18-15 · 53-UI-UX · `cap_53_2026-10-09_02-11-41_t3_bug126_hud_antes_de_h.png` — terreno blanco plano con manchas grises flotando
+- T18-21 · 51-Agua · `cap_51_2026-09-06_16-23-25_agua_olas_v1.png` — no se ve agua, solo terreno tipo cantera
+- T18-34 · 50-Vegetacion · `cap_50_2026-10-19_05-07-30_poblado-runtime-verificacion.png` — extensas zonas blancas sin textura en la orilla
+- T18-57 · 167-Isla-Raiz · `cap_167_2026-09-01_12-32-00_costa.png` — zona blanca/cian plana, costa sin detalle, IDE recortado
+- T18-58 · 167-Isla-Raiz · `cap_167_2026-09-01_22-40-00_smoke_regresion.png` — cápsula azul, bloques grises flotando y errores en consola
+- T18-59 · 167-Isla-Raiz · `cap_167_2026-10-31_20-28-35_gpt-luna_isla-reanudada.png` — orilla blanca sin textura y agua plana
+- T18-60 · 167-Isla-Raiz · `cap_167_2026-10-31_20-39-56_gpt-luna_continuar-reanuda.png` — orilla blanca sin textura, agua plana y personaje
+
+### 7. Otros hallazgos no encuadrados en los patrones anteriores (8)
+
+- T18-10 · 25-Ruinas · `cap_21_2026-08-29_18-25-35_catalina-junto-jugador.png` — solo cielo y franja marrón; sin escena
+- T18-31 · 50-Vegetacion · `cap_50_2026-09-02_05-51-00_vegetacion.png` — props de vegetación sobre fondo gris sin terreno; no se puede verificar ubicación
+- T18-35 · 50-Vegetacion · `cap_50_2026-10-19_05-12-10_fps-60-pivote.png` — bloque marrón flotando junto a la orilla
+- T18-36 · 01-Fundamentos-Del-Proyecto · `cap_01_2026-08-25_00-29-20.png` — campo marrón vacío con un punto blanco; sin terreno reconocible
+- T18-39 · 01-Fundamentos-Del-Proyecto · `cap_01_2026-08-25_00-38-26.png` — fondo gris plano y cápsula blanca; sin terreno
+- T18-41 · 13-Herramientas · `cap_13_2026-08-25_22-15-00_verificacion_highlight.png` — navegador e IDE ocupan la imagen; juego reducido a una franja verde
+- T18-42 · 13-Herramientas · `cap_13_2026-08-25_22-40-00_camara_corregida_3_recursos.png` — escena de prueba con cubos primitivos sobre fondo verde
+- T18-43 · 13-Herramientas · `cap_13_2026-08-25_22-50-00_pico_visible_en_mano.png` — pico primitivo y cubos; no corresponde al juego terminado
+
+### Nota de medicion (discrepancia de agrupacion)
+
+- Los patrones 1-6 se solapan en **7 capturas** (T18-06, T18-16, T18-17, T18-18, T18-19, T18-20, T18-58), asi que su union es **50**, no 58.
+- Quedan **8** capturas sin encuadrar en esos patrones (grupo 7), no las 5 que estimaba la tarea T22-08 del backlog 22.
+- Cuenta final verificada: 60 inspeccionadas = 2 OK + 50 en patrones + 8 otros = **60**; los 58 PROBLEMA quedan todos listados una vez en el grupo que les corresponde segun el orden de esta seccion.
+
+**Registro:** HY4 Flash / WorkBuddy — 2026-11-18 (datos medidos el 2026-11-17).

@@ -1,0 +1,720 @@
+======================================================================
+BUG-042  entrada 1/1  L5626  (71 lineas)
+## BUG-042: las fuentes de `assets/fonts/` son páginas HTML 404, no fuentes
+
+**Severidad:** 🟠 Mayor · **Módulo dueño:** M46/M88 (fuentes) · **Afecta a:** M53 (UI), M87 (tipografía)
+**Estado:** Abierto — reportado por **DeepSeek-V4.1-Flash / WorkBuddy** (M87 iter. 6, Log 920, 2026-09-15)
+
+### Qué se observó
+
+Al construir el analizador de encaje de texto de M87 (medición real con las métricas de la fuente),
+las medidas salían **0.0 px** para la fuente del juego, mientras que la fuente por defecto del tema
+medía con normalidad. La causa no era la API ni el modo headless.
+
+### Qué dice la medición
+
+```
+Nunito-Regular.ttf       bytes= 304727  imprimibles= 99.8%  magic= 0a0a0a0a
+Nunito-Bold.ttf          bytes= 304688  imprimibles= 99.8%  magic= 0a0a0a0a
+FredokaOne-Regular.ttf   bytes= 304724  imprimibles= 99.8%  magic= 0a0a0a0a
+Nunito-Variable.ttf      bytes= 276932  imprimibles= 26.7%  magic= 00010000   <- única VÁLIDA
+
+head -c 300 assets/fonts/Nunito-Regular.ttf
+  \n\n\n\n\n\n\n\n<!DOCTYPE html>\n<html\n  lang="en"\n  data-color-mode="auto" ...
+
+grep -oE "<title>[^<]*</title>" assets/fonts/Nunito-Regular.ttf
+  <title>Page not found · GitHub · GitHub</title>
+```
+
+- Un TTF real empieza con el magic `00 01 00 00` (sfnt) o `OTTO`. Los tres archivos corruptos
+  empiezan con **`0a 0a 0a 0a`** (saltos de línea) y son **99,8 % texto imprimible**: son
+  **páginas HTML de GitHub**, concretamente la pantalla **«Page not found»**. Se intentó descargar
+  las fuentes desde URLs de GitHub que devolvían 404 y se guardó la respuesta con extensión `.ttf`.
+- `Nunito-Variable.ttf` **sí es una fuente válida** (`00 01 00 00`) y mide correctamente
+  (`Jugar`@16 = 37×23 px). No figura en `data/fonts/fonts.json`.
+... [39 lineas mas]
+======================================================================
+BUG-043  entrada 1/1  L5697  (52 lineas)
+## BUG-043: bioma "snow" inalcanzable en el generador de la isla (checks en orden incorrecto)
+
+- **Fecha de reporte:** 2026-09-17 04:55
+- **Modulo(s) afectado(s):** M10 (Generación del Mundo) — `scripts/world/island_generator.gd:188-209`; efecto visible en M09/M167 (terreno de la Isla Raíz)
+- **Severidad:** 🟡 Menor (visual — la nieve nunca aparece pese a existir el bloque)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado (requiere visto bueno del usuario sobre el perfil visual del terreno — Log 791 restauró max_height 40 / boost 1.0 tras rechazar el terreno escalado)
+- **Reportado por:** atria-dawn (Shanghai AI Laboratory) / Kilo Code — QA M10, Log 945
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Fecha:** 2026-09-17 04:55
+
+**Descripcion del problema:**
+`_get_biome(x, z)` clasifica los biomas por altitud con dos umbrales calculados sobre
+`max_height` (40 nominal): mountain cuando `h > 0.65*40 = 26` y snow cuando
+`h > 0.8*40 = 32`. El check de **mountain se evalúa primero** (línea 198) y el de snow
+después (línea 202), así que toda posición alta vuelve "mountain" y el bioma "snow"
+es **código muerto**. El bloque SNOW (BlockType.SNOW = 26) existe y está registrado en
+la VoxelBlockyLibrary de `main_island.gd:131`, pero el generador nunca lo produce.
+
+**Evidencia (test nuevo, `scripts/world/test_generacion_m10_atria.gd`):**
+muestreo de 2000 posiciones en espiral dentro del 55% interior con el config de
+runtime (semilla 42, radio 2560, max_height 40, boost 1.0):
+`mountain=80, snow=0`, **altura máxima real = 38 > 32**. Es decir, existen posiciones
+que deberían clasificarse como nieve y se clasifican como montaña.
+
+**Pasos para reproducir:**
+1. `Godot --headless --path game/isla-ancestral --script res://scripts/world/test_generacion_m10_atria.gd`
+2. El test falla con: "bioma snow alcanzable: snow=0/2000 — causa única: el check de
+   mountain (26) va ANTES que el de snow (32)".
+
+**Comportamiento esperado:**
+... [20 lineas mas]
+======================================================================
+BUG-044  entrada 1/1  L5749  (94 lineas)
+## BUG-044: modulo M12 Camara — dos sistemas paralelos; el documentado es codigo muerto
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA cruzado M12, Log 955)
+- **Modulo:** M12 Camara
+- **Severidad:** Alta (arquitectura)
+- **Estado:** [?] Delegado
+
+### Sintoma
+
+El `05-Checklist.md` del M12 firme 102/102 items como cumplidos, afirmando comportamiento en
+runtime: 5 modos de camara (Explore/Build/Dialog/Cutscene/Minimap), zoom de 3 niveles (2.5/5/8 m),
+shake narrativo, fade centralizado, minimapa 128x128, FOV 70 fijado, limitador de rotacion
+240 grados/s. **Ninguno de esos comportamientos existe en la escena que el juego ejecuta.**
+
+### Causa raiz
+
+Existen dos sistemas de camara paralelos:
+
+1. **`scripts/camera/camera_rig.gd`** (267 lineas, CameraRig.tscn, camera_mode.gd, camera_spring.gd):
+   implementa todo lo que el modulo documenta. Pero **jamais se instancia en la escena principal**
+   (`run/main_scene = res://scenes/main_island.tscn`). Solo esta cableado en `scenes/main.tscn` +
+   `scripts/main.gd`, escena que no es la principal y no tiene ninguna referencia entrante desde
+   ningun .gd ni .tscn del proyecto. **Es codigo muerto.**
+
+2. **`scripts/follow_camera.gd`** (109 lineas, instanciada en `main_island.tscn:70-73`): la camara
+   que realmente corre el juego. Un solo modo, zoom continuo 4-20 m por scroll, yaw de orbit libre
+   del mouse, colision por voxel raycast, sin shake, sin fade, sin minimapa, sin FOV fijado.
+
+Ademas, los contratos de integracion documentados (seccion 3 de `04-Codigo.md`) no existen:
+... [62 lineas mas]
+======================================================================
+BUG-045: SIN ENTRADA EN 11-BUGS.md
+======================================================================
+BUG-046  entrada 1/1  L5843  (159 lineas)
+## BUG-046: catalogo M159 — 12 items con id interno discordante del nombre de archivo
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA M38, Log 982)
+- **Modulo:** M159 Catalogo-De-Objetos (data/items/)
+- **Severidad:** Media (mantenimiento; causa raiz de BUG-028)
+- **Estado:** [?] Delegado
+
+### Sintoma
+
+Doce archivos `.tres` de `data/items/` tienen un `id` interno cuya categoria NO coincide con el
+prefijo del nombre del archivo:
+
+| Archivo | id interno |
+|---|---|
+| item_obj_pla_001.tres | OBJ-CUA-007 |
+| item_obj_ban_001.tres | OBJ-MES-007 |
+| item_obj_cam_001.tres | OBJ-MES-009 |
+| item_obj_cam_002.tres | OBJ-MES-010 |
+| item_obj_est_001.tres | OBJ-MES-008 |
+| item_obj_est_002.tres | OBJ-CUA-008 |
+| item_obj_esp_001.tres | OBJ-CUA-003 |
+| item_obj_esp_002.tres | OBJ-CUA-004 |
+| item_obj_luz_001.tres | OBJ-CUA-006 |
+| item_obj_rel_001.tres | OBJ-CUA-005 |
+| item_obj_sil_001.tres | OBJ-MES-005 |
+| item_obj_sil_002.tres | OBJ-MES-006 |
+
+(Nota: el resto del catalogo — 99 archivos — SI coincide; los otros "discordantes" detectados en
+el escaneo eran solo diferencias de mayusculas/guion_vs_guion_bajo, falsos positivos.)
+... [127 lineas mas]
+======================================================================
+BUG-047  entrada 1/1  L3562  (11 lineas)
+### BUG-047 — M38: items solo-vendibles con precio_venta anulado (devuelve 0) — RESUELTO
+
+- **Fecha de reporte:** 2026-09-18 · **Fecha de resolución:** 2026-10-04
+- **Módulo(s) afectado(s):** M38 Economía — `game/isla-ancestral/scripts/economia/price_manager.gd`
+- **Reportado por:** atria-dawn (QA M38, Log 982) · **Resuelto por:** agnes-3-flash (re-fix v3, commit `c60b068`) · **Verificado por:** atria-dawn-s2 (QA §21.8, Log 1267)
+- **Síntoma:** `precio_venta_vigente` devolvía **0** para los 5 items solo-vendibles del catálogo (`fragmento_ancestral` 75, `talisman_ancestral` 200, `pico_cobre` 60, `hacha_cobre` 55, `caja_almacenamiento` 40).
+- **Causa raíz:** tres defectos encadenados, mismo síntoma: (1) original: `_precio_venta_base` hacía early return 0 cuando `precio_compra <= 0`, ignorando el `precio_venta` del override; (2) falso fix v1: `_catalog_venta` llamaba `.get(item
+- **Solución aplicada (3 cambios, commit `c60b068`):** `_catalog_venta()` usa `EconomyPriceCatalog.get_price_def(item_id)` con null-check; `_precio_venta_base()` usa el `precio_venta` del catálogo directo (con ajuste estacional/feria/oferta
+- **Verificación (Log 1267, binario real 4.7.2):** `test_bug047_sell_only.gd` **6/0** (nueva, afirma valores exactos del catálogo); `test_m38_economia_smoke.gd` 7/0; `test_iter5_jkl.gd` 33/0. **Sonda ROJO→VERDE empírica:** falso fix v1 (`8e
+- **Firma:** **Modelo:** atria-dawn-s2 (verificación) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-04 06:50
+
+======================================================================
+BUG-048  entrada 1/1  L6002  (91 lineas)
+## BUG-048: UI no compila en runtime (parse errors en theme_ux / dialog_layer)
+
+- **Fecha de reporte:** 2026-09-18
+- **Modelo:** Atria-Dawn-Preview
+- **Plataforma:** Kilo Code
+- **Reportado por:** agente (QA M38, Log 982 — hallazgo colateral)
+- **Modulo:** M53 UI-UX / M145 (scripts/ui/)
+- **Severidad:** Critica (la UI no carga en runtime)
+- **Estado:** [?] Delegado (M53 esta 🔵 En curso por otro agente — §21.4 lock)
+
+### Sintoma
+
+En TODAS las ejecuciones headless del proyecto (cualquier test que carga el arbol de escenas):
+
+```
+SCRIPT ERROR: Parse Error: Expression is of type "Node" so it can't be of type "Tween".
+   at: GDScript::reload (res://scripts/ui/theme/theme_ux.gd:168)
+SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+ERROR: Failed to load script "res://scripts/ui/theme/theme_service.gd" with error "Compilation failed".
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: _ready (res://scripts/ui/theme/theme_service.gd:18)
+SCRIPT ERROR: Parse Error: Function "_on_node_entered" has the same name as a previously declared function.
+   at: GDScript::reload (res://scripts/ui/layers/dialog_layer.gd:269)
+ERROR: Failed to load script "res://scripts/ui/layers/dialog_layer.gd" with error "Parse error".
+SCRIPT ERROR: Invalid call. Nonexistent function 'new' in base 'GDScript'.
+   at: UIRoot._build_layers (res://scripts/ui/ui_root.gd:41)
+```
+
+### Impacto
+
+- `ui_root.gd._build_layers` falla → **la UI del juego no se construye en runtime**.
+- Aparece en cada arranque del juego y en cada test headless que carga `main_island.tscn`.
+... [59 lineas mas]
+======================================================================
+BUG-049  entrada 1/1  L6093  (80 lineas)
+## BUG-049: `reservar_log.py` CIEGO a los numeros de 1, 2 y 4+ digitos (98 logs invisibles)
+
+- **Fecha de reporte:** 2026-09-18 03:30
+- **Modulo(s) afectado(s):** Transversal — `scripts/reservar_log.py` (guardian de reservas de `Logs/`)
+- **Severidad:** 🟠 Mayor
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Descripcion del problema:**
+Los dos regex del guardian exigian **exactamente 3 digitos**:
+
+```python
+RE_LOG = re.compile(r'^(\d{3})-.*\.md$')
+RE_RES = re.compile(r'^(\d{3})-.*\.txt$')
+```
+
+Con el protocolo v3 (`Logs/NUMEROS_DISPONIBLES.txt` = **1000-1500**) **todo log nuevo tiene 4
+digitos**, asi que a partir de 1000 el guardian queda ciego. Y no era solo el futuro: tambien
+quedaban fuera los logs de **1 y 2 digitos** que ya existian en `Logs/`.
+
+**Pasos para reproducir:**
+1. `python scripts/reservar_log.py --estado` → informa `reservas/*.txt : 0`.
+2. `ls Logs/reservas/` → hay `1000-atria-dawn-M13-QA.txt`.
+3. Contar `Logs/*.md` aplicando cada regex por separado.
+
+**Comportamiento esperado:**
+`--estado` debe ver TODOS los logs y TODAS las reservas, y detectar `RESERVA DOBLE` / `COLISION`
+para cualquier numero, no solo para los de 3 digitos.
+
+**Comportamiento actual (medido, Log 986):**
+
+```
+... [48 lineas mas]
+======================================================================
+BUG-050  entrada 1/1  L6173  (1816 lineas)
+## BUG-050: M39 Tiendas — `catalogo_tiendas.gd` llama `.size()` a un Callable (SCRIPT ERROR al boot) + catálogo M39 referencia item M15 inexistente `piedra_caliza`
+
+> ⚠️ **CORREGIDO por atria-dawn (2026-09-18, Log 1039):** la atribución del `.size()` sobre Callable
+> es **ERRÓNEA** — el error está en `test_logros.gd:291` (M72), no en `catalogo_tiendas.gd:63`.
+> Ver **BUG-055**. La parte de `piedra_caliza` SÍ es real, pero es 1 de **13 referencias rotas**
+> (ver **BUG-054**).
+
+- **Fecha de reporte:** 2026-09-18 19:15
+- **Modulo(s) afectado(s):** M39 Tiendas (`scripts/shops/catalogo_tiendas.gd`), M15 Items (`piedra_caliza`)
+- **Severidad:** 🟠 Mayor (emite `SCRIPT ERROR` en **todo** boot de autoloads; contamina cada run headless)
+- **Prioridad sugerida:** Media-Alta
+- **Estado:** [?] Delegado (dueño M39, en curso por glm — no lo corrijo para no pisar su trabajo)
+
+**Descripción del problema:**
+Al bootear el proyecto (cualquier test `--headless` que levante autoloads) se emite:
+```
+SCRIPT ERROR: Invalid call. Nonexistent function 'size' in base 'Callable'.
+   at: push_warning (core/variant/variant_utility.cpp)
+   GDScript backtrace (most recent call first):
+       [0] _validar_tienda (res://scripts/shops/catalogo_tiendas.gd:63)
+       [1] _registrar_validada (res://scripts/shops/catalogo_tiendas.gd:68)
+       [2] _registrar_tienda_general (res://scripts/shops/catalogo_tiendas.gd:116)
+       [3] _registrar_tiendas_oficiales (res://scripts/shops/catalogo_tiendas.gd:26)
+       [4] _ready (res://scripts/shops/catalogo_tiendas.gd:19)
+```
+Además: `WARNING: [M39] 'tienda_general': item_id inexistente en M15: piedra_caliza` — el catálogo M39
+referencia un `item_id` que no existe en el catálogo de M15.
+
+**Lectura (agnés, sin corregir):** `catalogo_tiendas.gd:63` llama `.size()` sobre algo que en runtime
+es un **Callable** (no un Array) → `Callable.size()` no existe. Probablemente una lista de validadores
+/ campos quedó como Callable (o una señal) y se itera con `.size()`. Y `piedra_caliza` es un `item_id`
+huérfano (M15 no lo define) → el validador de tienda lo reporta.
+... [1784 lineas mas]
+======================================================================
+BUG-051  entrada 1/1  L3866  (27 lineas)
+### BUG-051 — CI: job `godot-lint` era un no-op completo (lint de GDScript inefectivo)
+
+- **Estado:** [x] Resuelto (2026-09-18, Log 1039) | **Módulo:** M111/M83 (CI) | **Severidad:** 🟠 Mayor
+- **Síntoma:** `.github/workflows/quality.yml:33` ejecutaba `godot --headless --script 2>&1 || true`
+  — **sin ningún script**. Godot falla con error de uso, el `|| true` lo silencia, y el paso
+  "Check for Godot parser errors" nunca valida nada. El job `godot-lint` **nunca podía fallar**.
+- **Causa raíz:** el paso de CI invocaba `--script` **sin especificar script alguno** (uso
+  inválido de la CLI) y el error de uso resultante era silenciado por `|| true` → el gate era
+  un no-op completo: ningún parseo de GDScript se validaba jamás. De fondo, un segundo paso
+  ("Run GDScript Linter") corría `code_quality_check.gd` (`@tool EditorScript`) en headless,
+  donde tampoco puede ejecutarse, también tapado con `|| true`.
+- **Solución:** 3 piezas nuevas:
+  1. `tools/quality/gen_colector_sintaxis.py` — genera `scripts/editor/_colector_sintaxis.gd` con un
+     `preload` por cada .gd del proyecto (830; excluye `.godot/`, `addons/` terceros, `Godot/` y a
+     sí mismo). `preload` fuerza el parseo a tiempo de compilación.
+  2. `quality.yml` job `godot-lint`: pasos nuevos `Setup Python`, `Generate syntax collector` e
+     `Import project resources` (`--import` construye la caché de class_names; sin él, un checkout
+     limpio da ~19 falsos positivos). El paso de check ahora usa
+     `godot --headless --check-only --script res://scripts/editor/_colector_sintaxis.gd 2>&1 || FAIL=1`
+     — **gate duro**.
+  3. Se retiró el paso "Run GDScript Linter" (`code_quality_check.gd` es `@tool extends
+     EditorScript`; no corre headless; era un segundo no-op silencioso con `|| true`).
+- **Verificación (binario real, Godot 4.7.2):** árbol limpio → **EXIT 0**; error de sintaxis
+  inyectado → **EXIT 1** nombrando el archivo exacto; fresh checkout + `--import` → **EXIT 0**.
+- **Detalles técnicos y calleones sin salida documentados:** ver la entrada de BUG-051 en §6.
+- **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-18 (Log 1039)
+
+======================================================================
+BUG-052  entrada 1/2  L3814  (52 lineas)
+### BUG-052 — Boot del proyecto roto: `.get()` de 2 args sobre `Resource` (3 archivos, 5 sitios)
+
+- **Estado:** [x] Resuelto (2026-09-19, Log 1044) | **Módulo:** M64 (IA de NPC) — impacto **transversal: todo el proyecto** | **Severidad:** 🔴 Crítico
+- **Reportado por:** atria-dawn-preview / Kilo Code (descubierto al auditar la evidencia del Log 1042 de hy3)
+- **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code | **Fecha:** 2026-09-19 00:30
+
+- **Síntoma:** Todo run headless del proyecto (`--headless --path game/isla-ancestral --script ...`)
+  arrancaba con:
+  ```
+  SCRIPT ERROR: Parse Error: Too many arguments for "get()" call. Expected at most 1 but received 2.
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:41)
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:42)
+    at: GDScript::reload (res://scripts/ia_npc/npc_needs.gd:43)
+  SCRIPT ERROR: Compile Error: Failed to compile depended scripts.
+  ERROR: Failed to load script "res://scripts/ia_npc/npc_agent.gd" with error "Compilation failed".
+  ```
+  **Impacto:** cualquier agente que corriera un test headless veía errores ajenos a su módulo
+  (falso-rojo), o —peor— un test que reportaba "0 fallos" mientras el stderr contenía `SCRIPT
+  ERROR` (falso-verde, lección 28). La evidencia del Log 1042 de hy3 ("0 SCRIPT ERROR") era
+  inválida por este motivo.
+
+- **Causa raíz:** `Resource` extiende `Object`, y `Object.get()` admite **1 solo** argumento.
+  Los sitios usaban el patrón de `Dictionary.get(clave, default)`. En los 3 archivos las variables
+  receptoras estaban tipadas como `Resource` (perfil de NPC, config de necesidades), por lo que el
+  parser rechazaba el segundo argumento. Como `npc_needs.gd` era dependencia de `npc_agent.gd`,
+  la compilación fallaba en cascada.
+
+- **Solución:** aplicar el guard `!= null` explícito en vez del argumento default, preservando la
+  semántica de fallback original:
+  1. `scripts/ia_npc/npc_agent.gd:199` — `profile.get("job", "")` → `profile.get("job")`
+     (el guard de la línea 198 ya asegura non-null).
+  2. `scripts/ia_npc/npc_agent.gd:205` — `pp.get("job", "")` → guard explícito
+... [20 lineas mas]
+======================================================================
+BUG-052  entrada 2/2  L5026  (11 lineas)
+### BUG-052 — Deuda de copyright de .glb: 434/418 explicados, fix del pipeline pendiente
+
+- **Fecha de reporte:** 2026-09-18 20:40 (ampliación del hallazgo M127, Log 1022; no existía entrada .glb previa en §6/§8 — verificación por búsqueda `glb|copyright|M127`)
+- **Módulo(s) afectado(s):** M166/M09 (pipeline de exportación), deuda declarada por M127 en `tools/legal/asset_metadata_scope.json` (baseline SIN_ATRIBUCION `**/assets/3d/**/*.glb` max 418)
+- **Severidad:** 🟠 Mayor (legal/distribución)
+- **Estado:** [ ] Abierto — dueños M166/M09. Verificación empírica COMPLETA por agnes-3-flash (Log 1035).
+
+**Verificación (Log 1035):** 694 .glb versionados auditados uno por uno (sidecars + extras GLB + catálogos `data/legal` + git). **CON copyright: 0 · SIN: 694 · AMBIGUO: 0.** Origen de los 694: propio (pipeline Blender MCP, generator "Khrono
+**Firma:** agnes-3-flash (Sapiens AI) / Kilo Code, 2026-09-18 20:40
+
+
+======================================================================
+BUG-053  entrada 1/1  L4986  (40 lineas)
+### BUG-053 — QA visual orbitales: 7 artefactos M16/M19/M25/M33/M51 (delegado a M154/dueños de módulo)
+
+- **Fecha de reporte:** 2026-09-18 20:40
+- **Módulo(s) afectado(s):** M16 Crafting, M19 NPCs, M25 Ruinas-Templos, M33 Agricultura, M51 Agua-Interfaz (M154 aprobación final)
+- **Severidad:** 🟠 Mayor (V-3 `antorcha_pared` flota 30 cm = alta; el resto media/baja)
+- **Prioridad sugerida:** Media (pendiente de aprobación estética del usuario M154 + H12 M166)
+- **Estado:** [?] Delegado — agnes-3-flash verificó y documentó (V1/V2-asistencia); no toca mallas/GLB (V5 = Hy4)
+
+**Descripción del problema (resumen V-1..V-7, evidencia completa en Log 1035):**
+V-1 M16: hoja de `hacha_piedra` media/baja como vela semitransparente (decimate/blend, familia E-23).
+V-2 M19: brazo-cuajado del `npc_base_v5` colado al torso (perfil).
+V-3 M25: `antorcha_pared` (3 variantes) z_min +0.295/+0.34 — única cota positiva del repo (694 glb auditados): flota ~30 cm si se posiciona sobre terreno; en el set de captura va montada en pared (E-80).
+V-4 M19: `npc_sentado_v3` con pieza gris flotando tras la cabeza + anillo a la cintura.
+V-5 M33: `espantapajaros` con escalón en la cintura del torso (2 cajas desplazadas).
+V-6 M51: shore-fade blanco cubriendo demasiada arena (issue conocido M167, CONFIRMADO en iter. 2026-09-06).
+V-7 M51: orilla con banda de espuma blanca estática/borde duro; palmeras de banca se ven flotando sobre la banda.
+
+**Por qué agnes-3-flash no lo resuelve:** corrección de mallas/GLB es V5 (Hy4/Blender) y la aprobación estética es del usuario (M154). Lo que sí quedó hecho: verificación empírica (26 capturas leídas + 694 glb medidos en z), lista de eviden
+**Firma:** agnes-3-flash (Sapiens AI) / Kilo Code, 2026-09-18 20:40
+
+**Resolución del triage (2026-09-19, agnes-3-flash / Kilo Code, Logs 1049-1052):**
+- **V-3 RESUELTO (bug de posicionamiento, no de malla):** `antorcha_pared` no está instanciada
+  en el juego (busqueda por repo: solo ficha + reporte); el bug era LATENTE. Fix: regla de
+  colocación E-80 nueva en M25 — `scripts/ruinas/colocar_props_m25.gd` (z_base =
+  `TerrainLocator.get_height(x,z)+1` por regla de oro; pieza montada: `y = z_base + altura_montaje
+  - z_min_asset`, con z_min medido o por datos del Log 1035: alta 0.295 / media-baja 0.340).
+  Verificado: `test_colocar_props_m25.gd` headless **11/11 OK, EXIT 0, 0 SCRIPT ERROR** (binario
+  Godot 4.7.2 real) + captura in-engine antes/después en
+  `tools/mcp/godot-mcp/capturas/19-Muelle/cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png`.
+- **V-1 / V-2 / V-4 / V-5: [?] DELEGADO a Hy4** (corrección de mallas: vela-silueta de
+  `hacha_piedra` M16, brazo colado de `npc_base_v5` M19, piezas flotantes de `npc_sentado_v3`
+  M19, escalón de `espantapajaros` M33). Hy4 (artista Blender V5) no está disponible hasta
+... [8 lineas mas]
+======================================================================
+BUG-054  entrada 1/1  L6349  (58 lineas)
+### BUG-054 — M39↔M15: 13 referencias rotas (8 item_ids inexistentes) en las tiendas oficiales
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M39 Tiendas (`scripts/shops/catalogo_tiendas.gd`), M15 Recursos
+  (`data/items/*.tres` → `ItemDatabase`)
+- **Severidad:** 🟠 Mayor (las 3 tiendas oficiales referencian items que NO existen — toda compra
+  fallaría en runtime)
+- **Prioridad sugerida:** Alta
+- **Estado:** [?] Delegado — dueño **M39 (glm-5.3-flash, reserva Log 1004, activo)**. No lo corrijo:
+  el archivo tiene cambios sin commit y glm está trabajando sobre él.
+
+**Descripción (corrección de mi Log 1026):** mi Log 1026 decía "13 items inexistentes". La cifra
+exacta: **13 referencias (shop, item) rotas, que corresponden a 8 item_ids únicos** inexistentes en
+M15. M15 define 111 items (bloques: `wood`, `stone`, `planks`... + ids `OBJ-*`); NINGUNO de los 8
+ids usados por M39 existe.
+
+**Las 13 referencias rotas (validadas con script sobre los 111 .tres de M15):**
+
+| Tienda | item_ids inexistentes |
+|---|---|
+| `tienda_general` | `madera_roble`, `piedra_caliza`, `baya_roja`, `fibra_algodon`, `mineral_cobre`, `pergamino_rec_tela_lino` (venta) + `fragmento_ancestral` (recompra) |
+| `herreria` | `herramienta_basica`, `mineral_cobre`, `piedra_caliza` |
+| `mercader_viajero` | `fragmento_ancestral`, `baya_roja`, `mineral_cobre`, `madera_roble` |
+
+**Causa raíz:** M39 se escribió con ids en español (`madera_roble`, `piedra_caliza`...) que nunca
+tuvieron contraparte en el catálogo M15/M159 (que usa `OBJ-*` y nombres de bloques en inglés). El
+validador de glm (Log 1004) solo avisa —no bloquea— y ademas **solo valida `catalogo_venta`, no
+`catalogo_recompra`** (gap adicional: las recompras rotas no se detectan en absoluto).
+
+**Evidencia:** boot headless emite 11 warnings `[M39] '<tienda>': item_id inexistente en M15: <id>`
+(11 = entradas de `catalogo_venta`; las recompras no se validan). Confirmado leyendo
+`catalogo_tiendas.gd:59-63` y los 111 `.tres` de `data/items/`.
+... [26 lineas mas]
+======================================================================
+BUG-055  entrada 1/1  L6407  (21 lineas)
+### BUG-055 — `test_logros.gd:291` llama `.size()` sobre Callable (corrección de BUG-050)
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M72 Logros (`scripts/logros/test_logros.gd:291`)
+- **Severidad:** 🟡 Menor (no afecta al juego; ensucia toda corrida headless con 1 SCRIPT ERROR)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado — dueño **M72 (agnes-3-flash, Log 1021)**.
+
+**Descripción:** ver "CORRECCIÓN DE ATRIBUCIÓN" en la entrada de BUG-055 arriba (sección 6, junto a
+BUG-050). Resumen: `_ach.desbloqueados` no existe (es `_desbloqueados`, privado; el accessor público
+es `get_desbloqueados()`). Godot resuelve el nombre dinámico a un Callable → `.size()` falla.
+
+**Fix propuesto:** `var before: int = _ach.get_desbloqueados().size()`.
+
+**Firma:**
+**Modelo:** Atria-Dawn-Preview
+**Plataforma:** Kilo Code
+**Fecha:** 2026-09-18
+
+---
+
+======================================================================
+BUG-056  entrada 1/1  L3893  (18 lineas)
+### BUG-056 — 7 scripts del repo no compilaban (hallados por el gate nuevo de BUG-051)
+
+- **Estado:** [x] Resuelto (2026-09-18, Log 1039) | **Módulo:** M73/M131/M155/tests | **Severidad:** 🟠 Mayor
+- **Síntoma:** 7 scripts con errores de sintaxis REALES que arrastraban versionados: nadie los había
+  parseado nunca (la mayoría son `load()`-bajo-demanda o tests gdUnit4 que no corren en CI).
+- **Los 7 y sus fixes:**
+  | Script | Error | Fix |
+  |---|---|---|
+  | `scripts/coleccionables/collectible_category.gd:66` | docstring estilo Python `"""..."""` | `##` docstring |
+  | `scripts/coleccionables/collectible_category.gd:60` | comprensión de listas `[String(t) for t in tags]` (Python) | bucle `for` |
+  | `scripts/legal/audio_legal_manager.gd:195` | 1 espacio en vez de tab | tab |
+  | `scripts/legal/test_credits_m131_v2.gd:72` | `ok := ...` (redeclaración sin `var`) | `ok = ...` |
+  | `tests/unit/interfaces/test_i_{damageable,interactable,saveable}.gd` | `class CustomX` declarada DENTRO de una función (GDScript no lo permite) | clase movida a ámbito de archivo |
+  | `tests/unit/player/test_equipment_manager.gd:133+` | 76 líneas con espacio+tab en vez de tab | tabs |
+- **Verificación:** `--check-only` sobre el colector: **830/830 EXIT 0** después de los fixes (antes
+  EXIT 1). La prueba de inyección de BUG-051 confirma que el gate los habría detectado.
+- **Firma:** Atria-Dawn-Preview / Kilo Code — 2026-09-18 (Log 1039)
+
+======================================================================
+BUG-057  entrada 1/1  L6428  (135 lineas)
+### BUG-057 — `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso)
+
+- **Fecha de reporte:** 2026-09-18
+- **Módulo(s) afectado(s):** M17 Construcción (no implementado), M59 Guardado
+  (`scripts/datos/buildings_save_provider.gd:58-67`), M60 (EstructurasCodec)
+- **Severidad:** 🟡 Menor (el guardado funciona; el restore es incompleto **por diseño**)
+- **Prioridad sugerida:** Baja (bloqueada por M17)
+- **Estado:** [?] Delegado — dueño **M17/M59**. No es accionable hasta que M17 exista.
+
+**Descripción:** `restore_save_data()` busca por duck-typing un autoload/nodo que exponga
+`obtener_estructuras()` + `restaurar_estructuras()`. Como M17 (Construcción) no está implementado
+(11/175 en CHECKLIST-GLOBAL), `fuente()` devuelve `null` y el restore retorna en la línea 62
+**sin restaurar nada ni avisar**. Resultado: la sección "buildings" del save se escribe pero
+siempre se carga vacía.
+
+**Confirmación por código** (`buildings_save_provider.gd:58-67`):
+```gdscript
+func restore_save_data(data: Dictionary) -> void:
+	var lista := EstructurasCodec.desde_seccion(data)
+	var f := fuente()
+	if f == null:
+		return                      # ← silent no-op; `lista` se descarta
+	if not f.has_method(METODO_RESTAURAR):
+		push_warning(...)           # ← este aviso SÍ existe, pero solo si hay fuente
+		return
+	f.call(METODO_RESTAURAR, lista)
+```
+
+**No es un bug de M60:** el propio header del archivo (líneas 14-16) documenta que el restore es
+no-op "Así el guardado funciona desde hoy y M17 se enchufa sin tocar M60". Es una decisión de
+diseño explícita y honesta. Se registra para que M17 sepa que **debe** exponer
+`restaurar_estructuras(lista)` al implementarse, y para que M59/M60 tengan el seguimiento.
+... [103 lineas mas]
+======================================================================
+BUG-058  entrada 1/2  L2418  (71 lineas)
+### BUG-058 — `validar_nombres.py` (M149) inunda con falsos positivos + deriva de convención en 41 `.tres`
+
+- **Fecha de reporte:** 2026-09-19
+- **Módulo(s) afectado(s):** M149 Nombres-Y-Nomenclatura (`operativa/validar_nombres.py`),
+  M160 (datos/locations), M161 (data/npc_visuals), M118 (CI hooks)
+- **Severidad:** 🟡 Menor (la herramienta funciona, pero **no es usable como gate CI** mientras
+  inunde con ruido; y la convención documentada ya no describe el repo real)
+- **Prioridad sugerida:** Media
+- **Estado:** [?] Delegado — dueño **M149** (fix del validador) + **M160/M161** (decisión de
+  convención de IDs LOC-/NPC-). No lo arreglo yo: es fix de herramienta + decisión de diseño que
+  excede el alcance V0 de la reconciliación.
+
+**Descripción — dos problemas relacionados:**
+
+**(a) Falsos positivos por falta de exclusiones.** `validar_nombres.py` reporta **1128
+violaciones** al ejecutarse sobre el repo. Desglose (medido por mí, 2026-09-19):
+
+| Origen | Cuenta | Naturaleza |
+|---|---|---|
+| `Godot/app_userdata/isla-ancestral/analytics/lote_*.json` | **847** | Salida de telemetría en tiempo de ejecución — **no es fuente del repo** |
+| `addons/gdUnit4/**` (PascalCase.gd) | **~280** | Terceros — no aplica la convención del proyecto |
+| `Godot/editor_settings-4.7.tres` | 1 | Config del editor |
+| **Arbol fuente real** | **~50** | Ver (b) |
+
+El validador solo excluye `Obsoletos/`. **Sin excluir `Godot/`, `app_userdata/` y `addons/`, su
+output es 95% ruido** y no puede usarse como gate (el item E.14 de M149 lo delega a M118; cuando
+M118 lo cablee, esto romperá el pipeline).
+
+**(b) Deriva real de convención en 41 `.tres`.** Excluyendo terceros/runtime, quedan ~50
+violaciones reales. Las significativas:
+
+- **20 `data/locations/<ISO>/LOC-<ISO>-<TIP>-<NNN>.tres`** (M160) y **21
+... [39 lineas mas]
+======================================================================
+BUG-058  entrada 2/2  L3775  (39 lineas)
+### BUG-058 — Autoload M107 roto: `ZIPWriter` (Godot 3) → `ZIPPacker` (Godot 4) + 6 warnings Variant→error
+
+- **Estado:** [x] Resuelto (2026-09-19, Log 1077) | **Módulo:** M107 (Backups) — impacto **transversal: stderr de TODOS los runs headless** | **Severidad:** 🔴 Crítico
+- **Reportado por:** Hy3 (Log 1072, QA de M118, 2026-09-19 04:50) — "7 SCRIPT ERROR en stderr, todos de `scripts/backup/backup_manager.gd` (autoload roto, no relacionado con M118)". Código original de mimo-v2.5 (Log 1068).
+- **Resuelto por:** kimi-k3 (Moonshot AI) / Kilo Code | **Fecha:** 2026-09-19 04:50
+- **Documentado como:** E-22 en `GUIA-GODOT/06-registro-errores.md`
+
+- **Síntoma:** Todo run headless (`--headless --path game/isla-ancestral --script ...`) arrancaba con:
+  ```
+  SCRIPT ERROR: Parse Error: Identifier "ZIPWriter" not declared in the current scope.
+    at: GDScript::reload (res://scripts/backup/backup_manager.gd:125)
+  ERROR: Failed to instantiate an autoload, script '.../backup_manager.gd' does not inherit from 'Node'.
+  ```
+  El boot NO abortaba, pero el autoload BackupManager no cargaba y stderr quedaba contaminado →
+  cualquier test headless era **falso-verde potencial** (lección 28).
+
+- **Causa raíz (3 capas):**
+  1. `ZIPWriter` es clase de **Godot 3**; en 4.x es `ZIPPacker` (parse error de identificador).
+  2. `open()` era **estático** en Godot 3; en 4.x es de instancia (`ZIPPacker.new()` + `open()`,
+     `APPEND_CREATE` → `APPEND_ADDINZIP`).
+  3. `write_file(path, bytes)` de Godot 3 → en 4.x: `start_file(path)` + `write_file(bytes)`.
+  4. Además 6 líneas `var x := cat.get("destino", ...)` inferían Variant → **warning tratado como
+     error** (proyecto con warnings-as-errors) → parse error adicional tras arreglar lo anterior.
+
+- **Resolución:**
+  - [x] Cómo se corrigió: `scripts/backup/backup_manager.gd` — `zip_available()` usa
+    `ClassDB.class_exists(&"ZIPPacker")`; `_comprimir_directorio()` instancia
+    `var writer := ZIPPacker.new()` + `writer.open(zip_path, ZIPPacker.APPEND_ADDINZIP)`;
+    `_agregar_dir_a_zip()` usa `start_file()` + `write_file()` (patrón de `cicd_manager.gd` M118);
+    las 6 inferencias Variant → `var destino_cat: String = str(cat.get(...))` y
+    `var comprimir: bool = bool(cat.get(...))`.
+  - [x] Archivos modificados: `game/isla-ancestral/scripts/backup/backup_manager.gd` (5 sitios). Pendiente de commit (push negativo por instrucción).
+... [7 lineas mas]
+======================================================================
+BUG-059  entrada 1/2  L2489  (103 lineas)
+### BUG-059 — M126 + M128: ~33 citas colgantes a secciones de `03-Diseno.md` que no existen
+
+- **Fecha de reporte:** 2026-09-19
+- **Módulo(s) afectado(s):** M126 Marketing-Legal, M128 Identidad-De-Marca (checklists
+  `plan-actual/05-Checklist.md`)
+- **Severidad:** 🟡 Menor (no afecta código ni runtime — los ítems afectados ya están `[ ]`
+  correctamente; es **deuda de documentación** que afirma tener diseño cuando no lo tiene)
+- **Prioridad sugerida:** Media (impacta la confianza en TODAS las notas KnownIssue del repo)
+- **Estado:** [?] Delegado — dueño **M126/M128** (documentación). Las citas se corrigieron con
+  notas de re-referencia (no se borró el texto original); el estado de los ítems no cambia.
+
+**Descripción:** las notas "KnownIssue no bloqueante DoD: ... documentada en `03-Diseno.md` §X.Y"
+citaban secciones **inexistentes**. Patrón idéntico en ambos módulos (vestigio de los sellos ✅
+fabricados por agnes-2.5-flash, revertidos el 2026-09-14):
+
+- **M126:** el checklist cita `03-Diseno.md §3.1`–`§3.9` (influencers, contratos, giveaways,
+  screenshots, FTC, etc.). El archivo tiene **solo §1 (Estructura), §2 (Sistema de revisión legal)
+  y §3 (Pruebas)** — las subsecciones §3.1–§3.9 **no existen**. El contenido sustantivo que esas
+  notas afirma documentar está parcialmente en §1 (árbol de cobertura) y §2 (plantilla de
+  `marketing_legal_review.md` con decisiones ✅/❌).
+- **M128:** el checklist cita `§1.1`–`§1.10` y `§2.1`–`§2.6`. El archivo tiene **§1–§5** con otra
+  estructura. Verificación item por item (tabla completa en el checklist de M128):
+  - ✅ contenido real mal numerado: paleta hex (citada §1.1, real **§3**); clear space + min size
+    (citado §2.3, real **§2**).
+  - ⚠️ parcial: formatos PNG/SVG (citado §2.4, **§4** lista los archivos pero no menciona AI).
+  - ❌ **fabricados** (no existen en ningún lado del módulo): jerarquía tipográfica, swatches,
+    licencias de fuentes, registro de dominio, email corporativo, proveedores POD, criterios de
+    testing, press kit, versionado del manual, cease & desist, monitoreo de trademark, lockup
+    horizontal, variantes light/dark, test de legibilidad.
+  - ❌ **contradicción:** el app icon es **512x512** según checklist/`04-Codigo.md` pero
+    **1024x1024** según `03-Diseno.md` §2 (tabla "Tamaño Mínimo").
+
+... [71 lineas mas]
+======================================================================
+BUG-059  entrada 2/2  L2542  (50 lineas)
+#### BUG-059-NEW — Sweep global: 8 fantasmas adicionales en 5 módulos (2026-09-20)
+
+- **Fecha de reporte:** 2026-09-20
+- **Módulo(s) afectado(s):** M71-Progresion, M80-Legal-Privacidad, M86-IA-Generativa,
+  M108-Pipeline-De-Assets, M127-Copyright-Del-Juego
+- **Severidad:** 🟡 Menor (deuda de documentación — citas internas a secciones inexistentes
+  en el propio `03-Diseno.md` del módulo; no afecta código ni runtime)
+- **Prioridad sugerida:** Baja (los fixes son de documentación, no bloquean gameplay)
+- **Estado:** [?] Delegado — dueños de cada módulo (asignados por atria-dawn)
+
+**Descripción:** sweep de solo lectura (BUG-059 ampliado) sobre los 168 módulos con
+`03-Diseno.md`. Se extrajeron todas las citaciones `§X.Y` y se cruzaron contra las
+secciones reales (headers `## X.Y`). Clasificación:
+
+| Categoría | Cantidad | Definición |
+|-----------|----------|------------|
+| TRUE_PHANTOM | **8** | Cita a sección que NO existe en el propio `03-Diseno.md` del módulo |
+| CROSS_REF | 20 | Cita válida a `AGENTS.md §21.8`/`§9`/`§8` u otro documento externo |
+| FALSE_POSITIVE | 17 | Sección existe pero mi regex no la detectó (formato diferente) |
+
+**Los 8 fantasmas confirmados:**
+
+| # | Módulo | Cita | Detalle |
+|---|--------|------|---------|
+| 1 | **M71-Progresion** | §2.2 | §2 es tabla plana sin subsecciones; el doc se cita a sí mismo |
+| 2 | **M71-Progresion** | §2.3 | Idem — §2 no tiene `### 2.3` |
+| 3 | **M71-Progresion** | §3.6 | Dice "10 tipos del vocabulario §3.6" pero §3 solo tiene 3.1, 3.2, 3.3 |
+| 4 | **M80-Legal-Privacidad** | §9 | No hay `## 9`. El "9" es número de fila dentro de la tabla de §2 |
+| 5 | **M80-Legal-Privacidad** | §13 | No hay `## 13`. El "13" es fila de "Contacto" en la tabla de §2 |
+| 6 | **M86-IA-Generativa** | §12 | El archivo termina en `## 8`. §12 no existe |
+| 7 | **M108-Pipeline-De-Assets** | §6 | Solo tiene §1-§3. §6 no existe |
+| 8 | **M127-Copyright-Del-Juego** | §2.3 | §2 no tiene subsecciones (ya documentado en iter. 4 de DeepSeek) |
+... [18 lineas mas]
+======================================================================
+BUG-060  entrada 1/1  L4401  (53 lineas)
+### BUG-060 — player.gd: `_create_hotbar_hud()` accede a `current_scene` sin null-check (crash potencial)
+
+- **Fecha de reporte:** 2026-09-19 02:55
+- **Módulo(s) afectado(s):** M11 (Personaje del Jugador) — `game/isla-ancestral/scripts/player/player.gd`, función `_create_hotbar_hud()` (líneas 972-979)
+- **Severidad:** 🟢 Mayor (crash en runtime si el Player se instancia antes de que la escena actual esté lista)
+- **Prioridad sugerida:** Alta
+- **Estado:** [x] Resuelto
+
+**Causa raíz:** `_create_hotbar_hud()` desreferenciaba `get_tree().current_scene` (L972 y L978)
+**sin null-check**: si el nodo Player se instancia antes de que `SceneTree.current_scene` apunte
+a una escena válida (transición de escenas o arranque `--script` headless previo al
+`change_scene`), `current_scene` es `null` y Godot lanza error al desreferenciarlo.
+
+**Descripción del problema:**
+En `_create_hotbar_hud()`, las líneas 972 y 978 invocan `get_tree().current_scene.get_node_or_null("UI")` y `get_tree().current_scene.add_child(canvas)` sin verificar que `current_scene` sea no-nulo. Si el nodo Player se instancia/inicia an
+
+**Pasos para reproducir:**
+1. Instanciar `player.gd` (Player) donde `get_tree().current_scene == null` (escena aún no cargada, o `--script` headless previo al `change_scene`).
+2. Llamar a `_create_hotbar_hud()` (vía `_ready` o el flujo de HUD).
+3. Observar el error al desreferenciar `current_scene`.
+
+**Comportamiento esperado:**
+El HUD del hotbar sólo se crea con una escena actual válida; si no, se omite sin crashear (defensa temprana).
+
+**Comportamiento actual (pre-fix):**
+`current_scene` nulo -> `get_node_or_null` / `add_child` sobre `null` -> error de runtime / crash.
+
+**Entorno / Contexto:**
+- Godot 4.7.2 (stable, win64).
+- Detectado por hy3 en la suite headless M11 (Log 1055) y re-verificado por Atria (confirma sin fix).
+- Frecuencia: depende del orden de instanciación del Player vs. la escena; en juego real puede ocurrir en transiciones.
+
+... [21 lineas mas]
+======================================================================
+BUG-061  entrada 1/1  L2592  (32 lineas)
+### BUG-061 — M94 Retencion-Sin-FOMO: suite falla 5 checks estando marcado ✅ (sobre-cierre)
+
+- **Estado:** [x] Resuelto (2026-09-19, Log 1083) — ver §7 | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítico (sobre-cierre de un módulo ✅)
+- **Síntoma:** el módulo figura `✅ Completado 135/135` (ACT 2026-09-02, sin sello §21.8), pero
+  su suite `scripts/motivacion/test_motivacion_m94.gd` re-corrida con binario real el
+  2026-09-19 daba **EXIT 1 — 38 checks, 5 fallos**:
+  - `[FAIL] diarios = 3 size=0` — los retos diarios devuelven 0 en lugar de 3
+  - `[FAIL] semanales = 2 size=0`
+  - `[FAIL] mensuales = 2 size=0`
+  - `[FAIL] progreso parcial no completa`
+  - `[FAIL] progreso a 10 completa`
+- **Causa raíz (VERIFICADA):** **PRODUCCIÓN ROTA** — el catálogo `data/motivacion/objetivos.json`
+  usaba un esquema divergente del que lee el código. El manager (`motivacion_manager.gd`),
+  la clase canónica (`objetivo_data.gd`: `plazo`, `cantidad_requerida`, `recompensa_id`,
+  `recompensa_cantidad`) y la suite son consistentes entre sí y con el diseño
+  (`03-Diseno.md` §3 y `04-Codigo.md` §3: 3 diarios + 2 semanales + 2 mensuales). El JSON
+  "v2" en cambio tenía `cadencia: "diario_suave"` (los 7), `target_min` y `recompensa` como
+  string único con coma — campos que **no existen en ningún .gd**. Consecuencia:
+  `objetivo.get("plazo","")` → "" en los 7 → `objetivos_por_plazo()` devolvía [] en los tres
+  plazos; y `data.get("cantidad_requerida",1)` → fallback 1 → el primer `registrar_progreso`
+  completaba de inmediato. El ítem de checklist 209 del módulo celebra ese JSON "v2" como
+  entregable: se escribió sin verificar contra el código (sobre-cierre).
+- **Acción realizada:** se reescribió `objetivos.json` al esquema canónico (plazo +
+  cantidad_requerida + recompensa_id/recompensa_cantidad), respetando la distribución 3/2/2
+  documentada en `04-Codigo.md` §3 y los umbrales que asume la suite (madera=10,
+  regalar_regalo=1). No se tocó código ni test.
+- **Verificación:** re-corrido con binario real → **EXIT 0 — 38 checks, 0 fallos**.
+- **Firma:**
+  **Modelo:** Atria-Dawn-Preview
+  **Plataforma:** Kilo Code
+  **Fecha:** 2026-09-19
+
+======================================================================
+BUG-062  entrada 1/1  L2624  (24 lineas)
+### BUG-062 — M84 Musica-Y-Audio-Legal: la suite de test no parsea (✅ no re-validable)
+
+- **Estado:** [x] Resuelto (2026-09-19, Log 1085) — ver §7 | **Módulo:** M84 Musica-Y-Audio-Legal | **Severidad:** 🟠 Mayor
+- **Síntoma:** el módulo figura `✅ Completado 99/99` ("Completado por mimo-v2.5 2026-09-18:
+  tests edge cases"), pero `scripts/legal/test_audio_licenses_m84.gd` **no compila**:
+  `SCRIPT ERROR: Parse Error: The variable type is being inferred from a Variant value, so
+  it will be typed as Variant. (Warning treated as error.)` en las líneas **75 y 94** —
+  EXIT 1, 4 script errors. La suite no se puede re-correr, así que el ✅ es **no verificable**
+  hoy.
+- **Causa:** mismo patrón que BUG-048 (`is Tween` sobre var inferida) — Godot 4.7 estricto
+  rechaza la inferencia de tipo desde un valor Variant en esas dos líneas del test.
+- **Acción:** fixear las 2 líneas del test (tipar explícitamente) y re-correr; el módulo
+  subyacente puede estar perfecto, pero hoy no hay evidencia runtime.
+- **Acción realizada:** se tipó `var tracks: Array = data.get("tracks", [])` en las líneas 75
+  y 94 (la inferencia `:=` desde un valor Variant — `Dictionary.get()` retorna Variant — es
+  rechazada por Godot 4.7 estricto). No se tocó lógica del test.
+- **Verificación:** re-corrido con binario real → **EXIT 0 — 15 checks, 0 fallos**. El módulo
+  subyacente queda validado en runtime (la suite ahora compila y pasa).
+- **Firma:**
+  **Modelo:** Atria-Dawn-Preview
+  **Plataforma:** Kilo Code
+  **Fecha:** 2026-09-19
+
+

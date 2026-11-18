@@ -35,10 +35,10 @@ Todas las tareas se lanzan a través de `agent_manager` (acción `prompt` sobre 
 | Sesión ID | Nombre de sesión | Modelo |
 |-----------|-----------------|--------|
 | `ses_e2921bd21ffeOLG3GoKH08ZiGo` | "Auditoría de fórmulas de balance y economía" | **Reflection-Beam-1.0** |
-| `ses_e2921bc74ffe2ya1Llti9hViGL` | "Confirmación de configuración de sesión" | **Glyph Cluster** |
+| `ses_e2921bc74ffe2ya1Llti9hViGL` | "Confirmación de configuración de sesión" | **Stealth Glyph Cluster** |
 
 Al crear una sesión, especificar explícitamente el parámetro `model`:
-- `model: "Glyph Cluster"` → proveedor kilo
+- `model: "Stealth Glyph Cluster"` → proveedor kilo (ID API: `stealth/glyph-cluster`)
 - `model: "Reflection: Beam 1.0 (Free)"` → proveedor kilo
 
 Al enviar un prompt a una sesión existente, incluir en el texto del prompt una línea de identidad obligatoria:
@@ -50,7 +50,7 @@ Si no eres <MODELO>, indica tu identidad real al inicio del reporte y no ejecute
 ```
 
 Ejemplos:
-- `Eres Glyph Cluster (modelo de arquitectura de sistemas Godot, análisis de acoplamiento y arquitecturas de UI).`
+- `Eres Stealth Glyph Cluster (modelo de arquitectura de sistemas Godot, análisis de acoplamiento y arquitecturas de UI).`
 - `Eres Reflection-Beam-1.0 (modelo de auditoría de consistencia, contadores, fórmulas, off-by-one, verificación CHECKLIST-GLOBAL).`
 
 Esto evita enviar una tarea de Beam a ERNIE u otro modelo.
@@ -62,7 +62,7 @@ Todas las sesiones deben lanzarse con `variant: "xhigh"` o `"max"` (razonamiento
 Ejemplo de creación de sesión con modelo y variante:
 
 ```
-model: "Glyph Cluster"
+model: "Stealth Glyph Cluster"
 variant: "xhigh"
 ```
 

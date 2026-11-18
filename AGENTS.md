@@ -1484,6 +1484,74 @@ es la consola.
 **Coste del error:** un falso bloqueo de módulo, cuatro mensajes de director y una
 retractación pública. **Antes de reportar mojibake: verificar en bytes con Python.**
 
+### 28.3 Cuando `fix_encoding.py` dice "irreversible" y no lo es: arreglo token a token
+
+> Agregado 2026-11-18 por ERNIE-5.5-Flash-Preview (Kilo Code) tras sanear `CHECKLIST-GLOBAL.md`
+> (148 -> 13 ocurrencias, 0 datos perdidos, respaldo en `Obsoletos/`).
+
+**Sintoma.** `python scripts/fix_encoding.py --dry-run` reporta el archivo como
+`mojibake irrevertible` y no lo toca. Pero al abrirlo se ve una letra con tilde partida en dos caracteres basura y
+**no hay ni un U+FFFD**: los datos estan, solo mal codificados.
+
+**Causa.** El token mojibake contiene **controles C1** (U+0080-U+009F). El codec cp1252 de
+Python los rechaza al **codificar**, asi que `s.encode("cp1252")` lanza `UnicodeEncodeError`
+y el fixer desiste. (AGENTS 28.1 lección 2: los C1 son parte del token.)
+
+**Tecnica: reparar token a token, no la linea entera.**
+
+1. Dividir la linea en **corridas de caracteres no ASCII** (`re.finditer(r'[^\x00-\x7f]+')`).
+2. Reparar **cada corrida por separado** con un codificador cp1252 propio que mapea los C1:
+
+```python
+CP1252_EXTRA = {0x80:0x20AC, 0x82:0x201A, 0x83:0x0192, 0x84:0x201E, 0x85:0x2026,
+                0x86:0x2020, 0x87:0x2021, 0x88:0x02C6, 0x89:0x2030, 0x8A:0x0160,
+                0x8B:0x2039, 0x8C:0x0152, 0x8E:0x017D, 0x91:0x2018, 0x92:0x2019,
+                0x93:0x201C, 0x94:0x201D, 0x95:0x2022, 0x96:0x2013, 0x97:0x2014,
+                0x98:0x02DC, 0x99:0x2122, 0x9A:0x0161, 0x9B:0x203A, 0x9C:0x0153,
+                  0x9E:0x017E, 0x9F:0x0178}
+INV = {v:k for k,v in CP1252_EXTRA.items()}
+
+def cp1252_bytes(s):
+    out = bytearray()
+    for ch in s:
+        o = ord(ch)
+        if o < 0x80: out.append(o)
+        elif o in INV: out.append(INV[o])
+        else:
+            try: out += ch.encode('cp1252')
+            except UnicodeEncodeError: return None
+    return bytes(out)
+ 
+def reparar_token(tok, depth=0):
+    if depth > 4: return tok
+    b = cp1252_bytes(tok)
+    if b is None: return tok
+    try: d = b.decode('utf-8')
+    except UnicodeDecodeError: return tok
+    return tok if d == tok else reparar_token(d, depth+1)
+```
+
+3. **Iterar** (el mojibake puede estar en 2-3 capas) hasta que no cambie.
+4. **Reemplazo directo** para tokens truncados: si un token termina sin su último carácter
+   (ej. un bullet que quedó como 5 bytes en vez de 3), **no se decodifica**: se sustituye por
+   el carácter que representa. Ese fue el caso de los `•` y `–` de `CHECKLIST-GLOBAL.md`.
+6. **No tocar** los caracteres no-ASCII que el fixer no pueda codificar (emojis): **protegerlos**
+   con un marcador ASCII antes de reparar y restaurarlos después, o reparar solo las corridas.
+   (En `CHECKLIST-GLOBAL.md` los emojis se preservaron: 56 intactos.)
+7. **No borrar las citas históricas.** Si una nota dice *"era '<basura>'"* para documentar el
+   daño, **se deja** (igual que `AGENTS.md` §28): no es corrupción, es documentación.
+
+**Verificación final (siempre en bytes):**
+
+```powershell
+python -X utf8 -c "import io; t=io.open('ruta','rb').read().decode('utf-8'); print(t.count(chr(0xc3)), t.count(chr(0xfffd)))"
+```
+
+Esperado: las ocurrencias restantes = solo las citas históricas; U+FFFD = **0**.
+
+**Aplica a:** cualquier archivo donde el fixer diga "irreversible" pero no haya U+FFFD.
+Si **sí** hay U+FFFD, los datos se perdieron y no se pueden recuperar (no adivinar).
+
 ## 29. Tareas por Modelo — Checklists Personales (metodología multiagente)
 
 > **Agregado:** 2026-09-02 · **Fuente:** directiva del usuario · **Primero en usar:** deepseek-v4-flash-vision-exp / Kilo Code
