@@ -1,4 +1,17 @@
 extends Node
+
+_func _GL():
+	var gl = get_node_or_null("/root/GameLogger")
+	if gl != null:
+		return gl
+	return _FallbackLog.new()
+
+class _FallbackLog:
+	func debug(msg, cat="", ctx={}): pass
+	func info(msg, cat="", ctx={}): pass
+	func warning(msg, cat="", ctx={}): pass
+	func error(msg, cat="", ctx={}): pass
+	func critical(msg, cat="", ctx={}): pass
 ## CruceroEventos — Módulo 169: actividades a bordo.
 ##
 ## Engancha las 5 actividades del crucero con M74 (EventManager). NO reimplementa el
@@ -31,11 +44,11 @@ func _ready() -> void:
 
 func _cargar_catalogo() -> void:
 	if not FileAccess.file_exists(RUTA_JUEGOS):
-		GameLogger.error("%s no existe %s" % [PREFIJO_LOG, RUTA_JUEGOS], GameLogger.Category.SYSTEM)
+		_GL().error("%s no existe %s" % [PREFIJO_LOG, RUTA_JUEGOS], _GL().Category.SYSTEM)
 		return
 	var parsed: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_JUEGOS))
 	if typeof(parsed) != TYPE_DICTIONARY:
-		GameLogger.error("%s JSON invalido en %s" % [PREFIJO_LOG, RUTA_JUEGOS], GameLogger.Category.SYSTEM)
+		_GL().error("%s JSON invalido en %s" % [PREFIJO_LOG, RUTA_JUEGOS], _GL().Category.SYSTEM)
 		return
 	var lista: Variant = (parsed as Dictionary).get("actividades", [])
 	_actividades.clear()
@@ -43,7 +56,7 @@ func _cargar_catalogo() -> void:
 		if typeof(item) == TYPE_DICTIONARY:
 			var d: Dictionary = item
 			_actividades[String(d.get("id", &""))] = d
-	GameLogger.info("%s %d actividades cargadas" % [PREFIJO_LOG, _actividades.size()], GameLogger.Category.GAMEPLAY)
+	_GL().info("%s %d actividades cargadas" % [PREFIJO_LOG, _actividades.size()], _GL().Category.GAMEPLAY)
 
 
 var _actividades: Dictionary = {}
@@ -123,4 +136,4 @@ func finalizar(id: StringName, resultado: Dictionary) -> void:
 	if em != null and em.has_method("finalizar_evento"):
 		em.finalizar_evento(id, {"exito": exito, "premio": premio})
 
-	GameLogger.info("%s %s -> exito=%s premio=%d" % [PREFIJO_LOG, id, str(exito), premio], GameLogger.Category.GAMEPLAY)
+	_GL().info("%s %s -> exito=%s premio=%d" % [PREFIJO_LOG, id, str(exito), premio], _GL().Category.GAMEPLAY)

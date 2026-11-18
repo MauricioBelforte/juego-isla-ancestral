@@ -1,5 +1,18 @@
 class_name CruceroInterior
 extends Node3D
+
+_func _GL():
+	var gl = get_node_or_null("/root/GameLogger")
+	if gl != null:
+		return gl
+	return _FallbackLog.new()
+
+class _FallbackLog:
+	func debug(msg, cat="", ctx={}): pass
+	func info(msg, cat="", ctx={}): pass
+	func warning(msg, cat="", ctx={}): pass
+	func error(msg, cat="", ctx={}): pass
+	func critical(msg, cat="", ctx={}): pass
 ## Una cubierta del Crucero Real (M169).
 ##
 ## Regla del modulo: **una cubierta = una escena**. Este script solo controla
@@ -38,7 +51,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if cubierta >= 4:
 		destino = 1
 	puerta_cruzada.emit(destino)
-	GameLogger.info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], GameLogger.Category.GAMEPLAY)
+	_GL().info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], _GL().Category.GAMEPLAY)
 
 
 func activar() -> void:
