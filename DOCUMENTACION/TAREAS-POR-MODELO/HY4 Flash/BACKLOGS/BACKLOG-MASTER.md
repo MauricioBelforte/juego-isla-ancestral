@@ -98,3 +98,4 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 19-Backlog-CrossDoc-Contradicciones-PRUEBA.md (10 tareas - 1M context)
 - 20-Backlog-Bug-RootCause-PRUEBA.md (30 tareas - diagnostico)
 - 21-Backlog-I18N-Volumen-PRUEBA.md (100 tareas - tr/ .po)
+- 22-Backlog-M154-Visual-Checklist.md (12 tareas, creada 18nov)
