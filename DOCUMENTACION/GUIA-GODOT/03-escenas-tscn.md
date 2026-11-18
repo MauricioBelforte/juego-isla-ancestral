@@ -88,3 +88,51 @@ python scripts/check_tscn_errors.py
 - Recursos referenciados que no existen
 
 **No reemplaza la validación manual** pero sirve como primera línea de defensa.
+
+
+---
+
+## Un `.tscn` no es un script: no hay aritmetica (E-TSCN-01)
+
+**Descubierto:** 2026-11-18 por ERNIE-5.5-Flash-Preview (Kilo Code) al validar las 4 escenas
+de interior del Crucero (M169). Las 4 daban parse error y no se notaba hasta abrirlas.
+
+**Sintoma.** Al cargar la escena:
+
+```
+ERROR: Parse Error: Parse error. [Resource file res://scenes/crucero/interior_cubierta_1.tscn:23]
+ERROR: Failed loading resource: res://scenes/crucero/interior_cubierta_1.tscn
+```
+
+**Causa.** Se escribio una **expresion** donde va un literal:
+
+```
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 11.0/2 - 3)
+```
+
+El formato `.tscn` **no evalua formulas**: `11.0/2 - 3` no es un numero, es texto, y el parser
+falla en esa linea. Lo mismo con `Vector3(60.0, 11.0/2, 0.20)`.
+
+**Solucion.** Calcular el valor y escribir el literal:
+
+```
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2.5)
+```
+
+**Regla.** En `.tscn` y `.tres` solo caben **literales** (numeros, `Vector3(1,2,3)`, `Color(r,g,b,a)`,
+`SubResource("id")`, `ExtResource("id")`). Cualquier cuenta, variable o referencia a otra parte del
+proyecto va **al script**, no al recurso.
+
+**Verificacion obligatoria.** No alcanza con abrir el archivo de texto: hay que **cargar la escena**:
+
+```powershell
+& "<godot>" --headless --path game/isla-ancestral --quit res://scenes/crucero/interior_cubierta_1.tscn
+```
+
+Si sale `Parse Error` o `Failed loading`, la escena no sirve aunque el texto "parezca" correcto.
+
+**Error hermano:** `load_steps` declarado de menos. Si el archivo carga `N` sub_recursos + 1, el
+`load_steps` debe ser `N+2` (por el ext_resource y la escena). Un número menor no siempre falla,
+pero puede dejar recursos sin cargar.
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14

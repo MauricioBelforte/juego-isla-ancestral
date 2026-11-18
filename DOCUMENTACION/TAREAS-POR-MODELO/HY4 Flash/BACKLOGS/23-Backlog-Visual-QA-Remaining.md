@@ -107,3 +107,12 @@
 
 **Firma:** hy4-flash
 
+## Tanda 2 cerrada (HY4 Flash, 2026-11-18) — T23-09..16
+
+- **8/8 tareas con veredicto individual**, 20/20 capturas ABIERTAS Y VISTAS (0 `[?]`). Todas existen en disco.
+- Resultado: **4 OK / 16 PROBLEMA** (capturas). Por tarea: **1 OK** (T23-15) y **7 PROBLEMA** (T23-09..14, T23-16).
+- Dato relevante para BUG-124: las 4 primeras capturas de T23-10 confirman la colina sin chamán; la quinta (`bug124_chaman_malla`) muestra la malla ya agregada (capsula + esfera + Label3D) pero flotando, sin apoyo en el terreno.
+- Cola restante del backlog 23: **76 tareas `[ ]`**. Sin commit/push.
+
+**Firma:** hy4-flash
+
