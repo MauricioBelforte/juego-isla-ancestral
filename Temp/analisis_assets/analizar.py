@@ -1,4 +1,4 @@
-﻿import os, re, glob
+import os, re, glob
 
 ROOT = "game/isla-ancestral"
 PROJ = os.path.abspath(ROOT)

@@ -1,4 +1,4 @@
-﻿# COLA FINAL â€” pendientes A-DOC/FORMULA vivos de Beam (28oct, regenerado por GLM-5.3-Flash con el estado actual del disco)
+# COLA FINAL â€” pendientes A-DOC/FORMULA vivos de Beam (28oct, regenerado por GLM-5.3-Flash con el estado actual del disco)
 
 Filtrado: SOLO items de su nicho A (excluidos 376 B-EDITOR/ARTE + C-SKIP/duenos/DEP-BLOQ y 51 que ya estaban [x] en el 05 de disco).
 Ejecutar EN ORDEN. Por cada item: spec/fÃ³rmula en 03-Diseno (seccion unica, grep previo anti-duplicado) + flip del 05 CON CITA y marcar [x] ACA. Si no puede (dueno ajeno/dep), desmarcar a [ ] con motivo en el reporte (honesto).

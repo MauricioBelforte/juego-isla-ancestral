@@ -1,4 +1,4 @@
-﻿# 03-Diseno.md â€” DISEÃ‘O DEL PROYECTO (PLAN INICIAL GENERICO)
+# 03-Diseno.md â€” DISEÃ‘O DEL PROYECTO (PLAN INICIAL GENERICO)
 
 **Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode

@@ -1,4 +1,4 @@
-﻿# Reporte de Análisis de CHECKLIST-GLOBAL.md
+# Reporte de Análisis de CHECKLIST-GLOBAL.md
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

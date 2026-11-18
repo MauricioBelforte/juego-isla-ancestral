@@ -1,4 +1,4 @@
-﻿# Reporte: GameFlowManager, transiciones de escena y estado de juego
+# Reporte: GameFlowManager, transiciones de escena y estado de juego
 
 - **Modelo:** Glyph Cluster (kilo/stealth/glyph-cluster)
 - **Plataforma:** Kilo Code

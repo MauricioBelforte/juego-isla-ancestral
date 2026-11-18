@@ -1,4 +1,4 @@
-﻿**Modelo:** Reflection Beam 1.0
+**Modelo:** Reflection Beam 1.0
 **Plataforma:** Kilo Code
 
 # Reporte de análisis de escenas .tscn / .tres

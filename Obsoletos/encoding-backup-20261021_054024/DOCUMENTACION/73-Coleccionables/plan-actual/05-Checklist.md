@@ -1,4 +1,4 @@
-﻿**Modelo:** minimax-m3-free
+**Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md â€” MÃ³dulo 73: Coleccionables

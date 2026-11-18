@@ -1,4 +1,4 @@
-﻿**Modelo:** mimo-v2.6-flash-free (Ãºltimo modificador; base por Deepseek V4 Flash)
+**Modelo:** mimo-v2.6-flash-free (Ãºltimo modificador; base por Deepseek V4 Flash)
 **Plataforma:** opencode
 
 # 03-Diseno.md â€” MÃ³dulo 55: Diario del Jugador

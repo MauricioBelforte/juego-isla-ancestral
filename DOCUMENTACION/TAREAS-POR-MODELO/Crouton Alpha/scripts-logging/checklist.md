@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo scripts-logging
+@# Backlog Master — Crouton Alpha — Módulo scripts-logging
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

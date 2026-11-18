@@ -1,4 +1,4 @@
-﻿# Reporte — Economía, Comercio, Tiendas y Monedas (Glyph Cluster)
+# Reporte — Economía, Comercio, Tiendas y Monedas (Glyph Cluster)
 
 **Fecha:** 2026-11-08  
 **Ámbito analizado:** `game/isla-ancestral/scripts/economia/`, `game/isla-ancestral/scripts/shops/`, `game/isla-ancestral/scripts/security/`, pruebas de integración relacionadas.  

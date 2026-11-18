@@ -1,4 +1,4 @@
-﻿# Reporte: Análisis de sistema de inputs en isla-ancestral
+# Reporte: Análisis de sistema de inputs en isla-ancestral
 
 **Fecha:** 2026-11-10  
 **Analista:** Glyph Cluster  

@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 59-Guardado
+@# Backlog Master — Stealth Glyph Cluster — Módulo 59-Guardado
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

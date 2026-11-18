@@ -1,4 +1,4 @@
-﻿# Módulo 115: Hardware — Diseño
+# Módulo 115: Hardware — Diseño
 
 **Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code

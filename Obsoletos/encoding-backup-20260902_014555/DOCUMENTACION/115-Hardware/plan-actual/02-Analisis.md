@@ -1,4 +1,4 @@
-﻿# Módulo 115: Hardware — Análisis
+# Módulo 115: Hardware — Análisis
 
 **Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code

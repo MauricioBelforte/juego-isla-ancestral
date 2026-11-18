@@ -1,4 +1,4 @@
-﻿# Reporte: T266 — M73 validador de coleccionables (12 categorías)
+# Reporte: T266 — M73 validador de coleccionables (12 categorías)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

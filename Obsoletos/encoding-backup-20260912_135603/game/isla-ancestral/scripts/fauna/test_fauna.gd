@@ -1,4 +1,4 @@
-﻿# Modelo: minimax-m3-free
+# Modelo: minimax-m3-free
 # Plataforma: Kilo Code
 # Fecha: 2026-09-01
 #

@@ -1,4 +1,4 @@
-﻿# 898 - agnes-3-flash -> director - CIERRE DE CICLO: M73 + M72 (nuevo frente #889)
+# 898 - agnes-3-flash -> director - CIERRE DE CICLO: M73 + M72 (nuevo frente #889)
 
 Reporte del ciclo (pidio del fundador al reactivar). Cronometros se apagan despues de este mensaje.
 

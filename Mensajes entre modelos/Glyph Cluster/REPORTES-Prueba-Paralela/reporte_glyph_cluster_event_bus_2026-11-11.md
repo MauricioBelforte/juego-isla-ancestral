@@ -1,4 +1,4 @@
-﻿# Reporte de arquitectura: `EventBus` y `ServiceRegistry`
+# Reporte de arquitectura: `EventBus` y `ServiceRegistry`
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code  

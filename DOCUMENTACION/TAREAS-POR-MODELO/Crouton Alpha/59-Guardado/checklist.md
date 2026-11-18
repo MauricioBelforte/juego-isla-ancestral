@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 59-Guardado
+@# Backlog Master — Crouton Alpha — Módulo 59-Guardado
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

@@ -1,4 +1,4 @@
-﻿**Modelo:** Deepseek V4 Flash
+**Modelo:** Deepseek V4 Flash
 **Plataforma:** OpenCode
 
 # 03-Diseno.md â€” MÃ³dulo 68: Transporte y NavegaciÃ³n

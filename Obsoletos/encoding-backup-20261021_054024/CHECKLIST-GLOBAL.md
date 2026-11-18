@@ -1,4 +1,4 @@
-﻿# CHECKLIST-GLOBAL.md â€” Orquestador Multiagente
+# CHECKLIST-GLOBAL.md â€” Orquestador Multiagente
 > **Modelo:** glm-5.3-flash (Ãºltimo modificador)
 > **Plataforma:** Kilo Code
 > **Ãšltima generaciÃ³n automÃ¡tica:** 2026-09-15 01:19:23 (recontado a mano 2026-08-31 23:53)

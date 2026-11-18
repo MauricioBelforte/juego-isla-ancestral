@@ -1,4 +1,4 @@
-﻿**Modelo:** stepfun-3.7-flash
+**Modelo:** stepfun-3.7-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-09-01
 

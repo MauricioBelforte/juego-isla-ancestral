@@ -1,4 +1,4 @@
-﻿import re, os, pathlib
+import re, os, pathlib
 
 root = r"D:\Escritorio\PORTFOLIO\Proyectos para GitHub\PROYECTOS OPENCODE\juego-isla-ancestral\game\isla-ancestral"
 proj = os.path.join(root, "project.godot")

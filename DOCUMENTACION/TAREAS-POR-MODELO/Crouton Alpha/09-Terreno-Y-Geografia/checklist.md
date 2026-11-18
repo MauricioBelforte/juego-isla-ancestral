@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 09-Terreno-Y-Geografia
+@# Backlog Master — Crouton Alpha — Módulo 09-Terreno-Y-Geografia
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

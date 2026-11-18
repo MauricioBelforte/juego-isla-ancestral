@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 73-Coleccionables
+@# Backlog Master — Crouton Alpha — Módulo 73-Coleccionables
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

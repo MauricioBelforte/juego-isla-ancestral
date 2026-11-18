@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 07-Arquitectura-General
+@# Backlog Master — Stealth Glyph Cluster — Módulo 07-Arquitectura-General
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

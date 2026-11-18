@@ -1,4 +1,4 @@
-﻿# Reporte de análisis — Progresión, experiencia y niveles (M71)
+# Reporte de análisis — Progresión, experiencia y niveles (M71)
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code  

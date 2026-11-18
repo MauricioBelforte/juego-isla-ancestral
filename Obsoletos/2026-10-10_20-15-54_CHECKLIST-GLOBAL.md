@@ -1,4 +1,4 @@
-﻿# CHECKLIST-GLOBAL.md — Orquestador Multiagente
+# CHECKLIST-GLOBAL.md — Orquestador Multiagente
 
 
 

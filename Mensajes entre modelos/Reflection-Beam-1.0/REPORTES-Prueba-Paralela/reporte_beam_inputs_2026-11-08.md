@@ -1,4 +1,4 @@
-﻿# Reporte: Análisis de gestión de inputs (teclado/mouse/gamepad)
+# Reporte: Análisis de gestión de inputs (teclado/mouse/gamepad)
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo

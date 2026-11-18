@@ -1,4 +1,4 @@
-﻿## 1. Arquitectura de la fase
+## 1. Arquitectura de la fase
 
 
 ## 2. DiseÃ±o del mundo Pre-Alpha

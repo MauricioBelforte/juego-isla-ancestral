@@ -1,4 +1,4 @@
-﻿# Reporte de análisis: Progresión, experiencia, niveles y habilidades
+# Reporte de análisis: Progresión, experiencia, niveles y habilidades
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code (Vercel AI Gateway)  

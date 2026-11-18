@@ -1,4 +1,4 @@
-﻿**Modelo:** minimax-m3-free
+**Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code
 
 # 03-Diseno.md â€” MÃ³dulo 35: MinerÃ­a

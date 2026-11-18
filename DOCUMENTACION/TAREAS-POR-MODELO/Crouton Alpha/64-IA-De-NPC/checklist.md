@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 64-IA-De-NPC
+@# Backlog Master — Crouton Alpha — Módulo 64-IA-De-NPC
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

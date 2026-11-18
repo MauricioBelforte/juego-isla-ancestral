@@ -1,4 +1,4 @@
-﻿# Reporte: Fórmulas de balance de combate y economía
+# Reporte: Fórmulas de balance de combate y economía
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

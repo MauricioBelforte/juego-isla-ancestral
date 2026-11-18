@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 64-IA-De-NPC
+@# Backlog Master — Stealth Glyph Cluster — Módulo 64-IA-De-NPC
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

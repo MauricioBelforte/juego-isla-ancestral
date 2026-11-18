@@ -1,4 +1,4 @@
-﻿# Reporte: Re-verificación CHECKLIST-GLOBAL
+# Reporte: Re-verificación CHECKLIST-GLOBAL
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

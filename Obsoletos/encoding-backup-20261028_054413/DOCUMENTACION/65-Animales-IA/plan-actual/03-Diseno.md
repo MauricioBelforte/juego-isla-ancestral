@@ -1,4 +1,4 @@
-﻿# 65-Animales-IA â€” DiseÃ±o (plan-actual)
+# 65-Animales-IA â€” DiseÃ±o (plan-actual)
 
 **Modelo:** Hy3
 **Plataforma:** Kilo Code

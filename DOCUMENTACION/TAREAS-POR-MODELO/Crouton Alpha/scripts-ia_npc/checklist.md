@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo scripts-ia_npc
+@# Backlog Master — Crouton Alpha — Módulo scripts-ia_npc
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

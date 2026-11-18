@@ -1,4 +1,4 @@
-﻿> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
+> **REVERTIDO POR AUDITORIA (2026-09-14):** agnes-2.5-flash marco este modulo como completado sin verificacion real. Todos los [x] revertidos a [ ]. Revertir manualmente solo los que realmente esten implementados.
 
 ï»¿**Modelo:** glm-5.3-flash
 **Plataforma:** Kilo Code

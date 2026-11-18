@@ -1,4 +1,4 @@
-﻿**Modelo:** SWE-1.6
+**Modelo:** SWE-1.6
 **Plataforma:** Devin
 
 # 05-Checklist.md â€” MÃ³dulo 90: ConfiguraciÃ³n GrÃ¡fica

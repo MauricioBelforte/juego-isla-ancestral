@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 52-Particulas-Y-VFX
+@# Backlog Master — Stealth Glyph Cluster — Módulo 52-Particulas-Y-VFX
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

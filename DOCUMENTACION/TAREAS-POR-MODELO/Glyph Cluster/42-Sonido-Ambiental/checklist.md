@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 42-Sonido-Ambiental
+@# Backlog Master — Stealth Glyph Cluster — Módulo 42-Sonido-Ambiental
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 38-Economia
+@# Backlog Master — Crouton Alpha — Módulo 38-Economia
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

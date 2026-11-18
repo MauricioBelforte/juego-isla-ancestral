@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 95-Monetizacion
+@# Backlog Master — Stealth Glyph Cluster — Módulo 95-Monetizacion
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

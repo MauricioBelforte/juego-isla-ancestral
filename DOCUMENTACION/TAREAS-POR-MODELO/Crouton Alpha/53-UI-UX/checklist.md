@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 53-UI-UX
+@# Backlog Master — Crouton Alpha — Módulo 53-UI-UX
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

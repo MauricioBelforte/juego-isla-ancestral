@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 73-Coleccionables
+@# Backlog Master — Stealth Glyph Cluster — Módulo 73-Coleccionables
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

@@ -1,4 +1,4 @@
-﻿# Reporte UI/HUD — Glyph Cluster
+# Reporte UI/HUD — Glyph Cluster
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code (Agent Manager)  

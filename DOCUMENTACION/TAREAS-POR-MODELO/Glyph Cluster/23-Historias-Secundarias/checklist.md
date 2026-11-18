@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Stealth Glyph Cluster — Módulo 23-Historias-Secundarias
+@# Backlog Master — Stealth Glyph Cluster — Módulo 23-Historias-Secundarias
 
 ## Capacidades verificadas empíricamente
 Stealth Glyph Cluster ha completado análisis de arquitectura en este módulo.

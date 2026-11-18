@@ -1,4 +1,4 @@
-﻿# 08 - Guia Maestra de Orden de Implementacion
+# 08 - Guia Maestra de Orden de Implementacion
 
 
 

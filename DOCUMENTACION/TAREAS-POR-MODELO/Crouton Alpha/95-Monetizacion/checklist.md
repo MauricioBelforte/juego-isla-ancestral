@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 95-Monetizacion
+@# Backlog Master — Crouton Alpha — Módulo 95-Monetizacion
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

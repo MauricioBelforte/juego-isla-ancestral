@@ -1,4 +1,4 @@
-﻿# Reporte: Fórmulas de balance (combate y economía) — off-by-one y validación de entrada
+# Reporte: Fórmulas de balance (combate y economía) — off-by-one y validación de entrada
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

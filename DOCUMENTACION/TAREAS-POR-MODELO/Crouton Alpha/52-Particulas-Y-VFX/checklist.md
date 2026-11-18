@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 52-Particulas-Y-VFX
+@# Backlog Master — Crouton Alpha — Módulo 52-Particulas-Y-VFX
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.

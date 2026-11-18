@@ -44,86 +44,86 @@ Para cada BUG-XXX:
 - [x] T24-28: BUG-060 - diagnosticar causa — BUG-060 CAUSA: _create_hotbar_hud() desreferenciaba get_tree().current_scene sin null-check (L972/978 originales) y crasheaba en instanciaciones previas al change_scene. HOY RESUELTO: player.gd:1014-1018 guarda `var current_scene := get_tree().current_scene` + `if current_scene == null: push_warning(...); return`; ademas L116 llama via call_deferred(). CONFIDENCIA ALTA
 - [x] T24-29: BUG-061 - diagnosticar causa — BUG-061 CAUSA: data/motivacion/objetivos.json tenia esquema 'v2' divergente (cadencia='diario_suave', target_min, recompensa string) frente al canon (.gd: plazo/cantidad_requerida/recompensa_id/recompensa_cantidad) -> 5 checks rojos sobre modulo marcado 135/135. HOY RESUELTO: 7/7 objetivos con campos canonicos, distribucion 3 diarios/2 semanales/2 mensuales, 0 campos 'cadencia'/'target_min'. CONFIDENCIA ALTA
 - [x] T24-30: BUG-062 - diagnosticar causa — BUG-062 CAUSA: `var tracks := data.get(...)` inferia Variant desde Dictionary.get() y Godot 4.7 (warnings=errores) rechazaba la suite M84, haciendo el 99/99 no re-validable. HOY RESUELTO: test_audio_licenses_m84.gd:75 y :94 usan `var tracks: Array = data.get("tracks", [])` (medido en disco, 2/2). CONFIDENCIA ALTA
-- [ ] T24-31: BUG-063 - diagnosticar causa
-- [ ] T24-32: BUG-064 - diagnosticar causa
-- [ ] T24-33: BUG-065 - diagnosticar causa
-- [ ] T24-34: BUG-066 - diagnosticar causa
-- [ ] T24-35: BUG-067 - diagnosticar causa
-- [ ] T24-36: BUG-068 - diagnosticar causa
-- [ ] T24-37: BUG-069 - diagnosticar causa
-- [ ] T24-38: BUG-070 - diagnosticar causa
-- [ ] T24-39: BUG-071 - diagnosticar causa
-- [ ] T24-40: BUG-072 - diagnosticar causa
-- [ ] T24-41: BUG-073 - diagnosticar causa
-- [ ] T24-42: BUG-074 - diagnosticar causa
-- [ ] T24-43: BUG-075 - diagnosticar causa
-- [ ] T24-44: BUG-076 - diagnosticar causa
-- [ ] T24-45: BUG-077 - diagnosticar causa
-- [ ] T24-46: BUG-078 - diagnosticar causa
-- [ ] T24-47: BUG-079 - diagnosticar causa
-- [ ] T24-48: BUG-080 - diagnosticar causa
-- [ ] T24-49: BUG-081 - diagnosticar causa
-- [ ] T24-50: BUG-082 - diagnosticar causa
-- [ ] T24-51: BUG-083 - diagnosticar causa
-- [ ] T24-52: BUG-084 - diagnosticar causa
-- [ ] T24-53: BUG-085 - diagnosticar causa
-- [ ] T24-54: BUG-086 - diagnosticar causa
-- [ ] T24-55: BUG-087 - diagnosticar causa
-- [ ] T24-56: BUG-088 - diagnosticar causa
-- [ ] T24-57: BUG-089 - diagnosticar causa
-- [ ] T24-58: BUG-090 - diagnosticar causa
-- [ ] T24-59: BUG-091 - diagnosticar causa
-- [ ] T24-60: BUG-092 - diagnosticar causa
-- [ ] T24-61: BUG-093 - diagnosticar causa
-- [ ] T24-62: BUG-094 - diagnosticar causa
-- [ ] T24-63: BUG-095 - diagnosticar causa
-- [ ] T24-64: BUG-096 - diagnosticar causa
-- [ ] T24-65: BUG-097 - diagnosticar causa
-- [ ] T24-66: BUG-098 - diagnosticar causa
-- [ ] T24-67: BUG-099 - diagnosticar causa
-- [ ] T24-68: BUG-100 - diagnosticar causa
-- [ ] T24-69: BUG-101 - diagnosticar causa
-- [ ] T24-70: BUG-102 - diagnosticar causa
-- [ ] T24-71: BUG-103 - diagnosticar causa
-- [ ] T24-72: BUG-104 - diagnosticar causa
-- [ ] T24-73: BUG-105 - diagnosticar causa
-- [ ] T24-74: BUG-106 - diagnosticar causa
-- [ ] T24-75: BUG-107 - diagnosticar causa
-- [ ] T24-76: BUG-108 - diagnosticar causa
-- [ ] T24-77: BUG-109 - diagnosticar causa
-- [ ] T24-78: BUG-110 - diagnosticar causa
-- [ ] T24-79: BUG-111 - diagnosticar causa
-- [ ] T24-80: BUG-112 - diagnosticar causa
-- [ ] T24-81: BUG-113 - diagnosticar causa
-- [ ] T24-82: BUG-114 - diagnosticar causa
-- [ ] T24-83: BUG-115 - diagnosticar causa
-- [ ] T24-84: BUG-116 - diagnosticar causa
-- [ ] T24-85: BUG-117 - diagnosticar causa
-- [ ] T24-86: BUG-118 - diagnosticar causa
-- [ ] T24-87: BUG-119 - diagnosticar causa
-- [ ] T24-88: BUG-120 - diagnosticar causa
-- [ ] T24-89: BUG-121 - diagnosticar causa
-- [ ] T24-90: BUG-122 - diagnosticar causa
-- [ ] T24-91: BUG-123 - diagnosticar causa
-- [ ] T24-92: BUG-124 - diagnosticar causa
-- [ ] T24-93: BUG-125 - diagnosticar causa
-- [ ] T24-94: BUG-126 - diagnosticar causa
-- [ ] T24-95: BUG-127 - diagnosticar causa
-- [ ] T24-96: BUG-128 - diagnosticar causa
-- [ ] T24-97: BUG-129 - diagnosticar causa
-- [ ] T24-98: BUG-130 - diagnosticar causa
-- [ ] T24-99: BUG-131 - diagnosticar causa
-- [ ] T24-100: BUG-132 - diagnosticar causa
-- [ ] T24-101: BUG-133 - diagnosticar causa
-- [ ] T24-102: BUG-134 - diagnosticar causa
-- [ ] T24-103: BUG-135 - diagnosticar causa
-- [ ] T24-104: BUG-136 - diagnosticar causa
-- [ ] T24-105: BUG-137 - diagnosticar causa
-- [ ] T24-106: BUG-138 - diagnosticar causa
-- [ ] T24-107: BUG-139 - diagnosticar causa
-- [ ] T24-108: BUG-140 - diagnosticar causa
-- [ ] T24-109: BUG-141 - diagnosticar causa
-- [ ] T24-110: BUG-142 - diagnosticar causa
+- [x] T24-31: BUG-063 - diagnosticar causa — DRIFT RECURRENTE (no re-resuelto): M69 05-Checklist medido 142 `[x]` / 0 `[ ]` / 3 `[?]` = 145, pero `**Totales:**` declara 123/15/7 = 145 (desfase +19 x, -15 pend, -4 ?). Causa: la línea de resumen no se reconcilió tras los flips de 2026-10-12 y 10-19 documentados en la propia línea. CONFIDENCIA ALTA
+- [x] T24-32: BUG-064 - diagnosticar causa — DRIFT RECURRENTE: M156 medido 223 `[x]` / 2 `[ ]` / 82 `[?]` = 307; `**Totales:**` declara 212/48/47 = 307 (+11 x, -46 pend, +35 ?). Causa: flips y degradaciones sucesivas sin re-sincronización del resumen. CONFIDENCIA ALTA
+- [x] T24-33: BUG-065 - diagnosticar causa — PARCIAL: de los 9 módulos, 5 leyendas ya saneadas (M03, M41-M44: `[x]` completado) y 4 SIGUEN ROTAS (M02 L6, M04/M05/M06: `[ ]` para pendiente y completado). Efecto medido: Totales no auditable por conteo (M02 marcas 165/0/7 vs Totales 168/3/1; M04 128/0/0 vs 126/2/0). CONFIDENCIA ALTA
+- [x] T24-34: BUG-066 - diagnosticar causa — DRIFT RECURRENTE: M63 medido 93 `[x]` / 3 `[ ]` / 5 `[?]` = 101; `**Totales:**` declara 67/7/27 = 101 (+26 x, -4 pend, -22 ?). Mismo mecanismo que BUG-063/064. CONFIDENCIA ALTA
+- [x] T24-35: BUG-067 - diagnosticar causa — RESUELTO en código: `scripts/logging/logger.gd:65-66` `console_echo=true`/`console_min_level=Level.DEBUG`, L198 `if console_echo and level >= console_min_level:` (el `print` caro), L193 `line_emitted.emit` incondicional, L223 setter; `test_m103_frame_budget.gd` presente. Las cifras del registro NO se re-midieron (diagnóstico, no QA). CONFIDENCIA ALTA en código / MEDIA en cifra
+- [x] T24-36: BUG-068 - diagnosticar causa — RESUELTO: `project.godot` [autoload] tiene SOLO `HardwareManager="*res://scripts/hardware/hardware_manager.gd"` (L110); 0 entradas `hardware=`. El duplicado y su trampa de dos instancias desaparecieron. CONFIDENCIA ALTA
+- [x] T24-37: BUG-069 - diagnosticar causa — ABIERTO Y DERIVADO (prioridad alta): auditor real `scripts/auditar_arquitectura_m62.py` EXIT **1** hoy con 1 hallazgo NUEVO `A1|DataStore,SaveManager`; 117 autoloads / 250 aristas, 1 SCC (era 2), 10 refs fuera de orden (todas en PERMITIDOS). Aristas VIVAS y COMMITEADAS: `scripts/datos/data_store.gd:79,86` (en `_ready`) -> `/root/SaveManager`; `scripts/saving/save_manager.gd:231` (escritura) y `:317` (carga) -> `/root/DataStore`; ambos archivos limpios en git y las 4 líneas presentes en HEAD. Aviso: entrada `A1|ThemeService,UIManager` de PERMITIDOS quedó obsoleta. Dueños M60/M59/M62. `architecture-guard` está ROJO. CONFIDENCIA ALTA
+- [x] T24-38: BUG-070 - diagnosticar causa — ABIERTO (Familia B): barrido actual = 255 ítems `[x]` con texto "KnownIssue/no implementado" en 45 checklists de 43 módulos (inventario ampliado desde 145/17 del reporte). NO son 255 falsos automáticamente: requieren clasificación por dueño; Familia A (8 marcas) ya revertida según el registro. CONFIDENCIA ALTA en conteo / MEDIA en clasificación
+- [x] T24-39: BUG-071 - diagnosticar causa — RESUELTO: `DOCUMENTACION/11-BUGS.md` tiene exactamente 1 encabezado `### BUG-071` (DeepSeek) y 1 `### BUG-072` (hy3); la doble numeración fue corregida. CONFIDENCIA ALTA
+- [x] T24-40: BUG-072 - diagnosticar causa — RESUELTO en código, con DRIFT nuevo: `release-build.yml:203-244` implementa `deploy-itch` con BUTLER_API_KEY y trigger de tag semver; validador de workflows 6/6 OK. `firebelley` sigue sin referencias. M118 05-Checklist mide 113 `[x]` / 0 / 0 frente a `**Totales:** 107` (+6). CONFIDENCIA ALTA
+- [x] T24-41: BUG-073 - diagnosticar causa — VIVO: suite `scripts/ui/test_ui_i18n_m53.gd` con Godot 4.7.2 real emite 3x `ERROR: Parameter "fd" is null` y además `SCRIPT ERROR: Nonexistent function 'get_locale_actual' in base 'Node (localization_manager.gd)'`; el proceso NO termina en 180 s (EXIT 124) con 36 OK antes del corte. `theme_service.gd:50` llama `_theme_ux.reload_after_font_change()` sin guard de fuente nula. Dueños M53/M88. CONFIDENCIA ALTA
+- [x] T24-42: BUG-074 - diagnosticar causa — RESUELTO: meta-bug de numeración cerrado por la misma medición que BUG-071/072: 1 sola entrada `### BUG-074`, 1 `### BUG-071`, 1 `### BUG-072`. CONFIDENCIA ALTA
+- [x] T24-43: BUG-075 - diagnosticar causa — RESUELTO y guard PROBADO EN ROJO: `scripts/verificar_checklist.py:69` `DetectorCiegoError`, raises en L397/408/522/531/557, catch L712 -> `return 3`. Sonda con checklist vacío: EXIT 3 real, mensaje nombra el archivo. `CHECKLIST-GLOBAL.md` hoy 248686 B / 225 líneas LF (no vacío). CONFIDENCIA ALTA
+- [x] T24-44: BUG-076 - diagnosticar causa — RESUELTO en los dos jobs denunciados: `code-quality-script` fue RETIRADO del workflow y del `needs` de `summary` (BUG-122, comentario L87-103); `formatting-check` usa el colector y cuenta `SCRIPT ERROR` (L148-149). De 21 `|| true` quedan 15; 6 ejecutables: L77/78 y L148/149 (`tee`/`grep -c`, veredicto por conteo), L832 (head informativo), L1186 (acta informativa declarada, no bloquea quality). CONFIDENCIA ALTA
+- [x] T24-45: BUG-077 - diagnosticar causa — RESUELTO: `scripts/validar_workflows.py` con el intérprete venv (PyYAML presente) da EXIT 0 y 6/6 workflows válidos (YAML, runs-on, needs, citas `--script`). Nota: con el Python por defecto da EXIT 3 "DETECTOR CIEGO" por falta de PyYAML, no por el YAML. CONFIDENCIA ALTA
+- [x] T24-46: BUG-078 - diagnosticar causa — RESUELTO: las 8 citas `--script` denunciadas existen en HEAD (`git cat-file -e HEAD:game/isla-ancestral/<ruta>` rc=0 para las 8: M11 x1, M64 x5, M116, M117). Validador 6/6 OK, sin entradas de deuda obsoletas disparadas. CONFIDENCIA ALTA
+- [x] T24-47: BUG-079 - diagnosticar causa — PARCIAL: quedan 10 archivos bajo `tests/` con 132 usos de `is_equal_to` (era 12/134); desaparecieron las 3 suites M14 y `test_time_calendar_events.gd` -> convertidas. Inventario actual: `test_item_data.gd` 42, `test_stable_flows.gd` 18, `test_economy_manager.gd` 16, `test_npc_visual_database.gd` 14, `test_economy_npc_shop.gd` 13, 4 interfaces/equipment 28, `test_terrain_modifiers.gd` 1. Todas bajo `tests/`, que el runner central no ejecuta de forma efectiva (BUG-093); no re-ejecutadas en este nicho. CONFIDENCIA ALTA en conteo
+- [x] T24-48: BUG-080 - diagnosticar causa — RESUELTO: `tests/test_m65.gd` preloada `res://scripts/animales_ia/pack_logic.gd` y `school_logic.gd` (rutas vivas), y `m65_animal_ai.gd:26-27,87,170+` integra PackLogic/SchoolLogic en registrar/tick/desregistrar. CONFIDENCIA ALTA
+- [x] T24-49: BUG-081 - diagnosticar causa — RESUELTO: 4/4 sitios tipados — `credits_manager.gd:231` `-> Array[String]`, `audio_credit.gd:50` `var rol_texto: String = ...`, `audio_credits_generator.gd:33` y `:98` `var ...: String = ...`. CONFIDENCIA ALTA
+- [x] T24-50: BUG-082 - diagnosticar causa — ABIERTO, sin cambio: `scripts/map/map_data_service.gd:80-88` conserva el comentario "isla RIZ 256" y defaults centro [128,128]/radio 256; no son sólo defaults: `data/islas/islas.json:4` fija RIZ centro [256,256] radio 256 y `data/fasttravel/anclas.json:4-8` tiene anclas x/z 256-320, mientras `world/mundo_raiz.gd:16` fija CENTRO=(2560,2560). Dueños M27/M09. CONFIDENCIA ALTA
+- [x] T24-51: BUG-083 - diagnosticar causa — ABIERTO, sin cambio: `scripts/world/medir_costa_m51.gd:6,33,34` mantiene centro `256.0` y rayos `range(20,260,2)`; 0 referencias a `MundoRaiz.CENTRO`. Dueño M51. CONFIDENCIA ALTA
+- [x] T24-52: BUG-084 - diagnosticar causa — RESUELTO: `scripts/performance/bench_recorder.gd:35,137,142,144` usa `calcular_waypoints()`, `MundoRaiz.CENTRO`, `view_distance=1024.0` y `posicion_viewer()`; gate `test_bench_recorder_m166.gd` presente en disco. CONFIDENCIA ALTA
+- [x] T24-53: BUG-085 - diagnosticar causa — ABIERTO, sin cambio: `data/fasttravel/anclas.json` conserva las 4 anclas en (256,256), (310,310), (320,320), (256,80) y `fast_travel_service.gd:16` apunta a ese mismo archivo con `RUTA_ANCLAS`. Dueño M69. CONFIDENCIA ALTA
+- [x] T24-54: BUG-086 - diagnosticar causa — ABIERTO, sin cambio: `scripts/vegetacion/vegetation_spawner.gd:58` mantiene el fallback `else Vector2(256, 256)` (comentario L56). Dueño M50. CONFIDENCIA ALTA
+- [x] T24-55: BUG-087 - diagnosticar causa — RESUELTO: `scripts/saving/save_schema.gd:146-157` `_es_entero()` acepta TYPE_INT y TYPE_FLOAT. Suite real `validate_save.gd` corrida hoy: **16 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**. CONFIDENCIA ALTA
+- [x] T24-56: BUG-088 - diagnosticar causa — RESUELTO: `scripts/saving/save_manager.gd:280` rota ANTES de `:282` `write_atomic`. Suite real `test_rotate_m59.gd` hoy: **43 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR** (el registro citaba 28 checks, cifra stale). CONFIDENCIA ALTA
+- [x] T24-57: BUG-089 - diagnosticar causa — FALSO POSITIVO CERRADO: hay exactamente 1 `func _ready` en el worktree y 1 en HEAD (`git show HEAD:<ruta> | grep -n 'func _ready'` -> L64). No era regresión publicada. Nota de metodo: mi primer conteo sobre HEAD dio 0 por truncar la salida del subprocess a las ultimas 3000 chars; corregido antes de escribir. CONFIDENCIA ALTA
+- [x] T24-58: BUG-090 - diagnosticar causa — RESUELTO por CUARENTENA: hoy 0 copias en disco (`scripts/mapa/test_mapa_m54_e2e.gd` y `Obsoletos/raiz-temporales-20261003/test_mapa_m54_e2e.gd` ausentes). No esta en el gate de CI. CONFIDENCIA ALTA
+- [x] T24-59: BUG-091 - diagnosticar causa — PARCIAL CON GATE ROJO: `quality.yml:78-84` ya propaga `PARSE_ERRORS` a `FAIL=1` (gate duro), el generador esta versionado y el colector no tiene las citas muertas del reporte. PERO el colector real hoy da **2 SCRIPT ERROR**: `legal/merch_validator.gd:12` declara `class_name MerchValidator` y `legal/Obsoletos/2026-11-06_22-18-40_merch_validator.gd:12` declara el mismo nombre; AMBOS archivos versionados y el generador no excluye `Obsoletos`. Cascada en `_colector_sintaxis.gd:0`. El gate cuenta 2 -> FAIL=1 -> CI ROJO. Dueño M78/legal. CONFIDENCIA ALTA
+- [x] T24-60: BUG-092 - diagnosticar causa — PARCIAL: `audio_config_service.gd` `set_mute()` ahora llama `_guardar_config()` y L276 escribe `audio["mutes"]`. Pero `dynamic_range_manager.gd`, `compression_manager.gd` y `output_device_manager.gd` siguen con **0 referencias** a `DataStore`/`guardar_config`: los 3 settings siguen sin persistir. Dueño M91. CONFIDENCIA ALTA
+- [x] T24-61: BUG-093 - diagnosticar causa — RESUELTO: `tests/unit/terrain/test_terrain_modifiers.gd` reescrito a headless con `CHECKS_MINIMOS` (4 apariciones), `_fin` y expectativa 4.8 (3 apariciones); el unico `is_equal_to` que queda es un COMENTARIO en L8. No re-ejecutado en esta vuelta (diagnostico, no QA). CONFIDENCIA ALTA
+- [x] T24-62: BUG-094 - diagnosticar causa — RESUELTO: 0 llamadas reales a las APIs muertas; quedan 1 comentario por archivo y 3 etiquetas de `_check` que ya usan operadores del motor (`(data) is Dictionary`, `not (... in ...)`, `... in ...`). CONFIDENCIA ALTA
+- [x] T24-63: BUG-095 - diagnosticar causa — RESUELTO: `scripts/data/item_data.gd:93-95` parentesis explicitos. Suite real `test_item_data.gd` hoy: **258 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**, incluido el bloque K con `tamano=(1,0)`. CONFIDENCIA ALTA
+- [x] T24-64: BUG-096 - diagnosticar causa — RESUELTO por refactor: `scripts/interacciones/interaction_manager.gd` ya no define `_on_ui_layers_changed` ni consulta `hay_modal` (0 hits); `hay_modal` solo existe como variable local en `ui_manager.gd:85-94`. CONFIDENCIA ALTA
+- [x] T24-65: BUG-097 - diagnosticar causa — RESUELTO: `bootstrap.gd:159,165` llama `_registry().list_registered()` y `_registry().validate_required()`, y `service_registry.gd` ahora define ambas (ademas de register/get_service/has/unregister/contracts/duplicados_rechazados/_ready). CONFIDENCIA ALTA
+- [x] T24-66: BUG-098 - diagnosticar causa — PARCIAL / FAMILIA RECURRENTE: el residuo historico `inventario_service.gd:171` hoy usa `get_node_or_null("/root/ItemDatabase")` (convencion sana). PERO reaparece la familia G: doble `class_name MerchValidator` en `legal/merch_validator.gd:12` y `legal/Obsoletos/2026-11-06_22-18-40_merch_validator.gd:12`, ambos versionados -> 2 SCRIPT ERROR medidos en el colector. Dueño M78/legal. CONFIDENCIA ALTA
+- [x] T24-67: BUG-099 - diagnosticar causa — RESUELTO: el test vive en `scripts/enchantment/test_enchantment.gd` (no en `tests/`) y sus `load()` usan `res://scripts/...` sin prefijo doble. Corrida headless real hoy: **EXIT 0, 58 checks / 0 fallos** en menos de 70 s (antes colgaba). CONFIDENCIA ALTA
+- [x] T24-68: BUG-100 - diagnosticar causa — VIVO: `scripts/coleccionables/test_collectible_category.gd:46,117` llaman `.free()` sobre `CollectibleCategory` (RefCounted). Suite real hoy: **EXIT 0 y "0 fallo(s)" con 2x `SCRIPT ERROR: Attempted to free a RefCounted object`** -> falso verde confirmado. Dueño M73. CONFIDENCIA ALTA
+- [x] T24-69: BUG-101 - diagnosticar causa — RESUELTO: `scripts/data/item_database.gd:71-89` guarda los indices como `Array[ItemData]` tipado y los getters construyen `out: Array[ItemData]` antes de devolver. Cubierto por `test_item_data.gd` 258/0 de hoy. CONFIDENCIA ALTA
+- [x] T24-70: BUG-102 - diagnosticar causa — RESUELTO: `scripts/dlc/dlc_manager.gd:140-151` usa `comparar_versiones()` semantica y `:220-253` implementa ISaveProvider (`get_section_name`, `get_save_data`, `restore_save_data`, `dlcs_faltantes`). CONFIDENCIA ALTA
+- [x] T24-71: BUG-103 - diagnosticar causa — RESUELTO: los 3 logs de agosto ahora decodifican UTF-8 completo (2504/1902/3519 B). Nota honesta: mi PRIMERA medicion marco el tercero como UTF8_FAIL; re-medido dos veces da UTF8_OK (mtime 2026-10-09). No se si fue lectura transitoria o transcodificacion ajena: estado actual UTF8_OK, causa del cambio NO determinada. CONFIDENCIA ALTA en el estado / MEDIA en la explicacion
+- [x] T24-72: BUG-104 - diagnosticar causa — RESUELTO: `project.godot:59` solo registra `Localization="*res://scripts/localization/localization_manager.gd"`; 0 entradas para el duplicado `scripts/localizacion/`. El .gd viejo sigue en disco como huerfano inofensivo (no se borro). CONFIDENCIA ALTA
+- [x] T24-73: BUG-105 - diagnosticar causa — RESUELTO: `shaders/agua_olas.gdshader:72-83` atenua la espuma por distancia de camara y fija `SPECULAR = 0.0` (causa dominante de la banda lechosa); `scripts/world/agua_animada.gd:15-16` eleva Y de 4.05 a 6.0. La hipotesis inicial de albedo/textura estaba equivocada. CONFIDENCIA ALTA
+- [x] T24-74: BUG-106 - diagnosticar causa — RESUELTO: 8/8 `.tres` con los ids antiguos presentes en `data/items/` (madera_roble, baya_roja, fibra_algodon, mineral_cobre, herramienta_basica, fragmento_ancestral, piedra_caliza, pergamino_rec_tela_lino). CONFIDENCIA ALTA
+- [x] T24-75: BUG-107 - diagnosticar causa — ABIERTO, sin cambio: `scripts/main_island.gd:238-241` sigue creando `BaseArenaBlancaIsla` con `top_radius/bottom_radius = 242.0` en un mundo 5120². Deuda de geometria enterrada (no es la causa del agua blanca, descartada por A/B). Dueños M167/M08. CONFIDENCIA ALTA
+- [x] T24-76: BUG-108 - diagnosticar causa — RESUELTO: `inventario_service.gd:404,416-418` usa `_seccion_a_contenedor()` (clave no numerica rechazada) y `inventario_contenedor.gd:37-75` clampea `stack_max` al deserializar. Sonda real hoy: **12 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**. CONFIDENCIA ALTA
+- [x] T24-77: BUG-109 - diagnosticar causa — RESUELTO: `save_writer.gd:36,56-65` fija `MAX_DOCUMENT_BYTES = 2 MB` y `read_document()` chequea `get_length()` antes de leer. Sonda real hoy: **7 / 0 / EXIT 0 / 0 SCRIPT ERROR**. CONFIDENCIA ALTA
+- [x] T24-78: BUG-110 - diagnosticar causa — RESUELTO: `save_loader.gd:98-101` itera `range(1, SaveBackup.MAX_ROTATIONS + 1)` con `read_backup(slot, rotation)` hasta una rotacion valida. Sonda real hoy: **7 / 0 / EXIT 0 / 0 SCRIPT ERROR**. CONFIDENCIA ALTA
+- [x] T24-79: BUG-111 - diagnosticar causa — RECLASIFICADO Y RESUELTO: el sintoma literal (`_writing` trabado) era falso positivo; `save_snapshot.gd:64-71` usa `raw: Variant` y `typeof(raw) != TYPE_DICTIONARY` para OMITIR el proveedor roto sin vaciar el snapshot. Sonda real hoy: **10 / 0 / EXIT 0 / 0 SCRIPT ERROR**. CONFIDENCIA ALTA
+- [x] T24-80: BUG-112 - diagnosticar causa — RESUELTO: `save_backup.gd:24-70` `rotate() -> bool`, con `push_error` en cada `rename_absolute` fallido y `return false`; `save_manager.gd:280` consume el resultado. CONFIDENCIA ALTA
+- [x] T24-81: BUG-113 - diagnosticar causa — RESUELTO: `save_manager.gd:144-167` en `NOTIFICATION_WM_CLOSE_REQUEST` respeta `_writing` (L152), rota primero y escribe despues. Sonda `test_close_save` 6/0 segun registro (no re-ejecutada en esta vuelta). CONFIDENCIA ALTA en codigo
+- [x] T24-82: BUG-114 - diagnosticar causa — PARCIAL: `save_writer.gd:180-185` rechaza slots fuera de `1..SaveSchema.SLOT_COUNT` en `write_atomic` y L225 `cleanup_orphan_tmp` retorna temprano; `save_exists` (L234) queda SIN guard **a proposito** (guardarlo volveria trivialmente verdes 2 checks ya aceptados de `test_slots_m59`). CONFIDENCIA ALTA
+- [x] T24-83: BUG-115 - diagnosticar causa — RESUELTO en codigo (el registro dice `[→]`, cifra stale): `save_writer.gd:17-45` usa HMAC-SHA256 con prefijo `hmac256:` y acepta el token SHA-256 legado por retrocompatibilidad; `save_schema.gd:254-275` valida AMBOS dialectos de `time` y acota `acumulador` con `MAX_CLOCK_ACUMULADOR = 3600.0`. CONFIDENCIA ALTA
+- [x] T24-84: BUG-116 - diagnosticar causa — RESUELTO: `save_manager.gd:111-116` conecta el bloqueo via `bus.fishing.sesion_iniciada` / `sesion_terminada` y `fishing_manager.gd:211` emite `bus.fishing.sesion_iniciada`. La arista SaveManager->Fishing sigue contando para BUG-069, pero la feature MUERTA ya corre. CONFIDENCIA ALTA
+- [x] T24-85: BUG-117 - diagnosticar causa — RESUELTO por el mismo refactor que BUG-096: `interaction_manager.gd` ya no tiene `_on_ui_layers_changed` ni `bool(ui.get("hay_modal"))` (0 hits); los 2 `bool(...)` que quedan usan `.get(clave, default)` con valor por defecto. CONFIDENCIA ALTA
+- [x] T24-86: BUG-118 - diagnosticar causa — VIVO, FLAKY REPRODUCIDO HOY: `scripts/audio/test_audio_config.gd:29` `call_deferred("_run")` sin esperar a que `AudioConfig._ready()` pueble `_volumenes`. 3 corridas reales: **136/15/EXIT 1 · 136/0/EXIT 0 · 136/0/EXIT 0**; los fallos son defaults Music/UI/Master/SFX/Voice (L130-144). Dueño M91. CONFIDENCIA ALTA
+- [x] T24-87: BUG-119 - diagnosticar causa — RESUELTO: `incense_spawner.gd:42-65` reintenta por `_process` hasta `get_height(centro) >= 0` con `TIMEOUT_REINTENTOS_MS = 8000` y `set_process(false)` al terminar. La variante con `call_deferred` recursivo fue descartada por SIGSEGV medido. CONFIDENCIA ALTA
+- [x] T24-88: BUG-120 - diagnosticar causa — RESUELTO: `tests/run_tests.gd:25` define EXIT 2 = SIN EVIDENCIA, L30 timeout 180 s, L41 pool 300 s, L238 captura `errorlevel`, L260 `taskkill /T /F`. El exito con 0 tests es estructuralmente imposible. CONFIDENCIA ALTA
+- [x] T24-89: BUG-121 - diagnosticar causa — RESUELTO: guards `escena == null` en `fauna/tortuga_npc.gd:89-91` (usa `_instanciar_placeholder()`), `cangrejo_npc.gd:67-68` y `jabali_npc.gd:91-92` (sin placeholder, `return`). CONFIDENCIA ALTA
+- [x] T24-90: BUG-122 - diagnosticar causa — RESUELTO: `.github/workflows/testing.yml` tiene **0 `|| true` ejecutables** (3 ocurrencias, todas en comentarios L40/48/104) y gate de parseo con colector (2 citas). CONFIDENCIA ALTA
+- [x] T24-91: BUG-123 - diagnosticar causa — RESUELTO: `softlock_guard.gd:137-138` usa `inv.get("categoria")` de 1 arg + `has_method("get")` null-safe; el registro describe el codigo anterior. NOTA: `test_m66_inv_ruta.gd` no corre con `--script` (EXIT 1, "doesn't inherit from SceneTree or MainLoop"); evidencia estatica. CONFIDENCIA ALTA
+- [x] T24-92: BUG-124 - diagnosticar causa — RESUELTO: `shaman_npc.gd:63-94` anhade `_crear_visuales()` (CapsuleMesh r0.25/h1.0, SphereMesh r0.2, Label3D "Chaman"), invocado desde `_ready()` L18. Registro stale ([ ] Abierto). CONFIDENCIA ALTA
+- [x] T24-93: BUG-125 - diagnosticar causa — VIVO: `player.gd:597` `bg.add_child(panel)` y `:743` `canvas.add_child(panel)` sobre el MISMO panel; 0 `remove_child(panel)` / `reparent` en el archivo. Cifra del registro (554/700) stale. CONFIDENCIA ALTA
+- [x] T24-94: BUG-126 - diagnosticar causa — RESUELTO: `project.godot:324-327` declara `ocultar_hud` con physical_keycode 72 (H); `ui_manager.gd:161` consume la accion. Registro stale ([ ] Abierto). CONFIDENCIA ALTA
+- [x] T24-95: BUG-127 - diagnosticar causa — VIVO (estructural): `voxel.gdextension:6-25` tiene 0 entradas `web.*` y `addons/zylann.voxel/bin/` 0 `.wasm`; preset Web activo en `export_presets.cfg:3-12`. Fix = compilar extension wasm32 o retirar V3. CONFIDENCIA ALTA
+- [x] T24-96: BUG-128 - diagnosticar causa — ID DUPLICADO en 11-BUGS. (a) entrada detallada gitignore: RESUELTO, `.gitignore:51 !addons/gdUnit4/bin/` y `git ls-files` muestra 2 .gd versionados; (b) fila tabla HUD: RESUELTO, `main_island.gd` tiene 2 hits `_registrar_hud` y `test_bug128_hud_real.gd` 18/0 EXIT 0. CONFIDENCIA ALTA
+- [x] T24-97: BUG-129 - diagnosticar causa — ID DUPLICADO. (a) detallada MenuNavigator: RESUELTO, `menu_navigator.gd:72 wrapi(next_idx, 0, focusables.size())`, suite 7/0 EXIT 0; (b) fila tabla orphans M110: RESUELTO, `vegetation_spawner.gd:88 inst.free()`. CONFIDENCIA ALTA
+- [x] T24-98: BUG-130 - diagnosticar causa — ID DUPLICADO. (a) detallada toasts: RESUELTO, `notification_service.gd:109/117` font_color explicito, suite `test_m53_wcag.gd` 23/0 EXIT 0 (registro dice 17/0, stale); (b) fila tabla gaviota: RESUELTO, `fauna/gaviota_npc.gd:122-124` null-guard tras load(). CONFIDENCIA ALTA
+- [x] T24-99: BUG-131 - diagnosticar causa — RESUELTO: `register_task.ps1:69` solo `-DontStopIfGoingOnBatteries`; 0 usos ejecutables de `-AllowStartIfOnBatteries` (2 menciones en comentarios L11/L14, correcto segun PS 5.1). CONFIDENCIA ALTA
+- [x] T24-100: BUG-132 - diagnosticar causa — RESUELTO: `data/mining/ores.json` tiene 6 `item_id` (L4/20/37/54/71/88) y `mining_vein_catalog.gd:79 data.get("item_id", def_id)`; suite `test_mineria.gd` 92/0 EXIT 0 (registro dice 60/0, stale). CONFIDENCIA ALTA
+- [x] T24-101: BUG-133 - diagnosticar causa — RESUELTO: `crafting_feedback.gd:116/122` guard `has_method("push")` + `notif.push` con claves reales `text`/`type`; suite 9/0 EXIT 0 (medida hoy). CONFIDENCIA ALTA
+- [x] T24-102: BUG-134 - diagnosticar causa — RESUELTO: `dialog_layer.gd:36 MODAL_SIMPLE` e `inventory_layer.gd:45 MODAL_FULL`; inversion ya aplicada. CONFIDENCIA ALTA
+- [x] T24-103: BUG-135 - diagnosticar causa — VIVO (integracion muerta con guard): `house_manager.gd:231-238` llama `wl.buscar_cerca(...)`, pero hay 0 `func buscar_cerca` en todo `scripts/` (grep -rn). El guard `has_method` evita SCRIPT ERROR; la integracion M18->M160 siempre retorna false. CONFIDENCIA ALTA
+- [x] T24-104: BUG-136 - diagnosticar causa — RESUELTO: `test_pergaminos_tienda.gd:32-35` alineado al id canonico `OBJ-ART-002` con fallback substring; suite real 0 fallos EXIT 0. CONFIDENCIA ALTA
+- [x] T24-105: BUG-137 - diagnosticar causa — RESUELTO: `pause_layer.gd:223-231` implementa `_buscar_confirm_popup()` por duck typing (`configurar_texto`); suite `test_m89_menus.gd` 58/0 EXIT 0, 0 SCRIPT ERROR. CONFIDENCIA ALTA
+- [x] T24-106: BUG-138 - diagnosticar causa — RESUELTO: `crafting_station.gd:25/45/47` tope `_reintentos_jugador >= 5` + guard `is_inside_tree()`; QA `qa_m16_station_fisica.gd RESULTADO=OK` EXIT 0. CONFIDENCIA ALTA
+- [x] T24-107: BUG-139 - diagnosticar causa — ID DUPLICADO. (a) detallada M21 L103: VIVO, `test_m21_lote1_hy3.gd` NO existe en arbol vivo (retirado a archivo Hy3 por msg 539) y `dialogue_ui.gd:290/320/332/335/351` conserva el path L103 sin test de regresion; (b) fila tabla M52 True/False: RESUELTO, `achievement_service.gd` 0 `\b(True|False)\b`. CONFIDENCIA ALTA
+- [x] T24-108: BUG-140 - diagnosticar causa — RESUELTO: `test_logros.gd` ya no hace la asignacion white-box (L294 es `_check`); `CHECKS_MINIMOS := 72` L23 + guard L92-94. Suite REAL hoy: **72 checks / 0 fallos / 0 SCRIPT ERROR / EXIT 0**. Estado `[?]` del registro stale. CONFIDENCIA ALTA
+- [x] T24-109: BUG-141 - diagnosticar causa — PARCIAL: causa real documentada = deinit del GDExtension Voxel (36.5 s vs 2.8 s control, sondas de otro modelo NO re-ejecutadas por mi), NO fix de producto: `data_store.gd:99-103` sigue con `wait_to_finish()`. Registro `[x] Resuelto` describe el diagnostico, no la reparacion. CONFIDENCIA ALTA en codigo / MEDIA en atribucion
+- [x] T24-110: BUG-142 - diagnosticar causa — VIVO: `progression_manager.gd:380-389` retorna valor congelado de `_evaluacion_cache`; unico `.erase()` (`:404`) es eviccion FIFO en `_evaluate_cache_set`, NO invalidacion; `_reevaluar()` `:248-254` no toca el cache. `test_progresion.gd` 83/0 EXIT 0 sin probar invalidacion -> falso verde por omision. CONFIDENCIA ALTA
 - [ ] T24-111: BUG-143 - diagnosticar causa
 - [ ] T24-112: BUG-144 - diagnosticar causa
 - [ ] T24-113: BUG-145 - diagnosticar causa
@@ -154,5 +154,42 @@ Para cada BUG-XXX:
 - **2 IDs duplicados en el registro** (BUG-052 y BUG-058): cada uno tiene dos entradas con causas distintas; se diagnosticaron AMBAS.
 - **Cifras stale detectadas:** BUG-042 (304 KB HTML -> 4 fuentes reales), BUG-046 (12 items -> 0/272), BUG-052 (694/418 -> 490 under assets/3d), BUG-062 (lineas 75/94 confirmadas).
 - **Sin arreglos de codigo**: nicho = diagnosticar sin arreglar. Sin commits/push. Sin tocar 05-Checklist ajenos.
+
+**Firma:** hy4-flash
+
+
+## Lote 3 cerrado (HY4 Flash, 2026-11-18)
+
+- **20/20 diagnosticados** contra codigo vivo, bytes y gates reales (T24-31..50, BUG-063..082). Metodo: entrada en 11-BUGS -> grep -> lectura de archivo -> causa con archivo:linea; sin arreglos de codigo.
+- **11 resueltos** (067, 068, 071, 072, 074, 075, 076, 077, 078, 080, 081), **3 parciales** (065, 070, 079) y **6 abiertos o recurrentes** (063, 064, 066, 069, 073, 082).
+- **Hallazgo prioritario para el director:** BUG-069 DERIVO. `scripts/auditar_arquitectura_m62.py` sale **EXIT 1** con `A1|DataStore,SaveManager` (SCC nueva, no permitida); las 4 aristas estan en HEAD y en archivos limpios, y dos estan en caminos de guardado/carga. `architecture-guard` hoy esta ROJO. La entrada vieja `A1|ThemeService,UIManager` de PERMITIDOS quedo obsoleta. Duenos M60/M59/M62.
+- **Drift recurrente de Totales:** M69 142/0/3 vs 123/15/7; M156 223/2/82 vs 212/48/47; M63 93/3/5 vs 67/7/27; M118 113/0/0 vs 107/0/0. Cuatro claims desactualizados, todos con el total cuadrado pero la distribución vieja (trampa 2).
+- **Riesgo vivo:** BUG-073 reproduce 3x `Parameter "fd" is null` y un `SCRIPT ERROR` de API (`get_locale_actual`) que deja la suite colgada a 180 s (EXIT 124). BUG-082 sigue en geometria RIZ 256 tambien en `islas.json`/`anclas.json`.
+- **Sin commit/push;** unico archivo modificado = este backlog. Codigo, checklists ajenos y `11-BUGS.md` intactos. Cola restante: 72 tareas `[ ]` de 122.
+
+**Firma:** hy4-flash
+
+
+## Lote 4 cerrado (HY4 Flash, 2026-11-18)
+
+- **20/20 diagnosticados** contra codigo vivo, bytes, git y binario Godot 4.7.2 real (T24-51..70, BUG-083..102). **13 resueltos, 2 parciales, 5 abiertos**. Sin arreglos de codigo.
+- **Suites re-ejecutadas hoy (evidencia, no heredada):** validate_save 16/0, test_slots_m59 22/0, test_rotate_m59 43/0, test_item_data 258/0, test_enchantment 58/0 — todas EXIT 0 y 0 SCRIPT ERROR. test_collectible_category: EXIT 0 / "0 fallo(s)" pero 2 SCRIPT ERROR (BUG-100 vivo).
+- **Hallazgo nuevo para el director:** BUG-091/098 reaparecio por otra via. `class_name MerchValidator` esta duplicado en `scripts/legal/merch_validator.gd:12` y `scripts/legal/Obsoletos/2026-11-06_22-18-40_merch_validator.gd:12`; ambos versionados y el generador del colector NO excluye `Obsoletos`. Colector real: 2 SCRIPT ERROR + cascada; `godot-lint` cuenta esos errores y pone FAIL=1 -> **CI ROJO**. Dueño M78/legal.
+- **Geometria vieja 256 sigue viva** en 3 frentes: medir_costa_m51.gd:33-34 (M51), anclas.json + fast_travel_service.gd:16 (M69) y vegetation_spawner.gd:58 (M50). No son solo defaults: estan en datos versionados.
+- **Correccion metodologica propia:** en BUG-089 mi primer conteo sobre HEAD dio 0 `_ready` por truncar la salida del subprocess; re-medido con `git show | grep -n` -> 1, igual que en el worktree. No se escribio la cifra falsa.
+- **Sin commit/push;** unico archivo modificado = este backlog. Cola restante: 52 tareas `[ ]` de 122.
+
+**Firma:** hy4-flash
+
+
+## Lote 5 cerrado (HY4 Flash, 2026-11-18)
+
+- **20/20 diagnosticados** contra codigo vivo, bytes, git y binario Godot 4.7.2 real (T24-71..90, BUG-103..122). **17 resueltos, 1 parcial, 2 abiertos.** Sin arreglos de codigo.
+- **Suites re-ejecutadas hoy:** test_inventario_restore_robusto 12/0, test_save_size_cap 7/0, test_backup_rotations 7/0, test_save_collect_robust 10/0, test_slot_range 10/0 — todas EXIT 0 / 0 SCRIPT ERROR.
+- **BUG-118 vivo y flaky confirmado:** `test_audio_config.gd` 3 corridas = 136/15/EXIT 1, 136/0/EXIT 0, 136/0/EXIT 0. Causa: `call_deferred("_run")` sin esperar a `AudioConfig._ready()`. Dueño M91.
+- **BUG-107 abierto:** `BaseArenaBlancaIsla` sigue con radio 242 en `main_island.gd:238-241` (mundo 5120²). Dueños M167/M08.
+- **Registro stale detectado:** BUG-115 figura `[→]` en 11-BUGS.md pero el codigo ya tiene HMAC-SHA256 y validacion de ambos dialectos de `time`. No edite 11-BUGS.md (es del director).
+- **Correccion metodologica propia:** en BUG-103 mi primera lectura marco un log como UTF8_FAIL; re-medido dos veces = UTF8_OK. Queda dicha la incertidumbre sobre el cambio.
+- **Sin commit/push;** unico archivo modificado = este backlog. Cola restante: 32 tareas `[ ]` de 122.
 
 **Firma:** hy4-flash

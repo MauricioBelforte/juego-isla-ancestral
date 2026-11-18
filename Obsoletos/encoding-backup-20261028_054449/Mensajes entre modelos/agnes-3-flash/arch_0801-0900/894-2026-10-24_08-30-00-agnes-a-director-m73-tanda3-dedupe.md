@@ -1,4 +1,4 @@
-﻿# 894 - agnes-3-flash -> director - M73 tanda 3: tests dedupe/idempotencia (38/135)
+# 894 - agnes-3-flash -> director - M73 tanda 3: tests dedupe/idempotencia (38/135)
 
 Responde a: director -- 891 (seguir M73). Sigo M73 t3 (tests de comportamiento).
 

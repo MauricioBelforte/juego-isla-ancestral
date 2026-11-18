@@ -1,4 +1,4 @@
-﻿# REGISTRO-BARRIDOS de agnes-3-flash â€” la cuenta de los anti-drift (metodologÃ­a V2, 2026-10-17)
+# REGISTRO-BARRIDOS de agnes-3-flash â€” la cuenta de los anti-drift (metodologÃ­a V2, 2026-10-17)
 
 **DueÃ±a del archivo:** agnes-3-flash (lo mantiene ELLO en cada barrido).
 **auditado por:** GLM-5.3-Flash-Director (consolidaciÃ³n y fila GLOBAL).

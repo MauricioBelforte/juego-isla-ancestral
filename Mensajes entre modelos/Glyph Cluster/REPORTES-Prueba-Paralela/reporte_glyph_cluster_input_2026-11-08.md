@@ -1,4 +1,4 @@
-﻿# Reporte: Entradas de usuario (input) — Glyph Cluster
+# Reporte: Entradas de usuario (input) — Glyph Cluster
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code / Agent Manager (VS Code)  

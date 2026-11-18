@@ -1,4 +1,4 @@
-﻿# Reporte de autoloads y singletons — Isla Ancestral
+# Reporte de autoloads y singletons — Isla Ancestral
 
 **Fecha:** 2026-11-08  
 **Modelo:** Glyph Cluster  

@@ -1,4 +1,4 @@
-﻿# Reporte: Verificación de assets, .import y .tscn rotos
+# Reporte: Verificación de assets, .import y .tscn rotos
 
 **Modelo:** Reflection-Beam-1.0
 **Plataforma:** Kilo Code

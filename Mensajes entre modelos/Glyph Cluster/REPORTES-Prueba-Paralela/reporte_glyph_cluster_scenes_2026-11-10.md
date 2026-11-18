@@ -1,4 +1,4 @@
-﻿# Reporte de análisis de escenas `.tscn` — Isla Ancestral
+# Reporte de análisis de escenas `.tscn` — Isla Ancestral
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code  

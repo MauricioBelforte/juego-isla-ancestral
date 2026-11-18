@@ -1,4 +1,4 @@
-﻿**Modelo:** SWE-1.6
+**Modelo:** SWE-1.6
 **Plataforma:** Devin
 
 # 03-Diseno.md â€” MÃ³dulo 110: Debug Menu

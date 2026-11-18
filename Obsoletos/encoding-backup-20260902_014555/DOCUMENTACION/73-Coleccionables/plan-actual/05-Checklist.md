@@ -1,4 +1,4 @@
-﻿**Modelo:** minimax-m3-free
+**Modelo:** minimax-m3-free
 **Plataforma:** Kilo Code
 
 # 05-Checklist.md — Módulo 73: Coleccionables (130 ítems)

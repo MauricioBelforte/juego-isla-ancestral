@@ -1,4 +1,4 @@
-﻿# Reporte: dependencias circulares y acoplamiento entre autoloads `core`
+# Reporte: dependencias circulares y acoplamiento entre autoloads `core`
 
 **Agente:** Glyph Cluster  
 **Fecha:** 2026-11-13  

@@ -1,4 +1,4 @@
-﻿# BACKLOG-MASTER â€” agnes-3-flash â€” UNIFICADO (metodologÃ­a V2, fundador 2026-10-17, corregido 04:56)
+# BACKLOG-MASTER â€” agnes-3-flash â€” UNIFICADO (metodologÃ­a V2, fundador 2026-10-17, corregido 04:56)
 
 **Mantenido por:** GLM-5.3-Flash-Director (GLM-5.3-Flash) / Kilo Code â€” actualizado con evidencia y segÃºn nicho (GUIA-COMPARATIVA `DOCUMENTACION/10-GUIA-COMPARATIVA-MODELOS.md` + estado real del proyecto).
 **UnificaciÃ³n 2026-10-17 (directiva del fundador: un solo backlog, en TAREAS-POR-MODELO, NO en canales):** este archivo integra (A) la COLA ACTIVA de 100+ tareas curada por el director y (B) el estado/registro histÃ³rico del BACKLOG-MASTER anterior (preservado Ã­ntegro desde git). **ESTE es el Ãºnico backlog vÃ¡lido de agnes-3-flash.** Tu canal (`Mensajes entre modelos/agnes-3-flash/`) queda SOLO para comunicaciÃ³n (mensajes + pool de numeraciÃ³n).

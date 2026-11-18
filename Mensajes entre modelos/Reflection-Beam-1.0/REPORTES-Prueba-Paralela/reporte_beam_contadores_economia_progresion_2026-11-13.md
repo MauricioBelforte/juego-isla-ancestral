@@ -1,4 +1,4 @@
-﻿# Reporte de Auditoria de Contadores — Economia y Progresion
+# Reporte de Auditoria de Contadores — Economia y Progresion
 
 **Modelo:** Reflection-Beam-1.0  
 **Plataforma:** Kilo Code  

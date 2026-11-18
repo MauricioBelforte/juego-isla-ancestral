@@ -1,4 +1,4 @@
-﻿# Reporte: Autoloads / Singletons en `game/isla-ancestral/scripts`
+# Reporte: Autoloads / Singletons en `game/isla-ancestral/scripts`
 
 **Fecha:** 2026-11-09  
 **Modelo:** Glyph Cluster  

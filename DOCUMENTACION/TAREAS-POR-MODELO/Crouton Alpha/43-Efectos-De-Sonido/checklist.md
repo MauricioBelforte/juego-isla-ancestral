@@ -1,4 +1,4 @@
-﻿@# Backlog Master — Crouton Alpha — Módulo 43-Efectos-De-Sonido
+@# Backlog Master — Crouton Alpha — Módulo 43-Efectos-De-Sonido
 
 ## Capacidades verificadas empíricamente
 Crouton Alpha ha completado auditoría estática en este módulo.
