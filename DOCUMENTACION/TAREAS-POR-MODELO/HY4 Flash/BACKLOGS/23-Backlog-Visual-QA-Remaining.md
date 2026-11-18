@@ -22,22 +22,22 @@
 - [x] T23-14: 167-IslaRaiz / cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png ... cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png (1 caps) — 1/1 PROBLEMA: personaje modelo sobre archipielago, FPS:60, pero texto de IDE detras de la ventana.
 - [x] T23-15: 19-Muelle / cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png ... cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png (1 caps) — 1/1 OK: comparacion ANTES/DESPUES legible sobre fondo plano (`ANTES: flota 0.34 m` vs `DESPUES: E-90, cara interior`). No es gameplay, pero cumple su proposito de QA visual.
 - [x] T23-16: 19-NPC / cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png ... cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png (1 caps) — 1/1 PROBLEMA: modelo sobre costa con IDE/texto detras; NPC no diferenciable del jugador.
-- [ ] T23-17: 19-NPC-Y-Vecinos / cap_19_2026-08-28_02-07-15_Catalina Oso NPC visible en isla.png ... cap_19_2026-10-31_gpt-luna_sin-npc-visible.png (3 caps)
-- [ ] T23-18: 25-Ruinas / cap_21_2026-08-29_17-25-04_dialogo-catalina.png ... cap_21_2026-08-29_18-25-35_catalina-junto-jugador.png (5 caps)
-- [ ] T23-19: 25-Ruinas / cap_21_2026-08-29_18-36-02_camara-fijada.png ... cap_21_2026-08-29_19-52-07_spawn-corregido.png (5 caps)
-- [ ] T23-20: 25-Ruinas / cap_21_2026-08-29_20-04-40_isla-ideal-restaurada.png ... cap_25_2026-08-29_00-57-43_ruina-sobre-terreno.png (5 caps)
-- [ ] T23-21: 25-Ruinas / cap_25_2026-08-29_01-01-02_ruina-fix-async.png ... cap_25_2026-08-29_01-19-03_preview_limpio.png (5 caps)
-- [ ] T23-22: 25-Ruinas / cap_25_2026-08-29_01-21-05_preview-viewer.png ... cap_25_2026-08-29_01-26-14_preview-final2.png (5 caps)
-- [ ] T23-23: 25-Ruinas / cap_25_2026-08-29_01-27-28_preview-legible.png ... cap_25_2026-08-29_01-48-18_aire-isla.png (5 caps)
-- [ ] T23-24: 25-Ruinas / cap_25_2026-08-29_01-50-57_meseta-pasto.png ... cap_25_2026-08-29_01-56-49_isla-x10-spawn2.png (5 caps)
-- [ ] T23-25: 25-Ruinas / cap_25_2026-08-29_01-58-58_isla-centro.png ... cap_25_2026-08-29_02-13-49_montanas-legibles.png (5 caps)
-- [ ] T23-26: 25-Ruinas / cap_25_2026-08-29_02-17-32_spawn-suave.png ... cap_25_2026-08-29_02-33-09_piramide-final.png (5 caps)
-- [ ] T23-27: 25-Ruinas / cap_25_2026-08-29_02-35-19_salto-oro.png ... cap_25_2026-08-29_03-02-39_plato-arena.png (5 caps)
-- [ ] T23-28: 25-Ruinas / cap_25_2026-08-29_03-05-39_plato-256.png ... cap_25_2026-08-29_03-14-54_viewer-seguito.png (5 caps)
-- [ ] T23-29: 25-Ruinas / cap_25_2026-08-29_03-27-26_montanas-conicas.png ... cap_25_2026-08-29_04-53-01_volcan-monticulos.png (5 caps)
-- [ ] T23-30: 25-Ruinas / cap_25_2026-08-29_05-09-09_montanas-multiples.png ... cap_25_preview_ruina.png (5 caps)
-- [ ] T23-31: 30-Reloj-En-Tiempo-Real / cap_30_2026-08-26_19-21-00_iter7_pantalla_completa_verificacion.png ... cap_30_2026-08-26_iter1_preview_reloj.png (5 caps)
-- [ ] T23-32: 30-Reloj-En-Tiempo-Real / cap_30_2026-08-31_23-30-00_00_hover.png ... cap_30_2026-08-31_23-30-00_02_hover.png (3 caps)
+- [x] T23-17: 19-NPC-Y-Vecinos / cap_19_2026-08-28_02-07-15_Catalina Oso NPC visible en isla.png ... cap_19_2026-10-31_gpt-luna_sin-npc-visible.png (3 caps) — 2/3 OK: `gpt-luna_sin-npc-visible` y `_acercamiento` renders limpios (voxel, modelo de personaje, FPS 60/59, sin NPC); `Catalina Oso NPC visible` = pantalla negra con IDE al fondo (1238x630).
+- [x] T23-18: 25-Ruinas / cap_21_2026-08-29_17-25-04_dialogo-catalina.png ... cap_21_2026-08-29_18-25-35_catalina-junto-jugador.png (5 caps) — 0/5 OK: capsula azul en las 5; `dialogo-fijado` muestra cuadro de dialogo de Catalina (texto legible) pero terreno inundado de azul; `spawn-arena` capsula gigante ocupa el frame; `catalina-junto-jugador` suelo marron vacio sin NPC.
+- [x] T23-19: 25-Ruinas / cap_21_2026-08-29_18-36-02_camara-fijada.png ... cap_21_2026-08-29_19-52-07_spawn-corregido.png (5 caps) — 0/5 OK: `camara-fijada`, `spawn-interior`, `spawn-pradera` = frame azul solido (camara dentro del agua); `spawn-pradera-verificado` suelo marron vacio; `spawn-corregido` terreno voxel + dialogo legible pero capsula azul.
+- [x] T23-20: 25-Ruinas / cap_21_2026-08-29_20-04-40_isla-ideal-restaurada.png ... cap_25_2026-08-29_00-57-43_ruina-sobre-terreno.png (5 caps) — 0/5 OK: `isla-ideal-restaurada` vacio blanco + capsula; `terrainlocator` y las 3 `ruina-*` voxel con capsula azul (FPS 57-60), sin ruina claramente distinguible.
+- [x] T23-21: 25-Ruinas / cap_25_2026-08-29_01-01-02_ruina-fix-async.png ... cap_25_2026-08-29_01-19-03_preview_limpio.png (5 caps) — 0/5 OK: 4 capturas BYTE-IDENTICAS al splash de Godot (sha256 76c63250d57d, 936x556, 23574 B) bajo nombres `ruina-fix-async`, `ruina-tras-carga`, `preview_ventana`, `preview_limpio` -> evidencia de fix FALSA; `ruina-sin-conn` voxel + capsula.
+- [x] T23-22: 25-Ruinas / cap_25_2026-08-29_01-21-05_preview-viewer.png ... cap_25_2026-08-29_01-26-14_preview-final2.png (5 caps) — 0/5 OK: `preview-viewer`/`preview-final2` viewport gris vacio; `preview-generador`/`preview-encuadre` plano gris sin textura; `preview-final` miniature 159x27 px (861 B) recortada, inutilizable.
+- [x] T23-23: 25-Ruinas / cap_25_2026-08-29_01-27-28_preview-legible.png ... cap_25_2026-08-29_01-48-18_aire-isla.png (5 caps) — 0/5 OK: `preview-legible` plano gris; `ruina-legible-oficial` ruin gris visible pero sin textura/contexto; `spawn-actual`/`spawn-fix` voxel + capsula; `aire-isla` isla lejana sobre vacio marron + capsula.
+- [x] T23-24: 25-Ruinas / cap_25_2026-08-29_01-50-57_meseta-pasto.png ... cap_25_2026-08-29_01-56-49_isla-x10-spawn2.png (5 caps) — 0/5 OK: `meseta-pasto`/`meseta-tierra` voxel + capsula flotando; `isla-x10` isla diminuta; `isla-x10-spawn`/`spawn2` vacio marron con punto azul minusculo. FPS 59-60.
+- [x] T23-25: 25-Ruinas / cap_25_2026-08-29_01-58-58_isla-centro.png ... cap_25_2026-08-29_02-13-49_montanas-legibles.png (5 caps) — 0/5 OK: `isla-centro` y `meseta-plana` = vacio marron con punto azul minusculo; `viewer-spawn` = plano verde liso con capsula azul; `montanas-playa` = voxel con capsula azul gigante que tapa el centro; `montanas-legibles` = isla voxel con montanas grises pero sin ruina y capsula azul. FPS 59-60.
+- [x] T23-26: 25-Ruinas / cap_25_2026-08-29_02-17-32_spawn-suave.png ... cap_25_2026-08-29_02-33-09_piramide-final.png (5 caps) — 0/5 OK: `spawn-suave`, `playa-oceano`, `playa-cerca`, `piramidal`, `piramide-final` = terreno voxel verde/blanco con capsula azul; sin oceano, sin piramide reconocible, sin ruina. FPS 59-60.
+- [x] T23-27: 25-Ruinas / cap_25_2026-08-29_02-35-19_salto-oro.png ... cap_25_2026-08-29_03-02-39_plato-arena.png (5 caps) — 0/5 OK: `salto-oro` y `anillo-arena` = voxel verde sin salto dorado ni anillo; `atolon-2048b`, `sector-montanas`, `plato-arena` = plano de arena blanca con capsula azul y 0-2 bloques verdes; sin atolon, agua ni montanas. FPS 59-60.
+- [x] T23-28: 25-Ruinas / cap_25_2026-08-29_03-05-39_plato-256.png ... cap_25_2026-08-29_03-14-54_viewer-seguito.png (5 caps) — 0/5 OK: `plato-256`, `plato-256b`, `plato-completo`, `plato-viewer800`, `viewer-seguito` = plano de arena blanca recortado sobre fondo marron, capsula azul y 0-3 cubos verdes; sin ruina ni geometria distinguishable. FPS 59-60.
+- [x] T23-29: 25-Ruinas / cap_25_2026-08-29_03-27-26_montanas-conicas.png ... cap_25_2026-08-29_04-53-01_volcan-monticulos.png (5 caps) — 0/5 OK: `montanas-conicas`, `-altas-suaves`, `-orig` = relieves verdes con escalones oscuros, no conos; `punto-medio` = foso voxel con bloques rosados; `volcan-monticulos` = monticulos con curvas de nivel y capsula azul gigante. Sin ruina. FPS 60.
+- [x] T23-30: 25-Ruinas / cap_25_2026-08-29_05-09-09_montanas-multiples.png ... cap_25_preview_ruina.png (5 caps) — 0/5 OK (1 parcial): `montanas-multiples` y `paleta-maldivas` visualmente identicas (hashes distintos) = foso voxel verde con capsula; `verde-55711E` = franja verde/blanca con capsula; `nemotron_ruinas_horizonte` = personaje modelo sobre archipielago con IDE al fondo, sin ruina; `cap_25_preview_ruina` = unico render con muros grises de ruina real, sin textura/contexto/jugador. FPS 59-60.
+- [x] T23-31: 30-Reloj-En-Tiempo-Real / cap_30_2026-08-26_19-21-00_iter7_pantalla_completa_verificacion.png ... cap_30_2026-08-26_iter1_preview_reloj.png (5 caps) — 2/3 OK: `20-06-00_inengine` (08:00) y `20-06-01_inengine` (09:00) = panel legible arriba-derecha `Lunes, 1 de Primavera, Año 1 / Primavera`, avance horario medido; PROBLEMA: `iter7_pantalla_completa` y `grab_fresco` contaminados por IDE (reloj 11:00 solo en ventana embebida, grab_fresco sin reloj), `iter1_preview_reloj` = editor Godot con codigo, sin widget.
+- [x] T23-32: 30-Reloj-En-Tiempo-Real / cap_30_2026-08-31_23-30-00_00_hover.png ... cap_30_2026-08-31_23-30-00_02_hover.png (3 caps) — 1/3 OK: `02_hover` = tooltip `Fecha y hora / Lunes, 1 de Primavera, Año 1 / Sesion: Mañana / Estacion: Primavera / Próximos eventos: día 2, día 3` legible; PROBLEMA: `00_hover` y `01_hover` BYTE-IDENTICAS (sha256 `43e17985...`, 9633 B) y muestran el reloj reducido a un guion verde sin hora; en las 3 el widget colapsa a barra verde durante el hover.
 - [ ] T23-33: 30-RelojEnTiempoReal / cap_30_2026-10-25_23-22-34_nemotron_reloj_sin_hud.png ... cap_30_2026-10-25_23-22-34_nemotron_reloj_sin_hud.png (1 caps)
 - [ ] T23-34: 31-Ciclo-Dia-Noche / cap_31_2026-09-19_05-12-58_dia_0800.png ... cap_31_2026-09-19_05-19-00_atardecer_1900.png (3 caps)
 - [ ] T23-35: 31-CicloDiaNoche / cap_31_2026-10-25_21-16-08_nemotron_ciclo_diurno_sin_hud_hora.png ... cap_31_2026-10-25_21-16-08_nemotron_ciclo_diurno_sin_hud_hora.png (1 caps)
@@ -116,3 +116,24 @@
 
 **Firma:** hy4-flash
 
+
+## Tanda 3 cerrada (HY4 Flash, 2026-11-18) — T23-17..24
+
+- **8/8 tareas con veredicto individual**, 38/38 capturas ABIERTAS Y VISTAS (0 `[?]`). Rutas bajo `tools/mcp/godot-mcp/capturas/`; 19-NPC-Y-Vecinos 3/3 y 25-Ruinas 35/35 existen en disco.
+- Resultado: **2 OK / 36 PROBLEMA** (capturas). Por tarea: **0 OK completas**, **1 parcial** (T23-17, 2/3), **7 PROBLEMA** (T23-18..24).
+- **Hallazgo sistematico M25**: 4 capturas de la serie `ruina-fix-async / ruina-tras-carga / preview_ventana / preview_limpio` son BYTE-IDENTICAS al splash de Godot (sha256 `76c63250d57d`, 936x556, 23574 B). Estan nombradas como evidencia de fixes y no muestran ningun fix. `preview-final` es una miniatura 159x27 (861 B).
+- **Corrobora el hallazgo gpt-luna del director (msg 050)**: las UNICAS 2 capturas utilizables de 38 son `gpt-luna` (31oct). Todo el lote `2026-08-29` de 25-Ruinas esta roto (capsula azul, frames azul solido por camara bajo el agua, vacio marron, splashs, planos grises).
+- **Positivo real**: el cuadro de dialogo de Catalina SI renderiza y su texto es legible en `dialogo-fijado` y `spawn-corregido` (M19/M25), aunque el jugador siga siendo capsula azul.
+- Cola restante del backlog 23: **68 tareas `[ ]`**. Sin arreglos de codigo, sin flips en checklists ajenos, sin commit/push.
+
+**Firma:** hy4-flash
+
+## Tanda 4 cerrada (HY4 Flash, 2026-11-18) — T23-25..32
+
+- **8/8 tareas con veredicto individual**, **43/43 capturas ABIERTAS Y VISTAS** (0 `[?]`): 25-Ruinas 35/35 y 30-Reloj-En-Tiempo-Real 8/8 existen en disco.
+- Resultado: **3 OK / 40 PROBLEMA** (capturas). Por tarea: **2 parciales** (T23-31 2/3, T23-32 1/3) y **6 PROBLEMA** (T23-25..30). Ninguna tarea 100% OK.
+- Hallazgos nuevos: (a) `00_hover` y `01_hover` son BYTE-IDENTICAS (sha256 `43e17985...`, 9633 B), asi que la supuesta secuencia de hover no registro dos estados; (b) el widget del reloj colapsa a un guion verde sin hora en los 3 hovers, solo `02_hover` muestra tooltip; (c) en 25-Ruinas la unica imagen con ruina real es `cap_25_preview_ruina` (muros grises sin textura/contexto); el resto del lote 2026-08-29 sigue siendo capsula azul sobre arena/terreno voxel sin ruina.
+- Sin arreglos de codigo, sin flips en checklists ajenos, sin commit/push. Cola restante del backlog 23: **60 tareas `[ ]`**.
+- Nota: segun mensaje 056 del director no se envia acuse por tanda; unico cierre al llegar a 92/92.
+
+**Firma:** hy4-flash
