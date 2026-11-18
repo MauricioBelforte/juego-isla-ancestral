@@ -99,3 +99,13 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 20-Backlog-Bug-RootCause-PRUEBA.md (30 tareas - diagnostico)
 - 21-Backlog-I18N-Volumen-PRUEBA.md (100 tareas - tr/ .po)
 - 22-Backlog-M154-Visual-Checklist.md (12 tareas, creada 18nov)
+
+## NUEVO (18nov - 539 tareas adicionales)
+- 23-Backlog-Visual-QA-Remaining.md (92 tareas)
+- 24-Backlog-Bug-RootCause-Remaining.md (122 tareas)
+- 25-Backlog-CrossDoc-Expandido.md (25 tareas)
+- 26-Backlog-Orphan-Scripts.md (94 tareas)
+- 27-Backlog-Data-Validity.md (28 tareas)
+- 28-Backlog-Log-Integrity-Exp.md (94 tareas)
+- 29-Backlog-I18N-Deep-Orphans.md (23 tareas)
+- 30-Backlog-Scene-Shader.md (61 tareas)
