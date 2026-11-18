@@ -24,8 +24,8 @@
 ## B. Exterior — modelado LOD alta (casco y estructura)
 
 - [x] B-01 Modelar el casco con loft de secciones (obra viva + obra muerta), ≤ 1.400 v [C]  ✅
-- [ ] B-02 Proa con tajamar y mascarón, ≤ 250 v [M] — **pendiente**: requiere Blender abierto (mascarón de proa); el Blender del usuario no está conectado.
-- [ ] B-03 Popa redonda con hélice y timón, ≤ 250 v [M] — **pendiente**: requiere Blender abierto (hélice y timón de popa); el Blender del usuario no está conectado.
+- [ ] B-02 Proa con tajamar y mascarón, ≤ 250 v [M] — **bloqueado: Blender no disponible** (mascarón de proa). Se hace con el addon MCP activo.
+- [ ] B-03 Popa redonda con hélice y timón, ≤ 250 v [M] — **bloqueado: Blender no disponible** (hélice y timón de popa). Se hace con el addon MCP activo.
 - [x] B-04 Cubierta 1 (72,0 × 14,0 m) con forjado y baranda, ≤ 700 v [M]  ✅
 - [x] B-05 Cubierta 2 (66,0 × 13,2 m), ≤ 600 v [M]  ✅
 - [x] B-06 Cubierta 3 (56,0 × 12,4 m), ≤ 550 v [M]  ✅

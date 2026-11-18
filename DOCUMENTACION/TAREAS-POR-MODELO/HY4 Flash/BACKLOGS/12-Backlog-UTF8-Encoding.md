@@ -226,6 +226,8 @@
 
 Universo reconstruido con el mismo generador que creó el backlog (`Temp/create_backlogs_hy4.py`): 3000 `.md` bajo `DOCUMENTACION/` + 1264 `.gd` bajo `game/isla-ancestral/scripts/` = **4264 archivos**, 213 batches de 20. Verificación: BOM UTF-8, `decode("utf-8")` estricto y presencia de U+FFFD.
 
+**Desviación del universo (anotada, no corregida):** el backlog se generó con 4258 archivos a las 07:55 UTC; al ejecutar había 4264 (+6). Las muestras `desde:` coinciden con el listado actual hasta T12-108; desde T12-109 divergen porque se agregaron archivos nuevos (entre ellos los backlogs 18-21 de la directora). Verifiqué **los 4264 archivos presentes**, es decir cobertura mayor a la pedida. Los batches 109-213 no son exactamente los del momento de generación; la evidencia de anomalías se mantiene por archivo y es reproducible sobre el disco actual.
+
 | Resultado global | Archivos |
 |---|---|
 | OK | 4237 |

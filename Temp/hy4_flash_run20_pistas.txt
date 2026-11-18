@@ -1,0 +1,274 @@
+bugs objetivo: 30
+
+BUG-025 ### BUG-025 — La sección `npc` del save no coincide con el default del schema de M59
+  .gd citados: 3 | encontrados: 3 | kw: _test_rf3_fauna_vecinos,adicional,afectado,ancestral,barrido,caracterización,coincide,comprueba,consumidores,default
+    game/isla-ancestral/scripts/datos/test_datos_m60_iter3.gd:359 [hits=4] var claves_schema: Array = (SaveSchema.default_payload()["npc"] as Dictionary).keys()
+    game/isla-ancestral/scripts/datos/test_datos_m60_iter3.gd:360 [hits=3] _check("caracterización: M19 usa claves propias ≠ default del schema",
+    game/isla-ancestral/scripts/datos/test_datos_m60_iter3.gd:16 [hits=3] #   Godot --headless --path game/isla-ancestral --script res://scripts/datos/test_datos_m60_iter3.gd
+    game/isla-ancestral/scripts/ia_npc/npc_manager.gd:379 [hits=1] var agents_data: Dictionary = data.get("agents", {})
+    game/isla-ancestral/scripts/ia_npc/npc_manager.gd:378 [hits=1] func restore_save_data(data: Dictionary) -> void:
+    game/isla-ancestral/scripts/ia_npc/npc_manager.gd:369 [hits=1] func get_save_data() -> Dictionary:
+    game/isla-ancestral/scripts/npc/villager_manager.gd:709 [hits=1] var mem: Dictionary = data.get("memoria", {})
+    game/isla-ancestral/scripts/npc/villager_manager.gd:704 [hits=1] var hog: Dictionary = data.get("hogares", {})
+    game/isla-ancestral/scripts/npc/villager_manager.gd:700 [hits=1] var enf: Dictionary = data.get("enfriamientos", {})
+
+BUG-053 ### BUG-053 — QA visual orbitales: 7 artefactos M16/M19/M25/M33/M51 (delegado a M154/dueños de módulo)
+  .gd citados: 2 | encontrados: 2 | kw: artefactos,binario,colocación,colocar_props_m25,delegado,dueños,módulo,orbitales,scripts,test_colocar_props_m25
+    game/isla-ancestral/scripts/ruinas/colocar_props_m25.gd:5 [hits=2] # M25: Colocación de props .glb del módulo sobre el terreno REAL.
+    game/isla-ancestral/scripts/ruinas/colocar_props_m25.gd:74 [hits=1] ## audit scripts/auditar_flotacion_glb.py, Log 1035).
+    game/isla-ancestral/scripts/ruinas/colocar_props_m25.gd:69 [hits=1] ## Coloca un prop del módulo M25.
+    game/isla-ancestral/scripts/ruinas/test_colocar_props_m25.gd:7 [hits=3] #   & "D:\ISLA ANCESTRAL\Godot_v4.7.2-stable_win64_console.exe" --headless --path "game/isla-ancestral" --quit --script "res://scr
+    game/isla-ancestral/scripts/ruinas/test_colocar_props_m25.gd:41 [hits=2] var Placer = load("res://scripts/ruinas/colocar_props_m25.gd")
+    game/isla-ancestral/scripts/ruinas/test_colocar_props_m25.gd:95 [hits=1] print("=== [M25] TEST COLACAR-PROPS: 0 fallos — fix V-3 verificado headless ===")
+
+BUG-054 ### BUG-054 — M39↔M15: 13 referencias rotas (8 item_ids inexistentes) en las tiendas oficiales
+  .gd citados: 1 | encontrados: 1 | kw: afectado,autoloads,catalogo_tiendas,considerar,escribió,español,fallaría,inexistentes,item_ids,madera_roble
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:34 [hits=2] func _registrar_tiendas_oficiales() -> void:
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:32 [hits=2] _registrar_tiendas_oficiales()
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:151 [hits=1] var def = _nueva_tienda("mercader_viajero", "TIENDAS.VIAJERO", SHOP_SCRIPT.Tipo.MERCADER_VIAJERO, "")
+
+BUG-055 ### CORRECCIÓN DE ATRIBUCIÓN (atria-dawn, 2026-09-18, Log 1039) — BUG-055
+  .gd citados: 4 | encontrados: 4 | kw: _desbloqueados,_test_guardado_carga_rf9_rn8,achievement_service,achievementservice,adyacentes,afectado,atria,atribución,backtrace,binario
+    game/isla-ancestral/scripts/editor/code_quality_check.gd:6 [hits=2] ## Analiza scripts GDScript para detectar violaciones de estilo y calidad
+    game/isla-ancestral/scripts/editor/code_quality_check.gd:434 [hits=1] report += "\n=== Resumen por severidad ===\n"
+    game/isla-ancestral/scripts/editor/code_quality_check.gd:419 [hits=1] var by_severity: Dictionary = {"error": 0, "warning": 0, "info": 0}
+    game/isla-ancestral/scripts/logros/achievement_service.gd:411 [hits=3] func get_desbloqueados() -> Array:
+    game/isla-ancestral/scripts/logros/achievement_service.gd:615 [hits=2] _desbloqueados.append(lid2)
+    game/isla-ancestral/scripts/logros/achievement_service.gd:606 [hits=2] _desbloqueados.append(lid)
+    game/isla-ancestral/scripts/logros/test_logros.gd:224 [hits=3] _check(desb.size() >= 2, "get_desbloqueados >= 2: %d" % desb.size())
+    game/isla-ancestral/scripts/logros/test_logros.gd:223 [hits=3] var desb: Array = _ach.get_desbloqueados()
+    game/isla-ancestral/scripts/logros/test_logros.gd:16 [hits=3] # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/logros/test_logros.gd
+
+BUG-059 ### BUG-059 — M126 + M128: ~33 citas colgantes a secciones de `03-Diseno.md` que no existen
+  .gd citados: 0 | encontrados: 0 | kw: citas,colgantes,diseno,existen,secciones
+
+BUG-057 ### BUG-057 — `buildings_save_provider.gd` no restaura estructuras al cargar (no-op silencioso)
+  .gd citados: 1 | encontrados: 1 | kw: buildings_save_provider,cargar,estructuras,estructurascodec,gdscript,restaura,scripts,silencioso
+    game/isla-ancestral/scripts/datos/buildings_save_provider.gd:12 [hits=3] #     restaurar_estructuras(lista: Array) -> void   (opcional, para cargar)
+    game/isla-ancestral/scripts/datos/buildings_save_provider.gd:64 [hits=2] push_warning("[M60] La fuente de construcciones no expone %s(); no se restauran %d estructuras"
+    game/isla-ancestral/scripts/datos/buildings_save_provider.gd:59 [hits=2] var lista := EstructurasCodec.desde_seccion(data)
+
+BUG-067 ### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
+  .gd citados: 6 | encontrados: 6 | kw: afectado,ancestral,budget,contradice,diseño,escribe,frame,llamada,logging,medición
+    game/isla-ancestral/scripts/logging/logger.gd:58 [hits=2] ## El `print()` a stdout es el **99 %** del coste de una llamada que ESCRIBE:
+    game/isla-ancestral/scripts/logging/logger.gd:33 [hits=2] const CrashLogBridge = preload("res://scripts/logging/crash_log_bridge.gd")
+    game/isla-ancestral/scripts/logging/logger.gd:246 [hits=1] ## Reincorpora config desde un recurso LoggingConfig.
+    game/isla-ancestral/scripts/logging/logging_config.gd:35 [hits=1] ## escribe (510 us a archivo / 15 036 us a tuberia, frente a 5,3 us de solo disco).
+    game/isla-ancestral/scripts/logging/logging_config.gd:34 [hits=1] ## ¿Eco a stdout (`print`)? El `print` es el **99 %** del coste de una llamada que
+    game/isla-ancestral/scripts/logging/logging_config.gd:9 [hits=1] class_name LoggingConfig
+    game/isla-ancestral/scripts/logging/test_logger.gd:6 [hits=3] # Uso: godot --headless --path game/isla-ancestral --script res://scripts/logging/test_logger.gd
+    game/isla-ancestral/scripts/logging/test_logger.gd:79 [hits=1] _check("flush escribe buffer al archivo", FileAccess.file_exists(tmp))
+    game/isla-ancestral/scripts/logging/test_logger.gd:14 [hits=1] #  - Persistencia: flush() escribe el buffer al archivo.
+
+BUG-097 ### BUG-097 — `bootstrap.gd` llama dos métodos inexistentes de ServiceRegistry (M07)
+  .gd citados: 3 | encontrados: 3 | kw: afectado,apuntando,arquitectura,arranque,bootstrap,después,errores,faltantes,general,inexistente
+    game/isla-ancestral/scripts/core/bootstrap.gd:167 [hits=5] push_error("Bootstrap: servicios obligatorios faltantes: %s" % str(missing))
+    game/isla-ancestral/scripts/core/bootstrap.gd:169 [hits=4] print("[Bootstrap] Todos los servicios obligatorios están registrados")
+    game/isla-ancestral/scripts/core/bootstrap.gd:181 [hits=3] print("[Bootstrap] DOM-INF-FALTANTE dominios de juego no registrados: %s" % str(faltantes))
+    game/isla-ancestral/scripts/core/game_settings.gd:18 [hits=2] ## Arquitectura-General (no M46: la fila 46 es Arte-2D). Doc: M07 plan-actual.
+    game/isla-ancestral/scripts/core/game_settings.gd:13 [hits=1] ## Volumen general (0.0 a 1.0)
+    game/isla-ancestral/scripts/core/service_registry.gd:75 [hits=3] print("[M40] ServiceRegistry listo (%d servicios registrados)" % _registry.size())
+    game/isla-ancestral/scripts/core/service_registry.gd:62 [hits=2] ## No aborta el juego: el caller (bootstrap) decide push_error o log.
+    game/isla-ancestral/scripts/core/service_registry.gd:60 [hits=2] ## BUG-097: valida que todos los servicios en `required` estén registrados.
+
+BUG-029 ### BUG-029 — M149: `validar_nombres.py` escanea rutas que no son fuente (389 falsos positivos)
+  .gd citados: 1 | encontrados: 1 | kw: corrige,escanea,escáner,excluye,falsos,fuente,inicial,permite,positivos,rutas
+
+BUG-030 ### BUG-030 — M09: inconsistencia de registro (nombre modulo + checklist "sin scripts propios" vs `terreno_hor
+  .gd citados: 1 | encontrados: 1 | kw: actualiza,afectado,afirmacion,alcance,carpeta,checklist,coherente,contenido,corrige,desactualizada
+    game/isla-ancestral/scripts/world/terreno_horizonte.gd:234 [hits=2] print("[M09-IMP] impostor heightmap completo: %d tiles activos — ocultos <%.0fm (chunks reales mandan cerca)" % [activos, TILE_OCU
+    game/isla-ancestral/scripts/world/terreno_horizonte.gd:165 [hits=2] ## Crea los tiles del impostor heightmap (prismas escalonados, Log 780).
+    game/isla-ancestral/scripts/world/terreno_horizonte.gd:100 [hits=2] push_warning("[M09-IMP] generador no llegó — impostor omitido")
+
+BUG-031 ### BUG-031 — M95: `MonetizacionManager` falla 3 asserts funcionales en test_monetizacion.gd (regresión detect
+  .gd citados: 3 | encontrados: 3 | kw: afectado,ancestral,asserts,completa,cruzado,deepseek,detect,detectada,devuelve,esperado
+    game/isla-ancestral/scripts/monetizacion/monetizacion_manager.gd:11 [hits=4] # Ejecutar test: Godot --headless --path game/isla-ancestral --script res://scripts/monetizacion/test_monetizacion.gd
+    game/isla-ancestral/scripts/monetizacion/monetizacion_manager.gd:30 [hits=3] print("[M95] MonetizacionManager listo (%d ediciones, %d DLC)" % [
+    game/isla-ancestral/scripts/monetizacion/monetizacion_manager.gd:105 [hits=1] push_error("[M95] P2W detectado: %s" % str(offenders))
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion.gd:6 [hits=4] # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/monetizacion/test_monetizacion.gd
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion.gd:17 [hits=3] _check(m95 != null, "MonetizacionManager autoload presente")
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion.gd:16 [hits=3] var m95 := root.get_node_or_null("MonetizacionManager")
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion_m95.gd:95 [hits=2] _check("caja_misteriosa detectada (pago+azar)", violaciones.size() >= 1 and str(violaciones).contains("caja_misteriosa"))
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion_m95.gd:78 [hits=2] _check("poción tipo ventaja detectada", str(violaciones).contains("pocion"))
+    game/isla-ancestral/scripts/monetizacion/test_monetizacion_m95.gd:16 [hits=2] const _SC_LOOTBOX := preload("res://scripts/monetizacion/scanner_antilootbox.gd")
+
+BUG-043 ## BUG-043: bioma "snow" inalcanzable en el generador de la isla (checks en orden incorrecto)
+  .gd citados: 3 | encontrados: 3 | kw: afectado,alcanzable,ancestral,bioma,evidencia,gdscript,generación,generador,inalcanzable,incorrecto
+    game/isla-ancestral/scripts/main_island.gd:193 [hits=2] print("[M09] Isla Aurora — terreno con biomas (semilla: 42)")
+    game/isla-ancestral/scripts/main_island.gd:158 [hits=2] # alturas del mismo generador, siempre visible, 1 draw call.
+    game/isla-ancestral/scripts/main_island.gd:145 [hits=2] # Generador de isla con biomas (M09/M10) — PERFIL ORIGINAL (M167 config
+    game/isla-ancestral/scripts/world/island_generator.gd:217 [hits=2] # snow inalcanzable (snow=0 sobre 2000 muestras; alt. max real ~38).
+    game/isla-ancestral/scripts/world/island_generator.gd:169 [hits=2] # Capas de terreno según bioma
+    game/isla-ancestral/scripts/world/island_generator.gd:240 [hits=1] ## subterráneo del camino caliente del generador (get_block_at → _has_ore).
+    game/isla-ancestral/scripts/world/test_generacion_m10_atria.gd:117 [hits=3] ## BUG documentado (Log 945): el bioma "snow" era INALCANZABLE. _get_biome
+    game/isla-ancestral/scripts/world/test_generacion_m10_atria.gd:16 [hits=3] # Godot --headless --path game/isla-ancestral --script res://scripts/world/test_generacion_m10_atria.gd
+    game/isla-ancestral/scripts/world/test_generacion_m10_atria.gd:156 [hits=2] ## producir los biomas alcanzables por ruido+altura de la isla Aurora. Tras el
+
+BUG-044 ## BUG-044: modulo M12 Camara — dos sistemas paralelos; el documentado es codigo muerto
+  .gd citados: 8 | encontrados: 5 | kw: camara,camera_mode,camera_rig,camera_spring,camerarig,codigo,documentado,entrante,follow_camera,instanciada
+    game/isla-ancestral/scripts/follow_camera.gd:5 [hits=2] ## Shake, fade, FOV — portados de camera_rig.gd (código muerto → canónico)
+    game/isla-ancestral/scripts/follow_camera.gd:160 [hits=1] func get_mode() -> ModoCamara:
+    game/isla-ancestral/scripts/follow_camera.gd:154 [hits=1] func set_mode(new_mode: ModoCamara) -> void:
+    game/isla-ancestral/scripts/main.gd:8 [hits=2] @onready var camera_rig: CameraRig = $CameraRig
+    game/isla-ancestral/scripts/main.gd:86 [hits=1] camera_rig.zoom_out()
+    game/isla-ancestral/scripts/main.gd:84 [hits=1] camera_rig.zoom_in()
+    game/isla-ancestral/scripts/camera/camera_mode.gd:71 [hits=1] return modo in [ModoCamara.DIALOG, ModoCamara.CUTSCENE]
+    game/isla-ancestral/scripts/camera/camera_mode.gd:70 [hits=1] static func hides_hud(modo: ModoCamara) -> bool:
+    game/isla-ancestral/scripts/camera/camera_mode.gd:67 [hits=1] return modo in [ModoCamara.EXPLORE, ModoCamara.BUILD]
+
+BUG-046 ## BUG-046: catalogo M159 — 12 items con id interno discordante del nombre de archivo
+  .gd citados: 5 | encontrados: 5 | kw: _catalog_venta,_precio_venta_base,ancestral,archivo,catalogo,convencion,correcta,correctamente,cruzadas,cualquier
+    game/isla-ancestral/scripts/economia/economy_price_catalog.gd:52 [hits=3] push_error("M38: override '%s' -> venta (%d) >= compra (%d). Revise econ_prices.tres." % [e.item_id, e.precio_venta, e.precio_comp
+    game/isla-ancestral/scripts/economia/economy_price_catalog.gd:58 [hits=2] ## Lookup por item_id. Devuelve la PriceDefinition o null si no hay override.
+    game/isla-ancestral/scripts/economia/economy_price_catalog.gd:55 [hits=2] push_error("M38: override '%s' -> item solo-vendible sin precio_venta válido (0). Revise econ_prices.tres." % e.item_id)
+    game/isla-ancestral/scripts/economia/price_manager.gd:290 [hits=3] var antes := _precio_venta_base(item_id)
+    game/isla-ancestral/scripts/economia/price_manager.gd:199 [hits=3] func _precio_venta_base(item_id: String) -> int:
+    game/isla-ancestral/scripts/economia/price_manager.gd:180 [hits=3] var base := _precio_venta_base(item_id)
+    game/isla-ancestral/scripts/economia/test_diag_m38_atria.gd:4 [hits=4] ## Uso: godot --headless --path game/isla-ancestral --script res://scripts/economia/test_diag_m38_atria.gd
+    game/isla-ancestral/scripts/economia/test_diag_m38_atria.gd:33 [hits=2] var cls = load("res://scripts/economia/economy_price_catalog.gd")
+    game/isla-ancestral/scripts/economia/test_diag_m38_atria.gd:29 [hits=2] print("ref %s -> compra=%d venta=%d" % [id, int(eco.precio_compra_vigente(id)), int(eco.precio_venta_vigente(id))])
+
+BUG-048 ## BUG-048: UI no compila en runtime (parse errors en theme_ux / dialog_layer)
+  .gd citados: 5 | encontrados: 5 | kw: _build_layers,_get_all_tweens,_on_node_entered,ancestral,compila,compilacion,compilation,compile,comprobacion,construye
+    game/isla-ancestral/scripts/shops/test_loop_economico.gd:4 [hits=2] ## Uso: godot --headless --path game/isla-ancestral --script res://scripts/shops/test_loop_economico.gd
+    game/isla-ancestral/scripts/shops/test_loop_economico.gd:38 [hits=1] var entry = load("res://scripts/shops/shop_data.gd").StockEntry.new("OBJ-PLA-002", 2, 5, 1.0, true)
+    game/isla-ancestral/scripts/shops/test_loop_economico.gd:30 [hits=1] var def = load("res://scripts/shops/shop_data.gd").new()
+    game/isla-ancestral/scripts/ui/ui_root.gd:131 [hits=2] print("[DOM-UI] UIRoot: capas montadas (dialogo=%s pausa=%s menus=%s confirm=%s crafting=%s inventario=%s tienda=%s equipamiento=%
+    game/isla-ancestral/scripts/ui/ui_root.gd:41 [hits=2] var dl_load := load("res://scripts/ui/layers/dialog_layer.gd")
+    game/isla-ancestral/scripts/ui/ui_root.gd:167 [hits=1] # las capas montadas ya están registradas y push_layer es no-op
+    game/isla-ancestral/scripts/ui/layers/dialog_layer.gd:133 [hits=2] ## NOTA (atria-dawn, Log 983 — BUG-048): esta funcion existia DUPLICADA en la
+    game/isla-ancestral/scripts/ui/layers/dialog_layer.gd:280 [hits=1] func _on_node_entered(_node_id: String, speaker_key: String, texto: String, tipo: int, options: Array) -> void:
+    game/isla-ancestral/scripts/ui/layers/dialog_layer.gd:238 [hits=1] for child in _options_box.get_children():
+
+BUG-050 ## BUG-050: M39 Tiendas — `catalogo_tiendas.gd` llama `.size()` a un Callable (SCRIPT ERROR al boot) + catálog
+  .gd citados: 2 | encontrados: 2 | kw: _registrar_tienda_general,_registrar_tiendas_oficiales,_registrar_validada,_validar_tienda,afectado,ancestral,autoloads,backtrace,callable,catalogo_tiendas
+    game/isla-ancestral/scripts/logros/test_logros.gd:16 [hits=3] # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/logros/test_logros.gd
+    game/isla-ancestral/scripts/logros/test_logros.gd:320 [hits=2] # Usamos un ID que NO existe en el catálogo para evitar efectos de
+    game/isla-ancestral/scripts/logros/test_logros.gd:276 [hits=2] _check(not _ach.esta_desbloqueado("logro_viejo"), "logro de catálogo viejo purgado (§6)")
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:5 [hits=3] # M39: Tiendas — CatalogoTiendas (catálogos DEFINITIVOS del prototipo).
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:84 [hits=2] push_error("[M39] Catálogo '%s': %s" % [String(def.shop_id), p])
+    game/isla-ancestral/scripts/shops/catalogo_tiendas.gd:76 [hits=2] push_warning("[M39] '%s': item_id inexistente en M15: %s" % [String(def.shop_id), String(entrada2.item_id)])
+
+BUG-073 ### BUG-073 — "Parameter fd is null" (_shape_run) al cambiar de locale en headless: ThemeService.recargar_fuen
+  .gd citados: 3 | encontrados: 4 | kw: _on_locale_changed,_shape_run,afectado,ancestral,aplicar_tema_global,cambiar,corrida,corridas,delegación,endurecer
+    game/isla-ancestral/scripts/localization/localization_manager.gd:133 [hits=2] locale_changed.emit(locale)
+    game/isla-ancestral/scripts/localization/localization_manager.gd:132 [hits=2] TranslationServer.set_locale(locale)
+    game/isla-ancestral/scripts/localization/localization_manager.gd:98 [hits=2] func set_locale(locale: String) -> bool:
+    game/isla-ancestral/scripts/ui/test_ui_i18n_m53.gd:178 [hits=5] # locale dispara ThemeService.recargar_fuentes() y explota con
+    game/isla-ancestral/scripts/ui/test_ui_i18n_m53.gd:165 [hits=4] "UIManager expone _on_locale_changed_ui (M87 runtime)")
+    game/isla-ancestral/scripts/ui/test_ui_i18n_m53.gd:164 [hits=3] _check(ui != null and ui.has_method("_on_locale_changed_ui"),
+    game/isla-ancestral/scripts/ui/theme/theme_service.gd:57 [hits=3] recargar_fuentes()
+    game/isla-ancestral/scripts/ui/theme/theme_service.gd:56 [hits=3] func _on_locale_changed(_locale: String) -> void:
+    game/isla-ancestral/scripts/ui/theme/theme_service.gd:50 [hits=3] func recargar_fuentes() -> void:
+
+BUG-079 ### BUG-079 — Suites gdUnit4 de M14 no eran ejecutables: API desactualizada + `free()` sobre RefCounted + capt
+  .gd citados: 8 | encontrados: 8 | kw: abortaba,asignar,asserts,attempted,bloquea,capturan,causaban,compartido,compilaban,connect
+    game/isla-ancestral/tests/integration/test_economy_npc_shop.gd:246 [hits=2] _check("new_economy.saldo .is_equal_to(_economy.saldo)", (new_economy.saldo) == (_economy.saldo))
+    game/isla-ancestral/tests/integration/test_economy_npc_shop.gd:226 [hits=2] _check("_sig_count .is_equal_to(2)", (_sig_count) == (2))
+    game/isla-ancestral/tests/integration/test_economy_npc_shop.gd:221 [hits=2] _economy.transaccion_registrada.connect(func(tx: Dictionary) -> void:
+    game/isla-ancestral/tests/integration/test_inventory_economy.gd:40 [hits=6] ## (2) contadores de señales: las lambdas capturan locales POR VALOR → holder
+    game/isla-ancestral/tests/integration/test_inventory_economy.gd:39 [hits=3] ## FIX agnes-3-flash (Log 1127): (1) `is_equal_to`→`is_equal` (API gdUnit4 real);
+    game/isla-ancestral/tests/integration/test_inventory_economy.gd:213 [hits=2] _economy.transaccion_registrada.connect(func(tx: Dictionary) -> void:
+    game/isla-ancestral/tests/integration/test_time_calendar_events.gd:259 [hits=1] var saved: Dictionary = CAL.call("get_save_data")
+    game/isla-ancestral/tests/integration/test_time_calendar_events.gd:243 [hits=1] if String((ev as Dictionary).get("tipo", "")) == "festival":
+    game/isla-ancestral/tests/integration/test_time_calendar_events.gd:239 [hits=1] _check("obtener_festival_actual() es Dictionary", fest_actual is Dictionary)
+
+BUG-080 ### BUG-080 — M65: test de pack/school con preload muerto + logica huérfana en produccion
+  .gd citados: 6 | encontrados: 7 | kw: afectado,ancestral,animal_ai,animales,animales_ia,argument,autoload,contexto,corregidos,corregir
+    game/isla-ancestral/tests/test_m65.gd:14 [hits=6] const SchoolLogicRef = preload("res://scripts/animales_ia/school_logic.gd")
+    game/isla-ancestral/tests/test_m65.gd:13 [hits=5] const PackLogicRef = preload("res://scripts/animales_ia/pack_logic.gd")
+    game/isla-ancestral/tests/test_m65.gd:12 [hits=5] # scripts/animales_ia/ y el preload quedo muerto (BUG-080).
+    game/isla-ancestral/scripts/animales_ia/m65_animal_ai.gd:27 [hits=6] const SchoolLogicRef = preload("res://scripts/animales_ia/school_logic.gd")
+    game/isla-ancestral/scripts/animales_ia/m65_animal_ai.gd:26 [hits=5] const PackLogicRef = preload("res://scripts/animales_ia/pack_logic.gd")
+    game/isla-ancestral/scripts/animales_ia/m65_animal_ai.gd:23 [hits=3] const BehaviorRef = preload("res://scripts/fauna/fauna_behavior.gd")
+    game/isla-ancestral/scripts/animales_ia/pack_logic.gd:7 [hits=1] # Maneja grupos de animales terrestres/gregarios:
+    game/isla-ancestral/scripts/animales_ia/pack_logic.gd:5 [hits=1] # M65: Animales IA — PackLogic (comportamiento de manada)
+
+BUG-082 ### BUG-082 — map_data_service.gd: `dentro_de_isla` y asistencia de coords siguen en geometría "isla RIZ 256"
+  .gd citados: 3 | encontrados: 3 | kw: asistencia,coords,dentro_de_isla,geometría,map_data_service,scripts,siguen
+    game/isla-ancestral/scripts/map/map_data_service.gd:81 [hits=1] func dentro_de_isla(x: float, z: float) -> bool:
+    game/isla-ancestral/scripts/map/map_data_service.gd:80 [hits=1] ## ── Asistencia de coordenadas (isla RIZ 256) ───────
+    game/isla-ancestral/scripts/map/test_map_service_headless.gd:25 [hits=2] var datos = load("res://scripts/map/map_data_service.gd").new()
+    game/isla-ancestral/scripts/map/test_map_service_headless.gd:35 [hits=1] _check("Service: fuera de la isla (999,999)", not datos.dentro_de_isla(999, 999))
+    game/isla-ancestral/scripts/map/test_map_service_headless.gd:34 [hits=1] _check("Service: dentro de la isla (256,256)", datos.dentro_de_isla(256, 256))
+
+BUG-083 ### BUG-083 — medir_costa_m51.gd: centro hardcodeado 256.0, mide la costa vieja
+  .gd citados: 1 | encontrados: 1 | kw: ancestral,centrada,centro,comentario,corresponden,costa,ejecutar,esquina,hardcodeado,medir_costa_m51
+    game/isla-ancestral/scripts/world/medir_costa_m51.gd:8 [hits=5] # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/world/medir_costa_m51.gd
+    game/isla-ancestral/scripts/world/medir_costa_m51.gd:16 [hits=1] print("=== [M51] Medición de costa real ===")
+    game/isla-ancestral/scripts/world/medir_costa_m51.gd:6 [hits=1] # centro (256,256) con TerrainLocator y reporta el radio donde termina el
+
+BUG-085 ### BUG-085 — data/fasttravel/anclas.json: anclas en la esquina del mundo
+  .gd citados: 2 | encontrados: 2 | kw: anclas,esquina,fasttravel,mundo
+    game/isla-ancestral/scripts/fasttravel/fast_travel_service.gd:119 [hits=2] print("[M69] FastTravelService listo (%d anclas, %d desbloqueadas)" % [_anclas.size(), _desbloqueadas.size()])
+    game/isla-ancestral/scripts/fasttravel/fast_travel_service.gd:16 [hits=2] const RUTA_ANCLAS := "res://data/fasttravel/anclas.json"
+    game/isla-ancestral/scripts/fasttravel/fast_travel_service.gd:5 [hits=2] # M69: FastTravelService — anclas de viaje rápido (data-driven anclas.json),
+    game/isla-ancestral/scripts/fasttravel/test_fast_travel_headless.gd:5 [hits=2] # M69: Test headless del FastTravelService (anclas, desbloqueo, viaje).
+    game/isla-ancestral/scripts/fasttravel/test_fast_travel_headless.gd:304 [hits=1] _check("Índice O(1): cubre las %d anclas" % svc.anclas().size(), n_idx == svc.anclas().size())
+    game/isla-ancestral/scripts/fasttravel/test_fast_travel_headless.gd:301 [hits=1] for a in svc.anclas():
+
+BUG-086 ### BUG-086 — vegetation_spawner.gd:36: fallback `else Vector2(256,256)` si MundoRaiz ausente
+  .gd citados: 1 | encontrados: 1 | kw: ausente,autoload,esquina,fallback,mundoraiz,scripts,vector2,vegetacion,vegetación,vegetation_spawner
+    game/isla-ancestral/scripts/vegetacion/vegetation_spawner.gd:20 [hits=2] const PLAN = preload("res://scripts/vegetacion/vegetation_plan.gd")
+    game/isla-ancestral/scripts/vegetacion/vegetation_spawner.gd:123 [hits=1] ## Escala por tipo vía autoload EscalasGlobales (5-FUTURAS-MEJORAS).
+    game/isla-ancestral/scripts/vegetacion/vegetation_spawner.gd:112 [hits=1] _contenedor.name = "VegetacionInstancias"
+
+BUG-099 ### BUG-099 - `test_enchantment.gd` (M163) cuelga: `load()` con prefijo doble y sin watchdog
+  .gd citados: 1 | encontrados: 1 | kw: add_child,ancestral,arreglar,compilaba,compilable,cuelga,cuelgue,deepseek,doble,indefinidamente
+    game/isla-ancestral/scripts/enchantment/test_enchantment.gd:220 [hits=2] ui1._seleccionar_encantamiento("ancestral_cobre")
+    game/isla-ancestral/scripts/enchantment/test_enchantment.gd:177 [hits=2] ui1._seleccionar_encantamiento("ancestral_cobre")
+    game/isla-ancestral/scripts/enchantment/test_enchantment.gd:7 [hits=2] #   godot --headless --path game/isla-ancestral --script res://scripts/enchantment/test_enchantment.gd
+
+BUG-100 ### BUG-100 - Patron "verde con errores": `test_collectible_category.gd` reporta "0 fallos" con SCRIPT ERROR e
+  .gd citados: 1 | encontrados: 1 | kw: aserciones,attempted,capturar,coexistir,consola,errores,evaluar,fallos,familia,gdunit4
+    game/isla-ancestral/scripts/coleccionables/test_collectible_category.gd:35 [hits=1] _fallos += 1
+    game/isla-ancestral/scripts/coleccionables/test_collectible_category.gd:30 [hits=1] quit(1 if _fallos > 0 else 0)
+    game/isla-ancestral/scripts/coleccionables/test_collectible_category.gd:29 [hits=1] print("=== TEST M73 COLLECTIBLE_CATEGORY: " + str(_fallos) + " fallo(s) ===")
+
+BUG-135 ### BUG-135 — La integración M18 -> M160 está MUERTA: `house_manager.gd` llama a `WorldLocations.buscar_cerca(
+  .gd citados: 12 | encontrados: 12 | kw: _guardar_voxel_binario,_hilo_guardado,abierto,afectado,ancestral,apertura,aprobado,arreglar,aserción,asignar
+    game/isla-ancestral/tests/integration/test_fixtures_smoke.gd:16 [hits=2] # TODOS los bloques; el watchdog cubre cuelgues (un SCRIPT ERROR a mitad de
+    game/isla-ancestral/tests/integration/test_fixtures_smoke.gd:158 [hits=1] _check("registrado en VillagerManager (deferred)",
+    game/isla-ancestral/tests/integration/test_fixtures_smoke.gd:147 [hits=1] _check("autoload VillagerManager presente", vm != null)
+    game/isla-ancestral/scripts/data/world_locations.gd:275 [hits=1] obj.tipo_interaccion = String(o["herramienta"])
+    game/isla-ancestral/scripts/data/world_locations.gd:269 [hits=1] var LO = load("res://scripts/data/location_object.gd")
+    game/isla-ancestral/scripts/data/world_locations.gd:245 [hits=1] var LR = load("res://scripts/data/location_requirements.gd")
+    game/isla-ancestral/scripts/datos/data_store.gd:312 [hits=3] var crudo: Variant = _hilo_guardado.wait_to_finish()
+    game/isla-ancestral/scripts/datos/data_store.gd:257 [hits=3] ## sin autoloads). Todo lo que toque el motor se hace en `_finalizar_hilo_guardado`.
+    game/isla-ancestral/scripts/datos/data_store.gd:102 [hits=3] _hilo_guardado.wait_to_finish()
+
+BUG-140 ### BUG-140 — `test_logros.gd:294` asigna Array sin tipar a propiedad `Array[String]` -> SCRIPT ERROR que abor
+  .gd citados: 2 | encontrados: 2 | kw: _desbloqueados,_fechas,_summary,_test_guardado_carga_rf9_rn8,_wb_bloques,achievement_service,afectado,ancestral,array,aserciones
+    game/isla-ancestral/scripts/logros/achievement_service.gd:44 [hits=4] var _desbloqueados: Array[String] = []
+    game/isla-ancestral/scripts/logros/achievement_service.gd:411 [hits=3] func get_desbloqueados() -> Array:
+    game/isla-ancestral/scripts/logros/achievement_service.gd:245 [hits=3] if String(dep) not in _desbloqueados:
+    game/isla-ancestral/scripts/logros/test_logros.gd:367 [hits=5] # FIX 2026-10-26: `_desbloqueados` es `Array[String]`; asignarle un Array sin
+    game/isla-ancestral/scripts/logros/test_logros.gd:16 [hits=4] # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/logros/test_logros.gd
+    game/isla-ancestral/scripts/logros/test_logros.gd:11 [hits=4] # Array[String] y se le asignaba un Array sin tipar): el error abortaba
+
+BUG-153 ### BUG-153 — Inflación masiva §21.8.2.b: 1.194 ítems promovidos a `[x]` en 46 h por 3 commits de Beam — 859 m
+  .gd citados: 2 | encontrados: 2 | kw: commits,faltante,incluir,inflación,masiva,promovidos,scripts,terrain_block,terrenos
+    game/isla-ancestral/scripts/terrenos/terrain_block.gd:38 [hits=1] for terr in data["terrenos"]:
+    game/isla-ancestral/scripts/terrenos/terrain_block.gd:37 [hits=1] if not data.has("terrenos"): return
+    game/isla-ancestral/scripts/terrenos/terrain_block.gd:30 [hits=1] var file := FileAccess.open("res://data/terrenos/terrenos.json", FileAccess.READ)
+
+BUG-019 ### BUG-019 — EventManager no resoluble: nodo `/root/EventManager` inexistente y servicio `event_manager` no r
+  .gd citados: 2 | encontrados: 2 | kw: _autoregistrar_dominios,_resolver_event_manager,aparece,arrancar,autoload,bootstrap,buscaba,conectaban,corrigió,desaparece
+    game/isla-ancestral/scripts/core/bootstrap.gd:169 [hits=3] print("[Bootstrap] Todos los servicios obligatorios están registrados")
+    game/isla-ancestral/scripts/core/bootstrap.gd:160 [hits=3] print("[Bootstrap] Servicios core registrados (%d): %s" % [registered.size(), str(registered)])
+    game/isla-ancestral/scripts/core/bootstrap.gd:151 [hits=3] push_warning("Bootstrap: EventBus no encontrado como autoload")
+    game/isla-ancestral/scripts/economia/price_manager.gd:494 [hits=3] var em = _resolver_event_manager()
+    game/isla-ancestral/scripts/economia/price_manager.gd:483 [hits=3] func _resolver_event_manager():
+    game/isla-ancestral/scripts/economia/price_manager.gd:460 [hits=3] var em = _resolver_event_manager()
+
+BUG-052 ### BUG-052 — Boot del proyecto roto: `.get()` de 2 args sobre `Resource` (3 archivos, 5 sitios)
+  .gd citados: 4 | encontrados: 4 | kw: ancestral,aparece,archivo,archivos,argumento,arguments,binario,cascada,compilación,compilation
+    game/isla-ancestral/scripts/ia_npc/npc_agent.gd:268 [hits=2] func _get_profile() -> Resource:
+    game/isla-ancestral/scripts/ia_npc/npc_agent.gd:70 [hits=2] # Registrar estados desde archivos separados
+    game/isla-ancestral/scripts/ia_npc/npc_agent.gd:427 [hits=1] ## (headless-safe). En ambos casos congela la IA y las necesidades y
+    game/isla-ancestral/scripts/ia_npc/npc_needs.gd:64 [hits=1] ## Determinar si hay alguna necesidad urgente. Retorna StringName o &"".
+    game/isla-ancestral/scripts/ia_npc/npc_needs.gd:57 [hits=1] # Mood se recupera lentamente si las necesidades básicas están bien
+    game/isla-ancestral/scripts/ia_npc/npc_needs.gd:52 [hits=1] ## Actualizar necesidades (llamar desde _process con delta de juego)
+    game/isla-ancestral/scripts/ia_npc/test_ia_npc_m64_iterN.gd:400 [hits=2] "res://scripts/ia_npc/npc_needs.gd",
+    game/isla-ancestral/scripts/ia_npc/test_ia_npc_m64_iterN.gd:398 [hits=2] "res://scripts/ia_npc/npc_agent.gd",
+    game/isla-ancestral/scripts/ia_npc/test_ia_npc_m64_iterN.gd:18 [hits=2] const _SC_NEEDS := preload("res://scripts/ia_npc/npc_needs.gd")
