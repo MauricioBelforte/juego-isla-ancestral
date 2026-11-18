@@ -6,22 +6,22 @@
 
 ## Tareas
 
-- [ ] T23-01: 15-Recursos / cap_15_recursos.png ... cap_15_recursos2.png (2 caps)
-- [ ] T23-02: 154-Vision-Del-Agente / cap_154_2026-10-09_00-17-08_v3_web_preview.png ... cap_154_2026-10-31_18-46-00_gpt-luna_p60frames.png (4 caps)
-- [ ] T23-03: 155-Vestimenta / cap_155_2026-10-26_06-00-00_nemotron_vestimenta_spawn.png ... cap_155_2026-10-26_06-00-00_nemotron_vestimenta_spawn.png (1 caps)
-- [ ] T23-04: 155-Vestimenta-Y-Accesorios / cap_155_2026-09-01_18-50-00_jugador.png ... cap_155_2026-09-01_19-36-00_ui_equip4.png (5 caps)
-- [ ] T23-05: 155-Vestimenta-Y-Accesorios / cap_155_2026-09-01_19-38-00_printwindow.png ... cap_155_2026-09-01_22-24-00_preview.png (5 caps)
-- [ ] T23-06: 155-Vestimenta-Y-Accesorios / cap_155_equipment-integrated_2026-09-06_04-30.png ... cap_155_equipment-integrated_2026-09-06_04-30.png (1 caps)
-- [ ] T23-07: 16-Crafting / cap_16_crafting_arranque.png ... cap_16_estacion.png (2 caps)
-- [ ] T23-08: 161-Diseno-Visual-De-NPCs / swatch_23npc.png ... swatch_23npc_v2.png (2 caps)
-- [ ] T23-09: 161-DisenoVisualNPCs / cap_161_2026-10-26_05-30-20_nemotron_diseno_visual_npcs_spawn.png ... cap_161_2026-10-26_05-30-20_nemotron_diseno_visual_npcs_spawn.png (1 caps)
-- [ ] T23-10: 163-Sistema-De-Encantamientos / cap_163_2026-10-08_23-28-18_post_bug119_chaman_terreno.png ... cap_163_2026-10-09_03-39-06_bug124_chaman_malla.png (5 caps)
-- [ ] T23-11: 165-Voxel-Tools-Guia / cap_165_2026-09-01_00-41-03_escena_terrero.png ... cap_165_2026-09-01_00-41-34_detalle_biomas.png (2 caps)
-- [ ] T23-12: 167-Isla-Raiz / cap_167_2026-09-01_12-28-00_overview.png ... cap_167_2026-10-31_20-39-56_gpt-luna_continuar-reanuda.png (5 caps)
-- [ ] T23-13: 167-Isla-Raiz / cap_167_2026-10-31_20-42-21_gpt-luna_60-frames-agua.png ... cap_c1_2026-10-31_19-49-53_gpt-luna_isla-boot.png (4 caps)
-- [ ] T23-14: 167-IslaRaiz / cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png ... cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png (1 caps)
-- [ ] T23-15: 19-Muelle / cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png ... cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png (1 caps)
-- [ ] T23-16: 19-NPC / cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png ... cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png (1 caps)
+- [x] T23-01: 15-Recursos / cap_15_recursos.png ... cap_15_recursos2.png (2 caps) — 2/2 PROBLEMA: `cap_15_recursos.png` editor Godot con jugador = CAPSULA AZUL sobre terreno voxel y montaña blanca, texto de controles superpuesto y barra `100`; `cap_15_recursos2.png` ventana DEBUG (FPS:60) con la misma capsula azul entre muros verdes.
+- [x] T23-02: 154-Vision-Del-Agente / cap_154_2026-10-09_00-17-08_v3_web_preview.png ... cap_154_2026-10-31_18-46-00_gpt-luna_p60frames.png (4 caps) — 4/4 PROBLEMA: `v3_web_preview` mundo VACIO BLANCO, FPS:0, solo HUD reloj/barras (evidencia visual de BUG-127). Las 3 `gpt-luna` muestran menu Pausa legible sobre playa sobreexpuesta, pero con IDE Kilo Code visible detras.
+- [x] T23-03: 155-Vestimenta / cap_155_2026-10-26_06-00-00_nemotron_vestimenta_spawn.png ... cap_155_2026-10-26_06-00-00_nemotron_vestimenta_spawn.png (1 caps) — 1/1 PROBLEMA: personaje SI renderiza como modelo (no capsula) sobre archipelago/agua, pero captura contaminada por IDE con texto de reflexion detras; FPS:60.
+- [x] T23-04: 155-Vestimenta-Y-Accesorios / cap_155_2026-09-01_18-50-00_jugador.png ... cap_155_2026-09-01_19-36-00_ui_equip4.png (5 caps) — 5/5 PROBLEMA: `jugador` capsula azul con barra de equipo `Pico de cobre 150/150`; `ui_equipamiento` es solo VS Code/Kilo Code; `ui_equip2/3/4` son 3 veces el SPLASH de Godot (una con NullReferenceException en consola).
+- [x] T23-05: 155-Vestimenta-Y-Accesorios / cap_155_2026-09-01_19-38-00_printwindow.png ... cap_155_2026-09-01_22-24-00_preview.png (5 caps) — 5/5 PROBLEMA: `printwindow` ventana gris vacia; `region` splash de Godot; `intento6`/`topmost` dialogo "Los archivos han sido modificados fuera de Godot" sin escena; `preview` panel `Vestimenta del jugador` legible pero 4 slots vacios y consola IDE con errores detras.
+- [x] T23-06: 155-Vestimenta-Y-Accesorios / cap_155_equipment-integrated_2026-09-06_04-30.png ... cap_155_equipment-integrated_2026-09-06_04-30.png (1 caps) — 1/1 PROBLEMA: capsula azul sobre montaña voxel con arboles, FPS:60, IDE/browsers al fondo. No se ve equipamiento aplicado al modelo.
+- [x] T23-07: 16-Crafting / cap_16_crafting_arranque.png ... cap_16_estacion.png (2 caps) — 2/2 PROBLEMA: ambas muestran la misma capsula azul en terreno voxel (FPS:59 y 60) con controles superpuestos; no se distingue una estacion de crafting ni feedback visual.
+- [x] T23-08: 161-Diseno-Visual-De-NPCs / swatch_23npc.png ... swatch_23npc_v2.png (2 caps) — 2/2 PROBLEMA: `swatch_23npc.png` tabla de 23 NPCs con casillas GRISES VACIAS; `_v2` paleta coloreada legible, pero es documento de diseno, no render de NPC in-game.
+- [x] T23-09: 161-DisenoVisualNPCs / cap_161_2026-10-26_05-30-20_nemotron_diseno_visual_npcs_spawn.png ... cap_161_2026-10-26_05-30-20_nemotron_diseno_visual_npcs_spawn.png (1 caps) — 1/1 PROBLEMA: modelo de personaje visible sobre arena/agua con FPS:60, pero IDE/texto de reflection detras y portal naranja sin contexto. No se ven disenos de NPC.
+- [x] T23-10: 163-Sistema-De-Encantamientos / cap_163_2026-10-08_23-28-18_post_bug119_chaman_terreno.png ... cap_163_2026-10-09_03-39-06_bug124_chaman_malla.png (5 caps) — 5/5 PROBLEMA: las 4 primeras muestran SOLO ladera azul/gris sin chamán (evidencia del BUG-124 original); la quinta `bug124_chaman_malla` SI muestra capsula+esfera con Label3D `Chamán`, pero flotando sobre la colina y sin estilo. Fix visual parcial.
+- [x] T23-11: 165-Voxel-Tools-Guia / cap_165_2026-09-01_00-41-03_escena_terrero.png ... cap_165_2026-09-01_00-41-34_detalle_biomas.png (2 caps) — 2/2 PROBLEMA: terreno voxel con jugador CAPSULA AZUL, FPS:60; `detalle_biomas` no diferencia biomas (todo verde/rosa).
+- [x] T23-12: 167-Isla-Raiz / cap_167_2026-09-01_12-28-00_overview.png ... cap_167_2026-10-31_20-39-56_gpt-luna_continuar-reanuda.png (5 caps) — 4 PROBLEMA + 1 OK. OK: `gpt-luna_isla-reanudada` (modelo, agua/islas, FPS:60). PROBLEMA: `overview` y `smoke_regresion` con capsula azul + IDE/consola; `costa` geometria blanca/cian sin jugador; `continuar-reanuda` modelo con texto de IDE detras.
+- [x] T23-13: 167-Isla-Raiz / cap_167_2026-10-31_20-42-21_gpt-luna_60-frames-agua.png ... cap_c1_2026-10-31_19-49-53_gpt-luna_isla-boot.png (4 caps) — 2 OK + 2 PROBLEMA. OK: `60-frames-agua` y `mas-60-frames` (modelo + agua/islas, FPS:60, sin IDE). PROBLEMA: `gpt-luna_spawn` recortado (HUD cortado) y `cap_c1_isla-boot` con IDE al fondo.
+- [x] T23-14: 167-IslaRaiz / cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png ... cap_167_2026-10-26_00-32-40_nemotron_isla_raiz_spawn.png (1 caps) — 1/1 PROBLEMA: personaje modelo sobre archipielago, FPS:60, pero texto de IDE detras de la ventana.
+- [x] T23-15: 19-Muelle / cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png ... cap_19M-AntorchaPared_antes-despues_2026-09-19_02-46-17.png (1 caps) — 1/1 OK: comparacion ANTES/DESPUES legible sobre fondo plano (`ANTES: flota 0.34 m` vs `DESPUES: E-90, cara interior`). No es gameplay, pero cumple su proposito de QA visual.
+- [x] T23-16: 19-NPC / cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png ... cap_19_2026-10-25_23-05-38_nemotron_npc_spawn.png (1 caps) — 1/1 PROBLEMA: modelo sobre costa con IDE/texto detras; NPC no diferenciable del jugador.
 - [ ] T23-17: 19-NPC-Y-Vecinos / cap_19_2026-08-28_02-07-15_Catalina Oso NPC visible en isla.png ... cap_19_2026-10-31_gpt-luna_sin-npc-visible.png (3 caps)
 - [ ] T23-18: 25-Ruinas / cap_21_2026-08-29_17-25-04_dialogo-catalina.png ... cap_21_2026-08-29_18-25-35_catalina-junto-jugador.png (5 caps)
 - [ ] T23-19: 25-Ruinas / cap_21_2026-08-29_18-36-02_camara-fijada.png ... cap_21_2026-08-29_19-52-07_spawn-corregido.png (5 caps)
@@ -98,4 +98,12 @@
 - [ ] T23-90: M157 / cap_M157_2026-10-30_23-45_nemotron_p1-sin-hud-transporte.png ... cap_M157_2026-10-30_23-45_nemotron_p1-sin-hud-transporte.png (1 caps)
 - [ ] T23-91: QA-M51-M31-M19 / cap_QA_2026-09-19_05-04-31.png ... cap_QA_2026-09-19_05-04-31.png (1 caps)
 - [ ] T23-92: gameplay / cap_gameplay-fps60_2026-09-06_03-50.png ... cap_gameplay-fps60_2026-09-06_03-50.png (1 caps)
+
+## Tanda 1 cerrada (HY4 Flash, 2026-11-18) — T23-01..08
+
+- **8/8 tareas con veredicto individual**, 22/22 capturas ABIERTAS Y VISTAS (una por una, 0 `[?]`). Rutas resueltas bajo `tools/mcp/godot-mcp/capturas/`; las 22 existen en disco.
+- Resultado: **0 OK / 22 PROBLEMA**. Patrones medidos: 6 capturas con jugador como CAPSULA AZUL (T23-01 ×2, T23-04 `jugador`, T23-06, T23-07 ×2), 8 inutilizables para QA (4 splashs de Godot, 1 VS Code, 1 ventana gris, 2 dialogos de archivos modificados), 1 mundo web vacio con FPS:0 (BUG-127), 3 pantallas de Pausa contaminadas por IDE, 1 escena de archipelago con IDE al fondo, 2 swatches de NPC (uno con casillas vacias) y 1 panel de vestimenta legible pero sobre IDE con slots vacios. Suma: 6+8+1+3+1+2+1 = 22.
+- Sin arreglos de codigo, sin flips en checklists ajenos. Cola restante del backlog 23: **84 tareas `[ ]`**.
+
+**Firma:** hy4-flash
 

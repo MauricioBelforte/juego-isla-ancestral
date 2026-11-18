@@ -1,4 +1,4 @@
-﻿# Auditoría de arquitectura UI — `scenes/ui` y `scripts/ui`
+# Auditoría de arquitectura UI — `scenes/ui` y `scripts/ui`
 
 **Modelo:** Glyph Cluster  
 **Plataforma:** Kilo Code  

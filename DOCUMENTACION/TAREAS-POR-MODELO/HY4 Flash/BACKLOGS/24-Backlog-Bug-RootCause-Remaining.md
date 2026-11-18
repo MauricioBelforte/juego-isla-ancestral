@@ -124,18 +124,18 @@ Para cada BUG-XXX:
 - [x] T24-108: BUG-140 - diagnosticar causa — RESUELTO: `test_logros.gd` ya no hace la asignacion white-box (L294 es `_check`); `CHECKS_MINIMOS := 72` L23 + guard L92-94. Suite REAL hoy: **72 checks / 0 fallos / 0 SCRIPT ERROR / EXIT 0**. Estado `[?]` del registro stale. CONFIDENCIA ALTA
 - [x] T24-109: BUG-141 - diagnosticar causa — PARCIAL: causa real documentada = deinit del GDExtension Voxel (36.5 s vs 2.8 s control, sondas de otro modelo NO re-ejecutadas por mi), NO fix de producto: `data_store.gd:99-103` sigue con `wait_to_finish()`. Registro `[x] Resuelto` describe el diagnostico, no la reparacion. CONFIDENCIA ALTA en codigo / MEDIA en atribucion
 - [x] T24-110: BUG-142 - diagnosticar causa — VIVO: `progression_manager.gd:380-389` retorna valor congelado de `_evaluacion_cache`; unico `.erase()` (`:404`) es eviccion FIFO en `_evaluate_cache_set`, NO invalidacion; `_reevaluar()` `:248-254` no toca el cache. `test_progresion.gd` 83/0 EXIT 0 sin probar invalidacion -> falso verde por omision. CONFIDENCIA ALTA
-- [ ] T24-111: BUG-143 - diagnosticar causa
-- [ ] T24-112: BUG-144 - diagnosticar causa
-- [ ] T24-113: BUG-145 - diagnosticar causa
-- [ ] T24-114: BUG-146 - diagnosticar causa
-- [ ] T24-115: BUG-147 - diagnosticar causa
-- [ ] T24-116: BUG-148 - diagnosticar causa
-- [ ] T24-117: BUG-149 - diagnosticar causa
-- [ ] T24-118: BUG-150 - diagnosticar causa
-- [ ] T24-119: BUG-151 - diagnosticar causa
-- [ ] T24-120: BUG-152 - diagnosticar causa
-- [ ] T24-121: BUG-153 - diagnosticar causa
-- [ ] T24-122: BUG-156 - diagnosticar causa
+- [x] T24-111: BUG-143 - diagnosticar causa — VIVO: `progression_manager.gd:248-254` `_reevaluar()` marca todo hito no alcanzado indexado bajo el stat SIN revalidar su umbral. Suite real `test_bug_reevaluar_m71_hy3.gd` hoy: **8 checks / 2 fallos / EXIT 1**. CONFIDENCIA ALTA
+- [x] T24-112: BUG-144 - diagnosticar causa — NO REPRODUCE hoy: `tests/integration/test_fixtures_smoke.gd` **20 checks / 0 fallos / EXIT 0 / 0 SCRIPT ERROR**, sin ACCESS VIOLATION. El registro `[ ] Abierto` esta stale para el arbol actual; no re-cree la condicion de contencion original. CONFIDENCIA ALTA sobre la corrida actual
+- [x] T24-113: BUG-145 - diagnosticar causa — PARCIAL: el cuelgue NO reproduce, `test_m18_m17_conflicto.gd` termina **9/0 EXIT 0 en 67 s** (re-medido 2x); sigue el warning `Waiting for all tasks to be picked is taking a long time` del ThreadedTaskRunner Voxel. Test vivo, latencia de producto sin fix. CONFIDENCIA ALTA
+- [x] T24-114: BUG-146 - diagnosticar causa — RESUELTO: `typewriter_effect.gd:26-34` `start()` solo reinicia estado (0 emit), `:48-51` `update()` solo emite si `_current_index < length` + `mini(...)`; suite `qa_m21_typewriter.gd` 11/0 EXIT 0. CONFIDENCIA ALTA
+- [x] T24-115: BUG-147 - diagnosticar causa — RESUELTO: `auto_advance_manager.gd:80-82` `var errors: Array[String] = []`; suite `qa_m21_auto_advance.gd` 14/0 EXIT 0. CONFIDENCIA ALTA
+- [x] T24-116: BUG-148 - diagnosticar causa — VIVO: suite real `test_generacion_m10_atria.gd` **1 fallo / EXIT 1**, mensaje exacto `FALLO: cobertura bioma 'beach' > 0 muestras (0)` sobre 2000 muestras. Generador `island_generator.gd:173/188/211` clasifica beach pero el muestreo no cae en el bioma. CONFIDENCIA ALTA
+- [x] T24-117: BUG-149 - diagnosticar causa — RESUELTO: `backup_local.ps1:199-200` fuerza array `@(Get-Content ...)` y `@($existing) + ...`; suite `scripts/test_backup_ps1.py` re-corrida hoy **49 checks / 0 fallos / EXIT 0**. CONFIDENCIA ALTA
+- [x] T24-118: BUG-150 - diagnosticar causa — VIVO: `event_bus.gd:70` declara `signal item_removed(...)` pero hay **0 `EventBus.item_removed.emit`** en `scripts/` (grep -rn). Los consumidores M53/M59 siguen sin recibir la remocion. Estado del registro `[?] Delegado`. CONFIDENCIA ALTA
+- [x] T24-119: BUG-151 - diagnosticar causa — RESUELTO: `animacion_jugador_m48.gd:47` usa `get_node_or_null("/root/AnimationService")`; 0 usos ejecutables de `Engine.get_singleton` (3 menciones en comentarios L14/15/36). CONFIDENCIA ALTA
+- [x] T24-120: BUG-152 - diagnosticar causa — RESUELTO: `qa_dirty_item4.gd:107` llama al metodo real `_refrescar_guardar_dirty()`, `CHECKS_MINIMOS = 6` L16, watchdog 30 s L31/40, y L123 verifica que `_actualizar_dirty` NO exista. Suite real `[QA-DIRTY] RESULTADO=OK` EXIT 0 (antes colgaba >7 min). CONFIDENCIA ALTA
+- [x] T24-121: BUG-153 - diagnosticar causa — DELEGADO / NO RE-MEDIDO con el metodo original: decision macro del fundador, 0 flips por mi parte. Verificados en git los 3 commits citados (`dd6fb70`, `3a3d32c`, `a7a3a6b`). Muestreo grueso PROPIO (no equivalente al del registro): 2627 lineas `[x]` con cita `03-Diseno` en checklists; NO re-doy por medidas las cifras 859/515/283. CONFIDENCIA MEDIA
+- [x] T24-122: BUG-156 - diagnosticar causa — VIVO: en es/en/pt los `locales/*.po` tienen `VOLVER_TITULO` (2 hits c/u) y `VOLVER_TITULO_CONFIRMAR` (1 hit c/u), mientras `data/localizacion/strings_*.json` tienen **0** hits. Deriva real entre catalogos; runtime lee `.po`, sin rotura visual hoy. CONFIDENCIA ALTA
 
 
 
@@ -191,5 +191,25 @@ Para cada BUG-XXX:
 - **Registro stale detectado:** BUG-115 figura `[→]` en 11-BUGS.md pero el codigo ya tiene HMAC-SHA256 y validacion de ambos dialectos de `time`. No edite 11-BUGS.md (es del director).
 - **Correccion metodologica propia:** en BUG-103 mi primera lectura marco un log como UTF8_FAIL; re-medido dos veces = UTF8_OK. Queda dicha la incertidumbre sobre el cambio.
 - **Sin commit/push;** unico archivo modificado = este backlog. Cola restante: 32 tareas `[ ]` de 122.
+
+**Firma:** hy4-flash
+
+## Lote 6 cerrado (HY4 Flash, 2026-11-18)
+
+- **20/20 diagnosticados** (T24-91..110, BUG-123..142): 14 resueltos, 1 parcial, 5 abiertos. Sin arreglos de codigo ni flips.
+- 11 suites headless re-ejecutadas; 10 verdes con 0 SCRIPT ERROR; `test_m66_inv_ruta.gd` no corre por `--script` (ver nota del director abajo).
+- Cola de este backlog: 12 tareas `[ ]`; cola total re-medida en los 30 backlogs numerados: 399 (el 439 del informe 047 era pre-lote 5).
+
+**Firma:** hy4-flash
+
+## Lote 7 cerrado — backlog 24 COMPLETO (HY4 Flash, 2026-11-18)
+
+- **12/12 diagnosticados** (T24-111..122, BUG-143..156): 6 resueltos, 2 parciales/delegados, 4 abiertos. Sin arreglos de codigo ni flips.
+- Backlog 24: **122/122 `[x]`, 0 `[ ]`**. Suites reales: `test_bug_reevaluar_m71_hy3` 8/2/EXIT 1 (rojo esperado, BUG-143 vivo), `test_fixtures_smoke` 20/0, `test_m18_m17_conflicto` 9/0 en 67 s, `qa_m21_typewriter` 11/0, `qa_m21_auto_advance` 14/0, `test_generacion_m10_atria` 1 fallo/EXIT 1 (BUG-148 vivo), `qa_dirty_item4` OK, `test_backup_ps1.py` 49/0. Todas con 0 SCRIPT ERROR.
+- Abiertos que siguen: BUG-143 (M71), BUG-148 (M10), BUG-150 (M14/M53/M59), BUG-156 (M59/M87). Parciales: BUG-145 (latencia Voxel, test ya termina) y BUG-153 (decision macro del fundador, NO re-medida con el metodo original).
+
+## Nota del director 049 — M66, no fix (HY4 Flash, 2026-11-18)
+
+- `test_m66_inv_ruta.gd` corrido hoy: `rc=1`, 0 SCRIPT ERROR, `Can't load the script "res://scripts/core/test_m66_inv_ruta.gd" as it doesn't inherit from SceneTree or MainLoop`. El director manda anotarlo como bug M66 y **no arreglarlo**; lo deriva a DS-OC (msg 264). Sin cambios de codigo ni marcas de mi parte.
 
 **Firma:** hy4-flash
