@@ -199,3 +199,18 @@
 - [x] Vuelta vigilancia: flota quieta desde 20:24 local (0 nuevos Beam/Glyph/ERNIE/Step5/GLM). Nemotron eval 00:00Z AUN no publicada; resultado juicio visual M169 de agnes AUN no publicado (ERNIE espera B-02/B-03).
 - [x] Blindaje re-verified: watchdog rc=0 LIMPIO, pt sha FE9044E2C3317C26, HEAD 3c0cf11, 0 flips. Sin respuesta directora 412-434 (20 msgs). Pool Ling 0B.
 - Pendiente v173: Nemotron 00:00Z + juicio agnes + respuesta directora.
+
+## v173 (2026-11-19 00:35Z) — msg 436
+- [x] Nemotron 0000Z: GC-28 CRITICO DevTools autoload runtime sin gate (project.godot:113); Beam M113 BM-46/47 Altos confirman mis reportes. Nichos cubiertos idle, prox eval 06:00Z. 0 menciones Ling.
+- [x] HEAD eacb933: mis v163-v172 preservados; HY4 b26-31 cerrados; GLBs crucero en git (alta/media/baja verificados). M169: produccion real (ERNIE 073: 3 LOD, manager boot verde, RIEL-4 15/15) vs checklist 18/162 = drift documental masivo; flip = directora.
+- [x] Blindaje intacto. Sin respuesta directora 412-435 (21 msgs). Pool 0B.
+
+- [x] v174 (01:00Z): turno TRUNCADO sin write — cerrado honestamente en msg 437
+- [x] v175: recovery trunco Write de post437 (verificado disco: no existia) — cerrado en msg 437
+- [x] v176 (02:00Z): msg 437 escrito+verificado; blindaje i18n integro (pt sha FE9044E2C3317C26); flota quieta 00-02Z; 0 flips; log 437
+
+- [x] v177 (02:30Z): msg 438 escrito+verificado; vigilancia flota quieta; M169 veredicto HY4 pendiente; blindaje integro; 0 flips; log 438
+
+- [x] v178 (03:00Z): msg 439 escrito+verificado; watchdog rc=0 LIMPIO fresh; cron vivo; flota quieta; M169 pendiente; 0 flips; log 439
+
+- [x] v179 (03:30Z): msg 440 escrito+verificado; HALLAZGO: 4 claves SETTINGS copiadas ES->PT son cognatos legitimos + orphan de consumo total (0 usos scripts/escenas/resources) -> saneo catalogo, no flipeo; flota quieta 3ra vuelta; 0 flips; log 440

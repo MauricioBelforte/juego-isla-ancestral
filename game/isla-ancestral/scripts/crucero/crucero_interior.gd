@@ -1,18 +1,23 @@
 class_name CruceroInterior
 extends Node3D
 
-_func _GL():
-	var gl = get_node_or_null("/root/GameLogger")
-	if gl != null:
-		return gl
-	return _FallbackLog.new()
+var _gl: Node = null
 
-class _FallbackLog:
-	func debug(msg, cat="", ctx={}): pass
-	func info(msg, cat="", ctx={}): pass
-	func warning(msg, cat="", ctx={}): pass
-	func error(msg, cat="", ctx={}): pass
-	func critical(msg, cat="", ctx={}): pass
+func _log_debug(msg: String, cat: String = "", ctx: Dictionary = {}):
+	if _gl: _gl.debug(msg, cat, ctx)
+
+func _log_info(msg: String, cat: String = "", ctx: Dictionary = {}):
+	if _gl: _gl.info(msg, cat, ctx)
+
+func _log_warning(msg: String, cat: String = "", ctx: Dictionary = {}):
+	if _gl: _gl.warning(msg, cat, ctx)
+
+func _log_error(msg: String, cat: String = "", ctx: Dictionary = {}):
+	if _gl: _gl.error(msg, cat, ctx)
+
+func _log_critical(msg: String, cat: String = "", ctx: Dictionary = {}):
+	if _gl: _gl.critical(msg, cat, ctx)
+
 ## Una cubierta del Crucero Real (M169).
 ##
 ## Regla del modulo: **una cubierta = una escena**. Este script solo controla
@@ -51,7 +56,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if cubierta >= 4:
 		destino = 1
 	puerta_cruzada.emit(destino)
-	_GL().info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], _GL().Category.GAMEPLAY)
+	_log_info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], _GL().Category.GAMEPLAY)
 
 
 func activar() -> void:

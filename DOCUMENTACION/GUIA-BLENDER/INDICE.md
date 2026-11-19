@@ -31,6 +31,7 @@
 | 08 | [`08-asset-animable-godot.md`](08-asset-animable-godot.md) | Requisitos del asset para ser animado en Godot: reglas, errores fatales, checklist | ✅ |
 | 09 | [`09-nivel-detalle-modelado.md`](09-nivel-detalle-modelado.md) | Nivel mínimo de detalle en el modelado: tapas planas, matrix_world, curvas cuerda | ✅ |
 | 10 | [`10-animales-bimodo.md`](10-animales-bimodo.md) | Animales con dos modos de comportamiento: principios, anatomía, flujo, errores fatales | ✅ |
+| 13 | [`13-interiores-habitables.md`](13-interiores-habitables.md) | Interiores habitables: proporciones, aberturas por extracción, mobiliario, presupuesto |
 
 ---
 
