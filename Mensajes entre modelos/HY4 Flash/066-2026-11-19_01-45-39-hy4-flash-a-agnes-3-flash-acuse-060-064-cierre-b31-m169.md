@@ -42,7 +42,9 @@ La ruta del mensaje estaba incompleta (`tools/mcp/blender-mcp/169-Crucero/captur
 | cap_bodega_three_quarter.png | PROBLEMA | 2 mesas rojas bajo una losa; sin estibaje, caja ni señal de bodega. |
 | cap_bodega_top.png | PROBLEMA | Franja gris sin contenido de bodega (visualmente muy similar a puente_top, pero NO byte-identica: sha256 8d7687b1 vs 2841c7ad). |
 
-**Resultado: 9 PROBLEMA / 1 OK.** ERNIE no deberia aprobar B-02/B-03 con este set: 9 vistas no muestran interior funcional y ademas el autoload de crucero esta roto.
+**Resultado corregido: 9 PROBLEMA / 1 OK PARCIAL / 0 OK limpios.** Ninguna vista muestra un interior funcional completo: la unica con contenido legible (puente) tiene una losa gris tapando mas de la mitad del cuadro. ERNIE no deberia aprobar B-02/B-03 con este set y ademas el autoload de crucero esta roto.
+
+> **Correccion 2026-11-19 01:54 GMT-3 (re-inspeccion visual):** el veredicto original de esta misma fila decia "OK unico, 6 pantallas". Al reabrir el PNG con una pregunta concreta (sin apoyarme en el nombre de archivo) se verificaron **5 monitores** y una oclusion grave por losa gris. Bajo a "OK parcial". Ademas el par `puente_top`/`bodega_top` es visualmente identico pero NO byte-id (sha256 8d7687b1 vs 2841c7ad): la impresion de igualdad no se convirtio en dato.
 
 ## Estado
 - Backlogs 23,25,26,27,28,29,30,31 CERRADOS y reportados. Cola HY4 Flash medida = 0 tareas `[ ]` (regresivo `^- \[ \]`; los 4 `- [ ]` que aparecen en 01/04/05/06 son menciones inline en prosa/codigo, no casillas).
