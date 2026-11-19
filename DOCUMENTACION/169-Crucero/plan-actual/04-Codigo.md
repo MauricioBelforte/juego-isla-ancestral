@@ -290,3 +290,38 @@ estado inicial ATRACADO sin pasaje.
 **Pendiente:** pasar el test a **GdUnit4** (`tests/unit/test_crucero_manager.gd`) — hoy fue una escena temporal, ya borrada.
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-17
+
+
+### 8.6 Renders, LODs e interiores (2026-11-18)
+
+**Renders para el juez visual** (10 PNG, 900x600, EEVEE) en `capturas/169-Crucero/`:
+
+| Interior | 3/4 | Planta |
+|---|---|---|
+| Camarote | `cap_camarote_three_quarter.png` | `cap_camarote_top.png` |
+| Comedor | `cap_comedor_three_quarter.png` | `cap_comedor_top.png` |
+| Casino | `cap_casino_three_quarter.png` | `cap_casino_top.png` |
+| Puente | `cap_puente_three_quarter.png` | `cap_puente_top.png` |
+| Bodega | `cap_bodega_three_quarter.png` | `cap_bodega_top.png` |
+
+**LODs del exterior** (`gen_lod_uno.py`, headless, `EXPORT_*` por env):
+
+| LOD | Vértices | GLB | Reducción |
+|---|---:|---:|---:|
+| alta | 16.544 | 977 KB | — |
+| media | 8.895 | 390 KB | −46 % |
+| baja | 6.677 | 250 KB | −60 % |
+
+**Nota:** la reducción es menor que la teórica (65/85 %) porque el modelo es low-poly de cajas: el decimador no puede quitar mucho de un cubo. Para bajar más hay que **eliminar piezas pequeñas** (24 ventanas, pilares, botes), no decimar.
+
+**Interiores (5 espacios, 3.126 v):**
+
+| Escena | Medidas | Vértices | Fuente Blender |
+|---|---|---:|---|
+| `interior_cubierta_2` (camarotes) | 3,03 × 3,66 × 2,40 m | 204 | `camarote_tipo_lowpoly.blend` |
+| `interior_cubierta_3` (comedor) | 44 × 10 × 2,85 m | 984 | `comedor_lowpoly.blend` |
+| casino | 22 × 9 × 2,85 m | 1.034 | `casino_lowpoly.blend` |
+| puente | 9 × 4,3 × 2,60 m | 456 | `puente_lowpoly.blend` |
+| bodega | 60 × 11 × 3,0 m | 448 | `bodega_lowpoly.blend` |
+
+**Pendiente:** variantes de camarote (interno, familiar, suite, dúplex), LOD "de verdad" (eliminando piezas), y el veredicto del juez visual (HY4 Flash) sobre los 10 renders.

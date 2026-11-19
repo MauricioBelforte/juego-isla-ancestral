@@ -158,3 +158,44 @@
 - [x] v161 (vuelta 17:30Z): msg 427 escrito y verificado. BEAM ARRANCA FORMAL: AUDITORIA-M103-LOGGING-2026-11-18.md (17:23Z, 7463B; 2 Altos: logger.gd:209 contador rotacion chars-vs-bytes UTF-8 -> rotacion tarde/nunca, fix to_utf8_buffer().size(); export_by_date:315-316 else incondicional inyecta lineas sin timestamp. 6 Medios: off-by-one frontera :363, reload no idempotente, escape JSON incompleto, level sin validar, categorias vacias filtran todo, max_rotated_files sin clamp. 9 Bajos + 1 Ruido). 0 hits grep Ling/i18n/M87/pt.po/locale = sin superposicion de nichos. Alto (a) es clase exacta de bug de deuda mojibake AGENTS 28 (logs con acentos). HY4 absorbe ex-Hy3: nuevo 31-Backlog-Tanda-23nov-exHy3.md + BK-MASTER M (Hy3 pool roto head 483). Glyph BK persiste M (migracion Kilo Code). Blindaje re-verified: watchdog LIMPIO rc=0, centinela 22719/552/169 estables 0 flips (+9.75h), riel pt intacto, HEAD 3e52baf. Canal ultimos 3 = 426/425/424 (mios), sin acuse directora a 412-427 (14 msgs); estado_director congelado 2026-11-08 (10 dias) pero directora operativamente activa. PROXIMA: standby + blindaje, responder primero si contesta 412-427.
 
 - [x] v162 (vuelta 18:00Z): msg 428 escrito y verificado. FLOTA AUDITORIA A PLENA PRODUCCION: Beam M105 Telemetria (7051B, 2do informe 12 min tras M103): fila 105 global 143/171 COINCIDE real 143[x]/0[ ]/28[?] sin drift; verificar_hooks_m105.py H3=0 consumidores en 1245 .gd (trackers muertos en produccion, grep independiente confirma); Alto discovery incompleto 6/13 trackers, Medio-Alto difficulty_perceived sin validar/dedup, Medio PUZZLE_FIRST_COMPLETED inflado. Glyph/Nemotron M04 Game-Engine (17033B, 1er informe comp 5): F-01 Alto orquestacion Bootstrap/SceneManager/GameFlowManager fragmentada con canales paralelos senales vs EventBus.infra; F-02 Alto Service Locator strings magicos + /root/* inconsistente, Contratos no es fuente unica, SaveManager punto de riesgo; sin ciclos importacion directos. Metodologia convergente script+grep (escuela 420). Blindaje re-verified: watchdog LIMPIO rc=0, centinela 22719/552/169 estables 0 flips (+10h), riel pt intacto, HEAD 3e52baf. Canal 427/426/425 mios, sin acuse directora 412-427 (15 msgs); estado_director congelado 10 dias. PROXIMA: standby + blindaje.
+
+## v163 (2026-11-18 21:35Z) — CIERRE DEUDA v163-v166 + msg 429
+- [x] Vueltas 18:30/19:00/19:30/20:00/20:30Z sin write real (turnos truncados, cron superpuesto); deuda saldada con msg 429 (num consumido por helper dentro de post429 crasheo; escritura honesta cierra ciclo).
+- [x] Anomalia radar fantasma verificada NEGATIVAMENTE: 2 informes Beam listados 18:00Z (no_cubiertos mtime 15:05 + cross-verificacion M105-M112 '1805') NO EXISTEN en disco (glob repo-wide=0; canal Beam solo M103+M105; no_cubiertos unico mtime 02:24 6425B). No citar como entrega Beam.
+- [x] Radar flota firme: Beam M103 (2A/6M/9B) + M105 (fila sin drift, H3=0, discovery 6/13); Glyph/Nemotron migra Kilo Code 7 modulos; HY4 absorbe ex-Hy3. 0 superposicion Ling/i18n/M87.
+- [x] Blindaje 0 flips: watchdog rc=0, centinela 22719/552/169 estable, riel pt d2b567c intacto SHA256 FE9044E2C3317C26, HEAD 3e52baf, WT 18.
+- Leccion: write real PRIMERO en ventanas cron apretadas. Proximo v167: msg corto blindaje antes de radar largo.
+
+## v167 (2026-11-18 22:05Z) — msg 430
+- [x] Confirmado 429 en disco (2544B). HEAD 3c0cf11 (directora preservo 425-428+Beam+Glyph+Nemotron eval 18:05Z).
+- [x] Blindaje: watchdog directo rc=0 LIMPIO (170/170/170, 0 placeholders); pt sha FE9044E2C3317C26 invariante v58; 0 flips.
+- [x] Anomalia scan rc=1 = artefacto subprocess (directo rc=0). Pendiente: leer eval Nemotron 1800; radar Beam/Glyph.
+
+## v168 (2026-11-18 22:35Z) — msg 431 (renumerado desde 313: pool mal sembrado, colision evitada; ver msg 432)
+- [x] Radar: Beam reverificacion GLOBAL (5 IDs dup 48/115/127/139/148; 12 stale M158 critico 75d; 78 drifts; M169 ✅ FALSO 18/162 144[ ]); Beam M112 tests (sin drift, Alto Obsoletos en IGNORAR_DIRS); Glyph M10 (4 Altos contrato M09/_get_island_gen/hardcode); Nemotron eval (nichos cubiertos, opcion A, prox 00:00Z).
+- [x] Blindaje: watchdog rc=0 LIMPIO; pt sha FE9044E2C3317C26 invariante; 0 flips; HEAD 3c0cf11.
+- Pendiente directora: dedup IDs, stale, M169 ✅ falso, drifts 38/73/139 (Beam). 0 superposicion Ling.
+
+## v169 (2026-11-18 22:40Z) — msg 432 — INCIDENTE 313/431 REPARADO
+- [x] Incidente: pool Ling envenenado (1B '\n', mtime 2026-11-11) -> helper --consume dio 313 -> colision con 313 historico 2026-10-28. Reparado: renombrado a 431, 313 historico intacto, BK corregido, pool saneado (0 nums), helper OK proximo 432.
+- [x] Solicitudes directora: repoblar pool Ling 432+; revisar helper --consume con linea en blanco (rechazar no-numericos, validar num>max). Ling no toque scripts/.
+- [x] Lecciones aplicadas: validar num==max+1 antes de escribir; no regex-parsear stdout crudo; glob idempotencia.
+
+## v169b (2026-11-18 22:45Z) — correccion causa raiz incidente 313
+- [x] Causa real: bug propio argumentos helper (ruta partida 'scripts'+'proximo_numero.py') -> python ejecuto directorio -> regex capturo '313' de 'Python313' en path del error. Helper nunca corrio 429-432; numeros validos por fallback/validacion ultimo+1 (GUIA 10.2). Pool envenenado (1B '\n') era aparte; saneado.
+- [x] Msg 432 corregido en disco con causa verdadera. Proximos scripts: ruta helper como UN token 'scripts/proximo_numero.py'.
+
+## v170 (2026-11-18 23:05Z) — msg 433
+- [x] Cruce riel: HY4 b29 (276 msgid es.po, 206 usados/70 orphan) concentra orphan en SETTINGS.HORAS_* = mismas 4 claves copia ES->PT de mi watchdog. Hipotesis report-only, 0 flips (flips solo por test). agnes acuse: b27 ok, b28 deuda Hy3 (M102), b29 aceptado. Queda HY4 b26/b30/b31.
+- [x] Radar: Beam formulas combate/economia 7365B + tests v2 5886B; Glyph UI/M14/M71; agnes acuse ERNIE 069. Blindaje intacto (pt sha invariante, watchdog rc=0, HEAD 3c0cf11, 0 flips).
+- Pendiente: directora repoblar pool Ling 433+; helper --consume linea en blanco.
+
+## v171 (2026-11-18 23:35Z) — msg 434
+- [x] M169: cadena visual activa (ERNIE 071 renders -> agnes 060 juicio 10 PNG -> B-02/B-03 pendientes). PNG NO estan en repo (capturas no versionadas §24); carpeta 169-Crucero solo 3 .py. Refuerza ✅ falso Beam; flip = directora.
+- [x] Beam stress M113: Alto runner status siempre ok (falso verde) + Alto drift checklist 132/131/132 contradictorios; Medio flycam radio 256 obsoleto (§26).
+- [x] Blindaje intacto. Sin respuesta directora 412-433. Pool Ling 0B.
+
+## v172 (2026-11-19 00:05Z) — msg 435
+- [x] Vuelta vigilancia: flota quieta desde 20:24 local (0 nuevos Beam/Glyph/ERNIE/Step5/GLM). Nemotron eval 00:00Z AUN no publicada; resultado juicio visual M169 de agnes AUN no publicado (ERNIE espera B-02/B-03).
+- [x] Blindaje re-verified: watchdog rc=0 LIMPIO, pt sha FE9044E2C3317C26, HEAD 3c0cf11, 0 flips. Sin respuesta directora 412-434 (20 msgs). Pool Ling 0B.
+- Pendiente v173: Nemotron 00:00Z + juicio agnes + respuesta directora.
