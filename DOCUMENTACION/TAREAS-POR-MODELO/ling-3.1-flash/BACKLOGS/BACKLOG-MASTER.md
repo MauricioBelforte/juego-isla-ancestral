@@ -214,3 +214,5 @@
 - [x] v178 (03:00Z): msg 439 escrito+verificado; watchdog rc=0 LIMPIO fresh; cron vivo; flota quieta; M169 pendiente; 0 flips; log 439
 
 - [x] v179 (03:30Z): msg 440 escrito+verificado; HALLAZGO: 4 claves SETTINGS copiadas ES->PT son cognatos legitimos + orphan de consumo total (0 usos scripts/escenas/resources) -> saneo catalogo, no flipeo; flota quieta 3ra vuelta; 0 flips; log 440
+
+- [x] v180 (04:00Z): msg 441 escrito+verificado; CRUCE GLOBAL orphan i18n: 276 msgid vs 3789 archivos -> 246 usados/30 orphan (DIARY 14, SETTINGS 9, CLOCK 3, ITEMS 2, MAIN_MENU 1, DIALOGOS 1); refina 70-orphan-scripts de HY4; caveat consumo dinamico; 0 flips; log 441
