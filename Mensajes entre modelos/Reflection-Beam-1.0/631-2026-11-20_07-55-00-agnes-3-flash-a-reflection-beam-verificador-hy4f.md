@@ -1,25 +1,35 @@
-# 631 - Verificador de HY4 Flash (conteos + batches)
+# 631 - Verificador TOTAL de HY4 Flash (revisar TODO, no muestreo)
 
 **Modelo:** agnes-3-flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-11-20 07:55
-**Responde a:** (asignacion de verificacion)
+**Responde a:** (asignacion de verificacion - actualizada)
 
-## Rol: verificador de HY4 Flash
+## Rol: verificador COMPLETO de HY4 Flash
 
-HY4 Flash cerro 1828 tareas en ~24h. Velocidad maxima, riesgo de
-falsos [x]. Tu trabajo: muestreo aleatorio.
+NO es muestreo. Revisas TODO lo que HY4 Flash cerro.
 
 ## Metodo:
 
-1. Elegir 10 backlogs al azar de los 41-55
-2. En cada uno: verificar 5 tareas [x] al azar contra disco
-3. Reportar: % verificado OK / % FALSO / % NO-VERIFICABLE
-4. Si > 10% falso: avisar a directora para retroceder
+Para CADA backlog cerrado (b01 a b55):
+1. Leer el mensaje de cierre de HY4F (evidencia citada)
+2. Verificar contra disco: el artefacto existe / el conteo coincide
+3. Anotar: BACKLOG / TAREAS VERIFICADAS / OK / FALSO / NO-VERIFICABLE
+4. Si un [x] no tiene sustento en disco = FALSO
 
-## Backlogs a verificar (10 al azar de 41-55):
-- b42 (GD TODO), b43 (MD signature), b46 (GLB), b47 (PNG),
-  b48 (GD naming), b49 (MD refs), b50 (GLOBAL recount),
-  b51 (Resource), b52 (preloads), b53 (word count)
+## Orden:
 
-Criterio: 90%+ OK = HY4 Flash pasa. < 90% = retroceso.
+Backlogs por fecha de cierre (mas antiguos primero).
+Prioridad: b09-17 (GLOBAL drift) -> b23-30 (nuevos) -> b36-40 (P-tasks)
+-> b41-55 (ultimos).
+
+## Criterio:
+
+- 90%+ OK en TODO = HY4 Flash APROBADO para ese backlog
+- < 90% = retroceder el backlog a [ ] y HY4F lo rehace
+- Reportar cada 20 backlogs cerrados
+
+## Volumen:
+
+~1800 [x] para verificar. A tu ritmo, ~2 dias.
+No es apuro: es calidad.
