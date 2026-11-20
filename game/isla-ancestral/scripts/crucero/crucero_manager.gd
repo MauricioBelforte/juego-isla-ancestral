@@ -68,18 +68,18 @@ func _ready() -> void:
 func _cargar_catalogos() -> void:
 	_clases = _leer_json(RUTA_PASAJES, "clases")
 	_camarotes = _leer_json(RUTA_CAMAROTES, "camarotes")
-	_log_info("%s catalogos cargados: %d clases, %d camarotes" % [PREFIJO_LOG, _clases.size(), _camarotes.size()], _GL().Category.GAMEPLAY)
+	_log_info("%s catalogos cargados: %d clases, %d camarotes" % [PREFIJO_LOG, _clases.size(), _camarotes.size()], "GAMEPLAY")
 
 
 func _leer_json(ruta: String, clave: String) -> Dictionary:
 	var out := {}
 	if not FileAccess.file_exists(ruta):
-		_log_error("%s no existe %s" % [PREFIJO_LOG, ruta], _GL().Category.SYSTEM)
+		_log_error("%s no existe %s" % [PREFIJO_LOG, ruta], "SYSTEM")
 		return out
 	var txt := FileAccess.get_file_as_string(ruta)
 	var parsed: Variant = JSON.parse_string(txt)
 	if typeof(parsed) != TYPE_DICTIONARY:
-		_log_error("%s JSON invalido en %s" % [PREFIJO_LOG, ruta], _GL().Category.SYSTEM)
+		_log_error("%s JSON invalido en %s" % [PREFIJO_LOG, ruta], "SYSTEM")
 		return out
 	var lista: Variant = (parsed as Dictionary).get(clave, [])
 	if typeof(lista) != TYPE_ARRAY:
@@ -140,7 +140,7 @@ func vender_pasaje(clase: StringName, route_id_: StringName, origen: StringName,
 	camarote_asignado = cam
 	estado = Estado.ABORDO
 	pasaje_comprado.emit(String(clase), p.precio)
-	_log_info("%s pasaje vendido: %s -> %s (%s)" % [PREFIJO_LOG, origen, destino, clase], _GL().Category.GAMEPLAY)
+	_log_info("%s pasaje vendido: %s -> %s (%s)" % [PREFIJO_LOG, origen, destino, clase], "GAMEPLAY")
 	return {"ok": true, "motivo": "", "precio": p.precio, "camarote": cam}
 
 func _siguiente_camarote(clase: StringName) -> StringName:
@@ -155,12 +155,12 @@ func _siguiente_camarote(clase: StringName) -> StringName:
 ## El jugador cruza el Area3D de embarque.
 func embarcar() -> bool:
 	if not puede_embarcar():
-		_log_warning("%s embarque rechazado (estado=%s)" % [PREFIJO_LOG, str(estado)], _GL().Category.GAMEPLAY)
+		_log_warning("%s embarque rechazado (estado=%s)" % [PREFIJO_LOG, str(estado)], "GAMEPLAY")
 		return false
 	cubierta_actual = int(pasaje_actual.cubierta)
 	estado = Estado.ABORDO
 	embarque.emit(cubierta_actual)
-	_log_info("%s embarque en cubierta %d" % [PREFIJO_LOG, cubierta_actual], _GL().Category.GAMEPLAY)
+	_log_info("%s embarque en cubierta %d" % [PREFIJO_LOG, cubierta_actual], "GAMEPLAY")
 	return true
 
 ## M68 avisa que la ruta arrancó.
@@ -170,7 +170,7 @@ func _on_viaje_iniciado(route_id_: StringName, _coste: int) -> void:
 	route_id = route_id_
 	estado = Estado.NAVEGANDO
 	zarpe.emit(String(pasaje_actual.stop_id_origen), String(pasaje_actual.stop_id_destino))
-	_log_info("%s zarpe %s -> %s" % [PREFIJO_LOG, pasaje_actual.stop_id_origen, pasaje_actual.stop_id_destino], _GL().Category.GAMEPLAY)
+	_log_info("%s zarpe %s -> %s" % [PREFIJO_LOG, pasaje_actual.stop_id_origen, pasaje_actual.stop_id_destino], "GAMEPLAY")
 
 ## M68 avisa que llegamos.
 func _on_viaje_llegado(_route_id: StringName, stop_id: StringName) -> void:
@@ -178,7 +178,7 @@ func _on_viaje_llegado(_route_id: StringName, stop_id: StringName) -> void:
 		return
 	estado = Estado.ATRACADO
 	llegada.emit(String(stop_id))
-	_log_info("%s llegada a %s" % [PREFIJO_LOG, stop_id], _GL().Category.GAMEPLAY)
+	_log_info("%s llegada a %s" % [PREFIJO_LOG, stop_id], "GAMEPLAY")
 
 ## Cambio de cubierta (escalera o ascensor).
 func cambiar_cubierta(destino: int) -> bool:
@@ -198,14 +198,14 @@ func desembarcar(destino: String) -> void:
 	camarote_asignado = &""
 	estado = Estado.ATRACADO
 	desembarco.emit(destino)
-	_log_info("%s desembarco en %s (camarote %s liberado)" % [PREFIJO_LOG, destino, previo], _GL().Category.GAMEPLAY)
+	_log_info("%s desembarco en %s (camarote %s liberado)" % [PREFIJO_LOG, destino, previo], "GAMEPLAY")
 
 ## Modo emergencia (tormenta / falla): el viaje se interrumpe.
 func declarar_emergencia(motivo: String) -> void:
 	if estado != Estado.NAVEGANDO:
 		return
 	estado = Estado.EMERGENCIA
-	_log_warning("%s EMERGENCIA: %s" % [PREFIJO_LOG, motivo], _GL().Category.GAMEPLAY)
+	_log_warning("%s EMERGENCIA: %s" % [PREFIJO_LOG, motivo], "GAMEPLAY")
 
 # ------------------------------------------------------------------ persistencia
 
@@ -249,7 +249,7 @@ func cargar_desde(datos: Dictionary) -> void:
 		p.cubierta = int(d.get("cubierta", 2))
 		p.embarcado = true
 		pasaje_actual = p
-		_log_info("%s estado cargado: cubierta %d, clase %s" % [PREFIJO_LOG, cubierta_actual, p.clase], _GL().Category.GAMEPLAY)
+		_log_info("%s estado cargado: cubierta %d, clase %s" % [PREFIJO_LOG, cubierta_actual, p.clase], "GAMEPLAY")
 
 ## Conecta las señales de M68. Llamar desde el autoload de arranque.
 func conectar_transporte() -> void:

@@ -56,7 +56,7 @@ func _on_body_entered(body: Node3D) -> void:
 	if cubierta >= 4:
 		destino = 1
 	puerta_cruzada.emit(destino)
-	_log_info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], _GL().Category.GAMEPLAY)
+	_log_info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], "GAMEPLAY")
 
 
 func activar() -> void:
