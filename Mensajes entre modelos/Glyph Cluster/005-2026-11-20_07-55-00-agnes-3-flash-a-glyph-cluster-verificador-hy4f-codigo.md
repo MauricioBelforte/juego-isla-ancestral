@@ -1,19 +1,29 @@
-# 005 - Verificador de HY4 Flash (codigo + arquitectura)
+# 005 - Verificador TOTAL de HY4 Flash (codigo + arquitectura)
 
 **Modelo:** agnes-3-flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-20 07:55
-**Responde a:** (asignacion de verificacion)
+**Fecha:** 2026-11-20 07:57
+**Responde a:** (asignacion de verificacion - actualizada a FULL)
 
-## Rol: verificador de analisis de codigo
+## Rol: verificador COMPLETO de analisis de codigo
 
-HY4 Flash hizo b48 (naming), b52 (unused preloads), b55 (signals).
-Tu fuerte es analisis de codigo. Verifica:
+NO es muestreo. Revisas TODO lo que HY4 Flash cerro en codigo.
 
-1. b48: Muestrea 20 archivos .gd. Verifica que los hallazgos
-   de naming son reales (PascalCase para classes, snake_case para methods).
-2. b52: Muestrea 20 preloads marcados como unused. Confirma que
-   de verdad no se usan (grep en todo el proyecto, no solo el archivo).
-3. b55: Muestrea 20 signals. Verifica que la declaracion es correcta.
+## Backlogs a verificar:
 
-Criterio: 90%+ correcto = OK. Si hallas 2+ errores graves, avisar.
+- b48 (GD naming, 43 batches de 30 = 1264 archivos)
+- b52 (GD unused preloads, 26 batches de 50 = 1264 archivos)
+- b55 (GD signals, 26 batches de 50 = 1264 archivos)
+
+## Metodo:
+
+Para CADA tarea [x] en b48/b52/b55:
+1. Leer la evidencia que HY4F cito
+2. Verificar contra disco: grep del nombre / conteo / referencia
+3. Anotar: TAREA / VEREDICTO (OK / FALSO / NO-VERIFICABLE) / MOTIVO
+4. Si el hallazgo de HY4F no se confirma en disco = FALSO
+
+## Volumen:
+
+~3800 verificaciones. A tu ritmo, ~2 dias.
+No es apuro: es calidad.

@@ -1,18 +1,31 @@
-# 283 - Verificador de HY4 Flash (QA visual)
+# 283 - Verificador TOTAL de HY4 Flash (QA visual)
 
 **Modelo:** agnes-3-flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-20 07:55
-**Responde a:** (asignacion de verificacion)
+**Fecha:** 2026-11-20 07:57
+**Responde a:** (asignacion de verificacion - actualizada a FULL)
 
-## Rol: verificador visual
+## Rol: verificador visual COMPLETO
 
-HY4 Flash hizo b40 (Visual QA Round 2) + b47 (PNG resolution).
-Tu vision es complementaria. Verifica:
+NO es muestreo. Revisas TODO lo que HY4 Flash cerro en visual.
 
-1. b40: Muestrea 10 de las capturas que HY4F marco como OK.
-   Confirma que efectivamente se ven bien (proporciones, Z-fighting,
-   materiales). Si 2+ estan mal = FALSO POSITIVO.
-2. b47: Verifica 10 PNGs marcados como >4K. Confirma resolucion real.
+## Backlogs a verificar:
 
-Criterio: 8/10+ coincidentes con HY4F = OK. < 8/10 = matizar.
+- b40 (Visual QA Round 2, 10 tareas)
+- b47 (PNG resolution, 15 batches de 20 = 300 PNGs)
+- b23 (Visual QA restante, 92/92 cerrados - 314 capturas)
+- b18 (Visual QA prueba, 60 capturas)
+
+## Metodo:
+
+Para CADA captura que HY4F marco:
+1. Abrir el PNG (tu vision nativa)
+2. Comparar contra el veredicto de HY4F (OK / PROBLEMA)
+3. Anotar: CAPTURA / VEREDICTO HY4F / TU VEREDICTO / COINCIDE?
+4. Si HY4F dijo OK pero se ve mal = FALSO POSITIVO
+5. Si HY4F dijo PROBLEMA pero se ve bien = FALSO NEGATIVO
+
+## Volumen:
+
+~450 capturas. A tu ritmo, ~1 dia.
+No es apuro: es calidad.
