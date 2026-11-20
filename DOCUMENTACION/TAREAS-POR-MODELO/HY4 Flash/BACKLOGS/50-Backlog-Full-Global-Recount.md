@@ -7,178 +7,178 @@ Metodo: grep -cF en 05-Checklist + linea Totales + fila GLOBAL. Reportar drift >
 
 ## Tareas
 
-- [ ] T50-001: M00 - recount 3 fuentes
-- [ ] T50-002: M00 - recount 3 fuentes
-- [ ] T50-003: M01 - recount 3 fuentes
-- [ ] T50-004: M02 - recount 3 fuentes
-- [ ] T50-005: M03 - recount 3 fuentes
-- [ ] T50-006: M04 - recount 3 fuentes
-- [ ] T50-007: M05 - recount 3 fuentes
-- [ ] T50-008: M06 - recount 3 fuentes
-- [ ] T50-009: M06 - recount 3 fuentes
-- [ ] T50-010: M07 - recount 3 fuentes
-- [ ] T50-011: M08 - recount 3 fuentes
-- [ ] T50-012: M08 - recount 3 fuentes
-- [ ] T50-013: M09 - recount 3 fuentes
-- [ ] T50-014: M10 - recount 3 fuentes
-- [ ] T50-015: M11 - recount 3 fuentes
-- [ ] T50-016: M11 - recount 3 fuentes
-- [ ] T50-017: M12 - recount 3 fuentes
-- [ ] T50-018: M13 - recount 3 fuentes
-- [ ] T50-019: M14 - recount 3 fuentes
-- [ ] T50-020: M15 - recount 3 fuentes
-- [ ] T50-021: M16 - recount 3 fuentes
-- [ ] T50-022: M17 - recount 3 fuentes
-- [ ] T50-023: M18 - recount 3 fuentes
-- [ ] T50-024: M19 - recount 3 fuentes
-- [ ] T50-025: M20 - recount 3 fuentes
-- [ ] T50-026: M21 - recount 3 fuentes
-- [ ] T50-027: M22 - recount 3 fuentes
-- [ ] T50-028: M23 - recount 3 fuentes
-- [ ] T50-029: M24 - recount 3 fuentes
-- [ ] T50-030: M25 - recount 3 fuentes
-- [ ] T50-031: M26 - recount 3 fuentes
-- [ ] T50-032: M27 - recount 3 fuentes
-- [ ] T50-033: M28 - recount 3 fuentes
-- [ ] T50-034: M29 - recount 3 fuentes
-- [ ] T50-035: M30 - recount 3 fuentes
-- [ ] T50-036: M31 - recount 3 fuentes
-- [ ] T50-037: M32 - recount 3 fuentes
-- [ ] T50-038: M33 - recount 3 fuentes
-- [ ] T50-039: M34 - recount 3 fuentes
-- [ ] T50-040: M35 - recount 3 fuentes
-- [ ] T50-041: M36 - recount 3 fuentes
-- [ ] T50-042: M37 - recount 3 fuentes
-- [ ] T50-043: M38 - recount 3 fuentes
-- [ ] T50-044: M39 - recount 3 fuentes
-- [ ] T50-045: M40 - recount 3 fuentes
-- [ ] T50-046: M41 - recount 3 fuentes
-- [ ] T50-047: M42 - recount 3 fuentes
-- [ ] T50-048: M43 - recount 3 fuentes
-- [ ] T50-049: M44 - recount 3 fuentes
-- [ ] T50-050: M45 - recount 3 fuentes
-- [ ] T50-051: M46 - recount 3 fuentes
-- [ ] T50-052: M47 - recount 3 fuentes
-- [ ] T50-053: M48 - recount 3 fuentes
-- [ ] T50-054: M49 - recount 3 fuentes
-- [ ] T50-055: M50 - recount 3 fuentes
-- [ ] T50-056: M51 - recount 3 fuentes
-- [ ] T50-057: M52 - recount 3 fuentes
-- [ ] T50-058: M53 - recount 3 fuentes
-- [ ] T50-059: M54 - recount 3 fuentes
-- [ ] T50-060: M55 - recount 3 fuentes
-- [ ] T50-061: M56 - recount 3 fuentes
-- [ ] T50-062: M57 - recount 3 fuentes
-- [ ] T50-063: M58 - recount 3 fuentes
-- [ ] T50-064: M59 - recount 3 fuentes
-- [ ] T50-065: M60 - recount 3 fuentes
-- [ ] T50-066: M61 - recount 3 fuentes
-- [ ] T50-067: M62 - recount 3 fuentes
-- [ ] T50-068: M63 - recount 3 fuentes
-- [ ] T50-069: M64 - recount 3 fuentes
-- [ ] T50-070: M65 - recount 3 fuentes
-- [ ] T50-071: M66 - recount 3 fuentes
-- [ ] T50-072: M67 - recount 3 fuentes
-- [ ] T50-073: M68 - recount 3 fuentes
-- [ ] T50-074: M69 - recount 3 fuentes
-- [ ] T50-075: M70 - recount 3 fuentes
-- [ ] T50-076: M71 - recount 3 fuentes
-- [ ] T50-077: M72 - recount 3 fuentes
-- [ ] T50-078: M73 - recount 3 fuentes
-- [ ] T50-079: M74 - recount 3 fuentes
-- [ ] T50-080: M75 - recount 3 fuentes
-- [ ] T50-081: M76 - recount 3 fuentes
-- [ ] T50-082: M77 - recount 3 fuentes
-- [ ] T50-083: M78 - recount 3 fuentes
-- [ ] T50-084: M79 - recount 3 fuentes
-- [ ] T50-085: M80 - recount 3 fuentes
-- [ ] T50-086: M81 - recount 3 fuentes
-- [ ] T50-087: M82 - recount 3 fuentes
-- [ ] T50-088: M83 - recount 3 fuentes
-- [ ] T50-089: M84 - recount 3 fuentes
-- [ ] T50-090: M85 - recount 3 fuentes
-- [ ] T50-091: M86 - recount 3 fuentes
-- [ ] T50-092: M87 - recount 3 fuentes
-- [ ] T50-093: M88 - recount 3 fuentes
-- [ ] T50-094: M89 - recount 3 fuentes
-- [ ] T50-095: M90 - recount 3 fuentes
-- [ ] T50-096: M91 - recount 3 fuentes
-- [ ] T50-097: M92 - recount 3 fuentes
-- [ ] T50-098: M93 - recount 3 fuentes
-- [ ] T50-099: M94 - recount 3 fuentes
-- [ ] T50-100: M95 - recount 3 fuentes
-- [ ] T50-101: M96 - recount 3 fuentes
-- [ ] T50-102: M97 - recount 3 fuentes
-- [ ] T50-103: M98 - recount 3 fuentes
-- [ ] T50-104: M99 - recount 3 fuentes
-- [ ] T50-105: M100 - recount 3 fuentes
-- [ ] T50-106: M101 - recount 3 fuentes
-- [ ] T50-107: M102 - recount 3 fuentes
-- [ ] T50-108: M103 - recount 3 fuentes
-- [ ] T50-109: M104 - recount 3 fuentes
-- [ ] T50-110: M105 - recount 3 fuentes
-- [ ] T50-111: M106 - recount 3 fuentes
-- [ ] T50-112: M107 - recount 3 fuentes
-- [ ] T50-113: M108 - recount 3 fuentes
-- [ ] T50-114: M109 - recount 3 fuentes
-- [ ] T50-115: M110 - recount 3 fuentes
-- [ ] T50-116: M111 - recount 3 fuentes
-- [ ] T50-117: M112 - recount 3 fuentes
-- [ ] T50-118: M113 - recount 3 fuentes
-- [ ] T50-119: M114 - recount 3 fuentes
-- [ ] T50-120: M115 - recount 3 fuentes
-- [ ] T50-121: M116 - recount 3 fuentes
-- [ ] T50-122: M117 - recount 3 fuentes
-- [ ] T50-123: M118 - recount 3 fuentes
-- [ ] T50-124: M119 - recount 3 fuentes
-- [ ] T50-125: M120 - recount 3 fuentes
-- [ ] T50-126: M121 - recount 3 fuentes
-- [ ] T50-127: M122 - recount 3 fuentes
-- [ ] T50-128: M123 - recount 3 fuentes
-- [ ] T50-129: M124 - recount 3 fuentes
-- [ ] T50-130: M125 - recount 3 fuentes
-- [ ] T50-131: M126 - recount 3 fuentes
-- [ ] T50-132: M127 - recount 3 fuentes
-- [ ] T50-133: M128 - recount 3 fuentes
-- [ ] T50-134: M129 - recount 3 fuentes
-- [ ] T50-135: M130 - recount 3 fuentes
-- [ ] T50-136: M131 - recount 3 fuentes
-- [ ] T50-137: M132 - recount 3 fuentes
-- [ ] T50-138: M133 - recount 3 fuentes
-- [ ] T50-139: M134 - recount 3 fuentes
-- [ ] T50-140: M135 - recount 3 fuentes
-- [ ] T50-141: M136 - recount 3 fuentes
-- [ ] T50-142: M137 - recount 3 fuentes
-- [ ] T50-143: M138 - recount 3 fuentes
-- [ ] T50-144: M139 - recount 3 fuentes
-- [ ] T50-145: M140 - recount 3 fuentes
-- [ ] T50-146: M141 - recount 3 fuentes
-- [ ] T50-147: M142 - recount 3 fuentes
-- [ ] T50-148: M143 - recount 3 fuentes
-- [ ] T50-149: M144 - recount 3 fuentes
-- [ ] T50-150: M145 - recount 3 fuentes
-- [ ] T50-151: M146 - recount 3 fuentes
-- [ ] T50-152: M147 - recount 3 fuentes
-- [ ] T50-153: M148 - recount 3 fuentes
-- [ ] T50-154: M149 - recount 3 fuentes
-- [ ] T50-155: M150 - recount 3 fuentes
-- [ ] T50-156: M151 - recount 3 fuentes
-- [ ] T50-157: M152 - recount 3 fuentes
-- [ ] T50-158: M153 - recount 3 fuentes
-- [ ] T50-159: M154 - recount 3 fuentes
-- [ ] T50-160: M155 - recount 3 fuentes
-- [ ] T50-161: M156 - recount 3 fuentes
-- [ ] T50-162: M157 - recount 3 fuentes
-- [ ] T50-163: M158 - recount 3 fuentes
-- [ ] T50-164: M159 - recount 3 fuentes
-- [ ] T50-165: M160 - recount 3 fuentes
-- [ ] T50-166: M161 - recount 3 fuentes
-- [ ] T50-167: M162 - recount 3 fuentes
-- [ ] T50-168: M163 - recount 3 fuentes
-- [ ] T50-169: M164 - recount 3 fuentes
-- [ ] T50-170: M165 - recount 3 fuentes
-- [ ] T50-171: M166 - recount 3 fuentes
-- [ ] T50-172: M167 - recount 3 fuentes
-- [ ] T50-173: M168 - recount 3 fuentes
-- [ ] T50-174: M169 - recount 3 fuentes
+- [x] T50-001: M00 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-002: M00 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-003: M01 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-004: M02 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-005: M03 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-006: M04 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-007: M05 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-008: M06 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-009: M06 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-010: M07 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-011: M08 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-012: M08 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-013: M09 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-014: M10 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-015: M11 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-016: M11 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-017: M12 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-018: M13 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-019: M14 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-020: M15 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-021: M16 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-022: M17 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-023: M18 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-024: M19 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-025: M20 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-026: M21 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-027: M22 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-028: M23 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-029: M24 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-030: M25 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-031: M26 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-032: M27 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-033: M28 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-034: M29 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-035: M30 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-036: M31 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-037: M32 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-038: M33 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-039: M34 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-040: M35 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-041: M36 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-042: M37 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-043: M38 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-044: M39 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-045: M40 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-046: M41 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-047: M42 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-048: M43 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-049: M44 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-050: M45 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-051: M46 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-052: M47 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-053: M48 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-054: M49 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-055: M50 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-056: M51 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-057: M52 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-058: M53 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-059: M54 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-060: M55 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-061: M56 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-062: M57 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-063: M58 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-064: M59 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-065: M60 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-066: M61 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-067: M62 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-068: M63 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-069: M64 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-070: M65 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-071: M66 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-072: M67 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-073: M68 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-074: M69 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-075: M70 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-076: M71 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-077: M72 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-078: M73 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-079: M74 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-080: M75 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-081: M76 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-082: M77 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-083: M78 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-084: M79 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-085: M80 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-086: M81 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-087: M82 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-088: M83 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-089: M84 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-090: M85 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-091: M86 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-092: M87 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-093: M88 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-094: M89 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-095: M90 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-096: M91 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-097: M92 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-098: M93 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-099: M94 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-100: M95 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-101: M96 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-102: M97 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-103: M98 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-104: M99 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-105: M100 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-106: M101 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-107: M102 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-108: M103 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-109: M104 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-110: M105 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-111: M106 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-112: M107 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-113: M108 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-114: M109 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-115: M110 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-116: M111 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-117: M112 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-118: M113 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-119: M114 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-120: M115 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-121: M116 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-122: M117 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-123: M118 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-124: M119 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-125: M120 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-126: M121 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-127: M122 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-128: M123 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-129: M124 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-130: M125 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-131: M126 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-132: M127 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-133: M128 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-134: M129 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-135: M130 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-136: M131 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-137: M132 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-138: M133 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-139: M134 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-140: M135 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-141: M136 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-142: M137 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-143: M138 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-144: M139 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-145: M140 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-146: M141 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-147: M142 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-148: M143 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-149: M144 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-150: M145 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-151: M146 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-152: M147 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-153: M148 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-154: M149 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-155: M150 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-156: M151 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-157: M152 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-158: M153 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-159: M154 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-160: M155 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-161: M156 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-162: M157 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-163: M158 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-164: M159 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-165: M160 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-166: M161 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-167: M162 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-168: M163 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-169: M164 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-170: M165 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-171: M166 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-172: M167 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-173: M168 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
+- [x] T50-174: M169 - recount 3 fuentes -> 169 modulos, 14 con drift>5 (63:+26, 69:+19, 106:+12, 160:+10) (Log 2433).
 

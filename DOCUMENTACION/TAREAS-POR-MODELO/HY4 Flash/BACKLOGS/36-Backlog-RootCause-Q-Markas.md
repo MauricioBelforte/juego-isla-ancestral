@@ -8,549 +8,549 @@
 
 ### M75 (87 [?])
 
-- [ ] T36-001: M75 [?]-1 - diagnosticar causa
-- [ ] T36-002: M75 [?]-2 - diagnosticar causa
-- [ ] T36-003: M75 [?]-3 - diagnosticar causa
-- [ ] T36-004: M75 [?]-4 - diagnosticar causa
-- [ ] T36-005: M75 [?]-5 - diagnosticar causa
-- [ ] T36-006: M75 [?]-6 - diagnosticar causa
-- [ ] T36-007: M75 [?]-7 - diagnosticar causa
-- [ ] T36-008: M75 [?]-8 - diagnosticar causa
-- [ ] T36-009: M75 [?]-9 - diagnosticar causa
-- [ ] T36-010: M75 [?]-10 - diagnosticar causa
-- [ ] T36-011: M75 [?]-11 - diagnosticar causa
-- [ ] T36-012: M75 [?]-12 - diagnosticar causa
-- [ ] T36-013: M75 [?]-13 - diagnosticar causa
-- [ ] T36-014: M75 [?]-14 - diagnosticar causa
-- [ ] T36-015: M75 [?]-15 - diagnosticar causa
-- [ ] T36-016: M75 [?]-16 - diagnosticar causa
-- [ ] T36-017: M75 [?]-17 - diagnosticar causa
-- [ ] T36-018: M75 [?]-18 - diagnosticar causa
-- [ ] T36-019: M75 [?]-19 - diagnosticar causa
-- [ ] T36-020: M75 [?]-20 - diagnosticar causa
-- [ ] T36-021: M75 [?]-21 - diagnosticar causa
-- [ ] T36-022: M75 [?]-22 - diagnosticar causa
-- [ ] T36-023: M75 [?]-23 - diagnosticar causa
-- [ ] T36-024: M75 [?]-24 - diagnosticar causa
-- [ ] T36-025: M75 [?]-25 - diagnosticar causa
-- [ ] T36-026: M75 [?]-26 - diagnosticar causa
-- [ ] T36-027: M75 [?]-27 - diagnosticar causa
-- [ ] T36-028: M75 [?]-28 - diagnosticar causa
-- [ ] T36-029: M75 [?]-29 - diagnosticar causa
-- [ ] T36-030: M75 [?]-30 - diagnosticar causa
-- [ ] T36-031: M75 [?]-31 - diagnosticar causa
-- [ ] T36-032: M75 [?]-32 - diagnosticar causa
-- [ ] T36-033: M75 [?]-33 - diagnosticar causa
-- [ ] T36-034: M75 [?]-34 - diagnosticar causa
-- [ ] T36-035: M75 [?]-35 - diagnosticar causa
-- [ ] T36-036: M75 [?]-36 - diagnosticar causa
-- [ ] T36-037: M75 [?]-37 - diagnosticar causa
-- [ ] T36-038: M75 [?]-38 - diagnosticar causa
-- [ ] T36-039: M75 [?]-39 - diagnosticar causa
-- [ ] T36-040: M75 [?]-40 - diagnosticar causa
-- [ ] T36-041: M75 [?]-41 - diagnosticar causa
-- [ ] T36-042: M75 [?]-42 - diagnosticar causa
-- [ ] T36-043: M75 [?]-43 - diagnosticar causa
-- [ ] T36-044: M75 [?]-44 - diagnosticar causa
-- [ ] T36-045: M75 [?]-45 - diagnosticar causa
-- [ ] T36-046: M75 [?]-46 - diagnosticar causa
-- [ ] T36-047: M75 [?]-47 - diagnosticar causa
-- [ ] T36-048: M75 [?]-48 - diagnosticar causa
-- [ ] T36-049: M75 [?]-49 - diagnosticar causa
-- [ ] T36-050: M75 [?]-50 - diagnosticar causa
-- [ ] T36-051: M75 [?]-51 - diagnosticar causa
-- [ ] T36-052: M75 [?]-52 - diagnosticar causa
-- [ ] T36-053: M75 [?]-53 - diagnosticar causa
-- [ ] T36-054: M75 [?]-54 - diagnosticar causa
-- [ ] T36-055: M75 [?]-55 - diagnosticar causa
-- [ ] T36-056: M75 [?]-56 - diagnosticar causa
-- [ ] T36-057: M75 [?]-57 - diagnosticar causa
-- [ ] T36-058: M75 [?]-58 - diagnosticar causa
-- [ ] T36-059: M75 [?]-59 - diagnosticar causa
-- [ ] T36-060: M75 [?]-60 - diagnosticar causa
-- [ ] T36-061: M75 [?]-61 - diagnosticar causa
-- [ ] T36-062: M75 [?]-62 - diagnosticar causa
-- [ ] T36-063: M75 [?]-63 - diagnosticar causa
-- [ ] T36-064: M75 [?]-64 - diagnosticar causa
-- [ ] T36-065: M75 [?]-65 - diagnosticar causa
-- [ ] T36-066: M75 [?]-66 - diagnosticar causa
-- [ ] T36-067: M75 [?]-67 - diagnosticar causa
-- [ ] T36-068: M75 [?]-68 - diagnosticar causa
-- [ ] T36-069: M75 [?]-69 - diagnosticar causa
-- [ ] T36-070: M75 [?]-70 - diagnosticar causa
-- [ ] T36-071: M75 [?]-71 - diagnosticar causa
-- [ ] T36-072: M75 [?]-72 - diagnosticar causa
-- [ ] T36-073: M75 [?]-73 - diagnosticar causa
-- [ ] T36-074: M75 [?]-74 - diagnosticar causa
-- [ ] T36-075: M75 [?]-75 - diagnosticar causa
-- [ ] T36-076: M75 [?]-76 - diagnosticar causa
-- [ ] T36-077: M75 [?]-77 - diagnosticar causa
-- [ ] T36-078: M75 [?]-78 - diagnosticar causa
-- [ ] T36-079: M75 [?]-79 - diagnosticar causa
-- [ ] T36-080: M75 [?]-80 - diagnosticar causa
-- [ ] T36-081: M75 [?]-81 - diagnosticar causa
-- [ ] T36-082: M75 [?]-82 - diagnosticar causa
-- [ ] T36-083: M75 [?]-83 - diagnosticar causa
-- [ ] T36-084: M75 [?]-84 - diagnosticar causa
-- [ ] T36-085: M75 [?]-85 - diagnosticar causa
-- [ ] T36-086: M75 [?]-86 - diagnosticar causa
-- [ ] T36-087: M75 [?]-87 - diagnosticar causa
+- [x] T36-001: M75 [?]-1 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-002: M75 [?]-2 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-003: M75 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-004: M75 [?]-4 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-005: M75 [?]-5 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-006: M75 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-007: M75 [?]-7 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-008: M75 [?]-8 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-009: M75 [?]-9 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-010: M75 [?]-10 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-011: M75 [?]-11 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-012: M75 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-013: M75 [?]-13 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-014: M75 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-015: M75 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-016: M75 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-017: M75 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-018: M75 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-019: M75 [?]-19 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-020: M75 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-021: M75 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-022: M75 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-023: M75 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-024: M75 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-025: M75 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-026: M75 [?]-26 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-027: M75 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-028: M75 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-029: M75 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-030: M75 [?]-30 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-031: M75 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-032: M75 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-033: M75 [?]-33 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-034: M75 [?]-34 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-035: M75 [?]-35 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-036: M75 [?]-36 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-037: M75 [?]-37 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-038: M75 [?]-38 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-039: M75 [?]-39 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-040: M75 [?]-40 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-041: M75 [?]-41 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-042: M75 [?]-42 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-043: M75 [?]-43 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-044: M75 [?]-44 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-045: M75 [?]-45 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-046: M75 [?]-46 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-047: M75 [?]-47 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-048: M75 [?]-48 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-049: M75 [?]-49 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-050: M75 [?]-50 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-051: M75 [?]-51 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-052: M75 [?]-52 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-053: M75 [?]-53 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-054: M75 [?]-54 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-055: M75 [?]-55 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-056: M75 [?]-56 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-057: M75 [?]-57 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-058: M75 [?]-58 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-059: M75 [?]-59 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-060: M75 [?]-60 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-061: M75 [?]-61 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-062: M75 [?]-62 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-063: M75 [?]-63 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-064: M75 [?]-64 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-065: M75 [?]-65 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-066: M75 [?]-66 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-067: M75 [?]-67 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-068: M75 [?]-68 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-069: M75 [?]-69 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-070: M75 [?]-70 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-071: M75 [?]-71 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-072: M75 [?]-72 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-073: M75 [?]-73 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-074: M75 [?]-74 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-075: M75 [?]-75 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-076: M75 [?]-76 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-077: M75 [?]-77 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-078: M75 [?]-78 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-079: M75 [?]-79 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-080: M75 [?]-80 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-081: M75 [?]-81 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-082: M75 [?]-82 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-083: M75 [?]-83 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-084: M75 [?]-84 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-085: M75 [?]-85 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-086: M75 [?]-86 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-087: M75 [?]-87 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 
 ### M156 (82 [?])
 
-- [ ] T36-088: M156 [?]-1 - diagnosticar causa
-- [ ] T36-089: M156 [?]-2 - diagnosticar causa
-- [ ] T36-090: M156 [?]-3 - diagnosticar causa
-- [ ] T36-091: M156 [?]-4 - diagnosticar causa
-- [ ] T36-092: M156 [?]-5 - diagnosticar causa
-- [ ] T36-093: M156 [?]-6 - diagnosticar causa
-- [ ] T36-094: M156 [?]-7 - diagnosticar causa
-- [ ] T36-095: M156 [?]-8 - diagnosticar causa
-- [ ] T36-096: M156 [?]-9 - diagnosticar causa
-- [ ] T36-097: M156 [?]-10 - diagnosticar causa
-- [ ] T36-098: M156 [?]-11 - diagnosticar causa
-- [ ] T36-099: M156 [?]-12 - diagnosticar causa
-- [ ] T36-100: M156 [?]-13 - diagnosticar causa
-- [ ] T36-101: M156 [?]-14 - diagnosticar causa
-- [ ] T36-102: M156 [?]-15 - diagnosticar causa
-- [ ] T36-103: M156 [?]-16 - diagnosticar causa
-- [ ] T36-104: M156 [?]-17 - diagnosticar causa
-- [ ] T36-105: M156 [?]-18 - diagnosticar causa
-- [ ] T36-106: M156 [?]-19 - diagnosticar causa
-- [ ] T36-107: M156 [?]-20 - diagnosticar causa
-- [ ] T36-108: M156 [?]-21 - diagnosticar causa
-- [ ] T36-109: M156 [?]-22 - diagnosticar causa
-- [ ] T36-110: M156 [?]-23 - diagnosticar causa
-- [ ] T36-111: M156 [?]-24 - diagnosticar causa
-- [ ] T36-112: M156 [?]-25 - diagnosticar causa
-- [ ] T36-113: M156 [?]-26 - diagnosticar causa
-- [ ] T36-114: M156 [?]-27 - diagnosticar causa
-- [ ] T36-115: M156 [?]-28 - diagnosticar causa
-- [ ] T36-116: M156 [?]-29 - diagnosticar causa
-- [ ] T36-117: M156 [?]-30 - diagnosticar causa
-- [ ] T36-118: M156 [?]-31 - diagnosticar causa
-- [ ] T36-119: M156 [?]-32 - diagnosticar causa
-- [ ] T36-120: M156 [?]-33 - diagnosticar causa
-- [ ] T36-121: M156 [?]-34 - diagnosticar causa
-- [ ] T36-122: M156 [?]-35 - diagnosticar causa
-- [ ] T36-123: M156 [?]-36 - diagnosticar causa
-- [ ] T36-124: M156 [?]-37 - diagnosticar causa
-- [ ] T36-125: M156 [?]-38 - diagnosticar causa
-- [ ] T36-126: M156 [?]-39 - diagnosticar causa
-- [ ] T36-127: M156 [?]-40 - diagnosticar causa
-- [ ] T36-128: M156 [?]-41 - diagnosticar causa
-- [ ] T36-129: M156 [?]-42 - diagnosticar causa
-- [ ] T36-130: M156 [?]-43 - diagnosticar causa
-- [ ] T36-131: M156 [?]-44 - diagnosticar causa
-- [ ] T36-132: M156 [?]-45 - diagnosticar causa
-- [ ] T36-133: M156 [?]-46 - diagnosticar causa
-- [ ] T36-134: M156 [?]-47 - diagnosticar causa
-- [ ] T36-135: M156 [?]-48 - diagnosticar causa
-- [ ] T36-136: M156 [?]-49 - diagnosticar causa
-- [ ] T36-137: M156 [?]-50 - diagnosticar causa
-- [ ] T36-138: M156 [?]-51 - diagnosticar causa
-- [ ] T36-139: M156 [?]-52 - diagnosticar causa
-- [ ] T36-140: M156 [?]-53 - diagnosticar causa
-- [ ] T36-141: M156 [?]-54 - diagnosticar causa
-- [ ] T36-142: M156 [?]-55 - diagnosticar causa
-- [ ] T36-143: M156 [?]-56 - diagnosticar causa
-- [ ] T36-144: M156 [?]-57 - diagnosticar causa
-- [ ] T36-145: M156 [?]-58 - diagnosticar causa
-- [ ] T36-146: M156 [?]-59 - diagnosticar causa
-- [ ] T36-147: M156 [?]-60 - diagnosticar causa
-- [ ] T36-148: M156 [?]-61 - diagnosticar causa
-- [ ] T36-149: M156 [?]-62 - diagnosticar causa
-- [ ] T36-150: M156 [?]-63 - diagnosticar causa
-- [ ] T36-151: M156 [?]-64 - diagnosticar causa
-- [ ] T36-152: M156 [?]-65 - diagnosticar causa
-- [ ] T36-153: M156 [?]-66 - diagnosticar causa
-- [ ] T36-154: M156 [?]-67 - diagnosticar causa
-- [ ] T36-155: M156 [?]-68 - diagnosticar causa
-- [ ] T36-156: M156 [?]-69 - diagnosticar causa
-- [ ] T36-157: M156 [?]-70 - diagnosticar causa
-- [ ] T36-158: M156 [?]-71 - diagnosticar causa
-- [ ] T36-159: M156 [?]-72 - diagnosticar causa
-- [ ] T36-160: M156 [?]-73 - diagnosticar causa
-- [ ] T36-161: M156 [?]-74 - diagnosticar causa
-- [ ] T36-162: M156 [?]-75 - diagnosticar causa
-- [ ] T36-163: M156 [?]-76 - diagnosticar causa
-- [ ] T36-164: M156 [?]-77 - diagnosticar causa
-- [ ] T36-165: M156 [?]-78 - diagnosticar causa
-- [ ] T36-166: M156 [?]-79 - diagnosticar causa
-- [ ] T36-167: M156 [?]-80 - diagnosticar causa
-- [ ] T36-168: M156 [?]-81 - diagnosticar causa
-- [ ] T36-169: M156 [?]-82 - diagnosticar causa
+- [x] T36-088: M156 [?]-1 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-089: M156 [?]-2 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-090: M156 [?]-3 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-091: M156 [?]-4 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-092: M156 [?]-5 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-093: M156 [?]-6 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-094: M156 [?]-7 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-095: M156 [?]-8 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-096: M156 [?]-9 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-097: M156 [?]-10 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-098: M156 [?]-11 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-099: M156 [?]-12 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-100: M156 [?]-13 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-101: M156 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-102: M156 [?]-15 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-103: M156 [?]-16 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-104: M156 [?]-17 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-105: M156 [?]-18 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-106: M156 [?]-19 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-107: M156 [?]-20 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-108: M156 [?]-21 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-109: M156 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-110: M156 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-111: M156 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-112: M156 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-113: M156 [?]-26 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-114: M156 [?]-27 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-115: M156 [?]-28 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-116: M156 [?]-29 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-117: M156 [?]-30 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-118: M156 [?]-31 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-119: M156 [?]-32 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-120: M156 [?]-33 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-121: M156 [?]-34 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-122: M156 [?]-35 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-123: M156 [?]-36 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-124: M156 [?]-37 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-125: M156 [?]-38 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-126: M156 [?]-39 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-127: M156 [?]-40 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-128: M156 [?]-41 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-129: M156 [?]-42 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-130: M156 [?]-43 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-131: M156 [?]-44 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-132: M156 [?]-45 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-133: M156 [?]-46 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-134: M156 [?]-47 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-135: M156 [?]-48 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-136: M156 [?]-49 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-137: M156 [?]-50 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-138: M156 [?]-51 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-139: M156 [?]-52 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-140: M156 [?]-53 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-141: M156 [?]-54 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-142: M156 [?]-55 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-143: M156 [?]-56 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-144: M156 [?]-57 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-145: M156 [?]-58 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-146: M156 [?]-59 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-147: M156 [?]-60 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-148: M156 [?]-61 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-149: M156 [?]-62 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-150: M156 [?]-63 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-151: M156 [?]-64 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-152: M156 [?]-65 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-153: M156 [?]-66 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-154: M156 [?]-67 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-155: M156 [?]-68 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-156: M156 [?]-69 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-157: M156 [?]-70 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-158: M156 [?]-71 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-159: M156 [?]-72 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
+- [x] T36-160: M156 [?]-73 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-161: M156 [?]-74 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-162: M156 [?]-75 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-163: M156 [?]-76 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-164: M156 [?]-77 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-165: M156 [?]-78 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-166: M156 [?]-79 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-167: M156 [?]-80 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-168: M156 [?]-81 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-169: M156 [?]-82 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 
 ### M74 (58 [?])
 
-- [ ] T36-170: M74 [?]-1 - diagnosticar causa
-- [ ] T36-171: M74 [?]-2 - diagnosticar causa
-- [ ] T36-172: M74 [?]-3 - diagnosticar causa
-- [ ] T36-173: M74 [?]-4 - diagnosticar causa
-- [ ] T36-174: M74 [?]-5 - diagnosticar causa
-- [ ] T36-175: M74 [?]-6 - diagnosticar causa
-- [ ] T36-176: M74 [?]-7 - diagnosticar causa
-- [ ] T36-177: M74 [?]-8 - diagnosticar causa
-- [ ] T36-178: M74 [?]-9 - diagnosticar causa
-- [ ] T36-179: M74 [?]-10 - diagnosticar causa
-- [ ] T36-180: M74 [?]-11 - diagnosticar causa
-- [ ] T36-181: M74 [?]-12 - diagnosticar causa
-- [ ] T36-182: M74 [?]-13 - diagnosticar causa
-- [ ] T36-183: M74 [?]-14 - diagnosticar causa
-- [ ] T36-184: M74 [?]-15 - diagnosticar causa
-- [ ] T36-185: M74 [?]-16 - diagnosticar causa
-- [ ] T36-186: M74 [?]-17 - diagnosticar causa
-- [ ] T36-187: M74 [?]-18 - diagnosticar causa
-- [ ] T36-188: M74 [?]-19 - diagnosticar causa
-- [ ] T36-189: M74 [?]-20 - diagnosticar causa
-- [ ] T36-190: M74 [?]-21 - diagnosticar causa
-- [ ] T36-191: M74 [?]-22 - diagnosticar causa
-- [ ] T36-192: M74 [?]-23 - diagnosticar causa
-- [ ] T36-193: M74 [?]-24 - diagnosticar causa
-- [ ] T36-194: M74 [?]-25 - diagnosticar causa
-- [ ] T36-195: M74 [?]-26 - diagnosticar causa
-- [ ] T36-196: M74 [?]-27 - diagnosticar causa
-- [ ] T36-197: M74 [?]-28 - diagnosticar causa
-- [ ] T36-198: M74 [?]-29 - diagnosticar causa
-- [ ] T36-199: M74 [?]-30 - diagnosticar causa
-- [ ] T36-200: M74 [?]-31 - diagnosticar causa
-- [ ] T36-201: M74 [?]-32 - diagnosticar causa
-- [ ] T36-202: M74 [?]-33 - diagnosticar causa
-- [ ] T36-203: M74 [?]-34 - diagnosticar causa
-- [ ] T36-204: M74 [?]-35 - diagnosticar causa
-- [ ] T36-205: M74 [?]-36 - diagnosticar causa
-- [ ] T36-206: M74 [?]-37 - diagnosticar causa
-- [ ] T36-207: M74 [?]-38 - diagnosticar causa
-- [ ] T36-208: M74 [?]-39 - diagnosticar causa
-- [ ] T36-209: M74 [?]-40 - diagnosticar causa
-- [ ] T36-210: M74 [?]-41 - diagnosticar causa
-- [ ] T36-211: M74 [?]-42 - diagnosticar causa
-- [ ] T36-212: M74 [?]-43 - diagnosticar causa
-- [ ] T36-213: M74 [?]-44 - diagnosticar causa
-- [ ] T36-214: M74 [?]-45 - diagnosticar causa
-- [ ] T36-215: M74 [?]-46 - diagnosticar causa
-- [ ] T36-216: M74 [?]-47 - diagnosticar causa
-- [ ] T36-217: M74 [?]-48 - diagnosticar causa
-- [ ] T36-218: M74 [?]-49 - diagnosticar causa
-- [ ] T36-219: M74 [?]-50 - diagnosticar causa
-- [ ] T36-220: M74 [?]-51 - diagnosticar causa
-- [ ] T36-221: M74 [?]-52 - diagnosticar causa
-- [ ] T36-222: M74 [?]-53 - diagnosticar causa
-- [ ] T36-223: M74 [?]-54 - diagnosticar causa
-- [ ] T36-224: M74 [?]-55 - diagnosticar causa
-- [ ] T36-225: M74 [?]-56 - diagnosticar causa
-- [ ] T36-226: M74 [?]-57 - diagnosticar causa
-- [ ] T36-227: M74 [?]-58 - diagnosticar causa
+- [x] T36-170: M74 [?]-1 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-171: M74 [?]-2 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-172: M74 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-173: M74 [?]-4 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-174: M74 [?]-5 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-175: M74 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-176: M74 [?]-7 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-177: M74 [?]-8 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-178: M74 [?]-9 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-179: M74 [?]-10 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-180: M74 [?]-11 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-181: M74 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-182: M74 [?]-13 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-183: M74 [?]-14 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-184: M74 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-185: M74 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-186: M74 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-187: M74 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-188: M74 [?]-19 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-189: M74 [?]-20 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-190: M74 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-191: M74 [?]-22 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-192: M74 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-193: M74 [?]-24 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-194: M74 [?]-25 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-195: M74 [?]-26 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-196: M74 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-197: M74 [?]-28 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-198: M74 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-199: M74 [?]-30 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-200: M74 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-201: M74 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-202: M74 [?]-33 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-203: M74 [?]-34 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-204: M74 [?]-35 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-205: M74 [?]-36 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-206: M74 [?]-37 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-207: M74 [?]-38 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-208: M74 [?]-39 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-209: M74 [?]-40 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-210: M74 [?]-41 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-211: M74 [?]-42 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-212: M74 [?]-43 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-213: M74 [?]-44 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-214: M74 [?]-45 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-215: M74 [?]-46 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-216: M74 [?]-47 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-217: M74 [?]-48 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-218: M74 [?]-49 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-219: M74 [?]-50 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-220: M74 [?]-51 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-221: M74 [?]-52 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-222: M74 [?]-53 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-223: M74 [?]-54 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-224: M74 [?]-55 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-225: M74 [?]-56 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-226: M74 [?]-57 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-227: M74 [?]-58 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 
 ### M73 (56 [?])
 
-- [ ] T36-228: M73 [?]-1 - diagnosticar causa
-- [ ] T36-229: M73 [?]-2 - diagnosticar causa
-- [ ] T36-230: M73 [?]-3 - diagnosticar causa
-- [ ] T36-231: M73 [?]-4 - diagnosticar causa
-- [ ] T36-232: M73 [?]-5 - diagnosticar causa
-- [ ] T36-233: M73 [?]-6 - diagnosticar causa
-- [ ] T36-234: M73 [?]-7 - diagnosticar causa
-- [ ] T36-235: M73 [?]-8 - diagnosticar causa
-- [ ] T36-236: M73 [?]-9 - diagnosticar causa
-- [ ] T36-237: M73 [?]-10 - diagnosticar causa
-- [ ] T36-238: M73 [?]-11 - diagnosticar causa
-- [ ] T36-239: M73 [?]-12 - diagnosticar causa
-- [ ] T36-240: M73 [?]-13 - diagnosticar causa
-- [ ] T36-241: M73 [?]-14 - diagnosticar causa
-- [ ] T36-242: M73 [?]-15 - diagnosticar causa
-- [ ] T36-243: M73 [?]-16 - diagnosticar causa
-- [ ] T36-244: M73 [?]-17 - diagnosticar causa
-- [ ] T36-245: M73 [?]-18 - diagnosticar causa
-- [ ] T36-246: M73 [?]-19 - diagnosticar causa
-- [ ] T36-247: M73 [?]-20 - diagnosticar causa
-- [ ] T36-248: M73 [?]-21 - diagnosticar causa
-- [ ] T36-249: M73 [?]-22 - diagnosticar causa
-- [ ] T36-250: M73 [?]-23 - diagnosticar causa
-- [ ] T36-251: M73 [?]-24 - diagnosticar causa
-- [ ] T36-252: M73 [?]-25 - diagnosticar causa
-- [ ] T36-253: M73 [?]-26 - diagnosticar causa
-- [ ] T36-254: M73 [?]-27 - diagnosticar causa
-- [ ] T36-255: M73 [?]-28 - diagnosticar causa
-- [ ] T36-256: M73 [?]-29 - diagnosticar causa
-- [ ] T36-257: M73 [?]-30 - diagnosticar causa
-- [ ] T36-258: M73 [?]-31 - diagnosticar causa
-- [ ] T36-259: M73 [?]-32 - diagnosticar causa
-- [ ] T36-260: M73 [?]-33 - diagnosticar causa
-- [ ] T36-261: M73 [?]-34 - diagnosticar causa
-- [ ] T36-262: M73 [?]-35 - diagnosticar causa
-- [ ] T36-263: M73 [?]-36 - diagnosticar causa
-- [ ] T36-264: M73 [?]-37 - diagnosticar causa
-- [ ] T36-265: M73 [?]-38 - diagnosticar causa
-- [ ] T36-266: M73 [?]-39 - diagnosticar causa
-- [ ] T36-267: M73 [?]-40 - diagnosticar causa
-- [ ] T36-268: M73 [?]-41 - diagnosticar causa
-- [ ] T36-269: M73 [?]-42 - diagnosticar causa
-- [ ] T36-270: M73 [?]-43 - diagnosticar causa
-- [ ] T36-271: M73 [?]-44 - diagnosticar causa
-- [ ] T36-272: M73 [?]-45 - diagnosticar causa
-- [ ] T36-273: M73 [?]-46 - diagnosticar causa
-- [ ] T36-274: M73 [?]-47 - diagnosticar causa
-- [ ] T36-275: M73 [?]-48 - diagnosticar causa
-- [ ] T36-276: M73 [?]-49 - diagnosticar causa
-- [ ] T36-277: M73 [?]-50 - diagnosticar causa
-- [ ] T36-278: M73 [?]-51 - diagnosticar causa
-- [ ] T36-279: M73 [?]-52 - diagnosticar causa
-- [ ] T36-280: M73 [?]-53 - diagnosticar causa
-- [ ] T36-281: M73 [?]-54 - diagnosticar causa
-- [ ] T36-282: M73 [?]-55 - diagnosticar causa
-- [ ] T36-283: M73 [?]-56 - diagnosticar causa
+- [x] T36-228: M73 [?]-1 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-229: M73 [?]-2 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-230: M73 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-231: M73 [?]-4 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-232: M73 [?]-5 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-233: M73 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-234: M73 [?]-7 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-235: M73 [?]-8 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-236: M73 [?]-9 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-237: M73 [?]-10 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-238: M73 [?]-11 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-239: M73 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-240: M73 [?]-13 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-241: M73 [?]-14 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-242: M73 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-243: M73 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-244: M73 [?]-17 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-245: M73 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-246: M73 [?]-19 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-247: M73 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-248: M73 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-249: M73 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-250: M73 [?]-23 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-251: M73 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-252: M73 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-253: M73 [?]-26 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-254: M73 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-255: M73 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-256: M73 [?]-29 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-257: M73 [?]-30 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-258: M73 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-259: M73 [?]-32 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-260: M73 [?]-33 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-261: M73 [?]-34 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-262: M73 [?]-35 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-263: M73 [?]-36 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-264: M73 [?]-37 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-265: M73 [?]-38 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-266: M73 [?]-39 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-267: M73 [?]-40 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-268: M73 [?]-41 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-269: M73 [?]-42 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-270: M73 [?]-43 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-271: M73 [?]-44 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-272: M73 [?]-45 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-273: M73 [?]-46 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-274: M73 [?]-47 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-275: M73 [?]-48 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-276: M73 [?]-49 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-277: M73 [?]-50 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-278: M73 [?]-51 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-279: M73 [?]-52 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-280: M73 [?]-53 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-281: M73 [?]-54 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-282: M73 [?]-55 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-283: M73 [?]-56 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 
 ### M94 (49 [?])
 
-- [ ] T36-284: M94 [?]-1 - diagnosticar causa
-- [ ] T36-285: M94 [?]-2 - diagnosticar causa
-- [ ] T36-286: M94 [?]-3 - diagnosticar causa
-- [ ] T36-287: M94 [?]-4 - diagnosticar causa
-- [ ] T36-288: M94 [?]-5 - diagnosticar causa
-- [ ] T36-289: M94 [?]-6 - diagnosticar causa
-- [ ] T36-290: M94 [?]-7 - diagnosticar causa
-- [ ] T36-291: M94 [?]-8 - diagnosticar causa
-- [ ] T36-292: M94 [?]-9 - diagnosticar causa
-- [ ] T36-293: M94 [?]-10 - diagnosticar causa
-- [ ] T36-294: M94 [?]-11 - diagnosticar causa
-- [ ] T36-295: M94 [?]-12 - diagnosticar causa
-- [ ] T36-296: M94 [?]-13 - diagnosticar causa
-- [ ] T36-297: M94 [?]-14 - diagnosticar causa
-- [ ] T36-298: M94 [?]-15 - diagnosticar causa
-- [ ] T36-299: M94 [?]-16 - diagnosticar causa
-- [ ] T36-300: M94 [?]-17 - diagnosticar causa
-- [ ] T36-301: M94 [?]-18 - diagnosticar causa
-- [ ] T36-302: M94 [?]-19 - diagnosticar causa
-- [ ] T36-303: M94 [?]-20 - diagnosticar causa
-- [ ] T36-304: M94 [?]-21 - diagnosticar causa
-- [ ] T36-305: M94 [?]-22 - diagnosticar causa
-- [ ] T36-306: M94 [?]-23 - diagnosticar causa
-- [ ] T36-307: M94 [?]-24 - diagnosticar causa
-- [ ] T36-308: M94 [?]-25 - diagnosticar causa
-- [ ] T36-309: M94 [?]-26 - diagnosticar causa
-- [ ] T36-310: M94 [?]-27 - diagnosticar causa
-- [ ] T36-311: M94 [?]-28 - diagnosticar causa
-- [ ] T36-312: M94 [?]-29 - diagnosticar causa
-- [ ] T36-313: M94 [?]-30 - diagnosticar causa
-- [ ] T36-314: M94 [?]-31 - diagnosticar causa
-- [ ] T36-315: M94 [?]-32 - diagnosticar causa
-- [ ] T36-316: M94 [?]-33 - diagnosticar causa
-- [ ] T36-317: M94 [?]-34 - diagnosticar causa
-- [ ] T36-318: M94 [?]-35 - diagnosticar causa
-- [ ] T36-319: M94 [?]-36 - diagnosticar causa
-- [ ] T36-320: M94 [?]-37 - diagnosticar causa
-- [ ] T36-321: M94 [?]-38 - diagnosticar causa
-- [ ] T36-322: M94 [?]-39 - diagnosticar causa
-- [ ] T36-323: M94 [?]-40 - diagnosticar causa
-- [ ] T36-324: M94 [?]-41 - diagnosticar causa
-- [ ] T36-325: M94 [?]-42 - diagnosticar causa
-- [ ] T36-326: M94 [?]-43 - diagnosticar causa
-- [ ] T36-327: M94 [?]-44 - diagnosticar causa
-- [ ] T36-328: M94 [?]-45 - diagnosticar causa
-- [ ] T36-329: M94 [?]-46 - diagnosticar causa
-- [ ] T36-330: M94 [?]-47 - diagnosticar causa
-- [ ] T36-331: M94 [?]-48 - diagnosticar causa
-- [ ] T36-332: M94 [?]-49 - diagnosticar causa
+- [x] T36-284: M94 [?]-1 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-285: M94 [?]-2 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-286: M94 [?]-3 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-287: M94 [?]-4 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-288: M94 [?]-5 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-289: M94 [?]-6 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-290: M94 [?]-7 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-291: M94 [?]-8 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-292: M94 [?]-9 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-293: M94 [?]-10 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-294: M94 [?]-11 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-295: M94 [?]-12 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-296: M94 [?]-13 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-297: M94 [?]-14 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-298: M94 [?]-15 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-299: M94 [?]-16 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-300: M94 [?]-17 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-301: M94 [?]-18 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-302: M94 [?]-19 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-303: M94 [?]-20 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-304: M94 [?]-21 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-305: M94 [?]-22 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-306: M94 [?]-23 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-307: M94 [?]-24 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-308: M94 [?]-25 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-309: M94 [?]-26 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-310: M94 [?]-27 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-311: M94 [?]-28 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-312: M94 [?]-29 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-313: M94 [?]-30 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-314: M94 [?]-31 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-315: M94 [?]-32 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-316: M94 [?]-33 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-317: M94 [?]-34 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-318: M94 [?]-35 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-319: M94 [?]-36 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-320: M94 [?]-37 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-321: M94 [?]-38 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-322: M94 [?]-39 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-323: M94 [?]-40 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-324: M94 [?]-41 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-325: M94 [?]-42 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-326: M94 [?]-43 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-327: M94 [?]-44 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-328: M94 [?]-45 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-329: M94 [?]-46 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-330: M94 [?]-47 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-331: M94 [?]-48 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-332: M94 [?]-49 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 
 ### M71 (44 [?])
 
-- [ ] T36-333: M71 [?]-1 - diagnosticar causa
-- [ ] T36-334: M71 [?]-2 - diagnosticar causa
-- [ ] T36-335: M71 [?]-3 - diagnosticar causa
-- [ ] T36-336: M71 [?]-4 - diagnosticar causa
-- [ ] T36-337: M71 [?]-5 - diagnosticar causa
-- [ ] T36-338: M71 [?]-6 - diagnosticar causa
-- [ ] T36-339: M71 [?]-7 - diagnosticar causa
-- [ ] T36-340: M71 [?]-8 - diagnosticar causa
-- [ ] T36-341: M71 [?]-9 - diagnosticar causa
-- [ ] T36-342: M71 [?]-10 - diagnosticar causa
-- [ ] T36-343: M71 [?]-11 - diagnosticar causa
-- [ ] T36-344: M71 [?]-12 - diagnosticar causa
-- [ ] T36-345: M71 [?]-13 - diagnosticar causa
-- [ ] T36-346: M71 [?]-14 - diagnosticar causa
-- [ ] T36-347: M71 [?]-15 - diagnosticar causa
-- [ ] T36-348: M71 [?]-16 - diagnosticar causa
-- [ ] T36-349: M71 [?]-17 - diagnosticar causa
-- [ ] T36-350: M71 [?]-18 - diagnosticar causa
-- [ ] T36-351: M71 [?]-19 - diagnosticar causa
-- [ ] T36-352: M71 [?]-20 - diagnosticar causa
-- [ ] T36-353: M71 [?]-21 - diagnosticar causa
-- [ ] T36-354: M71 [?]-22 - diagnosticar causa
-- [ ] T36-355: M71 [?]-23 - diagnosticar causa
-- [ ] T36-356: M71 [?]-24 - diagnosticar causa
-- [ ] T36-357: M71 [?]-25 - diagnosticar causa
-- [ ] T36-358: M71 [?]-26 - diagnosticar causa
-- [ ] T36-359: M71 [?]-27 - diagnosticar causa
-- [ ] T36-360: M71 [?]-28 - diagnosticar causa
-- [ ] T36-361: M71 [?]-29 - diagnosticar causa
-- [ ] T36-362: M71 [?]-30 - diagnosticar causa
-- [ ] T36-363: M71 [?]-31 - diagnosticar causa
-- [ ] T36-364: M71 [?]-32 - diagnosticar causa
-- [ ] T36-365: M71 [?]-33 - diagnosticar causa
-- [ ] T36-366: M71 [?]-34 - diagnosticar causa
-- [ ] T36-367: M71 [?]-35 - diagnosticar causa
-- [ ] T36-368: M71 [?]-36 - diagnosticar causa
-- [ ] T36-369: M71 [?]-37 - diagnosticar causa
-- [ ] T36-370: M71 [?]-38 - diagnosticar causa
-- [ ] T36-371: M71 [?]-39 - diagnosticar causa
-- [ ] T36-372: M71 [?]-40 - diagnosticar causa
-- [ ] T36-373: M71 [?]-41 - diagnosticar causa
-- [ ] T36-374: M71 [?]-42 - diagnosticar causa
-- [ ] T36-375: M71 [?]-43 - diagnosticar causa
-- [ ] T36-376: M71 [?]-44 - diagnosticar causa
+- [x] T36-333: M71 [?]-1 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-334: M71 [?]-2 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-335: M71 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-336: M71 [?]-4 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-337: M71 [?]-5 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-338: M71 [?]-6 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-339: M71 [?]-7 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-340: M71 [?]-8 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-341: M71 [?]-9 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-342: M71 [?]-10 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-343: M71 [?]-11 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-344: M71 [?]-12 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-345: M71 [?]-13 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-346: M71 [?]-14 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-347: M71 [?]-15 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-348: M71 [?]-16 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-349: M71 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-350: M71 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-351: M71 [?]-19 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-352: M71 [?]-20 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-353: M71 [?]-21 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-354: M71 [?]-22 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-355: M71 [?]-23 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-356: M71 [?]-24 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-357: M71 [?]-25 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-358: M71 [?]-26 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-359: M71 [?]-27 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-360: M71 [?]-28 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-361: M71 [?]-29 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-362: M71 [?]-30 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-363: M71 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-364: M71 [?]-32 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-365: M71 [?]-33 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-366: M71 [?]-34 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-367: M71 [?]-35 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-368: M71 [?]-36 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-369: M71 [?]-37 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-370: M71 [?]-38 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-371: M71 [?]-39 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-372: M71 [?]-40 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-373: M71 [?]-41 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-374: M71 [?]-42 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-375: M71 [?]-43 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-376: M71 [?]-44 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
 
 ### M27 (40 [?])
 
-- [ ] T36-377: M27 [?]-1 - diagnosticar causa
-- [ ] T36-378: M27 [?]-2 - diagnosticar causa
-- [ ] T36-379: M27 [?]-3 - diagnosticar causa
-- [ ] T36-380: M27 [?]-4 - diagnosticar causa
-- [ ] T36-381: M27 [?]-5 - diagnosticar causa
-- [ ] T36-382: M27 [?]-6 - diagnosticar causa
-- [ ] T36-383: M27 [?]-7 - diagnosticar causa
-- [ ] T36-384: M27 [?]-8 - diagnosticar causa
-- [ ] T36-385: M27 [?]-9 - diagnosticar causa
-- [ ] T36-386: M27 [?]-10 - diagnosticar causa
-- [ ] T36-387: M27 [?]-11 - diagnosticar causa
-- [ ] T36-388: M27 [?]-12 - diagnosticar causa
-- [ ] T36-389: M27 [?]-13 - diagnosticar causa
-- [ ] T36-390: M27 [?]-14 - diagnosticar causa
-- [ ] T36-391: M27 [?]-15 - diagnosticar causa
-- [ ] T36-392: M27 [?]-16 - diagnosticar causa
-- [ ] T36-393: M27 [?]-17 - diagnosticar causa
-- [ ] T36-394: M27 [?]-18 - diagnosticar causa
-- [ ] T36-395: M27 [?]-19 - diagnosticar causa
-- [ ] T36-396: M27 [?]-20 - diagnosticar causa
-- [ ] T36-397: M27 [?]-21 - diagnosticar causa
-- [ ] T36-398: M27 [?]-22 - diagnosticar causa
-- [ ] T36-399: M27 [?]-23 - diagnosticar causa
-- [ ] T36-400: M27 [?]-24 - diagnosticar causa
-- [ ] T36-401: M27 [?]-25 - diagnosticar causa
-- [ ] T36-402: M27 [?]-26 - diagnosticar causa
-- [ ] T36-403: M27 [?]-27 - diagnosticar causa
-- [ ] T36-404: M27 [?]-28 - diagnosticar causa
-- [ ] T36-405: M27 [?]-29 - diagnosticar causa
-- [ ] T36-406: M27 [?]-30 - diagnosticar causa
-- [ ] T36-407: M27 [?]-31 - diagnosticar causa
-- [ ] T36-408: M27 [?]-32 - diagnosticar causa
-- [ ] T36-409: M27 [?]-33 - diagnosticar causa
-- [ ] T36-410: M27 [?]-34 - diagnosticar causa
-- [ ] T36-411: M27 [?]-35 - diagnosticar causa
-- [ ] T36-412: M27 [?]-36 - diagnosticar causa
-- [ ] T36-413: M27 [?]-37 - diagnosticar causa
-- [ ] T36-414: M27 [?]-38 - diagnosticar causa
-- [ ] T36-415: M27 [?]-39 - diagnosticar causa
-- [ ] T36-416: M27 [?]-40 - diagnosticar causa
+- [x] T36-377: M27 [?]-1 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-378: M27 [?]-2 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
+- [x] T36-379: M27 [?]-3 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
+- [x] T36-380: M27 [?]-4 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
+- [x] T36-381: M27 [?]-5 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-382: M27 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-383: M27 [?]-7 - diagnosticar causa -> deuda cross-modulo (dueno M15) (conf alta; Log 2434).
+- [x] T36-384: M27 [?]-8 - diagnosticar causa -> deuda cross-modulo (dueno M51) (conf alta; Log 2434).
+- [x] T36-385: M27 [?]-9 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-386: M27 [?]-10 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-387: M27 [?]-11 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-388: M27 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-389: M27 [?]-13 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-390: M27 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-391: M27 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-392: M27 [?]-16 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-393: M27 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-394: M27 [?]-18 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-395: M27 [?]-19 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-396: M27 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-397: M27 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-398: M27 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-399: M27 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-400: M27 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-401: M27 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-402: M27 [?]-26 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-403: M27 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-404: M27 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-405: M27 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-406: M27 [?]-30 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-407: M27 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-408: M27 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-409: M27 [?]-33 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-410: M27 [?]-34 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-411: M27 [?]-35 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-412: M27 [?]-36 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-413: M27 [?]-37 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-414: M27 [?]-38 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-415: M27 [?]-39 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-416: M27 [?]-40 - diagnosticar causa -> deuda cross-modulo (dueno M54) (conf alta; Log 2434).
 
 ### M159 (37 [?])
 
-- [ ] T36-417: M159 [?]-1 - diagnosticar causa
-- [ ] T36-418: M159 [?]-2 - diagnosticar causa
-- [ ] T36-419: M159 [?]-3 - diagnosticar causa
-- [ ] T36-420: M159 [?]-4 - diagnosticar causa
-- [ ] T36-421: M159 [?]-5 - diagnosticar causa
-- [ ] T36-422: M159 [?]-6 - diagnosticar causa
-- [ ] T36-423: M159 [?]-7 - diagnosticar causa
-- [ ] T36-424: M159 [?]-8 - diagnosticar causa
-- [ ] T36-425: M159 [?]-9 - diagnosticar causa
-- [ ] T36-426: M159 [?]-10 - diagnosticar causa
-- [ ] T36-427: M159 [?]-11 - diagnosticar causa
-- [ ] T36-428: M159 [?]-12 - diagnosticar causa
-- [ ] T36-429: M159 [?]-13 - diagnosticar causa
-- [ ] T36-430: M159 [?]-14 - diagnosticar causa
-- [ ] T36-431: M159 [?]-15 - diagnosticar causa
-- [ ] T36-432: M159 [?]-16 - diagnosticar causa
-- [ ] T36-433: M159 [?]-17 - diagnosticar causa
-- [ ] T36-434: M159 [?]-18 - diagnosticar causa
-- [ ] T36-435: M159 [?]-19 - diagnosticar causa
-- [ ] T36-436: M159 [?]-20 - diagnosticar causa
-- [ ] T36-437: M159 [?]-21 - diagnosticar causa
-- [ ] T36-438: M159 [?]-22 - diagnosticar causa
-- [ ] T36-439: M159 [?]-23 - diagnosticar causa
-- [ ] T36-440: M159 [?]-24 - diagnosticar causa
-- [ ] T36-441: M159 [?]-25 - diagnosticar causa
-- [ ] T36-442: M159 [?]-26 - diagnosticar causa
-- [ ] T36-443: M159 [?]-27 - diagnosticar causa
-- [ ] T36-444: M159 [?]-28 - diagnosticar causa
-- [ ] T36-445: M159 [?]-29 - diagnosticar causa
-- [ ] T36-446: M159 [?]-30 - diagnosticar causa
-- [ ] T36-447: M159 [?]-31 - diagnosticar causa
-- [ ] T36-448: M159 [?]-32 - diagnosticar causa
-- [ ] T36-449: M159 [?]-33 - diagnosticar causa
-- [ ] T36-450: M159 [?]-34 - diagnosticar causa
-- [ ] T36-451: M159 [?]-35 - diagnosticar causa
-- [ ] T36-452: M159 [?]-36 - diagnosticar causa
-- [ ] T36-453: M159 [?]-37 - diagnosticar causa
+- [x] T36-417: M159 [?]-1 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-418: M159 [?]-2 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-419: M159 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-420: M159 [?]-4 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-421: M159 [?]-5 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-422: M159 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-423: M159 [?]-7 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-424: M159 [?]-8 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-425: M159 [?]-9 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-426: M159 [?]-10 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-427: M159 [?]-11 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-428: M159 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-429: M159 [?]-13 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-430: M159 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-431: M159 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-432: M159 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-433: M159 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-434: M159 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-435: M159 [?]-19 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-436: M159 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-437: M159 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-438: M159 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-439: M159 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-440: M159 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-441: M159 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-442: M159 [?]-26 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-443: M159 [?]-27 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-444: M159 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-445: M159 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-446: M159 [?]-30 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-447: M159 [?]-31 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-448: M159 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-449: M159 [?]-33 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-450: M159 [?]-34 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-451: M159 [?]-35 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-452: M159 [?]-36 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-453: M159 [?]-37 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 
 ### M49 (33 [?])
 
-- [ ] T36-454: M49 [?]-1 - diagnosticar causa
-- [ ] T36-455: M49 [?]-2 - diagnosticar causa
-- [ ] T36-456: M49 [?]-3 - diagnosticar causa
-- [ ] T36-457: M49 [?]-4 - diagnosticar causa
-- [ ] T36-458: M49 [?]-5 - diagnosticar causa
-- [ ] T36-459: M49 [?]-6 - diagnosticar causa
-- [ ] T36-460: M49 [?]-7 - diagnosticar causa
-- [ ] T36-461: M49 [?]-8 - diagnosticar causa
-- [ ] T36-462: M49 [?]-9 - diagnosticar causa
-- [ ] T36-463: M49 [?]-10 - diagnosticar causa
-- [ ] T36-464: M49 [?]-11 - diagnosticar causa
-- [ ] T36-465: M49 [?]-12 - diagnosticar causa
-- [ ] T36-466: M49 [?]-13 - diagnosticar causa
-- [ ] T36-467: M49 [?]-14 - diagnosticar causa
-- [ ] T36-468: M49 [?]-15 - diagnosticar causa
-- [ ] T36-469: M49 [?]-16 - diagnosticar causa
-- [ ] T36-470: M49 [?]-17 - diagnosticar causa
-- [ ] T36-471: M49 [?]-18 - diagnosticar causa
-- [ ] T36-472: M49 [?]-19 - diagnosticar causa
-- [ ] T36-473: M49 [?]-20 - diagnosticar causa
-- [ ] T36-474: M49 [?]-21 - diagnosticar causa
-- [ ] T36-475: M49 [?]-22 - diagnosticar causa
-- [ ] T36-476: M49 [?]-23 - diagnosticar causa
-- [ ] T36-477: M49 [?]-24 - diagnosticar causa
-- [ ] T36-478: M49 [?]-25 - diagnosticar causa
-- [ ] T36-479: M49 [?]-26 - diagnosticar causa
-- [ ] T36-480: M49 [?]-27 - diagnosticar causa
-- [ ] T36-481: M49 [?]-28 - diagnosticar causa
-- [ ] T36-482: M49 [?]-29 - diagnosticar causa
-- [ ] T36-483: M49 [?]-30 - diagnosticar causa
-- [ ] T36-484: M49 [?]-31 - diagnosticar causa
-- [ ] T36-485: M49 [?]-32 - diagnosticar causa
-- [ ] T36-486: M49 [?]-33 - diagnosticar causa
+- [x] T36-454: M49 [?]-1 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-455: M49 [?]-2 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-456: M49 [?]-3 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-457: M49 [?]-4 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-458: M49 [?]-5 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-459: M49 [?]-6 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-460: M49 [?]-7 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-461: M49 [?]-8 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-462: M49 [?]-9 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-463: M49 [?]-10 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-464: M49 [?]-11 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-465: M49 [?]-12 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-466: M49 [?]-13 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-467: M49 [?]-14 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-468: M49 [?]-15 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-469: M49 [?]-16 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-470: M49 [?]-17 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-471: M49 [?]-18 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-472: M49 [?]-19 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-473: M49 [?]-20 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-474: M49 [?]-21 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-475: M49 [?]-22 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-476: M49 [?]-23 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-477: M49 [?]-24 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-478: M49 [?]-25 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-479: M49 [?]-26 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-480: M49 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-481: M49 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-482: M49 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-483: M49 [?]-30 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-484: M49 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-485: M49 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-486: M49 [?]-33 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 
 ### M11 (32 [?])
 
-- [ ] T36-487: M11 [?]-1 - diagnosticar causa
-- [ ] T36-488: M11 [?]-2 - diagnosticar causa
-- [ ] T36-489: M11 [?]-3 - diagnosticar causa
-- [ ] T36-490: M11 [?]-4 - diagnosticar causa
-- [ ] T36-491: M11 [?]-5 - diagnosticar causa
-- [ ] T36-492: M11 [?]-6 - diagnosticar causa
-- [ ] T36-493: M11 [?]-7 - diagnosticar causa
-- [ ] T36-494: M11 [?]-8 - diagnosticar causa
-- [ ] T36-495: M11 [?]-9 - diagnosticar causa
-- [ ] T36-496: M11 [?]-10 - diagnosticar causa
-- [ ] T36-497: M11 [?]-11 - diagnosticar causa
-- [ ] T36-498: M11 [?]-12 - diagnosticar causa
-- [ ] T36-499: M11 [?]-13 - diagnosticar causa
-- [ ] T36-500: M11 [?]-14 - diagnosticar causa
-- [ ] T36-501: M11 [?]-15 - diagnosticar causa
-- [ ] T36-502: M11 [?]-16 - diagnosticar causa
-- [ ] T36-503: M11 [?]-17 - diagnosticar causa
-- [ ] T36-504: M11 [?]-18 - diagnosticar causa
-- [ ] T36-505: M11 [?]-19 - diagnosticar causa
-- [ ] T36-506: M11 [?]-20 - diagnosticar causa
-- [ ] T36-507: M11 [?]-21 - diagnosticar causa
-- [ ] T36-508: M11 [?]-22 - diagnosticar causa
-- [ ] T36-509: M11 [?]-23 - diagnosticar causa
-- [ ] T36-510: M11 [?]-24 - diagnosticar causa
-- [ ] T36-511: M11 [?]-25 - diagnosticar causa
-- [ ] T36-512: M11 [?]-26 - diagnosticar causa
-- [ ] T36-513: M11 [?]-27 - diagnosticar causa
-- [ ] T36-514: M11 [?]-28 - diagnosticar causa
-- [ ] T36-515: M11 [?]-29 - diagnosticar causa
-- [ ] T36-516: M11 [?]-30 - diagnosticar causa
-- [ ] T36-517: M11 [?]-31 - diagnosticar causa
-- [ ] T36-518: M11 [?]-32 - diagnosticar causa
+- [x] T36-487: M11 [?]-1 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-488: M11 [?]-2 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-489: M11 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-490: M11 [?]-4 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-491: M11 [?]-5 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
+- [x] T36-492: M11 [?]-6 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-493: M11 [?]-7 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-494: M11 [?]-8 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-495: M11 [?]-9 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-496: M11 [?]-10 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-497: M11 [?]-11 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-498: M11 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-499: M11 [?]-13 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-500: M11 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-501: M11 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-502: M11 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-503: M11 [?]-17 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
+- [x] T36-504: M11 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-505: M11 [?]-19 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
+- [x] T36-506: M11 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-507: M11 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-508: M11 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-509: M11 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-510: M11 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-511: M11 [?]-25 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-512: M11 [?]-26 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-513: M11 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-514: M11 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-515: M11 [?]-29 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-516: M11 [?]-30 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
+- [x] T36-517: M11 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
+- [x] T36-518: M11 [?]-32 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 
