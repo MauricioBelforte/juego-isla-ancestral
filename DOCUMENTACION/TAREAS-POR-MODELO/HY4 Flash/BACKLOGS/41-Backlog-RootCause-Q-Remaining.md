@@ -6,348 +6,348 @@
 
 ## Tareas
 
-- [ ] T41-001: M105 [?]-1 - diagnosticar
-- [ ] T41-002: M105 [?]-2 - diagnosticar
-- [ ] T41-003: M105 [?]-3 - diagnosticar
-- [ ] T41-004: M105 [?]-4 - diagnosticar
-- [ ] T41-005: M105 [?]-5 - diagnosticar
-- [ ] T41-006: M105 [?]-6 - diagnosticar
-- [ ] T41-007: M105 [?]-7 - diagnosticar
-- [ ] T41-008: M105 [?]-8 - diagnosticar
-- [ ] T41-009: M105 [?]-9 - diagnosticar
-- [ ] T41-010: M105 [?]-10 - diagnosticar
-- [ ] T41-011: M105 [?]-11 - diagnosticar
-- [ ] T41-012: M105 [?]-12 - diagnosticar
-- [ ] T41-013: M105 [?]-13 - diagnosticar
-- [ ] T41-014: M105 [?]-14 - diagnosticar
-- [ ] T41-015: M105 [?]-15 - diagnosticar
-- [ ] T41-016: M105 [?]-16 - diagnosticar
-- [ ] T41-017: M105 [?]-17 - diagnosticar
-- [ ] T41-018: M105 [?]-18 - diagnosticar
-- [ ] T41-019: M105 [?]-19 - diagnosticar
-- [ ] T41-020: M105 [?]-20 - diagnosticar
-- [ ] T41-021: M105 [?]-21 - diagnosticar
-- [ ] T41-022: M105 [?]-22 - diagnosticar
-- [ ] T41-023: M105 [?]-23 - diagnosticar
-- [ ] T41-024: M105 [?]-24 - diagnosticar
-- [ ] T41-025: M105 [?]-25 - diagnosticar
-- [ ] T41-026: M105 [?]-26 - diagnosticar
-- [ ] T41-027: M105 [?]-27 - diagnosticar
-- [ ] T41-028: M105 [?]-28 - diagnosticar
-- [ ] T41-029: M115 [?]-1 - diagnosticar
-- [ ] T41-030: M115 [?]-2 - diagnosticar
-- [ ] T41-031: M115 [?]-3 - diagnosticar
-- [ ] T41-032: M115 [?]-4 - diagnosticar
-- [ ] T41-033: M115 [?]-5 - diagnosticar
-- [ ] T41-034: M115 [?]-6 - diagnosticar
-- [ ] T41-035: M115 [?]-7 - diagnosticar
-- [ ] T41-036: M115 [?]-8 - diagnosticar
-- [ ] T41-037: M115 [?]-9 - diagnosticar
-- [ ] T41-038: M115 [?]-10 - diagnosticar
-- [ ] T41-039: M115 [?]-11 - diagnosticar
-- [ ] T41-040: M115 [?]-12 - diagnosticar
-- [ ] T41-041: M115 [?]-13 - diagnosticar
-- [ ] T41-042: M115 [?]-14 - diagnosticar
-- [ ] T41-043: M115 [?]-15 - diagnosticar
-- [ ] T41-044: M115 [?]-16 - diagnosticar
-- [ ] T41-045: M115 [?]-17 - diagnosticar
-- [ ] T41-046: M115 [?]-18 - diagnosticar
-- [ ] T41-047: M115 [?]-19 - diagnosticar
-- [ ] T41-048: M115 [?]-20 - diagnosticar
-- [ ] T41-049: M115 [?]-21 - diagnosticar
-- [ ] T41-050: M115 [?]-22 - diagnosticar
-- [ ] T41-051: M115 [?]-23 - diagnosticar
-- [ ] T41-052: M115 [?]-24 - diagnosticar
-- [ ] T41-053: M115 [?]-25 - diagnosticar
-- [ ] T41-054: M115 [?]-26 - diagnosticar
-- [ ] T41-055: M127 [?]-1 - diagnosticar
-- [ ] T41-056: M127 [?]-2 - diagnosticar
-- [ ] T41-057: M127 [?]-3 - diagnosticar
-- [ ] T41-058: M127 [?]-4 - diagnosticar
-- [ ] T41-059: M127 [?]-5 - diagnosticar
-- [ ] T41-060: M127 [?]-6 - diagnosticar
-- [ ] T41-061: M127 [?]-7 - diagnosticar
-- [ ] T41-062: M127 [?]-8 - diagnosticar
-- [ ] T41-063: M127 [?]-9 - diagnosticar
-- [ ] T41-064: M127 [?]-10 - diagnosticar
-- [ ] T41-065: M127 [?]-11 - diagnosticar
-- [ ] T41-066: M127 [?]-12 - diagnosticar
-- [ ] T41-067: M127 [?]-13 - diagnosticar
-- [ ] T41-068: M127 [?]-14 - diagnosticar
-- [ ] T41-069: M127 [?]-15 - diagnosticar
-- [ ] T41-070: M127 [?]-16 - diagnosticar
-- [ ] T41-071: M127 [?]-17 - diagnosticar
-- [ ] T41-072: M127 [?]-18 - diagnosticar
-- [ ] T41-073: M127 [?]-19 - diagnosticar
-- [ ] T41-074: M127 [?]-20 - diagnosticar
-- [ ] T41-075: M127 [?]-21 - diagnosticar
-- [ ] T41-076: M127 [?]-22 - diagnosticar
-- [ ] T41-077: M127 [?]-23 - diagnosticar
-- [ ] T41-078: M127 [?]-24 - diagnosticar
-- [ ] T41-079: M124 [?]-1 - diagnosticar
-- [ ] T41-080: M124 [?]-2 - diagnosticar
-- [ ] T41-081: M124 [?]-3 - diagnosticar
-- [ ] T41-082: M124 [?]-4 - diagnosticar
-- [ ] T41-083: M124 [?]-5 - diagnosticar
-- [ ] T41-084: M124 [?]-6 - diagnosticar
-- [ ] T41-085: M124 [?]-7 - diagnosticar
-- [ ] T41-086: M124 [?]-8 - diagnosticar
-- [ ] T41-087: M124 [?]-9 - diagnosticar
-- [ ] T41-088: M124 [?]-10 - diagnosticar
-- [ ] T41-089: M124 [?]-11 - diagnosticar
-- [ ] T41-090: M124 [?]-12 - diagnosticar
-- [ ] T41-091: M124 [?]-13 - diagnosticar
-- [ ] T41-092: M124 [?]-14 - diagnosticar
-- [ ] T41-093: M124 [?]-15 - diagnosticar
-- [ ] T41-094: M124 [?]-16 - diagnosticar
-- [ ] T41-095: M124 [?]-17 - diagnosticar
-- [ ] T41-096: M124 [?]-18 - diagnosticar
-- [ ] T41-097: M124 [?]-19 - diagnosticar
-- [ ] T41-098: M124 [?]-20 - diagnosticar
-- [ ] T41-099: M124 [?]-21 - diagnosticar
-- [ ] T41-100: M124 [?]-22 - diagnosticar
-- [ ] T41-101: M124 [?]-23 - diagnosticar
-- [ ] T41-102: M10 [?]-1 - diagnosticar
-- [ ] T41-103: M10 [?]-2 - diagnosticar
-- [ ] T41-104: M10 [?]-3 - diagnosticar
-- [ ] T41-105: M10 [?]-4 - diagnosticar
-- [ ] T41-106: M10 [?]-5 - diagnosticar
-- [ ] T41-107: M10 [?]-6 - diagnosticar
-- [ ] T41-108: M10 [?]-7 - diagnosticar
-- [ ] T41-109: M10 [?]-8 - diagnosticar
-- [ ] T41-110: M10 [?]-9 - diagnosticar
-- [ ] T41-111: M10 [?]-10 - diagnosticar
-- [ ] T41-112: M10 [?]-11 - diagnosticar
-- [ ] T41-113: M10 [?]-12 - diagnosticar
-- [ ] T41-114: M10 [?]-13 - diagnosticar
-- [ ] T41-115: M10 [?]-14 - diagnosticar
-- [ ] T41-116: M10 [?]-15 - diagnosticar
-- [ ] T41-117: M10 [?]-16 - diagnosticar
-- [ ] T41-118: M10 [?]-17 - diagnosticar
-- [ ] T41-119: M10 [?]-18 - diagnosticar
-- [ ] T41-120: M67 [?]-1 - diagnosticar
-- [ ] T41-121: M67 [?]-2 - diagnosticar
-- [ ] T41-122: M67 [?]-3 - diagnosticar
-- [ ] T41-123: M67 [?]-4 - diagnosticar
-- [ ] T41-124: M67 [?]-5 - diagnosticar
-- [ ] T41-125: M67 [?]-6 - diagnosticar
-- [ ] T41-126: M67 [?]-7 - diagnosticar
-- [ ] T41-127: M67 [?]-8 - diagnosticar
-- [ ] T41-128: M67 [?]-9 - diagnosticar
-- [ ] T41-129: M67 [?]-10 - diagnosticar
-- [ ] T41-130: M67 [?]-11 - diagnosticar
-- [ ] T41-131: M67 [?]-12 - diagnosticar
-- [ ] T41-132: M67 [?]-13 - diagnosticar
-- [ ] T41-133: M67 [?]-14 - diagnosticar
-- [ ] T41-134: M67 [?]-15 - diagnosticar
-- [ ] T41-135: M67 [?]-16 - diagnosticar
-- [ ] T41-136: M67 [?]-17 - diagnosticar
-- [ ] T41-137: M16 [?]-1 - diagnosticar
-- [ ] T41-138: M16 [?]-2 - diagnosticar
-- [ ] T41-139: M16 [?]-3 - diagnosticar
-- [ ] T41-140: M16 [?]-4 - diagnosticar
-- [ ] T41-141: M16 [?]-5 - diagnosticar
-- [ ] T41-142: M16 [?]-6 - diagnosticar
-- [ ] T41-143: M16 [?]-7 - diagnosticar
-- [ ] T41-144: M16 [?]-8 - diagnosticar
-- [ ] T41-145: M16 [?]-9 - diagnosticar
-- [ ] T41-146: M16 [?]-10 - diagnosticar
-- [ ] T41-147: M16 [?]-11 - diagnosticar
-- [ ] T41-148: M16 [?]-12 - diagnosticar
-- [ ] T41-149: M16 [?]-13 - diagnosticar
-- [ ] T41-150: M16 [?]-14 - diagnosticar
-- [ ] T41-151: M16 [?]-15 - diagnosticar
-- [ ] T41-152: M16 [?]-16 - diagnosticar
-- [ ] T41-153: M64 [?]-1 - diagnosticar
-- [ ] T41-154: M64 [?]-2 - diagnosticar
-- [ ] T41-155: M64 [?]-3 - diagnosticar
-- [ ] T41-156: M64 [?]-4 - diagnosticar
-- [ ] T41-157: M64 [?]-5 - diagnosticar
-- [ ] T41-158: M64 [?]-6 - diagnosticar
-- [ ] T41-159: M64 [?]-7 - diagnosticar
-- [ ] T41-160: M64 [?]-8 - diagnosticar
-- [ ] T41-161: M64 [?]-9 - diagnosticar
-- [ ] T41-162: M64 [?]-10 - diagnosticar
-- [ ] T41-163: M122 [?]-1 - diagnosticar
-- [ ] T41-164: M122 [?]-2 - diagnosticar
-- [ ] T41-165: M122 [?]-3 - diagnosticar
-- [ ] T41-166: M122 [?]-4 - diagnosticar
-- [ ] T41-167: M122 [?]-5 - diagnosticar
-- [ ] T41-168: M122 [?]-6 - diagnosticar
-- [ ] T41-169: M122 [?]-7 - diagnosticar
-- [ ] T41-170: M122 [?]-8 - diagnosticar
-- [ ] T41-171: M131 [?]-1 - diagnosticar
-- [ ] T41-172: M131 [?]-2 - diagnosticar
-- [ ] T41-173: M131 [?]-3 - diagnosticar
-- [ ] T41-174: M131 [?]-4 - diagnosticar
-- [ ] T41-175: M131 [?]-5 - diagnosticar
-- [ ] T41-176: M131 [?]-6 - diagnosticar
-- [ ] T41-177: M131 [?]-7 - diagnosticar
-- [ ] T41-178: M131 [?]-8 - diagnosticar
-- [ ] T41-179: M34 [?]-1 - diagnosticar
-- [ ] T41-180: M34 [?]-2 - diagnosticar
-- [ ] T41-181: M34 [?]-3 - diagnosticar
-- [ ] T41-182: M34 [?]-4 - diagnosticar
-- [ ] T41-183: M34 [?]-5 - diagnosticar
-- [ ] T41-184: M34 [?]-6 - diagnosticar
-- [ ] T41-185: M34 [?]-7 - diagnosticar
-- [ ] T41-186: M34 [?]-8 - diagnosticar
-- [ ] T41-187: M02 [?]-1 - diagnosticar
-- [ ] T41-188: M02 [?]-2 - diagnosticar
-- [ ] T41-189: M02 [?]-3 - diagnosticar
-- [ ] T41-190: M02 [?]-4 - diagnosticar
-- [ ] T41-191: M02 [?]-5 - diagnosticar
-- [ ] T41-192: M02 [?]-6 - diagnosticar
-- [ ] T41-193: M02 [?]-7 - diagnosticar
-- [ ] T41-194: M137 [?]-1 - diagnosticar
-- [ ] T41-195: M137 [?]-2 - diagnosticar
-- [ ] T41-196: M137 [?]-3 - diagnosticar
-- [ ] T41-197: M137 [?]-4 - diagnosticar
-- [ ] T41-198: M137 [?]-5 - diagnosticar
-- [ ] T41-199: M137 [?]-6 - diagnosticar
-- [ ] T41-200: M137 [?]-7 - diagnosticar
-- [ ] T41-201: M163 [?]-1 - diagnosticar
-- [ ] T41-202: M163 [?]-2 - diagnosticar
-- [ ] T41-203: M163 [?]-3 - diagnosticar
-- [ ] T41-204: M163 [?]-4 - diagnosticar
-- [ ] T41-205: M163 [?]-5 - diagnosticar
-- [ ] T41-206: M163 [?]-6 - diagnosticar
-- [ ] T41-207: M163 [?]-7 - diagnosticar
-- [ ] T41-208: M88 [?]-1 - diagnosticar
-- [ ] T41-209: M88 [?]-2 - diagnosticar
-- [ ] T41-210: M88 [?]-3 - diagnosticar
-- [ ] T41-211: M88 [?]-4 - diagnosticar
-- [ ] T41-212: M88 [?]-5 - diagnosticar
-- [ ] T41-213: M88 [?]-6 - diagnosticar
-- [ ] T41-214: M88 [?]-7 - diagnosticar
-- [ ] T41-215: M139 [?]-1 - diagnosticar
-- [ ] T41-216: M139 [?]-2 - diagnosticar
-- [ ] T41-217: M139 [?]-3 - diagnosticar
-- [ ] T41-218: M139 [?]-4 - diagnosticar
-- [ ] T41-219: M139 [?]-5 - diagnosticar
-- [ ] T41-220: M139 [?]-6 - diagnosticar
-- [ ] T41-221: M21 [?]-1 - diagnosticar
-- [ ] T41-222: M21 [?]-2 - diagnosticar
-- [ ] T41-223: M21 [?]-3 - diagnosticar
-- [ ] T41-224: M21 [?]-4 - diagnosticar
-- [ ] T41-225: M21 [?]-5 - diagnosticar
-- [ ] T41-226: M21 [?]-6 - diagnosticar
-- [ ] T41-227: M33 [?]-1 - diagnosticar
-- [ ] T41-228: M33 [?]-2 - diagnosticar
-- [ ] T41-229: M33 [?]-3 - diagnosticar
-- [ ] T41-230: M33 [?]-4 - diagnosticar
-- [ ] T41-231: M33 [?]-5 - diagnosticar
-- [ ] T41-232: M33 [?]-6 - diagnosticar
-- [ ] T41-233: M09 [?]-1 - diagnosticar
-- [ ] T41-234: M09 [?]-2 - diagnosticar
-- [ ] T41-235: M09 [?]-3 - diagnosticar
-- [ ] T41-236: M09 [?]-4 - diagnosticar
-- [ ] T41-237: M09 [?]-5 - diagnosticar
-- [ ] T41-238: M151 [?]-1 - diagnosticar
-- [ ] T41-239: M151 [?]-2 - diagnosticar
-- [ ] T41-240: M151 [?]-3 - diagnosticar
-- [ ] T41-241: M151 [?]-4 - diagnosticar
-- [ ] T41-242: M151 [?]-5 - diagnosticar
-- [ ] T41-243: M63 [?]-1 - diagnosticar
-- [ ] T41-244: M63 [?]-2 - diagnosticar
-- [ ] T41-245: M63 [?]-3 - diagnosticar
-- [ ] T41-246: M63 [?]-4 - diagnosticar
-- [ ] T41-247: M63 [?]-5 - diagnosticar
-- [ ] T41-248: M112 [?]-1 - diagnosticar
-- [ ] T41-249: M112 [?]-2 - diagnosticar
-- [ ] T41-250: M112 [?]-3 - diagnosticar
-- [ ] T41-251: M112 [?]-4 - diagnosticar
-- [ ] T41-252: M15 [?]-1 - diagnosticar
-- [ ] T41-253: M15 [?]-2 - diagnosticar
-- [ ] T41-254: M15 [?]-3 - diagnosticar
-- [ ] T41-255: M15 [?]-4 - diagnosticar
-- [ ] T41-256: M18 [?]-1 - diagnosticar
-- [ ] T41-257: M18 [?]-2 - diagnosticar
-- [ ] T41-258: M18 [?]-3 - diagnosticar
-- [ ] T41-259: M18 [?]-4 - diagnosticar
-- [ ] T41-260: M22 [?]-1 - diagnosticar
-- [ ] T41-261: M22 [?]-2 - diagnosticar
-- [ ] T41-262: M22 [?]-3 - diagnosticar
-- [ ] T41-263: M22 [?]-4 - diagnosticar
-- [ ] T41-264: M60 [?]-1 - diagnosticar
-- [ ] T41-265: M60 [?]-2 - diagnosticar
-- [ ] T41-266: M60 [?]-3 - diagnosticar
-- [ ] T41-267: M60 [?]-4 - diagnosticar
-- [ ] T41-268: M82 [?]-1 - diagnosticar
-- [ ] T41-269: M82 [?]-2 - diagnosticar
-- [ ] T41-270: M82 [?]-3 - diagnosticar
-- [ ] T41-271: M82 [?]-4 - diagnosticar
-- [ ] T41-272: M03 [?]-1 - diagnosticar
-- [ ] T41-273: M03 [?]-2 - diagnosticar
-- [ ] T41-274: M03 [?]-3 - diagnosticar
-- [ ] T41-275: M108 [?]-1 - diagnosticar
-- [ ] T41-276: M108 [?]-2 - diagnosticar
-- [ ] T41-277: M108 [?]-3 - diagnosticar
-- [ ] T41-278: M138 [?]-1 - diagnosticar
-- [ ] T41-279: M138 [?]-2 - diagnosticar
-- [ ] T41-280: M138 [?]-3 - diagnosticar
-- [ ] T41-281: M44 [?]-1 - diagnosticar
-- [ ] T41-282: M44 [?]-2 - diagnosticar
-- [ ] T41-283: M44 [?]-3 - diagnosticar
-- [ ] T41-284: M62 [?]-1 - diagnosticar
-- [ ] T41-285: M62 [?]-2 - diagnosticar
-- [ ] T41-286: M62 [?]-3 - diagnosticar
-- [ ] T41-287: M68 [?]-1 - diagnosticar
-- [ ] T41-288: M68 [?]-2 - diagnosticar
-- [ ] T41-289: M68 [?]-3 - diagnosticar
-- [ ] T41-290: M69 [?]-1 - diagnosticar
-- [ ] T41-291: M69 [?]-2 - diagnosticar
-- [ ] T41-292: M69 [?]-3 - diagnosticar
-- [ ] T41-293: M103 [?]-1 - diagnosticar
-- [ ] T41-294: M103 [?]-2 - diagnosticar
-- [ ] T41-295: M109 [?]-1 - diagnosticar
-- [ ] T41-296: M109 [?]-2 - diagnosticar
-- [ ] T41-297: M12 [?]-1 - diagnosticar
-- [ ] T41-298: M12 [?]-2 - diagnosticar
-- [ ] T41-299: M140 [?]-1 - diagnosticar
-- [ ] T41-300: M140 [?]-2 - diagnosticar
-- [ ] T41-301: M145 [?]-1 - diagnosticar
-- [ ] T41-302: M145 [?]-2 - diagnosticar
-- [ ] T41-303: M154 [?]-1 - diagnosticar
-- [ ] T41-304: M154 [?]-2 - diagnosticar
-- [ ] T41-305: M161 [?]-1 - diagnosticar
-- [ ] T41-306: M161 [?]-2 - diagnosticar
-- [ ] T41-307: M162 [?]-1 - diagnosticar
-- [ ] T41-308: M162 [?]-2 - diagnosticar
-- [ ] T41-309: M23 [?]-1 - diagnosticar
-- [ ] T41-310: M23 [?]-2 - diagnosticar
-- [ ] T41-311: M31 [?]-1 - diagnosticar
-- [ ] T41-312: M31 [?]-2 - diagnosticar
-- [ ] T41-313: M45 [?]-1 - diagnosticar
-- [ ] T41-314: M45 [?]-2 - diagnosticar
-- [ ] T41-315: M50 [?]-1 - diagnosticar
-- [ ] T41-316: M50 [?]-2 - diagnosticar
-- [ ] T41-317: M52 [?]-1 - diagnosticar
-- [ ] T41-318: M52 [?]-2 - diagnosticar
-- [ ] T41-319: M53 [?]-1 - diagnosticar
-- [ ] T41-320: M53 [?]-2 - diagnosticar
-- [ ] T41-321: M55 [?]-1 - diagnosticar
-- [ ] T41-322: M55 [?]-2 - diagnosticar
-- [ ] T41-323: M59 [?]-1 - diagnosticar
-- [ ] T41-324: M59 [?]-2 - diagnosticar
-- [ ] T41-325: M72 [?]-1 - diagnosticar
-- [ ] T41-326: M72 [?]-2 - diagnosticar
-- [ ] T41-327: M85 [?]-1 - diagnosticar
-- [ ] T41-328: M85 [?]-2 - diagnosticar
-- [ ] T41-329: M117 [?]-1 - diagnosticar
-- [ ] T41-330: M129 [?]-1 - diagnosticar
-- [ ] T41-331: M14 [?]-1 - diagnosticar
-- [ ] T41-332: M147 [?]-1 - diagnosticar
-- [ ] T41-333: M148 [?]-1 - diagnosticar
-- [ ] T41-334: M164 [?]-1 - diagnosticar
-- [ ] T41-335: M17 [?]-1 - diagnosticar
-- [ ] T41-336: M26 [?]-1 - diagnosticar
-- [ ] T41-337: M35 [?]-1 - diagnosticar
-- [ ] T41-338: M38 [?]-1 - diagnosticar
-- [ ] T41-339: M48 [?]-1 - diagnosticar
-- [ ] T41-340: M51 [?]-1 - diagnosticar
-- [ ] T41-341: M56 [?]-1 - diagnosticar
-- [ ] T41-342: M58 [?]-1 - diagnosticar
-- [ ] T41-343: M61 [?]-1 - diagnosticar
-- [ ] T41-344: M96 [?]-1 - diagnosticar
+- [x] T41-001: M105 [?]-1 - diagnosticar -> requiere datos de gameplay reales (no disponibles en build (conf alta; Log 2432)
+- [x] T41-002: M105 [?]-2 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-003: M105 [?]-3 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-004: M105 [?]-4 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-005: M105 [?]-5 - diagnosticar -> requiere datos de gameplay reales (no disponibles en build (conf alta; Log 2432)
+- [x] T41-006: M105 [?]-6 - diagnosticar -> requiere datos de gameplay reales (no disponibles en build (conf alta; Log 2432)
+- [x] T41-007: M105 [?]-7 - diagnosticar -> requiere datos de gameplay reales (no disponibles en build (conf alta; Log 2432)
+- [x] T41-008: M105 [?]-8 - diagnosticar -> requiere datos de gameplay reales (no disponibles en build (conf alta; Log 2432)
+- [x] T41-009: M105 [?]-9 - diagnosticar -> deuda cross-modulo (dueno M91) (conf alta; Log 2432)
+- [x] T41-010: M105 [?]-10 - diagnosticar -> deuda cross-modulo (dueno M91) (conf alta; Log 2432)
+- [x] T41-011: M105 [?]-11 - diagnosticar -> deuda cross-modulo (dueno M104,M91) (conf alta; Log 2432)
+- [x] T41-012: M105 [?]-12 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-013: M105 [?]-13 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-014: M105 [?]-14 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-015: M105 [?]-15 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-016: M105 [?]-16 - diagnosticar -> deuda cross-modulo (dueno M71) (conf alta; Log 2432)
+- [x] T41-017: M105 [?]-17 - diagnosticar -> deuda cross-modulo (dueno M71) (conf alta; Log 2432)
+- [x] T41-018: M105 [?]-18 - diagnosticar -> deuda cross-modulo (dueno M71) (conf alta; Log 2432)
+- [x] T41-019: M105 [?]-19 - diagnosticar -> deuda cross-modulo (dueno M102) (conf alta; Log 2432)
+- [x] T41-020: M105 [?]-20 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-021: M105 [?]-21 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-022: M105 [?]-22 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-023: M105 [?]-23 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-024: M105 [?]-24 - diagnosticar -> deuda cross-modulo (dueno M53) (conf alta; Log 2432)
+- [x] T41-025: M105 [?]-25 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-026: M105 [?]-26 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-027: M105 [?]-27 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-028: M105 [?]-28 - diagnosticar -> deuda cross-modulo (dueno M104) (conf alta; Log 2432)
+- [x] T41-029: M115 [?]-1 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-030: M115 [?]-2 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-031: M115 [?]-3 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-032: M115 [?]-4 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-033: M115 [?]-5 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-034: M115 [?]-6 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-035: M115 [?]-7 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-036: M115 [?]-8 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-037: M115 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-038: M115 [?]-10 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-039: M115 [?]-11 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-040: M115 [?]-12 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-041: M115 [?]-13 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-042: M115 [?]-14 - diagnosticar -> deuda cross-modulo (dueno M90) (conf alta; Log 2432)
+- [x] T41-043: M115 [?]-15 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-044: M115 [?]-16 - diagnosticar -> deuda cross-modulo (dueno M57) (conf alta; Log 2432)
+- [x] T41-045: M115 [?]-17 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-046: M115 [?]-18 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-047: M115 [?]-19 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-048: M115 [?]-20 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-049: M115 [?]-21 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-050: M115 [?]-22 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-051: M115 [?]-23 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-052: M115 [?]-24 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-053: M115 [?]-25 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-054: M115 [?]-26 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-055: M127 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-056: M127 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-057: M127 [?]-3 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-058: M127 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-059: M127 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-060: M127 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-061: M127 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-062: M127 [?]-8 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-063: M127 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-064: M127 [?]-10 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-065: M127 [?]-11 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-066: M127 [?]-12 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-067: M127 [?]-13 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-068: M127 [?]-14 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-069: M127 [?]-15 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-070: M127 [?]-16 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-071: M127 [?]-17 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-072: M127 [?]-18 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-073: M127 [?]-19 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-074: M127 [?]-20 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-075: M127 [?]-21 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-076: M127 [?]-22 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-077: M127 [?]-23 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-078: M127 [?]-24 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-079: M124 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-080: M124 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-081: M124 [?]-3 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-082: M124 [?]-4 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-083: M124 [?]-5 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-084: M124 [?]-6 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-085: M124 [?]-7 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-086: M124 [?]-8 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-087: M124 [?]-9 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-088: M124 [?]-10 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-089: M124 [?]-11 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-090: M124 [?]-12 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-091: M124 [?]-13 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-092: M124 [?]-14 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-093: M124 [?]-15 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-094: M124 [?]-16 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-095: M124 [?]-17 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-096: M124 [?]-18 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-097: M124 [?]-19 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-098: M124 [?]-20 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-099: M124 [?]-21 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-100: M124 [?]-22 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-101: M124 [?]-23 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-102: M10 [?]-1 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-103: M10 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-104: M10 [?]-3 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-105: M10 [?]-4 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-106: M10 [?]-5 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-107: M10 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-108: M10 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-109: M10 [?]-8 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-110: M10 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-111: M10 [?]-10 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-112: M10 [?]-11 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-113: M10 [?]-12 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-114: M10 [?]-13 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-115: M10 [?]-14 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-116: M10 [?]-15 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-117: M10 [?]-16 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-118: M10 [?]-17 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-119: M10 [?]-18 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-120: M67 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-121: M67 [?]-2 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-122: M67 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-123: M67 [?]-4 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-124: M67 [?]-5 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-125: M67 [?]-6 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-126: M67 [?]-7 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-127: M67 [?]-8 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-128: M67 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-129: M67 [?]-10 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-130: M67 [?]-11 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-131: M67 [?]-12 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-132: M67 [?]-13 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-133: M67 [?]-14 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-134: M67 [?]-15 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-135: M67 [?]-16 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-136: M67 [?]-17 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-137: M16 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-138: M16 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-139: M16 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-140: M16 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-141: M16 [?]-5 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-142: M16 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-143: M16 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-144: M16 [?]-8 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-145: M16 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-146: M16 [?]-10 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-147: M16 [?]-11 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-148: M16 [?]-12 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-149: M16 [?]-13 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-150: M16 [?]-14 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-151: M16 [?]-15 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-152: M16 [?]-16 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-153: M64 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-154: M64 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-155: M64 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-156: M64 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-157: M64 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-158: M64 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-159: M64 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-160: M64 [?]-8 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-161: M64 [?]-9 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-162: M64 [?]-10 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-163: M122 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-164: M122 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-165: M122 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-166: M122 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-167: M122 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-168: M122 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-169: M122 [?]-7 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-170: M122 [?]-8 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-171: M131 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-172: M131 [?]-2 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-173: M131 [?]-3 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-174: M131 [?]-4 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-175: M131 [?]-5 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-176: M131 [?]-6 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-177: M131 [?]-7 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-178: M131 [?]-8 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-179: M34 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-180: M34 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-181: M34 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-182: M34 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-183: M34 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-184: M34 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-185: M34 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-186: M34 [?]-8 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-187: M02 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-188: M02 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-189: M02 [?]-3 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-190: M02 [?]-4 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-191: M02 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-192: M02 [?]-6 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-193: M02 [?]-7 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-194: M137 [?]-1 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-195: M137 [?]-2 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-196: M137 [?]-3 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-197: M137 [?]-4 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-198: M137 [?]-5 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-199: M137 [?]-6 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-200: M137 [?]-7 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-201: M163 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-202: M163 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-203: M163 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-204: M163 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-205: M163 [?]-5 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-206: M163 [?]-6 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-207: M163 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-208: M88 [?]-1 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-209: M88 [?]-2 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-210: M88 [?]-3 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-211: M88 [?]-4 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-212: M88 [?]-5 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-213: M88 [?]-6 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-214: M88 [?]-7 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-215: M139 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-216: M139 [?]-2 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-217: M139 [?]-3 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-218: M139 [?]-4 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-219: M139 [?]-5 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-220: M139 [?]-6 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-221: M21 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-222: M21 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-223: M21 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-224: M21 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-225: M21 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-226: M21 [?]-6 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-227: M33 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-228: M33 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-229: M33 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-230: M33 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-231: M33 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-232: M33 [?]-6 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-233: M09 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-234: M09 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-235: M09 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-236: M09 [?]-4 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-237: M09 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-238: M151 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-239: M151 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-240: M151 [?]-3 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-241: M151 [?]-4 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-242: M151 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-243: M63 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-244: M63 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-245: M63 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-246: M63 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-247: M63 [?]-5 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-248: M112 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-249: M112 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-250: M112 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-251: M112 [?]-4 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-252: M15 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-253: M15 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-254: M15 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-255: M15 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-256: M18 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-257: M18 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-258: M18 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-259: M18 [?]-4 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-260: M22 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-261: M22 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-262: M22 [?]-3 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-263: M22 [?]-4 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-264: M60 [?]-1 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-265: M60 [?]-2 - diagnosticar -> deuda cross-modulo (dueno M63) (conf alta; Log 2432)
+- [x] T41-266: M60 [?]-3 - diagnosticar -> KnownIssue documentado, no bloqueante (conf alta; Log 2432)
+- [x] T41-267: M60 [?]-4 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-268: M82 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-269: M82 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-270: M82 [?]-3 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-271: M82 [?]-4 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-272: M03 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-273: M03 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-274: M03 [?]-3 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-275: M108 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-276: M108 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-277: M108 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-278: M138 [?]-1 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-279: M138 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-280: M138 [?]-3 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-281: M44 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-282: M44 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-283: M44 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-284: M62 [?]-1 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-285: M62 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-286: M62 [?]-3 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-287: M68 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-288: M68 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-289: M68 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-290: M69 [?]-1 - diagnosticar -> deuda cross-modulo (dueno M91) (conf alta; Log 2432)
+- [x] T41-291: M69 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-292: M69 [?]-3 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-293: M103 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-294: M103 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-295: M109 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-296: M109 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-297: M12 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-298: M12 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-299: M140 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-300: M140 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-301: M145 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-302: M145 [?]-2 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-303: M154 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-304: M154 [?]-2 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-305: M161 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-306: M161 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-307: M162 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-308: M162 [?]-2 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-309: M23 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-310: M23 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-311: M31 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-312: M31 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-313: M45 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-314: M45 [?]-2 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-315: M50 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-316: M50 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-317: M52 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-318: M52 [?]-2 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-319: M53 [?]-1 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-320: M53 [?]-2 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-321: M55 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-322: M55 [?]-2 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-323: M59 [?]-1 - diagnosticar -> artefacto ausente en disco (conf media; Log 2432)
+- [x] T41-324: M59 [?]-2 - diagnosticar -> deuda cross-modulo (dueno M61) (conf alta; Log 2432)
+- [x] T41-325: M72 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-326: M72 [?]-2 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-327: M85 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-328: M85 [?]-2 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-329: M117 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-330: M129 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-331: M14 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-332: M147 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-333: M148 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-334: M164 [?]-1 - diagnosticar -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2432)
+- [x] T41-335: M17 [?]-1 - diagnosticar -> claim de ausencia inexacto: archivo citado SI existe, la f (conf alta; Log 2432)
+- [x] T41-336: M26 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-337: M35 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-338: M38 [?]-1 - diagnosticar -> deuda cross-modulo (dueno M38) (conf alta; Log 2432)
+- [x] T41-339: M48 [?]-1 - diagnosticar -> artefacto ausente en disco (conf alta; Log 2432)
+- [x] T41-340: M51 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-341: M56 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-342: M58 [?]-1 - diagnosticar -> deuda documentada en checklist (alcance posterior) (conf media; Log 2432)
+- [x] T41-343: M61 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
+- [x] T41-344: M96 [?]-1 - diagnosticar -> sin verificacion automatizada disponible (conf media; Log 2432)
 

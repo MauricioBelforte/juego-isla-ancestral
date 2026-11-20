@@ -43,7 +43,9 @@ El objetivo es mantener el archivo reducido y solo con lo realmente útil para e
 
 **Debilidades:** 12B activos por token (menos músculo de razonamiento puro que Beam 23B o Ultra 55B); benchmarks de maker aún sin validación independiente completa; verbosidad 170M tokens por Índice (el doble de la mediana).
 
-**Regla de asignación:** QA visual por API (M154 — ver capturas del juego), document intelligence (tablas, gráficos, OCR), picking [S]/[C] por velocidad (446 t/s). NO delegar: matemática dura de balance (M93/M95), verificaciones de código GDScript crítico en primera línea.
+**⚠️ Limitación dura de visión:** aunque es modelo VLM con visión nativa por API, **en este entorno de herramientas no puede leer ni ver archivos PNG existentes desde disco**. Solo puede ver imágenes en vivo: capturas de pantalla (`screen_capture_screen` / `screen_capture_window`) y la escena de Blender (`blender_look`). No puede ejecutar QA visual de archivos PNG estáticos en disco (ej. renders de M169 en `tools/mcp/blender-mcp/169-Crucero/`, capturas del barrido M154, etc.) sin que se le provean las imágenes mediante captura de pantalla de una ventana que las muestre.
+
+**Regla de asignación:** QA visual SOLO de imágenes en vivo (capturas de pantalla o escena de Blender), document intelligence (tablas, gráficos, OCR), picking [S]/[C] por velocidad (446 t/s). NO delegar: matemática dura de balance (M93/M95), verificaciones de código GDScript crítico en primera línea, QA visual de archivos PNG en disco.
 
 ---
 
