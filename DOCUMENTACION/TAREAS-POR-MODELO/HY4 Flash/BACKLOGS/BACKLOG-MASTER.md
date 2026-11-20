@@ -110,3 +110,10 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 29-Backlog-I18N-Deep-Orphans.md (23 tareas)
 - 30-Backlog-Scene-Shader.md (61 tareas)
 - 31-Backlog-Tanda-23nov-exHy3.md (12 tareas, reasignada de Hy3)
+
+## NUEVO 20nov (572 tareas)
+- 36-Backlog-RootCause-Q-Markas.md (518 tareas)
+- 37-Backlog-ReVerificacion-Drifts.md (20 tareas)
+- 38-Backlog-CI-Verde.md (14 tareas)
+- 39-Backlog-CrossDoc-Round2.md (10 tareas)
+- 40-Backlog-Visual-QA-Round2.md (10 tareas)
