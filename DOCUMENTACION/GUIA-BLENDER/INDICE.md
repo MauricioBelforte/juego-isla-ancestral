@@ -76,7 +76,7 @@
 | `02-errores-comunes-e01-e35.md` | E-01 a E-35 |
 | `04-errores-avanzados.md` | E-36 en adelante |
 
-**Total:** 107 errores documentados (E-01 a E-107). Ultimo agregado: **E-107** (aberturas sobre una pared existente: extraer la pared, no aproximarla).
+**Total:** 108 errores documentados (E-01 a E-108). Ultimo agregado: **E-108** (auditar z_min en GLB) existente: extraer la pared, no aproximarla).
 
 ---
 

@@ -32,7 +32,7 @@ La documentación detallada de temas de Godot está en **`DOCUMENTACION/GUIA-GOD
 - **Diagnóstico de tildes (freeze)**: [`GUIA-GODOT/19-diagnostico-tildes.md`](DOCUMENTACION/GUIA-GODOT/19-diagnostico-tildes.md) — protocolo paso a paso ante un tildo, causas C-01 a C-11 y checklist. **Leerlo ANTES de tocar código cuando el juego se tilda.**
 
 ## 2c. Carpeta GUIA-BLENDER (documentación temática de Blender)
-La documentación detallada de temas de Blender (bpy, modelado, exportación) está en **`DOCUMENTACION/GUIA-BLENDER/`** — archivos temáticos individuales con recetas completas probadas y 107 errores documentados (E-01 en adelante). El índice de navegación es [`GUIA-BLENDER/INDICE.md`](DOCUMENTACION/GUIA-BLENDER/INDICE.md). La guía original completa se conserva en [`OBSOLETOS/09-GUIA-BLENDER.md`](DOCUMENTACION/OBSOLETOS/09-GUIA-BLENDER.md) como respaldo histórico.
+La documentación detallada de temas de Blender (bpy, modelado, exportación) está en **`DOCUMENTACION/GUIA-BLENDER/`** — archivos temáticos individuales con recetas completas probadas y 108 errores documentados (E-01 en adelante). El índice de navegación es [`GUIA-BLENDER/INDICE.md`](DOCUMENTACION/GUIA-BLENDER/INDICE.md). La guía original completa se conserva en [`OBSOLETOS/09-GUIA-BLENDER.md`](DOCUMENTACION/OBSOLETOS/09-GUIA-BLENDER.md) como respaldo histórico.
 
 ### Fundamentales (01-05)
 - **Conexión MCP y convenciones**: [`GUIA-BLENDER/01-conexion-mcp-convenciones.md`](DOCUMENTACION/GUIA-BLENDER/01-conexion-mcp-convenciones.md)

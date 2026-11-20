@@ -693,3 +693,44 @@ ahorrado desde el principio (ahí la abertura va modelada en la pared desde el i
 
 **Relacionado:** E-24 (vertices vs AABB), E-45 (auditar en headless), E-49 (salto por mtime), E-106
 (el exportador no corre desde el addon MCP).
+
+
+---
+
+### E-108 - Auditar `z_min` en un GLB: vertices con matriz, no el `min/max` del accessor
+
+**Descubierto:** 2026-11-20 por ERNIE-5.5-Flash-Preview (Kilo Code) al exportar los 9 interiores
+del Crucero (M169). La auditoria daba 6 archivos "FUERA" y 4 eran falsos positivos.
+
+**Sintoma.** El auditor recorre los `.glb`, lee `accessor.min/max` de `POSITION` y calcula
+`z_min`. Para la mayoria de los assets funciona, pero en los que tienen **transformaciones de
+nodo** (translation/rotation/scale) da un valor **incorrecto**:
+
+| Archivo | z_min del accessor (local) | z_min real (mundo) |
+|---|---:|---:|
+| `169-Crucero_camarote_interno.glb` | −0,110 | **+0,045** |
+| `169-Crucero_camarote_suite.glb` | −0,110 | **+0,045** |
+
+**Causa.** `accessor.min/max` son el bounding box en **espacio local de la malla**. Si el nodo
+tiene `translation` o `scale`, el mundo es otro. El `.blend` estaba en +0,045 (verificado con
+depsgraph), pero el GLB "medía" −0,110.
+
+**Solucion.** Leer los **vertices reales** del accessor POSITION y aplicar la **matriz del nodo**:
+
+```python
+# 1) parsear el GLB (JSON + BIN)
+# 2) para cada nodo con malla: M = matriz(nodo) (TRS o matrix)
+# 3) y_min = min(M @ v) sobre todos los vertices
+# 4) z_min del GLB = min sobre todos los nodos
+```
+
+Si solo se necesita una verificación rápida y el GLB **no** tiene transformaciones (nodos con
+`matrix` identidad o sin `translation`/`scale`), el `accessor.min` sirve. **Si los hay, no.**
+
+**Verificación cruzada con Blender:** abrir el `.blend` y medir con
+`(o.matrix_world @ v.co).z` sobre la malla evaluada (`evaluated_get(depsgraph)`).
+
+**Aplica a:** cualquier auditoría de assets exportados (escala, `z_min`, bbox, orientación).
+**Relacionado:** E-24 (vertices vs AABB en Blender), E-106 (exportador headless), E-107 (aberturas).
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-20
