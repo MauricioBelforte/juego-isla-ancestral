@@ -207,6 +207,39 @@ func declarar_emergencia(motivo: String) -> void:
 	estado = Estado.EMERGENCIA
 	_log_warning("%s EMERGENCIA: %s" % [PREFIJO_LOG, motivo], "GAMEPLAY")
 
+
+# ------------------------------------------------------------------ streaming (K-03)
+## Nunca debe haber dos cubiertas cargadas a la vez: al entrar a una se
+## descarga la anterior. M63 (CargasManager) es el dueño del streaming; este
+## manager solo orquesta y deja registro para el test.
+
+var _cubierta_cargada: Node = null
+
+
+func descargar_cubierta() -> void:
+	if _cubierta_cargada != null and is_instance_valid(_cubierta_cargada):
+		_cubierta_cargada.queue_free()
+	_cubierta_cargada = null
+
+
+## Carga la cubierta `destino` (1..4) y descarga la anterior.
+func cargar_cubierta(destino: int) -> bool:
+	if destino < CUBIERTA_MIN or destino > CUBIERTA_MAX:
+		push_warning("%s cubierta invalida: %d" % [PREFIJO_LOG, destino])
+		return false
+	descargar_cubierta()
+	var ruta := "res://scenes/crucero/interior_cubierta_%d.tscn" % destino
+	var cargas := get_node_or_null("/root/CargasManager")
+	if cargas != null and cargas.has_method("cargar_sector"):
+		await cargas.cargar_sector(ruta)
+		cubierta_actual = destino
+		cambio_cubierta.emit(destino)
+		GameLogger.info("%s cubierta %d cargada (la anterior fue descargada)" % [PREFIJO_LOG, destino], GameLogger.Category.GAMEPLAY)
+		return true
+	GameLogger.warning("%s CargasManager no disponible; no se cargo la cubierta %d" % [PREFIJO_LOG, destino], GameLogger.Category.GAMEPLAY)
+	return false
+
+
 # ------------------------------------------------------------------ persistencia
 
 func a_dict() -> Dictionary:
