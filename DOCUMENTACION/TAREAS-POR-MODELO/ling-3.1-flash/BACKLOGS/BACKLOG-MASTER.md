@@ -216,3 +216,13 @@
 - [x] v179 (03:30Z): msg 440 escrito+verificado; HALLAZGO: 4 claves SETTINGS copiadas ES->PT son cognatos legitimos + orphan de consumo total (0 usos scripts/escenas/resources) -> saneo catalogo, no flipeo; flota quieta 3ra vuelta; 0 flips; log 440
 
 - [x] v180 (04:00Z): msg 441 escrito+verificado; CRUCE GLOBAL orphan i18n: 276 msgid vs 3789 archivos -> 246 usados/30 orphan (DIARY 14, SETTINGS 9, CLOCK 3, ITEMS 2, MAIN_MENU 1, DIALOGOS 1); refina 70-orphan-scripts de HY4; caveat consumo dinamico; 0 flips; log 441
+
+## v191-v210 (2026-11-19 04:30Z -> 2026-11-21 05:01Z) — RECOVERY gap truncamiento + msg 442
+- [x] GAP ~18-20h honesto: ~14 turnos cron truncados (v191-v209), 0 writes. Causa: payload largo trunca; read corto y bash corto sí ejecutan. Sin flips, sin push, riel intacto.
+- [x] v203: lectura canal OK (rompe ciclo): último 441, sin 442, sin respuesta directora.
+- [x] v208: helper --consume OK -> 442 consumido (usados 435, max 441, pool 0, huecos [63,156,157,232,233,234]).
+- [x] Hallazgo PNG M169: capturas/169-Crucero/ (raíz, gitignoreada) SÍ tiene 20 PNGs juicio HY4 066 (5 escenarios x 4 vistas; glob 0 hits por .gitignore, Get-ChildItem sí los ve). Corrige reportes 434/440.
+- [x] v210 (05:01Z): msg 442 escrito+verificado en disco (cierre v191-v209 + radar + pendientes dueño). BK append v191-v210.
+- Pendiente: blindaje post-fd0667b/a729f2a re-medir; +15 lineas fundador fd0667b NO están en este índice (buscar 02-Backlog-Tareas-Asignadas); HY4 069/070, ERNIE 077/078, agnes 072, Nemotron eval 0400, Beam m38/39 sin leer.
+- [x] v210 (05:10Z) blindaje post-2757f28 triple: pt.po SHA256 FE9044E2C3317C26 = invariante v58; watchdog LIMPIO (170/170/170, paridad 0); scan orphan RE-MEDIDO IDENTICO v180 (USADOS=246/ORPHAN=30, consumo no se movio). Msg 443 escrito (radar: HY4 069-079, b29-i18n cerrado HY4 063, cluster i18n bajo HY4 backlog 56; correccion precision 442: 4 cognatos de 9 SETTINGS orphan). +15 lineas fundador fd0667b NO localizadas (BK-MASTER termina v180; 02 L1-120 sin ellas) - ruta pedida al director. Pool Ling 0B 3ra vuelta ultimo+1.
+- [x] v211 (05:30Z): msg 444 escrito+verificado. Paso 0: estado_director 403 claves congelado (ling T32/LOTE B standby; hy3 cross-QA M87 ratificado 131/136). Centinela v45 rc=0 determinista: items_x=22719/C2=552/chk=169 IDENTICO v155 = 0 flips. Radar: Nemotron eval 0400 (Glyph 10 informes 8C/16A, Beam 12 9C/14A, ambos IDLE, opcion A; confluencia triple dup IDs+drift ratificada), Beam m38/m39 24 hallazgos economia/tiendas B/M sin solapamiento Ling. Sin respuesta directora 412-443 (23 msgs). Pool 0B 4ta vuelta ultimo+1 (444).

@@ -225,6 +225,49 @@
 
 ---
 
-**Totales:** 162 ítems · Completados: 18 · Pendientes: 144 · No resueltos: 0.
+**Totales:** 192 ítems · Completados: 45 · Pendientes: 147 · No resueltos: 0. (Actualizado 2026-11-21 con la sección R: implementación ejecutada.)
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25
+
+## R. Implementacion ejecutada (2026-11-14)
+
+> Esta seccion refleja lo **realmente construido**. Los bloques A-Q de arriba son el plan.
+
+### R.1 Exterior (asset 3D)
+- [x] Casco por loft de 13 estaciones (72 m × 13,58 m en el pequeno; 230,4 × 43,8 m en el grande) [C]
+- [x] 4 cubiertas con forjado y baranda, escalonadas [M]
+- [x] 3 niveles de superestructura con **ventanas reales** (huecos, no paneles) [C]
+- [x] 2 chimeneas con banda dorada (8,60 m de alto, radio 3,06 m) [M]
+- [x] Puente de mando con ventanal y 2 alas [M]
+- [x] Mástil + 2 radares + 2 antenas [S]
+- [x] Mascarón de proa (estilo ancestral, con tocado y ojos) [M]
+- [x] Hélice de 4 palas + bulbo + timón con mecha [M]
+- [x] 6 botes salvavidas con caseta, quilla, regala y pescante [M]
+- [x] Carteles de proa y popa [S]
+4. [x] 6 cables de botes [S]
+- [x] Piscina de 15 × 8 m + 2 jacuzzis + 6 tumbonas [M]
+- [x] 3 LOD (16.882 / 9.042 / 3.790 v) + GLB en `assets/3d/{alta,media,baja}/` [C]
+- [x] `z_min = 0,045` verificado con vértices y matriz (E-108) [S]
+
+### R.2 Interiores (9 GLB)
+- [x] Camarote tipo con cama, armario, baño, ojo de buey [M]
+- [x] 4 variantes: interno / familiar / suite / dúplex [C]
+- [x] Comedor: 16 mesas + 32 sillas + barra + escenario [M]
+- [x] Casino: 4 mesas de cartas + ruleta + fichas + barra [M]
+- [x] Puente: consola con 5 pantallas + 2 timones + silla del capitán + mesa de cartas [M]
+- [x] Bodega: cajas, barriles, 2 botes, 3 escotillas, 2 escaleras [M]
+- [x] 10 renders con cámara **adentro** (2 por espacio) [S]
+- [x] 9 GLB exportados con `z_min = 0,045` [S]
+
+### R.3 Integración (GDScript)
+- [x] `crucero_manager.gd` (241 líneas): 4 estados, 6 señales, persistencia [C]
+- [x] Autoload `CruceroManager` registrado en `project.godot` [S]
+- [x] Boot headless verificado: `[CRU] catalogos cargados: 3 clases, 7 camarotes` [S]
+- [x] 5 actividades a bordo (casino, ruleta, torneo, espectáculo, vigía) [C]
+- [x] `data/crucero/pasajes.json` + `camarotes.json` + `juegos_a_bordo.json` [S]
+- [x] Tests: `test_crucero_manager.gd` (13/0) y `test_crucero_eventos.gd` (6/0) [M]
+
+### R.4 Pendiente
+- [ ] Revisión visual del fundador (B-02/B-03 e interiores)
+- [ ] LOD "de verdad" (barandas con menos postes) — el actual decima
+- [ ] Integración con M28/M74/M63 en escena (hoy el manager está aislado)
