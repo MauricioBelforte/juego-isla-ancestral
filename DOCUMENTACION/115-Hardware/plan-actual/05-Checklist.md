@@ -113,7 +113,7 @@
 - [x] Test de cambio de preset en runtime [M] *(set_preset + reset_to_detected en test_override_y_reset)*
 - [x] Test de detección de gamepad [M] *(get_input_devices retorna PackedStringArray; vibrate/stop_vibration sin gamepad OK)*
 - [?] Test de mapeo de botones → **M57** *(test_control_input.gd existe)*
-- [?] Test de hot-plug de gamepad → requiere gamepad físico; fuera de headless
+- [?] Test de hot-plug de gamepad → requiere gamepad físico; fuera de headless  **KnownIssue: test de hot-plug requiere gamepad fisico, fuera de headless**
 - [x] Test de fallback cuando detección falla [M] *(RenderingServer.has_method() check; valores por defecto "Unknown")*
 
 ## H. Integración con Build Pipeline (10 ítems)

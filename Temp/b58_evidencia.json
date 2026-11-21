@@ -1,0 +1,1037 @@
+{
+ "M49": {
+  "39": {
+   "secciones": [],
+   "seccion_en_diseno": [],
+   "hits": {
+    "easing": {
+     "diseno": 4,
+     "code_files": 0
+    }
+   }
+  },
+  "40": {
+   "secciones": [],
+   "seccion_en_diseno": [],
+   "hits": {
+    "luna": {
+     "diseno": 1,
+     "code_files": 38
+    }
+   }
+  },
+  "79": {
+   "secciones": [],
+   "seccion_en_diseno": [],
+   "hits": {
+    "glow/bloom": {
+     "diseno": 0,
+     "code_files": 0
+    },
+    "cozy": {
+     "diseno": 0,
+     "code_files": 132
+    }
+   }
+  },
+  "86": {
+   "secciones": [
+    "2.2"
+   ],
+   "seccion_en_diseno": [
+    true
+   ],
+   "hits": {
+    "cueva": {
+     "diseno": 7,
+     "code_files": 25
+    },
+    "subterraneo": {
+     "diseno": 2,
+     "code_files": 16
+    }
+   }
+  },
+  "87": {
+   "secciones": [
+    "1"
+   ],
+   "seccion_en_diseno": [
+    true
+   ],
+   "hits": {
+    "cueva": {
+     "diseno": 7,
+     "code_files": 25
+    },
+    "subterraneo": {
+     "diseno": 2,
+     "code_files": 16
+    }
+   }
+  },
+  "93": {
+   "secciones": [
+    "3.3"
+   ],
+   "seccion_en_diseno": [
+    true
+   ],
+   "hits": {
+    "cueva": {
+     "diseno": 7,
+     "code_files": 25
+    },
+    "ambience": {
+     "diseno": 0,
+     "code_files": 0
+    }
+   }
+  },
+  "94": {
+   "secciones": [
+    "1",
+    "3.3"
+   ],
+   "seccion_en_diseno": [
+    true,
+    true
+   ],
+   "hits": {
+    "interior_templo": {
+     "diseno": 1,
+     "code_files": 0
+    }
+   }
+  },
+  "109": {
+   "secciones": [],
+   "seccion_en_diseno": [],
+   "hits": {
+    "PCF": {
+     "diseno": 0,
+     "code_files": 1
+    }
+   }
+  },
+  "148": {
+   "secciones": [
+    "3.1"
+   ],
+   "seccion_en_diseno": [
+    true
+   ],
+   "hits": {
+    "cozy": {
+     "diseno": 0,
+     "code_files": 132
+    }
+   }
+  },
+  "167": {
+   "secciones": [
+    "2.1"
+   ],
+   "seccion_en_diseno": [
+    true
+   ],
+   "hits": {
+    "easing": {
+     "diseno": 4,
+     "code_files": 0
+    }
+   }
+  }
+ },
+ "M94": [
+  {
+   "linea": 64,
+   "es_interrogante": true,
+   "primera": 25,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que cultivos/plantas no mueren por ausentarse [m] **degradado por el director (2026-10-10, qa 21.8 de ",
+   "first_norm": "definir que cultivos/plantas no mueren por ausentarse [m] agnes-2.5-flash 2026-09-12: regla cozy documentada e"
+  },
+  {
+   "linea": 73,
+   "es_interrogante": true,
+   "primera": 26,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que ninguna recompensa exige estar presente en una fecha real [m]",
+   "first_norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] agnes-2.5-flash 2026-09-12: regla do"
+  },
+  {
+   "linea": 74,
+   "es_interrogante": true,
+   "primera": 26,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] **degradado por el director (2026-10",
+   "first_norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] agnes-2.5-flash 2026-09-12: regla do"
+  },
+  {
+   "linea": 85,
+   "es_interrogante": true,
+   "primera": 27,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que el postgame quede disponible hasta completarlo [s]",
+   "first_norm": "definir que el postgame quede disponible hasta completarlo [s] agnes-2.5-flash 2026-09-12: regla documentada e"
+  },
+  {
+   "linea": 90,
+   "es_interrogante": true,
+   "primera": 33,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir ventanas de 1-2 dias de juego (no de calendario real) [m]",
+   "first_norm": "definir ventanas de 1-2 dias de juego (no de calendario real) [m] agnes-2.5-flash 2026-09-12: regla documentad"
+  },
+  {
+   "linea": 91,
+   "es_interrogante": true,
+   "primera": 34,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir anuncio anticipado en diario [m]",
+   "first_norm": "definir anuncio anticipado en diario [m] agnes-2.5-flash 2026-09-12: mecanismo disenado en 03-diseno.md 8.2 (a"
+  },
+  {
+   "linea": 102,
+   "es_interrogante": true,
+   "primera": 35,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que la festividad siga el dia de juego (m29) [m]",
+   "first_norm": "definir que la festividad siga el dia de juego (m29) [m] agnes-2.5-flash 2026-09-12: integration with m29 docu"
+  },
+  {
+   "linea": 103,
+   "es_interrogante": true,
+   "primera": 36,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir sin recompensas unicas por primera participacion [s]",
+   "first_norm": "definir sin recompensas unicas por primera participacion [s] agnes-2.5-flash 2026-09-12: regla documentada en "
+  },
+  {
+   "linea": 107,
+   "es_interrogante": false,
+   "primera": null,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "definir 6 sellos + acto 3 como meta sin prisa [m]",
+   "first_norm": ""
+  },
+  {
+   "linea": 108,
+   "es_interrogante": true,
+   "primera": 41,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir museo 100% (m37/m73) sin fecha limite [m]",
+   "first_norm": "definir museo 100% (m37/m73) sin fecha limite [m] agnes-2.5-flash 2026-09-12: politica documentada en 03-disen"
+  },
+  {
+   "linea": 109,
+   "es_interrogante": false,
+   "primera": null,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "definir ciudad/islas construidas (m17/m68) persistente [m]",
+   "first_norm": ""
+  },
+  {
+   "linea": 110,
+   "es_interrogante": true,
+   "primera": 42,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir amistad maxima con 30 npc sin decaimiento [m]",
+   "first_norm": "definir amistad maxima con 30 npc sin decaimiento [m] agnes-2.5-flash 2026-09-12: regla documentada en 03-dise"
+  },
+  {
+   "linea": 111,
+   "es_interrogante": true,
+   "primera": 43,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir misterios completos abiertos a ritmo propio [s]",
+   "first_norm": "definir misterios completos abiertos a ritmo propio [s] agnes-2.5-flash 2026-09-12: regla documentada en 03-di"
+  },
+  {
+   "linea": 116,
+   "es_interrogante": true,
+   "primera": 41,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir museo 100% (m37/m73) sin fecha limite [m] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-",
+   "first_norm": "definir museo 100% (m37/m73) sin fecha limite [m] agnes-2.5-flash 2026-09-12: politica documentada en 03-disen"
+  },
+  {
+   "linea": 117,
+   "es_interrogante": true,
+   "primera": 44,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir fichas con lore (m148) y sin ventana [m]",
+   "first_norm": "definir fichas con lore (m148) y sin ventana [m] agnes-2.5-flash 2026-09-12: integration with m148 documented "
+  },
+  {
+   "linea": 118,
+   "es_interrogante": true,
+   "primera": 45,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir progreso por fases visible en diario [m] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-f",
+   "first_norm": "definir progreso por fases visible en diario [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-diseno"
+  },
+  {
+   "linea": 123,
+   "es_interrogante": true,
+   "primera": 48,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir regalos del dia (catalogo) sin exclusividad [s] **degradado por el director (2026-10-10, qa 21.8 de ag",
+   "first_norm": "definir regalos del dia (catalogo) sin exclusividad [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+  },
+  {
+   "linea": 124,
+   "es_interrogante": true,
+   "primera": 49,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir sin eventos de amistad unicos e irrepetibles [s] **degradado por el director (2026-10-10, qa 21.8 de a",
+   "first_norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03"
+  },
+  {
+   "linea": 125,
+   "es_interrogante": true,
+   "primera": 45,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir progreso por fases visible en diario [m]",
+   "first_norm": "definir progreso por fases visible en diario [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-diseno"
+  },
+  {
+   "linea": 126,
+   "es_interrogante": true,
+   "primera": 53,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir arcos de misterio abiertos sin desesperar [m] **degradado por el director (2026-10-10, qa 21.8 de agne",
+   "first_norm": "definir arcos de misterio abiertos sin desesperar [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-d"
+  },
+  {
+   "linea": 127,
+   "es_interrogante": false,
+   "primera": null,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "",
+   "first_norm": ""
+  },
+  {
+   "linea": 130,
+   "es_interrogante": true,
+   "primera": 46,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir amistad con hitos de largo plazo (m20) [m]",
+   "first_norm": "definir amistad con hitos de largo plazo (m20) [m] agnes-2.5-flash 2026-09-12: integration with m20 documented"
+  },
+  {
+   "linea": 131,
+   "es_interrogante": true,
+   "primera": 47,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir cadenas de misiones de amistad sin prisa [m]",
+   "first_norm": "definir cadenas de misiones de amistad sin prisa [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-di"
+  },
+  {
+   "linea": 132,
+   "es_interrogante": true,
+   "primera": 48,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir regalos del dia (catalogo) sin exclusividad [s]",
+   "first_norm": "definir regalos del dia (catalogo) sin exclusividad [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+  },
+  {
+   "linea": 133,
+   "es_interrogante": true,
+   "primera": 49,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s]",
+   "first_norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03"
+  },
+  {
+   "linea": 137,
+   "es_interrogante": true,
+   "primera": 53,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir arcos de misterio abiertos sin desesperar [m]",
+   "first_norm": "definir arcos de misterio abiertos sin desesperar [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-d"
+  },
+  {
+   "linea": 138,
+   "es_interrogante": true,
+   "primera": 54,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir pistas de misterios reencontrables (diario/m148) [m]",
+   "first_norm": "definir pistas de misterios reencontrables (diario/m148) [m] agnes-2.5-flash 2026-09-12: integration with m148"
+  },
+  {
+   "linea": 139,
+   "es_interrogante": true,
+   "primera": 55,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "definir misterio final en postgame (5+ h) [c]",
+   "first_norm": "definir misterio final en postgame (5+ h) [c] agnes-2.5-flash 2026-09-12: diseno documentado in 03-diseno.md 1"
+  },
+  {
+   "linea": 140,
+   "es_interrogante": true,
+   "primera": 56,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir que ninguna pista expira [s]",
+   "first_norm": "definir que ninguna pista expira [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.md 14.4 (no ex"
+  },
+  {
+   "linea": 144,
+   "es_interrogante": true,
+   "primera": 65,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion formal de streaks [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-flash ms",
+   "first_norm": "definir prohibicion formal de streaks [s] agnes-2.5-flash 2026-09-12: regla formal documentada in 03-diseno.md"
+  },
+  {
+   "linea": 145,
+   "es_interrogante": true,
+   "primera": 66,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de contenido exclusivo temporal [s] **degradado por el director (2026-10-10, qa 21.8 de ag",
+   "first_norm": "definir prohibicion de contenido exclusivo temporal [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+  },
+  {
+   "linea": 146,
+   "es_interrogante": true,
+   "primera": 67,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de vuelve o lo pierdes [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-fla",
+   "first_norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.m"
+  },
+  {
+   "linea": 147,
+   "es_interrogante": true,
+   "primera": 68,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de penalizacion de ausencia [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-",
+   "first_norm": "definir prohibicion de penalizacion de ausencia [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+  },
+  {
+   "linea": 148,
+   "es_interrogante": true,
+   "primera": 59,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir desbloqueo tras el epilogo (m22) [m]",
+   "first_norm": "definir desbloqueo tras el epilogo (m22) [m] agnes-2.5-flash 2026-09-12: integration with m22 historia documen"
+  },
+  {
+   "linea": 149,
+   "es_interrogante": true,
+   "primera": 60,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "definir contenido de postgame 5 h verificado [m]",
+   "first_norm": "definir contenido de postgame 5 h verificado [m] agnes-2.5-flash 2026-09-12: spec documented in 03-diseno.md 1"
+  },
+  {
+   "linea": 153,
+   "es_interrogante": true,
+   "primera": 65,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion formal de streaks [s]",
+   "first_norm": "definir prohibicion formal de streaks [s] agnes-2.5-flash 2026-09-12: regla formal documentada in 03-diseno.md"
+  },
+  {
+   "linea": 154,
+   "es_interrogante": true,
+   "primera": 66,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de contenido exclusivo temporal [s]",
+   "first_norm": "definir prohibicion de contenido exclusivo temporal [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+  },
+  {
+   "linea": 155,
+   "es_interrogante": true,
+   "primera": 67,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s]",
+   "first_norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.m"
+  },
+  {
+   "linea": 156,
+   "es_interrogante": true,
+   "primera": 68,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir prohibicion de penalizacion de ausencia [s]",
+   "first_norm": "definir prohibicion de penalizacion de ausencia [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+  },
+  {
+   "linea": 163,
+   "es_interrogante": true,
+   "primera": 69,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir seccion sobremesa en el diario (cobrables) [m]",
+   "first_norm": "definir seccion sobremesa en el diario (cobrables) [m] agnes-2.5-flash 2026-09-12: feature designed in 03-dise"
+  },
+  {
+   "linea": 164,
+   "es_interrogante": true,
+   "primera": 70,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir contador de pendientes visible [s]",
+   "first_norm": "definir contador de pendientes visible [s] agnes-2.5-flash 2026-09-12: feature designed in 03-diseno.md 16.6 ("
+  },
+  {
+   "linea": 171,
+   "es_interrogante": true,
+   "primera": 75,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir migracion v3.1 v3.2 [m]",
+   "first_norm": "definir migracion v3.1 v3.2 [m] agnes-2.5-flash 2026-09-12: migration path documented in 03-diseno.md 18.1 (ve"
+  },
+  {
+   "linea": 178,
+   "es_interrogante": true,
+   "primera": 76,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir metrica \"recompensas cobradas pendientes\" [m]",
+   "first_norm": "definir metrica \"recompensas cobradas pendientes\" [m] agnes-2.5-flash 2026-09-12: metric designed in 03-diseno"
+  },
+  {
+   "linea": 179,
+   "es_interrogante": true,
+   "primera": 77,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir metrica de retencion por voluntad (dias jugados) [m]",
+   "first_norm": "definir metrica de retencion por voluntad (dias jugados) [m] agnes-2.5-flash 2026-09-12: metric designed in 03"
+  },
+  {
+   "linea": 180,
+   "es_interrogante": true,
+   "primera": 78,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir sin telemetria que manipule recompensas [s]",
+   "first_norm": "definir sin telemetria que manipule recompensas [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+  },
+  {
+   "linea": 181,
+   "es_interrogante": true,
+   "primera": 79,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir reporte de retencion sana en informe 72 h (m143) [s]",
+   "first_norm": "definir reporte de retencion sana en informe 72 h (m143) [s] agnes-2.5-flash 2026-09-12: report designed in 03"
+  },
+  {
+   "linea": 187,
+   "es_interrogante": true,
+   "primera": 83,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir suite ausencia (7 dias sin juego 0 perdida) [m]",
+   "first_norm": "definir suite ausencia (7 dias sin juego 0 perdida) [m] agnes-2.5-flash 2026-09-12: test suite designed in 03-"
+  },
+  {
+   "linea": 190,
+   "es_interrogante": true,
+   "primera": 84,
+   "primera_x": true,
+   "mismo_texto": false,
+   "norm": "definir suite postgame (desbloqueo + 3 bloques) [m]",
+   "first_norm": "definir suite postgame (desbloqueo + 3 bloques) [m] agnes-2.5-flash 2026-09-12: test suite designed in 03-dise"
+  },
+  {
+   "linea": 192,
+   "es_interrogante": true,
+   "primera": null,
+   "primera_x": false,
+   "mismo_texto": false,
+   "norm": "definir playtest de 5 usuarios: sienten presion de volver? (m114) [m]",
+   "first_norm": ""
+  }
+ ],
+ "M94_resumen": {
+  "listados": 49,
+  "interrogantes": 46,
+  "duplicados_validos": 0,
+  "no_validos": [
+   {
+    "linea": 64,
+    "es_interrogante": true,
+    "primera": 25,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que cultivos/plantas no mueren por ausentarse [m] **degradado por el director (2026-10-10, qa 21.8 de ",
+    "first_norm": "definir que cultivos/plantas no mueren por ausentarse [m] agnes-2.5-flash 2026-09-12: regla cozy documentada e"
+   },
+   {
+    "linea": 73,
+    "es_interrogante": true,
+    "primera": 26,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que ninguna recompensa exige estar presente en una fecha real [m]",
+    "first_norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] agnes-2.5-flash 2026-09-12: regla do"
+   },
+   {
+    "linea": 74,
+    "es_interrogante": true,
+    "primera": 26,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] **degradado por el director (2026-10",
+    "first_norm": "definir que ninguna recompensa exige estar presente en una fecha real [m] agnes-2.5-flash 2026-09-12: regla do"
+   },
+   {
+    "linea": 85,
+    "es_interrogante": true,
+    "primera": 27,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que el postgame quede disponible hasta completarlo [s]",
+    "first_norm": "definir que el postgame quede disponible hasta completarlo [s] agnes-2.5-flash 2026-09-12: regla documentada e"
+   },
+   {
+    "linea": 90,
+    "es_interrogante": true,
+    "primera": 33,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir ventanas de 1-2 dias de juego (no de calendario real) [m]",
+    "first_norm": "definir ventanas de 1-2 dias de juego (no de calendario real) [m] agnes-2.5-flash 2026-09-12: regla documentad"
+   },
+   {
+    "linea": 91,
+    "es_interrogante": true,
+    "primera": 34,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir anuncio anticipado en diario [m]",
+    "first_norm": "definir anuncio anticipado en diario [m] agnes-2.5-flash 2026-09-12: mecanismo disenado en 03-diseno.md 8.2 (a"
+   },
+   {
+    "linea": 102,
+    "es_interrogante": true,
+    "primera": 35,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que la festividad siga el dia de juego (m29) [m]",
+    "first_norm": "definir que la festividad siga el dia de juego (m29) [m] agnes-2.5-flash 2026-09-12: integration with m29 docu"
+   },
+   {
+    "linea": 103,
+    "es_interrogante": true,
+    "primera": 36,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir sin recompensas unicas por primera participacion [s]",
+    "first_norm": "definir sin recompensas unicas por primera participacion [s] agnes-2.5-flash 2026-09-12: regla documentada en "
+   },
+   {
+    "linea": 107,
+    "es_interrogante": false,
+    "primera": null,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "definir 6 sellos + acto 3 como meta sin prisa [m]",
+    "first_norm": ""
+   },
+   {
+    "linea": 108,
+    "es_interrogante": true,
+    "primera": 41,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir museo 100% (m37/m73) sin fecha limite [m]",
+    "first_norm": "definir museo 100% (m37/m73) sin fecha limite [m] agnes-2.5-flash 2026-09-12: politica documentada en 03-disen"
+   },
+   {
+    "linea": 109,
+    "es_interrogante": false,
+    "primera": null,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "definir ciudad/islas construidas (m17/m68) persistente [m]",
+    "first_norm": ""
+   },
+   {
+    "linea": 110,
+    "es_interrogante": true,
+    "primera": 42,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir amistad maxima con 30 npc sin decaimiento [m]",
+    "first_norm": "definir amistad maxima con 30 npc sin decaimiento [m] agnes-2.5-flash 2026-09-12: regla documentada en 03-dise"
+   },
+   {
+    "linea": 111,
+    "es_interrogante": true,
+    "primera": 43,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir misterios completos abiertos a ritmo propio [s]",
+    "first_norm": "definir misterios completos abiertos a ritmo propio [s] agnes-2.5-flash 2026-09-12: regla documentada en 03-di"
+   },
+   {
+    "linea": 116,
+    "es_interrogante": true,
+    "primera": 41,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir museo 100% (m37/m73) sin fecha limite [m] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-",
+    "first_norm": "definir museo 100% (m37/m73) sin fecha limite [m] agnes-2.5-flash 2026-09-12: politica documentada en 03-disen"
+   },
+   {
+    "linea": 117,
+    "es_interrogante": true,
+    "primera": 44,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir fichas con lore (m148) y sin ventana [m]",
+    "first_norm": "definir fichas con lore (m148) y sin ventana [m] agnes-2.5-flash 2026-09-12: integration with m148 documented "
+   },
+   {
+    "linea": 118,
+    "es_interrogante": true,
+    "primera": 45,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir progreso por fases visible en diario [m] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-f",
+    "first_norm": "definir progreso por fases visible en diario [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-diseno"
+   },
+   {
+    "linea": 123,
+    "es_interrogante": true,
+    "primera": 48,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir regalos del dia (catalogo) sin exclusividad [s] **degradado por el director (2026-10-10, qa 21.8 de ag",
+    "first_norm": "definir regalos del dia (catalogo) sin exclusividad [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+   },
+   {
+    "linea": 124,
+    "es_interrogante": true,
+    "primera": 49,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir sin eventos de amistad unicos e irrepetibles [s] **degradado por el director (2026-10-10, qa 21.8 de a",
+    "first_norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03"
+   },
+   {
+    "linea": 125,
+    "es_interrogante": true,
+    "primera": 45,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir progreso por fases visible en diario [m]",
+    "first_norm": "definir progreso por fases visible en diario [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-diseno"
+   },
+   {
+    "linea": 126,
+    "es_interrogante": true,
+    "primera": 53,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir arcos de misterio abiertos sin desesperar [m] **degradado por el director (2026-10-10, qa 21.8 de agne",
+    "first_norm": "definir arcos de misterio abiertos sin desesperar [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-d"
+   },
+   {
+    "linea": 127,
+    "es_interrogante": false,
+    "primera": null,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "",
+    "first_norm": ""
+   },
+   {
+    "linea": 130,
+    "es_interrogante": true,
+    "primera": 46,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir amistad con hitos de largo plazo (m20) [m]",
+    "first_norm": "definir amistad con hitos de largo plazo (m20) [m] agnes-2.5-flash 2026-09-12: integration with m20 documented"
+   },
+   {
+    "linea": 131,
+    "es_interrogante": true,
+    "primera": 47,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir cadenas de misiones de amistad sin prisa [m]",
+    "first_norm": "definir cadenas de misiones de amistad sin prisa [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-di"
+   },
+   {
+    "linea": 132,
+    "es_interrogante": true,
+    "primera": 48,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir regalos del dia (catalogo) sin exclusividad [s]",
+    "first_norm": "definir regalos del dia (catalogo) sin exclusividad [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+   },
+   {
+    "linea": 133,
+    "es_interrogante": true,
+    "primera": 49,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s]",
+    "first_norm": "definir sin eventos de amistad \"unicos e irrepetibles\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03"
+   },
+   {
+    "linea": 137,
+    "es_interrogante": true,
+    "primera": 53,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir arcos de misterio abiertos sin desesperar [m]",
+    "first_norm": "definir arcos de misterio abiertos sin desesperar [m] agnes-2.5-flash 2026-09-12: politica documentada in 03-d"
+   },
+   {
+    "linea": 138,
+    "es_interrogante": true,
+    "primera": 54,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir pistas de misterios reencontrables (diario/m148) [m]",
+    "first_norm": "definir pistas de misterios reencontrables (diario/m148) [m] agnes-2.5-flash 2026-09-12: integration with m148"
+   },
+   {
+    "linea": 139,
+    "es_interrogante": true,
+    "primera": 55,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "definir misterio final en postgame (5+ h) [c]",
+    "first_norm": "definir misterio final en postgame (5+ h) [c] agnes-2.5-flash 2026-09-12: diseno documentado in 03-diseno.md 1"
+   },
+   {
+    "linea": 140,
+    "es_interrogante": true,
+    "primera": 56,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir que ninguna pista expira [s]",
+    "first_norm": "definir que ninguna pista expira [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.md 14.4 (no ex"
+   },
+   {
+    "linea": 144,
+    "es_interrogante": true,
+    "primera": 65,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion formal de streaks [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-flash ms",
+    "first_norm": "definir prohibicion formal de streaks [s] agnes-2.5-flash 2026-09-12: regla formal documentada in 03-diseno.md"
+   },
+   {
+    "linea": 145,
+    "es_interrogante": true,
+    "primera": 66,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de contenido exclusivo temporal [s] **degradado por el director (2026-10-10, qa 21.8 de ag",
+    "first_norm": "definir prohibicion de contenido exclusivo temporal [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+   },
+   {
+    "linea": 146,
+    "es_interrogante": true,
+    "primera": 67,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de vuelve o lo pierdes [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-3-fla",
+    "first_norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.m"
+   },
+   {
+    "linea": 147,
+    "es_interrogante": true,
+    "primera": 68,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de penalizacion de ausencia [s] **degradado por el director (2026-10-10, qa 21.8 de agnes-",
+    "first_norm": "definir prohibicion de penalizacion de ausencia [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+   },
+   {
+    "linea": 148,
+    "es_interrogante": true,
+    "primera": 59,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir desbloqueo tras el epilogo (m22) [m]",
+    "first_norm": "definir desbloqueo tras el epilogo (m22) [m] agnes-2.5-flash 2026-09-12: integration with m22 historia documen"
+   },
+   {
+    "linea": 149,
+    "es_interrogante": true,
+    "primera": 60,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "definir contenido de postgame 5 h verificado [m]",
+    "first_norm": "definir contenido de postgame 5 h verificado [m] agnes-2.5-flash 2026-09-12: spec documented in 03-diseno.md 1"
+   },
+   {
+    "linea": 153,
+    "es_interrogante": true,
+    "primera": 65,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion formal de streaks [s]",
+    "first_norm": "definir prohibicion formal de streaks [s] agnes-2.5-flash 2026-09-12: regla formal documentada in 03-diseno.md"
+   },
+   {
+    "linea": 154,
+    "es_interrogante": true,
+    "primera": 66,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de contenido exclusivo temporal [s]",
+    "first_norm": "definir prohibicion de contenido exclusivo temporal [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-di"
+   },
+   {
+    "linea": 155,
+    "es_interrogante": true,
+    "primera": 67,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s]",
+    "first_norm": "definir prohibicion de \"vuelve o lo pierdes!\" [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno.m"
+   },
+   {
+    "linea": 156,
+    "es_interrogante": true,
+    "primera": 68,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir prohibicion de penalizacion de ausencia [s]",
+    "first_norm": "definir prohibicion de penalizacion de ausencia [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+   },
+   {
+    "linea": 163,
+    "es_interrogante": true,
+    "primera": 69,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir seccion sobremesa en el diario (cobrables) [m]",
+    "first_norm": "definir seccion sobremesa en el diario (cobrables) [m] agnes-2.5-flash 2026-09-12: feature designed in 03-dise"
+   },
+   {
+    "linea": 164,
+    "es_interrogante": true,
+    "primera": 70,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir contador de pendientes visible [s]",
+    "first_norm": "definir contador de pendientes visible [s] agnes-2.5-flash 2026-09-12: feature designed in 03-diseno.md 16.6 ("
+   },
+   {
+    "linea": 171,
+    "es_interrogante": true,
+    "primera": 75,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir migracion v3.1 v3.2 [m]",
+    "first_norm": "definir migracion v3.1 v3.2 [m] agnes-2.5-flash 2026-09-12: migration path documented in 03-diseno.md 18.1 (ve"
+   },
+   {
+    "linea": 178,
+    "es_interrogante": true,
+    "primera": 76,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir metrica \"recompensas cobradas pendientes\" [m]",
+    "first_norm": "definir metrica \"recompensas cobradas pendientes\" [m] agnes-2.5-flash 2026-09-12: metric designed in 03-diseno"
+   },
+   {
+    "linea": 179,
+    "es_interrogante": true,
+    "primera": 77,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir metrica de retencion por voluntad (dias jugados) [m]",
+    "first_norm": "definir metrica de retencion por voluntad (dias jugados) [m] agnes-2.5-flash 2026-09-12: metric designed in 03"
+   },
+   {
+    "linea": 180,
+    "es_interrogante": true,
+    "primera": 78,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir sin telemetria que manipule recompensas [s]",
+    "first_norm": "definir sin telemetria que manipule recompensas [s] agnes-2.5-flash 2026-09-12: regla documentada in 03-diseno"
+   },
+   {
+    "linea": 181,
+    "es_interrogante": true,
+    "primera": 79,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir reporte de retencion sana en informe 72 h (m143) [s]",
+    "first_norm": "definir reporte de retencion sana en informe 72 h (m143) [s] agnes-2.5-flash 2026-09-12: report designed in 03"
+   },
+   {
+    "linea": 187,
+    "es_interrogante": true,
+    "primera": 83,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir suite ausencia (7 dias sin juego 0 perdida) [m]",
+    "first_norm": "definir suite ausencia (7 dias sin juego 0 perdida) [m] agnes-2.5-flash 2026-09-12: test suite designed in 03-"
+   },
+   {
+    "linea": 190,
+    "es_interrogante": true,
+    "primera": 84,
+    "primera_x": true,
+    "mismo_texto": false,
+    "norm": "definir suite postgame (desbloqueo + 3 bloques) [m]",
+    "first_norm": "definir suite postgame (desbloqueo + 3 bloques) [m] agnes-2.5-flash 2026-09-12: test suite designed in 03-dise"
+   },
+   {
+    "linea": 192,
+    "es_interrogante": true,
+    "primera": null,
+    "primera_x": false,
+    "mismo_texto": false,
+    "norm": "definir playtest de 5 usuarios: sienten presion de volver? (m114) [m]",
+    "first_norm": ""
+   }
+  ]
+ }
+}

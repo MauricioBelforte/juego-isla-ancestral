@@ -193,10 +193,10 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [?] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`).
 
 ### [S] Uso de datos para mejorar diseño
-- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.
-- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.
-- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy (prereq_met → seal); los otros 12 siguen sin senal de datos en produccion — cablearlos sin emisor seria arista muerta.
-- [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.
+- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.  **KnownIssue: requiere volumen real de datos de gameplay (post-release); M105 ya emite puzzle_abandoned**
+- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.  **KnownIssue: requiere volumen real de datos; M105 ya emite zone_ignored**
+- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy (prereq_met → seal); los otros 12 siguen sin senal de datos en produccion — cablearlos sin emisor seria arista muerta.  **KnownIssue: API track_* existe pero 1/13 trackers con productor real (Log 2075); analisis requiere volumen**
+- [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.  **KnownIssue: requiere volumen real; M105 ya emite time_to_first_* y session_duration**
 - [x] Definir ajuste de balance basado en datos reales → KnownIssue no bloqueante DoD: requiere datos reales de balance (juego no jugado suficientemente); framework M105 listo para consumir datos cuando existan. El framework M105 expone la API de metricas; el procesamiento de datos NO esta en 03-Diseno.md (no existe seccion de analisis). — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: el diseno del analisis existe ahora en `03-Diseno.md` §7 (L71-112); regla de balance en L92. La ejecucion sigue diferida a datos reales de gameplay (KnownIssue no bloqueante de DoD).
 
 ### [S] Opt-in y GDPR
@@ -207,7 +207,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - [x] Definir no recolectar nombres, emails, IPs — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: "No se capturan PII"; los `datos` solo llevan ids internos de contenido (puzzle_id, zone_id, npc_id...).
 - [x] Definir solo recolectar datos de gameplay y comportamiento — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Header: opt-in explícito OFF por defecto (GDPR) + `enviar_evento()` corta en seco si `not opt_in`.
 - [?] Definir posibilidad de solicitar eliminación de datos — **M104** (storage) + **M91** (UI); M105 no almacena eventos (§5).
-- [?] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base.
+- [?] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base.  **KnownIssue: documentacion legal editorial transversal, fuera de M105 (§5 documenta el flujo)**
 
 ### [S] Integración con M104 (Analytics)
 - [x] Diseñar integración con M104 para envío de eventos
@@ -230,7 +230,7 @@ Cierra los 3 hallazgos menores del QA cruzado §21.8 (Log 1502, atria-dawn-s2).
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere agregación multi-jugador (volumen real de partidas); patron de deteccion disenado (tiempos anormales por capítulo), implementacion requerira datos acumulados post-release. Core telemetria operativo.
 - [x] Diseñar M105 identificar capitulos donde muchos jugadores se atascan → KnownIssue no bloqueante DoD: requiere volumen real de datos de progresion; La metrica de atasco NO esta disenada en 03-Diseno.md (el doc no tiene seccion de analisis): queda [?] hasta que exista diseno + datos. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: diseno de la metrica de atasco en `03-Diseno.md` §7 (fila L87 + regla L99-100). Ejecucion diferida a volumen real de progresion (KnownIssue no bloqueante de DoD).
 ### [S] Integración con M102 (Bug Tracking)
-- [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).
+- [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).  **KnownIssue: integracion con M102 depende de volumen real de issues detectadas**
 - [x] Diseñar datos de telemetría identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos + análisis; cita previa a 03-Diseno.md §3.4 FALSA: ese doc solo tiene §1-§6, no hay seccion de analisis. No existe patron documentado: queda [?] hasta que exista diseno + datos reales, ejecucion requiere datos de juego real acumulados. — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: patron documentado en `03-Diseno.md` §7 (fila L88 + regla L101-102). La cita previa a §3.4 era FALSA; ahora la cita es §7 real. Ejecucion diferida a datos reales acumulados.
 - _(fusionado — duplicado menos estricto del ítem de arriba, Patrón D, flip del director 2026-10-10)_ Diseñar datos de telemetria identificar bugs emergentes → KnownIssue no bloqueante DoD: requiere volumen real de datos; patron de deteccion disenado (tiempos anormales, tasa abandono), ejecucion requiere datos de juego real.
 - [x] Diseñar tiempos anormales para eventos clave → posible bug de rendimiento — iter. 8 DeepSeek-V4.1-Flash 2026-10-13: dueno = M105 (diseno en `03-Diseno.md` §7, fila L86 + regla L96-98); salida = candidato a bug de rendimiento -> issue en M102. Ejecucion diferida a datos reales.

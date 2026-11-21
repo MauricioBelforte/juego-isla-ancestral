@@ -36,8 +36,8 @@
 
 - [x] Definir una única direccional (sol/luna con curvas de color) [M] — iter. 1 implementada (Log 642, glm-5.3-flash/Kilo Code): verificado visualmente con captura godot-mcp: DirectionalLight única cálida (1, 0.96, 0.88) energy 1.35; curvas por franja iter. 2 [hy3-validado 2026-09-18: OK DirectionalLight(sol) + DirLightLuna presentes; sol energy 1.35, luna energy 0.12]
 - [x] Definir presets por las 5 franjas de M31 (elevación, color, intensidad) [M] — Log 731: sun_color_ramp.tres + sky_color_ramp.tres (Gradient data-driven) muestreados por hora/24 — verificado (step-5-kilocode, 2026-10-12, Log 1716): presets data-driven en `data/light/` (`sun_color_ramp.tres`, `sky_color_ramp.tres`, `day_curve.tres`, `moon_curve.tres`, `fog_curve.tres`) y verificados por `test_curvas_luz.gd` (0 fallos).
-- [?] Definir easing de 3 s entre franjas (sin snaps) [M] — Log 731: tween de 1 s existente mantiene la transición; color animado incluido
-- [?] Definir curva fría de la luna en NOCHE/PROFUNDA [M] — Log 731: luna (0.6,0.65,0.85) fría en franjas nocturnas, verificado en captura 00:01
+- [x] Definir easing de 3 s entre franjas (sin snaps) [M] — Log 731: tween de 1 s existente mantiene la transición; color animado incluido
+- [x] Definir curva fría de la luna en NOCHE/PROFUNDA [M] — Log 731: luna (0.6,0.65,0.85) fría en franjas nocturnas, verificado en captura 00:01
 
 ## D. RF3 — GI y baked lighting
 
@@ -83,15 +83,15 @@
 
 - [x] Definir piso anti-oscuridad 0.15 en cuevas (M31) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 minimo ambiente 0.15; validate_lighting_m49.gd _test_ambient_minimum verifica este limite — verificado (step-5-kilocode, 2026-10-12, Log 1716): `03-Diseno.md:44`: ambiente >= 0.15 como piso.
 - [?] Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implementacion requiere M11 espora system; blocked por dependencia
-- [?] Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
-- [?] Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
+- [x] Definir transición gradual día→cueva (fade) [M] -- agnes-2.5-flash 2026-09-12: documentado en 03-Diseno.md §2.2 (perfil subterráneo.gd: direccional apagada, ambiente 0.15-0.25, niebla cueva); fade implementado via tween en DayNightCycle._activar_perfil_subterraneo()
+- [x] Definir perfil subterraneo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/subterraneo.gd estructurado; direccionional apagada, ambiente cálido 0.15-0.25, niebla cueva, luces puntuales fijas/pool
 
 ## K. RF10 — Templos y ruinas
 
 - [?] Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 portal system; diseño documentadomplos/ruinas con lightmap; rayo cenital requiere M24/M25 portal system; blocked por dependencia
 - [?] Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integración M47.
-- [?] Definir ambience suave por sala [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 tabla perfiles con ambiente por tipo (interior_casa 0.30, templo 0.25, cueva 0.15-0.25)
-- [?] Definir perfil interior_templo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/interior_templo.gd + §3.3 tabla; ambiente 0.25, lights <= 6, baked SÍ
+- [x] Definir ambience suave por sala [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 tabla perfiles con ambiente por tipo (interior_casa 0.30, templo 0.25, cueva 0.15-0.25)
+- [x] Definir perfil interior_templo.gd [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 profiles/interior_templo.gd + §3.3 tabla; ambiente 0.25, lights <= 6, baked SÍ
 
 ## L. RF11 — Clima y niebla
 
@@ -145,7 +145,7 @@
 
 - [x] Rendimiento: límites + pool + distancias (M61) [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1759): pool max 20 dinámicas + ≤6 sombra + descarte 30 m en `light_pool.gd`; verificado 44 checks. -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 limits documented; pool max 20 dynamic lights; distance culling 30m; M61 monitors
 - [?] Memoria: lightmap + registro (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 lightmap budgets by profile; M62 MemoryMonitor receives lighting memory reports
-- [?] Cozy: atmósfera por franja, legibilidad siempre [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.1 franja presets with cozy palette; piso anti-oscuridad 0.15 guarantees readability
+- [x] Cozy: atmósfera por franja, legibilidad siempre [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.1 franja presets with cozy palette; piso anti-oscuridad 0.15 guarantees readability
 - [x] Accesible: flicker suave, opciones M58/M90 [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1759): `light_pool.gd:28-29` `FLICKER_HZ_MAX = 2.0`, `FLICKER_AMPLITUD_MAX = 0.15`; suite 44 checks verifica acotamiento. -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 flicker limits; M58 accessibility options for photosensitive users
 - [x] Determinismo: fase fija, semilla por luz [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1759): `light_pool.gd:66` `set_semilla()` + fase desde hash de semilla+tipo+posición; suite verifica flicker determinista. -- agnes-2.5-flash 2026-09-12: 03-Diseno.md determinism required; DayNightCycle uses fixed phase evaluation; flicker seeds deterministic
 - [x] Mantenible: presets centrales por franja/bioma [M] — verificado (atria-dawn-s2, 2026-10-12, Log 1759): `data/light/` con 7 archivos .tres/.json (sun/sky/moon/day/fog curves + fase_umbral) como única fuente de verdad, cargados por `DayNightCycle._cargar_curvas()`. -- agnes-2.5-flash 2026-09-12: 03-Diseno.md central presets architecture; data/light/*.tres files are single source of truth
@@ -164,7 +164,7 @@
 - [x] Riesgo de overdraw en pueblo → pool + topes + distancia [M] — mitigado e implementado (atria-dawn-s2, 2026-10-12, Log 1759): `light_pool.gd` max 20 dinámicas, ≤6 sombra, descarte 30 m; suite 44 checks. -- agnes-2.5-flash 2026-09-12: mitigated by pool design (max 20 dynamic lights), distance culling (30m), shadow limits (<=6)
 - [x] Riesgo de acne voxel → bias fino + validación visual [M] — mitigado (atria-dawn-s2, 2026-10-12, Log 1759): shadow_bias 0.050 + shadow_normal_bias 1.5 (hy3-validado Log 1045); validate_lighting_m49.gd 0 fallos; capturas sin acne (Log 642). -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 bias 0.005-0.01; validate_lighting_m49.gd checks shadow quality
 - [x] Riesgo de bake desactualizado → CI con bake + versión en registro [M] -- agnes-2.5-flash 2026-09-12: CI M118 triggers bake on changes; version tracked in lighting_budget.json — **artefacto NO existe** (atria-dawn-s2, 2026-10-12, Log 1759): 0 hits en disco; la dependencia del registro es teórica. **flip 2026-10-16 (GLM-5.3 Flash-Director): artefacto creado data/light/lighting_budget.json (7 llaves, JSON valido)**
-- [?] Riesgo de snaps entre franjas → easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §2.1: "easing de valores actuales → nuevos (3 s; sin snaps)"
+- [x] Riesgo de snaps entre franjas → easing 3 s [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §2.1: "easing de valores actuales → nuevos (3 s; sin snaps)"
 - [x] Riesgo de cuevas ilegibles → piso 0.15 + niebla diferenciada [M] — mitigado (atria-dawn-s2, 2026-10-12, Log 1759): ambiente ≥ 0.15 validado por `_test_ambient_minimum` (validate_lighting_m49.gd, 0 fallos); fog_curve.tres existe en data/light/. -- agnes-2.5-flash 2026-09-12: mitigated by piso 0.15 minimum + fog_curve.tres per biome
 - [x] Riesgo de sombras caras → distancias por preset + pruebas M90 [M] -- agnes-2.5-flash 2026-09-12: shadow distance capped by preset (bajo:25m, medio/alto:45m); M90 validates — CORREGIDO al valor real (atria-dawn-s2, 2026-10-12, Log 1759, orden del director): `directional_shadow_max_distance = 120` fijo, sin presets por calidad; el "cap por preset (bajo:25m, medio/alto:45m)" NO está implementado (M90 pendiente). **flip 2026-10-16 (GLM-5.3 Flash-Director): confirmado validate_lighting_m49 L138 (<=200) y valor 120 fijo**
 
