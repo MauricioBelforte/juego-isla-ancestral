@@ -134,3 +134,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 56-Backlog-RootCause-Q-Otros-861.md (18 tareas: 297 [?] otros + audio/.tres/.import/i18n/cross-doc)
 
 **TOTAL ACUMULADO: 3456[x] en 55 backlogs + 18 nuevas = 3474**
+
+## NUEVO 21nov 08:05 (15 tareas)
+- 57-Backlog-Drifts-Fix-Volumen.md (15 tareas: 55 drifts fix + data/scene/audio/scripts/cross-doc)
+
+**TOTAL ACUMULADO: 3474[x] en 56 backlogs + 15 nuevas = 3489**
