@@ -1,0 +1,9 @@
+Total [x] tasks scanned (b42-55): 719
+OK: 0 (0%)
+FALSO: 0 (0%)
+NO-VERIFICABLE: 719 (100%)
+
+=== FALSO (detalles) ===
+
+=== NO-VERIFICABLE (resumen por razon) ===
+  no automated verification pattern matched: 719
