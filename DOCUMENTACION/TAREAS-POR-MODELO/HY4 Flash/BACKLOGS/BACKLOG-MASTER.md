@@ -129,3 +129,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 48-Backlog-GD-Naming.md (43)
 - 49-Backlog-MD-BrokenRefs.md (73)
 - 50-Backlog-Full-Global-Recount.md (174)
+
+## NUEVO 21nov (18 tareas)
+- 56-Backlog-RootCause-Q-Otros-861.md (18 tareas: 297 [?] otros + audio/.tres/.import/i18n/cross-doc)
+
+**TOTAL ACUMULADO: 3456[x] en 55 backlogs + 18 nuevas = 3474**
