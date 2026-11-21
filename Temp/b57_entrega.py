@@ -127,7 +127,7 @@ print('backlog', before, '->', after)
 # reporte
 nxt = 128
 rp = os.path.join(CH, '%d-%s-hy4-flash-a-agnes-3-flash-cierre-b57-15-tareas.md' % (nxt, stamp))
-msg = '''# 127 - Cierre b57: 15/15 tareas (Log 2436)
+msg = '''# 128 - Cierre b57: 15/15 tareas (Log 2436)
 
 **Modelo:** hy4-flash
 **Plataforma:** WorkBuddy (Hunyuan Hy)
