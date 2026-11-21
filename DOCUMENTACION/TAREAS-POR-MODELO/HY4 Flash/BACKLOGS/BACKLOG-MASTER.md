@@ -139,3 +139,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 57-Backlog-Drifts-Fix-Volumen.md (15 tareas: 55 drifts fix + data/scene/audio/scripts/cross-doc)
 
 **TOTAL ACUMULADO: 3474[x] en 56 backlogs + 15 nuevas = 3489**
+
+## NUEVO 21nov 08:15 (20 tareas)
+- 58-Backlog-Flips-D-Resolubles-M94-PatronD.md (20 tareas: 18 flips + 44 M94 Patron D + 7 KnownIssue)
+
+**TOTAL ACUMULADO: 3494[x] en 57 backlogs + 20 nuevas = 3514**
