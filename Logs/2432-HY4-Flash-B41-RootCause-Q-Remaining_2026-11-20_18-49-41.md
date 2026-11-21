@@ -1,4 +1,5 @@
 # Log 2432 - HY4 Flash - Backlog 41 RootCause Q restantes
+NOTA DE ERRATA (msj 118 retractacion / msj 120 correccion / msj 127 GO): las etiquetas "archivo SI existe / falsos negativos resueltos" eran imprecisas. El archivo citado puede existir, pero la funcionalidad pedida NO fue verificada. Solo cambian etiquetas: marcas, conteos y evidencia original quedan intactos.
 
 Fecha: 2026-11-20
 Agente: hy4-flash
@@ -12,10 +13,9 @@ Confianza alta = causa explicita en el checklist o verificada en disco;
 media = deuda/alcance posterior sin verificacion directa.
 
 == HALLAZGO DE CORRECCION ==
-10 items decian 'no existe tal archivo' pero el archivo SI existe en disco
-(island_generator.gd, audio_config_service.gd, validate_vehicles.gd...).
-Se corrigio la causa a 'claim de ausencia inexacto: archivo existe, falta la
-funcionalidad'. Sin esta verificacion se habrian consignado 10 falsedades.
+10 items con causa imprecisa: el archivo citado puede existir; la funcionalidad pedida no fue verificada
+Ejemplos citados: island_generator.gd, audio_config_service.gd, validate_vehicles.gd (no verificados como archivo pedido).
+Causa corregida a 'causa imprecisa: funcionalidad pedida no verificada' (errata msj 118/120/127).
 
 == DISTRIBUCION DE CAUSAS ==
  141  deuda documentada en checklist (alcance posterior)
@@ -23,7 +23,7 @@ funcionalidad'. Sin esta verificacion se habrian consignado 10 falsedades.
   45  sin verificacion automatizada disponible
   38  artefacto ausente en disco
   21  KnownIssue documentado, no bloqueante
-  10  claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta
+  10  causa imprecisa: el archivo citado puede existir, la funcionalidad pedida no fue verificada
    7  deuda cross-modulo (dueno M104)
    7  deuda cross-modulo (dueno M90)
    6  deuda cross-modulo (dueno M53)
@@ -141,18 +141,18 @@ T41-098 | M124 L126 | media | decision de diseno pendiente (fuera de este modulo
 T41-099 | M124 L148 | media | decision de diseno pendiente (fuera de este modulo) | - [?] Definir galeria publica con filtros por tag [M]  dueno: UI M89
 T41-100 | M124 L149 | media | decision de diseno pendiente (fuera de este modulo) | - [?] Definir tarjeta de item (foto/blueprint + alias + me gusta) [M]  dueno: UI M89
 T41-101 | M124 L151 | media | decision de diseno pendiente (fuera de este modulo) | - [?] Definir pagina de perfil con mis items y estados [M]  dueno: UI M89
-T41-102 | M10 L18 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Requisito RF5: recetas de M09 aplicadas [S]  QA atria-dawn: FALSO. Las recetas de M09 no 
+T41-102 | M10 L18 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Requisito RF5: recetas de M09 aplicadas [S]  QA atria-dawn: FALSO. Las recetas de M09 no 
 T41-103 | M10 L26 | media | deuda documentada en checklist (alcance posterior) | - [?] Configurar 4-6 octavas con amplitud 0-192 m (Aurora) [M]  DEGRADADO 2026-10-15 (step-5 41
 T41-104 | M10 L38 | media | sin verificacion automatizada disponible | - [?] Test A de determinismo: 3 ordenes de regen  mismos bytes [C]  QA atria-dawn: no existia N
 T41-105 | M10 L44 | media | sin verificacion automatizada disponible | - [?] Capa 2 Biomas: altura + humedad  mapa de biomas (umbrales M09) [M]  QA atria-dawn: parcia
-T41-106 | M10 L45 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Capa 3 Formaciones: recetas M09 + marcadores  modificadores [M]  QA atria-dawn: FALSO. No
+T41-106 | M10 L45 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Capa 3 Formaciones: recetas M09 + marcadores  modificadores [M]  QA atria-dawn: FALSO. No
 T41-107 | M10 L46 | media | deuda documentada en checklist (alcance posterior) | - [?] Capa 4 Roca y cuevas: Simplex 3D  densidad de piedra/aire [M]  QA atria-dawn: FALSO. El u
 T41-108 | M10 L50 | media | deuda documentada en checklist (alcance posterior) | - [?] Capa 8 Estructuras: prefabs por marcador POI [M]  QA atria-dawn: FALSO. El generador no c
 T41-109 | M10 L53 | media | deuda documentada en checklist (alcance posterior) | - [?] Diffs del jugador se aplican DESPUES de regenerar [M]  DEGRADADO 2026-10-15 (step-5 412, 
 T41-110 | M10 L56 | media | deuda documentada en checklist (alcance posterior) | - [?] Implementacion como autoload WorldGenerator [S]  QA atria-dawn: FALSO. `world_generator.g
 T41-111 | M10 L58 | media | artefacto ausente en disco | - [?] Knobs por capa en data/*.tres (sin recompilar) [M]  QA atria-dawn: FALSO. `data/generatio
 T41-112 | M10 L90 | media | deuda documentada en checklist (alcance posterior) | - [?] Chunk fallido  reintento 2  fallback de basalto + log [M]  QA atria-dawn: FALSO. `_genera
-T41-113 | M10 L91 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Midiendo: LOG_GENERATION con chunks/seg [S]  QA atria-dawn: FALSO. No existe tal logging 
+T41-113 | M10 L91 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Midiendo: LOG_GENERATION con chunks/seg [S]  QA atria-dawn: FALSO. No existe tal logging 
 T41-114 | M10 L95 | media | artefacto ausente en disco | - [?] Catalogo de prefabs de estructuras (faro, puerto, plaza, granja, templo, puentes, ruinas)
 T41-115 | M10 L105 | media | deuda documentada en checklist (alcance posterior) | - [?] Cuevas:  3 entradas por isla, al menos 1 cerca del pueblo [M]  QA atria-dawn: FALSO, sin 
 T41-116 | M10 L106 | media | deuda documentada en checklist (alcance posterior) | - [?] Galerias de 3-8 m de tamano [S]  QA atria-dawn: FALSO, sin codigo de galerias/cuevas. / F
@@ -160,7 +160,7 @@ T41-117 | M10 L107 | media | artefacto ausente en disco | - [?] Minerales por pr
 T41-118 | M10 L108 | media | deuda documentada en checklist (alcance posterior) | - [?] Prefabs reutilizables entre islas (biblia M09) [M]  QA atria-dawn: FALSO, no hay prefabs.
 T41-119 | M10 L122 | media | deuda documentada en checklist (alcance posterior) | - [?] Sin contradicciones con M09 (recetas, POI, biomas) [M]  QA atria-dawn: FALSO. Hay contrad
 T41-120 | M67 L46 | media | sin verificacion automatizada disponible | - [?] Vela desplegable (M48) y estela por evento (M52) [M] / DEGRADADO 2026-10-28 DS-V4.1-Flash
-T41-121 | M67 L52 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C]  Step-5 2026-10-21
+T41-121 | M67 L52 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] No romper el streaming a gran altura (chunk_target + LOD, M10/M61) [C]  Step-5 2026-10-21
 T41-122 | M67 L53 | media | deuda documentada en checklist (alcance posterior) | - [?] No colisionar con vegetacion alta (paso por encima) [M]  Step-5 2026-10-21: sin sistema d
 T41-123 | M67 L75 | media | sin verificacion automatizada disponible | - [?] Controles con WASD y gamepad (palanca/gatillos) [M] / DEGRADADO 2026-10-28 DS-V4.1-Flash-
 T41-124 | M67 L99 | media | artefacto ausente en disco | - [?] Entrada solo si esta docked o en superficie [M]  Step-5 2026-10-21: enter() valida docked
@@ -257,7 +257,7 @@ T41-214 | M88 L259 | media | deuda documentada en checklist (alcance posterior) 
 T41-215 | M139 L63 | media | artefacto ausente en disco | - [?] Implementar anti-stuck con teleport a waypoint previo (M66) [M]  DEGRADADO a [?] por step
 T41-216 | M139 L71 | alta | artefacto ausente en disco | - [?] Integrar precios desde `curvas.json` (M93: lineal clave/suave logaritmica metas) [M]  DEG
 T41-217 | M139 L74 | media | artefacto ausente en disco | - [?] Documentar los 60+ items del mundo con precio base (M15) [C]  PENDIENTE REAL 2026-10-14 (
-T41-218 | M139 L158 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Definir buses: Music, Ambient, SFX, ASMR, UI [M]  PENDIENTE REAL 2026-10-14 (step-5-kiloc
+T41-218 | M139 L158 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Definir buses: Music, Ambient, SFX, ASMR, UI [M]  PENDIENTE REAL 2026-10-14 (step-5-kiloc
 T41-219 | M139 L190 | media | sin verificacion automatizada disponible | - [?] Asegurar 0 errores en consola al entrar en Play Mode (regla seccion 12) [M]  PENDIENTE DE
 T41-220 | M139 L192 | media | sin verificacion automatizada disponible | - [?] Asegurar flujo completo verificado en Play Mode antes de cerrar (seccion 12) [M]  PENDIEN
 T41-221 | M21 L62 | media | deuda documentada en checklist (alcance posterior) | - [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_strin
@@ -265,7 +265,7 @@ T41-222 | M21 L63 | media | artefacto ausente en disco | - [?] Detectar IDs dupl
 T41-223 | M21 L75 | media | deuda documentada en checklist (alcance posterior) | - [?] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M] / DEGRADADO 
 T41-224 | M21 L79 | media | deuda documentada en checklist (alcance posterior) | - [?] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S] / DEGRADADO 2026-11-11 (D
 T41-225 | M21 L166 | media | deuda documentada en checklist (alcance posterior) | - [?] Cache de grafos cargados con descarte LRU por limite de memoria [M] / DEGRADADO 2026-11-1
-T41-226 | M21 L194 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]  archivo inexisten
+T41-226 | M21 L194 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M]  archivo inexisten
 T41-227 | M33 L44 | media | deuda documentada en checklist (alcance posterior) | - [?] P21: recetas con cultivos  catalogo M16 (ensaladas, pan, tintes, ofrendas) [M]  FLIP 2026
 T41-228 | M33 L120 | media | deuda documentada en checklist (alcance posterior) | - [?] Interaccion F sobre tierra arada abre selector de semillas (M70/M53) [M]  FLIP 2026-10-28
 T41-229 | M33 L126 | media | deuda documentada en checklist (alcance posterior) | - [?] Cancelacion segura del selector sin consumir semillas [S]  FLIP 2026-10-28 (Nemotron, COL
@@ -323,7 +323,7 @@ T41-280 | M138 L152 | media | artefacto ausente en disco | - [?] Definir `IDEAS-
 T41-281 | M44 L100 | media | deuda documentada en checklist (alcance posterior) | - [?] M45: abrir contenedores con receta de caja  receta abrir_contenedor existe en datos; M45 
 T41-282 | M44 L103 | media | deuda documentada en checklist (alcance posterior) | - [?] M31: capas de hora cambian microfoley  set_contexto() existe (feedback_director.gd L72) p
 T41-283 | M44 L109 | media | deuda documentada en checklist (alcance posterior) | - [?] M29: pausa congela microfoley sin residuos  pausar()/reanudar() son stubs `pass` (feedbac
-T41-284 | M62 L190 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Baseline menu principal: objetivo < 600 MB [S]  **[?] 2026-10-20 (Tanda 78, DS-Opencode):
+T41-284 | M62 L190 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Baseline menu principal: objetivo < 600 MB [S]  **[?] 2026-10-20 (Tanda 78, DS-Opencode):
 T41-285 | M62 L193 | media | artefacto ausente en disco | - [?] Baseline subterraneo del templo (M26): objetivo < 2.000 MB [S]  **[?] 2026-10-20 (Tanda 8
 T41-286 | M62 L194 | media | artefacto ausente en disco | - [?] Baseline tormenta maxima (M32) + banco de audio completo:  2.500 MB (Alta) [S]  **[?] 202
 T41-287 | M68 L77 | media | artefacto ausente en disco | - [?] Descuentos visibles en el panel (M53)  iter. 1 DeepSeek-V4.1-Flash 2026-09-11: `list_rout
@@ -358,8 +358,8 @@ T41-315 | M50 L197 | media | deuda documentada en checklist (alcance posterior) 
 T41-316 | M50 L203 | media | deuda documentada en checklist (alcance posterior) | - [?] Instanciacion en el mundo (M08 poblar)  iter 3 (dueno: deepseek-v4-flash-vision-exp)
 T41-317 | M52 L60 | media | decision de diseno pendiente (fuera de este modulo) | - [?] Definir VfxManager (autoload) [M]  `VfxManager inexistente  impl real VfxDirector sin aut
 T41-318 | M52 L242 | media | deuda documentada en checklist (alcance posterior) | - [?] Catalogo de VFX por evento (M44 feedback + M92 tutorial): iter 2  catalogo data-driven (d
-T41-319 | M53 L137 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Toasts con icono y SFX por tipo (obtencion, evento, mision) [M]  **FALSO VERDE confirmado
-T41-320 | M53 L224 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] Minimapa con textura cache sin regeneracion por frame [M] - **QA Step 5 2026-10-12 (msg 2
+T41-319 | M53 L137 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Toasts con icono y SFX por tipo (obtencion, evento, mision) [M]  **FALSO VERDE confirmado
+T41-320 | M53 L224 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] Minimapa con textura cache sin regeneracion por frame [M] - **QA Step 5 2026-10-12 (msg 2
 T41-321 | M55 L147 | media | deuda documentada en checklist (alcance posterior) | - [?] Abrir fotografia en pantalla completa sin lag (M61) [M]  **dueno M56/M61:** sin fotos que
 T41-322 | M55 L212 | media | artefacto ausente en disco | - [?] Probar 14 categorias con al menos 1 entrada cada una [M] - 13/14: fotografias tiene 0 ent
 T41-323 | M59 L157 | media | artefacto ausente en disco | - [?] Guardar opciones graficas (M90), audio (M91), accesibilidad (M58) e idioma (M87) [M]  **G
@@ -374,7 +374,7 @@ T41-331 | M14 L183 | media | deuda documentada en checklist (alcance posterior) 
 T41-332 | M147 L301 | media | deuda documentada en checklist (alcance posterior) | - [?] Aplicacion del canon en gameplay (M22 historia/sellos  dueno: Hy3/WorkBuddy)
 T41-333 | M148 L224 | media | deuda documentada en checklist (alcance posterior) | - [?] Contenido narrativo por lugares nuevos (iter 2  dueno: deepseek-v4-flash-vision-exp)
 T41-334 | M164 L42 | media | decision de diseno pendiente (fuera de este modulo) | - [?] Paquetes de gemas: 1 gema (1 USD), 10 gemas (8 USD), 20 gemas (15 USD) [S]  **iter 1: blo
-T41-335 | M17 L134 | alta | claim de ausencia inexacto: archivo citado SI existe, la funcionalidad/claim es lo que falta | - [?] La demolicion de piezas funcionales (camas, almacenamiento) libera su contenido [C]  **[x
+T41-335 | M17 L134 | alta | causa imprecisa (retractada en 118, corregida por directora en 120), la funcionalidad/claim es lo que falta | - [?] La demolicion de piezas funcionales (camas, almacenamiento) libera su contenido [C]  **[x
 T41-336 | M26 L202 | media | deuda documentada en checklist (alcance posterior) | - [?] Implementacion de salas/puzzles en el mundo (M24/M25 framework + gen de ruinas) y la cone
 T41-337 | M35 L58 | media | deuda documentada en checklist (alcance posterior) | - [?] Sonidos de golpe y extraccion por material [S] *(placeholder; M43)*
 T41-338 | M38 L41 | alta | deuda cross-modulo (dueno M38) | - [?] RF13: persistencia de saldo, reputacion, historial e inventarios de tienda [M]  PARCIAL: 
@@ -387,4 +387,5 @@ T41-344 | M96 L210 | media | sin verificacion automatizada disponible | - [?] Ve
 
 == LIMITES ==
 Sin cambios en checklists ni codigo. Sin flips. Sin commit/push.
+
 

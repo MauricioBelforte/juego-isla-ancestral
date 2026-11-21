@@ -1,5 +1,6 @@
 # 36-Backlog: Bug Root-Cause [?] Top-10 modulos
 
+> **Errata (GO director msj 127):** las etiquetas "archivo citado SI existe / falsos negativos resueltos" se reclasifican como **causa imprecisa** (retractacion msj 118, correccion msj 120). El archivo citado puede existir; la funcionalidad pedida no fue verificada. Marcas y conteos NO se modifican.
 > Creada por: agnes-3-flash - 2026-11-20 07:47
 > Nicho: Bug root-cause (aprobado 17nov). 418 [?] en 10 modulos.
 > Metodo: para cada [?] en 05-Checklist.md: causa + archivo:linea + confianza.
@@ -100,10 +101,10 @@
 
 - [x] T36-088: M156 [?]-1 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-089: M156 [?]-2 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
-- [x] T36-090: M156 [?]-3 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-090: M156 [?]-3 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-091: M156 [?]-4 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
-- [x] T36-092: M156 [?]-5 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-093: M156 [?]-6 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-092: M156 [?]-5 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-093: M156 [?]-6 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-094: M156 [?]-7 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-095: M156 [?]-8 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-096: M156 [?]-9 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
@@ -112,13 +113,13 @@
 - [x] T36-099: M156 [?]-12 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-100: M156 [?]-13 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-101: M156 [?]-14 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
-- [x] T36-102: M156 [?]-15 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-103: M156 [?]-16 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-104: M156 [?]-17 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-105: M156 [?]-18 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-106: M156 [?]-19 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-107: M156 [?]-20 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-108: M156 [?]-21 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-102: M156 [?]-15 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-103: M156 [?]-16 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-104: M156 [?]-17 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-105: M156 [?]-18 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-106: M156 [?]-19 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-107: M156 [?]-20 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-108: M156 [?]-21 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-109: M156 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-110: M156 [?]-23 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-111: M156 [?]-24 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
@@ -152,13 +153,13 @@
 - [x] T36-139: M156 [?]-52 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-140: M156 [?]-53 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-141: M156 [?]-54 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
-- [x] T36-142: M156 [?]-55 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-142: M156 [?]-55 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-143: M156 [?]-56 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
 - [x] T36-144: M156 [?]-57 - diagnosticar causa -> artefacto ausente en disco (conf alta; Log 2434).
-- [x] T36-145: M156 [?]-58 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-146: M156 [?]-59 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-147: M156 [?]-60 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-148: M156 [?]-61 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-145: M156 [?]-58 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-146: M156 [?]-59 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-147: M156 [?]-60 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-148: M156 [?]-61 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-149: M156 [?]-62 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-150: M156 [?]-63 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-151: M156 [?]-64 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
@@ -195,7 +196,7 @@
 - [x] T36-179: M74 [?]-10 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 - [x] T36-180: M74 [?]-11 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-181: M74 [?]-12 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
-- [x] T36-182: M74 [?]-13 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-182: M74 [?]-13 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-183: M74 [?]-14 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-184: M74 [?]-15 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-185: M74 [?]-16 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
@@ -273,7 +274,7 @@
 - [x] T36-254: M73 [?]-27 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-255: M73 [?]-28 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-256: M73 [?]-29 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
-- [x] T36-257: M73 [?]-30 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-257: M73 [?]-30 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-258: M73 [?]-31 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-259: M73 [?]-32 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-260: M73 [?]-33 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
@@ -355,8 +356,8 @@
 
 ### M71 (44 [?])
 
-- [x] T36-333: M71 [?]-1 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-334: M71 [?]-2 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-333: M71 [?]-1 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-334: M71 [?]-2 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-335: M71 [?]-3 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-336: M71 [?]-4 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-337: M71 [?]-5 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
@@ -370,7 +371,7 @@
 - [x] T36-345: M71 [?]-13 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 - [x] T36-346: M71 [?]-14 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-347: M71 [?]-15 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
-- [x] T36-348: M71 [?]-16 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-348: M71 [?]-16 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-349: M71 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-350: M71 [?]-18 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-351: M71 [?]-19 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
@@ -380,8 +381,8 @@
 - [x] T36-355: M71 [?]-23 - diagnosticar causa -> artefacto ausente en disco (conf media; Log 2434).
 - [x] T36-356: M71 [?]-24 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 - [x] T36-357: M71 [?]-25 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
-- [x] T36-358: M71 [?]-26 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
-- [x] T36-359: M71 [?]-27 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-358: M71 [?]-26 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
+- [x] T36-359: M71 [?]-27 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-360: M71 [?]-28 - diagnosticar causa -> decision de diseno pendiente (fuera de este modulo) (conf media; Log 2434).
 - [x] T36-361: M71 [?]-29 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
 - [x] T36-362: M71 [?]-30 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
@@ -402,7 +403,7 @@
 
 ### M27 (40 [?])
 
-- [x] T36-377: M27 [?]-1 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-377: M27 [?]-1 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-378: M27 [?]-2 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
 - [x] T36-379: M27 [?]-3 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
 - [x] T36-380: M27 [?]-4 - diagnosticar causa -> deuda cross-modulo (dueno M10) (conf alta; Log 2434).
@@ -420,7 +421,7 @@
 - [x] T36-392: M27 [?]-16 - diagnosticar causa -> KnownIssue documentado, no bloqueante (conf alta; Log 2434).
 - [x] T36-393: M27 [?]-17 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-394: M27 [?]-18 - diagnosticar causa -> sin verificacion automatizada disponible (conf media; Log 2434).
-- [x] T36-395: M27 [?]-19 - diagnosticar causa -> claim de ausencia inexacto: archivo citado SI existe, f (conf alta; Log 2434).
+- [x] T36-395: M27 [?]-19 - diagnosticar causa -> causa imprecisa (retractada en 118, corregida por directora en 120) (conf alta; Log 2434).
 - [x] T36-396: M27 [?]-20 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-397: M27 [?]-21 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
 - [x] T36-398: M27 [?]-22 - diagnosticar causa -> deuda documentada en checklist (alcance posterior) (conf media; Log 2434).
