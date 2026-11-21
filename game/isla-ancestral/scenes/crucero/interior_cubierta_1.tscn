@@ -4,31 +4,44 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_piso"]
 size = Vector3(60.0, 11.0, 0.20)
-
 [sub_resource type="StandardMaterial3D" id="Mat_piso"]
 albedo_color = Color(0.705882, 0.52549, 0.294118, 1)
-
 [sub_resource type="SphereShape3D" id="Forma_puerta"]
 radius = 1.2
+[sub_resource type="BoxShape3D" id="Box_piso"]
+size = Vector3(11.00, 60.00, 0.20)
+[sub_resource type="BoxShape3D" id="Box_pared_ew"]
+size = Vector3(0.20, 60.00, 5.48)
 
 [node name="Interior_Cubierta1" type="Node3D"]
 script = ExtResource("1_crucero")
-
 [node name="Piso" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.10, 0)
 mesh = SubResource("BoxMesh_piso")
 surface_material_override/0 = SubResource("Mat_piso")
-
 [node name="Spawn" type="Marker3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.05, 2.5)
-
 [node name="Luz" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6, 0)
 light_energy = 1.4
 omni_range = 16.0
-
 [node name="Puerta" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.0, 4.9)
-
 [node name="Colision" type="CollisionShape3D" parent="Puerta"]
 shape = SubResource("Forma_puerta")
+[node name="ColisionPiso" type="StaticBody3D" parent="."]
+
+[node name="Forma" type="CollisionShape3D" parent="ColisionPiso"]
+shape = SubResource("Box_piso")
+
+[node name="ParedE" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.400, 0, 0)
+
+[node name="Forma" type="CollisionShape3D" parent="ParedE"]
+shape = SubResource("Box_pared_ew")
+
+[node name="ParedB" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.400, 0, 0)
+
+[node name="Forma" type="CollisionShape3D" parent="ParedB"]
+shape = SubResource("Box_pared_ew")
