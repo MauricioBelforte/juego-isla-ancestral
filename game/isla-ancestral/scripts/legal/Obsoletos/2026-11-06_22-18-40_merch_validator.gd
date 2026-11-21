@@ -9,7 +9,7 @@
 #   precio_usd [min,max] · margen [min,max] · tamanos[] · colores[] · calidad[] · seguridad[]
 # Reglas: margen en [0,1]; precio min<=max y >0; min<=max en rangos.
 
-class_name MerchValidator
+# class_name MerchValidator  # obsoleto: class_name activo en scripts/legal/merch_validator.gd (GO agnes-3-flash 015, Glyph Cluster)
 extends RefCounted
 
 const _TIPOS_VALIDOS: Array = ["fisico", "textil", "ceramica", "impreso", "audio", "juguete", "coleccionable"]

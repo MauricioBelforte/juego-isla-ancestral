@@ -22,7 +22,7 @@ func _init() -> void:
 	call_deferred("_run")
 
 func _validar_presupuesto() -> void:
-	var svc := get_node_or_null("/root/PhotoService")
+	var svc: Node = get_root().get_node_or_null("/root/PhotoService")
 	if svc == null:
 		return
 	var ms: int = int(svc.get("_ultimo_tiempo_captura_ms"))
@@ -68,7 +68,7 @@ func _cargar_y_validar_presets() -> void:
 
 
 func _validar_servicio() -> void:
-	var svc := get_node_or_null("/root/PhotoService")
+	var svc: Node = get_root().get_node_or_null("/root/PhotoService")
 	_check(svc != null, "PhotoService registrado como autoload")
 	if svc == null:
 		return
@@ -83,7 +83,7 @@ func _validar_servicio() -> void:
 
 
 func _validar_navigator() -> void:
-	var svc := get_node_or_null("/root/PhotoService")
+	var svc: Node = get_root().get_node_or_null("/root/PhotoService")
 	if svc == null:
 		return
 	var nav = svc.get("_navigator")
@@ -101,7 +101,7 @@ func _validar_navigator() -> void:
 
 
 func _validar_subviewport() -> void:
-	var svc := get_node_or_null("/root/PhotoService")
+	var svc: Node = get_root().get_node_or_null("/root/PhotoService")
 	if svc == null:
 		return
 	var vp = svc.get("_viewport_captura")

@@ -45,7 +45,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 
 - **Fecha de reporte:** YYYY-MM-DD HH:MM
 - **Módulo(s) afectado(s):** M-NN (nombre) — escena/script/sistema
-- **Severidad:** 🔴 Crítico | 🟠 Mayor | 🟡 Menor | ⚪ Trivial
+- **Severidad:** 🔴 Crítica | 🟠 Mayor | 🟡 Menor | ⚪ Trivial
 - **Prioridad sugerida:** Alta / Media / Baja
 - **Estado:** [ ] Abierto | [→] En progreso | [?] Delegado | [x] Resuelto
 
@@ -260,6 +260,9 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-135 | La integración M18 -> M160 está MUERTA: house_manager.gd llama a WorldLocations.buscar_cerca(), método que no existe | M018/M160 | 🟡 Menor | [?] Delegado — dueño M18/M160; decide el agente que tome ese frente | minimax-m3-1-flash | 2026-10-15 02:51 |
 | BUG-140 | test_logros.gd:294 asigna Array sin tipar a propiedad Array[String] -> SCRIPT ERROR que aborta 6 aserciones de persistencia (falso verde en QA §21.8 de M72) | M072 | 🟠 Mayor | [?] Delegado — dueño M72 (step-5-kilocode, autor del módulo y del test). Verificador != autor: hy3 no fixea… | Hy3 (WorkBuddy / Hunyuan) — verificación cruzada §21.8… | 2026-10-21 03:56 |
 | BUG-149 | backup_local.ps1 corrompe checksums.txt en la 2a corrida ($existing + linea = concatenacion de STRINGS cuando Get-Content devuelve un escalar) -> verify_backups.ps1 reporta FALTANTE un backup que EXISTE y restore_backup.ps1 extrae SIN verificar checksum, con el script saliendo exit 0 (falla en silencio) | M107 | 🟠 Mayor | [x] Resuelto 2026-10-22 (fix en HEAD, commit 0dbe925 del director; suite 49/0 re-corrida sobre HEAD) | DeepSeek-V4.1-Flash (WorkBuddy) | 2026-10-22 15:52 |
+| BUG-150 | EventBus.item_removed — señal declarada en bus sin emisor (puente roto) | M14/M53/M59 | 🟠 Mayor | [?] Delegado | Hy3 / agnes-3-flash | 2026-10-29 |
+| BUG-151 | M48 animacion_jugador — Engine.get_singleton("AnimationService") devuelve null en runtime | M48 | 🟠 Mayor | [x] Resuelto | DeepSeek-V4.1-Flash / agnes-3-flash | 2026-10-29 |
+| BUG-152 | qa_dirty_item4.gd — test muerto llama _actualizar_dirty() inexistente (colgado >7 min, false-green M59) | M59 | 🟠 Mayor | [x] Resuelto | DeepSeek-V4.1-Flash / agnes-3-flash | 2026-10-30 |
 | BUG-141 | Salida del juego lenta ~60 s con mundo voxel cargado (causa real: deinit del GDExtension de Voxel Tools) | M07/M08/M167 | 🟠 Mayor (derivada del texto: 60 s de espera al salir) | [x] Resuelto (diagnosticado 2026-10-21, fix pendiente en producto) | minimax-m3-1-flash | 2026-10-21 21:45 |
 | BUG-142 | M71 ProgresionManager: stale-read en evaluar_condicion_id() — _evaluacion_cache nunca se invalida en _reevaluar() | M71 | 🟠 Mayor (derivada del texto: API publica devuelve estado congelado) | [ ] Abierto (fix 2-3 lineas propuesto, propuesta-only de Reflection Beam 1.0) | Reflection Beam 1.0 | 2026-10-21 22:59 |
 | BUG-143 | M71 progression_manager.gd L248-253: _reevaluar() marca TODOS los hitos del stat (recompensas duplicadas/anticipadas) | M71 | 🟠 Mayor (derivada del texto: recompensas duplicadas en runtime) | [ ] Abierto (fix propuesto por Hy3, derivado a duena M71) | Hy3 (QA §21.8 #55) | 2026-10-22 02:35 |
@@ -268,7 +271,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
 | BUG-146 | TypewriterEffect: start() emitia typing_complete() inmediato y update() re-emitia la senal en cada llamada | M21 | 🟡 Menor (derivada del texto: senal de UI duplicada) | [x] Resuelto en la misma tanda (fix + QA de guardia) | G-5.3-Flash-Agente | 2026-10-22 09:50 |
 | BUG-147 | AutoAdvanceManager.validate_config(): Array generico asignado a Array[String] lanza SCRIPT ERROR (validacion inutilizable) | M21 | 🟡 Menor (derivada del texto: validacion de config rota, ya resuelta) | [x] Resuelto en la misma tanda (fix en line 55 del manager) | G-5.3-Flash-Agente | 2026-10-22 10:45 |
 | BUG-148 | Cobre de bioma beach: la cobertura reporta beach con 0 muestras (test_generacion_m10_atria.gd rc=1, deterministico) | M10 | 🟡 Menor (derivada del texto: reporte de cobertura de bioma, 1 suite) | [ ] Abierto (generacion M10, derivado al dueno de world-gen) | minimax-m3-1-flash | 2026-10-22 02:50 |
-| BUG-153 | Inflación masiva: 1.194 ítems promovidos a `[x]` en 46 h por 3 commits de Beam — 859 marcas falsas verdes vivas en 77 módulos | 77 módulos (M75/M73/M27/M12/M01…) | 🔴 Crítico (marcas falsas verdes: el proyecto reporta como hecho lo que no existe) | [?] Delegado (decisión macro del fundador; **P-100**, no flip sin GO) | DeepSeek V4.1 Flash (gate-1) | 2026-10-31 17:24 |
+| BUG-153 | Inflación masiva: 1.194 ítems promovidos a `[x]` en 46 h por 3 commits de Beam — 859 marcas falsas verdes vivas en 77 módulos | 77 módulos (M75/M73/M27/M12/M01…) | 🔴 Crítica (marcas falsas verdes: el proyecto reporta como hecho lo que no existe) | [?] Delegado (decisión macro del fundador; **P-100**, no flip sin GO) | DeepSeek V4.1 Flash (gate-1) | 2026-10-31 17:24 |
 | BUG-156 | Catálogos i18n desincronizados: `SETTINGS.VOLVER_TITULO` (y `_CONFIRMAR`) existen en `locales/{es,en,pt}.po` pero faltan en `data/localizacion/strings_{es,en,pt}.json` | M59 / M87 (i18n) | 🟡 Menor (derivada del texto: deriva entre catálogos; el runtime lee `.po`, medido) | [ ] Abierto (registrado por orden de la directora, canal 490 c) | DeepSeek-V4.1-Flash (WorkBuddy) | 2026-11-01 15:45 |
 
 ## 6. Bugs Abiertos (pendientes)
@@ -285,7 +288,7 @@ Copiar y pegar el siguiente bloque para cada bug nuevo:
   **M156** Terrenos-Y-Movimiento (38), **M162** Diálogos-Contextuales (34), **M110** Debug-Menu (22),
   **M63** Cargas-Y-Streaming (22), **M31** Ciclo-Día-Noche (22), **M61** Rendimiento (21).
   Inventario completo de los 77 en la sección «Asignación P-100» de esta misma entrada.
-- **Severidad:** 🔴 Crítico (marcas falsas verdes: el proyecto reporta como terminado trabajo que no existe)
+- **Severidad:** 🔴 Crítica (marcas falsas verdes: el proyecto reporta como terminado trabajo que no existe)
 - **Prioridad sugerida:** Alta — **P-100** (§21.8.2.b: muestreo obligatorio antes de cualquier sello)
 - **Estado:** [?] Delegado — **decisión macro del fundador** (859 `[x]`); **NO se flipea sin GO**
 
@@ -2591,7 +2594,7 @@ secciones reales (headers `## X.Y`). Clasificación:
 
 ### BUG-061 — M94 Retencion-Sin-FOMO: suite falla 5 checks estando marcado ✅ (sobre-cierre)
 
-- **Estado:** [x] Resuelto (2026-09-19, Log 1083) — ver §7 | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítico (sobre-cierre de un módulo ✅)
+- **Estado:** [x] Resuelto (2026-09-19, Log 1083) — ver §7 | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítica (sobre-cierre de un módulo ✅)
 - **Síntoma:** el módulo figura `✅ Completado 135/135` (ACT 2026-09-02, sin sello §21.8), pero
   su suite `scripts/motivacion/test_motivacion_m94.gd` re-corrida con binario real el
   2026-09-19 daba **EXIT 1 — 38 checks, 5 fallos**:
@@ -3749,7 +3752,7 @@ Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya 
 
 > **Registro previo consolidado de BUG-061 (M102, 2026-10-22):** M94 Retencion-Sin-FOMO: suite fallaba 5 checks (JSON con esquema divergente)
 
-- **Estado:** [x] Resuelto (2026-09-19, Log 1083) | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítico (sobre-cierre de un módulo ✅)
+- **Estado:** [x] Resuelto (2026-09-19, Log 1083) | **Módulo:** M94 Retencion-Sin-FOMO | **Severidad:** 🔴 Crítica (sobre-cierre de un módulo ✅)
 - **Reportado por:** Atria-Dawn-Preview (auditoría batería anti-sobre-cierre, Log 1065, 2026-09-19)
 - **Síntoma:** `test_motivacion_m94.gd` EXIT 1 con 5 fallos (`diarios=3 size=0`, `semanales=2 size=0`,
   `mensuales=2 size=0`, `progreso parcial no completa`, `progreso a 10 completa`) estando el módulo
@@ -3774,7 +3777,7 @@ Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya 
 
 ### BUG-058 — Autoload M107 roto: `ZIPWriter` (Godot 3) → `ZIPPacker` (Godot 4) + 6 warnings Variant→error
 
-- **Estado:** [x] Resuelto (2026-09-19, Log 1077) | **Módulo:** M107 (Backups) — impacto **transversal: stderr de TODOS los runs headless** | **Severidad:** 🔴 Crítico
+- **Estado:** [x] Resuelto (2026-09-19, Log 1077) | **Módulo:** M107 (Backups) — impacto **transversal: stderr de TODOS los runs headless** | **Severidad:** 🔴 Crítica
 - **Reportado por:** Hy3 (Log 1072, QA de M118, 2026-09-19 04:50) — "7 SCRIPT ERROR en stderr, todos de `scripts/backup/backup_manager.gd` (autoload roto, no relacionado con M118)". Código original de mimo-v2.5 (Log 1068).
 - **Resuelto por:** kimi-k3 (Moonshot AI) / Kilo Code | **Fecha:** 2026-09-19 04:50
 - **Documentado como:** E-22 en `GUIA-GODOT/06-registro-errores.md`
@@ -3813,7 +3816,7 @@ Las preferencias de settings sobreviven a los reinicios, siguiendo el patron ya 
 
 ### BUG-052 — Boot del proyecto roto: `.get()` de 2 args sobre `Resource` (3 archivos, 5 sitios)
 
-- **Estado:** [x] Resuelto (2026-09-19, Log 1044) | **Módulo:** M64 (IA de NPC) — impacto **transversal: todo el proyecto** | **Severidad:** 🔴 Crítico
+- **Estado:** [x] Resuelto (2026-09-19, Log 1044) | **Módulo:** M64 (IA de NPC) — impacto **transversal: todo el proyecto** | **Severidad:** 🔴 Crítica
 - **Reportado por:** atria-dawn-preview / Kilo Code (descubierto al auditar la evidencia del Log 1042 de hy3)
 - **Modelo:** Atria-Dawn-Preview | **Plataforma:** Kilo Code | **Fecha:** 2026-09-19 00:30
 
@@ -4069,7 +4072,7 @@ Al cerrar el inventario, el `Backdrop` (ColorRect negro α=0.5 creado por `playe
 
 - **Fecha de reporte:** 2026-09-02 21:45
 - **Módulo(s) afectado(s):** M19 (villager_manager.gd get_save_data) — patrón transversal en ISaveProviders
-- **Severidad:** 🔴 Crítico (corrupción silenciosa de saves)
+- **Severidad:** 🔴 Crítica (corrupción silenciosa de saves)
 - **Prioridad sugerida:** Alta
 - **Estado:** [x] Resuelto
 
@@ -4149,7 +4152,7 @@ Deep-copy explícito en `get_save_data()`: `_memoria[k].duplicate(true)` por vec
 
 - **Fecha de reporte:** 2026-09-12 02:25
 - **Módulo(s) afectado(s):** M21 (Diálogos) — `scripts/dialogos/dialogue_manager.gd` (`start_dialogue`, gate `[VAL-DGV]` L106-110) · `scripts/dialogos/dialog_graph_validator.gd` (`CLAVES_MUNDO_BASE`)
-- **Severidad:** 🔴 Crítico
+- **Severidad:** 🔴 Crítica
 - **Prioridad sugerida:** Alta
 - **Estado:** [x] Resuelto (2026-09-12, Log 846)
 
@@ -6892,7 +6895,7 @@ no se respetaron).
 - **Fecha de reporte:** 2026-09-20 01:13
 - **Módulo(s) afectado(s):** M32, M36, M65, M78, M81, M82, M85, M93, M94, M114, M116,
   M118, M119, M145, M146, M154, M167 (17 módulos que figuraban ✅).
-- **Severidad:** 🔴 Crítico (corrupción de la métrica de progreso del proyecto)
+- **Severidad:** 🔴 Crítica (corrupción de la métrica de progreso del proyecto)
 - **Detectado por:** Atria-Dawn-Preview / Kilo Code — escaneo sistemático de over-marks
   (Log 1116), sucesor natural de BUG-063/064/066 (claims falsos de Totales) y
   BUG-061/062 (sobre-cierres).
