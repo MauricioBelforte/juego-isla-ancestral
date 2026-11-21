@@ -1,0 +1,86 @@
+[
+ {
+  "mod": "71",
+  "linea": 62,
+  "pedido": "milestone_catalog.tres",
+  "existe": false,
+  "texto": "Crear milestone_catalog.tres como catálogo central cargado por el registry [M] | AUDIT 2026-10-14 (step-5-kilocode): NO existe milestone_catalog.tres; el catalo"
+ },
+ {
+  "mod": "71",
+  "linea": 62,
+  "pedido": "milestone_catalog.tres",
+  "existe": false,
+  "texto": "Crear milestone_catalog.tres como catálogo central cargado por el registry [M] | AUDIT 2026-10-14 (step-5-kilocode): NO existe milestone_catalog.tres; el catalo"
+ },
+ {
+  "mod": "137",
+  "linea": 10,
+  "pedido": "prototipo_isla.tscn",
+  "existe": false,
+  "texto": "Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la e"
+ },
+ {
+  "mod": "156",
+  "linea": 200,
+  "pedido": "particulas_ceped.gd",
+  "existe": false,
+  "texto": "Crear particulas_ceped.gd [S] — atria-dawn 2026-10-13 (lote I): NO se crea el .gd nombrado; la implementacion es scenes/terrenos/particulas_ceped.tscn (CPUParti"
+ },
+ {
+  "mod": "156",
+  "linea": 201,
+  "pedido": "particulas_barro.gd",
+  "existe": false,
+  "texto": "Crear particulas_barro.gd [S] — atria-dawn 2026-10-13: idem particulas_ceped.gd — escena particulas_barro.tscn en su lugar (data-driven)  [Auditoria T-agnes blq"
+ },
+ {
+  "mod": "156",
+  "linea": 202,
+  "pedido": "particulas_arena.gd",
+  "existe": false,
+  "texto": "Crear particulas_arena.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_arena.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE "
+ },
+ {
+  "mod": "156",
+  "linea": 203,
+  "pedido": "particulas_agua.gd",
+  "existe": false,
+  "texto": "Crear particulas_agua.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_agua.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en"
+ },
+ {
+  "mod": "156",
+  "linea": 204,
+  "pedido": "particulas_nieve.gd",
+  "existe": false,
+  "texto": "Crear particulas_nieve.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_nieve.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE "
+ },
+ {
+  "mod": "156",
+  "linea": 205,
+  "pedido": "particulas_rocas.gd",
+  "existe": false,
+  "texto": "Crear particulas_rocas.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_rocas.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE "
+ },
+ {
+  "mod": "156",
+  "linea": 223,
+  "pedido": "terrain_footstep_audio.gd",
+  "existe": false,
+  "texto": "Crear terrain_footstep_audio.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/"
+ },
+ {
+  "mod": "156",
+  "linea": 290,
+  "pedido": "test_terrain_provider.gd",
+  "existe": false,
+  "texto": "Crear test_terrain_provider.gd [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo "
+ },
+ {
+  "mod": "156",
+  "linea": 295,
+  "pedido": "test_terrain_detector.gd",
+  "existe": false,
+  "texto": "Crear test_terrain_detector.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/t"
+ }
+]
