@@ -1,0 +1,2124 @@
+{
+ "fecha": "2026-11-21 05:07:30",
+ "A_pre": {
+  "filas": 174,
+  "drifts": 56,
+  "denom_desalineados": 3,
+  "lista": [
+   {
+    "linea": 27,
+    "id": "04",
+    "global": 126,
+    "global_total": 128,
+    "real_x": 128,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 128,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 33,
+    "id": "10",
+    "global": 90,
+    "global_total": 106,
+    "real_x": 88,
+    "real_q": 18,
+    "real_blanco": 0,
+    "total": 106,
+    "delta": 2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 34,
+    "id": "62",
+    "global": 145,
+    "global_total": 150,
+    "real_x": 147,
+    "real_q": 3,
+    "real_blanco": 0,
+    "total": 150,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 38,
+    "id": "103",
+    "global": 173,
+    "global_total": 179,
+    "real_x": 177,
+    "real_q": 2,
+    "real_blanco": 0,
+    "total": 179,
+    "delta": -4,
+    "denom_delta": 0
+   },
+   {
+    "linea": 39,
+    "id": "104",
+    "global": 111,
+    "global_total": 119,
+    "real_x": 119,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 119,
+    "delta": -8,
+    "denom_delta": 0
+   },
+   {
+    "linea": 41,
+    "id": "106",
+    "global": 194,
+    "global_total": 206,
+    "real_x": 206,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 206,
+    "delta": -12,
+    "denom_delta": 0
+   },
+   {
+    "linea": 42,
+    "id": "107",
+    "global": 177,
+    "global_total": 182,
+    "real_x": 182,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 182,
+    "delta": -5,
+    "denom_delta": 0
+   },
+   {
+    "linea": 44,
+    "id": "109",
+    "global": 135,
+    "global_total": 138,
+    "real_x": 136,
+    "real_q": 2,
+    "real_blanco": 0,
+    "total": 138,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 49,
+    "id": "113",
+    "global": 131,
+    "global_total": 132,
+    "real_x": 132,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 132,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 60,
+    "id": "122",
+    "global": 254,
+    "global_total": 264,
+    "real_x": 256,
+    "real_q": 8,
+    "real_blanco": 0,
+    "total": 264,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 61,
+    "id": "123",
+    "global": 106,
+    "global_total": 108,
+    "real_x": 108,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 108,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 69,
+    "id": "129",
+    "global": 101,
+    "global_total": 108,
+    "real_x": 107,
+    "real_q": 1,
+    "real_blanco": 0,
+    "total": 108,
+    "delta": -6,
+    "denom_delta": 0
+   },
+   {
+    "linea": 72,
+    "id": "131",
+    "global": 86,
+    "global_total": 95,
+    "real_x": 87,
+    "real_q": 8,
+    "real_blanco": 0,
+    "total": 95,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 73,
+    "id": "132",
+    "global": 104,
+    "global_total": 105,
+    "real_x": 105,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 105,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 78,
+    "id": "137",
+    "global": 118,
+    "global_total": 131,
+    "real_x": 124,
+    "real_q": 7,
+    "real_blanco": 0,
+    "total": 131,
+    "delta": -6,
+    "denom_delta": 0
+   },
+   {
+    "linea": 80,
+    "id": "139",
+    "global": 138,
+    "global_total": 142,
+    "real_x": 136,
+    "real_q": 6,
+    "real_blanco": 0,
+    "total": 142,
+    "delta": 2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 82,
+    "id": "139",
+    "global": 139,
+    "global_total": 142,
+    "real_x": 136,
+    "real_q": 6,
+    "real_blanco": 0,
+    "total": 142,
+    "delta": 3,
+    "denom_delta": 0
+   },
+   {
+    "linea": 84,
+    "id": "141",
+    "global": 146,
+    "global_total": 147,
+    "real_x": 147,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 147,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 87,
+    "id": "144",
+    "global": 104,
+    "global_total": 106,
+    "real_x": 106,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 106,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 92,
+    "id": "148",
+    "global": 115,
+    "global_total": 117,
+    "real_x": 116,
+    "real_q": 1,
+    "real_blanco": 0,
+    "total": 117,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 93,
+    "id": "148",
+    "global": 115,
+    "global_total": 117,
+    "real_x": 116,
+    "real_q": 1,
+    "real_blanco": 0,
+    "total": 117,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 94,
+    "id": "149",
+    "global": 99,
+    "global_total": 100,
+    "real_x": 100,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 100,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 101,
+    "id": "154",
+    "global": 149,
+    "global_total": 155,
+    "real_x": 150,
+    "real_q": 2,
+    "real_blanco": 3,
+    "total": 155,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 102,
+    "id": "155",
+    "global": 105,
+    "global_total": 108,
+    "real_x": 108,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 108,
+    "delta": -3,
+    "denom_delta": 0
+   },
+   {
+    "linea": 109,
+    "id": "160",
+    "global": 145,
+    "global_total": 155,
+    "real_x": 155,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 155,
+    "delta": -10,
+    "denom_delta": 0
+   },
+   {
+    "linea": 112,
+    "id": "163",
+    "global": 105,
+    "global_total": 120,
+    "real_x": 113,
+    "real_q": 7,
+    "real_blanco": 0,
+    "total": 120,
+    "delta": -8,
+    "denom_delta": 0
+   },
+   {
+    "linea": 113,
+    "id": "164",
+    "global": 120,
+    "global_total": 129,
+    "real_x": 128,
+    "real_q": 1,
+    "real_blanco": 0,
+    "total": 129,
+    "delta": -8,
+    "denom_delta": 0
+   },
+   {
+    "linea": 116,
+    "id": "167",
+    "global": 113,
+    "global_total": 114,
+    "real_x": 114,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 114,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 118,
+    "id": "169",
+    "global": 10,
+    "global_total": 162,
+    "real_x": 45,
+    "real_q": 0,
+    "real_blanco": 147,
+    "total": 192,
+    "delta": -35,
+    "denom_delta": -30
+   },
+   {
+    "linea": 126,
+    "id": "24",
+    "global": 127,
+    "global_total": 128,
+    "real_x": 128,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 128,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 131,
+    "id": "29",
+    "global": 193,
+    "global_total": 195,
+    "real_x": 195,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 195,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 132,
+    "id": "30",
+    "global": 119,
+    "global_total": 120,
+    "real_x": 120,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 120,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 134,
+    "id": "32",
+    "global": 119,
+    "global_total": 121,
+    "real_x": 121,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 121,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 140,
+    "id": "38",
+    "global": 164,
+    "global_total": 164,
+    "real_x": 163,
+    "real_q": 1,
+    "real_blanco": 0,
+    "total": 164,
+    "delta": 1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 142,
+    "id": "40",
+    "global": 206,
+    "global_total": 211,
+    "real_x": 210,
+    "real_q": 0,
+    "real_blanco": 1,
+    "total": 211,
+    "delta": -4,
+    "denom_delta": 0
+   },
+   {
+    "linea": 146,
+    "id": "44",
+    "global": 107,
+    "global_total": 113,
+    "real_x": 110,
+    "real_q": 3,
+    "real_blanco": 0,
+    "total": 113,
+    "delta": -3,
+    "denom_delta": 0
+   },
+   {
+    "linea": 148,
+    "id": "46",
+    "global": 101,
+    "global_total": 110,
+    "real_x": 109,
+    "real_q": 0,
+    "real_blanco": 1,
+    "total": 110,
+    "delta": -8,
+    "denom_delta": 0
+   },
+   {
+    "linea": 149,
+    "id": "47",
+    "global": 118,
+    "global_total": 121,
+    "real_x": 121,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 121,
+    "delta": -3,
+    "denom_delta": 0
+   },
+   {
+    "linea": 153,
+    "id": "50",
+    "global": 131,
+    "global_total": 142,
+    "real_x": 138,
+    "real_q": 2,
+    "real_blanco": 1,
+    "total": 141,
+    "delta": -7,
+    "denom_delta": 1
+   },
+   {
+    "linea": 155,
+    "id": "52",
+    "global": 145,
+    "global_total": 148,
+    "real_x": 146,
+    "real_q": 2,
+    "real_blanco": 0,
+    "total": 148,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 156,
+    "id": "53",
+    "global": 159,
+    "global_total": 165,
+    "real_x": 160,
+    "real_q": 2,
+    "real_blanco": 2,
+    "total": 164,
+    "delta": -1,
+    "denom_delta": 1
+   },
+   {
+    "linea": 159,
+    "id": "56",
+    "global": 132,
+    "global_total": 138,
+    "real_x": 130,
+    "real_q": 1,
+    "real_blanco": 7,
+    "total": 138,
+    "delta": 2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 166,
+    "id": "63",
+    "global": 67,
+    "global_total": 101,
+    "real_x": 93,
+    "real_q": 5,
+    "real_blanco": 3,
+    "total": 101,
+    "delta": -26,
+    "denom_delta": 0
+   },
+   {
+    "linea": 169,
+    "id": "66",
+    "global": 110,
+    "global_total": 117,
+    "real_x": 117,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 117,
+    "delta": -7,
+    "denom_delta": 0
+   },
+   {
+    "linea": 172,
+    "id": "69",
+    "global": 123,
+    "global_total": 145,
+    "real_x": 142,
+    "real_q": 3,
+    "real_blanco": 0,
+    "total": 145,
+    "delta": -19,
+    "denom_delta": 0
+   },
+   {
+    "linea": 175,
+    "id": "72",
+    "global": 200,
+    "global_total": 200,
+    "real_x": 197,
+    "real_q": 2,
+    "real_blanco": 1,
+    "total": 200,
+    "delta": 3,
+    "denom_delta": 0
+   },
+   {
+    "linea": 179,
+    "id": "76",
+    "global": 129,
+    "global_total": 130,
+    "real_x": 130,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 130,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 181,
+    "id": "78",
+    "global": 156,
+    "global_total": 157,
+    "real_x": 157,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 157,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 183,
+    "id": "80",
+    "global": 142,
+    "global_total": 144,
+    "real_x": 144,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 144,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 184,
+    "id": "81",
+    "global": 135,
+    "global_total": 137,
+    "real_x": 137,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 137,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 186,
+    "id": "83",
+    "global": 99,
+    "global_total": 100,
+    "real_x": 100,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 100,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 191,
+    "id": "88",
+    "global": 174,
+    "global_total": 185,
+    "real_x": 178,
+    "real_q": 7,
+    "real_blanco": 0,
+    "total": 185,
+    "delta": -4,
+    "denom_delta": 0
+   },
+   {
+    "linea": 192,
+    "id": "89",
+    "global": 124,
+    "global_total": 125,
+    "real_x": 125,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 125,
+    "delta": -1,
+    "denom_delta": 0
+   },
+   {
+    "linea": 194,
+    "id": "91",
+    "global": 237,
+    "global_total": 239,
+    "real_x": 239,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 239,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 196,
+    "id": "93",
+    "global": 137,
+    "global_total": 139,
+    "real_x": 139,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 139,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 197,
+    "id": "94",
+    "global": 83,
+    "global_total": 138,
+    "real_x": 89,
+    "real_q": 49,
+    "real_blanco": 0,
+    "total": 138,
+    "delta": -6,
+    "denom_delta": 0
+   }
+  ],
+  "top20": [
+   {
+    "linea": 60,
+    "id": "122",
+    "global": 254,
+    "global_total": 264,
+    "real_x": 256,
+    "real_q": 8,
+    "real_blanco": 0,
+    "total": 264,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 193,
+    "id": "90",
+    "global": 249,
+    "global_total": 249,
+    "real_x": 249,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 249,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 194,
+    "id": "91",
+    "global": 237,
+    "global_total": 239,
+    "real_x": 239,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 239,
+    "delta": -2,
+    "denom_delta": 0
+   },
+   {
+    "linea": 48,
+    "id": "112",
+    "global": 228,
+    "global_total": 232,
+    "real_x": 228,
+    "real_q": 4,
+    "real_blanco": 0,
+    "total": 232,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 138,
+    "id": "36",
+    "global": 228,
+    "global_total": 228,
+    "real_x": 228,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 228,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 177,
+    "id": "74",
+    "global": 227,
+    "global_total": 285,
+    "real_x": 227,
+    "real_q": 58,
+    "real_blanco": 0,
+    "total": 285,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 103,
+    "id": "156",
+    "global": 223,
+    "global_total": 307,
+    "real_x": 223,
+    "real_q": 82,
+    "real_blanco": 2,
+    "total": 307,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 58,
+    "id": "120",
+    "global": 222,
+    "global_total": 222,
+    "real_x": 222,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 222,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 35,
+    "id": "100",
+    "global": 220,
+    "global_total": 220,
+    "real_x": 220,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 220,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 95,
+    "id": "15",
+    "global": 215,
+    "global_total": 219,
+    "real_x": 215,
+    "real_q": 4,
+    "real_blanco": 0,
+    "total": 219,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 59,
+    "id": "121",
+    "global": 211,
+    "global_total": 211,
+    "real_x": 211,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 211,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 142,
+    "id": "40",
+    "global": 206,
+    "global_total": 211,
+    "real_x": 210,
+    "real_q": 0,
+    "real_blanco": 1,
+    "total": 211,
+    "delta": -4,
+    "denom_delta": 0
+   },
+   {
+    "linea": 36,
+    "id": "101",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 209,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 47,
+    "id": "111",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 209,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 41,
+    "id": "106",
+    "global": 194,
+    "global_total": 206,
+    "real_x": 206,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 206,
+    "delta": -12,
+    "denom_delta": 0
+   },
+   {
+    "linea": 43,
+    "id": "108",
+    "global": 202,
+    "global_total": 205,
+    "real_x": 202,
+    "real_q": 3,
+    "real_blanco": 0,
+    "total": 205,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 98,
+    "id": "152",
+    "global": 202,
+    "global_total": 202,
+    "real_x": 202,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 202,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 120,
+    "id": "18",
+    "global": 200,
+    "global_total": 213,
+    "real_x": 200,
+    "real_q": 4,
+    "real_blanco": 9,
+    "total": 213,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 53,
+    "id": "116",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 199,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 77,
+    "id": "136",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 199,
+    "delta": 0,
+    "denom_delta": 0
+   }
+  ]
+ },
+ "A_post": {
+  "filas": 174,
+  "drifts": 0,
+  "top20": [
+   {
+    "id": "122",
+    "global": 256,
+    "global_total": 264,
+    "real_x": 256,
+    "delta": 0
+   },
+   {
+    "id": "90",
+    "global": 249,
+    "global_total": 249,
+    "real_x": 249,
+    "delta": 0
+   },
+   {
+    "id": "91",
+    "global": 239,
+    "global_total": 239,
+    "real_x": 239,
+    "delta": 0
+   },
+   {
+    "id": "112",
+    "global": 228,
+    "global_total": 232,
+    "real_x": 228,
+    "delta": 0
+   },
+   {
+    "id": "36",
+    "global": 228,
+    "global_total": 228,
+    "real_x": 228,
+    "delta": 0
+   },
+   {
+    "id": "74",
+    "global": 227,
+    "global_total": 285,
+    "real_x": 227,
+    "delta": 0
+   },
+   {
+    "id": "156",
+    "global": 223,
+    "global_total": 307,
+    "real_x": 223,
+    "delta": 0
+   },
+   {
+    "id": "120",
+    "global": 222,
+    "global_total": 222,
+    "real_x": 222,
+    "delta": 0
+   },
+   {
+    "id": "100",
+    "global": 220,
+    "global_total": 220,
+    "real_x": 220,
+    "delta": 0
+   },
+   {
+    "id": "15",
+    "global": 215,
+    "global_total": 219,
+    "real_x": 215,
+    "delta": 0
+   },
+   {
+    "id": "121",
+    "global": 211,
+    "global_total": 211,
+    "real_x": 211,
+    "delta": 0
+   },
+   {
+    "id": "40",
+    "global": 210,
+    "global_total": 211,
+    "real_x": 210,
+    "delta": 0
+   },
+   {
+    "id": "101",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "delta": 0
+   },
+   {
+    "id": "111",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "delta": 0
+   },
+   {
+    "id": "106",
+    "global": 206,
+    "global_total": 206,
+    "real_x": 206,
+    "delta": 0
+   },
+   {
+    "id": "108",
+    "global": 202,
+    "global_total": 205,
+    "real_x": 202,
+    "delta": 0
+   },
+   {
+    "id": "152",
+    "global": 202,
+    "global_total": 202,
+    "real_x": 202,
+    "delta": 0
+   },
+   {
+    "id": "18",
+    "global": 200,
+    "global_total": 213,
+    "real_x": 200,
+    "delta": 0
+   },
+   {
+    "id": "116",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "delta": 0
+   },
+   {
+    "id": "136",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "delta": 0
+   }
+  ],
+  "restantes": []
+ },
+ "B": {
+  "archivos": 3052,
+  "por_extension": {
+   ".cfg": 929,
+   ".json": 1644,
+   ".tres": 479
+  },
+  "errores": 7,
+  "errores_ej": [
+   [
+    "game\\isla-ancestral\\.godot\\extension_list.cfg",
+    "MissingSectionHeaderError: File contains no section headers.\nfile: 'D:\\\\Escritorio\\\\PORTFOLIO\\\\Proyectos para GitHub\\"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\global_script_class_cache.cfg",
+    "MissingSectionHeaderError: File contains no section headers.\nfile: 'D:\\\\Escritorio\\\\PORTFOLIO\\\\Proyectos para GitHub\\"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\editor_layout.cfg",
+    "ParsingError: Source contains parsing errors: 'D:\\\\Escritorio\\\\PORTFOLIO\\\\Proyectos para GitHub\\\\PROYECT"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\script_editor_cache.cfg",
+    "ParsingError: Source contains parsing errors: 'D:\\\\Escritorio\\\\PORTFOLIO\\\\Proyectos para GitHub\\\\PROYECT"
+   ],
+   [
+    "game\\isla-ancestral\\Godot\\app_userdata\\isla-ancestral\\config.cfg",
+    "MissingSectionHeaderError: File contains no section headers.\nfile: 'D:\\\\Escritorio\\\\PORTFOLIO\\\\Proyectos para GitHub\\"
+   ],
+   [
+    "game\\isla-ancestral\\Godot\\app_userdata\\isla-ancestral\\backups\\backup_restore.json",
+    "JSONDecodeError: Extra data: line 1 column 6 (char 5)"
+   ],
+   [
+    "game\\isla-ancestral\\Godot\\app_userdata\\isla-ancestral\\backups\\backup_test.json",
+    "JSONDecodeError: Expecting value: line 1 column 1 (char 0)"
+   ]
+  ],
+  "refs": 1609,
+  "refs_rotas": 42,
+  "rotas_ej": [
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main.tscn-folding-3ad5c15c4f3250da0cc7c1af1770d85f.cfg",
+    4,
+    "scenes/main.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_island.tscn-folding-aa1f4c7a7afa69e9e41b69e49dfb278c.cfg",
+    4,
+    "scenes/main_island.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_simple.tscn-folding-2ef5bb7930c6f4c9ae7bbff190244647.cfg",
+    4,
+    "scenes/main_simple.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_test.tscn-folding-ecac5a59c09b9b86523a0ebd1e66d45f.cfg",
+    4,
+    "scenes/main_test.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_test.tscn-folding-ecac5a59c09b9b86523a0ebd1e66d45f.cfg",
+    4,
+    "scenes/main_test.tscn::BoxMesh_floor"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_test.tscn-folding-ecac5a59c09b9b86523a0ebd1e66d45f.cfg",
+    4,
+    "scenes/main_test.tscn::BoxShape3D_floor"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\main_test2.tscn-folding-97ca3055412b5fb3394535e5cb7eb63c.cfg",
+    4,
+    "scenes/main_test2.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\preview_particles.tscn-folding-87ca91a58ebfdf08c295f47511b8c3b4.cfg",
+    4,
+    "scenes/preview_particles.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::Env_1"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::GrassMat"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::GroundMesh"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::GroundShape"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::BodyMat"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::BodyMesh"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::HeadMat"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::HeadMesh"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::LimbMat"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::LimbMesh"
+   ],
+   [
+    "game\\isla-ancestral\\.godot\\editor\\simple_walk.tscn-folding-f3937bd7c499191c931358598ae7e14a.cfg",
+    4,
+    "scenes/simple_walk.tscn::PlayerShape"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    10,
+    "assets/ui/logros/primer_sello.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    25,
+    "assets/ui/logros/siete_sellos.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    43,
+    "assets/ui/logros/coleccionista.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    57,
+    "assets/ui/logros/viajero.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    73,
+    "assets/ui/logros/vecino.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    88,
+    "assets/ui/logros/misionero.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    103,
+    "assets/ui/logros/secreto_guardian.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    118,
+    "assets/ui/logros/amigo_cercano.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    133,
+    "assets/ui/logros/alma_de_la_isla.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    148,
+    "assets/ui/logros/pescador_principiante.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    164,
+    "assets/ui/logros/mar_adentro_10.png"
+   ]
+  ]
+ },
+ "C": {
+  "tscn": 73,
+  "ext_refs": 121,
+  "problems": 111,
+  "problems_ej": [
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\menu\\GdUnitInspectorContextMenu.tscn",
+    "ID rotos: DPITexture_miuuy"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\menu\\GdUnitInspectorContextMenu.tscn",
+    "ID rotos: DPITexture_ern2r"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\menu\\GdUnitInspectorContextMenu.tscn",
+    "ID rotos: DPITexture_miuuy"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\menu\\GdUnitInspectorContextMenu.tscn",
+    "ID rotos: DPITexture_qdci2"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\menu\\GdUnitInspectorContextMenu.tscn",
+    "ID rotos: DPITexture_hed0i"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorProgressBar.tscn",
+    "ID rotos: StyleBoxFlat_ayfir"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorStatusBar.tscn",
+    "ID rotos: StyleBoxEmpty_mb3ih"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorStatusBar.tscn",
+    "ID rotos: StyleBoxEmpty_wo03e"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorStatusBar.tscn",
+    "ID rotos: StyleBoxEmpty_jh28t"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: InputEventKey_4j3on"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: InputEventKey_85ykl"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: InputEventKey_1iti7"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: InputEventKey_hb3do"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_c7rhl"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_3erui"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_p22nw"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: Shortcut_5pa04"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_3lcek"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: Shortcut_fpubx"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_ndw0i"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: Shortcut_hpi24"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: StyleBoxEmpty_eoihf"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorToolBar.tscn",
+    "ID rotos: Shortcut_lm2q6"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorTreeMainPanel.tscn",
+    "ID rotos: DPITexture_njcuo"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorTreeMainPanel.tscn",
+    "ID rotos: DPITexture_o05pk"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorTreeMainPanel.tscn",
+    "ID rotos: DPITexture_njcuo"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorTreeMainPanel.tscn",
+    "ID rotos: DPITexture_njtpf"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\parts\\GdUnitInspectorTreeMainPanel.tscn",
+    "ID rotos: DPITexture_eg3rq"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\settings\\GdUnitSettingsDialog.tscn",
+    "ID rotos: StyleBoxFlat_hbbq5"
+   ],
+   [
+    "game\\isla-ancestral\\addons\\gdUnit4\\src\\ui\\settings\\GdUnitSettingsTabHooks.tscn",
+    "ID rotos: Image_h5sr5"
+   ]
+  ],
+  "sin_nodo_raiz": 0,
+  "sin_raiz_ej": [],
+  "multi_root": 0,
+  "multi_ej": []
+ },
+ "D": {
+  "por_extension": {
+   ".wav": 97
+  },
+  "ejemplos": {
+   ".wav": [
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_cerrojo.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_contenedor.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_madera.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\area_misteriosa.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\aurora_aparece.wav"
+   ]
+  }
+ },
+ "E": {
+  "todo_count": 35,
+  "gd_files": 31,
+  "todos_ej": [
+   [
+    "game\\isla-ancestral\\scripts\\animales_ia\\m65_animal_ai.gd",
+    113,
+    "# huida coordinada sobreescribe el destino de TODO el grupo."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\animales_ia\\m65_animal_ai.gd",
+    177,
+    "## huida coordinada sobreescribe el destino de TODO el grupo del mismo tipo."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote2_m73.gd",
+    44,
+    "print(\"[M73-LOTE2] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote3_m73.gd",
+    55,
+    "print(\"[M73-LOTE3] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote4_m73.gd",
+    49,
+    "print(\"[M73-LOTE4] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_validate_collectibles_m73.gd",
+    69,
+    "# 7. Recompensa de coleccion definida: TODO item tiene recompensa_item + cantidad >= 0"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\construccion\\test_construccion_iter2.gd",
+    150,
+    "# (a) TODO item_id de costo debe existir como recurso real de M14."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\crafting\\qa_m16_rollback_lleno.gd",
+    58,
+    "# Snapshot exacto de TODO el estado (counts desde el servicio)."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\datos\\catalogos_estaticos.gd",
+    113,
+    "## Fuerza la carga de TODO el catálogo (QA / precalentamiento opcional)."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\datos\\test_datos_m60_iter4.gd",
+    542,
+    "# borrar_slot limpia TODO (incluido .deflate y las copias)"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1023,
+    "# TODO: conectar a DebugUtils/PhysicsServer cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1031,
+    "# TODO: conectar a VoxelViewer/M08 cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1038,
+    "# TODO: conectar a NavigationServer/AStar cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\diario\\test_diario_persist.gd",
+    260,
+    "# Verificar que Diary restauró TODO lo de la sesión 1"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\economia\\test_barter.gd",
+    114,
+    "# aplica; probamos que el pedido se remueve solo si TODO está disponible"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\farm\\farm_tool_controller.gd",
+    68,
+    "# Sin cultivo: arar (till valida en el servicio; TODO voxel M08 en iter 3)"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\fishing\\test_fishing_clima.gd",
+    107,
+    "# bajo CUALQUIER clima, TODO pez del catálogo conserva peso > 0 (nunca 0,"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\friendship\\test_amistad_rf48_m20.gd",
+    85,
+    "print(\"M20 RF4-RF8 TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\inventario\\inventario_iter5.gd",
+    7,
+    "# Patron: duck-typing en TODO; si el modulo destino no existe, devuelve"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\legal\\audio_license_report_tool.gd",
+    12,
+    "# TODO asset de audio del build aparece en el reporte. Si NO está en el"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logging\\logger.gd",
+    26,
+    "#     devolvía TODO. Corregido: granularidad horaria real + patrón que acepta 'T'"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logging\\test_logging_m103_iter1.gd",
+    442,
+    "# TODO). Con una ventana negativa nada debe entrar."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logros\\test_logros_rf10_m72.gd",
+    103,
+    "print(\"[M72-RF10] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\mineria\\mining_manager.gd",
+    22,
+    "#      herramienta_requerida (\"pico\") -> TODO pico T2+ era rechazado con"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\plataformas\\steam_bridge.gd",
+    21,
+    "# TODO(M149): Steamworks.Achievement.Store cuando el SDK esté integrado"
+   ]
+  ],
+  "autoloads": 117,
+  "autoloads_rotos": [
+   [
+    "EventBus",
+    "*res://scripts/core/event_bus.gd",
+    false
+   ],
+   [
+    "WorldState",
+    "*res://scripts/dialogos/world_state_service.gd",
+    false
+   ],
+   [
+    "DialogueManager",
+    "*res://scripts/dialogos/dialogue_manager.gd",
+    false
+   ],
+   [
+    "GameSettings",
+    "*res://scripts/core/game_settings.gd",
+    false
+   ],
+   [
+    "ServiceRegistry",
+    "*res://scripts/core/service_registry.gd",
+    false
+   ],
+   [
+    "GameLogger",
+    "*res://scripts/logging/logger.gd",
+    false
+   ],
+   [
+    "AnalyticsDirector",
+    "*res://scripts/analytics/analytics_director.gd",
+    false
+   ],
+   [
+    "TelemetryDirector",
+    "*res://scripts/telemetry/telemetry_director.gd",
+    false
+   ],
+   [
+    "SaveManager",
+    "*res://scripts/saving/save_manager.gd",
+    false
+   ],
+   [
+    "TimeCalendar",
+    "*res://scripts/time/time_calendar.gd",
+    false
+   ],
+   [
+    "ItemDatabase",
+    "*res://scripts/data/item_database.gd",
+    false
+   ],
+   [
+    "EconomyManager",
+    "*res://scripts/economia/economy_manager.gd",
+    false
+   ],
+   [
+    "SoftlockGuard",
+    "*res://scripts/core/softlock_guard.gd",
+    false
+   ],
+   [
+    "ShopManager",
+    "*res://scripts/shops/shop_manager.gd",
+    false
+   ],
+   [
+    "Inventario",
+    "*res://scripts/inventario/inventario_service.gd",
+    false
+   ],
+   [
+    "Friendship",
+    "*res://scripts/friendship/friendship_service.gd",
+    false
+   ],
+   [
+    "GameTime",
+    "*res://scripts/time/game_clock.gd",
+    false
+   ],
+   [
+    "RelojHud",
+    "*res://scripts/clock/reloj_hud.gd",
+    false
+   ],
+   [
+    "Bootstrap",
+    "*res://scripts/core/bootstrap.gd",
+    false
+   ],
+   [
+    "UIManager",
+    "*res://scripts/ui/core/ui_manager.gd",
+    false
+   ],
+   [
+    "TooltipService",
+    "*res://scripts/ui/services/tooltip_service.gd",
+    false
+   ],
+   [
+    "NotificationService",
+    "*res://scripts/ui/services/notification_service.gd",
+    false
+   ],
+   [
+    "TerrainLocator",
+    "*res://scripts/core/terrain_locator.gd",
+    false
+   ],
+   [
+    "VillagerManager",
+    "*res://scripts/npc/villager_manager.gd",
+    false
+   ],
+   [
+    "ControlInput",
+    "*res://scripts/controls/control_input.gd",
+    false
+   ],
+   [
+    "ResourceManager",
+    "*res://scripts/resources/resource_manager.gd",
+    false
+   ],
+   [
+    "mineria",
+    "*res://scripts/mineria/mining_manager.gd",
+    false
+   ],
+   [
+    "interacciones",
+    "*res://scripts/interacciones/interaction_manager.gd",
+    false
+   ],
+   [
+    "fauna_registry",
+    "*res://scripts/fauna/fauna_registry.gd",
+    false
+   ],
+   [
+    "fauna",
+    "*res://scripts/fauna/fauna_manager.gd",
+    false
+   ],
+   [
+    "credits_manager",
+    "*res://scripts/legal/credits_manager.gd",
+    false
+   ],
+   [
+    "MerchManager",
+    "*res://scripts/legal/merch_manager.gd",
+    false
+   ],
+   [
+    "animal_ai",
+    "*res://scripts/animales_ia/m65_animal_ai.gd",
+    false
+   ],
+   [
+    "coleccionables",
+    "*res://scripts/coleccionables/coleccionables_manager.gd",
+    false
+   ],
+   [
+    "hotbar",
+    "*res://scripts/inventario/hotbar_state.gd",
+    false
+   ],
+   [
+    "inventario_helper",
+    "*res://scripts/inventario/inventario_iter4.gd",
+    false
+   ],
+   [
+    "inventario_iter5",
+    "*res://scripts/inventario/inventario_iter5.gd",
+    false
+   ],
+   [
+    "Localization",
+    "*res://scripts/localization/localization_manager.gd",
+    false
+   ],
+   [
+    "Balance",
+    "*res://scripts/balance/balance_service.gd",
+    false
+   ],
+   [
+    "Tutorial",
+    "*res://scripts/tutorial/tutorial_manager.gd",
+    false
+   ],
+   [
+    "ThemeService",
+    "*res://scripts/ui/theme/theme_service.gd",
+    false
+   ],
+   [
+    "Crafting",
+    "*res://scripts/crafting/crafting_service.gd",
+    false
+   ],
+   [
+    "AssetProfile",
+    "*res://scripts/rendimiento/asset_profile.gd",
+    false
+   ],
+   [
+    "BrandConfig",
+    "*res://scripts/brand/brand_config.gd",
+    false
+   ],
+   [
+    "DebugMenu",
+    "*res://scripts/debug/debug_menu.gd",
+    false
+   ],
+   [
+    "CatalogoTiendas",
+    "*res://scripts/shops/catalogo_tiendas.gd",
+    false
+   ],
+   [
+    "Farm",
+    "*res://scripts/farm/farm_service.gd",
+    false
+   ],
+   [
+    "Fishing",
+    "*res://scripts/fishing/fishing_manager.gd",
+    false
+   ],
+   [
+    "Weather",
+    "*res://scripts/clima/weather_service.gd",
+    false
+   ],
+   [
+    "Historia",
+    "*res://scripts/historia/story_manager.gd",
+    false
+   ],
+   [
+    "Historias",
+    "*res://scripts/historias/secondary_stories_service.gd",
+    false
+   ],
+   [
+    "Barter",
+    "*res://scripts/economia/barter_system.gd",
+    false
+   ],
+   [
+    "TravelService",
+    "*res://scripts/viajes/travel_service.gd",
+    false
+   ],
+   [
+    "CollectionRegistry",
+    "*res://scripts/museum/collection_registry.gd",
+    false
+   ],
+   [
+    "DonationService",
+    "*res://scripts/museum/donation_service.gd",
+    false
+   ],
+   [
+    "Diary",
+    "*res://scripts/diario/diary_service.gd",
+    false
+   ],
+   [
+    "PlayerProfile",
+    "*res://scripts/progresion/player_profile.gd",
+    false
+   ],
+   [
+    "ProgressionManager",
+    "*res://scripts/progresion/progression_manager.gd",
+    false
+   ],
+   [
+    "Achievements",
+    "*res://scripts/logros/achievement_service.gd",
+    false
+   ],
+   [
+    "Vehiculos",
+    "*res://scripts/vehiculos/vehicle_manager.gd",
+    false
+   ],
+   [
+    "Postgame",
+    "*res://scripts/postgame/postgame_manager.gd",
+    false
+   ],
+   [
+    "EscalasGlobales",
+    "*res://scripts/core/escalas_globales.gd",
+    false
+   ],
+   [
+    "AccesibilityManager",
+    "*res://scripts/accesibilidad/accesibilidad_manager.gd",
+    false
+   ],
+   [
+    "AnimationService",
+    "*res://scripts/animacion/animation_service.gd",
+    false
+   ],
+   [
+    "PhotoService",
+    "*res://scripts/foto/photo_service.gd",
+    false
+   ],
+   [
+    "Tiers",
+    "*res://scripts/herramientas158/tool_tier_system.gd",
+    false
+   ],
+   [
+    "AudioConfig",
+    "*res://scripts/audio/audio_config_service.gd",
+    false
+   ],
+   [
+    "DataStore",
+    "*res://scripts/datos/data_store.gd",
+    false
+   ],
+   [
+    "SubtitleManager",
+    "*res://scripts/ui/subtitle_manager.gd",
+    false
+   ],
+   [
+    "StreamManager",
+    "*res://scripts/stream/stream_manager.gd",
+    false
+   ],
+   [
+    "PantallaCarga",
+    "*res://scripts/stream/pantalla_carga.gd",
+    false
+   ],
+   [
+    "MonetizacionManager",
+    "*res://scripts/monetizacion/monetizacion_manager.gd",
+    false
+   ],
+   [
+    "TerrainProvider",
+    "*res://scripts/terrenos/terrain_provider.gd",
+    false
+   ],
+   [
+    "GameFlowManager",
+    "*res://scripts/core/game_flow_manager.gd",
+    false
+   ],
+   [
+    "SceneManager",
+    "*res://scripts/core/scene_manager.gd",
+    false
+   ],
+   [
+    "MotivacionManager",
+    "*res://scripts/motivacion/motivacion_manager.gd",
+    false
+   ],
+   [
+    "PlatformManager",
+    "*res://scripts/plataformas/platform_manager.gd",
+    false
+   ],
+   [
+    "WorldBible",
+    "*res://scripts/world/world_bible.gd",
+    false
+   ],
+   [
+    "MemoryMonitor",
+    "*res://scripts/rendimiento/memoria/memory_monitor.gd",
+    false
+   ],
+   [
+    "MusicDirector",
+    "*res://scripts/audio/music_director.gd",
+    false
+   ],
+   [
+    "AmbientDirector",
+    "*res://scripts/audio/ambient_director.gd",
+    false
+   ],
+   [
+    "SFXManager",
+    "*res://scripts/audio/sfx_manager.gd",
+    false
+   ],
+   [
+    "FeedbackDirector",
+    "*res://scripts/audio/feedback_director.gd",
+    false
+   ],
+   [
+    "NarrativeSound",
+    "*res://scripts/audio/narrative_sound.gd",
+    false
+   ],
+   [
+    "CrashReporter",
+    "*res://scripts/crash/crash_reporter.gd",
+    false
+   ],
+   [
+    "CiCdManager",
+    "*res://scripts/ci/cicd_manager.gd",
+    false
+   ],
+   [
+    "InstaladorConfig",
+    "*res://scripts/installer/instalador_config.gd",
+    false
+   ],
+   [
+    "MapManager",
+    "*res://scripts/mapa/mapa_manager.gd",
+    false
+   ],
+   [
+    "HardwareManager",
+    "*res://scripts/hardware/hardware_manager.gd",
+    false
+   ],
+   [
+    "BuildConfigManager",
+    "*res://scripts/build/build_config_manager.gd",
+    false
+   ],
+   [
+    "UpdateManager",
+    "*res://scripts/updates/update_manager.gd",
+    false
+   ],
+   [
+    "DevTools",
+    "*res://scripts/dev/dev_tools.gd",
+    false
+   ],
+   [
+    "MaterialesRecursos",
+    "*res://scripts/arte3d/materiales_recursos.gd",
+    false
+   ],
+   [
+    "BotPaseoM09",
+    "*res://scripts/world/bot_paseo_m09.gd",
+    false
+   ],
+   [
+    "MundoRaiz",
+    "*res://scripts/world/mundo_raiz.gd",
+    false
+   ],
+   [
+    "SecurityManager",
+    "*res://scripts/security/security_manager.gd",
+    false
+   ],
+   [
+    "FontCatalog",
+    "*res://scripts/fonts/font_catalog.gd",
+    false
+   ],
+   [
+    "BackupManager",
+    "*res://scripts/backup/backup_manager.gd",
+    false
+   ],
+   [
+    "DlcManager",
+    "*res://scripts/dlc/dlc_manager.gd",
+    false
+   ],
+   [
+    "SupportManager",
+    "*res://scripts/support/support_manager.gd",
+    false
+   ],
+   [
+    "ModdingManager",
+    "*res://scripts/modding/modding_manager.gd",
+    false
+   ],
+   [
+    "UgcManager",
+    "*res://scripts/ugc/ugc_manager.gd",
+    false
+   ],
+   [
+    "CommunityManager",
+    "*res://scripts/community/community_manager.gd",
+    false
+   ],
+   [
+    "NPCManager",
+    "*res://scripts/ia_npc/npc_manager.gd",
+    false
+   ],
+   [
+    "eventos",
+    "*res://scripts/eventos/event_manager.gd",
+    false
+   ],
+   [
+    "EquipmentManager",
+    "*res://scripts/player/equipment_manager.gd",
+    false
+   ],
+   [
+    "NPCVisualDatabase",
+    "*res://scripts/data/npc_visual_database.gd",
+    false
+   ],
+   [
+    "WorldLocations",
+    "*res://scripts/data/world_locations.gd",
+    false
+   ],
+   [
+    "EnchantmentSystem",
+    "*res://scripts/enchantment/enchantment_system.gd",
+    false
+   ],
+   [
+    "TransportManager",
+    "*res://scripts/transporte/transport_manager.gd",
+    false
+   ],
+   [
+    "CruceroManager",
+    "*res://scripts/crucero/crucero_manager.gd",
+    false
+   ],
+   [
+    "IslandRegistry",
+    "*res://scripts/islas/island_registry.gd",
+    false
+   ],
+   [
+    "gem_currency",
+    "*res://scripts/combat/gem_currency.gd",
+    false
+   ],
+   [
+    "combat_island",
+    "*res://scripts/combat/combat_island_system.gd",
+    false
+   ],
+   [
+    "Construccion",
+    "*res://scripts/construccion/build_manager.gd",
+    false
+   ],
+   [
+    "HouseManager",
+    "*res://scripts/houses/house_manager.gd",
+    false
+   ]
+  ]
+ }
+}

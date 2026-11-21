@@ -1,0 +1,659 @@
+{
+ "fecha": "2026-11-21 05:08:18",
+ "A_pre": {
+  "filas": 174,
+  "drifts": 0,
+  "denom_desalineados": 0,
+  "lista": [],
+  "top20": [
+   {
+    "linea": 60,
+    "id": "122",
+    "global": 256,
+    "global_total": 264,
+    "real_x": 256,
+    "real_q": 8,
+    "real_blanco": 0,
+    "total": 264,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 193,
+    "id": "90",
+    "global": 249,
+    "global_total": 249,
+    "real_x": 249,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 249,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 194,
+    "id": "91",
+    "global": 239,
+    "global_total": 239,
+    "real_x": 239,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 239,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 48,
+    "id": "112",
+    "global": 228,
+    "global_total": 232,
+    "real_x": 228,
+    "real_q": 4,
+    "real_blanco": 0,
+    "total": 232,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 138,
+    "id": "36",
+    "global": 228,
+    "global_total": 228,
+    "real_x": 228,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 228,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 177,
+    "id": "74",
+    "global": 227,
+    "global_total": 285,
+    "real_x": 227,
+    "real_q": 58,
+    "real_blanco": 0,
+    "total": 285,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 103,
+    "id": "156",
+    "global": 223,
+    "global_total": 307,
+    "real_x": 223,
+    "real_q": 82,
+    "real_blanco": 2,
+    "total": 307,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 58,
+    "id": "120",
+    "global": 222,
+    "global_total": 222,
+    "real_x": 222,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 222,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 35,
+    "id": "100",
+    "global": 220,
+    "global_total": 220,
+    "real_x": 220,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 220,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 95,
+    "id": "15",
+    "global": 215,
+    "global_total": 219,
+    "real_x": 215,
+    "real_q": 4,
+    "real_blanco": 0,
+    "total": 219,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 59,
+    "id": "121",
+    "global": 211,
+    "global_total": 211,
+    "real_x": 211,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 211,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 142,
+    "id": "40",
+    "global": 210,
+    "global_total": 211,
+    "real_x": 210,
+    "real_q": 0,
+    "real_blanco": 1,
+    "total": 211,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 36,
+    "id": "101",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 209,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 47,
+    "id": "111",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 209,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 41,
+    "id": "106",
+    "global": 206,
+    "global_total": 206,
+    "real_x": 206,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 206,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 43,
+    "id": "108",
+    "global": 202,
+    "global_total": 205,
+    "real_x": 202,
+    "real_q": 3,
+    "real_blanco": 0,
+    "total": 205,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 98,
+    "id": "152",
+    "global": 202,
+    "global_total": 202,
+    "real_x": 202,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 202,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 120,
+    "id": "18",
+    "global": 200,
+    "global_total": 213,
+    "real_x": 200,
+    "real_q": 4,
+    "real_blanco": 9,
+    "total": 213,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 53,
+    "id": "116",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 199,
+    "delta": 0,
+    "denom_delta": 0
+   },
+   {
+    "linea": 77,
+    "id": "136",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "real_q": 0,
+    "real_blanco": 0,
+    "total": 199,
+    "delta": 0,
+    "denom_delta": 0
+   }
+  ]
+ },
+ "A_post": {
+  "filas": 174,
+  "drifts": 0,
+  "top20": [
+   {
+    "id": "122",
+    "global": 256,
+    "global_total": 264,
+    "real_x": 256,
+    "delta": 0
+   },
+   {
+    "id": "90",
+    "global": 249,
+    "global_total": 249,
+    "real_x": 249,
+    "delta": 0
+   },
+   {
+    "id": "91",
+    "global": 239,
+    "global_total": 239,
+    "real_x": 239,
+    "delta": 0
+   },
+   {
+    "id": "112",
+    "global": 228,
+    "global_total": 232,
+    "real_x": 228,
+    "delta": 0
+   },
+   {
+    "id": "36",
+    "global": 228,
+    "global_total": 228,
+    "real_x": 228,
+    "delta": 0
+   },
+   {
+    "id": "74",
+    "global": 227,
+    "global_total": 285,
+    "real_x": 227,
+    "delta": 0
+   },
+   {
+    "id": "156",
+    "global": 223,
+    "global_total": 307,
+    "real_x": 223,
+    "delta": 0
+   },
+   {
+    "id": "120",
+    "global": 222,
+    "global_total": 222,
+    "real_x": 222,
+    "delta": 0
+   },
+   {
+    "id": "100",
+    "global": 220,
+    "global_total": 220,
+    "real_x": 220,
+    "delta": 0
+   },
+   {
+    "id": "15",
+    "global": 215,
+    "global_total": 219,
+    "real_x": 215,
+    "delta": 0
+   },
+   {
+    "id": "121",
+    "global": 211,
+    "global_total": 211,
+    "real_x": 211,
+    "delta": 0
+   },
+   {
+    "id": "40",
+    "global": 210,
+    "global_total": 211,
+    "real_x": 210,
+    "delta": 0
+   },
+   {
+    "id": "101",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "delta": 0
+   },
+   {
+    "id": "111",
+    "global": 209,
+    "global_total": 209,
+    "real_x": 209,
+    "delta": 0
+   },
+   {
+    "id": "106",
+    "global": 206,
+    "global_total": 206,
+    "real_x": 206,
+    "delta": 0
+   },
+   {
+    "id": "108",
+    "global": 202,
+    "global_total": 205,
+    "real_x": 202,
+    "delta": 0
+   },
+   {
+    "id": "152",
+    "global": 202,
+    "global_total": 202,
+    "real_x": 202,
+    "delta": 0
+   },
+   {
+    "id": "18",
+    "global": 200,
+    "global_total": 213,
+    "real_x": 200,
+    "delta": 0
+   },
+   {
+    "id": "116",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "delta": 0
+   },
+   {
+    "id": "136",
+    "global": 199,
+    "global_total": 199,
+    "real_x": 199,
+    "delta": 0
+   }
+  ],
+  "restantes": []
+ },
+ "B": {
+  "archivos": 995,
+  "por_extension": {
+   ".json": 552,
+   ".tres": 443
+  },
+  "errores": 0,
+  "errores_ej": [],
+  "refs": 851,
+  "refs_rotas": 18,
+  "rotas_ej": [
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    10,
+    "assets/ui/logros/primer_sello.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    25,
+    "assets/ui/logros/siete_sellos.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    43,
+    "assets/ui/logros/coleccionista.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    57,
+    "assets/ui/logros/viajero.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    73,
+    "assets/ui/logros/vecino.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    88,
+    "assets/ui/logros/misionero.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    103,
+    "assets/ui/logros/secreto_guardian.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    118,
+    "assets/ui/logros/amigo_cercano.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    133,
+    "assets/ui/logros/alma_de_la_isla.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    148,
+    "assets/ui/logros/pescador_principiante.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    164,
+    "assets/ui/logros/mar_adentro_10.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    180,
+    "assets/ui/logros/primer_cultivo.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    195,
+    "assets/ui/logros/cosecha_diez.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    211,
+    "assets/ui/logros/primer_mineral.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    226,
+    "assets/ui/logros/minero_veterano.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    242,
+    "assets/ui/logros/primera_isla.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    257,
+    "assets/ui/logros/dias_en_aurora.png"
+   ],
+   [
+    "game\\isla-ancestral\\data\\logros\\logros.json",
+    273,
+    "assets/ui/logros/ruina_restaurada.png"
+   ]
+  ]
+ },
+ "C": {
+  "tscn": 73,
+  "ext_refs": 121,
+  "problems": 0,
+  "problems_ej": [],
+  "sin_nodo_raiz": 0,
+  "sin_raiz_ej": [],
+  "multi_root": 0,
+  "multi_ej": []
+ },
+ "D": {
+  "por_extension": {
+   ".wav": 97
+  },
+  "ejemplos": {
+   ".wav": [
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_cerrojo.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_contenedor.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\abrir_madera.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\area_misteriosa.wav",
+    "DOCUMENTACION\\TAREAS-POR-MODELO\\step-5-kilocode\\audio\\aurora_aparece.wav"
+   ]
+  }
+ },
+ "E": {
+  "todo_count": 35,
+  "gd_files": 31,
+  "todos_ej": [
+   [
+    "game\\isla-ancestral\\scripts\\animales_ia\\m65_animal_ai.gd",
+    113,
+    "# huida coordinada sobreescribe el destino de TODO el grupo."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\animales_ia\\m65_animal_ai.gd",
+    177,
+    "## huida coordinada sobreescribe el destino de TODO el grupo del mismo tipo."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote2_m73.gd",
+    44,
+    "print(\"[M73-LOTE2] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote3_m73.gd",
+    55,
+    "print(\"[M73-LOTE3] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_coleccionables_lote4_m73.gd",
+    49,
+    "print(\"[M73-LOTE4] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\coleccionables\\test_validate_collectibles_m73.gd",
+    69,
+    "# 7. Recompensa de coleccion definida: TODO item tiene recompensa_item + cantidad >= 0"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\construccion\\test_construccion_iter2.gd",
+    150,
+    "# (a) TODO item_id de costo debe existir como recurso real de M14."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\crafting\\qa_m16_rollback_lleno.gd",
+    58,
+    "# Snapshot exacto de TODO el estado (counts desde el servicio)."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\datos\\catalogos_estaticos.gd",
+    113,
+    "## Fuerza la carga de TODO el catálogo (QA / precalentamiento opcional)."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\datos\\test_datos_m60_iter4.gd",
+    542,
+    "# borrar_slot limpia TODO (incluido .deflate y las copias)"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1023,
+    "# TODO: conectar a DebugUtils/PhysicsServer cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1031,
+    "# TODO: conectar a VoxelViewer/M08 cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\debug\\debug_menu.gd",
+    1038,
+    "# TODO: conectar a NavigationServer/AStar cuando exista"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\diario\\test_diario_persist.gd",
+    260,
+    "# Verificar que Diary restauró TODO lo de la sesión 1"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\economia\\test_barter.gd",
+    114,
+    "# aplica; probamos que el pedido se remueve solo si TODO está disponible"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\farm\\farm_tool_controller.gd",
+    68,
+    "# Sin cultivo: arar (till valida en el servicio; TODO voxel M08 en iter 3)"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\fishing\\test_fishing_clima.gd",
+    107,
+    "# bajo CUALQUIER clima, TODO pez del catálogo conserva peso > 0 (nunca 0,"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\friendship\\test_amistad_rf48_m20.gd",
+    85,
+    "print(\"M20 RF4-RF8 TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\inventario\\inventario_iter5.gd",
+    7,
+    "# Patron: duck-typing en TODO; si el modulo destino no existe, devuelve"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\legal\\audio_license_report_tool.gd",
+    12,
+    "# TODO asset de audio del build aparece en el reporte. Si NO está en el"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logging\\logger.gd",
+    26,
+    "#     devolvía TODO. Corregido: granularidad horaria real + patrón que acepta 'T'"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logging\\test_logging_m103_iter1.gd",
+    442,
+    "# TODO). Con una ventana negativa nada debe entrar."
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\logros\\test_logros_rf10_m72.gd",
+    103,
+    "print(\"[M72-RF10] TODO OK\")"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\mineria\\mining_manager.gd",
+    22,
+    "#      herramienta_requerida (\"pico\") -> TODO pico T2+ era rechazado con"
+   ],
+   [
+    "game\\isla-ancestral\\scripts\\plataformas\\steam_bridge.gd",
+    21,
+    "# TODO(M149): Steamworks.Achievement.Store cuando el SDK esté integrado"
+   ]
+  ],
+  "autoloads": 117,
+  "autoloads_rotos": []
+ }
+}
