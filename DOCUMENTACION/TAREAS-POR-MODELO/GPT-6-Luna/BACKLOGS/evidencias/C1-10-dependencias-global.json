@@ -1,0 +1,2417 @@
+{
+  "task_id": "C1-10",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Extracción estática de IDs y dependencias declaradas en CHECKLIST-GLOBAL.md; verifica dependencias únicamente en filas de ancho correcto y con valor sintáctico inequívoco. Solo lectura, sin corregir filas ni dependencias.",
+  "source": {
+    "path": "CHECKLIST-GLOBAL.md",
+    "sha256": "2870b391c43a57b8b499d053a0c6b59a7eeea5c3fccc617ea13df3b6fb043f4f",
+    "git_status_before": "clean"
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "table_parse": "Se usa el encabezado literal para ubicar Dependencias; filas cuyo número de celdas no coincide con el encabezado o cuyo valor no es una lista de IDs simple se excluyen del parseo de dependencias y se marcan ambiguas.",
+    "verification": "Cada ID de dependencia parseado se compara con los IDs de módulo que aparecen en el mismo snapshot.",
+    "limits": "No se asigna semántica a columnas desplazadas ni se deduce si una fila es válida para el proyecto."
+  },
+  "counts": {
+    "module_rows": 174,
+    "unique_module_ids": 169,
+    "duplicate_id_values": 5,
+    "dependency_edges_parsed": 280,
+    "unresolved_dependency_edges": 0,
+    "ambiguous_rows": 13,
+    "rows_with_cell_count_other_than_header": 10
+  },
+  "modules": [
+    {
+      "line": 24,
+      "id": 1,
+      "module": "01-Fundamentos-Del-Proyecto",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 25,
+      "id": 2,
+      "module": "02-Vision-Y-Concepto",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 26,
+      "id": 3,
+      "module": "03-Documentacion-Del-Proyecto",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 28,
+      "id": 4,
+      "module": "04-Game-Engine",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 29,
+      "id": 5,
+      "module": "05-Lenguaje-Y-Programacion",
+      "cell_count": 11,
+      "dependencies_raw": "04",
+      "dependencies": [
+        4
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 30,
+      "id": 6,
+      "module": "06-Control-De-Versiones",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 31,
+      "id": 7,
+      "module": "07-Arquitectura-General",
+      "cell_count": 11,
+      "dependencies_raw": "04",
+      "dependencies": [
+        4
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 32,
+      "id": 8,
+      "module": "08-Mundo-Voxel",
+      "cell_count": 11,
+      "dependencies_raw": "07",
+      "dependencies": [
+        7
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 33,
+      "id": 9,
+      "module": "09-Terreno-Y-Geografia",
+      "cell_count": 11,
+      "dependencies_raw": "02, 10",
+      "dependencies": [
+        2,
+        10
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 34,
+      "id": 10,
+      "module": "10-Generacion-Del-Mundo",
+      "cell_count": 11,
+      "dependencies_raw": "08",
+      "dependencies": [
+        8
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 35,
+      "id": 62,
+      "module": "62-Memoria",
+      "cell_count": 11,
+      "dependencies_raw": "61",
+      "dependencies": [
+        61
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 36,
+      "id": 100,
+      "module": "100-Community-Management",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 37,
+      "id": 101,
+      "module": "101-QA-General",
+      "cell_count": 11,
+      "dependencies_raw": "110, 112, 114",
+      "dependencies": [
+        110,
+        112,
+        114
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 38,
+      "id": 102,
+      "module": "102-Bug-Tracking",
+      "cell_count": 11,
+      "dependencies_raw": "101",
+      "dependencies": [
+        101
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 39,
+      "id": 103,
+      "module": "103-Logging",
+      "cell_count": 11,
+      "dependencies_raw": "10",
+      "dependencies": [
+        10
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 40,
+      "id": 104,
+      "module": "104-Analytics",
+      "cell_count": 11,
+      "dependencies_raw": "95,114",
+      "dependencies": [
+        95,
+        114
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 41,
+      "id": 105,
+      "module": "105-Telemetria-De-Gameplay",
+      "cell_count": 11,
+      "dependencies_raw": "104",
+      "dependencies": [
+        104
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 42,
+      "id": 106,
+      "module": "106-Seguridad",
+      "cell_count": 11,
+      "dependencies_raw": "77",
+      "dependencies": [
+        77
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 43,
+      "id": 107,
+      "module": "107-Backups",
+      "cell_count": 11,
+      "dependencies_raw": "59",
+      "dependencies": [
+        59
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 44,
+      "id": 108,
+      "module": "108-Pipeline-De-Assets",
+      "cell_count": 11,
+      "dependencies_raw": "45",
+      "dependencies": [
+        45
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 45,
+      "id": 109,
+      "module": "109-Herramientas-Internas",
+      "cell_count": 11,
+      "dependencies_raw": "04",
+      "dependencies": [
+        4
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 46,
+      "id": 11,
+      "module": "11-Personaje-Del-Jugador",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 47,
+      "id": 110,
+      "module": "110-Debug-Menu",
+      "cell_count": 11,
+      "dependencies_raw": "08, 50, 64",
+      "dependencies": [
+        8,
+        50,
+        64
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 48,
+      "id": 111,
+      "module": "111-Codigo-De-Calidad",
+      "cell_count": 11,
+      "dependencies_raw": "04",
+      "dependencies": [
+        4
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 49,
+      "id": 112,
+      "module": "112-Testing-Automatico",
+      "cell_count": 12,
+      "dependencies_raw": "3",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 50,
+      "id": 113,
+      "module": "113-Pruebas-De-Stress",
+      "cell_count": 11,
+      "dependencies_raw": "112",
+      "dependencies": [
+        112
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 51,
+      "id": 114,
+      "module": "114-Playtest",
+      "cell_count": 11,
+      "dependencies_raw": "101, 137",
+      "dependencies": [
+        101,
+        137
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 52,
+      "id": 115,
+      "module": "115-Hardware",
+      "cell_count": 11,
+      "dependencies_raw": "90,99,107",
+      "dependencies": [
+        90,
+        99,
+        107
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 53,
+      "id": 115,
+      "module": "115-Hardware",
+      "cell_count": 11,
+      "dependencies_raw": "61",
+      "dependencies": [
+        61
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 54,
+      "id": 116,
+      "module": "116-Instalador",
+      "cell_count": 11,
+      "dependencies_raw": "117",
+      "dependencies": [
+        117
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 55,
+      "id": 117,
+      "module": "117-Build-System",
+      "cell_count": 11,
+      "dependencies_raw": "116",
+      "dependencies": [
+        116
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 56,
+      "id": 118,
+      "module": "118-CI-CD",
+      "cell_count": 11,
+      "dependencies_raw": "117",
+      "dependencies": [
+        117
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 57,
+      "id": 119,
+      "module": "119-Actualizaciones",
+      "cell_count": 11,
+      "dependencies_raw": "117, 59",
+      "dependencies": [
+        117,
+        59
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 58,
+      "id": 12,
+      "module": "12-Camara",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 59,
+      "id": 120,
+      "module": "120-DLC-Y-Expansiones",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 60,
+      "id": 121,
+      "module": "121-Soporte-Post-Lanzamiento",
+      "cell_count": 11,
+      "dependencies_raw": "95,118",
+      "dependencies": [
+        95,
+        118
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 61,
+      "id": 122,
+      "module": "122-Crash-Reporting",
+      "cell_count": 11,
+      "dependencies_raw": "103",
+      "dependencies": [
+        103
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 62,
+      "id": 123,
+      "module": "123-Modding",
+      "cell_count": 11,
+      "dependencies_raw": "120",
+      "dependencies": [
+        120
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 63,
+      "id": 124,
+      "module": "124-Contenido-Generado-Por-Usuarios",
+      "cell_count": 11,
+      "dependencies_raw": "123",
+      "dependencies": [
+        123
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 64,
+      "id": 125,
+      "module": "125-Terminos-De-Servicio",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 65,
+      "id": 126,
+      "module": "126-Marketing-Legal",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 66,
+      "id": 127,
+      "module": "127-Copyright-Del-Juego",
+      "cell_count": 11,
+      "dependencies_raw": "41, 45",
+      "dependencies": [
+        41,
+        45
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 67,
+      "id": 127,
+      "module": "127-Copyright-Del-Juego",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 68,
+      "id": 128,
+      "module": "128-Identidad-De-Marca",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 70,
+      "id": 129,
+      "module": "129-Merchandising",
+      "cell_count": 11,
+      "dependencies_raw": "142",
+      "dependencies": [
+        142
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 71,
+      "id": 13,
+      "module": "13-Herramientas",
+      "cell_count": 11,
+      "dependencies_raw": "11",
+      "dependencies": [
+        11
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 72,
+      "id": 130,
+      "module": "130-Artbook",
+      "cell_count": 11,
+      "dependencies_raw": "01,40",
+      "dependencies": [
+        1,
+        40
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 73,
+      "id": 131,
+      "module": "131-Creditos",
+      "cell_count": 11,
+      "dependencies_raw": "91",
+      "dependencies": [
+        91
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 74,
+      "id": 132,
+      "module": "132-Produccion-De-Equipo",
+      "cell_count": 11,
+      "dependencies_raw": "134",
+      "dependencies": [
+        134
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 75,
+      "id": 133,
+      "module": "133-Gestion-Del-Proyecto",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 76,
+      "id": 134,
+      "module": "134-Presupuesto",
+      "cell_count": 11,
+      "dependencies_raw": "133",
+      "dependencies": [
+        133
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 77,
+      "id": 135,
+      "module": "135-Riesgos-Del-Proyecto",
+      "cell_count": 11,
+      "dependencies_raw": "133",
+      "dependencies": [
+        133
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 78,
+      "id": 136,
+      "module": "136-Roadmap",
+      "cell_count": 11,
+      "dependencies_raw": "133, 135",
+      "dependencies": [
+        133,
+        135
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 79,
+      "id": 137,
+      "module": "137-Prototipo",
+      "cell_count": 11,
+      "dependencies_raw": "08, 11, 14, 59",
+      "dependencies": [
+        8,
+        11,
+        14,
+        59
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 80,
+      "id": 138,
+      "module": "138-Vertical-Slice",
+      "cell_count": 11,
+      "dependencies_raw": "137, 26, 19",
+      "dependencies": [
+        137,
+        26,
+        19
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 81,
+      "id": 139,
+      "module": "139-Pre-Alpha",
+      "cell_count": 11,
+      "dependencies_raw": "138",
+      "dependencies": [
+        138
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 82,
+      "id": 14,
+      "module": "14-Inventario",
+      "cell_count": 11,
+      "dependencies_raw": "11",
+      "dependencies": [
+        11
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 83,
+      "id": 139,
+      "module": "139-Pre-Alpha",
+      "cell_count": 11,
+      "dependencies_raw": "138",
+      "dependencies": [
+        138
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 84,
+      "id": 140,
+      "module": "140-Alpha",
+      "cell_count": 11,
+      "dependencies_raw": "139",
+      "dependencies": [
+        139
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 85,
+      "id": 141,
+      "module": "141-Beta",
+      "cell_count": 11,
+      "dependencies_raw": "107, 111",
+      "dependencies": [
+        107,
+        111
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 86,
+      "id": 142,
+      "module": "142-Release-Candidate",
+      "cell_count": 11,
+      "dependencies_raw": "141",
+      "dependencies": [
+        141
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 87,
+      "id": 143,
+      "module": "143-Lanzamiento",
+      "cell_count": 11,
+      "dependencies_raw": "142, 97",
+      "dependencies": [
+        142,
+        97
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 88,
+      "id": 144,
+      "module": "144-Despues-Del-Lanzamiento",
+      "cell_count": 11,
+      "dependencies_raw": "143",
+      "dependencies": [
+        143
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 89,
+      "id": 145,
+      "module": "145-Diseno-De-Experiencia",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 91,
+      "id": 146,
+      "module": "146-Diseno-Emocional",
+      "cell_count": 11,
+      "dependencies_raw": "145",
+      "dependencies": [
+        145
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 92,
+      "id": 147,
+      "module": "147-World-Building",
+      "cell_count": 11,
+      "dependencies_raw": "15",
+      "dependencies": [
+        15
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 93,
+      "id": 148,
+      "module": "148-Lore-Ambiental",
+      "cell_count": 11,
+      "dependencies_raw": "147, 24",
+      "dependencies": [
+        147,
+        24
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 94,
+      "id": 148,
+      "module": "148-Lore-Ambiental",
+      "cell_count": 11,
+      "dependencies_raw": "147, 24",
+      "dependencies": [
+        147,
+        24
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 95,
+      "id": 149,
+      "module": "149-Nombres-Y-Nomenclatura",
+      "cell_count": 11,
+      "dependencies_raw": "147",
+      "dependencies": [
+        147
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 96,
+      "id": 15,
+      "module": "15-Recursos",
+      "cell_count": 11,
+      "dependencies_raw": "14",
+      "dependencies": [
+        14
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 97,
+      "id": 150,
+      "module": "150-Diseno-Sonoro-Narrativo",
+      "cell_count": 11,
+      "dependencies_raw": "149",
+      "dependencies": [
+        149
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 98,
+      "id": 151,
+      "module": "151-Control-Final",
+      "cell_count": 12,
+      "dependencies_raw": "2",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 99,
+      "id": 152,
+      "module": "152-Principios-Innegociables",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 101,
+      "id": 153,
+      "module": "153-Objetivo-Final",
+      "cell_count": 11,
+      "dependencies_raw": "151",
+      "dependencies": [
+        151
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 102,
+      "id": 154,
+      "module": "154-Vision-Del-Agente",
+      "cell_count": 11,
+      "dependencies_raw": "04, 103",
+      "dependencies": [
+        4,
+        103
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 103,
+      "id": 155,
+      "module": "155-Vestimenta-Y-Accesorios",
+      "cell_count": 11,
+      "dependencies_raw": "11, 14, 156",
+      "dependencies": [
+        11,
+        14,
+        156
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 104,
+      "id": 156,
+      "module": "156-Terrenos-Y-Movimiento",
+      "cell_count": 11,
+      "dependencies_raw": "11, 155",
+      "dependencies": [
+        11,
+        155
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 105,
+      "id": 157,
+      "module": "157-Medios-De-Transporte",
+      "cell_count": 11,
+      "dependencies_raw": "69, 22, 24, 19",
+      "dependencies": [
+        69,
+        22,
+        24,
+        19
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 106,
+      "id": 158,
+      "module": "158-Herramientas-Y-Desbloqueo-De-Zonas",
+      "cell_count": 11,
+      "dependencies_raw": "13, 38, 27, 28",
+      "dependencies": [
+        13,
+        38,
+        27,
+        28
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 107,
+      "id": 159,
+      "module": "159-Catalogo-De-Objetos",
+      "cell_count": 11,
+      "dependencies_raw": "14, 16, 18",
+      "dependencies": [
+        14,
+        16,
+        18
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 109,
+      "id": 16,
+      "module": "16-Crafting",
+      "cell_count": 11,
+      "dependencies_raw": "14, 15",
+      "dependencies": [
+        14,
+        15
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 110,
+      "id": 160,
+      "module": "160-Diseno-De-Ubicaciones-Del-Mundo",
+      "cell_count": 11,
+      "dependencies_raw": "27, 17, 18, 39, 159",
+      "dependencies": [
+        27,
+        17,
+        18,
+        39,
+        159
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 111,
+      "id": 161,
+      "module": "161-Diseno-Visual-De-NPCs",
+      "cell_count": 11,
+      "dependencies_raw": "19, 159, 45, 46, 155",
+      "dependencies": [
+        19,
+        159,
+        45,
+        46,
+        155
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 112,
+      "id": 162,
+      "module": "162-Dialogos-Contextuales-De-NPCs",
+      "cell_count": 11,
+      "dependencies_raw": "21, 22, 19, 161, 20, 29, 160",
+      "dependencies": [
+        21,
+        22,
+        19,
+        161,
+        20,
+        29,
+        160
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 113,
+      "id": 163,
+      "module": "163-Sistema-De-Encantamientos",
+      "cell_count": 11,
+      "dependencies_raw": "13, 158, 159",
+      "dependencies": [
+        13,
+        158,
+        159
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 114,
+      "id": 164,
+      "module": "164-Isla-De-Combate-Endgame",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 115,
+      "id": 165,
+      "module": "165-Voxel-Tools-Guia",
+      "cell_count": 11,
+      "dependencies_raw": "04, 08",
+      "dependencies": [
+        4,
+        8
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 116,
+      "id": 166,
+      "module": "166-Variantes-Y-Perfil-De-Rendimiento",
+      "cell_count": 11,
+      "dependencies_raw": "15, 159",
+      "dependencies": [
+        15,
+        159
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 117,
+      "id": 167,
+      "module": "167-Isla-Raiz",
+      "cell_count": 11,
+      "dependencies_raw": "08,09,10,12,19",
+      "dependencies": [
+        8,
+        9,
+        10,
+        12,
+        19
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 118,
+      "id": 168,
+      "module": "168-Plantilla-De-Isla",
+      "cell_count": 11,
+      "dependencies_raw": "08,09,10,12,19",
+      "dependencies": [
+        8,
+        9,
+        10,
+        12,
+        19
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 119,
+      "id": 169,
+      "module": "169-Crucero",
+      "cell_count": 11,
+      "dependencies_raw": "68,74,34,21,28,63,29,38,67,59,51",
+      "dependencies": [
+        68,
+        74,
+        34,
+        21,
+        28,
+        63,
+        29,
+        38,
+        67,
+        59,
+        51
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 120,
+      "id": 17,
+      "module": "17-Construccion",
+      "cell_count": 14,
+      "dependencies_raw": "08",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 121,
+      "id": 18,
+      "module": "18-Casas",
+      "cell_count": 11,
+      "dependencies_raw": "14, 21",
+      "dependencies": [
+        14,
+        21
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 122,
+      "id": 19,
+      "module": "19-NPC-Y-Vecinos",
+      "cell_count": 11,
+      "dependencies_raw": "08,18,44",
+      "dependencies": [
+        8,
+        18,
+        44
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 123,
+      "id": 20,
+      "module": "20-Sistema-De-Amistad",
+      "cell_count": 12,
+      "dependencies_raw": "19",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 124,
+      "id": 21,
+      "module": "21-Dialogos",
+      "cell_count": 11,
+      "dependencies_raw": "19,29,31,64,73,87",
+      "dependencies": [
+        19,
+        29,
+        31,
+        64,
+        73,
+        87
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 125,
+      "id": 22,
+      "module": "22-Historia-Principal",
+      "cell_count": 10,
+      "dependencies_raw": "21, 28",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 126,
+      "id": 23,
+      "module": "23-Historias-Secundarias",
+      "cell_count": 11,
+      "dependencies_raw": "22, 15",
+      "dependencies": [
+        22,
+        15
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 127,
+      "id": 24,
+      "module": "24-Templos-Y-Puzzles",
+      "cell_count": 11,
+      "dependencies_raw": "145, 29",
+      "dependencies": [
+        145,
+        29
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 128,
+      "id": 25,
+      "module": "25-Ruinas",
+      "cell_count": 11,
+      "dependencies_raw": "24",
+      "dependencies": [
+        24
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 129,
+      "id": 26,
+      "module": "26-Templo-Subterraneo",
+      "cell_count": 11,
+      "dependencies_raw": "24, 25",
+      "dependencies": [
+        24,
+        25
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 130,
+      "id": 27,
+      "module": "27-Islas-Del-Mundo",
+      "cell_count": 11,
+      "dependencies_raw": "08,10,51",
+      "dependencies": [
+        8,
+        10,
+        51
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 131,
+      "id": 28,
+      "module": "28-Viajes",
+      "cell_count": 11,
+      "dependencies_raw": "22, 27",
+      "dependencies": [
+        22,
+        27
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 132,
+      "id": 29,
+      "module": "29-Tiempo-Y-Calendario",
+      "cell_count": 11,
+      "dependencies_raw": "07",
+      "dependencies": [
+        7
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 133,
+      "id": 30,
+      "module": "30-Reloj-En-Tiempo-Real",
+      "cell_count": 11,
+      "dependencies_raw": "45,46",
+      "dependencies": [
+        45,
+        46
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 134,
+      "id": 31,
+      "module": "31-Ciclo-Dia-Noche",
+      "cell_count": 11,
+      "dependencies_raw": "29",
+      "dependencies": [
+        29
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 135,
+      "id": 32,
+      "module": "32-Clima",
+      "cell_count": 11,
+      "dependencies_raw": "29, 31",
+      "dependencies": [
+        29,
+        31
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 136,
+      "id": 33,
+      "module": "33-Agricultura",
+      "cell_count": 11,
+      "dependencies_raw": "08, 15",
+      "dependencies": [
+        8,
+        15
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 137,
+      "id": 34,
+      "module": "34-Pesca",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 138,
+      "id": 35,
+      "module": "35-Mineria",
+      "cell_count": 11,
+      "dependencies_raw": "08, 13",
+      "dependencies": [
+        8,
+        13
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 139,
+      "id": 36,
+      "module": "36-Fauna",
+      "cell_count": 11,
+      "dependencies_raw": "07, 31",
+      "dependencies": [
+        7,
+        31
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 140,
+      "id": 37,
+      "module": "37-Museos",
+      "cell_count": 11,
+      "dependencies_raw": "34, 25, 55",
+      "dependencies": [
+        34,
+        25,
+        55
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 141,
+      "id": 38,
+      "module": "38-Economia",
+      "cell_count": 11,
+      "dependencies_raw": "15, 16, 20",
+      "dependencies": [
+        15,
+        16,
+        20
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 142,
+      "id": 39,
+      "module": "39-Tiendas",
+      "cell_count": 11,
+      "dependencies_raw": "38",
+      "dependencies": [
+        38
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 143,
+      "id": 40,
+      "module": "40-Infraestructura",
+      "cell_count": 11,
+      "dependencies_raw": "38",
+      "dependencies": [
+        38
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 144,
+      "id": 41,
+      "module": "41-Musica",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 145,
+      "id": 42,
+      "module": "42-Sonido-Ambiental",
+      "cell_count": 11,
+      "dependencies_raw": "agnes-2.5-flash",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_cell_value",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 146,
+      "id": 43,
+      "module": "43-Efectos-De-Sonido",
+      "cell_count": 11,
+      "dependencies_raw": "03,40",
+      "dependencies": [
+        3,
+        40
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 147,
+      "id": 44,
+      "module": "44-ASMR-Y-Feedback",
+      "cell_count": 11,
+      "dependencies_raw": "43",
+      "dependencies": [
+        43
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 148,
+      "id": 45,
+      "module": "45-Arte-3D",
+      "cell_count": 11,
+      "dependencies_raw": "agnes-3-flash (b1 2026-10-17, N708)",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_cell_value",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 149,
+      "id": 46,
+      "module": "46-Arte-2D",
+      "cell_count": 11,
+      "dependencies_raw": "45",
+      "dependencies": [
+        45
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 150,
+      "id": 47,
+      "module": "47-Texturas-Y-Materiales",
+      "cell_count": 11,
+      "dependencies_raw": "01,45",
+      "dependencies": [
+        1,
+        45
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 151,
+      "id": 48,
+      "module": "48-Animacion",
+      "cell_count": 11,
+      "dependencies_raw": "1, 13, 156",
+      "dependencies": [
+        1,
+        13,
+        156
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 152,
+      "id": 48,
+      "module": "48-Animacion",
+      "cell_count": 11,
+      "dependencies_raw": "45, 11, 19",
+      "dependencies": [
+        45,
+        11,
+        19
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 153,
+      "id": 49,
+      "module": "49-Iluminacion",
+      "cell_count": 11,
+      "dependencies_raw": "53,98,91",
+      "dependencies": [
+        53,
+        98,
+        91
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 154,
+      "id": 50,
+      "module": "50-Vegetacion",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 155,
+      "id": 51,
+      "module": "51-Agua",
+      "cell_count": 11,
+      "dependencies_raw": "08,09,42,45,47,49,61",
+      "dependencies": [
+        8,
+        9,
+        42,
+        45,
+        47,
+        49,
+        61
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 156,
+      "id": 52,
+      "module": "52-Particulas-Y-VFX",
+      "cell_count": 11,
+      "dependencies_raw": "45",
+      "dependencies": [
+        45
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 157,
+      "id": 53,
+      "module": "53-UI-UX",
+      "cell_count": 10,
+      "dependencies_raw": "45, 46",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 158,
+      "id": 54,
+      "module": "54-Mapa",
+      "cell_count": 11,
+      "dependencies_raw": "53",
+      "dependencies": [
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 159,
+      "id": 55,
+      "module": "55-Diario-Del-Jugador",
+      "cell_count": 10,
+      "dependencies_raw": "53",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 160,
+      "id": 56,
+      "module": "56-Fotografia",
+      "cell_count": 11,
+      "dependencies_raw": "53",
+      "dependencies": [
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 161,
+      "id": 57,
+      "module": "57-Interfaz-De-Control",
+      "cell_count": 11,
+      "dependencies_raw": "04",
+      "dependencies": [
+        4
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 162,
+      "id": 58,
+      "module": "58-Accesibilidad",
+      "cell_count": 11,
+      "dependencies_raw": "53,57,88,154",
+      "dependencies": [
+        53,
+        57,
+        88,
+        154
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 163,
+      "id": 59,
+      "module": "59-Guardado",
+      "cell_count": 11,
+      "dependencies_raw": "07, 14",
+      "dependencies": [
+        7,
+        14
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 164,
+      "id": 60,
+      "module": "60-Datos-Y-Serializacion",
+      "cell_count": 11,
+      "dependencies_raw": "59",
+      "dependencies": [
+        59
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 166,
+      "id": 61,
+      "module": "61-Rendimiento",
+      "cell_count": 11,
+      "dependencies_raw": "53,98,91",
+      "dependencies": [
+        53,
+        98,
+        91
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 167,
+      "id": 63,
+      "module": "63-Cargas-Y-Streaming",
+      "cell_count": 11,
+      "dependencies_raw": "08, 61",
+      "dependencies": [
+        8,
+        61
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 168,
+      "id": 64,
+      "module": "64-IA-De-NPC",
+      "cell_count": 11,
+      "dependencies_raw": "19, 61",
+      "dependencies": [
+        19,
+        61
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 169,
+      "id": 65,
+      "module": "65-Animales-IA",
+      "cell_count": 11,
+      "dependencies_raw": "36, 64",
+      "dependencies": [
+        36,
+        64
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 170,
+      "id": 66,
+      "module": "66-Anti-Softlock",
+      "cell_count": 11,
+      "dependencies_raw": "22, 26",
+      "dependencies": [
+        22,
+        26
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 171,
+      "id": 67,
+      "module": "67-Vehiculos",
+      "cell_count": 11,
+      "dependencies_raw": "28",
+      "dependencies": [
+        28
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 172,
+      "id": 68,
+      "module": "68-Transporte-Y-Navegacion",
+      "cell_count": 11,
+      "dependencies_raw": "28, 67",
+      "dependencies": [
+        28,
+        67
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 173,
+      "id": 69,
+      "module": "69-Fast-Travel",
+      "cell_count": 11,
+      "dependencies_raw": "39, 53",
+      "dependencies": [
+        39,
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 174,
+      "id": 70,
+      "module": "70-Interacciones",
+      "cell_count": 11,
+      "dependencies_raw": "11, 13",
+      "dependencies": [
+        11,
+        13
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 175,
+      "id": 71,
+      "module": "71-Progresion",
+      "cell_count": 11,
+      "dependencies_raw": "16,34,74",
+      "dependencies": [
+        16,
+        34,
+        74
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 176,
+      "id": 72,
+      "module": "72-Sistema-De-Logros",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 177,
+      "id": 73,
+      "module": "73-Coleccionables",
+      "cell_count": 11,
+      "dependencies_raw": "55",
+      "dependencies": [
+        55
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 178,
+      "id": 74,
+      "module": "74-Eventos",
+      "cell_count": 11,
+      "dependencies_raw": "29,21,53,58",
+      "dependencies": [
+        29,
+        21,
+        53,
+        58
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 179,
+      "id": 75,
+      "module": "75-Postgame",
+      "cell_count": 10,
+      "dependencies_raw": "22",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 180,
+      "id": 76,
+      "module": "76-Multijugador",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 181,
+      "id": 77,
+      "module": "77-Online-Y-Red",
+      "cell_count": 11,
+      "dependencies_raw": "76",
+      "dependencies": [
+        76
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 182,
+      "id": 78,
+      "module": "78-Legal-Propiedad-Intelectual",
+      "cell_count": 11,
+      "dependencies_raw": "01",
+      "dependencies": [
+        1
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 183,
+      "id": 79,
+      "module": "79-Legal-Contratos",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 184,
+      "id": 80,
+      "module": "80-Legal-Privacidad",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 185,
+      "id": 81,
+      "module": "81-Legal-Menores",
+      "cell_count": 11,
+      "dependencies_raw": "80",
+      "dependencies": [
+        80
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 186,
+      "id": 82,
+      "module": "82-Clasificacion-Por-Edades",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 187,
+      "id": 83,
+      "module": "83-Licencias-De-Software",
+      "cell_count": 11,
+      "dependencies_raw": "17,123",
+      "dependencies": [
+        17,
+        123
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 188,
+      "id": 84,
+      "module": "84-Musica-Y-Audio-Legal",
+      "cell_count": 11,
+      "dependencies_raw": "41, 78",
+      "dependencies": [
+        41,
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 189,
+      "id": 85,
+      "module": "85-Modelos-3D-Legal",
+      "cell_count": 10,
+      "dependencies_raw": "45, 78",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 190,
+      "id": 86,
+      "module": "86-IA-Generativa",
+      "cell_count": 11,
+      "dependencies_raw": "78",
+      "dependencies": [
+        78
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 191,
+      "id": 87,
+      "module": "87-Localizacion",
+      "cell_count": 10,
+      "dependencies_raw": "53,86",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_column_count",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 192,
+      "id": 88,
+      "module": "88-Fuentes-Tipograficas",
+      "cell_count": 11,
+      "dependencies_raw": "53",
+      "dependencies": [
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 193,
+      "id": 89,
+      "module": "89-Diseno-De-Menus",
+      "cell_count": 11,
+      "dependencies_raw": "53",
+      "dependencies": [
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 194,
+      "id": 90,
+      "module": "90-Configuracion-Grafica",
+      "cell_count": 11,
+      "dependencies_raw": "•",
+      "dependencies": [],
+      "dependency_parse": "ambiguous_cell_value",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 195,
+      "id": 91,
+      "module": "91-Configuracion-De-Audio",
+      "cell_count": 11,
+      "dependencies_raw": "53",
+      "dependencies": [
+        53
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 196,
+      "id": 92,
+      "module": "92-Tutorial",
+      "cell_count": 11,
+      "dependencies_raw": "21,53,58,70",
+      "dependencies": [
+        21,
+        53,
+        58,
+        70
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 197,
+      "id": 93,
+      "module": "93-Balance",
+      "cell_count": 11,
+      "dependencies_raw": "38, 20",
+      "dependencies": [
+        38,
+        20
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 198,
+      "id": 94,
+      "module": "94-Retencion-Sin-FOMO",
+      "cell_count": 11,
+      "dependencies_raw": "38, 93",
+      "dependencies": [
+        38,
+        93
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 199,
+      "id": 95,
+      "module": "95-Monetizacion",
+      "cell_count": 11,
+      "dependencies_raw": "38",
+      "dependencies": [
+        38
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 200,
+      "id": 96,
+      "module": "96-Plataformas",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 201,
+      "id": 97,
+      "module": "97-Steam-Store-Page",
+      "cell_count": 11,
+      "dependencies_raw": "96",
+      "dependencies": [
+        96
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 202,
+      "id": 98,
+      "module": "98-Trailer",
+      "cell_count": 11,
+      "dependencies_raw": "97",
+      "dependencies": [
+        97
+      ],
+      "dependency_parse": "valid_ids",
+      "unresolved_dependencies": []
+    },
+    {
+      "line": 203,
+      "id": 99,
+      "module": "99-Marketing",
+      "cell_count": 11,
+      "dependencies_raw": "—",
+      "dependencies": [],
+      "dependency_parse": "valid_empty",
+      "unresolved_dependencies": []
+    }
+  ],
+  "unresolved_dependency_ids": [],
+  "duplicate_module_ids": [
+    {
+      "id": 48,
+      "lines": [
+        151,
+        152
+      ],
+      "modules": [
+        "48-Animacion",
+        "48-Animacion"
+      ]
+    },
+    {
+      "id": 115,
+      "lines": [
+        52,
+        53
+      ],
+      "modules": [
+        "115-Hardware",
+        "115-Hardware"
+      ]
+    },
+    {
+      "id": 127,
+      "lines": [
+        66,
+        67
+      ],
+      "modules": [
+        "127-Copyright-Del-Juego",
+        "127-Copyright-Del-Juego"
+      ]
+    },
+    {
+      "id": 139,
+      "lines": [
+        81,
+        83
+      ],
+      "modules": [
+        "139-Pre-Alpha",
+        "139-Pre-Alpha"
+      ]
+    },
+    {
+      "id": 148,
+      "lines": [
+        93,
+        94
+      ],
+      "modules": [
+        "148-Lore-Ambiental",
+        "148-Lore-Ambiental"
+      ]
+    }
+  ],
+  "ambiguous_rows": [
+    {
+      "line": 49,
+      "id": 112,
+      "module": "112-Testing-Automatico",
+      "cell_count": 12,
+      "expected_cell_count": 11,
+      "dependencies_raw": "3"
+    },
+    {
+      "line": 98,
+      "id": 151,
+      "module": "151-Control-Final",
+      "cell_count": 12,
+      "expected_cell_count": 11,
+      "dependencies_raw": "2"
+    },
+    {
+      "line": 120,
+      "id": 17,
+      "module": "17-Construccion",
+      "cell_count": 14,
+      "expected_cell_count": 11,
+      "dependencies_raw": "08"
+    },
+    {
+      "line": 123,
+      "id": 20,
+      "module": "20-Sistema-De-Amistad",
+      "cell_count": 12,
+      "expected_cell_count": 11,
+      "dependencies_raw": "19"
+    },
+    {
+      "line": 125,
+      "id": 22,
+      "module": "22-Historia-Principal",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "21, 28"
+    },
+    {
+      "line": 145,
+      "id": 42,
+      "module": "42-Sonido-Ambiental",
+      "cell_count": 11,
+      "expected_cell_count": 11,
+      "dependencies_raw": "agnes-2.5-flash"
+    },
+    {
+      "line": 148,
+      "id": 45,
+      "module": "45-Arte-3D",
+      "cell_count": 11,
+      "expected_cell_count": 11,
+      "dependencies_raw": "agnes-3-flash (b1 2026-10-17, N708)"
+    },
+    {
+      "line": 157,
+      "id": 53,
+      "module": "53-UI-UX",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "45, 46"
+    },
+    {
+      "line": 159,
+      "id": 55,
+      "module": "55-Diario-Del-Jugador",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "53"
+    },
+    {
+      "line": 179,
+      "id": 75,
+      "module": "75-Postgame",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "22"
+    },
+    {
+      "line": 189,
+      "id": 85,
+      "module": "85-Modelos-3D-Legal",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "45, 78"
+    },
+    {
+      "line": 191,
+      "id": 87,
+      "module": "87-Localizacion",
+      "cell_count": 10,
+      "expected_cell_count": 11,
+      "dependencies_raw": "53,86"
+    },
+    {
+      "line": 194,
+      "id": 90,
+      "module": "90-Configuracion-Grafica",
+      "cell_count": 11,
+      "expected_cell_count": 11,
+      "dependencies_raw": "•"
+    }
+  ],
+  "anchors": [
+    {
+      "line": 22,
+      "text": "| ID | Módulo | Estado | Progreso | Prioridad | Complejidad | Dependencias | Recom | Agente actual | Última actividad | Notas |"
+    },
+    {
+      "line": 49,
+      "text": "| 112 | 112-Testing-Automatico | 🟡 Con dudas | 228/232 | 221/225 | Alta | 3 | 111 | — | 2026-10-27 07:20 | ✅ Verificado por agnes-3-flash 2026-10-23 (lote 3: 0 [ ]; 4 [?] honestos; 475 test en disco) — conteo canon 223/0/4=227 | · **minimax-m3-1-flash (2026-10-27):** FIX del TIMEOUT flake del pool en `res://tests/run_tests.gd` — evidencia: 2 corridas completas del runner central colgaron suites DISTINTAS por TIMEOUT 300 s (h12_variantes y test_item_data) y ambas pasan en <10 s en serie => contencion del pool sobre el deinit del motor, no fallo de suite. Ahora una suite con TIMEOUT en el pool se RE-MIDE EN SERIE antes de declararse fallida (el reintento no tolera fallos reales). Verificado con probe (POOL_TIMEOUT_MS=3000): 2 timeouts -> 2 [REINTENTO] -> 2 [OK]. Documentado en `112-Testing-Automatico/plan-actual/04-Codigo.md` §9 + Log 2215. PENDIENTE NO tocado: tiempo total del CI ~875 s > presupuesto 600 s (lane voxel) |"
+    },
+    {
+      "line": 98,
+      "text": "| 151 | 151-Control-Final | 🟡 Con dudas | 156/167 | 155/167 | Media | 2 | 142 | — | mimo-v2.6-flash-free | bateria 6 G-5.3: cierra a lo definible; 5 flags fundador + 1 flag tecnico cloud M60 anotados en el 05 (155/6/6 = 167) | **🟡 Reclamado por agnes-2.5-flash** — · 2026-09-02 18:00 · **🟡 Liberado (Logs 534+537):** puerta de release 7 gates + gate CLI (BLOQUEADO hoy: 2 criticos reales (BUG-078, BUG-091) + CI/textos pendientes — veredicto realista, medido por mimo iter.4) + estado JSON. [?]: cablear a CI (iter 3). · [BAJA 2026-10-06] **space-bunny-alpha dado de baja del flujo** (directiva del fundador) - M151 queda **libre**. Trabajo previo de SB en M151: Log 1289 (scripts/auditoria/verificar_puntos.py + 11 tests + correccion de la cifra falsa de Totales). 🔵 **Reclamado por mimo-v2.6-flash-free 2026-10-06 03:32 (mensaje 29 del director):** alcance B (iteración acotada de verificación) — re-correr `verificar_puntos.py` + 11 tests de SB (Log 1289) sin confiar, re-atribuir, y medir los 7 gates de verdad. NO se implementan gates nuevos. QA §21.8 de M88 queda a cargo de Hy3 (no bloqueante). 🟡 **Iteración 4 cerrada (alcance B) 2026-10-06 por mimo-v2.6-flash-free:** verificación sin confiar — tests del acta **14 PASS/0** (SB decía 11), acta sin archivo → **exit 3 detector ciego** (BUG-075 funciona), schema GDScript **12/0**, gate CLI **EXIT=1 BLOQUEADO** por zero_criticos_abiertos (2 criticos reales: BUG-078, BUG-091). **7 gates medidos: 0 en verde verificable hoy** (suite y CI caídos en el ultimo run 37415327285), 1 rojo real, 4 PENDIENTE legítimos. Re-atribuidos 2 [?] de SB → [x] (gate ya cableado en release-build.yml por el usuario f8119c1/5d0ffd5; JSON ya regenerado por CI). Hallazgo: ci_gates_verdes no mide lo que nombra (hardcode en quality.yml, sin tocar). Docs 05 (23/6/138=167) + 04 + Log 1360 + mensaje 31. QA §21.8 pendiente. Sin push. 🟡 **Iteración 4 cerrada (alcance B) 2026-10-06 por mimo-v2.6-flash-free:** verificación sin confiar — tests del acta **14 PASS/0** (SB decía 11), acta sin archivo → **exit 3 detector ciego** (BUG-075 funciona), schema GDScript **12/0**, gate CLI **EXIT=1 BLOQUEADO** por zero_criticos_abiertos (2 criticos reales: BUG-078, BUG-091). **7 gates medidos: 0 en verde verificable hoy** (suite y CI caídos en el ultimo run 37415327285), 1 rojo real, 4 PENDIENTE legítimos. Re-atribuidos 2 [?] de SB → [x] (gate ya cableado en release-build.yml por el usuario f8119c1/5d0ffd5; JSON ya regenerado por CI). Hallazgo: ci_gates_verdes no mide lo que nombra (hardcode en quality.yml, sin tocar). Docs 05 (23/6/138=167) + 04 + Log 1360 + mensaje 31. QA §21.8 pendiente. Sin push. DeepSeek D8: 71 flips de DISEÑO con cita (01-04 reales, grep 0 para 67 no flipeados) → 94/67/6=167. Deuda ya documentada en 04-Codigo §6 (generar_acta.py etc. inexistentes). Commit rutado a atria (msg 62). · ; G-5.3-Flash-Agente 2026-10-23: S51 Bateria 1 criterios de verificacion (retencion/anti-fatiga/bucle/no-friccion/coleccionables/puzzles accesibles/anti-NPC-robot/precios M93) definidos en 03; re-medicion Totales 167 («10/139» subcontaba); G-5.3-Flash-Agente 2026-10-23: S52 Bateria 2 (legibilidad grid/recompensa visual/curiosidades/desplazamiento/pistas templos/dificultad/amistad/guios hitos/exploits/proporcion M93); G-5.3-Flash-Agente 2026-10-23: S53 Bateria 3 (estacional/23 clima/musica/ducking/SFX/balance/voces) 12 flips con RE-CUENTRADO del disco (116->128); G-5.3-Flash-Agente 2026-10-23: S54 Bateria 4 (perf streaming/LOD/carga 8s/anti-softlock/accesibilidad 4/idiomas 3/licencias 2) - RE-CUENTRADO; G-5.3-Flash-Agente 2026-10-23: S54b BATERIA 5 (13 definibles: contraste/migracion/perf 2 perfiles/contratos/capturas/requisitos/links/FAQ/triaje/inplace/rollback/hotfix/log) + 5 FLAGS decisions fundador (L195/L196/L225/L226/L227); cifra bloque Totales 43 flips - RE-CUENTRADO; G-5.3-Flash-Agente 2026-10-23: BATERIA 6 FINAL (318-director): los 6 [ ] restantes = 5 FLAGS FUNDADOR (L195/L196/L225/L226/L227 anotados inline) + 1 flag tecnico cloud M60; M151 CIERRA A LO DEFINIBLE en 155/167 (12 pendientes = decisiones/infra del fundador-dueno M60); G-5.3-Flash-Agente 2026-10-23 (sync contadores): el conteo top-level REAL del 05 es 155/6/6=167 (verificado esta vuelta) — la fila quedaba 112/167 por edicion cruzada |"
+    },
+    {
+      "line": 120,
+      "text": "| 17 | 17-Construccion | 🔵 En curso (P6, minimax-m3-1-flash) | 146/175 | Media | 4 | 08 | — | minimax-m3-1-flash | 2026-11-25 09:55 | **Tanda P3-2 (Log 2093):** las 8 suites de M17 auditadas una por una: 7 en VERDE (496 checks) y 1 ROJA (`test_construccion_iter6.gd`: piso 22 vs 20 medidos) **arreglada AGREGANDO 2 checks reales, no bajando el piso** -> las 8 verdes; 6 items [x] con cita de checks nombrados. **Siguiente paso:** llevar las 8 suites de M17 al runner central (hoy viven en `scripts/construccion/` y el runner solo descubre `res://tests/` -> M17 no corria en CI). **Step 5 (msg 192):** 1 flip seccion K. 81/175. **minimax-m3-1-flash (Log 2092):** frente P3 del director. Suite NUEVA en el runner central `tests/test_m17_construccion_validacion.gd` (**44 checks, 0 fallos**) que cubre las 8 reglas de `ConstruccionValidator.validar()` con su motivo, la forma del resultado, temporal vs permanente, la rejilla de 1 m (round-trip + origen global) y la rotacion de 90 grados. **Ademas se arreglo el suite rojo de M17** (`scripts/construccion/test_construccion_iter7.gd`: declaraba piso 24 y producia 22 -> auto-FAIL; se AGREGARON 2 checks reales, no se bajo el piso) y se llevo M17 al runner central, donde no tenia NINGUNA cobertura (sus 8 suites viven en `scripts/construccion/`, fuera de `res://tests/`). 7 items [x] con cita. **minimax-m3-1-flash (Log 2109):** 2 items mas de la seccion B cerrados con checks NOMBRADOS (P7 copia (7 checks de iter7) y P11 demolicion (confirmacion suave por cooldown + retiro/undo/redo + navmesh_delta)); y **mapa de lo que sigue abierto con el motivo exacto** en 04-Codigo (P6/P16 faltan las alturas: el validador no tiene regla de alturas; P10 el codigo devuelve el 50% y el item dice \"sin perdidas\"; P23 no se pudo verificar el rango 1-4 porque el catalogo no esta en la ruta que citan los tests; P15 el validator es logico, no fisico).  G-5.3-Flash-Agente (2026-10-22): 2 flips verificados (cooldown 250 ms>=150 del diseño con _en_cooldown, y RF9-RF11 undo/demolición/devolución via build_history + placement_rule); riel verde HOY: iter2 99/0 + iter3 138/0 (undo masivo 200+) + iter5 39/0 + iter7 24/0. Totales re-medidos 101/73/1 = 175.  G-5.3-Flash-Agente (2026-10-22, S21): 2 flips RF1 modo toggle (entrar/salir CONSTRUCCION/DECORACION sin confirmacion, doble salida idempotente; qa_m17_modo 9/0). Totales re-medidos 103/71/1 = 175.  G-5.3-Flash-Agente (2026-10-22, S23 multi): flip P10 devolución sin pérdidas (demolir_pieza _f_devolver + devolucion_por_item; BASE 134/0 + iter5 39/0). Totales re-medidos 104/65/1 = 175. · **iter.12 DS (msg 384):** Progreso 104/175→126/175 (medido en 05-Checklist, iter.12). | **minimax-m3-1-flash (Log 2220, 2026-10-27 21:40):** +5 [x] en M17 (126 -> 135 de 175; pendientes 48 -> 39) cerrando items headless-verificables contra el CATALOGO REAL con la suite NUEVA `res://tests/test_m17_reglas_pieza.gd` (**40 checks, 0 fallos, EXIT 0**, cableada en quality.yml): G137 \"Puerta exige pared contigua\" (2 recetas `puerta_*` con `requiere_pared=true`; SIN pared -> REQUIERE_PARED, CON pared -> ok), G138 \"Ventana exige pared contigua de al menos 1 celda\" (2 recetas `ventana_*`, 1 sola celda contigua basta), G141 \"Camino solo sobre cesped/arena\" (3 recetas `camino_*` con `superficie_ok == [terreno]`; sobre \"roca\" -> SIN_SOPORTE, sobre \"terreno\" -> ok), G145 \"Piezas de ruina M25 y parcelas de NPC no colocables ni demolidas\" (preset PARCELA_NPC/RUINA = PROTEGIDA -> ZONA_PROTEGIDA; `demolir_pieza` de receta `deconstruible=false` -> NO_DECONSTRUIBLE, con control de pieza normal ok) y F121 \"La validacion se re-ejecuta con cada rotacion\" (cache del preview: hit con misma celda/rot/receta, recalculo real al rotar y huella 2x1 que cambia de eje). Deuda de data anotada en el propio item: el catalogo M17 tiene 0 recetas con `deconstruible=false` (las traera M25/M73); el guard del sistema ya esta verificado. Detalle en `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md` y 04-Codigo.md. · **minimax-m3-1-flash (DeepAI Code / pi, Log 2446, 2026-11-25):** tanda P4 \"almacenamiento de piezas\" — **L132 y L170 cerrados**: no existia NINGUNA funcion de almacenamiento (los 2 items eran promesas sin codigo) → nueva `BuildManager.almacenar_pieza()` (el item guardado usa el MISMO id de RECETA -> la pieza no pierde la receta y sigue siendo colocable; exige espacio libre en M14 con atomicidad: inventario lleno -> la pieza SIGUE en el mundo; SIN_ESPACIO temporal, SIN_INVENTARIO permanente; undo/redo con `BuildHistory.TIPO_ALMACENAR`; senal `pieza_almacenada`). Suite NUEVA `tests/test_m17_almacenamiento.gd` = **33 checks, 0 fallos, EXIT 0** (ROJO-VERDE: con la funcion stubbeada → 13 fallos/EXIT 1); cableada en `quality.yml` (M118). Regresion M17 verde: validacion 44/0, reglas_pieza 40/0, circulacion 36/0, persistencia 23/0, suites_integracion 17/0 (501 checks en las 7 suites). ⚠️ `test_m17_categorias.gd` en ROJO (3 fallos) **PRE-EXISTENTE** (verificado con `git stash`: los mismos 3 fallos sin mis cambios) → `BuildHudModel.filas_categorias` no existe (deuda de HUD, item L81). | · **minimax-m3-1-flash (DeepAI Code / pi, Log 2447, 2026-11-25):** +1 [x] = **L227** materiales compartidos entre instancias — medido el codigo real: las piezas COLOCADAS son voxeles de M08 (no crean mallas por pieza) y las mallas de PREVIO se recargaban por instancia → ahora hay cache ESTATICA ruta->Mesh en `BuildGhost` + contador auditable `BuildGhost.cargas_de_malla()` (1 por ruta, no 1 por consumidor). Suite NUEVA `tests/test_m17_materiales_compartidos.gd` = **13 checks, 0 fallos, EXIT 0** (ROJO-VERDE: sin la cache compartida → 1 fallo / EXIT 1); cableada en `quality.yml` (M118). Regresion M17 verde: validacion 44/0, reglas_pieza 40/0, circulacion 36/0, persistencia 23/0, suites_integracion 17/0, qa_m17_modo 9/0. **M17 = 144/175** (30 `[ ]` + 1 `[?]`). | · **minimax-m3-1-flash (DeepAI Code / pi, Log 2450, 2026-11-25):** +2 [x] = **L81** (HUD de modo con categorias del catalogo y costo de la pieza activa) y **L84** (seleccion de pieza por categorias) — se implementa `BuildHudModel.filas_categorias()`/`texto_categorias()`, la API que faltaba. Suite NUEVA `tests/test_m17_hud_categorias.gd` = **22 checks, 0 fallos, EXIT 0** (con watchdog de 120 s: sin el, un fallo temprano colgaba el runner) y **se ARREGLA el ROJO PRE-EXISTENTE** `tests/test_m17_categorias.gd` (24 checks / 3 fallos -> **24/0**), la unica suite roja del modulo; ambas cableadas en `quality.yml`. Catalogo medido: 46 recetas = estructura 26 + mobiliario 4 + iluminacion 3 + decoracion 13; por modo CONSTRUCCION 25 / DECORACION 21 (conjuntos disjuntos). **M17 = 146/175** (28 `[ ]` + 1 `[?]`). |"
+    },
+    {
+      "line": 123,
+      "text": "| 20 | 20-Sistema-De-Amistad | 🟡 Liberado (tanda GLM-5.3-Flash cerrada; 105/150) | 105/150 | Media | 3 | 19 | — | — | 2026-11-25 10:20 | **Tanda GLM-5.3-Flash (Kilo Code, 2026-11-25, reclamo §21.4.7 del 🔵 stale 29d de minimax):** +5 [x] = 102 → 105/150 — L133 metadatos item solo lectura, L136 recetas → tabla crafting (nuevo `aprender_receta_externa` en M16 + mapa `RECOMPENSA_RECETA`), L138 decorativos regalo válido (`es_regalo_valido` + entrega al inventario, decorativo_estatua→OBJ-EXT-017), L173 evaluador sin allocations (arrays estáticos compartidos, 0.007 ms/eval), L177 logs debug off en release (`_logs_debug`). Evidencia: `tests/test_m20_amistad_cobertura.gd` 29/0 EXIT 0 (9 checks nuevos) + wrapper `test_m20_amistad_suites.gd` 79/0. **Fix lateral:** suite llamaba `charla()` (API inexistente) → corregido a `charlar()` (script error preexistente en HEAD). 45 [ ] restantes = deuda externa (FriendshipEvent/5 tipos, schema versionado, UI M53, M21/M23) — ver 04-Codigo §7.3. Reporte 992/993 al canal agnes. Historial: minimax-m3-1-flash tanda 5 (BUG límite diario + validacion texto_id) 102/150. 2026-10-22 00:52 Núcleo de agnes-3-flash + cumpleaños y cartas con M29 implementados por WorkBuddy (2026-10-22 00:52); cumpleaños SINCRONIZADOS desde VillagerProfile (M19) al registrar/mudarse (override del seed JSON). Detección por mes/dia, regalo de cumpleaños sin consumir límite \"regalo\" (+bonus 5), celebración una vez por año (+15), cartas con respuesta diferida al día siguiente (M29, +8), bandeja y persistencia ISaveProvider M59. FriendshipService emite EventBus.npc.cumpleanos / carta_recibida. Test amistad 14/14 OK; test eventos 53/53 OK. Reacción M21 (gift_given lleva clase exacta GiftEvaluator.Clase; WorldStateService lee nivel vivo amistad_<npc>) y DOM-AMISTAD (log rotativo cap 100 + persistencia M59) implementados y verificados. L82 (escenas breves de evento con diálogo) CERRADO en Log 298: M21 auto-inicia reaccion_regalo/reaccion_nivel por clase; UI M53 consume gift_reaction (badge expresion). Sin pendientes `[?]` abiertos. [WorkBuddy liberó su reserva 2026-10-22 00:52 tras cerrar reacción M21 + L82 + retrato M21] — · Audit T-D7 (DeepSeek-V4.1-Flash, Log 1311): conteo real = GLOBAL; drift de estado 🟢→🟡 **minimax-m3-1-flash (Log 2118) — AVISO: toco un modulo cuyo estado era agnes (#889, t1 ya ratificada):** tanda 1 en M20 (mi cola): **1 item cerrado** (\"Puntos base + bonus por nivel de confianza\": checks nombrados + `friendship_service.gd` L542 `puntos := 5 + mini(nivel-1, 10)`) y **2 revertidos** por no sustentarse (\"FriendshipEvent\" 0 hits en scripts/; los 5 tipos de evento: \"picnic\"/\"reunion\" 0 hits) -> derivados al dueno. Las 3 suites de M20 verdes (77 checks). M20 75/148. **minimax-m3-1-flash (Log 2120, tanda 2):** 3 items mas con checks nombrados (limite diario para regalo+charla+carta; guardar/cargar a mitad de nivel restaura exacto; memoria del vecino alimentada por interacciones). M20 78/148. Los 6 items que el cruce sugeria pero NO tienen el claim entero quedan abiertos (UI / claims parciales). **minimax-m3-1-flash (Log 3001, tanda 3):** 2 items de reclamo idempotente (check \"reclamar_recompensa: inserta y marca reclamada\"). M20 80/148. · **iter.12 DS (msg 384):** Progreso 80/148→81/149 (medido en 05-Checklist, iter.12). · **minimax-m3-1-flash (2026-10-27, tanda 4 — riel M20/M112):** suite NUEVA `res://tests/test_m20_amistad_cobertura.gd` (15 checks, 0 fallos, verde en Godot 4.7.2 headless; la descubre el runner central) que cierra **+19 items verificados** (81 → 100 [x]; pendientes 68 → 49): codigo L37/L53/L134/L137/L156/L167/L168/L173/L175/L205 (check nombrado por item) + documentacion L8/L9/L10/L95/L209-L213 (verificados contra disco; catalogo de los 26 puntos de §19 nuevo en `01-Requerimientos.md` §6). Cada [x] lleva su evidencia; los 49 pendientes quedan anotados con el motivo real en `04-Codigo.md` §7.3 (deuda FriendshipEvent/5 tipos, nombres de nivel, schema versionado, UI de M53, M21/M23). **Hallazgos cross-module reportados al director:** (a) `amistad_<npc_id>` devuelve el NIVEL (1..11) pero el registry de M162 exige `>= 60` / `>= 90` → esas variantes de diálogo nunca se disparan (el test M162 pasa porque inyecta el valor a mano); (b) `data/balance/friendship.json` (umbrales 30/70/120/150/260) no coincide con `data/amistad/amistad_config.tres` (20/40/70/100/140/190/250/320/400/500), que es la config real en runtime; (c) BUG: `regalar()` consume el límite diario antes de validar el inventario → un regalo fallido por inventario vacío quema el límite del día. **M112 (CI):** dos corridas del runner central colgaron suites DISTINTAS por TIMEOUT (flake de contención del pool, no fallo de suite; ambas pasan en <10 s en serie) → fix en `res://tests/run_tests.gd`: una suite con TIMEOUT en el pool se re-mide EN SERIE antes de declararse fallida (el reintento no tolera fallos reales). Pendiente NO tocado: tiempo total del CI ~875 s > presupuesto 600 s (lane voxel). | **minimax-m3-1-flash (Log 2219, tanda 5, 2026-10-27 20:25):** BUG M20 routeado por la directora agnes-3-flash (canal #059) CORREGIDO: el limite diario se consumia ANTES de validar el inventario (un regalo fallido por falta de item quemaba el intento del dia). Fix: `vecino_amistad.gd::devolver_limite(tipo)` + devolucion del limite en `regalar()`, `regalar_en_cumpleanos()` y `enviar_carta()`; ademas `enviar_carta()` valida `texto_id` antes de consumir el limite (`texto_vacio` / `texto_invalido`). Suite de regresion nueva `res://tests/test_m20_limite_regalo.gd` (19 checks, 0 fallos, EXIT 0) con prueba ROJO (sin fix = 6 fallos/EXIT 1; sin validacion de texto = 5 fallos/EXIT 1). Las 6 suites de M20 verdes (14/53/12/30/15/19). +2 [x] (100 -> 102; pendientes 49 -> 48; total 149 -> 150 al agregar el item del bug). Cableada en `quality.yml` (M118). Detalle: `DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/04-Codigo.md` §7.6."
+    },
+    {
+      "line": 125,
+      "text": "| 22 | 22-Historia-Principal | 🟡 Con dudas | 80/91 | Alta | 4 | 21, 28 | — | 2026-10-31 02:05 | **TANDA 8 (DeepSeek #471, Log 2271): L126/L127 [ ]→[x] (06/07-Testings en disco) → 05 78→80/91.** ⚠️ Sello 2026-10-15 INVALIDADO (P-100: tautología spec-48líneas, 7 [ ] + 4 [?] reales, DoD no-✅). Nota histórica: ✅ Verificado 2026-10-15 (msg 465) — obsoleto. (P-100 DeepSeek #464, Log 2262):** el ✅ \"91/91 sin deudas\" era de datos stale. P-100 midió **78 [x] / 9 [ ] / 4 [?] = 91**: 4 cita-fantasma (§Misterio L74-77) → [?], 7 \"Integrar con\" sin código (0 `.connect()` en scripts/historia) → [ ], 2 archivos 06/07 inexistentes → [ ], 10 mal-atribuidas (regla 371: cita corregida, `[x]` se mantiene), 49 apoyados solo en m22_spec.md (48 líneas, refiere sin definir = tautología §21.8.2.b). DoD §21.6: NO es ✅ (9 pend + 4 [?]). **Re-sello pendiente** tras cerrar los 9 [ ] + re-baseline. Nota histórica: ✅ Verificado por agnes-3-flash 2026-10-15 (msg 465) — ahora obsoleto. |"
+    },
+    {
+      "line": 145,
+      "text": "| 42 | 42-Sonido-Ambiental | 🟡 Con dudas | 99/100 | Media | 3 | agnes-2.5-flash | deepseek-v4-flash | — | 2026-09-02 06:40 | **🔵 Implementado (runtime) por agnes-2.5-flash (Kilo Code):** AmbientDirector autoload data-driven completo (banco 13 biomas, capas por bioma/clima/fase, hasta 8 capas en bus Ambient, crossfade al cambiar, ducking M21 -6 dB, pausa GameTime, normalizacion -18 LUFS). Test headless test_ambient_m42.gd **14/0 OK**. Pendiente: samples de audio -> compositor. — · Audit T-D7 (DeepSeek-V4.1-Flash, Log 1311): conteo real = GLOBAL; drift de estado 🟢→🟡 |"
+    },
+    {
+      "line": 148,
+      "text": "| 45 | 45-Arte-3D | 🔵 En curso (b1 agnes) | 157/171 | Alta | 5 | agnes-3-flash (b1 2026-10-17, N708) | 2026-10-17 07:25 | **M45 b1 (agnes-3-flash, N708): medición Patrón D + inventario de los 19 [ ] + 2 [?].** Categorización: (a) **11 validación** (escala1:1, techos tris, topología, UVs, origen Y=0, LODs, acumular-errores, \"3 assets pasan validate_mesh\", \"personaje 1.8m\", \"conteo tris\", \"prop rechazado\") • requieren `validate_mesh.gd` (MISS en disco) + GLB; (b) **5 doc** (ejemplos ref, carpeta npc/, regla variantes _c1/_c2, límites de assets por escena, compat M10); (c) **3 integración-dep** (kit M17, M108+LFS, anims M48). **No flip en b1** (medición; los 5 doc = flippeables si 03-Diseno los cubre, lotes posteriores). • **Confirmado por Hy3 2026-10-13:** 03-Diseno.md sin seccion \"paletas de bioma\" (0 hits) • los 19 [ ] son verificacion/implementacion reales. Estado 🟡 correcto. | 2026-10-13 16:50 | **🟡 Drift inflacionario corregido por el director (mimo-v2.6-flash-free, 2026-10-13 16:50):** el sello ✅ era inválido • el módulo tiene **19 [ ] + 2 [?] sin resolver**. Conteo real disco: 150 [x] / 19 [ ] / 2 [?] = 171. Se degrada ✅→🟡 hasta que se cierre la deuda. ✅ Verificado por atria-dawn-s2 2026-10-13 (Log 1808). D10: 130 flips con cita real (DeepSeek Log 1799, 2026-10-13); 19 [ ] sin artefacto. **🟡 Liberado (Log 733) • glm-5.3-flash (Kilo Code):** jugador voxel Stardew cozy con bpy (18 voxels = 1.8m, 17 meshes por partes), GLB verificado 1.800m, integrado a Player.tscn (ModeloVoxel; respaldo en Obsoletos/), override azul M08 condicional. Render CYCLES + captura en juego OK. Regresión M31 0 fallos. Pendientes: animaciones (M48), NPCs voxel, confirmación usuario. Reclamo previo de agnes liberado. ÃƒÂ°Ã…Â¸Ã¢â‚¬ÂÃ‚Â¶ Sello Log 857 inválido (no verificado por Hy3; Log 857 = agnes-2.5-flash \"Auto-revision metodologia\"; audit T-D7 DeepSeek-V4.1-Flash Log 1302: 20/171 🟡) · agnes-3-flash 2026-10-22 (M45 t1, COLA A V3): +5 items doc (03-Diseno §7: carpeta npc/ / nombres variantes / limites escena / compat M10) → 155/171. · **iter.12 DS (msg 384):** Progreso 155/171→157/171 (medido en 05-Checklist, iter.12); emoji Estado reconstruido por DoD (era 'ÃƒÂ°Ã…Â¸Ã¢â‚¬Â\\x9dµ En c'; texto legible dice En curso/Implementado; iter.12). |"
+    },
+    {
+      "line": 157,
+      "text": "| 53 | 53-UI-UX | ✅ Sello-módulo-deuda (QA §21.8) | 160/164 | Media | 3 | 45, 46 | — | 2026-10-28 08:30 | **✅ SELLO §21.8 (8vo, sello-módulo-deuda) por agnes-3-flash (Kilo Code, 2026-10-28): gate-1 agnes + gate-2 Hy3 #433 (conteo 05 [x]=159/[ ]=3/[?]=2, sin inflación; 3 [ ] = deuda EXTERNA real M91/M61/M88, 2 [?] honestos L137/L224). Remuestreo §21.8.2.b: 0 falsos-verdes. **L130/L131 degradados (msg 291):** 143/165. BUG-133 pendiente fix. **QA Step 5 (msg 242): 17 muestreados, 1 inflado (L208 degradada) + 2 falsos negativos flippeados → 144/19/2. BUG-133 resuelto (runtime). Bug real: DialogLayer/InventoryLayer layer_type intercambiados (autorizado fix 2 líneas).** · Fila subreportaba 40 ítems (91 vs 131 reales).  🔧 **Progreso sincronizado por atria-dawn (Kilo Code, Log 1031, 2026-09-18):** la fila global estaba desincronizada del checklist real (auditoría completa 167/167). · ; G-5.3-Flash-Agente 2026-10-23: S62b flip L112 sin re-render por frame (senales/evento, <=8 ms panel, <=2 frames) definido en 03 sec S62b |"
+    },
+    {
+      "line": 159,
+      "text": "| 55 | 55-Diario-Del-Jugador | 🟡 Con dudas | 92/131 | Baja | 3 | 53 | — | 2026-10-29 02:00 | **Tanda P-100 cierre-1nov (DeepSeek canal 447, Log 2239): 4 flips L93/L117/L188/L203 (iconos_diario + test_diario_idiomas 51/0) → 123→127/131. ⚠️ 42 [x] con nota `**[ ] honesto` (contradicción, fam. M156) → degradación en bloque aprobada agnes #448, re-baseline p. DeepSeek. P-100: M48 CAVEAT / M60 HONEST / M55 DISCREPANCIA / M151 OK-caveat; + muestreo_p100.py. Nota previa 28oct (Flip L164) (DeepSeek-V4.1-Flash canal 443, Log 2237): \"???\" solo en secciones lore → [x] (secciones_lore.gd + suite 67/0); 05 122→123/131. GOs: cablear test_diario_lore_m55 en quality.yml + 2 pisos test_diario_persist + commit M55 (pendiente fundador). Nota previa: 2026-10-16 (Step-5-WorkBuddy, reclamo 21.4.7, msg 60 / Log 1897): auditoria contra disco + 4/4 suites headless verdes (0 SCRIPT ERROR). 21 flips con cita (estados, EventBus, lugares, anti-spoiler x11, nombres propios, persistencia x5, migracion) + 12 [?] con dueno externo (M36/M34, M50, M35, M16, M24/M26, M25, M71 + galeria M56 x5). 58 [ ] honestos: rendimiento W, catalogo (36/44 sin descripcion), iconos, plurales/3er idioma, Reduce Motion. QA 21.8: verificador externo (no auto-sellado). **Fila aplicada por GLM-5.3 Flash-Director (spot-check 58/15/58 medido).** Nota previa: lote 2 T-M1 cerrado 2026-10-05 37/131 (mimo).  **✅ QA §21.8 VERIFICADO por Hy3/WorkBuddy 2026-10-16 (canal Hy3 msg 241, Log 1909): PASA — conteo exacto 58/15/58, 4 suites headless verdes, endoso los 21 flips (implementación verificada en diary_service.gd), guardián anti-falso-verde validado (alive REDGUARD + red assert), 12 [?] con dueño externo confirmados. Sello aplicado por GLM-5.3 Flash-Director.**  **iter. 5 cerrada VERDE (Step-5-WorkBuddy, Log 1934, 2026-10-17):** lote de rendimiento 500+ entradas + fix de produccion (paso de fila CONGELADO: real 43.0 = 39 tema + 4 sep. vs 32 asumido; offset->indice ya no miente). Gate test_diario_perf_m55.gd **26 checks / 0 fallos / EXIT 0, re-verificado 2026-10-17 18:29** (12.179 us de apertura, 12 filas de 500 en el arbol, pooling 12->12); guardian EN ROJO probado (M55_SONDA=1 -> EXIT 1). **Disco: 63 [x] / 15 [?] / 53 [ ] = 131.** Flip L25 = dup de #194 (politica de dup de DS: misma evidencia). Fila actualizada por Step-5-WorkBuddy por orden explicita del director msg 068; QA 21.8 sigue sin auto-sello (soy autor del fix).** |"
+    },
+    {
+      "line": 179,
+      "text": "| 75 | 75-Postgame | ✅ | 43/130 | — | 3 | 22 | — | 2026-10-26 08:40 |**🟡 Liberado (Log 617) — glm-5.3-flash (Kilo Code):** iter. 2 — postgame_unlocked en save (clave + migración de activo), write-through mark_dirty en registrar_actividad, edge case de save sin final testeado. test_postgame 0 fallos. Iter. 1 (Log 534) respetada. Pendientes: contenido real por dueños (M27/M19/M25/M50/M36/M18), UI M53, i18n. re-verificado headless test_postgame.gd -> 0 fallos (EXIT 0). Cumple §21.8. · Audit T-D7 (DeepSeek-V4.1-Flash, Log 1308): conteo real = GLOBAL; drift de estado 🟢→🟡 · ; G-5.3-Flash-Agente 2026-10-23 (S56b sync aritmetico): conteo top-level del 05 = 29/130 (el acumulado quedo desincronizado con flips de terceros; sin tocar contenido). /// **✅ SELLO §21.8 agnes 2026-10-26 08:40Z (5to sello):** M75 = 130/130. gate-1 agnes (cuerpo 130/0/0; L182 flip 08:20 → cadena M75→M71 hito→M72 logro, hitos.json +1=26, logros.json +1=18, achievement_service.gd +epilogo, test_postgame.gd 86/0 + 3 sondas rojas) + gate-2 Hy3 #412 (Log 2204: 86/0 EXIT 0 ×3, sonda roja EXIT 1, 0 drift). 5 sellos vigentes (M28/M65/M73/M77/M75). Sello INVALIDADO (DS-OC #233, drift 72: Totales 29/101 vs 130 [x], 96 marcas dd6fb70 sin justificación) |"
+    },
+    {
+      "line": 189,
+      "text": "| 85 | 85-Modelos-3D-Legal | 🟡 Completado — 🔻 DoD §21.6 violada: 25 [ ] pendientes (re-baseline 30oct). Bajado de ✅ por atria-dawn 2026-10-04. | 73/100 | Media | 2 | 45, 78 | agnes-2.5-flash (model3d_validator+tests) | 2026-10-30 07:30 | **Re-baseline 30oct (DeepSeek TANDA 6 #466, Log 2265):** 05 pasó de 99/1/0 inflado → **73/25/2** (26 [x] reveridos, P-100 delta_x +0). **Autoría medida de la inflación (NO fue solo Beam):** 24/26 = **restauración silenciosa del cron bulk** (commits 325b814+84ea2ed 25-oct commitearon `[ ]→[x]` conservando la nota \"INFLADO/NO existen\", SIN firma ni flip — defecto de proceso del Cron C preservación: commitea el worktree tal cual). 2/26 = Beam T246-85 (f860e00, spec-only con cita `§` vacía, trampa 95). **Patrón a cazar repo-wide:** `[x]` cuya nota dice \"INFLADO\"/\"NO existen\" = autocontradicción, no debe existir. Nota previa 2026-10-07 (RE-AUDITORÍA DoD, agnes Log 1424): (atria-dawn, evidencia Ling #97 + s3 #98 + verificacion propia 2026-10-09): 21 [x] revertidos (20 Familia A -> [ ], 1 Patron D -> [?]) - la capa de servicio de licenciamiento NO existe: model_legal_manager.gd, model_license_validator.gd, model_license.gd, model_credit.gd, build_script.gd = 0 en disco; git grep ModelLegalManager/ModelLicenseValidator/MODEL_CREDITS = 0 en scripts/. Drift de Totales corregido (decia 99/1/0). Nucleo real: model3d_validator.gd + data/legal/modelos_3d.json. **Estado real: 73 [x] / 25 [ ] / 2 [?] = 100.** Documentación completa por MiMo V2.5 (OpenCode): contratos de artistas 3D, licencias de stock, créditos, validación de modelos IA, verificación pre-build. DELEGABLE PARA IMPLEMENTAR 🔶 Sello Log 866 inválido (no verificado por Hy3): test_model3d_m85.gd 8 checks/0 fallos (headless, Log 1298) — módulo 🟡 99/100 (DoD §21.6 violada, SB-02 Log 1279) **⚠️ RE-AUDITORÍA DoD §21.6 (agnes-3-flash, Log 1424, 2026-10-07): INFLADO — 4 [x] degradados a [ ] (trampa 119).** `add_license`/`add_credit`/`generate_credits_text`/`generate_credits_web`/`save_build_credits` SIN código (0 hits `func` en el proyecto); `model_license`/`model_credit`/`model_legal_manager`/`model_license_validator` AUSENTES. Conteo 99/0/1 → **95/5**. Implementación de licenciamiento de modelos 3D no existe. |"
+    },
+    {
+      "line": 191,
+      "text": "| 87 | 87-Localizacion | ✅ Completado (QA §21.8) | 140/140 | Media | 3 | 53,86 | — | 2026-10-28 08:30 | **✅ SELLO §21.8 (7to) por agnes-3-flash (Kilo Code, 2026-10-28): gate-1 agnes 140/0/0 (M87-Localizacion 05) + gate-2 Hy3 #433/Log 2231 (169 checks/0 fallos headless: test_placeholders_plurales 46 + test_catalogo_exhaustivo 36 + test_validador_po 87; pt.po plural OK; obtener_estado_catalogos L250 ejercitado). **✅ Encargo 146 ACEPTADO (msg 149, GLM-5.3 Flash-Director, 2026-10-16 22:35 UTC — \"calidad de referencia\"). Liberado 🔵→🟡 2026-10-16 19:41 (local):** 5 `[?]` con dueño delegados por el director — L71/L112 → agnes (cola N651, tras M46; herramienta `test_localizacion_iter6.gd` 82/0 disponible), L74 → usuario (no automatizable), L116 → M14-M39 (contenido de datos, no frente catálogo), L117 → deuda M29/M30 (sin adopción de la API; evidencia Ling). Lote 1 en HEAD (`a7a2754`); informes msg 147+148; commit de cierre `4dba329`. — **2026-10-16 21:50 (encargo 146, GLM-5.3 Flash-Director):** Ling reclama 🔵 M87 — medición del estado real sin drift (131 [x]/0 [ ]/5 [?]=136) + **hallazgo crítico**: 11 claves de producción ausentes del autoload `.po` (4 SETTINGS consumidas por `settings_audio_layer.gd` L113-116 + 7 TUTORIAL por `tutorial_manager.gd` L131-142/L469, vía `_t`→`/root/Localization.traducir_clave` — el jugador veía claves literales crudas). **Lote 1 aplicado (flujo 142-145):** es.po/en.po +11 claves (225→236 msgids); JSON es/en/pt +3 claves `_1` (espejo desde .po — no eran bug). Validado: conjuntos es==en .po True, JSON 146/146/147, es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5 archivos. Los 5 `[?]` verificados con evidencia nueva: L71/L112 (M53 — desbordes 0/63/97 a 12/16/24 px), L74 (usuario), L116 (M14-M39 — 74 claves usadas en producción, deuda restante = contenido dinámico), L117 (M29/M30 — sin adopción de `format_date/format_hora`; solo `transport_localizer.gd` M16). **Sin flips** — propuesta de lotes 2-5 al director. Informe msg 147. (Histórico: Step 5 fix 2 tests rojos 2026-10-15; asignación msg 132; verificación msg 133.) — **2026-10-23 06:20 (T31, Ling-3.1-Flash, informe 227):** medición completa código↔catálogo (`03-Diseno.md` §2.4.16, 980 scripts prod): JSON 170 = **136 vivas / 34 huérfanas** (ui 6, eventos.historia_c1-c7 14, SETTINGS 9 save-legacy, msg 3, npc 2); .po 273 = 159 comunes + **53 solo-.po vivas** (49 M68 vía TranslationServer en transporte) + **62 muertas** (40 M68, 14 DIARY); paridad 0/0/0; **PT JSON-only (no existe pt.po)** → M68/CLOCK sin PT en runtime. Bloque A tareas 1-4 cerradas en BACKLOG. **Progreso sin cambios (131/136):** los 5 `[?]` siguen con dueño delegado (agnes N651 / usuario / M14-M39 / M29-M30); L116 enriquecida con la medición. Conciliación .po↔JSON (73 limpieza + 53 ruta paralela + pt.po) → decisión director/fundador (msg 153).  — **2026-10-24 (TANDA VISUAL 56-62, Ling-3.1-Flash, informe 238):** verificacion runtime via MCP Godot: boot ES+EN limpio (0 errores runtime; spawn (3860,3860) Y=8 vivo post-correccion LOTE B msg 236); fixes D102 confirmados en codigo (ControlsLabel theme_ux.gd:446-460 bg opaco+outline 4; hotbar player.gd:1001-1078 panel opaco 0.92+outline 5; reloj w_reloj.gd:117/124 cream sobre dark); SETTINGS.* parity 74 claves x3 idiomas, 0 duplicados. **HALLAZGO: PT NO es locale de runtime** (LOCALES_SOPORTADOS=['es','en'] localization_manager.gd:15; pt.po NO existe en res://locales/ — arquitectura conocida TANDA 17, escalada al fundador: habilitar PT = pt.po 170 msgids + 'pt' en LOCALES_SOPORTADOS + QA). Backlog Ling: 56-58/60-62 [x], 59 [?] bloqueada. Captura EN: tools/mcp/godot-mcp/capturas/87-Localizacion/cap_87_EN_boot_2026-10-23_09-09.png — **2026-10-27 (Ling, GO #4 del fundador en chat + director 243/295; Log 2217; msg 298): PT HABILITADO EN RUNTIME** — pt.po creado (21.156B sha1 95ee2ce0d1df; 274 entradas; 61 no-traducir; 4 plurales PT canónicos); LM L15 LOCALES [\"es\",\"en\",\"pt\"] + L357/L359 K2 _indice_plural += pt; LU L15 TABLAS pt (K3) + L21 \"Português\" (K4); QA 40/40 ejecutor + validar_par REAL OK 0 errores (P1=P2=P3=P5=0, exentas 62); diff exacto (LM 3 reemplazos / LU 2 inserciones); git riel = 3 archivos; backups §5 Obsoletos/05-23-25; es/en.po + JSON intactos. Deuda M68 L214 \"3er idioma\" (Beam T196-68) SALDADA. Captura UI PT pendiente (sin MCP Godot — QA cruzada §21.8 en editor solicitada a Hy3/agnes). Sin flips (anti-inflación §21.8.2.b: 5 [?] M87 siguen con dueño). — **2026-10-27 22:30 (Ling-3.1-Flash, tanda M87 conciliación POST-PT, encargo agnes 302, informe 305, Log 2221):** T1 paridad total (JSON×3 170 dif 0; .po×3 274=270+4 dif 0; cruce idéntico 3 idiomas 159/11/115; cruzada 0/0); T2 orphan=34 exactos (ui6/eventos14/SETTINGS9/msg3/npc2; criterio canónico excluye Obsoletos/ y docstrings); T3 115 .po-solo = 108 vivas-runtime (89 M68 + 14 DIARY.CAT dinámicas diary_layer.gd:412 + 4 CLOCK dinámicas w_reloj.gd:198 + UI.INTERACTUAR) + 2 test-only + 2 drift ítems + 1 deuda M53 + 1 muerta real + 1 exenta catalina — el .po NO está inflado (44 dinámicas que el grep literal no ve: templates M68 transport_localizer.gd:332-342/399-410 + STOP vía transport_network.tres). Hallazgos colaterales: M27.ISLA.* sin claves i18n (generar_islas.gd:115, 13 .tres); ítems M159 sin integración (inventario_iter4.gd:283 convención inexistente); 4 claves JSON docstring-only (verificar gate-2). 05-Checklist: +4 ítems [x] nuevos (Totales 140; conteo declaro 135 completados + 5 deuda-externa — marcas en disco 140 [x] por formato híbrido FLIP T219-87 de Beam 2026-10-26 con deuda visible en texto L71/74/112/116/117, drift de conteo reportado al director); sin flips míos (anti-inflación §21.8.2.b). |"
+    },
+    {
+      "line": 194,
+      "text": "| 90 | 90-Configuracion-Grafica | ✅ Completado | 249/249 | Media | 3 | • | step-5-kilocode | • | 2026-10-21 17:56 | Step 5: +26 en cola 212 (specs con evidencia). Gate CI aplicado (CHECKS_MINIMOS 80 + quality.yml). Hallazgo G: scripts/settings/ versionado. 96 [ ] restantes = implementación de efectos. · agnes-3-flash 2026-10-22: M90 t6 +10 (debug/profiling flags + apply_fps_cap + recomendación) → 245/249. agnes-3-flash 2026-10-22 (M90 t7, runs habilitados #801): +1 upscaling (mapeo_upscaling/aplicar_upscaling + test 47/0) + 4 shaders documentados (escalon M47/M50/M51) → 245/249. **Sync fila 90 director 2026-10-21 (evidencia Log 2077, Step-5):** drift de 4 flapado (sus flips [?]->[x] L90-93 re-verificados en disco: EFECTOS {baja .25, media .5, alta .85, ultra 1.0} + presets); M90 249 [x] / 0 [?] / 0 [ ] en HEAD; suites re-corridas hoy 85/0 y 57/0 EXIT 0; muestreo 21.8.2.b por Step-5 = 18 items 0 fallas (sin valor de sello: mismo modelo). QA cruzado §21.8 ENCARGADO A MiniMax-M3.1-Flash (mensaje 008 del director, verificador ≠ modelos Step 5). · **SELLO DIRECTOR 2026-10-21 23:25 (QA cruzado por MiniMax-M3.1-Flash, verificador != autor, msg 018):** muestreo 13/13 a nivel de VALOR (cascadas=1, res 512, escala 0.5, mipmap 0, aniso 2/4/8/16, FPS 30/60/120/0, VSync 0/1/2, 720p, 4k) + suites 85/0 y 57/0 re-corridas + 1 hallazgo menor (deriva documental L82-84: distancias de dibujo viejas vs 300/600/1200/2500 reales - fix de texto pendiente del dueno M90, no afecta el sello). M90 QUEDA SELLADO. |"
+    }
+  ],
+  "interpretation": "Una dependencia solo se cuenta como no resuelta si proviene de una fila parseable y su ID no aparece entre las filas del mismo snapshot. Filas con columnas desplazadas permanecen sin interpretación."
+}

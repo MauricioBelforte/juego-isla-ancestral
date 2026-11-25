@@ -1,0 +1,375 @@
+{
+  "task_id": "S2-03",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Comparación documental de 03-Diseno.md y 04-Codigo.md de M87. Solo contradicciones textuales/drift; no revisión de código fuente ni ejecución.",
+  "sources": {
+    "design": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4"
+    },
+    "code_doc": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "citations": "referencias exactas file:line con literal citado",
+    "interpretation": "04 contiene esquemas GDScript y notas históricas. Cada diferencia se califica según el contexto de versión; ninguna por sí sola prueba defecto actual."
+  },
+  "counts": {
+    "findings": 6,
+    "by_classification": {
+      "contradiccion_textual_con_nota_de_version": 1,
+      "incompatibilidad_de_contrato_en_esquemas": 1,
+      "drift_de_esquema_historico_explicito": 1,
+      "drift_temporal_interno_a_04": 1,
+      "esquema_no_demuestra_el_contrato": 1,
+      "incompatibilidad_de_firma_en_esquemas": 1
+    }
+  },
+  "findings": [
+    {
+      "id": "D01",
+      "topic": "Carga y parseo de catálogos",
+      "classification": "contradiccion_textual_con_nota_de_version",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 65,
+          "text": "1. **Cargar catálogos:** en `_ready()` recorre `LOCALES_SOPORTADOS`, parsea cada `.po` con `_parse_po()` (parser propio, tolerante a catálogos corruptos) y registra una `Translation` construida con `Translation.new()` + `add_message()` por clave, antes de `TranslationServer.add_translation()`. **No usa `load()` sobre el `.po`** (corrección iter. 5)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 98,
+          "text": "func _load_catalog(locale: String) -> void:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 99,
+          "text": "var path := \"%s/%s.po\" % [CATALOG_DIR, locale]"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 100,
+          "text": "if ResourceLoader.exists(path):"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 101,
+          "text": "TranslationServer.add_translation(load(path))"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 102,
+          "text": "else:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 103,
+          "text": "push_warning(\"Localizacion: catalogo faltante '%s'.\" % path)"
+        }
+      ],
+      "analysis": "03 afirma que el runtime parsea cada .po con _parse_po y explícitamente no usa load() sobre .po; el esquema de 04 construye la ruta y llama ResourceLoader.exists/load(path). También difiere el momento: 03 carga todos los locales soportados en _ready; el esquema de 04 carga el locale solicitado en set_locale. El encabezado y las notas posteriores de 04 lo presentan como esquema, y 04 §8b documenta el parser runtime real; por tanto esto parece drift del esquema, no evidencia sobre ejecución actual."
+    },
+    {
+      "id": "D02",
+      "topic": "Clave de cache y plurales",
+      "classification": "incompatibilidad_de_contrato_en_esquemas",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 14,
+          "text": "│   ├── Cache de traducciones frecuentes (Dictionary \"clave|n\")"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 20,
+          "text": "│   │   ├── tr_key(module, section, key, params, n)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 78,
+          "text": "var _cache: Dictionary = {}"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 108,
+          "text": "func tr_key(module: String, section: String, key: String, params: Dictionary = {}) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 110,
+          "text": "return format_text(_tr_cached(full_key), params)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 112,
+          "text": "func _tr_cached(full_key: String) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 113,
+          "text": "if _cache.has(full_key):"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 114,
+          "text": "return _cache[full_key]"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 118,
+          "text": "_cache[full_key] = value"
+        }
+      ],
+      "analysis": "El diseño define tr_key con parámetro n y cache de clave|n; el esquema de 04 omite n en la firma y cachea solo full_key. Si hay formas plurales, el esquema no distingue el resultado en cache. Es discrepancia textual de API/pseudocódigo; no se confirma que el código real tenga ese defecto."
+    },
+    {
+      "id": "D03",
+      "topic": "Firmas de LocaleUtils y formatos",
+      "classification": "drift_de_esquema_historico_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 24,
+          "text": "│   │   ├── format_number(value) / format_date(d) / format_hora(h,m)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 68,
+          "text": "4. **Formatear:** delega números, fechas y hora en `LocaleUtils` según el idioma activo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 606,
+          "text": "1. `LocaleUtils` mantiene tablas por idioma: separador decimal, separador de miles, orden de fecha, reloj 12h/24h."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 607,
+          "text": "2. `format_number(1234.56)` -> español \"1.234,56\" / inglés \"1,234.56\"."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 608,
+          "text": "3. `format_date(datetime_dict)` -> español \"17/08/2026\" / inglés \"08/17/2026\"."
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 144,
+          "text": "static func format_number(value: float, locale: String) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 145,
+          "text": "match locale:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 147,
+          "text": "return \"%s\" % value  # revisar: separador decimal coma, miles punto (tabla de formato)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 148,
+          "text": "\"en\":"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 153,
+          "text": "static func format_date(datetime: Dictionary, locale: String) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 155,
+          "text": "return \"\""
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 164,
+          "text": "Nota: los formatos finales de `format_number` y `format_date` se implementan en la fase de código real (pendiente), respetando las tablas por idioma definidas en 03-Diseno.md."
+        }
+      ],
+      "analysis": "03 expone formateo mediante idioma activo y ejemplifica valores localizados. El esquema 04 exige locale explícito, deja format_number como interpolación sin transformación y format_date devuelve cadena vacía. La propia nota 04 L164 declara esos formatos pendientes en la fase real, así que el bloque es un esquema histórico, no descripción confiable de la implementación vigente."
+    },
+    {
+      "id": "D04",
+      "topic": "Locales soportados",
+      "classification": "drift_temporal_interno_a_04",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 44,
+          "text": "│   ├── es.po    (fuente de verdad, español)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 45,
+          "text": "│   └── en.po    (inglés)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 489,
+          "text": "**Paridad y calidad:** ES/EN/PT 170/170/170, paridad de claves 0/0/0 en las tres direcciones, placeholders 0 discrepancias; .po ES/EN 0 fuzzy y 0 `msgstr` vacíos (salvo header). **PT ES locale de runtime desde 2026-10-27 (GO #4 del fundador, Log 2217/msg 298):** `pt.po` existe (274 entradas: 159 migradas de JSON + 115 nuevas + 4 plurales canónicos PT) y `LOCALES_SOPORTADOS=[\"es\",\"en\",\"pt\"]` — las 53 claves .po-vivas YA tienen traducción PT en runtime. La conciliación .po↔JSON (msg 153) sigue pendiente como deuda data- del fundador (11 claves solo-JSON mortuas), sin bloqueo para PT."
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 73,
+          "text": "const DEFAULT_LOCALE := \"es\""
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 74,
+          "text": "const CATALOG_DIR := \"res://locales\""
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 75,
+          "text": "const SUPPORTED_LOCALES: Array[String] = [\"es\", \"en\"]"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 223,
+          "text": "1. **Runtime M87** (autoload `Localization` = `scripts/localization/localization_manager.gd`, 377 líneas): carga **exclusivamente `.po`** de `res://locales/` (L15-17: `LOCALES_SOPORTADOS=[\"es\",\"en\"]`, `LOCALE_DEFECTO=\"es\"`, `RUTA_CATALOGOS=\"res://locales/\"`; `_cargar_catalogos` L35-39 → `_parse_po` L276+ → `_catalogs`). **PT ES locale de runtime desde 2026-10-27 (GO #4 del fundador, Log 2217):** `pt.po` creado (21.156 B, sha1 95ee2ce0d1df, 274 entradas, ValidadorPO 0 errores) y `LOCALES_SOPORTADOS=[\"es\",\"en\",\"pt\"]` (+ `_indice_plural` K2, `LocaleUtils` K3/K4). El JSON PT sigue siendo fuente histórica de build (159 claves migradas al .po), no runtime. `tr_key` **normaliza a MAYÚSCULAS** (L137-139): `tr_key(\"clock\",\"estaciones\",\"0\")` → `CLOCK.ESTACIONES.0`. `_buscar_texto` (L163-188): activo → fallback ES → clave cruda + `_avisar_faltante`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 510,
+          "text": "1. `locales/pt.po` creado (21.156 B, sha1 `95ee2ce0d1df`): 274 entradas (270 simples + 4 plurales con msgstr[0]+[1] canónicos PT — ITEMS.SE_OFRECEN \"Oferecendo {n} item/itens\"; M68.TRIP.HORAS/MINUTOS/SEGUNDOS \"{n} hora/horas\", \"{n} minuto/minutos\", \"{n} segundo/segundos\"), 61 marcadores `#. no-traducir`, header PT (Language: pt; Plural-Forms nplurals=2; plural=(n > 1)). Contenido: 159 migradas de strings_pt.json (QA 0 anomalias) + 115 nuevas con canon PT (salvar/item/peca/loja/diário/excluir/ilha/ânimo, você-imperativo formal; M68-heavy) + 13 plantillas no-traducir + npc.catalina exenta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 511,
+          "text": "2. `localization_manager.gd` L15: `LOCALES_SOPORTADOS := [\"es\", \"en\", \"pt\"]`."
+        }
+      ],
+      "analysis": "El esquema antiguo de 04 limita SUPPORTED_LOCALES a es/en; el propio 04 §8b documenta que runtime luego soporta es/en/pt, y 03 registra PT runtime. 03 arquitectura inicial también enumera es/en, pero más adelante registra PT; el inventario superior no se actualizó. Es drift por versiones documentales, no una contradicción sobre el estado actual una vez considerado el apéndice posterior."
+    },
+    {
+      "id": "D05",
+      "topic": "Fallback al catálogo español",
+      "classification": "esquema_no_demuestra_el_contrato",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 27,
+          "text": "│   └── Fallback: clave -> es.po -> clave literal"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 115,
+          "text": "var value: String = TranslationServer.translate(full_key)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 116,
+          "text": "if value.is_empty() or value == full_key:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 117,
+          "text": "value = _tr_from_es(full_key)   # fallback a la fuente de verdad"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 121,
+          "text": "func _tr_from_es(full_key: String) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 122,
+          "text": "# Busca en el catalogo es.po (fuente de verdad); si no existe, devuelve la clave literal."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 123,
+          "text": "return TranslationServer.translate(full_key)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 135,
+          "text": "- `TranslationServer.translate()` ya devuelve el texto del catálogo del locale activo; el fallback explícito a español cubre los casos de clave ausente en el idioma activo."
+        }
+      ],
+      "analysis": "03 especifica explícitamente fallback locale activo → español → clave literal. El esquema de 04 delega _tr_from_es en TranslationServer.translate(full_key), sin mostrar selección explícita del catálogo es.po; L135 afirma que el fallback cubre claves ausentes. El esquema no hace trazable ese paso, pero no basta para demostrar fallo de runtime."
+    },
+    {
+      "id": "D06",
+      "topic": "API pública de traducción",
+      "classification": "incompatibilidad_de_firma_en_esquemas",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 18,
+          "text": "│   │   ├── set_locale(locale) / set_locale_persistente(locale)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 20,
+          "text": "│   │   ├── tr_key(module, section, key, params, n)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 21,
+          "text": "│   │   ├── traducir_clave(clave, params, n)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 22,
+          "text": "│   │   ├── tr_ctx(contexto, module, section, key, params)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "code_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 108,
+          "text": "func tr_key(module: String, section: String, key: String, params: Dictionary = {}) -> String:"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "line": 110,
+          "text": "return format_text(_tr_cached(full_key), params)"
+        }
+      ],
+      "analysis": "03 enumera traducir_clave, tr_ctx y tr_key con argumentos params/n; el esquema de 04 muestra solo tr_key con 4 parámetros y sin plural n/contexto. 04 §8b documenta después la implementación real con un set más amplio de APIs. Registrar como drift entre contrato resumido y esquema, no como prueba de ausencia de API."
+    }
+  ],
+  "aligned_or_contextualized": [
+    "La persistencia M60/señal locale_changed y la sugerencia del SO están descritas en ambos documentos (03 L66/L108-L110 y 04 L87-L96/L295-L307).",
+    "La integración del selector con M53, subtítulos M44 y diálogos M21 coincide en alto nivel.",
+    "La adición PT y el plural PT están concordados por las notas posteriores de 03 y 04 §8b/8c."
+  ],
+  "limitations": "La tarea es comparación de documentos. No se verificaron fuentes GDScript actuales, historial Git completo, runtime ni pruebas; los bloques esquemáticos no se tratan como código vigente."
+}

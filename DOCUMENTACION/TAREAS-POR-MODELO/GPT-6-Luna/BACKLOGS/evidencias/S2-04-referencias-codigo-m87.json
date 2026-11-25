@@ -1,0 +1,289 @@
+{
+  "task_id": "S2-04",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Inventario estático de referencias literales con forma de ruta en 04-Codigo.md de M87 y comprobación de existencia en el disco local. Directorios, archivos y patrones glob se distinguen.",
+  "source": {
+    "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+    "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e"
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "resolution": "rutas res:// y árbol del proyecto contra game/isla-ancestral; scripts de tooling contra raíz del repo si no existen en el proyecto",
+    "exclusions": "Nombres de APIs, rutas incompletas sin separador/extensión, módulos citados sin archivo concreto y nombres mencionados solo en comentarios de historial que no tienen forma de ruta."
+  },
+  "counts": {
+    "unique_references": 14,
+    "by_status": {
+      "existe": 13,
+      "coincidencias": 1
+    },
+    "directories": 3,
+    "file_references": 10,
+    "glob_patterns": 1
+  },
+  "references": [
+    {
+      "reference": "scripts/localization/",
+      "kind": "directorio",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization"
+      ],
+      "source_occurrences": [
+        {
+          "line": 22,
+          "heading": "## 2. Archivos reales (implementados)",
+          "text": "├── scripts/localization/"
+        }
+      ]
+    },
+    {
+      "reference": "project.godot",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/project.godot"
+      ],
+      "source_occurrences": [
+        {
+          "line": 23,
+          "heading": "## 2. Archivos reales (implementados)",
+          "text": "│   ├── localization_manager.gd   → LocalizationManager (autoload \"Localization\", project.godot:60)"
+        },
+        {
+          "line": 40,
+          "heading": "## 2. Archivos reales (implementados)",
+          "text": "(`scripts/localizacion/localization_manager.gd`, project.godot:108, catálogos JSON) sigue registrado y **sin"
+        },
+        {
+          "line": 68,
+          "heading": "# Autoload registrado como \"Localization\" en project.godot (línea 60)",
+          "text": "# Autoload registrado como \"Localization\" en project.godot (línea 60)"
+        },
+        {
+          "line": 344,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Documentar el **conflicto de autoloads duplicados**: existe `Localization` (canónico .po, este módulo) y `LocalizationManager` (scripts/localizacion/, JSON, API `get_texto`/`set_idioma` creado 2026-09-02). Ambos registrados en project.godot. Decisión conservadora: NO se tocó el duplicado (núcleo de otro agente). Un agente dueño de M87 o el QA debe unificarlos (migrar a .po o a JSON) a futuro."
+        }
+      ]
+    },
+    {
+      "reference": "data/localization/",
+      "kind": "directorio",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/data/localization"
+      ],
+      "source_occurrences": [
+        {
+          "line": 33,
+          "heading": "## 2. Archivos reales (implementados)",
+          "text": "├── data/localization/"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localization/test_*.gd",
+      "kind": "patron_glob",
+      "status_on_disk": "coincidencias",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization/test_catalogo_exhaustivo_m87.gd",
+        "game/isla-ancestral/scripts/localization/test_localizacion_iter2.gd",
+        "game/isla-ancestral/scripts/localization/test_localizacion_iter3.gd",
+        "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+        "game/isla-ancestral/scripts/localization/test_localizacion_iter6.gd",
+        "game/isla-ancestral/scripts/localization/test_localization.gd",
+        "game/isla-ancestral/scripts/localization/test_placeholders_plurales_m87.gd",
+        "game/isla-ancestral/scripts/localization/test_validador_po_m87.gd"
+      ],
+      "source_occurrences": [
+        {
+          "line": 35,
+          "heading": "## 2. Archivos reales (implementados)",
+          "text": "└── scripts/localization/test_*.gd → 6 suites headless (ver 06-Plan-Testings.md)"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localization/localization_manager.gd",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization/localization_manager.gd"
+      ],
+      "source_occurrences": [
+        {
+          "line": 67,
+          "heading": "# scripts/localization/localization_manager.gd",
+          "text": "# scripts/localization/localization_manager.gd"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localization/locale_utils.gd",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization/locale_utils.gd"
+      ],
+      "source_occurrences": [
+        {
+          "line": 140,
+          "heading": "# scripts/localization/locale_utils.gd",
+          "text": "# scripts/localization/locale_utils.gd"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/validar_i18n_integridad.py",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "scripts/validar_i18n_integridad.py"
+      ],
+      "source_occurrences": [
+        {
+          "line": 245,
+          "heading": "## 8b. Mapa de claves del código (auditado TANDA 17, 2026-10-21 — msg 192)",
+          "text": "**Verificación:** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0."
+        }
+      ]
+    },
+    {
+      "reference": "locales/es.po",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/locales/es.po"
+      ],
+      "source_occurrences": [
+        {
+          "line": 278,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Confirmar que Godot 4.x carga `res://locales/es.po` directamente con `load()` (loader PO nativo); si no, compilar los catálogos a `.translation` desde el editor."
+        },
+        {
+          "line": 489,
+          "heading": "### Archivos",
+          "text": "- `game/isla-ancestral/locales/es.po` — +9 líneas (13107 B), LF, sin BOM"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localizacion/",
+      "kind": "directorio",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localizacion"
+      ],
+      "source_occurrences": [
+        {
+          "line": 344,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Documentar el **conflicto de autoloads duplicados**: existe `Localization` (canónico .po, este módulo) y `LocalizationManager` (scripts/localizacion/, JSON, API `get_texto`/`set_idioma` creado 2026-09-02). Ambos registrados en project.godot. Decisión conservadora: NO se tocó el duplicado (núcleo de otro agente). Un agente dueño de M87 o el QA debe unificarlos (migrar a .po o a JSON) a futuro."
+        }
+      ]
+    },
+    {
+      "reference": "res://locales/en.po",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/locales/en.po"
+      ],
+      "source_occurrences": [
+        {
+          "line": 397,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos, correr `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`: hoy dan **0 errores** y **OK**."
+        },
+        {
+          "line": 439,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos: `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`. Hoy dan **0 errores** y **OK**."
+        }
+      ]
+    },
+    {
+      "reference": "res://locales/es.po",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/locales/es.po"
+      ],
+      "source_occurrences": [
+        {
+          "line": 397,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos, correr `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`: hoy dan **0 errores** y **OK**."
+        },
+        {
+          "line": 397,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos, correr `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`: hoy dan **0 errores** y **OK**."
+        },
+        {
+          "line": 439,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos: `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`. Hoy dan **0 errores** y **OK**."
+        },
+        {
+          "line": 439,
+          "heading": "### Recomendaciones para el próximo agente",
+          "text": "- Antes de cerrar cualquier módulo que toque textos: `ValidadorPO.validar_par(\"res://locales/es.po\", \"res://locales/en.po\")` y `AuditorClaves.auditar(\"res://scripts\", \"res://locales/es.po\")`. Hoy dan **0 errores** y **OK**."
+        }
+      ]
+    },
+    {
+      "reference": "locales/en.po",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/locales/en.po"
+      ],
+      "source_occurrences": [
+        {
+          "line": 490,
+          "heading": "### Archivos",
+          "text": "- `game/isla-ancestral/locales/en.po` — +9 líneas (12478 B), LF, sin BOM"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localization/auditor_claves.gd",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization/auditor_claves.gd"
+      ],
+      "source_occurrences": [
+        {
+          "line": 491,
+          "heading": "### Archivos",
+          "text": "- `game/isla-ancestral/scripts/localization/auditor_claves.gd` — 2 constantes + 4 líneas de escaneo"
+        }
+      ]
+    },
+    {
+      "reference": "scripts/localization/test_validador_po_m87.gd",
+      "kind": "archivo",
+      "status_on_disk": "existe",
+      "resolved_paths": [
+        "game/isla-ancestral/scripts/localization/test_validador_po_m87.gd"
+      ],
+      "source_occurrences": [
+        {
+          "line": 492,
+          "heading": "### Archivos",
+          "text": "- `game/isla-ancestral/scripts/localization/test_validador_po_m87.gd` — 6 aserciones nuevas en el bloque G"
+        }
+      ]
+    }
+  ],
+  "findings": [
+    "El patrón scripts/localization/test_*.gd sí resuelve 8 archivos en disco, mientras la línea citada de 04 habla de 6 suites; el conteo de archivos del glob no equivale necesariamente a suites ejecutables y requiere clasificarlas antes de declarar un desajuste de cobertura.",
+    "La ruta scripts/validar_i18n_integridad.py se resuelve en la raíz del repositorio, no bajo game/isla-ancestral/scripts; la referencia existe, aunque su ubicación es distinta de la estructura de runtime."
+  ],
+  "limitations": "La búsqueda solo cubre rutas literales reconocidas por el patrón; no demuestra que archivos existentes se usen ni que referencias externas a M87 sean correctas."
+}

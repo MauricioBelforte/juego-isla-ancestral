@@ -1,0 +1,470 @@
+{
+  "task_id": "S2-06",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Matriz claim→fuente para 03-Diseno §3.4, sobre pluralización M87; análisis estático, sin ejecutar pruebas ni modificar el producto.",
+  "sources": {
+    "design": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4"
+    },
+    "code_doc": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e"
+    },
+    "manager": {
+      "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+      "sha256": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6"
+    },
+    "es_po": {
+      "path": "game/isla-ancestral/locales/es.po",
+      "sha256": "f21df27e9d32859fac7a97145da6c2541940b5340f924e6cff0f891017731269"
+    },
+    "en_po": {
+      "path": "game/isla-ancestral/locales/en.po",
+      "sha256": "ad377c73b896f30f46657b0e085abd4592eae523412c954fa05fb9bde7015f48"
+    },
+    "pt_po": {
+      "path": "game/isla-ancestral/locales/pt.po",
+      "sha256": "fe9044e2c3317c26559d53e07985b42e1aebbd1ebdc3c7cc0f27a384d092a76e"
+    },
+    "test": {
+      "path": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+      "sha256": "41c1f35d8a9ba3291bf1c0326c20d94350c01eee645865fa5cac0e0623c8f548"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "citation": "línea exacta con texto literal",
+    "assessment": "corroboración documental/estática; no equivale a prueba runtime"
+  },
+  "claims": [
+    {
+      "id": "C1",
+      "claim": "El catálogo declara formas singular/plural mediante msgid_plural y msgstr[0]/msgstr[1].",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 599,
+          "text": "1. Catálogo declara `msgid_plural` y `msgstr[0]`/`msgstr[1]`."
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/locales/es.po",
+          "line": 35,
+          "text": "msgid \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/es.po",
+          "line": 36,
+          "text": "msgid_plural \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/es.po",
+          "line": 37,
+          "text": "msgstr[0] \"Se ofrece {n} objeto\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/es.po",
+          "line": 38,
+          "text": "msgstr[1] \"Se ofrecen {n} objetos\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/en.po",
+          "line": 35,
+          "text": "msgid \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/en.po",
+          "line": 36,
+          "text": "msgid_plural \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/en.po",
+          "line": 37,
+          "text": "msgstr[0] \"Offering {n} item\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/en.po",
+          "line": 38,
+          "text": "msgstr[1] \"Offering {n} items\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 38,
+          "text": "msgid \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 39,
+          "text": "msgid_plural \"ITEMS.SE_OFRECEN\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 40,
+          "text": "msgstr[0] \"Oferecendo {n} item\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 41,
+          "text": "msgstr[1] \"Oferecendo {n} itens\""
+        }
+      ],
+      "assessment": "corroborado_en_catalogos",
+      "notes": "Las tres variantes consultadas declaran dos formas para ITEMS.SE_OFRECEN."
+    },
+    {
+      "id": "C2",
+      "claim": "La API pública puede traducir una clave con parámetro plural n.",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 600,
+          "text": "2. Código: `Localization.traducir_clave(\"ITEMS.SE_OFRECEN\", {}, n)` obtiene la forma correcta según el idioma activo. *(El ejemplo anterior usaba `tr(\"ITEMS.SE_OFRECEN\", \"\", n)`, que no es la API del módulo: corrección iter. 5. El módulo no traduce con `Object.tr()`.)*"
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 135,
+          "text": "## Traduce `MODULO.SECCION.CLAVE` con params y opcional plural (n)."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 136,
+          "text": "func tr_key(module: String, section: String, key: String, params: Dictionary = {}, n: int = -1) -> String:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 137,
+          "text": "var clave := (module + \".\" + section).to_upper()"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 138,
+          "text": "if key != \"\":"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 139,
+          "text": "clave += \".\" + key.to_upper()"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 140,
+          "text": "return _tr_clave(clave, params, n)"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 157,
+          "text": "## Traduce una clave COMPLETA (ej \"MAIN_MENU.PLAY\" o \"ITEMS.SE_OFRECEN\")."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 158,
+          "text": "## Expone la traducción de claves tal como viven en el catálogo .po, sin dividir."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 159,
+          "text": "func traducir_clave(clave: String, params: Dictionary = {}, n: int = -1) -> String:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 160,
+          "text": "return _tr_clave(clave, params, n)"
+        }
+      ],
+      "assessment": "corroborado_en_codigo_estatico",
+      "notes": "tr_key y traducir_clave aceptan n y delegan a _tr_clave."
+    },
+    {
+      "id": "C3",
+      "claim": "La forma plural seleccionada respeta la regla declarada por el locale activo.",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 600,
+          "text": "2. Código: `Localization.traducir_clave(\"ITEMS.SE_OFRECEN\", {}, n)` obtiene la forma correcta según el idioma activo. *(El ejemplo anterior usaba `tr(\"ITEMS.SE_OFRECEN\", \"\", n)`, que no es la API del módulo: corrección iter. 5. El módulo no traduce con `Object.tr()`.)*"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 601,
+          "text": "- ⚠️ La forma se elige con `_indice_plural()`, que **hardcodea** la regla es/en; **no** lee `Plural-Forms` de la cabecera del `.po`. Ver `02-Analisis.md` §1.5."
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 357,
+          "text": "## Índice plural para es/en/pt: 0 si n==1, 1 si no (nplurals=2)."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 358,
+          "text": "func _indice_plural(locale: String, n: int, nformas: int) -> int:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 359,
+          "text": "if locale == \"es\" or locale == \"en\" or locale == \"pt\":"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 360,
+          "text": "return 0 if n == 1 else mini(1, nformas - 1)"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 361,
+          "text": "return 0"
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 1,
+          "text": "msgid \"\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 2,
+          "text": "msgstr \"\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 3,
+          "text": "\"Content-Type: text/plain; charset=UTF-8\\n\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 4,
+          "text": "\"Language: pt\\n\""
+        },
+        {
+          "file": "game/isla-ancestral/locales/pt.po",
+          "line": 5,
+          "text": "\"Plural-Forms: nplurals=2; plural=(n > 1);\\n\""
+        }
+      ],
+      "assessment": "discrepancia_estatica_pt_n0",
+      "notes": "pt.po declara plural=(n > 1), que ubica n=0 en índice 0; _indice_plural ubica todo n distinto de 1 en índice 1. Para PT n=0 los criterios no concuerdan. No se ejecutó runtime."
+    },
+    {
+      "id": "C4",
+      "claim": "El diseño incluye fallback de la forma plural portuguesa a español cuando falta la forma activa.",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 601,
+          "text": "- ⚠️ La forma se elige con `_indice_plural()`, que **hardcodea** la regla es/en; **no** lee `Plural-Forms` de la cabecera del `.po`. Ver `02-Analisis.md` §1.5."
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 163,
+          "text": "func _buscar_texto(clave: String, n: int) -> String:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 164,
+          "text": "# Plurales primero: las claves plural viven en _plural_forms, no en mensajes."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 165,
+          "text": "if n != -1:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 166,
+          "text": "var plural_data = _plural_forms.get(_locale_actual, {})"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 167,
+          "text": "if plural_data.has(clave):"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 168,
+          "text": "var formas: Array = plural_data[clave]"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 169,
+          "text": "var idx := _indice_plural(_locale_actual, n, formas.size())"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 170,
+          "text": "if idx < formas.size() and formas[idx] != \"\":"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 171,
+          "text": "return str(formas[idx])"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 172,
+          "text": "# Fallback de plural a español si falta en el idioma activo"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 173,
+          "text": "if _locale_actual != LOCALE_DEFECTO:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 174,
+          "text": "var plural_es = _plural_forms.get(LOCALE_DEFECTO, {})"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 175,
+          "text": "if plural_es.has(clave):"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 176,
+          "text": "var formas_es: Array = plural_es[clave]"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 177,
+          "text": "var idx_es := _indice_plural(LOCALE_DEFECTO, n, formas_es.size())"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 178,
+          "text": "if idx_es < formas_es.size() and formas_es[idx_es] != \"\":"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 179,
+          "text": "return str(formas_es[idx_es])"
+        }
+      ],
+      "assessment": "corroborado_en_codigo_estatico_con_limite",
+      "notes": "El fallback existe; el índice de fallback también se calcula por _indice_plural y comparte la regla genérica n==1, aunque el catálogo es usa n!=1. No se valida aquí cómo tratar cantidades 0 en el catálogo fallback."
+    },
+    {
+      "id": "C5",
+      "claim": "Si n no viene en params, format_text recibe el parámetro n automáticamente.",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 602,
+          "text": "3. `format_text()` inyecta `{n}` si el texto lo declara."
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 148,
+          "text": "# Inyectar {n} del plural si no viene en params. n=-1 significa \"sin plural\";"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 149,
+          "text": "# cualquier otro valor (0, 1, 2, -3...) activa la rama plural."
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 150,
+          "text": "var params_final := params.duplicate()"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 151,
+          "text": "if n != -1 and not params_final.has(\"n\"):"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 152,
+          "text": "params_final[\"n\"] = n"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 153,
+          "text": "var resuelto := format_text(texto, params_final)"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "line": 154,
+          "text": "_cache[cache_key] = resuelto"
+        }
+      ],
+      "assessment": "corroborado_en_codigo_estatico",
+      "notes": "_tr_clave copia params y añade n si n!=-1 y params no lo incluye; luego aplica format_text."
+    },
+    {
+      "id": "C6",
+      "claim": "Las pruebas citadas ejercitan plural n=0/1/2/-3.",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 599,
+          "text": "1. Catálogo declara `msgid_plural` y `msgstr[0]`/`msgstr[1]`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 600,
+          "text": "2. Código: `Localization.traducir_clave(\"ITEMS.SE_OFRECEN\", {}, n)` obtiene la forma correcta según el idioma activo. *(El ejemplo anterior usaba `tr(\"ITEMS.SE_OFRECEN\", \"\", n)`, que no es la API del módulo: corrección iter. 5. El módulo no traduce con `Object.tr()`.)*"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 601,
+          "text": "- ⚠️ La forma se elige con `_indice_plural()`, que **hardcodea** la regla es/en; **no** lee `Plural-Forms` de la cabecera del `.po`. Ver `02-Analisis.md` §1.5."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 602,
+          "text": "3. `format_text()` inyecta `{n}` si el texto lo declara."
+        }
+      ],
+      "evidence_refs": [
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 122,
+          "text": "func _test_plurales_numeros_fechas_edge() -> void:"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 123,
+          "text": "_loc.set_locale(\"es\")"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 124,
+          "text": "# n=0 (es: plural), n=1 (singular), n=2 (plural), n=-3 (plural), n decimal vía int"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 125,
+          "text": "_check(_loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, 0) == \"Se ofrecen 0 objetos\", \"es n=0 plural: \" + _loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, 0))"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 126,
+          "text": "_check(_loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, 2) == \"Se ofrecen 2 objetos\", \"es n=2 plural: \" + _loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, 2))"
+        },
+        {
+          "file": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+          "line": 127,
+          "text": "_check(_loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, -3) == \"Se ofrecen -3 objetos\", \"es n=-3 plural: \" + _loc.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, -3))"
+        }
+      ],
+      "assessment": "parcial_solo_es",
+      "notes": "El fragmento de prueba fija locale es. No constituye cobertura PT ni prueba por sí mismo el comportamiento actual en ejecución."
+    }
+  ],
+  "summary": [
+    "La estructura de dos formas y la API con n tienen respaldo en catálogos/código estático.",
+    "Hay una discrepancia concreta para PT cuando n=0: la expresión plural del catálogo y el selector de índice no coinciden.",
+    "La prueba localizada cubre varios valores únicamente con locale es; no se encontró en ese bloque una aserción para PT.",
+    "No se propone flip ni cambio: el criterio esperado para n=0 en portugués requiere validación con responsable de M87, diseño gettext y/o prueba runtime autorizada."
+  ],
+  "limitations": "No se ejecutó Godot/GdUnit; no se confirmó en ejecución el índice efectivo de Translation ni el contrato semántico de cantidades cero."
+}

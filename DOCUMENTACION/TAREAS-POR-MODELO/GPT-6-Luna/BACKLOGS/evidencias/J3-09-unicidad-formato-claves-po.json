@@ -1,0 +1,5341 @@
+{
+  "task_id": "J3-09",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Auditoría estática de unicidad y formato de msgid no vacío en locales/es.po, en.po y pt.po. No edita catálogos ni atribuye defectos de traducción.",
+  "sources": {
+    "es": {
+      "path": "game/isla-ancestral/locales/es.po",
+      "sha256": "f21df27e9d32859fac7a97145da6c2541940b5340f924e6cff0f891017731269"
+    },
+    "en": {
+      "path": "game/isla-ancestral/locales/en.po",
+      "sha256": "ad377c73b896f30f46657b0e085abd4592eae523412c954fa05fb9bde7015f48"
+    },
+    "pt": {
+      "path": "game/isla-ancestral/locales/pt.po",
+      "sha256": "fe9044e2c3317c26559d53e07985b42e1aebbd1ebdc3c7cc0f27a384d092a76e"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "canonical_pattern": "^[A-Z][A-Z0-9_]*(?:\\.[A-Z0-9_]+)+$",
+    "duplicates": "Counter sobre msgid literal; cabecera msgid \"\" excluida",
+    "documented_classes": "npc.catalina = excepción literal del ValidadorPO; eventos.* = legado M60 citado en 03; M68.* minúscula en sufijo se informa aparte, sin inferir aprobación."
+  },
+  "counts": {
+    "keys_by_locale": {
+      "es": 276,
+      "en": 276,
+      "pt": 276
+    },
+    "duplicate_key_count_by_locale": {
+      "es": 0,
+      "en": 0,
+      "pt": 0
+    },
+    "noncanonical_by_locale": {
+      "es": 55,
+      "en": 55,
+      "pt": 55
+    },
+    "class_counts_es": {
+      "convencion_canonica": 221,
+      "excepcion_explicita_validador": 1,
+      "M68_sufijo_lowercase_excepcion_no_explicita_en_validador": 40,
+      "legado_m60_documentado": 14
+    },
+    "parity_differences": {
+      "es_vs_en": {
+        "only_es": 0,
+        "only_en": 0
+      },
+      "es_vs_pt": {
+        "only_es": 0,
+        "only_pt": 0
+      },
+      "en_vs_pt": {
+        "only_en": 0,
+        "only_pt": 0
+      }
+    }
+  },
+  "parity": {
+    "es_vs_en": {
+      "only_es": [],
+      "only_en": []
+    },
+    "es_vs_pt": {
+      "only_es": [],
+      "only_pt": []
+    },
+    "en_vs_pt": {
+      "only_en": [],
+      "only_pt": []
+    }
+  },
+  "duplicate_keys": {
+    "es": [],
+    "en": [],
+    "pt": []
+  },
+  "keys_by_locale": {
+    "es": [
+      {
+        "key": "MAIN_MENU.PLAY",
+        "line": 8,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "MAIN_MENU.OPTIONS",
+        "line": 11,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.ENERGIA",
+        "line": 14,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.VIDA",
+        "line": 17,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA",
+        "line": 20,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA_DESC",
+        "line": 23,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA",
+        "line": 26,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA_DESC",
+        "line": 29,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIALOGOS.VECINO_SALUDO",
+        "line": 32,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.SE_OFRECEN",
+        "line": 35,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.PAUSA",
+        "line": 40,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONTINUAR",
+        "line": 43,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AJUSTES",
+        "line": 46,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR",
+        "line": 49,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_TITULO",
+        "line": 52,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_CONFIRMA",
+        "line": 55,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_EXITO",
+        "line": 58,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_FALLO",
+        "line": 61,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_SLOT",
+        "line": 64,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_TITULO",
+        "line": 67,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_CONFIRMA",
+        "line": 70,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_EXITO",
+        "line": 73,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_CORRUPTO",
+        "line": 76,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_RECUPERADO",
+        "line": 79,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_DISCO_LLENO",
+        "line": 82,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_H",
+        "line": 85,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_1",
+        "line": 88,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_M",
+        "line": 91,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_1",
+        "line": 94,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_BLOQUEADO",
+        "line": 99,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ULTIMO_GUARDADO",
+        "line": 103,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_GUARDADO_PREVIO",
+        "line": 106,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SALIR",
+        "line": 111,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO",
+        "line": 114,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO_CONFIRMAR",
+        "line": 117,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.JUGAR",
+        "line": 120,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREDITOS",
+        "line": 123,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONFIRMAR",
+        "line": 126,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CANCELAR",
+        "line": 129,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TITULO",
+        "line": 132,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ELEGIR_OPCION",
+        "line": 135,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ADVANCED",
+        "line": 138,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CERRAR",
+        "line": 141,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MESA_TRABAJO",
+        "line": 144,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FOGATA",
+        "line": 147,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TELAR",
+        "line": 150,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_RECETAS",
+        "line": 153,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SELECCIONA_RECETA",
+        "line": 156,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_1",
+        "line": 159,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_N",
+        "line": 162,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_OK",
+        "line": 165,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_FALLO",
+        "line": 168,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO_HINT",
+        "line": 171,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOT_LIBRE",
+        "line": 174,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOTS",
+        "line": 177,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO",
+        "line": 180,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BUSCAR",
+        "line": 183,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ORDENAR",
+        "line": 186,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.APLICAR",
+        "line": 189,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR",
+        "line": 192,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_TITULO",
+        "line": 195,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_MENSAJE",
+        "line": 198,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "npc.catalina",
+        "line": 201,
+        "matches_canonical_regex": false,
+        "classification": "excepcion_explicita_validador"
+      },
+      {
+        "key": "TIENDAS.GENERAL",
+        "line": 204,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.HERRERIA",
+        "line": 207,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VIAJERO",
+        "line": 210,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CATALOGO",
+        "line": 213,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_TITULO",
+        "line": 216,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SALDO",
+        "line": 219,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SELECCIONA",
+        "line": 222,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_1",
+        "line": 225,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_N",
+        "line": 228,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_1",
+        "line": 231,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_N",
+        "line": 234,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRA_INFO",
+        "line": 237,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENTA_INFO",
+        "line": 240,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_OK",
+        "line": 243,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_FALLO",
+        "line": 246,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_FONDOS",
+        "line": 249,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_STOCK",
+        "line": 252,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.INVENTARIO_LLENO",
+        "line": 255,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_ITEMS",
+        "line": 258,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CERRADA",
+        "line": 261,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.0",
+        "line": 264,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.1",
+        "line": 267,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.2",
+        "line": 270,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.3",
+        "line": 273,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CATEGORIAS",
+        "line": 283,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ENTRADAS",
+        "line": 286,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_ENTRADAS",
+        "line": 289,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PERSONAJES",
+        "line": 292,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_LUGARES",
+        "line": 295,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CRIATURAS",
+        "line": 298,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PLANTAS",
+        "line": 301,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MINERALES",
+        "line": 304,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RECETAS",
+        "line": 307,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PISTAS",
+        "line": 310,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_SELLOS",
+        "line": 313,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RUINAS",
+        "line": 316,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CARTAS",
+        "line": 319,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_DESCUBRIMIENTOS",
+        "line": 322,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MISIONES",
+        "line": 325,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_EVENTOS",
+        "line": 328,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_FOTOGRAFIAS",
+        "line": 331,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TITULO",
+        "line": 334,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.CARGANDO",
+        "line": 337,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TIP",
+        "line": 340,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FUERA_TEMPORADA",
+        "line": 343,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA",
+        "line": 347,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA.SENAL",
+        "line": 350,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA",
+        "line": 353,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA.SENAL",
+        "line": 356,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS",
+        "line": 359,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS.SENAL",
+        "line": 362,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO",
+        "line": 365,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO.SENAL",
+        "line": 368,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO",
+        "line": 371,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO.SENAL",
+        "line": 374,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.01",
+        "line": 377,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.02",
+        "line": 380,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4_BRIS",
+        "line": 383,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.01",
+        "line": 386,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.02",
+        "line": 389,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.03",
+        "line": 392,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7_CAMARA",
+        "line": 395,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.FINAL_SECRETO",
+        "line": 398,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.SECRETO.01",
+        "line": 401,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_brisa",
+        "line": 404,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_espejo",
+        "line": 407,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_estacion",
+        "line": 410,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_este",
+        "line": 413,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_muelle",
+        "line": 416,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_plataforma",
+        "line": 419,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_sur",
+        "line": 422,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_estacion_aurora",
+        "line": 425,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_aurora",
+        "line": 428,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_muelle",
+        "line": 431,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_festival_muelle",
+        "line": 434,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_aurora",
+        "line": 437,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_este",
+        "line": 440,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_festival",
+        "line": 443,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_sur",
+        "line": 446,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_norte_plataforma",
+        "line": 449,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_aurora",
+        "line": 452,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_norte",
+        "line": 455,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_aurora",
+        "line": 458,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_muelle",
+        "line": 461,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.GENERICO",
+        "line": 465,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SIGN.estacion_central",
+        "line": 469,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.muelle_raiz_sur",
+        "line": 473,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.plataforma_norte",
+        "line": 477,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_aurora",
+        "line": 481,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_brisa",
+        "line": 485,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_espejo",
+        "line": 489,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_este",
+        "line": 493,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_festival",
+        "line": 497,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_norte",
+        "line": 501,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_sur",
+        "line": 505,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO",
+        "line": 508,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO_DESC",
+        "line": 511,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES",
+        "line": 514,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES_DESC",
+        "line": 517,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO",
+        "line": 520,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO_DESC",
+        "line": 523,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA",
+        "line": 526,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC",
+        "line": 529,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO",
+        "line": 532,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO_DESC",
+        "line": 535,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA",
+        "line": 538,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA_DESC",
+        "line": 541,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE",
+        "line": 544,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE_DESC",
+        "line": 547,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.STOP.estacion_central",
+        "line": 550,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.muelle_raiz_sur",
+        "line": 553,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.plataforma_norte",
+        "line": 556,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_aurora",
+        "line": 559,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_brisa",
+        "line": 562,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_espejo",
+        "line": 565,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_este",
+        "line": 568,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_festival",
+        "line": 571,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_norte",
+        "line": 574,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_sur",
+        "line": 577,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.TRIP.ARRIVED_AT",
+        "line": 580,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.CURRENCY",
+        "line": 584,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.DURATION",
+        "line": 587,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS_MINUTOS",
+        "line": 591,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOADING",
+        "line": 594,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOCKED",
+        "line": 597,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.NO_MONEY",
+        "line": 600,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.OUT_OF_SCHEDULE",
+        "line": 603,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.PRICE",
+        "line": 606,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SCHEDULE",
+        "line": 609,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SPECIAL_ONLY",
+        "line": 612,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.TRAVELING_TO",
+        "line": 615,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS",
+        "line": 618,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.MINUTOS",
+        "line": 623,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SEGUNDOS",
+        "line": 628,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TITULO",
+        "line": 634,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.CATALOGO_TITULO",
+        "line": 637,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.HINT",
+        "line": 640,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.VACIO",
+        "line": 643,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO",
+        "line": 646,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO_EQUIPO",
+        "line": 649,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.EQUIPADO",
+        "line": 653,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_QUITAR",
+        "line": 656,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_ELEGIR",
+        "line": 659,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.PRENDAS",
+        "line": 662,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_CAPITULO",
+        "line": 665,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_FLAG",
+        "line": 668,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ",
+        "line": 671,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "UI.INTERACTUAR",
+        "line": 674,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_TITULO",
+        "line": 678,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MAESTRO",
+        "line": 680,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MUSICA",
+        "line": 682,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.EFECTOS",
+        "line": 684,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SILENCIAR",
+        "line": 686,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.OPCIONES",
+        "line": 688,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO",
+        "line": 690,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_QUIET",
+        "line": 692,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_MEDIO",
+        "line": 694,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO_PRESET",
+        "line": 696,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.COMPRESION",
+        "line": 698,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DISPOSITIVO_SALIDA",
+        "line": 700,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_FALLA",
+        "line": 702,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER",
+        "line": 704,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.TITULO",
+        "line": 707,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DETALLE",
+        "line": 710,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.REFERENCIAS",
+        "line": 713,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BUSCAR",
+        "line": 716,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO",
+        "line": 719,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_TODOS",
+        "line": 722,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_NUEVOS",
+        "line": 725,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_VISTOS",
+        "line": 728,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_COMPLETADOS",
+        "line": 731,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_FAVORITOS",
+        "line": 734,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_NUEVO",
+        "line": 737,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_VISTO",
+        "line": 740,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_COMPLETADO",
+        "line": 743,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_SELECCION",
+        "line": 746,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_RESULTADOS",
+        "line": 749,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FAVORITO",
+        "line": 752,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_GLOBAL",
+        "line": 755,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_CAT",
+        "line": 758,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DIA",
+        "line": 761,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BLOQUEADO",
+        "line": 765,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AMBIENTE",
+        "line": 769,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CINEMATICAS",
+        "line": 772,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.UI",
+        "line": 775,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOCES",
+        "line": 778,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.CAPITULO_COMPLETADO",
+        "line": 781,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA",
+        "line": 784,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA_USO",
+        "line": 787,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.INTERACTUAR",
+        "line": 790,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_BIENVENIDA",
+        "line": 793,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_MOVERSE",
+        "line": 796,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.VECINO",
+        "line": 799,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.ARRIBADA",
+        "line": 803,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.CANCELADO",
+        "line": 806,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORAR",
+        "line": 809,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.NIVEL_MEJORA",
+        "line": 812,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORA_MAXIMA",
+        "line": 815,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DURABILIDAD_NIVEL",
+        "line": 818,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "eventos.historia_c1_nombre",
+        "line": 824,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c1_desc",
+        "line": 827,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_nombre",
+        "line": 830,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_desc",
+        "line": 833,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_nombre",
+        "line": 836,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_desc",
+        "line": 839,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_nombre",
+        "line": 842,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_desc",
+        "line": 845,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_nombre",
+        "line": 848,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_desc",
+        "line": 851,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_nombre",
+        "line": 854,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_desc",
+        "line": 857,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_nombre",
+        "line": 860,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_desc",
+        "line": 863,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      }
+    ],
+    "en": [
+      {
+        "key": "MAIN_MENU.PLAY",
+        "line": 8,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "MAIN_MENU.OPTIONS",
+        "line": 11,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.ENERGIA",
+        "line": 14,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.VIDA",
+        "line": 17,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA",
+        "line": 20,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA_DESC",
+        "line": 23,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA",
+        "line": 26,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA_DESC",
+        "line": 29,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIALOGOS.VECINO_SALUDO",
+        "line": 32,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.SE_OFRECEN",
+        "line": 35,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.PAUSA",
+        "line": 40,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONTINUAR",
+        "line": 43,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AJUSTES",
+        "line": 46,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR",
+        "line": 49,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_TITULO",
+        "line": 52,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_CONFIRMA",
+        "line": 55,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_EXITO",
+        "line": 58,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_FALLO",
+        "line": 61,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_SLOT",
+        "line": 64,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_TITULO",
+        "line": 67,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_CONFIRMA",
+        "line": 70,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_EXITO",
+        "line": 73,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_CORRUPTO",
+        "line": 76,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_RECUPERADO",
+        "line": 79,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_DISCO_LLENO",
+        "line": 82,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_H",
+        "line": 85,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_1",
+        "line": 88,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_M",
+        "line": 91,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_1",
+        "line": 94,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_BLOQUEADO",
+        "line": 99,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ULTIMO_GUARDADO",
+        "line": 103,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_GUARDADO_PREVIO",
+        "line": 106,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SALIR",
+        "line": 111,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO",
+        "line": 114,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO_CONFIRMAR",
+        "line": 117,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.JUGAR",
+        "line": 120,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREDITOS",
+        "line": 123,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONFIRMAR",
+        "line": 126,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CANCELAR",
+        "line": 129,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TITULO",
+        "line": 132,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ELEGIR_OPCION",
+        "line": 135,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ADVANCED",
+        "line": 138,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CERRAR",
+        "line": 140,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MESA_TRABAJO",
+        "line": 143,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FOGATA",
+        "line": 146,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TELAR",
+        "line": 149,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_RECETAS",
+        "line": 152,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SELECCIONA_RECETA",
+        "line": 155,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_1",
+        "line": 158,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_N",
+        "line": 161,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_OK",
+        "line": 164,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_FALLO",
+        "line": 167,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO_HINT",
+        "line": 170,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOT_LIBRE",
+        "line": 173,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOTS",
+        "line": 176,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO",
+        "line": 179,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BUSCAR",
+        "line": 182,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ORDENAR",
+        "line": 185,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.APLICAR",
+        "line": 188,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR",
+        "line": 191,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_TITULO",
+        "line": 194,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_MENSAJE",
+        "line": 197,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "npc.catalina",
+        "line": 200,
+        "matches_canonical_regex": false,
+        "classification": "excepcion_explicita_validador"
+      },
+      {
+        "key": "TIENDAS.GENERAL",
+        "line": 203,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.HERRERIA",
+        "line": 206,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VIAJERO",
+        "line": 209,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CATALOGO",
+        "line": 212,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_TITULO",
+        "line": 215,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SALDO",
+        "line": 218,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SELECCIONA",
+        "line": 221,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_1",
+        "line": 224,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_N",
+        "line": 227,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_1",
+        "line": 230,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_N",
+        "line": 233,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRA_INFO",
+        "line": 236,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENTA_INFO",
+        "line": 239,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_OK",
+        "line": 242,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_FALLO",
+        "line": 245,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_FONDOS",
+        "line": 248,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_STOCK",
+        "line": 251,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.INVENTARIO_LLENO",
+        "line": 254,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_ITEMS",
+        "line": 257,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CERRADA",
+        "line": 260,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.0",
+        "line": 263,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.1",
+        "line": 266,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.2",
+        "line": 269,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.3",
+        "line": 272,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CATEGORIAS",
+        "line": 279,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ENTRADAS",
+        "line": 282,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_ENTRADAS",
+        "line": 285,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PERSONAJES",
+        "line": 288,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_LUGARES",
+        "line": 291,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CRIATURAS",
+        "line": 294,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PLANTAS",
+        "line": 297,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MINERALES",
+        "line": 300,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RECETAS",
+        "line": 303,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PISTAS",
+        "line": 306,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_SELLOS",
+        "line": 309,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RUINAS",
+        "line": 312,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CARTAS",
+        "line": 315,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_DESCUBRIMIENTOS",
+        "line": 318,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MISIONES",
+        "line": 321,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_EVENTOS",
+        "line": 324,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_FOTOGRAFIAS",
+        "line": 327,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TITULO",
+        "line": 330,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.CARGANDO",
+        "line": 333,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TIP",
+        "line": 336,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FUERA_TEMPORADA",
+        "line": 339,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA",
+        "line": 343,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA.SENAL",
+        "line": 346,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA",
+        "line": 349,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA.SENAL",
+        "line": 352,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS",
+        "line": 355,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS.SENAL",
+        "line": 358,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO",
+        "line": 361,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO.SENAL",
+        "line": 364,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO",
+        "line": 367,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO.SENAL",
+        "line": 370,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.01",
+        "line": 373,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.02",
+        "line": 376,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4_BRIS",
+        "line": 379,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.01",
+        "line": 382,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.02",
+        "line": 385,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.03",
+        "line": 388,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7_CAMARA",
+        "line": 391,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.FINAL_SECRETO",
+        "line": 394,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.SECRETO.01",
+        "line": 397,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_brisa",
+        "line": 400,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_espejo",
+        "line": 403,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_estacion",
+        "line": 406,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_este",
+        "line": 409,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_muelle",
+        "line": 412,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_plataforma",
+        "line": 415,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_sur",
+        "line": 418,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_estacion_aurora",
+        "line": 421,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_aurora",
+        "line": 424,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_muelle",
+        "line": 427,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_festival_muelle",
+        "line": 430,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_aurora",
+        "line": 433,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_este",
+        "line": 436,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_festival",
+        "line": 439,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_sur",
+        "line": 442,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_norte_plataforma",
+        "line": 445,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_aurora",
+        "line": 448,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_norte",
+        "line": 451,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_aurora",
+        "line": 454,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_muelle",
+        "line": 457,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.GENERICO",
+        "line": 461,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SIGN.estacion_central",
+        "line": 465,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.muelle_raiz_sur",
+        "line": 469,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.plataforma_norte",
+        "line": 473,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_aurora",
+        "line": 477,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_brisa",
+        "line": 481,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_espejo",
+        "line": 485,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_este",
+        "line": 489,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_festival",
+        "line": 493,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_norte",
+        "line": 497,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_sur",
+        "line": 501,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO",
+        "line": 504,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO_DESC",
+        "line": 507,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES",
+        "line": 510,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES_DESC",
+        "line": 513,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO",
+        "line": 516,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO_DESC",
+        "line": 519,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA",
+        "line": 522,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC",
+        "line": 525,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO",
+        "line": 528,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO_DESC",
+        "line": 531,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA",
+        "line": 534,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA_DESC",
+        "line": 537,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE",
+        "line": 540,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE_DESC",
+        "line": 543,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.STOP.estacion_central",
+        "line": 546,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.muelle_raiz_sur",
+        "line": 549,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.plataforma_norte",
+        "line": 552,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_aurora",
+        "line": 555,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_brisa",
+        "line": 558,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_espejo",
+        "line": 561,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_este",
+        "line": 564,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_festival",
+        "line": 567,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_norte",
+        "line": 570,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_sur",
+        "line": 573,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.TRIP.ARRIVED_AT",
+        "line": 576,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.CURRENCY",
+        "line": 580,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.DURATION",
+        "line": 583,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS_MINUTOS",
+        "line": 587,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOADING",
+        "line": 590,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOCKED",
+        "line": 593,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.NO_MONEY",
+        "line": 596,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.OUT_OF_SCHEDULE",
+        "line": 599,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.PRICE",
+        "line": 602,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SCHEDULE",
+        "line": 605,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SPECIAL_ONLY",
+        "line": 608,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.TRAVELING_TO",
+        "line": 611,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS",
+        "line": 614,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.MINUTOS",
+        "line": 619,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SEGUNDOS",
+        "line": 624,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TITULO",
+        "line": 630,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.CATALOGO_TITULO",
+        "line": 633,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.HINT",
+        "line": 636,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.VACIO",
+        "line": 639,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO",
+        "line": 642,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO_EQUIPO",
+        "line": 645,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.EQUIPADO",
+        "line": 649,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_QUITAR",
+        "line": 652,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_ELEGIR",
+        "line": 655,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.PRENDAS",
+        "line": 658,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_CAPITULO",
+        "line": 661,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_FLAG",
+        "line": 664,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ",
+        "line": 667,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "UI.INTERACTUAR",
+        "line": 670,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_TITULO",
+        "line": 674,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MAESTRO",
+        "line": 676,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MUSICA",
+        "line": 678,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.EFECTOS",
+        "line": 680,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SILENCIAR",
+        "line": 682,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.OPCIONES",
+        "line": 684,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO",
+        "line": 686,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_QUIET",
+        "line": 688,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_MEDIO",
+        "line": 690,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO_PRESET",
+        "line": 692,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.COMPRESION",
+        "line": 694,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DISPOSITIVO_SALIDA",
+        "line": 696,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_FALLA",
+        "line": 698,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER",
+        "line": 700,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.TITULO",
+        "line": 703,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DETALLE",
+        "line": 706,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.REFERENCIAS",
+        "line": 709,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BUSCAR",
+        "line": 712,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO",
+        "line": 715,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_TODOS",
+        "line": 718,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_NUEVOS",
+        "line": 721,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_VISTOS",
+        "line": 724,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_COMPLETADOS",
+        "line": 727,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_FAVORITOS",
+        "line": 730,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_NUEVO",
+        "line": 733,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_VISTO",
+        "line": 736,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_COMPLETADO",
+        "line": 739,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_SELECCION",
+        "line": 742,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_RESULTADOS",
+        "line": 745,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FAVORITO",
+        "line": 748,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_GLOBAL",
+        "line": 751,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_CAT",
+        "line": 754,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DIA",
+        "line": 757,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BLOQUEADO",
+        "line": 761,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AMBIENTE",
+        "line": 765,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CINEMATICAS",
+        "line": 768,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.UI",
+        "line": 771,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOCES",
+        "line": 774,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.CAPITULO_COMPLETADO",
+        "line": 777,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA",
+        "line": 780,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA_USO",
+        "line": 783,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.INTERACTUAR",
+        "line": 786,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_BIENVENIDA",
+        "line": 789,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_MOVERSE",
+        "line": 792,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.VECINO",
+        "line": 795,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.ARRIBADA",
+        "line": 799,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.CANCELADO",
+        "line": 802,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORAR",
+        "line": 805,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.NIVEL_MEJORA",
+        "line": 808,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORA_MAXIMA",
+        "line": 811,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DURABILIDAD_NIVEL",
+        "line": 814,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "eventos.historia_c1_nombre",
+        "line": 820,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c1_desc",
+        "line": 823,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_nombre",
+        "line": 826,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_desc",
+        "line": 829,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_nombre",
+        "line": 832,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_desc",
+        "line": 835,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_nombre",
+        "line": 838,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_desc",
+        "line": 841,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_nombre",
+        "line": 844,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_desc",
+        "line": 847,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_nombre",
+        "line": 850,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_desc",
+        "line": 853,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_nombre",
+        "line": 856,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_desc",
+        "line": 859,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      }
+    ],
+    "pt": [
+      {
+        "key": "MAIN_MENU.PLAY",
+        "line": 9,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "MAIN_MENU.OPTIONS",
+        "line": 12,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.ENERGIA",
+        "line": 15,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "HUD.VIDA",
+        "line": 19,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA",
+        "line": 22,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.MADERA_DESC",
+        "line": 25,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA",
+        "line": 29,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.IDIOMA_DESC",
+        "line": 32,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIALOGOS.VECINO_SALUDO",
+        "line": 35,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "ITEMS.SE_OFRECEN",
+        "line": 38,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.PAUSA",
+        "line": 44,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONTINUAR",
+        "line": 48,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AJUSTES",
+        "line": 51,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR",
+        "line": 54,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_TITULO",
+        "line": 57,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_CONFIRMA",
+        "line": 60,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_EXITO",
+        "line": 63,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_FALLO",
+        "line": 66,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_SLOT",
+        "line": 69,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_TITULO",
+        "line": 72,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_CONFIRMA",
+        "line": 75,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BORRAR_EXITO",
+        "line": 78,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_CORRUPTO",
+        "line": 81,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_RECUPERADO",
+        "line": 84,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SAVE_DISCO_LLENO",
+        "line": 87,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_H",
+        "line": 91,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.HORAS_1",
+        "line": 95,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_M",
+        "line": 99,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MIN_1",
+        "line": 103,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.GUARDAR_BLOQUEADO",
+        "line": 106,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ULTIMO_GUARDADO",
+        "line": 109,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_GUARDADO_PREVIO",
+        "line": 112,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SALIR",
+        "line": 115,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO",
+        "line": 118,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER_TITULO_CONFIRMAR",
+        "line": 121,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.JUGAR",
+        "line": 124,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREDITOS",
+        "line": 128,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CONFIRMAR",
+        "line": 132,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CANCELAR",
+        "line": 136,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TITULO",
+        "line": 139,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ELEGIR_OPCION",
+        "line": 142,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ADVANCED",
+        "line": 146,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CERRAR",
+        "line": 149,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MESA_TRABAJO",
+        "line": 152,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FOGATA",
+        "line": 155,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.TELAR",
+        "line": 158,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SIN_RECETAS",
+        "line": 161,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SELECCIONA_RECETA",
+        "line": 164,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_1",
+        "line": 167,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CREAR_N",
+        "line": 170,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_OK",
+        "line": 173,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CRAFT_FALLO",
+        "line": 176,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO_HINT",
+        "line": 179,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOT_LIBRE",
+        "line": 182,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SLOTS",
+        "line": 186,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.INVENTARIO",
+        "line": 189,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.BUSCAR",
+        "line": 193,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.ORDENAR",
+        "line": 197,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.APLICAR",
+        "line": 201,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR",
+        "line": 205,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_TITULO",
+        "line": 208,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DESCARTAR_MENSAJE",
+        "line": 211,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "npc.catalina",
+        "line": 214,
+        "matches_canonical_regex": false,
+        "classification": "excepcion_explicita_validador"
+      },
+      {
+        "key": "TIENDAS.GENERAL",
+        "line": 217,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.HERRERIA",
+        "line": 220,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VIAJERO",
+        "line": 223,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CATALOGO",
+        "line": 227,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_TITULO",
+        "line": 230,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SALDO",
+        "line": 234,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SELECCIONA",
+        "line": 237,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_1",
+        "line": 241,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRAR_N",
+        "line": 245,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_1",
+        "line": 249,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENDER_N",
+        "line": 253,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.COMPRA_INFO",
+        "line": 256,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.VENTA_INFO",
+        "line": 259,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_OK",
+        "line": 262,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.TRANSACCION_FALLO",
+        "line": 265,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_FONDOS",
+        "line": 268,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_STOCK",
+        "line": 271,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.INVENTARIO_LLENO",
+        "line": 274,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.SIN_ITEMS",
+        "line": 277,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TIENDAS.CERRADA",
+        "line": 280,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.0",
+        "line": 284,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.1",
+        "line": 287,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.2",
+        "line": 290,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "CLOCK.ESTACIONES.3",
+        "line": 293,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CATEGORIAS",
+        "line": 296,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ENTRADAS",
+        "line": 300,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_ENTRADAS",
+        "line": 303,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PERSONAJES",
+        "line": 306,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_LUGARES",
+        "line": 309,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CRIATURAS",
+        "line": 313,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PLANTAS",
+        "line": 317,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MINERALES",
+        "line": 320,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RECETAS",
+        "line": 323,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_PISTAS",
+        "line": 327,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_SELLOS",
+        "line": 330,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_RUINAS",
+        "line": 333,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_CARTAS",
+        "line": 337,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_DESCUBRIMIENTOS",
+        "line": 340,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_MISIONES",
+        "line": 343,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_EVENTOS",
+        "line": 347,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.CAT_FOTOGRAFIAS",
+        "line": 350,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TITULO",
+        "line": 353,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.CARGANDO",
+        "line": 356,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "LOADING.TIP",
+        "line": 359,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.FUERA_TEMPORADA",
+        "line": 362,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA",
+        "line": 366,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.DIRIGIBLE_LUNA.SENAL",
+        "line": 369,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA",
+        "line": 372,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.FESTIVAL_CATALINA.SENAL",
+        "line": 375,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS",
+        "line": 379,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.LLEGADA_FINNEAS.SENAL",
+        "line": 382,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO",
+        "line": 385,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.MUELLE_MATEO.SENAL",
+        "line": 388,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO",
+        "line": 391,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.EVENT.PUERTO_BRUNO.SENAL",
+        "line": 394,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.01",
+        "line": 397,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4.02",
+        "line": 400,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C4_BRIS",
+        "line": 403,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.01",
+        "line": 406,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.02",
+        "line": 409,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7.03",
+        "line": 412,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.C7_CAMARA",
+        "line": 415,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.FINAL_SECRETO",
+        "line": 418,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.NARR.SECRETO.01",
+        "line": 421,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_brisa",
+        "line": 424,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_espejo",
+        "line": 427,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_estacion",
+        "line": 430,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_este",
+        "line": 433,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_muelle",
+        "line": 436,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_plataforma",
+        "line": 439,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_aurora_sur",
+        "line": 442,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_estacion_aurora",
+        "line": 445,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_aurora",
+        "line": 448,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_este_muelle",
+        "line": 451,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_festival_muelle",
+        "line": 454,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_aurora",
+        "line": 457,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_este",
+        "line": 460,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_festival",
+        "line": 463,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_muelle_sur",
+        "line": 466,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_norte_plataforma",
+        "line": 469,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_aurora",
+        "line": 472,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_plataforma_norte",
+        "line": 475,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_aurora",
+        "line": 478,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.ROUTE.r_sur_muelle",
+        "line": 481,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.GENERICO",
+        "line": 485,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SIGN.estacion_central",
+        "line": 489,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.muelle_raiz_sur",
+        "line": 493,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.plataforma_norte",
+        "line": 497,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_aurora",
+        "line": 501,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_brisa",
+        "line": 505,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_espejo",
+        "line": 509,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_este",
+        "line": 513,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_festival",
+        "line": 517,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_norte",
+        "line": 521,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SIGN.puerto_sur",
+        "line": 525,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO",
+        "line": 528,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_INVIERNO_DESC",
+        "line": 531,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES",
+        "line": 534,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_LUCES_DESC",
+        "line": 537,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO",
+        "line": 540,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_OTONO_DESC",
+        "line": 543,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA",
+        "line": 546,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_PRIMAVERA_DESC",
+        "line": 549,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO",
+        "line": 552,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.FESTIVAL_VERANO_DESC",
+        "line": 555,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA",
+        "line": 558,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.LUNA_LLENA_DESC",
+        "line": 561,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE",
+        "line": 564,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.SPECIAL.TOUR_DIRIGIBLE_DESC",
+        "line": 567,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.STOP.estacion_central",
+        "line": 570,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.muelle_raiz_sur",
+        "line": 573,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.plataforma_norte",
+        "line": 576,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_aurora",
+        "line": 579,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_brisa",
+        "line": 582,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_espejo",
+        "line": 585,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_este",
+        "line": 588,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_festival",
+        "line": 591,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_norte",
+        "line": 594,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.STOP.puerto_sur",
+        "line": 597,
+        "matches_canonical_regex": false,
+        "classification": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+      },
+      {
+        "key": "M68.TRIP.ARRIVED_AT",
+        "line": 600,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.CURRENCY",
+        "line": 604,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.DURATION",
+        "line": 607,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS_MINUTOS",
+        "line": 611,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOADING",
+        "line": 614,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.LOCKED",
+        "line": 618,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.NO_MONEY",
+        "line": 621,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.OUT_OF_SCHEDULE",
+        "line": 624,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.PRICE",
+        "line": 627,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SCHEDULE",
+        "line": 630,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SPECIAL_ONLY",
+        "line": 633,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.TRAVELING_TO",
+        "line": 636,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.HORAS",
+        "line": 640,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.MINUTOS",
+        "line": 646,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M68.TRIP.SEGUNDOS",
+        "line": 652,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TITULO",
+        "line": 658,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.CATALOGO_TITULO",
+        "line": 661,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.HINT",
+        "line": 664,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.VACIO",
+        "line": 667,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO",
+        "line": 670,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.BONO_EQUIPO",
+        "line": 673,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.EQUIPADO",
+        "line": 677,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_QUITAR",
+        "line": 680,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.TOOLTIP_ELEGIR",
+        "line": 683,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.PRENDAS",
+        "line": 686,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_CAPITULO",
+        "line": 689,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ_FLAG",
+        "line": 692,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "EQUIP.REQ",
+        "line": 695,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "UI.INTERACTUAR",
+        "line": 698,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_TITULO",
+        "line": 702,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MAESTRO",
+        "line": 705,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MUSICA",
+        "line": 709,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.EFECTOS",
+        "line": 712,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.SILENCIAR",
+        "line": 716,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.OPCIONES",
+        "line": 719,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO",
+        "line": 722,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_QUIET",
+        "line": 726,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_MEDIO",
+        "line": 729,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.RANGO_DINAMICO_PRESET",
+        "line": 732,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.COMPRESION",
+        "line": 735,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DISPOSITIVO_SALIDA",
+        "line": 738,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AUDIO_FALLA",
+        "line": 741,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOLVER",
+        "line": 744,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.TITULO",
+        "line": 747,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DETALLE",
+        "line": 750,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.REFERENCIAS",
+        "line": 753,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BUSCAR",
+        "line": 756,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO",
+        "line": 760,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_TODOS",
+        "line": 764,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_NUEVOS",
+        "line": 767,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_VISTOS",
+        "line": 771,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_COMPLETADOS",
+        "line": 774,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FILTRO_FAVORITOS",
+        "line": 778,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_NUEVO",
+        "line": 781,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_VISTO",
+        "line": 785,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.ESTADO_COMPLETADO",
+        "line": 788,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_SELECCION",
+        "line": 791,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.SIN_RESULTADOS",
+        "line": 794,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.FAVORITO",
+        "line": 798,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_GLOBAL",
+        "line": 801,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.PROGRESO_CAT",
+        "line": 804,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.DIA",
+        "line": 807,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "DIARY.BLOQUEADO",
+        "line": 811,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.AMBIENTE",
+        "line": 816,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.CINEMATICAS",
+        "line": 820,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.UI",
+        "line": 823,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.VOCES",
+        "line": 826,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.CAPITULO_COMPLETADO",
+        "line": 829,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA",
+        "line": 832,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.HERRAMIENTA_USO",
+        "line": 835,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.INTERACTUAR",
+        "line": 838,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_BIENVENIDA",
+        "line": 841,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.PROLOGO_MOVERSE",
+        "line": 844,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "TUTORIAL.VECINO",
+        "line": 847,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.ARRIBADA",
+        "line": 850,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "M69.FEEDBACK.CANCELADO",
+        "line": 853,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORAR",
+        "line": 856,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.NIVEL_MEJORA",
+        "line": 859,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.MEJORA_MAXIMA",
+        "line": 862,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "SETTINGS.DURABILIDAD_NIVEL",
+        "line": 865,
+        "matches_canonical_regex": true,
+        "classification": "convencion_canonica"
+      },
+      {
+        "key": "eventos.historia_c1_nombre",
+        "line": 871,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c1_desc",
+        "line": 874,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_nombre",
+        "line": 877,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c2_desc",
+        "line": 880,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_nombre",
+        "line": 883,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c3_desc",
+        "line": 886,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_nombre",
+        "line": 889,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c4_desc",
+        "line": 892,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_nombre",
+        "line": 895,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c5_desc",
+        "line": 898,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_nombre",
+        "line": 901,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c6_desc",
+        "line": 904,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_nombre",
+        "line": 907,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      },
+      {
+        "key": "eventos.historia_c7_desc",
+        "line": 910,
+        "matches_canonical_regex": false,
+        "classification": "legado_m60_documentado"
+      }
+    ]
+  },
+  "noncanonical_examples": [
+    {
+      "key": "npc.catalina",
+      "line_es": 201,
+      "class": "excepcion_explicita_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_brisa",
+      "line_es": 404,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_espejo",
+      "line_es": 407,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_estacion",
+      "line_es": 410,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_este",
+      "line_es": 413,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_muelle",
+      "line_es": 416,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_plataforma",
+      "line_es": 419,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_aurora_sur",
+      "line_es": 422,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_estacion_aurora",
+      "line_es": 425,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_este_aurora",
+      "line_es": 428,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_este_muelle",
+      "line_es": 431,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_festival_muelle",
+      "line_es": 434,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_muelle_aurora",
+      "line_es": 437,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_muelle_este",
+      "line_es": 440,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_muelle_festival",
+      "line_es": 443,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_muelle_sur",
+      "line_es": 446,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_norte_plataforma",
+      "line_es": 449,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_plataforma_aurora",
+      "line_es": 452,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_plataforma_norte",
+      "line_es": 455,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_sur_aurora",
+      "line_es": 458,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.ROUTE.r_sur_muelle",
+      "line_es": 461,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.estacion_central",
+      "line_es": 469,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.muelle_raiz_sur",
+      "line_es": 473,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.plataforma_norte",
+      "line_es": 477,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_aurora",
+      "line_es": 481,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_brisa",
+      "line_es": 485,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_espejo",
+      "line_es": 489,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_este",
+      "line_es": 493,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_festival",
+      "line_es": 497,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_norte",
+      "line_es": 501,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.SIGN.puerto_sur",
+      "line_es": 505,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.estacion_central",
+      "line_es": 550,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.muelle_raiz_sur",
+      "line_es": 553,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.plataforma_norte",
+      "line_es": 556,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_aurora",
+      "line_es": 559,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_brisa",
+      "line_es": 562,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_espejo",
+      "line_es": 565,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_este",
+      "line_es": 568,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_festival",
+      "line_es": 571,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_norte",
+      "line_es": 574,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "M68.STOP.puerto_sur",
+      "line_es": 577,
+      "class": "M68_sufijo_lowercase_excepcion_no_explicita_en_validador"
+    },
+    {
+      "key": "eventos.historia_c1_nombre",
+      "line_es": 824,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c1_desc",
+      "line_es": 827,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c2_nombre",
+      "line_es": 830,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c2_desc",
+      "line_es": 833,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c3_nombre",
+      "line_es": 836,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c3_desc",
+      "line_es": 839,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c4_nombre",
+      "line_es": 842,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c4_desc",
+      "line_es": 845,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c5_nombre",
+      "line_es": 848,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c5_desc",
+      "line_es": 851,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c6_nombre",
+      "line_es": 854,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c6_desc",
+      "line_es": 857,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c7_nombre",
+      "line_es": 860,
+      "class": "legado_m60_documentado"
+    },
+    {
+      "key": "eventos.historia_c7_desc",
+      "line_es": 863,
+      "class": "legado_m60_documentado"
+    }
+  ],
+  "findings": [
+    "Los tres catálogos tienen 276 claves, cero duplicados y conjuntos idénticos (paridad de claves 0/0/0).",
+    "55 claves por catálogo no coinciden con el regex canónico estricto: 14 eventos.* de legado M60, npc.catalina con excepción explícita, y 40 M68.* con sufijos en minúscula (rutas/señales/paradas).",
+    "El código ValidadorPO declara npc.catalina como excepción pero no incluye una excepción equivalente para los sufijos lower-case M68; reportar posible divergencia entre convención vigente/validador/datos, sin asumir que los IDs M68 deban renombrarse."
+  ],
+  "limitations": "La auditoría comprueba formato literal y unicidad, no que cada msgid tenga consumidor ni que las traducciones sean semánticamente correctas."
+}

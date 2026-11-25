@@ -36,6 +36,13 @@ extends Node
 ## Carpeta de recetas .tres (catalogo data-driven, RF12).
 const DIR_PIEZAS: String = "res://data/construccion/piezas"
 
+# Modelo puro del CONTENIDO de las piezas (cofre/muebles/puertas).
+# Se carga con `preload` y NO por `class_name`: un archivo NUEVO con
+# `class_name` no esta en la cache global de clases hasta que el editor
+# reescanea el proyecto, y en headless eso rompia el arranque del autoload
+# ("Identifier BuildInteraction not declared in the current scope").
+const INTERACCION := preload("res://scripts/construccion/build_interaction.gd")
+
 # ── Senales (la capa UI/M18/M64 escucha; aqui no hay logica de UI) ──────
 signal obra_activa(activa: bool)
 signal pieza_colocada(receta_id: StringName, celda: Vector3i)
@@ -490,14 +497,14 @@ func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 func contenido_de_pieza(clave: String) -> Dictionary:
 	if not _estructuras.has(clave):
 		return {}
-	return BuildInteraction.contenido_de(_estructuras[clave])
+	return INTERACCION.contenido_de(_estructuras[clave])
 
 ## Asigna items {item_id: cantidad} a una pieza colocada (lo que hace M18 al
 ## guardar cosas en un cofre). Devuelve false si no hay pieza en esa clave.
 func asignar_contenido(clave: String, items: Dictionary) -> bool:
 	if not _estructuras.has(clave):
 		return false
-	_estructuras[clave]["cofre"] = BuildInteraction.items_a_contenido(items)
+	_estructuras[clave]["cofre"] = INTERACCION.items_a_contenido(items)
 	return true
 
 ## A diferencia de mover_pieza, NO desocupa el origen: la pieza original
@@ -601,7 +608,7 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 	# CONTENIDO de las piezas funcionales (camas, cofre, estanteria...): los
 	# ITEMS vuelven al inventario (no se pierden). El modelo puro es
 	# `BuildInteraction` (sin nodos): la logica vive alla, aqui solo se aplica.
-	var contenido_liberado: Dictionary = BuildInteraction.liberar_contenido(e)
+	var contenido_liberado: Dictionary = INTERACCION.liberar_contenido(e)
 	var items_liberados: Dictionary = contenido_liberado.get("items", {})
 	for item_id in items_liberados.keys():
 		if _f_agregar_item.is_valid():
