@@ -37,12 +37,21 @@ extends SceneTree
 const MODULO := "M17 Construccion: materiales compartidos entre instancias (L227)"
 const CATALOGO := preload("res://scripts/construccion/build_catalog_db.gd")
 const GHOST := preload("res://scripts/construccion/build_ghost.gd")
+const MUNDO := preload("res://scripts/construccion/construccion_mundo.gd")
 const MGR := preload("res://scripts/construccion/build_manager.gd")
 const ZONE_REG := preload("res://scripts/construccion/zone_registry.gd")
 const CHECKS_MINIMOS := 8
 
 ## Ruta real de malla de una receta del catalogo (pared_esquina -> pared de casa).
 const RUTA_REAL := "res://assets/3d/alta/18-Casas_pared_madera.glb"
+
+# Mundo falso: terreno plano (superficie "terreno" hasta y=0) para que la
+# pieza tenga soporte al colocarse en y=1.
+class MundoPlano:
+	extends ConstruccionMundo
+	var suelo: int = 0
+	func superficie_voxel(celda: Vector3i) -> StringName:
+		return &"terreno" if celda.y <= suelo else &"aire"
 
 var _checks := 0
 var _fallos := 0
@@ -120,7 +129,10 @@ func _correr() -> void:
 	var mgr = MGR.new()
 	mgr.name = "BuildManagerMateriales"
 	root.add_child(mgr)
-	mgr.conectar_mundo(null)
+	mgr.conectar_mundo(MundoPlano.new())
+	# Sin inventario: la colocacion no cobra recursos (si se dejara el
+	# autoload real `/root/Inventario`, faltarian materiales y no colocaria).
+	mgr.conectar_inventario(null)
 	mgr.conectar_zonas(ZONE_REG.new())
 	mgr.set_limite_mundo(AABB())
 	await process_frame
@@ -131,7 +143,9 @@ func _correr() -> void:
 	var mallas_antes: int = _contar_mallas(root)
 	mgr.registrar_receta(receta)
 	mgr.seleccionar_pieza(receta)
-	mgr.confirmar_colocacion(Vector3i(5, 1, 5))
+	var res_col: Dictionary = mgr.confirmar_colocacion(Vector3i(5, 1, 5))
+	_check("D0: la pieza de prueba se coloca (precondicion)",
+		bool(res_col.get("ok", false)), str(res_col.get("motivos", [])))
 	var mallas_despues: int = _contar_mallas(root)
 	_check("D1: colocar una pieza NO crea instancias de malla en M17 (la pieza es un VOXEL de M08)",
 		mallas_despues == mallas_antes,
@@ -140,8 +154,14 @@ func _correr() -> void:
 		mgr.cantidad_estructuras() == 1, "estructuras=%d" % mgr.cantidad_estructuras())
 
 	# La resolucion por receta usa la cache compartida (mismo camino).
-	var resuelta_a: Mesh = fantasma_a.resolver_malla(receta)
-	var resuelta_b: Mesh = fantasma_b.resolver_malla(receta)
+	# Instancias NUEVAS: `fantasma_a` tiene una precarga sintetica (B1) que por
+	# diseno tiene prioridad en su cache local.
+	var fantasma_c := GHOST.new()
+	var fantasma_d := GHOST.new()
+	root.add_child(fantasma_c)
+	root.add_child(fantasma_d)
+	var resuelta_a: Mesh = fantasma_c.resolver_malla(receta)
+	var resuelta_b: Mesh = fantasma_d.resolver_malla(receta)
 	_check("D3: resolver_malla de la MISMA receta en dos instancias da el mismo recurso",
 		resuelta_a != null and resuelta_b != null and resuelta_a.get_instance_id() == resuelta_b.get_instance_id(),
 		"a=%s b=%s" % [str(resuelta_a.get_instance_id()) if resuelta_a else "-", str(resuelta_b.get_instance_id()) if resuelta_b else "-"])

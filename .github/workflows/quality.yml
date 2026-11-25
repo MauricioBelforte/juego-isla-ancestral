@@ -468,6 +468,14 @@ jobs:
           # undo/redo con BuildHistory.TIPO_ALMACENAR. 33 checks, 0 fallos, EXIT 0;
           # guarda anti-falso-verde probada con STUB (13 fallos / EXIT 1).
           suite --script tests/test_m17_almacenamiento.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2447): MATERIALES
+          # COMPARTIDOS entre instancias (L227) — cache ESTATICA ruta->Mesh en
+          # BuildGhost: la malla de la receta (y sus materiales) se resuelve UNA vez
+          # para todos los consumidores en vez de instanciar una copia por fantasma;
+          # las piezas COLOCADAS son voxeles de M08 (no crean mallas). 13 checks, 0 fallos,
+          # EXIT 0; guarda anti-falso-verde probada quitando la cache compartida
+          # (1 check en ROJO / EXIT 1).
+          suite --script tests/test_m17_materiales_compartidos.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

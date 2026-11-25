@@ -6,6 +6,13 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P5: **L227** materiales compartidos entre instancias — cache ESTATICA ruta->Mesh en `BuildGhost` + contador `BuildGhost.cargas_de_malla()` (las piezas colocadas son voxeles de M08: la parte de mallas NO es de M17, queda anotada con dueño) — 2026-11-25 (Log 2447)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_materiales_compartidos.gd` (13 checks, 0 fallos, EXIT 0; ROJO-VERDE sin la cache compartida → 1 fallo/EXIT 1) + cableada en `quality.yml` (M118) — 2026-11-25 (Log 2447)
+- [x] [17-Construccion] Flips M17: 143 → 144 de 175 (pendientes 31 → 30); GLOBAL fila 17 sincronizada — 2026-11-25 (Log 2447)
+- [x] [Canal] Mensaje 065 de cierre de tanda P5 reportado a la directora — 2026-11-25 10:35
+- [x] [Log] Log reservado: **2447** — tanda P5 M17 (materiales compartidos L227)
+- [ ] [17-Construccion] L225 (raycast 1/frame): la cache existe en BuildPreview pero el throttle vive en la capa de input (M70) → para cerrarlo con honestidad hace falta el dueño de esa capa; si no, queda [?] con dueño M70
+- [ ] [17-Construccion] L196/L198/L173/L173: son DATOS de otros dueños (M25 ruinas, M73 festival, M92 costos) → NO fabricarlos para inflar el contador
 - [x] [17-Construccion] Tanda P4: implementar `BuildManager.almacenar_pieza()` (NO existia ninguna funcion de almacenamiento) — L132 (espacio libre M14, atomicidad) y L170 (el item guardado conserva el id de RECETA) — 2026-11-25 (Log 2446)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_almacenamiento.gd` (33 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 13 fallos/EXIT 1) + cableada en `quality.yml` (M118) — 2026-11-25 (Log 2446)
 - [x] [17-Construccion] Flips M17: 141 → 143 de 175 (pendientes 33 → 31); GLOBAL fila 17, guía 08 y ESTADO-PARALELO sincronizados — 2026-11-25 (Log 2446)

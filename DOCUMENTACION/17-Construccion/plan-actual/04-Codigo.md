@@ -638,5 +638,53 @@ Corresponde al ítem de HUD (L81) — no es deuda de código de M17 resueluble h
 ### 10.5 Lo que sigue abierto (31 `[ ]` + 1 `[?]`)
 
 Sin cambios respecto de §9.4 salvo el conteo: UI/arte/audio (L78-86, L127), inventario cruzado con
-M14 para el resto de家具, navmesh M64 (L161), datos M25/M73 (L196/L198), M92 (L173), M93 (L200),
+M14 para el resto de los muebles, navmesh M64 (L161), datos M25/M73 (L196/L198), M92 (L173), M93 (L200),
 raycast 1/frame (L225), materiales compartidos (L227) y playtest/QA manual (L262-L266).
+
+## 11. Tanda materiales compartidos (2026-11-25 10:2x) — 1 ítem cerrado (L227)
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 11.1 Medición previa (qué era real y qué no)
+
+- Las piezas **colocadas** en M17 **no son mallas**: `ConstruccionMundo.escribir_voxel()` escribe
+  **vóxeles** en el terreno (M08). No hay una instancia de malla por pieza colocada que pueda
+  duplicar materiales → esa parte del ítem vive en **M08** (VoxelTerrain/VoxelTool) y se deja
+  anotada, no se roba.
+- Lo que **sí** existe en M17 son las **mallas de previa** (el fantasma). Antes de esta tanda,
+  `BuildGhost` tenía cache **por instancia** (`_cache_malla`): cada fantasma instanciaba su
+  propia copia de la escena `.glb` de la receta → N copias de la misma malla y de sus materiales
+  (CPU + memoria + batching roto).
+
+### 11.2 Qué se añadió
+
+`scripts/construccion/build_ghost.gd`:
+- `static var _cache_malla_compartida: Dictionary` — cache **ESTÁTICA** ruta→Mesh: la malla se
+  resuelve **UNA vez** para todos los consumidores y todas las instancias reciben el **mismo**
+  recurso (y por tanto el mismo material de superficie).
+- `static var _cargas_malla: int` + `static func cargas_de_malla() -> int` — contador auditable
+  (1 por ruta, no 1 por consumidor).
+- `registrar_malla()` (precarga explícita) **sigue siendo por instancia**: son datos de test y no
+  deben contaminar el cache compartido.
+- Ruta inexistente → `null` sin fallar y **sin** consumir carga.
+
+### 11.3 Ítem cerrado
+
+| Ítem | Evidencia (texto literal de los checks) |
+|---|---|
+| **L227** Materiales de pieza compartidos entre instancias (static batching de Godot) | Suite NUEVA `res://tests/test_m17_materiales_compartidos.gd` (**13 checks, 0 fallos, EXIT 0**): "A2: la carga de la malla ocurre UNA sola vez (cache compartida, no 1 por consumidor)" · "A3: el 2do consumidor NO vuelve a cargar la malla (reutiliza la compartida)" · "A4: las dos instancias reciben el MISMO recurso de malla (mismo instance id)" · "A5: el material de superficie es el MISMO recurso en ambas instancias (no se duplica)" · "B1/B2: la precarga explícita tiene prioridad en SU instancia y NO contamina el cache compartido" · "C1/C2: ruta inexistente degrada a null sin fallar y sin gastar carga" · "D1: colocar una pieza NO crea instancias de malla en M17 (la pieza es un VOXEL de M08)" · "D2/D3" |
+
+### 11.4 Anti-falso-verde
+
+Quitando la cache compartida (cada consumidor vuelve a instanciar la escena) la suite da
+**1 check en ROJO / EXIT 1** ("A3: el 2do consumidor NO vuelve a cargar la malla"); restaurada,
+**13/0 / EXIT 0**.
+
+### 11.5 Deuda que queda (honesta)
+
+- El material **override** del fantasma (`_mat`, el tinte verde/rojo) es **por instancia a
+  propósito**: cada fantasma cambia de color según su estado. Con 1-2 fantasmas visibles no
+  afecta al batching; si el pool creciera, habría que compartir el material por estado.
+- Los materiales del **terreno voxel** (las piezas ya colocadas) son de **M08** (VoxelTerrain /
+  VoxelTool): quedan fuera de M17 y se anotan para su dueño.
