@@ -49,6 +49,15 @@ func _test_compatibilidad() -> void:
 	_check("isla_hielo compatible con 1.0.0", dm.es_compatible("isla_hielo", "1.0.0") == true)
 	_check("isla_hielo incompatible con 0.9.0", dm.es_compatible("isla_hielo", "0.9.0") == false)
 	_check("dlc inexistente incompatible", dm.es_compatible("no_existe", "1.0.0") == false)
+	# 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445): el manager exige propiedad
+	# registrada (gate cerrado por defecto) y este test activaba sin poseer → quedaba
+	# en rojo con "[FAIL] isla_hielo activo". Se fija el contrato completo: sin
+	# propiedad NO se activa, con propiedad SÍ (mismo contrato que
+	# tests/unit/dlc/test_dlc_manager.gd, que ya lo cubría).
+	dm.desactivar("isla_hielo")
+	_check("activar sin propiedad falla", dm.activar("isla_hielo") == false)
+	_check("sin propiedad no queda activo", dm.esta_activo("isla_hielo") == false)
+	_check("registrar_propiedad isla_hielo", dm.registrar_propiedad("isla_hielo") == true)
 	_check("activar isla_hielo", dm.activar("isla_hielo") == true)
 	_check("isla_hielo activo", dm.esta_activo("isla_hielo") == true)
 	_check("activar inexistente falla", dm.activar("no_existe") == false)

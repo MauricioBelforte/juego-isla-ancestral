@@ -14,7 +14,7 @@ ningún techo de deuda ni silenciar gates.
 | Job | Antes | Ahora |
 |---|---|---|
 | GDScript Lint/Format | 3 `SCRIPT ERROR: Identifier not found` | 0 errores sobre 1366 scripts |
-| Test Suite (M112) | 3 de 100 suites en rojo | 100/100 (evidencia en §3) |
+| Test Suite (M112) | 3 de 100 suites en rojo | 101 suites ejecutadas, 0 fallidas (§4) |
 | Architecture Guard | `AUDIT_EXIT=1`, arista `A1\|DataStore,SaveManager` no permitida | exit 0 |
 | Legal Tooling | 31/32 + 84 `.glb` sin copyright + 1 gate | 32/32 y todos los gates en 0 |
 
