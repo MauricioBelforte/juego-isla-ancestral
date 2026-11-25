@@ -159,3 +159,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 61-Backlog-Q-Round3-Modulos-Medios.md (10 tareas: 25-40 [?] en 10 modulos)
 
 **TOTAL ACUMULADO: 3564[x] en 60 backlogs + 10 nuevas = 3574**
+
+## NUEVO 25nov 11:00 (10 tareas)
+- 62-Backlog-Implementables-45-Nemotron320.md (10 tareas: 45 implementables M01+M20)
+
+**TOTAL ACUMULADO: 3564[x] en 61 backlogs + 10 nuevas = 3574**
