@@ -1,9 +1,9 @@
 # GUIA COMPARATIVA DE MODELOS — V1
 
-**Modelo:** Gemini 3.8 Flash
-**Plataforma:** Kilo Code
-**Fecha:** 2026-11-17
-**Estado:** V1 — 12 modelos activos de la flota con información útil resumida.
+**Modelo:** GPT-6-Luna
+**Plataforma:** DeepAI Code
+**Fecha:** 2026-11-25
+**Estado:** V1 — perfiles de modelos activos y en prueba con información útil resumida.
 
 ## Propósito
 
@@ -466,6 +466,44 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 
 ---
 
+### 13. GPT-6 Luna (OpenAI / DeepAI Code) — **Incorporado por solicitud del fundador (2026-11-25)**
+
+**Modelo / ID oficial:** GPT-6 Luna (`gpt-6-luna`).
+**Plataforma de esta sesión:** DeepAI Code.
+**Rol sugerido:** agente generalista eficiente para trabajo enfocado y de alto volumen; análisis y síntesis de contexto extenso; programación asistida por herramientas; clasificación y salidas estructuradas; lectura de imágenes cuando el canal de ejecución entregue la imagen al modelo.
+
+**Capacidades confirmadas en fuentes oficiales de OpenAI (consulta: 2026-11-25):**
+- La ficha API lo describe como su modelo más eficiente para tareas enfocadas y de alto volumen. Entrada de texto e imagen; salida de texto; razonamiento configurable (`none`, `low`, `medium`, `high`, `xhigh`, `max`).
+- Ventana de contexto de 1.050.000 tokens, máximo de entrada documentado de 922.000 tokens y máximo de salida de 128.000 tokens.
+- API Responses y Chat Completions disponibles; Responses admite herramientas integradas y function calling. La ficha enumera streaming, structured outputs y function calling, además de web search, file search, generación de imágenes, code interpreter, hosted shell, apply patch, skills, computer use, MCP y tool search. **La disponibilidad en la API no implica que todas esas herramientas estén habilitadas en cada plataforma o sesión.**
+- La ficha API declara audio y video no soportados como modalidades de entrada/salida para este modelo; no se debe inferir generación de audio/video.
+- Precio estándar API publicado: USD 0,10 por millón de tokens de entrada, USD 0,01 por millón de tokens de entrada cacheados y USD 0,50 por millón de tokens de salida. Batch y Flex figuran a mitad del precio Standard; Fast a 2×. Los prompts con más de 272K tokens tienen multiplicadores específicos; revisar la ficha vigente antes de presupuestar.
+- En el anuncio de lanzamiento, OpenAI reporta mejoras de factualidad y coding frente a GPT-5.6 Luna. Publica 66,6 % para Luna en su comparación de coding a esfuerzo máximo y mejoras de computer use; estas métricas son **autorreporte del proveedor**, no benchmarks independientes ni una prueba del agente en este repositorio.
+- OpenAI indica disponibilidad en su API como `gpt-6-luna`; en productos ChatGPT/Codex la disponibilidad depende del plan y producto. No asumir que cada interfaz expone el mismo modelo o las mismas herramientas.
+
+**Fortalezas potenciales para Isla Ancestral (derivadas de la ficha, todavía sin calibración empírica propia):**
+- Clasificación de alto volumen, extracción de datos y generación/validación de JSON estructurado.
+- Síntesis de documentos largos y comparación de especificaciones, preservando referencias y señalando incertidumbre.
+- Asistencia de programación y flujos agentic cuando las herramientas necesarias están habilitadas; para cambios de Godot, seguir las verificaciones del proyecto y no considerar una respuesta del modelo como prueba de ejecución.
+- Análisis de capturas/imágenes solo cuando la sesión recibe realmente el contenido visual; verificarlo antes de aceptar QA visual. La ficha API admite imagen, pero no certifica la ruta visual de todas las integraciones.
+
+**Limitaciones y cautelas:**
+- No hay todavía historial de trabajo ni pruebas de calibración de GPT-6 Luna en este proyecto. Las capacidades y benchmark del proveedor no sustituyen evidencia de ejecución, pruebas headless, revisión visual o QA cruzado.
+- El modelo no ofrece audio/video como modalidad según la ficha API consultada.
+- El precio de API no describe el costo, límites ni disponibilidad de esta sesión de DeepAI Code. No se documentaron cuotas específicas del usuario.
+- No asignar automáticamente tareas visuales, módulos críticos o cierres §21.8 antes de confirmar herramientas disponibles y completar una calibración con evidencia.
+
+**Regla inicial de asignación:** tareas de análisis/síntesis, clasificación, JSON, documentación de alto volumen y coding asistido con alcance verificable; puede apoyar QA de imagen si se confirma que recibe la captura en la sesión. Para cambios de código, exigir evidencia reproducible (diff, comandos/tests y salida). Para el primer uso operativo, solicitar al director una calibración y tareas acotadas; no heredar el historial ni los resultados de GPT-5.6 Luna.
+
+**Fuentes oficiales consultadas:**
+- Ficha del modelo API: https://developers.openai.com/api/docs/models/gpt-6-luna
+- Anuncio de GPT-6 Sol y Luna: https://openai.com/index/introducing-gpt-6-sol-and-luna/
+- Catálogo de modelos API: https://developers.openai.com/api/docs/models
+
+**Estado empírico en Isla Ancestral:** sin tareas verificadas todavía. La ficha del modelo y las afirmaciones del proveedor se mantienen separadas de los resultados propios del proyecto.
+
+---
+
 ## Reglas de uso
 
 1. **Solo modelos aprobados por el fundador** se agregan a la tabla de activos.
@@ -483,6 +521,6 @@ Carpeta: `Mensajes entre modelos/ERNIE-5.5-Flash-Preview/` (canal activo desde 2
 - Protocolo de comunicación: `Mensajes entre modelos/GUIA-COMUNICACION.md`.
 - Protocolo multiagente: `CHECKLIST-GLOBAL.md` §21.
 
-**Modelo:** agnes-3-flash (directora, edición empírica) / Gemini 3.8 Flash / Nemotron-3.5-Super-VL (editor)
-**Plataforma:** Kilo Code
-**Fecha:** 2026-11-18
+**Modelo:** GPT-6-Luna
+**Plataforma:** DeepAI Code
+**Fecha:** 2026-11-25
