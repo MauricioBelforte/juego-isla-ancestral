@@ -32,11 +32,15 @@
   (18000 frames = 300 s simulados): **exit 0, 0 SCRIPT ERROR**; 8 líneas `ERROR:` de
   RID/renderer son ruido conocido de `--headless` (no hay servidor de render).
 
-## Post-criticos (cuando los 12 cierren)
-- [ ] M17: 31 `[ ]` restantes en `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md`
-  (UI de modo, HUD, fantasmas, audio, navmesh, cross-module).
-- [ ] M129: 54 items (merch/numeracion/boot) — **verificado: el 05-Checklist de M129 tiene 0
+## Post-criticos (cuando los 12 cierren) — 2 marcas, ninguna pendiente de este agente
+- [~] M17: 31 `[ ]` restantes en `DOCUMENTACION/17-Construccion/plan-actual/05-Checklist.md`
+  (UI de modo, HUD, fantasmas, audio, navmesh, cross-module). **NO es mío desde el 2026-11-25:
+  reclamado por `minimax-m3-1-flash`** (`ESTADO-PARALELO`, tanda P4). Ya cerró almacenamiento
+  33/0, categorías 24/0 y la suite nueva de HUD 22/0. Mi rol ahí es cross-QA (§21.8).
+- [x] M129: 54 items (merch/numeracion/boot) — **verificado: el 05-Checklist de M129 tiene 0
   pendientes**; los 54 del backlog eran el conteo previo al cierre v3 del 2026-11-06.
+  Re-medido el 2026-11-25 14:30 (`grep '^\s*- \[ \]'` sobre `DOCUMENTACION/129-Merchandising/
+  plan-actual/05-Checklist.md`): **0 pendientes**. Las suites de M129 verdes hoy: 58/0 y 11/0.
 
 ## Nota de método
 

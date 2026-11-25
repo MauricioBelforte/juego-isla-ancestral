@@ -116,6 +116,10 @@ enum Motivo {
 	# voxeles). La pieza NO se registra y el costo se devuelve. TEMPORAL: se
 	# puede reintentar cuando el mundo vuelva a responder.
 	NO_SE_PUDO_ESCRIBIR,
+	# El BORRADO en el mundo NO ocurrio (hay terreno, pero no se borraron
+	# voxeles). La pieza se queda en su sitio y no se devuelven materiales.
+	# TEMPORAL: se puede reintentar cuando el mundo vuelva a responder.
+	NO_SE_PUDO_BORRAR,
 }
 
 ## ── Motivos TEMPORALES (edge case L de M17) ────────────────────────────────
@@ -136,6 +140,9 @@ const MOTIVOS_TEMPORALES: Array = [
 	# La escritura fallo por un problema transitorio del mundo (M08) -> el
 	# reintento funciona igual (y el costo ya fue devuelto).
 	Motivo.NO_SE_PUDO_ESCRIBIR,
+	# El borrado fallo por un problema transitorio del mundo (M08) -> el
+	# reintento funciona igual (y no se devolvieron materiales).
+	Motivo.NO_SE_PUDO_BORRAR,
 ]
 
 ## true si el motivo puede desaparecer sin que el jugador cambie de celda.
@@ -166,6 +173,7 @@ const TEXTO: Dictionary = {
 	Motivo.SIN_INVENTARIO: "no hay inventario conectado (no se puede guardar)",
 	Motivo.TERRENO_NO_CARGADO: "el terreno de esa zona todavia no esta cargado",
 	Motivo.NO_SE_PUDO_ESCRIBIR: "no se pudo escribir en el mundo (intenta de nuevo)",
+	Motivo.NO_SE_PUDO_BORRAR: "no se pudo borrar la pieza del mundo (intenta de nuevo)",
 }
 
 ## Texto de un motivo. Tolerante a valores desconocidos.

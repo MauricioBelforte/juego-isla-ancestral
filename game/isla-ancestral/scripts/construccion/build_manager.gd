@@ -645,6 +645,14 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 			[ConstruccionTipos.Motivo.SOSTIENE_OTRA_PIEZA],
 			["%s sostiene %s apoyada en %s" % [String(e.get("tipo", "")), str(apoyadas), str(celdas)]], [])
 	var borrados: int = _mundo.borrar_voxel(celdas)
+	# ATOMICIDAD (2026-11-25): si hay terreno y el borrado NO ocurrio (0
+	# voxels), la demolicion NO procede: la pieza se queda en su sitio y NO se
+	# devuelven materiales. Antes se daba de baja igual y el voxel quedaba
+	# huerfano en el mundo (visible, pero sin pieza: no se podia demoler).
+	if _mundo.tiene_terreno() and borrados <= 0:
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_SE_PUDO_BORRAR],
+			["no se pudieron borrar los voxeles de la pieza; sigue en su sitio"], celdas)
 	var devuelto: Dictionary = r.devolucion_por_item() if r != null else {}
 	if _f_devolver.is_valid() and not devuelto.is_empty():
 		_f_devolver.call(devuelto)
@@ -994,6 +1002,16 @@ func _baja_estructura(ancla: String) -> void:
 	_estructuras.erase(ancla)
 
 ## Aplica la inversa de un delta. `es_undo` = true si venimos de undo().
+## ATOMICIDAD con el mundo (2026-11-25): true si la escritura/borrado en el
+## mundo NO ocurrio. En MODO LOGICO (sin terreno) no es un fallo: ahi el mundo
+## es nulo por diseno y la pieza vive solo en la logica de M17.
+func _fallo_de_mundo(operados: int) -> bool:
+	return _mundo.tiene_terreno() and operados <= 0
+
+## Resultado de fallo por mundo (para undo/redo, que no devuelven PieceResult).
+func _fallo_mundo(motivo: int, detalle: String) -> Dictionary:
+	return ConstruccionTipos.resultado_fallo([motivo], [detalle], [])
+
 func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 	var tipo: String = String(d.get("tipo", ""))
 	var celda: Vector3i = d.get("celda", Vector3i.ZERO)
@@ -1008,7 +1026,12 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 				var ancla: String = ConstruccionTipos.clave(celda)
 				var r: PlacementRule = _receta_de_ancla(ancla)
 				var celdas: Array = d.get("celdas", [])
-				_mundo.borrar_voxel(celdas)
+				# ATOMICIDAD: si el borrado falla, la pieza NO se da de baja y
+				# NO se devuelven materiales (antes el voxel quedaba huerfano).
+				var borrados_c: int = _mundo.borrar_voxel(celdas)
+				if _fallo_de_mundo(borrados_c):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_BORRAR,
+						"undo: no se pudieron borrar los voxeles; la pieza sigue en su sitio")
 				_baja_estructura(ancla)
 				if _f_devolver.is_valid():
 					_f_devolver.call(d.get("costo", {}))
@@ -1016,7 +1039,10 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 			else:
 				var r2: PlacementRule = _catalogo.get(StringName(String(d.get("receta_id", ""))), null)
 				var celdas2: Array[Vector3i] = (d.get("celdas", []) as Array)
-				_mundo.escribir_voxel(celdas2, int(d.get("bloque", 0)))
+				var escritos_c: int = _mundo.escribir_voxel(celdas2, int(d.get("bloque", 0)))
+				if _fallo_de_mundo(escritos_c):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR,
+						"redo: no se pudieron escribir los voxeles; la pieza no se registro")
 				if r2 != null:
 					_alta_estructura(celda, r2, int(d.get("rotacion", 0)))
 					if _f_descontar.is_valid():
@@ -1027,8 +1053,13 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 			var e: Dictionary = d.get("estructura", {})
 			if es_undo:
 				var r3: PlacementRule = _catalogo.get(StringName(String(d.get("receta_id", ""))), null)
+				# ATOMICIDAD: primero se escribe en el mundo; si falla, la pieza
+				# NO se registra (antes quedaba en la logica sin voxel).
+				var escritos_d: int = _mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
+				if _fallo_de_mundo(escritos_d):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR,
+						"undo: no se pudieron escribir los voxeles; la pieza no se registro")
 				_alta_estructura(celda, r3, int(d.get("rotacion", 0)), e)
-				_mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
 				if _f_descontar.is_valid():
 					_f_descontar.call(d.get("devuelto", {}))
 				# El CONTENIDO vuelve a la pieza: los items que se llevó la
@@ -1039,8 +1070,13 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 						_f_tirar_item.call(String(item_id), int(items_vuelta[item_id]))
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["undo: demolicion revertida en %s" % str(celda)]}
 			else:
+				# ATOMICIDAD: primero se borra; si falla, la pieza NO se da de
+				# baja y NO se devuelven materiales.
+				var borrados_d: int = _mundo.borrar_voxel(d.get("celdas", []))
+				if _fallo_de_mundo(borrados_d):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_BORRAR,
+						"redo: no se pudieron borrar los voxeles; la pieza sigue en su sitio")
 				_baja_estructura(ConstruccionTipos.clave(celda))
-				_mundo.borrar_voxel(d.get("celdas", []))
 				if _f_devolver.is_valid():
 					_f_devolver.call(d.get("devuelto", {}))
 				# Rehacer la demolicion = el contenido vuelve a salir al inventario.
@@ -1058,14 +1094,24 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 				var r5: PlacementRule = _catalogo.get(StringName(item_id), null)
 				if r5 == null:
 					return {"ok": false, "motivos": [], "texto": "", "detalle": ["no se pudo deshacer el almacenamiento: %s no esta en el catalogo" % item_id]}
-				_mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
+				# ATOMICIDAD: se escribe antes de registrar; si falla, la pieza
+				# no se registra y el item NO sale del inventario.
+				var escritos_a: int = _mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
+				if _fallo_de_mundo(escritos_a):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR,
+						"undo: no se pudieron escribir los voxeles; la pieza no se registro")
 				_alta_estructura(celda, r5, int(d.get("rotacion", 0)), e3)
 				if _f_tirar_item.is_valid():
 					_f_tirar_item.call(item_id, 1)
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["undo: almacenamiento revertido en %s" % str(celda)]}
 			else:
+				# ATOMICIDAD: se borra antes de dar de baja; si falla, la pieza
+				# sigue en su sitio y el item NO vuelve al inventario.
+				var borrados_a: int = _mundo.borrar_voxel(d.get("celdas", []))
+				if _fallo_de_mundo(borrados_a):
+					return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_BORRAR,
+						"redo: no se pudieron borrar los voxeles; la pieza sigue en su sitio")
 				_baja_estructura(ConstruccionTipos.clave(celda))
-				_mundo.borrar_voxel(d.get("celdas", []))
 				if _f_agregar_item.is_valid():
 					_f_agregar_item.call(item_id, 1)
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["redo: almacenamiento reaplicado en %s" % str(celda)]}
@@ -1081,8 +1127,14 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 				return {"ok": false, "motivos": [], "texto": "", "detalle": ["no se pudo invertir mover: %s" % str(desde)]}
 			var e2: Dictionary = _estructuras[ancla2]
 			var r4: PlacementRule = _receta_de_ancla(ancla2)
+			# ATOMICIDAD: se escribe el destino antes de dar de baja el origen;
+			# si la escritura falla, la pieza NO se mueve (sigue donde estaba).
+			var celdas_hasta: Array = (r4.celdas(hasta, int(d.get("rotacion", 0))) if r4 != null else [hasta]) as Array
+			var escritos_m: int = _mundo.escribir_voxel(celdas_hasta, int(d.get("bloque", 0)))
+			if _fallo_de_mundo(escritos_m):
+				return _fallo_mundo(ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR,
+					"no se pudieron escribir los voxeles; la pieza sigue en %s" % str(desde))
 			_baja_estructura(ancla2)
-			_mundo.escribir_voxel(r4.celdas(hasta, int(d.get("rotacion", 0))) if r4 != null else [hasta], int(d.get("bloque", 0)))
 			_alta_estructura(hasta, r4, int(d.get("rotacion", 0)), e2, "", true)
 			return {"ok": true, "motivos": [], "texto": "", "detalle": ["%s: movimiento invertido %s -> %s" % [
 				("undo" if es_undo else "redo"), str(desde), str(hasta)]],}

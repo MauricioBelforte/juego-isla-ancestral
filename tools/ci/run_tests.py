@@ -3,14 +3,23 @@
 # Descubre automaticamente archivos test_*.gd en scripts/ y los corre con godot --headless.
 # Genera reporte JSON con resultados por test.
 # Exit 0 si todos pasan, 1 si alguno falla.
+#
+# 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2458): antes incluia tambien suites que
+# NO se pueden correr con --script (GdUnit4: exit 1 "doesn't inherit from SceneTree",
+# y helpers/mocks que extienden Node3D/RefCounted). Con ~11 fallos garantizados el
+# exit code era 1 SIEMPRE, y dev-build lo tapaba con `|| echo "Some tests failed"`:
+# el step se volvio ruido permanente y nadie lo miraba. Ahora se filtran por cabecera
+# (`extends SceneTree|MainLoop`), se informan como omitidas y `--incluir-gdunit`
+# permite forzarlas para diagnostico.
 
 import os
+import re
 import sys
 import json
 import argparse
 import subprocess
 import time
-from typing import List, Dict
+from typing import List, Dict, Tuple
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -37,9 +46,34 @@ def find_godot_bin() -> str:
     return "godot"
 
 
-def find_test_files(root: str) -> list:
-    """Encuentra test_*.gd bajo scripts/ y tests/ (carpetas principales de tests)."""
+def es_ejecutable_con_script(path_abs: str) -> bool:
+    """True si el script es un SceneTree/MainLoop (corrible con --script).
+
+    Las suites GdUnit4 (`extends GdUnitTestSuite`) NO se pueden correr asi: Godot
+    sale con exit 1 y el mensaje "doesn't inherit from SceneTree or MainLoop".
+    El runner las incluia igual, asi que su exit code era 1 SIEMPRE y el step de
+    dev-build lo tapaba con `|| echo "Some tests failed"`. Un gate que siempre
+    esta rojo no es un gate: se dejo de mirar. Se filtran por cabecera (2026-11-25).
+    """
+    try:
+        with open(path_abs, "r", encoding="utf-8", errors="replace") as fh:
+            # Archivo completo: hay suites con 200 lineas de cabecera/comentarios antes
+            # del `extends` (ej. scripts/historias/test_historias.gd). Con una ventana
+            # corta se clasificaban mal y se omitian suites validas.
+            cabecera = fh.read(200_000)
+    except OSError:
+        return False
+    return bool(re.search(r"^extends\s+(SceneTree|MainLoop)\b", cabecera, re.M))
+
+
+def find_test_files(root: str) -> Tuple[list, list]:
+    """Encuentra test_*.gd corribles con --script bajo scripts/ y tests/.
+
+    Devuelve (ejecutables, omitidas). Las omitidas se reportan: no se descartan
+    en silencio (son suites GdUnit4, las corre el job GdUnit4 de testing.yml).
+    """
     out = []
+    omitidas = []
     candidates = [
         os.path.join(root, "game", "isla-ancestral", "scripts"),
         os.path.join(root, "game", "isla-ancestral", "tests"),
@@ -53,10 +87,14 @@ def find_test_files(root: str) -> list:
             for f in filenames:
                 if f.startswith("test_") and f.endswith(".gd"):
                     # res:// = game/isla-ancestral/scripts/... o game/isla-ancestral/tests/...
-                    rel = os.path.relpath(os.path.join(dirpath, f), os.path.join(root, "game", "isla-ancestral"))
+                    abs_path = os.path.join(dirpath, f)
+                    rel = os.path.relpath(abs_path, os.path.join(root, "game", "isla-ancestral"))
                     rel = rel.replace(os.sep, "/")
-                    out.append("res://" + rel)
-    return sorted(set(out))
+                    if es_ejecutable_con_script(abs_path):
+                        out.append("res://" + rel)
+                    else:
+                        omitidas.append("res://" + rel)
+    return sorted(set(out)), sorted(set(omitidas))
 
 
 def main() -> int:
@@ -65,6 +103,8 @@ def main() -> int:
     parser.add_argument("--module", help="Solo tests del modulo dado (ej: mineria)")
     parser.add_argument("--out", default=os.path.join(PROJECT_ROOT, "out", "test-report.json"))
     parser.add_argument("--timeout", type=int, default=120, help="Timeout por test (segundos)")
+    parser.add_argument("--incluir-gdunit", action="store_true",
+                        help="incluir suites GdUnit4 (fallan con --script: solo para diagnostico)")
     args = parser.parse_args()
 
     godot_bin = args.godot or find_godot_bin()
@@ -72,9 +112,16 @@ def main() -> int:
         print("[tests] ERROR: godot no encontrado", file=sys.stderr)
         return 1
 
-    test_files = find_test_files(PROJECT_ROOT)
+    test_files, omitidas = find_test_files(PROJECT_ROOT)
+    if args.incluir_gdunit:
+        test_files = sorted(set(test_files) | set(omitidas))
+        omitidas = []
     if args.module:
         test_files = [t for t in test_files if args.module in t]
+        omitidas = [t for t in omitidas if args.module in t]
+    if omitidas:
+        print(f"[tests] {len(omitidas)} suites GdUnit4 omitidas (no corren con --script; "
+              f"las ejecuta el job GdUnit4 de testing.yml). Ver --incluir-gdunit.")
     if not test_files:
         print(f"[tests] no se encontraron tests" + (f" para {args.module}" if args.module else ""))
         return 0

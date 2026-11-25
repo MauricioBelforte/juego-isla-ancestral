@@ -1,0 +1,149 @@
+{
+  "task_id": "S2-16",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Comparación documental de contratos de localización entre M87 y M53. No es auditoría de código ni reabre módulos.",
+  "sources": {
+    "m53_code": {
+      "path": "DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md",
+      "sha256": "1aeab91d00bf5db91b15a47f2be70e7b20ef2a1e17430239b6abcac7ee8330d9"
+    },
+    "m53_checklist": {
+      "path": "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md",
+      "sha256": "42cd37f780d117bef9a45339fe68f7613ab2c7d52da447edd973a9827ee85d40"
+    },
+    "m87_code": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e"
+    },
+    "m87_design": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4"
+    },
+    "global": {
+      "path": "CHECKLIST-GLOBAL.md",
+      "sha256": "60432ba726c39add80b3cfd5507474eddee5e67d0864e58b04867b3957a926db"
+    }
+  },
+  "module_status_context": {
+    "global_line": 157,
+    "cells": [
+      "53",
+      "53-UI-UX",
+      "✅ Sello-módulo-deuda (QA §21.8)",
+      "160/164",
+      "Media",
+      "3",
+      "45, 46",
+      "—",
+      "2026-10-28 08:30",
+      "**✅ SELLO §21.8 (8vo, sello-módulo-deuda) por agnes-3-flash (Kilo Code, 2026-10-28): gate-1 agnes + gate-2 Hy3 #433 (conteo 05 [x]=159/[ ]=3/[?]=2, sin inflación; 3 [ ] = deuda EXTERNA real M91/M61/M88, 2 [?] honestos L137/L224). Remuestreo §21.8.2.b: 0 falsos-verdes. **L130/L131 degradados (msg 291):** 143/165. BUG-133 pendiente fix. **QA Step 5 (msg 242): 17 muestreados, 1 inflado (L208 degradada) + 2 falsos negativos flippeados → 144/19/2. BUG-133 resuelto (runtime). Bug real: DialogLayer/InventoryLayer layer_type intercambiados (autorizado fix 2 líneas).** · Fila subreportaba 40 ítems (91 vs 131 reales).  🔧 **Progreso sincronizado por atria-dawn (Kilo Code, Log 1031, 2026-09-18):** la fila global estaba desincronizada del checklist real (auditoría completa 167/167). · ; G-5.3-Flash-Agente 2026-10-23: S62b flip L112 sin re-render por frame (senales/evento, <=8 ms panel, <=2 frames) definido en 03 sec S62b"
+    ],
+    "interpretation": "CHECKLIST-GLOBAL declara M53 con sello y sin agente actual; se cita solo para contexto. No se adopta como autorización para ejecutar tareas ni como verificación independiente."
+  },
+  "comparison": [
+    {
+      "topic": "Función traductora",
+      "m87_contract": "API pública directa: tr_key(module, section, key, params, n), además de traducir_clave/tr_ctx; M87 nombra tr_key para labels, botones y tooltips.",
+      "m53_contract": "Documenta un adaptador UiI18n con traducir/traducir_param y metadatos meta_texto/meta_tooltip; checklist describe text_key en capas concretas.",
+      "difference": "Abstracción/nomenclatura diferente: el consumidor M53 habla al puente UiI18n y no expone en la ficha sus llamadas internas al API M87. Documentación compatible como capa adaptadora; no se infiere divergencia funcional.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 17,
+          "end_line": 27,
+          "text": "│   ├── API:\n│   │   ├── set_locale(locale) / set_locale_persistente(locale)\n│   │   ├── get_locale() / get_locale_display_name() / locales_disponibles()\n│   │   ├── tr_key(module, section, key, params, n)\n│   │   ├── traducir_clave(clave, params, n)\n│   │   ├── tr_ctx(contexto, module, section, key, params)\n│   │   ├── format_text(text, params)\n│   │   ├── format_number(value) / format_date(d) / format_hora(h,m)\n│   │   ├── validar_catalogos() / obtener_estado_catalogos() (dev/test)\n│   │   └── claves_faltantes() (dev/test, iter. 5)\n│   └── Fallback: clave -> es.po -> clave literal"
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "start_line": 181,
+          "end_line": 185,
+          "text": "\n### Salida (hacia otros módulos)\n- **M21 (Diálogos):** `tr_key` para líneas, opciones y placeholders de conversaciones.\n- **M44 (Subtítulos):** `tr_key` para el texto visible de subtítulos en el idioma activo.\n- **M53 (UI-UX):** `tr_key` para labels, botones, tooltips y el selector de idioma."
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md",
+          "start_line": 42,
+          "end_line": 46,
+          "text": "├── i18n/                           # Strings y traducciones (M87)\n│   └── ui_es.po · ui_en.po ...\n├── i18n/ui_i18n.gd                 # (Log 1118) UiI18n: puente M53↔M87 — traducir/\n│                                     #   traducir_param + metadatos text_key/tooltip_text_key\n│                                     #   + RetraductorUI + conectar_locale"
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md",
+          "start_line": 269,
+          "end_line": 275,
+          "text": "   (`UiI18n`: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía\n   `RetraductorUI` + `conectar_locale`). Adopción: `equipment_layer` (3 etiquetas\n   estáticas con `text_key` + dinámicos re-generados en `locale_changed`),\n   `equipment_ui` (EQUIP.VACIO + bonus) e `interact_prompt` (UI.INTERACTUAR).\n   Claves `EQUIP.*` + `UI.INTERACTUAR` agregadas a `locales/es.po` + `en.po`\n   (validador PO M87: 0 fallos; `EQUIP.EQUIPADO` exento P5 por plantilla idéntica).\n   **Cierro los 2 items M87Ã—2** (M53-owned, ver `87-Localizacion/.../05-Checklist.md`)."
+        }
+      ]
+    },
+    {
+      "topic": "Cambio de locale y actualización de UI",
+      "m87_contract": "Localization.set_locale aplica el locale y emite locale_changed(locale); la arquitectura enumera RetraductorUI como consumidor de esa señal.",
+      "m53_contract": "UIManager conecta M87 y vuelve a traducir capas montadas y HUD; TooltipService mantiene clave del tooltip visible para re-traducirlo.",
+      "difference": "M87 define el evento/proveedor; M53 define los consumidores de presentación. El nivel de detalle es asimétrico, no contradictorio.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "start_line": 71,
+          "end_line": 97,
+          "text": "signal locale_changed(locale: String)\n\nconst DEFAULT_LOCALE := \"es\"\nconst CATALOG_DIR := \"res://locales\"\nconst SUPPORTED_LOCALES: Array[String] = [\"es\", \"en\"]\n\nvar _current_locale: String = DEFAULT_LOCALE\nvar _cache: Dictionary = {}\n\nfunc _ready() -> void:\n    var saved: String = LocalizationSettings.read_locale()\n    if saved in SUPPORTED_LOCALES:\n        set_locale(saved)\n    else:\n        set_locale(DEFAULT_LOCALE)\n\nfunc set_locale(locale: String) -> void:\n    if not locale in SUPPORTED_LOCALES:\n        push_warning(\"Localizacion: idioma no soportado '%s'. Usando '%s'.\" % [locale, DEFAULT_LOCALE])\n        locale = DEFAULT_LOCALE\n    _load_catalog(locale)\n    TranslationServer.set_locale(locale)\n    _current_locale = locale\n    _cache.clear()\n    LocalizationSettings.write_locale(locale)\n    locale_changed.emit(locale)\n"
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 14,
+          "end_line": 27,
+          "text": "│   ├── Cache de traducciones frecuentes (Dictionary \"clave|n\")\n│   ├── Avisos de clave ausente deduplicados (_avisadas)\n│   ├── Señal: locale_changed(locale)\n│   ├── API:\n│   │   ├── set_locale(locale) / set_locale_persistente(locale)\n│   │   ├── get_locale() / get_locale_display_name() / locales_disponibles()\n│   │   ├── tr_key(module, section, key, params, n)\n│   │   ├── traducir_clave(clave, params, n)\n│   │   ├── tr_ctx(contexto, module, section, key, params)\n│   │   ├── format_text(text, params)\n│   │   ├── format_number(value) / format_date(d) / format_hora(h,m)\n│   │   ├── validar_catalogos() / obtener_estado_catalogos() (dev/test)\n│   │   └── claves_faltantes() (dev/test, iter. 5)\n│   └── Fallback: clave -> es.po -> clave literal"
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md",
+          "start_line": 52,
+          "end_line": 59,
+          "text": "> **Agregado agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** `i18n/ui_i18n.gd`\n> (puente M53↔M87) y `overlays/subtitulo_overlay.gd` (M58 RF8) +\n> `test_ui_i18n_m53.gd` (39 checks). `UIManager` expone además `_conectar_m87` /\n> `_on_locale_changed_ui` (re-traducción runtime de capas montadas + HUD) y\n> `_conectar_m58` / `_on_pausa_instantanea` / `_on_pausa_continuar` (RF18 →\n> PauseLayer + `reanudar()` de M58). `TooltipService.show_tooltip_key(clave, at,\n> params)` resuelve tooltips por clave M87 y re-traduce el visible en `locale_changed`;\n> `UIManager._on_focus_moved_tooltip` prioriza el metadato `tooltip_text_key`."
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md",
+          "start_line": 276,
+          "end_line": 282,
+          "text": "2. **Re-traducción runtime:** `UIManager._conectar_m87()` + `_on_locale_changed_ui`\n   â†’ al cambiar de idioma, `RetraductorUI.retraducir` sobre capas montadas + HUD\n   (solo nodos visibles; dinámicos los re-genera cada capa).\n3. **TooltipService por clave (M87):** `show_tooltip_key(clave, at, params)` resuelve\n   en el locale del momento y guarda la clave; el tooltip visible se **re-traduce en\n   vivo** al cambiar de idioma (M87 `locale_changed`). `UIManager._on_focus_moved_tooltip`\n   prioriza el metadato `tooltip_text_key` sobre `tooltip_text` estático."
+        }
+      ]
+    },
+    {
+      "topic": "Metadatos de texto y tooltips",
+      "m87_contract": "La integración general de M53 se expresa como uso de tr_key para textos UI y tooltips.",
+      "m53_contract": "Documenta text_key/tooltip_text_key, UiI18n.meta_texto/meta_tooltip y show_tooltip_key(clave, at, params).",
+      "difference": "M53 agrega un contrato declarativo para registrar claves en nodos y un helper del servicio de tooltips, más específico que el contrato consumidor de M87.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "start_line": 183,
+          "end_line": 183,
+          "text": "- **M21 (Diálogos):** `tr_key` para líneas, opciones y placeholders de conversaciones."
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+          "start_line": 211,
+          "end_line": 213,
+          "text": "| Ajustes de idioma y selector de idioma | **M53/M90** | No es de M87: es UI de configuración |\n| Absorber el desborde de texto medido (63/170 a 16 px) | **M53** | Pendiente — la medición la aporta M87 |\n| Adoptar el metadato `text_key` / `tooltip_text_key` en la UI | **M53** | Pendiente — el mecanismo está provisto y probado |"
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md",
+          "start_line": 42,
+          "end_line": 59,
+          "text": "├── i18n/                           # Strings y traducciones (M87)\n│   └── ui_es.po · ui_en.po ...\n├── i18n/ui_i18n.gd                 # (Log 1118) UiI18n: puente M53↔M87 — traducir/\n│                                     #   traducir_param + metadatos text_key/tooltip_text_key\n│                                     #   + RetraductorUI + conectar_locale\n├── overlays/subtitulo_overlay.gd   # (Log 1118) SubtituloOverlay: subtítulos M58 RF8\n└── glyphs/                         # Iconos vectoriales (SVG) del HUD y botones (M46)\n    ├── icon_coin.svg · icon_seed.svg ...\n```\n\n> **Agregado agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** `i18n/ui_i18n.gd`\n> (puente M53↔M87) y `overlays/subtitulo_overlay.gd` (M58 RF8) +\n> `test_ui_i18n_m53.gd` (39 checks). `UIManager` expone además `_conectar_m87` /\n> `_on_locale_changed_ui` (re-traducción runtime de capas montadas + HUD) y\n> `_conectar_m58` / `_on_pausa_instantanea` / `_on_pausa_continuar` (RF18 →\n> PauseLayer + `reanudar()` de M58). `TooltipService.show_tooltip_key(clave, at,\n> params)` resuelve tooltips por clave M87 y re-traduce el visible en `locale_changed`;\n> `UIManager._on_focus_moved_tooltip` prioriza el metadato `tooltip_text_key`."
+        },
+        {
+          "path": "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md",
+          "start_line": 269,
+          "end_line": 282,
+          "text": "   (`UiI18n`: `traducir`/`traducir_param`/`meta_texto`/`meta_tooltip`/`retraducir` vía\n   `RetraductorUI` + `conectar_locale`). Adopción: `equipment_layer` (3 etiquetas\n   estáticas con `text_key` + dinámicos re-generados en `locale_changed`),\n   `equipment_ui` (EQUIP.VACIO + bonus) e `interact_prompt` (UI.INTERACTUAR).\n   Claves `EQUIP.*` + `UI.INTERACTUAR` agregadas a `locales/es.po` + `en.po`\n   (validador PO M87: 0 fallos; `EQUIP.EQUIPADO` exento P5 por plantilla idéntica).\n   **Cierro los 2 items M87Ã—2** (M53-owned, ver `87-Localizacion/.../05-Checklist.md`).\n2. **Re-traducción runtime:** `UIManager._conectar_m87()` + `_on_locale_changed_ui`\n   â†’ al cambiar de idioma, `RetraductorUI.retraducir` sobre capas montadas + HUD\n   (solo nodos visibles; dinámicos los re-genera cada capa).\n3. **TooltipService por clave (M87):** `show_tooltip_key(clave, at, params)` resuelve\n   en el locale del momento y guarda la clave; el tooltip visible se **re-traduce en\n   vivo** al cambiar de idioma (M87 `locale_changed`). `UIManager._on_focus_moved_tooltip`\n   prioriza el metadato `tooltip_text_key` sobre `tooltip_text` estático."
+        }
+      ]
+    }
+  ],
+  "conclusion": {
+    "compatible_documented_layers": true,
+    "direct_contradiction_found": false,
+    "contract_gap": "Las referencias revisadas no especifican firma tipada completa de UiI18n ni el protocolo de conexión de RetraductorUI; sus garantías se encuentran en extractos narrativos de código/checklist, no demostradas por esta comparación.",
+    "evidence_type": "Contratos declarados en documentación de plan-actual. No se comprobó implementación en disco, cobertura, ni funcionamiento runtime."
+  },
+  "limitations": "Solo lectura. M53 y M87 no se modificaron; no se ejecutaron pruebas; no se actualizó GLOBAL ni se cambiaron marcas. No se afirma que todo el módulo UI esté integrado ni que el sello se haya revalidado."
+}

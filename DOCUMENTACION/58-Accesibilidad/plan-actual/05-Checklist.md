@@ -3,6 +3,13 @@
 
 # 05-Checklist.md — Módulo 58: Accesibilidad
 
+## Reserva actual
+
+**Modelo:** GLM-5.3-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-11-25 14:25
+**Alcance (§21.3):** UN ítem — RF12 "auditar que ningún puzzle dependa de oír un sonido específico" [C] (módulo 🟡, 182 [x]/1 [ ]/1 [?] = 184 medido, fila libre). Auditoría ejecutada como QA verificable `scripts/templos/qa_rf12_audit_audio.gd` (5 checks / 0 fallos / EXIT 0): 0 APIs de audio en las 18 familias de puzzles; familia SONIDO = modelo puro de datos (tono = identificador, selección por posición/id); pistas textuales (pista_patron tras 2 fallos); resolución observable por estado de emisores/receptores. El [?] (aplicar config a la UI, dueño deepseek-v4-flash-vision-exp) no se toca.
+
 ## A. Problema y objetivos (12)
 
 - [x] Definir el problema: jugadores con discapacidades visuales, auditivas, motoras, cognitivas o de lectura quedan excluidos sin opciones [S]
@@ -46,7 +53,7 @@
 - [x] RF10: referenciar los buses de audio de M91 sin duplicar su lógica [S]
 - [x] RF10: definir opción de silenciar ambientes en eventos de diálogo [M]
 - [x] RF11: definir carteles visuales de alertas (baja vida, tormenta, hambre) [M] — **implementado (step-5-kilocode, iter. 3, 2026-10-11):** `AccesibilityManager.set/get_sonido_visual()` + catálogo data-driven `INDICADORES_SONIDO` (insectos/agua/cofre/canto_npc + alertas de vida, tormenta y hambre) y `pedir_indicador(tipo)` con anti-spam por tipo (`VENTANA_ANTISPAM_SEG = 2.0`, L54). Señal `sonido_visual_changed`. Suite nueva `scripts/accesibilidad/test_sonido_visual_m58.gd`: **18 checks, 0 fallos, EXIT 0**. Sin regresión: `test_accesibilidad_manager.gd` **39/0** y `test_accesibilidad_headless.gd` **13/0**. Log 1670.
-- [ ] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C]
+- [x] RF12: auditar que ningún puzzle dependa de oír un sonido específico [C] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** auditoría ejecutada como QA verificable `scripts/templos/qa_rf12_audit_audio.gd` — **5 checks / 0 fallos / EXIT 0**: (1) 0 referencias a APIs de audio (AudioStreamPlayer/AudioServer/SFXManager/play_sfx/play_sound/AudioStream) en las 18 familias de puzzles de `scripts/templos/`; (2) la familia SONIDO es modelo puro de datos (tono = identificador de dato, selección de campanas POR POSICIÓN/id — precedencia item 104 de M24); (3) pista del patrón textual tras 2 fallos (pista_patron); (4) sistema de pistas general textual (puzzle_pistas, sin reproducción de audio); (5) resolución observable por estado de emisores/receptores (set_emisor/estado_igual_objetivo) — un jugador sordo puede completar cualquier puzzle.
 - [x] RF12: definir alternativa visual para las pistas auditivas existentes [M] — implementado (atria-dawn-s2, 2026-10-12, Log 1755): `INDICADORES_SONIDO` (accesibilidad_manager.gd:353) define forma visual + clave de texto para 7 pistas: insectos/agua/canto_npc (anillo), cofre (rizos), alerta_vida/alerta_tormenta/alerta_hambre (cartel)
 - [x] Definir que los subtítulos cubran SFX importantes (M43) y feedback ASMR (M44) [M]
 - [x] Definir velocidad de subtítulos 0.5x–2x con valor por defecto 1x [S]
@@ -259,7 +266,7 @@
 - Conectar pausa_instantanea_activada al PauseLayer (M53) para el overlay visual.
 - El remap físico (InputMap) requiere coordinación con M57 para no romper su capa de acciones.
 
-**Totales:** 184 ítems · Completados: 182 · Pendientes: 1 · No resueltos: 1. (Saneo Hy3 TANDA 21nov: recount canónico = 182 [x]/1 [ ]/1 [?]; línea Normalizado G-5.3-Flash-Agente 2026-10-20 stale 167/15/2)
+**Totales:** 184 ítems · Completados: 183 · Pendientes: 0 · No resueltos: 1. (Tanda GLM-5.3-Flash 2026-11-25: RF12 flip con evidencia (qa_rf12_audit_audio 5/0) = 182 → 183 [x], 0 [ ]; queda 1 [?] con dueño externo. Previo: Saneo Hy3 TANDA 21nov: recount canónico = 182 [x]/1 [ ]/1 [?]; línea Normalizado G-5.3-Flash-Agente 2026-10-20 stale 167/15/2)
 
 > **Actualizado por atria-dawn-s2 (Atria-Dawn-Preview / Kilo Code, 2026-10-12, Log 1755):** barrido con evidencia en disco y runtime. +6 `[ ]` -> `[x]`: RF4 niveles de texto delegados a M88 (01-Requerimientos RF4); RF12 alternativa visual para pistas auditivas (`INDICADORES_SONIDO`, accesibilidad_manager.gd:353, 7 pistas con forma visual + clave de texto); presets de control persisten por jugador (`control_preset` L409 + profile.json, 03-Diseno:40/77); RF23 diálogos a ritmo del jugador sin cuenta regresiva (dialog_layer.gd:153/158/166 por input; `AutoAdvanceManager` sin cablear en escenas); letreros sustituibles por diálogo/marca visual (02-Analisis:41); flujo de arranque boot->load->apply->título (03-Diseno:98-110). No flippeados (honestidad): RF26 guía de textos no redactada (solo RF26 en requerimientos), reabrir último diálogo sin implementar (solo signal `_on_dialogue_ended`), F10 sin implementar (0 `KEY_F10`), carteles con tiempo de vida/fade-out ausentes. **HALLAZGO REGRESIÓN:** `test_perfil_m58_iter4.gd` tiene 33 llamadas `_ok()` pero `CHECKS_MINIMOS = 34` -> falla estructural "PISO NO CUMPLIDO: 33 < 34" (EXIT 1). El Log 1701 de Step 5 declaró "39 checks, 0 fallos" — inexacto. Fix mínimo: bajar `CHECKS_MINIMOS` a 33 (o agregar 1 check). Runtime 4 suites: 110 checks útiles, 0 fallos (39+13+33+25); la suite iter4 se cuenta como falla estructural, no de lógica.
 

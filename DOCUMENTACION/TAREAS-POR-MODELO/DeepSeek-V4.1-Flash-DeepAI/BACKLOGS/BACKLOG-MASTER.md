@@ -102,6 +102,40 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
 - **Lección de arnés:** `Start-Process -RedirectStandardOutput` devuelve **exit codes falsos** en
   esta máquina (marcó rojas suites que dan 0). Para medir suites: `& godot ... ; $LASTEXITCODE`.
 - **Log creado: 2451** (`Logs/2451-cobertura-del-gate-427-suites-fuera-de-ci_2026-11-25_11-11-00.md`).
+### Tanda 2026-11-25 11:20 — gates estáticos y cross-QA de la flota
+
+- Gates estáticos del CI corridos desde la raíz (§ mío: gate-1): `lint_check --no-syntax` 2287
+  archivos 0 errores; `validar_workflows --selftest` 6/6 + ok; `test_scripts` OK;
+  `auditar_arquitectura --selftest` 0 fallos; `auditar_cobertura_suites --check` OK.
+- `verificar_checklist.py` sale **1** y es correcto: el workflow (quality.yml:1137-1151) solo falla
+  con exit 3 (detector ciego); exit 1 es warning por inconsistencias preexistentes del tablero.
+  Confirmado en el YAML, no asumido.
+- Cross-QA §21.8 de M20 (glm-5.3-flash): `test_m20_amistad_cobertura` 29/0 y
+  `test_m20_amistad_suites` 8/0 (el wrapper reporta 8 checks propios, no 79: la suma incluye
+  las 3 suites internas). Coincide con lo reportado.
+- Hallazgo para el director: `verificar_checklist` marca 10 inconsistencias ✅ vs `[?]`/`[ ]`
+  en módulos ajenos (M38, M53, M64, M72, M73, M75, M49, M94…). No las toco: des-sellar un ✅ es
+  decisión del director, no mía.
+### Tanda 2026-11-25 14:26 — el hueco entre los dos jobs de CI
+
+- Corregí un supuesto propio: en el 2451 excluí `tests/unit/**` creyendo que era todo GdUnit4.
+  Medido: 23 archivos, **4 GdUnit4** (los corre `testing.yml` por directorio) y **19 SceneTree**
+  que no corría ningún job (ni `quality.yml` con `--script` ni el job GdUnit4, que solo colecta
+  suites del addon). Corridas: **19/19 verdes, 0 timeouts** → el hueco es de cobertura, no de rotura.
+- `tools/quality/auditar_cobertura_suites.py` ahora clasifica por tipo (scenetree/gdunit4):
+  526 en disco (522 st / 4 gd), 104 en el workflow, 426 fuera; bajo `tests/` **61** (57 st sin job).
+- **Log 2456.** Reporte: mensaje `006`.
+
+### Tanda 2026-11-25 14:52 — qué lleva adentro el binario exportado
+
+- Export Windows real (templates 4.7.2): **EXIT=0 en 24.7 s, 124.5 MB** → el job `build` no está roto.
+- El binario incluye el addon de tests y las suites: 1234 refs `gdUnit4`, 146 `tests/test_`, 70
+  `GdUnitTestSuite`. Causa: los 4 presets usan `export_filter="all_resources"` con
+  `exclude_filter="Godot/*"`.
+- Filtro `Godot/*,addons/gdUnit4/*,tests/*` probado: EXIT=0, 123.2 MB, marcadores 1234→6 / 146→2
+  / 70→0. **Revertido**: ahorra 1.3 MB y deja `scenes/test_runner.tscn` apuntando a
+  `res://tests/run_tests.gd` (falta partir el preset Dev/Release). `export_presets.cfg` sin diff.
+- **Log 2457.** Reporte: mensaje `007`.
 - Reporte al director: mensaje `004` del canal. Esperando respuesta a 2 preguntas
   (registrar suites M17 en `quality.yml`; sumar el paso de cobertura al CI).
 
@@ -123,10 +157,10 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
 2. **No editar** el backlog de otro modelo; el canal OC queda histórico.
 3. **Un módulo por vez** (§21.4); reserva `🔵` en `CHECKLIST-GLOBAL`.
 4. **Política de duplicados 052** vigente.
-5. **Logs:** pool global `Logs/NUMEROS_DISPONIBLES.txt` (último consumido propio: **2451**).
+5. **Logs:** pool global `Logs/NUMEROS_DISPONIBLES.txt` (último consumido propio: **2457**).
 
 ## MANTENIMIENTO
 
 La directora agrega tandas nuevas como `05-Backlog-<descripción>.md` y actualiza este índice en cada ronda.
 
-**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 11:14
+**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 14:57

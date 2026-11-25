@@ -10,7 +10,7 @@
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
 **Fecha:** 2026-11-25 11:00 (tercera tanda del día, re-claim del módulo 🟡 propio)
-**Alcance (§21.3):** UN ítem — L161 "No duplicar texturas en memoria al abrir la galería" [M]. Diagnóstico: `photo_gallery.gd` descarga texturas fuera del rango visible (texture=null) pero DEJA el TextureRect vacío en el grid y al recargar crea OTRO nodo duplicado por foto. Implementación: nodos reutilizados (un TextureRect por foto creado en orden, texturas solo para el rango visible ≤24, sin re-creación). QA nueva con checks nombrados + regresión de las suites M56.
+**Alcance (§21.3):** UN ítem — L161 "No duplicar texturas en memoria al abrir la galería" [M]. Diagnóstico: `photo_gallery.gd` descarga texturas fuera del rango visible (texture=null) pero DEJA el TextureRect vacío en el grid y al recargar crea OTRO nodo duplicado por foto. Implementación: nodos reutilizados (un TextureRect por foto creado en orden, texturas solo para el rango visible ≤24, sin re-creación). QA nueva con checks nombrados + regresión de las suites M56. **CERRADO 14:18 (Log 2450, reporte 040).**
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
 |--------|--------|--------|------|--------|---------|--------|--------------------|

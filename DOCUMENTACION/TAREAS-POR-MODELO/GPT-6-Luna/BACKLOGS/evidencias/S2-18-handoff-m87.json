@@ -1,0 +1,260 @@
+{
+  "task_id": "S2-18",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Borrador de handoff documental para M87, basado en plan-actual, estado global y evidencia S2-17; no es una reserva ni una autorización de cambios.",
+  "snapshot": {
+    "head": "98ce7e6ba937950222f0cba8cf9ae3070ead7cd4",
+    "date": "2026-11-25"
+  },
+  "sources_sha256": {
+    "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md": {
+      "sha256": "02e4d4239d6fa58525a3f808a84d4fbd1ff83a7a24a595801e644066f1639b25",
+      "bytes": 44000
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md": {
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+      "bytes": 47495
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md": {
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4",
+      "bytes": 80843
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md": {
+      "sha256": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9",
+      "bytes": 18287
+    },
+    "CHECKLIST-GLOBAL.md": {
+      "sha256": "304275bcf0d0ddb14dc44b5c9733c086c5649611b565f303f42b244da936297f",
+      "bytes": 255493
+    },
+    "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md": {
+      "sha256": "28bbd20e00a7e9915ecc6138f234a2f59056805f5a82a1bc8ab305eb5ecd95bb",
+      "bytes": 86195
+    },
+    "game/isla-ancestral/scripts/localization/localization_manager.gd": {
+      "sha256": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6",
+      "bytes": 15219
+    },
+    "game/isla-ancestral/locales/pt.po": {
+      "sha256": "fe9044e2c3317c26559d53e07985b42e1aebbd1ebdc3c7cc0f27a384d092a76e",
+      "bytes": 21359
+    },
+    "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-17-clasificacion-referencias-m87.json": {
+      "sha256": "14b86a9f694076119d87497462dcdef3f82c6d7fafb39cd8d92a42dee63d0db7",
+      "bytes": 80304
+    }
+  },
+  "status": {
+    "global_current_record": {
+      "source": "CHECKLIST-GLOBAL.md",
+      "line": 191,
+      "declared": "✅ Completado (QA §21.8), 140/140, sin agente actual; la fila registra sello de Agnes 2026-10-28 y gate-2 Hy3 #433/Log 2231 con 169 checks/0 fallos."
+    },
+    "guide_08_record": {
+      "source": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "line": 50,
+      "declared": "Reserva del encargo 146 liberada en octubre (131/136 y cinco deudas delegadas); se conserva como registro histórico y no se toma como estado actual."
+    },
+    "checklist_literal_counts": {
+      "x": 140,
+      "pending": 0,
+      "question": 0
+    },
+    "checklist_net_interpretation": "El encabezado/totales declaran 135 completados netos + 5 deudas externas; las cinco están marcadas [x] por formato híbrido T219-87, con la deuda textual preservada. Es el propio documento quien declara esta interpretación.",
+    "reconciliation": "Global dice 140/140 y QA sellado; la guía 08 mantiene snapshot anterior. No se modificó ninguna fuente ni se concluye que el sello deba reabrirse."
+  },
+  "handoff": {
+    "what_is_documented_as_proven": [
+      {
+        "item": "Registro de QA cruzado",
+        "status": "Documentado, no reejecutado en esta tarea.",
+        "detail": "CHECKLIST-GLOBAL atribuye a Agnes el gate-1 y a Hy3 #433/Log 2231 169 checks/0 fallos: 46 + 36 + 87 checks en tres suites, incluidos casos PT/plurales y estado de catálogos."
+      },
+      {
+        "item": "Estado PT en código/catálogo",
+        "status": "Corroborado estáticamente en HEAD; no prueba runtime.",
+        "detail": "LocalizationManager soporta es/en/pt y el catálogo locales/pt.po está presente. La línea histórica de 04-Codigo que enumera solo es/en no está sincronizada con la nota PT posterior."
+      },
+      {
+        "item": "Literales de UI documentados como deuda",
+        "status": "Corroborado estáticamente en HEAD, sin cambio de esos textos por la revisión puntual.",
+        "detail": "player.gd mantiene literales del inventario/hotbar y las propuestas ITEMS.* no están en los catálogos; menus_layer.gd mantiene “Controles:” + ID de preset. Evidencia detallada y límites en S2-17."
+      },
+      {
+        "item": "Dueños intermodulares en checklist",
+        "status": "Declarados por el plan, no asignados por este handoff.",
+        "detail": "M53 (layout/adopción UI), usuario/revisor bilingüe (estilo), M14-M39 (contenido), M29/M30 (fecha/hora)."
+      }
+    ],
+    "what_remains_or_is_unclear": [
+      {
+        "item": "Deudas externas de checklist",
+        "detail": "L71 y L112 layouts/accesibilidad M53; L74 revisión humana; L116 migración de contenido M14-M39; L117 uso de format_date/format_hora M29/M30. El checklist las cuenta como cinco [x] híbridas con deuda conservada en texto."
+      },
+      {
+        "item": "Deuda técnica del módulo en 04-Codigo §8",
+        "detail": "Duplicado LocalizationManager con decisión pendiente del usuario; patrón dinámico del auditor que puede leer comentarios, documentado como no bloqueante. Debe confirmarse vigencia antes de proponer trabajo."
+      },
+      {
+        "item": "Drift documental de catálogo PT/M74 y seguimiento M06",
+        "detail": "04-Codigo conserva párrafos históricos pre-PT y referencias obsoletas sobre JSON/eventos; 03-Diseno contiene una atribución de commit y una nota “player.gd sin cambios” señaladas en S2-17. Requiere reconciliación editorial por dueño, no inferir reparación de código."
+      },
+      {
+        "item": "Estado neto de cierre",
+        "detail": "La lectura literal del checklist produce 140 [x]/0 [ ]/0 [?], mientras sus Totales dicen 135 netos + 5 no resueltos. Un normalizado formal dependería del propietario/director y del protocolo de marcas; no se cambió aquí."
+      }
+    ],
+    "risks": [
+      {
+        "risk": "Falso estado de reserva si se usa guía 08 como fuente actual",
+        "impact": "Duplicar trabajo o actuar sobre un módulo sellado.",
+        "mitigation": "Tomar CHECKLIST-GLOBAL actual como tablero de estado; tratar la línea 08 como histórica hasta actualización autorizada."
+      },
+      {
+        "risk": "Confundir recuento literal con cierre semántico",
+        "impact": "Sobreestimar el completado al ignorar las cinco deudas híbridas.",
+        "mitigation": "Reportar ambos: 140 marcas [x], pero 135 netos + 5 deudas en el texto del propio checklist."
+      },
+      {
+        "risk": "Presentar QA histórico como verificación propia",
+        "impact": "Afirmar pruebas ejecutadas en noviembre que no se corrieron.",
+        "mitigation": "Atribuir 169/0 al registro de QA de octubre; declarar no reejecutado."
+      },
+      {
+        "risk": "Corregir datos o marcas en módulos con sello sin encargo",
+        "impact": "Romper la gobernanza y reabrir arbitrariamente M87.",
+        "mitigation": "No editar plan-actual, código, catálogos, checklist, GLOBAL ni guía 08 en este handoff."
+      }
+    ],
+    "recommended_next_steps_not_assigned": [
+      "Directora/propietario decide si hace falta armonizar plan-actual §8b/§2.4.6 con el estado PT y el historial Git; si sí, encargar la corrección al propietario documental y conservar el sello hasta decisión expresa.",
+      "Si se requiere normalizar las cinco marcas híbridas, seguir el procedimiento de decisión/flip del director y sincronizar checklist, GLOBAL y guía 08; no inferir que esta tarea lo autoriza.",
+      "Reejecutar suites solo bajo un encargo explícito de QA; registrar versiones/comandos/resultados y no reutilizar el 169/0 histórico como ejecución actual.",
+      "Mantener como propuesta y sin asignar los cambios de UI M06/M53 indicados en M87; no crear claves sin consumidor ni modificar módulos ajenos."
+    ]
+  },
+  "citations": [
+    {
+      "path": "CHECKLIST-GLOBAL.md",
+      "start_line": 191,
+      "end_line": 191,
+      "excerpt": "La fila 87 declara ✅ Completado (QA §21.8), 140/140, agente —; anota el sello Agnes 2026-10-28 y gate-2 Hy3 #433/Log 2231 con 169 checks y 0 fallos.",
+      "note": "Cita resumida de una fila extensa; SHA-256 de la fuente guardado en sources_sha256."
+    },
+    {
+      "path": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "start_line": 50,
+      "end_line": 50,
+      "excerpt": "La fila de M87 en guía 08 registra la liberación de octubre (131/136; 5 [?]) y el lote i18n del encargo 146.",
+      "note": "Registro previo; no se trata como estado actual."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 4,
+      "end_line": 16,
+      "excerpt": "Reserva cerrada; líneas 6-16 registran encargo 146, agente liberado, lote, evidencias y 5 deudas delegadas."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 342,
+      "end_line": 342,
+      "excerpt": "**Totales:** 140 ítems · Completados: 135 (+5 [x] con deuda externa documentada en texto, formato FLIP T219-87) · Pendientes: 0 · No resueltos: 5 (deuda externa con dueño)."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 381,
+      "end_line": 390,
+      "excerpt": "La conciliación post-PT documenta 4 acciones [x], el total literal 140/0/0 y la interpretación del propio archivo: 135 completados netos + 5 deudas híbridas."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 71,
+      "end_line": 71,
+      "excerpt": "- [x] Respetar los ajustes de accesibilidad de texto de M58 sin romper layouts [M] -- **M53**. iter. 6: medido con `AnalizadorLayout` a los tamaños equivalentes al `ui_scale` 0.8-1.5 de M58 (12/16/24 px, contenedor 220x40): desbordan **0 / 63 / 97** de 170 claves. La traducción no se rompe; los LAYOUTS sí a 1.5x. El ajuste es de M53; la medición y la lista de claves quedan en `07-Resultados-Testings.md`. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): evidencia en disco — `07-Resultados-Testings.md` L192 (63/170 a 16 px) y L246 (97/170 a 24 px, dueño M53). Sigue `[?]` deuda externa M53. | FLIP 2026-10-26 (Reflection-Beam-1.0, T219-87): spec en 03-Diseno.md § (L71 respetar ajustes M58)"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 74,
+      "end_line": 74,
+      "excerpt": "- [x] Garantizar revisión humana de las traducciones antes del lanzamiento [C] -- **revisión humana (usuario)**. No es automatizable: el módulo aporta la herramienta de consistencia (`Glosario`, `ValidadorPO`) y marca los textos provisionales, pero la validación final de estilo y naturalidad la hace una persona bilingüe. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramientas en disco — `glosario.gd` L1 (`Glosario`), `validador_po.gd` L19 (`ValidadorPO`); la revisión final es humana por definición. Sigue `[?]` dueño: usuario (revisión humana pre-lanzamiento). | FLIP 2026-10-26 (Reflection-Beam-1.0, T219-87): spec en 03-Diseno.md § (L74 revisión humana)"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 112,
+      "end_line": 112,
+      "excerpt": "- [x] Integrar M58: el tamaño de texto ajustable no rompe la traducción [M] -- **M53**. iter. 6: el análisis responde a la escala de forma monótona (bloque K: desbordan 0 a 12 px, 63 a 16 px, 97 a 24 px), así que la herramienta para validarlo existe y está probada; lo que falta es que los layouts de M53 absorban esos tres casos. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramienta probada (`test_localizacion_iter6.gd` 82 checks 0 fallos); el desborde de layouts es de M53 (07-Resultados L246). Sigue `[?]` deuda externa M53. | FLIP 2026-10-26 (Reflection-Beam-1.0, T219-87): spec en 03-Diseno.md § (L112 integrar M58 tamaño texto)"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 116,
+      "end_line": 116,
+      "excerpt": "- [x] Integrar módulos de contenido (M14-M39): items, misiones, tiendas y diarios con claves M87 [C] -- **M14-M39 (26 módulos de contenido)**. El catálogo ya cubre 170 claves y `AuditorClaves` inventaría el uso real (código↔catálogo), así que la migración se puede medir módulo a módulo; hacerla entera excede el alcance de M87. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): `AuditorClaves` existe (`auditor_claves.gd` L18); corroborado por Tarea B i18n — 112 claves ausentes en 22 scripts de UI (material step-5, commit da673d8) = módulos de contenido aún sin migrar. Sigue `[?]` dueño M14-M39. Med. 2026-10-23 (T31, Ling-3.1-Flash, auditoría sobre 980 scripts de producción): JSON 170 claves → **136 referenciadas en código / 34 huérfanas** (ui 6, eventos.historia_c1-c7 14, SETTINGS 9 legacy-de-save, msg 3, npc 2); .po 273 claves → 159 comunes + 115 solo-.po (**53 vivas**: 49 M68 narrativas de transporte vía TranslationServer + CLOCK/SETTINGS/UI/npc 4; **62 muertas**: 40 M68, 14 DIARY categorías, 8 varias). M68 total 89 = 49 vivas/40 muertas. Detalle y conciliación: `03-Diseno.md` §2.4.16. | FLIP 2026-10-26 (Reflection-Beam-1.0, T219-87): spec en 03-Diseno.md § (L116 integrar M14-M39)"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 117,
+      "end_line": 117,
+      "excerpt": "- [x] Integrar M29/M30: fechas y horas mostradas en formato localizado [M] -- **M29/M30**. La API está lista y probada en M87: `LocaleUtils.format_date()` (d/m/Y vs m/d/Y) y `format_hora()`, expuestas por `Localization.format_date/format_hora`. Falta que el reloj y el calendario las usen en vez de formatear por su cuenta. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): API lista y probada (`locale_utils.gd` L54/L65, expuesta en `localization_manager.gd` L226/L229); adopción en disco: solo tests + `transport_localizer.gd` L254-255 la llaman — reloj/calendario (M29/M30) NO. Sigue `[?]` deuda externa M29/M30. | FLIP 2026-10-26 (Reflection-Beam-1.0, T219-87): spec en 03-Diseno.md § (L117 integrar M29/M30)"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "start_line": 200,
+      "end_line": 218,
+      "excerpt": "La tabla del plan asigna pendientes a M53/M90, M29/M30, M14-M39 y al usuario; registra además deudas del autoload duplicado y del auditor."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "start_line": 223,
+      "end_line": 249,
+      "excerpt": "En 04-Codigo §8b coexisten cifras/anclas pre-PT con una nota posterior PT; la descripción de consumo M74 y la cita del commit son históricas y requieren sincronización."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md",
+      "start_line": 1,
+      "end_line": 19,
+      "excerpt": "El plan de resultados documenta 6 suites antiguas; sirve como registro histórico, no evidencia actual del gate PT/QA 169."
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+      "start_line": 15,
+      "end_line": 17,
+      "excerpt": "Lista de idiomas soportados actual: es, en, pt."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "start_line": 277,
+      "end_line": 277,
+      "excerpt": "Nota histórica sobre player.gd que S2-17 contrasta con f860e00; revisar cita en S2-17."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "start_line": 489,
+      "end_line": 493,
+      "excerpt": "Síntesis del diseño con afirmaciones PT de octubre y conciliación de catálogos; comparar con §8b de 04-Codigo."
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-17-clasificacion-referencias-m87.json",
+      "start_line": 1,
+      "end_line": 20,
+      "excerpt": "S2-17 proporciona clasificación previa, hashes y hallazgos de referencias históricas; no valida runtime.",
+      "note": "La evidencia JSON completa contiene 27 citas con extractos verificados."
+    }
+  ],
+  "verification": {
+    "method": [
+      "Conteo independiente de marcas del checklist: 140 [x], 0 [ ], 0 [?].",
+      "Comparación de encabezados/conclusiones con la fila GLOBAL y la reserva de guía 08.",
+      "Lectura de líneas citadas de 04-Codigo, 03-Diseno y 07-Resultados-Testings; consulta de la evidencia S2-17.",
+      "Hashes SHA-256 de fuentes guardados para fijar el snapshot."
+    ],
+    "not_done": [
+      "No se ejecutó ningún test, Godot ni validador.",
+      "No se cambió el estado ni las marcas de M87.",
+      "No se solicitó ni presumió reserva del módulo.",
+      "No se actualizó documentación canónica, código, GLOBAL o guía 08."
+    ]
+  },
+  "conclusion": "Handoff documental listo: el estado global registra M87 completado con QA cruzado, mientras el checklist conserva cinco deudas mediante marcas híbridas y la guía 08 contiene un snapshot antiguo. Hay texto histórico de M87 que no está sincronizado con PT y con el historial de algunos commits. No se reabre el módulo ni se asigna trabajo; cualquier reconciliación debe venir del dueño/directora.",
+  "limitations": "Los estados de QA y las pruebas se citan como afirmaciones registradas por sus autores. Este artefacto es un borrador informativo, no una orden, reserva, sello ni actualización oficial del módulo."
+}

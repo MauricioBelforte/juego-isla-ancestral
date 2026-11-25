@@ -37,6 +37,12 @@ var _catalogo: Dictionary = {}
 var _estados: Dictionary = {}
 ## Fechas de registro por entrada (día absoluto M30, para la UI)
 var _dia_registro: Dictionary = {}
+## Datos extra por entrada (tanda GLM-5.3-Flash 2026-11-25, checklist L57/L92):
+## entrada_id -> Dictionary con los puentes de datos de otros módulos leídos
+## read-only (ej: {"nivel_relacion": 2, "retrato": "res://...",
+## "ultimo_dialogo": "aur_001"} en personajes; {"cantidad_inventario": 4} en
+## minerales). Se persiste en la sección diary (schema_version 2).
+var _extras: Dictionary = {}
 ## Entradas registradas esta sesión (notificación "¡Diario actualizado!" M53)
 var _nuevas_sesion: Array[String] = []
 ## Preferencias de UI persistidas (T-M1 lote 2): filtro de estado y
@@ -103,9 +109,31 @@ func _conectar_eventos() -> void:
 	# Sellos (M22/M26) → categoría sellos
 	if bus.quest.has_signal("prereq_met"):
 		bus.quest.prereq_met.connect(func(seal_id: String): registrar("sello_" + _slug(seal_id), "sellos"))
-	# Vecinos que se mudan (M19) → personajes
+	# Vecinos que se mudan (M19) → personajes (con retrato NPCVisualDatabase)
 	if bus.npc.has_signal("npc_moved_in"):
-		bus.npc.npc_moved_in.connect(func(npc_id: String, _isla: String): registrar("vecino_" + _slug(npc_id), "personajes"))
+		bus.npc.npc_moved_in.connect(func(npc_id: String, _isla: String):
+			var datos: Dictionary = {}
+			var visual := _retrato_npc(npc_id)
+			if not visual.is_empty():
+				datos["retrato"] = visual
+			registrar_con_datos("vecino_" + _slug(npc_id), "personajes", datos))
+	# Nivel de amistad (M20) → personajes: snapshot del nivel de relación
+	# (checklist L57: la relación vive con la entrada del personaje).
+	if bus.npc.has_signal("nivel_amistad_cambio"):
+		bus.npc.nivel_amistad_cambio.connect(func(npc_id: String, nivel: int):
+			var eid := _npc_a_entrada(npc_id, "personajes")
+			if not eid.is_empty():
+				registrar_con_datos(eid, "personajes", {"nivel_relacion": nivel}))
+	# Diálogo solicitado (M21) → personajes: último diálogo leído por vecino
+	# (checklist L57: "últimos diálogos"; se guarda el id del nodo solicitado).
+	if bus.npc.has_signal("dialog_requested"):
+		bus.npc.dialog_requested.connect(func(npc_id: String, dialog_data: Dictionary):
+			var did := String(dialog_data.get("id", ""))
+			if did.is_empty():
+				return
+			var eid := _npc_a_entrada(npc_id, "personajes")
+			if not eid.is_empty():
+				registrar_con_datos(eid, "personajes", {"ultimo_dialogo": did}))
 	# Misiones (M22/M23) → misiones
 	if bus.quest.has_signal("quest_completed"):
 		bus.quest.quest_completed.connect(func(qid: String): registrar("mision_" + _slug(qid), "misiones"))
@@ -127,6 +155,61 @@ func _slug(s: String) -> String:
 	r = r.replace("á", "a").replace("é", "e").replace("í", "i")
 	r = r.replace("ó", "o").replace("ú", "u").replace("ñ", "n")
 	return r
+
+
+## Traduce un id ajeno (ej: npc_id "catalina_oso") al id de entrada del
+## catálogo ("vecino_catalina_oso"). Exacto primero; fallback por prefijo
+## ("vecino_catalina_oso_alt") o por substring ("cat_oso"). "" si no hay match.
+func _npc_a_entrada(valor: String, categoria: String) -> String:
+	if valor.is_empty() or not _catalogo.has(categoria):
+		return ""
+	var candidato := categoria_singular(categoria) + "_" + _slug(valor)
+	var exacto := _entrada_existe(candidato, categoria)
+	if exacto != "":
+		return exacto
+	for e in _catalogo[categoria]:
+		var eid := String(e.get("id", ""))
+		if eid.begins_with(candidato + "_") or _slug(eid).contains(_slug(valor)):
+			return eid
+	return ""
+
+
+## Prefijo de categoría para ids compuestos ("personajes"→"vecino",
+## "minerales"→"mineral"; si la categoría no está mapeada, la propia id).
+func categoria_singular(categoria: String) -> String:
+	match categoria:
+		"personajes": return "vecino"
+		"lugares": return "lugar"
+		"sellos": return "sello"
+		"misiones": return "mision"
+		"eventos": return "evento"
+		"cartas": return "carta"
+		"recetas": return "receta"
+		"plantas": return "planta"
+		"minerales": return "mineral"
+		"ruinas": return "ruina"
+		"criaturas": return "pez"
+		"pistas": return "pista"
+		_: return categoria
+
+
+func _entrada_existe(entrada_id: String, categoria: String) -> String:
+	for e in _catalogo.get(categoria, []):
+		if String(e.get("id", "")) == entrada_id:
+			return entrada_id
+	return ""
+
+
+## Ruta del recurso visual (retrato) de un NPC (read-only M162).
+## "" si el autoload no existe o no tiene visual para ese id.
+func _retrato_npc(npc_id: String) -> String:
+	var db := get_node_or_null("/root/NPCVisualDatabase")
+	if db == null or not db.has_method("get_visual"):
+		return ""
+	var visual: Resource = db.get_visual(npc_id)
+	if visual == null or visual.resource_path.is_empty():
+		return ""
+	return visual.resource_path
 
 
 ## API central de registro (la llaman los sistemas y los puentes de arriba).
@@ -151,6 +234,13 @@ func registrar(entrada_id: String, categoria: String) -> bool:
 	_estados[entrada_id] = {"categoria": categoria, "estado": Estado.VISTO, "favorito": false}
 	_dia_registro[entrada_id] = _dia_absoluto()
 	_nuevas_sesion.append(entrada_id)
+	# Snapshot de cantidad en inventario (M14) para minerales (checklist L92:
+	# "guardar cantidad conocida"): al registrar, se lee read-only el conteo
+	# del ítem asociado (mineral_mineral_cobre → mineral_cobre).
+	if categoria == "minerales":
+		var cant := _cantidad_inventario_de(entrada_id)
+		if cant >= 0:
+			_extras[entrada_id] = _extras.get(entrada_id, {}).merged({"cantidad_inventario": cant}, true)
 	var bus := get_node_or_null("/root/EventBus")
 	if bus != null:
 		bus.diary.entrada_nueva.emit(entrada_id, categoria)
@@ -166,6 +256,39 @@ func marcar_completado(entrada_id: String) -> bool:
 	if int(_estados[entrada_id].get("estado", Estado.PENDIENTE)) < Estado.COMPLETADO:
 		_estados[entrada_id]["estado"] = Estado.COMPLETADO
 	return true
+
+
+## ── Datos extra por entrada (puentes read-only, L57/L92) ──────────
+
+## Registra (o actualiza) una entrada ADEMÁS de datos extra de otros módulos.
+## Idempotente: re-llamadas fusionan los datos (los nuevos pisan claves).
+func registrar_con_datos(entrada_id: String, categoria: String, datos: Dictionary) -> bool:
+	if datos.is_empty():
+		return registrar(entrada_id, categoria)
+	if not registrar(entrada_id, categoria):
+		return false
+	# Promover VISTO → COMPLETADO si el puente repite (misma semántica que
+	# la re-llamada de registrar, §2.1) y fusionar los datos.
+	var previos: Dictionary = _extras.get(entrada_id, {})
+	_extras[entrada_id] = previos.merged(datos, true)
+	return true
+
+
+## Datos extra de una entrada (copia segura; {} si no tiene).
+func datos_de(entrada_id: String) -> Dictionary:
+	return (_extras.get(entrada_id, {}) as Dictionary).duplicate()
+
+
+## Cantidad en inventario (M14) del ítem asociado a una entrada de minerales.
+## -1 si el servicio no está disponible o el id no mapea.
+func _cantidad_inventario_de(entrada_id: String) -> int:
+	var inv := get_node_or_null("/root/Inventario")
+	if inv == null or not inv.has_method("count_item"):
+		return -1
+	var item_id := entrada_id
+	if item_id.begins_with("mineral_"):
+		item_id = item_id.substr("mineral_".length())
+	return int(inv.count_item(item_id))
 
 
 func alternar_favorito(entrada_id: String) -> bool:
@@ -199,13 +322,21 @@ func detalle_entrada(entrada_id: String) -> Dictionary:
 		return {}
 	for e in _catalogo[cat]:
 		if String(e.get("id", "")) == entrada_id:
-			return {
+			var d: Dictionary = {
 				"id": entrada_id,
 				"titulo": String(e.get("titulo", "")),
 				"descripcion": String(e.get("descripcion", "")),
 				"refs": (e.get("refs", []) as Array).duplicate(),
 				"icono": String(e.get("icono", "")),
+				# Datos extra de puentes (L57/L92): nivel_relacion, retrato,
+				# ultimo_dialogo, cantidad_inventario... {} si no tiene.
+				"datos": datos_de(entrada_id),
 			}
+			# Cantidad EN VIVO del inventario (M14) para minerales: el snapshot
+			# del registro queda en "datos"; el conteo actual se expone aparte.
+			if cat == "minerales":
+				d["inventario"] = _cantidad_inventario_de(entrada_id)
+			return d
 	return {}
 
 
@@ -363,16 +494,23 @@ func get_save_data() -> Dictionary:
 			"favorito": bool(_estados[eid].get("favorito", false)),
 			"dia": int(_dia_registro.get(eid, 0)),
 		}
-	return {"schema_version": 1, "entradas": entradas, "ui": _ui_prefs.duplicate()}
+	return {"schema_version": 2, "entradas": entradas, "ui": _ui_prefs.duplicate(), "extras": _extras.duplicate(true)}
 
 
 func restore_save_data(data: Dictionary) -> void:
 	_estados.clear()
 	_dia_registro.clear()
+	_extras.clear()
 	# Preferencias de UI (T-M1 lote 2): tolerante — sin "ui" o inválidas →
 	# defaults (los saves antiguos de M59 sin esta clave cargan igual).
 	var ui: Dictionary = data.get("ui", {})
 	set_ui_prefs(int(ui.get("filtro", 0)), String(ui.get("categoria", "personajes")))
+	# Datos extra (schema_version 2; saves v1 sin "extras" cargan igual).
+	var extras: Dictionary = data.get("extras", {})
+	if typeof(extras) == TYPE_DICTIONARY:
+		for eid in extras:
+			if typeof(extras[eid]) == TYPE_DICTIONARY:
+				_extras[String(eid)] = (extras[eid] as Dictionary).duplicate()
 	var entradas: Dictionary = data.get("entradas", {})
 	for eid in entradas:
 		var e: Dictionary = entradas[eid]
@@ -405,3 +543,48 @@ func total_entradas() -> int:
 ## bien a través de Variant en runtime, así que se expone este accessor.
 func get_categorias() -> Array[String]:
 	return CATEGORIAS.duplicate()
+
+
+## ── Validación contra el catálogo de M25 (checklist L125) ─────────
+
+## Valida los estados de sellos del diario contra el catálogo real de sellos
+## (data/balance/seals.json). Devuelve:
+##	{"catalogo_ok": bool, "sellos_diario": int, "sellos_m25": int,
+##	 "desconocidos": [ids del diario sin homólogo en M25],
+##	 "sin_diario": [ids de M25 sin entrada registrada en el diario]}
+## "desconocidos" es esperado no-vacío: el diario registra la familia de
+## sellos de TEMPLES (M24: sello_ceniza_sala1...) y M25 cataloga los sellos de
+## PROGRESO del juego (sello_llegada...); la validación expone la relación.
+func validar_sellos_m25(ruta: String = "res://data/balance/seals.json") -> Dictionary:
+	var reporte := {"catalogo_ok": false, "sellos_diario": 0, "sellos_m25": 0, "desconocidos": [], "sin_diario": []}
+	var texto := FileAccess.get_file_as_string(ruta)
+	var parseado: Variant = JSON.parse_string(texto)
+	if typeof(parseado) != TYPE_DICTIONARY:
+		return reporte
+	var sellos_m25: Variant = (parseado as Dictionary).get("sellos", {})
+	if typeof(sellos_m25) != TYPE_DICTIONARY:
+		return reporte
+	reporte["catalogo_ok"] = true
+	reporte["sellos_m25"] = (sellos_m25 as Dictionary).size()
+	var ids_m25: Array[String] = []
+	for sid in sellos_m25:
+		ids_m25.append(String(sid))
+	var registrados: Array[String] = []
+	for eid in _estados:
+		if String(_estados[eid].get("categoria", "")) == "sellos":
+			registrados.append(String(eid))
+	reporte["sellos_diario"] = registrados.size()
+	# Homólogo M25 de un sello del diario: id sin el prefijo "sello_" exterior
+	# ("sello_sello_ceniza_sala1" → "sello_ceniza_sala1") o coincidencia de
+	# sufijo ("sello_llegada" ↔ sello registrado "sello_llegada").
+	for eid in registrados:
+		var homologo := eid
+		if eid.begins_with("sello_sello_"):
+			homologo = "sello_" + eid.substr("sello_sello_".length())
+		if not (homologo in ids_m25) and not (eid in ids_m25):
+			(reporte["desconocidos"] as Array).append(eid)
+	for sid in ids_m25:
+		var directo := _entrada_existe(sid, "sellos")
+		if directo == "" and not _estados.has("sello_" + sid):
+			(reporte["sin_diario"] as Array).append(String(sid))
+	return reporte

@@ -14,6 +14,13 @@ fallos) no estaba registrada y nadie lo veia.
 Esto NO decide que suite hay que registrar: solo mide el hueco y detecta las
 entradas del workflow que apuntan a archivos inexistentes (rot del doctor).
 
+Desde 2026-11-25 tambien clasifica por TIPO, porque el hueco no es uniforme:
+  * `gdunit4`   -> necesita el runner del addon (workflow testing.yml, por directorio)
+  * `scenetree` -> corre con `godot --headless --script <ruta>`
+La distincion importa: 19 suites de `tests/unit/**` son `scenetree` y el job
+GdUnit4 NO las colecta (busca suites del addon), asi que quedaban sin correr en
+ninguno de los dos jobs. Medidas el 2026-11-25: 19/19 en verde, 0 timeouts.
+
 Uso:
     python tools/quality/auditar_cobertura_suites.py
     python tools/quality/auditar_cobertura_suites.py --check   # exit 1 si una entrada de CI no existe
@@ -47,6 +54,17 @@ def suites_en_ci(texto_yml: str) -> list[str]:
     return vistas
 
 
+def tipo_de_suite(ruta_abs: Path) -> str:
+    """Clasifica por cabecera: gdunit4 (necesita el runner del addon) o scenetree."""
+    try:
+        cabecera = ruta_abs.read_text(encoding="utf-8", errors="replace")[:2500]
+    except OSError:
+        return "?"
+    if re.search(r"GdUnitTestSuite|GdUnitTest", cabecera):
+        return "gdunit4"
+    return "scenetree"
+
+
 def suites_en_disco() -> list[str]:
     rutas: list[str] = []
     for base in ("tests", "scripts"):
@@ -75,9 +93,17 @@ def main(argv: list[str] | None = None) -> int:
     fuera = [s for s in disco if s not in en_ci]
     inexistentes = [s for s in en_ci if not (PROYECTO / s).is_file()]
 
-    print(f"Suites en disco ......... {len(disco)}")
+    tipos = {s: tipo_de_suite(PROYECTO / s) for s in disco}
+    n_st = sum(1 for t in tipos.values() if t == "scenetree")
+    n_gd = sum(1 for t in tipos.values() if t == "gdunit4")
+    # Las gdunit4 las corre el job GdUnit4 del workflow testing.yml por directorio,
+    # no aparecen como `--script` en quality.yml: no son "fuera" en el mismo sentido.
+    fuera_st = [s for s in fuera if tipos.get(s) == "scenetree"]
+
+    print(f"Suites en disco ......... {len(disco)}  (scenetree {n_st} / gdunit4 {n_gd})")
     print(f"Suites en el workflow ... {len(en_ci)}")
     print(f"Fuera del workflow ...... {len(fuera)}")
+    print(f"  de las cuales ejecutables con --script y sin correr: {len(fuera_st)}")
 
     por_carpeta: collections.Counter[str] = collections.Counter()
     for s in fuera:
@@ -91,7 +117,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.fuera:
         print("\nSuites no registradas:")
         for s in fuera:
-            print(f"  {s}")
+            print(f"  [{tipos.get(s, '?')[:6]}] {s}")
 
     if inexistentes:
         print("\nERROR: el workflow referencia suites que no existen:")

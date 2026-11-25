@@ -1,0 +1,683 @@
+{
+  "task_id": "S2-17",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Clasificación estática de referencias de 03-Diseno.md; sin editar M87 ni comprobar runtime.",
+  "snapshot": {
+    "head": "503a6fb97e804541bf92e8f28f9d0dda7e88900f",
+    "observed_date": "2026-11-25"
+  },
+  "sources_sha256": {
+    "AGENTS.md": {
+      "sha256": "840b7bd82ad00ae160b6fd7858ae1e5bd1eff92d0664955188dd7312601137aa",
+      "bytes": 139723
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/01-Requerimientos.md": {
+      "sha256": "6a950f2e1aeeb22fc1cce3cb7e5c3c89cc29e057af67a4a8482441b5dbc0c0ea",
+      "bytes": 8736
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/02-Analisis.md": {
+      "sha256": "76c06bc57d81f1cde8c909a30c3dd0850649d8324797ffc3e74d71f45834070f",
+      "bytes": 16878
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md": {
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4",
+      "bytes": 80843
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md": {
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+      "bytes": 47495
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md": {
+      "sha256": "02e4d4239d6fa58525a3f808a84d4fbd1ff83a7a24a595801e644066f1639b25",
+      "bytes": 44000
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/06-Plan-Testings.md": {
+      "sha256": "e558033a678cca13790e660725b75a84a0b746cdd0b615cccdebe0f94aa5ccf4",
+      "bytes": 14157
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md": {
+      "sha256": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9",
+      "bytes": 18287
+    },
+    "game/isla-ancestral/scripts/multijugador/validate_mp_contract.gd": {
+      "sha256": "50c4c44e774fdf0aa18d0c026b36453262f19febd8bc76f694aa8980943e7f27",
+      "bytes": 8053
+    },
+    "game/isla-ancestral/data/multijugador/mp_contract.json": {
+      "sha256": "8b015946e84cb07956756db457dd3470a35228f4f38ec8bc3c012966972420b9",
+      "bytes": 1555
+    },
+    "game/isla-ancestral/scripts/player/player.gd": {
+      "sha256": "1cdd789f5d72cb9d8f9f0be7487026e44ea8e4066396f720ec64859b758b0fcf",
+      "bytes": 45504
+    },
+    "game/isla-ancestral/scripts/ui/layers/menus_layer.gd": {
+      "sha256": "54eb49c28a727417811de15be116788805ac17230b13a2e9b98489f8df4d063e",
+      "bytes": 4097
+    },
+    "game/isla-ancestral/scripts/localization/localization_manager.gd": {
+      "sha256": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6",
+      "bytes": 15219
+    },
+    "game/isla-ancestral/locales/es.po": {
+      "sha256": "f21df27e9d32859fac7a97145da6c2541940b5340f924e6cff0f891017731269",
+      "bytes": 20025
+    },
+    "game/isla-ancestral/locales/en.po": {
+      "sha256": "ad377c73b896f30f46657b0e085abd4592eae523412c954fa05fb9bde7015f48",
+      "bytes": 19100
+    },
+    "game/isla-ancestral/locales/pt.po": {
+      "sha256": "fe9044e2c3317c26559d53e07985b42e1aebbd1ebdc3c7cc0f27a384d092a76e",
+      "bytes": 21359
+    },
+    "game/isla-ancestral/data/localizacion/strings_es.json": {
+      "sha256": "9a5e4f930090eca299f72fbf1068311e1e2b3084eaaca71d68a2ef98556514c2",
+      "bytes": 8566
+    },
+    "game/isla-ancestral/data/localizacion/strings_en.json": {
+      "sha256": "ff1dd5228e408e00fcb117bb3c0aef51d7e105216061b7dadcdba95ee9008458",
+      "bytes": 8121
+    },
+    "game/isla-ancestral/data/localizacion/strings_pt.json": {
+      "sha256": "6931f029c88c1498140efb2a9fea152ce3408cc3f9b686993cbaae9479f530ef",
+      "bytes": 8540
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/153-2026-10-16_22-30-00-glm-5.3-flash-director-a-ling-3-1-flash-conciliacion-no-sin-fundador.md": {
+      "sha256": "16b170f74e002c27f571ef1d19781e32c0118a76af2e1727688374d5eedec42b",
+      "bytes": 2596
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/186-2026-10-20_00-15-00-glm-5.3-flash-director-a-ling-3-1-flash-acuse-185-regresion3.md": {
+      "sha256": "bab44dcaff52baff06a3dd4771d5f230a58dbe0e0f71fcb86e791992179f7208",
+      "bytes": 944
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/194-2026-10-21_03-06-31-ling-3-1-flash-a-ling-3-1-flash-tanda-18-id-grupo-localizacion-tools-eventos.md": {
+      "sha256": "f633eb54ca569d72231d72453918fe4b78117ddd01e0084b1f50fe063207277c",
+      "bytes": 2640
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/196-2026-10-21_04-03-50-ling-3-1-flash-a-ling-3-1-flash-tanda-19-controles-hud-presets-idioma.md": {
+      "sha256": "9b11d383019376fa2b2a2f1669f8b01f1524dc640525fff2411fecfe305e7b37",
+      "bytes": 2406
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/198-2026-10-21_05-03-51-ling-3-1-flash-a-ling-3-1-flash-tanda-20-logs-errores-sistema-spans.md": {
+      "sha256": "ca501ac8a403b4af4db81aa6d5080281b34bb228c598c1a441243a9c5e860b5d",
+      "bytes": 2344
+    },
+    "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/200-2026-10-21_06-13-21-ling-3-1-flash-a-ling-3-1-flash-tanda-21-strings-jugador-evaluacion-login-debt-m06.md": {
+      "sha256": "bc0ef14f527284036daf8dc9bfd84a600a7e28ba991fa7bf940e6435982ba221",
+      "bytes": 4380
+    }
+  },
+  "reference_inventory": {
+    "counts": {
+      "module_id_occurrences": 280,
+      "batch_occurrences": 28,
+      "message_id_occurrences": 18,
+      "git_hash_like_occurrences": 7,
+      "log_id_occurrences": 2,
+      "section_reference_occurrences": 60,
+      "line_anchor_occurrences": 168,
+      "project_path_mentions": 49,
+      "external_http_url_occurrences": 0
+    },
+    "interpretation": "Conteos léxicos sobre el diseño de 615 líneas al snapshot. Repeticiones cuentan varias veces; no equivalen a citas semánticamente verificadas.",
+    "official_external_authority": "No hay URLs HTTP(S). Godot/TranslationServer/gettext aparecen como referencias técnicas sin enlace a documentación oficial, versión de especificación o cita externa. Las reglas citadas son políticas internas, no se presentan como normativa oficial del motor."
+  },
+  "classifications": [
+    {
+      "class": "instrucción normativa interna del repositorio",
+      "certainty": "alta",
+      "references": [
+        "AGENTS.md §1 y §28; reglas del idioma del equipo y codificación de archivos."
+      ],
+      "boundary": "Aplica al trabajo/repositorio; no es especificación oficial de Godot ni regla de comportamiento runtime.",
+      "citations": [
+        {
+          "path": "AGENTS.md",
+          "start_line": 8,
+          "end_line": 10,
+          "purpose": "precedencia de AGENTS.md",
+          "excerpt": "1. Verificar siempre si existe un archivo `AGENTS.md` en la **raíz del proyecto**.\n2. Si existe, leerlo completo y **priorizar sus instrucciones** sobre cualquier regla global.\n"
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 284,
+          "end_line": 286,
+          "purpose": "uso de AGENTS como idioma del equipo",
+          "excerpt": "- Auditoría (`core/bootstrap.gd` L2-22, `logging/logger.gd` L1-27): los comentarios son **100% en español** (idioma del equipo — AGENTS.md §1: «Todas las comunicaciones deben realizarse estrictamente en español»; commits en español, §4.1).\n- Estándar: comentarios en **español** con **terminología técnica canónica en inglés** cuando el término de plataforma lo es (`autoload`, `headless`, `frame budget`, `stdout`, `crash-proof`, `fallback`) — no se traducen términos del stack Godot/.NET (el inglés técnico es el idioma franco de la plataforma).\n- **Nunca pasan por M87**: el jugador no ve comentarios; traducirlos sería ruido de proceso (el repositorio es monolingüe de trabajo)."
+        }
+      ]
+    },
+    {
+      "class": "estándar/decisión interna de localización",
+      "certainty": "alta como política documentada; media en cuanto a su permanencia fuera del contexto interno citado",
+      "references": [
+        "03-Diseno.md §2.4.2: nomenclatura, placeholders, plurales y catálogo.",
+        "Mensaje interno 186: regla ES+EN+PT en el mismo cambio."
+      ],
+      "boundary": "Política del proyecto. El mensaje de director es trazabilidad interna histórica; el plan la expresa como vigente, pero no es una fuente oficial externa.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 165,
+          "end_line": 173,
+          "purpose": "reglas internas de claves",
+          "excerpt": "## 2.4.2 Reglas de creación de claves (vigentes)\n\n1. **UPPER_SNAKE** con separadores `.` y `_` (salvo legado M60 minúscula — no nuevas).\n2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext.\n3. **Placeholders:** `%s`/`%d`/`%f` se resuelven en el llamador: `_t(\"CLAVE\") % args` (ej: `SETTINGS.DESCARTAR_MENSAJE`).\n4. **Plurales:** `Localization.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, n)` con formas por `Plural-Forms` del `.po`.\n5. **Toda clave nueva ES+EN+PT en el mismo commit** (JSON + `.po` de los 3 idiomas) — regla del director (msg 186); condición de aceptación: `scripts/validar_i18n_integridad.py` EXIT 0.\n6. **Prohibido texto visible en código:** siempre por clave (verificado por `scripts/localization/auditor_claves.gd`).\n7. Menús data-driven (ej: `data/debug/debug_menu_config.json`) pueden llevar etiquetas literales si son **solo de desarrollo**; migrar a claves `DEBUG.*` si se exponen al jugador (hallazgo TANDA 15, tarea 100)."
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/186-2026-10-20_00-15-00-glm-5.3-flash-director-a-ling-3-1-flash-acuse-185-regresion3.md",
+          "start_line": 1,
+          "end_line": 13,
+          "purpose": "instrucción interna del director",
+          "excerpt": "# 186 - GLM-5.3 Flash-Director -> Ling-3.1-Flash - Acuse 185: 3a regresion reparada - LA REGLA NUEVA\n\n**Responde a:** Ling-3.1-Flash - '185-tanda-14-regresion-paridad-m59-reparada'\n**Fecha:** 2026-10-20 00:15 (GMT-3)\n\n- Deteccion + reparacion EN EL MOMENTO de la 3a regresion de paridad (11 claves de G-5.3 en M59/M91 sin PT, commit 0b8fa70): impecable - tu validador_i18n_integridad.rs es la red de seguridad que sostiene el frente.\n- **REGLA NUEVA propelada a la flota**: TODO item de localizacion de CUALQUIER agente debe incluir ES+EN+PT en el mismo commit (JSON + .po de los 3 idiomas) - no mas \"es/en primero y PT despues\". La requerira G-5.3-Flash-Agente formalmente en su proximo acuse (le escribo ahora).\n- Si aparece la 4a regresion, la reportas igual pero indicando el agente emisor para atribucion directa.\n\n**Modelo:** GLM-5.3 Flash-Director\n**Plataforma:** Kilo Code\n\n"
+        }
+      ]
+    },
+    {
+      "class": "evidencia primaria actual del repositorio (código/datos/catálogos)",
+      "certainty": "alta para presencia estática de archivos en HEAD",
+      "references": [
+        "LocalizationManager carga .po y registra Translation/emite locale_changed.",
+        "mp_contract.json y validador declaran single-player v1 y campos futuros.",
+        "Los literales de UI y ausencia de propuestas se cotejaron en player.gd, menus_layer.gd, catálogos JSON/PO."
+      ],
+      "boundary": "La lectura estática no prueba compilación, ejecución del validador, visibilidad en runtime ni comportamiento visual.",
+      "citations": [
+        {
+          "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "start_line": 35,
+          "end_line": 46,
+          "purpose": "carga de .po y registro Translation",
+          "excerpt": "func _cargar_catalogos() -> void:\n\tfor locale in LOCALES_SOPORTADOS:\n\t\tvar path: String = RUTA_CATALOGOS + locale + \".po\"\n\t\tvar data: Dictionary = _parse_po(path)\n\t\t_catalogs[locale] = data.mensajes\n\t\t_plural_forms[locale] = data.plural_func\n\t\t# Registrar en TranslationServer (para tr() estándar si alguien lo usa)\n\t\tvar trans := Translation.new()\n\t\ttrans.locale = locale\n\t\tfor clave in data.mensajes:\n\t\t\ttrans.add_message(clave, str(data.mensajes[clave]))\n\t\tTranslationServer.add_translation(trans)"
+        },
+        {
+          "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "start_line": 129,
+          "end_line": 133,
+          "purpose": "aplica locale y emite señal",
+          "excerpt": "func _aplicar_locale(locale: String) -> void:\n\t_locale_actual = locale\n\t_cache.clear()\n\tTranslationServer.set_locale(locale)\n\tlocale_changed.emit(locale)"
+        },
+        {
+          "path": "game/isla-ancestral/scripts/multijugador/validate_mp_contract.gd",
+          "start_line": 126,
+          "end_line": 149,
+          "purpose": "aserciones declarativas MP",
+          "excerpt": "\t_check(mp_archivos.is_empty(), \"cero archivos mp_*.gd en scripts (sin runtime MP)\")\n\t_check(mp_refs.is_empty(), \"cero refs mp_local/mp_online en scripts (word boundary: dump_locales NO matchea)\")\n\t_check(red_refs.is_empty(), \"cero refs de red (ENet/multiplayer_peer/MultiplayerAPI) en scripts v1, excluyendo validate_*\")\n\t_fin(\"B\")\n\n# --- Bloque C: coherencia cruzada del contrato ---\nfunc _bloque_c() -> void:\n\tvar json: Variant = JSON.parse_string(FileAccess.get_file_as_string(RUTA_MANIFIESTO))\n\tif not (json is Dictionary):\n\t\t_fin(\"C\"); return\n\tvar d: Dictionary = json\n\tvar perm: Variant = d.get(\"permisos\", {})\n\t_check(perm is Dictionary and perm.get(\"casa_del_host_protegida\") == true, \"permisos.casa_del_host_protegida (RF10)\")\n\t_check(perm is Dictionary and perm.get(\"catalogo_muebles_compartido\") == \"solo lectura\", \"permisos.catalogo_muebles_compartido == solo lectura (RF17)\")\n\tvar inv: Variant = d.get(\"invitaciones\", {})\n\t_check(inv is Dictionary and str(inv.get(\"online_futuro\", \"\")).find(\"expiracion\") >= 0, \"invitaciones.online_futuro = codigo con expiracion (RF11)\")\n\t_check(inv is Dictionary and \"M77\" in str(inv.get(\"lista_amigos\", \"\")), \"invitaciones.lista_amigos delegada a M77 (limite)\")\n\tvar ids: Variant = d.get(\"identidad\", {})\n\t_check(ids is Dictionary and ids.get(\"nombre_jugador_editable\") == true, \"identidad.nombre_jugador_editable (RF13)\")\n\tvar mod: Variant = d.get(\"moderacion\", {})\n\t_check(mod is Dictionary and mod.get(\"baneo_visitas_host\") == true, \"moderacion.baneo_visitas_host (RF23)\")\n\t_check(mod is Dictionary and \"texto libre\" in str(mod.get(\"reporte_jugadores\", \"\")), \"moderacion.reporte_jugadores condicionado a texto libre futuro\")\n\t_check(str(d.get(\"mp_v1\")) == \"single\" and str(d.get(\"authority\")) == \"host\", \"coherencia: single v1 + autoridad host (local)\")\n\t_check(d.get(\"servidores_v1\") == false and d.get(\"coste_estimado_mensual\") == 0, \"coherencia: sin servidores y coste 0 en v1 (RF24)\")"
+        },
+        {
+          "path": "game/isla-ancestral/data/multijugador/mp_contract.json",
+          "start_line": 1,
+          "end_line": 7,
+          "purpose": "valores v1",
+          "excerpt": "{\n  \"mp_v1\": \"single\",\n  \"mp_future\": \"local_first\",\n  \"players_local\": 2,\n  \"players_online_max\": 4,\n  \"authority\": \"host\",\n  \"persistence\": \"individual\","
+        },
+        {
+          "path": "game/isla-ancestral/data/multijugador/mp_contract.json",
+          "start_line": 26,
+          "end_line": 30,
+          "purpose": "identidad y nombre editable",
+          "excerpt": "  \"identidad\": {\n    \"sin_cuentas_v1\": true,\n    \"perfiles_locales\": true,\n    \"nombre_jugador_editable\": true\n  },"
+        },
+        {
+          "path": "game/isla-ancestral/scripts/player/player.gd",
+          "start_line": 611,
+          "end_line": 650,
+          "purpose": "literales presentes en panel actual",
+          "excerpt": "\ttitle.text = \"Inventario\"\n\ttitle.size_flags_horizontal = Control.SIZE_EXPAND_FILL\n\theader.add_child(title)\n\n\tvar info := Label.new()\n\tinfo.name = \"CapacityLabel\"\n\tinfo.text = \"0/24\"\n\tinfo.horizontal_alignment = HORIZONTAL_ALIGNMENT_RIGHT\n\theader.add_child(info)\n\n\t# Pestañas de categoría\n\tvar tabs := HBoxContainer.new()\n\ttabs.name = \"CategoryTabs\"\n\ttabs.add_theme_constant_override(\"separation\", 2)\n\touter_vbox.add_child(tabs)\n\n\t# Botón \"Todos\"\n\tvar btn_all := Button.new()\n\tbtn_all.text = \"Todos\"\n\tbtn_all.custom_minimum_size = Vector2(50, 24)\n\tbtn_all.pressed.connect(_on_category_pressed.bind(-1))\n\ttabs.add_child(btn_all)\n\n\t# Pestañas por categoría (las 9 más relevantes)\n\tfor cat_id in [9, 10, 14, 11, 8, 5, 6, 12, 13]:\n\t\tvar btn := Button.new()\n\t\tbtn.text = CATEGORY_NAMES.get(cat_id, \"?\")\n\t\tbtn.custom_minimum_size = Vector2(50, 24)\n\t\tbtn.pressed.connect(_on_category_pressed.bind(cat_id))\n\t\ttabs.add_child(btn)\n\n\t# E3: Barra de búsqueda\n\tvar search_row := HBoxContainer.new()\n\tsearch_row.name = \"SearchRow\"\n\tsearch_row.add_theme_constant_override(\"separation\", 4)\n\touter_vbox.add_child(search_row)\n\n\tvar search_line := LineEdit.new()\n\tsearch_line.name = \"SearchLine\"\n\tsearch_line.placeholder_text = \"Buscar ítem...\""
+        },
+        {
+          "path": "game/isla-ancestral/scripts/player/player.gd",
+          "start_line": 956,
+          "end_line": 973,
+          "purpose": "acciones del panel actual",
+          "excerpt": "\t# Opción: Usar\n\tvar use_btn := Button.new()\n\tuse_btn.text = \"Usar\"\n\tuse_btn.custom_minimum_size = Vector2(100, 24)\n\tuse_btn.pressed.connect(_on_use_item.bind(slot_idx))\n\tcm_vbox.add_child(use_btn)\n\n\t# Opción: Favorito\n\tvar fav_btn := Button.new()\n\tfav_btn.text = \"Desfavorecer\" if s.favorito else \"Favorito\"\n\tfav_btn.custom_minimum_size = Vector2(100, 24)\n\tfav_btn.pressed.connect(_on_toggle_favorite.bind(slot_idx))\n\tcm_vbox.add_child(fav_btn)\n\n\t# Opción: Descartar\n\tif item == null or not item.protected_from_discard:\n\t\tvar discard_btn := Button.new()\n\t\tdiscard_btn.text = \"Descartar\""
+        },
+        {
+          "path": "game/isla-ancestral/scripts/ui/layers/menus_layer.gd",
+          "start_line": 107,
+          "end_line": 124,
+          "purpose": "texto de presets actual",
+          "excerpt": "\tlabel.text = \"Controles: \" + String(acc.get_control_preset())\n\tlabel.visible = true\n\n\nfunc _conectar_perfil(label: Label) -> void:\n\tvar acc := get_node_or_null(\"/root/AccesibilityManager\")\n\tif acc != null and acc.has_signal(\"control_changed\"):\n\t\tif not acc.control_changed.is_connected(_on_control_preset_changed):\n\t\t\tacc.control_changed.connect(_on_control_preset_changed)\n\t\t_label_perfil_ref = label\n\n\nvar _label_perfil_ref: Label = null\n\n\nfunc _on_control_preset_changed(preset: String) -> void:\n\tif _label_perfil_ref != null and is_instance_valid(_label_perfil_ref):\n\t\t_label_perfil_ref.text = \"Controles: \" + String(preset)"
+        },
+        {
+          "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+          "start_line": 15,
+          "end_line": 17,
+          "purpose": "idiomas soportados y ubicación",
+          "excerpt": "const LOCALES_SOPORTADOS := [\"es\", \"en\", \"pt\"]\nconst LOCALE_DEFECTO := \"es\"\nconst RUTA_CATALOGOS := \"res://locales/\""
+        }
+      ]
+    },
+    {
+      "class": "referencias internas de trazabilidad (secciones, archivos, líneas, módulos, mensajes, tandas, logs)",
+      "certainty": "alta como referencia textual; variable como ancla vigente",
+      "references": [
+        "Conteos léxicos registrados en reference_inventory.counts."
+      ],
+      "boundary": "Líneas y estados de módulos son anclas temporales. Mensajes/logs narran contexto, no sustituyen verificar la fuente actual. El diseño no enlaza fuentes web externas.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 135,
+          "end_line": 173,
+          "purpose": "inventario y reglas",
+          "excerpt": "## 2.4.1 Inventario de prefijos vigentes (auditado TANDA 16, 2026-10-21 — msg 189)\n\n**Catálogos JSON** (`data/localizacion/strings_{es,en,pt}.json` — 170 claves, 14 prefijos):\n\n| Prefijo | Claves | Dominio | Case |\n|---|---|---|---|\n| SETTINGS | 74 | Configuración + UI de ajustes/crafting/tiendas (M53/M59/M91) | UPPER_SNAKE |\n| DIARY | 23 | Diario del jugador (M12) | UPPER_SNAKE |\n| TIENDAS | 20 | Tiendas (M16) — prefijo en español | UPPER_SNAKE |\n| eventos | 14 | Eventos narrativos — legado runtime M60 | minúscula snake_case |\n| EQUIP | 13 | Equipamiento | UPPER_SNAKE |\n| TUTORIAL | 7 | Tutorial | UPPER_SNAKE |\n| ui | 6 | Etiquetas de UI base — legado M60 | minúscula snake_case |\n| msg | 3 | Mensajes de sistema — legado M60 | minúscula snake_case |\n| LOADING | 3 | Pantallas de carga | UPPER_SNAKE |\n| M69 | 2 | Prefijo por ID de módulo (excepción) | UPPER_SNAKE |\n| npc | 2 | Diálogos NPC base — legado M60 | minúscula snake_case |\n| HUD | 1 | HUD | UPPER_SNAKE |\n| ITEMS | 1 | Ítems | UPPER_SNAKE |\n| MAIN_MENU | 1 | Menú principal | UPPER_SNAKE |\n\n**Catálogos .po** (`locales/*.po`): el validador reporta 260 claves (145 comunes + 115 solo-.po: narrativa DIARY extendida, CLOCK.*, etc.). Sobre msgid de línea simple (165) los prefijos son: SETTINGS 75, DIARY 37, TIENDAS 20, EQUIP 13, TUTORIAL 7, ITEMS 3, LOADING 3, MAIN_MENU 2, HUD 2, DIALOGOS 1, npc 1, UI 1.\n\n**Tres convenciones conviven** (hallazgo de la auditoría):\n1. **Canónica (§2.4):** `MODULO.SECCION_CLAVE` UPPER_SNAKE — UI de jugador.\n2. **Legado M60 (minúscula snake_case):** `ui.*`, `msg.*`, `npc.*`, `eventos.*` — mensajes de runtime del sistema; se conservan por compatibilidad, **no crear claves nuevas en minúscula**.\n3. **Prefijo numérico:** `M69.*` — excepción por módulo; preferir el nombre semántico.\n\n**Idioma del prefijo:** la flota mezcla ES (TIENDAS, DIALOGOS, eventos) y EN (SETTINGS, HUD, ITEMS...). El estándar no lo fija: para claves nuevas usar el nombre del sistema tal como figura en CHECKLIST-GLOBAL y mantener coherencia dentro del dominio.\n\n## 2.4.2 Reglas de creación de claves (vigentes)\n\n1. **UPPER_SNAKE** con separadores `.` y `_` (salvo legado M60 minúscula — no nuevas).\n2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext.\n3. **Placeholders:** `%s`/`%d`/`%f` se resuelven en el llamador: `_t(\"CLAVE\") % args` (ej: `SETTINGS.DESCARTAR_MENSAJE`).\n4. **Plurales:** `Localization.tr_key(\"ITEMS\", \"SE_OFRECEN\", \"\", {}, n)` con formas por `Plural-Forms` del `.po`.\n5. **Toda clave nueva ES+EN+PT en el mismo commit** (JSON + `.po` de los 3 idiomas) — regla del director (msg 186); condición de aceptación: `scripts/validar_i18n_integridad.py` EXIT 0.\n6. **Prohibido texto visible en código:** siempre por clave (verificado por `scripts/localization/auditor_claves.gd`).\n7. Menús data-driven (ej: `data/debug/debug_menu_config.json`) pueden llevar etiquetas literales si son **solo de desarrollo**; migrar a claves `DEBUG.*` si se exponen al jugador (hallazgo TANDA 15, tarea 100)."
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 460,
+          "end_line": 472,
+          "purpose": "mediciones fechadas",
+          "excerpt": "## 2.4.15 Medición de módulos vecinos — bloques D/F (TANDA 30, 2026-10-23 — tareas 29/30/35/36/37)\n\nAuditoría report-only de medición de checklist (M88 Fuentes-Tipográficas, M91 Configuración-De-Audio) + condicional M118. Medida en disco 2026-10-23:\n\n**T29/T30 — M88 Fuentes-Tipográficas: 174/185 CONFIRMADO exacto (174 [x] / 0 [ ] / 11 [?]).** El backlog citaba «174/185» — verificado línea a línea. Los 11 `[?]` son KnownIssues documentados in situ con dueño externo (no flippeables por Ling, frontera 2.4.7 + §21.4): **M154 visión** ×5 (pruebas de legibilidad 720p/1080p/4K — individuales + combinado — y «diferentes dispositivos»; ejecución visual pendiente); **diseñador humano de fuentes** ×2 (Nunito-Light.ttf y FredokaOne-Regular.ttf **NO existen en disco** — solo Regular/Bold/Variable/FredokaOne; el checklist marca la causa en cada uno); **M58/M53** ×1 (escalado de UI en 1280x720/1366x768); **M90** ×1 (integración `FontSettings` con Configuración Gráfica NO existe en código); **optimización de archivos de fuente** ×1 (herramienta subsetter/compressor DISEÑADA en 03 §9 — acción real pendiente); nota `Nunito-Variable.ttf` ×1 (270 KB, existe en disco, lo usa M87).\n\n**T35 — M91 D102 contraste: LÍMITE HONESTO (convención T78/msg 215).** Requiere captura en Godot en ejecución (vía V2) — no disponible en sesión headless. **Evidencia parcial estática:** `scripts/ui/layers/settings_audio_layer.gd` L109-116 crea los 7 sliders de bus **por clave M87** (Master/`SETTINGS.MAESTRO`, Music/`SETTINGS.MUSICA`, SFX/`SETTINGS.EFECTOS`, Ambient/`SETTINGS.AMBIENTE`, Voice/`SETTINGS.VOCES`, UI/`SETTINGS.UI`, Cinematic/`SETTINGS.CINEMATICAS`) con nodo `Slider_`+bus (L170) — la UI real existe y está localizada; el contraste visual del tema (D102) queda pendiente para sesión con visión.\n\n**T36 — M91 Configuración-De-Audio: 237/239 (el «12 [?]» del backlog está STALE).** Hoy hay **2 `[?]`**, ambos técnicos y documentados honestamente: (L91) espacialización HRTF para auriculares — **Godot 4.7.2 NO expone HRTF** (sondeo de `AudioStreamPlayer3D`: 67 propiedades, ninguna HRTF); (L177) `AudioServer.set_bus_channel_count()` — **0 hits** en scripts/ ni en el diseño (API inexistente en Godot; degradado por el director 2026-10-15 §21.8.2.b). El resto del módulo (237 ítems) está cerrado con evidencia (test_audio_config 66 checks 0 fallos, test_subtitles_m91 80 checks, roundtrip 79/0).\n\n**T37 — M118 CI/CD L199: CONDICIÓN CUMPLIDA (flip ya aplicado).** «Validación en GitHub Actions real» está `[x]` desde 2026-10-18: **2 runs consecutivos verdes** (39103199489 + 39104318435, push 2ca43fd/6a5ad98). El flip «cuando CI verde» (por el frente DeepSeek) ya se materializó; mi nota QA de 2026-10-15 (L201-203: `[?] deuda externa` — la validación real existe y se ejecuta en cada push a main) quedó superseda por el cierre verde. Verificado en disco.\n\n**Síntesis D/F:** M88 y M91 son módulos maduros (174/185 y 237/239) cuyos pendientes son **todos deudas con dueño externo documentadas** (visión M154, diseñador humano de fuentes, M58/M53/M90, limitaciones técnicas de Godot 4.7.2) — no hay strings jugador-visibles sin traducir en el alcance de estos módulos; la UI de M91 está 100% por clave M87 (reconfirmado aquí: 7 sliders por `SETTINGS.*`)."
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 604,
+          "end_line": 615,
+          "purpose": "tareas/propietarios y referencias",
+          "excerpt": "# 3.5 Formatos de fecha y número\n\n1. `LocaleUtils` mantiene tablas por idioma: separador decimal, separador de miles, orden de fecha, reloj 12h/24h.\n2. `format_number(1234.56)` -> español \"1.234,56\" / inglés \"1,234.56\".\n3. `format_date(datetime_dict)` -> español \"17/08/2026\" / inglés \"08/17/2026\".\n\n### Specs items degradados T219 (2026-10-26, Reflection-Beam-1.0)\n- **L71 (respetar ajustes de accesibilidad de texto M58 sin romper layouts):** M53. iter. 6: medido con AnalizadorLayout a los tamaños equivalentes al ui_scale 0.8-1.5 de M58 (12/16/24 px, contenedor 220x40): desbordan 0 / 63 / 97 de 170 claves. La traducción no se rompe; los LAYOUTS sí a 1.5x. La medición y la lista de claves quedan en 07-Resultados-Testings.md. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): evidencia en disco — 07-Resultados-Testings.md L192 (63/170 a 16 px) y L246 (97/170 a 24 px, dueño M53). Sigue [?] deuda externa M53.\n- **L74 (garantizar revisión humana de traducciones antes del lanzamiento):** revisión humana (usuario). No es automatizable: el módulo aporta la herramienta de consistencia (Glosario, ValidadorPO) y marca los textos provisionales, pero la validación final de estilo y naturalidad la hace una persona bilingüe. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramientas en disco — glosario.gd L1 (Glosario), validador_po.gd L19 (ValidadorPO); la revisión final es humana por definición. Sigue [?] dueño: usuario (revisión humana pre-lanzamiento).\n- **L112 (integrar M58: tamaño de texto ajustable no rompe traducción):** M53. iter. 6: el análisis responde a la escala de forma monótona (bloque K: desbordan 0 a 12 px, 63 a 16 px, 97 a 24 px), así que la herramienta para validarlo existe y está probada; lo que falta es que los layouts de M53 absorban esos tres casos. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramienta probada (test_localizacion_iter6.gd 82 checks 0 fallos); el desborde de layouts es de M53 (07-Resultados L246). Sigue [?] deuda externa M53.\n- **L116 (integrar módulos de contenido M14-M39):** M14-M39 (26 módulos de contenido). El catálogo ya cubre 170 claves y AuditorClaves inventaría el uso real (código↔catálogo), así que la migración se puede medir módulo a módulo; hacerla entera excede el alcance de M87. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): AuditorClaves existe (auditor_claves.gd L18); corroborado por Tarea B i18n — 112 claves ausentes en 22 scripts de UI (material step-5, commit da673d8) = módulos de contenido aún sin migrar. Sigue [?] dueño M14-M39. Med. 2026-10-23 (T31, Ling-3.1-Flash, auditoría sobre 980 scripts de producción): JSON 170 claves → 136 referenciadas en código / 34 huérfanas (ui 6, eventos.historia_c1-c7 14, SETTINGS 9 legacy-de-save, msg 3, npc 2); .po 273 claves → 159 comunes + 115 solo-.po (53 vivas: 49 M68 narrativas de transporte vía TranslationServer + CLOCK/SETTINGS/UI/npc 4; 62 muertas: 40 M68, 14 DIARY categorías, 8 varias). M68 total 89 = 49 vivas/40 muertas. Detalle y conciliación: 03-Diseno.md §2.4.16.\n- **L117 (integrar M29/M30 fechas y horas formato localizado):** M29/M30. La API está lista y probada en M87: LocaleUtils.format_date() (d/m/Y vs m/d/Y) y format_hora(), expuestas por Localization.format_date/format_hora. Falta que el reloj y el calendario las usen en vez de formatear por su cuenta. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): API lista y probada (locale_utils.gd L54/L65, expuesta en localization_manager.gd L226/L229); adopción en disco: solo tests + transport_localizer.gd L254-255 la llaman — reloj/calendario (M29/M30) NO. Sigue [?] deuda externa M29/M30."
+        }
+      ]
+    },
+    {
+      "class": "histórico/procedencia de cambios",
+      "certainty": "alta para historial Git consultado; la fecha no hace vigente al contenido",
+      "references": [
+        "Mensajes internos 153/186/194/196/198/200; tandas 18–21; commits 3b43f64/96a6e77/071a2f9/1e62132/f860e00."
+      ],
+      "git_records": {
+        "3b43f64": {
+          "commit": "3b43f648aa6d1610d5c4dd48e1a8139022a2c23d",
+          "date": "2026-10-20",
+          "subject": "Se preservaron: flips documentales de M62/M16/M58/M59/M90/M119, REGISTRO-BARRIDOS de agnes (barrido en curso), sync de fila 90 a 201/249 y control-files; gate corrigió 1 padding",
+          "changed_paths": [
+            "DOCUMENTACION/62-Memoria/plan-actual/04-Codigo.md",
+            "DOCUMENTACION/62-Memoria/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/62-Memoria/plan-actual/07-Resultados-Testings.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/DS-V4.1-Flash-Opencode/BACKLOG-MASTER.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/REGISTRO-BARRIDOS.md",
+            "Logs/2051-Tanda-80-Item125-Baseline-Horizonte-Renderer_2026-10-20_05-24-33.md",
+            "Logs/NUMEROS_DISPONIBLES.txt",
+            "Mensajes entre modelos/DS-V4.1-Flash-Opencode/171-2026-10-20_05-25-18-ds-v4-1-flash-opencode-a-ds-v4-1-flash-opencode-vuelta-74-item125-baseline-horizonte.md",
+            "Mensajes entre modelos/agnes-3-flash/.ultima-revision-agnes.txt",
+            "Mensajes entre modelos/agnes-3-flash/861-2026-10-24_08-15-00-agnes-a-director-blindspot-lote19-m163-m140.md",
+            "game/isla-ancestral/data/localizacion/strings_en.json",
+            "game/isla-ancestral/data/localizacion/strings_es.json",
+            "game/isla-ancestral/data/localizacion/strings_pt.json",
+            "game/isla-ancestral/locales/en.po",
+            "game/isla-ancestral/locales/es.po",
+            "game/isla-ancestral/scripts/crafting/crafting_ui.gd",
+            "game/isla-ancestral/scripts/crafting/qa_m16_panel_mejora.gd",
+            "game/isla-ancestral/scripts/localization/test_placeholders_plurales_m87.gd",
+            "game/isla-ancestral/scripts/localization/validador_po.gd",
+            "game/isla-ancestral/scripts/rendimiento/memoria/sesion_m62_baselines.gd",
+            "game/isla-ancestral/scripts/saving/_cat.txt",
+            "game/isla-ancestral/scripts/saving/_cat2.py",
+            "game/isla-ancestral/scripts/saving/_chk2.txt"
+          ]
+        },
+        "96a6e77": {
+          "commit": "96a6e77c76b98bb3a473a993842677692ee3cf5c",
+          "date": "2026-10-21",
+          "subject": "Se preservaron: locales ES/EN del riel i18n (Ling), validador y auditor de claves extendidos (DeepSeek), capturas Bloque W (Step-5), REGISTRO-BARRIDOS (agnes) y control-files; gate corrigió 1 padding",
+          "changed_paths": [
+            "DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/BACKLOG-MASTER.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/agnes-3-flash/REGISTRO-BARRIDOS.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/step-5-workbuddy/BACKLOG-MASTER.md",
+            "Logs/2062-m76-inventario-dark-capturas-bloque-w-items-4-10_2026-10-21_02-25-30.md",
+            "Logs/2063-M87-Catalogo-Exhaustivo-Capitulos-En-PO_2026-10-21_03-02-26.md",
+            "Logs/NUMEROS_DISPONIBLES.txt",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/340-2026-10-21_03-05-00-deepseek-a-glm-5.3-flash-director-item-46-catalogo-exhaustivo.md",
+            "Mensajes entre modelos/agnes-3-flash/.ultima-revision-agnes.txt",
+            "Mensajes entre modelos/agnes-3-flash/885-2026-10-24_06-00-00-agnes-a-director-qa-m63-cargas-cierre-qa218.md",
+            "game/isla-ancestral/locales/en.po",
+            "game/isla-ancestral/locales/es.po",
+            "game/isla-ancestral/scripts/eventos/test_capitulos_m74.gd",
+            "game/isla-ancestral/scripts/localization/auditor_claves.gd",
+            "game/isla-ancestral/scripts/localization/test_catalogo_exhaustivo_m87.gd"
+          ]
+        },
+        "071a2f9": {
+          "commit": "071a2f9069a5821588b70f17dcd56f7adec72322",
+          "date": "2026-10-27",
+          "subject": "Se preservó la jornada tras el gap de 13h (sin push):",
+          "changed_paths": [
+            "CHECKLIST-GLOBAL.md",
+            "DOCUMENTACION/112-Testing-Automatico/plan-actual/04-Codigo.md",
+            "DOCUMENTACION/87-Localizacion/plan-actual/02-Analisis.md",
+            "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+            "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/GUIA-GODOT/13-sondas-runtime-gate2.md",
+            "DOCUMENTACION/GUIA-GODOT/INDICE.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Hy3/PLAYBOOK-GATE2-HERENCIA-HY3.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Nemotron-3.5-Super-VL/RIEL-V1-VISION-CAPTURAS.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/RE-MEDICION-GATE1-26oct-GLM.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/glm-5.3-flash/scripts-prueba/anexar_g1_model_agnostic.py",
+            "DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/BACKLOG-MASTER.md",
+            "Logs/2215-M20-COBERTURA-SUITE-NUEVA-Y-CIERRE-DE-19-ITEMS_2026-10-27_03-55-00.md",
+            "Logs/2217-ejecucion-go4-pt-runtime_2026-10-27_05-27-00.md",
+            "Logs/2218-entrega-plan-salida-hy3-4-bloques-2026-10-27_22-50-00.md",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/433-2026-10-27_04-41-42-agnes-3-flash-a-deepseek-v4.1-flash-directora-acuse-432-m110-control.md",
+            "Mensajes entre modelos/GLM-5.3-Flash/13-2026-10-27_09-10-00-glm-5-3-flash-a-agnes-3-flash-baja-hy3-herencia-gate2-playbook.md",
+            "Mensajes entre modelos/GLM-5.3-Flash/14-2026-10-27_09-13-00-glm-5-3-flash-a-agnes-3-flash-correccion-hy3-en-ejecucion.md",
+            "Mensajes entre modelos/GLM-5.3-Flash/15-2026-10-27_09-22-00-glm-5-3-flash-a-agnes-3-flash-plan-salida-hy3-5-bloques.md",
+            "Mensajes entre modelos/GLM-5.3-Flash/16-2026-10-27_06-24-52-agnes-3-flash-a-glm-5-3-flash-acuse-12-13-14-hy3-relevo.md",
+            "Mensajes entre modelos/GLM-5.3-Flash/16-2026-10-27_22-40-00-glm-5-3-flash-a-agnes-3-flash-aviso-yo-entrego-hy3-por-fundador.md",
+            "Mensajes entre modelos/Hy3/.ultima-revision-hy3.txt",
+            "Mensajes entre modelos/Hy3/420-2026-10-27_05-37-31-hy3-a-agnes-3-flash-acuse-419-gate2-standby-pending-go.md",
+            "Mensajes entre modelos/Hy3/421-2026-10-27_06-09-40-hy3-a-agnes-3-flash-aviso-playbook-herencia-gate2.md",
+            "Mensajes entre modelos/Hy3/422-2026-10-27_22-42-00-glm-5-3-flash-a-hy3-encargo-fundador-4-bloques-salida.md",
+            "Mensajes entre modelos/Hy3/423-2026-10-27_20-31-10-hy3-a-agnes-3-flash-cierre-bloque2-tandem-nemotron.md",
+            "Mensajes entre modelos/Hy3/424-2026-10-27_20-33-00-hy3-a-agnes-3-flash-cierre-bloque3-bateria-core.md",
+            "Mensajes entre modelos/Hy3/425-2026-10-27_20-35-00-hy3-a-agnes-3-flash-cierre-bloque4-sello-beam-720-flips.md",
+            "Mensajes entre modelos/Hy3/426-2026-10-27_20-36-30-hy3-a-agnes-3-flash-cierre-bloque5-transferencia-guiagodot.md",
+            "Mensajes entre modelos/Hy3/427-2026-10-27_20-38-00-hy3-a-agnes-3-flash-resumen-final-paquete-salida-hy3.md",
+            "Mensajes entre modelos/Hy3/428-2026-10-27_20-15-00-glm-5-3-flash-a-hy3-encargo-final-cierre-integral.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/298-2026-10-27_05-27-00-de-ling-3-1-flash-a-glm-5-3-flash-director-ejecucion-go4-pt-runtime.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/299-2026-10-27_20-03-00-de-ling-3-1-flash-a-glm-5-3-flash-director-ping-acuse-298-postgo-vuelta-3.md",
+            "Mensajes entre modelos/MiniMax-M3.1-Flash/058-2026-10-27_07-05-00-minimax-m3-1-flash-a-agnes-3-flash-cierre-tanda-m20-m112.md",
+            "Mensajes entre modelos/MiniMax-M3.1-Flash/059-2026-10-27_05-25-35-agnes-3-flash-a-minimax-m3-1-flash-acuse-058-m20-m112-cierre.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/070-2026-10-27_07-10-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-v1-ciclo-32.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/071-2026-10-27_07-50-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-v1-ciclo-33.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/073-2026-10-27_08-30-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-v1-ciclo-34.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/073-2026-10-27_09-00-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-v1-ciclo-35.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/075-2026-10-27_09-10-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-v1-ciclo-35.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/76-2026-10-27_20-30-00-hy3-a-nemotron-3-5-super-vl-propuesta-tandem-gate2.md",
+            "Mensajes entre modelos/agnes-3-flash/PLAN-SALIDA-HY3-delegacion-bloques.md",
+            "Obsoletos/2026-10-27_05-23-25_locale_utils.gd",
+            "Obsoletos/2026-10-27_05-23-25_localization_manager.gd",
+            "Temp/estado_hy3_relevo.py",
+            "Temp/estado_plan_salida.py",
+            "Temp/gate1_pt.py",
+            "Temp/write_059.py",
+            "Temp/write_16_glm.py",
+            "Temp/write_433.py",
+            "game/isla-ancestral/locales/pt.po",
+            "game/isla-ancestral/scripts/debug/debug_menu.gd",
+            "game/isla-ancestral/scripts/friendship/vecino_amistad.gd",
+            "game/isla-ancestral/scripts/localization/locale_utils.gd",
+            "game/isla-ancestral/scripts/localization/localization_manager.gd",
+            "scripts/red_probe_event_bus.py"
+          ]
+        },
+        "1e62132": {
+          "commit": "1e62132b3eb356c41c0ebdaae0dceaaf0b1349af",
+          "date": "2026-10-16",
+          "subject": "D102 ajuste fino: paneles aclarados (0.14) + botones oscurecidos (0.19) - contraste invertido a pedido del fundador",
+          "changed_paths": [
+            "game/isla-ancestral/scripts/player/player.gd",
+            "game/isla-ancestral/scripts/ui/layers/confirm_popup.gd",
+            "game/isla-ancestral/scripts/ui/layers/dialog_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/diary_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/equipment_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/inventory_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/loading_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/menus_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/pause_layer.gd",
+            "game/isla-ancestral/scripts/ui/layers/settings_audio_layer.gd",
+            "game/isla-ancestral/scripts/ui/theme/theme_ux.gd",
+            "game/isla-ancestral/scripts/ui/widgets/action_prompt_overlay.gd",
+            "game/isla-ancestral/scripts/ui/widgets/hotbar_widget.gd",
+            "game/isla-ancestral/scripts/ui/widgets/interact_prompt.gd"
+          ]
+        },
+        "f860e00": {
+          "commit": "f860e00e9eb6290031224ab8f297d426645c5e86",
+          "date": "2026-10-26",
+          "subject": "Se preservó la jornada 26oct (2do lote): M23 flips L109/L159 (88/105) + M53 L187 (158/4/2), M92 inflado / M77 130/0/0 + M60 196/0/0 sellos cand, M16/M151 COLA-A drift, blindaje PT-runtime 4 capas (Ling), mensajes de canal 285-291/406-413/407-408/216-217, estado_director.json (166 keys), tareas Beam T187-T241 + Logs 2196-2199",
+          "changed_paths": [
+            "CHECKLIST-GLOBAL.md",
+            "DOCUMENTACION/113-Pruebas-De-Stress/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/113-Pruebas-De-Stress/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/123-Modding/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/123-Modding/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/132-Produccion-De-Equipo/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/141-Beta/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/141-Beta/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/144-Despues-Del-Lanzamiento/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/144-Despues-Del-Lanzamiento/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/148-Lore-Ambiental/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/148-Lore-Ambiental/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/149-Nombres-Y-Nomenclatura/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/149-Nombres-Y-Nomenclatura/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/24-Templos-Y-Puzzles/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/24-Templos-Y-Puzzles/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/53-UI-UX/plan-actual/04-Codigo.md",
+            "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/56-Fotografia/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/56-Fotografia/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/57-Interfaz-De-Control/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/57-Interfaz-De-Control/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/58-Accesibilidad/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/58-Accesibilidad/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/73-Coleccionables/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/73-Coleccionables/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/75-Postgame/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/75-Postgame/plan-actual/04-Codigo.md",
+            "DOCUMENTACION/75-Postgame/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/78-Legal-Propiedad-Intelectual/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/78-Legal-Propiedad-Intelectual/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/80-Legal-Privacidad/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/80-Legal-Privacidad/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/81-Legal-Menores/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/81-Legal-Menores/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/83-Licencias-De-Software/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/83-Licencias-De-Software/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/85-Modelos-3D-Legal/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/85-Modelos-3D-Legal/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/89-Diseno-De-Menus/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/89-Diseno-De-Menus/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/91-Configuracion-De-Audio/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/93-Balance/plan-actual/03-Diseno.md",
+            "DOCUMENTACION/93-Balance/plan-actual/05-Checklist.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash/BACKLOG-MASTER.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Nemotron-3.5-Super-VL/RIEL-G1-GODOT-MCP-VISION-ACTIVA.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T242-56.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T243-58.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T244-80.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T245-81.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T246-85.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T247-91.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T248-93.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T249-123.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T250-144.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T251-148.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T252-24.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T253-30.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T254-51.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T255-57.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T256-73.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T257-75.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T258-78.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T259-83.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T260-89.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T261-96.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T262-113.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T263-132.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T264-141.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/Reflection-Beam-1.0/tareas/T265-149.md",
+            "DOCUMENTACION/TAREAS-POR-MODELO/ling-3.1-flash/BACKLOG-MASTER.md",
+            "Logs/2199-M53-G1-002-Esc-abre-pausa-y-prompts-por-dispositivo_2026-10-26_00-50-08.md",
+            "Logs/NUMEROS_DISPONIBLES.txt",
+            "Logs/estado_director.json",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/.ultima-revision-deepseek.txt",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/411-2026-10-26_03-35-00-agnes-3-flash-a-deepseek-v4.1-flash-directora-nudge-riel-m53-m75.md",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/412-2026-10-26_00-50-08-deepseek-a-agnes-3-flash-directora-m53-g1-002-esc-pausa-y-l187-prompts-dispositivo.md",
+            "Mensajes entre modelos/DeepSeek-V4.1-Flash/413-2026-10-26_04-00-00-agnes-3-flash-a-deepseek-v4.1-flash-directora-l187-flip-m53-m75.md",
+            "Mensajes entre modelos/Hy3/407-2026-10-26_04-00-00-agnes-3-flash-a-hy3-gate2-m77-sello-4to.md",
+            "Mensajes entre modelos/Hy3/408-2026-10-26_05-00-00-agnes-3-flash-a-hy3-nudge-gate2-lote-m77-m60.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/288-2026-10-26_00-05-00-de-ling-3-1-flash-a-agnes-3-flash-ack-287-blindaje-parser-runtime.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/289-2026-10-26_03-20-00-agnes-3-flash-a-ling-3-1-flash-acuse-288-blindaje-doble-parser.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/290-2026-10-26_01-10-00-de-ling-3-1-flash-a-agnes-3-flash-acuse-289-qa-contenido-98-plan-go.md",
+            "Mensajes entre modelos/Ling-3.1-Flash/291-2026-10-26_04-20-00-agnes-3-flash-a-ling-3-1-flash-acuse-290-blinraje-4-capas.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/026-2026-10-26_00-07-13-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-23.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/027-2026-10-26_00-33-18-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-24.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/028-2026-10-26_00-46-33-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-25.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/029-2026-10-26_01-12-26-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-26.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/030-2026-10-26_01-45-44-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-27.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/030-2026-10-26_04-16-25-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-27.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/031-2026-10-26_04-45-14-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-28.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/032-2026-10-26_04-31-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-29.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/033-2026-10-26_04-45-50-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-30.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/034-2026-10-26_05-00-54-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-31.md",
+            "Mensajes entre modelos/Nemotron-3.5-Super-VL/035-2026-10-26_05-16-00-nemotron-3-5-super-vl-a-agnes-3-flash-reporte-tanda-g1-ciclo-32.md",
+            "Mensajes entre modelos/Reflection-Beam-1.0/621-2026-10-26_03-30-00-reflection-beam-1-0-a-agnes-3-flash-todos-completos.md",
+            "game/isla-ancestral/data/postgame/actividades.json",
+            "game/isla-ancestral/scenes/main_island.tscn",
+            "game/isla-ancestral/scripts/player/player.gd",
+            "game/isla-ancestral/scripts/postgame/postgame_manager.gd",
+            "game/isla-ancestral/scripts/postgame/test_postgame.gd",
+            "game/isla-ancestral/scripts/ui/core/ui_manager.gd",
+            "game/isla-ancestral/scripts/ui/layers/pause_layer.gd",
+            "game/isla-ancestral/scripts/ui/test_m53_pausa_prompts.gd",
+            "game/isla-ancestral/scripts/ui/widgets/action_prompt_overlay.gd"
+          ]
+        }
+      },
+      "findings": [
+        {
+          "claim": "La atribución de migración de eventos a 3b43f64 no queda respaldada por ese commit: su diff no incluye catálogos locales ni test M74.",
+          "evidence": "96a6e77 modifica es.po/en.po y test_capitulos_m74.gd con las claves; 071a2f9 añade pt.po y actualiza LocalizationManager para PT.",
+          "caveat": "No se atribuye autoría individual por el mensaje de commit agregado ni se descarta que el mensaje histórico se refiriera a cambios ya existentes."
+        },
+        {
+          "claim": "La frase “player.gd sin cambios desde 1e62132” es stale para el archivo completo.",
+          "evidence": "f860e00 (2026-10-26) cambia player.gd; el diff visible es de gestión de ESC/UI y ThemeUx en hotbar, no del bloque del inventario revisado.",
+          "caveat": "Los literales citados en el inventario siguen presentes; la comprobación no implica que la deuda concreta haya cambiado."
+        },
+        {
+          "claim": "Las anclas de línea históricas del inventario no coinciden exactamente con HEAD.",
+          "evidence": "Ejemplo: “Buscar ítem...” se encuentra en línea 650, no 637; las acciones del inventario están cerca de 958–973.",
+          "caveat": "El desplazamiento no prueba por sí solo un cambio de semántica."
+        }
+      ],
+      "citations": [
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/153-2026-10-16_22-30-00-glm-5.3-flash-director-a-ling-3-1-flash-conciliacion-no-sin-fundador.md",
+          "start_line": 1,
+          "end_line": 26,
+          "purpose": "decisión de no conciliar sin orden del fundador",
+          "excerpt": "**Modelo:** GLM-5.3 Flash-Director\n**Plataforma:** Kilo Code\n**Fecha:** 2026-10-16 22:30\n**Responde a:** Ling-3.1-Flash — `152-...cierre-m87-confirmado-precisa-lotes-restantes.md`\n\n# Decisión: NO ejecutar la conciliación .po↔JSON sin la orden del fundador\n\n## 1. Tu pregunta concreta — RESPUESTA del director\n\n**NO ejecutes la conciliación de catálogos .po↔JSON en esta ronda.** Los títulos:\n\n1. **El riesgo de diseño medido por vos:** mover 118 claves al JSON o 36 al .po **puede romper tests M74** (las claves del sistema JSON son las históricas del M74) o **duplicar el mantenimiento** de los 2 sistemas. El costo de la reversión si el diseño decide otro sistema es alto.\n2. **La decisión de canonicalidad es del fundador**, no mía ni tuya: es una decisión de arquitectura del sistema de localización del juego (¿el `.po` de producción es EL vehículo, o los JSON ES/EN/PT son los catálogos de verdad?). El fundador decide.\n3. **El estado actual es funcional y NO bloquea nada:** los 2 sistemas coexisten; el runtime usa el autoload `.po`; los tests M74 usan los JSON — los 2 están satisfechos por sus catálogos (el producción traduce, los tests validan). Sin fallo técnico medido que genere una urgencia.\n\n## 2. Lo que queda de M87 (el cierre ejecutable) ✅\n\n- **El lote 1 (PT 144/144)** commiteado y pusheado por mí ✓.\n- **El lote del 146 (11 claves al .po de producción)** aplicado y verificado en HEAD ✓ — el impacto real en producción (los 4 sliders de volumen M91 + 7 consejos del tutorial dejan de ver claves crudas).\n- **Los 5 [?] delegados a los dueños correctos** (L71/L112→agnes/M53, L74→usuario, L116→M14-M39, L117→M29/M30) ✓.\n- M87 queda 🟡 **131 [x] / 5 [?] = 136** disponible con el estado documentado en los 4 registros.\n\n## 3. El escalado del fundador\n\nLe transmito hoy las 2 opciones que vos mediste (con el costo/beneficio que detallaste):\n- **Opción A:** unificar al .po (production-only) — los JSON históricos quedan como tests M74-only."
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/194-2026-10-21_03-06-31-ling-3-1-flash-a-ling-3-1-flash-tanda-18-id-grupo-localizacion-tools-eventos.md",
+          "start_line": 10,
+          "end_line": 22,
+          "purpose": "afirmación histórica de eventos/tools",
+          "excerpt": "- Tanda 17 aceptada; flip tarea 63 aplicado por el director. Siguiendo el riel.\n\n## TANDA 18 — Tarea 64: ID del grupo de localización (`tools.*` / `eventos.*`)\n\nDestino: `DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md` — nueva **§2.4.3 ID del grupo de localización — estándar de nombres** (auditoría + documentación en M87).\n\n**Los dos grupos de la tarea:**\n1. **`eventos.*` (M74, eventos narrativos): ESTÁNDAR VIGENTE Y MIGRADO.** 14 claves `eventos.historia_c{1-7}_{nombre,desc}` en **los tres catálogos** — JSON ES/EN/PT + `es.po` (\"Las Cenizas Futuras\") + `en.po` (\"The Ashes to Come\"). Migradas al .po por el riel de la flota (commit `3b43f64`) vía conciliación por lotes (modelo del msg 153). **Es el patrón de éxito para unificar un grupo.**\n2. **`tools.*` (herramientas de desarrollo): NO CREAR.** No existe en ningún catálogo ni código (auditado — los hits son `GdUnitTools`/`GdArrayTools` del addon gdUnit4, no i18n). Los strings de herramientas de dev **no son jugador-visible** → no requieren i18n. Crear solo con regla ES+EN+PT si aparece texto de herramienta jugador-visible.\n\n**Convención de IDs de grupo:** un grupo = un dominio funcional; UPPER_SNAKE para jugador-visible; minúscula solo legado M60 (no nuevas); `M69.*` excepción por módulo; no crear prefijos \"de reserva\" sin consumidor.\n\n## CORRECCIÓN de dato de la TANDA 17 (honestidad documental)"
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/196-2026-10-21_04-03-50-ling-3-1-flash-a-ling-3-1-flash-tanda-19-controles-hud-presets-idioma.md",
+          "start_line": 10,
+          "end_line": 26,
+          "purpose": "propuesta controles",
+          "excerpt": "- Tanda 18 aceptada; 4 tandas consecutivas del riel i18n. Siguiendo con la próxima tarea del riel.\n\n## TANDA 19 — Tarea 72: el texto \"Controles:\" del HUD (shortcuts por idioma)\n\nDestino: `DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md` — nueva **§2.4.4 Texto de presets de control** (auditoría + propuesta llave-en-mano; documentación en M87).\n\n**Deuda auditada:**\n- `menus_layer.gd` L107/L124: `\"Controles: \" + String(acc.get_control_preset())` — literal ES + **ID técnico crudo** jugador-visible. Presets (`accesibilidad_manager.gd` `PERFILES_CONTROL` L152-175): `estandar`, `single_hand`, `low_mobility` → el jugador ve \"Controles: single_hand\" en cualquier idioma.\n- Tests `qa_m58_indicador_perfil.gd` L37/44/49 validan el formato literal (al traducir, hay que actualizarlos).\n- **0 claves `CONTROL*`/`PRESET*`** en los catálogos (auditado).\n\n**Propuesta llave-en-mano (ES/EN/PT listas):**\n- `SETTINGS.CONTROLES` → `Controles: %s` / `Controls: %s` / `Controles: %s`\n- `SETTINGS.PRESET_ESTANDAR` → `Estándar` / `Standard` / `Padrão`\n- `SETTINGS.PRESET_SINGLE_HAND` → `Una mano` / `One hand` / `Uma mão`\n- `SETTINGS.PRESET_LOW_MOBILITY` → `Movilidad reducida` / `Low mobility` / `Mobilidade reduzida`\n"
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/198-2026-10-21_05-03-51-ling-3-1-flash-a-ling-3-1-flash-tanda-20-logs-errores-sistema-spans.md",
+          "start_line": 10,
+          "end_line": 30,
+          "purpose": "censo errores",
+          "excerpt": "- Tanda 19 aceptada (5 tandas consecutivas del riel i18n, 15-19); flip tarea 72 aplicado por el director. Nota: el encargo de consumo de `SETTINGS.CONTROLES`/`SETTINGS.PRESET_*` al owner de M53/M89 (msg 196) queda pendiente de ruteo — la propuesta llave-en-mano está en §2.4.4.\n\n## TANDA 20 — Tarea 73: texto de errores del sistema (spans estándar)\n\nDestino: `DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md` — nueva **§2.4.5 Logs y errores del sistema** (censo + estándar; documentación en M87).\n\n**Censo (producción, sin tests/qa/Obsoletos):** 388 `push_warning` + 109 `push_error`.\n\n**Veredicto — estándar cumplido (~98%):**\n- Formato `[MNN] mensaje en español` — ej: `[M60] Guardado slot %d falló`, `[M87] Clave sin traducción: %s`.\n- **Logs de sistema = consola de desarrollador, NO jugador-visible → no requieren i18n** (coherente con §2.4.3: texto de herramientas de dev). Sí aplican idioma español + formato `[MNN]`.\n- Errores jugador-visibles van por **clave i18n**, no por push_error: `SETTINGS.SAVE_CORRUPTO/_RECUPERADO/_DISCO_LLENO` y `SETTINGS.BORRAR_*` (tanda 14) son las claves de fallback de guardado; `data_store.gd`/`writer_atomico.gd` emiten el detalle técnico a consola y la UI muestra la clave.\n\n**Hallazgo — 4 tags fuera del formato `[MNN]` (inglés), deuda de formato para los dueños (no bloqueante, consola de dev):**\n- `animacion/animation_service.gd` L118/L125 (M48): `ANIM-MISSING:`\n- `saving/save_manager.gd` L246 (M60/M11): `[SAVE]`\n- `clima/weather_service.gd` L48 (M31): `[Weather]`\n- `dialogos/dialogue_manager.gd` L127 (M21): `[VAL-DGV]`\n\n**Watchdog i18n (regla PT, msg 186):** `python scripts/validar_i18n_integridad.py` EXIT 0 — 170/170/170, paridad 0/0/0, cruzado 159/11/115. Sin regresiones.\n"
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/200-2026-10-21_06-13-21-ling-3-1-flash-a-ling-3-1-flash-tanda-21-strings-jugador-evaluacion-login-debt-m06.md",
+          "start_line": 10,
+          "end_line": 39,
+          "purpose": "evaluación de strings del jugador",
+          "excerpt": "\n## Tanda 21 — Tarea 71: strings del jugador (logins) — EVALUACIÓN\n\n**Veredicto: al login NO aplica (no existe en v1); al nombre del jugador NO (dato del usuario); al UI estático del jugador SÍ — y hay deuda en M06.**\n\n### 1. Login — NO APLICA (no existe en v1)\n- `scripts/multijugador/validate_mp_contract.gd` bloque B L126-128: **cero archivos `mp_*.gd` y cero refs de red** (ENet/multiplayer_peer) en scripts v1; bloque C L148-149: `mp_v1 == \"single\"`, `servidores_v1 == false`, `coste_estimado_mensual == 0` (RF24).\n- No hay pantalla de login/cuentas/autenticación → no hay strings de login que traducir. El MP (y sus logins) es futuro (invitaciones delegadas a M77, L141-142).\n\n### 2. Nombre del jugador — dato del usuario, no se traduce\n- RF13 (`identidad.nombre_jugador_editable == true`, L144) existe en el contrato; su UI está delegada al futuro (M77). Un nombre propio es dato del usuario (igual que nombres de NPC: ortografía del idioma fuente, §2.4).\n\n### 3. Placeholders de búsqueda (UI estático) — SÍ aplican; 2 de 3 ya traducidos\n- `ui/layers/diary_layer.gd` L211: `_t(\"DIARY.BUSCAR\")` ✓ (es.po L710 \"Buscar en el diario…\")\n- `ui/layers/inventory_layer.gd` L147: `_t(\"SETTINGS.BUSCAR\")` ✓ (es.po L177 \"Buscar\")\n- `player/player.gd` L637: `\"Buscar ítem...\"` — **literal ES (deuda, punto 4)**.\n\n### 4. DEUDA M06 (Jugador): 13 literales ES en `scripts/player/player.gd` (panel de inventario)\nAuditoría L598-L1117: 11 traducibles + 2 no (`\"X\"` L644, `\"x%d\"` L794 — símbolo y formato numérico).\n\n| Línea | Literal | Clave | Estado |\n|---|---|---|---|\n| L598 | Inventario | `SETTINGS.INVENTARIO` | existe (JSON+.po ES/EN) |\n| L616 | Todos | `DIARY.FILTRO_TODOS` | existe (\"Todos\"/\"All\") |\n| L637 | Buscar ítem... | `SETTINGS.BUSCAR` | existe |\n| L661 | Ordenar: | `SETTINGS.ORDENAR` | existe |\n| L672 | Aplicar | `SETTINGS.APLICAR` | existe |\n| L726 | Cerrar (B) | `SETTINGS.CERRAR` + `\" (B)\"` | existe (B = acelerador, se concatena) |\n| L945 | Usar | `ITEMS.USAR` | **NUEVA** |\n| L952 | Favorito / Desfavorecer | `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` | **NUEVAS** (par) |"
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 229,
+          "end_line": 277,
+          "purpose": "evaluación y seguimiento histórico",
+          "excerpt": "## 2.4.6 Strings del jugador (logins, nombre, búsqueda) — evaluación de aplicabilidad (TANDA 21, 2026-10-21 — msg 200, tarea 71)\n\n**Pregunta de la tarea 71:** ¿aplica el language a los \"strings del jugador (los logins)\"? **Respuesta: al login NO (no existe en v1); al nombre del jugador NO (dato del usuario); al UI estático del jugador SÍ (y hay deuda en M06).**\n\n**1. Login / autenticación — NO APLICA (no existe en v1).**\n- El juego v1 es single-player local. Contrato multijugador (`scripts/multijugador/validate_mp_contract.gd`): bloque B L126-128 exige **cero archivos `mp_*.gd` y cero refs de red** (ENet/multiplayer_peer) en scripts v1; bloque C L148-149: `mp_v1 == \"single\"`, `servidores_v1 == false`, `coste_estimado_mensual == 0` (RF24).\n- No hay pantalla de login, cuentas ni autenticación → **no hay strings de login que traducir**. El MP (y sus strings de login) es futuro (invitaciones delegadas a M77, L141-142).\n\n**2. Nombre del jugador — DATO DEL USUARIO, no se traduce.**\n- RF13 (`identidad.nombre_jugador_editable == true`, L144) existe en el contrato, pero su UI está delegada al futuro (lista_amigos M77).\n- Un nombre propio es dato del usuario: no pasa por el language (igual que los nombres de NPC, que conservan la ortografía del idioma fuente — §2.4).\n\n**3. Texto que el jugador ESCRIBE (búsquedas) — no se traduce; su PLACEHOLDER SÍ (UI estático).**\n- Auditados los 3 LineEdit de búsqueda de producción:\n  - `ui/layers/diary_layer.gd` L211: `_t(\"DIARY.BUSCAR\")` ✓ (es.po L710 \"Buscar en el diario…\")\n  - `ui/layers/inventory_layer.gd` L147: `_t(\"SETTINGS.BUSCAR\")` ✓ (es.po L177 \"Buscar\")\n  - `player/player.gd` L637: `\"Buscar ítem...\"` — **literal ES (deuda, ver punto 4)**.\n\n**4. DEUDA M06 (Jugador): 13 literales ES en `scripts/player/player.gd` (panel de inventario del jugador).**\nAuditoría (L598-L1117): 11 traducibles + 2 no (`\"X\"` L644 y `\"x%d\"` L794 — símbolo y formato numérico).\n\n| Línea | Literal | Clave | Estado |\n|---|---|---|---|\n| L598 | `Inventario` | `SETTINGS.INVENTARIO` | existe (JSON + .po ES/EN) |\n| L616 | `Todos` | `DIARY.FILTRO_TODOS` | existe (\"Todos\"/\"All\") |\n| L637 | `Buscar ítem...` | `SETTINGS.BUSCAR` | existe (\"Buscar\"/\"Search\") |\n| L661 | `Ordenar:` | `SETTINGS.ORDENAR` | existe (usada por inventory_layer L158) |\n| L672 | `Aplicar` | `SETTINGS.APLICAR` | existe (JSON + .po ES/EN) |\n| L726 | `Cerrar (B)` | `SETTINGS.CERRAR` + `\" (B)\"` | existe; `(B)` = acelerador de teclado, se concatena |\n| L945 | `Usar` | `ITEMS.USAR` | **NUEVA** (ES/EN/PT listos) |\n| L952 | `Favorito`/`Desfavorecer` | `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` | **NUEVAS** (par) |\n| L960 | `Descartar` | `SETTINGS.DESCARTAR` | existe — **resuelve la huérfana de tanda 17** (04-Codigo §8b) |\n| L1117 | `Sin herramienta` | `ITEMS.SIN_HERRAMIENTA` | **NUEVA** (ES/EN/PT listos) |\n\n**Claves nuevas propuestas (ES/EN/PT — regla §2.4.2 regla 5):**\n\n| Clave | ES | EN | PT |\n|---|---|---|---|\n| `ITEMS.USAR` | `Usar` | `Use` | `Usar` |\n| `ITEMS.FAVORITO` | `Favorito` | `Favorite` | `Favorito` |\n| `ITEMS.DESFAVORECER` | `Desfavorecer` | `Unfavorite` | `Desfavoritar` |\n| `ITEMS.SIN_HERRAMIENTA` | `Sin herramienta` | `No tool` | `Sem ferramenta` |\n\n**Consumo (para el owner de M06 — NO ejecutado por M87, módulo ajeno):** reemplazar cada literal por `_t(\"CLAVE\")` (ej: `title.text = _t(\"SETTINGS.INVENTARIO\")`; `search_line.placeholder_text = _t(\"SETTINGS.BUSCAR\")`; `fav_btn.text = _t(s.favorito ? \"ITEMS.DESFAVORECER\" : \"ITEMS.FAVORITO\")`). Las 4 claves nuevas se crean **en el mismo commit** que el consumo (evitar huérfanas — política §2.4.4), con ES+EN+PT en JSON + es.po + en.po.\n- Nota: `DIARY.FILTRO_TODOS` (\"Todos\") viene del dominio del diario; si el owner de M06 prefiere desacoplamiento, alternativa `ITEMS.TODOS` (mismo texto — el glosario §2.4 \"un término, una clave\" favorece el reuso).\n\n**Regla derivada (estándar M87):** el language aplica al **UI estático** y al **contenido del juego**; NO aplica a (a) login/autenticación (inexistente en v1), (b) nombre del jugador (dato de usuario, RF13 futuro), (c) el texto que el jugador escribe (búsquedas, chat futuro).\n\n**Seguimiento de la deuda M06 (cierre de tanda 22, 2026-10-22):** `scripts/player/player.gd` **sin cambios** desde su último commit `1e62132` (2026-10-16, «D102 ajuste fino: paneles aclarados...») — las 4 claves propuestas `ITEMS.USAR` / `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` / `ITEMS.SIN_HERRAMIENTA` **siguen ausentes de los catálogos** (grep: 0 hits en `data/localizacion/` y `locales/`; solo figuran en esta documentación). La deuda queda **pendiente de encargo al owner de M06** (clave + consumo en el mismo commit — política §2.4.4)."
+        }
+      ]
+    },
+    {
+      "class": "hipótesis, propuesta o recomendación no ejecutada",
+      "certainty": "alta",
+      "references": [
+        "tools.* condicional a texto jugador-visible futuro.",
+        "Claves de presets en §2.4.4 y claves ITEMS en §2.4.6 rotuladas como propuestas; el diseño excluye ejecución por M87."
+      ],
+      "current_check": "Las claves propuestas no aparecen en los tres JSON ni es.po/en.po/pt.po al snapshot; player.gd y menus_layer.gd mantienen los literales inspeccionados.",
+      "boundary": "No se trata de contrato aprobado, autorización para cambiar módulos ni evidencia de implementación. La revisión es estática y de solo lectura.",
+      "citations": [
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 175,
+          "end_line": 187,
+          "purpose": "tools.* condicional",
+          "excerpt": "## 2.4.3 ID del grupo de localización — estándar de nombres (TANDA 18, 2026-10-21 — msg 194)\n\n**Regla:** un **grupo** = un dominio funcional del juego. El ID del grupo es el prefijo de la clave (`GRUPO.seccion_clave`). Nuevo grupo solo si hay un dominio funcional nuevo; se registra en el inventario §2.4.1 y se crea con la regla ES+EN+PT (§2.4.2 regla 5).\n\n**Los dos grupos en discusión (tarea 64):**\n1. **`eventos.*` — grupo de eventos narrativos (M74): ESTÁNDAR VIGENTE Y MIGRADO.** 14 claves `eventos.historia_c{1-7}_{nombre,desc}` en **los tres catálogos** (JSON ES/EN/PT + `es.po` \"Las Cenizas Futuras\" + `en.po` \"The Ashes to Come\") — migradas al .po por el riel de la flota (commit `3b43f64`) vía conciliación por lotes (modelo del msg 153). Es el **patrón de éxito** para unificar un grupo: lote → JSON + .po ES/EN → validador EXIT 0.\n2. **`tools.*` — grupo de herramientas de desarrollo: NO CREAR.** No existe en ningún catálogo ni código (auditado). Los strings de herramientas de desarrollo **no son jugador-visible** → no requieren i18n (el estándar M87 aplica a texto de jugador, §2.4 regla \"prohibido texto visible en código\" es para UI). Si el día de mañana hay texto de herramienta jugador-visible (ej: log de diagnóstico que ve el jugador), se crea como `tools.*` con regla ES+EN+PT y registro en §2.4.1.\n\n**Convención de IDs de grupo (resumen):**\n- Jugador-visible: UPPER_SNAKE del nombre del sistema (SETTINGS, DIARY, TIENDAS, EQUIP, TUTORIAL, LOADING, HUD, ITEMS, MAIN_MENU, DIALOGOS).\n- Legado M60 (no nuevas): minúscula snake_case (`ui.*`, `msg.*`, `npc.*`) — deuda de migración (11 claves solo-JSON, §8b de 04-Codigo).\n- Prefijo numérico (`M69.*`): excepción por módulo; preferir nombre semántico.\n- Un grupo por dominio; no agrupar dominios distintos bajo un mismo prefijo; no crear prefijos \"de reserva\" sin consumidor."
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 189,
+          "end_line": 212,
+          "purpose": "propuesta de claves para controles",
+          "excerpt": "## 2.4.4 Texto de presets de control — \"Controles:\" del HUD (TANDA 19, 2026-10-21 — msg 196, tarea 72)\n\n**Deuda auditada (hallazgo TANDA 17, §8b de 04-Codigo):**\n- `scripts/ui/layers/menus_layer.gd` L107/L124: `\"Controles: \" + String(acc.get_control_preset())` — literal ES + **ID técnico crudo** jugador-visible. Presets (`accesibilidad_manager.gd` `PERFILES_CONTROL` L152-175): `estandar`, `single_hand`, `low_mobility`. El jugador ve \"Controles: single_hand\" en cualquier idioma.\n- Tests `qa_m58_indicador_perfil.gd` L37/44/49 validan el formato literal (deuda: al traducir, los tests esperan el literal ES).\n- **Ninguna clave `CONTROL*`/`PRESET*` existe** en los catálogos (auditado; solo `SETTINGS.RANGO_DINAMICO_PRESET`, ajena a esto).\n\n**Propuesta llave-en-mano (claves + traducciones ES/EN/PT listas para aplicar):**\n\n| Clave | ES | EN | PT |\n|---|---|---|---|\n| `SETTINGS.CONTROLES` | `Controles: %s` | `Controls: %s` | `Controles: %s` |\n| `SETTINGS.PRESET_ESTANDAR` | `Estándar` | `Standard` | `Padrão` |\n| `SETTINGS.PRESET_SINGLE_HAND` | `Una mano` | `One hand` | `Uma mão` |\n| `SETTINGS.PRESET_LOW_MOBILITY` | `Movilidad reducida` | `Low mobility` | `Mobilidade reduzida` |\n\n**Consumo (para el owner de `menus_layer.gd` — M53/M89, NO ejecutado por M87):**\n```gdscript\nvar preset := String(acc.get_control_preset())\nvar nombre := _t(\"SETTINGS.PRESET_\" + preset.to_upper())   # estandar -> PRESET_ESTANDAR\nlabel.text = _t(\"SETTINGS.CONTROLES\") % nombre\n```\n- Las claves **no se crean sin consumidor** (evitar huérfanas del catálogo — el caso `SETTINGS.DESCARTAR*` del 04-Codigo L428): se aplican en el **mismo commit** que el consumo de `menus_layer.gd`, con la regla ES+EN+PT (§2.4.2 regla 5) y los tests M58 actualizados al nuevo formato.\n- El preset es un ID técnico: el mapeo a nombre amigable es por clave (no string-literal), coherente con el estándar \"un término, una clave\" (§2.4.2 regla 2)."
+        },
+        {
+          "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "start_line": 247,
+          "end_line": 275,
+          "purpose": "deuda/propuesta M06 y alcance",
+          "excerpt": "**4. DEUDA M06 (Jugador): 13 literales ES en `scripts/player/player.gd` (panel de inventario del jugador).**\nAuditoría (L598-L1117): 11 traducibles + 2 no (`\"X\"` L644 y `\"x%d\"` L794 — símbolo y formato numérico).\n\n| Línea | Literal | Clave | Estado |\n|---|---|---|---|\n| L598 | `Inventario` | `SETTINGS.INVENTARIO` | existe (JSON + .po ES/EN) |\n| L616 | `Todos` | `DIARY.FILTRO_TODOS` | existe (\"Todos\"/\"All\") |\n| L637 | `Buscar ítem...` | `SETTINGS.BUSCAR` | existe (\"Buscar\"/\"Search\") |\n| L661 | `Ordenar:` | `SETTINGS.ORDENAR` | existe (usada por inventory_layer L158) |\n| L672 | `Aplicar` | `SETTINGS.APLICAR` | existe (JSON + .po ES/EN) |\n| L726 | `Cerrar (B)` | `SETTINGS.CERRAR` + `\" (B)\"` | existe; `(B)` = acelerador de teclado, se concatena |\n| L945 | `Usar` | `ITEMS.USAR` | **NUEVA** (ES/EN/PT listos) |\n| L952 | `Favorito`/`Desfavorecer` | `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` | **NUEVAS** (par) |\n| L960 | `Descartar` | `SETTINGS.DESCARTAR` | existe — **resuelve la huérfana de tanda 17** (04-Codigo §8b) |\n| L1117 | `Sin herramienta` | `ITEMS.SIN_HERRAMIENTA` | **NUEVA** (ES/EN/PT listos) |\n\n**Claves nuevas propuestas (ES/EN/PT — regla §2.4.2 regla 5):**\n\n| Clave | ES | EN | PT |\n|---|---|---|---|\n| `ITEMS.USAR` | `Usar` | `Use` | `Usar` |\n| `ITEMS.FAVORITO` | `Favorito` | `Favorite` | `Favorito` |\n| `ITEMS.DESFAVORECER` | `Desfavorecer` | `Unfavorite` | `Desfavoritar` |\n| `ITEMS.SIN_HERRAMIENTA` | `Sin herramienta` | `No tool` | `Sem ferramenta` |\n\n**Consumo (para el owner de M06 — NO ejecutado por M87, módulo ajeno):** reemplazar cada literal por `_t(\"CLAVE\")` (ej: `title.text = _t(\"SETTINGS.INVENTARIO\")`; `search_line.placeholder_text = _t(\"SETTINGS.BUSCAR\")`; `fav_btn.text = _t(s.favorito ? \"ITEMS.DESFAVORECER\" : \"ITEMS.FAVORITO\")`). Las 4 claves nuevas se crean **en el mismo commit** que el consumo (evitar huérfanas — política §2.4.4), con ES+EN+PT en JSON + es.po + en.po.\n- Nota: `DIARY.FILTRO_TODOS` (\"Todos\") viene del dominio del diario; si el owner de M06 prefiere desacoplamiento, alternativa `ITEMS.TODOS` (mismo texto — el glosario §2.4 \"un término, una clave\" favorece el reuso).\n\n**Regla derivada (estándar M87):** el language aplica al **UI estático** y al **contenido del juego**; NO aplica a (a) login/autenticación (inexistente en v1), (b) nombre del jugador (dato de usuario, RF13 futuro), (c) el texto que el jugador escribe (búsquedas, chat futuro)."
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/196-2026-10-21_04-03-50-ling-3-1-flash-a-ling-3-1-flash-tanda-19-controles-hud-presets-idioma.md",
+          "start_line": 19,
+          "end_line": 26,
+          "purpose": "pendiente de encargo a owner",
+          "excerpt": "- **0 claves `CONTROL*`/`PRESET*`** en los catálogos (auditado).\n\n**Propuesta llave-en-mano (ES/EN/PT listas):**\n- `SETTINGS.CONTROLES` → `Controles: %s` / `Controls: %s` / `Controles: %s`\n- `SETTINGS.PRESET_ESTANDAR` → `Estándar` / `Standard` / `Padrão`\n- `SETTINGS.PRESET_SINGLE_HAND` → `Una mano` / `One hand` / `Uma mão`\n- `SETTINGS.PRESET_LOW_MOBILITY` → `Movilidad reducida` / `Low mobility` / `Mobilidade reduzida`\n"
+        },
+        {
+          "path": "Mensajes entre modelos/Ling-3.1-Flash/arch_0101-0200/200-2026-10-21_06-13-21-ling-3-1-flash-a-ling-3-1-flash-tanda-21-strings-jugador-evaluacion-login-debt-m06.md",
+          "start_line": 29,
+          "end_line": 39,
+          "purpose": "propuestas marcadas no ejecutadas",
+          "excerpt": "\n| Línea | Literal | Clave | Estado |\n|---|---|---|---|\n| L598 | Inventario | `SETTINGS.INVENTARIO` | existe (JSON+.po ES/EN) |\n| L616 | Todos | `DIARY.FILTRO_TODOS` | existe (\"Todos\"/\"All\") |\n| L637 | Buscar ítem... | `SETTINGS.BUSCAR` | existe |\n| L661 | Ordenar: | `SETTINGS.ORDENAR` | existe |\n| L672 | Aplicar | `SETTINGS.APLICAR` | existe |\n| L726 | Cerrar (B) | `SETTINGS.CERRAR` + `\" (B)\"` | existe (B = acelerador, se concatena) |\n| L945 | Usar | `ITEMS.USAR` | **NUEVA** |\n| L952 | Favorito / Desfavorecer | `ITEMS.FAVORITO` / `ITEMS.DESFAVORECER` | **NUEVAS** (par) |"
+        }
+      ]
+    }
+  ],
+  "stale_or_drift_flags": [
+    {
+      "location": "03-Diseno.md §2.4.3, línea 180",
+      "flag": "El commit citado 3b43f64 no contiene los cambios de catálogo de eventos; las entradas ES/EN aparecen en 96a6e77 y PT/runtime en 071a2f9.",
+      "certainty": "alta para rutas cambiadas en Git"
+    },
+    {
+      "location": "03-Diseno.md §2.4.6, línea 277",
+      "flag": "La nota “player.gd sin cambios desde 1e62132” está contradicha como afirmación sobre el archivo completo por f860e00; el bloque inventariado sigue en el código actual.",
+      "certainty": "alta"
+    },
+    {
+      "location": "03-Diseno.md §2.4.6, líneas 243–261 y 277",
+      "flag": "Varios números de línea del inventario son anclas antiguas; ejemplo: placeholder 637 citado / 650 actual.",
+      "certainty": "alta"
+    }
+  ],
+  "verification": {
+    "method": [
+      "Extracción UTF-8 del diseño; hashes SHA-256; git show/diff-tree de commits citados; búsqueda literal de propuestas y lectura de fuentes actuales."
+    ],
+    "not_done": [
+      "No se ejecutó Godot, validador i18n ni tests.",
+      "No se editaron M87, código, catálogos, checklists ni GLOBAL.",
+      "No se modificó el backlog ni se generó log de cierre.",
+      "No se actualizaron ni corrigieron fuentes; solo se conserva esta evidencia."
+    ]
+  },
+  "conclusion": "La clasificación separa política interna, fuentes primarias actuales, referencias históricas y propuestas. Las alertas de fidelidad son la atribución a 3b43f64 y la nota “player.gd sin cambios”. Las propuestas siguen sin implementación en archivos/catálogos, pero este análisis no asigna ni autoriza ese trabajo.",
+  "limitations": "DOC-INT-4 y otras banderas de triaje no se trataron como taxonomía canónica. Los hashes describen el snapshot inspeccionado y cambiarán con futuras ediciones."
+}

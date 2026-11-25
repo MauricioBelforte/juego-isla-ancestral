@@ -1,0 +1,200 @@
+{
+  "task_id": "S2-19",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Auditoría de completitud/fidelidad del resumen S2-12 contra las fuentes citadas, incluyendo condiciones, excepciones y propietarios. Solo lectura; no se cambia ninguna marca ni fuente.",
+  "snapshot": {
+    "head": "98ce7e6ba937950222f0cba8cf9ae3070ead7cd4",
+    "date": "2026-11-25"
+  },
+  "sources_sha256": {
+    "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-12-pendientes-propietarios-m87.json": {
+      "sha256": "87c0ebe0e502a235eb922d6a12294d0f9aa2c38ab6acf7a45fbf03287f72d85c",
+      "bytes": 35808
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md": {
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+      "bytes": 47495
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md": {
+      "sha256": "02e4d4239d6fa58525a3f808a84d4fbd1ff83a7a24a595801e644066f1639b25",
+      "bytes": 44000
+    },
+    "CHECKLIST-GLOBAL.md": {
+      "sha256": "304275bcf0d0ddb14dc44b5c9733c086c5649611b565f303f42b244da936297f",
+      "bytes": 255493
+    },
+    "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md": {
+      "sha256": "28bbd20e00a7e9915ecc6138f234a2f59056805f5a82a1bc8ab305eb5ecd95bb",
+      "bytes": 86195
+    },
+    "DOCUMENTACION/87-Localizacion/plan-actual/01-Requerimientos.md": {
+      "sha256": "6a950f2e1aeeb22fc1cce3cb7e5c3c89cc29e057af67a4a8482441b5dbc0c0ea",
+      "bytes": 8736
+    }
+  },
+  "summary_pointer_review": [
+    {
+      "source_fact": "04-Codigo.md §8, línea 211: selector/ajustes de idioma, dueño M53/M90, descrito como UI fuera de M87.",
+      "summary_pointer": "$.interpretation.external_module_owners[0] y $.pending_register_rows[9]",
+      "summary_representation": "Owner M53/M90 incluido como selector/ajustes externos; se preserva además la fila fuente.",
+      "other_source_condition": "05-Checklist.md línea 107 marca como [x] “dropdown de idioma en la pantalla de configuración”.",
+      "verdict": "OMISIÓN DE ALCANCE / NO CONTRADICCIÓN DEMOSTRADA",
+      "certainty": "alta",
+      "explanation": "El resumen sí incluye al propietario M53/M90 pero no distingue la parte de selector declarada integrada en el checklist de la responsabilidad restante de UI/configuración. La [x] no prueba por sí sola que toda la configuración esté terminada."
+    },
+    {
+      "source_fact": "04-Codigo.md §8, línea 213: adopción de metadatos text_key/tooltip_text_key por M53 aparece como pendiente.",
+      "summary_pointer": "$.interpretation.external_module_owners[2] y $.pending_register_rows[11]",
+      "summary_representation": "M53 aparece como dueño de adoptar los metadatos, sin reconciliación adicional.",
+      "other_source_condition": "05-Checklist.md líneas 106 y 109 marcan [x] adopción acotada en equipment_layer/equipment_ui/interact_prompt y TooltipService; describen test_ui_i18n_m53.gd 39/0 (resultado histórico).",
+      "verdict": "OMISIÓN MATERIAL DE CAVEAT / POSIBLE DRIFT ENTRE FUENTES",
+      "certainty": "alta para la existencia de pasajes discordantes; media para el alcance global",
+      "explanation": "La evidencia del checklist es específica a consumidores, no afirma que toda la UI M53 esté migrada. El resumen debía anotar el estado parcial/acotado en lugar de sintetizar la fila 213 como pendiente sin advertencia. No se concluye que M53 completo esté cerrado."
+    },
+    {
+      "source_fact": "04-Codigo.md §8, línea 210: en.po está provisional y requiere revisión humana (RN9).",
+      "summary_pointer": "$.interpretation.human_owned[0]",
+      "summary_representation": "La revisión final de la traducción inglesa pertenece a TRADUCTOR HUMANO.",
+      "verdict": "CUBIERTO",
+      "certainty": "alta",
+      "explanation": "El resumen conserva el propietario; la condición RN9/provisionalidad está en la fila literal extraída."
+    },
+    {
+      "source_fact": "04-Codigo.md §8, líneas 212, 214-217: overflow M53; fechas M29/M30; migración M14-M39; duplicado con decisión del usuario; deuda auditor M87 no bloqueante.",
+      "summary_pointer": "$.interpretation.external_module_owners, $.interpretation.user_owned, $.interpretation.module_owned",
+      "summary_representation": "Owners M53, M29/M30, M14-M39, usuario y M87 presentes en las categorías; el resumen menciona deuda no bloqueante del auditor.",
+      "verdict": "CUBIERTO EN NIVEL DE PROPIETARIO, CON DETALLE CONDICIONAL SOLO EN FILA LITERAL",
+      "certainty": "alta",
+      "explanation": "La tabla original de 04 §8 y la fila completa se conservan en pending_register_rows. La sinopsis pierde la explicación del prefijo fantasma y el ejemplo validate_diary.gd:186/190, pero no los borra del artefacto completo."
+    },
+    {
+      "source_fact": "04-Codigo.md §8, línea 218: 06/07 resultados registrados como ejecutados, 6 suites, 0 fallos.",
+      "summary_pointer": "$.pending_register_rows[16] y $.limitations",
+      "summary_representation": "La fila completa queda preservada en el JSON; la limitación declara que esta auditoría no reejecutó pruebas.",
+      "verdict": "CUBIERTO; DIFERENCIACIÓN TEMPORAL ADECUADA",
+      "certainty": "alta",
+      "explanation": "El resumen distingue registro histórico de ejecución actual; no convierte los 6 resultados antiguos ni el gate global citado en una corrida propia."
+    }
+  ],
+  "cross_source_consistency": {
+    "checklist_literal_marks": {
+      "x": 140,
+      "pending": 0,
+      "unresolved": 0
+    },
+    "checklist_interpretation": "05-Checklist.md informa 135 completados netos + 5 deudas híbridas en líneas 342 y 390; la evidencia S2-12 conserva las cinco líneas y advierte que el conteo es literal.",
+    "global_row_snapshot_match": true,
+    "global_file_hash_match": false,
+    "global_row_note": "El SHA-256 integral de CHECKLIST-GLOBAL cambió desde el snapshot guardado en S2-12, pero la celda exacta de M87 de la fila 191 coincide byte/textualmente con la almacenada; no se observó drift en esa fila.",
+    "guide08_note": "La guía 08 conserva una reserva/medición histórica de octubre. S2-12 no la cita como estado actual; su GLOBAL row snapshot se conserva como declaración, no como QA propia."
+  },
+  "overall_findings": [
+    {
+      "severity": "material caveat omitted in synthesis",
+      "description": "El resumen S2-12 no concilia la fila 04 §8 “Adoptar text_key/tooltip_text_key: pendiente” con las marcas [x] y la evidencia acotada de M53 en checklist líneas 106/109. Debe describirse como fuente documental discordante/alcance parcial, no como cierre total ni pendiente uniforme."
+    },
+    {
+      "severity": "scope distinction omitted",
+      "description": "Para selector de idioma, S2-12 conserva owner M53/M90, pero omite que el checklist tiene la tarea concreta del dropdown [x]; distinguir selector integrado de responsabilidad general de ajustes."
+    },
+    {
+      "severity": "no false claim found",
+      "description": "No hay evidencia en S2-12 de que se reasignaran los propietarios, se reabriera M87 o se presentara la QA histórica como ejecución propia."
+    },
+    {
+      "severity": "source snapshot metadata drift, content unchanged",
+      "description": "El hash completo de GLOBAL guardado en S2-12 difiere del archivo actual, pero la celda/fila 87 citada coincide exactamente en el cotejo del snapshot; informar hash viejo no invalida el estado M87 concreto."
+    }
+  ],
+  "citations": [
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "start_line": 200,
+      "end_line": 218,
+      "description": "Tabla literal de propietarios y estados que sirve de fuente primaria documental.",
+      "excerpt": "| Pendiente | Dueño | Estado |\n|---|---|---|\n| `scripts/localization/localization_manager.gd` (autoload) | M87 | **Implementado** (iter. 1; ampliado en iter. 6 con `catalogo()`/`claves_catalogo()`) |\n| `scripts/localization/locale_utils.gd` | M87 | **Implementado** (iter. 1) |\n| Validación de catálogos (`validador_po.gd`) | M87 | **Implementado** (iter. 5; marcador `#. no-traducir:` en iter. 6) |\n| Auditoría código↔catálogo (`auditor_claves.gd`) | M87 | **Implementado** (iter. 5) |\n| Medición de encaje de texto (`analizador_layout.gd`) | M87 | **Implementado** (iter. 6) |\n| Consistencia terminológica (`glosario.gd` + `glosario.json`) | M87 | **Implementado** (iter. 6) |\n| Re-traducción selectiva (`retraductor_ui.gd`) | M87 | **Implementado** (iter. 6) |\n| `locales/es.po` (fuente de verdad) | M87 | **Implementado** (171 entradas) |\n| `locales/en.po` (traducción al inglés) | TRADUCTOR HUMANO | **Provisional** — textos generados, revisión humana pendiente (RN9) |\n| Ajustes de idioma y selector de idioma | **M53/M90** | No es de M87: es UI de configuración |\n| Absorber el desborde de texto medido (63/170 a 16 px) | **M53** | Pendiente — la medición la aporta M87 |\n| Adoptar el metadato `text_key` / `tooltip_text_key` en la UI | **M53** | Pendiente — el mecanismo está provisto y probado |\n| Usar `LocaleUtils.format_date/format_hora` en reloj y calendario | **M29/M30** | Pendiente — la API está lista y probada |\n| Migrar 26 módulos de contenido a claves M87 | **M14-M39** | Pendiente — el catálogo y el auditor lo permiten módulo a módulo |\n| Eliminar el autoload duplicado `LocalizationManager` | **decisión del usuario** | Pendiente (hallazgo H-1) |\n| Auto-escaneo del auditor (`auditor_claves.gd` aplica los patrones al TEXTO crudo, comentarios incluidos) | M87 | **Deuda conocida, no bloqueante** (hallazgo H1 de la iter. 8, Log 1504). Un COMENTARIO que contenga el patrón literal de llamada dinámica registra un prefijo **fantasma**, y toda clave real que empiece con ese prefijo queda excluida del veredicto. Medido con sonda aislada: `# _t(\"ZZFANTASMA.\" + x)` -> `dinamicas = [\"ZZFANTASMA.\"]`. Hoy es inofensivo: los únicos comentarios así en `scripts/` son `validate_diary.gd:186/190`, y nombran `DIARY.CAT_`, que ya es un prefijo dinámico real. No se corrige ahora (efecto cosmético); el fix futuro sería descartar las líneas de comentario antes de aplicar los patrones. |\n| `06-Plan-Testings.md` / `07-Resultados-Testings.md` | M87 | **Ejecutados** (6 suites, 0 fallos) |"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 106,
+      "end_line": 109,
+      "description": "Marcas [x] de integración acotada de labels/tooltip con dueño M53 y test 39/0 registrado.",
+      "excerpt": "- [x] Integrar M53: labels de UI usando tr_key en vez de texto estático [M] -- **M53** (Log 1118, agnes-3-flash/Kilo Code 2026-09-20): M53 adoptó el metadato vía `UiI18n` (`scripts/ui/i18n/ui_i18n.gd`): `equipment_layer` (título/catálogo/hint con `text_key` + dinámicos re-generados en `locale_changed`), `equipment_ui` (EQUIP.VACIO) e `interact_prompt` (UI.INTERACTUAR). `UIManager._on_locale_changed_ui` dispara `RetraductorUI.retraducir` sobre capas montadas + HUD al cambiar de idioma. Test headless `test_ui_i18n_m53.gd` 39/0 (incluye re-traducción en vivo de capa registrada en→es). Claves EQUIP.*/UI.INTERACTUAR agregadas a es.po/en.po (validador PO M87 0 fallos).\n- [x] Integrar M53: dropdown de idioma en la pantalla de configuración [M]\n- [x] Integrar M53: re-traducción de la UI completa al emitir locale_changed [M]\n- [x] Integrar M53: tooltips y descripciones traducidos [S] -- **M53** (Log 1118, agnes-3-flash/Kilo Code 2026-09-20): `TooltipService` adopta el metadato — `show_tooltip_key(clave, at, params)` resuelve vía M87 al mostrarse y guarda la clave para re-traducir el tooltip VISIBLE en vivo al cambiar de idioma (`locale_changed`); `UiI18n.meta_tooltip` declara el metadato; `UIManager._on_focus_moved_tooltip` prioriza `tooltip_text_key` sobre `tooltip_text` estático. Test `test_ui_i18n_m53.gd` 39/0 (tooltip por clave resuelto es + re-traducido a en en vivo)."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 107,
+      "end_line": 107,
+      "description": "Dropdown de idioma marcado [x].",
+      "excerpt": "- [x] Integrar M53: dropdown de idioma en la pantalla de configuración [M]"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 286,
+      "end_line": 298,
+      "description": "Tabla histórica de siete [¿] antes del flip; contexto, no estado literal actual.",
+      "excerpt": "### Los 7 `[?]` (con dueño y motivo, no ocultos)\n\n| Ítem | Dueño | Por qué no lo cierra M87 |\n|---|---|---|\n| Accesibilidad de texto de M58 sin romper layouts | **M53** | Medido (0 / 63 / 97 desbordes a 12 / 16 / 24 px); absorberlo en los layouts es trabajo de M53 |\n| Revisión humana de las traducciones | **Usuario** | No automatizable por definición: M87 aporta la herramienta, no el juicio de estilo |\n| Integrar M53: labels con tr_key en vez de texto estático | **M53** | El mecanismo está provisto y probado (`set_meta(\"text_key\", …)`); falta que la UI adopte el metadato |\n| Integrar M53: tooltips y descripciones traducidos | **M53** | Ídem, por la ruta `tooltip_text_key` |\n| Integrar M58: el tamaño de texto ajustable no rompe la traducción | **M53** | La herramienta existe y responde de forma monótona a la escala; falta que el layout absorba los 3 casos |\n| Integrar M14-M39: contenido con claves M87 | **26 módulos de contenido** | El catálogo cubre 170 claves y `AuditorClaves` inventaría el uso real; migrar 26 módulos excede M87 |\n| Integrar M29/M30: fechas y horas localizadas | **M29/M30** | `LocaleUtils.format_date/format_hora` están listas y probadas; falta que el reloj y el calendario las usen |\n\n> **Nota de honestidad:** los 16 pendientes de la iter. 5 **no** se cerraron en bloque. Los que admitían una medición determinista se cerraron con cifras reproducibles; los que dependen de otra UI (M53), de un traductor humano o de otro módulo quedaron `[?]` **con dueño nombrado y motivo medido**. Ningún `[x]` de esta iteración se apoya en una impresión visual: la QA visual sigue bloqueada por BUG-042, y donde no se puede mirar se mide."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 342,
+      "end_line": 352,
+      "description": "Totales y anotaciones históricas del formato híbrido.",
+      "excerpt": "**Totales:** 140 ítems · Completados: 135 (+5 [x] con deuda externa documentada en texto, formato FLIP T219-87) · Pendientes: 0 · No resueltos: 5 (deuda externa con dueño).\n\n> **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 4):**\n> este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 0 [ ] /\n> 7 [?]. Las marcas no se tocaron.\n\n> **Actualización agnes-3-flash / Kilo Code (Log 1118, 2026-09-20):** los 2 ítems\n> \"Integrar M53\" (labels tr_key + tooltips traducidos) pasaron `[?]`→`[x]` con la\n> adopción M53 documentada en cada línea (UiI18n + metadatos + test 39/0).\n> Conteo real actual: 131 [x] / 0 [ ] / 5 [?].\n"
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "start_line": 390,
+      "end_line": 390,
+      "description": "Interpretación actual del checklist: 135 netos + 5 deudas híbridas; normalización para director.",
+      "excerpt": "**Conteo tras esta tanda (§21.8.2.b):** marcas en disco 140 [x] / 0 [ ] / 0 [?] = 140 ítems. De los 140 [x], **5 son formato híbrido del FLIP T219-87 (Reflection-Beam-1.0, 2026-10-26)**: marca [x] + texto \"Sigue [?] deuda externa\" con dueño (L71/L74/L112/L116/L117) → **135 completados netos + 5 deuda-externa-con-dueño**. Esta tanda no flipó nada de esos 5 (deuda mantenida visible en texto; normalización de formato queda al director). Drift declarativo preexistente reportado: Totales histórico decía 131[x]/5[?] vs 136[x] reales en disco ya post-flip-Beam."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/01-Requerimientos.md",
+      "start_line": 8,
+      "end_line": 11,
+      "description": "Dependencias explícitas M21/M53 y módulos relacionados.",
+      "excerpt": "- **Código:** M87 (CHECKLIST-GLOBAL: ID 87 — Localización)\n- **Carpeta:** `DOCUMENTACION/87-Localizacion/`\n- **Dependencias:** M21 (Diálogos), M53 (UI-UX). Relacionados: M44 (ASMR y Feedback — subtítulos), M58 (Accesibilidad), M60 (Datos y Serialización), M88 (Fuentes Tipográficas), M90/M91 (Configuración)\n- **Carácter:** Módulo de internacionalización (i18n) y localización (l10n) de todos los textos del juego"
+    },
+    {
+      "path": "CHECKLIST-GLOBAL.md",
+      "start_line": 191,
+      "end_line": 191,
+      "description": "Fila actual de M87 con sello, QA y notas históricas; cotejada idéntica con la celda almacenada en S2-12.",
+      "excerpt": "| 87 | 87-Localizacion | ✅ Completado (QA §21.8) | 140/140 | Media | 3 | 53,86 | — | 2026-10-28 08:30 | **✅ SELLO §21.8 (7to) por agnes-3-flash (Kilo Code, 2026-10-28): gate-1 agnes 140/0/0 (M87-Localizacion 05) + gate-2 Hy3 #433/Log 2231 (169 checks/0 fallos headless: test_placeholders_plurales 46 + test_catalogo_exhaustivo 36 + test_validador_po 87; pt.po plural OK; obtener_estado_catalogos L250 ejercitado). **✅ Encargo 146 ACEPTADO (msg 149, GLM-5.3 Flash-Director, 2026-10-16 22:35 UTC — \"calidad de referencia\"). Liberado 🔵→🟡 2026-10-16 19:41 (local):** 5 `[?]` con dueño delegados por el director — L71/L112 → agnes (cola N651, tras M46; herramienta `test_localizacion_iter6.gd` 82/0 disponible), L74 → usuario (no automatizable), L116 → M14-M39 (contenido de datos, no frente catálogo), L117 → deuda M29/M30 (sin adopción de la API; evidencia Ling). Lote 1 en HEAD (`a7a2754`); informes msg 147+148; commit de cierre `4dba329`. — **2026-10-16 21:50 (encargo 146, GLM-5.3 Flash-Director):** Ling reclama 🔵 M87 — medición del estado real sin drift (131 [x]/0 [ ]/5 [?]=136) + **hallazgo crítico**: 11 claves de producción ausentes del autoload `.po` (4 SETTINGS consumidas por `settings_audio_layer.gd` L113-116 + 7 TUTORIAL por `tutorial_manager.gd` L131-142/L469, vía `_t`→`/root/Localization.traducir_clave` — el jugador veía claves literales crudas). **Lote 1 aplicado (flujo 142-145):** es.po/en.po +11 claves (225→236 msgids); JSON es/en/pt +3 claves `_1` (espejo desde .po — no eran bug). Validado: conjuntos es==en .po True, JSON 146/146/147, es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5 archivos. Los 5 `[?]` verificados con evidencia nueva: L71/L112 (M53 — desbordes 0/63/97 a 12/16/24 px), L74 (usuario), L116 (M14-M39 — 74 claves usadas en producción, deuda restante = contenido dinámico), L117 (M29/M30 — sin adopción de `format_date/format_hora`; solo `transport_localizer.gd` M16). **Sin flips** — propuesta de lotes 2-5 al director. Informe msg 147. (Histórico: Step 5 fix 2 tests rojos 2026-10-15; asignación msg 132; verificación msg 133.) — **2026-10-23 06:20 (T31, Ling-3.1-Flash, informe 227):** medición completa código↔catálogo (`03-Diseno.md` §2.4.16, 980 scripts prod): JSON 170 = **136 vivas / 34 huérfanas** (ui 6, eventos.historia_c1-c7 14, SETTINGS 9 save-legacy, msg 3, npc 2); .po 273 = 159 comunes + **53 solo-.po vivas** (49 M68 vía TranslationServer en transporte) + **62 muertas** (40 M68, 14 DIARY); paridad 0/0/0; **PT JSON-only (no existe pt.po)** → M68/CLOCK sin PT en runtime. Bloque A tareas 1-4 cerradas en BACKLOG. **Progreso sin cambios (131/136):** los 5 `[?]` siguen con dueño delegado (agnes N651 / usuario / M14-M39 / M29-M30); L116 enriquecida con la medición. Conciliación .po↔JSON (73 limpieza + 53 ruta paralela + pt.po) → decisión director/fundador (msg 153).  — **2026-10-24 (TANDA VISUAL 56-62, Ling-3.1-Flash, informe 238):** verificacion runtime via MCP Godot: boot ES+EN limpio (0 errores runtime; spawn (3860,3860) Y=8 vivo post-correccion LOTE B msg 236); fixes D102 confirmados en codigo (ControlsLabel theme_ux.gd:446-460 bg opaco+outline 4; hotbar player.gd:1001-1078 panel opaco 0.92+outline 5; reloj w_reloj.gd:117/124 cream sobre dark); SETTINGS.* parity 74 claves x3 idiomas, 0 duplicados. **HALLAZGO: PT NO es locale de runtime** (LOCALES_SOPORTADOS=['es','en'] localization_manager.gd:15; pt.po NO existe en res://locales/ — arquitectura conocida TANDA 17, escalada al fundador: habilitar PT = pt.po 170 msgids + 'pt' en LOCALES_SOPORTADOS + QA). Backlog Ling: 56-58/60-62 [x], 59 [?] bloqueada. Captura EN: tools/mcp/godot-mcp/capturas/87-Localizacion/cap_87_EN_boot_2026-10-23_09-09.png — **2026-10-27 (Ling, GO #4 del fundador en chat + director 243/295; Log 2217; msg 298): PT HABILITADO EN RUNTIME** — pt.po creado (21.156B sha1 95ee2ce0d1df; 274 entradas; 61 no-traducir; 4 plurales PT canónicos); LM L15 LOCALES [\"es\",\"en\",\"pt\"] + L357/L359 K2 _indice_plural += pt; LU L15 TABLAS pt (K3) + L21 \"Português\" (K4); QA 40/40 ejecutor + validar_par REAL OK 0 errores (P1=P2=P3=P5=0, exentas 62); diff exacto (LM 3 reemplazos / LU 2 inserciones); git riel = 3 archivos; backups §5 Obsoletos/05-23-25; es/en.po + JSON intactos. Deuda M68 L214 \"3er idioma\" (Beam T196-68) SALDADA. Captura UI PT pendiente (sin MCP Godot — QA cruzada §21.8 en editor solicitada a Hy3/agnes). Sin flips (anti-inflación §21.8.2.b: 5 [?] M87 siguen con dueño). — **2026-10-27 22:30 (Ling-3.1-Flash, tanda M87 conciliación POST-PT, encargo agnes 302, informe 305, Log 2221):** T1 paridad total (JSON×3 170 dif 0; .po×3 274=270+4 dif 0; cruce idéntico 3 idiomas 159/11/115; cruzada 0/0); T2 orphan=34 exactos (ui6/eventos14/SETTINGS9/msg3/npc2; criterio canónico excluye Obsoletos/ y docstrings); T3 115 .po-solo = 108 vivas-runtime (89 M68 + 14 DIARY.CAT dinámicas diary_layer.gd:412 + 4 CLOCK dinámicas w_reloj.gd:198 + UI.INTERACTUAR) + 2 test-only + 2 drift ítems + 1 deuda M53 + 1 muerta real + 1 exenta catalina — el .po NO está inflado (44 dinámicas que el grep literal no ve: templates M68 transport_localizer.gd:332-342/399-410 + STOP vía transport_network.tres). Hallazgos colaterales: M27.ISLA.* sin claves i18n (generar_islas.gd:115, 13 .tres); ítems M159 sin integración (inventario_iter4.gd:283 convención inexistente); 4 claves JSON docstring-only (verificar gate-2). 05-Checklist: +4 ítems [x] nuevos (Totales 140; conteo declaro 135 completados + 5 deuda-externa — marcas en disco 140 [x] por formato híbrido FLIP T219-87 de Beam 2026-10-26 con deuda visible en texto L71/74/112/116/117, drift de conteo reportado al director); sin flips míos (anti-inflación §21.8.2.b). |"
+    },
+    {
+      "path": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "start_line": 50,
+      "end_line": 50,
+      "description": "Reserva histórica de M87 en guía 08; no se toma como estado actual.",
+      "excerpt": "| M87 Localización (encargo 146 del director: medición + lote i18n) | 🟡 Liberado 2026-10-16 19:41 (131/136; 5 [?] con dueño delegados por el director) | Ling-3.1-Flash (Kilo Code) — liberado | F8 (calidad/localización) | V0 (datos) | M87 🟡 131/136 (5 `[?]` con dueño); 2 sistemas de catálogo medidos: autoload `.po` 225 msgids + JSON 143/143/144; 118 solo-.po / 36 solo-JSON | Lote 1 EJECUTADO: +11 claves al `.po` ES/EN (4 SETTINGS + 7 TUTORIAL ausentes del autoload, consumidas por `settings_audio_layer.gd` L113-116 y `tutorial_manager.gd` L131-142/L469 vía `_t`→`/root/Localization.traducir_clave`) + 3 claves `_1` espejo a JSON ES/EN/PT (no eran bug: ya existían en .po). Validado: conjuntos es==en .po True, JSON 146/146/147, es−pt=0, 0 placeholders nuevos, UTF-8/BOM/U+FFFD/CRLF limpio ×5. Propuesta lotes 2-5 al director (M53 layouts, M29/M30 fechas, M14-M39 contenido, usuario revisión). **Sin flips** — los 5 `[?]` siguen con dueño. | `game/isla-ancestral/locales/{es,en}.po`, `game/isla-ancestral/data/localizacion/strings_{es,en,pt}.json`, `DOCUMENTACION/87-Localizacion/plan-actual/` |"
+    }
+  ],
+  "verification": {
+    "method": [
+      "Parseo JSON de S2-12 y lectura de JSONPath para categorías/filas.",
+      "Comparación por línea de 04 §8 contra líneas 106–109 y 107 de 05.",
+      "Conteo literal del checklist y cotejo de fila M87 GLOBAL guardada vs actual.",
+      "SHA-256 actual de fuentes."
+    ],
+    "checks": {
+      "summary_json_parseable": true,
+      "summary_task_id": "S2-12",
+      "global_row_exact_match": true,
+      "checklist_literal_counts": {
+        "x": 140,
+        "pending": 0,
+        "unresolved": 0
+      }
+    },
+    "not_done": [
+      "No se inspeccionaron estados de módulos propietarios.",
+      "No se ejecutaron pruebas ni validador.",
+      "No se modificaron documentos, código, checklists, GLOBAL, marcas o backlog."
+    ]
+  },
+  "conclusion": "S2-12 conserva todas las filas literales de la tabla 04 §8 y los cinco híbridos, con propietarios en general fieles. No obstante, su sinopsis omite dos matices interdocumentales importantes: el selector ya marcado [x] en checklist y la adopción M53 de text_key/tooltips marcada [x] para consumidores concretos, mientras 04 §8 la mantiene pendiente. Es una brecha de reconciliación y alcance del resumen; no basta para concluir que M53 entero esté terminado. El snapshot GLOBAL conserva la fila M87 correcta aunque el hash global integral haya variado.",
+  "limitations": "Esta revisión evalúa la fidelidad documental de S2-12, no la vigencia de las tareas en módulos externos ni la calidad runtime de UiI18n/M53. Los estados [x] se reportan como marcas y afirmaciones documentales."
+}

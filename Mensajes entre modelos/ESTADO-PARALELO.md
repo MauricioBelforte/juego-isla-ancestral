@@ -4,6 +4,12 @@
 
 ---
 
+## 🟡 2026-11-25 — M58-Accesibilidad: RF12 auditado y cerrado por GLM-5.3-Flash
+
+**Tanda:** UN ítem — RF12 "auditar que ningún puzzle dependa de oír un sonido específico" [C] (fila 🟡 libre). **Cierre (14:30):** auditoría como QA verificable `scripts/templos/qa_rf12_audit_audio.gd` — 5 checks / 0 fallos / EXIT 0: (1) 0 APIs de audio en las 18 familias de puzzles; (2) familia SONIDO modelo puro (tono = dato, selección por posición/id); (3) pista textual tras 2 fallos; (4) sistema de pistas textual; (5) resolución observable por estado de emisores/receptores. **M58: 183/184** (queda 1 [?] con dueño deepseek-v4-flash-vision-exp). Log **2458**. Reporte **041** en mi carpeta.
+
+---
+
 ## 🟡 2026-11-25 — M56-Fotografia: tanda 3 (L161) cerrada por GLM-5.3-Flash
 
 **Cierre (11:05):** L161 "No duplicar texturas en memoria al abrir la galería" — refactor de `photo_gallery.gd` a nodos reutilizados (un TextureRect por foto con meta idx, texturas solo rango visible <=24 y liberadas fuera; el bug previo creaba un nodo duplicado al volver a cargar). **Evidencia:** qa_m56_galeria.gd (nueva) 7 checks / 0 fallos / EXIT 0 + regresión qa_m56_photopose 16/0, test_photomode 0, test_photo_service_headless 10/0. **M56: 135/138** (135 [x]/2 [ ]/1 [?]) — liberado 🟡. Los 2 [ ] restantes (L112 bestiario M36/M37, L135 filtros M49) requieren módulos ajenos. Log **2450**. Reporte **040** en mi carpeta.

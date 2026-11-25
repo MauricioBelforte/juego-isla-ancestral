@@ -68,8 +68,12 @@ class TerrainFalso:
 	extends Node
 	var tool: VoxelToolFalso = VoxelToolFalso.new()
 	var data_blocks: Array[Vector3i] = []
+	var roto: bool = false
 	func get_voxel_tool():
-		return tool
+		# Roto: el terreno sigue existiendo pero el voxel tool no responde ->
+		# la escritura/borrado en el mundo devuelve 0 (el fallo que hay que
+		# detectar en las operaciones que SI dicen "ok").
+		return null if roto else tool
 	func voxel_to_data_block(v: Vector3) -> Vector3i:
 		return Vector3i(int(floor(v.x / LADO_BLOQUE)), int(floor(v.y / LADO_BLOQUE)), int(floor(v.z / LADO_BLOQUE)))
 	func has_data_block(bloque: Vector3i) -> bool:
@@ -307,8 +311,60 @@ func _correr() -> void:
 	_check("E3: en el camino sano la pieza queda registrada",
 		not (mgr_ok.pieza_en_celda(Vector3i(7, 1, 7)) as Dictionary).is_empty())
 
-	# ── F. Anti-falso-verde ─────────────────────────────────────────────
-	_check("F1: la suite ejecuta al menos %d checks (minimo anti-falso-verde)" % CHECKS_MINIMOS,
+	# ── F. DEMOLICION con el borrado fallido (mismo defecto, otra ruta) ──
+	var terreno2 := TerrainFalso.new()
+	terreno2.name = "Terrain2"
+	root.add_child(terreno2)
+	terreno2.data_blocks.append(Vector3i(0, 0, 0))
+	for x in range(0, 6):
+		for z in range(0, 6):
+			terreno2.tool.bloques[Vector3i(x, 0, z)] = 12
+	var mundo2 := MUNDO.new()
+	mundo2.conectar_terrain(terreno2)
+	var inv2 := FakeInventario.new()
+	_sembrar(inv2, receta_base)
+	var receta2 := _receta_sin_bloque()
+	receta2.bloque = 12
+	var mgr2 = _manager(mundo2, inv2, "Mgr2")
+	await process_frame
+	mgr2.registrar_receta(receta2)
+	mgr2.seleccionar_pieza(receta2)
+	var celda2 := Vector3i(2, 1, 2)
+	var res2: Dictionary = mgr2.confirmar_colocacion(celda2)
+	_check("F1: la pieza de prueba se colocó (mundo sano)", bool(res2.get("ok", false)), str(_motivos(res2)))
+	var planks_antes: int = int(inv2.items.get("planks", 0))
+
+	# El terreno se rompe: el borrado va a devolver 0.
+	terreno2.roto = true
+	var res_dem: Dictionary = mgr2.demolir_pieza(celda2)
+	_check("F2: demoler con el borrado fallido -> motivo NO_SE_PUDO_BORRAR",
+		(_motivos(res_dem) as Array).has(TIPO.Motivo.NO_SE_PUDO_BORRAR), str(_motivos(res_dem)))
+	_check("F3: la pieza SIGUE en su sitio (no queda un voxel huerfano)",
+		not (mgr2.pieza_en_celda(celda2) as Dictionary).is_empty())
+	_check("F4: NO se devuelven materiales si la demolicion no ocurrio",
+		int(inv2.items.get("planks", 0)) == planks_antes,
+		"antes=%d ahora=%d" % [planks_antes, int(inv2.items.get("planks", 0))])
+
+	# Deshacer la colocacion con el borrado fallido: tampoco puede dejar huerfano.
+	var res_undo: Dictionary = mgr2.undo()
+	_check("F5: deshacer con el borrado fallido -> motivo NO_SE_PUDO_BORRAR",
+		(_motivos(res_undo) as Array).has(TIPO.Motivo.NO_SE_PUDO_BORRAR), str(_motivos(res_undo)))
+	_check("F6: al no poder deshacer, la pieza sigue en su sitio",
+		not (mgr2.pieza_en_celda(celda2) as Dictionary).is_empty())
+
+	# Con el mundo sano: demoler y luego deshacer con el terreno roto.
+	terreno2.roto = false
+	var res_dem_ok: Dictionary = mgr2.demolir_pieza(celda2)
+	_check("F7: con el mundo sano la demolicion -> ok", bool(res_dem_ok.get("ok", false)), str(_motivos(res_dem_ok)))
+	terreno2.roto = true
+	var res_undo2: Dictionary = mgr2.undo()
+	_check("F8: deshacer una demolicion con la escritura fallida -> motivo NO_SE_PUDO_ESCRIBIR",
+		(_motivos(res_undo2) as Array).has(TIPO.Motivo.NO_SE_PUDO_ESCRIBIR), str(_motivos(res_undo2)))
+	_check("F9: al no poder deshacer, la pieza NO se registro (no queda en la logica sin voxel)",
+		(mgr2.pieza_en_celda(celda2) as Dictionary).is_empty())
+
+	# ── G. Anti-falso-verde ─────────────────────────────────────────────
+	_check("G1: la suite ejecuta al menos %d checks (minimo anti-falso-verde)" % CHECKS_MINIMOS,
 		_checks >= CHECKS_MINIMOS, "checks=%d" % _checks)
 
 	print("--- %s: %d checks, %d fallos ---" % [MODULO, _checks, _fallos])
