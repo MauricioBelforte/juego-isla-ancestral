@@ -475,6 +475,31 @@ func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 	}
 
 ## F110: copia una pieza existente a otra celda CONSERVANDO su rotacion.
+## ---------------------------------------------------------------------------
+## CONTENIDO DE LAS PIEZAS (M17 -> M18)
+##
+## Una pieza colocada puede GUARDAR contenido (un cofre con items, muebles,
+## puertas). El dato vive en la estructura; el modelo puro es `BuildInteraction`
+## (`scripts/construccion/build_interaction.gd`). Estas dos funciones son la
+## API que la UI de M18 necesita (leer qué devuelve una pieza / guardar items
+## en ella) sin tocar nada privado.
+## ---------------------------------------------------------------------------
+
+## Contenido de una pieza colocada. `clave` es la clave de celda/ancla
+## (`ConstruccionTipos.clave`). Vacio si no hay pieza ahi.
+func contenido_de_pieza(clave: String) -> Dictionary:
+	if not _estructuras.has(clave):
+		return {}
+	return BuildInteraction.contenido_de(_estructuras[clave])
+
+## Asigna items {item_id: cantidad} a una pieza colocada (lo que hace M18 al
+## guardar cosas en un cofre). Devuelve false si no hay pieza en esa clave.
+func asignar_contenido(clave: String, items: Dictionary) -> bool:
+	if not _estructuras.has(clave):
+		return false
+	_estructuras[clave]["cofre"] = BuildInteraction.items_a_contenido(items)
+	return true
+
 ## A diferencia de mover_pieza, NO desocupa el origen: la pieza original
 ## sigue en su sitio. Los recursos NO se re-cobran (F112: solo se reubican) ni
 ## se cobran de nuevo — la copia se cobra como una colocacion nueva.
@@ -573,6 +598,15 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 	if _f_devolver.is_valid() and not devuelto.is_empty():
 		_f_devolver.call(devuelto)
 
+	# CONTENIDO de las piezas funcionales (camas, cofre, estanteria...): los
+	# ITEMS vuelven al inventario (no se pierden). El modelo puro es
+	# `BuildInteraction` (sin nodos): la logica vive alla, aqui solo se aplica.
+	var contenido_liberado: Dictionary = BuildInteraction.liberar_contenido(e)
+	var items_liberados: Dictionary = contenido_liberado.get("items", {})
+	for item_id in items_liberados.keys():
+		if _f_agregar_item.is_valid():
+			_f_agregar_item.call(String(item_id), int(items_liberados[item_id]))
+
 	var c_ancla: Vector3i = ConstruccionTipos.celda_de_clave(ancla)
 	_baja_estructura(ancla)
 	_historial.registrar({
@@ -583,6 +617,7 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 		"celdas": celdas.duplicate(),
 		"costo": (r.costo.duplicate() if r != null else {}),
 		"devuelto": devuelto.duplicate(),
+		"contenido": items_liberados.duplicate(),
 		"bloque": (r.bloque if r != null else 0),
 		"estructura": e.duplicate(true),
 	})
@@ -598,6 +633,8 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 		"texto": "",
 		"voxeles_borrados": borrados,
 		"devuelto": devuelto,
+		"contenido_liberado": contenido_liberado,
+		"items_liberados": items_liberados,
 	}
 
 ## ─────────────────────────────────────────────────────────────────────────
@@ -925,12 +962,23 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 				_mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
 				if _f_descontar.is_valid():
 					_f_descontar.call(d.get("devuelto", {}))
+				# El CONTENIDO vuelve a la pieza: los items que se llevó la
+				# demolición vuelven al inventario (no se pierden).
+				var items_vuelta: Dictionary = d.get("contenido", {})
+				for item_id in items_vuelta.keys():
+					if _f_tirar_item.is_valid():
+						_f_tirar_item.call(String(item_id), int(items_vuelta[item_id]))
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["undo: demolicion revertida en %s" % str(celda)]}
 			else:
 				_baja_estructura(ConstruccionTipos.clave(celda))
 				_mundo.borrar_voxel(d.get("celdas", []))
 				if _f_devolver.is_valid():
 					_f_devolver.call(d.get("devuelto", {}))
+				# Rehacer la demolicion = el contenido vuelve a salir al inventario.
+				var items_redo: Dictionary = d.get("contenido", {})
+				for item_id in items_redo.keys():
+					if _f_agregar_item.is_valid():
+						_f_agregar_item.call(String(item_id), int(items_redo[item_id]))
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["redo: demolicion reaplicada en %s" % str(celda)]}
 		BuildHistory.TIPO_ALMACENAR:
 			# deshacer almacenar = recolocar la pieza y SACAR el item del

@@ -1,0 +1,79 @@
+{
+  "task_id": "J3-08",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Comparación estática de claves y placeholders entre idiomas en las parejas runtime de M87: es.po/en.po y strings_es/en.json. No se comparan traducciones semánticamente ni se valida runtime.",
+  "sources": {
+    "po": {
+      "es": {
+        "path": "game/isla-ancestral/locales/es.po",
+        "sha256": "f21df27e9d32859fac7a97145da6c2541940b5340f924e6cff0f891017731269"
+      },
+      "en": {
+        "path": "game/isla-ancestral/locales/en.po",
+        "sha256": "ad377c73b896f30f46657b0e085abd4592eae523412c954fa05fb9bde7015f48"
+      }
+    },
+    "json": {
+      "es": {
+        "path": "game/isla-ancestral/data/localizacion/strings_es.json",
+        "sha256": "9a5e4f930090eca299f72fbf1068311e1e2b3084eaaca71d68a2ef98556514c2"
+      },
+      "en": {
+        "path": "game/isla-ancestral/data/localizacion/strings_en.json",
+        "sha256": "ff1dd5228e408e00fcb117bb3c0aef51d7e105216061b7dadcdba95ee9008458"
+      }
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "po_identity": "(msgctxt,msgid), cabecera vacía excluida, continuaciones de cadenas y formas msgstr[n] conservadas",
+    "json_key_path": "cadenas",
+    "json_duplicate_detection": "json.loads(object_pairs_hook=...) rechazó duplicados y contó cero en es/en",
+    "placeholder_patterns": {
+      "brace": "\\{([A-Za-z_][A-Za-z0-9_]*)\\}",
+      "printf": "%(?:\\d+\\$)?[-+#0 ]*(?:\\d+|\\*)?(?:\\.(?:\\d+|\\*))?(?:hh|h|ll|l|z|j|t|L)?[diouxXeEfFgGaAcspn]"
+    },
+    "comparison": "Multisets de placeholders por clave común; formas plurales PO comparadas por índice presente en ambos idiomas."
+  },
+  "results": {
+    "gettext_po": {
+      "counts": {
+        "entries": {
+          "es": 276,
+          "en": 276
+        },
+        "duplicate_identities": {
+          "es": 0,
+          "en": 0
+        },
+        "key_set_equal": true,
+        "es_only": 0,
+        "en_only": 0,
+        "shared": 276,
+        "placeholder_mismatch_entries": 0
+      },
+      "placeholder_mismatches": []
+    },
+    "json_catalogs": {
+      "counts": {
+        "keys": {
+          "es": 170,
+          "en": 170
+        },
+        "duplicate_json_keys": {
+          "es": 0,
+          "en": 0
+        },
+        "key_set_equal": true,
+        "es_only": 0,
+        "en_only": 0,
+        "shared": 170,
+        "placeholder_mismatch_entries": 0
+      },
+      "placeholder_mismatches": []
+    }
+  },
+  "conclusion": "En ambas parejas los conjuntos de claves coinciden; no se encontraron diferencias de placeholders en las formas comparadas. PO: 276 entradas por idioma. JSON: 170 claves por idioma.",
+  "limitations": "Parser PO de extracción acotado al formato observado, no implementación gettext normativa; patrones placeholder no cubren todas las gramáticas posibles. En JSON se usó object_pairs_hook para detectar claves duplicadas. No se ejecutó ValidadorPO/Godot ni se acredita que las cadenas sean traducciones correctas."
+}

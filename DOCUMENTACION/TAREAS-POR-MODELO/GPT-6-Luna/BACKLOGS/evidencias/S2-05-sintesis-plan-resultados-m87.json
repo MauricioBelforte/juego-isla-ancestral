@@ -1,0 +1,529 @@
+{
+  "task_id": "S2-05",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Síntesis read-only del plan y resultados de testing M87; separa casos propuestos, resultados registrados históricamente y estado actual no ejecutado.",
+  "sources": {
+    "plan": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/06-Plan-Testings.md",
+      "sha256": "e558033a678cca13790e660725b75a84a0b746cdd0b615cccdebe0f94aa5ccf4"
+    },
+    "results": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md",
+      "sha256": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9"
+    },
+    "static_inventory": {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/C1-07-inventario-tests-m87.json",
+      "sha256": "14ca2195049bf41a6bcfe35c905a0f8b619039b84127e268b22fe6c6fc385eb5"
+    }
+  },
+  "counts": {
+    "plan_unique_suites": 6,
+    "result_table_rows_including_repeated_summary": 12,
+    "result_unique_suites": 6,
+    "static_test_files_from_C1_07": 8,
+    "plan_suites_missing_from_inventory": [],
+    "files_on_disk_not_in_plan_table": [
+      "test_catalogo_exhaustivo_m87.gd",
+      "test_placeholders_plurales_m87.gd"
+    ],
+    "files_on_disk_not_in_results_tables": [
+      "test_catalogo_exhaustivo_m87.gd",
+      "test_placeholders_plurales_m87.gd"
+    ],
+    "plan_explicit_cp_cases": 66,
+    "result_individual_cp_rows": 15
+  },
+  "plan_suite_rows": [
+    {
+      "file": "test_localization.gd",
+      "line": 22,
+      "text": "| Núcleo (iter. 1) | `test_localization.gd` | Carga catálogos, traducción es/en, placeholders, plurales, formato, fallback, validar_catalogos |"
+    },
+    {
+      "file": "test_localizacion_iter2.gd",
+      "line": 23,
+      "text": "| Iteración 2 | `test_localizacion_iter2.gd` | Persistencia M60, sugerencia SO, contexto gettext, cache, debug |"
+    },
+    {
+      "file": "test_localizacion_iter3.gd",
+      "line": 24,
+      "text": "| Iteración 3 | `test_localizacion_iter3.gd` | Cobertura M88 (fuentes por idioma), validación RF14 |"
+    },
+    {
+      "file": "test_localizacion_iter4.gd",
+      "line": 25,
+      "text": "| Iteración 4 | `test_localizacion_iter4.gd` | Parseo .po corrupto sin crash, placeholders mal formados, estado de catálogos RF21, plurales n=0/negativos, formatos edge |"
+    },
+    {
+      "file": "test_validador_po_m87.gd",
+      "line": 26,
+      "text": "| **Iteración 5** | `test_validador_po_m87.gd` | Validador de catálogos (reglas R1-R13 y P1-P5): bytes BOM/CRLF/UTF-8, cabecera, estructura, duplicados, plurales, convención RF20, placeholders, coherencia es↔en + auditoría de claves código↔catálogo |"
+    },
+    {
+      "file": "test_localizacion_iter6.gd",
+      "line": 27,
+      "text": "| **Iteración 6 (nueva)** | `test_localizacion_iter6.gd` | **Encaje de texto medido (expansión es→en, desborde, palabras sin espacios, truncado, estrategias), glosario de términos canónicos, re-traducción selectiva de UI y coste del HUD a 60 fps, regresión contra `ValidadorPO`/`Localization`, barrido de accesibilidad M58. 11 bloques con marcador `_fin()` + guardián anti-falso-verde con watchdog** |"
+    }
+  ],
+  "result_suite_rows": [
+    {
+      "file": "test_localization.gd",
+      "line": 12,
+      "text": "| Núcleo (iter. 1) | `test_localization.gd` | ✅ 0 fallos (exit 0) |"
+    },
+    {
+      "file": "test_localizacion_iter2.gd",
+      "line": 13,
+      "text": "| Iteración 2 | `test_localizacion_iter2.gd` | ✅ 0 fallos (exit 0) — reparada en iter. 5, ver §7 |"
+    },
+    {
+      "file": "test_localizacion_iter3.gd",
+      "line": 14,
+      "text": "| Iteración 3 | `test_localizacion_iter3.gd` | ✅ 0 fallos (exit 0) |"
+    },
+    {
+      "file": "test_localizacion_iter4.gd",
+      "line": 15,
+      "text": "| Iteración 4 | `test_localizacion_iter4.gd` | ✅ 0 fallos (exit 0) |"
+    },
+    {
+      "file": "test_validador_po_m87.gd",
+      "line": 16,
+      "text": "| Iteración 5 | `test_validador_po_m87.gd` | ✅ 0 fallos (exit 0) — ampliada en iter. 6 con el bloque I |"
+    },
+    {
+      "file": "test_localizacion_iter6.gd",
+      "line": 17,
+      "text": "| **Iteración 6 (nueva)** | `test_localizacion_iter6.gd` | ✅ **82 checks, 0 fallos (exit 0)**, 3 corridas |"
+    },
+    {
+      "file": "test_localization.gd",
+      "line": 148,
+      "text": "| `test_localization.gd` (núcleo) | ✅ 0 fallos, exit 0 | 0 |"
+    },
+    {
+      "file": "test_localizacion_iter2.gd",
+      "line": 149,
+      "text": "| `test_localizacion_iter2.gd` | ✅ 0 fallos, exit 0 | 0 |"
+    },
+    {
+      "file": "test_localizacion_iter3.gd",
+      "line": 150,
+      "text": "| `test_localizacion_iter3.gd` | ✅ 0 fallos, exit 0 | 0 |"
+    },
+    {
+      "file": "test_localizacion_iter4.gd",
+      "line": 151,
+      "text": "| `test_localizacion_iter4.gd` | ✅ 0 fallos, exit 0 | 0 |"
+    },
+    {
+      "file": "test_validador_po_m87.gd",
+      "line": 152,
+      "text": "| `test_validador_po_m87.gd` (iter. 5 + bloque I) | ✅ 0 fallos, exit 0 | 0 |"
+    },
+    {
+      "file": "test_localizacion_iter6.gd",
+      "line": 153,
+      "text": "| `test_localizacion_iter6.gd` (nueva) | ✅ **82 checks, 0 fallos, exit 0** ×3 | 0 |"
+    }
+  ],
+  "result_summary_claims": [
+    {
+      "line": 6,
+      "text": "> **Estado:** Ejecutado — **6/6 suites en verde, 0 fallos, 0 errores de script**"
+    },
+    {
+      "line": 17,
+      "text": "| **Iteración 6 (nueva)** | `test_localizacion_iter6.gd` | ✅ **82 checks, 0 fallos (exit 0)**, 3 corridas |"
+    },
+    {
+      "line": 153,
+      "text": "| `test_localizacion_iter6.gd` (nueva) | ✅ **82 checks, 0 fallos, exit 0** ×3 | 0 |"
+    },
+    {
+      "line": 306,
+      "text": "timestamps y `session id` normalizados). Las 6 suites de `scripts/localization/` siguen en verde."
+    }
+  ],
+  "coverage_groups": [
+    {
+      "group": "CP-01..CP-15: núcleo e iteraciones 1-4",
+      "plan_case_count": 15,
+      "result_case_rows": 15,
+      "recorded_support": "Resultados §2 enumera CP-01..CP-15 como ✅; CP-15 indica regresión 3/3.",
+      "status": "registrado_como_pasado_historicamente"
+    },
+    {
+      "group": "CP-16..CP-36: iteración 5 validador/auditor",
+      "plan_case_count": 21,
+      "result_case_rows": 0,
+      "recorded_support": "Resultados §7.1 documenta 8 bloques, 0 fallos y 0 errores de script; tabla bloques A-H. §8 amplía con I; CP-36 no tiene fila de resultado individual.",
+      "status": "resultado_agregado_documentado"
+    },
+    {
+      "group": "CP-37..CP-66: iteración 6",
+      "plan_case_count": 30,
+      "result_case_rows": 0,
+      "recorded_support": "Resultados §8.1-8.5: 6 suites; test_localizacion_iter6.gd 82 checks, 0 fallos, exit 0 ×3; mediciones por bloque. No hay filas CP individuales para este rango.",
+      "status": "resultado_agregado_documentado"
+    },
+    {
+      "group": "C1-C9: iteración 7",
+      "plan_case_count": 9,
+      "result_case_rows": 0,
+      "recorded_support": "Plan §7 define nueve casos. Resultados §9 registra la regresión y tres corridas deterministas del validador; no presenta matriz C1-C9 completa.",
+      "status": "resultado_parcial_documentado"
+    }
+  ],
+  "plan_case_ids": [
+    {
+      "id": "CP-01",
+      "line": 32
+    },
+    {
+      "id": "CP-02",
+      "line": 33
+    },
+    {
+      "id": "CP-03",
+      "line": 34
+    },
+    {
+      "id": "CP-04",
+      "line": 37
+    },
+    {
+      "id": "CP-05",
+      "line": 38
+    },
+    {
+      "id": "CP-06",
+      "line": 39
+    },
+    {
+      "id": "CP-07",
+      "line": 40
+    },
+    {
+      "id": "CP-08",
+      "line": 43
+    },
+    {
+      "id": "CP-09",
+      "line": 44
+    },
+    {
+      "id": "CP-10",
+      "line": 45
+    },
+    {
+      "id": "CP-11",
+      "line": 48
+    },
+    {
+      "id": "CP-12",
+      "line": 49
+    },
+    {
+      "id": "CP-13",
+      "line": 50
+    },
+    {
+      "id": "CP-14",
+      "line": 51
+    },
+    {
+      "id": "CP-15",
+      "line": 54
+    },
+    {
+      "id": "CP-16",
+      "line": 61
+    },
+    {
+      "id": "CP-17",
+      "line": 62
+    },
+    {
+      "id": "CP-18",
+      "line": 63
+    },
+    {
+      "id": "CP-19",
+      "line": 66
+    },
+    {
+      "id": "CP-20",
+      "line": 67
+    },
+    {
+      "id": "CP-21",
+      "line": 68
+    },
+    {
+      "id": "CP-22",
+      "line": 69
+    },
+    {
+      "id": "CP-23",
+      "line": 72
+    },
+    {
+      "id": "CP-24",
+      "line": 73
+    },
+    {
+      "id": "CP-25",
+      "line": 74
+    },
+    {
+      "id": "CP-26",
+      "line": 77
+    },
+    {
+      "id": "CP-27",
+      "line": 78
+    },
+    {
+      "id": "CP-28",
+      "line": 79
+    },
+    {
+      "id": "CP-29",
+      "line": 80
+    },
+    {
+      "id": "CP-30",
+      "line": 83
+    },
+    {
+      "id": "CP-31",
+      "line": 84
+    },
+    {
+      "id": "CP-32",
+      "line": 85
+    },
+    {
+      "id": "CP-33",
+      "line": 86
+    },
+    {
+      "id": "CP-34",
+      "line": 87
+    },
+    {
+      "id": "CP-35",
+      "line": 88
+    },
+    {
+      "id": "CP-36",
+      "line": 89
+    },
+    {
+      "id": "CP-37",
+      "line": 98
+    },
+    {
+      "id": "CP-38",
+      "line": 99
+    },
+    {
+      "id": "CP-39",
+      "line": 100
+    },
+    {
+      "id": "CP-40",
+      "line": 103
+    },
+    {
+      "id": "CP-41",
+      "line": 104
+    },
+    {
+      "id": "CP-42",
+      "line": 107
+    },
+    {
+      "id": "CP-43",
+      "line": 108
+    },
+    {
+      "id": "CP-44",
+      "line": 111
+    },
+    {
+      "id": "CP-45",
+      "line": 112
+    },
+    {
+      "id": "CP-46",
+      "line": 113
+    },
+    {
+      "id": "CP-47",
+      "line": 116
+    },
+    {
+      "id": "CP-48",
+      "line": 119
+    },
+    {
+      "id": "CP-49",
+      "line": 120
+    },
+    {
+      "id": "CP-50",
+      "line": 121
+    },
+    {
+      "id": "CP-51",
+      "line": 122
+    },
+    {
+      "id": "CP-52",
+      "line": 123
+    },
+    {
+      "id": "CP-53",
+      "line": 126
+    },
+    {
+      "id": "CP-54",
+      "line": 129
+    },
+    {
+      "id": "CP-55",
+      "line": 130
+    },
+    {
+      "id": "CP-56",
+      "line": 131
+    },
+    {
+      "id": "CP-57",
+      "line": 134
+    },
+    {
+      "id": "CP-58",
+      "line": 137
+    },
+    {
+      "id": "CP-59",
+      "line": 140
+    },
+    {
+      "id": "CP-60",
+      "line": 141
+    },
+    {
+      "id": "CP-61",
+      "line": 142
+    },
+    {
+      "id": "CP-62",
+      "line": 145
+    },
+    {
+      "id": "CP-63",
+      "line": 146
+    },
+    {
+      "id": "CP-64",
+      "line": 147
+    },
+    {
+      "id": "CP-65",
+      "line": 148
+    },
+    {
+      "id": "CP-66",
+      "line": 149
+    }
+  ],
+  "result_case_rows": [
+    {
+      "id": "CP-01",
+      "line": 25,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-02",
+      "line": 26,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-03",
+      "line": 27,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-04",
+      "line": 28,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-05",
+      "line": 29,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-06",
+      "line": 30,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-07",
+      "line": 31,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-08",
+      "line": 32,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-09",
+      "line": 33,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-10",
+      "line": 34,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-11",
+      "line": 35,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-12",
+      "line": 36,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-13",
+      "line": 37,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-14",
+      "line": 38,
+      "reported_pass": true
+    },
+    {
+      "id": "CP-15",
+      "line": 39,
+      "reported_pass": true
+    }
+  ],
+  "interpretation": {
+    "historical_cut": "El plan y las tablas resumen describen seis suites. El documento 07 reporta 6/6 en iteración 6 y 82 checks/0 fallos/exit 0 ×3 para test_localizacion_iter6.gd.",
+    "later_iteration": "La sección 9 documenta iteración 7, corrige regresión M53/M87 y registra tres corridas deterministas del validador; no ofrece matriz completa C1-C9.",
+    "current_inventory": "C1-07 encuentra ocho archivos test_*.gd. Dos (test_placeholders_plurales_m87.gd y test_catalogo_exhaustivo_m87.gd) no aparecen en las tablas de plan/resultados. No se infiere que pasen ni que formen parte del 6/6 histórico.",
+    "current_status": "No se ejecutaron suites durante esta síntesis; estado actual sin verificar."
+  },
+  "limitations": "Resultados históricos se reproducen como afirmaciones documentadas, no reejecutadas. Falta de fila individual no se convierte en fallo. Los dos archivos adicionales se identifican mediante C1-07 y no se les atribuye resultado."
+}

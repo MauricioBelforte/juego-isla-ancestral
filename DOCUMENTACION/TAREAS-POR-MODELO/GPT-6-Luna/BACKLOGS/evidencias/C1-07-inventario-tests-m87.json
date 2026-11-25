@@ -1,0 +1,439 @@
+{
+  "task_id": "C1-07",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Inventario estático de test_*.gd en el árbol M87 scripts/localization y clasificación sustentada en código/documentación. No ejecuta suites ni afirma que pasen.",
+  "sources": {
+    "directory": "game/isla-ancestral/scripts/localization",
+    "testing_plan": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/06-Plan-Testings.md",
+      "sha256": "e558033a678cca13790e660725b75a84a0b746cdd0b615cccdebe0f94aa5ccf4"
+    },
+    "results_doc": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md",
+      "sha256": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "file_selection": "glob test_*.gd bajo la carpeta indicada",
+    "inspection": "extends, funciones _test_*, _fin, _check, CHECKS_MINIMOS, dependencias explícitas",
+    "classification": "etiquetas no excluyentes de tipo según nombres, comentarios y dependencias visibles; solo heurística documental"
+  },
+  "counts": {
+    "files_on_disk": 8,
+    "files_extending_scene_tree": 8,
+    "files_with_named_test_functions": 7,
+    "total_named_test_functions": 42,
+    "files_with_completion_markers": 8,
+    "explicit_suite_rows_in_plan": 6
+  },
+  "plan_suite_rows": [
+    {
+      "line": 22,
+      "text": "| Núcleo (iter. 1) | `test_localization.gd` | Carga catálogos, traducción es/en, placeholders, plurales, formato, fallback, validar_catalogos |"
+    },
+    {
+      "line": 23,
+      "text": "| Iteración 2 | `test_localizacion_iter2.gd` | Persistencia M60, sugerencia SO, contexto gettext, cache, debug |"
+    },
+    {
+      "line": 24,
+      "text": "| Iteración 3 | `test_localizacion_iter3.gd` | Cobertura M88 (fuentes por idioma), validación RF14 |"
+    },
+    {
+      "line": 25,
+      "text": "| Iteración 4 | `test_localizacion_iter4.gd` | Parseo .po corrupto sin crash, placeholders mal formados, estado de catálogos RF21, plurales n=0/negativos, formatos edge |"
+    },
+    {
+      "line": 26,
+      "text": "| **Iteración 5** | `test_validador_po_m87.gd` | Validador de catálogos (reglas R1-R13 y P1-P5): bytes BOM/CRLF/UTF-8, cabecera, estructura, duplicados, plurales, convención RF20, placeholders, coherencia es↔en + auditoría de claves código↔catálogo |"
+    },
+    {
+      "line": 27,
+      "text": "| **Iteración 6 (nueva)** | `test_localizacion_iter6.gd` | **Encaje de texto medido (expansión es→en, desborde, palabras sin espacios, truncado, estrategias), glosario de términos canónicos, re-traducción selectiva de UI y coste del HUD a 60 fps, regresión contra `ValidadorPO`/`Localization`, barrido de accesibilidad M58. 11 bloques con marcador `_fin()` + guardián anti-falso-verde con watchdog** |"
+    }
+  ],
+  "plan_claims": [],
+  "files": [
+    {
+      "name": "test_catalogo_exhaustivo_m87.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_catalogo_exhaustivo_m87.gd",
+      "bytes": 11587,
+      "sha256": "25da4ae81b8ec653e4dd8b5dc38819e008507ca4eebf4843aa1b3d76ea5bc601",
+      "line_count": 275,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 36,
+      "named_test_functions": [
+        {
+          "name": "_test_catalogos_reales",
+          "line": 137
+        },
+        {
+          "name": "_test_capitulos_en_catalogo",
+          "line": 150
+        },
+        {
+          "name": "_test_recursos_reales",
+          "line": 179
+        },
+        {
+          "name": "_test_fixture_ausente",
+          "line": 195
+        },
+        {
+          "name": "_test_fixture_presente",
+          "line": 215
+        },
+        {
+          "name": "_test_fixture_formato",
+          "line": 231
+        },
+        {
+          "name": "_test_informe",
+          "line": 260
+        }
+      ],
+      "named_test_function_count": 7,
+      "completion_marker_line_count": 11,
+      "assertion_helper_call_line_count": 34,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "integration",
+        "data_validation",
+        "regression"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Exhaustividad de claves frente a recursos reales, fixtures presentes/ausentes y formato de informe."
+    },
+    {
+      "name": "test_localizacion_iter2.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_localizacion_iter2.gd",
+      "bytes": 6882,
+      "sha256": "8e4b9bebe2fb72cda9ac6d190117cff82420a0bf9688e5ad6d93a628cfca9652",
+      "line_count": 152,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 21,
+      "named_test_functions": [
+        {
+          "name": "_test_persistencia_m60",
+          "line": 76
+        },
+        {
+          "name": "_test_sugerencia_so",
+          "line": 92
+        },
+        {
+          "name": "_test_contexto_gettext",
+          "line": 103
+        },
+        {
+          "name": "_test_cache",
+          "line": 115
+        },
+        {
+          "name": "_test_sugerencias_debug",
+          "line": 140
+        }
+      ],
+      "named_test_function_count": 5,
+      "completion_marker_line_count": 6,
+      "assertion_helper_call_line_count": 23,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "integration",
+        "regression"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Persistencia M60, sugerencia SO, contexto gettext, caché y debug con servicios Localization/DataStore."
+    },
+    {
+      "name": "test_localizacion_iter3.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_localizacion_iter3.gd",
+      "bytes": 3908,
+      "sha256": "444993c6d98e9c23b546e571184f8ae4e189a3016990f1b69ea582757ccfd3ee",
+      "line_count": 99,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 12,
+      "named_test_functions": [
+        {
+          "name": "_test_cobertura_data",
+          "line": 72
+        },
+        {
+          "name": "_test_fuente_por_idioma",
+          "line": 81
+        },
+        {
+          "name": "_test_validacion_cobertura",
+          "line": 92
+        }
+      ],
+      "named_test_function_count": 3,
+      "completion_marker_line_count": 4,
+      "assertion_helper_call_line_count": 13,
+      "dependency_evidence": [
+        {
+          "line": 54,
+          "text": "var script_catalog := load(\"res://scripts/fonts/font_catalog.gd\")"
+        }
+      ],
+      "classification_tags": [
+        "integration",
+        "coverage"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Cobertura de caracteres por idioma y selección de fuentes FontCatalog (M88)."
+    },
+    {
+      "name": "test_localizacion_iter4.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+      "bytes": 7281,
+      "sha256": "41c1f35d8a9ba3291bf1c0326c20d94350c01eee645865fa5cac0e0623c8f548",
+      "line_count": 151,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 25,
+      "named_test_functions": [
+        {
+          "name": "_test_parseo_po_corrupto",
+          "line": 78
+        },
+        {
+          "name": "_test_format_text_edge_cases",
+          "line": 101
+        },
+        {
+          "name": "_test_estado_catalogos",
+          "line": 114
+        },
+        {
+          "name": "_test_plurales_numeros_fechas_edge",
+          "line": 122
+        },
+        {
+          "name": "_test_contexto_clave_compuesta",
+          "line": 138
+        }
+      ],
+      "named_test_function_count": 5,
+      "completion_marker_line_count": 6,
+      "assertion_helper_call_line_count": 26,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "component_unit",
+        "edge_cases",
+        "regression"
+      ],
+      "classification_confidence": "medium",
+      "classification_evidence": "Parseo .po corrupto, placeholders, estado catálogos, plurales/fechas/números edge y contexto de clave."
+    },
+    {
+      "name": "test_localizacion_iter6.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_localizacion_iter6.gd",
+      "bytes": 26000,
+      "sha256": "28c92565271545a4988a77bb97b5b9be692189179bd6c392060ca809933d84cf",
+      "line_count": 552,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": null,
+      "named_test_functions": [],
+      "named_test_function_count": 0,
+      "completion_marker_line_count": 16,
+      "assertion_helper_call_line_count": 89,
+      "dependency_evidence": [
+        {
+          "line": 109,
+          "text": "var f_var: Font = load(\"res://assets/fonts/Nunito-Variable.ttf\")"
+        },
+        {
+          "line": 113,
+          "text": "var f_reg: Font = load(\"res://assets/fonts/Nunito-Regular.ttf\")"
+        }
+      ],
+      "classification_tags": [
+        "integration",
+        "performance",
+        "regression"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Medición ThemeDB, servicio Localization real, re-traducción UI, glosario, escala M58 y coste; bloques directos en _run()."
+    },
+    {
+      "name": "test_localization.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_localization.gd",
+      "bytes": 5423,
+      "sha256": "dfcd840566b0ba83df2b82662073d4e17a728a5b3d2bb43c0341181e2a074c15",
+      "line_count": 134,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 23,
+      "named_test_functions": [
+        {
+          "name": "_test_catalogos",
+          "line": 74
+        },
+        {
+          "name": "_test_traduccion_es",
+          "line": 90
+        },
+        {
+          "name": "_test_traduccion_en",
+          "line": 97
+        },
+        {
+          "name": "_test_placeholders_y_plurales",
+          "line": 105
+        },
+        {
+          "name": "_test_formato",
+          "line": 117
+        },
+        {
+          "name": "_test_fallback",
+          "line": 127
+        }
+      ],
+      "named_test_function_count": 6,
+      "completion_marker_line_count": 7,
+      "assertion_helper_call_line_count": 24,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "component_unit",
+        "catalog_behavior"
+      ],
+      "classification_confidence": "medium",
+      "classification_evidence": "Carga de catálogos, traducción es/en, placeholders/plurales, formato y fallback; test de componente/autoload."
+    },
+    {
+      "name": "test_placeholders_plurales_m87.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_placeholders_plurales_m87.gd",
+      "bytes": 12683,
+      "sha256": "b1b5287ac9d79816e491bbfd4392cad1b0ec98e22e75d3c21a6f333c833e9b68",
+      "line_count": 296,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 46,
+      "named_test_functions": [
+        {
+          "name": "_test_catalogos_reales",
+          "line": 133
+        },
+        {
+          "name": "_test_r14_falta",
+          "line": 154
+        },
+        {
+          "name": "_test_r14_contiguo",
+          "line": 170
+        },
+        {
+          "name": "_test_r15_formas",
+          "line": 182
+        },
+        {
+          "name": "_test_real_plural_formas",
+          "line": 200
+        },
+        {
+          "name": "_test_llamadas_printf",
+          "line": 230
+        },
+        {
+          "name": "_test_resolucion_plural",
+          "line": 267
+        }
+      ],
+      "named_test_function_count": 7,
+      "completion_marker_line_count": 8,
+      "assertion_helper_call_line_count": 41,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "unit",
+        "integration",
+        "regression"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Reglas R14/R15 y compatibilidad placeholders llamada-catálogo con fixtures y plural real."
+    },
+    {
+      "name": "test_validador_po_m87.gd",
+      "path": "game/isla-ancestral/scripts/localization/test_validador_po_m87.gd",
+      "bytes": 21197,
+      "sha256": "2857b7de83160082a60953c0d278696f6fc6d5a457643df7ebd8a432165a7695",
+      "line_count": 378,
+      "extends_scene_tree": true,
+      "minimum_checks_declared": 87,
+      "named_test_functions": [
+        {
+          "name": "_test_catalogos_reales",
+          "line": 145
+        },
+        {
+          "name": "_test_reglas_bytes",
+          "line": 164
+        },
+        {
+          "name": "_test_cabecera_y_estructura",
+          "line": 182
+        },
+        {
+          "name": "_test_plurales_y_convencion",
+          "line": 198
+        },
+        {
+          "name": "_test_placeholders",
+          "line": 213
+        },
+        {
+          "name": "_test_coherencia_idiomas",
+          "line": 224
+        },
+        {
+          "name": "_test_auditor_claves",
+          "line": 247
+        },
+        {
+          "name": "_test_unidades",
+          "line": 306
+        },
+        {
+          "name": "_test_exencion_p5",
+          "line": 330
+        }
+      ],
+      "named_test_function_count": 9,
+      "completion_marker_line_count": 10,
+      "assertion_helper_call_line_count": 80,
+      "dependency_evidence": [],
+      "classification_tags": [
+        "unit",
+        "integration",
+        "regression"
+      ],
+      "classification_confidence": "high",
+      "classification_evidence": "Reglas de ValidadorPO con fixtures sintéticos y catálogos reales; auditoría de claves contra scripts."
+    }
+  ],
+  "classification_summary": {
+    "unit_or_component_unit": [
+      "test_localizacion_iter4.gd",
+      "test_localization.gd",
+      "test_placeholders_plurales_m87.gd",
+      "test_validador_po_m87.gd"
+    ],
+    "integration": [
+      "test_catalogo_exhaustivo_m87.gd",
+      "test_localizacion_iter2.gd",
+      "test_localizacion_iter3.gd",
+      "test_localizacion_iter6.gd",
+      "test_placeholders_plurales_m87.gd",
+      "test_validador_po_m87.gd"
+    ],
+    "regression": [
+      "test_catalogo_exhaustivo_m87.gd",
+      "test_localizacion_iter2.gd",
+      "test_localizacion_iter4.gd",
+      "test_localizacion_iter6.gd",
+      "test_placeholders_plurales_m87.gd",
+      "test_validador_po_m87.gd"
+    ]
+  },
+  "limitations": "Clasifica intención/cobertura aparente, no aislamiento ni ejecución exitosa. El plan enumera seis suites y el patrón físico encuentra ocho scripts; esto se presenta como diferencia entre lista del plan y archivos, sin inferir cuántos se ejecutan hoy. test_localizacion_iter6.gd tiene bloques en _run() sin funciones _test_* con nombre propio."
+}

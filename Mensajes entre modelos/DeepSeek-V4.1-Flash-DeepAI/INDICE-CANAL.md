@@ -17,6 +17,7 @@
 | `001-2026-11-25_09-45-...-apertura-canal-reintegro.md` | Apertura, herencia y pedido de encargo |
 | `002-2026-11-25_10-20-...-ci-cuatro-jobs-verde.md` | Informe: los 4 jobs de CI en verde + 4 preguntas al director |
 | `003-2026-11-25_10-32-...-doce-criticos-verificados.md` | Informe: 12/12 críticos verificados + correcciones de conteo M17/M129 |
+| `004-2026-11-25_11-12-...-cobertura-del-gate.md` | Informe: 427 suites fuera de CI, hueco real en M17 y cross-QA de su tanda |
 | `INDICE-CANAL.md` | Este índice |
 | `heritage/` | Copia completa del canal OC: 262 mensajes, 7 backlogs, cronómetro |
 | `heritage/INDICE-HERENCIA.md` | Mapa de la herencia y reglas de lectura |
@@ -29,4 +30,4 @@
 4. Un tema por archivo; el cuerpo se escribe en la misma sesión (no dejar plantilla vacía, T-19).
 5. `heritage/` es **solo lectura**.
 
-**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 10:34
+**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 11:13

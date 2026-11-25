@@ -45,15 +45,20 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
 
 ### Bloque 3 — Post-críticos (abierto)
 
-- [ ] M17: **31** `[ ]` reales hoy (el backlog decía 33). Casi todos UI/arte/audio/navmesh y
-  cross-module; requieren runtime con cámara y visión. Prioridad: HUD de modo + fantasmas.
+- [~] M17: **NO es mío** — reclamado por minimax-m3-1-flash el 2026-11-25 (`ESTADO-PARALELO`,
+  tanda P4 almacenamiento + HUD de categorías). Quedan 31 `[ ]` pero pasan a su cola (§21.4).
+  Mi trabajo ahí es cross-QA: verificado hoy 33/0 almacenamiento, 40/0 reglas, 23/0
+  persistencia, 36/0 circulación, 44/0 validación, 24/0 categorías, 22/0 HUD categorías.
 - [x] M129: los "54 ítems" eran el conteo previo al cierre v3 del 2026-11-06; el
   `05-Checklist.md` de M129 hoy tiene **0 pendientes** (1 `[?]` de render 3D, dueño Hy4).
 
 ### Bloque 4 — Cola 1-181 (heredada)
 
 - 101 ítems `[x]` (cerrados; ver `01-Backlog-Cola-Activa.md`)
-- [ ] **102 — BUG-069**: verificar refs de los 8 módulos ajenos (GO parcial en el 263)
+- [x] **102 — BUG-069**: medido y documentado el 2026-11-25 → `BACKLOGS/evidencias/BUG-069-estado-2026-11-25.md`
+  (117 autoloads, 254 aristas, 1 SCC `DataStore`↔`SaveManager`, 10 refs A2, 0 hallazgos nuevos).
+  Retirada la entrada obsoleta `A1|ThemeService,UIManager` de `PERMITIDOS` → auditor exit 0.
+  [ ] queda el mediador de guardado (ruta de perfil, necesita prueba de runtime con 2 perfiles).
 
 ## REGISTRO DE TANDAS
 
@@ -85,6 +90,21 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
   El 2447 lo consumió otro agente mientras corría la tanda.
 - Reporte al director: mensaje `003` del canal.
 
+### Tanda 2026-11-25 11:11 — cobertura del gate
+
+- Medido: **524** suites en disco, **101** en `quality.yml`, **427** fuera. Herramienta nueva
+  `tools/quality/auditar_cobertura_suites.py` (report + `--check` de rutas rotas del workflow).
+- Barrido de 40 suites de `tests/` fuera de CI: **0 rojas, 0 timeouts** (timeout 120 s por suite).
+  El único rojo de la zona, `tests/test_m17_categorias.gd` (24/3), era de M17 y minimax-m3-1-flash
+  lo cerró honestamente en la misma hora implementando `filas_categorias` → 24/0 a las 11:10.
+  Cross-QA de su tanda completa, §21.8: coincide con lo reportado.
+- BUG-069: documento de estado medido + entrada obsoleta de la allowlist retirada (audit exit 0).
+- **Lección de arnés:** `Start-Process -RedirectStandardOutput` devuelve **exit codes falsos** en
+  esta máquina (marcó rojas suites que dan 0). Para medir suites: `& godot ... ; $LASTEXITCODE`.
+- **Log creado: 2451** (`Logs/2451-cobertura-del-gate-427-suites-fuera-de-ci_2026-11-25_11-11-00.md`).
+- Reporte al director: mensaje `004` del canal. Esperando respuesta a 2 preguntas
+  (registrar suites M17 en `quality.yml`; sumar el paso de cobertura al CI).
+
 ## ÍNDICE DE ARCHIVOS
 
 | Archivo | Contenido | Estado |
@@ -95,6 +115,7 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
 | `04-Backlog-Repoblacion-V3.md` | Ítems reales de `05-Checklist`: M62/M15/M147/M158 | Mixto |
 | `02-Backlog-Bloques-Originales.md` | Bloques A-Z + W2 (casi todos `[x]`) | Cerrado |
 | `00-Backlog-Original-PreSplit.md` | MASTER original (738 líneas, pre-split del 4 nov) | Archivo |
+| `evidencias/BUG-069-estado-2026-11-25.md` | Grafo de servicios medido (A1/A2) para BUG-069 | Activo |
 
 ## REGLAS
 
@@ -102,10 +123,10 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
 2. **No editar** el backlog de otro modelo; el canal OC queda histórico.
 3. **Un módulo por vez** (§21.4); reserva `🔵` en `CHECKLIST-GLOBAL`.
 4. **Política de duplicados 052** vigente.
-5. **Logs:** pool global `Logs/NUMEROS_DISPONIBLES.txt` (último consumido propio: **2448**).
+5. **Logs:** pool global `Logs/NUMEROS_DISPONIBLES.txt` (último consumido propio: **2451**).
 
 ## MANTENIMIENTO
 
 La directora agrega tandas nuevas como `05-Backlog-<descripción>.md` y actualiza este índice en cada ronda.
 
-**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 10:33
+**Firma:** Deepseek V4.1 Flash-DeepAI · DeepAI · 2026-11-25 11:14

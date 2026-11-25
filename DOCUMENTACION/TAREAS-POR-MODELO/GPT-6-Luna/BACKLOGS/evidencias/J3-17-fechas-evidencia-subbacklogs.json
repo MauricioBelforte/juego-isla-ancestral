@@ -1,0 +1,188 @@
+{
+  "task_id": "J3-17",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Auditoría estricta del formato de captured_at/date en el dataset JSON propio C1-14, más contraste read-only con encabezados Fecha de las ocho fuentes declaradas. Sin normalizar ni modificar ningún valor.",
+  "source": {
+    "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/C1-14-metadatos-subbacklogs.json",
+    "sha256": "53ec09c48d141ba6a61a6eb272c5e443d2b57d2252e66aa0faba5a43f87717df",
+    "source_documents": 8
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "strict_date_pattern": "^\\d{4}-\\d{2}-\\d{2}$",
+    "calendar_validation": "datetime.date.fromisoformat",
+    "normalization": "ninguna; el JSON se evalúa literalmente",
+    "provenance_check": "lee el campo Fecha y compara SHA-256 frente a snapshot C1-14; reporta igualdad literal por separado"
+  },
+  "captured_at": {
+    "raw_value": "2026-11-25",
+    "valid_iso_date": true,
+    "parsed": "2026-11-25"
+  },
+  "date_fields": [
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/02-Backlog-Sintesis-y-CrossDoc.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/03-Backlog-Estructuras-y-JSON.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/05-Backlog-Calibracion-y-Consistencia.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/06-Validacion-y-Pruebas.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/07-Localizacion-y-Recuperacion.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/08-Informes-y-Coordinacion.md",
+      "field": "date",
+      "raw_value": "** 2026-11-25",
+      "strict_iso_validation": {
+        "raw_value": "** 2026-11-25",
+        "valid_iso_date": false,
+        "reason": "no coincide exactamente con YYYY-MM-DD"
+      }
+    }
+  ],
+  "source_header_checks": [
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/02-Backlog-Sintesis-y-CrossDoc.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/03-Backlog-Estructuras-y-JSON.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/05-Backlog-Calibracion-y-Consistencia.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/06-Validacion-y-Pruebas.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/07-Localizacion-y-Recuperacion.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/08-Informes-y-Coordinacion.md",
+      "json_date_raw": "** 2026-11-25",
+      "source_header_value": "2026-11-25",
+      "source_header_valid_iso": true,
+      "raw_json_equals_header": false,
+      "source_hash_matches_snapshot": true
+    }
+  ],
+  "summary": {
+    "captured_at": {
+      "raw_value": "2026-11-25",
+      "valid_iso_date": true,
+      "parsed": "2026-11-25"
+    },
+    "date_fields_total": 8,
+    "json_date_strict_valid": 0,
+    "json_date_strict_invalid": 8,
+    "all_date_fields_have_same_raw_value": true,
+    "all_source_headers_iso_valid": true,
+    "source_hashes_match_snapshot": true,
+    "json_date_matches_header_raw": 0,
+    "prefix_observed": "** "
+  },
+  "conclusion": "captured_at cumple ISO YYYY-MM-DD. Los ocho campos date del JSON fallan la regla estricta porque conservan el prefijo literal \"** \". En las ocho fuentes los encabezados Fecha son fechas ISO válidas y los hashes coinciden con el snapshot C1-14, pero ningún valor date del JSON coincide literalmente con su encabezado. El resultado señala una discrepancia de extracción/documentación dentro del dataset propio, no fechas de origen inválidas.",
+  "limitations": "No se eliminó el prefijo ni se reparó C1-14. El contraste solo verifica el encabezado Fecha y la huella de bytes; no mide semántica temporal, zona horaria ni hora de modificación real."
+}

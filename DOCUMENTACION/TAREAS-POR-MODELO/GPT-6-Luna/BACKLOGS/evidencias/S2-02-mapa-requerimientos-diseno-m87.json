@@ -1,0 +1,1036 @@
+{
+  "task_id": "S2-02",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Comparación documental 01-Requerimientos.md vs 03-Diseno.md de M87; no evalúa código ni marca requisitos implementados.",
+  "sources": {
+    "requirements": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/01-Requerimientos.md",
+      "sha256": "6a950f2e1aeeb22fc1cce3cb7e5c3c89cc29e057af67a4a8482441b5dbc0c0ea"
+    },
+    "design": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "sha256": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "extraction": "filas RF/RN y citas exactas archivo:línea",
+    "statuses": "mapeo documental explícito, parcial, parcial con desviación/deuda/riesgo, alto nivel o sin mapeo explícito",
+    "limit": "Que el diseño mencione un requisito no prueba implementación; ausencia en 03 no prueba que no exista en el producto."
+  },
+  "counts": {
+    "total": 36,
+    "RF": 24,
+    "RN": 12,
+    "by_mapping_status": {
+      "mapeado_explicito": 20,
+      "parcial_con_desviacion": 3,
+      "parcial": 2,
+      "parcial_con_deuda": 2,
+      "mapeo_alto_nivel": 4,
+      "sin_mapeo_explicito": 2,
+      "parcial_con_riesgo": 2,
+      "mapeado_parcial": 1
+    }
+  },
+  "requirements": [
+    {
+      "id": "RF1",
+      "line": 59,
+      "title": "Idioma por defecto",
+      "requirement": "Español al primer inicio (idioma nativo del juego)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 538,
+          "text": "1. `Localization._ready()` lee el idioma guardado de la configuración (M60)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 539,
+          "text": "2. Si no hay guardado: idioma por defecto español; si el SO sugiere otro idioma soportado, se marca la sugerencia en la pantalla de bienvenida."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 541,
+          "text": "4. `TranslationServer.set_locale(idioma)` se aplica antes de instanciar la UI principal."
+        }
+      ],
+      "analysis": "Arranque define español por defecto, sugerencia y locale previo a UI."
+    },
+    {
+      "id": "RF2",
+      "line": 60,
+      "title": "Seleccionar idioma",
+      "requirement": "Selector de idioma en configuración (español, inglés)",
+      "mapping_status": "parcial_con_desviacion",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 105,
+          "text": "# 2.3 Selector de idioma (configuración, M53/M90)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 108,
+          "text": "- Al seleccionar: `Localization.set_locale(locale)` -> cambio en vivo + persistencia (M60)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 110,
+          "text": "- ⚠️ **Desviación real (verificada iter. 5):** el diseño decía \"nunca se cambia el idioma sin consentimiento explícito\", pero el código **sí lo hace**: `_restaurar_locale_guardado()` aplica la sugerencia del SO (`_aplicar_locale`) **y la persiste** (`_persistir_locale`) en el primer arranque, sin esperar confirmación; la UI de confirmación pertenece a M53 y está pendiente. Queda registrado como desviación consciente y dependiente de M53: cuando M53 agregue el diálogo, la sugerencia debería quedar **solo preseleccionada** hasta que el jugador confirme."
+        }
+      ],
+      "analysis": "Selector descrito; la sugerencia SO se aplica/persiste antes de confirmación."
+    },
+    {
+      "id": "RF3",
+      "line": 61,
+      "title": "Cambiar idioma en vivo",
+      "requirement": "El cambio se aplica de inmediato a toda la UI abierta sin reiniciar",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 66,
+          "text": "2. **Aplicar idioma:** `set_locale()` valida el locale contra `LOCALES_SOPORTADOS`, aplica `TranslationServer.set_locale()`, limpia la cache, persiste (M60) y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 585,
+          "text": "1. El jugador selecciona otro idioma en configuración."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 586,
+          "text": "2. `Localization.set_locale(nuevo)` valida, aplica `TranslationServer.set_locale`, limpia cache, persiste el cambio y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 587,
+          "text": "3. La UI suscrita re-traduce sus controls (labels, botones, tooltips) con sus claves; los paneles que muestran contenido dinámico (inventario, misiones) se refrescan."
+        }
+      ],
+      "analysis": "Cambio vivo, señal y retraducción de UI descritos."
+    },
+    {
+      "id": "RF4",
+      "line": 62,
+      "title": "Persistir idioma",
+      "requirement": "La elección se guarda en la configuración del jugador (M60)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 66,
+          "text": "2. **Aplicar idioma:** `set_locale()` valida el locale contra `LOCALES_SOPORTADOS`, aplica `TranslationServer.set_locale()`, limpia la cache, persiste (M60) y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 538,
+          "text": "1. `Localization._ready()` lee el idioma guardado de la configuración (M60)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 586,
+          "text": "2. `Localization.set_locale(nuevo)` valida, aplica `TranslationServer.set_locale`, limpia cache, persiste el cambio y emite `locale_changed`."
+        }
+      ],
+      "analysis": "Persistencia de idioma por M60 descrita."
+    },
+    {
+      "id": "RF5",
+      "line": 63,
+      "title": "Cargar catálogo",
+      "requirement": "Cargar el catálogo `.po` del idioma activo al iniciar",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 65,
+          "text": "1. **Cargar catálogos:** en `_ready()` recorre `LOCALES_SOPORTADOS`, parsea cada `.po` con `_parse_po()` (parser propio, tolerante a catálogos corruptos) y registra una `Translation` construida con `Translation.new()` + `add_message()` por clave, antes de `TranslationServer.add_translation()`. **No usa `load()` sobre el `.po`** (corrección iter. 5)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 538,
+          "text": "1. `Localization._ready()` lee el idioma guardado de la configuración (M60)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 540,
+          "text": "3. Se cargan los catálogos de los idiomas soportados (o se precargaron en la pantalla de carga, M63)."
+        }
+      ],
+      "analysis": "Carga/parsing de catálogos al inicio."
+    },
+    {
+      "id": "RF6",
+      "line": 64,
+      "title": "Precargar catálogos",
+      "requirement": "Precargar los catálogos de los idiomas soportados para cambio instantáneo",
+      "mapping_status": "parcial",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 65,
+          "text": "1. **Cargar catálogos:** en `_ready()` recorre `LOCALES_SOPORTADOS`, parsea cada `.po` con `_parse_po()` (parser propio, tolerante a catálogos corruptos) y registra una `Translation` construida con `Translation.new()` + `add_message()` por clave, antes de `TranslationServer.add_translation()`. **No usa `load()` sobre el `.po`** (corrección iter. 5)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 540,
+          "text": "3. Se cargan los catálogos de los idiomas soportados (o se precargaron en la pantalla de carga, M63)."
+        }
+      ],
+      "analysis": "Carga de locales sí; precarga instantánea queda como alternativa no definida."
+    },
+    {
+      "id": "RF7",
+      "line": 65,
+      "title": "Traducir clave",
+      "requirement": "`Localization.tr_key(module, section, key)` devuelve el texto localizado",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 16,
+          "text": "│   ├── Señal: locale_changed(locale)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "analysis": "API tr_key documentada."
+    },
+    {
+      "id": "RF8",
+      "line": 66,
+      "title": "Placeholders",
+      "requirement": "Textos con `{nombre}` o `{cantidad}` reemplazables dinámicamente",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 169,
+          "text": "3. **Placeholders:** `%s`/`%d`/`%f` se resuelven en el llamador: `_t(\"CLAVE\") % args` (ej: `SETTINGS.DESCARTAR_MENSAJE`)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 593,
+          "text": "1. Catálogo: `msgid \"DIALOGOS.ENTREGA\"` / `msgstr \"Recibí {cantidad} de {objeto}.\"`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 595,
+          "text": "3. `format_text()` reemplaza `{cantidad}` y `{objeto}` iterando `params` con `String.replace()` (**no** con el patrón `\\{\\w+\\}`: corrección iter. 5). Antes cuenta llaves y, si no coinciden, deja el texto literal con un warning de desarrollo; las claves sin valor en `params` quedan literales y emiten warning."
+        }
+      ],
+      "analysis": "format_text y placeholders descritos."
+    },
+    {
+      "id": "RF9",
+      "line": 67,
+      "title": "Plurales",
+      "requirement": "Formas singular/plural según idioma y cantidad (msgid_plural)",
+      "mapping_status": "parcial_con_deuda",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 599,
+          "text": "1. Catálogo declara `msgid_plural` y `msgstr[0]`/`msgstr[1]`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 602,
+          "text": "3. `format_text()` inyecta `{n}` si el texto lo declara."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 601,
+          "text": "- ⚠️ La forma se elige con `_indice_plural()`, que **hardcodea** la regla es/en; **no** lee `Plural-Forms` de la cabecera del `.po`. Ver `02-Analisis.md` §1.5."
+        }
+      ],
+      "analysis": "Plural descrito, pero regla es/en hardcodeada y no lee Plural-Forms."
+    },
+    {
+      "id": "RF10",
+      "line": 68,
+      "title": "Fechas localizadas",
+      "requirement": "Formato de fecha según idioma (d/m/Y vs m/d/Y)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 68,
+          "text": "4. **Formatear:** delega números, fechas y hora en `LocaleUtils` según el idioma activo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 606,
+          "text": "1. `LocaleUtils` mantiene tablas por idioma: separador decimal, separador de miles, orden de fecha, reloj 12h/24h."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 608,
+          "text": "3. `format_date(datetime_dict)` -> español \"17/08/2026\" / inglés \"08/17/2026\"."
+        }
+      ],
+      "analysis": "LocaleUtils y formatos de fecha descritos."
+    },
+    {
+      "id": "RF11",
+      "line": 69,
+      "title": "Números localizados",
+      "requirement": "Separadores decimales y de miles según idioma",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 68,
+          "text": "4. **Formatear:** delega números, fechas y hora en `LocaleUtils` según el idioma activo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 606,
+          "text": "1. `LocaleUtils` mantiene tablas por idioma: separador decimal, separador de miles, orden de fecha, reloj 12h/24h."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 607,
+          "text": "2. `format_number(1234.56)` -> español \"1.234,56\" / inglés \"1,234.56\"."
+        }
+      ],
+      "analysis": "Separadores numéricos por locale descritos."
+    },
+    {
+      "id": "RF12",
+      "line": 70,
+      "title": "Fallback de clave",
+      "requirement": "Clave ausente en el idioma activo se muestra en español",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 27,
+          "text": "│   └── Fallback: clave -> es.po -> clave literal"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "analysis": "Fallback a español y luego clave literal."
+    },
+    {
+      "id": "RF13",
+      "line": 71,
+      "title": "Fallback de catálogo",
+      "requirement": "Catálogo ausente o corrupto no impide arrancar el juego",
+      "mapping_status": "parcial",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 65,
+          "text": "1. **Cargar catálogos:** en `_ready()` recorre `LOCALES_SOPORTADOS`, parsea cada `.po` con `_parse_po()` (parser propio, tolerante a catálogos corruptos) y registra una `Translation` construida con `Translation.new()` + `add_message()` por clave, antes de `TranslationServer.add_translation()`. **No usa `load()` sobre el `.po`** (corrección iter. 5)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "analysis": "Parser tolerante y fallback descritos, pero falta contrato completo si todos los catálogos faltan/corrompen."
+    },
+    {
+      "id": "RF14",
+      "line": 72,
+      "title": "Detección de idioma del sistema",
+      "requirement": "Sugerir el idioma del SO (si está soportado) en el primer arranque, con confirmación",
+      "mapping_status": "parcial_con_desviacion",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 108,
+          "text": "- Al seleccionar: `Localization.set_locale(locale)` -> cambio en vivo + persistencia (M60)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 110,
+          "text": "- ⚠️ **Desviación real (verificada iter. 5):** el diseño decía \"nunca se cambia el idioma sin consentimiento explícito\", pero el código **sí lo hace**: `_restaurar_locale_guardado()` aplica la sugerencia del SO (`_aplicar_locale`) **y la persiste** (`_persistir_locale`) en el primer arranque, sin esperar confirmación; la UI de confirmación pertenece a M53 y está pendiente. Queda registrado como desviación consciente y dependiente de M53: cuando M53 agregue el diálogo, la sugerencia debería quedar **solo preseleccionada** hasta que el jugador confirme."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 539,
+          "text": "2. Si no hay guardado: idioma por defecto español; si el SO sugiere otro idioma soportado, se marca la sugerencia en la pantalla de bienvenida."
+        }
+      ],
+      "analysis": "Sugerencia SO existe; diseño registra aplicación/persistencia sin consentimiento."
+    },
+    {
+      "id": "RF15",
+      "line": 73,
+      "title": "Catálogo español",
+      "requirement": "`es.po` completo y fuente de verdad (msgid = clave, msgstr = texto en español)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 44,
+          "text": "│   ├── es.po    (fuente de verdad, español)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 71,
+          "text": "# 2.2 Catálogos .po (res://locales/)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 101,
+          "text": "- En `es.po` (fuente de verdad) el `msgstr` reproduce el texto español final."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 102,
+          "text": "- En `en.po` cada clave traducida debe existir; mientras una no tenga traducción, su `msgstr` se deja con el texto español (fallback natural hasta traducir)."
+        }
+      ],
+      "analysis": "es.po como fuente de verdad descrito."
+    },
+    {
+      "id": "RF16",
+      "line": 74,
+      "title": "Catálogo inglés",
+      "requirement": "`en.po` con todas las claves traducidas",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 71,
+          "text": "# 2.2 Catálogos .po (res://locales/)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 102,
+          "text": "- En `en.po` cada clave traducida debe existir; mientras una no tenga traducción, su `msgstr` se deja con el texto español (fallback natural hasta traducir)."
+        }
+      ],
+      "analysis": "en.po y paridad de claves descritos."
+    },
+    {
+      "id": "RF17",
+      "line": 75,
+      "title": "Diálogos localizados",
+      "requirement": "M21 resuelve líneas y opciones a través de claves de localización",
+      "mapping_status": "mapeo_alto_nivel",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 47,
+          "text": "├── M21 Diálogos    -> líneas y opciones traducidas + placeholders"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 57,
+          "text": "La arquitectura sigue la regla de modularidad del proyecto: el `LocalizationManager` es la única capa que conoce el motor de traducción (TranslationServer) y los catálogos; la UI (M53) y los sistemas de texto (M21, M44) solo llaman a sus funciones expuestas, sin acoplarse a `.po` ni a detalles de gettext."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 588,
+          "text": "4. Los diálogos activos (M21) finalizan la línea actual y continúan en el idioma nuevo; un diálogo pausado se reinicia desde su inicio (decisión para evitar textos mixtos)."
+        }
+      ],
+      "analysis": "M21 nombrado; transición de diálogo descrita sin contrato de cada opción."
+    },
+    {
+      "id": "RF18",
+      "line": 76,
+      "title": "Subtítulos localizados",
+      "requirement": "M44 muestra subtítulos en el idioma activo",
+      "mapping_status": "mapeo_alto_nivel",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 48,
+          "text": "├── M44 Subtítulos  -> texto visible en idioma activo"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 589,
+          "text": "5. Los subtítulos (M44) en curso se re-traducen en la siguiente aparición."
+        }
+      ],
+      "analysis": "M44/subtítulos nombrados en alto nivel."
+    },
+    {
+      "id": "RF19",
+      "line": 77,
+      "title": "UI localizada",
+      "requirement": "M53 usa claves de localización en todos los controles visibles",
+      "mapping_status": "mapeo_alto_nivel",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 48,
+          "text": "├── M44 Subtítulos  -> texto visible en idioma activo"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 57,
+          "text": "La arquitectura sigue la regla de modularidad del proyecto: el `LocalizationManager` es la única capa que conoce el motor de traducción (TranslationServer) y los catálogos; la UI (M53) y los sistemas de texto (M21, M44) solo llaman a sus funciones expuestas, sin acoplarse a `.po` ni a detalles de gettext."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 105,
+          "text": "# 2.3 Selector de idioma (configuración, M53/M90)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 108,
+          "text": "- Al seleccionar: `Localization.set_locale(locale)` -> cambio en vivo + persistencia (M60)."
+        }
+      ],
+      "analysis": "UI M53/selector nombrados; cobertura completa delegada."
+    },
+    {
+      "id": "RF20",
+      "line": 78,
+      "title": "Convención de claves",
+      "requirement": "Prefijo `MODULO.SECCION.CLAVE` (UPPER_SNAKE) en todo el proyecto",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 113,
+          "text": "# 2.4 Convenciones de claves"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 131,
+          "text": "- UPPER_SNAKE obligatorio; los nombres propios conservan la ortografía original del idioma fuente."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 132,
+          "text": "- Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 165,
+          "text": "## 2.4.2 Reglas de creación de claves (vigentes)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 168,
+          "text": "2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext."
+        }
+      ],
+      "analysis": "MODULO.SECCION.CLAVE y UPPER_SNAKE descritos."
+    },
+    {
+      "id": "RF21",
+      "line": 79,
+      "title": "Validación de catálogos",
+      "requirement": "Script que detecta claves faltantes, sobrantes y errores de formato `.po`",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 33,
+          "text": "│   ├── Bytes: BOM (§28), CRLF (RN10), UTF-8 válido"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 34,
+          "text": "│   ├── Cabecera: Content-Type / Language / Plural-Forms"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 35,
+          "text": "│   ├── Estructura: msgid↔msgstr, plurales desde 0, duplicados, sintaxis"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 36,
+          "text": "│   ├── Convención de claves (RF20) con excepciones documentadas"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 37,
+          "text": "│   ├── Coherencia entre idiomas: faltantes, placeholders, sin traducir"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 38,
+          "text": "│   └── Reglas R1-R13 (un catálogo) y P1-P5 (par fuente↔traducción)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 39,
+          "text": "├── AuditorClaves (class_name, dev/CI — iter. 5)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 40,
+          "text": "│   ├── Claves usadas en código y ausentes del catálogo"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 41,
+          "text": "│   ├── Claves del catálogo sin uso (huérfanas) y por prefijo dinámico"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 42,
+          "text": "│   └── Veredicto sobre código de producción (los probes de test no cuentan)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 69,
+          "text": "5. **Validar:** `validar_catalogos()` y `obtener_estado_catalogos()` reportan faltantes/vacías en runtime; `claves_faltantes()` (iter. 5) lista lo que el juego pidió y no existía, con **un aviso por clave** (deduplicado). La validación profunda de archivos vive en `ValidadorPO` y el inventario código↔catálogo en `AuditorClaves`, ambos usables desde un script headless de CI."
+        }
+      ],
+      "analysis": "ValidadorPO, AuditorClaves y validación runtime descritos."
+    },
+    {
+      "id": "RF22",
+      "line": 80,
+      "title": "Señal de cambio de idioma",
+      "requirement": "Señal `locale_changed` para que la UI suscrita se re-traduzca",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 16,
+          "text": "│   ├── Señal: locale_changed(locale)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 66,
+          "text": "2. **Aplicar idioma:** `set_locale()` valida el locale contra `LOCALES_SOPORTADOS`, aplica `TranslationServer.set_locale()`, limpia la cache, persiste (M60) y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 586,
+          "text": "2. `Localization.set_locale(nuevo)` valida, aplica `TranslationServer.set_locale`, limpia cache, persiste el cambio y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 587,
+          "text": "3. La UI suscrita re-traduce sus controls (labels, botones, tooltips) con sus claves; los paneles que muestran contenido dinámico (inventario, misiones) se refrescan."
+        }
+      ],
+      "analysis": "locale_changed declarada y emitida."
+    },
+    {
+      "id": "RF23",
+      "line": 81,
+      "title": "Idiomas en su propio idioma",
+      "requirement": "El selector muestra \"Español\" y \"English\" (nombre nativo de cada idioma)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 31,
+          "text": "│   └── Nombres nativos de idiomas (\"Español\", \"English\")"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 105,
+          "text": "# 2.3 Selector de idioma (configuración, M53/M90)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 107,
+          "text": "- Lista horizontal de opciones o dropdown con los idiomas soportados, mostrados con su **nombre nativo** (\"Español\", \"English\")."
+        }
+      ],
+      "analysis": "Nombres nativos en selector."
+    },
+    {
+      "id": "RF24",
+      "line": 82,
+      "title": "Contexto desambiguante",
+      "requirement": "Entradas con contexto en `.po` para términos que cambian según uso",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 22,
+          "text": "│   │   ├── tr_ctx(contexto, module, section, key, params)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 76,
+          "text": "#. Contexto para el traductor (opcional)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 132,
+          "text": "- Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 168,
+          "text": "2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext."
+        }
+      ],
+      "analysis": "tr_ctx/contexto gettext como desambiguación."
+    },
+    {
+      "id": "RN1",
+      "line": 88,
+      "title": "Rendimiento",
+      "requirement": "Traducción sin penalizaciones perceptibles (cache de resultados, sin parseos repetidos)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 14,
+          "text": "│   ├── Cache de traducciones frecuentes (Dictionary \"clave|n\")"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 66,
+          "text": "2. **Aplicar idioma:** `set_locale()` valida el locale contra `LOCALES_SOPORTADOS`, aplica `TranslationServer.set_locale()`, limpia la cache, persiste (M60) y emite `locale_changed`."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 67,
+          "text": "3. **Traducir:** `tr_key(module, section, key, params, n)` arma la clave completa y delega en `_tr_clave()`, que consulta la cache `_cache[\"clave|n\"]`, aplica `format_text()` y, en caso de fallo, cae al catálogo español y en última instancia devuelve la clave literal (jamás texto vacío). *(El nombre `tr_cached` que figuraba antes no existe en el código: corrección iter. 5.)*"
+        }
+      ],
+      "analysis": "Cache por clave|n, parseo al cargar y limpieza al cambiar."
+    },
+    {
+      "id": "RN2",
+      "line": 89,
+      "title": "Offline",
+      "requirement": "Sin llamadas de red; todo el contenido de traducción es local",
+      "mapping_status": "sin_mapeo_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 1,
+          "text": "**Modelo:** Ling-3.1-Flash (último modificador — tandas 16-22; previo: DeepSeek-V4.1-Flash / WorkBuddy, iter. 5, 2026-09-13; texto original: Deepseek V4 Flash / OpenCode, 2026-08-26)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 57,
+          "text": "La arquitectura sigue la regla de modularidad del proyecto: el `LocalizationManager` es la única capa que conoce el motor de traducción (TranslationServer) y los catálogos; la UI (M53) y los sistemas de texto (M21, M44) solo llaman a sus funciones expuestas, sin acoplarse a `.po` ni a detalles de gettext."
+        }
+      ],
+      "analysis": "No hay contrato explícito offline/cero red en el diseño."
+    },
+    {
+      "id": "RN3",
+      "line": 90,
+      "title": "Escalabilidad",
+      "requirement": "Agregar idioma = agregar 1 archivo `.po` + 1 entrada en el selector",
+      "mapping_status": "parcial_con_desviacion",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 523,
+          "text": "# 2.5 Flujo de agregar un idioma nuevo"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 525,
+          "text": "1. Copiar `es.po` como `xx.po` (xx = código ISO del idioma)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 526,
+          "text": "2. Editar la cabecera (`Language: xx`, `Plural-Forms` si difiere del español)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 528,
+          "text": "4. Agregar el idioma en la lista `LOCALES_SOPORTADOS` del `LocalizationManager` y al selector de configuración con su nombre nativo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 529,
+          "text": "- ⚠️ **Corrección iter. 5:** el nombre del const es `LOCALES_SOPORTADOS` (el `SUPPORTED_LOCALES` anterior no existe en el código). Además, la lista de idiomas está **duplicada en tres lugares**: `LocalizationManager.LOCALES_SOPORTADOS`, `LocaleUtils.TABLAS` y `LocaleUtils.NOMBRES_NATIVOS`. Agregar un idioma con reglas numéricas o nombre nativo nuevos exige tocar los tres, lo que **incumple RN3** en su letra (\"1 `.po` + 1 entrada en el selector\"). Deuda técnica registrada; unificar en `LocaleUtils` sería el arreglo natural."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 530,
+          "text": "5. Verificar en M88 que la fuente cubre los caracteres del idioma (FontLoader según idioma)."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 531,
+          "text": "6. Ejecutar `TranslationValidator` y QA de localización del idioma nuevo."
+        }
+      ],
+      "analysis": "Flujo de idioma existe, pero tres listas deben tocarse; contradice cambio de un .po + selector."
+    },
+    {
+      "id": "RN4",
+      "line": 91,
+      "title": "Mantenibilidad",
+      "requirement": "Claves agrupadas por módulo y documentadas (convención única)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 113,
+          "text": "# 2.4 Convenciones de claves"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 131,
+          "text": "- UPPER_SNAKE obligatorio; los nombres propios conservan la ortografía original del idioma fuente."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 132,
+          "text": "- Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 165,
+          "text": "## 2.4.2 Reglas de creación de claves (vigentes)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 168,
+          "text": "2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext."
+        }
+      ],
+      "analysis": "Claves agrupadas y glosario descritos."
+    },
+    {
+      "id": "RN5",
+      "line": 92,
+      "title": "Compatibilidad de fuentes",
+      "requirement": "Caracteres del idioma soportados por las fuentes de M88",
+      "mapping_status": "mapeo_alto_nivel",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 51,
+          "text": "├── M88 Fuentes     -> FontLoader selecciona fuente según idioma"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 530,
+          "text": "5. Verificar en M88 que la fuente cubre los caracteres del idioma (FontLoader según idioma)."
+        }
+      ],
+      "analysis": "Integración M88/Fuentes nombrada, criterio de cobertura no desarrollado."
+    },
+    {
+      "id": "RN6",
+      "line": 93,
+      "title": "Accesibilidad",
+      "requirement": "Ajustes de tamaño de texto (M58) no rompen la traducción ni el layout",
+      "mapping_status": "parcial_con_riesgo",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 111,
+          "text": "- El selector está enlazado a las opciones de accesibilidad (M58): el tamaño de fuente ajustado se re-aplica en el idioma nuevo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 611,
+          "text": "- **L71 (respetar ajustes de accesibilidad de texto M58 sin romper layouts):** M53. iter. 6: medido con AnalizadorLayout a los tamaños equivalentes al ui_scale 0.8-1.5 de M58 (12/16/24 px, contenedor 220x40): desbordan 0 / 63 / 97 de 170 claves. La traducción no se rompe; los LAYOUTS sí a 1.5x. La medición y la lista de claves quedan en 07-Resultados-Testings.md. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): evidencia en disco — 07-Resultados-Testings.md L192 (63/170 a 16 px) y L246 (97/170 a 24 px, dueño M53). Sigue [?] deuda externa M53."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 613,
+          "text": "- **L112 (integrar M58: tamaño de texto ajustable no rompe traducción):** M53. iter. 6: el análisis responde a la escala de forma monótona (bloque K: desbordan 0 a 12 px, 63 a 16 px, 97 a 24 px), así que la herramienta para validarlo existe y está probada; lo que falta es que los layouts de M53 absorban esos tres casos. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramienta probada (test_localizacion_iter6.gd 82 checks 0 fallos); el desborde de layouts es de M53 (07-Resultados L246). Sigue [?] deuda externa M53."
+        }
+      ],
+      "analysis": "M58 medido; diseño informa overflow 63/170 a 16px y 97/170 a 24px."
+    },
+    {
+      "id": "RN7",
+      "line": 94,
+      "title": "Longitud variable",
+      "requirement": "El inglés puede alargar textos +30%; los layouts deben tolerarlo",
+      "mapping_status": "parcial_con_riesgo",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 107,
+          "text": "- Lista horizontal de opciones o dropdown con los idiomas soportados, mostrados con su **nombre nativo** (\"Español\", \"English\")."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 111,
+          "text": "- El selector está enlazado a las opciones de accesibilidad (M58): el tamaño de fuente ajustado se re-aplica en el idioma nuevo."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 611,
+          "text": "- **L71 (respetar ajustes de accesibilidad de texto M58 sin romper layouts):** M53. iter. 6: medido con AnalizadorLayout a los tamaños equivalentes al ui_scale 0.8-1.5 de M58 (12/16/24 px, contenedor 220x40): desbordan 0 / 63 / 97 de 170 claves. La traducción no se rompe; los LAYOUTS sí a 1.5x. La medición y la lista de claves quedan en 07-Resultados-Testings.md. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): evidencia en disco — 07-Resultados-Testings.md L192 (63/170 a 16 px) y L246 (97/170 a 24 px, dueño M53). Sigue [?] deuda externa M53."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 613,
+          "text": "- **L112 (integrar M58: tamaño de texto ajustable no rompe traducción):** M53. iter. 6: el análisis responde a la escala de forma monótona (bloque K: desbordan 0 a 12 px, 63 a 16 px, 97 a 24 px), así que la herramienta para validarlo existe y está probada; lo que falta es que los layouts de M53 absorban esos tres casos. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramienta probada (test_localizacion_iter6.gd 82 checks 0 fallos); el desborde de layouts es de M53 (07-Resultados L246). Sigue [?] deuda externa M53."
+        }
+      ],
+      "analysis": "Expansión y layouts medidos, pero tolerancia total no garantizada."
+    },
+    {
+      "id": "RN8",
+      "line": 95,
+      "title": "Consistencia",
+      "requirement": "Un mismo término se traduce igual en todo el juego (glosario)",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 132,
+          "text": "- Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 168,
+          "text": "2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 501,
+          "text": "# 2.4.17 Bloque W (T32, 2026-10-23): auditoría de calidad de traducción (punto ciego del watchdog)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 521,
+          "text": "**Conclusión:** el catálogo vivo está **completo y correcto en ES/EN/PT** — 0 traducciones faltantes, 0 vacíos, 0 copias no traducidas activas. Las 4 «sospechosas» del watchdog (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) son claves MUERTAS del save legacy (T31), no deuda activa."
+        }
+      ],
+      "analysis": "Glosario/auditoría y resultado 0 inconsistencias documentados."
+    },
+    {
+      "id": "RN9",
+      "line": 96,
+      "title": "Calidad",
+      "requirement": "Revisión humana de las traducciones antes del lanzamiento",
+      "mapping_status": "mapeado_parcial",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 501,
+          "text": "# 2.4.17 Bloque W (T32, 2026-10-23): auditoría de calidad de traducción (punto ciego del watchdog)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 521,
+          "text": "**Conclusión:** el catálogo vivo está **completo y correcto en ES/EN/PT** — 0 traducciones faltantes, 0 vacíos, 0 copias no traducidas activas. Las 4 «sospechosas» del watchdog (`SETTINGS.HORAS_1/HORAS_H/MIN_1/MIN_M`) son claves MUERTAS del save legacy (T31), no deuda activa."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 612,
+          "text": "- **L74 (garantizar revisión humana de traducciones antes del lanzamiento):** revisión humana (usuario). No es automatizable: el módulo aporta la herramienta de consistencia (Glosario, ValidadorPO) y marca los textos provisionales, pero la validación final de estilo y naturalidad la hace una persona bilingüe. Verif. 2026-10-15 (Ling-3.1-Flash, msg 137): herramientas en disco — glosario.gd L1 (Glosario), validador_po.gd L19 (ValidadorPO); la revisión final es humana por definición. Sigue [?] dueño: usuario (revisión humana pre-lanzamiento)."
+        }
+      ],
+      "analysis": "Revisión humana queda como pendiente/decisión externa."
+    },
+    {
+      "id": "RN10",
+      "line": 97,
+      "title": "Codificación",
+      "requirement": "Archivos `.po` en UTF-8 sin BOM, saltos LF",
+      "mapping_status": "mapeado_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 33,
+          "text": "│   ├── Bytes: BOM (§28), CRLF (RN10), UTF-8 válido"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 103,
+          "text": "- UTF-8 sin BOM, saltos LF, una entrada por bloque."
+        }
+      ],
+      "analysis": "UTF-8 sin BOM y LF descritos/validados."
+    },
+    {
+      "id": "RN11",
+      "line": 98,
+      "title": "Sin hardcodeo",
+      "requirement": "Ningún texto visible hardcodeado fuera de los catálogos",
+      "mapping_status": "parcial_con_deuda",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 132,
+          "text": "- Un término se declara una sola vez y se reutiliza (glosario); si el mismo texto necesita traducciones distintas según contexto, se desambigua con el campo `#... context` de gettext o con una sección distinta."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 168,
+          "text": "2. **Un término, una clave** (glosario); desambiguar por contexto con sección distinta o campo `#... context` de gettext."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 247,
+          "text": "**4. DEUDA M06 (Jugador): 13 literales ES en `scripts/player/player.gd` (panel de inventario del jugador).**"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 272,
+          "text": "**Consumo (para el owner de M06 — NO ejecutado por M87, módulo ajeno):** reemplazar cada literal por `_t(\"CLAVE\")` (ej: `title.text = _t(\"SETTINGS.INVENTARIO\")`; `search_line.placeholder_text = _t(\"SETTINGS.BUSCAR\")`; `fav_btn.text = _t(s.favorito ? \"ITEMS.DESFAVORECER\" : \"ITEMS.FAVORITO\")`). Las 4 claves nuevas se crean **en el mismo commit** que el consumo (evitar huérfanas — política §2.4.4), con ES+EN+PT en JSON + es.po + en.po."
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 547,
+          "text": "- **DEUDA (el \"boot strings desync\"):** los **8 consejos cozy** (`const TIPS`, L17-26) son **literales ES** jugador-visible — el prefijo \"Consejo:\" se traduce pero el contenido no:"
+        }
+      ],
+      "analysis": "Prohibición/auditoría descritas, pero hay literales jugador-visibles anotados como deuda."
+    },
+    {
+      "id": "RN12",
+      "line": 99,
+      "title": "Compatibilidad de herramientas",
+      "requirement": "`.po` válido para Poedit y herramientas gettext estándar",
+      "mapping_status": "sin_mapeo_explicito",
+      "design_refs": [
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 33,
+          "text": "│   ├── Bytes: BOM (§28), CRLF (RN10), UTF-8 válido"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 71,
+          "text": "# 2.2 Catálogos .po (res://locales/)"
+        },
+        {
+          "file": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+          "line": 103,
+          "text": "- UTF-8 sin BOM, saltos LF, una entrada por bloque."
+        }
+      ],
+      "analysis": "Se describe sintaxis PO, pero no compatibilidad explícita Poedit/msgfmt estándar."
+    }
+  ],
+  "key_findings": [
+    "RN2 offline y RN12 compatibilidad Poedit/gettext no tienen mapeo explícito en 03.",
+    "RF14 y RN3 tienen desviaciones documentadas: idioma SO aplicado sin consentimiento y listas de idiomas duplicadas.",
+    "RN6/RN7 registran overflow abierto derivado a M53.",
+    "RF9 registra la deuda de reglas plurales hardcodeadas en vez de leer Plural-Forms."
+  ],
+  "limitations": "Revisión solo documental; no se consultaron implementación, checklist ni pruebas para inferir cierre."
+}
