@@ -225,7 +225,7 @@
 
 ---
 
-**Totales:** 196 ítems · Completados: 59 · Pendientes: 135 · No resueltos: 2. (Actualizado 2026-11-25: cerradas b01 (12/12) y b02 (10/12, 2 [?] por Blender/visión); B-02/B-03 en STANDBY.)
+**Totales:** 203 ítems · Completados: 64 · Pendientes: 137 · No resueltos: 2. (Actualizado 2026-11-25: cerradas b01 (12/12), b02 (10/12) y b03 (8/8); tests M169 59/0; B-02/B-03 en STANDBY.)
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25
 
@@ -270,6 +270,11 @@
 - [x] 18 iconos de logros rotos anotados en `04-Codigo.md` §9 [S]
 - [x] L-04 diálogo ambiental 1 línea/NPC: `crucero_ambiental.gd` + `ambiental.json` (6 NPCs, test 5/0) [M]
 - [x] Verificación HUD tienda (M-06): precios en vivo vía `EconomyManager` en `shop_ui.gd` [S]
+- [x] `crucero_interior.gd` completado: luces/puertas/spawn + `configurar()` + ciclo 4→1 [M]
+- [x] `crucero_puerto.gd` (Area3D embarque/desembarco → CruceroManager) [M]
+- [x] Seal CruceroManager↔CruceroInterior (`conectar_interior` + `_on_puerta_cruzada`) [S]
+- [x] `test_crucero_interior.gd` (9/0) y `test_crucero_puerto.gd` (7/0) [M]
+- [x] `06-Plan-Testings.md` y `07-Resultados-Testings.md` de M169 (59/0 global) [M]
 - [?] D-05 colisión del bote salvavidas: exterior GLB sin `.tscn` de colisión (iter 2, requiere Blender) [M]
 - [?] D-06 ventanas de camarote sin solape (AABB): requiere Blender/visión (no disponible en este harness) [M]
 

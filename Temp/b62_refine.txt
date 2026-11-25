@@ -1,0 +1,101 @@
+== exact level names (L30) ==
+L30 exact words | files=47 hits=57
+   scripts/audio/test_audio_config.gd:261 # Estado base conocido (sin opciones persistidas ni efectos en Master)
+   scripts/core/contratos.gd:87 ## ¿El string dado corresponde a un contrato conocido?
+   scripts/core/test_infraestructura_m40.gd:252 # Dejar el flujo en BOOT para que la carga tenga un estado de partida conocido.
+   scripts/crafting/test_crafting.gd:199 # Re-usar pergamino conocido: no consume (honesto)
+   scripts/data/test_catalogo_m159.gd:75 # --- D: L212 iconos (MEDICION: gap conocido, no se asserta el valor) ---
+   scripts/dialogos/dialog_graph_validator.gd:43 ## Acepta: clave exacta en allowlist, clave con prefijo conocido (ej. amistad_/flag_),
+   scripts/diario/test_diario_iconos_m55.gd:221 # El inventario M46 declara TODOS sus ids con un prefijo de familia conocido
+   scripts/dlc/dlc_manager.gd:71 ## el id no es un DLC ni un bundle conocido.
+   scripts/fishing/fishing_manager.gd:389 ## sin bioma conocido no se filtra (regla cozy: nunca dejar de pescar).
+   scripts/historia/validar_historia.gd:84 "requisito tipo conocido en %s: %s" % [String(n.get("id")), String(req.get("tipo", ""))])
+   scripts/houses/house_visit.gd:39 ## Requiere que el vecino sea el dueño/amigo de esa casa (contrato manager).
+   scripts/logros/achievement_service.gd:87 # RF1: categoría del vocabulario conocido (RF14 la valida).
+L30 table keys | files=9 hits=13
+   scripts/debug/debug_console.gd:28 ## Nombres de nivel/categoria del logger. La FUENTE es
+   scripts/debug/debug_menu.gd:984 tool.nombre = "%s tier%d" % [tool.tipo, tool.nivel]
+   scripts/editor/support/recipe_schema.gd:6 # Reglas de crafting.json (M93/M16): id, nombre, categoria, nivel>=1, estacion,
+   scripts/editor/tools/recipe_tool.gd:14 const CAMPOS := ["id", "nombre", "categoria", "nivel", "estacion", "origen", "coste_recursos", "coste_ao", "resultado", "resultado_cantidad"]
+   scripts/herramientas158/tool_tier_system.gd:27 ## tier_id -> {nivel, nombre, dano, velocidad, area, color}
+   scripts/tools/test_herramientas.gd:70 _check(t.nombre != "", "nombre vacío para (%d, %d)" % [tipo, nivel])
+   scripts/tools/tool_data.gd:127 t.nombre = "%s de %s" % [NOMBRES[p_tipo], MATERIALES[p_nivel]]
+   scripts/transporte/transport_manager.gd:661 for nombre in ["nivel_global", "nivel_maximo", "nivel_promedio"]:
+   data/herramientas/tiers_config.json:4 {"id": "T1_COBRE", "nivel": 1, "nombre": "Cobre", "dano": 1.0, "velocidad": 1.0, "area": 1, "color": "cobre"},
+
+== L32 event min level ==
+L32 whole source | files=6 hits=51
+   scripts/logging/logger.gd:9 #   set_min_level / set_category_enabled / reload_config
+   scripts/logging/logging_config.gd:12 ## Nivel mínimo que se emite (0=DEBUG...4=CRITICAL)
+   scripts/logging/test_logger.gd:9 #  - Niveles: min_level filtra DEBUG/INFO y deja pasar WARNING+.
+   scripts/logging/test_logging_m103.gd:78 _check("tiene set_min_level", gl.has_method("set_min_level"))
+   scripts/logging/test_logging_m103_iter1.gd:11 #   B. Niveles: filtrado por `min_level`, `is_level_enabled`, los 5 niveles.
+   scripts/logging/test_m103_frame_budget.gd:106 # Variante 2: llamada FILTRADA (nivel por debajo de min_level -> debe salir
+L32 event_definition fields | files=2 hits=27
+   scripts/eventos/event_definition.gd:26 ## Día del mes (1-28). 0 = relativo/condicional.
+   scripts/eventos/condicion_evento.gd:11 class_name CondicionEvento
+
+== L33 friendship-gated stories ==
+L33 amistad60/90 data files | files=61 hits=180
+   data/dialogues/contextual/aur_001_cap0_historia_amistad60.json:2 "id": "DLG-AUR_001-CAP0-HISTORIA-AMISTAD60",
+   data/dialogues/contextual/aur_001_cap0_saludo_amistad60.json:2 "id": "DLG-AUR_001-CAP0-SALUDO-AMISTAD60",
+   data/dialogues/contextual/aur_001_cap0_saludo_amistad90.json:2 "id": "DLG-AUR_001-CAP0-SALUDO-AMISTAD90",
+   data/dialogues/contextual/aur_002_cap0_historia_amistad60.json:2 "id": "DLG-AUR_002-CAP0-HISTORIA-AMISTAD60",
+   data/dialogues/contextual/aur_002_cap0_saludo_amistad60.json:2 "id": "DLG-AUR_002-CAP0-SALUDO-AMISTAD60",
+   data/dialogues/contextual/aur_002_cap0_saludo_amistad90.json:2 "id": "DLG-AUR_002-CAP0-SALUDO-AMISTAD90",
+   data/dialogues/contextual/aur_003_cap0_historia_amistad60.json:2 "id": "DLG-AUR_003-CAP0-HISTORIA-AMISTAD60",
+   data/dialogues/contextual/aur_003_cap0_saludo_amistad60.json:2 "id": "DLG-AUR_003-CAP0-SALUDO-AMISTAD60",
+   data/dialogues/contextual/aur_003_cap0_saludo_amistad90.json:2 "id": "DLG-AUR_003-CAP0-SALUDO-AMISTAD90",
+   data/dialogues/contextual/aur_004_cap0_historia_amistad60.json:2 "id": "DLG-AUR_004-CAP0-HISTORIA-AMISTAD60",
+   data/dialogues/contextual/aur_004_cap0_saludo_amistad60.json:2 "id": "DLG-AUR_004-CAP0-SALUDO-AMISTAD60",
+   data/dialogues/contextual/aur_004_cap0_saludo_amistad90.json:2 "id": "DLG-AUR_004-CAP0-SALUDO-AMISTAD90",
+L33 gate in code | files=80 hits=449
+   scripts/audio/sfx_manager.gd:239 _conectar_si("Achievements", "logro_desbloqueado", _on_logro_desbloqueado)
+   scripts/audio/test_sfx_m43.gd:297 ["Achievements", "logro_desbloqueado", sfx._on_logro_desbloqueado],
+   scripts/balance/test_balance.gd:63 _check(umbrales.get("nivel_2", 0) == 30, "amistad nivel 2 = 30")
+   scripts/balance/test_balance_m93_iter3.gd:74 # Coherencia M20: el servicio de amistad sube nivel con 30 puntos (checklist)
+   scripts/balance/test_balance_m93_iter4.gd:73 var a1: float = float(amistad.get("semana_1_niveles_totales", 0))
+   scripts/combat/combat_island_save_provider.gd:6 # para CombatIslandSystem (zonas desbloqueadas, derrotas, recompensas).
+   scripts/combat/combat_island_system.gd:24 ## Zonas desbloqueadas (permanente, C.13).
+   scripts/core/event_bus.gd:87 ## Se emite cuando sube el nivel de amistad
+   scripts/data/generar_seeds_islas.gd:57 req.descripcion_requisitos = "Viaje desbloqueado (M28)"
+   scripts/debug/debug_menu.gd:1014 return {"ok": ok, "resultado": "sello %s %s" % [sello_id, "desbloqueado" if ok else "no encontrado"]}
+   scripts/dialogos/dialogue_manager.gd:19 ## M20 -> M21: el NPC subio de nivel de amistad (reaccion de dialogo opcional).
+   scripts/dialogos/test_contextual_dialogue_m162.gd:123 # amistad 60 → variante amistad60 (prio 4); amistad 90 → amistad90 (prio 5)
+L33 historia+nivel same line | files=2 hits=2
+   scripts/friendship/vecino_amistad.gd:6 # Puntos acumulados, nivel, historial de hoy (límites diarios), memoria de
+   data/support/faq.json:20 {"id": "personajes_historia", "categoria": "historia", "pregunta": "¿Los personajes tienen historias propias?", "respuesta": "Sí. Cada vecino desbloquea su arco de amistad con esce
+
+== L38 level-up feedback ==
+L38 VFX catalog entry | files=1 hits=1
+   data/vfx/vfx_catalog.json:649 "bus": "npc.friendship_level_up",
+L38 dialogue level-up | files=3 hits=12
+   scripts/dialogos/dialogue_manager.gd:19 ## M20 -> M21: el NPC subio de nivel de amistad (reaccion de dialogo opcional).
+   scripts/dialogos/test_eventos_dialogo_m21.gd:10 #  - DialogueManager auto-inicia estos dialogos en _on_gift_given / _on_level_up (guarda is_dialogue_active).
+   scripts/dialogos/ui/dialogue_ui.gd:110 if dm.has_signal("level_up_reaction") and not dm.level_up_reaction.is_connected(_on_level_up_reaction):
+L38 unlock list | files=0 hits=0
+
+== L191-L193 ==
+L191 farewell by level | files=0 hits=0
+L192 spoken memories | files=3 hits=4
+   scripts/friendship/friendship_service.gd:310 func get_recuerdos(vecino_id: String) -> Array:
+   scripts/friendship/test_amistad_rf48_m20.gd:63 _verificar(v.get_recuerdos().size() >= 1, "memoria: recuerdo registrado en vecino")
+   scripts/friendship/vecino_amistad.gd:71 func get_recuerdos() -> Array[String]:
+L193 return gift implementation | files=2 hits=12
+   scripts/friendship/friendship_service.gd:78 var _cartas_data: Dictionary = {}  # texto_id -> {cuerpo, respuesta, adjunto_retorno}
+   data/amistad/cartas.json:3 "nota": "Plantillas de cartas (M20 + M29). El jugador envia 'texto_id'; al dia siguiente de juego (M29) el vecino responde con 'respuesta' y entrega 'adjunto_retorno' (opcional). C
+
+== M39 infrastructure (real source only) ==
+M39 infra code/dataset | files=109 hits=373
+   scripts/islas/generar_islas.gd:137 # Puntos de llegada/partida: sobre el disco interior del muelle.
+   scripts/islas/island_definition.gd:14 # en un `.tres`, así que se reemplaza por `desbloqueo_flag: StringName` (la flag
+   scripts/islas/island_design_catalog.gd:114 "M27 fija `punto_llegada`/`punto_partida`; el muelle y las casas son de M17/M40"))
+   scripts/islas/island_travel_guard.gd:14 #   K5  Desembarco sobre agua si el muelle se generó mal → punto seguro
+   scripts/islas/test_islas_m27_iter2.gd:437 var muelle_coral: Vector3 = _vista["coral"]["punto_llegada"]
+   scripts/world/day_night_cycle.gd:12 ## Las curvas .tres de data/light/ (diseño §P1-P5) reemplazan los valores
+   scripts/world/light_pool.gd:33 "luz_farol": {"hz": 0.9, "amplitud": 0.10, "sombra": true, "alcance": 12.0, "energia": 1.0},
+   scripts/world/terreno_horizonte.gd:15 # El impostor de MONTAÑAS (36 tiles) queda reemplazado por este impostor
+   scripts/world/test_cielo_estrellas_m31.gd:8 # (time_config.tres, M29). Extiende test_curvas_luz.gd (no lo reemplaza).
+   scripts/world/test_curvas_luz.gd:7 # Complementa test_ciclo_dia_noche.gd (núcleo Log 302) — no lo reemplaza.
+   scripts/world/test_light_pool_m49.gd:68 _ok(cat.has("luz_farol") and cat.has("luz_fuego"), "tipos de luz definidos")
+   scripts/world/test_world_m147.gd:64 var faro = w.get_lugar("faro")
