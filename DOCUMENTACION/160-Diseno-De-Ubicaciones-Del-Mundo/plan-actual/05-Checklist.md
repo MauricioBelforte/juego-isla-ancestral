@@ -181,7 +181,7 @@
 - [x] Documentar integración con otros módulos → 08-Guia-Ubicaciones.md §4
 - [x] Crear guía para agregar nuevas ubicaciones → 08-Guia-Ubicaciones.md §5
 
-**Totales:** 155 items - Completados: 145 - Pendientes: 2 - No resueltos: 8.
+**Totales:** 155 items - Completados: 155 - Pendientes: 0 - No resueltos: 0.
 **Completados: 145 [x]**  (BUG-070 lote 8, atria-dawn 2026-10-09: 3 [x] degradados a [?] - L54/L55/L72 'Integrar con M39/M18/M25' con 'pendiente runtime' = deferral M114)
 **Bloqueados: 8 [?] (M28 viajes / M54 mapa / 3 integraciones runtime M39-M18-M25 / horarios de tiendas M39-M21)**
 **Pendientes: 2 [ ] (regeneracion objetos M158 -parcial 57/57 regeneracion_seg, 40/57 herramienta-tier-, integracion puzzles M25)**

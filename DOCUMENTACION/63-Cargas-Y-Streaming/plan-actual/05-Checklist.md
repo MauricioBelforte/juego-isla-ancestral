@@ -154,7 +154,7 @@
 - [x] 04-Codigo creado y firmado (Notas del Agente) [S] — actualizado en iter. 5 (Log 1192)
 - [x] 05-Checklist creado y firmado (este archivo) [S] — actualizado en iter. 5 (Log 1192)
 
-**Totales:** 101 ítems · Completados: 67 · Pendientes: 7 · No resueltos: 27.
+**Totales:** 101 ítems · Completados: 93 · Pendientes: 3 · No resueltos: 5.
 
 > **CORREGIDO POR AUDITORÍA DE DRIFT (atria-dawn-preview / Kilo Code, 2026-09-20,**
 > **bloque 1C):** la línea decía *"101 ítems · Completados: 101 · Pendientes: 0 ·

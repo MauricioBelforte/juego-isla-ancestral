@@ -184,7 +184,7 @@
 - [x] Crear Log en Logs/ con formato NN-DESCRIPCION_FECHA [S] — `Logs/902-M26-Templo-Subterraneo-Iter2_2026-09-14.md`
 - [x] Actualizar fila 26 en CHECKLIST-GLOBAL al implementar [S]
 
-**Totales:** 129 ítems · Completados: 122 · Pendientes: 0 · No resueltos: 7.
+**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1.
 Nota (iter. 3, DeepSeek-V4.1-Flash, 2026-10-16): se cerraron 5 ítems con artefacto medido — L118 (catálogo de 8 glifos = 4 comunes + 4 de cámara), L148 y L160 (documentación consolidada en `04-Codigo.md`), L157 (presupuesto por región) y L158 (instancing de columnas). La línea anterior (101/18/10, "drift corregido por QA s2, Log 1777") no coincidía con las marcas reales del archivo (117/2/10): el archivo se contradecía a sí mismo. Los 7 `[?]` que quedan tienen dueño externo nombrado.
 El módulo sigue 🟡: la lógica verificable está implementada y probada, pero la
 geometría (M08), los assets (M45/M47/M52/M63), el audio (M41/M42/M43) y las

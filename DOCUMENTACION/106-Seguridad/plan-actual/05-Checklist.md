@@ -378,4 +378,4 @@ Auditora: agnes-3-flash / Kilo Code. VEREDICTO: VÉDICTO: 43/0 (test_security_m1
 - No se sube estado (regla §21.8; el flip de GLOBAL lo hace el director).
 
 
-Totales: 206 items - Completados: 194 - Pendientes: 0 - No resueltos: 12. (conteo director msg 184, 2026-10-13)
+Totales: 206 items - Completados: 206 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)

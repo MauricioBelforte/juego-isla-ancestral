@@ -1,0 +1,600 @@
+{
+ "A": [
+  {
+   "mod": "18",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales actualizados M18:** 200 ítems · Completados: 200 · Pendientes: 9 · No resueltos: 4.",
+   "real": "200/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "26",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1.",
+   "real": "128/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "28",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 130 items · Completados: 129 · Pendientes: 1 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)",
+   "real": "129/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "31",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 169 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería.)",
+   "real": "167/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "35",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 142 items · Completados: 139 · Pendientes: 2 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 26 [ ] / 13 [?] = 142 tras S3 raycast-exclusivo + chunks-memoria; el archivo no tenia linea de Totales — agregada con la medida real, los 13 [?] son de modulos externos de las secciones M08/M26/M52/M43.)",
+   "real": "139/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "37",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 148 items · Completados: 141 · Pendientes: 7 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: tras tanda historial+robustez; qa_m37_historial.gd 20/0; riel verde hoy: museo 0 fallos + persistencia 35/0 + rf1 0 + rf2d 28/0 + rf3 12/0.)",
+   "real": "141/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "63",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 101 ítems · Completados: 93 · Pendientes: 3 · No resueltos: 5.",
+   "real": "93/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "72",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 200 ítems · Completados: 197 · Pendientes: 1 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)",
+   "real": "197/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "104",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 119 ítems · Completados: 119 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)",
+   "real": "119/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "106",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "Totales: 206 items - Completados: 206 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)",
+   "real": "206/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "160",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 155 items - Completados: 155 - Pendientes: 0 - No resueltos: 0.",
+   "real": "155/0/0",
+   "drift": 0
+  },
+  {
+   "mod": "164",
+   "linea": null,
+   "antes": "ver git diff",
+   "despues": "**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)",
+   "real": "128/0/0",
+   "drift": 0
+  }
+ ],
+ "B": {
+  "faltantes": [
+   "alma_de_la_isla.png",
+   "amigo_cercano.png",
+   "coleccionista.png",
+   "cosecha_diez.png",
+   "dias_en_aurora.png",
+   "mar_adentro_10.png",
+   "minero_veterano.png",
+   "misionero.png",
+   "pescador_principiante.png",
+   "primer_cultivo.png",
+   "primer_mineral.png",
+   "primer_sello.png",
+   "primera_isla.png",
+   "ruina_restaurada.png",
+   "secreto_guardian.png",
+   "siete_sellos.png",
+   "vecino.png",
+   "viajero.png"
+  ],
+  "m53": "DOCUMENTACION\\53-UI-UX\\plan-actual\\05-Checklist.md"
+ },
+ "C": [
+  {
+   "linea": 26,
+   "mod": "01",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M01** Visión y Concepto [M] 🔴 — definir nombre definitivo, pilares, pitch, alcance v1.0 — *re-baseline 29oct: [x]→[ ] "
+  },
+  {
+   "linea": 27,
+   "mod": "02",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M02** Documentación del Proyecto [M] 🔴 — GDD, narrativa, sistemas, convenciones, backlog inicial — *re-baseline 29oct:"
+  },
+  {
+   "linea": 28,
+   "mod": "03",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M03** Game Engine [C] 🔴 — elegir Unity o Godot, fijar versión, configurar render pipeline e input"
+  },
+  {
+   "linea": 29,
+   "mod": "04",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M04** Lenguaje y Programación [M] 🔴 — C#/GDScript, convenciones, namespaces, arquitectura de software"
+  },
+  {
+   "linea": 37,
+   "mod": "08",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M08** Terreno y Geografía [C] 🔴 — montañas, valles, ríos, playas, biomas de Aurora — *re-baseline 29oct: [x]→[ ] · cla"
+  },
+  {
+   "linea": 39,
+   "mod": "10",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M10** Personaje del Jugador [M] 🔴 — modelo 3D, animaciones, controlador, colisiones, interacción"
+  },
+  {
+   "linea": 40,
+   "mod": "11",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M11** Cámara [M] 🔴 — tercera persona cenital inclinada, zoom, clipping, sensibilidad configurable — *re-baseline 29oct"
+  },
+  {
+   "linea": 41,
+   "mod": "12",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M12** Herramientas [C] 🔴 — pala, pico, hacha, gancho mecánico, lanza-semillas, vara de flujo (sin daño) — *re-baseline"
+  },
+  {
+   "linea": 43,
+   "mod": "14",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M14** Recursos [M] 🔴 — madera, piedra, arena, minerales, frutas, peces, rareza, respawn — *re-baseline 29oct: [x]→[ ] "
+  },
+  {
+   "linea": 44,
+   "mod": "15",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M15** Crafting [M] 🔴 — banco de trabajo, recetas, desbloqueos, preview, feedback — *re-baseline 29oct: [x]→[ ] · clase"
+  },
+  {
+   "linea": 45,
+   "mod": "16",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M16** Construcción [C] 🔴 — modo construcción/decoración, grid, snapping, rotación, demolición — *re-baseline 29oct: [x"
+  },
+  {
+   "linea": 52,
+   "mod": "19",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M19** Sistema de Amistad [M] 🟡 — puntos de amistad, niveles, regalos, desbloqueos, eventos únicos — *re-baseline 29oct"
+  },
+  {
+   "linea": 56,
+   "mod": "22",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M22** Historias Secundarias [M] 🟡 — arcos de vecinos, lugares, ruinas, objetos, postgame"
+  },
+  {
+   "linea": 58,
+   "mod": "24",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M24** Ruinas [M] 🟡 — variantes pequeñas/medianas/grandes, inscripciones, pasajes ocultos"
+  },
+  {
+   "linea": 59,
+   "mod": "25",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M25** Templo Subterráneo [C] 🔴 — Templo de la Brisa: entrada, tutorial, salas, cámara del Sello — *re-baseline 29oct: "
+  },
+  {
+   "linea": 63,
+   "mod": "26",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M26** Islas del Mundo [C] 🟡 — Isla de Coral, Verde, Cenizas, Cielo (diseño completo por isla) — *re-baseline 29oct: [x"
+  },
+  {
+   "linea": 64,
+   "mod": "27",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M27** Viajes [M] 🟡 — Gran Vapor, boletos, requisitos, pantalla de viaje diegética"
+  },
+  {
+   "linea": 65,
+   "mod": "28",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M28** Tiempo y Calendario [M] 🔴 — día/noche, estaciones, festivales, cumpleaños, eventos"
+  },
+  {
+   "linea": 66,
+   "mod": "29",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M29** Reloj en Tiempo Real [M] 🟡 — Gran Vapor mensual, zona horaria, offline, anti-exploits"
+  },
+  {
+   "linea": 67,
+   "mod": "30",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M30** Ciclo Día/Noche [M] 🟡 — iluminación, cielo, estrellas, comportamiento de NPC y fauna"
+  },
+  {
+   "linea": 73,
+   "mod": "32",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M32** Agricultura [M] 🟡 — parcelas, semillas, riego, fertilizante, estaciones, plantas ancestrales — *re-baseline 29oc"
+  },
+  {
+   "linea": 74,
+   "mod": "33",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M33** Pesca [M] 🟡 — especies, minijuego no frustrante, coleccionario, peces legendarios — *re-baseline 29oct: [x]→[ ] "
+  },
+  {
+   "linea": 75,
+   "mod": "34",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M34** Minería [M] 🟡 — vetas, profundidad, minerales ancestrales, derrumbes controlados — *re-baseline 29oct: [x]→[ ] ·"
+  },
+  {
+   "linea": 77,
+   "mod": "36",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M36** Museos y Colecciones [M] 🟢 — salas, vitrinas, fósiles, porcentaje completado — *re-baseline 29oct: [x]→[ ] · cla"
+  },
+  {
+   "linea": 80,
+   "mod": "39",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M39** Infraestructura [M] 🟡 — puentes, rampas, faro, puerto, plaza, proyectos de Finneas — *re-baseline 29oct: [x]→[ ]"
+  },
+  {
+   "linea": 84,
+   "mod": "40",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M40** Música [C] 🟡 — acústica/lo-fi por bioma, leitmotifs, música adaptativa, loops — *re-baseline 29oct: [x]→[ ] · cl"
+  },
+  {
+   "linea": 85,
+   "mod": "41",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M41** Sonido Ambiental [M] 🟡 — viento, agua, océano, cuevas, ruinas, mecanismos"
+  },
+  {
+   "linea": 87,
+   "mod": "43",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M43** ASMR y Feedback [M] 🟡 — sensaciones táctiles de picar/cosechar/construir, capas sonoras"
+  },
+  {
+   "linea": 88,
+   "mod": "44",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M44** Arte 3D [C] 🔴 — estilo cozy voxel redondeado, presupuesto de polígonos, LOD — *re-baseline 29oct: [x]→[ ] · clas"
+  },
+  {
+   "linea": 89,
+   "mod": "45",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M45** Arte 2D [M] 🟡 — logo, iconos, UI, mapas, símbolos ancestrales, guías de estilo"
+  },
+  {
+   "linea": 90,
+   "mod": "46",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M46** Texturas y Materiales [M] 🟡 — tierra, césped, piedra, agua, variantes por bioma"
+  },
+  {
+   "linea": 91,
+   "mod": "47",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M47** Animación [C] 🟡 — jugador, NPC, fauna, vegetación, mecanismos, UI"
+  },
+  {
+   "linea": 92,
+   "mod": "48",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M48** Iluminación [M] 🟡 — URP/Forward+, GI suave, horaria, faroles, cuevas, optimización — *re-baseline 29oct: [x]→[ ]"
+  },
+  {
+   "linea": 93,
+   "mod": "49",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M49** Vegetación [M] 🟡 — hierba, árboles ancestrales, plantas luminosas, viento, instancing — *re-baseline 29oct: [x]→"
+  },
+  {
+   "linea": 94,
+   "mod": "50",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M50** Agua [C] 🟡 — océano, ríos, cascadas, congelamiento, evaporación, puzzles hidráulicos — *re-baseline 29oct: [x]→["
+  },
+  {
+   "linea": 95,
+   "mod": "51",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M51** Partículas y VFX [M] 🟡 — polvo, hojas, Resonancia, activación de runas, obtención de Sello — *re-baseline 29oct:"
+  },
+  {
+   "linea": 99,
+   "mod": "52",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M52** UI/UX [C] 🔴 — HUD, menús, inventario, mapa, diario, calendario, tooltips"
+  },
+  {
+   "linea": 100,
+   "mod": "53",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M53** Mapa [M] 🟡 — mapa global, descubrimiento progresivo, marcadores, leyenda — *re-baseline 29oct: [x]→[ ] · clase `"
+  },
+  {
+   "linea": 101,
+   "mod": "54",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M54** Diario del Jugador [M] 🟢 — registro de personajes, pistas, Sellos, ruinas, fotografías"
+  },
+  {
+   "linea": 102,
+   "mod": "55",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M55** Fotografía [M] 🟢 — modo fotografía, filtros, álbum, galería — *re-baseline 29oct: [x]→[ ] · clase `modulo_abiert"
+  },
+  {
+   "linea": 103,
+   "mod": "56",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M56** Interfaz de Control [M] 🔴 — teclado, ratón, gamepad, remapeo, Steam Deck — *re-baseline 29oct: [x]→[ ] · clase `"
+  },
+  {
+   "linea": 104,
+   "mod": "57",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M57** Accesibilidad [M] 🔴 — daltonismo, subtítulos, texto ajustable, reducción de movimiento — *re-baseline 29oct: [x]"
+  },
+  {
+   "linea": 108,
+   "mod": "58",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M58** Guardado [C] 🔴 — autosave, slots, GameState versionado, backups, recuperación — *re-baseline 29oct: [x]→[ ] · cl"
+  },
+  {
+   "linea": 109,
+   "mod": "59",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M59** Datos y Serialización [M] 🔴 — formato, IDs persistentes, versionado de schema, migraciones — *re-baseline 29oct:"
+  },
+  {
+   "linea": 110,
+   "mod": "60",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M60** Rendimiento [C] 🔴 — 60 FPS, presupuestos, profiling, culling, batching, instancing — *re-baseline 29oct: [x]→[ ]"
+  },
+  {
+   "linea": 111,
+   "mod": "61",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M61** Memoria [M] 🔴 — texturas, meshes, audio, streaming, memory leaks, sesiones largas"
+  },
+  {
+   "linea": 112,
+   "mod": "62",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M62** Cargas y Streaming [M] 🔴 — carga asíncrona, chunks cercanos, progreso real — *re-baseline 29oct: [x]→[ ] · clase"
+  },
+  {
+   "linea": 113,
+   "mod": "63",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M63** IA de NPC [C] 🔴 — máquina de estados, rutinas, pathfinding sobre terreno modificable"
+  },
+  {
+   "linea": 116,
+   "mod": "66",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M66** Vehículos [M] 🟢 — barco (y post-v1.0 submarino), física, cámara, docking — *re-baseline 29oct: [x]→[ ] · clase `"
+  },
+  {
+   "linea": 117,
+   "mod": "67",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M67** Transporte y Navegación [M] 🟢 — puerto, rutas, señalización, fast travel narrativo — *re-baseline 29oct: [x]→[ ]"
+  },
+  {
+   "linea": 118,
+   "mod": "68",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M68** Fast Travel [S] 🟢 — puntos de viaje, requisitos, anti-bypass de eventos"
+  },
+  {
+   "linea": 125,
+   "mod": "72",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M72** Coleccionables [M] 🟡 — reliquias, fragmentos, conchas, fósiles, documentos"
+  },
+  {
+   "linea": 126,
+   "mod": "73",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M73** Eventos [M] 🟡 — festivales estacionales, llegada del vapor, eventos raros — *re-baseline 29oct: [x]→[ ] · clase "
+  },
+  {
+   "linea": 144,
+   "mod": "84",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M84** Modelos 3D — Legal [M] 🟡 — licencias de cada modelo, atribución, registro — *re-baseline 29oct: [x]→[ ] · clase "
+  },
+  {
+   "linea": 150,
+   "mod": "87",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M87** Fuentes Tipográficas [S] 🟢 — fuente principal/secundaria, licencia, tildes y ñ — *re-baseline 29oct: [x]→[ ] · c"
+  },
+  {
+   "linea": 157,
+   "mod": "93",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M93** Retención sin FOMO [M] 🟡 — objetivos diarios/semanales, sin castigos por ausencia — *re-baseline 29oct: [x]→[ ] "
+  },
+  {
+   "linea": 159,
+   "mod": "95",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M95** Plataformas [M] 🟡 — PC/Steam prioritario, Steam Deck, EGS/GOG a evaluar — *re-baseline 29oct: [x]→[ ] · clase `s"
+  },
+  {
+   "linea": 170,
+   "mod": "102",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M102** Logging [M] 🟡 — niveles, rotación, crash reporting, exportación — *re-baseline 29oct: [x]→[ ] · clase `solo_int"
+  },
+  {
+   "linea": 174,
+   "mod": "106",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M106** Backups [S] 🔴 — repositorio, assets, documentación, builds, restauración"
+  },
+  {
+   "linea": 175,
+   "mod": "107",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M107** Pipeline de Assets [M] 🔴 — naming, carpetas, formatos, import settings, validadores — *re-baseline 29oct: [x]→["
+  },
+  {
+   "linea": 176,
+   "mod": "108",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M108** Herramientas Internas [M] 🟡 — editores de bloques/NPC/diálogos/recetas, teleport — *re-baseline 29oct: [x]→[ ] "
+  },
+  {
+   "linea": 177,
+   "mod": "109",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M109** Debug Menu [S] 🟡 — teletransporte, tiempo/clima, objetos, regenerar chunks"
+  },
+  {
+   "linea": 189,
+   "mod": "116",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M116** Build System [M] 🟡 — builds automatizados dev/QA/staging/release, versión, firmado"
+  },
+  {
+   "linea": 194,
+   "mod": "121",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M121** Crash Reporting [S] 🟢 — captura de stack, versión, agrupación, priorización — *re-baseline 29oct: [x]→[ ] · cla"
+  },
+  {
+   "linea": 196,
+   "mod": "123",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M123** Contenido Generado por Usuarios [M] 🟢 — moderación, privacidad, términos — *re-baseline 29oct: [x]→[ ] · clase "
+  },
+  {
+   "linea": 199,
+   "mod": "126",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M126** Copyright del Juego [S] 🟢 — registro, evidencias de autoría, titulares — *re-baseline 29oct: [x]→[ ] · clase `s"
+  },
+  {
+   "linea": 201,
+   "mod": "128",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M128** Merchandising [S] 🟢 — soundtrack, poster, artbook (post-lanzamiento) — *re-baseline 29oct: [x]→[ ] · clase `sol"
+  },
+  {
+   "linea": 203,
+   "mod": "130",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M130** Créditos [S] 🟡 — todos los roles, licencias, herramientas, agradecimientos — *re-baseline 29oct: [x]→[ ] · clas"
+  },
+  {
+   "linea": 207,
+   "mod": "131",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M131** Producción del Equipo [S] 🟡 — roles definidos aunque sea equipo chico"
+  },
+  {
+   "linea": 215,
+   "mod": "136",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M136** Prototipo [C] 🔴 — movimiento, cámara, voxel básico, extracción/colocación, mini puzzle, save — *re-baseline 29o"
+  },
+  {
+   "linea": 216,
+   "mod": "137",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M137** Vertical Slice [C] 🔴 — Aurora + templo completo + NPC con arco, arte final, medición de rendimiento"
+  },
+  {
+   "linea": 217,
+   "mod": "138",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M138** Pre-Alpha [C] 🔴 — núcleo jugable, arquitectura estable, primer bioma, primeros sistemas"
+  },
+  {
+   "linea": 218,
+   "mod": "139",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M139** Alpha [C] 🔴 — mecánicas completas, historia jugable, primer balance, QA intensivo — *re-baseline 29oct: [x]→[ ]"
+  },
+  {
+   "linea": 220,
+   "mod": "141",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M141** Release Candidate [C] 🔴 — freeze, builds limpias, saves compatibles, certificación"
+  },
+  {
+   "linea": 226,
+   "mod": "144",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M144** Diseño de Experiencia [M] 🟡 — sensación de llegada, descubrimiento, hogar, comunidad, misterio — *re-baseline 2"
+  },
+  {
+   "linea": 228,
+   "mod": "146",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M146** World Building [C] 🔴 — historia de Aurora, Arquitectos, Resonancia, Primeros Jardineros, Elysia"
+  },
+  {
+   "linea": 229,
+   "mod": "147",
+   "clase": "IMPORTANTE (no bloquea)",
+   "texto": "**M147** Lore Ambiental [M] 🟡 — ruinas/objetos/vegetación que cuentan historias, pistas"
+  },
+  {
+   "linea": 231,
+   "mod": "149",
+   "clase": "NICE-TO-HAVE / post-v1.0",
+   "texto": "**M149** Diseño Sonoro Narrativo [M] 🟢 — sonido de Resonancia, de cada Sello, silencios narrativos"
+  },
+  {
+   "linea": 232,
+   "mod": "150",
+   "clase": "FUNDAMENTAL (bloquea v1.0)",
+   "texto": "**M150** Control Final [M] 🔴 — verificación integral: diversión, economía, mundo vivo, rendimiento — *re-baseline 29oct:"
+  }
+ ],
+ "stamp": "2026-11-25_04-37-54"
+}

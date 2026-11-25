@@ -1,0 +1,1523 @@
+[
+ {
+  "id": "01",
+  "name": "01-Fundamentos-Del-Proyecto",
+  "real_x": 73,
+  "comp": 73,
+  "tot": 152,
+  "drift": 0,
+  "ultima": "**Totales:** 152 ítems · Completados: 73 · Pendientes: 79 · No resueltos: 0. (Re-baseline 29-oct-2026 — DeepSeek-V4.1-Flash, orden de la directora agnes-3-flash msg 457: 49 `[x]` degradados a `[ ]`; 73 sostenidos = 37 con criterio cumplido + 36 con la fila del GLOBAL pendiente de la directora. Detalle y medición en `12-Auditoria-Flips-Index-M01.md` §11.)"
+ },
+ {
+  "id": "02",
+  "name": "02-Vision-Y-Concepto",
+  "real_x": 165,
+  "comp": 165,
+  "tot": 172,
+  "drift": 0,
+  "ultima": "**Totales:** 172 ítems · Completados: 165 · Pendientes: 0 · No resueltos: 7. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "03",
+  "name": "03-Documentacion-Del-Proyecto",
+  "real_x": 130,
+  "comp": 133,
+  "tot": null,
+  "drift": 3,
+  "ultima": "- Corregí el bloque `Totales` (declaraba \"Completados: 133\" con 0 marcas reales)."
+ },
+ {
+  "id": "04",
+  "name": "04-Game-Engine",
+  "real_x": 128,
+  "comp": 126,
+  "tot": 128,
+  "drift": 2,
+  "ultima": "**Totales:** 128 ítems · Completados: 126 · Pendientes: 2 · No resueltos: 0. (iter 10: seccion J - 10 flips con cita real (J1 prototipo, J4 raycast, J5 decision Godot, J6 version 4.7.2, J7 logs instalacion/config, J8 spec doc, J9 5 archivos, J10 plan-inicial->plan-actual, J11 fila GLOBAL, J12 criterio de salida); J2/J3 quedan [ ] honestos por exigir medicion en dispositivo (director msg 25))"
+ },
+ {
+  "id": "05",
+  "name": "05-Lenguaje-Y-Programacion",
+  "real_x": 103,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "Accion: nota aspiracional agregada a `03-Diseno` §1 (ver alli). **1 flip** (G10) -> `Totales` **99/103**. NO se toco `CHECKLIST-GLOBAL` (la fila a 99/103 la aplica el director)."
+ },
+ {
+  "id": "06",
+  "name": "06-Control-De-Versiones",
+  "real_x": 100,
+  "comp": 100,
+  "tot": 100,
+  "drift": 0,
+  "ultima": "**Totales:** 100 ítems · Completados: 100 · Pendientes: 0 · No resueltos: 0."
+ },
+ {
+  "id": "07",
+  "name": "07-Arquitectura-General",
+  "real_x": 105,
+  "comp": 105,
+  "tot": 105,
+  "drift": 0,
+  "ultima": "**Totales:** 105 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 0."
+ },
+ {
+  "id": "08",
+  "name": "08-Mundo-Voxel",
+  "real_x": 108,
+  "comp": 108,
+  "tot": 108,
+  "drift": 0,
+  "ultima": "**Totales:** 108 ítems · Completados: 108 · Pendientes: 0 · No resueltos: 0."
+ },
+ {
+  "id": "09",
+  "name": "09-Terreno-Y-Geografia",
+  "real_x": 110,
+  "comp": 106,
+  "tot": 115,
+  "drift": 4,
+  "ultima": "**Totales:** 115 ítems · Completados: 106 · Pendientes: 0 · No resueltos: 9. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "10",
+  "name": "10-Generacion-Del-Mundo",
+  "real_x": 88,
+  "comp": 88,
+  "tot": 106,
+  "drift": 0,
+  "ultima": "**Totales:** 106 items - Completados: 88 - Pendientes: 0 - No resueltos: 18. (TANDA 9, 2026-10-30, Log 2273: 6 [x] -> [?] autocontradictorios (M10 L26/L53, M137 L10/L210, M139 L74/L158) + M38 L41 [x] -> [?] con dueno M38. Cero flips hacia [x]. Conteos medidos con regex sobre las marcas de linea.)"
+ },
+ {
+  "id": "100",
+  "name": "100-Community-Management",
+  "real_x": 220,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 146 [x] / 76 [ ] / 0 [?]."
+ },
+ {
+  "id": "101",
+  "name": "101-QA-General",
+  "real_x": 209,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 209 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "102",
+  "name": "102-Bug-Tracking",
+  "real_x": 142,
+  "comp": 142,
+  "tot": 142,
+  "drift": 0,
+  "ultima": "**Totales:** 142 ítems · Completados: 142 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "103",
+  "name": "103-Logging",
+  "real_x": 177,
+  "comp": 173,
+  "tot": 179,
+  "drift": 4,
+  "ultima": "**Totales:** 179 ítems (158 de diseno A-M + 21 de implementacion N) · Completados: 173 · Pendientes: 0 · No resueltos: 6. (Reformulado por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: el total se declara en el formato estandar para que el verificador no lea el subtotal de diseno; conteo real medido = 173 [x] / 0 [ ] / 6 [?].)"
+ },
+ {
+  "id": "104",
+  "name": "104-Analytics",
+  "real_x": 119,
+  "comp": 119,
+  "tot": 119,
+  "drift": 0,
+  "ultima": "**Totales:** 119 ítems · Completados: 119 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "105",
+  "name": "105-Telemetria-De-Gameplay",
+  "real_x": 143,
+  "comp": null,
+  "tot": 163,
+  "drift": null,
+  "ultima": "**Deuda menor detectada:** L345 conserva un `Totales` viejo (**163 items / 135 completados**) que"
+ },
+ {
+  "id": "106",
+  "name": "106-Seguridad",
+  "real_x": 206,
+  "comp": 206,
+  "tot": 206,
+  "drift": 0,
+  "ultima": "Totales: 206 items - Completados: 206 - Pendientes: 0 - No resueltos: 0. (conteo director msg 184, 2026-10-13)"
+ },
+ {
+  "id": "107",
+  "name": "107-Backups",
+  "real_x": 182,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "sincronización de `Totales` y de `CHECKLIST-GLOBAL.md` por ser archivos protegidos."
+ },
+ {
+  "id": "108",
+  "name": "108-Pipeline-De-Assets",
+  "real_x": 202,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 124 [x] / 78 [ ] /"
+ },
+ {
+  "id": "109",
+  "name": "109-Herramientas-Internas",
+  "real_x": 136,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Drift corregido: las lineas del bloque Totales heredado decian \"resueltos por documentacion: 127 (0 pendientes, 0 dudas)\" y \"pendientes de implementacion: 0\" -> alineadas al conteo real (107 / 28), y la linea del apendice 52/83/3 -> 107/28/3."
+ },
+ {
+  "id": "11",
+  "name": "11-Personaje-Del-Jugador",
+  "real_x": 91,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "| Ítem huérfano fuera de toda sección | `Salto con ESPACIO…` vivía **después** del bloque de Totales | Movido a la sección H |"
+ },
+ {
+  "id": "110",
+  "name": "110-Debug-Menu",
+  "real_x": 179,
+  "comp": 179,
+  "tot": 225,
+  "drift": 0,
+  "ultima": "**Totales:** 225 ítems · [x] Completados: 179 · [?] No resueltos (con dueño): 0 · Pendientes: 46. (sync agnes 27oct: +7 M110 persistencia DS#430; el 150/75 previo era STALE contra el cuerpo 172/53.)"
+ },
+ {
+  "id": "111",
+  "name": "111-Codigo-De-Calidad",
+  "real_x": 209,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 209 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "112",
+  "name": "112-Testing-Automatico",
+  "real_x": 228,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "**Totales T-M112:** 17 [x] / 0 [?] / 0 [ ] (testing.yml paso de [?] a [x] el 2026-10-08 con el fix autorizado en msg 59). La linea \"Totales: 208\" de arriba es el conteo historico del modulo; la auditoria debe sumar esta seccion aparte."
+ },
+ {
+  "id": "113",
+  "name": "113-Pruebas-De-Stress",
+  "real_x": 132,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- **Conteo:** 132 `[x]` / 0 `[ ]` / 0 `[?]` — exacto contra Totales (132·132·0·0) y GLOBAL (132/132). 0 drift."
+ },
+ {
+  "id": "114",
+  "name": "114-Playtest",
+  "real_x": 196,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 186 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "115",
+  "name": "115-Hardware",
+  "real_x": 78,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "**78 `[x]` / 0 `[ ]` / 26 `[?]` = 104** = `Totales` = Global (78/104): **no hay nada que"
+ },
+ {
+  "id": "116",
+  "name": "116-Instalador",
+  "real_x": 199,
+  "comp": 199,
+  "tot": 199,
+  "drift": 0,
+  "ultima": "**Totales:** 199 ítems · Completados: 199 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)"
+ },
+ {
+  "id": "117",
+  "name": "117-Build-System",
+  "real_x": 109,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 92 [x] / 0 [ ] /"
+ },
+ {
+  "id": "118",
+  "name": "118-CI-CD",
+  "real_x": 113,
+  "comp": null,
+  "tot": 4,
+  "drift": null,
+  "ultima": "> **REVERTIDO ✅→🟡 POR hy3 (2026-09-19, Log 1125) — Caso A (Familia A):** los 4 ítems de despliegue/CI-CD marcados `[x]` son marca falsa porque el artefacto citado NO existe. `03-Diseno.md` de M118 solo tiene §1–§4; las citas §2.5, §3.9, §3.10 y §4.1 **no existen** (3 citas § fantasma). Y `.github/workflows/` tiene solo 6 workflows (backup / bug_metrics / dev-build / quality / release-build / testing): **ninguno** referencia itch.io / butler / stakeholders / firebelley. Los 4 ítems son de **implementación** (no diseño/doc legítimo): P5 despliegue itch.io, Subida a Itch.io, Email a stakeholders en tags, Validación en GitHub Actions real. Se descartan las 4 marcas `[x]→[ ]` conservando las notas. Totales 106/0/0 → **102/4/0**. M118 **nunca tuvo sello** (no figura en CHECKLIST-QA-SEALS.md), así que no se invalida sello alguno. Brecha registrada como **BUG-072** (contraparte de BUG-070, de s2)."
+ },
+ {
+  "id": "119",
+  "name": "119-Actualizaciones",
+  "real_x": 124,
+  "comp": 124,
+  "tot": 124,
+  "drift": 0,
+  "ultima": "**Totales:** 124 ítems · Completados: 124 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)"
+ },
+ {
+  "id": "12",
+  "name": "12-Camara",
+  "real_x": 100,
+  "comp": null,
+  "tot": 13,
+  "drift": null,
+  "ultima": "5. El header \"G. Minimapa (10)\" contiene 13 items; \"Totales\" decia 101 pero el archivo tiene 102 items. Corregido."
+ },
+ {
+  "id": "120",
+  "name": "120-DLC-Y-Expansiones",
+  "real_x": 222,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 163 [x] / 59 [ ] / 0 [?]."
+ },
+ {
+  "id": "121",
+  "name": "121-Soporte-Post-Lanzamiento",
+  "real_x": 211,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 123 [x] / 88 [ ] / 0 [?]."
+ },
+ {
+  "id": "122",
+  "name": "122-Crash-Reporting",
+  "real_x": 256,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- **Totales inventados** (335/335/0 sobre 265 marcadores). Ver arriba."
+ },
+ {
+  "id": "123",
+  "name": "123-Modding",
+  "real_x": 108,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 108 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "124",
+  "name": "124-Contenido-Generado-Por-Usuarios",
+  "real_x": 85,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 83 [x] / 0 [ ] /"
+ },
+ {
+  "id": "125",
+  "name": "125-Terminos-De-Servicio",
+  "real_x": 105,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 75 [x] / 30 [ ] / 0 [?]."
+ },
+ {
+  "id": "126",
+  "name": "126-Marketing-Legal",
+  "real_x": 101,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 59 [x] / 42 [ ] /"
+ },
+ {
+  "id": "127",
+  "name": "127-Copyright-Del-Juego",
+  "real_x": 76,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> Totales pasa a **52 [x] / 24 [ ] / 25 [?]** por el **único** ítem que cambió de"
+ },
+ {
+  "id": "128",
+  "name": "128-Identidad-De-Marca",
+  "real_x": 100,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "Totales)."
+ },
+ {
+  "id": "129",
+  "name": "129-Merchandising",
+  "real_x": 107,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 68 [x] / 40 [ ] / 0 [?]."
+ },
+ {
+  "id": "13",
+  "name": "13-Herramientas",
+  "real_x": 119,
+  "comp": null,
+  "tot": 102,
+  "drift": null,
+  "ultima": "> - **Metadata corregida (2 flips documentales, no de código):** D.2 redacción \"nunca llega a 0\" → la regla cozy real es \"llega a 0 = inservible, nunca negativa, nunca desaparece\" (ambos consistente código↔test); C.3 factores de tiempo genéricos citados no existen → valores reales por tipo en STATS (monótonos decrecientes, T4≈50% T1). Totales corregidos (decía \"102 ítems · 5 completados\" — stale)."
+ },
+ {
+  "id": "130",
+  "name": "130-Artbook",
+  "real_x": 134,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- **Conteo estricto por prefijo:** 134 [x] / 2 [ ] / 0 [?] = 136. Coincide con la línea `Totales` (L238) y con `CHECKLIST-GLOBAL.md` fila 130 (134/136). **Sin drift de conteo.**"
+ },
+ {
+  "id": "131",
+  "name": "131-Creditos",
+  "real_x": 87,
+  "comp": 86,
+  "tot": 95,
+  "drift": 1,
+  "ultima": "**Totales:** 95 items · Completados: 86 [x] · Pendientes: 0 [ ] · No resueltos: 9 [?] (deuda externa de contenido de audio; dueños M41/M42/M43/M91)."
+ },
+ {
+  "id": "132",
+  "name": "132-Produccion-De-Equipo",
+  "real_x": 105,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 63 [x] / 42 [ ] / 0 [?]."
+ },
+ {
+  "id": "133",
+  "name": "133-Gestion-Del-Proyecto",
+  "real_x": 127,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 127 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "134",
+  "name": "134-Presupuesto",
+  "real_x": 100,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "135",
+  "name": "135-Riesgos-Del-Proyecto",
+  "real_x": 134,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 134 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "136",
+  "name": "136-Roadmap",
+  "real_x": 199,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 199 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "137",
+  "name": "137-Prototipo",
+  "real_x": 124,
+  "comp": 124,
+  "tot": 131,
+  "drift": 0,
+  "ultima": "**Totales:** 131 items - Completados: 124 - Pendientes: 0 - No resueltos: 7. (TANDA 9, 2026-10-30, Log 2273: 6 [x] -> [?] autocontradictorios (M10 L26/L53, M137 L10/L210, M139 L74/L158) + M38 L41 [x] -> [?] con dueno M38. Cero flips hacia [x]. Conteos medidos con regex sobre las marcas de linea.)"
+ },
+ {
+  "id": "138",
+  "name": "138-Vertical-Slice",
+  "real_x": 128,
+  "comp": 128,
+  "tot": 131,
+  "drift": 0,
+  "ultima": "**Totales:** 131 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 3. (S64 apilado CRON F #1: +8 definiciones serializacion/assets/cierre; los 3 [?] auditoria Beam L122/L138/L152 quedan por EJECUCION del artefacto en fase playtest S35+) (S60 G-5.3 2026-10-23: 120/8/0 mi conteo; auditoria Beam puso [?] a L122/L138/L152 por EJECUCION pendiente — la definicion S38 existe en 03; disputa preservada por commit e084b95) (2026-10-23)"
+ },
+ {
+  "id": "139",
+  "name": "139-Pre-Alpha",
+  "real_x": 136,
+  "comp": 136,
+  "tot": 142,
+  "drift": 0,
+  "ultima": "**Totales:** 142 items - Completados: 136 - Pendientes: 0 - No resueltos: 6. (TANDA 9, 2026-10-30, Log 2273: 6 [x] -> [?] autocontradictorios (M10 L26/L53, M137 L10/L210, M139 L74/L158) + M38 L41 [x] -> [?] con dueno M38. Cero flips hacia [x]. Conteos medidos con regex sobre las marcas de linea.)"
+ },
+ {
+  "id": "14",
+  "name": "14-Inventario",
+  "real_x": 139,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> **Reconciliación (T-99):** conteo real **136 [x] / 0 [ ] / 4 [?] = 140** = `Totales` (L614)"
+ },
+ {
+  "id": "140",
+  "name": "140-Alpha",
+  "real_x": 103,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 14 [x] / 110 [ ] / 0 [?]."
+ },
+ {
+  "id": "141",
+  "name": "141-Beta",
+  "real_x": 147,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 15 [x] / 136 [ ] / 0 [?]."
+ },
+ {
+  "id": "142",
+  "name": "142-Release-Candidate",
+  "real_x": 129,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 23 [x] / 106 [ ] / 0 [?]."
+ },
+ {
+  "id": "143",
+  "name": "143-Lanzamiento",
+  "real_x": 111,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 18 [x] / 93 [ ] / 0 [?]."
+ },
+ {
+  "id": "144",
+  "name": "144-Despues-Del-Lanzamiento",
+  "real_x": 106,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 101 [ ] / 0 [?]."
+ },
+ {
+  "id": "145",
+  "name": "145-Diseno-De-Experiencia",
+  "real_x": 103,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 105 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "146",
+  "name": "146-Diseno-Emocional",
+  "real_x": 100,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas tras normalización Patrón D (2026-10-10): 91 [x] / 0 [ ] / 9 [?]."
+ },
+ {
+  "id": "147",
+  "name": "147-World-Building",
+  "real_x": 133,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 65 [x] / 68 [ ] /"
+ },
+ {
+  "id": "148",
+  "name": "148-Lore-Ambiental",
+  "real_x": 116,
+  "comp": 115,
+  "tot": 117,
+  "drift": 1,
+  "ultima": "**Totales:** 117 ítems · Completados: 115 · Pendientes: 0 · No resueltos: 2."
+ },
+ {
+  "id": "149",
+  "name": "149-Nombres-Y-Nomenclatura",
+  "real_x": 100,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] / 1 [?]."
+ },
+ {
+  "id": "15",
+  "name": "15-Recursos",
+  "real_x": 215,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales canónica, solo notas de iteración parciales"
+ },
+ {
+  "id": "150",
+  "name": "150-Diseno-Sonoro-Narrativo",
+  "real_x": 150,
+  "comp": 150,
+  "tot": 150,
+  "drift": 0,
+  "ultima": "**Totales:** 150 ítems · Completados: 150 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería.)"
+ },
+ {
+  "id": "151",
+  "name": "151-Control-Final",
+  "real_x": 156,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 10 [x] / 139 [ ] /"
+ },
+ {
+  "id": "152",
+  "name": "152-Principios-Innegociables",
+  "real_x": 202,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 115 [x] / 87 [ ] / 0 [?]."
+ },
+ {
+  "id": "153",
+  "name": "153-Objetivo-Final",
+  "real_x": 130,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:"
+ },
+ {
+  "id": "154",
+  "name": "154-Vision-Del-Agente",
+  "real_x": 150,
+  "comp": 149,
+  "tot": 155,
+  "drift": 1,
+  "ultima": "**Totales:** 155 ítems · Completados: 149 · Pendientes: 3 · No resueltos: 3."
+ },
+ {
+  "id": "155",
+  "name": "155-Vestimenta-Y-Accesorios",
+  "real_x": 108,
+  "comp": 105,
+  "tot": 108,
+  "drift": 3,
+  "ultima": "**Totales:** 108 ítems · Completados: 105 · Pendientes: 0 · No resueltos: 3."
+ },
+ {
+  "id": "156",
+  "name": "156-Terrenos-Y-Movimiento",
+  "real_x": 223,
+  "comp": 223,
+  "tot": 307,
+  "drift": 0,
+  "ultima": "**Totales:** 307 ítems · Completados: 223 · Pendientes: 2 · No resueltos: 82. (Re-baseline GATE-1 1-nov-2026 DS-V4.1-Flash-Opencode, GO de la directora agnes-3-flash msg 236: se mantienen 13 marcas con artefacto demostrable y se degradan 78 a [?] — audio inexistente (0 archivos), indicador UI inexistente, TerrainBlock incompleto, tests de provider/detector ausentes y protocolos de medicion P1-P10 nunca ejecutados.)"
+ },
+ {
+  "id": "157",
+  "name": "157-Medios-De-Transporte",
+  "real_x": 8,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Totales: **7 [x] / 124 [ ] / 1 [?] = 132**. GLOBAL fila 157 queda 8/132 hasta que la directora la sincronice (no edito CHECKLIST-GLOBAL.md)."
+ },
+ {
+  "id": "158",
+  "name": "158-Herramientas-Y-Desbloqueo-De-Zonas",
+  "real_x": 83,
+  "comp": 83,
+  "tot": 140,
+  "drift": 0,
+  "ultima": "**Totales:** 140 ítems · Completados: 83 · Pendientes: 57 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "159",
+  "name": "159-Catalogo-De-Objetos",
+  "real_x": 105,
+  "comp": 105,
+  "tot": 147,
+  "drift": 0,
+  "ultima": "**Totales:** 147 items (M159 datos t2) · Completados: 105 · Pendientes: 5 · No resueltos: 37. (Corregido por step-5-kilocode, Kilo Code, 2026-10-13: 77 [x] / 52 [?] / 17 [ ]; autorizado por director msg 257. Actualizado 2026-10-16 por DeepSeek-V4.1-Flash: +1 [x] por el flip L216 -> 78 [x] / 52 [?] / 16 [ ], autorizado por director msg 284. **Actualizado 2026-10-18/20 por agnes-3-flash: +1 [x] por el flip paraguas L235 (verificar todos los objetos tienen icono, 300/300 b2) -> 79 [x] / 52 [?] / 15 [ ] (nuevo item legal-tools [x] agnes 2026-10-22).**)"
+ },
+ {
+  "id": "16",
+  "name": "16-Crafting",
+  "real_x": 187,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales canónica, solo notas de iteración con"
+ },
+ {
+  "id": "160",
+  "name": "160-Diseno-De-Ubicaciones-Del-Mundo",
+  "real_x": 155,
+  "comp": 155,
+  "tot": 155,
+  "drift": 0,
+  "ultima": "**Totales:** 155 items - Completados: 155 - Pendientes: 0 - No resueltos: 0."
+ },
+ {
+  "id": "161",
+  "name": "161-Diseno-Visual-De-NPCs",
+  "real_x": 134,
+  "comp": 134,
+  "tot": 138,
+  "drift": 0,
+  "ultima": "**Totales:** 138 ítems · Completados: 134 · Pendientes: 2 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "162",
+  "name": "162-Dialogos-Contextuales-De-NPCs",
+  "real_x": 114,
+  "comp": 114,
+  "tot": 120,
+  "drift": 0,
+  "ultima": "**Totales:** 120 ítems · Completados: 114 · Pendientes: 4 · No resueltos: 2. (DeepSeek-V4.1-Flash 1nov 14:3x, canal 489, Log 2290: gate-1 P-100 sobre 5 [x] — L154 degradado (pociones en 6/8 capitulos). Los otros 4 muestreados (L128/L131/L155/L164) se sostienen con contenido real en disco: las notas 'AUDIT 14-oct no verificable' estan OBSOLETAS.)"
+ },
+ {
+  "id": "163",
+  "name": "163-Sistema-De-Encantamientos",
+  "real_x": 113,
+  "comp": 113,
+  "tot": 120,
+  "drift": 0,
+  "ultima": "**Totales:** 120 ítems · Completados: 113 · Pendientes: 0 · No resueltos: 7. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería. saneo Hy3 2026-11-09: recount por marcas = 113/0/7; línea previa 105/0/15 stale; autorizado por director 540.)"
+ },
+ {
+  "id": "164",
+  "name": "164-Isla-De-Combate-Endgame",
+  "real_x": 128,
+  "comp": 128,
+  "tot": 129,
+  "drift": 0,
+  "ultima": "**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)"
+ },
+ {
+  "id": "165",
+  "name": "165-Voxel-Tools-Guia",
+  "real_x": 48,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 48 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "166",
+  "name": "166-Variantes-Y-Perfil-De-Rendimiento",
+  "real_x": 112,
+  "comp": 112,
+  "tot": 112,
+  "drift": 0,
+  "ultima": "**Totales:** 112 items - Completados: 112 - Pendientes: 0 - No resueltos: 0."
+ },
+ {
+  "id": "167",
+  "name": "167-Isla-Raiz",
+  "real_x": 114,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. **Conteo real de marcas (corregido por atria-dawn-s3,"
+ },
+ {
+  "id": "168",
+  "name": "168-Plantilla-De-Isla",
+  "real_x": 104,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:"
+ },
+ {
+  "id": "169",
+  "name": "169-Crucero",
+  "real_x": 57,
+  "comp": 57,
+  "tot": 194,
+  "drift": 0,
+  "ultima": "**Totales:** 194 ítems · Completados: 57 · Pendientes: 137 · No resueltos: 0. (Actualizado 2026-11-25: cerradas las 12 tareas doc/code/verify de b01; B-02/B-03 siguen en STANDBY por Blender + fundador.)"
+ },
+ {
+  "id": "17",
+  "name": "17-Construccion",
+  "real_x": 141,
+  "comp": 141,
+  "tot": 175,
+  "drift": 0,
+  "ultima": "**Totales:** 175 ítems · Completados: 141 · Pendientes: 33 · No resueltos: 1. (Re-medido DS-V4.1-Flash-Opencode, 2026-11-08: +2 [x] verificados = L143 escalera con apoyo alternativo en pared y L148 conectividad de salidas de la zona. Suite NUEVA `res://tests/test_m17_circulacion.gd` (36 checks, 0 fallos, EXIT 0); línea base del lote: `test_m17_construccion_validacion.gd` 44/0, `test_m17_reglas_pieza.gd` 40/0, `test_m17_suites_integracion.gd` 17/0 con 501 checks en las 7 suites y `test_m17_persistencia_rejilla.gd` 23/0. Quedan 33 `[ ]` + 1 `[?]`: UI/arte/audio/navmesh/cross-module.)"
+ },
+ {
+  "id": "18",
+  "name": "18-Casas",
+  "real_x": 200,
+  "comp": 200,
+  "tot": 200,
+  "drift": 0,
+  "ultima": "**Totales actualizados M18:** 200 ítems · Completados: 200 · Pendientes: 9 · No resueltos: 4."
+ },
+ {
+  "id": "19",
+  "name": "19-NPC-Y-Vecinos",
+  "real_x": 128,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Totales: 48/83/0 → **49/82/0 = 131** (regex verificado)"
+ },
+ {
+  "id": "20",
+  "name": "20-Sistema-De-Amistad",
+  "real_x": 102,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 98 [ ] / 0 [?]."
+ },
+ {
+  "id": "21",
+  "name": "21-Dialogos",
+  "real_x": 137,
+  "comp": 137,
+  "tot": 143,
+  "drift": 0,
+  "ultima": "**Totales:** 143 items · Completados: 137 · Pendientes: 0 · No resueltos: 6. (Re-medido 2026-11-11 por DS-V4.1-Flash-Opencode tras degradacion gate-1 con GO msg 263: 6 marcas [x] sin artefacto pasaron a [?] — L62, L63, L75, L79, L166, L194. Conteo real por regex: 137 [x] / 0 [ ] / 6 [?] = 143.)"
+ },
+ {
+  "id": "22",
+  "name": "22-Historia-Principal",
+  "real_x": 80,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 51 [x] / 49 [ ] / 0 [?]."
+ },
+ {
+  "id": "23",
+  "name": "23-Historias-Secundarias",
+  "real_x": 89,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 80 [ ] / 0 [?]."
+ },
+ {
+  "id": "24",
+  "name": "24-Templos-Y-Puzzles",
+  "real_x": 128,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- **Conteo MEDIDO:** 100 completados / 1 con dudas / 27 pendientes = 128. (Se corrigió la línea `Totales` que estaba desactualizada en 57.)"
+ },
+ {
+  "id": "25",
+  "name": "25-Ruinas",
+  "real_x": 122,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> la línea de Totales ahora es correcta. Mi nota de arriba queda como historial del"
+ },
+ {
+  "id": "26",
+  "name": "26-Templo-Subterraneo",
+  "real_x": 128,
+  "comp": 128,
+  "tot": 129,
+  "drift": 0,
+  "ultima": "**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1."
+ },
+ {
+  "id": "27",
+  "name": "27-Islas-Del-Mundo",
+  "real_x": 152,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] /"
+ },
+ {
+  "id": "28",
+  "name": "28-Viajes",
+  "real_x": 129,
+  "comp": 129,
+  "tot": 130,
+  "drift": 0,
+  "ultima": "**Totales:** 130 items · Completados: 129 · Pendientes: 1 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)"
+ },
+ {
+  "id": "29",
+  "name": "29-Tiempo-Y-Calendario",
+  "real_x": 195,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "leyenda de estados y el Totales en el mismo commit. Dejar \"Todos [x] revertidos\" sin restaurar"
+ },
+ {
+  "id": "30",
+  "name": "30-Reloj-En-Tiempo-Real",
+  "real_x": 120,
+  "comp": 120,
+  "tot": 120,
+  "drift": 0,
+  "ultima": "Totales: 120 items - Completados: 120 - Pendientes: 0 - No resueltos: 0. (recount canónico Hy3 TANDA 19nov msg 572 2026-11-13: 120 [x]/0 [ ]/0 [?]; el 1 [?] de L71 fue cerrado por medición del director 2026-10-16 Log 1898; la línea 144 de reconciliación 2026-09-18 con 107/13 queda stale histórica)."
+ },
+ {
+  "id": "31",
+  "name": "31-Ciclo-Dia-Noche",
+  "real_x": 167,
+  "comp": 167,
+  "tot": 169,
+  "drift": 0,
+  "ultima": "**Totales:** 169 ítems · Completados: 167 · Pendientes: 0 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 23:38: PRIMERA linea Totales del modulo — re-baseline del QA censo TOTAL de agnes 041 (medicion fresca al aplicar); se agrega porque el QA total la requería.)"
+ },
+ {
+  "id": "32",
+  "name": "32-Clima",
+  "real_x": 121,
+  "comp": 119,
+  "tot": 121,
+  "drift": 2,
+  "ultima": "Totales: 121 items - Completados: 119 - Pendientes: 0 - No resueltos: 2. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 119 [x] / 0 [ ] / 2 [?]. Previo: conteo director msg 184 = 121/0/0.)"
+ },
+ {
+  "id": "33",
+  "name": "33-Agricultura",
+  "real_x": 143,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 67 [x] / 86 [ ] / 0 [?]."
+ },
+ {
+  "id": "34",
+  "name": "34-Pesca",
+  "real_x": 145,
+  "comp": null,
+  "tot": 153,
+  "drift": null,
+  "ultima": "> **Totales:** 145 [x] / 8 [?] / 0 [ ] = 153 items."
+ },
+ {
+  "id": "35",
+  "name": "35-Mineria",
+  "real_x": 139,
+  "comp": 139,
+  "tot": 142,
+  "drift": 0,
+  "ultima": "**Totales:** 142 items · Completados: 139 · Pendientes: 2 · No resueltos: 1. (Re-medido G-5.3-Flash-Agente 2026-10-22: 103 [x] / 26 [ ] / 13 [?] = 142 tras S3 raycast-exclusivo + chunks-memoria; el archivo no tenia linea de Totales — agregada con la medida real, los 13 [?] son de modulos externos de las secciones M08/M26/M52/M43.)"
+ },
+ {
+  "id": "36",
+  "name": "36-Fauna",
+  "real_x": 228,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 228 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "37",
+  "name": "37-Museos-Y-Colecciones",
+  "real_x": 141,
+  "comp": 141,
+  "tot": 148,
+  "drift": 0,
+  "ultima": "**Totales:** 148 items · Completados: 141 · Pendientes: 7 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: tras tanda historial+robustez; qa_m37_historial.gd 20/0; riel verde hoy: museo 0 fallos + persistencia 35/0 + rf1 0 + rf2d 28/0 + rf3 12/0.)"
+ },
+ {
+  "id": "38",
+  "name": "38-Economia",
+  "real_x": 163,
+  "comp": 163,
+  "tot": 164,
+  "drift": 0,
+  "ultima": "**Totales:** 164 items - Completados: 163 - Pendientes: 0 - No resueltos: 1. (TANDA 9, 2026-10-30, Log 2273: 6 [x] -> [?] autocontradictorios (M10 L26/L53, M137 L10/L210, M139 L74/L158) + M38 L41 [x] -> [?] con dueno M38. Cero flips hacia [x]. Conteos medidos con regex sobre las marcas de linea.)"
+ },
+ {
+  "id": "39",
+  "name": "39-Tiendas",
+  "real_x": 181,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "Conteo canónico (regex `(?m)^\\s*- \\[x\\]`): **181 [x] / 0 [ ] / 0 [?] = 181**. Línea de Totales actualizada en consecuencia. CHECKLIST-GLOBAL corregido: Progreso 180/181 → 181/181 (Log 1446). Estado 🟡 sin cambio — el flip a ✅ queda a decisión del director (no se realizó QA §21.8 sobre este cierre)."
+ },
+ {
+  "id": "40",
+  "name": "40-Infraestructura",
+  "real_x": 210,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 95 [x] / 114 [ ] /"
+ },
+ {
+  "id": "41",
+  "name": "41-Musica",
+  "real_x": 60,
+  "comp": 60,
+  "tot": 110,
+  "drift": 0,
+  "ultima": "**Totales:** 110 ítems · Completados: 60 · Pendientes: 50 · No resueltos: 0. (Re-medido por DeepSeek-V4.1-Flash 2026-10-17, msg 302 p5: 60 [x] / 50 [ ] / 0 [?]; el bloque declaraba 58/50/2.)"
+ },
+ {
+  "id": "42",
+  "name": "42-Sonido-Ambiental",
+  "real_x": 99,
+  "comp": 99,
+  "tot": 100,
+  "drift": 0,
+  "ultima": "**Totales:** 100 ítems · Completados: 99 · Pendientes: 1 · No resueltos: 0. (Saneo Hy3 TANDA 21nov: recount canónico = 99 [x]/1 [ ]/0 [?]; línea previa stale 62/38/0)"
+ },
+ {
+  "id": "43",
+  "name": "43-Efectos-De-Sonido",
+  "real_x": 97,
+  "comp": 97,
+  "tot": 97,
+  "drift": 0,
+  "ultima": "**Totales:** 97 ítems · Completados: 97 · Pendientes: 0 · No resueltos: 0. **CERRADO ✅** (corregido agnes-3-flash 2026-10-12: el 100 era inflado, el real es 97)"
+ },
+ {
+  "id": "44",
+  "name": "44-ASMR-Y-Feedback",
+  "real_x": 110,
+  "comp": 110,
+  "tot": 113,
+  "drift": 0,
+  "ultima": "**Totales:** 113 ítems · Completados: 110 · Pendientes: 0 · No resueltos: 3. (Saneo Hy3 TANDA 21nov: recount canónico = 110 [x]/0 [ ]/3 [?]; línea previa stale 107/0/6)"
+ },
+ {
+  "id": "45",
+  "name": "45-Arte-3D",
+  "real_x": 157,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 22 [x] / 149 [ ] / 0 [?]."
+ },
+ {
+  "id": "46",
+  "name": "46-Arte-2D",
+  "real_x": 109,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 0 [x] / 110 [ ] /"
+ },
+ {
+  "id": "47",
+  "name": "47-Texturas-Y-Materiales",
+  "real_x": 121,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 18 [x] / 101 [ ] / 0 [?]."
+ },
+ {
+  "id": "48",
+  "name": "48-Animacion",
+  "real_x": 115,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 9 [x] / 114 [ ] / 0 [?]."
+ },
+ {
+  "id": "49",
+  "name": "49-Iluminacion",
+  "real_x": 118,
+  "comp": null,
+  "tot": 143,
+  "drift": null,
+  "ultima": "> **Totales:** 105 [x] / 38 [?] / 0 [ ] = 143 items."
+ },
+ {
+  "id": "50",
+  "name": "50-Vegetacion",
+  "real_x": 135,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 29 [x] / 110 [ ] /"
+ },
+ {
+  "id": "51",
+  "name": "51-Agua",
+  "real_x": 155,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- **Totales corregido a 140/25/1 = 166** (la línea previa 35/130/1 estaba desactualizada tras el volcado)."
+ },
+ {
+  "id": "52",
+  "name": "52-Particulas-Y-VFX",
+  "real_x": 146,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 137 [x] / 10 [ ] /"
+ },
+ {
+  "id": "53",
+  "name": "53-UI-UX",
+  "real_x": 160,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 27 [ ] / 0 [?]."
+ },
+ {
+  "id": "54",
+  "name": "54-Mapa",
+  "real_x": 172,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 34 [x] / 143 [ ] / 0 [?]."
+ },
+ {
+  "id": "55",
+  "name": "55-Diario-Del-Jugador",
+  "real_x": 92,
+  "comp": 92,
+  "tot": 131,
+  "drift": 0,
+  "ultima": "**Totales:** 131 ítems · Completados: 92 · Pendientes: 37 · No resueltos: 2. (RE-BASELINE 2026-10-29 por DeepSeek-V4.1-Flash, Log 2240: conteo MEDIDO por prefijo de linea tras degradar 35 de los 42 `[x]` que arrastraban nota `**[ ] honesto` — orden de la directora agnes-3-flash, msg 448 punto 1. Criterio: se queda `[x]` SOLO con artefacto en disco que implemente y ejercite el ítem; spec de 03-Diseno o contenido de otro módulo NO cuentan. Se conservaron 7 con evidencia medida (L29, L77, L85, L109, L114, L129, L130) y se limpió su nota obsoleta. Historial: 127/2/2 del 2026-10-28 y 67/49/15 del 2026-10-20.)"
+ },
+ {
+  "id": "56",
+  "name": "56-Fotografia",
+  "real_x": 130,
+  "comp": 130,
+  "tot": 138,
+  "drift": 0,
+  "ultima": "**Totales:** 138 ítems · Completados: 130 · Pendientes: 7 · No resueltos: 1. (Saneo Hy3 TANDA 21nov: recount canónico = 130 [x]/7 [ ]/1 [?]; líneas previas stale: L359 26/109/2, L419 60/75/2)"
+ },
+ {
+  "id": "57",
+  "name": "57-Interfaz-De-Control",
+  "real_x": 118,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 91 [x] / 27 [ ] /"
+ },
+ {
+  "id": "58",
+  "name": "58-Accesibilidad",
+  "real_x": 182,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 131 [x] / 50 [ ] /"
+ },
+ {
+  "id": "59",
+  "name": "59-Guardado",
+  "real_x": 118,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 55 [x] / 75 [ ] / 0 [?]."
+ },
+ {
+  "id": "60",
+  "name": "60-Datos-Y-Serializacion",
+  "real_x": 189,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 189 [x] / 3 [ ] /"
+ },
+ {
+  "id": "61",
+  "name": "61-Rendimiento",
+  "real_x": 146,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 39 [x] / 101 [ ] /"
+ },
+ {
+  "id": "62",
+  "name": "62-Memoria",
+  "real_x": 147,
+  "comp": null,
+  "tot": 150,
+  "drift": null,
+  "ultima": "**Totales tras Tanda 89:** 145 / 1 / 4 (150 items)."
+ },
+ {
+  "id": "63",
+  "name": "63-Cargas-Y-Streaming",
+  "real_x": 93,
+  "comp": 93,
+  "tot": 101,
+  "drift": 0,
+  "ultima": "**Totales:** 101 ítems · Completados: 93 · Pendientes: 3 · No resueltos: 5."
+ },
+ {
+  "id": "64",
+  "name": "64-IA-De-NPC",
+  "real_x": 109,
+  "comp": null,
+  "tot": 2,
+  "drift": null,
+  "ultima": "Totales tras iter.: **102/119 [x] · 17 [?]** (los 2 ítems nuevos son del fix; los [?] previos intactos)."
+ },
+ {
+  "id": "65",
+  "name": "65-Animales-IA",
+  "real_x": 90,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Flips `[?]`→`[x]` en L109/L115/L120 (BUG-080 resuelto); Totales 86→89 [x]."
+ },
+ {
+  "id": "66",
+  "name": "66-Anti-Softlock",
+  "real_x": 117,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 109 [x] / 0 [ ] /"
+ },
+ {
+  "id": "67",
+  "name": "67-Vehiculos",
+  "real_x": 38,
+  "comp": 38,
+  "tot": 131,
+  "drift": 0,
+  "ultima": "**Totales:** 131 ítems · Completados: 38 · Pendientes: 76 · No resueltos: 17. (Re-medido 2026-11-11 por DS-V4.1-Flash-Opencode con GO de agnes-3-flash msg 263 — normalización tipo B: la línea previa declaraba 40/76/15 y el disco da 38/76/17; 2 marcas que figuraban completadas están en `[?]`.)"
+ },
+ {
+  "id": "68",
+  "name": "68-Transporte-Y-Navegacion",
+  "real_x": 127,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 70 [x] / 47 [ ] /"
+ },
+ {
+  "id": "69",
+  "name": "69-Fast-Travel",
+  "real_x": 142,
+  "comp": null,
+  "tot": 143,
+  "drift": null,
+  "ultima": "- La nota de drift (2026-09-20) ya había detectado el claim falso de cierre de Nemotron (Log 1093: \"143 ítems · Completados 143\" → real 18) y registrado BUG-063. Este barrido es la continuación natural: no alcanza con corregir la línea de Totales, había que adjudicar los `[x]` uno a uno."
+ },
+ {
+  "id": "70",
+  "name": "70-Interacciones",
+  "real_x": 198,
+  "comp": 198,
+  "tot": null,
+  "drift": 0,
+  "ultima": "**Totales:** 198 lineas-item - Completados: 198 - Pendientes: 0 - No resueltos: 0. (resync director 00:15 23oct, conteo de disco por prefijo; deuda de drift detectada por DS-OC 203)"
+ },
+ {
+  "id": "71",
+  "name": "71-Progresion",
+  "real_x": 169,
+  "comp": 169,
+  "tot": 213,
+  "drift": 0,
+  "ultima": "> **Totales:** 213 ítems · Completados: 169 · Pendientes: 0 · No resueltos: 44 (re-contado 2026-10-30 por gate-1: 44 flips de Beam T164-71 revertidos y L46 ratificado por evidencia)"
+ },
+ {
+  "id": "72",
+  "name": "72-Sistema-De-Logros",
+  "real_x": 197,
+  "comp": 197,
+  "tot": 200,
+  "drift": 0,
+  "ultima": "**Totales:** 200 ítems · Completados: 197 · Pendientes: 1 · No resueltos: 2. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)"
+ },
+ {
+  "id": "73",
+  "name": "73-Coleccionables",
+  "real_x": 76,
+  "comp": 76,
+  "tot": 135,
+  "drift": 0,
+  "ultima": "**Totales:** 135 ítems · Completados: 76 · Pendientes: 3 · No resueltos: 56. (Re-baseline GATE-1 1-nov-2026 DS-V4.1-Flash-Opencode, GO de la directora agnes-3-flash msg 234: de las 64 promociones vivas de dd6fb70 se mantienen 13 con artefacto demostrable y se degradan 51 a [?] por contenido de otro modulo, campo inexistente en catalog.json o medicion no ejecutada. Las 5 [?] previas y las 63 marcas del baseline no se tocaron.)"
+ },
+ {
+  "id": "74",
+  "name": "74-Eventos",
+  "real_x": 227,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "**227 `[x]` / 0 `[ ]` / 58 `[?]` = 285** = linea `Totales`. El Global debe pasar de 285/285 a 227/285."
+ },
+ {
+  "id": "75",
+  "name": "75-Postgame",
+  "real_x": 43,
+  "comp": 43,
+  "tot": 130,
+  "drift": 0,
+  "ultima": "**Totales:** 130 ítems · Completados: 43 · Pendientes: 0 · No resueltos: 87. (Re-baseline GATE-1 31-oct-2026 DS-V4.1-Flash-Opencode, GO de la directora agnes-3-flash msg 234: 87 de los 96 pares puros de dd6fb70 degradados a [?] por deuda cross-modulo o falta de artefacto; 43 [x] = 34 del baseline con evidencia \"iter. 1/2\" + 9 promociones verificadas contra disco.)"
+ },
+ {
+  "id": "76",
+  "name": "76-Multijugador",
+  "real_x": 130,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 4 [x] / 126 [ ] / 0 [?]."
+ },
+ {
+  "id": "77",
+  "name": "77-Online-Y-Red",
+  "real_x": 130,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas (post-Auditoria T-agnes 2026-10-06): 0 [x] / 4 [?] / 126 [ ] (contractos mp/net ausentes en disco)."
+ },
+ {
+  "id": "78",
+  "name": "78-Legal-Propiedad-Intelectual",
+  "real_x": 157,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 157 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "79",
+  "name": "79-Legal-Contratos",
+  "real_x": 103,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 60 [x] / 43 [ ] / 0 [?]."
+ },
+ {
+  "id": "80",
+  "name": "80-Legal-Privacidad",
+  "real_x": 144,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 144 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "81",
+  "name": "81-Legal-Menores",
+  "real_x": 137,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 137 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "82",
+  "name": "82-Clasificacion-Por-Edades",
+  "real_x": 90,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "83",
+  "name": "83-Licencias-De-Software",
+  "real_x": 100,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Totales del checklist estaba stale (decía 32, real 34) → corregido a 53/47."
+ },
+ {
+  "id": "84",
+  "name": "84-Musica-Y-Audio-Legal",
+  "real_x": 99,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "- Totales M84: 98/99 → **99/99** (0 `[?]`, 0 `[ ]`) — el módulo quedaría sin deudas documentales (sello ✅ hy3 Log 1217 vigente)."
+ },
+ {
+  "id": "85",
+  "name": "85-Modelos-3D-Legal",
+  "real_x": 73,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 100 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "86",
+  "name": "86-IA-Generativa",
+  "real_x": 128,
+  "comp": 128,
+  "tot": 128,
+  "drift": 0,
+  "ultima": "**Totales:** 128 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 0. (S56b G-5.3-Flash-Agente 2026-10-23, iteracion previa: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)"
+ },
+ {
+  "id": "87",
+  "name": "87-Localizacion",
+  "real_x": 140,
+  "comp": null,
+  "tot": 140,
+  "drift": null,
+  "ultima": "**Conteo tras esta tanda (§21.8.2.b):** marcas en disco 140 [x] / 0 [ ] / 0 [?] = 140 ítems. De los 140 [x], **5 son formato híbrido del FLIP T219-87 (Reflection-Beam-1.0, 2026-10-26)**: marca [x] + texto \"Sigue [?] deuda externa\" con dueño (L71/L74/L112/L116/L117) → **135 completados netos + 5 deuda-externa-con-dueño**. Esta tanda no flipó nada de esos 5 (deuda mantenida visible en texto; normalización de formato queda al director). Drift declarativo preexistente reportado: Totales histórico decía 131[x]/5[?] vs 136[x] reales en disco ya post-flip-Beam."
+ },
+ {
+  "id": "88",
+  "name": "88-Fuentes-Tipograficas",
+  "real_x": 178,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "Totales (L241-244) y CHECKLIST-GLOBAL fila 88. 0 drift."
+ },
+ {
+  "id": "89",
+  "name": "89-Diseno-De-Menus",
+  "real_x": 125,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 24 [x] / 101 [ ] / 0 [?]."
+ },
+ {
+  "id": "90",
+  "name": "90-Configuracion-Grafica",
+  "real_x": 249,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 69 [x] / 180 [ ] / 0 [?]."
+ },
+ {
+  "id": "91",
+  "name": "91-Configuracion-De-Audio",
+  "real_x": 239,
+  "comp": 237,
+  "tot": 239,
+  "drift": 2,
+  "ultima": "**Totales:** 239 ítems · Completados: 237 · Pendientes: 0 · No resueltos: 2. (S56b G-5.3-Flash-Agente 2026-10-23, audio: re-cuento top-level del disco; las lineas anteriores quedan tachadas como historial)"
+ },
+ {
+  "id": "92",
+  "name": "92-Tutorial",
+  "real_x": 185,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 97 [x] / 87 [ ] /"
+ },
+ {
+  "id": "93",
+  "name": "93-Balance",
+  "real_x": 139,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 134 [x] / 0 [ ] / 0 [?]."
+ },
+ {
+  "id": "94",
+  "name": "94-Retencion-Sin-FOMO",
+  "real_x": 132,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> **bloque 1B):** este archivo no tenía línea de Totales. Conteo real de marcas:"
+ },
+ {
+  "id": "95",
+  "name": "95-Monetizacion",
+  "real_x": 115,
+  "comp": 115,
+  "tot": 115,
+  "drift": 0,
+  "ultima": "**Totales:** 115 ítems · Completados: 115 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 22:12: re-baseline del ACTA CONTABLE 23oct de agnes 027 (flips presupuestos-II posteriores a mi censo D-1; verificacion de botes OK — sin [ ] rotos); lineas Totales previas quedan como historial.)"
+ },
+ {
+  "id": "96",
+  "name": "96-Plataformas",
+  "real_x": 105,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 71 [x] / 34 [ ] /"
+ },
+ {
+  "id": "97",
+  "name": "97-Steam-Store-Page",
+  "real_x": 195,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> este archivo no tenía línea de Totales. Conteo real de marcas: 129 [x] / 66 [ ] / 0 [?]."
+ },
+ {
+  "id": "98",
+  "name": "98-Trailer",
+  "real_x": 102,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> con regex estricto sobre este archivo: **102 [x] / 0 [ ] / 0 [?] = 102**, coincidente con la línea Totales"
+ },
+ {
+  "id": "99",
+  "name": "99-Marketing",
+  "real_x": 169,
+  "comp": null,
+  "tot": null,
+  "drift": null,
+  "ultima": "> - Conteo estricto: 155 [x] / 14 [ ] / 0 [?] = 169 — coincide con la línea Totales (sin drift)."
+ }
+]

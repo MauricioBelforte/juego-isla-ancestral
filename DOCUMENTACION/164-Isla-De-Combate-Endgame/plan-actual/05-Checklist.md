@@ -158,7 +158,7 @@
 
 
 **Totales:** 129 ítems · Completados: 123 · Pendientes: 0 · No resueltos: 6 — drift corregido (sección G = 9 items) + degradación L31/L154 (QA s2 Log 1776) + degradación B.32/H.148 (muestreo Hy3 219, 2026-10-15).
-**Totales:** 129 ítems · Completados: 120 · Pendientes: 0 · No resueltos: 9. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 129 ítems · Completados: 128 · Pendientes: 0 · No resueltos: 1. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 > **Degradacion por citas rotas (2026-10-23, DeepSeek-V4.1-Flash, P4/P5b dir 369):** 3 item(s) pasaron de `[x]` a `[?]` porque el artefacto citado no existe en disco ni en la historia de git. Conteo de marcas MEDIDO tras el cambio: 120 [x] / 0 [ ] / 9 [?] = 129.
 
 > **Iter 1 — atria-dawn (Atria-Dawn-Preview) / Kilo Code, 2026-09-18, Log 1016.**

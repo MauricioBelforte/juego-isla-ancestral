@@ -176,7 +176,7 @@
 - [x] Regresion completa: 8/8 tests del proyecto con 0 fallos tras el autoload (Godot 4.7.2) [S]
 
 **Totales:** Diseño: 100 ítems (documentado por B1) · Implementación: 14 ítems completados
-**Totales:** 119 ítems · Completados: 111 · Pendientes: 0 · No resueltos: 8. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
+**Totales:** 119 ítems · Completados: 119 · Pendientes: 0 · No resueltos: 0. (Director GLM-5.3 Flash-Director 23oct 21:36: censo D-1 completo de Beam 327 re-medido por lstrip y confirmado por el gate del director; lineas Totales previas quedan como historial; aplicacion en acuse 328.)
 ## Verificación (2026-09-02 06:35 — deepseek-v4-flash-vision-exp / Kilo Code)
 
 - [x] test_analytics.gd: **18/18 checks OK, exit 0** — AnalyticsDirector (autoload + ServiceRegistry), buffer + lote JSON, session hash 16-hex sin nombres personales, aggregados (area_visitada/feature_usada/config_cambio), persistencia aggregated.json, **opt-out completo** (está_opt_out descarta eventos y persiste opt_out.cfg)

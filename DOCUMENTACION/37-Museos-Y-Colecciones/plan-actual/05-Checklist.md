@@ -281,4 +281,4 @@ logica verificada, no el 3D/UI.
 - test_museo_rf3.gd 0/0 EXIT 0 (save->load->reconstruir + idempotencia + expo huorfana + pieza inexistente + parcial). RF1/RF2 siguen 0/0.
 - L111 (Registro persistente) queda cubierto por el ISaveProvider del registry; lo dejo para que el director lo confirme en su flip.
 
-**Totales:** 148 items · Completados: 98 · Pendientes: 50 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: tras tanda historial+robustez; qa_m37_historial.gd 20/0; riel verde hoy: museo 0 fallos + persistencia 35/0 + rf1 0 + rf2d 28/0 + rf3 12/0.)
+**Totales:** 148 items · Completados: 141 · Pendientes: 7 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: tras tanda historial+robustez; qa_m37_historial.gd 20/0; riel verde hoy: museo 0 fallos + persistencia 35/0 + rf1 0 + rf2d 28/0 + rf3 12/0.)

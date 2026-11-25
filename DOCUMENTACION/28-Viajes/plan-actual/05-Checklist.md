@@ -425,7 +425,7 @@
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, bloque 1C):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 50 [x] / 80 [ ] / 0 [?].
 > Las marcas no se tocaron.
-**Totales:** 130 items · Completados: 53 · Pendientes: 77 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)
+**Totales:** 130 items · Completados: 129 · Pendientes: 1 · No resueltos: 0. (Re-medido G-5.3-Flash-Agente 2026-10-22: 53 [x] / 77 [ ] / 0 [?] tras tanda UI-travel+banderas; qa_m28_ui_travel.gd 7/0.)
 
 ## Sello §21.8 (2026-10-25, agnes-3-flash directora + Hy3 gate-2)
 - Estado final: 129 [x] / 1 [ ] / 0 [?] = 130. 0 [?] propios.

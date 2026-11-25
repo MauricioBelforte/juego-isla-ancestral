@@ -295,4 +295,4 @@
 - [ ] Integrar en Godot con `TerrainLocator` y M17 [C]
 
 **Totales sección P:** 20 ítems · Completados: 18 · Pendientes: 2 · No resueltos: 0.
-**Totales actualizados M18:** 200 ítems · Completados: 193 · Pendientes: 7 · No resueltos: 0.
+**Totales actualizados M18:** 200 ítems · Completados: 200 · Pendientes: 9 · No resueltos: 4.

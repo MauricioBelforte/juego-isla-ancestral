@@ -340,4 +340,4 @@ evidencia real en disco (regla §21.4.3: `[x]` sin evidencia = degradar a `[?]`)
 ## Notas del Agente — Auditoría T (agnes-3-flash, Kilo Code, 2026-10-06, bloque 6)
 Los [139 [x]] verificados contra disco y sustentados; 0 degradaciones. Evidencia: test_ui_framework.gd 0/0 = scripts/ui/; P-37 (Log 1151) hooks i18n/accesibilidad en ui_manager.gd — [x] de traducción en vivo legítimos (confirmado por Atria s2/68).
 
-
+> **KnownIssue b59 (logros.json:** 18 refs `res://assets/ui/logros/*.png` inexistentes en todo el repo; verificadas por nombre exacto el 2026-11-25. Iconos: alma_de_la_isla.png, amigo_cercano.png, coleccionista.png, cosecha_diez.png, dias_en_aurora.png, mar_adentro_10.png, minero_veterano.png, misionero.png, pescador_principiante.png, primer_cultivo.png, primer_mineral.png, primer_sello.png, primera_isla.png, ruina_restaurada.png, secreto_guardian.png, siete_sellos.png, vecino.png, viajero.png. Solo documentado (T59-09); sin crear archivos ni fixear codigo. Ver Log 2438.
