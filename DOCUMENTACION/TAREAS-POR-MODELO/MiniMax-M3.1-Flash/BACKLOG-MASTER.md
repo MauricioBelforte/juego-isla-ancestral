@@ -6,6 +6,11 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P10 (**0 flips**): auditoria de coherencia docs<->codigo sobre `04-Codigo.md` — **7 derivas reales** (tabla con rutas `res://src/` inexistentes, `build_validator.gd`, `modo_construccion.gd`, `VoxelWorld.escribir_celdas`, `Inventario.consultar/descontar/devolver`, `ConstruccionData`, `noche_cambio`/`recargas_festival`, `devolve_al_pool`) corregidas contra disco — 2026-11-25 (Log 2463)
+- [x] [Canal] Mensaje 079 (P10) reportado a la directora (incluye aviso de colision de numeracion 075/077 en mi canal) — 2026-11-25 15:30
+- [x] [Log] Log reservado: **2463** — tanda P10 M17 (auditoria docs<->codigo)
+- [ ] [Pendiente-otro-dueno] La deriva `res://src/` puede existir en documentos de OTROS modulos: no se reviso (no son de M17) — **avisar a la directora** (ya avisado en el mensaje 079)
+- [ ] [Decision-pendiente] Siguiente paso propuesto: buscar un modulo donde el trabajo sea headless-verificable por mi (los 27 pendientes de M17 son de otros duenos) — **esperando su respuesta**
 - [x] [17-Construccion] Tanda P9d (**0 flips**): 3 defectos de la familia 'estado que no es verdad' — `BuildGhost.MOTIVOS_OCULTAN` sin `TERRENO_NO_CARGADO` (caja roja flotando sobre chunk sin cargar), `BuildGhost.ocultar()` sin reiniciar la animacion (caja a escala parcial al salir del pool), `BuildHudModel.es_temporal()` sin fallback a los motivos (HUD sin 'prueba de nuevo') — 2026-11-25 (Log 2462)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_fantasma_estado.gd` (24 checks, 0 fallos, EXIT 0; ROJO-VERDE revirtiendo los 3 fixes → 4 fallos/EXIT 1) + regresion 17 suites verdes (incl. iter4 45/0) — 2026-11-25 (Log 2462)
 - [x] [17-Construccion] BARRIDO CERRADO para el nucleo de M17 (manager, mundo, tipos, preview, ghost, hud, history) con el criterio 'el sistema muestra un estado que no es verdad' — 2026-11-25 (Log 2462)

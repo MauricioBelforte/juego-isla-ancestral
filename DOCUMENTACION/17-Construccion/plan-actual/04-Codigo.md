@@ -3,23 +3,26 @@
 
 # 04-Codigo.md — Módulo 17: Construcción
 
-Nota: rutas propuestas (prefijo `res://src/` acorde al stack Godot 4.x + GDScript del proyecto). El nombre exacto de las rutas lo confirma el agente de implementación al consolidar M08.
+Nota: **rutas REALES verificadas contra disco (2026-11-25, minimax-m3-1-flash)**. Antes esta tabla usaba el prefijo
+propuesto `res://src/` (carpeta que NUNCA existio): el modulo quedo en `res://scripts/construccion/`.
+Los nombres de archivo tambien se corrigieron: `build_validator.gd` -> `construccion_validator.gd` y
+`modo_construccion.gd` -> `construccion_tipos.gd` (los modos viven en `ConstruccionTipos.Modo`). de implementación al consolidar M08.
 
 ## 1. Archivos involucrados (previstos)
 
 | Archivo | Tipo | Rol |
 |---|---|---|
-| `res://src/construccion/build_manager.gd` | Autoload | Sesión de construcción: entrada/salida de modo, orquestación, señales, pila de acción |
-| `res://src/construccion/build_preview.gd` | Componente | Raycast del cursor, conversión a celda voxel (rejilla 1 m, planta), rotación y elevación |
-| `res://src/construccion/build_validator.gd` | Clase estática | Única autoridad "puede colocar": zonas, ocupación, soporte, reglas de pieza, costos |
-| `res://src/construccion/build_ghost.gd` | Nodo visual | Fantasma semi-transparente (verde/rojo) con pooling, sigue al cursor |
-| `res://src/construccion/build_history.gd` | Componente | Pila undo/redo con deltas exactos (celdas + recursos) |
-| `res://src/construccion/zone_registry.gd` | Autoload data | Regiones AABB de zonas (edificable/protegida/narrativa/agua) consultada por el validador |
-| `res://src/construccion/build_catalog_db.gd` | Autoload data | Catálogo de piezas por modo (construcción/decoración) y desbloqueos |
-| `res://src/construccion/placement_rule.gd` | Resource | Datos declarativos por pieza (tamaño, regla, costo, devolución, mesh) |
+| `res://scripts/construccion/build_manager.gd` | Autoload | Sesión de construcción: entrada/salida de modo, orquestación, señales, pila de acción |
+| `res://scripts/construccion/build_preview.gd` | Componente | Raycast del cursor, conversión a celda voxel (rejilla 1 m, planta), rotación y elevación |
+| `res://scripts/construccion/construccion_validator.gd` | Clase estática | Única autoridad "puede colocar": zonas, ocupación, soporte, reglas de pieza, costos |
+| `res://scripts/construccion/build_ghost.gd` | Nodo visual | Fantasma semi-transparente (verde/rojo) con pooling, sigue al cursor |
+| `res://scripts/construccion/build_history.gd` | Componente | Pila undo/redo con deltas exactos (celdas + recursos) |
+| `res://scripts/construccion/zone_registry.gd` | Autoload data | Regiones AABB de zonas (edificable/protegida/narrativa/agua) consultada por el validador |
+| `res://scripts/construccion/build_catalog_db.gd` | Autoload data | Catálogo de piezas por modo (construcción/decoración) y desbloqueos |
+| `res://scripts/construccion/placement_rule.gd` | Resource | Datos declarativos por pieza (tamaño, regla, costo, devolución, mesh) |
 | `res://data/construccion/piezas/*.tres` | Data | Recetas del catálogo (paredes, pisos, techos, puertas, ventanas, escaleras, puentes, caminos, cercas, faroles, muebles, decoración) |
-| `res://src/construccion/build_interaction.gd` | Componente | Punto de interacción en piezas funcionales (camas, almacenamiento M18) |
-| `res://src/construccion/modo_construccion.gd` | Enum/Util | Tipos de modo: CONSTRUCCION, DECORACION |
+| `res://scripts/construccion/build_interaction.gd` | Componente | Punto de interacción en piezas funcionales (camas, almacenamiento M18) |
+| `res://scripts/construccion/construccion_tipos.gd` | Enum/Util | Tipos de modo: CONSTRUCCION, DECORACION |
 
 ## 2. Funciones clave (firmas GDScript)
 
@@ -72,12 +75,26 @@ func registrar_zona(aabb: AABB, permiso: StringName) -> void
 
 ## 3. Suscripciones e integración
 
-- M08: `VoxelWorld.escribir_celdas(celdas, bloque)` con marca dirty de chunk; lee datos de ocupación del mapa de piezas en memoria (rápido) + consulta voxel en bordes.
-- M14: `Inventario.consultar(costo)` antes y `Inventario.descontar(costo)` al confirmar; `Inventario.devolver(item_id, cantidad)` en demolición/almacenamiento.
+- M08 (mundo): la API que M17 usa de verdad es `ConstruccionMundo.escribir_voxel(celda, bloque)` y
+  `ConstruccionMundo.borrar_voxel(celda)` (la marca de chunk dirty la lleva el mundo). OJO: `VoxelWorld.escribir_celdas()`
+  **NO existe** — era una propuesta de diseño de este documento (2026-11-25). La ocupacion se lee del mapa de
+  piezas en memoria (rapido) y se consulta el voxel en los bordes.
+- M14 (inventario): la API real es `count_item(item_id)`, `remove_item(item_id, cantidad)` y `add_item(item_id, cantidad)`
+  (ademas `agregar_items(items)` y `has_free_space()`). El manager no las llama directo: usa los adaptadores
+  `_f_agregar_item` / `_f_tirar_item` / `_f_hay_espacio`, que delegan en el autoload `Inventario` cuando existe.
+  OJO: `Inventario.consultar/descontar/devolver` **NO existen** — eran nombres propuestos (2026-11-25).
 - M64: `obra_activa(activa)` y `navmesh_delta(celdas)` para re-planificación de NPC; el validador consulta ocupación de NPCs activos.
-- M58: `ConstruccionData` serializa `Array[Dictionary] {receta_id, celda, rotacion}`; restauración idempotente (limpia celdas de pieza previas antes de reescribir).
-- M31: luces de pieza (faroles) conectadas al ciclo día/noche (`dia_cambio`, `noche_cambio`).
-- M73: `recargas_festival()` agrega recetas de evento temporales al catálogo.
+- M58/M59 (guardado): el contrato real de M17 son dos metodos del manager: `obtener_estructuras()` (snapshot
+  `Array[Dictionary] {receta_id, celda, rotacion}`) y `restaurar_estructuras(lista)`, que es idempotente (limpia las
+  celdas de la pieza previa antes de reescribir). La escritura a disco la hace `SaveWriter`/`SaveSchema` (M59).
+  OJO: la clase `ConstruccionData` **NO existe** — era un nombre propuesto (2026-11-25).
+- M31 (faroles): las senales reales del reloj son `dia_cambio`, `hora_cambio`, `minuto_cambio`, `estacion_cambio` y
+  `evento_activado` (autoloads `Reloj` -> `res://scripts/time/game_clock.gd` y `Calendario` ->
+  `res://scripts/time/time_calendar.gd`; OJO: ninguno de los dos scripts declara `class_name`).
+  El motivo `noche_cambio` **NO existe** — era un nombre propuesto (2026-11-25).
+- M73/M64 (eventos): no hay una funcion `recargas_festival()`. El calendario emite `evento_activado(info)` y el
+  badge de festival vive en `res://scripts/clock/w_reloj.gd`. La recarga de recetas temporales al catalogo es un
+  pendiente de M73, no una API existente (2026-11-25).
 - UI: la capa UI (Canvas) escucha señales de `BuildManager`; no se acopla ninguna lógica de colocación en los scripts de UI.
 
 ## 4. Logs relacionados
@@ -100,7 +117,9 @@ func registrar_zona(aabb: AABB, permiso: StringName) -> void
 
 ### Lo que NO hice (honestidad obligatoria)
 - Implementación: pendiente hasta que M08 (escritura voxel + dirty flags) y M14 (inventario) estén disponibles y estables.
-- Las rutas `res://src/construccion/` son propuestas de diseño; deben confirmarse al consolidar la estructura del proyecto Godot (M07 arquitectura).
+- Las rutas `res://src/construccion/` fueron **propuestas de diseño**; la estructura quedo **consolidada** en
+  `res://scripts/construccion/` (M07 arquitectura) y la tabla de la seccion 1 ya trae las rutas REALES
+  (verificadas contra disco el 2026-11-25).
 - El balance de costos de piezas queda delegado a M92.
 
 ### Recomendaciones para el próximo agente
@@ -163,7 +182,7 @@ reinicia junto con el estado de sesión.
 | Requisito | Implementación | Archivo |
 |---|---|---|
 | L197 demolición ordenada | `piezas_apoyadas_en(ancla)` + motivo `SOSTIENE_OTRA_PIEZA` (permanente); rechaza nombrar la pieza de arriba para que el jugador demuela de arriba hacia abajo | `build_manager.gd`, `construccion_tipos.gd` |
-| L192 fantasma al pool | `conectar_fantasma()` / `fantasma()`; `salir_modo()` llama `devolve_al_pool()` | `build_manager.gd` |
+| L192 fantasma al pool | `conectar_fantasma()` / `fantasma()`; `salir_modo()` llama `devolver_al_pool()` | `build_manager.gd` |
 | L193 guardado a mitad de colocación | el fantasma es estado de UI: `obtener_estructuras()` / save solo ven `_estructuras`; verificado por round-trip | `build_manager.gd`, suite iter5 bloque 3 |
 
 Suite nueva: `res://scripts/construccion/test_construccion_iter5.gd` (39 checks, 4 bloques).
