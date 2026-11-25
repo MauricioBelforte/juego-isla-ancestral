@@ -241,10 +241,25 @@ func cargar_cubierta(destino: int) -> bool:
 		await cargas.cargar_sector(ruta)
 		cubierta_actual = destino
 		cambio_cubierta.emit(destino)
-		GameLogger.info("%s cubierta %d cargada (la anterior fue descargada)" % [PREFIJO_LOG, destino], GameLogger.Category.GAMEPLAY)
+		_log_info("%s cubierta %d cargada (la anterior fue descargada)" % [PREFIJO_LOG, destino], "GAMEPLAY")
 		return true
-	GameLogger.warning("%s CargasManager no disponible; no se cargo la cubierta %d" % [PREFIJO_LOG, destino], GameLogger.Category.GAMEPLAY)
+	_log_warning("%s CargasManager no disponible; no se cargo la cubierta %d" % [PREFIJO_LOG, destino], "GAMEPLAY")
 	return false
+
+
+## Conecta la senal `puerta_cruzada` de una cubierta cargada (CruceroInterior) para
+## que el ciclo de puertas (4 -> 1) cierre: puerta -> cambiar_cubierta + cargar la
+## siguiente. Sella la integracion CruceroManager <-> CruceroInterior.
+func conectar_interior(n: Node) -> void:
+	if n == null or not n.has_signal("puerta_cruzada"):
+		return
+	if not n.puerta_cruzada.is_connected(_on_puerta_cruzada):
+		n.puerta_cruzada.connect(_on_puerta_cruzada)
+
+
+func _on_puerta_cruzada(destino: int) -> void:
+	cambiar_cubierta(destino)
+	cargar_cubierta(destino)
 
 
 # ------------------------------------------------------------------ persistencia

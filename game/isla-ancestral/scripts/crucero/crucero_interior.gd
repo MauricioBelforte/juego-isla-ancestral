@@ -3,20 +3,26 @@ extends Node3D
 
 var _gl: Node = null
 
+## Mapea el nombre de categoria (String) al enum Category de GameLogger (int).
+const _CAT := {"BOOT": 0, "SYSTEM": 1, "GAMEPLAY": 2, "WORLD": 3, "NETWORKING": 4, "ANALYTICS": 5, "CRASH": 6}
+
+func _cat(cat: String) -> int:
+	return int(_CAT.get(cat, 1))
+
 func _log_debug(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.debug(msg, cat, ctx)
+	if _gl: _gl.debug(msg, _cat(cat), ctx)
 
 func _log_info(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.info(msg, cat, ctx)
+	if _gl: _gl.info(msg, _cat(cat), ctx)
 
 func _log_warning(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.warning(msg, cat, ctx)
+	if _gl: _gl.warning(msg, _cat(cat), ctx)
 
 func _log_error(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.error(msg, cat, ctx)
+	if _gl: _gl.error(msg, _cat(cat), ctx)
 
 func _log_critical(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.critical(msg, cat, ctx)
+	if _gl: _gl.critical(msg, _cat(cat), ctx)
 
 ## Una cubierta del Crucero Real (M169).
 ##
@@ -38,6 +44,7 @@ var _activa: bool = false
 
 
 func _ready() -> void:
+	_gl = get_node_or_null("/root/GameLogger")
 	if luces.is_empty():
 		for hijo: Node in find_children("*", "OmniLight3D", true, false):
 			luces.append(hijo as OmniLight3D)
@@ -46,15 +53,31 @@ func _ready() -> void:
 	_apagar_luces()
 
 
+## Configura la cubierta desde el manager o el tooling (sin tocar la .tscn).
+func configurar(n_cubierta: int, p_luces: Array = [], p_puerta: Area3D = null, p_spawn: Marker3D = null) -> void:
+	cubierta = n_cubierta
+	if not p_luces.is_empty():
+		luces = p_luces
+	if p_puerta != null:
+		puerta_cubierta = p_puerta
+		if not puerta_cubierta.body_entered.is_connected(_on_body_entered):
+			puerta_cubierta.body_entered.connect(_on_body_entered)
+	if p_spawn != null:
+		punto_spawn = p_spawn
+
+
+## Cubierta destino al cruzar la puerta (4 -> 1, cerrando el ciclo).
+func destino_siguiente() -> int:
+	return 1 if cubierta >= 4 else cubierta + 1
+
+
 ## El jugador cruzó la puerta de la cubierta.
 func _on_body_entered(body: Node3D) -> void:
 	if not _activa:
 		return
 	if not body.is_in_group("player"):
 		return
-	var destino := cubierta + 1
-	if cubierta >= 4:
-		destino = 1
+	var destino := destino_siguiente()
 	puerta_cruzada.emit(destino)
 	_log_info("[CRU] puerta cruzada en cubierta %d -> %d" % [cubierta, destino], "GAMEPLAY")
 

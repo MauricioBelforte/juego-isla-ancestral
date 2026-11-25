@@ -1,0 +1,102 @@
+== A. M01 derivados: artefacto de implementacion en scripts/ ==
+T62-01 M12 herramientas158/tools | files=13 hits=106
+   scripts/herramientas158/jar_manager.gd:5 # M158: Herramientas — JarManager (fuentes de ingreso: jarrones, checklist G).
+   scripts/herramientas158/shop_visitor.gd:5 # M158: Herramientas — ShopVisitorManager (Node interno del autoload "Tiers",
+   scripts/herramientas158/test_iter2.gd:7 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/herramientas158/test_iter2.gd
+   scripts/herramientas158/test_tiers.gd:7 # Ejecutar: Godot --headless --path game/isla-ancestral --script res://scripts/herramientas158/test_tiers.gd
+   scripts/herramientas158/tool_tier_system.gd:5 # M158: Herramientas y Desbloqueo de Zonas — ToolTierSystem (autoload "Tiers").
+   scripts/tools/preview_herramientas.gd:5 # M13: Herramientas — Preview visual (validación V2/V4)
+   scripts/tools/recurso_mock.gd:5 # M13: Herramientas — Recurso mock para preview visual
+   scripts/tools/test_herramientas.gd:5 # M13: Test headless de Herramientas (ToolData + tablas del ToolController)
+   scripts/herramientas158/tool_tier_system.gd=SI scripts/tools/tool_controller.gd=SI
+T62-02 M16 construccion | files=1 hits=1
+   scripts/construccion/qa_m17_modo.gd:30 var mgr: Node = (load("res://scripts/construccion/build_manager.gd") as Script).new()
+   scripts/construccion/build_manager.gd=SI scripts/construccion/construccion_mundo.gd=SI
+T62-03 M36 museum | files=3 hits=6
+   scripts/museum/exhibit_slot.gd:45 var reg = _collection_registry()
+   scripts/museum/museum.gd:60 var reg = _collection_registry()
+   scripts/museum/qa_m37_historial.gd:31 return (load("res://scripts/museum/collection_registry.gd") as Script).new()
+   scripts/museum/museum.gd=SI scenes/museo/museum.tscn=SI
+T62-04 M39 infraestructura (source) | files=91 hits=300
+   scripts/islas/generar_islas.gd:137 # Puntos de llegada/partida: sobre el disco interior del muelle.
+   scripts/islas/island_definition.gd:14 # en un `.tres`, así que se reemplaza por `desbloqueo_flag: StringName` (la flag
+   scripts/islas/island_design_catalog.gd:114 "M27 fija `punto_llegada`/`punto_partida`; el muelle y las casas son de M17/M40"))
+   scripts/islas/island_travel_guard.gd:14 #   K5  Desembarco sobre agua si el muelle se generó mal → punto seguro
+   scripts/islas/test_islas_m27_iter2.gd:437 var muelle_coral: Vector3 = _vista["coral"]["punto_llegada"]
+   scripts/world/day_night_cycle.gd:12 ## Las curvas .tres de data/light/ (diseño §P1-P5) reemplazan los valores
+   scripts/world/terreno_horizonte.gd:15 # El impostor de MONTAÑAS (36 tiles) queda reemplazado por este impostor
+   scripts/world/test_cielo_estrellas_m31.gd:8 # (time_config.tres, M29). Extiende test_curvas_luz.gd (no lo reemplaza).
+T62-05 M44 arte3d/validadores | files=4 hits=85
+   scripts/arte3d/materiales_recursos.gd:5 # M47 iter. 1: materiales/formas distintivas por TIPO de recurso (M15/M35).
+   scripts/arte3d/test_materiales_m47.gd:5 # M47 iter. 1: test de materiales/formas por tipo de recurso.
+   scripts/validadores/test_validador_autoloads.gd:6 # Suite headless de validador_autoloads.gd.
+   scripts/validadores/validador_autoloads.gd:6 # M151-family guard: validador de autoloads.
+   scripts/arte3d/materiales_recursos.gd=SI scripts/validadores/validador_autoloads.gd=SI scripts/arte3d/validate_mesh.gd=NO assets/arte3d/asset_catalog.json=NO
+T62-05b validate_mesh.gd/asset_catalog.json en todo el repo | files=0 hits=0
+T62-06 M50 agua runtime | files=10 hits=34
+   scripts/world/agua_animada.gd:6 # sobre el océano voxel. El MeshInstance3D se define en main_island.tscn;
+   scripts/world/block_catalog.gd:48 BlockType.WATER,
+   scripts/world/block_type.gd:71 const WATER: int = 17
+   scripts/world/island_generator.gd:20 var water_level: int = 2
+   scripts/world/test_generacion_m10_atria.gd:8 # (SHALLOW_WATER) y el bug de inalcanzabilidad del bioma "snow".
+   scripts/world/validate_water.gd:2 # validate_water.gd — Validador puro de lógica de agua (M51, RF21 / §21.8)
+   scripts/terrenos/terrain_detector.gd:217 BlockType.WATER, BlockType.SHALLOW_WATER:
+   scripts/terrenos/terrain_modifiers.gd:28 ## "shallow_water", "snow", "rock"). M156 iter. 3 (B1.3): se ELIMINÓ el mapa
+   scripts/world/agua_animada.gd=SI
+T62-07 M58 saving | files=24 hits=69
+   scripts/saving/qa_m59_bloqueo_manual.gd:27 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/qa_m59_doble_guardado.gd:23 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/qa_m59_guardar_confirmacion.gd:43 # (a) Sin popup montado: fallback → guardado directo real (SaveManager).
+   scripts/saving/qa_m59_guardar_dirty.gd:26 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/qa_m59_payload_sections.gd:24 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/qa_m59_profile_id.gd:23 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/qa_m59_save_vacio.gd:23 var sm = root.get_node_or_null("SaveManager")
+   scripts/saving/save_loader.gd:25 ## Referencia al snapshot (se asigna por SaveManager)
+   scripts/saving/save_manager.gd=SI scripts/saving/save_backup.gd=SI
+T62-08 M66 vehiculos | files=5 hits=13
+   scripts/vehiculos/qa_m67_altitud.gd:29 var ctrl: Object = (load("res://scripts/vehiculos/vehicle_controller.gd") as Script).new()
+   scripts/vehiculos/test_vehiculos.gd:5 # M67: Test de VehicleManager + VehicleController (núcleo V0 iter. 1).
+   scripts/vehiculos/validate_vehicles.gd:14 #   D) integración con el autoload VehicleManager (si está presente)
+   scripts/vehiculos/vehicle_controller.gd:5 # M67: Vehículos — VehicleController (lógica pura, diseño §2.2/§3.1).
+   scripts/vehiculos/vehicle_manager.gd:5 # M67: Vehículos — VehicleManager (autoload "Vehiculos", diseño §1/§2.1-2.3).
+   scripts/vehiculos/vehicle_manager.gd=SI scripts/vehiculos/vehicle_controller.gd=SI
+T62-09 M68 fasttravel | files=3 hits=9
+   scripts/fasttravel/fast_travel_effect.gd:10 ## Velo pleno sostenido alcanzado (el caller teletransporta al jugador aquí).
+   scripts/fasttravel/fast_travel_service.gd:5 # M69: FastTravelService — anclas de viaje rápido (data-driven anclas.json),
+   scripts/fasttravel/test_fast_travel_headless.gd:5 # M69: Test headless del FastTravelService (anclas, desbloqueo, viaje).
+   scripts/fasttravel/fast_travel_service.gd=SI scripts/fasttravel/fast_travel_effect.gd=SI
+T62-10 M108 tools/editor | files=4 hits=7
+   scripts/editor/plugin_herramientas.gd:15 _dock = load("res://scripts/editor/tools/recipe_tool.gd").new()
+   scripts/editor/_colector_sintaxis.gd:369 const _g359 := preload("res://scripts/editor/plugin_herramientas.gd")
+   scripts/editor/tools/dialogos_auditor.gd:8 # Ejecutar: godot --headless --path game/isla-ancestral -s res://scripts/editor/tools/dialogos_auditor.gd
+   scripts/editor/tools/recipe_tool.gd:10 extends "res://scripts/editor/tools/editor_base.gd"
+   scripts/editor/tools/recipe_tool.gd=SI scripts/editor/tools/dialogos_auditor.gd=SI scripts/tools/tool_controller.gd=SI scenes/dialogo_ui.tscn=NO
+
+== B. M20 Amistad: artefacto concreto por linea citada ==
+T62-11 L30 nombres de nivel | files=118 hits=207
+   scripts/accesibilidad/accesibilidad_manager.gd:389 push_warning("[M58] Indicador desconocido: %s" % tipo)
+   scripts/accesibilidad/test_sonido_visual_m58.gd:9 #   - pedir_indicador: descriptor válido, tipo desconocido -> {} + warning
+   scripts/arte3d/test_materiales_m47.gd:45 _check("tipo desconocido -> roca default", String(m47.forma_para("recurso_inexistente")) == "roca")
+   scripts/audio/ambient_director.gd:43 push_warning("[M42] Bioma desconocido: %s" % bioma)
+   scripts/audio/output_device_manager.gd:41 ## Devuelve false si no existe (el motor ignora nombres desconocidos, pero
+   scripts/audio/test_audio_config.gd:261 # Estado base conocido (sin opciones persistidas ni efectos en Master)
+   scripts/audio/test_audio_effects_m91.gd:86 _check(not DynamicRangeManager.aplicar("no_existe"), "rango desconocido rechazado")
+   scripts/audio/test_sfx_m43.gd:194 _check("localizado material desconocido -> ''", mal == "")
+T62-12 L32 acceso eventos por nivel minimo | files=0 hits=0
+T62-13 L33 desbloqueo historias por nivel | files=2 hits=2
+   scripts/friendship/vecino_amistad.gd:6 # Puntos acumulados, nivel, historial de hoy (límites diarios), memoria de
+   data/support/faq.json:20 {"id": "personajes_historia", "categoria": "historia", "pregunta": "¿Los personajes tienen historias propias?", "respuesta": "Sí. Cada vecino desbloquea su arco
+T62-14 L38 feedback nivel subido | files=2 hits=12
+   scripts/friendship/friendship_service.gd:9 #   EventBus.npc.friendship_level_up(npc_id, new_level)
+   scripts/friendship/vecino_amistad.gd:97 ## si subió de nivel. Emite via retorno; el servicio decide la señal.
+T62-15a L192 recuerdos hablados (get_recuerdos en dialogos) | files=0 hits=0
+T62-15b L191 frases de despedida por nivel | files=26 hits=58
+   scripts/herramientas158/shop_visitor.gd:39 ## El visitante anterior se va al pasar de día (sin despedida, cozy).
+   scripts/legal/credits_manager.gd:318 func obtener_farewell() -> String:
+   scripts/legal/test_credits_layer_m131.gd:84 _check("D9: sin despedida al abrir", _layer._lbl_farewell.visible == false)
+   scripts/npc/test_catalogo_m19_atria.gd:100 var lineas := ["linea_saludo", "linea_despedida", "linea_sueno"]
+   scripts/npc/villager_dialogue_hook.gd:150 "despedida":
+   scripts/npc/villager_profile.gd:42 @export var linea_despedida: String = "¡Hasta luego!"
+   scripts/ui/test_m53_wcag.gd:141 var farewell: Control = layer._lbl_farewell
+   scripts/ui/layers/credits_layer.gd:45 var _lbl_farewell: Label
+T62-15c L193 regalos de retorno por correo | files=0 hits=0

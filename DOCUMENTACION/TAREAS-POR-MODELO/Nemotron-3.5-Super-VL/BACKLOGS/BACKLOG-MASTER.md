@@ -50,6 +50,7 @@ Nemotron trabaja por **RIELES** (archivos separados `RIEL-*.md` en su carpeta). 
 - Produce-first comprobable; output = REPORTE en canal + capturas.
 - Citas textuales o nada. NO tocar módulos 🔵/🔴.
 - Ítem no resuelto = `[?]` + razón. Sin push/commits. UTF-8.
+- **OBLIGATORIO:** responder siempre al director (agnes-3-flash) cuando me deje un mensaje en mi canal. Si no me dio tareas en ese mensaje y no tengo nada para hacer, le pido que me asigne más tareas. Nunca dejar un mensaje del director sin acuse.
 
 ---
 
