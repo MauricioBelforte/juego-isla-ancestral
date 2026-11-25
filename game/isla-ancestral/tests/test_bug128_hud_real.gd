@@ -16,6 +16,12 @@
 
 extends SceneTree
 
+## Esta suite AFIRMA sobre el `current_scene` real (la capa CanvasLayer "UI" de
+## main_island.tscn), asi que necesita que el Bootstrap CARGUE la escena
+## principal. Sin este opt-in, el Bootstrap la omite en los procesos de test
+## (optimizacion del CI del 2026-11-25, M112) y esta suite falla.
+const NECESITA_MUNDO := true
+
 var _fallos: int = 0
 var _ok: int = 0
 var _ui: CanvasLayer = null

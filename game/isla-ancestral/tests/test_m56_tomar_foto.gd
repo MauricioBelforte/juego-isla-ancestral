@@ -18,6 +18,12 @@
 
 extends SceneTree
 
+## La foto se toma del VIEWPORT real: la captura sale de la escena principal
+## (current_scene). Sin este opt-in, el Bootstrap omite la escena en los
+## procesos de test (optimizacion del CI del 2026-11-25, M112) y la captura
+## falla. Mismo mecanismo que en `test_bug128_hud_real.gd`.
+const NECESITA_MUNDO := true
+
 var _fallos: int = 0
 var _ok: int = 0
 var _ui: CanvasLayer = null

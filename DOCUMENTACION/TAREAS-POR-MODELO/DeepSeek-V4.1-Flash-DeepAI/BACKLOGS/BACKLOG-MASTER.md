@@ -126,6 +126,22 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
   526 en disco (522 st / 4 gd), 104 en el workflow, 426 fuera; bajo `tests/` **61** (57 st sin job).
 - **Log 2456.** Reporte: mensaje `006`.
 
+### Tanda 2026-11-25 16:34 — gate 107/107 y un check que estaba ciego
+
+- **Gate re-medido tras ~30 commits de la flota:** 107 suites del workflow, **107 verdes, 0
+  timeouts** (15:50-16:05); censo de ruido sobre las mismas: **0 SCRIPT ERROR, 0 format error**.
+- **Hallazgo:** `scripts/stream/test_stream.gd:81 y :94` formateaban `"... 2% al ..." % p0` con
+  `%` literal: Godot imprime `String formatting error`, la cadena sale vacía y el check queda
+  **ciego** (se evalúa, pero si falla no dice nada). El gate no lo ve: exit 0, no es SCRIPT ERROR.
+  Arreglado con `%%`; verificado 21 checks / 0 fallos / 0 errores.
+- **Herramienta nueva:** `tools/quality/detectar_format_invalido.py` (solo valida literales que
+  son operando de `%`). Fixture 3 malos + 3 buenos -> 3 hallazgos; árbol real -> 0. Falso
+  positivo propio corregido (exigía que el argumento empezara con `[`/letra/`(`).
+- **Pedidos al director:** detector en CI (1 línea), quitar el `|| echo` de `dev-build.yml:61`
+  (con `--module tests/` propuesto), y registrar las 18 suites que la flota escribió hoy
+  (bloque listo en `BACKLOGS/PROPUESTA-registrar-suites-en-ci.md`).
+- **Logs:** 2460 y 2464. **Reporte:** mensaje `009`.
+
 ### Tanda 2026-11-25 15:14 — el step de tests de dev-build era un gate siempre rojo
 
 - `run_tests.py` corría también suites imposibles de ejecutar con `--script`: 4 GdUnit4 + 7

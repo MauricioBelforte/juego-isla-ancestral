@@ -183,8 +183,46 @@ func verificar_integridad_dominios() -> void:
 		print("[Bootstrap] DOM-INF integridad OK: %d dominios de juego verificados" % DOMINIOS_ESPERADOS.size())
 
 
+## En un proceso de TEST (invocado con `--script res://tests/...`), la escena
+## principal NO se carga.
+##
+## POR QUE (medido el 2026-11-25, M112): en cada proceso de suite, cargar
+## `main_island.tscn` cuesta 5,3 s de carga y ~19,6 s de DEINIT (el teardown
+## del GDExtension de Voxel Tools al salir el motor). Las suites de test NO
+## usan el mundo, asi que ese ~25 s por proceso es puro gasto: con ~90 suites
+## en el CI son ~2250 s locales (~6500 s en el runner de CI, donde el deinit
+## se mide en ~72 s).
+##
+## OPT-IN: una suite que necesite el mundo declara `const NECESITA_MUNDO := true`
+## y entonces se carga como siempre.
+##
+## El juego normal (sin `--script`) NO cambia de comportamiento.
+func _debe_cargar_escena_principal() -> bool:
+	var arbol := get_tree()
+	if arbol == null:
+		return true
+	var sc: Script = arbol.get_script()
+	if sc == null or String(sc.resource_path) == "":
+		return true
+	var ruta: String = String(sc.resource_path)
+	var nombre: String = ruta.get_file()
+	var es_proceso_de_test: bool = ruta.begins_with("res://tests/") \
+			or nombre.begins_with("test_") or nombre.begins_with("qa_")
+	if not es_proceso_de_test:
+		return true
+	# Opt-in explicito de la suite.
+	var constantes: Dictionary = sc.get_script_constant_map()
+	if bool(constantes.get("NECESITA_MUNDO", false)):
+		print("[Bootstrap] La suite declara NECESITA_MUNDO: se carga la escena principal")
+		return true
+	return false
+
+
 ## Carga la escena principal del juego (deferred)
 func _load_main_scene() -> void:
+	if not _debe_cargar_escena_principal():
+		print("[Bootstrap] Proceso de test: NO se carga la escena principal (optimiza el tiempo del CI)")
+		return
 	# Respetar una escena pedida explícitamente por CLI (previews de módulos,
 	# ej: godot res://scenes/preview_reloj.tscn). Si el árbol ya tiene una
 	# escena actual que NO es la principal, no la pisamos.
