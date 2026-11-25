@@ -956,3 +956,50 @@ Se detecto un **choque de numeracion de logs**: existen `Logs/2450-m17-hud-...` 
 `Logs/2450-m56-...` (otro agente) con el MISMO numero. Es la carrera que el protocolo advierte
 (§6.1.d: dos agentes leen la cabeza del pool a la vez). No lo toco — el pool es de la directora —
 pero lo reporto para que lo sanee.
+
+## 16. Tanda P9b (2026-11-25 13:4x) — la misma clase de defecto en DEMOLER y en el HISTORIAL
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 16.1 Lo que encontré al terminar la P9
+
+La P9 arregló la **colocación**. Al seguir el barrido de la misma clase de defecto ("reporta
+éxito sin hacer el trabajo"), aparecieron **más rutas con exactamente el mismo problema**:
+
+| Ruta | Qué pasaba |
+|---|---|
+| `demolir_pieza()` | `_mundo.borrar_voxel()` devolvía 0 y la pieza **se daba de baja igual**, y los materiales **se devolvían**: el voxel quedaba **huérfano** en el mundo (visible, pero sin pieza: "no hay ninguna pieza en esa celda" → no se podía demoler). |
+| `undo` de colocar | Idem: borrado fallido + `_baja_estructura()` + costo devuelto → huérfano. |
+| `redo` de colocar | Escritura fallida + `_alta_estructura()` → pieza en la lógica **sin voxel**. |
+| `undo` de demoler | Escritura fallida + `_alta_estructura()` → ídem, y además se re-descontaba el costo. |
+| `redo` de demoler | Borrado fallido + `_baja_estructura()` + material devuelto → huérfano. |
+| `undo`/`redo` de almacenar | Igual que colocar/demoler. |
+| `undo`/`redo` de mover | `_baja_estructura()` del origen **antes** de escribir → si la escritura fallaba, **la pieza se perdía**. |
+
+### 16.2 Corrección
+
+- **Motivo nuevo `NO_SE_PUDO_BORRAR`** (TEMPORAL, con texto de HUD: *"no se pudo borrar la pieza del
+  mundo (intenta de nuevo)"*), simétrico de `NO_SE_PUDO_ESCRIBIR`.
+- Helper único en el manager:
+  ```gdscript
+  func _fallo_de_mundo(operados: int) -> bool:
+      return _mundo.tiene_terreno() and operados <= 0
+  ```
+  (en **modo lógico** —sin terreno— nunca es un fallo: ahí el mundo es nulo por diseño).
+- **Orden corregido en todas las rutas**: **primero la operación en el mundo, después el estado
+  interno**. Si la operación falla, no se toca la estructura, el inventario ni el historial.
+- **Al mover**: se escribe el destino **antes** de dar de baja el origen → si falla, la pieza
+  **sigue donde estaba**.
+
+### 16.3 Verificación
+
+- Suite `res://tests/test_m17_atomicidad_escritura.gd` ampliada de 24 a **33 checks, 0 fallos,
+  EXIT 0**. Checks nuevos: "F2: demoler con el borrado fallido -> motivo NO_SE_PUDO_BORRAR" · "F3:
+  la pieza SIGUE en su sitio (no queda un voxel huerfano)" · "F4: NO se devuelven materiales si la
+  demolicion no ocurrio" · "F5/F6: deshacer con el borrado fallido -> la pieza sigue en su sitio" ·
+  "F8: deshacer una demolicion con la escritura fallida -> motivo NO_SE_PUDO_ESCRIBIR" · "F9: al no
+  poder deshacer, la pieza NO se registro".
+- **ROJO-VERDE:** con `_fallo_de_mundo()` stubbeada a `false` → **4 fallos / EXIT 1** (se ve el
+  comportamiento viejo). Restaurada → 33/0.
+- **Regresión: 15 suites en verde** (M17 ×14 + M59 28/0).

@@ -6,6 +6,12 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P9b (**0 flips**): la misma clase de defecto en DEMOLER y en las **6 ramas del historial** (undo/redo de colocar, demoler, almacenar y mover) — el borrado fallido dejaba voxels **huerfanos** y el mover **perdia la pieza** — 2026-11-25 (Log 2459)
+- [x] [17-Construccion] Motivo nuevo `NO_SE_PUDO_BORRAR` (TEMPORAL) + helper `_fallo_de_mundo()`/`_fallo_mundo()`; principio aplicado en las 7 rutas: **primero la operacion en el mundo, despues el estado interno** — 2026-11-25 (Log 2459)
+- [x] [17-Construccion] Suite `test_m17_atomicidad_escritura.gd` ampliada de 24 a **33 checks, 0 fallos** (ROJO-VERDE con `_fallo_de_mundo` stub → 4 fallos/EXIT 1) + regresion 15 suites OK — 2026-11-25 (Log 2459)
+- [x] [Canal] Mensaje 076 (P9b) reportado a la directora + aviso de mas colisiones de numeracion de logs (2458 duplicado) — 2026-11-25 13:50
+- [x] [Log] Log reservado: **2459** — tanda P9b M17 (atomicidad en demoler e historial)
+- [ ] [Decision-pendiente] Siguiente paso propuesto a la directora: (1) terminar el barrido de la clase de defecto en `build_ghost.gd`/`build_hud.gd`/`build_preview.gd`, o (2) tomar otro modulo — **esperando su answer**
 - [x] [17-Construccion] Tanda P9 (**0 flips**): corregido un DEFECTO de la clase L102 — la colocacion registraba la pieza y reportaba EXITO aunque la escritura en el mundo devolviera 0 voxels (la pieza vivia solo en la logica, el undo no cuadraba y el material descontado se perdia) — 2026-11-25 (Log 2458)
 - [x] [17-Construccion] Atomicidad real: motivo nuevo `NO_SE_PUDO_ESCRIBIR` (TEMPORAL); `confirmar_colocacion()` no registra + devuelve el costo + no deja entrada en el historial; `copiar_pieza()` igual; `mover_pieza()` escribe el destino ANTES de vaciar el origen (el origen sigue en su sitio si falla) — 2026-11-25 (Log 2458)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_atomicidad_escritura.gd` (24 checks, 0 fallos, EXIT 0; ROJO-VERDE con el guard off → 7 fallos/EXIT 1) + cableada en `quality.yml` — 2026-11-25 (Log 2458)
