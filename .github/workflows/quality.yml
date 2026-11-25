@@ -486,6 +486,14 @@ jobs:
           # anti-falso-verde probada por STUB (10 fallos / EXIT 1).
           suite --script tests/test_m17_hud_categorias.gd
           suite --script tests/test_m17_categorias.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2452): CONTENIDO de las piezas
+          # (cierra el UNICO [?] del modulo: la demolicion devuelve el contenido de la pieza al
+          # inventario). Modelo puro build_interaction.gd + integracion en demolir_pieza() + deshacer
+          # que restituye la pieza INTEGRA y saca los items del inventario (no se duplican).
+          # Suite NUEVA test_m17_contenido_piezas.gd = 32 checks / 0 fallos (ROJO-VERDE con stub: 4
+          # fallos / EXIT 1). OJO: build_interaction.gd se carga con preload, no por class_name
+          # (en headless la clase nueva no esta en la cache global y rompia el arranque).
+          suite --script tests/test_m17_contenido_piezas.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

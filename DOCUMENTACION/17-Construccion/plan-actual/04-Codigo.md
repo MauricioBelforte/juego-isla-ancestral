@@ -743,3 +743,63 @@ watchdog + guards, el rojo sale limpio con EXIT 1).
 Nota de diseño: el filtro por modo (`es_mueble`) **cruza** las categorías (una antorcha es
 `iluminacion` y es mueble: aparece en modo decoración). Por eso el HUD lleva los dos conteos
 (`cantidad` = catálogo, `cantidad_modo` = disponible ahora) en lugar de uno solo.
+
+## 13. Tanda P7 (2026-11-25 11:4x) — CONTENIDO de las piezas: el ÚNICO `[?]` de M17, cerrado
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 13.1 Punto de partida
+
+El checklist tenía **un único ítem en `[?]`** (degradado por atria-dawn-s2 el 2026-10-08, msg 133):
+*"La demolición de piezas funcionales (camas, almacenamiento) libera su contenido"*, con la nota de que
+`demolir_pieza` solo devuelve los **materiales** de la receta, de que no existe lógica de liberar
+contenido y de que **no existe `build_interaction.gd`** (que el propio `04-Codigo.md` §1 ya listaba
+como "Punto de interacción en piezas funcionales (camas, almacenamiento M18)").
+
+**Verificado en disco:** el archivo no existía y no había ninguna ruta de código que devolviera el
+contenido de una pieza al demolerla — los items de un cofre **se perdían**.
+
+### 13.2 Qué se añadió
+
+**`scripts/construccion/build_interaction.gd`** (nuevo, **modelo puro**, sin nodos):
+| Función | Qué hace |
+|---|---|
+| `items_de_contenido(bruto)` | Normaliza las **dos** formas de cofre del proyecto: canónica `{"contenido":[{item_id,cantidad}]}` y alternativa `{"items":{...}}`. CUALQUIER otra forma → `{}` (no inventa datos). |
+| `contenido_de(estructura)` | Separa lo que guarda la pieza: `{items, muebles, puertas}` (vacío si no hay nada → nunca `null`). |
+| `tiene_contenido(estructura)` | true si hay items, muebles o puertas. |
+| `liberar_contenido(estructura)` | Lo que el jugador recupera. **NO muta** la pieza (para que el deshacer la devuelva íntegra). |
+| `vaciar_contenido(estructura)` | Vacía el cofre de verdad (consumo real de la pieza). |
+| `items_a_contenido(items)` | Inverso: `{item_id: cantidad}` → `{"contenido":[{item_id,cantidad}]}`. |
+| `total_items` / `texto_contenido` / `es_funcional` | Métricas y texto para la UI ("vuelve: madera x4"). |
+
+**`scripts/construccion/build_manager.gd`** (3 puntos):
+1. `demolir_pieza()`: los items de la pieza **vuelven al inventario** (antes se perdían) y el
+   resultado reporta `contenido_liberado` / `items_liberados`.
+2. Historial: la demolición guarda el `contenido` liberado → el **deshacer** restituye la pieza
+   **íntegra** y saca los items del inventario (no se duplican ni se pierden); el **rehacer** los
+   devuelve al inventario.
+3. **API pública para M18** (la UI necesita leer/guardar, sin tocar estado privado):
+   `contenido_de_pieza(clave)` y `asignar_contenido(clave, items)`.
+
+> ⚠️ **Trampa de headless (documentada porque costó un rato):** un archivo **nuevo** con
+> `class_name` no está en la cache global de clases hasta que el editor reescanea el proyecto. En
+> headless eso rompía el arranque del autoload (`Identifier "BuildInteraction" not declared in the
+> current scope`) y la suite **se colgaba** en vez de fallar. **Solución:** en el manager se carga
+> con `const INTERACCION := preload("res://scripts/construccion/build_interaction.gd")` (no por
+> `class_name`). El `class_name` se mantiene para cuando el editor registre la clase.
+
+### 13.3 Verificación
+
+- Suite NUEVA `res://tests/test_m17_contenido_piezas.gd` → **32 checks, 0 fallos, EXIT 0**.
+- **ROJO-VERDE:** con `liberar_contenido()` stubbeado a items vacíos → **4 fallos (A9, A11, B7, B8) /
+  EXIT 1**. Restaurado → 32/0.
+- **Regresión M17 completa (12 suites, todas EXIT 0):** contenido 32/0 · hud_categorias 22/0 ·
+  categorias 24/0 · almacenamiento 33/0 · materiales_compartidos 13/0 · validacion 44/0 ·
+  reglas_pieza 40/0 · circulacion 36/0 · persistencia 23/0 · suites_integracion 17/0 (501 checks) ·
+  qa_m17_modo 9/0 · iter3 138/0.
+
+### 13.4 Lo que queda fuera de M17 (dueño explicito)
+
+La **ventana de confirmación** con lo que devuelve la pieza al demolerla es **UI de M18** (L133).
+Aquí queda el dato y la lógica; el diálogo, no.

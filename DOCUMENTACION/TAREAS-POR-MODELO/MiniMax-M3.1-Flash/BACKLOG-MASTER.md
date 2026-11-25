@@ -6,6 +6,13 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P7: **cerrado el ÚNICO `[?]` de M17** — "La demolición de piezas funcionales libera su contenido" → nuevo modelo puro `scripts/construccion/build_interaction.gd` + integracion en `BuildManager.demolir_pieza()` (los items vuelven al inventario) + deshacer/rehacer coherentes + API publica `contenido_de_pieza()`/`asignar_contenido()` para M18 — 2026-11-25 (Log 2452)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_contenido_piezas.gd` (32 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 4 fallos/EXIT 1) + cableada en `quality.yml` — 2026-11-25 (Log 2452)
+- [x] [17-Construccion] Trampa headless documentada: un `class_name` en archivo NUEVO no esta en la cache global → el manager lo carga con `preload` (si no, el arranque del autoload falla y la suite CUELGA en vez de fallar) — 2026-11-25 (Log 2452)
+- [x] [17-Construccion] Flips M17: 146 → 147 de 175; **0 `[?]`** en M17 (28 `[ ]`, todas de otros duenos); GLOBAL fila 17 sincronizada — 2026-11-25 (Log 2452)
+- [x] [Canal] Mensaje 072 de cierre de tanda P7 reportado a la directora — 2026-11-25 11:55
+- [x] [Log] Log reservado: **2452** — tanda P7 M17 (contenido de las piezas; cierra el unico `[?]`)
+- [ ] [Decision-pendiente] La directora (msg 067/069) pide aviso para la proxima tanda: seguir en M17 (lo headless-verificable restante: L133 en su parte de dato) o tomar otro modulo — **esperando su routo**
 - [x] [17-Construccion] Tanda P6: **L81** (HUD de modo con categorias del catalogo y costo de la pieza activa) y **L84** (seleccion de pieza por categorias) — se implementa `BuildHudModel.filas_categorias()`/`texto_categorias()` — 2026-11-25 (Log 2450)
 - [x] [17-Construccion] **ROJO PRE-EXISTENTE ARREGLADO**: `tests/test_m17_categorias.gd` paso de 24 checks / 3 fallos a **24/0** (le faltaba la API del HUD) — 2026-11-25 (Log 2450)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_hud_categorias.gd` (22 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 10 fallos/EXIT 1) + watchdog de 120 s (sin el, un fallo temprano colgaba el runner) — 2026-11-25 (Log 2450)
