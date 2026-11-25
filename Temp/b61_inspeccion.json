@@ -1,0 +1,197 @@
+{
+ "21": {
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "path": "DOCUMENTACION/21-Dialogos/plan-actual/05-Checklist.md",
+  "exp": 31,
+  "q": 6,
+  "x": 137,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 62,
+    "text": "- [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta er"
+   },
+   {
+    "line": 63,
+    "text": "- [?] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga) | FLIP 2026"
+   },
+   {
+    "line": 75,
+    "text": "- [?] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash)"
+   },
+   {
+    "line": 79,
+    "text": "- [?] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `scripts/di"
+   },
+   {
+    "line": 166,
+    "text": "- [?] Cache de grafos cargados con descarte LRU por limite de memoria [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `dialog"
+   }
+  ]
+ },
+ "33": {
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "path": "DOCUMENTACION/33-Agricultura/plan-actual/05-Checklist.md",
+  "exp": 30,
+  "q": 6,
+  "x": 143,
+  "blank": 6,
+  "sample": [
+   {
+    "line": 44,
+    "text": "- [?] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L307-308 (Beam"
+   },
+   {
+    "line": 120,
+    "text": "- [?] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L322-323 (Beam 664: \""
+   },
+   {
+    "line": 126,
+    "text": "- [?] Cancelación segura del selector sin consumir semillas [S] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L325-326 (Beam 664: \"Cancelacion seg"
+   },
+   {
+    "line": 166,
+    "text": "- [?] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L340-341 (Beam 664: \"Na"
+   },
+   {
+    "line": 169,
+    "text": "- [?] Cosecha con inventario lleno: sobrante devuelto con notificación [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L343-344 (Beam 665: \"Cose"
+   }
+  ]
+ },
+ "14": {
+  "name": "Recursos",
+  "dir": "14-Inventario",
+  "path": "DOCUMENTACION/14-Inventario/plan-actual/05-Checklist.md",
+  "exp": 30,
+  "q": 1,
+  "x": 139,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 183,
+    "text": "- [?] Soporte completo de gamepad y teclado/mouse [C] — **QA atria-dawn 2026-09-18 (Log 1047): grep `gamepad` en `inventory_layer.gd` = 0.** La capa usa `_input_event` co"
+   }
+  ]
+ },
+ "30": {
+  "name": "Ciclo-Dia-Noche",
+  "dir": "30-Reloj-En-Tiempo-Real",
+  "path": "DOCUMENTACION/30-Reloj-En-Tiempo-Real/plan-actual/05-Checklist.md",
+  "exp": 28,
+  "q": 0,
+  "x": 120,
+  "blank": 0,
+  "sample": []
+ },
+ "61": {
+  "name": "Rendimiento",
+  "dir": "61-Rendimiento",
+  "path": "DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md",
+  "exp": 28,
+  "q": 1,
+  "x": 146,
+  "blank": 1,
+  "sample": [
+   {
+    "line": 221,
+    "text": "- [?]Validar festival (M74) sin picos [C] → **no medible en headless** (Log 2068): VFX + frame time real. El limite de particulas (<= 500 por camara) si esta definido en "
+   }
+  ]
+ },
+ "36": {
+  "name": "Museos",
+  "dir": "36-Fauna",
+  "path": "DOCUMENTACION/36-Fauna/plan-actual/05-Checklist.md",
+  "exp": 27,
+  "q": 0,
+  "x": 228,
+  "blank": 0,
+  "sample": []
+ },
+ "155": {
+  "name": "Fotos",
+  "dir": "155-Vestimenta-Y-Accesorios",
+  "path": "DOCUMENTACION/155-Vestimenta-Y-Accesorios/plan-actual/05-Checklist.md",
+  "exp": 26,
+  "q": 0,
+  "x": 108,
+  "blank": 0,
+  "sample": []
+ },
+ "52": {
+  "name": "UI-UX",
+  "dir": "52-Particulas-Y-VFX",
+  "path": "DOCUMENTACION/52-Particulas-Y-VFX/plan-actual/05-Checklist.md",
+  "exp": 25,
+  "q": 2,
+  "x": 146,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 60,
+    "text": "- [?] Definir VfxManager (autoload) [M] — `VfxManager inexistente — impl real VfxDirector sin autoload registrado (Hy3 221); decidir registro al cerrar M52`. Verificado p"
+   },
+   {
+    "line": 242,
+    "text": "- [?] Catálogo de VFX por evento (M44 feedback + M92 tutorial): iter 2 — catálogo data-driven (dueño: deepseek-v4-flash-vision-exp)"
+   }
+  ]
+ },
+ "137": {
+  "name": "Vertical-Slice",
+  "dir": "137-Prototipo",
+  "path": "DOCUMENTACION/137-Prototipo/plan-actual/05-Checklist.md",
+  "exp": 25,
+  "q": 7,
+  "x": 124,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 10,
+    "text": "- [?] Definir escena `prototipo_isla.tscn` como escena principal [M] — PENDIENTE REAL 2026-10-14 (step-5-kilocode): verificado — no existe `prototipo_isla.tscn`; la escen"
+   },
+   {
+    "line": 54,
+    "text": "- [?] Definir `inventario_proto.gd` con slot único [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `inventario_proto.gd` NO ex"
+   },
+   {
+    "line": 131,
+    "text": "- [?] Definir plantilla `PLAYTEST.md` con resultados [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe e"
+   },
+   {
+    "line": 155,
+    "text": "- [?] Definir reporte de rendimiento en `PLAYTEST.md` [M] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe "
+   },
+   {
+    "line": 178,
+    "text": "- [?] Definir `GONOGO.md` firmado con fecha [S] — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `GONOGO.md` NO existe en disco ni "
+   }
+  ]
+ },
+ "44": {
+  "name": "Arte-3D",
+  "dir": "44-ASMR-Y-Feedback",
+  "path": "DOCUMENTACION/44-ASMR-Y-Feedback/plan-actual/05-Checklist.md",
+  "exp": 24,
+  "q": 3,
+  "x": 110,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 100,
+    "text": "- [?] M45: abrir contenedores con receta de caja — receta «abrir_contenedor» existe en datos; M45 (20/171) no la dispara — rg «abrir_contenedor» sin hallazgos en scripts;"
+   },
+   {
+    "line": 103,
+    "text": "- [?] M31: capas de hora cambian microfoley — set_contexto() existe (feedback_director.gd L72) pero nadie pasa «hora» desde M31 (0 llamadas externas); lógica de hora sin "
+   },
+   {
+    "line": 109,
+    "text": "- [?] M29: pausa congela microfoley sin residuos — pausar()/reanudar() son stubs `pass` (feedback_director.gd L79-83); congelamiento no implementado; dueño: AGENTE DELEGA"
+   }
+  ]
+ }
+}

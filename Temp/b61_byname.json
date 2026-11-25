@@ -1,0 +1,82 @@
+{
+ "21-Dialogos": {
+  "exp": 31,
+  "label": "M21 Dialogos",
+  "q": 6,
+  "x": 137,
+  "blank": 0,
+  "path": "DOCUMENTACION/21-Dialogos/plan-actual/05-Checklist.md"
+ },
+ "33-Agricultura": {
+  "exp": 30,
+  "label": "M33 Agricultura",
+  "q": 6,
+  "x": 143,
+  "blank": 6,
+  "path": "DOCUMENTACION/33-Agricultura/plan-actual/05-Checklist.md"
+ },
+ "15-Recursos": {
+  "exp": 30,
+  "label": "M14 Recursos",
+  "q": 4,
+  "x": 215,
+  "blank": 0,
+  "path": "DOCUMENTACION/15-Recursos/plan-actual/05-Checklist.md"
+ },
+ "31-Ciclo-Dia-Noche": {
+  "exp": 28,
+  "label": "M30 Ciclo-Dia-Noche",
+  "q": 2,
+  "x": 167,
+  "blank": 0,
+  "path": "DOCUMENTACION/31-Ciclo-Dia-Noche/plan-actual/05-Checklist.md"
+ },
+ "61-Rendimiento": {
+  "exp": 28,
+  "label": "M61 Rendimiento",
+  "q": 1,
+  "x": 146,
+  "blank": 1,
+  "path": "DOCUMENTACION/61-Rendimiento/plan-actual/05-Checklist.md"
+ },
+ "37-Museos-Y-Colecciones": {
+  "exp": 27,
+  "label": "M36 Museos",
+  "q": 0,
+  "x": 141,
+  "blank": 7,
+  "path": "DOCUMENTACION/37-Museos-Y-Colecciones/plan-actual/05-Checklist.md"
+ },
+ "56-Fotografia": {
+  "exp": 26,
+  "label": "M155 Fotos",
+  "q": 1,
+  "x": 130,
+  "blank": 7,
+  "path": "DOCUMENTACION/56-Fotografia/plan-actual/05-Checklist.md"
+ },
+ "53-UI-UX": {
+  "exp": 25,
+  "label": "M52 UI-UX",
+  "q": 2,
+  "x": 160,
+  "blank": 2,
+  "path": "DOCUMENTACION/53-UI-UX/plan-actual/05-Checklist.md"
+ },
+ "138-Vertical-Slice": {
+  "exp": 25,
+  "label": "M137 Vertical-Slice",
+  "q": 3,
+  "x": 128,
+  "blank": 0,
+  "path": "DOCUMENTACION/138-Vertical-Slice/plan-actual/05-Checklist.md"
+ },
+ "45-Arte-3D": {
+  "exp": 24,
+  "label": "M44 Arte-3D",
+  "q": 2,
+  "x": 157,
+  "blank": 12,
+  "path": "DOCUMENTACION/45-Arte-3D/plan-actual/05-Checklist.md"
+ }
+}

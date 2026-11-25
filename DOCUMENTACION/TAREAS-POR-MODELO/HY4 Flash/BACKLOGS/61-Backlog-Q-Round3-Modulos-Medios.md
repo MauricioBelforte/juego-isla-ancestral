@@ -10,16 +10,16 @@ b60 CERRADA (0 flips, 483 [?] sin evidencia). 3564[x]. Round 3: modulos con 25-4
 
 ## A - Verificacion [?] round 3 (10)
 
-- [ ] T61-01: M21 Dialogos (31[?]): clasificar
-- [ ] T61-02: M33 Agricultura (30[?]): clasificar
-- [ ] T61-03: M14 Recursos (30[?]): clasificar
-- [ ] T61-04: M30 Ciclo-Dia-Noche (28[?]): clasificar
-- [ ] T61-05: M61 Rendimiento (28[?]): clasificar
-- [ ] T61-06: M36 Museos (27[?]): clasificar
-- [ ] T61-07: M155 Fotos (26[?]): clasificar
-- [ ] T61-08: M52 UI-UX (25[?]): clasificar
-- [ ] T61-09: M137 Vertical-Slice (25[?]): clasificar
-- [ ] T61-10: M44 Arte-3D (24[?]): clasificar
+- [x] T61-01: M21 Dialogos (31[?]): clasificar
+- [x] T61-02: M33 Agricultura (30[?]): clasificar
+- [x] T61-03: M14 Recursos (30[?]): clasificar
+- [x] T61-04: M30 Ciclo-Dia-Noche (28[?]): clasificar
+- [x] T61-05: M61 Rendimiento (28[?]): clasificar
+- [x] T61-06: M36 Museos (27[?]): clasificar
+- [x] T61-07: M155 Fotos (26[?]): clasificar
+- [x] T61-08: M52 UI-UX (25[?]): clasificar
+- [x] T61-09: M137 Vertical-Slice (25[?]): clasificar
+- [x] T61-10: M44 Arte-3D (24[?]): clasificar
 
 ## Regla
 
