@@ -152,7 +152,12 @@ PERMITIDOS = {
     # etiquetadas "BUG-068", pero A1/A2 (ciclos y orden de autoloads) son el
     # contenido de BUG-069. BUG-068 es SOLO el A3 (el mismo script como dos
     # autoloads). La etiqueta equivocada mandaba al bug que no era.
-    "A1|ThemeService,UIManager": "BUG-069",
+    # A1|ThemeService,UIManager RETIRADA el 2026-11-25 (Deepseek V4.1 Flash-DeepAI,
+    # Log 2449): la arista la sostuvo codigo muerto (`viewport_resized` inexistente,
+    # cerrada en Log 1391); el auditor hace rondas avisando que ya no la observa y una
+    # entrada muerta en la allowlist es deuda que oculta: si el ciclo vuelve, tiene que
+    # volver a doler. Medido despues de retirarla: 1 SCC (`DataStore`<->`SaveManager`),
+    # 0 hallazgos nuevos, exit 0.
     # A1 NUEVA declarada el 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445):
     # ciclo DataStore <-> SaveManager. El job Architecture Guard del push
     # f0bc848+106213f la reportaba como hallazgo NUEVO. Las dos direcciones son

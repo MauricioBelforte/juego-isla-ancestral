@@ -1,0 +1,30 @@
+{
+  "task_id": "K5-01",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "created_date": "2026-11-25",
+  "status": "DISEÑO NO EJECUTADO; no cuenta como calibración ni resultado de modelo",
+  "reason_not_completed": "La fuente sintética y la referencia fueron preparadas en la misma sesión y la supuesta extracción del modelo se redactó con conocimiento de la referencia. No hubo ejecución ciega/independiente; la coincidencia aparente sería tautológica y no mide exactitud.",
+  "fixture_for_future_blind_run": {
+    "instruction": "Cuando otro evaluador pueda ocultar la referencia gold al modelo, extraer un registro por cada línea física que comience exactamente con ITEM|. Parsear los campos separados por | y devolver en orden los campos ID, OWNER, STATE y EVIDENCE. Conservar valores literales sin normalizar ni inferir, omitir cualquier otra línea, y conservar OWNER vacío como cadena vacía.",
+    "source_text": "ITEM|ID=R01|OWNER=M20|STATE=bloqueado|EVIDENCE=depende de M21\nITEM|ID=R02|OWNER=sin_asignar|STATE=pendiente|EVIDENCE=—\nITEM|ID=R03|OWNER=fundador|STATE=decision_externa|EVIDENCE=requiere decisión de marca\nITEM|ID=R04|OWNER=GPT-6-Luna|STATE=verificado|EVIDENCE=salida parseada\nITEM|ID=R05|OWNER=compositor|STATE=bloqueado|EVIDENCE=espera assets de audio\nITEM|ID=R06|OWNER=|STATE=sin_dueno|EVIDENCE=sin registro asignado\nITEM|ID=R07|OWNER=GLM-5.3-Flash|STATE=asignado|EVIDENCE=M20 reservado\nITEM|ID=R08|OWNER=usuario|STATE=pendiente|EVIDENCE=confirmar presupuesto; no suponer\nNota de control: la cadena ITEM|ID=R09|OWNER=falso|STATE=falso|EVIDENCE=no extraer no está al inicio de una línea física."
+  },
+  "reference_for_external_scoring_only": [
+    {"ID":"R01","OWNER":"M20","STATE":"bloqueado","EVIDENCE":"depende de M21"},
+    {"ID":"R02","OWNER":"sin_asignar","STATE":"pendiente","EVIDENCE":"—"},
+    {"ID":"R03","OWNER":"fundador","STATE":"decision_externa","EVIDENCE":"requiere decisión de marca"},
+    {"ID":"R04","OWNER":"GPT-6-Luna","STATE":"verificado","EVIDENCE":"salida parseada"},
+    {"ID":"R05","OWNER":"compositor","STATE":"bloqueado","EVIDENCE":"espera assets de audio"},
+    {"ID":"R06","OWNER":"","STATE":"sin_dueno","EVIDENCE":"sin registro asignado"},
+    {"ID":"R07","OWNER":"GLM-5.3-Flash","STATE":"asignado","EVIDENCE":"M20 reservado"},
+    {"ID":"R08","OWNER":"usuario","STATE":"pendiente","EVIDENCE":"confirmar presupuesto; no suponer"}
+  ],
+  "scoring_protocol": {
+    "records_expected": 8,
+    "fields_expected": 32,
+    "metric": "Coincidencia exacta de lista ordenada JSON, claves y valores; registrar precisión/recall por campo y omisiones/insertions.",
+    "independence_requirement": "Un evaluador debe presentar solo la instrucción y source_text, conservar oculta la referencia_for_external_scoring_only, capturar literalmente la respuesta del modelo y luego puntuarla. Si el evaluador no puede ocultar la referencia al modelo, dejar la tarea sin ejecutar.",
+    "result": null
+  },
+  "conclusion": "No se obtuvo medición. Este archivo conserva únicamente un fixture y protocolo para una ejecución ciega futura. No respalda afirmaciones de exactitud ni superioridad."
+}

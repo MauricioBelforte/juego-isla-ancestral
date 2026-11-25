@@ -79,6 +79,52 @@ static func texto_costo(receta: PlacementRule) -> String:
 static func costo_total(receta: PlacementRule) -> int:
 	return receta.costo_total() if receta != null else 0
 
+## ── Categorias del catalogo (items L81 y L84) ─────────────────────────────
+
+## Filas de CATEGORIAS listas para pintar el HUD del modo.
+##
+## Siempre devuelve las 4 categorias canonicas en su ORDEN de presentacion
+## (`ConstruccionTipos.CATEGORIAS`), aunque una este vacia: el HUD no debe
+## saltar filas ni cambiar de alto al filtrar.
+##
+## `mgr` es el BuildManager (autoload `Construccion`) por duck-typing: solo se
+## le pide `piezas_de_categoria(categoria, modo)`.
+## `modo` filtra la DISPONIBILIDAD (-1 = todos los modos).
+##
+## Cada fila: { categoria, nombre, cantidad, cantidad_modo, texto }.
+##   `cantidad`      = recetas del CATALOGO en esa categoria (las 4 filas suman
+##                     el catalogo completo: el HUD presenta el catalogo).
+##   `cantidad_modo` = recetas disponibles en el modo pedido (las que el
+##                     jugador puede colocar AHORA en ese modo).
+static func filas_categorias(mgr, modo: int = -1) -> Array:
+	var out: Array = []
+	if mgr == null or not mgr.has_method("piezas_de_categoria"):
+		return out
+	for c in ConstruccionTipos.CATEGORIAS:
+		var cat: int = int(c)
+		var todas: Array = mgr.call("piezas_de_categoria", cat, -1)
+		var en_modo: Array = todas
+		if modo >= 0:
+			en_modo = mgr.call("piezas_de_categoria", cat, modo)
+		var nombre: String = ConstruccionTipos.texto_categoria(cat)
+		out.append({
+			"categoria": cat,
+			"nombre": nombre,
+			"cantidad": todas.size(),
+			"cantidad_modo": en_modo.size(),
+			"texto": "%s (%d)" % [nombre, en_modo.size()],
+		})
+	return out
+
+## Texto de una linea con las categorias y su disponibilidad en el modo
+## ("estructura (25) | mobiliario (0) | ...").
+static func texto_categorias(mgr, modo: int = -1) -> String:
+	var filas: Array = filas_categorias(mgr, modo)
+	var partes: Array = []
+	for f in filas:
+		partes.append(String((f as Dictionary)["texto"]))
+	return " | ".join(partes)
+
 ## ── Motivos ─────────────────────────────────────────────────────────────
 
 ## Filas de motivos de rechazo. Cada fila: { motivo, texto }.
