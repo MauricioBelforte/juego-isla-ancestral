@@ -1,14 +1,14 @@
-**Modelo:** DeepSeek-V4.1-Flash (OpenCode)
-**Plataforma:** OpenCode
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
 
 ## Reserva actual
 
 | Campo | Valor |
 |---|---|
 | Módulo | M17 Construcción |
-| Estado | 🟡 Liberado (deuda M18) — flip aplicado por el director (atria-dawn, 2026-10-08 09:05, msg 137) |
-| Agente | — (libre) |
-| Última tanda | DS-V4.1-Flash-Opencode (OpenCode), 2026-11-08 — 2 ítems cerrados con evidencia (L143 apoyo alternativo de escalera, L148 conectividad de salidas) + suite nueva `tests/test_m17_circulacion.gd` (36 checks, 0 fallos). Quedan 33 `[ ]` + 1 `[?]` (UI/arte/audio/navmesh/cross-module). |
+| Estado | 🔵 En curso (P4, minimax-m3-1-flash) — reclamo renovado 2026-11-25 tras el periodo sin actividad (§21.4.7) |
+| Agente | minimax-m3-1-flash (DeepAI Code / pi) |
+| Última tanda | minimax-m3-1-flash (DeepAI Code / pi), 2026-11-25 — tanda P4 "almacenamiento de piezas": función NUEVA `BuildManager.almacenar_pieza()` (no existía: los 2 ítems eran promesas corticales) + suite NUEVA `tests/test_m17_almacenamiento.gd` (**33 checks, 0 fallos, EXIT 0**; ROJO-VERDE: con la función stubbeada → 13 fallos/EXIT 1). Cerrados **L132** (espacio libre en M14) y **L170** (el item guardado conserva la receta). Quedan 31 `[ ]` + 1 `[?]`. |
 | Motivo liberación | DoD estricta: sello §21.8 registrado por s2 (Log 1468), pero 1 `[?]` (demolición libera contenido, dueño formal M18) bloquea el flip ✅. Mismo precedente que M66. M18 cierra el `[?]` → M17 puede re-auditar y pasar a ✅ |
 | Auditoría s2 | 368 checks / 0 fallos / EXIT 0 en 3 suites; 58 de 59 `[x]` respaldados; 1 falso (→ `[?]` con dueño M18). Veredicto: módulo IMPLEMENTADO y sano (caso opuesto a M25/M112) |
 
@@ -129,7 +129,7 @@
 - [x] Mover una pieza desocupa las celdas originales solo al confirmar [C]
 - [x] Al mover, los recursos no se re-cobran (solo se reubican) [M]
   · evidencia (DS-V4.1-Flash-Opencode, 2026-11-06): `build_manager.gd` `mover_pieza()` (L555-597) no llama a `_f_descontar` ni a `_f_devolver` y registra `"costo": {}` en el historial (L590); probado en `scripts/construccion/test_construccion.gd` L386-391 ("mover NO re-cobra recursos").
-- [ ] Almacenar requiere inventario con espacio libre (M14) [M]
+- [x] Almacenar requiere inventario con espacio libre (M14) [M] — **CERRADO con checks nombrados** (minimax-m3-1-flash / DeepAI Code, 2026-11-25, Log 2446): función NUEVA `BuildManager.almacenar_pieza()` (`scripts/construccion/build_manager.gd`) + adaptadores de inventario `_f_agregar_item` / `_f_tirar_item` / `_f_hay_espacio` (duck-typing sobre `agregar_items` / `remover_items` / `has_free_space` de M14). Suite NUEVA `res://tests/test_m17_almacenamiento.gd` (**33 checks, 0 fallos, EXIT 0**, Godot 4.7.2 headless; ROJO-VERDE: con la función stubbeada → 13 fallos / EXIT 1). Checks: "B4: inventario LLENO -> motivo SIN_ESPACIO" · "B5: inventario lleno -> la pieza SIGUE colocada (atomicidad: no hay entrega parcial)" · "B6: inventario lleno -> no se entrego el item" · "B7: SIN_ESPACIO es TEMPORAL (se reintenta al liberar un slot)" · "B1: SIN inventario -> motivo SIN_INVENTARIO" · "B3: SIN_INVENTARIO es PERMANENTE". Motivos nuevos en `construccion_tipos.gd`: `SIN_ESPACIO` (temporal) y `SIN_INVENTARIO` (permanente), con su texto de HUD.
 - [ ] Demolición con ventana de confirmación y preview de lo que se devuelve [M]
 - [?] La demolición de piezas funcionales (camas, almacenamiento) libera su contenido [C] — **[x] falso detectado por atria-dawn-s2 (volumen DoD, msg 133, 2026-10-08):** `build_manager.gd:demolir_pieza` solo devuelve los MATERIALES de la receta (`_f_devolver.call(devuelto)`); no existe logica de liberar contenido, no existe `build_interaction.gd` (propuesto en 04-Codigo.md para M18), y 0 matches de `liberar|contenido|almacen` en las 3 suites. Es una promesa de integracion con M18 no implementada. Flip a [?] con dueno M18 por el director (atria-dawn, 2026-10-08).
 
@@ -167,7 +167,7 @@
 - [x] Descuento atómico al confirmar (nunca descuenta sin colocar) [M]
 - [x] Devolución parcial configurable por receta al demoler (default 50%) [M]
 - [x] Devolución exacta al deshacer (undo restaura todos los recursos consumidos) [M]
-- [ ] El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M]
+- [x] El almacenamiento convierte la pieza en ítem del inventario sin perder receta [M] — **CERRADO con checks nombrados** (minimax-m3-1-flash / DeepAI Code, 2026-11-25, Log 2446): el item guardado usa el **mismo id que la receta** (`String(e["tipo"])`), por lo que la pieza sigue siendo colocable desde el catálogo — no se pierde la receta. Suite `res://tests/test_m17_almacenamiento.gd` (33 checks, 0 fallos, EXIT 0). Checks: "A4: el item guardado usa el MISMO id que la RECETA" · "A5: la receta sigue en el catalogo (no se perdio al guardar)" · "A8: el item almacenado se puede volver a colocar -> ok" (ciclo completo guardar → recolocar) · "A6/A7: la pieza salio del mundo" · "D3: guardar NO devuelve recursos (los materiales no cambian)" · "D4–D9: undo/redo del almacenamiento (la pieza vuelve al mundo y el item sale del inventario, y al revés)". historial: `BuildHistory.TIPO_ALMACENAR` con su rama en `_invertir()`. Señal nueva `pieza_almacenada(receta_id, celda)` (+ `navmesh_delta`).
 - [x] Los stacks de M14 se agrupan al devolver materiales sobrantes [S]
   · evidencia: 03-Diseno.md secc. Aviso y stacks (P-100, Reflection-Beam-1.0, T76, 2026-10-22)
 - [ ] Balance inicial de costos delegado a M92 con tabla de referencia en las recetas [M]
@@ -316,3 +316,5 @@
 **Totales:** 175 ítems · Completados: 135 · Pendientes: 39 · No resueltos: 1. (Re-medido minimax-m3-1-flash, 2026-10-27, Log 2220: +5 [x] al cerrar G137/G138/G141/G145 y F121 con la suite nueva `res://tests/test_m17_reglas_pieza.gd` (40 checks, 0 fallos, EXIT 0); el conteo de marcas del cuerpo manda.)
 **Totales:** 175 ítems · Completados: 139 · Pendientes: 35 · No resueltos: 1. (Re-medido DS-V4.1-Flash-Opencode, 2026-11-06: +4 [x] verificados = D97 rejilla de 1 m, D102 coherencia de rejilla tras guardar/cargar, F127 mover sin re-cobro y P256 integración colocar→guardar→cargar→restaurar. Suite NUEVA `res://tests/test_m17_persistencia_rejilla.gd` (23 checks, 0 fallos, EXIT 0); línea base del lote: `test_m17_construccion_validacion.gd` 44/0, `test_m17_reglas_pieza.gd` 40/0 y `test_m17_suites_integracion.gd` 17/0 con 501 checks en las 7 suites. Quedan 35 `[ ]` + 1 `[?]`: UI/arte/audio/navmesh/cross-module.)
 **Totales:** 175 ítems · Completados: 141 · Pendientes: 33 · No resueltos: 1. (Re-medido DS-V4.1-Flash-Opencode, 2026-11-08: +2 [x] verificados = L143 escalera con apoyo alternativo en pared y L148 conectividad de salidas de la zona. Suite NUEVA `res://tests/test_m17_circulacion.gd` (36 checks, 0 fallos, EXIT 0); línea base del lote: `test_m17_construccion_validacion.gd` 44/0, `test_m17_reglas_pieza.gd` 40/0, `test_m17_suites_integracion.gd` 17/0 con 501 checks en las 7 suites y `test_m17_persistencia_rejilla.gd` 23/0. Quedan 33 `[ ]` + 1 `[?]`: UI/arte/audio/navmesh/cross-module.)
+
+**Totales:** 175 ítems · Completados: 143 · Pendientes: 31 · No resueltos: 1. (Re-medido minimax-m3-1-flash / DeepAI Code, 2026-11-25, Log 2446: +2 [x] verificados = **L132** (almacenar exige espacio libre en M14, con atomicidad: si el inventario está lleno la pieza SIGUE en el mundo) y **L170** (el item guardado conserva el id de RECETA y la pieza es recolocable). Suite NUEVA `res://tests/test_m17_almacenamiento.gd` (**33 checks, 0 fallos, EXIT 0**; ROJO-VERDE con stub → 13 fallos/EXIT 1) + `BuildManager.almacenar_pieza()` NUEVA (no existía: los 2 ítems eran promesas sin código). Línea base del lote (Godot 4.7.2 headless): `test_m17_almacenamiento.gd` 33/0, `test_m17_construccion_validacion.gd` 44/0, `test_m17_reglas_pieza.gd` 40/0, `test_m17_circulacion.gd` 36/0, `test_m17_persistencia_rejilla.gd` 23/0, `test_m17_suites_integracion.gd` 17/0 (501 checks en las 7 suites de `scripts/construccion/`). ⚠️ `test_m17_categorias.gd` está en ROJO (24 checks, 3 fallos) **por fallo PRE-EXISTENTE, no de esta tanda** (verificado con `git stash` sobre los 3 archivos tocados: los mismos 3 fallos sin mis cambios) → `BuildHudModel.filas_categorias` no existe; es el ítem de HUD (L81), deuda UI. Quedan 31 `[ ]` + 1 `[?]`: UI/arte/audio/navmesh/cross-module.)

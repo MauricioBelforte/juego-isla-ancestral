@@ -1,7 +1,7 @@
 {
   "source": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
-  "scope": "Tareas numeradas C1-01..C1-20 de la cola activa, actualizada durante la sesión.",
-  "method": "Regex de marca e ID; extracción literal en orden, sin juzgar la justificación de estados.",
+  "scope": "Tareas C1-01..C1-20; captura sincronizada al estado presente de la cola.",
+  "method": "Regex de marca e ID; extracción literal en orden, sin valorar la justificación.",
   "counts": {
     "pending": 8,
     "complete": 12,

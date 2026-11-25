@@ -83,7 +83,9 @@ func info_actividad(id: StringName) -> Dictionary:
 
 
 func _chequear_dia() -> void:
-	var t := TimeCalendar
+	# M169/CI: ver la nota de crucero_manager.vender_pasaje() — el autoload se
+	# resuelve por nodo para que `--check-only --script` (gate de CI) compile.
+	var t := get_node_or_null("/root/TimeCalendar")
 	var dia := 0
 	if t != null and t.has_method("dia_trascurrido"):
 		dia = int(t.dia_trascurrido())

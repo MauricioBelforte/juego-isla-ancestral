@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # Copyright (c) 2026 Isla Ancestral Team. Todos los derechos reservados.
 # SPDX-License-Identifier: LicenseRef-Propietaria
+# Este archivo es parte de "Isla Ancestral". Ver LICENSE en la raiz.
 # M159 legal-tools (encargo director #784): test headless del
 # generate_item_attribution.py (inyeccion de tEXt Copyright/Author en los 300 PNG
 # de M159). Valida: inyecta, idempotente, validador queda en verde.

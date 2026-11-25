@@ -126,10 +126,17 @@ func puede_embarcar() -> bool:
 func vender_pasaje(clase: StringName, route_id_: StringName, origen: StringName, destino: StringName) -> Dictionary:
 	if not _clases.has(clase):
 		return {"ok": false, "motivo": "clase_desconocida"}
-	if not TransportManager.tiene_red():
+	# M169/CI (2026-11-25, Deepseek V4.1 Flash-DeepAI): el autoload se resuelve
+	# por NODO, no por identificador global. `godot --check-only --script` compila
+	# los .gd sin registrar los autoloads como singletons, asi que un
+	# `TransportManager.metodo()` literal aborta con "Identifier not found"
+	# (patron BUG-128 / T-108 de GUIA-GODOT/06). Con get_node_or_null la misma
+	# referencia funciona igual en runtime y el gate compila.
+	var tm = get_node_or_null("/root/TransportManager")
+	if tm == null or not tm.tiene_red():
 		return {"ok": false, "motivo": "sin_red"}
 
-	var resultado: Dictionary = TransportManager.buy_ticket(route_id_, origen)
+	var resultado: Dictionary = tm.buy_ticket(route_id_, origen)
 	if not bool(resultado.get("ok", false)):
 		return resultado
 
@@ -142,7 +149,8 @@ func vender_pasaje(clase: StringName, route_id_: StringName, origen: StringName,
 	p.camarote = cam
 	p.precio = int(resultado.get("precio", precio_de(clase)))
 	p.cubierta = 2 if cam != &"suite_duo" else 3
-	p.fecha_compra = TimeCalendar.fecha_actual() if TimeCalendar.has_method("fecha_actual") else {}
+	var tc = get_node_or_null("/root/TimeCalendar")
+	p.fecha_compra = tc.fecha_actual() if tc != null and tc.has_method("fecha_actual") else {}
 	pasaje_actual = p
 	camarote_asignado = cam
 	estado = Estado.ABORDO
@@ -308,7 +316,11 @@ func cargar_desde(datos: Dictionary) -> void:
 
 ## Conecta las señales de M68. Llamar desde el autoload de arranque.
 func conectar_transporte() -> void:
-	if not TransportManager.viaje_iniciado.is_connected(_on_viaje_iniciado):
-		TransportManager.viaje_iniciado.connect(_on_viaje_iniciado)
-	if not TransportManager.viaje_llegado.is_connected(_on_viaje_llegado):
-		TransportManager.viaje_llegado.connect(_on_viaje_llegado)
+	var tm = get_node_or_null("/root/TransportManager")
+	if tm == null:
+		_log_info("%s TransportManager ausente; senales de viaje no conectadas" % PREFIJO_LOG, "GAMEPLAY")
+		return
+	if not tm.viaje_iniciado.is_connected(_on_viaje_iniciado):
+		tm.viaje_iniciado.connect(_on_viaje_iniciado)
+	if not tm.viaje_llegado.is_connected(_on_viaje_llegado):
+		tm.viaje_llegado.connect(_on_viaje_llegado)

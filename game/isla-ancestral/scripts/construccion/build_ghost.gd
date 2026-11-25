@@ -53,6 +53,18 @@ const ANIM_DURACION: float = 0.3
 var _malla_real: Mesh = null
 ## Cache ruta -> Mesh (o null si la ruta no resuelve). Evita recargar por frame.
 var _cache_malla: Dictionary = {}
+## L227: cache ESTATICA ruta -> Mesh, COMPARTIDA por todas las instancias de
+## fantasma. Antes cada fantasma instanciaba su propia copia de la escena
+## .glb (misma ruta, N copias): ademas de gastar CPU/allocaciones, duplicaba
+## los recursos de material y-rompia el batching. Con la cache compartida, la
+## ruta se resuelve UNA vez y todas las instancias reciben el MISMO recurso de
+## malla (y sus materiales), que es la condicion para poder agrupar draw calls.
+## Las precargas explicitas (`registrar_malla`) siguen siendo POR INSTANCIA
+## (son datos de test: no deben contaminar el cache compartido).
+static var _cache_malla_compartida: Dictionary = {}
+## Cuantas veces se cargo/instancio una malla desde disco (contador de
+## auditoria para L227: debe ser 1 por ruta, no 1 por consumidor).
+static var _cargas_malla: int = 0
 
 ## ── Construccion perezosa ───────────────────────────────────────────────
 
@@ -117,15 +129,25 @@ func malla_desde_ruta(ruta: String) -> Mesh:
 		return null
 	if _cache_malla.has(ruta):
 		return _cache_malla[ruta]
+	# Cache compartida (L227): la malla se carga una sola vez para TODAS las
+	# instancias; el recurso devuelto es el MISMO objeto (mismos materiales).
+	if _cache_malla_compartida.has(ruta):
+		return _cache_malla_compartida[ruta]
 	var m: Mesh = cargar_malla_ruta(ruta)
-	_cache_malla[ruta] = m
+	_cache_malla_compartida[ruta] = m
 	return m
+
+## Auditoria L227: cuantas veces se cargo una malla desde disco en todo el
+## proceso (debe ser 1 por ruta, no 1 por consumidor). Solo lectura.
+static func cargas_de_malla() -> int:
+	return _cargas_malla
 
 ## Carga una malla desde una ruta. Acepta un `Mesh` directo o un `PackedScene`
 ## (p. ej. un `.glb` importado) del que toma la primera `MeshInstance3D`.
 static func cargar_malla_ruta(ruta: String) -> Mesh:
 	if not ResourceLoader.exists(ruta):
 		return null
+	_cargas_malla += 1
 	var res: Variant = ResourceLoader.load(ruta)
 	if res is Mesh:
 		return res

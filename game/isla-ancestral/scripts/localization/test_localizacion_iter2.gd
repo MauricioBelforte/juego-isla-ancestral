@@ -141,4 +141,12 @@ func _test_sugerencias_debug() -> void:
 	# Checklist: idioma activo visible (para menú de debug M110)
 	var display: String = _loc.get_locale_display_name()
 	_check(display != "", "get_locale_display_name() '%s'" % display)
-	_check(_loc.locales_disponibles().size() == 2, "es+en disponibles (selector M53/M110)")
+	# 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445): clavado en 2 idiomas; el
+	# autoload declara es/en/pt. Se compara contra los catálogos en disco (BUG-032).
+	var _locales: Array = _loc.locales_disponibles()
+	var _con_catalogo := 0
+	for _l in _locales:
+		if FileAccess.file_exists("res://data/localizacion/strings_%s.json" % str(_l)):
+			_con_catalogo += 1
+	_check(_locales.has("es") and _locales.has("en") and _con_catalogo == _locales.size(),
+		"es+en disponibles y cada idioma con catalogo (selector M53/M110): %s" % str(_locales))

@@ -46,6 +46,26 @@ const BONUS_CUMPLEANOS_REGALO := 5
 ## Config de niveles/recompensas cargada desde data/amistad/amistad_config.tres
 ## (override de los fallback de abajo). Ver _cargar_config().
 var _config = null
+
+## L136 (M20): recompensas "receta_*" -> rec_id de la tabla de crafting (M16).
+## Si el reward no esta en el mapa, se deriva "rec_" + sufijo; si la receta no
+## existe en la tabla, la entrega se omite con registro (sin crash).
+const RECOMPENSA_RECETA := {
+	"receta_herramienta_basica": "rec_hacha_cobre",
+	"receta_comida_gourmet": "rec_ensalada_bayas",
+}
+
+## L138 (M20): recompensas "decorativo_*" -> id del catalogo M159 (ItemDatabase).
+## "" = el item todavia no existe en catalogo: la entrega se omite con registro.
+const RECOMPENSA_DECORATIVA := {
+	"decorativo_estatua": "OBJ-EXT-017",
+	"decorativo_fuente": "",
+}
+
+## L177 (M20): logs de debug desactivados en release (conditional symbol).
+## El DOM-AMISTAD es instrumentacion de desarrollo: se resuelve UNA vez al
+## arrancar; en release (_logs_debug == false) registrar_evento no asigna nada.
+var _logs_debug: bool = OS.is_debug_build()
 var _umbrales: Array = VECINO_SCRIPT.UMBRALES
 var _recompensas: Dictionary = RECOMPENSAS_NIVEL
 ## Perfiles M19 cacheados por vecino_id para evaluacion de regalos (gustos reales).
@@ -576,7 +596,32 @@ func charlar(vecino_id: String) -> Dictionary:
 	return {"ok": true, "clase": -1, "puntos": puntos, "nivel": v.get_nivel()}
 
 func reclamar_recompensa(vecino_id: String, reward_id: String) -> bool:
-	return _vecino(vecino_id).reclamar_recompensa(reward_id)
+	if not _vecino(vecino_id).reclamar_recompensa(reward_id):
+		return false
+	_entregar_recompensa(reward_id)
+	return true
+
+## Entrega material de la recompensa reclamada (L136/L138 del plan M20):
+## - "receta_*": la receta pasa a CONOCIDA en la tabla de crafting (M16).
+## - "decorativo_*": el item decorativo entra al inventario (M14) como item
+##   regalo valido (ver GiftEvaluator.es_regalo_valido).
+## La reclamacion es unica por reward (la bandeja consume el id), asi que la
+## entrega corre una sola vez. Si el id no existe, se omite con registro.
+func _entregar_recompensa(reward_id: String) -> void:
+	if reward_id.begins_with("receta_"):
+		var cs = get_node_or_null("/root/Crafting")
+		if cs != null and cs.has_method("aprender_receta_externa"):
+			var rec_id: String = str(RECOMPENSA_RECETA.get(reward_id, "rec_" + reward_id.substr(7)))
+			if not bool(cs.aprender_receta_externa(rec_id)):
+				registrar_evento("recompensa_sin_receta", "", reward_id)
+	elif reward_id.begins_with("decorativo_"):
+		var item_id: String = str(RECOMPENSA_DECORATIVA.get(reward_id, ""))
+		if item_id == "":
+			registrar_evento("recompensa_sin_item", "", reward_id)
+			return
+		var inv = get_node_or_null("/root/Inventario")
+		if inv != null and inv.has_method("agregar_items"):
+			inv.agregar_items({item_id: 1})
 
 ## ── Internos ──────────────────────────────────────────────
 func _emitir_npc_events(vecino_id: String, item_id: String, clase: int) -> void:
@@ -628,6 +673,10 @@ func _get_vecino_data(vecino_id: String) -> Dictionary:
 ## Registra un evento con rotacion (cap LOG_CAP). `clase` = GiftEvaluator.Clase
 ## cuando aplica (regalo), -1 si no. `detalle` suele ser item_id / nivel / respuesta.
 func registrar_evento(tipo: String, npc_id: String, detalle: String, clase: int = -1) -> void:
+	# L177 (M20): logs de debug desactivados en release (conditional symbol).
+	# El DOM-AMISTAD es instrumentacion de desarrollo: en release no asigna.
+	if not _logs_debug:
+		return
 	_eventos.append({"tipo": tipo, "npc_id": npc_id, "detalle": detalle, "dia": _dia, "clase": clase})
 	while _eventos.size() > LOG_CAP:
 		_eventos.pop_front()

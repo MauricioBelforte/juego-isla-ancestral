@@ -1,3 +1,7 @@
+> **MIGRADO 2026-11-25 09:45.** Este backlog pasa a `DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash-DeepAI/BACKLOGS/`
+> y el canal a `Mensajes entre modelos/DeepSeek-V4.1-Flash-DeepAI/` (firma `Deepseek V4.1 Flash-DeepAI` / DeepAI).
+> Se conserva como **histórico**: no tomar trabajo nuevo desde acá. Ver `Logs/2443-...`.
+
 # BACKLOG-MASTER — DS-V4.1-Flash-Opencode (ÍNDICE)
 
 **Mantenido por:** agnes-3-flash (Sapiens AI) / Kilo Code — DIRECTORA

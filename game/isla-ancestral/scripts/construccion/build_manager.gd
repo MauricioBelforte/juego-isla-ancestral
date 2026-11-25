@@ -40,6 +40,8 @@ const DIR_PIEZAS: String = "res://data/construccion/piezas"
 signal obra_activa(activa: bool)
 signal pieza_colocada(receta_id: StringName, celda: Vector3i)
 signal pieza_demolida(receta_id: StringName, celda: Vector3i)
+## L132/L170: la pieza guardada en el inventario (M14) sale del mundo.
+signal pieza_almacenada(receta_id: StringName, celda: Vector3i)
 signal zona_rechazada(celda: Vector3i, motivo: String)
 signal estructuras_restauradas(cantidad: int)
 ## M64: la navmesh debe recalcularse en las celdas que cambiaron (bloque K).
@@ -69,6 +71,13 @@ var _preview: BuildPreview = BuildPreview.new()
 var _f_puede_pagar: Callable = Callable()
 var _f_descontar: Callable = Callable()
 var _f_devolver: Callable = Callable()
+## Adaptadores de inventario para ALMACENAR (L132/L170):
+##   _f_agregar_item -> (item_id: String, cantidad: int) -> bool
+##   _f_tirar_item  -> (item_id: String, cantidad: int) -> bool
+##   _f_hay_espacio -> () -> bool   (pre-chequeo; opcional)
+var _f_agregar_item: Callable = Callable()
+var _f_tirar_item: Callable = Callable()
+var _f_hay_espacio: Callable = Callable()
 
 # ── Fantasma (estado de UI, NUNCA persistido) ─────────────────────────────
 ## El fantasma es estado de presentacion: vive fuera de `_estructuras` y fuera
@@ -142,6 +151,9 @@ func conectar_inventario(inv) -> void:
 		_f_puede_pagar = Callable()
 		_f_descontar = Callable()
 		_f_devolver = Callable()
+		_f_agregar_item = Callable()
+		_f_tirar_item = Callable()
+		_f_hay_espacio = Callable()
 		return
 	_f_puede_pagar = func(costo: Dictionary) -> bool:
 		for k in costo.keys():
@@ -156,6 +168,23 @@ func conectar_inventario(inv) -> void:
 		if d.is_empty():
 			return true
 		return bool(inv.agregar_items(d))
+	# ── Almacenamiento de piezas (L132/L170) ──────────────────────────────
+	# `agregar_items` es atomico en el servicio real (revierte lo parcial si
+	# no entra) -> false significa SIN_ESPACIO, no "a medias".
+	_f_agregar_item = func(item_id: String, cantidad: int) -> bool:
+		if item_id == "" or cantidad <= 0:
+			return false
+		return bool(inv.agregar_items({item_id: cantidad}))
+	_f_tirar_item = func(item_id: String, cantidad: int) -> bool:
+		if item_id == "" or cantidad <= 0:
+			return false
+		return bool(inv.remover_items({item_id: cantidad}))
+	# El pre-chequeo es una cortesia: si el inventario no lo expone, el intento
+	# real (agregar_items) sigue siendo la autoridad.
+	_f_hay_espacio = func() -> bool:
+		if inv.has_method("has_free_space"):
+			return bool(inv.call("has_free_space", 0))
+		return true
 
 ## Conecta un registro de zonas (o uno vacio si es null).
 func conectar_zonas(z: ZoneRegistry) -> void:
@@ -571,6 +600,91 @@ func demolir_pieza(celda: Vector3i) -> Dictionary:
 		"devuelto": devuelto,
 	}
 
+## ─────────────────────────────────────────────────────────────────────────
+## L132 / L170 — ALMACENAR una pieza colocada.
+##
+## La pieza sale del mundo y entra al INVENTARIO (M14) como un item con el
+## MISMO id de receta: por eso "no pierde la receta" (se puede volver a
+## colocar sin buscarla en un catalogo aparte).
+##
+## NO devuelve recursos al jugador (no es una demolicion): lo que se guarda es
+## la pieza misma. El item se agrega ANTES de tocar el mundo, asi que un
+## inventario lleno deja la pieza intacta (atomicidad).
+##
+## Idempotencia/orden de Guards:
+##   1) no hay pieza        -> NO_HAY_PIEZA
+##   2) recipe no valida    -> RECETA_INVALIDA
+##   3) no deconstruible    -> NO_DECONSTRUIBLE
+##   4) sostiene otra pieza -> SOSTIENE_OTRA_PIEZA
+##   5) sin inventario      -> SIN_INVENTARIO
+##   6) sin espacio         -> SIN_ESPACIO (temporal: reintentable)
+## ─────────────────────────────────────────────────────────────────────────
+func almacenar_pieza(celda: Vector3i) -> Dictionary:
+	var ancla: String = String(_ocupacion.get(ConstruccionTipos.clave(celda), ""))
+	if ancla == "":
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_HAY_PIEZA], ["nada que almacenar en %s" % str(celda)], [])
+	var e: Dictionary = _estructuras[ancla]
+	var r: PlacementRule = _receta_de_ancla(ancla)
+	if r == null:
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.RECETA_INVALIDA], ["la pieza no esta en el catalogo"], [])
+	if not r.deconstruible:
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_DECONSTRUIBLE],
+			["%s no se puede almacenar" % String(e.get("tipo", ""))], [])
+	var apoyadas: Array = piezas_apoyadas_en(ancla)
+	if not apoyadas.is_empty():
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.SOSTIENE_OTRA_PIEZA],
+			["%s sostiene %s apoyada en %s" % [String(e.get("tipo", "")), str(apoyadas), str(celda)]], [])
+	if not _f_agregar_item.is_valid():
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.SIN_INVENTARIO],
+			["no hay inventario conectado: la pieza no se puede guardar"], [])
+	if _f_hay_espacio.is_valid() and not bool(_f_hay_espacio.call()):
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.SIN_ESPACIO], ["el inventario esta lleno"], [])
+
+	# El item usa el id de RECETA (no un id nuevo): la receta queda a mano y la
+	# pieza sigue siendo colocable desde el catalogo.
+	var item_id: String = String(e.get("tipo", ""))
+	if item_id == "":
+		item_id = String(r.id)
+	if not bool(_f_agregar_item.call(item_id, 1)):
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.SIN_ESPACIO],
+			["no entro %s en el inventario" % item_id], [])
+
+	var celdas: Array = _celdas_de_estructura(e, r)
+	var borrados: int = _mundo.borrar_voxel(celdas)
+	var c_ancla: Vector3i = ConstruccionTipos.celda_de_clave(ancla)
+	_baja_estructura(ancla)
+	_historial.registrar({
+		"tipo": BuildHistory.TIPO_ALMACENAR,
+		"receta_id": StringName(item_id),
+		"celda": c_ancla,
+		"rotacion": _rotacion_de_estructura(e),
+		"celdas": celdas.duplicate(),
+		"item_id": item_id,
+		"estructura": e.duplicate(true),
+		"bloque": (r.bloque if r != null else 0),
+	})
+	pieza_almacenada.emit(StringName(item_id), c_ancla)
+	navmesh_delta.emit(celdas.duplicate())
+	_preview.limpiar()
+
+	return {
+		"ok": true,
+		"motivos": [],
+		"detalle": ["almacenada %s de %s (item %s, %d voxeles)" % [
+			item_id, str(c_ancla), item_id, borrados]],
+		"celdas": celdas,
+		"texto": "",
+		"item_id": item_id,
+		"voxeles_borrados": borrados,
+	}
+
 ## Deshace la ultima accion. Devuelve {ok, detalle}.
 func undo() -> Dictionary:
 	var d: Dictionary = _historial.undo_ultimo()
@@ -818,6 +932,26 @@ func _invertir(d: Dictionary, es_undo: bool) -> Dictionary:
 				if _f_devolver.is_valid():
 					_f_devolver.call(d.get("devuelto", {}))
 				return {"ok": true, "motivos": [], "texto": "", "detalle": ["redo: demolicion reaplicada en %s" % str(celda)]}
+		BuildHistory.TIPO_ALMACENAR:
+			# deshacer almacenar = recolocar la pieza y SACAR el item del
+			# inventario; rehacer = volver a guardarla.
+			var e3: Dictionary = d.get("estructura", {})
+			var item_id: String = String(d.get("item_id", d.get("receta_id", "")))
+			if es_undo:
+				var r5: PlacementRule = _catalogo.get(StringName(item_id), null)
+				if r5 == null:
+					return {"ok": false, "motivos": [], "texto": "", "detalle": ["no se pudo deshacer el almacenamiento: %s no esta en el catalogo" % item_id]}
+				_mundo.escribir_voxel(d.get("celdas", []), int(d.get("bloque", 0)))
+				_alta_estructura(celda, r5, int(d.get("rotacion", 0)), e3)
+				if _f_tirar_item.is_valid():
+					_f_tirar_item.call(item_id, 1)
+				return {"ok": true, "motivos": [], "texto": "", "detalle": ["undo: almacenamiento revertido en %s" % str(celda)]}
+			else:
+				_baja_estructura(ConstruccionTipos.clave(celda))
+				_mundo.borrar_voxel(d.get("celdas", []))
+				if _f_agregar_item.is_valid():
+					_f_agregar_item.call(item_id, 1)
+				return {"ok": true, "motivos": [], "texto": "", "detalle": ["redo: almacenamiento reaplicado en %s" % str(celda)]}
 		BuildHistory.TIPO_MOVER:
 			var destino: Vector3i = d.get("celda", Vector3i.ZERO)
 			var origen: Vector3i = d.get("celda_origen", Vector3i.ZERO)

@@ -72,7 +72,18 @@ func _check(cond: bool, msg: String) -> void:
 		print("FALLO: " + msg)
 
 func _test_catalogos() -> void:
-	_check(_loc.locales_disponibles().size() == 2, "2 idiomas soportados")
+	# 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445): la aserción estaba clavada
+	# en 2 idiomas y el autoload declara 3 (es/en/pt) desde la iter. 3 de M87 → el
+	# job M112 fallaba con "FALLO: 2 idiomas soportados". Misma familia que BUG-032
+	# (conteo fijado a un literal viejo): ahora se compara contra los catálogos que
+	# EXISTEN en disco, que es la fuente de verdad, no contra un número a mano.
+	var locales: Array = _loc.locales_disponibles()
+	var con_catalogo: Array = []
+	for l in locales:
+		if FileAccess.file_exists("res://data/localizacion/strings_%s.json" % str(l)):
+			con_catalogo.append(l)
+	_check(not locales.is_empty() and con_catalogo.size() == locales.size(),
+		"cada idioma soportado tiene catalogo en disco: %s" % str(locales))
 	var faltantes: Array = _loc.validar_catalogos()
 	_check(faltantes.is_empty(), "sin claves faltantes en: " + str(faltantes))
 

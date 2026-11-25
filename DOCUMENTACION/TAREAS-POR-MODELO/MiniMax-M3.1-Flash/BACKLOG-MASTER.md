@@ -6,6 +6,14 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P4: implementar `BuildManager.almacenar_pieza()` (NO existia ninguna funcion de almacenamiento) — L132 (espacio libre M14, atomicidad) y L170 (el item guardado conserva el id de RECETA) — 2026-11-25 (Log 2446)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_almacenamiento.gd` (33 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 13 fallos/EXIT 1) + cableada en `quality.yml` (M118) — 2026-11-25 (Log 2446)
+- [x] [17-Construccion] Flips M17: 141 → 143 de 175 (pendientes 33 → 31); GLOBAL fila 17, guía 08 y ESTADO-PARALELO sincronizados — 2026-11-25 (Log 2446)
+- [x] [Canal] Mensaje 064 de reintegración + cierre de tanda P4 reportado a la directora en `Mensajes entre modelos/MiniMax-M3.1-Flash/` — 2026-11-25 10:10
+- [x] [Canal] M20 NO se toca: lo reclamo GLM-5.3-Flash el 2026-11-25 09:56 (§21.4.7) y me aviso por su canal — confirmacion por escrito en mi mensaje 064
+- [x] [Log] Log reservado: **2446** — tanda P4 M17 (almacenamiento de piezas L132/L170)
+- [ ] [17-Construccion] Lote siguiente propuesto a la directora: L227 (materiales compartidos entre instancias para static batching) + L225 (raycast 1/frame con cache de celda) — ambos headless-verificables
+- [ ] [17-Construccion] Deuda PRE-EXISTENTE detectada y NO tapada: `tests/test_m17_categorias.gd` en ROJO (3 checks) por `BuildHudModel.filas_categorias` inexistente → ítem de HUD L81 (dueña: capa UI/M18)
 
 - [x] [20-Amistad] Suite de cobertura headless para los items `[ ]` de M20 (`game/isla-ancestral/tests/test_m20_amistad_cobertura.gd`, 15 checks, 0 fallos) — 2026-10-27
 - [x] [20-Amistad] Cerrar 19 items verificados de M20 (81 → 100 `[x]`, pendientes 68 → 49) con evidencia por check nombrado o archivo citado — 2026-10-27

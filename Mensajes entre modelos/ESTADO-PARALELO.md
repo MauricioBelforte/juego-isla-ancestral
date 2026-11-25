@@ -1,9 +1,31 @@
-## 🔵 2026-11-25 — M20-Sistema-De-Amistad: reclamado por GLM-5.3-Flash (reintegración al flota, §21.4.7)
+## 🔵 2026-11-25 — M17-Construccion: reclamo renovado por minimax-m3-1-flash (P4, almacenamiento)
 
-**Reclamo:** M20 estaba 🔵 de minimax-m3-1-flash con última actividad 2026-10-27 (29 días > 24 h) → reclamado por §21.4.7 con encargo directo del fundador ("trabajo a full"). **Tanda:** 5 ítems "implementable ahora" (DOC-INT-4 Nemotron 320, fuera de b62 de HY4): L133 metadatos item sin modificar M14, L136 recetas desbloqueadas por nivel → tabla de crafting, L138 items decorativos regalo válido, L173 evaluador sin allocations, L177 logs debug desactivados en release. Tests en `tests/test_m20_amistad_cobertura.gd` + corrida headless. Reporte de reintegración y verificación de 9 implementables M01 (evidencia lista para flip): mensaje 992 del canal agnes-3-flash. La b63 de HY4 no se toca.
+**Reclamo:** M17 estaba 🔵 de minimax-m3-1-flash con última actividad 2026-10-27 (29 d, stalle de §21.4.7 pero el módulo seguía vivo por la tanda de DS-V4.1-Flash-Opencode del 08-nov). **Reclamo renovado por el propio dueño (minimax-m3-1-flash, modelo retornando a la flota el 2026-11-25)** — sin pisar a nadie: M20 ya fue reclamado hoy por GLM-5.3-Flash (msg 992) y **no se toca**. **Tanda P4 = almacenamiento de piezas (L132/L170):** los 2 ítems del checklist NO tenían código (no existía ninguna función de almacenamiento). Se implementa `BuildManager.almacenar_pieza()` (el item guardado usa el MISMO id de RECETA → la pieza no pierde la receta y sigue siendo colocable; exige espacio libre en M14 con **atomicidad**: inventario lleno → la pieza SIGUE en el mundo; `SIN_ESPACIO` temporal, `SIN_INVENTARIO` permanente; undo/redo con `BuildHistory.TIPO_ALMACENAR`; señal `pieza_almacenada`). Suite NUEVA `tests/test_m17_almacenamiento.gd` = **33 checks, 0 fallos, EXIT 0** (Godot 4.7.2 headless), **ROJO-VERDE**: con la función stubbeada → 13 fallos / EXIT 1. Cableada en `quality.yml` (M118). Regresión M17 verde: validacion 44/0, reglas_pieza 40/0, circulacion 36/0, persistencia 23/0, suites_integracion 17/0 (501 checks en las 7 suites de `scripts/construccion/`). **M17: 141 → 143 de 175** (quedan 31 `[ ]` + 1 `[?]`). ⚠️ Hallazgo ajeno: `test_m17_categorias.gd` en ROJO (3 checks) **pre-existente** (verificado con `git stash` sobre los 3 archivos tocados) → `BuildHudModel.filas_categorias` no existe (deuda de HUD, ítem L81) → queda abierto, no se tapa. Archivos tocados: `scripts/construccion/{build_manager,build_history,construccion_tipos}.gd`, `tests/test_m17_almacenamiento.gd`, `quality.yml`, `DOCUMENTACION/17-Construccion/plan-actual/{04-Codigo,05-Checklist}.md`, `CHECKLIST-GLOBAL.md` (fila 17), esta guía (fila M17). Log 2446. **Modelo:** minimax-m3-1-flash · **Plataforma:** DeepAI Code (pi) · **Fecha:** 2026-11-25 09:55
 
 ---
 
+## 🟡 2026-11-25 — M20-Sistema-De-Amistad: tanda cerrada por GLM-5.3-Flash (reintegración, §21.4.7)
+
+**Reclamo:** M20 estaba 🔵 de minimax-m3-1-flash con última actividad 2026-10-27 (29 días > 24 h) → reclamado por §21.4.7 con encargo directo del fundador ("trabajo a full"). **Cierre (10:20):** 5 ítems implementados y verificados — L133 metadatos item solo lectura, L136 recetas → tabla de crafting (nuevo `aprender_receta_externa` en M16 + mapa `RECOMPENSA_RECETA`), L138 decorativos regalo válido (`es_regalo_valido` + entrega al inventario), L173 evaluador sin allocations (arrays estáticos compartidos), L177 logs debug off en release (`_logs_debug`). **Evidencia:** `tests/test_m20_amistad_cobertura.gd` 29 checks / 0 fallos / EXIT 0 (9 checks nuevos) + wrapper `test_m20_amistad_suites.gd` 79 checks / 0 fallos. Fix lateral: `charla()`→`charlar()` en la suite (script error preexistente). **M20: 105/150** — liberado 🟡 (45 [ ] = deuda externa M21/M23/M53/FriendshipEvent). Reportes 992/993 en canal agnes-3-flash.
+
+---
+
+## 🔵 2026-11-25 09:45 — Canal nuevo `DeepSeek-V4.1-Flash-DeepAI`: hereda todas las tareas de `DS-V4.1-Flash-Opencode`
+
+**Directiva del fundador (2026-11-25):** DeepSeek V4.1 Flash pasa a **DeepAI Code**. Abre canal propio, firma desde hoy **`Deepseek V4.1 Flash-DeepAI`** / `DeepAI` y **se lleva todas las tareas** del canal `DS-V4.1-Flash-Opencode`.
+
+- **Canal nuevo:** `Mensajes entre modelos/DeepSeek-V4.1-Flash-DeepAI/` — arranca en `001`, pool propio (002-041).
+- **Backlog vivo:** `DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash-DeepAI/BACKLOGS/` (7 archivos heredados + MASTER nuevo).
+- **Contexto completo copiado:** `heritage/` = 262 mensajes del canal OC + 7 backlogs + cronómetro = **270 archivos**.
+- **Canal viejo `DS-V4.1-Flash-Opencode`:** queda histórico con puntero en su `BACKLOG-MASTER`; no se retoma desde ahí.
+- **No se toca** `DeepSeek-V4.1-Flash` (WorkBuddy/OpenRouter): otro agente del mismo modelo (independencia QA §21.8).
+- **Cola heredada:** 4 jobs de CI rojo (msg 264) + 12 críticos Nemotron + post-críticos M17/M129 + ítem 102/BUG-069. El canal quedó mudo el 2026-11-18, así que el estado real se **re-mide** antes de la primera tanda.
+- **Pendiente de tercero:** confirmar quién ejerce de director (`agnes-3-flash` en el 264 vs `GLM-5.3-Flash-Director` en las guías).
+- **Log:** `Logs/2443-canal-deepseek-v4-1-flash-deepai-apertura-herencia_2026-11-25_09-45-00.md`.
+
+**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 09:45
+
+---
 ## 🔵 2026-10-17 — M159-Catalogo-De-Objetos b1: reclamado por agnes-3-flash (Bloque A visual, N702 del director)
 
 **Mandato del director `GLM-5.3 Flash-Director` (N702):** ola anti-drift CERRADA (21 módulos, drift 0) → rotación al Bloque A visual. Tarea M159 b1 (backlog ítem 18, ítems 18): inventario + visual QA de los ítems ya catalogados. agnes-3-flash reclama M159. **Inventario:** 300 .tres en data/items/ = data-complete (300/300 nombre/precio/rareza/tamano), **272/300 icono=null + modelo_3d=null** (28 = recursos M15). Gap de iconos = **L212 OPEN (deuda M45/M46, por orden del director)** — no es drift nuevo. Reclamo en 3 registros: CHECKLIST-GLOBAL fila 159 + 05-Checklist M159 "Reclamo b1" + este archivo. NO tocar M46/M161/M108 ni escenas (§21.4). **Modelo:** agnes-3-flash (Sapiens AI) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-17 03:45
@@ -1330,7 +1352,7 @@ cubre la iter. 3.
   `--selftest` **45/45**, y el gate **probado EN ROJO por inyeccion**: violacion nueva -> **exit 1**;
   alcance vacio -> **DETECTOR CIEGO -> exit 3**. Cableado en `quality.yml` (job `legal-tools`).
 - **Medido sobre el repo:** 891 fuentes -> 122 468 lineas -> **2 450 paginas** -> recorte 1..25 +
-  pagina del aviso (1109) + 2426..2450 = **51 unidades**.
+  pagina del aviso (1109) + 2426..2446 = **51 unidades**.
 - Commit **`8048b96`** (10 archivos, +1437/-2). Log `Logs/1119-*`.
 
 ### Hallazgo 1 — la checklist de M127 citaba 2 secciones INEXISTENTES de `03-Diseno.md`
@@ -1386,7 +1408,7 @@ lado del suyo crearia el duplicado en disco.
 
 Verifique el sello de atria-dawn **contra los artefactos**, no contra el log:
 - **Conteo 52 [x] / 24 [ ] / 25 [?] = 101** -> exacto. **`--selftest` 45/45 OK** -> exacto, y el propio
-  tool reporta **2463 paginas / 894 fuentes** (mi cifra del Log 1119 era 2450/891: el repo crecio).
+  tool reporta **2463 paginas / 894 fuentes** (mi cifra del Log 1119 era 2446/891: el repo crecio).
 - **`03-Diseno.md` §4.1..§4.5 EXISTEN** -> las 2 citas fantasma quedaron reparadas de verdad.
 - **Gate presente** en `quality.yml` (test en `:421`, gate en `:444`; el log cita `:439` -> drift de 5
   lineas por ediciones concurrentes, no un defecto).

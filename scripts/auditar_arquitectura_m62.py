@@ -153,6 +153,22 @@ PERMITIDOS = {
     # contenido de BUG-069. BUG-068 es SOLO el A3 (el mismo script como dos
     # autoloads). La etiqueta equivocada mandaba al bug que no era.
     "A1|ThemeService,UIManager": "BUG-069",
+    # A1 NUEVA declarada el 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445):
+    # ciclo DataStore <-> SaveManager. El job Architecture Guard del push
+    # f0bc848+106213f la reportaba como hallazgo NUEVO. Las dos direcciones son
+    # funcionales y ninguna es un `preload`/`_init` (por eso el runtime no falla):
+    #   DataStore -> SaveManager: `_registrar_provider_buildings()` registra el
+    #     provider de la seccion "buildings" en el registro de M59
+    #     (data_store.gd:85-95, get_node_or_null + has_method).
+    #   SaveManager -> DataStore: sella `meta.profile_id` al guardar
+    #     (save_manager.gd:231-233) y lo valida al cargar, con rechazo por
+    #     anti-cruzamiento de perfiles (save_manager.gd:317-320).
+    # Ambas usan `get_node_or_null("/root/...")`, asi que degradan sin romper
+    # si el otro autoload no esta. Romper el ciclo requiere un mediador
+    # (ServiceRegistry) y queda como refactor pendiente: no se toca la ruta de
+    # guardado en un fix de CI. Justificacion completa en el mensaje 002 del
+    # canal DeepSeek-V4.1-Flash-DeepAI.
+    "A1|DataStore,SaveManager": "BUG-069",
     # A2 — referencias a un autoload declarado despues (regla de capas).
     # Medido: NO es un fallo de runtime (en _ready() todos los autoloads ya
     # existen); es deuda arquitectonica. Ver BUG-069.

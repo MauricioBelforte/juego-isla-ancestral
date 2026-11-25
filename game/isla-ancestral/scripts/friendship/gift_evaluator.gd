@@ -18,6 +18,12 @@ const PUNTOS := {
 	Clase.DUPLICADO: 2,
 }
 
+## L173 (M20): evaluador sin allocations relevantes — arrays vacios compartidos
+## para los .get() de gustos. El literal [] como default se evalua en cada
+## llamada y asigna un Array nuevo aunque la clave exista; el estatico
+## compartido elimina esa asignacion en el caso hit y en el caso miss.
+static var _SIN_DATOS: Array = []
+
 ## Evalúa un regalo para un vecino. `vecino_data` es VecinoData (M19) por
 ## duck-typing; puede ser null si M19 aún no existe (fallback neutral).
 ## `item_meta` es ItemData (M14) por duck-typing.
@@ -33,6 +39,18 @@ static func evaluar(vecino_data, item_meta, ya_regalado: bool) -> Dictionary:
 		"reaccion_id": _reaccion(clase),
 	}
 
+## L138 (M20): los items decorativos de recompensa (ItemData del catalogo M159,
+## p.ej. OBJ-EXT-017 "Estatua pequena") son regalo valido: todo Resource con id
+## no vacio es regalable; los Dictionary de tests/legacy solo se rechazan si
+## marcan explicitamente "regalo_valido": false. Nunca rechaza por defecto
+## (cozy: sin castigo).
+static func es_regalo_valido(item_meta) -> bool:
+	if item_meta == null:
+		return false
+	if item_meta is Dictionary:
+		return _campo(item_meta, "regalo_valido", true) != false
+	return str(_campo(item_meta, "id", "")) != ""
+
 static func _clasificar(vecino_data, item_meta, ya_regalado: bool) -> int:
 	if ya_regalado:
 		return Clase.DUPLICADO
@@ -46,20 +64,20 @@ static func _clasificar(vecino_data, item_meta, ya_regalado: bool) -> int:
 	# _campo() maneja ambos (duck-typing). "regalo_valido" no existe en ItemData
 	# -> default null (no "" para no comparar String vs false): solo un
 	# Dictionary con "regalo_valido"==false devuelve NEUTRAL; Resource/null -> sigue.
-	if _campo(item_meta, "regalo_valido", null) == false:
+	if not es_regalo_valido(item_meta):
 		return Clase.NEUTRAL
 	var item_id := str(_campo(item_meta, "id", ""))
 	var categoria := str(_campo(item_meta, "categoria", ""))
 	if vecino_data == null:
 		return Clase.NEUTRAL
-	# Gustos del vecino: amados > gusta > disgustos
-	var amados: Array = vecino_data.get("regalos_amados", [])
+	# Gustos del vecino: amados > gusta > disgustos (defaults estaticos, L173)
+	var amados: Array = vecino_data.get("regalos_amados", _SIN_DATOS)
 	if item_id in amados or categoria in amados:
 		return Clase.AMADO
-	var gusta: Array = vecino_data.get("gustos", [])
+	var gusta: Array = vecino_data.get("gustos", _SIN_DATOS)
 	if item_id in gusta or categoria in gusta:
 		return Clase.GUSTA
-	var disgustos: Array = vecino_data.get("disgustos", [])
+	var disgustos: Array = vecino_data.get("disgustos", _SIN_DATOS)
 	if item_id in disgustos or categoria in disgustos:
 		# El vecino nunca es hostil: un disgusto baja a neutral, no castiga.
 		return Clase.NEUTRAL

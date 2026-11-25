@@ -282,3 +282,13 @@
 - [ ] Revisión visual del fundador (B-02/B-03 e interiores)
 - [ ] LOD "de verdad" (barandas con menos postes) — el actual decima
 - [ ] Integración con M28/M74/M63 en escena (hoy el manager está aislado)
+
+> **Arreglo de CI (Deepseek V4.1 Flash-DeepAI / DeepAI, 2026-11-25, Log 2445):**
+> `crucero_manager.gd` y `crucero_eventos.gd` referenciaban los autoloads
+> `TransportManager` y `TimeCalendar` por identificador global, y el gate de CI
+> `godot --headless --check-only --script` los compilaba sin autoloads → 3
+> `SCRIPT ERROR: Identifier not found` (job GDScript Lint/Format en rojo). Ahora
+> se resuelven con `get_node_or_null("/root/...")` (patrón ya usado en
+> `crucero_interior.gd`, `crucero_puerto.gd` y `crucero_manager.gd:71`) y el
+> colector queda en 0 errores sobre 1366 scripts. Sin cambio de comportamiento en
+> runtime: con los autoloads presentes la referencia resuelve al mismo nodo.

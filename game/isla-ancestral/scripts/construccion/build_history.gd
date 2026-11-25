@@ -22,6 +22,9 @@ const TIPO_COLOCAR: String = "colocar"
 const TIPO_DEMOLER: String = "demoler"
 const TIPO_MOVER: String = "mover"
 const TIPO_COPIAR: String = "copiar"
+## L132/L170: la pieza guardada en el inventario (M14). Deshacer = recolocar
+## la pieza y sacar el item; rehacer = volver a guardarla.
+const TIPO_ALMACENAR: String = "almacenar"
 
 ## Tope de la pila de undo (las acciones mas viejas se descartan). 0 = sin tope.
 var limite: int = 200

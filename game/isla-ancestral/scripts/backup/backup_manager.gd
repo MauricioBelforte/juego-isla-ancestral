@@ -45,8 +45,18 @@ func _registrar_servicio() -> void:
 	if not sr.has("backup"):
 		sr.register("backup", self)
 
+## Copias maximas por categoria.
+## H22 (GO fundador 275) renombro la clave de la policy a
+## `retencion.max_copias_por_categoria`; esta funcion seguia leyendo el nombre
+## viejo (`max_copias`) y la policy quedaba DECORATIVA: el JSON nunca se leia y
+## todo caia en el default 5, que por casualidad coincidia con el valor real
+## (trampa 81: un test verde sobre un default, no sobre la config).
+## Se acepta el nombre viejo para no romper policies ya escritas.
 func _max_copias() -> int:
-	return int(config.get("retencion", {}).get("max_copias", 5))
+	var r: Dictionary = config.get("retencion", {})
+	if r.has("max_copias_por_categoria"):
+		return int(r["max_copias_por_categoria"])
+	return int(r.get("max_copias", 5))
 
 func _dir_os() -> String:
 	return ProjectSettings.globalize_path(DIR_BACKUP)
@@ -325,7 +335,7 @@ func _limpiar_excedentes_cat(destino_cat: String) -> void:
 		if f.ends_with(".zip") or not f.ends_with(".txt"):
 			archivos.append({"nombre": f, "mtime": FileAccess.get_modified_time("%s%s" % [dir_cat, f])})
 	archivos.sort_custom(func(a, b): return int(a["mtime"]) > int(b["mtime"]))
-	var max_archivos := int(config.get("retencion", {}).get("max_copias", 5))
+	var max_archivos := _max_copias()
 	while archivos.size() > max_archivos:
 		var viejo: Dictionary = archivos.pop_back()
 		DirAccess.remove_absolute("%s%s" % [dir_cat, viejo["nombre"]])

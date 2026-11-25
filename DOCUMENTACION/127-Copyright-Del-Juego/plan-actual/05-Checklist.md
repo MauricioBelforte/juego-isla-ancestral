@@ -206,3 +206,15 @@ El módulo fue liberado como "núcleo iter. 1" con JSON + Validator + Test. **No
 > "pipeline de metadata que no incremente el tamaño de los paquetes de
 > distribución" **sigue `[ ]`**: es sobre los paquetes de distribución (M108/M117),
 > no sobre el depósito; el script implementa la regla solo para el depósito.
+
+> **Tanda CI (Deepseek V4.1 Flash-DeepAI / DeepAI, 2026-11-25, Log 2445):** el techo
+> de `SIN_ATRIBUCION` para `.glb` (`asset_metadata_scope.json`, `max: 418`) estaba
+> **excedido en 84**: los modelos de M25/M33/M35/M36/M40 exportados después del
+> 2026-10-10 no llevan `asset.copyright`, así que el job `legal-tools` fallaba con
+> "84 hallazgo(s) nuevo(s)". Se agregó `tools/legal/inject_glb_copyright.py`
+> (con `--autotest`: idempotente, no toca `asset.generator`, el chunk BIN sobrevive
+> byte a byte) y se inyectó `asset.copyright` en esos **84** `.glb`. Resultado:
+> **0 hallazgos nuevos, 418/418** en el techo. **La deuda de fondo sigue abierta:**
+> los 418 restantes necesitan el arreglo del pipeline de exportación (M166/M09);
+> inyectar caso por caso no es la solución, es el parche que mantiene el trinquete
+> honesto mientras el pipeline no emita el campo.

@@ -1,5 +1,5 @@
 **Modelo:** minimax-m3-1-flash
-**Plataforma:** MiniMax API (Kilo Code)
+**Plataforma:** DeepAI Code (pi)
 
 # 04-Codigo.md — Módulo 17: Construcción
 
@@ -573,3 +573,70 @@ Total: 12 + 2 + 2 + 3 + 1 + 1 + 1 + 1 + 1 + 2 + 3 + 2 + 1 + 1 + 2 + 1 = 36.
   `w.autostart = true` + `add_child()`; el error desapareció y la suite sigue en 17/0 (501 checks).
 - Ningún `.gd` de las 7 suites históricas (`test_construccion.gd` … `iter7`) se modificó.
 
+## 10. Tanda almacenamiento de piezas (2026-11-25 09:5x) — 2 ítems cerrados
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 10.1 Qué se añadió
+
+**Código (antes NO existía ninguna función de almacenamiento):**
+
+1. `scripts/construccion/build_manager.gd` → **`almacenar_pieza(celda: Vector3i) -> Dictionary`** (NUEVA).
+   La pieza sale del mundo y entra al inventario (M14) como un item con el **mismo id de receta**
+   (`String(e["tipo"])`), por eso la pieza conserva su receta y sigue siendo colocable desde el
+   catálogo. **No** devuelve recursos (guardar no es demoler: lo que se guarda es la pieza).
+   Orden de guards: `NO_HAY_PIEZA` → `RECETA_INVALIDA` → `NO_DECONSTRUIBLE` → `SOSTIENE_OTRA_PIEZA`
+   → `SIN_INVENTARIO` → `SIN_ESPACIO`.
+   **Atomicidad:** el item se agrega ANTES de tocar el mundo; si el inventario no lo acepta, la
+   pieza sigue intacta (nunca hay entrega parcial).
+2. **Adaptadores de inventario** en `conectar_inventario()` (duck-typing sobre M14):
+   `_f_agregar_item(item_id, cantidad)`, `_f_tirar_item(item_id, cantidad)`,
+   `_f_hay_espacio()` (usa `has_free_space(0)` — el BOLSILLO, `ContainerType.Id.BOLSILLO = 0`;
+   si el inventario no lo expone, el intento real sigue siendo la autoridad).
+3. **Señal nueva** `pieza_almacenada(receta_id: StringName, celda: Vector3i)` (+ `navmesh_delta`).
+4. `scripts/construccion/build_history.gd` → `TIPO_ALMACENAR = "almacenar"` + rama en
+   `_invertir()` de `BuildManager`: **undo** = recolocar la pieza y sacar el item del inventario;
+   **redo** = volver a guardarla.
+5. `scripts/construccion/construccion_tipos.gd` → motivos `SIN_ESPACIO` (temporal: se reintenta al
+   liberar un slot) y `SIN_INVENTARIO` (permanente), con su texto de HUD. Se **añaden al final** del
+   enum: no se renumera ningún motivo existente.
+
+**Tests:** suite NUEVA `res://tests/test_m17_almacenamiento.gd` → **33 checks, 0 fallos, EXIT 0**
+(Godot 4.7.2 headless). El runner central la descubre sola (recorre `res://tests/`), cableada
+además en `quality.yml` (M118).
+
+### 10.2 Ítems cerrados
+
+| Ítem | Evidencia (texto literal de los checks) |
+|---|---|
+| **L132** Almacenar requiere inventario con espacio libre (M14) | "B4: inventario LLENO -> motivo SIN_ESPACIO" · "B5: inventario lleno -> la pieza SIGUE colocada (atomicidad: no hay entrega parcial)" · "B6: inventario lleno -> no se entrego el item" · "B7: SIN_ESPACIO es TEMPORAL (se reintenta al liberar un slot)" · "B1: SIN inventario -> motivo SIN_INVENTARIO" · "B2: SIN inventario la pieza SIGUE colocada" · "B3: SIN_INVENTARIO es PERMANENTE" |
+| **L170** El almacenamiento convierte la pieza en ítem del inventario sin perder receta | "A4: el item guardado usa el MISMO id que la RECETA" · "A5: la receta sigue en el catalogo (no se perdio al guardar)" · "A8: el item almacenado se puede volver a colocar -> ok" · "A9: la pieza vuelve a estar en el mundo tras recolocarla" · "A6/A7: la pieza salio del mundo" · "D3: guardar NO devuelve recursos" · "D4–D9: undo/redo del almacenamiento (pieza ↔ item)" · "D1/D2: señales `pieza_almacenada` y `navmesh_delta`" |
+
+### 10.3 Anti-falso-verde (ROJO-VERDE)
+
+Con `almacenar_pieza()` stubbeada a un fallo la suite da **13 fallos / EXIT 1**; restaurada,
+**33 checks / 0 fallos / EXIT 0**. La suite detecta la ausencia de la función.
+
+### 10.4 Línea base del lote (Godot 4.7.2 headless)
+
+| Suite | Checks | Fallos | EXIT |
+|---|---|---|---|
+| `tests/test_m17_almacenamiento.gd` (NUEVA) | 33 | 0 | 0 |
+| `tests/test_m17_construccion_validacion.gd` | 44 | 0 | 0 |
+| `tests/test_m17_reglas_pieza.gd` | 40 | 0 | 0 |
+| `tests/test_m17_circulacion.gd` | 36 | 0 | 0 |
+| `tests/test_m17_persistencia_rejilla.gd` | 23 | 0 | 0 |
+| `tests/test_m17_suites_integracion.gd` | 17 (501 en las 7 suites) | 0 | 0 |
+| `tests/test_m17_categorias.gd` | 24 | **3 (PRE-EXISTENTE)** | 1 |
+
+⚠️ **Deuda ajena a esta tanda (no tapada):** `test_m17_categorias.gd` está en ROJO por
+`BuildHudModel.filas_categorias` inexistente (3 checks). Verificado como **fallo PRE-EXISTENTE**
+con `git stash` sobre los 3 archivos tocados por esta tanda: los mismos 3 fallos sin mis cambios.
+Corresponde al ítem de HUD (L81) — no es deuda de código de M17 resueluble headless.
+
+### 10.5 Lo que sigue abierto (31 `[ ]` + 1 `[?]`)
+
+Sin cambios respecto de §9.4 salvo el conteo: UI/arte/audio (L78-86, L127), inventario cruzado con
+M14 para el resto de家具, navmesh M64 (L161), datos M25/M73 (L196/L198), M92 (L173), M93 (L200),
+raycast 1/frame (L225), materiales compartidos (L227) y playtest/QA manual (L262-L266).

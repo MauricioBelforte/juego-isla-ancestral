@@ -208,5 +208,10 @@
     ],
     "result": "parcial; no sustenta completar A4-11"
   },
-  "all_signatures_match_expected_identity": true
+  "all_signatures_match_expected_identity": true,
+  "a4_11_follow_up": {
+    "evidence": "evidencias/A4-11-revision-indice-master.json",
+    "result": "completed_with_scope_note",
+    "finding": "BACKLOG-MASTER tiene 7 encabezados numerados y 8 filas de índice a sub-backlogs; los 8 destinos existen y cada uno contiene 20 tareas. La tabla es un índice de archivos, no TOC con anchors."
+  }
 }

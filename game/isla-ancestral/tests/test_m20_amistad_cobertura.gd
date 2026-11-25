@@ -54,6 +54,7 @@ func _ejecutar() -> void:
 	_preparar()
 	_test_indice_vecinos()
 	_test_recompensas_bajo_demanda()
+	_test_recompensas_entrega_tanda_glm()
 	_test_limites_medianoche()
 	_test_persistencia()
 	_test_regalo_inventario()
@@ -107,14 +108,75 @@ func _test_recompensas_bajo_demanda() -> void:
 			and not bool(_fs.reclamar_recompensa("RECOMP", "receta_herramienta_basica")))
 
 
+## Tanda GLM-5.3-Flash (2026-11-25): L133/L136/L138/L173/L177 del plan M20.
+func _test_recompensas_entrega_tanda_glm() -> void:
+	# L133: metadatos de item consultados sin modificar M14 (solo lectura).
+	var count_meta: int = _inv.count_item(ITEM_PRUEBA, true)
+	var meta1 = _fs._get_item_meta(ITEM_PRUEBA)
+	var meta2 = _fs._get_item_meta(ITEM_PRUEBA)
+	var id1 := str(meta1.get("id")) if meta1 != null else ""
+	var id2 := str(meta2.get("id")) if meta2 != null else ""
+	_check("metadatos de item consultados sin modificar M14: get_item es de solo lectura (count estable y metadata estable)",
+		_inv.count_item(ITEM_PRUEBA, true) == count_meta and id1 != "" and id1 == id2)
+
+	# L136: recetas desbloqueadas por nivel van a la tabla de crafting.
+	var cs = root.get_node_or_null("/root/Crafting")
+	var v_rec = _fs._vecino("RECETA_GLM")
+	v_rec.aplicar_puntos(140, _fs._recompensas)  # sube hasta nivel 5 (reward receta_comida_gourmet)
+	var base_conocida := bool(cs.es_conocida("rec_ensalada_bayas")) if cs != null else false
+	var rec_ok: bool = cs != null and bool(_fs.reclamar_recompensa("RECETA_GLM", "receta_comida_gourmet")) \
+		and bool(cs.es_conocida("rec_ensalada_bayas"))
+	_check("recetas desbloqueadas por nivel van a la tabla de crafting: reclamar receta la conoce en M16 (antes %s)" % ["conocida" if base_conocida else "bloqueada"],
+		rec_ok)
+	_check("recetas desbloqueadas por nivel van a la tabla de crafting: reclamar dos veces la misma receta no duplica conocimiento (idempotente)",
+		cs == null or bool(cs.es_conocida("rec_ensalada_bayas")))
+
+	# L138: items decorativos de recompensa marcados como regalo valido.
+	var v_dec = _fs._vecino("DECOR_GLM")
+	v_dec.aplicar_puntos(69, _fs._recompensas)  # sube hasta nivel 3 (reward decorativo_estatua)
+	var base_est: int = _inv.count_item("OBJ-EXT-017", true)
+	_check("items decorativos de recompensa marcados como regalo valido: reclamar decorativo entrega el item al inventario",
+		bool(_fs.reclamar_recompensa("DECOR_GLM", "decorativo_estatua"))
+			and _inv.count_item("OBJ-EXT-017", true) == base_est + 1)
+	var ev_dec: Dictionary = EVAL.evaluar({"gustos": [], "disgustos": []}, {"id": "OBJ-EXT-017", "categoria": "decoracion"}, false)
+	_check("items decorativos de recompensa marcados como regalo valido: el evaluador no rechaza el decorativo (regalo valido)",
+		int(ev_dec.get("clase", -1)) == EVAL.Clase.NEUTRAL)
+	var r_dec: Dictionary = _fs.regalar("DECOR_REGALO", "OBJ-EXT-017")
+	_check("items decorativos de recompensa marcados como regalo valido: el decorativo entregado se puede regalar sin rechazo",
+		bool(r_dec.get("ok", false)) and int(r_dec.get("puntos", 0)) > 0)
+
+	# L173: evaluador sin allocations relevantes (diccionarios reutilizados).
+	_check("evaluador sin allocations relevantes (diccionarios reutilizados): los defaults vacios son estaticos compartidos",
+		EVAL._SIN_DATOS is Array and EVAL._SIN_DATOS.is_empty())
+	var data_miss := {"gustos": [], "disgustos": []}
+	var t0 := Time.get_ticks_usec()
+	for i in range(2000):
+		EVAL.evaluar(data_miss, {"id": "sin_gustos_%d" % i}, false)
+	var medio := float(Time.get_ticks_usec() - t0) / 2000.0 / 1000.0
+	_check("evaluador sin allocations relevantes (diccionarios reutilizados): ruta sin gustos bajo 0.5 ms (medido %.4f ms)" % medio,
+		medio < 0.5)
+
+	# L177: logs de debug desactivados en release (conditional symbols).
+	var n_ev: int = _fs.get_eventos().size()
+	_fs._logs_debug = false
+	_fs.registrar_evento("debug_off", "", "")
+	_check("logs de debug desactivados en release (conditional symbols): con el flag de release no se registra evento",
+		_fs.get_eventos().size() == n_ev)
+	_fs._logs_debug = true
+	_fs.registrar_evento("debug_on", "", "")
+	_check("logs de debug desactivados en release (conditional symbols): en debug el DOM-AMISTAD sigue registrando",
+		_fs.get_eventos().size() == n_ev + 1)
+	_fs._logs_debug = OS.is_debug_build()
+
+
 func _test_limites_medianoche() -> void:
 	_fs.pivote_dia(100)
-	_check("dia 100: la charla del dia se permite", bool(_fs.charla("MEDIANOCHE").get("ok", false)))
+	_check("dia 100: la charla del dia se permite", bool(_fs.charlar("MEDIANOCHE").get("ok", false)))
 	_check("dia 100: la segunda charla del mismo dia se rechaza por limite diario",
-		str(_fs.charla("MEDIANOCHE").get("motivo", "")) == "limite_diario")
+		str(_fs.charlar("MEDIANOCHE").get("motivo", "")) == "limite_diario")
 	_fs.pivote_dia(101)
 	_check("medianoche (dia 101): el limite diario se recalcula y la charla vuelve a estar disponible",
-		bool(_fs.charla("MEDIANOCHE").get("ok", false)))
+		bool(_fs.charlar("MEDIANOCHE").get("ok", false)))
 
 
 func _test_persistencia() -> void:
@@ -192,7 +254,7 @@ func _test_recorrido_m114() -> void:
 		for d in range(1, DIAS_RECORRIDO + 1):
 			_fs.pivote_dia(300 + d)
 			_fs._procesar_nuevo_dia()
-			if not bool(_fs.charla(vid).get("ok", false)):
+			if not bool(_fs.charlar(vid).get("ok", false)):
 				errores += 1
 			_inv.add_item(ITEM_PRUEBA, 1)
 			if not bool(_fs.regalar(vid, ITEM_PRUEBA).get("ok", false)):

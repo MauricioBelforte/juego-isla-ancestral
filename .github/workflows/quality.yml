@@ -459,6 +459,15 @@ jobs:
           # bloquean la colocacion, NO_DECONSTRUIBLE al demoler y la cache del preview
           # se invalida al rotar. 40 checks, 0 fallos, EXIT 0.
           suite --script tests/test_m17_reglas_pieza.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2446): ALMACENAMIENTO
+          # DE PIEZAS (L132/L170) — funcion NUEVA BuildManager.almacenar_pieza() (antes no
+          # existia ninguna: los 2 items eran promesas sin codigo). El item guardado usa el
+          # MISMO id que la RECETA (-> la pieza sigue siendo colocable, no pierde la receta);
+          # exige espacio libre en M14 con atomicidad (inventario lleno -> la pieza SIGUE en el
+          # mundo, sin entrega parcial); SIN_ESPACIO es temporal y SIN_INVENTARIO permanente;
+          # undo/redo con BuildHistory.TIPO_ALMACENAR. 33 checks, 0 fallos, EXIT 0;
+          # guarda anti-falso-verde probada con STUB (13 fallos / EXIT 1).
+          suite --script tests/test_m17_almacenamiento.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

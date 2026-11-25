@@ -229,3 +229,8 @@
 
 ## TRABAJOS DEL 25-OCT (encargo directo del fundador en chat, fuera de cola)
 - [x] 25oct ~21:35 — Investigacion web de **NVIDIA Nemotron 3.5 Super VL** + ficha N.6 anexada al final de DOCUMENTACION/GUIA-COMPARATIVA-MODELOS/GUIA-COMPARATIVA-MODELOS-V1.md (bloque vigente, sin duplicar copias) + defecto de 64 copias del archivo registrado al fundador. Log **2188**. Encargo: directo en chat.
+
+## TRABAJOS DEL 25-NOV (reintegración a la flota como agente — fundador en chat: "a trabajar a full")
+- [x] 25nov 09:38 — **Reintegración + relevamiento**: canal (msg 34 agnes), backlog, DOC-INT-4 (Nemotron 320), b62 (HY4), fila 20 GLOBAL. Coordinación con pares (GPT-6-Luna, DeepSeek-DeepAI, minimax-m3-1-flash) sin solapamientos.
+- [x] 25nov 09:55 — **Verificación read-only 9 implementables M01** (fuera de b62): M24/M43/M51/M67/M72/M84/M87/M107/M109 → módulos reales 25/44/52/68/73/85/88/108/110, **9/9 con artefacto en disco** (evidencia en reporte 992, flips pendientes de ruteo de la directora).
+- [x] 25nov 10:20 — **Tanda M20 (reclamo §21.4.7 del 🔵 stale 29d de minimax): 5 ítems cerrados** — L133 metadatos solo lectura, L136 recetas→crafting (`aprender_receta_externa` nuevo en M16 + `RECOMPENSA_RECETA`), L138 decorativos regalo válido (`es_regalo_valido` + entrega inventario, `RECOMPENSA_DECORATIVA`), L173 evaluador sin allocations (`_SIN_DATOS` estático), L177 logs debug off en release (`_logs_debug`). **Evidencia: test_m20_amistad_cobertura 29/0 EXIT 0 (9 checks nuevos) + wrapper 79/0.** Fix lateral: `charla()`→`charlar()` en la suite (script error preexistente en HEAD). **M20: 105/150 (105/45/0), liberado 🟡.** Reserva/cierre §21.3 en los 4 registros. Log **2444**. Reportes **992/993** al canal de agnes. QA §21.8 pendiente (modelo distinto).

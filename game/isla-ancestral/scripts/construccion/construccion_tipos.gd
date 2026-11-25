@@ -106,6 +106,8 @@ enum Motivo {
 	DOBLE_CONFIRMACION,
 	SOSTIENE_OTRA_PIEZA,
 	BLOQUEA_SALIDA,
+	SIN_ESPACIO,
+	SIN_INVENTARIO,
 }
 
 ## ── Motivos TEMPORALES (edge case L de M17) ────────────────────────────────
@@ -117,6 +119,9 @@ const MOTIVOS_TEMPORALES: Array = [
 	Motivo.NPC_EN_CELDA,
 	Motivo.RECURSOS_INSUFICIENTES,
 	Motivo.DOBLE_CONFIRMACION,
+	# L132: sin espacio en el inventario (M14) se resuelve solo cuando el
+	# jugador libera un slot -> el rechazo es reintentable sin cambiar de celda.
+	Motivo.SIN_ESPACIO,
 ]
 
 ## true si el motivo puede desaparecer sin que el jugador cambie de celda.
@@ -143,6 +148,8 @@ const TEXTO: Dictionary = {
 	Motivo.DOBLE_CONFIRMACION: "confirmacion demasiado rapida (espera un instante)",
 	Motivo.SOSTIENE_OTRA_PIEZA: "hay una pieza apoyada arriba (demole la de arriba primero)",
 	Motivo.BLOQUEA_SALIDA: "taparia la unica salida de la zona",
+	Motivo.SIN_ESPACIO: "no hay espacio en el inventario para guardar la pieza",
+	Motivo.SIN_INVENTARIO: "no hay inventario conectado (no se puede guardar)",
 }
 
 ## Texto de un motivo. Tolerante a valores desconocidos.

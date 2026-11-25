@@ -47,7 +47,13 @@ func _test_policy() -> void:
 		quit(1)
 		return
 	_check("BackupManager autoload presente", true)
-	_check("retención máx 5", int(bm.config.get("retencion", {}).get("max_copias", 0)) == 5)
+	# 2026-11-25 (Deepseek V4.1 Flash-DeepAI, Log 2445): la aserción leía la clave
+	# VIEJA (max_copias), que la policy ya no tiene desde H22 → fallaba con 0. Ahora
+	# se comprueba el valor EFECTIVO del manager y que la clave nueva esté cableada
+	# (antes era decorativa: se caía en el default 5 y el JSON no se leía).
+	_check("retención máx 5", bm._max_copias() == 5)
+	_check("policy cableada: max_copias_por_categoria",
+		int(bm.config.get("retencion", {}).get("max_copias_por_categoria", 0)) == bm._max_copias())
 	_check("checksum habilitado", bm.config.get("verificacion", {}).get("checksum_habilitado", false) == true)
 
 func _test_backup() -> void:

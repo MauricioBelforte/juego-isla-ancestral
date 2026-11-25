@@ -193,6 +193,21 @@ func aprender_desde_pergamino(rec_id: String) -> bool:
 	pergamino_consumido.emit(rec_id, true)
 	return true
 
+## Conoce una receta desde un sistema externo (recompensa de amistad M20:
+## "recetas desbloqueadas por nivel van a la tabla de crafting", L133/136 del
+## plan M20). No consume pergamino ni emite senales de pergamino; emite
+## receta_aprendida solo si la receta era nueva. Idempotente.
+## Devuelve true si la receta existe en la tabla y queda (o ya estaba) conocida.
+func aprender_receta_externa(rec_id: String) -> bool:
+	var receta: CraftingRecipe = _recetas.get(rec_id, null)
+	if receta == null:
+		push_warning("[M16] aprender_receta_externa: receta inexistente %s" % rec_id)
+		return false
+	if es_conocida(rec_id):
+		return true
+	_conocer(rec_id)
+	return true
+
 ## Helper M14: usa un item de tipo "pergamino_rec_<rec_id>" desde el inventario.
 ## Convención: "pergamino_rec_tela_lino" → strip "pergamino_" → "rec_tela_lino"
 ## (glm-5.3-flash FIX: el prefijo anterior "pergamino_rec_" recortaba el "rec_"

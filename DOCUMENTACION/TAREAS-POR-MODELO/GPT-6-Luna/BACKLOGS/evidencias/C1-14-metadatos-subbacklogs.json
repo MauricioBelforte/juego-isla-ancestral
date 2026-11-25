@@ -1,22 +1,22 @@
 {
-  "scope": "Ocho sub-backlogs explícitamente listados en BACKLOG-MASTER.md; cualquier archivo no listado se excluyó. Snapshot previo a la modificación de este reporte.",
-  "method": "Lee únicamente rutas listadas en el índice rector; decodificación UTF-8 estricta, extracción de campos explícitos, hash SHA-256 y marcas literales de tareas.",
+  "scope": "Ocho sub-backlogs listados en BACKLOG-MASTER.md; solo documentos GPT-6-Luna propios.",
+  "method": "UTF-8 estricto; metadatos explícitos, SHA-256 y marcas literales de 160 tareas.",
+  "captured_at": "2026-11-25",
   "document_count": 8,
   "documents": [
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
-      "sha256": "e9d8cedf3a413d1b85313c6a7dcab624e40418e14626a0ebcaa15c73d6bb58ef",
-      "title": "01 — Censos y clasificación (20 tareas)",
+      "sha256": "94c7ea89b4d5603ddf2ac11676d15bf28b382093b123f54bb8f2d9ce1d4ade26",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
       "task_count": 20,
       "task_mark_counts": {
-        " ": 9,
-        "x": 11,
+        " ": 8,
+        "x": 12,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -86,7 +86,7 @@
         },
         {
           "line": 21,
-          "mark": " ",
+          "mark": "x",
           "id": "C1-14"
         },
         {
@@ -119,13 +119,12 @@
           "mark": " ",
           "id": "C1-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/02-Backlog-Sintesis-y-CrossDoc.md",
       "sha256": "5da244f8cb5c34ec8f22e2cbacd9781f91d983cdcf656cb7f5818fa16d36285e",
-      "title": "02 — Síntesis y análisis entre documentos (20 tareas)",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -134,8 +133,7 @@
         " ": 18,
         "x": 1,
         "?": 1,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -238,23 +236,21 @@
           "mark": " ",
           "id": "S2-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/03-Backlog-Estructuras-y-JSON.md",
-      "sha256": "5f77f5c50ce32677e72f4d8b934e5761b572b7ee40f4627a560110c5cadd50c5",
-      "title": "03 — Estructuras de datos y JSON (20 tareas)",
+      "sha256": "de6b9ce9fe2a298d4fbc89434c56f26438b12d648a3ad6d6b44bcd4eb2e66de3",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
       "task_count": 20,
       "task_mark_counts": {
         " ": 15,
-        "x": 5,
-        "?": 0,
-        "→": 0,
-        "other": 0
+        "x": 3,
+        "?": 2,
+        "→": 0
       },
       "tasks": [
         {
@@ -264,7 +260,7 @@
         },
         {
           "line": 9,
-          "mark": "x",
+          "mark": "?",
           "id": "J3-02"
         },
         {
@@ -274,7 +270,7 @@
         },
         {
           "line": 11,
-          "mark": "x",
+          "mark": "?",
           "id": "J3-04"
         },
         {
@@ -357,13 +353,12 @@
           "mark": " ",
           "id": "J3-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/04-Backlog-Auditoria-Documental-y-Codigo.md",
-      "sha256": "3011592356b1f3425235e6fc601ad741823a76190cf1ea9528196d720cce57a9",
-      "title": "04 — Auditoría documental y código estático (20 tareas)",
+      "sha256": "f7acc7be9d0cd02d6f21d4edbf6892866b580edf8f726f898e9e4d0f8bbf70fe",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -372,8 +367,7 @@
         " ": 18,
         "x": 2,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -476,13 +470,12 @@
           "mark": " ",
           "id": "A4-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/05-Backlog-Calibracion-y-Consistencia.md",
       "sha256": "611c2d356e666a8870321922da0756e174dcc7e466691264aed0877c30ba7b12",
-      "title": "05 — Calibración y consistencia de resultados (20 tareas)",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -491,8 +484,7 @@
         " ": 20,
         "x": 0,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -595,13 +587,12 @@
           "mark": " ",
           "id": "K5-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/06-Validacion-y-Pruebas.md",
       "sha256": "6aecebc26e18d5d9c7c81ba0733843a6c05daa55a422ce0f23318814871f1282",
-      "title": "06 — Validación y pruebas (20 tareas)",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -610,8 +601,7 @@
         " ": 20,
         "x": 0,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -714,13 +704,12 @@
           "mark": " ",
           "id": "V6-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/07-Localizacion-y-Recuperacion.md",
       "sha256": "555b50d1535f8aa8b947409ddab02e05b56b9c1aa051f32b1384f530739f5611",
-      "title": "07 — Localización de evidencia y recuperación (20 tareas)",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -729,8 +718,7 @@
         " ": 20,
         "x": 0,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -833,13 +821,12 @@
           "mark": " ",
           "id": "R7-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     },
     {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/08-Informes-y-Coordinacion.md",
       "sha256": "c0612bfe81449aa9b29c553dc5636b37323265fe7589d7db95b9f4ad22e51cce",
-      "title": "08 — Informes y coordinación verificable (20 tareas)",
+      "type": "text/markdown",
       "model": "** GPT-6-Luna",
       "platform": "** DeepAI Code",
       "date": "** 2026-11-25",
@@ -848,8 +835,7 @@
         " ": 20,
         "x": 0,
         "?": 0,
-        "→": 0,
-        "other": 0
+        "→": 0
       },
       "tasks": [
         {
@@ -952,13 +938,17 @@
           "mark": " ",
           "id": "C8-20"
         }
-      ],
-      "type": "text/markdown"
+      ]
     }
   ],
-  "excluded_unlisted_files": [],
+  "totals": {
+    "pending": 139,
+    "complete": 18,
+    "unresolved": 3,
+    "in_progress": 0
+  },
   "limitations": [
-    "Estados agregados son una captura del momento; pueden cambiar al editar backlogs.",
-    "No se inspeccionan fuentes externas ni se interpreta la semántica de cada tarea."
+    "Snapshot del momento; puede cambiar al editar colas.",
+    "No interpreta semántica de cada tarea ni fuentes externas."
   ]
 }
