@@ -37,3 +37,5 @@
 **Total: 12 = 5 anuladas (Bloque 4) + 7 hechas (Bloques 5 y 6).**
 
 **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code - 2026-11-13 08:05
+
+| 02-Backlog-M169-Doc-Verify-Code.md | 12 | PENDIENTE |

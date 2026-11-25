@@ -5124,27 +5124,27 @@
   "mod": "169",
   "path": "DOCUMENTACION\\169-Crucero\\plan-actual\\05-Checklist.md",
   "line": 229,
-  "text": "**Totales:** 192 ítems · Completados: 45 · Pendientes: 147 · No resueltos: 0. (Actualizado 2026-11-21 con la sección R: implementación ejecutada.)",
-  "norm": "Totales: 192 ítems · Completados: 45 · Pendientes: 147 · No resueltos: 0.",
-  "decl_total": 192,
-  "decl_x": 45,
-  "decl_pend": 147,
+  "text": "**Totales:** 194 ítems · Completados: 57 · Pendientes: 137 · No resueltos: 0. (Actualizado 2026-11-25: cerradas las 12 tareas doc/code/verify de b01; B-02/B-03 siguen en STANDBY por Blender + fundador.)",
+  "norm": "Totales: 194 ítems · Completados: 57 · Pendientes: 137 · No resueltos: 0.",
+  "decl_total": 194,
+  "decl_x": 57,
+  "decl_pend": 137,
   "decl_res": 0,
-  "real_x": 45,
-  "real_blanco": 147,
+  "real_x": 57,
+  "real_blanco": 137,
   "real_q": 0,
-  "real_total": 192,
+  "real_total": 194,
   "struck": false,
   "total_candidates": 1,
   "all_candidates": [
    {
     "line": 229,
-    "decl_total": 192,
+    "decl_total": 194,
     "struck": false
    }
   ],
   "d_total": 0,
   "d_x": 0,
-  "d_total_vs_x": 147
+  "d_total_vs_x": 137
  }
 ]

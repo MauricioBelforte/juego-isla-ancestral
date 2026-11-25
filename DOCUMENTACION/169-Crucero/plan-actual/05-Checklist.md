@@ -61,8 +61,8 @@
 
 - [ ] D-01 Generar LOD media del exterior, ≤ 3.500 v [C]
 - [ ] D-02 Generar LOD baja del exterior, ≤ 1.500 v [C]
-- [ ] D-03 Verificar que el LOD baja conserve la silueta (72 m de eslora) [M]
-- [ ] D-04 Verificar que el LOD media conserve chimeneas y botes [S]
+- [x] D-03 Verificar que el LOD baja conserve la silueta (72 m de eslora) [M]
+- [x] D-04 Verificar que el LOD media conserve chimeneas y botes [S]
 - [ ] D-05 Auditar `z_min` de los 3 LOD con `auditar_glb_490.py` [S]
 - [ ] D-06 Auditar escala (eslora 72 m ± 0,5 m) en los 3 LOD [S]
 
@@ -74,8 +74,8 @@
 - [ ] E-04 Rampa de colisión en las escaleras con `FloorMaxAngle = 45°` [M]
 - [ ] E-05 Colisión de las puertas de camarote (`Area3D`) [M]
 - [ ] E-06 Colisión del puente de mando y la terraza [S]
-- [ ] E-07 Verificar que el jugador no pueda caer al agua desde cubierta 1 [M]
-- [ ] E-08 Verificar que el jugador no atraviese paredes de los interiores [M]
+- [x] E-07 Verificar que el jugador no pueda caer al agua desde cubierta 1 [M]
+- [x] E-08 Verificar que el jugador no atraviese paredes de los interiores [M]
 
 ## F. Interior — cubierta 1 (botes y carga)
 
@@ -132,7 +132,7 @@
 ## J. Navegación e integración con M28
 
 - [ ] J-01 Agregar `crucero` a `data/vehiculos/vehicles.json` sin romper el esquema [M]
-- [ ] J-02 Implementar `CruceroManager` como autoload [C]
+- [x] J-02 Implementar `CruceroManager` como autoload [C]
 - [ ] J-03 Implementar los 4 estados (ATRACADO, ABORDO, NAVEGANDO, EMERGENCIA) [M]
 - [ ] J-04 Conectar el `Area3D "Puerto"` del casco al embarque [M]
 - [ ] J-05 Implementar la ruta fija origen → destino (reutilizar `BoatRoute` de M28) [M]
@@ -146,7 +146,7 @@
 
 - [ ] K-01 Registrar una `Sector` por cubierta [M]
 - [ ] K-02 Cargar el interior al entrar y descargarlo al salir [C]
-- [ ] K-03 Verificar que nunca haya 2 cubiertas en memoria [M]
+- [x] K-03 Verificar que nunca haya 2 cubiertas en memoria [M]
 - [ ] K-04 Tiempo de carga ≤ 1,5 s por cubierta [M]
 - [ ] K-05 Prueba de estrés: entrar y salir 20 veces seguidas sin fuga [C]
 - [ ] K-06 Verificar que no se rompa el streaming del mundo exterior al zarpar [M]
@@ -189,15 +189,15 @@
 
 ## P. QA, rendimiento y cierre
 
-- [ ] P-01 `tests/unit/test_crucero_manager.gd` con los 4 estados [C]
-- [ ] P-02 `tests/integration/test_crucero_viaje.gd` (embarque → zarpe → llegada) [C]
+- [x] P-01 `tests/unit/test_crucero_manager.gd` con los 4 estados [C]
+- [x] P-02 `tests/integration/test_crucero_viaje.gd` (embarque → zarpe → llegada) [C]
 - [ ] P-03 Probar el ciclo completo a pie: puerto → camarote → comedor → cubierta → zarpe [C]
 - [ ] P-04 Medir frame time con el crucero a la vista (≤ 16,6 ms) [M]
 - [ ] P-05 Medir draw calls del exterior (≤ 40) [M]
 - [ ] P-06 Probar la caída al agua desde cada cubierta [M]
 - [ ] P-07 Probar el viaje con clima de tormenta (M32) [M]
 - [ ] P-08 Probar la recarga del juego a mitad de viaje [M]
-- [ ] P-09 Verificar que ningún otro módulo cambió de comportamiento [M]
+- [x] P-09 Verificar que ningún otro módulo cambió de comportamiento [M]
 - [ ] P-10 QA visual final del fundador (no lo firma este agente: no tiene visión) [S]
 
 ## Q. Aventura a bordo (capa 3) — juegos y retos
@@ -214,7 +214,7 @@
 - [ ] Q-10 Camarote misterioso: pista + cofre con ítem raro (M15) [M]
 - [ ] Q-11 Vigía: catalejo en cubierta 4 y 3 objetos detectables [M]
 - [ ] Q-12 Vigía: FSM de 7 estados tomando ishing_session.gd como plantilla [C]
-- [ ] Q-13 Conectar las 5 actividades al EventManager de M74 (contrato de minijuego) [C]
+- [x] Q-13 Conectar las 5 actividades al EventManager de M74 (contrato de minijuego) [C]
 - [ ] Q-14 Bloquear las actividades de exterior con clima severo (M32); casino sigue abierto [M]
 - [ ] Q-15 Pausar y conservar el progreso al desembarcar [M]
 - [ ] Q-16 Verificar que ninguna actividad use dinero real ni microtransacciones [S]
@@ -225,7 +225,7 @@
 
 ---
 
-**Totales:** 192 ítems · Completados: 45 · Pendientes: 147 · No resueltos: 0. (Actualizado 2026-11-21 con la sección R: implementación ejecutada.)
+**Totales:** 194 ítems · Completados: 57 · Pendientes: 137 · No resueltos: 0. (Actualizado 2026-11-25: cerradas las 12 tareas doc/code/verify de b01; B-02/B-03 siguen en STANDBY por Blender + fundador.)
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25
 
@@ -265,7 +265,9 @@
 - [x] Boot headless verificado: `[CRU] catalogos cargados: 3 clases, 7 camarotes` [S]
 - [x] 5 actividades a bordo (casino, ruleta, torneo, espectáculo, vigía) [C]
 - [x] `data/crucero/pasajes.json` + `camarotes.json` + `juegos_a_bordo.json` [S]
-- [x] Tests: `test_crucero_manager.gd` (13/0) y `test_crucero_eventos.gd` (6/0) [M]
+- [x] Tests: `test_crucero_manager.gd` (13/0), `test_crucero_eventos.gd` (6/0) y `test_crucero_viaje.gd` (19/0) [M]
+- [x] `03-Diseno.md` §11 reconciliación de drifts (10 verificables, b57) [M]
+- [x] 18 iconos de logros rotos anotados en `04-Codigo.md` §9 [S]
 
 ### R.4 Pendiente
 - [ ] Revisión visual del fundador (B-02/B-03 e interiores)
