@@ -39,3 +39,5 @@
 **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code - 2026-11-13 08:05
 
 | 02-Backlog-M169-Doc-Verify-Code.md | 12 | PENDIENTE |
+
+| 03-Backlog-M169-Codigo-Tests-Docs.md | 8 | PENDIENTE |
