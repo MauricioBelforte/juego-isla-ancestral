@@ -71,3 +71,5 @@ Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa r
 **Modelo:** Nemotron-3.5-Super-VL  
 **Plataforma:** Kilo Code  
 **Fecha:** 2026-11-18
+
+| 02-Backlog-M53-M159-CI-Extra.md | 8 | PENDIENTE |

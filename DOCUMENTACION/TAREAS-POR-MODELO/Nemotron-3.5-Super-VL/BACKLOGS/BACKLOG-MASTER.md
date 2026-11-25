@@ -54,3 +54,5 @@ Nemotron trabaja por **RIELES** (archivos separados `RIEL-*.md` en su carpeta). 
 ---
 
 **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code — 2026-11-05 00:38
+
+| 02-Backlog-VisualQA-Round3.md | 10 | PENDIENTE |

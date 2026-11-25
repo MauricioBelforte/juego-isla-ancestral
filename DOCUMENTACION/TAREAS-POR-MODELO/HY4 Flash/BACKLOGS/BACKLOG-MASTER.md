@@ -149,3 +149,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 59-Backlog-Drifts-Totales-Logros-Volumen.md (10 tareas: 13 drifts + 18 logros + M01 79)
 
 **TOTAL ACUMULADO: 3534[x] en 58 backlogs + 10 nuevas = 3544**
+
+## NUEVO 25nov 09:00 (10 tareas)
+- 60-Backlog-Q-Restantes-Top10.md (10 tareas: 813 [?] restantes, top 10 modulos)
+
+**TOTAL ACUMULADO: 3554[x] en 59 backlogs + 10 nuevas = 3564**
