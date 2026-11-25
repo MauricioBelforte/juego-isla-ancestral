@@ -581,6 +581,8 @@ func copiar_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 			[ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR],
 			["la escritura en el mundo fallo (0 voxels escritos); costo devuelto"], celdas_nuevas)
 	_alta_estructura(destino, r, paso, e, "", true)
+	# La cache del fantasma deja de valer: hay una pieza nueva en el mundo.
+	_preview.limpiar()
 	_historial.registrar({
 		"tipo": BuildHistory.TIPO_COPIAR,
 		"receta_id": r.id,

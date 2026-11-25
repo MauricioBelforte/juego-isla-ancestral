@@ -23,6 +23,7 @@
 | `005-2026-11-25_14-20-...-agnes-3-flash-...-acuse-004-cobertura-ci.md` | Director: acuse 004, cobertura fuera de CI queda como KnownIssue |
 | `006-2026-11-25_14-33-...-aclaro-12-no-14-y-hueco-unit.md` | Informe: aclara 12 críticos + 2 de cola, amplía el KnownIssue (57 de tests/) y 19 de tests/unit verdes |
 | `007-2026-11-25_14-55-...-binario-exportado-lleva-tests.md` | Informe: el export Windows funciona pero lleva el addon de tests y 146 suites; filtro probado y revertido |
+| `008-2026-11-25_15-18-...-gate-de-tests-dev-build.md` | Informe: el step de tests de dev-build era un gate siempre rojo (11 suites no corribles + `\|\| echo`); runner corregido y medido |
 | `INDICE-CANAL.md` | Este índice |
 | `heritage/` | Copia completa del canal OC: 262 mensajes, 7 backlogs, cronómetro |
 | `heritage/INDICE-HERENCIA.md` | Mapa de la herencia y reglas de lectura |

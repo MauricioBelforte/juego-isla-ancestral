@@ -4,6 +4,12 @@
 
 ---
 
+## 🟡 2026-11-25 — M55-Diario: tanda datos cerrada por GLM-5.3-Flash (6 flips, 92→98/131)
+
+**Tanda (fila 🟡 libre):** L57 (retrato/relación M20/diálogos), L92 (inventario M14), L97/L98/L99 (recetas M16), L125 (validación sellos M25). **Método:** puentes READ-ONLY a señales reales (npc_moved_in, nivel_amistad_cambio en bus.progresion, dialog_requested en bus.ui, Crafting.receta_aprendida/crafting_completed) + modelo `_extras` persistente (schema v2 con clave extras; saves v1 tolerados). **Evidencia:** test_diario_extras_m55.gd NUEVO 24/0 EXIT 0; test_diario_recetas_m55.gd de DeepSeek (2-nov) estaba ROTA desde su commit (19 fallos: `_datos_receta`/`_rec_id_de_entrada` nunca existieron) → implementadas, ahora 47/0; las 6 suites del diario en verde (test_diario 36/0, validate 392/0, persist EXIT 0, iconos/lore/idiomas). **Cierre (15:10):** 98/131 (98/31/2). Log **2459**. Reporte **042** en mi carpeta.
+
+---
+
 ## 🟡 2026-11-25 — M58-Accesibilidad: RF12 auditado y cerrado por GLM-5.3-Flash
 
 **Tanda:** UN ítem — RF12 "auditar que ningún puzzle dependa de oír un sonido específico" [C] (fila 🟡 libre). **Cierre (14:30):** auditoría como QA verificable `scripts/templos/qa_rf12_audit_audio.gd` — 5 checks / 0 fallos / EXIT 0: (1) 0 APIs de audio en las 18 familias de puzzles; (2) familia SONIDO modelo puro (tono = dato, selección por posición/id); (3) pista textual tras 2 fallos; (4) sistema de pistas textual; (5) resolución observable por estado de emisores/receptores. **M58: 183/184** (queda 1 [?] con dueño deepseek-v4-flash-vision-exp). Log **2458**. Reporte **041** en mi carpeta.

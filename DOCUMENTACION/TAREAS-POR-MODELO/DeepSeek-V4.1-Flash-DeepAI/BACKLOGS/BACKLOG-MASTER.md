@@ -126,6 +126,22 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
   526 en disco (522 st / 4 gd), 104 en el workflow, 426 fuera; bajo `tests/` **61** (57 st sin job).
 - **Log 2456.** Reporte: mensaje `006`.
 
+### Tanda 2026-11-25 15:14 — el step de tests de dev-build era un gate siempre rojo
+
+- `run_tests.py` corría también suites imposibles de ejecutar con `--script`: 4 GdUnit4 + 7
+  helpers/mocks (`Node3D`/`RefCounted`/`IRecoverable`/`InvariantBase`). Con 11 fallos
+  garantizados el exit era 1 siempre, y `dev-build.yml:61` lo tapaba con `|| echo`.
+- Arreglado en `tools/ci/run_tests.py`: filtro por cabecera leyendo el archivo completo (la
+  ventana de 4000 chars clasificaba mal `test_historias.gd`), omitidas informadas,
+  `--incluir-gdunit` para diagnóstico y **reintento único** de rojas marcadas `flaky`.
+- Medido: **516 ejecutables / 11 omitidas**; `--module tests/unit` 19 OK/0 FAIL (204 s);
+  `--module tests/` 68 suites 67 OK/1 FAIL (1050 s) — la roja (`test_m17_hud_categorias`) fue
+  contención: sola da 22/0 dos veces seguidas.
+- Auditoría de `|| true` / `|| echo` / `continue-on-error` en todos los workflows: el único
+  agujero real era dev-build:61; los de `release-build.yml:97` y `quality.yml:1235` son gates
+  por texto deliberados y documentados.
+- **Log 2460** (choqué con 2458, que dos agentes usaron; me pasé al 2460). Reporte: mensaje `008`.
+
 ### Tanda 2026-11-25 14:52 — qué lleva adentro el binario exportado
 
 - Export Windows real (templates 4.7.2): **EXIT=0 en 24.7 s, 124.5 MB** → el job `build` no está roto.

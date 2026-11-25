@@ -15,6 +15,12 @@
     "static_inventory": {
       "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/C1-07-inventario-tests-m87.json",
       "sha256": "14ca2195049bf41a6bcfe35c905a0f8b619039b84127e268b22fe6c6fc385eb5"
+    },
+    "global_checklist": {
+      "path": "CHECKLIST-GLOBAL.md",
+      "sha256": "9dd1adf03c6eb56204de269d7b2e0a46550bab1abbf50b11eae01e48d479a568",
+      "line": 191,
+      "relevant_text": "2026-10-28; gate-2 Hy3 #433/Log 2231; 169 checks/0 fallos headless: test_placeholders_plurales 46 + test_catalogo_exhaustivo 36 + test_validador_po 87"
     }
   },
   "counts": {
@@ -32,7 +38,43 @@
       "test_placeholders_plurales_m87.gd"
     ],
     "plan_explicit_cp_cases": 66,
-    "result_individual_cp_rows": 15
+    "result_individual_cp_rows": 15,
+    "additional_test_files_with_later_GLOBAL_gate_claim": 2,
+    "GLOBAL_gate_reported_checks": 169,
+    "GLOBAL_gate_component_check_counts_sum": 169
+  },
+  "historical_global_gate_claim": {
+    "date": "2026-10-28",
+    "source_line": 191,
+    "reported_gate": "Hy3 #433/Log 2231",
+    "reported_result": "169 checks / 0 fallos headless",
+    "reported_suites": [
+      {
+        "name": "test_placeholders_plurales_m87",
+        "checks": 46,
+        "present_in_static_inventory": true,
+        "listed_in_plan_06_table": false,
+        "listed_in_results_07_tables": false
+      },
+      {
+        "name": "test_catalogo_exhaustivo_m87",
+        "checks": 36,
+        "present_in_static_inventory": true,
+        "listed_in_plan_06_table": false,
+        "listed_in_results_07_tables": false
+      },
+      {
+        "global_label": "test_validador_po",
+        "inventory_file": "test_validador_po_m87.gd",
+        "checks": 87,
+        "present_in_static_inventory": true,
+        "listed_in_plan_06_table": true,
+        "listed_in_results_07_tables": true,
+        "name_mapping_note": "El GLOBAL usa el nombre abreviado; el inventario y las tablas 06/07 registran el sufijo _m87. No se infiere identidad adicional más allá de esa correspondencia nominal."
+      }
+    ],
+    "arithmetic_check": "46 + 36 + 87 = 169",
+    "interpretation": "Registro histórico citado por CHECKLIST-GLOBAL; confirma que las dos suites adicionales aparecen en un reclamo de QA posterior, pero no equivale a ejecución actual ni amplía retroactivamente las tablas de 06/07. No se consultó el Log 2231 ni se reejecutaron las suites."
   },
   "plan_suite_rows": [
     {
@@ -522,8 +564,8 @@
   "interpretation": {
     "historical_cut": "El plan y las tablas resumen describen seis suites. El documento 07 reporta 6/6 en iteración 6 y 82 checks/0 fallos/exit 0 ×3 para test_localizacion_iter6.gd.",
     "later_iteration": "La sección 9 documenta iteración 7, corrige regresión M53/M87 y registra tres corridas deterministas del validador; no ofrece matriz completa C1-C9.",
-    "current_inventory": "C1-07 encuentra ocho archivos test_*.gd. Dos (test_placeholders_plurales_m87.gd y test_catalogo_exhaustivo_m87.gd) no aparecen en las tablas de plan/resultados. No se infiere que pasen ni que formen parte del 6/6 histórico.",
-    "current_status": "No se ejecutaron suites durante esta síntesis; estado actual sin verificar."
+    "current_inventory": "C1-07 encuentra ocho archivos test_*.gd, todos todavía presentes y con SHA-256 coincidente con el inventario estático. Dos (test_placeholders_plurales_m87.gd y test_catalogo_exhaustivo_m87.gd) no aparecen en las tablas de 06/07, pero CHECKLIST-GLOBAL línea 191 sí cita para ellas un gate-2 histórico posterior con 46 y 36 checks, respectivamente.",
+    "current_status": "No se ejecutaron suites durante esta síntesis; estado actual sin verificar. El GLOBAL contiene un reclamo histórico de QA fechado 2026-10-28 (169 checks / 0 fallos), no una corrida actual."
   },
-  "limitations": "Resultados históricos se reproducen como afirmaciones documentadas, no reejecutadas. Falta de fila individual no se convierte en fallo. Los dos archivos adicionales se identifican mediante C1-07 y no se les atribuye resultado."
+  "limitations": "Resultados de 06/07 y del GLOBAL se reproducen como afirmaciones históricas documentadas, no reejecutadas. El registro del GLOBAL no amplía las tablas originales de 06/07 ni prueba estado actual. No se consultó el Log 2231; se tomó el texto literal de CHECKLIST-GLOBAL línea 191. Falta de fila individual no se convierte en fallo."
 }
