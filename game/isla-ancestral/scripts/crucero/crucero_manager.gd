@@ -2,20 +2,26 @@ extends Node
 
 var _gl: Node = null
 
+## Mapea el nombre de categoria (String) al enum Category de GameLogger (int).
+const _CAT := {"BOOT": 0, "SYSTEM": 1, "GAMEPLAY": 2, "WORLD": 3, "NETWORKING": 4, "ANALYTICS": 5, "CRASH": 6}
+
+func _cat(cat: String) -> int:
+	return int(_CAT.get(cat, 1))
+
 func _log_debug(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.debug(msg, cat, ctx)
+	if _gl: _gl.debug(msg, _cat(cat), ctx)
 
 func _log_info(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.info(msg, cat, ctx)
+	if _gl: _gl.info(msg, _cat(cat), ctx)
 
 func _log_warning(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.warning(msg, cat, ctx)
+	if _gl: _gl.warning(msg, _cat(cat), ctx)
 
 func _log_error(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.error(msg, cat, ctx)
+	if _gl: _gl.error(msg, _cat(cat), ctx)
 
 func _log_critical(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.critical(msg, cat, ctx)
+	if _gl: _gl.critical(msg, _cat(cat), ctx)
 
 ## CruceroManager — Módulo 169 (Crucero Real).
 ##
@@ -62,6 +68,7 @@ var _camarotes: Dictionary = {}   ## id -> Dictionary (camarotes.json)
 
 
 func _ready() -> void:
+	_gl = get_node_or_null("/root/GameLogger")
 	_cargar_catalogos()
 
 

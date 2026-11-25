@@ -2,20 +2,26 @@ extends Node
 
 var _gl: Node = null
 
+## Mapea el nombre de categoria (String) al enum Category de GameLogger (int).
+const _CAT := {"BOOT": 0, "SYSTEM": 1, "GAMEPLAY": 2, "WORLD": 3, "NETWORKING": 4, "ANALYTICS": 5, "CRASH": 6}
+
+func _cat(cat: String) -> int:
+	return int(_CAT.get(cat, 1))
+
 func _log_debug(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.debug(msg, cat, ctx)
+	if _gl: _gl.debug(msg, _cat(cat), ctx)
 
 func _log_info(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.info(msg, cat, ctx)
+	if _gl: _gl.info(msg, _cat(cat), ctx)
 
 func _log_warning(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.warning(msg, cat, ctx)
+	if _gl: _gl.warning(msg, _cat(cat), ctx)
 
 func _log_error(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.error(msg, cat, ctx)
+	if _gl: _gl.error(msg, _cat(cat), ctx)
 
 func _log_critical(msg: String, cat: String = "", ctx: Dictionary = {}):
-	if _gl: _gl.critical(msg, cat, ctx)
+	if _gl: _gl.critical(msg, _cat(cat), ctx)
 
 ## CruceroEventos — Módulo 169: actividades a bordo.
 ##
@@ -44,6 +50,7 @@ var _dia_control: int = -1
 
 
 func _ready() -> void:
+	_gl = get_node_or_null("/root/GameLogger")
 	_cargar_catalogo()
 
 
@@ -137,7 +144,12 @@ func finalizar(id: StringName, resultado: Dictionary) -> void:
 	_jugadas_hoy[id] = veces_jugadas(id) + 1
 	actividad_jugada.emit(id, exito, premio)
 
-	var em = get_node_or_null("/root/EventManager")
+	# M74 (EventManager) esta registrado como autoload `eventos` en project.godot.
+	# `finalizar_evento` hace no-op si el id no esta en su catalogo (los minijuegos
+	# del crucero no son festivales), por eso la conexion es segura.
+	var em = get_node_or_null("/root/eventos")
+	if em == null:
+		em = get_node_or_null("/root/EventManager")
 	if em != null and em.has_method("finalizar_evento"):
 		em.finalizar_evento(id, {"exito": exito, "premio": premio})
 

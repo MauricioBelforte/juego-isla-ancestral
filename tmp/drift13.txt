@@ -1,0 +1,13 @@
+13 modules with drift_totals >5:
+  M18 18-Casas: real=200 totals=193 drift=7
+  M26 26-Templo-Subterraneo: real=128 totals=122 drift=6
+  M28 28-Viajes: real=129 totals=53 drift=76
+  M31 31-Ciclo-Dia-Noche: real=167 totals=125 drift=42
+  M35 35-Mineria: real=139 totals=103 drift=36
+  M37 37-Museos-Y-Colecciones: real=141 totals=98 drift=43
+  M63 63-Cargas-Y-Streaming: real=93 totals=67 drift=26
+  M72 72-Sistema-De-Logros: real=197 totals=108 drift=89
+  M104 104-Analytics: real=119 totals=111 drift=8
+  M106 106-Seguridad: real=206 totals=194 drift=12
+  M160 160-Diseno-De-Ubicaciones-Del-Mundo: real=155 totals=145 drift=10
+  M164 164-Isla-De-Combate-Endgame: real=128 totals=120 drift=8
