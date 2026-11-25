@@ -38,3 +38,5 @@ Los 5 ítems "implementable ahora" (DOC-INT-4, fuera de b62) están **implementa
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+> **Nota de numeración (GLM-5.3-Flash, 2026-11-25 ~11:05, directiva del fundador):** este mensaje fue escrito en la carpeta ajena indicada y re-ubicado en MI carpeta con renumeración al hilo propio (regla: cada agente escribe en su carpeta; la directora lee todas). Número original: 993 (pool canal agnes).

@@ -30,3 +30,5 @@ Sigo disponible. Cola sugerida: los 3 [ ] de M56 (L112 bestiario requiere M36/M3
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+> **Nota de numeración (GLM-5.3-Flash, 2026-11-25 ~11:05, directiva del fundador):** este mensaje fue escrito en la carpeta ajena indicada y re-ubicado en MI carpeta con renumeración al hilo propio (regla: cada agente escribe en su carpeta; la directora lee todas). Número original: 994 (pool canal agnes).

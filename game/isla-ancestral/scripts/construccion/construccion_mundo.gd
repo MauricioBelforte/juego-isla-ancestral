@@ -1,5 +1,6 @@
 # Modelo: DeepSeek-V4.1-Flash (WorkBuddy)
 # Fecha: 2026-10-03
+# Actualizado: minimax-m3-1-flash / DeepAI Code (pi) — 2026-11-25 (L102: terreno CARGADO)
 #
 # M17 Construccion iter. 1 — ConstruccionMundo: adaptador al mundo REAL.
 #
@@ -29,6 +30,11 @@ var _npc_provider: Callable = Callable()
 ## Contadores de diagnostico (lo que realmente se escribio en el mundo).
 var escrituras: int = 0
 var borrados: int = 0
+
+## Consultas de superficie que se hicieron al terreno (L102: permite PROBAR que
+## la rejilla no se calcula sobre chunks vacios — el conteo es acotado por la
+## huella de la pieza, no por el tamano del mundo).
+var consultas: int = 0
 
 ## ── Conexion ────────────────────────────────────────────────────────────
 
@@ -77,8 +83,15 @@ func _buscar_en(nodo: Node):
 ##   "agua"    WATER / SHALLOW_WATER
 ##   "terreno" cualquier otro bloque solido (terreno generado o construccion M08)
 ## Sin terreno -> "aire" (modo logico).
+##
+## L102 (2026-11-25): si el CHUNK de la celda no esta CARGADO, la respuesta es
+## "aire" aunque el voxelTool devuelva algo — la rejilla de construccion solo se
+## calcula sobre terreno cargado (nunca sobre chunks vacios o con datos rancios).
 func superficie_voxel(celda: Vector3i) -> StringName:
+	consultas += 1
 	if not tiene_terreno():
+		return &"aire"
+	if not chunk_cargada(celda):
 		return &"aire"
 	var vt = _terrain.get_voxel_tool()
 	if vt == null:
@@ -86,6 +99,37 @@ func superficie_voxel(celda: Vector3i) -> StringName:
 	vt.channel = VoxelBuffer.CHANNEL_TYPE
 	var id: int = int(vt.get_voxel(celda)) & 0xFF
 	return _clasificar_bloque(id)
+
+## ── L102: chunks cargados ───────────────────────────────────────────────
+##
+## true si el chunk (data block) que contiene la celda esta CARGADO en el
+## terreno. API nativa medida en Godot 4.7.2 + Voxel Tools (estandar de la
+## libreria):
+##   VoxelTerrain.voxel_to_data_block(voxel_pos: Vector3) -> Vector3i
+##   VoxelTerrain.has_data_block(block_position: Vector3i) -> bool
+##
+## Es conservative por diseno:
+##   * sin terreno (modo logico) -> true: no se bloquea nada;
+##   * sin esa API (VoxelTools distinto) -> true: no se bloquea nada;
+##   * solo se bloquea cuando la API RESPONDE y dice que no hay data block.
+func chunk_cargada(celda: Vector3i) -> bool:
+	if not tiene_terreno():
+		return true
+	if not _terrain.has_method("voxel_to_data_block") or not _terrain.has_method("has_data_block"):
+		return true
+	var bloque: Vector3i = _terrain.voxel_to_data_block(Vector3(celda))
+	return bool(_terrain.has_data_block(bloque))
+
+## Celdas cuya chunk NO esta cargada (las que quedan FUERA de la rejilla).
+## Con el terreno en modo logico devuelve la lista vacia (no bloquea nada).
+func celdas_sin_chunk(celdas: Array) -> Array:
+	var fuera: Array = []
+	if not tiene_terreno():
+		return fuera
+	for c in celdas:
+		if not chunk_cargada(c as Vector3i):
+			fuera.append(c)
+	return fuera
 
 ## Altura del terreno en (x, z), o -1 si no hay terreno. Usa el generador real
 ## si esta expuesto (`_get_island_gen`), igual que TerrainLocator.
@@ -166,6 +210,7 @@ func borrar_voxel(celdas: Array) -> int:
 func reiniciar_contadores() -> void:
 	escrituras = 0
 	borrados = 0
+	consultas = 0
 
 ## ── Internos ────────────────────────────────────────────────────────────
 

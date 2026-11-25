@@ -4,6 +4,18 @@
 
 ---
 
+## 🟡 2026-11-25 — M56-Fotografia: tanda 3 (L161) cerrada por GLM-5.3-Flash
+
+**Cierre (11:05):** L161 "No duplicar texturas en memoria al abrir la galería" — refactor de `photo_gallery.gd` a nodos reutilizados (un TextureRect por foto con meta idx, texturas solo rango visible <=24 y liberadas fuera; el bug previo creaba un nodo duplicado al volver a cargar). **Evidencia:** qa_m56_galeria.gd (nueva) 7 checks / 0 fallos / EXIT 0 + regresión qa_m56_photopose 16/0, test_photomode 0, test_photo_service_headless 10/0. **M56: 135/138** (135 [x]/2 [ ]/1 [?]) — liberado 🟡. Los 2 [ ] restantes (L112 bestiario M36/M37, L135 filtros M49) requieren módulos ajenos. Log **2450**. Reporte **040** en mi carpeta.
+
+---
+
+## 🔵 2026-11-25 — M56-Fotografia: tanda 3 (L161) reclamada por GLM-5.3-Flash (re-claim del módulo 🟡 propio)
+
+**Tanda:** UN ítem — L161 "No duplicar texturas en memoria al abrir la galería" [M]. **Diagnóstico:** `photo_gallery.gd` descarga texturas fuera del rango visible (`texture=null`) pero deja el TextureRect vacío en el grid y al volver a cargar crea OTRO nodo duplicado. **Implementación:** nodos reutilizados — un TextureRect por foto creado en orden de lista, texturas cargadas solo en el rango visible (≤24, presupuesto M61) y descargadas fuera de él, sin re-creación. QA nueva con checks nombrados + regresión M56.
+
+---
+
 ## 🟡 2026-11-25 — M56-Fotografia: tanda cerrada por GLM-5.3-Flash (reclamo §21.3 del 🟢)
 
 **Tanda:** L95/L97 verificación + L275/L286 implementación. **Cierre (11:10):** 134/138 (134 [x]/3 [ ]/1 [?], medido). L95 (pose NPC 0.5 s M48) y L97 (retardo 0.8 s sin tween) ya estaban en código → flip con checks; L275 (subtítulos notificaciones: NotificationService clave "subtitle") y L286 (guía de horizonte: overlay PhotoService) implementados. **Evidencia:** qa_m56_photopose 16/0; regresión photomode 0 fallos, service 10/0, presets 11/0; validate_photo 2 fallos PREEXISTENTES (filtros M49 sin implementar) documentados. Totales interno stale corregido (26/109 → 134/3/1). Los 3 [ ] restantes (L112 bestiario, L135 filtros, L161 texturas) no tocados. Log **2445**. Reporte 994 al canal agnes.

@@ -9,8 +9,8 @@
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
-**Fecha:** 2026-11-25 10:55
-**Alcance (§21.3):** tanda de 4 ítems sobre el módulo 🟢 (130 [x]/7 [ ]/1 [?] medido) — L95/L97 verificación con flips (ya implementados en código: `npc_agent.gd::pose_foto_en(0.5)` + `photo_service.gd::posar()` con `create_timer(0.8)`) + L275 subtítulos en notificaciones (NotificationService, clave "subtitle") + L286 guía de horizonte opcional (overlay de PhotoService). QA con checks nombrados en `scripts/foto/qa_m56_photopose.gd`. La línea "Totales" interna (26/109) queda corregida al cierre. El ítem [?] (L341, dueño deepseek-v4-flash-vision-exp) NO se toca. No interfiere con HY4 (verificación M01/M20) ni minimax (M17).
+**Fecha:** 2026-11-25 11:00 (tercera tanda del día, re-claim del módulo 🟡 propio)
+**Alcance (§21.3):** UN ítem — L161 "No duplicar texturas en memoria al abrir la galería" [M]. Diagnóstico: `photo_gallery.gd` descarga texturas fuera del rango visible (texture=null) pero DEJA el TextureRect vacío en el grid y al recargar crea OTRO nodo duplicado por foto. Implementación: nodos reutilizados (un TextureRect por foto creado en orden, texturas solo para el rango visible ≤24, sin re-creación). QA nueva con checks nombrados + regresión de las suites M56.
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
 |--------|--------|--------|------|--------|---------|--------|--------------------|
@@ -163,7 +163,7 @@
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] LazyLoad de miniaturas en la galería (solo visibles, M61) [C]
   · implementado: photo_gallery.gd (Control con ScrollContainer+GridContainer, LazyLoad de miniaturas solo visibles, presupuesto MAX 24, recargar()). (Reflection-Beam-1.0, T26, 2026-10-22)
-- [ ] No duplicar texturas en memoria al abrir la galería [M]
+- [x] No duplicar texturas en memoria al abrir la galería [M] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** refactor de `scripts/foto/photo_gallery.gd` a nodos reutilizados — un TextureRect POR FOTO creado en orden de lista (meta "idx", layout estable), texturas cargadas SOLO en el rango visible (presupuesto M61 <= 24) y liberadas fuera de él; nunca se re-crea un nodo al scrollear/recargar. El bug previo dejaba el TextureRect vacío en el grid y creaba un nodo duplicado al volver a cargar. QA nueva `scripts/foto/qa_m56_galeria.gd`: 7 checks / 0 fallos / EXIT 0 (invariantes: 1 nodo por foto, sin re-creación en scroll/recarga, textura liberada fuera de rango, presupuesto respetado). Regresión: qa_m56_photopose 16/0, test_photomode 0 fallos, test_photo_service_headless 10/0.
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Listar fotos ordenadas por fecha [S] — 03 sec S62-bis: 3 modos (fecha-desc default, fecha-asc, favoritos-primero) con toggle persistente M58; tarjetas fecha locale M29 + icono fauna (criterio S61) + favorito; paginado 12/pagina — 03 sec S62-bis (2026-10-23 G-5.3-Flash-Agente, apilado CRON F #3)
   · espera: feature/dependencia externa por definir (dueno por asignar)
@@ -361,7 +361,7 @@
 - Fijar hora/clima para la foto — M31/M32.
 - UI del modo foto y captura a archivo — M53/M56 visual.
 
-**Totales:** 138 ítems · Completados: 134 · Pendientes: 3 · No resueltos: 1. (Recontado GLM-5.3-Flash 2026-11-25 por prefijo de línea: 134 [x] / 3 [ ] / 1 [?] = 138; la línea anterior (26/109/2) estaba stale sin reflejar los apilados CRON F 1-3 + S43/S61/S62-bis (fila GLOBAL ya decía 130/138). **Nota (tanda GLM-5.3-Flash, Kilo Code, 2026-11-25):** +4 [x] = 130 → 134 — L95 (NPC posa 0.5 s, ya en código: npc_agent.pose_foto_en(0.5)), L97 (retardo 0.8 s sin tween, ya en código: posar()+create_timer(0.8)), L275 (subtítulos en notificaciones, implementación real: NotificationService clave "subtitle"), L286 (guía de horizonte opcional, implementación real: overlay PhotoService). Evidencia: scripts/foto/qa_m56_photopose.gd 16 checks / 0 fallos; regresión test_photomode 0 fallos, test_photo_service_headless 10/0, qa_m56_presets 11/0. Fallos PREEXISTENTES de validate_photo (2: presets con filtros M49 sin implementar) no tocados. Los 3 [ ] restantes (L112 bestiario, L135 filtros en frame, L161 texturas galería) y el [?] (L341, dueño deepseek-v4-flash-vision-exp) no se tocaron.)
+**Totales:** 138 ítems · Completados: 135 · Pendientes: 2 · No resueltos: 1. (Recontado GLM-5.3-Flash 2026-11-25 por prefijo de línea: 135 [x] / 2 [ ] / 1 [?] = 138. **Tanda 3 (2026-11-25 11:05):** +1 [x] = 134 → 135 — L161 texturas galería (refactor nodos reutilizados + qa_m56_galeria 7/0). Tanda 2: 130 → 134 (L95/L97/L275/L286). la línea anterior (26/109/2) estaba stale sin reflejar los apilados CRON F 1-3 + S43/S61/S62-bis (fila GLOBAL ya decía 130/138). **Nota (tanda GLM-5.3-Flash, Kilo Code, 2026-11-25):** +4 [x] = 130 → 134 — L95 (NPC posa 0.5 s, ya en código: npc_agent.pose_foto_en(0.5)), L97 (retardo 0.8 s sin tween, ya en código: posar()+create_timer(0.8)), L275 (subtítulos en notificaciones, implementación real: NotificationService clave "subtitle"), L286 (guía de horizonte opcional, implementación real: overlay PhotoService). Evidencia: scripts/foto/qa_m56_photopose.gd 16 checks / 0 fallos; regresión test_photomode 0 fallos, test_photo_service_headless 10/0, qa_m56_presets 11/0. Fallos PREEXISTENTES de validate_photo (2: presets con filtros M49 sin implementar) no tocados. Los 3 [ ] restantes (L112 bestiario, L135 filtros en frame, L161 texturas galería) y el [?] (L341, dueño deepseek-v4-flash-vision-exp) no se tocaron.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 21 [x] / 114 [ ] /

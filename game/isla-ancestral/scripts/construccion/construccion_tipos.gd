@@ -108,6 +108,10 @@ enum Motivo {
 	BLOQUEA_SALIDA,
 	SIN_ESPACIO,
 	SIN_INVENTARIO,
+	# L102: el chunk de terreno de esa celda todavia no esta CARGADO. La pieza
+	# NO se coloca (la rejilla solo se calcula sobre terreno cargado). Es
+	# TEMPORAL: el chunk se carga solo y el reintento funciona igual.
+	TERRENO_NO_CARGADO,
 }
 
 ## ── Motivos TEMPORALES (edge case L de M17) ────────────────────────────────
@@ -122,6 +126,9 @@ const MOTIVOS_TEMPORALES: Array = [
 	# L132: sin espacio en el inventario (M14) se resuelve solo cuando el
 	# jugador libera un slot -> el rechazo es reintentable sin cambiar de celda.
 	Motivo.SIN_ESPACIO,
+	# L102: el chunk de terreno se carga solo (streaming de M08) -> el rechazo
+	# desaparece sin que el jugador cambie de celda ni de pieza.
+	Motivo.TERRENO_NO_CARGADO,
 ]
 
 ## true si el motivo puede desaparecer sin que el jugador cambie de celda.
@@ -150,6 +157,7 @@ const TEXTO: Dictionary = {
 	Motivo.BLOQUEA_SALIDA: "taparia la unica salida de la zona",
 	Motivo.SIN_ESPACIO: "no hay espacio en el inventario para guardar la pieza",
 	Motivo.SIN_INVENTARIO: "no hay inventario conectado (no se puede guardar)",
+	Motivo.TERRENO_NO_CARGADO: "el terreno de esa zona todavia no esta cargado",
 }
 
 ## Texto de un motivo. Tolerante a valores desconocidos.

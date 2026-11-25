@@ -427,6 +427,20 @@ func _ctx_piezas_en_zona(r: PlacementRule, celda: Vector3i) -> int:
 ## El cooldown va DESPUES de validar a proposito: si la celda ya no es valida
 ## (ocupada, sin soporte) el jugador debe ver ESE motivo, no el de cooldown.
 func confirmar_colocacion(celda: Vector3i) -> Dictionary:
+	# L102 (PRIMERO, antes de validar): si el chunk de terreno de la pieza
+	# todavia no esta CARGADO, el motivo correcto es "terreno no cargado"
+	# (TEMPORAL: se carga solo) y no "sin soporte" (permanente), que es lo que
+	# devolveria la validacion al leer "aire" en una celda sin chunk.
+	var r_pre: PlacementRule = _receta
+	if r_pre != null:
+		var celdas_pre: Array[Vector3i] = r_pre.celdas(celda, _rotacion)
+		var fuera_pre: Array = _mundo.celdas_sin_chunk(celdas_pre)
+		if not fuera_pre.is_empty():
+			zona_rechazada.emit(celda, "terreno no cargado")
+			return ConstruccionTipos.resultado_fallo(
+				[ConstruccionTipos.Motivo.TERRENO_NO_CARGADO],
+				["el terreno de %s todavia no esta cargado (%d celdas)" % [str(celda), fuera_pre.size()]],
+				celdas_pre)
 	var res: Dictionary = validar(celda)
 	if not bool(res.get("ok", false)):
 		zona_rechazada.emit(celda, String(res.get("texto", "invalido")))
@@ -526,6 +540,15 @@ func copiar_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 	if _ocupacion.has(ConstruccionTipos.clave(destino)):
 		return ConstruccionTipos.resultado_fallo(
 			[ConstruccionTipos.Motivo.CELDA_OCUPADA], ["la celda destino ya esta ocupada"], [])
+	# L102 (antes de validar): el motivo correcto es "terreno no cargado"
+	# (temporal), no "sin soporte" (permanente).
+	var celdas_destino: Array[Vector3i] = r.celdas(destino, paso)
+	var fuera_copia: Array = _mundo.celdas_sin_chunk(celdas_destino)
+	if not fuera_copia.is_empty():
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.TERRENO_NO_CARGADO],
+			["el terreno de %s todavia no esta cargado (%d celdas)" % [str(destino), fuera_copia.size()]],
+			celdas_destino)
 	var res: Dictionary = validar_receta(r, destino, paso)
 	if not bool(res.get("ok", false)):
 		zona_rechazada.emit(destino, String(res.get("texto", "invalido")))
@@ -761,14 +784,24 @@ func mover_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 	# Item 111: validar el destino PRIMERO (sin desocupar el origen).
 	# Solo si la validacion pasa, se desocupan las celdas originales y se
 	# reubica la pieza. Asi el origen permanece ocupado hasta la confirmacion.
+	#
+	# L102 (antes de validar): el motivo correcto es "terreno no cargado"
+	# (TEMPORAL, el chunk se carga solo) y no "sin soporte" (permanente).
+	var celdas_mover: Array[Vector3i] = r.celdas(destino, paso)
+	var fuera_mover: Array = _mundo.celdas_sin_chunk(celdas_mover)
+	if not fuera_mover.is_empty():
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.TERRENO_NO_CARGADO],
+			["el terreno de %s todavia no esta cargado (%d celdas)" % [str(destino), fuera_mover.size()]],
+			celdas_mover)
 	var res: Dictionary = validar_receta(r, destino, paso)
 	if not bool(res.get("ok", false)):
 		zona_rechazada.emit(destino, String(res.get("texto", "invalido")))
 		return res
 	# Destino valido: ahora si desocupar origen y reubicar.
 	var celdas_viejas: Array = _celdas_de_estructura(e, r)
-	_baja_estructura(ancla)
 	var celdas_nuevas: Array[Vector3i] = r.celdas(destino, paso)
+	_baja_estructura(ancla)
 	_mundo.borrar_voxel(celdas_viejas)
 	_mundo.escribir_voxel(celdas_nuevas, r.bloque)
 	_alta_estructura(destino, r, paso, e, "", true)

@@ -19,3 +19,5 @@
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+> **Nota de numeración (GLM-5.3-Flash, 2026-11-25 ~11:05, directiva del fundador):** este mensaje fue escrito en la carpeta ajena indicada y re-ubicado en MI carpeta con renumeración al hilo propio (regla: cada agente escribe en su carpeta; la directora lee todas). Número original: 002 (pool canal GPT-6-Luna).

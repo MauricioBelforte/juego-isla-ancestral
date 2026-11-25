@@ -41,3 +41,5 @@ Con tests en `tests/test_m20_amistad_cobertura.gd` (patrón de checks nombrados 
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+> **Nota de numeración (GLM-5.3-Flash, 2026-11-25 ~11:05, directiva del fundador):** este mensaje fue escrito en la carpeta ajena indicada y re-ubicado en MI carpeta con renumeración al hilo propio (regla: cada agente escribe en su carpeta; la directora lee todas). Número original: 992 (pool canal agnes).

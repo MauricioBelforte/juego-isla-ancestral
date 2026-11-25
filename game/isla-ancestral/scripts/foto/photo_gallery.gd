@@ -16,7 +16,8 @@ const MAX_MINIATURAS_CARGADAS := 24  # presupuesto M61: no cargar todas en memor
 
 var _scroll: ScrollContainer = null
 var _grid: GridContainer = null
-var _miniaturas_cargadas: Dictionary = {}  # ruta -> TextureRect
+var _miniaturas_cargadas: Dictionary = {}  # ruta -> TextureRect (texture != null)
+var _nodos_fotos: Dictionary = {}  # ruta -> TextureRect (nodo reutilizado, texture puede ser null)
 var _lista_fotos: Array[String] = []
 var _indice_visible_inicio: int = 0
 var _indice_visible_fin: int = 0
@@ -25,6 +26,7 @@ var _indice_visible_fin: int = 0
 func _ready() -> void:
 	_crear_ui()
 	_cargar_lista_fotos()
+	_crear_nodos_fotos()
 	_actualizar_visibles()
 
 
@@ -56,6 +58,25 @@ func _cargar_lista_fotos() -> void:
 	# Ordenar por nombre (timestamp en el nombre).
 	_lista_fotos.sort()
 
+## M56 L161: un TextureRect POR FOTO, creado una sola vez en orden de lista
+## (el layout del GridContainer queda estable). Sin textura al crear: las
+## texturas se cargan SOLO para el rango visible (presupuesto M61 <= 24) y se
+## descargan fuera de él — nunca se re-crea un nodo al volver a una foto.
+func _crear_nodos_fotos() -> void:
+	for i in range(_lista_fotos.size()):
+		var ruta: String = _lista_fotos[i]
+		if _nodos_fotos.has(ruta):
+			continue
+		var tr := TextureRect.new()
+		tr.custom_minimum_size = TAMANO_MINIATURA
+		tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
+		tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
+		tr.set_meta("ruta", ruta)
+		tr.set_meta("idx", i)
+		tr.gui_input.connect(_on_miniatura_input.bind(ruta))
+		_grid.add_child(tr)
+		_nodos_fotos[ruta] = tr
+
 
 func _actualizar_visibles() -> void:
 	# Determinar qué miniaturas deberían estar visibles según el scroll.
@@ -67,30 +88,35 @@ func _actualizar_visibles() -> void:
 	var cols := _grid.columns
 	var idx_inicio := fila_inicio * cols
 	var idx_fin := mini(idx_inicio + (fila_fin - fila_inicio + 1) * cols, _lista_fotos.size())
-	# Descargar miniaturas fuera del rango visible (LazyLoad).
-	var a_descargar := []
-	for ruta in _miniaturas_cargadas.keys():
-		var idx := _lista_fotos.find(ruta)
-		if idx < idx_inicio or idx >= idx_fin:
-			a_descargar.append(ruta)
-	for ruta in a_descargar:
-		var tr: TextureRect = _miniaturas_cargadas[ruta]
-		if tr != null and is_instance_valid(tr):
-			tr.texture = null
-		_miniaturas_cargadas.erase(ruta)
-	# Cargar miniaturas visibles que no estén cargadas.
+	# Descargar texturas fuera del rango visible (LazyLoad): el nodo queda
+	# (para el layout) pero su textura se libera (L161: sin duplicar texturas).
+	_miniaturas_cargadas.clear()
+	for ruta in _nodos_fotos:
+		var tr_f: TextureRect = _nodos_fotos[ruta]
+		if not is_instance_valid(tr_f):
+			continue
+		var idx_f: int = int(tr_f.get_meta("idx"))
+		if idx_f < idx_inicio or idx_f >= idx_fin:
+			tr_f.texture = null
+	# Cargar texturas SOLO para las fotos visibles sin textura.
+	var cargadas: int = 0
 	for i in range(idx_inicio, idx_fin):
 		if i < 0 or i >= _lista_fotos.size():
 			continue
 		var ruta := _lista_fotos[i]
-		if _miniaturas_cargadas.has(ruta):
+		var tr: TextureRect = _nodos_fotos.get(ruta, null)
+		if tr == null or not is_instance_valid(tr):
 			continue
-		if _miniaturas_cargadas.size() >= MAX_MINIATURAS_CARGADAS:
-			break
-		_cargar_miniatura(ruta, i)
+		if tr.texture != null:
+			_miniaturas_cargadas[ruta] = tr
+			continue
+		if cargadas >= MAX_MINIATURAS_CARGADAS:
+			continue
+		_cargar_miniatura(ruta, tr)
+		cargadas += 1
 
 
-func _cargar_miniatura(ruta: String, idx: int) -> void:
+func _cargar_miniatura(ruta: String, tr: TextureRect) -> void:
 	# Cargar la miniatura en background (no bloquear el hilo principal).
 	# En Godot 4, Image.load_from_file es síncrono pero rápido para thumbnails.
 	var img := Image.new()
@@ -98,17 +124,7 @@ func _cargar_miniatura(ruta: String, idx: int) -> void:
 	if err != OK:
 		return
 	img.resize(TAMANO_MINIATURA.x, TAMANO_MINIATURA.y, Image.INTERPOLATE_BILINEAR)
-	var tex := ImageTexture.create_from_image(img)
-	var tr := TextureRect.new()
-	tr.texture = tex
-	tr.custom_minimum_size = TAMANO_MINIATURA
-	tr.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-	tr.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
-	# Guardar la ruta para referencia.
-	tr.set_meta("ruta", ruta)
-	tr.gui_input.connect(_on_miniatura_input.bind(ruta))
-	_grid.add_child(tr)
-	_miniaturas_cargadas[ruta] = tr
+	tr.texture = ImageTexture.create_from_image(img)
 
 
 func _on_miniatura_input(event: InputEvent, ruta: String) -> void:
@@ -126,11 +142,13 @@ func _on_scroll_changed(_value: float) -> void:
 
 
 func recargar() -> void:
-	# Limpiar miniaturas cargadas y recargar la lista.
-	for ruta in _miniaturas_cargadas.keys():
-		var tr: TextureRect = _miniaturas_cargadas[ruta]
+	# Limpiar texturas y nodos, recargar la lista y recrear los nodos en orden.
+	for ruta in _nodos_fotos.keys():
+		var tr: TextureRect = _nodos_fotos[ruta]
 		if tr != null and is_instance_valid(tr):
 			tr.queue_free()
+	_nodos_fotos.clear()
 	_miniaturas_cargadas.clear()
 	_cargar_lista_fotos()
+	_crear_nodos_fotos()
 	_actualizar_visibles()
