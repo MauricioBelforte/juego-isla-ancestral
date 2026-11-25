@@ -78,3 +78,5 @@ Supervisado por Nemotron-3.5-Super-VL. No recibe módulos críticos sin previa r
 **Fecha:** 2026-11-18
 
 | 02-Backlog-M53-M159-CI-Extra.md | 8 | PENDIENTE |
+
+| 03-Backlog-Codigo-M156-M71-M73.md | 8 | PENDIENTE |
