@@ -567,6 +567,12 @@ jobs:
           # poder fallar el build (familia trampa 75: el verde lo producia la
           # tuberia, no el programa).
           godot --headless --script scripts/build/test_instalador_m116.gd 2>&1
+          # M82 Clasificacion por Edades (gate L92, GLM-5.3-Flash 2026-11-25):
+          # el build FALLA si el rating declarado es inconsistente con el
+          # contenido (rating_validator + test 9/0 determinista y verde medido
+          # en headless antes de cablear). CIERRA el hueco del revert BUG-070
+          # lote 6: ningún workflow cableaba el validador.
+          suite --script scripts/legal/test_rating_m82.gd
           # M83 Licencias (Log 974 agnes-3): test del validador de catálogo + del
           # nuevo scanner (classificar/detectar/scan_addons). Gate duro: ambos
           # deterministas y verdes (boot-time UI errors preexistentes no afectan

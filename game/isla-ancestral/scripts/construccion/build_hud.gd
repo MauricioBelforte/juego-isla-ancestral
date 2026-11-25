@@ -175,8 +175,17 @@ static func linea_estado(res: Dictionary, receta: PlacementRule) -> String:
 	return "RECHAZADO — %s%s" % [m, extra]
 
 ## true si el resultado viene marcado como rechazo temporal (edge case L).
+## Robusto (2026-11-25): si el resultado NO trae la clave "temporal" (p. ej.
+## alguien armo el dict a mano), se consulta el motivo: un temporal sigue
+## siendo temporal. Sin esto, el HUD decia "RECHAZADO" sin el "proba de nuevo"
+## y el jugador pensaba que no podia reintentar.
 static func es_temporal(res: Dictionary) -> bool:
-	return bool(res.get("temporal", false))
+	if bool(res.get("temporal", false)):
+		return true
+	for m in (res.get("motivos", []) as Array):
+		if ConstruccionTipos.es_temporal(int(m)):
+			return true
+	return false
 
 ## Resumen completo listo para pintar (una sola llamada desde la UI).
 ## { ok, nombre, costo[], costo_texto, costo_total, motivos[], motivos_texto,

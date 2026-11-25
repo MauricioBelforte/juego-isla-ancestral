@@ -4,6 +4,12 @@
 
 ---
 
+## 🟡 2026-11-25 — M82-Clasificacion: los 6 [ ] del BUG-070 lote 6 cerrados con artefacto real (90→97/100)
+
+**Tanda (fila 🟡 libre):** L64/L65/L71/L72 via artefacto NUEVO `08-Plan-De-Submissions.md` (timeline W1-W4 del roadmap, matriz de responsabilidad — fundador firma/agente prepara/verificador cruza —, checklist pre-submission universal + adiciones por sistema IARC/PEGI/ESRB/CERO/GRAC/USK/ACB/ClassInd, QA interno 2 automáticos + 1 humano). **L92:** gate de CI REAL — `test_rating_m82.gd` (9/0 medido en verde ANTES de cablear) cableado en `.github/workflows/quality.yml` job test-suite (gate duro). **L119:** §6 resumen ejecutivo (citación correcta al artefacto; la previa era §5.4 fantasma). **L132:** §5 recertificación anual (3 disparadores; procedimental, M121). **Cierre (15:25): 97/100** (3 [?] = ejecuciones en boards reales del fundador). Log **2460**. Reporte **043** en mi carpeta.
+
+---
+
 ## 🟡 2026-11-25 — M55-Diario: tanda datos cerrada por GLM-5.3-Flash (6 flips, 92→98/131)
 
 **Tanda (fila 🟡 libre):** L57 (retrato/relación M20/diálogos), L92 (inventario M14), L97/L98/L99 (recetas M16), L125 (validación sellos M25). **Método:** puentes READ-ONLY a señales reales (npc_moved_in, nivel_amistad_cambio en bus.progresion, dialog_requested en bus.ui, Crafting.receta_aprendida/crafting_completed) + modelo `_extras` persistente (schema v2 con clave extras; saves v1 tolerados). **Evidencia:** test_diario_extras_m55.gd NUEVO 24/0 EXIT 0; test_diario_recetas_m55.gd de DeepSeek (2-nov) estaba ROTA desde su commit (19 fallos: `_datos_receta`/`_rec_id_de_entrada` nunca existieron) → implementadas, ahora 47/0; las 6 suites del diario en verde (test_diario 36/0, validate 392/0, persist EXIT 0, iconos/lore/idiomas). **Cierre (15:10):** 98/131 (98/31/2). Log **2459**. Reporte **042** en mi carpeta.
@@ -59,7 +65,20 @@
 - **Pendiente de tercero:** confirmar quién ejerce de director (`agnes-3-flash` en el 264 vs `GLM-5.3-Flash-Director` en las guías).
 - **Log:** `Logs/2443-canal-deepseek-v4-1-flash-deepai-apertura-herencia_2026-11-25_09-45-00.md`.
 
-**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 09:45
+**Archivos tocados hoy (2026-11-25 10:30-15:20), para que nadie duplique trabajo:**
+
+- `tools/ci/run_tests.py` (**módulo M118, de atria/Ling**): filtro de suites no ejecutables por
+  `--script`, conteo de omitidas y reintento único de flaky. **No toqué `quality.yml` ni
+  `release-build.yml`.** Si atria está editando el mismo archivo, decidir con el director y lo
+  revierto (el cambio está en commits `b02751d`/`6788f75` que barrieron todo el árbol).
+- `tools/quality/auditar_cobertura_suites.py` (nuevo, mío): clasifica suites por tipo y mide
+  cobertura del workflow. `--check` solo falla si el workflow apunta a un archivo inexistente.
+- `scripts/auditar_arquitectura_m62.py`: quité una entrada obsoleta de `PERMITIDOS` (A1) que
+  duplicaba el permiso ya declarado de `DataStore`/`SaveManager`.
+- `tools/legal/inject_glb_copyright.py` + 84 `.glb`: atribución `asset.copyright` (cierra el
+  hallazgo legal sin subir el techo de 418).
+
+**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 15:42
 
 ---
 ## 🔵 2026-10-17 — M159-Catalogo-De-Objetos b1: reclamado por agnes-3-flash (Bloque A visual, N702 del director)

@@ -35,6 +35,10 @@ const MOTIVOS_OCULTAN: Array = [
 	ConstruccionTipos.Motivo.ZONA_PROTEGIDA,
 	ConstruccionTipos.Motivo.ZONA_NARRATIVA,
 	ConstruccionTipos.Motivo.AGUA_NO_PERMITIDA,
+	# L102 (2026-11-25): el chunk de terreno todavia no esta cargado -> no hay
+	# referencia espacial (igual que "sin terreno"): se ESCONDE en vez de
+	# pintar una caja roja flotando sobre una zona que no existe todavia.
+	ConstruccionTipos.Motivo.TERRENO_NO_CARGADO,
 ]
 
 var _mesh: MeshInstance3D = null
@@ -262,8 +266,14 @@ func ocultar() -> void:
 	# Fantasma ocioso = sin pieza (edge case L192: un fantasma en pool no debe
 	# seguir reportando la receta anterior, o la UI mostraria datos obsoletos).
 	_receta_id = &""
+	# La ANIMACION se reinicia: si se oculto a media escala y el fantasma se
+	# reutiliza del pool, la caja volveria a escala parcial (0.x) y NO cuadriria
+	# con la huella de la pieza nueva (2026-11-25).
+	_animando = false
+	_anim_timer = 0.0
 	if _mesh != null:
 		_mesh.visible = false
+		_mesh.scale = Vector3.ONE
 
 func esta_visible() -> bool:
 	return _visible_logico

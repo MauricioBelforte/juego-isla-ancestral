@@ -23,24 +23,27 @@ flota acaba de escribir son las que el gate no mira.
 
 ## 2. Bloque listo para pegar
 
+No hace falta un step nuevo ni un runner nuevo: `quality.yml` ya define, dentro de su step de
+suites, la función de shell `suite()` (línea ~195) que corre `godot --headless "$@"`, cuenta la
+suite, emite `::error::FALLO <script>` si falla y marca `FAIL=1`. El working dir del step es
+`game/isla-ancestral`, y las rutas van **sin** `res://` (como `suite --script scripts/saving/
+validate_save.gd`). Registrar = pegar 8 líneas más en ese mismo step:
+
 ```yaml
-      # Suites SceneTree que ningun otro job ejecuta (2026-11-25, Log 2456/2460).
-      # Todas verdes al registrarse; si alguna se pone roja, es senal real.
-      - name: Run M17 suites (fuera de CI hasta hoy)
-        run: |
-          set -e
-          for s in \
-            res://tests/test_m17_almacenamiento.gd \
-            res://tests/test_m17_atomicidad_escritura.gd \
-            res://tests/test_m17_cache_preview.gd \
-            res://tests/test_m17_contenido_piezas.gd \
-            res://tests/test_m17_hud_categorias.gd \
-            res://tests/test_m17_materiales_compartidos.gd \
-            res://tests/test_m17_terreno_cargado.gd \
-            res://tests/test_m20_amistad_cobertura.gd ; do
-            python tools/ci/suite.py --script "$s"
-          done
+          # Suites SceneTree que ningun otro job ejecuta (2026-11-25, Log 2456/2460).
+          # Todas verdes al registrarse; si alguna se pone roja, es senal real.
+          suite --script tests/test_m17_almacenamiento.gd
+          suite --script tests/test_m17_atomicidad_escritura.gd
+          suite --script tests/test_m17_cache_preview.gd
+          suite --script tests/test_m17_contenido_piezas.gd
+          suite --script tests/test_m17_hud_categorias.gd
+          suite --script tests/test_m17_materiales_compartidos.gd
+          suite --script tests/test_m17_terreno_cargado.gd
+          suite --script tests/test_m20_amistad_cobertura.gd
 ```
+
+**Ojo con el costo:** cada `suite` corre en el mismo job, así que 8 suites nuevas suman ~1-2 min.
+Las 19 de `tests/unit/**` suman 204 s medidos: si se agregan las 27, el job crece ~5 min.
 
 Para las 19 de `tests/unit/**` conviene un lazo que excluya las 4 GdUnit4 (por cabecera), o
 listarlas: son las que el runner `run_tests.py --module tests/unit` ya corre en 204 s.

@@ -1047,3 +1047,44 @@ la escritura no atomica: **el sistema mostraba un estado que ya no era verdad**.
   reutiliza el resultado viejo). Restaurada → 17/0.
 - **Regresión: 16 suites en verde** (M17 ×15 + M59), incluidas `test_construccion_iter2.gd` (99/0) e
   `iter3.gd` (138/0), que dependen de la semántica de `recalculos()` (intacta).
+
+## 18. Tanda P9d (2026-11-25 14:4x) — FANTASMA y HUD: ultimo tranche del barrido
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 18.1 Tres defectos (todos de la familia "el sistema muestra un estado que no es verdad")
+
+| # | Dónde | Qué pasaba |
+|---|---|---|
+| 1 | `BuildGhost.MOTIVOS_OCULTAN` | no incluía el motivo nuevo **`TERRENO_NO_CARGADO`** (L102): el fantasma pintaba una **caja roja flotando** sobre una zona cuyo chunk de terreno todavía no está cargado (no hay referencia espacial: es el mismo caso que "sin terreno", que sí lo oculta). |
+| 2 | `BuildGhost.ocultar()` | **no reiniciaba la animación**: si el fantasma se ocultaba a media escala (0 < e < 1) y se reutilizaba del pool, la caja reaparecía a **escala parcial** y ya **no cuadraba con la huella** de la pieza nueva (el jugador veía una caja más pequeña que el sitio donde iba). |
+| 3 | `BuildHudModel.es_temporal(res)` | leía solo la clave `"temporal"` del resultado. Un resultado **armado a mano** (sin esa clave) hacía que el HUD mostrara "RECHAZADO" **sin** el "proba de nuevo", aunque el motivo fuera temporal → el jugador|no reintentaba. |
+
+### 18.2 Corrección
+
+- `MOTIVOS_OCULTAN` += `TERRENO_NO_CARGADO` (integra L102 con la capa visual).
+- `ocultar()` reinicia la animación: `_animando = false`, `_anim_timer = 0` y `_mesh.scale = Vector3.ONE`
+  (el fantasma reutilizado del pool vuelve a cuadrar con la huella).
+- `es_temporal(res)`: si el resultado no trae la clave, **consulta los motivos** con
+  `ConstruccionTipos.es_temporal(motivo)`. Un temporal sigue siendo temporal.
+
+### 18.3 Verificación
+
+- Suite NUEVA `res://tests/test_m17_fantasma_estado.gd` → **24 checks, 0 fallos, EXIT 0**.
+  Checks: "A1: debe_ocultarse = true con TERRENO_NO_CARGADO (no hay referencia espacial)" · "A2: con el
+  terreno sin cargar el fantasma queda OCULTO" · "C1: al ocultar, la escala VUELVE a 1 (no queda a
+  medias)" · "C2: el fantasma REUTILIZADO del pool aparece a escala 1 (cuadra con la huella)" ·
+  "D1/D2: tras ocultar no queda receta ni celdas reportadas (L192)" · "E3: aplicar un resultado NO
+  crea nodos nuevos (pooling)" · "F2: la linea del HUD pide reintentar en un rechazo temporal" ·
+  "F3: un resultado sin la clave 'temporal' tambien se detecta como temporal (por el motivo)" ·
+  "F5: la linea de un rechazo permanente NO pide reintentar".
+- **ROJO-VERDE:** revirtiendo los 3 cambios → **4 fallos / EXIT 1**. Restaurados → 24/0.
+- **Regresión: 17 suites en verde** (M17 ×16 + M59), incluidas `iter2` (99/0), `iter3` (138/0) e
+  **`iter4` (45/0)** —后者 es la que prueba la línea de estado temporal del HUD.
+
+### 18.4 Cierre del barrido
+
+Con esta tanda queda **auditado con el criterio "el sistema muestra/reporta un estado que ya no es
+verdad"** todo el núcleo de M17: `build_manager.gd`, `construccion_mundo.gd`, `construccion_tipos.gd`,
+`build_preview.gd`, `build_ghost.gd` y `build_hud.gd`, más el historial (`build_history.gd`).

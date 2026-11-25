@@ -1,0 +1,152 @@
+{
+  "task_id": "S2-11",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "date": "2026-11-25",
+  "scope": "Mapa documental read-only del flujo de posicionamiento sobre el terreno de M167 (Isla Raíz), cruzando AGENTS.md, la guía temática Godot y plan-actual. Incluye comprobación estática de código fuente para distinguir drift histórico de estado visible en disco; no cambia código ni documentación canónica y no ejecuta Godot.",
+  "selected_flow": "Resolver altura y colocar el jugador/NPC/objeto en el terreno de la Isla Raíz usando TerrainLocator y el generador real del mundo.",
+  "sources": {
+    "project_rules": {
+      "path": "AGENTS.md",
+      "sha256": "840b7bd82ad00ae160b6fd7858ae1e5bd1eff92d0664955188dd7312601137aa",
+      "citations": [
+        {"lines": "1324-1342", "topic": "M167/M168, isla 5120², P-39; nota de migración en curso con referencias a coordenadas antiguas"},
+        {"lines": "1343-1346", "topic": "Regla normativa vigente: TerrainLocator, generador del mundo, no IslandGenerator clonado"}
+      ]
+    },
+    "thematic_guide": {
+      "path": "DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md",
+      "sha256": "de345163a6a74134788b17eec0b5b3b7e7ba2741860063cc40a1abc933e0a9b1",
+      "citations": [
+        {"lines": "148-158", "topic": "NPC: TerrainLocator.posicionar_sobre_terreno"},
+        {"lines": "162-175", "topic": "Anti-caída/spawn: ejemplo genérico basado en gen.get_height + 1.5"},
+        {"lines": "179-204", "topic": "Isla Raíz 5120², TerrainLocator obligatorio y anti-ejemplo de IslandGenerator propio"}
+      ]
+    },
+    "plan_analysis": {
+      "path": "DOCUMENTACION/167-Isla-Raiz/plan-actual/02-Analisis.md",
+      "sha256": "6c4edd649775cc419b680a8e5ca19d1eb1c902864d7a77844ea4902058c908e6",
+      "citations": [
+        {"lines": "25-29", "topic": "Describe el snap del NPC como propio IslandGenerator y condiciona el radio"}
+      ]
+    },
+    "plan_design": {
+      "path": "DOCUMENTACION/167-Isla-Raiz/plan-actual/03-Diseno.md",
+      "sha256": "12893e71b6cfd1bb97a26a382f92e43961e420cc897c7139b4e99c30787d8160",
+      "citations": [
+        {"lines": "48-62", "topic": "Ejemplo directo de terrain.generator/get_height; regla de generador real y radio coincidente"},
+        {"lines": "99-108", "topic": "Registra reintentos vía TerrainLocator cuando no hay terreno disponible"}
+      ]
+    },
+    "plan_code": {
+      "path": "DOCUMENTACION/167-Isla-Raiz/plan-actual/04-Codigo.md",
+      "sha256": "7691582c3b2377f2e206e6fec6614e6c7558ad2bf29b50cb845cd2fcd5cd8223",
+      "citations": [
+        {"lines": "52-67", "topic": "Ejemplos históricos que crean generador propio y leen directamente get_height"},
+        {"lines": "87-100", "topic": "Actualización posterior: TerrainLocator declarado único punto de verdad; no crear generador clonado"},
+        {"lines": "154-175", "topic": "P-39: migración corregida y cerrada, fallbacks de centro antiguo retirados; evidencia histórica de runtime/headless"}
+      ]
+    },
+    "plan_checklist": {
+      "path": "DOCUMENTACION/167-Isla-Raiz/plan-actual/05-Checklist.md",
+      "sha256": "60aebf57098f8898569c7092eb7649ce50d1f0bedd6de540c6f9713cb424631c",
+      "citations": [
+        {"lines": "63-70", "topic": "Ítems documentales de posicionamiento con get_height y el modelo previo del NPC"},
+        {"lines": "135-145", "topic": "Mantenimiento y uso del generador real/TerrainLocator marcado [x]"},
+        {"lines": "214-239", "topic": "Cierre P-39; describe fallbacks y el cierre de migración"}
+      ]
+    },
+    "terrain_locator_code": {
+      "path": "game/isla-ancestral/scripts/core/terrain_locator.gd",
+      "sha256": "fef1f29493eb8d94816cd48144953a1fdef21850513c3a308e8a120c228cbfa4",
+      "citations": [
+        {"lines": "43-60", "topic": "get_height consulta terrain.generator; sentinel -1 si no está disponible; posicionar_sobre_terreno coloca a h+1 y devuelve false si falta terreno"}
+      ]
+    },
+    "villager_code": {
+      "path": "game/isla-ancestral/scripts/npc/villager.gd",
+      "sha256": "5eec98f53388180ab49bbbeb9ca386924960695901eddf06ae75ca39e93fcdd1",
+      "citations": [
+        {"lines": "151-160", "topic": "_snap_to_ground consulta TerrainLocator; no construye IslandGenerator propio"}
+      ]
+    },
+    "main_island_code": {
+      "path": "game/isla-ancestral/scripts/main_island.gd",
+      "sha256": "eaa2157d57c573285a4f3d24f812a03fcf0f8c6d3020ec82b2bafc8a22501a99",
+      "citations": [
+        {"lines": "187-191", "topic": "Spawn inicial deriva de MundoRaiz.SPAWN_JUGADOR"},
+        {"lines": "211-218", "topic": "Océano centrado a través de MundoRaiz"},
+        {"lines": "249-254", "topic": "Disco de arena centrado a través de MundoRaiz"},
+        {"lines": "290-315", "topic": "Ajuste de spawn consulta TerrainLocator y usa el punto único de verdad MundoRaiz"}
+      ]
+    },
+    "world_constants": {
+      "path": "game/isla-ancestral/scripts/world/mundo_raiz.gd",
+      "sha256": "1dc6ab939add96ec835000523a80fcadc59e2aca68bf47e8d06498248427b437",
+      "citations": [
+        {"lines": "14-22", "topic": "CENTRO=(2560,2560), RADIO_ISLA y RADIO_ORILLA actuales"}
+      ]
+    }
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "classification": "drift documental temporal; no contradicción del código actual observada",
+      "claim_a": {
+        "source": "AGENTS.md:1341-1342",
+        "text": "Declara que la migración M167 sigue en curso y que main_island.gd L184/L205 todavía usan el centro antiguo (256,...)."
+      },
+      "claim_b": {
+        "sources": ["DOCUMENTACION/167-Isla-Raiz/plan-actual/04-Codigo.md:154-175", "DOCUMENTACION/167-Isla-Raiz/plan-actual/05-Checklist.md:214-239"],
+        "text": "P-39 se registra cerrado; los fallbacks de centro antiguo se retiraron y se describen los cambios posteriores."
+      },
+      "disk_crosscheck": "main_island.gd contiene SPAWN_JUGADOR en el spawn, MundoRaiz.centro_vec3 para océano/disco y TerrainLocator para obtener altura. Las constantes actuales de MundoRaiz indican CENTRO=(2560,2560).",
+      "assessment": "La cláusula de AGENTS sobre la migración y sus referencias de línea están stale respecto del propio bloque P-39 y de la documentación de cierre. El mismo bloque contiene la regla vigente de TerrainLocator, que sí concuerda con plan posterior y código inspeccionado. No corregí AGENTS.md."
+    },
+    {
+      "id": "F2",
+      "classification": "contradicción interna del plan actual por contenido histórico no claramente rotulado",
+      "claim_a": {
+        "sources": ["DOCUMENTACION/167-Isla-Raiz/plan-actual/02-Analisis.md:25-29", "DOCUMENTACION/167-Isla-Raiz/plan-actual/03-Diseno.md:48-62", "DOCUMENTACION/167-Isla-Raiz/plan-actual/04-Codigo.md:52-67"],
+        "text": "Se describen como método robusto el acceso directo a get_height y/o un snap del NPC que crea su propio IslandGenerator y debe igualar el radio."
+      },
+      "claim_b": {
+        "sources": ["DOCUMENTACION/167-Isla-Raiz/plan-actual/04-Codigo.md:87-100", "DOCUMENTACION/167-Isla-Raiz/plan-actual/05-Checklist.md:144", "AGENTS.md:1343-1345"],
+        "text": "Una actualización posterior declara TerrainLocator como punto único de verdad, registra que los objetos lo usan y prohíbe crear generadores propios con radio hardcodeado."
+      },
+      "disk_crosscheck": "terrain_locator.gd obtiene la altura del generador real de VoxelTerrain; villager.gd consulta TerrainLocator y no crea IslandGenerator. main_island.gd también usa el locator para el ajuste del spawn.",
+      "assessment": "Los fragmentos antiguos parecen describir una etapa previa y están parcialmente contextualizados por secciones posteriores, pero no están marcados de forma uniforme como obsoletos. Un lector puede confundirlos con el patrón actual. La fuente actual visible en disco favorece TerrainLocator; esto es inspección estática, no ejecución runtime."
+    },
+    {
+      "id": "F3",
+      "classification": "ambigüedad entre receta genérica y regla específica posterior",
+      "claim_a": {
+        "source": "DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md:168-175",
+        "text": "El ejemplo anti-caída calcula spawn con una variable gen no definida en el fragmento y aplica get_height + 1.5."
+      },
+      "claim_b": {
+        "sources": ["DOCUMENTACION/GUIA-GODOT/08-terreno-voxel.md:181-201", "AGENTS.md:1343-1345"],
+        "text": "La sección Isla Raíz y las reglas del proyecto exigen TerrainLocator; la guía también indica no crear un IslandGenerator propio."
+      },
+      "disk_crosscheck": "El ajuste de jugador en main_island.gd consulta TerrainLocator, obtiene coordenadas de MundoRaiz y establece la altura con su propio offset de spawn; no replica el fragmento gen/+1.5.",
+      "assessment": "No es necesariamente una contradicción universal porque la primera receta es genérica y no define el origen de gen. Sí es una ambigüedad de precedencia para Isla Raíz: aplicar el ejemplo literal entraría en tensión con la receta específica y normativa posterior. El offset del jugador no debe compararse directamente con el h+1 genérico de objetos sin considerar el tipo de nodo."
+    }
+  ],
+  "conclusion": {
+    "current_static_pattern": "Para Isla Raíz, la regla coherente entre instrucción vigente, guía específica y código inspeccionado es consultar TerrainLocator, que lee el generador real del VoxelTerrain; MundoRaiz proporciona las coordenadas/constantes del layout.",
+    "confirmed_runtime": false,
+    "module_or_guide_modified": false,
+    "checklist_or_global_modified": false,
+    "recommended_followup_for_director": [
+      "Considerar corregir o fechar explícitamente AGENTS.md:1341-1342, cuyo mensaje de migración en curso contradice la nota P-39 cerrada y el estado actual inspeccionado.",
+      "Si se autoriza una limpieza documental futura de M167, marcar los ejemplos directos de generador/IslandGenerator de 02/03/04 como históricos o sustituirlos por la receta TerrainLocator, preservando el historial de decisiones.",
+      "Aclarar en la guía 08 que la receta de spawn con gen es genérica/legacy y que para Isla Raíz prevalece TerrainLocator y la configuración específica del módulo."
+    ]
+  },
+  "limitations": [
+    "El análisis es documental y una inspección estática puntual de archivos y líneas citados; no se ejecutó Godot ni se verificó el comportamiento runtime.",
+    "No se atribuye causa, autor ni fecha de edición al drift en AGENTS.md.",
+    "Los ejemplos de las primeras secciones de plan-actual pueden ser históricos; el hallazgo es que el estado histórico no queda señalado consistentemente en su contexto.",
+    "No se altera el estado QA de M167, no se modifican sus marcas y no se certifica funcionalidad adicional."
+  ]
+}
