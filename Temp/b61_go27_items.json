@@ -1,0 +1,191 @@
+[
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 62,
+  "text": "- [?] Reportar JSON malformado con archivo, linea y columna [S] (limite: Godot JSON.parse_string no expone posicion; DialogGraphValidator.validar_texto/archivo reporta error de JSON invalido sin linea/columna) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L62 reportar JSON malformado) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): spec en 03-Diseno no es implementacion: `DialogGraphValidator` reporta JSON invalido SIN linea/columna (el propio parentesis del item lo admite)"
+ },
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 63,
+  "text": "- [?] Detectar IDs duplicados dentro de un grafo [S] (no aplicable: DialogueGraph.load_from_json usa Dictionary, colapsa duplicados; no detectable post-carga) | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L63 detectar IDs duplicados) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): \"no aplicable\" no es un item hecho: `load_from_json` usa Dictionary y colapsa duplicados, la deteccion no existe ni puede existir post-carga"
+ },
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 75,
+  "text": "- [?] Recarga en caliente del grafo en el editor (tool) sin reiniciar el juego [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): 0 archivos con `@tool` en `scripts/dialogos/` (grep 2026-11-11): no hay herramienta de recarga en caliente del grafo"
+ },
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 79,
+  "text": "- [?] Crear escena dialogue_ui.tscn como CanvasLayer reutilizable [S] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `scripts/dialogos/ui/dialogue_ui.gd` existe pero **NO hay** `dialogue_ui.tscn` en el repo (glob 2026-11-11): la escena CanvasLayer no fue creada"
+ },
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 166,
+  "text": "- [?] Cache de grafos cargados con descarte LRU por limite de memoria [M] | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `dialogue_manager.gd` L294-307: `_grafos_cache` es un Dictionary SIN limite ni politica de descarte -> no hay LRU"
+ },
+ {
+  "mod": "21",
+  "name": "Dialogos",
+  "dir": "21-Dialogos",
+  "line": 194,
+  "text": "- [?] Test del pipeline end-to-end con dialogo_ejemplo.json en play mode [M] → archivo inexistente (medido 2026-10-15, DeepSeek 258); re-apuntar a shaman_intro.json al implementar; requiere test play-mode real (las 15 suites headless no lo cubren). | FLIP 2026-10-26 (Reflection-Beam-1.0, T222-21): spec en 03-Diseno.md § (L194 test pipeline end-to-end) | DEGRADADO 2026-11-11 (DS-V4.1-Flash-Opencode, gate-1 con GO msg 263 de agnes-3-flash): `dialogo_ejemplo.json` no existe (la propia linea lo anota) y no hay test play-mode del pipeline; las suites headless no lo cubren"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 44,
+  "text": "- [?] P21: recetas con cultivos — catálogo M16 (ensaladas, pan, tintes, ofrendas) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L307-308 (Beam 663: \"P21: recetas con cultivos — catalogo M16\"). Coherente con M33 y M16. (2026-10-28 13:10) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 120,
+  "text": "- [?] Interacción F sobre tierra arada abre selector de semillas (M70/M53) [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L322-323 (Beam 664: \"Interaccion F sobre tierra arada abre selector de semillas\"). Coherente con M33 y M53. (2026-10-28 13:10) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 126,
+  "text": "- [?] Cancelación segura del selector sin consumir semillas [S] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L325-326 (Beam 664: \"Cancelacion segura del selector sin consumir semillas\"). Coherente con M33 y M53. (2026-10-28 13:10) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 166,
+  "text": "- [?] Navegación M64 evita celdas cultivadas cuando hay ruta alternativa [C] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L340-341 (Beam 664: \"Navegacion M64 evita celdas cultivadas cuando hay ruta alternativa\"). Coherente con M33 y M64. (2026-10-28 13:10) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 169,
+  "text": "- [?] Cosecha con inventario lleno: sobrante devuelto con notificación [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L343-344 (Beam 665: \"Cosecha con inventario lleno: sobrante devuelto con notificación\"). Coherente con M33 y M14. (2026-10-28 12:55) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "33",
+  "name": "Agricultura",
+  "dir": "33-Agricultura",
+  "line": 173,
+  "text": "- [?] Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas [M] — FLIP 2026-10-28 (Nemotron, COLA-A): spec ya existía en 03-Diseno.md L349-350 (Beam 666: \"Borrado de parcela (M17) con cultivos activos: aviso previo y devolución de semillas\"). Coherente con M33 y M17. (2026-10-28 12:55) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+ },
+ {
+  "mod": "14",
+  "name": "Recursos",
+  "dir": "15-Recursos",
+  "line": 40,
+  "text": "- [?] resource_catalog.tres existe [M] - **QA s2 2026-10-12 (Log 1787): artefacto citado inexistente (grep 0 hits). Definiciones embebidas en resource_manager.gd L91-155. Deuda M15.**"
+ },
+ {
+  "mod": "14",
+  "name": "Recursos",
+  "dir": "15-Recursos",
+  "line": 289,
+  "text": "- [?] Meshes del arte (placeholders funcionales ahora) [C]"
+ },
+ {
+  "mod": "14",
+  "name": "Recursos",
+  "dir": "15-Recursos",
+  "line": 322,
+  "text": "- [?] Meshes del arte (SIGUE de iter 3): dueño M45/M47 [C]"
+ },
+ {
+  "mod": "14",
+  "name": "Recursos",
+  "dir": "15-Recursos",
+  "line": 345,
+  "text": "- [?] Meshes del arte (SIGUE de iter 3): dueño M45/M47 [C]"
+ },
+ {
+  "mod": "30",
+  "name": "Ciclo-Dia-Noche",
+  "dir": "31-Ciclo-Dia-Noche",
+  "line": 92,
+  "text": "- [?] Compatible con M12 minimapa (sin luz) [S] → M12 minimapa sin implementar (fila 12 global); la regla \"sin luz\" documentada en diseño §4 | AUDIT 2026-10-14 (step-5-kilocode): M12 minimapa SI existe en disco (scripts/mapas/mapa_manager.gd, mapa_markers.gd, test_mapa_m54.gd) — el item decía 'sin implementar'. La regla 'sin luz' está documentada en diseño §4. Requiere corrección del item, no degradación."
+ },
+ {
+  "mod": "30",
+  "name": "Ciclo-Dia-Noche",
+  "dir": "31-Ciclo-Dia-Noche",
+  "line": 220,
+  "text": "- [?] Luna esférica con textura de fases (M45) [C] | AUDIT 2026-10-14 (step-5-kilocode): luz DirectionalLight3D sin mesh; textura de fases de M45 (K.2)."
+ },
+ {
+  "mod": "61",
+  "name": "Rendimiento",
+  "dir": "61-Rendimiento",
+  "line": 221,
+  "text": "- [?]Validar festival (M74) sin picos [C] → **no medible en headless** (Log 2068): VFX + frame time real. El limite de particulas (<= 500 por camara) si esta definido en `limites` y verificado por el gate; el conteo en runtime es del dueno M52."
+ },
+ {
+  "mod": "155",
+  "name": "Fotos",
+  "dir": "56-Fotografia",
+  "line": 341,
+  "text": "- [?] DoF selectivo (foco claro, RF6) y cámara libre/zoom/filtros en vivo (RF1-RF4) — iteración 2 con M49/M31 (dueño: deepseek-v4-flash-vision-exp)"
+ },
+ {
+  "mod": "52",
+  "name": "UI-UX",
+  "dir": "53-UI-UX",
+  "line": 137,
+  "text": "- [?] Toasts con icono y SFX por tipo (obtención, evento, misión) [M] — **FALSO VERDE confirmado 2026-10-12 (Ling 3.1 Flash, msg 60; aceptado por director msg 61):** NotificationService es **visual-only** (0 SFX en 203 líneas; el test H.9 `test_m53_no_redundancia.gd:45-53` asserta que `push()` NO crea AudioStreamPlayer) y los emisores (`achievement_service.gd:248-267` M72 logros, `collection_registry.gd:111-123` M37 museo) emiten `ui.notify` **sin SFX**. El icono sí existe (`_get_type_icon`); el SFX no. Re-escopear: \"Toasts con icono por tipo; SFX por canal audio separado — dueño M91/FeedbackDirector\". Correlato: **BUG-133 RESUELTO 2026-10-12** (Ling 3.1 Flash, encargo director msg 71, Log 1723): `crafting_feedback.gd:114-122` `_notificar()` ahora usa `notif.push({\"text\":…, \"type\": <ToastType>, \"icon\": tipo})` — los toasts de crafting SÍ se muestran (test `test_m16_crafting_toast.gd` 9/0 EXIT 0; regresión `test_crafting.gd` 0/0). El SFX del toast sigue sin existir (servicio visual-only por diseño) — el re-escopo de H.L121 (SFX por canal audio separado) sigue pendiente, dueño M91/FeedbackDirector. -- 2026-10-26 (DeepSeek-V4.1-Flash, Log 2199): se mantiene `[?]` HONESTO. Icono: existe y funciona. SFX: no existe y NO es de M53 — `NotificationService` es visual-only por diseno y el dueno del canal de audio es M91/FeedbackDirector (re-escopo ya aceptado por la directora, msg 61). No se flipea."
+ },
+ {
+  "mod": "52",
+  "name": "UI-UX",
+  "dir": "53-UI-UX",
+  "line": 224,
+  "text": "- [?] Minimapa con textura caché sin regeneración por frame [M] - **QA Step 5 2026-10-12 (msg 242): la verificación citada (minimap_widget.gd:4 _tex / set_textura) NO existe (grep 0 hits; widget es _draw() procedural). Deuda M53.** -- 2026-10-26 (DeepSeek-V4.1-Flash, Log 2199): se mantiene `[?]`. `minimap_widget.gd` dibuja por `_draw()` procedural: no hay textura cache que verificar (la cita original a `_tex`/`set_textura` no existe, grep 0 hits — confirmado). La deuda real es 'cachear el dibujo a una ImageTexture y solo regenerar al cambiar de zona', y no se abordo en esta tanda (requiere medir coste por frame con M61 antes de optimizar)."
+ },
+ {
+  "mod": "137",
+  "name": "Vertical-Slice",
+  "dir": "138-Vertical-Slice",
+  "line": 122,
+  "text": "- [?] Definir reporte `REPORTE-FPS.md` generado por `bench_slice.gd` [C] — 03-Diseno Cierre: tool 60 s sobre la escena de estres; FPS prom/min, draw calls, particulas, VRAM; veredicto de Beam con presupuesto L5 (2026-10-23 S38) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `REPORTE-FPS.md`, `bench_slice.gd` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**"
+ },
+ {
+  "mod": "137",
+  "name": "Vertical-Slice",
+  "dir": "138-Vertical-Slice",
+  "line": 138,
+  "text": "- [?] Definir análisis de encuesta en `PLAYTEST.md` [M] — 03-Diseno Protocolo: tabla por tester + veredicto de umbrales L129/L130 (2026-10-22 S35; archivo en docs/vslice/ L208) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `PLAYTEST.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**"
+ },
+ {
+  "mod": "137",
+  "name": "Vertical-Slice",
+  "dir": "138-Vertical-Slice",
+  "line": 152,
+  "text": "- [?] Definir `IDEAS-DESCARTADAS.md` para lo que no entra [S] — 03-Diseno: 1 linea por idea (fecha/proponente/idea/motivo enlazado a regla); alimenta 5-FUTURAS-MEJORAS si es buena (2026-10-23 S46) — **[?] degradado 2026-10-23 (DeepSeek-V4.1-Flash, P4/P5b dir 369): el artefacto citado `IDEAS-DESCARTADAS.md` NO existe en disco ni en la historia de git (`git log --all` = 0 commits); el `[x]` no tenia evidencia en disco.**"
+ },
+ {
+  "mod": "44",
+  "name": "Arte-3D",
+  "dir": "45-Arte-3D",
+  "line": 140,
+  "text": "- [?] Definir asset_catalog.json con: asset_id, categoría, bioma, estado, dueño, prioridad, deps [M]"
+ },
+ {
+  "mod": "44",
+  "name": "Arte-3D",
+  "dir": "45-Arte-3D",
+  "line": 148,
+  "text": "- [?] Definir script validate_mesh.gd en Assets/_Project/Editor/ [M]"
+ }
+]
