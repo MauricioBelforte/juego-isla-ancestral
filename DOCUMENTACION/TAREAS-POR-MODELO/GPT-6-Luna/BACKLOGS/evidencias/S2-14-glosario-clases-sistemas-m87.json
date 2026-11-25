@@ -1,0 +1,176 @@
+{
+  "task_id": "S2-14",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Glosario estático de nombres de clases y sistemas documentados en el plan-actual M87, enlazados con las fuentes del plan y archivos actuales. No es un inventario exhaustivo de APIs, ni valida ejecución runtime.",
+  "as_of": "2026-11-25",
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "source_selection": "Se extrajeron entidades nombradas expresamente en DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md y sus notas; se contrastó la existencia, declaración class_name/extends/autoload y anclas identificables en archivos de código actuales.",
+    "limits": "Una declaración estática no prueba comportamiento runtime. Cuando la guía usa un esquema didáctico o una descripción histórica, se marca explícitamente. No se ejecutaron Godot ni tests."
+  },
+  "sources": {
+    "module_code_document": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+      "ranges": ["21-29", "64-76", "137-162", "180-193", "200-218", "376-382", "409-412"]
+    },
+    "project_configuration": {
+      "path": "game/isla-ancestral/project.godot",
+      "sha256": "0900f905b0857f746ec99c9cec26bb612bdf35682f0d0ef4429bfb3f38ecb9d6",
+      "ranges": ["57-60", "116-120"]
+    },
+    "localization_autoload_script": {
+      "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+      "sha256": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6",
+      "anchors": ["extends Node", "signal locale_changed(locale: String)", "LOCALES_SOPORTADOS", "func set_locale", "func tr_key"]
+    },
+    "locale_utils": {
+      "path": "game/isla-ancestral/scripts/localization/locale_utils.gd",
+      "sha256": "2f0018178b5c109c38e25bb4bb4f762a8bb8aabfc528520af882df3d8ae982c7",
+      "anchors": ["class_name LocaleUtils", "const TABLAS", "const NOMBRES_NATIVOS", "func format_number", "func format_date", "func format_hora"]
+    },
+    "po_validator": {
+      "path": "game/isla-ancestral/scripts/localization/validador_po.gd",
+      "sha256": "3812ebbf759b62772d4be0114625a55802b47e7421d498cf727d4cd6e617c53b",
+      "anchors": ["class_name ValidadorPO", "extends RefCounted"]
+    },
+    "key_auditor": {
+      "path": "game/isla-ancestral/scripts/localization/auditor_claves.gd",
+      "sha256": "3aa7ce7809b83738b3846216d51cc02697c56e480a90015660ef74134a525af8",
+      "anchors": ["class_name AuditorClaves", "extends RefCounted"]
+    },
+    "layout_analyzer": {
+      "path": "game/isla-ancestral/scripts/localization/analizador_layout.gd",
+      "sha256": "ef276e831bbc309ac57d0ff8e172de25fcee8f990c352a6b2d7ea0dcd8dc85dd",
+      "anchors": ["class_name AnalizadorLayout", "extends RefCounted"]
+    },
+    "glossary": {
+      "script": {
+        "path": "game/isla-ancestral/scripts/localization/glosario.gd",
+        "sha256": "21fe633a7181580a8494915d9db929ca9449c3814e57fc6055fe7d6cf08f9e0d",
+        "anchors": ["class_name Glosario", "static func cargar", "static func verificar"]
+      },
+      "data": {
+        "path": "game/isla-ancestral/data/localization/glosario.json",
+        "sha256": "180fe502efd828b3ae2062c30a27d69c44a26ca6d17f7371984c70805ab29d04"
+      }
+    },
+    "ui_retranslator": {
+      "path": "game/isla-ancestral/scripts/localization/retraductor_ui.gd",
+      "sha256": "74dfa765bf736cbaa5c8f54da32658d20b2715847050737f9f09c6ef5d584b83",
+      "anchors": ["class_name RetraductorUI", "extends RefCounted", "const PROPS_TEXTO"]
+    },
+    "font_catalog": {
+      "path": "game/isla-ancestral/scripts/fonts/font_catalog.gd",
+      "sha256": "8c14fcb8ca22456c652dc1e23d64bc53f2676fe66f1647b5b2969a76e88b062b",
+      "anchors": ["extends Node", "func fuente", "func fuente_para_idioma"],
+      "autoload_line": 118
+    }
+  },
+  "terms": [
+    {
+      "name": "Localization (autoload)",
+      "kind": "autoload/service name",
+      "meaning": "Singleton de idioma que el plan presenta como proveedor M87; su nombre en project.godot es Localization.",
+      "document_refs": ["04-Codigo.md:21-24", "04-Codigo.md:67-76", "04-Codigo.md:180-193"],
+      "implementation_refs": ["project.godot:59", "scripts/localization/localization_manager.gd:11-17"],
+      "note": "El script no declara class_name; LocalizationManager es el basename/histórico del script, no una clase global actual. El esqueleto de 04-Codigo.md es ilustrativo y presenta API/configuración antigua; cita LocalizationSettings, para la cual no aparece una definición/archivo en el árbol estático revisado. La implementación actual usa `_leer_locale_m60()` (localization_manager.gd:68). Consultar el archivo real para el estado presente."
+    },
+    {
+      "name": "locale_changed",
+      "kind": "signal",
+      "meaning": "Señal del autoload Localization que comunica el cambio de locale a consumidores; RetraductorUI se describe como consumidor M53 en el plan.",
+      "document_refs": ["04-Codigo.md:29", "04-Codigo.md:71", "04-Codigo.md:411"],
+      "implementation_refs": ["scripts/localization/localization_manager.gd:13", "scripts/localization/retraductor_ui.gd:15-19"],
+      "note": "La declaración existe estáticamente; no se verificó aquí la conexión runtime."
+    },
+    {
+      "name": "LocaleUtils",
+      "kind": "class_name / helper de formato",
+      "meaning": "Helper RefCounted para utilidades de locale: nombres nativos, formato numérico, fecha y hora.",
+      "document_refs": ["04-Codigo.md:24", "04-Codigo.md:137-162"],
+      "implementation_refs": ["scripts/localization/locale_utils.gd:8-9", "scripts/localization/locale_utils.gd:12-21"]
+    },
+    {
+      "name": "ValidadorPO",
+      "kind": "class_name / validador gettext",
+      "meaning": "Validador de archivos .po y de coherencia entre idiomas (reglas R1-R13 y P1-P5 según la documentación del módulo).",
+      "document_refs": ["04-Codigo.md:25", "04-Codigo.md:204", "04-Codigo.md:380"],
+      "implementation_refs": ["scripts/localization/validador_po.gd:19-20"]
+    },
+    {
+      "name": "AuditorClaves",
+      "kind": "class_name / auditor de claves",
+      "meaning": "Inventaría referencias de claves en código frente al catálogo y trata prefijos dinámicos de forma diferenciada, según plan y cabecera de la herramienta.",
+      "document_refs": ["04-Codigo.md:26", "04-Codigo.md:205", "04-Codigo.md:381"],
+      "implementation_refs": ["scripts/localization/auditor_claves.gd:18-19", "scripts/localization/auditor_claves.gd:21-24"]
+    },
+    {
+      "name": "AnalizadorLayout",
+      "kind": "class_name / analizador de encaje",
+      "meaning": "Mide expansión y encaje del texto traducido usando métricas de fuente y dimensiones suministradas.",
+      "document_refs": ["04-Codigo.md:27", "04-Codigo.md:206", "04-Codigo.md:409"],
+      "implementation_refs": ["scripts/localization/analizador_layout.gd:1-2", "scripts/localization/analizador_layout.gd:5-16"]
+    },
+    {
+      "name": "Glosario",
+      "kind": "class_name / verificador terminológico",
+      "meaning": "Carga datos terminológicos y compara términos españoles e ingleses contra formas canónicas y variantes aceptadas, conforme al diseño descrito.",
+      "document_refs": ["04-Codigo.md:28", "04-Codigo.md:207", "04-Codigo.md:410"],
+      "implementation_refs": ["scripts/localization/glosario.gd:1-18", "data/localization/glosario.json:1-5"]
+    },
+    {
+      "name": "RetraductorUI",
+      "kind": "class_name / servicio helper de UI",
+      "meaning": "Recorre UI y actualiza propiedades de texto declaradas por metadatos al cambiar el locale; el plan describe filtrado de nodos no visibles.",
+      "document_refs": ["04-Codigo.md:29", "04-Codigo.md:208", "04-Codigo.md:411"],
+      "implementation_refs": ["scripts/localization/retraductor_ui.gd:1-2", "scripts/localization/retraductor_ui.gd:5-19", "scripts/localization/retraductor_ui.gd:27-30"],
+      "note": "Se registran la clase y la descripción/documentación; no se ejecutó una prueba de recorrido de nodos."
+    },
+    {
+      "name": "TranslationServer",
+      "kind": "servicio global del motor Godot usado por M87",
+      "meaning": "API del motor documentada como backend para locale y traducción de catálogos.",
+      "document_refs": ["04-Codigo.md:8", "04-Codigo.md:92", "04-Codigo.md:115-135"],
+      "implementation_refs": ["scripts/localization/localization_manager.gd:41-46", "scripts/localization/localization_manager.gd:129-133"],
+      "note": "No es una clase propia del proyecto M87; aparece como dependencia del motor."
+    },
+    {
+      "name": "FontCatalog",
+      "kind": "autoload del módulo M88, integración con cobertura por locale",
+      "meaning": "Catálogo de fuentes de M88 que se describe en el plan como proveedor de cobertura/selección por idioma.",
+      "document_refs": ["04-Codigo.md:8", "04-Codigo.md:356-367"],
+      "implementation_refs": ["project.godot:118", "scripts/fonts/font_catalog.gd:10-19", "scripts/fonts/font_catalog.gd:56-80"],
+      "note": "Sistema vecino M88, no clase perteneciente a M87."
+    },
+    {
+      "name": "Catálogos gettext .po",
+      "kind": "sistema de datos de localización",
+      "meaning": "Archivos de traducción referidos como fuente cargada por el autoload de localización.",
+      "document_refs": ["04-Codigo.md:8", "04-Codigo.md:23-25", "04-Codigo.md:209-210"],
+      "implementation_refs": ["scripts/localization/localization_manager.gd:6-8", "scripts/localization/localization_manager.gd:17", "game/isla-ancestral/locales/es.po", "game/isla-ancestral/locales/en.po", "game/isla-ancestral/locales/pt.po"],
+      "note": "La lista de idiomas actuales incluye es/en/pt (localization_manager.gd:15); los 171-entry claims en el documento son históricos y no se recalcularon aquí."
+    }
+  ],
+  "documentary_drift": [
+    {
+      "document": "04-Codigo.md",
+      "lines": "64-76, 137-164, 216",
+      "description": "Los esqueletos de LocalizationManager y LocaleUtils y el pendiente de retirar un autoload duplicado no reflejan todo el estado actual: por ejemplo, project.godot registra Localization, el autoload soporta es/en/pt y LocaleUtils está implementado. BUG-104 documenta el retiro histórico del autoload duplicado.",
+      "handling": "Se conserva el texto como fuente documental histórica del glosario; no se corrige ni se usa para afirmar estado presente."
+    },
+    {
+      "document": "04-Codigo.md",
+      "lines": "80-95",
+      "description": "El esqueleto didáctico invoca LocalizationSettings.read_locale/write_locale, pero la búsqueda estática del árbol no encuentra esa clase o símbolo. El script real lee persistencia mediante `_leer_locale_m60()`; el nombre del ejemplo no se trata como clase existente.",
+      "handling": "Se marca como referencia ilustrativa/stale y no se adjudica un archivo fuente inexistente."
+    }
+  ],
+  "limitations": [
+    "Se contrastó existencia/declaraciones estáticas y anclas de código; no se ejecutaron suites ni Godot.",
+    "La presencia de una clase, señal o autoload no demuestra integración o comportamiento runtime.",
+    "No se usó `LocalizationManager` como nombre de una clase global: el script principal extiende Node sin class_name; el nombre actual del autoload es Localization.",
+    "No se modificaron fuentes canónicas, código, checklist, GLOBAL, estado de M87 ni logs."
+  ]
+}

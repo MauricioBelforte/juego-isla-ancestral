@@ -105,6 +105,8 @@ def main() -> int:
     parser.add_argument("--timeout", type=int, default=120, help="Timeout por test (segundos)")
     parser.add_argument("--incluir-gdunit", action="store_true",
                         help="incluir suites GdUnit4 (fallan con --script: solo para diagnostico)")
+    parser.add_argument("--sin-reintento", action="store_true",
+                        help="no reintentar las rojas (por defecto se reintentan una vez)")
     args = parser.parse_args()
 
     godot_bin = args.godot or find_godot_bin()
@@ -145,12 +147,34 @@ def main() -> int:
         fail_fast=False,  # Queremos ejecutar TODOS los tests aunque uno falle
     )
     results = p.run()
+
+    # Reintento unico de las rojas. Con varios agentes trabajando el mismo arbol,
+    # una suite puede caer por contencion (dos Godot sobre `.godot/`, cache a medio
+    # escribir, "Waiting for all tasks to be picked"): falso rojo que entrena a
+    # ignorar el gate. Caso real 2026-11-25 14:47: test_m17_hud_categorias rc=1 en
+    # la corrida por lotes y 22/0 estable corrida sola. Si el reintento tambien
+    # falla, es rojo de verdad.
+    flaky: List[str] = []
+    if not args.sin_reintento:
+        rojas = [s for s, r in zip(steps, results) if r.returncode != 0]
+        if rojas:
+            print(f"[tests] reintento unico de {len(rojas)} suite(s) roja(s)...")
+            p2 = Pipeline(name="ci-tests-retry", steps=rojas, project_root=PROJECT_ROOT,
+                          fail_fast=False)
+            por_nombre = {r.name: r for r in p2.run()}
+            for r in results:
+                if r.returncode != 0 and r.name in por_nombre and por_nombre[r.name].returncode == 0:
+                    flaky.append(r.name)
+                    r.returncode = 0
+                    r.error = ((r.error or "") + " | flaky: paso en el reintento").strip()
+
     p.write_report(results, args.out)
 
     # Resumen
     passed = sum(1 for r in results if r.returncode == 0)
     failed = len(results) - passed
-    print(f"[tests] Resumen: {passed} OK, {failed} FAIL")
+    extra = f" ({len(flaky)} flaky)" if flaky else ""
+    print(f"[tests] Resumen: {passed} OK, {failed} FAIL{extra}")
     return 1 if failed > 0 else 0
 
 

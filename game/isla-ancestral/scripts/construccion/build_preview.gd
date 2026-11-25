@@ -25,6 +25,11 @@ var _receta_id: StringName = &""
 var _evaluado: bool = false
 var _resultado: Dictionary = {}
 var _recalculos: int = 0
+## Recalculos REALES desde que se creo el evaluador (NO se resetea al
+## invalidar). `recalculos()` es el contador por sesion (se resetea con
+## `limpiar()`); este es el total, que es el que sirve para AUDITAR de verdad
+## quantas veces se recalculo la rejilla (2026-11-25).
+var _recalculos_totales: int = 0
 
 ## ── API ─────────────────────────────────────────────────────────────────
 
@@ -83,6 +88,7 @@ func evaluar_receta(manager, r: PlacementRule, celda: Vector3i, rotacion: int) -
 	_receta_id = rid
 	_evaluado = true
 	_recalculos += 1
+	_recalculos_totales += 1
 	return _resultado.duplicate()
 
 ## Ultimo resultado evaluado (o {} si nunca se evaluo).
@@ -96,9 +102,15 @@ func cambio(celda: Vector3i, rotacion: int, receta_id: StringName) -> bool:
 	return celda != _celda or posmod(rotacion, 4) != _rotacion or receta_id != _receta_id
 
 ## Cuantos recalculos reales se hicieron (auditoria de la cache). NO cuenta los
-## aciertos de cache.
+## aciertos de cache. Se RESETEA con `limpiar()` (contador de la sesion).
 func recalculos() -> int:
 	return _recalculos
+
+## Recalculos reales desde que se creo el evaluador (monotono: NO se resetea
+## al invalidar la cache). Es el contador de auditoria: permite medir quantas
+## veces se recalculo la rejilla a lo largo de la sesion.
+func recalculos_totales() -> int:
+	return _recalculos_totales
 
 func limpiar() -> void:
 	_evaluado = false

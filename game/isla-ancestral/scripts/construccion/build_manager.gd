@@ -924,6 +924,9 @@ func limpiar_estructuras() -> void:
 	_historial.limpiar()
 	_ultima_celda = Vector3i(-999999, -999999, -999999)
 	_ultima_confirmacion_ms = -999999
+	# La cache del fantasma deja de valer: el mundo cambio entero (guardar,
+	# cargar o reiniciar). Sin esto, el fantasma mostraba la validez OLD.
+	_preview.limpiar()
 
 # ── Internos de estado ──────────────────────────────────────────────────
 

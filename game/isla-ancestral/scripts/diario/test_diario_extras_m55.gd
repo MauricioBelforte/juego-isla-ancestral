@@ -75,14 +75,21 @@ func _run() -> void:
 	_check("npc_moved_in registra la entrada del vecino", diary.esta_registrada(eid))
 	var retrato: String = String(diary.datos_de(eid).get("retrato", ""))
 	_check("npc_moved_in snapshot del retrato (NPCVisualDatabase, read-only)", retrato.is_empty() or retrato.begins_with("res://"))
-	# Nivel de relación (M20)
-	bus.npc.nivel_amistad_cambio.emit("catalina_oso", 2)
+	# Nivel de relación (M20) — señal en bus.progresion
+	bus.progresion.nivel_amistad_cambio.emit("catalina_oso", 2)
 	_check("nivel_amistad_cambio guarda nivel_relacion en la entrada", int(diary.datos_de(eid).get("nivel_relacion", -1)) == 2)
-	# Último diálogo (M21)
-	bus.npc.dialog_requested.emit("catalina_oso", {"id": "aur_001_intro"})
-	_check("dialog_requested guarda ultimo_dialogo en la entrada", String(diary.datos_de(eid).get("ultimo_dialogo", "")) == "aur_001_intro")
+	# Último diálogo (M21) — señal en bus.ui; historial tope 5, más nuevo primero
+	bus.ui.dialog_requested.emit("catalina_oso", {"id": "aur_001_intro"})
+	bus.ui.dialog_requested.emit("catalina_oso", {"id": "aur_002_chat"})
+	bus.ui.dialog_requested.emit("catalina_oso", {"id": "aur_003_chat"})
+	var d_e: Dictionary = diary.datos_de(eid)
+	var hist: Array = d_e.get("dialogos", [])
+	_check("dialog_requested guarda historial de diálogos (más nuevo primero, tope 5)", String(hist[0]) == "aur_003_chat" and hist.size() == 3)
+	bus.ui.dialog_requested.emit("catalina_oso", {"id": "aur_001_intro"})
+	var hist2: Array = diary.datos_de(eid).get("dialogos", [])
+	_check("re-lectura mueve el diálogo al frente y dedupe", String(hist2[0]) == "aur_001_intro" and hist2.size() == 3)
 	# NPC sin entrada en catálogo: el puente no rompe (silent-skip)
-	bus.npc.nivel_amistad_cambio.emit("npc_inventado_xyz", 3)
+	bus.progresion.nivel_amistad_cambio.emit("npc_inventado_xyz", 3)
 	_check("puente con NPC desconocido no rompe (silent-skip)", true)
 
 	# ── E. Minerales: snapshot de inventario (L92) ──

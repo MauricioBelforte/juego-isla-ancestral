@@ -118,22 +118,32 @@ func _conectar_eventos() -> void:
 				datos["retrato"] = visual
 			registrar_con_datos("vecino_" + _slug(npc_id), "personajes", datos))
 	# Nivel de amistad (M20) → personajes: snapshot del nivel de relación
-	# (checklist L57: la relación vive con la entrada del personaje).
-	if bus.npc.has_signal("nivel_amistad_cambio"):
-		bus.npc.nivel_amistad_cambio.connect(func(npc_id: String, nivel: int):
+	# (checklist L57: la relación vive con la entrada del personaje). Señal en
+	# bus.progresion (dominio PROGRESION de M71/M20), no en bus.npc.
+	if bus.progresion.has_signal("nivel_amistad_cambio"):
+		bus.progresion.nivel_amistad_cambio.connect(func(npc_id: String, nivel: int):
 			var eid := _npc_a_entrada(npc_id, "personajes")
 			if not eid.is_empty():
 				registrar_con_datos(eid, "personajes", {"nivel_relacion": nivel}))
-	# Diálogo solicitado (M21) → personajes: último diálogo leído por vecino
-	# (checklist L57: "últimos diálogos"; se guarda el id del nodo solicitado).
-	if bus.npc.has_signal("dialog_requested"):
-		bus.npc.dialog_requested.connect(func(npc_id: String, dialog_data: Dictionary):
+	# Diálogo solicitado (M21) → personajes: historial de diálogos leídos por
+	# vecino (checklist L57: "últimos diálogos"; se guarda el id del nodo
+	# solicitado en "dialogos" (tope 5, más nuevo primero) + "ultimo_dialogo").
+	# Señal en bus.ui (UIEvents: la UI pide abrir el diálogo).
+	if bus.ui.has_signal("dialog_requested"):
+		bus.ui.dialog_requested.connect(func(npc_id: String, dialog_data: Dictionary):
 			var did := String(dialog_data.get("id", ""))
 			if did.is_empty():
 				return
 			var eid := _npc_a_entrada(npc_id, "personajes")
-			if not eid.is_empty():
-				registrar_con_datos(eid, "personajes", {"ultimo_dialogo": did}))
+			if eid.is_empty():
+				return
+			var previos := datos_de(eid)
+			var hist: Array = (previos.get("dialogos", []) as Array).duplicate()
+			hist.erase(did)  # dedupe: re-lectura lo mueve al frente
+			hist.push_front(did)
+			if hist.size() > 5:
+				hist.resize(5)
+			registrar_con_datos(eid, "personajes", {"ultimo_dialogo": did, "dialogos": hist}))
 	# Misiones (M22/M23) → misiones
 	if bus.quest.has_signal("quest_completed"):
 		bus.quest.quest_completed.connect(func(qid: String): registrar("mision_" + _slug(qid), "misiones"))
@@ -146,6 +156,22 @@ func _conectar_eventos() -> void:
 	# Cartas recibidas (M74/M20) → cartas
 	if bus.npc.has_signal("carta_recibida"):
 		bus.npc.carta_recibida.connect(func(_npc: String, respuesta_id: String): registrar("carta_" + _slug(respuesta_id), "cartas"))
+	# Recetas (M16) → recetas: aprender DESBLOQUEA (L97), fabricar COMPLETA (L99).
+	# Señales reales de Crafting (crafting_service.gd:16/:18), read-only acá:
+	# Diary no fabrica ni aprende, solo refleja.
+	var crafting := get_node_or_null("/root/Crafting")
+	if crafting != null:
+		if crafting.has_signal("receta_aprendida"):
+			crafting.receta_aprendida.connect(func(receta: Resource):
+				var rid := String(receta.get("id")) if receta != null else ""
+				if not rid.is_empty():
+					registrar("receta_" + rid, "recetas"))
+		if crafting.has_signal("crafting_completed"):
+			crafting.crafting_completed.connect(func(receta: Resource, _cantidad: int):
+				var rid := String(receta.get("id")) if receta != null else ""
+				if not rid.is_empty():
+					registrar("receta_" + rid, "recetas")
+					marcar_completado("receta_" + rid))
 
 
 ## Normaliza un id compuesto: minúsculas + sin tildes ("Otoño"→"otono").
@@ -291,6 +317,36 @@ func _cantidad_inventario_de(entrada_id: String) -> int:
 	return int(inv.count_item(item_id))
 
 
+## ── Recetas (M16): datos del detalle (L98) ────────────────────────
+
+## "receta_rec_mesa_robusta" -> "rec_mesa_robusta" ("" si no es de recetas).
+func _rec_id_de_entrada(entrada_id: String) -> String:
+	if not entrada_id.begins_with("receta_"):
+		return ""
+	return entrada_id.substr("receta_".length())
+
+
+## Ingredientes con cantidades + resultado de una receta REAL de M16.
+## Fail-closed (contrato del test F1-F4): rec_id inexistente/vacío devuelve
+## la FORMA ({ingredientes: [], resultado: {}}) sin inventar datos.
+func _datos_receta(rec_id: String) -> Dictionary:
+	if rec_id.is_empty():
+		return {"ingredientes": [], "resultado": {}}
+	var crafting := get_node_or_null("/root/Crafting")
+	if crafting == null or not crafting.has_method("obtener_receta"):
+		return {"ingredientes": [], "resultado": {}}
+	var receta: Resource = crafting.obtener_receta(rec_id)
+	if receta == null:
+		return {"ingredientes": [], "resultado": {}}
+	var ingredientes: Array[Dictionary] = []
+	for item_id in receta.materiales:
+		ingredientes.append({"id": String(item_id), "cantidad": int(receta.materiales[item_id])})
+	return {
+		"ingredientes": ingredientes,
+		"resultado": {"id": String(receta.resultado_id), "cantidad": int(receta.resultado_cantidad)},
+	}
+
+
 func alternar_favorito(entrada_id: String) -> bool:
 	if not _estados.has(entrada_id):
 		return false
@@ -336,6 +392,13 @@ func detalle_entrada(entrada_id: String) -> Dictionary:
 			# del registro queda en "datos"; el conteo actual se expone aparte.
 			if cat == "minerales":
 				d["inventario"] = _cantidad_inventario_de(entrada_id)
+			# Recetas (L98): ingredientes con cantidades + resultado, leídos de
+			# la fuente única de M16 (Crafting.obtener_receta). Fail-closed: si
+			# la receta no existe, se devuelve la forma con arrays vacíos.
+			if cat == "recetas":
+				var rec_datos: Dictionary = _datos_receta(_rec_id_de_entrada(entrada_id))
+				d["ingredientes"] = rec_datos.get("ingredientes", [])
+				d["resultado"] = rec_datos.get("resultado", {})
 			return d
 	return {}
 

@@ -271,9 +271,9 @@ func _fase_hijo() -> void:
 		"carga: categoría abierta persiste")
 	# El payload recién cargado vuelve a serializar con el mismo contenido
 	var otra: Dictionary = diary.get_save_data()
-	_check(int(otra.get("schema_version", 0)) == 1
+	_check(int(otra.get("schema_version", 0)) == 2
 		and (otra.get("entradas", {}) as Dictionary).has("vecino_catalina_oso"),
-		"carga: get_save_data re-serializa lo mismo")
+		"carga: get_save_data re-serializa lo mismo (schema v2 con extras, tanda 25-nov)")
 	sm.current_slot = -1
 	_fin(FASE_HIJO)
 

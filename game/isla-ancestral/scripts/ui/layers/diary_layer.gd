@@ -717,6 +717,29 @@ func _pintar_descripcion_refs(eid: String) -> void:
 		visibles += 1
 	if visibles > 0:
 		_lbl_refs_hdr.visible = true
+	# Recetas (L98): ingredientes con cantidades + resultado, con la misma
+	# convención visual de la columna derecha (Labels planos en _refs_box).
+	# Solo entradas RECETAS (fuente única: lo que expone detalle_entrada).
+	if String(det.get("id", "")).begins_with("receta_") or det.has("ingredientes"):
+		var ingredientes: Array = det.get("ingredientes", [])
+		if not ingredientes.is_empty():
+			var partes: Array[String] = []
+			for i in ingredientes:
+				partes.append("%d × %s" % [int(i.get("cantidad", 0)), String(i.get("id", ""))])
+			var lbl_ing := Label.new()
+			lbl_ing.name = "Rec_Ingredientes"
+			lbl_ing.text = "Ingredientes: " + ", ".join(partes)
+			lbl_ing.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			_refs_box.add_child(lbl_ing)
+			_lbl_refs_hdr.visible = true
+		var res: Dictionary = det.get("resultado", {})
+		if not res.is_empty():
+			var lbl_res := Label.new()
+			lbl_res.name = "Rec_Resultado"
+			lbl_res.text = "Resultado: %d × %s" % [int(res.get("cantidad", 0)), String(res.get("id", ""))]
+			lbl_res.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+			_refs_box.add_child(lbl_res)
+			_lbl_refs_hdr.visible = true
 
 
 ## Navega a una entrada referenciada: cambia de pestaña, limpia filtros

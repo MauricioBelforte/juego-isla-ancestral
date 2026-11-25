@@ -1,0 +1,60 @@
+{
+  "task_id": "S2-10",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Síntesis documental read-only de lecciones aplicables al BUG-073 (recarga de fuentes al cambiar locale en headless). No se reabrió el bug, modificó código ni ejecutó Godot.",
+  "sources": {
+    "bug_record": {
+      "path": "DOCUMENTACION/11-BUGS.md",
+      "sha256": "b688e09bf4c0cd5de0ab492df9613ee71c60081c2f598e097ba419080dad0855",
+      "section": "BUG-073",
+      "lines": "7015-7049"
+    },
+    "ui_font_guide": {
+      "path": "DOCUMENTACION/GUIA-GODOT/10-ui-hud.md",
+      "sha256": "033492a0c80eef7bd58a28396d369d5afb67245d6647d51f24d0114aa28dfd89",
+      "section": "6. Carga de fuentes en runtime",
+      "lines": "96-108"
+    },
+    "runtime_probe_guide": {
+      "path": "DOCUMENTACION/GUIA-GODOT/13-sondas-runtime-gate2.md",
+      "sha256": "b6039a881bc14440d38622e822600146eb970229eef58d1360b475aa2fe65fbc",
+      "sections": ["1. Sustrato de runtime", "2. RED-PROBE", "3. GREEN-PROBE byte-exact", "4. Correlación de logs"],
+      "lines": "20-33, 35-39, 76-102"
+    },
+    "error_guide": {
+      "path": "DOCUMENTACION/GUIA-GODOT/06-registro-errores.md",
+      "sha256": "aa52d434f86a4986bf2d7dd507993be9bccd347f1f09991d82ae2732fff2b688",
+      "section": "Lección transversal sobre logs headless y falsos verdes",
+      "lines": "301-304"
+    }
+  },
+  "lessons": [
+    {
+      "lesson": "No aceptar EXIT 0 como evidencia suficiente si el log contiene ERROR de motor.",
+      "application": "BUG-073 reporta exit 0 y 0 SCRIPT ERROR, pero también cuatro mensajes ERROR: Parameter fd is null en cada una de tres corridas históricas. La propia guía exige correlacionar EXIT, salida y mensajes del motor; las suites verdes con errores deben reportarse con matices.",
+      "citations": ["DOCUMENTACION/11-BUGS.md:7024-7040", "DOCUMENTACION/GUIA-GODOT/13-sondas-runtime-gate2.md:28-33,96-102", "DOCUMENTACION/GUIA-GODOT/06-registro-errores.md:301-304"]
+    },
+    {
+      "lesson": "Aislar diferencias entre headless y runtime con una comparación equivalente; no generalizar el error al juego en editor.",
+      "application": "El registro informa error durante cambios de locale en headless y no lo observó en main_island.tscn sin cambio de idioma. Eso acota el escenario observado; no demuestra ausencia del problema en todo runtime interactivo ni prueba la hipótesis de FreeType/fuente nula.",
+      "citations": ["DOCUMENTACION/11-BUGS.md:7030-7040", "DOCUMENTACION/GUIA-GODOT/13-sondas-runtime-gate2.md:20-33,92-102"]
+    },
+    {
+      "lesson": "Inspeccionar la ruta de carga de FontFile, sin confundir una receta general con causa raíz del BUG-073.",
+      "application": "La guía UI/HUD recomienda FontFile.new() + load_dynamic_font(path) para fuentes cargadas dinámicamente. El BUG-073 solo formula como hipótesis que el shaping recibe font data nulo; esta regla sirve como punto de inspección, no basta para declarar la causa ni el fix.",
+      "citations": ["DOCUMENTACION/GUIA-GODOT/10-ui-hud.md:96-108", "DOCUMENTACION/11-BUGS.md:7035-7038"]
+    },
+    {
+      "lesson": "Para validar un fix, conservar baseline, comprobar el comportamiento posterior y asegurar atribución causal mediante una sonda/reversión controlada.",
+      "application": "La guía GATE-2 prescribe RED-PROBE cuando una suite afirma 0 fallos, GREEN-PROBE byte-exact cuando se atribuye el verde a un fix, y correlación de logs boot/post. Son recetas para el dueño autorizado si el bug se retoma; no se ejecutaron aquí.",
+      "citations": ["DOCUMENTACION/GUIA-GODOT/13-sondas-runtime-gate2.md:35-39,76-102"]
+    }
+  ],
+  "limitations": [
+    "Los resultados de 39 OK/0 fallos y 4 errores por corrida son mediciones históricas citadas en 11-BUGS.md (2026-09-20), no una repetición contra HEAD.",
+    "No se verificó que la fuente usada sea nula, que el problema sea exclusivo de headless ni que load_dynamic_font resuelva el error.",
+    "El BUG-073 permanece [?] Delegado a propietarios M53/M88 en la fuente consultada; esta síntesis no cambia su estado ni asigna trabajo.",
+    "No se modificaron código, módulos, documentación canónica, checklists, GLOBAL o logs; no se ejecutó Godot."
+  ]
+}

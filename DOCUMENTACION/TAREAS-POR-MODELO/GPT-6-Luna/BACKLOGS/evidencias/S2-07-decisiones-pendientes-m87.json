@@ -1,0 +1,138 @@
+{
+  "task_id": "S2-07",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Inventario documental y estático de decisiones/acciones pendientes M87, diferenciando decisiones actuales, notas históricas desactualizadas y trabajo de dueños. Solo lectura; no se cambió el módulo ni se reabrió su sello.",
+  "as_of": "2026-11-25",
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "cross_check": "plan-actual M87 (02/04/05/07), 11-BUGS BUG-104, CHECKLIST-GLOBAL fila 87 y estado estático de project.godot/scripts referenciados",
+    "limits": "No ejecuté Godot, suites ni validadores; una búsqueda estática no prueba uso o no uso durante runtime. El estado de archivos actuales se distingue de declaraciones históricas en documentación."
+  },
+  "sources": {
+    "analysis": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/02-Analisis.md",
+      "sha256": "76c06bc57d81f1cde8c909a30c3dd0850649d8324797ffc3e74d71f45834070f",
+      "lines": "157-168"
+    },
+    "code_plan": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+      "lines": "37-42, 209-218, 239-245, 389-400"
+    },
+    "checklist": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "sha256": "02e4d4239d6fa58525a3f808a84d4fbd1ff83a7a24a595801e644066f1639b25",
+      "lines": "197-233, 286-298"
+    },
+    "test_results": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md",
+      "sha256": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9",
+      "lines": "128-138, 242-257"
+    },
+    "bug104": {
+      "path": "DOCUMENTACION/11-BUGS.md",
+      "sha256": "b688e09bf4c0cd5de0ab492df9613ee71c60081c2f598e097ba419080dad0855",
+      "lines": "1064-1115"
+    },
+    "global": {
+      "path": "CHECKLIST-GLOBAL.md",
+      "sha256": "304275bcf0d0ddb14dc44b5c9733c086c5649611b565f303f42b244da936297f",
+      "line": 191,
+      "interpretation": "Fila 87 declara módulo completado/QA; se conserva como contexto y no como permiso para cambios."
+    },
+    "current_project_autoloads": {
+      "path": "game/isla-ancestral/project.godot",
+      "sha256": "0900f905b0857f746ec99c9cec26bb612bdf35682f0d0ef4429bfb3f38ecb9d6",
+      "lines": "19-23, 57-62, 105-110",
+      "static_observation": "La sección [autoload] contiene Localization apuntando al script bajo scripts/localization; no contiene una entrada LocalizationManager."
+    },
+    "current_localization": {
+      "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+      "sha256": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6",
+      "lines": "13-20",
+      "static_observation": "La lista LOCALES_SOPORTADOS actual del archivo es [es, en, pt]."
+    },
+    "current_locale_utils": {
+      "path": "game/isla-ancestral/scripts/localization/locale_utils.gd",
+      "sha256": "2f0018178b5c109c38e25bb4bb4f762a8bb8aabfc528520af882df3d8ae982c7",
+      "lines": "8-23",
+      "static_observation": "TABLAS y NOMBRES_NATIVOS definen por separado es/en/pt."
+    },
+    "syntax_collector": {
+      "path": "game/isla-ancestral/scripts/editor/_colector_sintaxis.gd",
+      "sha256": "5d09e17cd5f50eaaa395c70ff29dd8cf3e0f2bec3b44aecfe49345a353fdd133",
+      "lines": "649-655",
+      "static_observation": "El colector todavía preloadea el script legado de scripts/localizacion y un test histórico en Obsoletos, además del Localization actual. No se prueba aquí si ese colector se ejecuta en producción."
+    }
+  },
+  "findings": [
+    {
+      "category": "contradicción_documental_stale",
+      "subject": "Eliminar el autoload duplicado LocalizationManager",
+      "status": "La decisión/acción de quitarlo del registro de autoload ya aparece ejecutada históricamente; no debe presentarse como pendiente actual sin reconciliar los documentos.",
+      "evidence": [
+        "11-BUGS.md:1064-1105 registra el cierre BUG-104: se quitó LocalizationManager de project.godot y quedó solo Localization.",
+        "project.godot:59 contiene Localization y no hay una entrada LocalizationManager en la sección [autoload] actual.",
+        "02-Analisis.md:157-168, 04-Codigo.md:37-41, 04-Codigo.md:216 y 05-Checklist.md:201 todavía describen el autoload duplicado como registrado/pendiente de decisión."
+      ],
+      "agent_action": "No reaplicar el cambio. Reportar el drift para conciliación documental por el dueño/directora; esta tarea no tiene autorización para editar plan-actual ni checklist."
+    },
+    {
+      "category": "decision_de_alcance_del_dueno_usuario",
+      "subject": "Qué hacer con el script legado y artefactos JSON tras quitar el autoload",
+      "status": "La limpieza residual no es equivalente a eliminar un autoload. BUG-104 dice que el script quedó huérfano parseable y que limpiar scripts/localizacion es una tarea aparte; el plan todavía solicita una decisión. El colector estático lo preloadea y la documentación registra lectores/herramientas del JSON, por lo que no se puede tratar como archivo demostrablemente descartable con esta inspección.",
+      "evidence": [
+        "11-BUGS.md:1112-1115: el script no se borró; el colector lo preloadea y la limpieza queda como tarea separada con aviso.",
+        "04-Codigo.md:224 y 04-Codigo.md:243: el JSON tiene usos de validación/análisis y el script legado sigue preloadeado; lo califica como candidato, no como eliminado.",
+        "_colector_sintaxis.gd:649-655 contiene preloads del script legado, del test obsoleto y del script actual.",
+        "02-Analisis.md:166 identifica una lectura directa de strings_es.json por test_capitulos_m74.gd."
+      ],
+      "decision_needed": "El propietario/directora debe decidir si conserva, archiva o elimina el script legado y qué rol tienen los JSON de base/validación, coordinando cambios a sus lectores y al colector. No se propone una eliminación automática.",
+      "agent_action": "Se puede preparar un inventario estático de referencias y una propuesta de migración; no borrar, mover ni modificar el legado ni JSON sin instrucción específica del dueño."
+    },
+    {
+      "category": "accion_humana_no_automatizable",
+      "subject": "Revisión final de las traducciones provisionales, en especial en.po",
+      "status": "Pendiente de revisión de persona bilingüe/traductor; no se resuelve por validación automática ni por este agente.",
+      "evidence": [
+        "04-Codigo.md:210 describe en.po como provisional y asigna revisión a traductor humano (RN9).",
+        "05-Checklist.md:74 explica que la revisión de estilo/naturalidad es humana aunque existan Glosario y ValidadorPO.",
+        "07-Resultados-Testings.md:136 y 253 conservan la revisión humana como pendiente.",
+        "02-Analisis.md:153 señala que los textos añadidos son provisionales y requieren revisión antes del lanzamiento."
+      ],
+      "decision_needed": "Una persona bilingüe debe revisar y aprobar el contenido antes de lanzamiento; los criterios editoriales y el responsable final son decisiones humanas.",
+      "agent_action": "El agente puede listar claves marcadas/provisionales o automatizar consistencia, pero no certificar calidad lingüística ni sustituir aprobación humana."
+    },
+    {
+      "category": "deuda_tecnica_con_propietario_no_decision_usuario_explicita",
+      "subject": "Normalizar fuentes de verdad de idiomas y completar integraciones de otros módulos",
+      "status": "Los documentos antiguos proponen unificar tres estructuras de idiomas y listan integraciones pendientes. El estado actual declara es/en/pt y duplica las tablas/nombres en LocaleUtils. Los consumidores tienen propietarios M53, M29/M30 y M14-M39; esto es trabajo de integración/arquitectura, no evidencia de una decisión actual del usuario.",
+      "evidence": [
+        "04-Codigo.md:392 y 05-Checklist.md:206 describen la duplicación; el código actual declara [es,en,pt] en localization_manager.gd:15 y tabla/nombres es/en/pt en locale_utils.gd:12-21.",
+        "04-Codigo.md:211-215 atribuye selector/layout/metadatos a M53 y formato de fecha a M29/M30, y migración de contenido a M14-M39.",
+        "05-Checklist.md:286-298 conserva los dueños delegados y distingue la revisión humana de las integraciones técnicas."
+      ],
+      "agent_action": "Preparar propuesta de fuente única o diagnóstico por lector es trabajo preparatorio posible; modificar código o integrar UI/contenido requiere autorización y coordinación con los propietarios."
+    }
+  ],
+  "conclusion": {
+    "current_user_decision_confirmed": "No se encontró base suficiente para presentar como pendiente vigente la decisión de quitar el autoload: ya fue ejecutada. La decisión explícita que persiste es el alcance de la limpieza residual (script/JSON/colector) y la aprobación humana de traducciones antes de lanzamiento.",
+    "safe_agent_work": [
+      "Conciliar/reportar afirmaciones históricas que contradicen el estado actual (sin editar los documentos canónicos por iniciativa propia).",
+      "Inventariar referencias estáticas y preparar propuesta técnica para el propietario.",
+      "Validar consistencia mecánica de catálogos si se autoriza una corrida y no se altera el módulo."
+    ],
+    "not_authorized": [
+      "Borrar, mover o refactorizar scripts/JSON de localización.",
+      "Cambiar estado, marcas, checklist, GLOBAL, documentación de M87, integración de módulos o contenido lingüístico.",
+      "Cerrar o reabrir el módulo M87 por cuenta propia."
+    ]
+  },
+  "limitations": [
+    "El sello/global de M87 se cita como declaración histórica; no se revalidó QA ni runtime.",
+    "No se ejecutaron tests, Godot, validador PO, auditor de claves ni collector; las citas de código son inspección estática del HEAD visible.",
+    "La presencia de un preload estático no prueba que el colector cargue en el juego/export; no se atribuye impacto runtime.",
+    "No se editaron documentos canónicos, proyecto, scripts, checklists, GLOBAL, bug log ni estados de terceros."
+  ]
+}
