@@ -6,6 +6,12 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P9d (**0 flips**): 3 defectos de la familia 'estado que no es verdad' — `BuildGhost.MOTIVOS_OCULTAN` sin `TERRENO_NO_CARGADO` (caja roja flotando sobre chunk sin cargar), `BuildGhost.ocultar()` sin reiniciar la animacion (caja a escala parcial al salir del pool), `BuildHudModel.es_temporal()` sin fallback a los motivos (HUD sin 'prueba de nuevo') — 2026-11-25 (Log 2462)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_fantasma_estado.gd` (24 checks, 0 fallos, EXIT 0; ROJO-VERDE revirtiendo los 3 fixes → 4 fallos/EXIT 1) + regresion 17 suites verdes (incl. iter4 45/0) — 2026-11-25 (Log 2462)
+- [x] [17-Construccion] BARRIDO CERRADO para el nucleo de M17 (manager, mundo, tipos, preview, ghost, hud, history) con el criterio 'el sistema muestra un estado que no es verdad' — 2026-11-25 (Log 2462)
+- [x] [Canal] Mensaje 078 (P9d) reportado a la directora — 2026-11-25 15:00
+- [x] [Log] Log reservado: **2462** — tanda P9d M17 (fantasma y HUD)
+- [ ] [Decision-pendiente] Propuse a la directora 2 caminos: (1) segunda auditoria con otro criterio (coherencia docs<->codigo de M17), (2) tomar otro modulo — **esperando su respuesta**
 - [x] [17-Construccion] Tanda P9c (**0 flips**, L225 anotado): la cache del fantasma se invalidaba solo en 4 rutas — faltaban `copiar_pieza()`, `limpiar_estructuras()` y `restaurar_estructuras()` (por cascada): el fantasma podia pintar VERDE una celda ya ocupada — 2026-11-25 (Log 2461)
 - [x] [17-Construccion] Contador auditable monótono nuevo `BuildPreview.recalculos_totales()` (NO resetea al invalidar); `recalculos()` de sesion intacto (lo usan iter2/iter3) — 2026-11-25 (Log 2461)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_cache_preview.gd` (17 checks, 0 fallos, EXIT 0; ROJO-VERDE sin el invalidar en copiar → 1 fallo/EXIT 1) + regresion 16 suites OK — 2026-11-25 (Log 2461)

@@ -1081,7 +1081,7 @@ la escritura no atomica: **el sistema mostraba un estado que ya no era verdad**.
   "F5: la linea de un rechazo permanente NO pide reintentar".
 - **ROJO-VERDE:** revirtiendo los 3 cambios → **4 fallos / EXIT 1**. Restaurados → 24/0.
 - **Regresión: 17 suites en verde** (M17 ×16 + M59), incluidas `iter2` (99/0), `iter3` (138/0) e
-  **`iter4` (45/0)** —后者 es la que prueba la línea de estado temporal del HUD.
+  **`iter4` (45/0)** —este ultimo es el que prueba la línea de estado temporal del HUD.
 
 ### 18.4 Cierre del barrido
 
