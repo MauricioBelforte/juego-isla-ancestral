@@ -1,0 +1,112 @@
+{
+ "M49": {
+  "79": {
+   "diseno_hits": 0,
+   "diseno_ej": [],
+   "game_hits": 35,
+   "game_ej": [
+    [
+     "game/isla-ancestral/scenes/main_island.tscn",
+     43,
+     "glow_enabled = true"
+    ],
+    [
+     "game/isla-ancestral/scenes/main_island.tscn",
+     44,
+     "glow_intensity = 0.4"
+    ],
+    [
+     "game/isla-ancestral/scenes/main_island.tscn",
+     45,
+     "glow_bloom = 0.05"
+    ]
+   ]
+  },
+  "109": {
+   "diseno_hits": 0,
+   "diseno_ej": [],
+   "game_hits": 0,
+   "game_ej": []
+  },
+  "120": {
+   "diseno_hits": 1,
+   "diseno_ej": [
+    [
+     55,
+     "→ luces puntuales fijas (horneadas si estático, pool si dinámico)"
+    ]
+   ],
+   "game_hits": 16,
+   "game_ej": [
+    [
+     "game/isla-ancestral/data/historias/secundarias.json",
+     65,
+     "\"contexto\": \"Catalina quiere recuperar la receta del pan de fiesta que su abuela horneaba para toda la plaza\","
+    ],
+    [
+     "game/isla-ancestral/data/historias/secundarias.json",
+     73,
+     "\"consecuencia\": { \"pan_fiesta_horneado\": true },"
+    ],
+    [
+     "game/isla-ancestral/data/items/items_abm.gd",
+     45,
+     "\"cocina\": [\"cocinar\", \"hornear\", \"freir\", \"calentar\"],"
+    ]
+   ]
+  },
+  "199": {
+   "diseno_hits": 0,
+   "diseno_ej": [],
+   "game_hits": 1,
+   "game_ej": [
+    [
+     "game/isla-ancestral/data/light/lighting_budget.json",
+     27,
+     "\"referencia\": \"CI M118 dispara bake con semilla fija; esta versión se rastreaba en este registro. Baked: sí para interio"
+    ]
+   ]
+  },
+  "200": {
+   "diseno_hits": 3,
+   "diseno_ej": [
+    [
+     13,
+     "│   └── niebla_por_bioma.tres     (13 biomas M09)"
+    ],
+    [
+     67,
+     "→ niebla en rango esperado según bioma/franja del registro"
+    ],
+    [
+     114,
+     "| M09 | Sky procedural por bioma + niebla del bioma |"
+    ]
+   ],
+   "game_hits": 33,
+   "game_ej": [
+    [
+     "game/isla-ancestral/data/light/fase_umbral.json",
+     17,
+     "\"curva\": \"res://data/light/fog_curve.tres\","
+    ],
+    [
+     "game/isla-ancestral/scripts/world/day_night_cycle.gd",
+     55,
+     "## Niebla por hora (fog_curve.tres, fase_umbral.json §niebla) + modulación"
+    ],
+    [
+     "game/isla-ancestral/scripts/world/day_night_cycle.gd",
+     58,
+     "## (reconciliación 2026-09-19: \"fog_curve existe pero no se carga en código\""
+    ]
+   ]
+  }
+ },
+ "M159": {
+  "catalog_dirs": [],
+  "obj_tres_count": 0,
+  "obj_tres_ej": []
+ },
+ "verify_script": false
+}

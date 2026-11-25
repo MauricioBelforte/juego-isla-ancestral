@@ -1,0 +1,322 @@
+{
+ "75": {
+  "path": "DOCUMENTACION\\75-Postgame\\plan-actual\\05-Checklist.md",
+  "q": 87,
+  "x": 43,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 24,
+    "text": "- [?] Definir el epílogo de la historia (M22) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M22 (deuda cross-módulo"
+   },
+   {
+    "line": 38,
+    "text": "- [?] Verificar streaming/LOD de las nuevas islas (M61) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cr"
+   },
+   {
+    "line": 42,
+    "text": "- [?] Diseñar 1-2 vecinos nuevos postgame (M19) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M19 (deuda cross-módu"
+   },
+   {
+    "line": 43,
+    "text": "- [?] Rutinas propias de los vecinos nuevos [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postga"
+   },
+   {
+    "line": 45,
+    "text": "- [?] Diálogos de vecinos postgame (M21) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M21 (deuda cross-módulo)"
+   },
+   {
+    "line": 52,
+    "text": "- [?] Muebles únicos de eventos postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/"
+   }
+  ]
+ },
+ "156": {
+  "path": "DOCUMENTACION\\156-Terrenos-Y-Movimiento\\plan-actual\\05-Checklist.md",
+  "q": 82,
+  "x": 223,
+  "blank": 2,
+  "sample": [
+   {
+    "line": 131,
+    "text": "- [?] Implementar property terrain_id: int [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): terrain_block.gd declara `terrain_type: String` (L"
+   },
+   {
+    "line": 132,
+    "text": "- [?] Implementar get_terrain_id() [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112, verificada por el director): func get_terrain_id = 0 definiciones en scripts/ (existe get_cu"
+   },
+   {
+    "line": 135,
+    "text": "- [?] Requerir CollisionShape3D hijo [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-V4.1-Flash-O"
+   },
+   {
+    "line": 137,
+    "text": "- [?] Crear escena base terrain_block.tscn [M] — **Auditoría A (agnes-3-flash, 2026-10-06):** | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `te"
+   },
+   {
+    "line": 140,
+    "text": "- [?] Configurar CollisionShape3D con BoxShape3D [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-"
+   },
+   {
+    "line": 143,
+    "text": "- [?] Asignar terrain_id correcto [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-V4.1-Flash-Open"
+   }
+  ]
+ },
+ "74": {
+  "path": "DOCUMENTACION\\74-Eventos\\plan-actual\\05-Checklist.md",
+  "q": 58,
+  "x": 227,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 93,
+    "text": "- [?] RF4.6: activar el recinto del evento (interacción M70) [M] | AUDIT 2026-10-13 (step-5-kilocode): el campo escena_recinto existe y se serializa (event_definition.gd L61/L188) "
+   },
+   {
+    "line": 94,
+    "text": "- [?] RF4.7: activar música y ambiente festivo por señales (M41/M42/M43) [M] | AUDIT 2026-10-13 (step-5-kilocode): existen senales de ciclo (evento_iniciado/terminado, event_manage"
+   },
+   {
+    "line": 117,
+    "text": "- [?] RF5.15: lanzar el minijuego/partida del festival por contrato de escena [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de minijuego/partida de festival en scripts/eventos/."
+   },
+   {
+    "line": 130,
+    "text": "- [?] RF6.7: entregar progreso vía M71 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de entrega de progreso a M71 (logros) en scripts/eventos/."
+   },
+   {
+    "line": 136,
+    "text": "- [?] RF6.13: informar en UI \"Ya recibiste la recompensa de este año\" [S] | AUDIT 2026-10-13 (step-5-kilocode): existe buzon_entregas.gd (recompensa fuera de inventario) y la senal"
+   },
+   {
+    "line": 148,
+    "text": "- [?] RF8.2: intercambiar recinto por variante_cubierta ante clima severo [M] | AUDIT 2026-10-13 (step-5-kilocode): _on_clima_cambio ante tormenta (event_manager.gd L176-186) es un"
+   }
+  ]
+ },
+ "73": {
+  "path": "DOCUMENTACION\\73-Coleccionables\\plan-actual\\05-Checklist.md",
+  "q": 56,
+  "x": 76,
+  "blank": 3,
+  "sample": [
+   {
+    "line": 39,
+    "text": "- [?] Testear conchas en 3 playas distintas [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de '3 playas'; el catalogo solo di"
+   },
+   {
+    "line": 47,
+    "text": "- [?] Testear minerales por región [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de minerales por region; las filas no tiene"
+   },
+   {
+    "line": 52,
+    "text": "- [?] Peces de temporada (M29) y hora (M31) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): las filas de peces no tienen campos temporada/hor"
+   },
+   {
+    "line": 53,
+    "text": "- [?] Trofeo de pesca como recompensa (M18) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria peces es moneda_anc"
+   },
+   {
+    "line": 55,
+    "text": "- [?] Testear peces raros (solo lluvia M32) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de peces raros por lluvia; sin int"
+   },
+   {
+    "line": 60,
+    "text": "- [?] Semillas de temporada [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L60 semillas temporada) DEGRADADO 31oct (DeepSeek "
+   }
+  ]
+ },
+ "71": {
+  "path": "DOCUMENTACION\\71-Progresion\\plan-actual\\05-Checklist.md",
+  "q": 44,
+  "x": 169,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 58,
+    "text": "- [?] Definir MilestoneDefinition con milestone_id, nombre_i18n, descripcion_i18n, condicion, recompensas [M] | AUDIT 2026-10-14 (step-5-kilocode): no existe una clase MilestoneDef"
+   },
+   {
+    "line": 62,
+    "text": "- [?] Crear milestone_catalog.tres como catálogo central cargado por el registry [M] | AUDIT 2026-10-14 (step-5-kilocode): NO existe milestone_catalog.tres; el catalogo real es dat"
+   },
+   {
+    "line": 63,
+    "text": "- [?] Implementar get_milestone(id) con búsqueda O(1) en diccionario precargado [M] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de get_milestone/get_unlock/get_logro/get_titulo en"
+   },
+   {
+    "line": 64,
+    "text": "- [?] Implementar get_unlock(id), get_logro(id) y get_titulo(id) con el mismo patrón [S] — DEGRADADO 2026-10-12 (atria-dawn-s2, QA Log 1714): las 3 funciones NO existen en scripts/"
+   },
+   {
+    "line": 73,
+    "text": "- [?] Registrar hitos reflejo de niveles de herramientas (M13: 9 herramientas x 4 niveles) [M] | AUDIT 2026-10-14 (step-5-kilocode): el reflejo M13 existe y esta cableado — conecta"
+   },
+   {
+    "line": 74,
+    "text": "- [?] Registrar hitos reflejo de niveles de casa (M18) [M] | AUDIT 2026-10-14 (step-5-kilocode): house_nivel via player_profile.gd (3831 B) y progresion como autoload; house_nivel "
+   }
+  ]
+ },
+ "27": {
+  "path": "DOCUMENTACION\\27-Islas-Del-Mundo\\plan-actual\\05-Checklist.md",
+  "q": 40,
+  "x": 152,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 74,
+    "text": "- [?] Validar que ninguna isla invade el templo subterráneo (M26) ni ruinas (M25) [C] — PREGUNTA PARA EL FUNDADOR: no hay check de invasión de templo/ruinas en world_generator.gd ("
+   },
+   {
+    "line": 78,
+    "text": "- [?] Log ERROR si tras 8 intentos no hay ancla válida (fallback: echar isla al anillo siguiente) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): no existe log ERROR por intent"
+   },
+   {
+    "line": 79,
+    "text": "- [?] Regeneración 80/0 de M10 produce anclas consistentes (test de regen) [C] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): test_generacion_m10_atria.gd cubre determinismo de re"
+   },
+   {
+    "line": 80,
+    "text": "- [?] Estructuras ancladas de M10 respetan las islas (no generan dentro del mar) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de validacion de estructuras contra agua"
+   },
+   {
+    "line": 82,
+    "text": "- [?] Los NPC (M19) y POI de M09 se generan sobre el terreno de la isla ya anclado [M] — **M19/M09** | AUDIT 2026-10-13 (step-5-kilocode): NPC usan TerrainLocator.get_height() (sha"
+   },
+   {
+    "line": 104,
+    "text": "- [?] Progreso real por pesos reportado a la pantalla de viaje (M28) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de reporte de progreso por pesos a la pantalla de viaje"
+   }
+  ]
+ },
+ "159": {
+  "path": "DOCUMENTACION\\159-Catalogo-De-Objetos\\plan-actual\\05-Checklist.md",
+  "q": 37,
+  "x": 105,
+  "blank": 5,
+  "sample": [
+   {
+    "line": 132,
+    "text": "- [?] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)"
+   },
+   {
+    "line": 135,
+    "text": "- [?] Definir recetas asociadas"
+   },
+   {
+    "line": 139,
+    "text": "- [?] Crear animaciones de uso"
+   },
+   {
+    "line": 140,
+    "text": "- [?] Integrar con M16 (Crafting)"
+   },
+   {
+    "line": 141,
+    "text": "- [?] Integrar con M18 (Casas)"
+   },
+   {
+    "line": 145,
+    "text": "- [?] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)"
+   }
+  ]
+ },
+ "49": {
+  "path": "DOCUMENTACION\\49-Iluminacion\\plan-actual\\05-Checklist.md",
+  "q": 25,
+  "x": 118,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 31,
+    "text": "- [?] Definir cielo procedural por bioma (M09) [M] -- agnes-2.5-flash 2026-09-12: sky_curve.tres + sky_color_ramp.tres EXISTS en data/light/; DayNightCycle._cargar_curvas() las car"
+   },
+   {
+    "line": 46,
+    "text": "- [?] Definir bake en CI (M118) con semilla fija [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 M108/M118 integrations; bake seed fixed in CI pipeline config"
+   },
+   {
+    "line": 47,
+    "text": "- [?] Definir memoria de lightmaps contra M62 [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 recibe reporte de lighting"
+   },
+   {
+    "line": 59,
+    "text": "- [?] Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNigh"
+   },
+   {
+    "line": 60,
+    "text": "- [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por "
+   },
+   {
+    "line": 65,
+    "text": "- [?] Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por e"
+   }
+  ]
+ },
+ "115": {
+  "path": "DOCUMENTACION\\115-Hardware\\plan-actual\\05-Checklist.md",
+  "q": 26,
+  "x": 78,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 23,
+    "text": "- [?] Documentar requisitos recomendados de CPU → KnownIssue: M97 marketing. Spec en 03-Diseno §2.1."
+   },
+   {
+    "line": 24,
+    "text": "- [?] Documentar requisitos recomendados de RAM → KnownIssue: M97. Spec en 03-Diseno §2.2."
+   },
+   {
+    "line": 25,
+    "text": "- [?] Documentar requisitos recomendados de GPU → KnownIssue: M97. Spec en 03-Diseno §2.3."
+   },
+   {
+    "line": 27,
+    "text": "- [?] Definir DirectX/OpenGL requerido → KnownIssue: M90/M04. Policy defined."
+   },
+   {
+    "line": 28,
+    "text": "- [?] Documentar espacio en disco requerido → KnownIssue: M98/M117 instalador. Estimación ~2GB."
+   },
+   {
+    "line": 29,
+    "text": "- [?] Crear tabla comparativa de requisitos por plataforma → KnownIssue: M97 editorial."
+   }
+  ]
+ },
+ "105": {
+  "path": "DOCUMENTACION\\105-Telemetria-De-Gameplay\\plan-actual\\05-Checklist.md",
+  "q": 28,
+  "x": 143,
+  "blank": 0,
+  "sample": [
+   {
+    "line": 145,
+    "text": "- [?] Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) → KnownIssue no bloqueante DoD: nucleo telemetria operativo (test headless 0 fallos"
+   },
+   {
+    "line": 189,
+    "text": "- [?] Definir encuesta post-puzzle — **M53** (UI de encuesta; M105 ya emite `solicitar_encuesta(puzzle_id)`)."
+   },
+   {
+    "line": 191,
+    "text": "- [?] Diseñar pregunta: \"¿Qué tan difícil te pareció este puzzle?\" — **M53** (texto de la UI de encuesta)."
+   },
+   {
+    "line": 193,
+    "text": "- [?] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`)."
+   },
+   {
+    "line": 196,
+    "text": "- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.  **KnownIss"
+   },
+   {
+    "line": 197,
+    "text": "- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.  **KnownIssue: requiere volumen real de datos; M105 ya emite"
+   }
+  ]
+ }
+}

@@ -1,0 +1,2513 @@
+{
+ "75": {
+  "path": "DOCUMENTACION/75-Postgame/plan-actual/05-Checklist.md",
+  "total": 87,
+  "cats": {
+   "bloqueado": 87
+  },
+  "items": [
+   {
+    "line": 24,
+    "cat": "bloqueado",
+    "text": "- [?] Definir el epílogo de la historia (M22) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M22 (deuda cross-módulo)"
+   },
+   {
+    "line": 38,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar streaming/LOD de las nuevas islas (M61) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)"
+   },
+   {
+    "line": 42,
+    "cat": "bloqueado",
+    "text": "- [?] Diseñar 1-2 vecinos nuevos postgame (M19) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M19 (deuda cross-módulo)"
+   },
+   {
+    "line": 43,
+    "cat": "bloqueado",
+    "text": "- [?] Rutinas propias de los vecinos nuevos [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 45,
+    "cat": "bloqueado",
+    "text": "- [?] Diálogos de vecinos postgame (M21) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M21 (deuda cross-módulo)"
+   },
+   {
+    "line": 52,
+    "cat": "bloqueado",
+    "text": "- [?] Muebles únicos de eventos postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 53,
+    "cat": "bloqueado",
+    "text": "- [?] Recetas de muebles integradas (M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)"
+   },
+   {
+    "line": 59,
+    "cat": "bloqueado",
+    "text": "- [?] Especies estacionales postgame (M50/M33) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M50 (deuda cross-módulo)"
+   },
+   {
+    "line": 60,
+    "cat": "bloqueado",
+    "text": "- [?] Plantas raras postgame (solo después del final) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 64,
+    "cat": "bloqueado",
+    "text": "- [?] Validar temporadas con el calendario (M29) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M29 (deuda cross-módulo)"
+   },
+   {
+    "line": 68,
+    "cat": "bloqueado",
+    "text": "- [?] Especies raras solo postgame (M36) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M36 (deuda cross-módulo)"
+   },
+   {
+    "line": 69,
+    "cat": "bloqueado",
+    "text": "- [?] Animales libres con ritmos propios (M35) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M35 (deuda cross-módulo)"
+   },
+   {
+    "line": 70,
+    "cat": "bloqueado",
+    "text": "- [?] Avistamientos marcados en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)"
+   },
+   {
+    "line": 72,
+    "cat": "bloqueado",
+    "text": "- [?] Validar aparición por clima (M28) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M28 (deuda cross-módulo)"
+   },
+   {
+    "line": 85,
+    "cat": "bloqueado",
+    "text": "- [?] Puzzle del Sello oculto (FASE 2, M24) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M24 (deuda cross-módulo)"
+   },
+   {
+    "line": 88,
+    "cat": "bloqueado",
+    "text": "- [?] Recompensa del puzzle sin spoilers [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 89,
+    "cat": "bloqueado",
+    "text": "- [?] Puzzle rejugable sin repetir (M24) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M24 (deuda cross-módulo)"
+   },
+   {
+    "line": 90,
+    "cat": "bloqueado",
+    "text": "- [?] Validar solución única del puzzle [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 94,
+    "cat": "bloqueado",
+    "text": "- [?] Categorías postgame en el catálogo (M73) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)"
+   },
+   {
+    "line": 95,
+    "cat": "bloqueado",
+    "text": "- [?] Documentos finales de la historia (M73) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)"
+   },
+   {
+    "line": 96,
+    "cat": "bloqueado",
+    "text": "- [?] Colecciones postgame con totales reales [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 97,
+    "cat": "bloqueado",
+    "text": "- [?] Compleción de colección = donación al museo (M37) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M37 (deuda cross-módulo)"
+   },
+   {
+    "line": 103,
+    "cat": "bloqueado",
+    "text": "- [?] Herramienta de jardín acuático (FASE 2, M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)"
+   },
+   {
+    "line": 104,
+    "cat": "bloqueado",
+    "text": "- [?] Mejora de herramienta postgame (M17) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M17 (deuda cross-módulo)"
+   },
+   {
+    "line": 107,
+    "cat": "bloqueado",
+    "text": "- [?] Herramienta con animación propia (M13) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M13 (deuda cross-módulo)"
+   },
+   {
+    "line": 108,
+    "cat": "bloqueado",
+    "text": "- [?] Validar receta de la herramienta postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 112,
+    "cat": "bloqueado",
+    "text": "- [?] Mejora del ático postgame (M17) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M17 (deuda cross-módulo)"
+   },
+   {
+    "line": 115,
+    "cat": "bloqueado",
+    "text": "- [?] Mejora con material raro postgame [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 123,
+    "cat": "bloqueado",
+    "text": "- [?] Cadenas secundarias postgame (M23) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M23 (deuda cross-módulo)"
+   },
+   {
+    "line": 124,
+    "cat": "bloqueado",
+    "text": "- [?] Historias que cierran arcos de vecinos (M19/M21) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M19 (deuda cross-módulo)"
+   },
+   {
+    "line": 127,
+    "cat": "bloqueado",
+    "text": "- [?] Diálogos postgame con doblaje si aplica (M93) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M93 (deuda cross-módulo)"
+   },
+   {
+    "line": 133,
+    "cat": "bloqueado",
+    "text": "- [?] Festivales rotativos postgame (M74) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M74 (deuda cross-módulo)"
+   },
+   {
+    "line": 134,
+    "cat": "bloqueado",
+    "text": "- [?] Programación en calendario (M29) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M29 (deuda cross-módulo)"
+   },
+   {
+    "line": 135,
+    "cat": "bloqueado",
+    "text": "- [?] Ciclo anual cozy sin fechas únicas [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 136,
+    "cat": "bloqueado",
+    "text": "- [?] Recompensas únicas de festival (M38/M20) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M38 (deuda cross-módulo)"
+   },
+   {
+    "line": 137,
+    "cat": "bloqueado",
+    "text": "- [?] Logros de eventos postgame (M72) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)"
+   },
+   {
+    "line": 141,
+    "cat": "bloqueado",
+    "text": "- [?] Secretos desbloqueables solo postgame (M71) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M71 (deuda cross-módulo)"
+   },
+   {
+    "line": 142,
+    "cat": "bloqueado",
+    "text": "- [?] Secretos anti-spoiler en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)"
+   },
+   {
+    "line": 143,
+    "cat": "bloqueado",
+    "text": "- [?] Secretos con pistas de exploración natural [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 144,
+    "cat": "bloqueado",
+    "text": "- [?] Sin secuencias bloqueantes en secretos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 145,
+    "cat": "bloqueado",
+    "text": "- [?] Validar secretos con ids únicos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 149,
+    "cat": "bloqueado",
+    "text": "- [?] Arrecife profundo (FASE 2, M51) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M51 (deuda cross-módulo)"
+   },
+   {
+    "line": 150,
+    "cat": "bloqueado",
+    "text": "- [?] Acceso con submarino (M67) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M67 (deuda cross-módulo)"
+   },
+   {
+    "line": 151,
+    "cat": "bloqueado",
+    "text": "- [?] Streaming del arrecife (M61/M10) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)"
+   },
+   {
+    "line": 152,
+    "cat": "bloqueado",
+    "text": "- [?] Fauna/submarina propia (M36/M51) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M36 (deuda cross-módulo)"
+   },
+   {
+    "line": 153,
+    "cat": "bloqueado",
+    "text": "- [?] Sin buceo frustrante (oxígeno generoso, cozy) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 157,
+    "cat": "bloqueado",
+    "text": "- [?] Isla flotante (FASE 2, M10) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M10 (deuda cross-módulo)"
+   },
+   {
+    "line": 158,
+    "cat": "bloqueado",
+    "text": "- [?] Acceso con dirigible (M67) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M67 (deuda cross-módulo)"
+   },
+   {
+    "line": 159,
+    "cat": "bloqueado",
+    "text": "- [?] Gravedad carismática sin romper mecánicas [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 160,
+    "cat": "bloqueado",
+    "text": "- [?] LOD del terreno flotante (M61) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)"
+   },
+   {
+    "line": 161,
+    "cat": "bloqueado",
+    "text": "- [?] Sin caídas frustrantes (muerte suave, retorno) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 165,
+    "cat": "bloqueado",
+    "text": "- [?] Jardín acuático (FASE 2, M16) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M16 (deuda cross-módulo)"
+   },
+   {
+    "line": 166,
+    "cat": "bloqueado",
+    "text": "- [?] Criadero de peces (FASE 2, M34) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M34 (deuda cross-módulo)"
+   },
+   {
+    "line": 174,
+    "cat": "bloqueado",
+    "text": "- [?] Hoja de ruta \"Isla al 100%\" en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)"
+   },
+   {
+    "line": 175,
+    "cat": "bloqueado",
+    "text": "- [?] % por categoría derivado (no almacenado) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 176,
+    "cat": "bloqueado",
+    "text": "- [?] Anti-spoiler: solo se ve lo descubierto (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)"
+   },
+   {
+    "line": 177,
+    "cat": "bloqueado",
+    "text": "- [?] Museo (M37) aporta su % al total [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M37 (deuda cross-módulo)"
+   },
+   {
+    "line": 178,
+    "cat": "bloqueado",
+    "text": "- [?] Sin grindeo en el 100% (actividades naturales) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 182,
+    "cat": "bloqueado",
+    "text": "- [?] Categoría \"Epílogo\" en M72 [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)"
+   },
+   {
+    "line": 183,
+    "cat": "bloqueado",
+    "text": "- [?] Logro: colección completa [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 187,
+    "cat": "bloqueado",
+    "text": "- [?] Logro: primer festival postgame [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 188,
+    "cat": "bloqueado",
+    "text": "- [?] Logro: 100% de la hoja de ruta [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 192,
+    "cat": "bloqueado",
+    "text": "- [?] Mundo 100% abierto tras el final [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 193,
+    "cat": "bloqueado",
+    "text": "- [?] Sin bloqueos de progresión postgame (M71) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M71 (deuda cross-módulo)"
+   },
+   {
+    "line": 194,
+    "cat": "bloqueado",
+    "text": "- [?] Transporte accesible a todas las zonas (M68) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M68 (deuda cross-módulo)"
+   },
+   {
+    "line": 195,
+    "cat": "bloqueado",
+    "text": "- [?] Exploración recompensada (M73/M71) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)"
+   },
+   {
+    "line": 201,
+    "cat": "bloqueado",
+    "text": "- [?] Hoja de ruta sin duplicación de estado [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 202,
+    "cat": "bloqueado",
+    "text": "- [?] Migración v1.4 del flag (M60) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el save declara `version: 1`; no existe migración v1.4 (restore acepta `postgame_unlocked`, no un"
+   },
+   {
+    "line": 203,
+    "cat": "bloqueado",
+    "text": "- [?] Catálogo como Resource embebido (no serializado) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el catálogo es `data/postgame/actividades.json` cargado en runtime, NO un Reso"
+   },
+   {
+    "line": 208,
+    "cat": "bloqueado",
+    "text": "- [?] Sin grindeo en actividades del 100% [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 210,
+    "cat": "bloqueado",
+    "text": "- [?] Sin logros imposibles (validados) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 211,
+    "cat": "bloqueado",
+    "text": "- [?] Epílogo cálido, no menú frío [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 212,
+    "cat": "bloqueado",
+    "text": "- [?] La isla sigue viva tras los créditos [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin artefacto en scripts/postgame/ ni data/postgame/ (grep 0 hits)"
+   },
+   {
+    "line": 217,
+    "cat": "bloqueado",
+    "text": "- [?] Pestaña \"Isla al 100%\" en el diario (M55) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M55 (deuda cross-módulo)"
+   },
+   {
+    "line": 218,
+    "cat": "bloqueado",
+    "text": "- [?] Notificación de meta cumplida (M44) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M44 (deuda cross-módulo)"
+   },
+   {
+    "line": 219,
+    "cat": "bloqueado",
+    "text": "- [?] Confeti sutil en logros finales (M52) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M52 (deuda cross-módulo)"
+   },
+   {
+    "line": 227,
+    "cat": "bloqueado",
+    "text": "- [?] Evento postgame durante viaje (M68) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M68 (deuda cross-módulo)"
+   },
+   {
+    "line": 228,
+    "cat": "bloqueado",
+    "text": "- [?] Expansión con módulo ausente en CHECKLIST [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no hay manejo de módulo ausente en el catálogo; solo `push_error` si el JSON es invál"
+   },
+   {
+    "line": 229,
+    "cat": "bloqueado",
+    "text": "- [?] Probar con profiler: hoja de ruta bajo demanda (M61/M116) [C] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M61 (deuda cross-módulo)"
+   },
+   {
+    "line": 233,
+    "cat": "bloqueado",
+    "text": "- [?] Integrar con M22 (epílogo) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M22 (deuda cross-módulo)"
+   },
+   {
+    "line": 234,
+    "cat": "bloqueado",
+    "text": "- [?] Integrar con M72 (categoría Epílogo) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M72 (deuda cross-módulo)"
+   },
+   {
+    "line": 235,
+    "cat": "bloqueado",
+    "text": "- [?] Integrar con M74/M29 (eventos) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M74 (deuda cross-módulo)"
+   },
+   {
+    "line": 236,
+    "cat": "bloqueado",
+    "text": "- [?] Integrar con M73/M37/M55 (100%) [M] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M73 (deuda cross-módulo)"
+   },
+   {
+    "line": 237,
+    "cat": "bloqueado",
+    "text": "- [?] Integrar con M92 (tutorial \"¿qué sigue?\") [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): contenido cuyo dueño es M92 (deuda cross-módulo)"
+   },
+   {
+    "line": 243,
+    "cat": "bloqueado",
+    "text": "- [?] Actualizar CHECKLIST-GLOBAL, README, ESTADO-PARALELO y log [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el Global quedó en 130/130 (invalido por §21.8.2.b) y ESTADO-PARALEL"
+   },
+   {
+    "line": 244,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar con verificar_checklist.py (sin alertas nuevas) [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): `verificar_checklist.py` sale con codigo 1 (alertas); el item pide \"s"
+   },
+   {
+    "line": 245,
+    "cat": "bloqueado",
+    "text": "- [?] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] | GATE-1 2026-10-31 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): 130 ítems exactos = verdadero, pero `plan-inicial == plan-actual` es "
+   }
+  ]
+ },
+ "156": {
+  "path": "DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md",
+  "total": 82,
+  "cats": {
+   "bloqueado": 82
+  },
+  "items": [
+   {
+    "line": 131,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar property terrain_id: int [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): terrain_block.gd declara `terrain_type: String` (L6), no `terrain_id: int`; 0 hits de `ter"
+   },
+   {
+    "line": 132,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar get_terrain_id() [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112, verificada por el director): func get_terrain_id = 0 definiciones en scripts/ (existe get_current_terrain_id en terrain_detector.gd,"
+   },
+   {
+    "line": 135,
+    "cat": "bloqueado",
+    "text": "- [?] Requerir CollisionShape3D hijo [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash ms"
+   },
+   {
+    "line": 137,
+    "cat": "bloqueado",
+    "text": "- [?] Crear escena base terrain_block.tscn [M] — **Auditoría A (agnes-3-flash, 2026-10-06):** | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `terrain_block.tscn` NO EXISTE en ningun di"
+   },
+   {
+    "line": 140,
+    "cat": "bloqueado",
+    "text": "- [?] Configurar CollisionShape3D con BoxShape3D [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agne"
+   },
+   {
+    "line": 143,
+    "cat": "bloqueado",
+    "text": "- [?] Asignar terrain_id correcto [S] - BUG-070 lote 8: TerrainBlock inexistente - terrain_block.gd es [?] L127 (agnes 2026-10-06: NO existe) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 2"
+   },
+   {
+    "line": 144,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_ceped [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_ceped` NO EXISTE (0 archivos terrain_block*.tscn/.tres)"
+   },
+   {
+    "line": 146,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_barro [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_barro` NO E"
+   },
+   {
+    "line": 148,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_pavimento [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_pavimen"
+   },
+   {
+    "line": 150,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_arena [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_arena` NO E"
+   },
+   {
+    "line": 152,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_agua [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_agua` NO EXI"
+   },
+   {
+    "line": 154,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_nieve [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_nieve` NO E"
+   },
+   {
+    "line": 156,
+    "cat": "bloqueado",
+    "text": "- [?] Crear variante terrain_block_rocas [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): variante `terrain_block_rocas` NO E"
+   },
+   {
+    "line": 167,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar get_current_speed() [S] - BUG-070 lote 8: integracion M11 inexistente - grep _on_terrain_changed/_update_effective_speed/get_current_speed = 0 hits en scripts/ | FLIP 2026-10-26 (Reflection-Beam-1.0, T1"
+   },
+   {
+    "line": 200,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_ceped.gd [S] — atria-dawn 2026-10-13 (lote I): NO se crea el .gd nombrado; la implementacion es scenes/terrenos/particulas_ceped.tscn (CPUParticles3D con props directas) + gestor unico terrain_part"
+   },
+   {
+    "line": 201,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_barro.gd [S] — atria-dawn 2026-10-13: idem particulas_ceped.gd — escena particulas_barro.tscn en su lugar (data-driven)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco"
+   },
+   {
+    "line": 202,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_arena.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_arena.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data"
+   },
+   {
+    "line": 203,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_agua.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_agua.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/t"
+   },
+   {
+    "line": 204,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_nieve.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_nieve.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data"
+   },
+   {
+    "line": 205,
+    "cat": "bloqueado",
+    "text": "- [?] Crear particulas_rocas.gd [S] — atria-dawn 2026-10-13: idem — escena particulas_rocas.tscn  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data"
+   },
+   {
+    "line": 223,
+    "cat": "bloqueado",
+    "text": "- [?] Crear terrain_footstep_audio.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubiert"
+   },
+   {
+    "line": 224,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar referencia a AudioStreamPlayer3D [S] - BUG-070 lote 8: feedback audio inexistente - play_footstep = 0 hits en scripts/"
+   },
+   {
+    "line": 226,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar play_footstep(terrain_id) [M] - BUG-070 lote 8: feedback audio inexistente - play_footstep = 0 hits en scripts/ | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `play_f"
+   },
+   {
+    "line": 228,
+    "cat": "bloqueado",
+    "text": "- [?] Aplicar variacion de pitch configurable [M] - BUG-070 lote 8: feedback audio inexistente - play_footstep = 0 hits en scripts/"
+   },
+   {
+    "line": 229,
+    "cat": "bloqueado",
+    "text": "- [?] Aplicar volumen configurable [S] - BUG-070 lote 8: feedback audio inexistente - play_footstep = 0 hits en scripts/ | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin sistema de a"
+   },
+   {
+    "line": 230,
+    "cat": "bloqueado",
+    "text": "- [?] Configurar bus de audio a SFX [S] - BUG-070 lote 8: feedback audio inexistente - play_footstep = 0 hits en scripts/"
+   },
+   {
+    "line": 231,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_ceped_step_1.wav [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_ceped_step_1.wav` NO EXISTE: el proyecto tiene 0 archivos .wav/.ogg/.mp3 y no hay c"
+   },
+   {
+    "line": 232,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_ceped_step_2.wav [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_ceped_step_2.wav` NO EXISTE (0 archivos de audio en todo el proyecto)"
+   },
+   {
+    "line": 233,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_barro_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_barro_step_1.wav` NO EXIST"
+   },
+   {
+    "line": 234,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_barro_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_barro_step_2.wav` NO EXIST"
+   },
+   {
+    "line": 235,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_pavimento_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_pavimento_step_1.wav` "
+   },
+   {
+    "line": 236,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_pavimento_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_pavimento_step_2.wav` "
+   },
+   {
+    "line": 237,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_arena_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_arena_step_1.wav` NO EXIST"
+   },
+   {
+    "line": 238,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_arena_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_arena_step_2.wav` NO EXIST"
+   },
+   {
+    "line": 239,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_agua_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_agua_step_1.wav` NO EXISTE "
+   },
+   {
+    "line": 240,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_agua_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_agua_step_2.wav` NO EXISTE "
+   },
+   {
+    "line": 241,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_nieve_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_nieve_step_1.wav` NO EXIST"
+   },
+   {
+    "line": 242,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_nieve_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_nieve_step_2.wav` NO EXIST"
+   },
+   {
+    "line": 243,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_rocas_step_1.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_rocas_step_1.wav` NO EXIST"
+   },
+   {
+    "line": 244,
+    "cat": "bloqueado",
+    "text": "- [?] Crear samples audio_rocas_step_2.wav [S] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `audio_rocas_step_2.wav` NO EXIST"
+   },
+   {
+    "line": 246,
+    "cat": "bloqueado",
+    "text": "- [?] Evitar reproduccion doble [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin reproductor de pasos no hay doble reproduccion que evitar (`play_footstep` = 0 hits)"
+   },
+   {
+    "line": 247,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar fade al cambiar terreno [M] — FORMULA (Beam 479): 03-Diseno.md \"Spec feedback de terreno\" ### Fade al cambiar terreno. Flipado tras verificacion de artefacto en disco. - BUG-070 lote 8: feedback audio i"
+   },
+   {
+    "line": 267,
+    "cat": "bloqueado",
+    "text": "- [?] Crear escena terrain_indicator.tscn [M] (revertido: BUG-070 Familia A, artefacto inexistente, atria-dawn-s2 msg 144, aplicado por atria-dawn 2026-10-08) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por ag"
+   },
+   {
+    "line": 268,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar TextureRect para icono de terreno [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `TerrainIndicator`/`terrain_indicator` = 0 hits en scripts/ y scenes/: no hay Texture"
+   },
+   {
+    "line": 269,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar Label para nombre de terreno [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): no hay Label de nombre de terreno (el nodo contenedor no existe)"
+   },
+   {
+    "line": 270,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar ProgressBar para velocidad efectiva [S] — FORMULA (Beam 346): 03-Diseno.md \"Presupuestos de terreno\" ### ProgressBar para velocidad efectiva. Flipado tras verificacion de artefacto en disco. — TerrainModifi"
+   },
+   {
+    "line": 271,
+    "cat": "bloqueado",
+    "text": "- [?] Conectar signal terrain_changed a UI [M] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/ - AUDITORIA T-agnes blq-M156 2026-10-06 — REVERT por el direct"
+   },
+   {
+    "line": 272,
+    "cat": "bloqueado",
+    "text": "- [?] Actualizar icono segun terreno [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin nodo de indicador no hay icono que actualizar"
+   },
+   {
+    "line": 273,
+    "cat": "bloqueado",
+    "text": "- [?] Actualizar texto segun terreno [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin nodo de indicador no hay texto que actualizar"
+   },
+   {
+    "line": 274,
+    "cat": "bloqueado",
+    "text": "- [?] Actualizar barra de progreso [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin nodo de indicador no hay barra que actualizar"
+   },
+   {
+    "line": 275,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar tooltip con detalles [M] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/ | FLIP 2026-10-26 (Reflection-Beam-1.0, T173-156): spec en 03-Dise"
+   },
+   {
+    "line": 276,
+    "cat": "bloqueado",
+    "text": "- [?] Posicionar UI en esquina inferior [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin UI no hay posicionamiento en esquina"
+   },
+   {
+    "line": 277,
+    "cat": "bloqueado",
+    "text": "- [?] Configurar opacidad de UI [S] - BUG-070 lote 8: indicador UI inexistente - TerrainIndicator/terrain_indicator = 0 hits en scripts/ y scenes/ | FLIP 2026-10-26 (Reflection-Beam-1.0, T173-156): spec en 03-Diseno.md §"
+   },
+   {
+    "line": 278,
+    "cat": "bloqueado",
+    "text": "- [?] Animar transiciones de UI [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin UI no hay transiciones que animar"
+   },
+   {
+    "line": 290,
+    "cat": "bloqueado",
+    "text": "- [?] Crear test_terrain_provider.gd [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2)  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es da"
+   },
+   {
+    "line": 291,
+    "cat": "bloqueado",
+    "text": "- [?] Test: get_terrain_data retorna data valida [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): el archivo padre test_terrain_provider.gd es [?] (L281, agnes: AUSENTE); grep get_terrain_data sobre tests/ = 0 hits "
+   },
+   {
+    "line": 292,
+    "cat": "bloqueado",
+    "text": "- [?] Test: get_terrain_data retorna null para ID invalido [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): el archivo padre test_terrain_provider.gd es [?] (L281, agnes: AUSENTE); grep get_terrain_data sobre tests/"
+   },
+   {
+    "line": 295,
+    "cat": "bloqueado",
+    "text": "- [?] Crear test_terrain_detector.gd [M]  [Auditoria T-agnes blq-M156 2026-10-06: el archivo nombrado AUSENTE en disco; la funcionalidad real es data-driven en data/terrenos/terrenos.json (7 tipos, testeado) y/o cubierta"
+   },
+   {
+    "line": 296,
+    "cat": "bloqueado",
+    "text": "- [?] Test: deteccion inicial es -1 [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): el archivo padre test_terrain_detector.gd es [?] (L286, agnes: AUSENTE); test_terrenos.gd solo hace has_signal() - sin cobertura d"
+   },
+   {
+    "line": 297,
+    "cat": "bloqueado",
+    "text": "- [?] Test: deteccion actualiza terrain_id [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): el archivo padre test_terrain_detector.gd es [?] (L286, agnes: AUSENTE); test_terrenos.gd solo hace has_signal() - sin cobe"
+   },
+   {
+    "line": 299,
+    "cat": "bloqueado",
+    "text": "- [?] Test: debounce evita updates rapidos [M] - BUG-070 lote 8 re-verificacion (DeepSeek #112): el archivo padre test_terrain_detector.gd es [?] (L286, agnes: AUSENTE); test_terrenos.gd solo hace has_signal() - sin cobe"
+   },
+   {
+    "line": 326,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar que raycast no impacta FPS [M] — glm-5.3-flash 2026-09-02 (iter. 1, Log 490): TerrainDetector RayCast3D + debounce §10.2 (clase lista, montaje en escena iter. 2) - BUG-070 lote 8 (atria-dawn, evidencia Li"
+   },
+   {
+    "line": 327,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar que audio no causa lag [S] — P1: profiler Audio + frame-time, 10 sfx simultaneos; 0 frames > 100 ms y CPU mezclador < 2% por frame — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 2026-10-23 "
+   },
+   {
+    "line": 328,
+    "cat": "bloqueado",
+    "text": "- [?] Medir tiempo de ejecucion por deteccion [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): no hay medicion de tiempo por deteccion registrada"
+   },
+   {
+    "line": 329,
+    "cat": "bloqueado",
+    "text": "- [?] Documentar impacto en rendimiento [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): el impacto en rendimiento no se puede documentar sin la medicion de L326-L328"
+   },
+   {
+    "line": 347,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar TerrainDataProvider como hijo del jugador [M] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2) - BUG-070 lote 8 re-verificacion (DeepSeek #112): 'como hijo del jugador' exige nodo en"
+   },
+   {
+    "line": 354,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar TerrainFootstepAudio al jugador [M] — FORMULA (Beam 480): 03-Diseno.md \"Spec TerrainFootstepAudio\" ### Agregar TerrainFootstepAudio al jugador. Flipado tras verificacion de artefacto en disco. - BUG-070 lot"
+   },
+   {
+    "line": 355,
+    "cat": "bloqueado",
+    "text": "- [?] Configurar AudioStreamPlayer3D [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): sub-item de TerrainFootstepAudio (L345 [?]); TerrainFootstepAudio = 0 hits en scripts/ y scenes/"
+   },
+   {
+    "line": 356,
+    "cat": "bloqueado",
+    "text": "- [?] Asignar terrain_provider al TerrainFootstepAudio [S] — TerrainProvider autoload + 7 terrenos JSON data-driven (testeado §4.2) - BUG-070 lote 8 re-verificacion (DeepSeek #112): TerrainFootstepAudio = 0 hits en scrip"
+   },
+   {
+    "line": 357,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar TerrainIndicator a la escena UI [M] - BUG-070 lote 8: Patron D - el entregable padre no existe (terrain_footstep_audio.gd L214 [?]; terrain_indicator.tscn L258 [ ]); grep 0 hits | FLIP 2026-10-26 (Reflectio"
+   },
+   {
+    "line": 358,
+    "cat": "bloqueado",
+    "text": "- [?] Conectar TerrainIndicator al terrain_changed [S] - BUG-070 lote 8 re-verificacion (DeepSeek #112): TerrainIndicator = 0 hits en scripts/ y scenes/ | FLIP 2026-10-26 (Reflection-Beam-1.0, T174-156): spec en 03-Disen"
+   },
+   {
+    "line": 362,
+    "cat": "bloqueado",
+    "text": "- [?] Crear escena de prueba con 7 terrenos [M] — data/terrenos/terrenos.json con los 7 tipos (testeado) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): NO existe escena de prueba con 7"
+   },
+   {
+    "line": 375,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar sonidos diferentes por terreno [S] — P2: tabla material->sfx, 6 materiales x 5 pasos; 6/6 sfx distintos, 0 generico — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 2026-10-23 G-5.3-Flash-Age"
+   },
+   {
+    "line": 378,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar indicador de UI actualiza [S] — P5: senal de estado precede al cambio de UI <= 2 frames; 100% de cambios reflejados — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 2026-10-23 G-5.3-Flash-Age"
+   },
+   {
+    "line": 379,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar que jugador nunca se bloquea [C] — P6: recorrido autonomo por 12 estructuras; 0 congelamientos > 5 s y 1 recuperacion automatica si ocurre (nudge) — protocolo definido en 03 sec \"Protocolos de medicion\" ("
+   },
+   {
+    "line": 380,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar FPS estable a 60 [M] — P7: REPORTE-FPS (TC13 M138); >= 60 fps promedio, 1% low >= 45, 0 picos > 250 ms — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 2026-10-23 G-5.3-Flash-Agente; EJECUCIO"
+   },
+   {
+    "line": 381,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar sin errores en consola [S] — P8: get_debug_output filtro ERROR/FATAL en tanda canonica de 15 min; 0 ERROR/FATAL de sesion — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 2026-10-23 G-5.3-Fla"
+   },
+   {
+    "line": 385,
+    "cat": "bloqueado",
+    "text": "- [?] Ajustar volumenes de audio por terreno [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin audio no hay volumenes que ajustar"
+   },
+   {
+    "line": 386,
+    "cat": "bloqueado",
+    "text": "- [?] Ajustar variacion de pitch por terreno [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): sin audio no hay pitch que ajustar"
+   },
+   {
+    "line": 390,
+    "cat": "bloqueado",
+    "text": "- [?] Agregar tooltips informativos [S] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 236): `tooltip` de terreno = 0 hits: no hay tooltips informativos"
+   },
+   {
+    "line": 393,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar coherencia visual total [M] — P9: style-guide por el dueno de arte (V1/V2) sobre 6 materiales del prototipo; 100% dentro del canon del dueno (no del agente) — protocolo definido en 03 sec \"Protocolos de m"
+   },
+   {
+    "line": 394,
+    "cat": "bloqueado",
+    "text": "- [?] Verificar coherencia audio total [M] — P10: mezclador (buses amb/sfx/usd) + tabla por zona M42; 100% zonas con ambiente propio y 0 SFX fuera de canon — protocolo definido en 03 sec \"Protocolos de medicion\" (S56b 20"
+   }
+  ]
+ },
+ "74": {
+  "path": "DOCUMENTACION/74-Eventos/plan-actual/05-Checklist.md",
+  "total": 58,
+  "cats": {
+   "bloqueado": 58
+  },
+  "items": [
+   {
+    "line": 93,
+    "cat": "bloqueado",
+    "text": "- [?] RF4.6: activar el recinto del evento (interacción M70) [M] | AUDIT 2026-10-13 (step-5-kilocode): el campo escena_recinto existe y se serializa (event_definition.gd L61/L188) pero no hay instanciacion ni activacion "
+   },
+   {
+    "line": 94,
+    "cat": "bloqueado",
+    "text": "- [?] RF4.7: activar música y ambiente festivo por señales (M41/M42/M43) [M] | AUDIT 2026-10-13 (step-5-kilocode): existen senales de ciclo (evento_iniciado/terminado, event_manager.gd L22-31) pero no hay senial ni consu"
+   },
+   {
+    "line": 117,
+    "cat": "bloqueado",
+    "text": "- [?] RF5.15: lanzar el minijuego/partida del festival por contrato de escena [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de minijuego/partida de festival en scripts/eventos/."
+   },
+   {
+    "line": 130,
+    "cat": "bloqueado",
+    "text": "- [?] RF6.7: entregar progreso vía M71 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de entrega de progreso a M71 (logros) en scripts/eventos/."
+   },
+   {
+    "line": 136,
+    "cat": "bloqueado",
+    "text": "- [?] RF6.13: informar en UI \"Ya recibiste la recompensa de este año\" [S] | AUDIT 2026-10-13 (step-5-kilocode): existe buzon_entregas.gd (recompensa fuera de inventario) y la senal evento_recompensa_entregada (event_mana"
+   },
+   {
+    "line": 148,
+    "cat": "bloqueado",
+    "text": "- [?] RF8.2: intercambiar recinto por variante_cubierta ante clima severo [M] | AUDIT 2026-10-13 (step-5-kilocode): _on_clima_cambio ante tormenta (event_manager.gd L176-186) es un STUB: imprime y hace pass ('la UI consu"
+   },
+   {
+    "line": 149,
+    "cat": "bloqueado",
+    "text": "- [?] RF8.3: trasladar el evento un día si no existe variante y el clima es severo [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de reprogramacion de evento por clima severo sin variante (la senal evento_reprogramado "
+   },
+   {
+    "line": 150,
+    "cat": "bloqueado",
+    "text": "- [?] RF8.4: no interrumpir el evento abruptamente si la tormenta aparece a mitad [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de logica de no-interrupcion de evento ante tormenta a mitad."
+   },
+   {
+    "line": 151,
+    "cat": "bloqueado",
+    "text": "- [?] RF8.5: esperar al cierre del día para finalizar un evento interrumpido [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de espera al cierre del dia para finalizar evento interrumpido."
+   },
+   {
+    "line": 152,
+    "cat": "bloqueado",
+    "text": "- [?] RF8.6: ejecutar diálogos de variante para recintos techados (M21) [M] | AUDIT 2026-10-13 (step-5-kilocode): los dialogos con variante existentes son estacionales/contextuales (M162, test_contextual_dialogue_m162.gd"
+   },
+   {
+    "line": 156,
+    "cat": "bloqueado",
+    "text": "- [?] RF9.4: re-programar la sorpresa descartada a otro día [M] | AUDIT 2026-10-13 (step-5-kilocode): _sorpresa_semanal_count existe (event_manager.gd L41) pero no hay logica de reprogramar la sorpresa descartada a otro "
+   },
+   {
+    "line": 160,
+    "cat": "bloqueado",
+    "text": "- [?] RF10.3: conectar tutorial de primer festival (M92) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de tutorial/primer festival (M92) en scripts/eventos/."
+   },
+   {
+    "line": 163,
+    "cat": "bloqueado",
+    "text": "- [?] RF12.1: cancelar con aviso amable si la escena del recinto falla (M63) [M] | AUDIT 2026-10-13 (step-5-kilocode): la recompensa compensatoria al cancelar esta implementada y testeada (event_manager.gd L272-283, test"
+   },
+   {
+    "line": 164,
+    "cat": "bloqueado",
+    "text": "- [?] RF12.2: jamás crashear ante recinto faltante o corrupto [M] | AUDIT 2026-10-13 (step-5-kilocode): evidencia parcial — recinto FALTANTE no crashea (test_barrido_m74.gd L139 'evento sin escena_recinto no crashea' + l"
+   },
+   {
+    "line": 171,
+    "cat": "bloqueado",
+    "text": "- [?] RN4: carga de recintos bajo demanda (M63) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de carga de recintos bajo demanda/streaming (M63) en scripts/eventos/."
+   },
+   {
+    "line": 174,
+    "cat": "bloqueado",
+    "text": "- [?] RN7: avisos accesibles con texto y ícono (M58) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de avisos accesibles con texto e icono (M58) en scripts/eventos/."
+   },
+   {
+    "line": 175,
+    "cat": "bloqueado",
+    "text": "- [?] RN8: opción de pausar avisos de eventos [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de opcion de pausar avisos de eventos."
+   },
+   {
+    "line": 176,
+    "cat": "bloqueado",
+    "text": "- [?] RN9: alto contraste en banners [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de alto contraste en banners de evento."
+   },
+   {
+    "line": 177,
+    "cat": "bloqueado",
+    "text": "- [?] RN10: nombres y descripciones siempre localizables (M57) [S] | AUDIT 2026-10-13 (step-5-kilocode): los nombres/descripciones existen como CLAVES de localizacion (nombre_clave/descripcion_clave, event_definition.gd "
+   },
+   {
+    "line": 178,
+    "cat": "bloqueado",
+    "text": "- [?] RN11: cero texto hardcodeado en GDScript [S] | AUDIT 2026-10-13 (step-5-kilocode): hay texto hardcodeado en espanol en prints de debug (event_manager.gd L168 'Buzon: %d entregas purgadas...' y similares); no se ver"
+   },
+   {
+    "line": 179,
+    "cat": "bloqueado",
+    "text": "- [?] RN12: determinismo con misma semilla de partida [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de semilla/seed en scripts/eventos/; no hay logica de determinismo por semilla de partida."
+   },
+   {
+    "line": 181,
+    "cat": "bloqueado",
+    "text": "- [?] RN14: banners no-modales que no bloquean el juego [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de banners/modales en scripts/eventos/ (la UI de avisos no esta implementada en el modulo)."
+   },
+   {
+    "line": 217,
+    "cat": "bloqueado",
+    "text": "- [?] I10: consumir M20 amistad.modificar para recompensas de amistad [M] | AUDIT 2026-10-13 (step-5-kilocode): el consumidor existe pero esta ROTO: recompensa_def.gd L95-97 llama fs.sumar_puntos() y friendship_service.g"
+   },
+   {
+    "line": 219,
+    "cat": "bloqueado",
+    "text": "- [?] I12: consumir M71 progreso para recompensas de progresión [M] | AUDIT 2026-10-13 (step-5-kilocode): el gancho existe pero esta DORMIDO: recompensa_def.gd L103-109 llama registrar_progreso_evento solo si M71 lo expo"
+   },
+   {
+    "line": 220,
+    "cat": "bloqueado",
+    "text": "- [?] I13: consumir M37 registrar_recuerdo para la galería [M] | AUDIT 2026-10-13 (step-5-kilocode): mismo patron: recompensa_def.gd L110+ llama museo.registrar_recuerdo() por duck-typing, pero el unico 'func registrar_r"
+   },
+   {
+    "line": 222,
+    "cat": "bloqueado",
+    "text": "- [?] I15: consumir M63 cargador bajo demanda para recintos [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de cargador bajo demanda de recintos (M63) en scripts/eventos/ (ver item 15)."
+   },
+   {
+    "line": 223,
+    "cat": "bloqueado",
+    "text": "- [?] I16: consumir M53 convenciones de UI/HUD [M] | AUDIT 2026-10-13 (step-5-kilocode): el diseno separa UI por senales (event_manager.gd L16) pero no hay consumo de convenciones M53 en el modulo."
+   },
+   {
+    "line": 224,
+    "cat": "bloqueado",
+    "text": "- [?] I17: consumir M57 localización en todas las claves de texto [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 usos reales de tr() en scripts/eventos/ (las coincidencias de 'tr(' eran de str()); las claves nombre_clave/de"
+   },
+   {
+    "line": 225,
+    "cat": "bloqueado",
+    "text": "- [?] I18: consumir M58 accesibilidad en banners y avisos [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de accesibilidad (M58) en banners/avisos del modulo."
+   },
+   {
+    "line": 230,
+    "cat": "bloqueado",
+    "text": "- [?] I23: M94 anti-FOMO: recompensas importantes con ruta alternativa (M39/M37/M23) [M] | AUDIT 2026-10-13 (step-5-kilocode): el anti-FOMO anual esta implementado (event_manager.gd L9/L128, todos los eventos vuelven a P"
+   },
+   {
+    "line": 231,
+    "cat": "bloqueado",
+    "text": "- [?] I24: integración con M92 tutorial en el primer festival [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de tutorial/primer festival (M92) en scripts/eventos/ (ver item 12)."
+   },
+   {
+    "line": 232,
+    "cat": "bloqueado",
+    "text": "- [?] I25: integración con M104 analytics: registrar participación sin PII [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de analytics/telemetria (M104) en scripts/eventos/."
+   },
+   {
+    "line": 246,
+    "cat": "bloqueado",
+    "text": "- [?] J10: recompensa duplicada: aviso claro en la ventana del festival [S] | AUDIT 2026-10-13 (step-5-kilocode): hay proteccion anti-duplicado de recompensas (recompensas_recibidas en event_state.gd + deep-copy en buzon"
+   },
+   {
+    "line": 247,
+    "cat": "bloqueado",
+    "text": "- [?] J11: festival con lluvia: variante cubierta sin cancelación [M] | AUDIT 2026-10-13 (step-5-kilocode): _on_clima_cambio con tormenta es un stub (print + pass, event_manager.gd L176-186); no se aplica la variante cub"
+   },
+   {
+    "line": 248,
+    "cat": "bloqueado",
+    "text": "- [?] J12: tormenta a mitad de evento: cierre normal sin interrupción abrupta [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de logica de cierre normal ante tormenta a mitad de evento (ver item 8)."
+   },
+   {
+    "line": 252,
+    "cat": "bloqueado",
+    "text": "- [?] J16: recinto roto/corrupto: evento_cancelado + compensación sin crash [M] | AUDIT 2026-10-13 (step-5-kilocode): la compensacion al cancelar existe y esta testeada (event_manager.gd L272-283) pero el disparador 'rec"
+   },
+   {
+    "line": 254,
+    "cat": "bloqueado",
+    "text": "- [?] J18: carga concurrente doble: sin clonación de recompensas [C] | AUDIT 2026-10-13 (step-5-kilocode): el buzon deep-copia las recompensas (buzon_entregas.gd L38/47/64) pero no hay prueba ni guarda de carga concurren"
+   },
+   {
+    "line": 256,
+    "cat": "bloqueado",
+    "text": "- [?] J20: cumpleaños de NPC (M29) y feria el mismo día: feria se corre [M] | AUDIT 2026-10-13 (step-5-kilocode): las prioridades de solape entre eventos de M74 existen (event_definition.gd L49-50, senal solape_resuelto "
+   },
+   {
+    "line": 271,
+    "cat": "bloqueado",
+    "text": "- [?] K4: carga de recintos solo al iniciar el evento (bajo demanda) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de carga/instanciacion de escena de recinto al iniciar evento (ver items 1 y 15)."
+   },
+   {
+    "line": 272,
+    "cat": "bloqueado",
+    "text": "- [?] K5: liberar escenas de recinto al terminarse el evento [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de liberacion (queue_free/free) de escenas de recinto en produccion; los unicos free() son de tests."
+   },
+   {
+    "line": 274,
+    "cat": "bloqueado",
+    "text": "- [?] K7: numeración de diccionarios con StringName en lugar de String para ids [M] | AUDIT 2026-10-13 (step-5-kilocode): hay conversiones defensivas a StringName (event_manager.gd L631/712/715) pero los diccionarios del"
+   },
+   {
+    "line": 277,
+    "cat": "bloqueado",
+    "text": "- [?] K10: persistencia diferida del historial anual (una escritura al fin de año) [M] | AUDIT 2026-10-13 (step-5-kilocode): el manager escucha anio_cambio (comentario L15) pero no hay escritura diferida unica del histor"
+   },
+   {
+    "line": 278,
+    "cat": "bloqueado",
+    "text": "- [?] K11: UI de agenda con instancias recicladas por fila [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de UI de agenda con reciclado de instancias en el modulo (los 'instancia' son de tests)."
+   },
+   {
+    "line": 279,
+    "cat": "bloqueado",
+    "text": "- [?] K12: banners con animación única de entrada, sin repintado continuo [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de animacion/tween en banners de evento."
+   },
+   {
+    "line": 280,
+    "cat": "bloqueado",
+    "text": "- [?] K13: monitorear allocate de strings en bucles de agenda [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de monitoreo de allocate de strings en bucles de agenda."
+   },
+   {
+    "line": 281,
+    "cat": "bloqueado",
+    "text": "- [?] K14: test de frame budget en Profiler de Godot [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de test de frame budget con Profiler para el modulo."
+   },
+   {
+    "line": 282,
+    "cat": "bloqueado",
+    "text": "- [?] K15: medición de memoria del catálogo cargado [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de medicion de memoria del catalogo cargado."
+   },
+   {
+    "line": 315,
+    "cat": "bloqueado",
+    "text": "- [?] M9: planear suite test_clima: variante cubierta y traslado [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe suite test_clima planificada para variante cubierta y traslado (los tests existentes cubren otro frente"
+   },
+   {
+    "line": 320,
+    "cat": "bloqueado",
+    "text": "- [?] M14: planear caso de carga concurrente sin clonación [C] | AUDIT 2026-10-13 (step-5-kilocode): no existe caso de carga concurrente sin clonacion planificado (ver item 37)."
+   },
+   {
+    "line": 326,
+    "cat": "bloqueado",
+    "text": "- [?] M20: medir frame budget con Profiler en escena de festival [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de medicion de frame budget con Profiler en escena de festival."
+   },
+   {
+    "line": 327,
+    "cat": "bloqueado",
+    "text": "- [?] M21: verificar 0 errores en consola al entrar en Play Mode [M] | AUDIT 2026-10-13 (step-5-kilocode): verificacion manual en Play Mode; no verificable por disco. Pendiente de ejecucion."
+   },
+   {
+    "line": 328,
+    "cat": "bloqueado",
+    "text": "- [?] M22: verificar ausencia de NullReference/MissingReference en runtime [M] | AUDIT 2026-10-13 (step-5-kilocode): verificacion de runtime (NullReference/MissingReference); no verificable por disco. Pendiente."
+   },
+   {
+    "line": 329,
+    "cat": "bloqueado",
+    "text": "- [?] M23: probar el flujo completo de un festival de extremo a extremo [C] | AUDIT 2026-10-13 (step-5-kilocode): prueba de flujo completo extremo a extremo; manual. Pendiente."
+   },
+   {
+    "line": 330,
+    "cat": "bloqueado",
+    "text": "- [?] M24: probar en la escena de la plaza y en la del recinto [M] | AUDIT 2026-10-13 (step-5-kilocode): prueba en escena de plaza y de recinto; manual. Pendiente."
+   },
+   {
+    "line": 331,
+    "cat": "bloqueado",
+    "text": "- [?] M25: probar con clima severo forzado desde el debug (M32/M110) [M] | AUDIT 2026-10-13 (step-5-kilocode): prueba con clima severo forzado desde debug (M32/M110); manual. Pendiente."
+   },
+   {
+    "line": 332,
+    "cat": "bloqueado",
+    "text": "- [?] M26: probar recompensas con inventario lleno y vacío [M] | AUDIT 2026-10-13 (step-5-kilocode): prueba de recompensas con inventario lleno/vacio; manual. Pendiente."
+   },
+   {
+    "line": 333,
+    "cat": "bloqueado",
+    "text": "- [?] M27: probar ausencia de FOMO: perder un festival y vivirlo el año siguiente [C] | AUDIT 2026-10-13 (step-5-kilocode): prueba anti-FOMO (perder un festival y vivirirlo al ano siguiente); manual. Pendiente."
+   },
+   {
+    "line": 365,
+    "cat": "bloqueado",
+    "text": "- [?] Simulación de inicio/fin por día: **colgada por regresiones ajenas en el árbol** (event_bus.gd parse error + vehicle_manager.gd autoload roto — avisos en ESTADO-PARALELO, dueños ajenos) — se revalida con el árbol s"
+   }
+  ]
+ },
+ "73": {
+  "path": "DOCUMENTACION/73-Coleccionables/plan-actual/05-Checklist.md",
+  "total": 56,
+  "cats": {
+   "bloqueado": 51,
+   "known": 5
+  },
+  "items": [
+   {
+    "line": 39,
+    "cat": "bloqueado",
+    "text": "- [?] Testear conchas en 3 playas distintas [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de '3 playas'; el catalogo solo distingue fuente 'playa'/'playa_evento', n"
+   },
+   {
+    "line": 47,
+    "cat": "bloqueado",
+    "text": "- [?] Testear minerales por región [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de minerales por region; las filas no tienen campo region"
+   },
+   {
+    "line": 52,
+    "cat": "bloqueado",
+    "text": "- [?] Peces de temporada (M29) y hora (M31) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): las filas de peces no tienen campos temporada/hora; sin integracion M29/M31 (solo fauna e"
+   },
+   {
+    "line": 53,
+    "cat": "bloqueado",
+    "text": "- [?] Trofeo de pesca como recompensa (M18) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria peces es moneda_ancestral x20, no un trofeo de pesca (M18)"
+   },
+   {
+    "line": 55,
+    "cat": "bloqueado",
+    "text": "- [?] Testear peces raros (solo lluvia M32) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de peces raros por lluvia; sin integracion M32"
+   },
+   {
+    "line": 60,
+    "cat": "known",
+    "text": "- [?] Semillas de temporada [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L60 semillas temporada) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+   },
+   {
+    "line": 61,
+    "cat": "bloqueado",
+    "text": "- [?] Recompensa de colección (semilla rara M33) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria plantas es moneda_ancestral x15, no una semilla rara ("
+   },
+   {
+    "line": 63,
+    "cat": "bloqueado",
+    "text": "- [?] Testear plantas de las 4 estaciones (M29) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test estacional de plantas; sin integracion M29"
+   },
+   {
+    "line": 68,
+    "cat": "bloqueado",
+    "text": "- [?] Insectos nocturnos y diurnos (M31) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): las filas de insectos no tienen campo horario; sin integracion M31"
+   },
+   {
+    "line": 69,
+    "cat": "bloqueado",
+    "text": "- [?] Jaula decorativa como recompensa (M18) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria insectos es moneda_ancestral x10, no una jaula (M18)"
+   },
+   {
+    "line": 71,
+    "cat": "bloqueado",
+    "text": "- [?] Testear insectos en biomas distintos [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de insectos por bioma"
+   },
+   {
+    "line": 76,
+    "cat": "bloqueado",
+    "text": "- [?] Esqueleto completo como recompensa (M37) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria fosiles es moneda_ancestral x15; 'Esqueleto Ancestral' e"
+   },
+   {
+    "line": 77,
+    "cat": "bloqueado",
+    "text": "- [?] Excavación con huevos (2 bloques) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): mecanica de excavacion con huevos es de M25; 0 hits en scripts/coleccionables"
+   },
+   {
+    "line": 79,
+    "cat": "known",
+    "text": "- [?] Testear fósiles en ruinas y montañas [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T256-73): spec en 03-Diseno.md § (L79 testear fósiles) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+   },
+   {
+    "line": 84,
+    "cat": "known",
+    "text": "- [?] Cartas de NPC (M19) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L84 cartas NPC) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+   },
+   {
+    "line": 85,
+    "cat": "bloqueado",
+    "text": "- [?] Sobre de regalo como recompensa (M20) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria cartas es moneda_ancestral x10; 'Sobre de Regalo Raro' es i"
+   },
+   {
+    "line": 87,
+    "cat": "bloqueado",
+    "text": "- [?] Testear cartas de temporada [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de cartas de temporada"
+   },
+   {
+    "line": 93,
+    "cat": "bloqueado",
+    "text": "- [?] Álbum premium como recompensa (M55) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria fotos es moneda_ancestral x10, no un album premium (M55)"
+   },
+   {
+    "line": 95,
+    "cat": "bloqueado",
+    "text": "- [?] Testear fotos especiales (festival M74) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de fotos especiales de festival; sin integracion M74"
+   },
+   {
+    "line": 100,
+    "cat": "known",
+    "text": "- [?] Muebles de evento (M74) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L100 muebles evento) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+   },
+   {
+    "line": 101,
+    "cat": "bloqueado",
+    "text": "- [?] Mueble exclusivo como recompensa (M18) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria muebles es moneda_ancestral x15, no un mueble exclusivo (M"
+   },
+   {
+    "line": 102,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar al colocar en la casa (M18) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no hay hook de colocacion en casa; _categoria_para_fuente solo mapea fuente 'mueble' (M18"
+   },
+   {
+    "line": 103,
+    "cat": "bloqueado",
+    "text": "- [?] Testear muebles de tienda rotativa [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de tienda rotativa"
+   },
+   {
+    "line": 108,
+    "cat": "bloqueado",
+    "text": "- [?] Atuendos de NPC (M20) [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L108 atuendos NPC) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flas"
+   },
+   {
+    "line": 109,
+    "cat": "bloqueado",
+    "text": "- [?] Atuendo exclusivo como recompensa (M46) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria ropa es moneda_ancestral x15, no un atuendo exclusivo (M4"
+   },
+   {
+    "line": 111,
+    "cat": "bloqueado",
+    "text": "- [?] Testear ropa de las 4 estaciones [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test estacional de ropa"
+   },
+   {
+    "line": 116,
+    "cat": "bloqueado",
+    "text": "- [?] Herramientas de crafting avanzado (M16) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): las filas existen pero no hay integracion con crafting avanzado (M16); solo fuente 'her"
+   },
+   {
+    "line": 117,
+    "cat": "bloqueado",
+    "text": "- [?] Mejora de herramienta como recompensa [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria herramientas es moneda_ancestral x15, no una mejora"
+   },
+   {
+    "line": 119,
+    "cat": "bloqueado",
+    "text": "- [?] Testear herramientas únicas (1 por partida) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de unicidad por partida"
+   },
+   {
+    "line": 124,
+    "cat": "bloqueado",
+    "text": "- [?] Documentos de la biblioteca [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): NO existe categoria 'documentos' en catalog.json (19 categorias: minerales, animales, conchas, reli"
+   },
+   {
+    "line": 125,
+    "cat": "bloqueado",
+    "text": "- [?] Lore desbloqueado como recompensa (M55) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria mensajes es moneda_ancestral x10; no hay entrega de lore "
+   },
+   {
+    "line": 126,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar al leer (M21/M70) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe fuente 'leer' ni 'documento' en _categoria_para_fuente; sin categoria documentos"
+   },
+   {
+    "line": 127,
+    "cat": "bloqueado",
+    "text": "- [?] Testear documentos sin spoilers (orden de lectura) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de orden de lectura ni anti-spoiler de documentos"
+   },
+   {
+    "line": 132,
+    "cat": "known",
+    "text": "- [?] Mapas de exploración [M] | FLIP 2026-10-26 (Reflection-Beam-1.0, T057-73/T058-73/T073-73/T074-73): spec en 03-Diseno.md § (L132 mapas exploración) DEGRADADO 31oct (DeepSeek #477 P-100: INFLADO spec-only)"
+   },
+   {
+    "line": 133,
+    "cat": "bloqueado",
+    "text": "- [?] Tesoro oculto como recompensa (M71) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria mapas es moneda_ancestral x15, no un tesoro oculto (M71)"
+   },
+   {
+    "line": 135,
+    "cat": "bloqueado",
+    "text": "- [?] Testear mapas con coordenadas correctas [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de coordenadas de mapas"
+   },
+   {
+    "line": 141,
+    "cat": "bloqueado",
+    "text": "- [?] Pista de puzzle como recompensa (M24) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria simbolos es moneda_ancestral x15, no una pista de puzzle (M"
+   },
+   {
+    "line": 143,
+    "cat": "bloqueado",
+    "text": "- [?] Testear símbolos de los 7 anillos (M26) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de los 7 anillos; sin integracion M26"
+   },
+   {
+    "line": 149,
+    "cat": "bloqueado",
+    "text": "- [?] Historia de NPC como recompensa (M20) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria mensajes es moneda_ancestral x10; no hay entrega de histori"
+   },
+   {
+    "line": 157,
+    "cat": "bloqueado",
+    "text": "- [?] Contenido oculto como recompensa (M55) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria secretos es moneda_ancestral x20, no contenido oculto (M55"
+   },
+   {
+    "line": 165,
+    "cat": "bloqueado",
+    "text": "- [?] Final alterno como recompensa (M22) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): la recompensa de la categoria objetos_historia es moneda_ancestral x15; el final alterno es"
+   },
+   {
+    "line": 167,
+    "cat": "bloqueado",
+    "text": "- [?] Testear objetos de los 7 capítulos [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no existe test de los 7 capitulos"
+   },
+   {
+    "line": 172,
+    "cat": "bloqueado",
+    "text": "- [?] Otorgar recompensa definida (M14/M38) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): _on_categoria_completa (L188) SOLO emite la senal; comentario literal: 'M14/M38 daran el "
+   },
+   {
+    "line": 173,
+    "cat": "bloqueado",
+    "text": "- [?] Notificación especial al completar (M44) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin integracion M44; el unico consumidor de categoria_completed es achievement_service"
+   },
+   {
+    "line": 174,
+    "cat": "bloqueado",
+    "text": "- [?] Confeti sutil por evento (M52) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin integracion M52; 0 hits de confeti/particulas por evento en scripts/coleccionables"
+   },
+   {
+    "line": 175,
+    "cat": "bloqueado",
+    "text": "- [?] Desbloquear progresión (M71: receta M16, área, atajo M69) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): sin integracion M71/M16/M69; 0 hits de recetas/areas/atajos en script"
+   },
+   {
+    "line": 179,
+    "cat": "bloqueado",
+    "text": "- [?] Progreso por categoría en el diario (M55) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): porcentaje_categoria/get_section_name existen pero NINGUN archivo fuera de colecciona"
+   },
+   {
+    "line": 190,
+    "cat": "bloqueado",
+    "text": "- [?] Migración de saves antiguos [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): restore_save_data descarta version < VERSION con 'return' (rechazo, no migracion); no hay codigo de"
+   },
+   {
+    "line": 195,
+    "cat": "bloqueado",
+    "text": "- [?] Recolectar con inventario lleno (M14) o durante diálogo (M21, bloqueado) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): inventario lleno / dialogo bloqueado: 0 hits en script"
+   },
+   {
+    "line": 196,
+    "cat": "bloqueado",
+    "text": "- [?] Recolectar en evento (M74) e ítem de fuente borrada (fallback) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): evento M74 / item de fuente borrada: 0 hits de fallback en scrip"
+   },
+   {
+    "line": 197,
+    "cat": "bloqueado",
+    "text": "- [?] Catálogo estático sin consultas por frame (M61) y sin GC pesado (M62) [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): no hay _process (cierto), pero 'sin GC pesado (M62)' no t"
+   },
+   {
+    "line": 198,
+    "cat": "bloqueado",
+    "text": "- [?] Probar 500 ítems de estado sin lag y con profiler (M116) [C] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el catalogo tiene 81 items, no 500; no hay corrida de profiler registr"
+   },
+   {
+    "line": 199,
+    "cat": "bloqueado",
+    "text": "- [?] Probar 22 categorías en estado inicial y colección con 1 faltante [M] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): el catalogo tiene 19 categorias, no 22 (test_coleccionables_l"
+   },
+   {
+    "line": 204,
+    "cat": "bloqueado",
+    "text": "- [?] Probar ciclo completo: recolectar → registrar → ver en diario → completar → recompensa [C] | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): cubre registrar/completar, pero 'ver en "
+   },
+   {
+    "line": 215,
+    "cat": "bloqueado",
+    "text": "- [?] Confirmar 130 ítems exactos y plan-inicial == plan-actual [S] — agnes-2026-09-06: HEADER CORREGIDO a 135 ítems; discrepancia entre header (130) y conteo real (135). Pendiente verificación con plan-inicial. | GATE-1"
+   },
+   {
+    "line": 266,
+    "cat": "bloqueado",
+    "text": "- [?] Recompensas de gema_ancestral/moneda_ancestral vinculadas a M159/M93 (dueño: modulos de economia) | GATE-1 2026-11-01 DS-V4.1-Flash-Opencode (autorizado por agnes-3-flash msg 234): 0 hits de M159/M93 en scripts/col"
+   }
+  ]
+ },
+ "71": {
+  "path": "DOCUMENTACION/71-Progresion/plan-actual/05-Checklist.md",
+  "total": 44,
+  "cats": {
+   "bloqueado": 43,
+   "known": 1
+  },
+  "items": [
+   {
+    "line": 58,
+    "cat": "bloqueado",
+    "text": "- [?] Definir MilestoneDefinition con milestone_id, nombre_i18n, descripcion_i18n, condicion, recompensas [M] | AUDIT 2026-10-14 (step-5-kilocode): no existe una clase MilestoneDefinition; los hitos se modelan como dicci"
+   },
+   {
+    "line": 62,
+    "cat": "bloqueado",
+    "text": "- [?] Crear milestone_catalog.tres como catálogo central cargado por el registry [M] | AUDIT 2026-10-14 (step-5-kilocode): NO existe milestone_catalog.tres; el catalogo real es data/progresion/hitos.json (8875 B, 25 hito"
+   },
+   {
+    "line": 63,
+    "cat": "bloqueado",
+    "text": "- [?] Implementar get_milestone(id) con búsqueda O(1) en diccionario precargado [M] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de get_milestone/get_unlock/get_logro/get_titulo en scripts/progresion/; el acceso es por _"
+   },
+   {
+    "line": 64,
+    "cat": "known",
+    "text": "- [?] Implementar get_unlock(id), get_logro(id) y get_titulo(id) con el mismo patrón [S] — DEGRADADO 2026-10-12 (atria-dawn-s2, QA Log 1714): las 3 funciones NO existen en scripts/. Grep global de `func (get_unlock|get_l"
+   },
+   {
+    "line": 73,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hitos reflejo de niveles de herramientas (M13: 9 herramientas x 4 niveles) [M] | AUDIT 2026-10-14 (step-5-kilocode): el reflejo M13 existe y esta cableado — conectar_tool_controller (L193), nivel_herramie"
+   },
+   {
+    "line": 74,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hitos reflejo de niveles de casa (M18) [M] | AUDIT 2026-10-14 (step-5-kilocode): house_nivel via player_profile.gd (3831 B) y progresion como autoload; house_nivel nivel 3 existe (test_progresion.gd L316)"
+   },
+   {
+    "line": 76,
+    "cat": "bloqueado",
+    "text": "- [?] Respetar que la fuente de verdad de niveles es M13/M18; el 71 solo refleja y condiciona [M] | AUDIT 2026-10-14 (step-5-kilocode): confirmado por diseno — progression_manager.gd L15 documenta duck-typing con M13 (to"
+   },
+   {
+    "line": 77,
+    "cat": "bloqueado",
+    "text": "- [?] Permitir desbloqueos cuya condición referencia niveles de herramientas (ej: picota nivel 3 → cueva profunda) [M] | AUDIT 2026-10-14 (step-5-kilocode): _evaluar_nivel_modulo_puro (L351) + obtener_nivel_herramienta ("
+   },
+   {
+    "line": 85,
+    "cat": "bloqueado",
+    "text": "- [?] Definir AchievementDefinition con logro_id, nombre_i18n, descripcion_i18n y condicion [M] | AUDIT 2026-10-14 (step-5-kilocode): no existe clase AchievementDefinition ni logro_id; los logros no estan modelados como "
+   },
+   {
+    "line": 94,
+    "cat": "bloqueado",
+    "text": "- [?] Garantizar que ningún logro sea imposible de alcanzar tras el postgame (M75) [M] | AUDIT 2026-10-14 (step-5-kilocode): detectar_condiciones_imposibles_estaticas (L388) + _es_condicion_imposible (L396) en codigo; la"
+   },
+   {
+    "line": 99,
+    "cat": "bloqueado",
+    "text": "- [?] Definir estadísticas mínimas iniciales: items_recolectados, items_crafteados, monedas_ganadas_total, monedas_gastadas_total, trueques_realizados, objetos_vendidos, donaciones, amistades_maximas, sellos, capitulos, "
+   },
+   {
+    "line": 115,
+    "cat": "bloqueado",
+    "text": "- [?] RNF5: data-driven total en .tres con validación en editor [M] | AUDIT 2026-10-14 (step-5-kilocode): el catalogo es data-driven pero en JSON (data/progresion/hitos.json), no .tres; la validacion en editor no existe "
+   },
+   {
+    "line": 124,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de desbloqueos: apertura de recetas, zonas, mecánicas, títulos y contenido narrativo [M] | AUDIT 2026-10-14 (step-5-kilocode): los 5 tipos estan tipados en el dominio — senales progreso_desbloquead"
+   },
+   {
+    "line": 125,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de mejoras: herramientas M13 (9x4 niveles) y casas M18 como progresión vertical [M] | AUDIT 2026-10-14 (step-5-kilocode): M13 9x4 confirmado (conectar_tool_controller L193, nivel_herramienta_cambio"
+   },
+   {
+    "line": 126,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de reputación: amistad individual M20 (0-4) + reputación comunitaria derivada [M] | AUDIT 2026-10-14 (step-5-kilocode): amistad 0-4 con reflejo (integrar_amistad + test L267); reputacion comunitari"
+   },
+   {
+    "line": 127,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de colecciones: museo M37, coccionables M73, fauna M36, fotografía M56 como progresión horizontal [M] | AUDIT 2026-10-14 (step-5-kilocode): dominio 'colecciones' existe en hitos.json (1 hito) y M37"
+   },
+   {
+    "line": 128,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de hitos narrativos: 7 capítulos y 7 sellos de M22 como esqueleto del progreso [M] | AUDIT 2026-10-14 (step-5-kilocode): dominio 'historia' existe en hitos.json (3 hitos) y los 7 capitulos/sellos d"
+   },
+   {
+    "line": 129,
+    "cat": "bloqueado",
+    "text": "- [?] Analizar dominio de economía: M38 como facilitador y no como objetivo de progreso [M] | AUDIT 2026-10-14 (step-5-kilocode): dominio economia con 5 hitos + _on_transaccion_registrada (L226); M38 como facilitador con"
+   },
+   {
+    "line": 138,
+    "cat": "bloqueado",
+    "text": "- [?] Definir curva temprana: desbloqueos frecuentes en días 1-7 (cada 30-60 min) [M] | AUDIT 2026-10-14 (step-5-kilocode): no hay curva de desbloqueos temprana parametrizada; los 10 hitos 'generales' de hitos.json no ti"
+   },
+   {
+    "line": 139,
+    "cat": "bloqueado",
+    "text": "- [?] Definir curva media: desbloqueos espaciados en semanas 2-4 (cada 2-4 días de juego) [M] | AUDIT 2026-10-14 (step-5-kilocode): idem — sin curva media definida en datos ni codigo."
+   },
+   {
+    "line": 140,
+    "cat": "bloqueado",
+    "text": "- [?] Definir curva tardía: desbloqueos selectos post-capítulo 4 orientados a completitud [M] | AUDIT 2026-10-14 (step-5-kilocode): curva tardia no definida; los 3 hitos de dominio 'historia' dependen de M22."
+   },
+   {
+    "line": 144,
+    "cat": "bloqueado",
+    "text": "- [?] Asegurar que todo es desbloqueable: sin elecciones excluyentes permanentes [M] | AUDIT 2026-10-14 (step-5-kilocode): sin elecciones excluyentes permanentes — no hay flags de exclusion en hitos.json; el diseno de pr"
+   },
+   {
+    "line": 171,
+    "cat": "bloqueado",
+    "text": "- [?] Diagramar flujo de condición imposible con cooperación de M66 [M] | AUDIT 2026-10-14 (step-5-kilocode): deteccion estatica implementada (_es_condicion_imposible L396); el diagrama de cooperacion con M66 no existe c"
+   },
+   {
+    "line": 194,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hito reflejo por cada herramienta al alcanzar cada nivel [M] | AUDIT 2026-10-14 (step-5-kilocode): nivel_herramienta_cambio (L216) + test_nivel_herramienta.gd (M13 iter 5) — el reflejo por herramienta/niv"
+   },
+   {
+    "line": 195,
+    "cat": "bloqueado",
+    "text": "- [?] Definir condiciones nivel_modulo(herramienta, ref, nivel) en el catálogo [M] | AUDIT 2026-10-14 (step-5-kilocode): el tipo de condicion 'nivel_modulo' existe en el evaluador (L351) y los hitos de hitos.json usan co"
+   },
+   {
+    "line": 202,
+    "cat": "bloqueado",
+    "text": "- [?] Consumir la señal de cambio de nivel de casa de M18 (nombre a confirmar) [M] | AUDIT 2026-10-14 (step-5-kilocode): house_nivel se lee por player_profile (valor 3 en test L316) pero la senal de M18 no esta conectada"
+   },
+   {
+    "line": 203,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hitos reflejo de niveles de casa [M] | AUDIT 2026-10-14 (step-5-kilocode): house_nivel via player_profile.gd (3831 B) y progresion como autoload; house_nivel nivel 3 existe (test_progresion.gd L316). El r"
+   },
+   {
+    "line": 204,
+    "cat": "bloqueado",
+    "text": "- [?] Definir condiciones nivel_modulo(casa, ref, nivel) [M] | AUDIT 2026-10-14 (step-5-kilocode): mismo evaluador nivel_modulo (L351) cubre casa; hitos.json tiene condiciones por nivel de casa. | CORRECCION 2026-10-15 ("
+   },
+   {
+    "line": 212,
+    "cat": "bloqueado",
+    "text": "- [?] Actualizar estadísticas de amistad por NPC y hallazgos (\"amigos en nivel N\") [M] | AUDIT 2026-10-14 (step-5-kilocode): integrar_amistad cubre el reflejo por NPC (dominio amistad, 6 hitos); la stat 'amigos en nivel "
+   },
+   {
+    "line": 215,
+    "cat": "bloqueado",
+    "text": "- [?] Permitir desbloqueos sociales por amistad (trueques únicos M38, eventos M74) sin bloquear contenido principal [M] | AUDIT 2026-10-14 (step-5-kilocode): desbloqueos por amistad existen (hitos de dominio amistad) sin"
+   },
+   {
+    "line": 221,
+    "cat": "bloqueado",
+    "text": "- [?] Consumir sello_obtenido(sello_id) y capitulo_avanzado(capitulo_id) como solo lectura [M] | AUDIT 2026-10-14 (step-5-kilocode): sello_obtenido no aparece en codigo de M71; el dominio 'historia' usa hitos por capitul"
+   },
+   {
+    "line": 222,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hitos narrativos reflejos por sello y capítulo [M] | AUDIT 2026-10-14 (step-5-kilocode): dominio 'historia' (3 hitos) existe pero no hay reflejo por sello individual. | CORRECCION 2026-10-15 (step-5-kiloc"
+   },
+   {
+    "line": 223,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar hitos narrativos reflejos por sello y capitulo [M] | AUDIT 2026-10-14 (step-5-kilocode): dominio 'historia' (3 hitos) existe pero no hay reflejo por sello individual. | CORRECCION 2026-10-15 (step-5-kiloc"
+   },
+   {
+    "line": 224,
+    "cat": "bloqueado",
+    "text": "- [?] Definir condiciones sello_historia(sello_id) y capitulo_historia(capitulo_id) [M] | AUDIT 2026-10-14 (step-5-kilocode): el tipo de condicion 'sello_historia'/'capitulo_historia' no existe en el evaluador; las condi"
+   },
+   {
+    "line": 225,
+    "cat": "bloqueado",
+    "text": "- [?] Permitir desbloqueos de contenido tardío condicionados a sellos con vigilancia de M66 [M] | AUDIT 2026-10-14 (step-5-kilocode): sin desbloqueos por sello en hitos.json; la deteccion de condiciones imposibles (M66) "
+   },
+   {
+    "line": 226,
+    "cat": "bloqueado",
+    "text": "- [?] Registrar los 5 finales de M22 como hitos de cierre [M] | AUDIT 2026-10-14 (step-5-kilocode): 0 hits de finales de M22 en hitos.json; los finales son de M22 (22-Historia-Principal)."
+   },
+   {
+    "line": 227,
+    "cat": "bloqueado",
+    "text": "- [?] Coordinar con postgame (M75) la re-priorización de metas tras finalizar [M] | AUDIT 2026-10-14 (step-5-kilocode): sin coordinacion con M75 en codigo; postgame no implementado."
+   },
+   {
+    "line": 246,
+    "cat": "bloqueado",
+    "text": "- [?] Condición actualmente no cumplible: reportada a M66 con ruta alternativa [M] | AUDIT 2026-10-14 (step-5-kilocode): reportada a M66 por diseno (comentario del item); la deteccion estatica existe (L388) pero la ruta "
+   },
+   {
+    "line": 250,
+    "cat": "bloqueado",
+    "text": "- [?] Muchos hitos simultáneos al despertar: cola de notificaciones priorizada en M53 [M] | AUDIT 2026-10-14 (step-5-kilocode): signals de hito existen (L20) sin cola priorizada de notificaciones en M53."
+   },
+   {
+    "line": 267,
+    "cat": "bloqueado",
+    "text": "- [?] Condiciones como RefCounted reutilizados desde el pool del registry, sin instanciación en runtime [M] | AUDIT 2026-10-14 (step-5-kilocode): condiciones evaluadas como diccionarios puros (evaluar_pura L260) sin pool"
+   },
+   {
+    "line": 275,
+    "cat": "bloqueado",
+    "text": "- [?] Crear 02-Analisis.md con dominio, curvas, anti-frustración, alternativas y decisiones [M] — D1-D10 — verificado Log 623: 02-Analisis.md plan-actual con D1-D10 documentadas | AUDIT 2026-10-14 (step-5-kilocode): 02-A"
+   },
+   {
+    "line": 279,
+    "cat": "bloqueado",
+    "text": "- [?] Crear 05-Checklist.md con más de 130 ítems todos completados [M] | AUDIT 2026-10-14 (step-5-kilocode): el checklist existe con 213 items (>130) pero 45 quedan [?]; el item pide 'todos completados'. Parcial."
+   },
+   {
+    "line": 292,
+    "cat": "bloqueado",
+    "text": "- [?] Definir prueba de condición imposible: detección estática en editor y ruta alternativa en runtime [M] | AUDIT 2026-10-14 (step-5-kilocode): detectar_condiciones_imposibles_estaticas (L388) cubre la deteccion; la pr"
+   },
+   {
+    "line": 295,
+    "cat": "bloqueado",
+    "text": "- [?] Definir prueba de determinismo: misma partida → mismos hitos en el mismo orden [M] | AUDIT 2026-10-14 (step-5-kilocode): test_progresion.gd (20 KB) cubre evaluacion y condiciones; la prueba de determinismo (mismos "
+   }
+  ]
+ },
+ "27": {
+  "path": "DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/05-Checklist.md",
+  "total": 40,
+  "cats": {
+   "known": 37,
+   "bloqueado": 3
+  },
+  "items": [
+   {
+    "line": 74,
+    "cat": "known",
+    "text": "- [?] Validar que ninguna isla invade el templo subterráneo (M26) ni ruinas (M25) [C] — PREGUNTA PARA EL FUNDADOR: no hay check de invasión de templo/ruinas en world_generator.gd (verificado por grep). El 03 de M27 prome"
+   },
+   {
+    "line": 78,
+    "cat": "known",
+    "text": "- [?] Log ERROR si tras 8 intentos no hay ancla válida (fallback: echar isla al anillo siguiente) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): no existe log ERROR por intentos de ancla; INTENTOS_MAX=12 es de terre"
+   },
+   {
+    "line": 79,
+    "cat": "known",
+    "text": "- [?] Regeneración 80/0 de M10 produce anclas consistentes (test de regen) [C] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): test_generacion_m10_atria.gd cubre determinismo de regen de chunks/biomas/semilla, 0 hits de "
+   },
+   {
+    "line": 80,
+    "cat": "known",
+    "text": "- [?] Estructuras ancladas de M10 respetan las islas (no generan dentro del mar) [M] — **M10** | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de validacion de estructuras contra agua/mar; island_props.gd solo declara props"
+   },
+   {
+    "line": 82,
+    "cat": "known",
+    "text": "- [?] Los NPC (M19) y POI de M09 se generan sobre el terreno de la isla ya anclado [M] — **M19/M09** | AUDIT 2026-10-13 (step-5-kilocode): NPC usan TerrainLocator.get_height() (shaman_npc.gd L27, incense_spawner.gd L161)"
+   },
+   {
+    "line": 104,
+    "cat": "known",
+    "text": "- [?] Progreso real por pesos reportado a la pantalla de viaje (M28) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de reporte de progreso por pesos a la pantalla de viaje; los pesos viven en IslandOps (priorida"
+   },
+   {
+    "line": 114,
+    "cat": "known",
+    "text": "- [?] Spawn de recursos exclusivos (contrato M15) en zonas deterministas [M] — **M15** | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de spawn de recursos exclusivos de M15 en la isla; los unicos 'zonas' son de Comb"
+   },
+   {
+    "line": 117,
+    "cat": "known",
+    "text": "- [?] Los props no se generan en el mar (zona acuática M51) [S] — el recorte contra el mar es del spawner / **M51** | AUDIT 2026-10-13 (step-5-kilocode): island_props.gd no valida agua/mar; el comentario L126 delega el r"
+   },
+   {
+    "line": 125,
+    "cat": "known",
+    "text": "- [?] Contrato: M28 consulta posicion_ancla(destino) para trazar la ruta [M] | AUDIT 2026-10-13 (step-5-kilocode): posicion_ancla() esta expuesta y testeada por la suite propia de M27 (test_islas_m27.gd L274) y citada en"
+   },
+   {
+    "line": 126,
+    "cat": "known",
+    "text": "- [?] Embarque: jugador en punto_partida → M28 inicia travesía [M] | AUDIT 2026-10-13 (step-5-kilocode): evidencia parcial en 2 modulos: punto_partida_mundo() (island_definition.gd L114) lo consume island_travel_guard.gd"
+   },
+   {
+    "line": 127,
+    "cat": "known",
+    "text": "- [?] Pantalla de viaje muestra progreso real de IslandLoading (M63) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de progreso real de IslandLoading hacia la pantalla de viaje; M63 no aparece como proveedor de "
+   },
+   {
+    "line": 128,
+    "cat": "known",
+    "text": "- [?] Desembarco posiciona al jugador en punto_de_llegada(destino) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de punto_de_llegada en todo scripts/islas/. | FLIP 2026-10-26 (Reflection-Beam-1.0, T167-27): spec en 03"
+   },
+   {
+    "line": 130,
+    "cat": "known",
+    "text": "- [?] Regreso a Aurora gratis desde cualquier muelle (anti-frustración) [S] | AUDIT 2026-10-13 (step-5-kilocode): ID_PRINCIPAL=aurora existe (island_travel_guard.gd L31) pero no hay logica de regreso gratis desde cualqui"
+   },
+   {
+    "line": 131,
+    "cat": "known",
+    "text": "- [?] Viajes estacionales/de expedición consultan calendario M29 [C] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de estacional/temporada en islas/; no hay consulta al calendario M29. | FLIP 2026-10-26 (Reflection-Beam-1"
+   },
+   {
+    "line": 132,
+    "cat": "known",
+    "text": "- [?] Viajes nocturnos y estacionales respetan clima (M32) y hora (M31) [M] | AUDIT 2026-10-13 (step-5-kilocode): clima_tendencia es solo dato (generar_islas.gd L124); no hay consumo de M32/M31 en el flujo de viaje. | FL"
+   },
+   {
+    "line": 133,
+    "cat": "known",
+    "text": "- [?] Boleto/requisitos (M28) no bloquean el regreso a Aurora [S] | AUDIT 2026-10-13 (step-5-kilocode): el flag de requisito existe (island_definition.gd L75, M22 via WorldState) pero no hay logica de boleto que-blquee/n"
+   },
+   {
+    "line": 134,
+    "cat": "known",
+    "text": "- [?] NPC viajeros (M28) respetan la isla cargada (spawn solo si su isla activa) [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de spawn condicionado de NPC viajeros a la isla activa. | FLIP 2026-10-26 (Reflecti"
+   },
+   {
+    "line": 135,
+    "cat": "known",
+    "text": "- [?] El barco no atraca en islas sin desbloqueo (anillo LEJANO) [M] | AUDIT 2026-10-13 (step-5-kilocode): esta_desbloqueada() existe y esta testeada (island_registry.gd L404, test_islas_m27.gd L417-420) pero tiene 0 lla"
+   },
+   {
+    "line": 142,
+    "cat": "known",
+    "text": "- [?] Nivel de mar global definido (OCEANO_ALTURA) en el mundo voxel [M] | AUDIT 2026-10-13 (step-5-kilocode): no existe la constante OCEANO_ALTURA; equivalentes: NIVEL_MAR=0.0 configurable (island_travel_guard.gd L32/L5"
+   },
+   {
+    "line": 143,
+    "cat": "known",
+    "text": "- [?] El agua entre islas es navegable por barco (no bloqueo invisible) [C] | AUDIT 2026-10-13 (step-5-kilocode): island_design_catalog.gd L102 declara el oceanico navegable (RF4) pero delega barco/navegacion a otro modu"
+   },
+   {
+    "line": 144,
+    "cat": "known",
+    "text": "- [?] Profundidades por isla: arrecife poco profundo de Coral, fosa de Submarina [M] | AUDIT 2026-10-13 (step-5-kilocode): SHALLOW_WATER existe como bloque (M08) pero no hay profundidades por isla (arrecife Coral / fosa "
+   },
+   {
+    "line": 146,
+    "cat": "known",
+    "text": "- [?] Corrientes de M51 no llevan el barco fuera de los bounds del archipiélago [C] | AUDIT 2026-10-13 (step-5-kilocode): validate_water.gd L17 valida deriva de corriente acotada (RF14/O.106, CURRENT_DRIFT_MAX=0.3) pero "
+   },
+   {
+    "line": 147,
+    "cat": "known",
+    "text": "- [?] El agua no se congela ni inunda dentro de las islas salvo eventos M32 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de congelacion/inundacion de agua dentro de islas; los hits de 'congela' son de pausas/tiempo, "
+   },
+   {
+    "line": 149,
+    "cat": "bloqueado",
+    "text": "- [?] Los sonidos del mar (M42) cambian según distancia a la isla más cercana [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de sonidos de mar por distancia (M42)."
+   },
+   {
+    "line": 150,
+    "cat": "known",
+    "text": "- [?] El agua interactúa con puzzles de islas (M23/M24) solo isla cargada [M] | AUDIT 2026-10-13 (step-5-kilocode): sin evidencia de interaccion agua-puzzles (M23/M24) condicionada a isla cargada. | FLIP 2026-10-26 (Refl"
+   },
+   {
+    "line": 158,
+    "cat": "known",
+    "text": "- [?] Transiciones entre biomas dentro de una isla suaves (falloff M09) [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de falloff de biomas dentro de isla en islas/ ni world/. | FLIP 2026-10-26 (Reflection-Beam-1.0, T1"
+   },
+   {
+    "line": 159,
+    "cat": "known",
+    "text": "- [?] Playas/acantilados por recetas de formaciones de M09 [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de recetas de formaciones (playas/acantilados) de M09. | FLIP 2026-10-26 (Reflection-Beam-1.0, T168-27): spec en"
+   },
+   {
+    "line": 160,
+    "cat": "known",
+    "text": "- [?] Clima por isla consultado por M32 (lluvia en Verde, nieve en Nieve) [M] | AUDIT 2026-10-13 (step-5-kilocode): clima_tendencia es solo dato de definicion (generar_islas.gd L124, island_definition.gd L53); 0 consumid"
+   },
+   {
+    "line": 161,
+    "cat": "bloqueado",
+    "text": "- [?] La música cambia al desembarcar (M41 theme de la isla) [S] | AUDIT 2026-10-13 (step-5-kilocode): el campo musica existe por isla (generar_islas.gd L154+ 'mus_aurora' etc.) pero no hay consumo al desembarcar en los "
+   },
+   {
+    "line": 162,
+    "cat": "known",
+    "text": "- [?] La fauna (M36) y vegetación (M50) respetan el bioma al spawnar [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de spawn de fauna/vegetacion condicionado al bioma. | FLIP 2026-10-26 (Reflection-Beam-1.0, T168-27): "
+   },
+   {
+    "line": 195,
+    "cat": "known",
+    "text": "- [?] Aurora siempre cargada pero con streaming fino de chunks lejanos [M] | AUDIT 2026-10-13 (step-5-kilocode): Aurora siempre carga por fallback de archipielago.gd y hay bounds para streaming (island_definition.gd L99)"
+   },
+   {
+    "line": 201,
+    "cat": "known",
+    "text": "- [?] Precalentamiento en el menú (M63): cachea Aurora al boot [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de precalentamiento/cacheo de Aurora en el menu (M63). | FLIP 2026-10-26 (Reflection-Beam-1.0, T168-27): spe"
+   },
+   {
+    "line": 220,
+    "cat": "known",
+    "text": "- [?] Mensaje al descubrir una isla (toast/M54) sin romper la inmersión [S] | AUDIT 2026-10-13 (step-5-kilocode): descubrir() existe y devuelve true solo la primera vez 'para el toast de M54' (island_registry.gd L359), c"
+   },
+   {
+    "line": 222,
+    "cat": "known",
+    "text": "- [?] Transición de embarque suave (M28) con música de travesía [M] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de transicion de embarque con musica de travesia. | FLIP 2026-10-26 (Reflection-Beam-1.0, T168-27): spec en"
+   },
+   {
+    "line": 223,
+    "cat": "known",
+    "text": "- [?] Ningún contenido exclusivo se pierde: accesible luego por otras vías (M73/feria) [M] | AUDIT 2026-10-13 (step-5-kilocode): solo existe la nota de diseno (island_design_catalog.gd L120, regla cozy M73/M28); no hay i"
+   },
+   {
+    "line": 224,
+    "cat": "known",
+    "text": "- [?] El regreso siempre disponible: sin estados bloqueados [S] | AUDIT 2026-10-13 (step-5-kilocode): 0 hits de estados bloqueados; no hay evidencia de garantia de regreso siempre disponible. | FLIP 2026-10-26 (Reflectio"
+   },
+   {
+    "line": 238,
+    "cat": "known",
+    "text": "- [?] Test integración: viaje Aurora→Nieve y regreso sin pérdida de estado [C] | AUDIT 2026-10-13 (step-5-kilocode): no existe test de integracion de viaje Aurora->Nieve con verificacion de no-perdida de estado. | FLIP 2"
+   },
+   {
+    "line": 240,
+    "cat": "known",
+    "text": "- [?] Test integración: regen 80/0 conserva anclas válidas [C] | AUDIT 2026-10-13 (step-5-kilocode): no existe test de regen 80/0 con conservacion de anclas (ver item 6). | FLIP 2026-10-26 (Reflection-Beam-1.0, T168-27):"
+   },
+   {
+    "line": 252,
+    "cat": "bloqueado",
+    "text": "- [?] Coordenadas/disposición de world (via M160) y generación de islas por viaje (M27/M28) — iter 2 (dueño: deepseek-v4-flash-vision-exp) | AUDIT 2026-10-13 (step-5-kilocode): delegado a deepseek-v4-flash-vision-exp (du"
+   },
+   {
+    "line": 277,
+    "cat": "known",
+    "text": "- [?] Migrar el mapa de `islas.json` (4) al catálogo de 13 → **M54** | AUDIT 2026-10-13 (step-5-kilocode): data/islas/islas.json sigue con 4 islas mientras el catalogo de definir_islas genera 13; la migracion del mapa es"
+   }
+  ]
+ },
+ "159": {
+  "path": "DOCUMENTACION/159-Catalogo-De-Objetos/plan-actual/05-Checklist.md",
+  "total": 37,
+  "cats": {
+   "candidato": 37
+  },
+  "items": [
+   {
+    "line": 132,
+    "cat": "candidato",
+    "text": "- [?] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)"
+   },
+   {
+    "line": 135,
+    "cat": "candidato",
+    "text": "- [?] Definir recetas asociadas"
+   },
+   {
+    "line": 139,
+    "cat": "candidato",
+    "text": "- [?] Crear animaciones de uso"
+   },
+   {
+    "line": 140,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M16 (Crafting)"
+   },
+   {
+    "line": 141,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M18 (Casas)"
+   },
+   {
+    "line": 145,
+    "cat": "candidato",
+    "text": "- [?] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)"
+   },
+   {
+    "line": 153,
+    "cat": "candidato",
+    "text": "- [?] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005)"
+   },
+   {
+    "line": 155,
+    "cat": "candidato",
+    "text": "- [?] Definir interacciones"
+   },
+   {
+    "line": 161,
+    "cat": "candidato",
+    "text": "- [?] Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005)"
+   },
+   {
+    "line": 162,
+    "cat": "candidato",
+    "text": "- [?] Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente"
+   },
+   {
+    "line": 163,
+    "cat": "candidato",
+    "text": "- [?] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente"
+   },
+   {
+    "line": 170,
+    "cat": "candidato",
+    "text": "- [?] Crear animaciones de recolección"
+   },
+   {
+    "line": 174,
+    "cat": "candidato",
+    "text": "- [?] Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005)"
+   },
+   {
+    "line": 182,
+    "cat": "candidato",
+    "text": "- [?] Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005)"
+   },
+   {
+    "line": 186,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M13 (Herramientas) y M158 (Desbloqueo de Zonas)"
+   },
+   {
+    "line": 190,
+    "cat": "candidato",
+    "text": "- [?] Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005)"
+   },
+   {
+    "line": 191,
+    "cat": "candidato",
+    "text": "- [?] Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024)"
+   },
+   {
+    "line": 192,
+    "cat": "candidato",
+    "text": "- [?] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente"
+   },
+   {
+    "line": 194,
+    "cat": "candidato",
+    "text": "- [?] Definir efectos de comida (energía)"
+   },
+   {
+    "line": 197,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M14 (Inventario)"
+   },
+   {
+    "line": 198,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M16 (Crafting)"
+   },
+   {
+    "line": 199,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M38 (Economía)"
+   },
+   {
+    "line": 203,
+    "cat": "candidato",
+    "text": "- [?] Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005)"
+   },
+   {
+    "line": 207,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M155 (Vestimenta)"
+   },
+   {
+    "line": 211,
+    "cat": "candidato",
+    "text": "- [?] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005)"
+   },
+   {
+    "line": 212,
+    "cat": "candidato",
+    "text": "- [?] Definir lore asociado a cada uno"
+   },
+   {
+    "line": 213,
+    "cat": "candidato",
+    "text": "- [?] Definir interacciones (mirar + lore)"
+   },
+   {
+    "line": 215,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M25 (Ruinas) y M37 (Museos)"
+   },
+   {
+    "line": 219,
+    "cat": "candidato",
+    "text": "- [?] Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005)"
+   },
+   {
+    "line": 221,
+    "cat": "candidato",
+    "text": "- [?] Definir duración de disponibilidad"
+   },
+   {
+    "line": 222,
+    "cat": "candidato",
+    "text": "- [?] Definir interacciones"
+   },
+   {
+    "line": 223,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M29 (Tiempo y Calendario)"
+   },
+   {
+    "line": 227,
+    "cat": "candidato",
+    "text": "- [?] Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005)"
+   },
+   {
+    "line": 228,
+    "cat": "candidato",
+    "text": "- [?] Definir cómo se obtienen (puzzles, quests)"
+   },
+   {
+    "line": 229,
+    "cat": "candidato",
+    "text": "- [?] Definir lore asociado"
+   },
+   {
+    "line": 231,
+    "cat": "candidato",
+    "text": "- [?] Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)"
+   },
+   {
+    "line": 270,
+    "cat": "candidato",
+    "text": "- [?] Crear test de integración con Inventario (M14 no implementado)"
+   }
+  ]
+ },
+ "49": {
+  "path": "DOCUMENTACION/49-Iluminacion/plan-actual/05-Checklist.md",
+  "total": 25,
+  "cats": {
+   "candidato": 23,
+   "known": 2
+  },
+  "items": [
+   {
+    "line": 31,
+    "cat": "candidato",
+    "text": "- [?] Definir cielo procedural por bioma (M09) [M] -- agnes-2.5-flash 2026-09-12: sky_curve.tres + sky_color_ramp.tres EXISTS en data/light/; DayNightCycle._cargar_curvas() las carga; integracion por bioma stubbed (requi"
+   },
+   {
+    "line": 46,
+    "cat": "candidato",
+    "text": "- [?] Definir bake en CI (M118) con semilla fija [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 M108/M118 integrations; bake seed fixed in CI pipeline config"
+   },
+   {
+    "line": 47,
+    "cat": "candidato",
+    "text": "- [?] Definir memoria de lightmaps contra M62 [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 recibe reporte de lighting"
+   },
+   {
+    "line": 59,
+    "cat": "candidato",
+    "text": "- [?] Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNightCycle para luz ambiental tiendamic/; im"
+   },
+   {
+    "line": 60,
+    "cat": "known",
+    "text": "- [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por M18 (lightmap bake en escenas con ventan"
+   },
+   {
+    "line": 65,
+    "cat": "candidato",
+    "text": "- [?] Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por evento M39/M28do; posición por evento M39"
+   },
+   {
+    "line": 72,
+    "cat": "candidato",
+    "text": "- [?] Definir luz cálida de hogueras/chimeneas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_fuego.gd definido; integrado con M52 particulas fuego; luz cálida desde poolefinido; integrado con M52 partícu"
+   },
+   {
+    "line": 78,
+    "cat": "candidato",
+    "text": "- [?] Definir luz ambiental sutil de cristales (M47) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M47 integration documented; crystal emission light definida; integrada con materiales luminosos M47documented; cryst"
+   },
+   {
+    "line": 79,
+    "cat": "candidato",
+    "text": "- [?] Definir glow acotado (sin bloom agresivo) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md estilo cozy; bloom agresivo descartado como risk; ambient light color ramps controlan glow sin post-process"
+   },
+   {
+    "line": 85,
+    "cat": "candidato",
+    "text": "- [?] Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con perfil subterraneo11 en cuevas; implemen"
+   },
+   {
+    "line": 91,
+    "cat": "candidato",
+    "text": "- [?] Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 portal system; diseño documentadomplos/ruina"
+   },
+   {
+    "line": 92,
+    "cat": "known",
+    "text": "- [?] Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIssue no bloqueante DoD — deferred a integ"
+   },
+   {
+    "line": 101,
+    "cat": "candidato",
+    "text": "- [?] Definir niebla de jungla densa y costa baja [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md niebla_por_bioma.tres estructurado; valores por bioma definidos en diseño; implementacion requiere M09 bioma catalog estru"
+   },
+   {
+    "line": 109,
+    "cat": "candidato",
+    "text": "- [?] Definir sombras suaves (PCF ≥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica quality"
+   },
+   {
+    "line": 120,
+    "cat": "candidato",
+    "text": "- [?] Definir dónde hornea (interiores y estructuras) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3: baked SÍ para interior_casa, templo, cueva, ruinas; NO para exterior pueblo/campo"
+   },
+   {
+    "line": 121,
+    "cat": "candidato",
+    "text": "- [?] Definir formato/registro de memoria (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 receives lighting memory reports"
+   },
+   {
+    "line": 122,
+    "cat": "candidato",
+    "text": "- [?] Definir regeneración en CI [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md bake en CI (M118) with fixed seed; validate_lighting_m49.gd runs in headless mode"
+   },
+   {
+    "line": 126,
+    "cat": "candidato",
+    "text": "- [?] Definir prueba de iluminación en hardware medio (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md hardware testing documented; M90 graphics presets include lighting validation"
+   },
+   {
+    "line": 127,
+    "cat": "candidato",
+    "text": "- [?] Definir presets de calidad de sombras/luz (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 shadow cascades by preset (bajo:2, medio:3, alto:4); shadow atlas 1024/2048 by preset"
+   },
+   {
+    "line": 128,
+    "cat": "candidato",
+    "text": "- [?] Definir objetivo 30 fps mínimo / 60 deseado [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target documented; M61 MemoryMonitor tracks frame budget"
+   },
+   {
+    "line": 142,
+    "cat": "candidato",
+    "text": "- [?] Alinear con M108 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M108 integration documented; sky materials compression handled by M108 pipeline"
+   },
+   {
+    "line": 147,
+    "cat": "candidato",
+    "text": "- [?] Memoria: lightmap + registro (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 lightmap budgets by profile; M62 MemoryMonitor receives lighting memory reports"
+   },
+   {
+    "line": 194,
+    "cat": "candidato",
+    "text": "- [?] Escena pivote ≥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget"
+   },
+   {
+    "line": 199,
+    "cat": "candidato",
+    "text": "- [?] Interior de casa horneado y legible sin dinámicas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa: baked SÍ, dinámicas <=3, ambiente 0.30"
+   },
+   {
+    "line": 200,
+    "cat": "candidato",
+    "text": "- [?] Niebla por bioma/lluvia sin romper legibilidad [M] -- agnes-2.5-flash 2026-09-12: fog_curve.tres per biome; rain dimming documented; piso 0.15 ensures readability"
+   }
+  ]
+ },
+ "115": {
+  "path": "DOCUMENTACION/115-Hardware/plan-actual/05-Checklist.md",
+  "total": 26,
+  "cats": {
+   "known": 16,
+   "candidato": 10
+  },
+  "items": [
+   {
+    "line": 23,
+    "cat": "known",
+    "text": "- [?] Documentar requisitos recomendados de CPU → KnownIssue: M97 marketing. Spec en 03-Diseno §2.1."
+   },
+   {
+    "line": 24,
+    "cat": "known",
+    "text": "- [?] Documentar requisitos recomendados de RAM → KnownIssue: M97. Spec en 03-Diseno §2.2."
+   },
+   {
+    "line": 25,
+    "cat": "known",
+    "text": "- [?] Documentar requisitos recomendados de GPU → KnownIssue: M97. Spec en 03-Diseno §2.3."
+   },
+   {
+    "line": 27,
+    "cat": "known",
+    "text": "- [?] Definir DirectX/OpenGL requerido → KnownIssue: M90/M04. Policy defined."
+   },
+   {
+    "line": 28,
+    "cat": "known",
+    "text": "- [?] Documentar espacio en disco requerido → KnownIssue: M98/M117 instalador. Estimación ~2GB."
+   },
+   {
+    "line": 29,
+    "cat": "known",
+    "text": "- [?] Crear tabla comparativa de requisitos por plataforma → KnownIssue: M97 editorial."
+   },
+   {
+    "line": 66,
+    "cat": "candidato",
+    "text": "- [?] Aplicar SSAO on/off → **M90**"
+   },
+   {
+    "line": 67,
+    "cat": "candidato",
+    "text": "- [?] Aplicar SSR on/off → **M90**"
+   },
+   {
+    "line": 72,
+    "cat": "candidato",
+    "text": "- [?] Crear Resource QualitySettings → **M90 — fuera de alcance M115**"
+   },
+   {
+    "line": 74,
+    "cat": "candidato",
+    "text": "- [?] Very Low: render_scale 0.5, shadows off, 30 FPS target → **M90**"
+   },
+   {
+    "line": 75,
+    "cat": "candidato",
+    "text": "- [?] Low: render_scale 0.7, shadows low, 30 FPS target → **M90**"
+   },
+   {
+    "line": 76,
+    "cat": "candidato",
+    "text": "- [?] Medium: render_scale 0.85, shadows medium, 60 FPS target → **M90**"
+   },
+   {
+    "line": 77,
+    "cat": "candidato",
+    "text": "- [?] High: render_scale 1.0, shadows high, 60 FPS target → **M90**"
+   },
+   {
+    "line": 78,
+    "cat": "candidato",
+    "text": "- [?] Ultra: render_scale 1.0, shadows ultra, 120 FPS target → **M90**"
+   },
+   {
+    "line": 90,
+    "cat": "known",
+    "text": "- [?] Emitir señal cuando el preset cambia → KnownIssue: no emitida; pendiente si M90 la requiere."
+   },
+   {
+    "line": 115,
+    "cat": "candidato",
+    "text": "- [?] Test de mapeo de botones → **M57** *(test_control_input.gd existe)*"
+   },
+   {
+    "line": 116,
+    "cat": "known",
+    "text": "- [?] Test de hot-plug de gamepad → requiere gamepad físico; fuera de headless  **KnownIssue: test de hot-plug requiere gamepad fisico, fuera de headless**"
+   },
+   {
+    "line": 122,
+    "cat": "known",
+    "text": "- [?] Perfiles de calidad incluidos en build → KnownIssue: M90. Deferred."
+   },
+   {
+    "line": 124,
+    "cat": "known",
+    "text": "- [?] Logging de hardware en build log → KnownIssue: M103 Logging. Deferred."
+   },
+   {
+    "line": 129,
+    "cat": "known",
+    "text": "- [?] Soporte para Steam Deck → KnownIssue: M95/M117. Deferred."
+   },
+   {
+    "line": 130,
+    "cat": "known",
+    "text": "- [?] Documentar hardware no soportado → KnownIssue: M97 editorial. Spec defined."
+   },
+   {
+    "line": 135,
+    "cat": "known",
+    "text": "- [?] Crear guia de uso para el jugador → KnownIssue: M88/M89 menu. Spec defined."
+   },
+   {
+    "line": 138,
+    "cat": "known",
+    "text": "- [?] Tabla de requisitos de hardware para Steam → KnownIssue: M97. Tabla base en 03-Diseno §2.6."
+   },
+   {
+    "line": 139,
+    "cat": "known",
+    "text": "- [?] FAQ de problemas de hardware comunes → KnownIssue: M97. FAQ en 03-Diseno §3.3."
+   },
+   {
+    "line": 142,
+    "cat": "known",
+    "text": "- [?] Proceso de testing en hardware diverso → KnownIssue: M113/M61 bench. Proceso en 03-Diseno §3.4."
+   },
+   {
+    "line": 153,
+    "cat": "candidato",
+    "text": "- [?] Verificar M154 antes de trabajo visual. En iter 1 no hay UI visual; M154 solo necesario si M90 pinta previews."
+   }
+  ]
+ },
+ "105": {
+  "path": "DOCUMENTACION/105-Telemetria-De-Gameplay/plan-actual/05-Checklist.md",
+  "total": 28,
+  "cats": {
+   "known": 7,
+   "candidato": 21
+  },
+  "items": [
+   {
+    "line": 145,
+    "cat": "known",
+    "text": "- [?] Usar datos para mejorar diseño (requiere gameplay + volumen de datos real; fase posterior) → KnownIssue no bloqueante DoD: nucleo telemetria operativo (test headless 0 fallos); analisis de datos requiere juego juga"
+   },
+   {
+    "line": 189,
+    "cat": "candidato",
+    "text": "- [?] Definir encuesta post-puzzle — **M53** (UI de encuesta; M105 ya emite `solicitar_encuesta(puzzle_id)`)."
+   },
+   {
+    "line": 191,
+    "cat": "candidato",
+    "text": "- [?] Diseñar pregunta: \"¿Qué tan difícil te pareció este puzzle?\" — **M53** (texto de la UI de encuesta)."
+   },
+   {
+    "line": 193,
+    "cat": "candidato",
+    "text": "- [?] Diseñar encuesta opcional después de completar puzzle — **M53** (UI opcional; requiere consumir `solicitar_encuesta`)."
+   },
+   {
+    "line": 196,
+    "cat": "known",
+    "text": "- [?] Definir análisis de datos para identificar puzzles con alta tasa de abandono — requiere datos reales de gameplay (post-release); M105 ya emite `puzzle_abandoned`.  **KnownIssue: requiere volumen real de datos de ga"
+   },
+   {
+    "line": 197,
+    "cat": "known",
+    "text": "- [?] Definir análisis de datos para identificar zonas ignoradas — requiere datos reales; M105 ya emite `zone_ignored`.  **KnownIssue: requiere volumen real de datos; M105 ya emite zone_ignored**"
+   },
+   {
+    "line": 198,
+    "cat": "known",
+    "text": "- [?] Definir análisis de datos para identificar eventos clave no alcanzados — requiere datos reales. NOTA CORREGIDA (medido Log 2075, no flip): el API track_* existe pero solo 1 de 13 trackers tiene productor real hoy ("
+   },
+   {
+    "line": 199,
+    "cat": "known",
+    "text": "- [?] Definir análisis de datos para identificar tiempos anormales — requiere datos reales; M105 ya emite las métricas `time_to_first_*` + `session_duration`.  **KnownIssue: requiere volumen real; M105 ya emite time_to_f"
+   },
+   {
+    "line": 204,
+    "cat": "candidato",
+    "text": "- [?] Definir prompt en primer inicio del juego — **M91** (UI de primer arranque); M105 expone `establecer_opt_in()` + `cambio_opt_in`."
+   },
+   {
+    "line": 205,
+    "cat": "candidato",
+    "text": "- [?] Definir opción de opt-out en settings — **M91** (menú de settings); M105 ya soporta opt-out en caliente."
+   },
+   {
+    "line": 209,
+    "cat": "candidato",
+    "text": "- [?] Definir posibilidad de solicitar eliminación de datos — **M104** (storage) + **M91** (UI); M105 no almacena eventos (§5)."
+   },
+   {
+    "line": 210,
+    "cat": "known",
+    "text": "- [?] Definir política de privacidad documentada — documentación legal (transversal); M105 documenta el flujo de datos (§5) como base.  **KnownIssue: documentacion legal editorial transversal, fuera de M105 (§5 documenta"
+   },
+   {
+    "line": 215,
+    "cat": "candidato",
+    "text": "- [?] Diseñar AnalyticsService batching y envío — **M104** (AnalyticsDirector); M105 solo delega `registrar_evento()`."
+   },
+   {
+    "line": 216,
+    "cat": "candidato",
+    "text": "- [?] Diseñar AnalyticsService anonimización y GDPR compliance — **M104** (hash de sesión SHA256 rotativo 24 h)."
+   },
+   {
+    "line": 217,
+    "cat": "candidato",
+    "text": "- [?] Diseñar AnalyticsService caché local y envío batch — **M104** (buffer + batch JSON offline, §4)."
+   },
+   {
+    "line": 220,
+    "cat": "candidato",
+    "text": "- [?] Diseñar integración con M71 para observación de eventos — **M71** (M105 expone la API pasiva)."
+   },
+   {
+    "line": 221,
+    "cat": "candidato",
+    "text": "- [?] Diseñar M71 notificar a M105 cuando ocurren eventos clave — **M71** (llamador); M105 ya expone `track_*`."
+   },
+   {
+    "line": 224,
+    "cat": "candidato",
+    "text": "- [?] Diseñar M105 como observador pasivo de eventos de M71 — **M71**; M105 es sumidero de solo-escritura."
+   },
+   {
+    "line": 233,
+    "cat": "known",
+    "text": "- [?] Diseñar integración con M102 para generación de issues — **M102** (M105 expone los patrones detectados).  **KnownIssue: integracion con M102 depende de volumen real de issues detectadas**"
+   },
+   {
+    "line": 245,
+    "cat": "candidato",
+    "text": "- [?] Diseñar método generate_session_id() — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegado a M104 por diseño (privacy by design): el id de sesión es el hash SHA256 rotativo 24 h que genera Analytics. M105 no duplica s"
+   },
+   {
+    "line": 250,
+    "cat": "candidato",
+    "text": "- [?] Diseñar variable session_id — iter. 6 DeepSeek-V4.1-Flash 2026-09-11: Delegada a M104 por diseño (mismo criterio que `generate_session_id`)."
+   },
+   {
+    "line": 293,
+    "cat": "candidato",
+    "text": "- [?] Diseñar método show_difficulty_survey(puzzle_id) — **M53** (UI); M105 emite `solicitar_encuesta(puzzle_id)`."
+   },
+   {
+    "line": 295,
+    "cat": "candidato",
+    "text": "- [?] Diseñar UI de encuesta post-puzzle — **M53**."
+   },
+   {
+    "line": 296,
+    "cat": "candidato",
+    "text": "- [?] Diseñar encuesta opcional (no forzar) — **M53** (opcional por diseño)."
+   },
+   {
+    "line": 299,
+    "cat": "candidato",
+    "text": "- [?] Diseñar archivo user://telemetry/gameplay_events.json — **M104** (§4: buffer + batch JSON); M105 no duplica storage (§5)."
+   },
+   {
+    "line": 300,
+    "cat": "candidato",
+    "text": "- [?] Diseñar formato JSON de eventos — **M104** (contrato de `registrar_evento`)."
+   },
+   {
+    "line": 301,
+    "cat": "candidato",
+    "text": "- [?] Diseñar método save_events_to_cache() — **M104** (cache offline)."
+   },
+   {
+    "line": 302,
+    "cat": "candidato",
+    "text": "- [?] Diseñar carga de eventos al inicio (opcional) — **M104**."
+   }
+  ]
+ }
+}
