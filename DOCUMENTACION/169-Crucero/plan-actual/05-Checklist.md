@@ -225,7 +225,7 @@
 
 ---
 
-**Totales:** 194 ítems · Completados: 57 · Pendientes: 137 · No resueltos: 0. (Actualizado 2026-11-25: cerradas las 12 tareas doc/code/verify de b01; B-02/B-03 siguen en STANDBY por Blender + fundador.)
+**Totales:** 196 ítems · Completados: 59 · Pendientes: 135 · No resueltos: 2. (Actualizado 2026-11-25: cerradas b01 (12/12) y b02 (10/12, 2 [?] por Blender/visión); B-02/B-03 en STANDBY.)
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25
 
@@ -268,6 +268,10 @@
 - [x] Tests: `test_crucero_manager.gd` (13/0), `test_crucero_eventos.gd` (6/0) y `test_crucero_viaje.gd` (19/0) [M]
 - [x] `03-Diseno.md` §11 reconciliación de drifts (10 verificables, b57) [M]
 - [x] 18 iconos de logros rotos anotados en `04-Codigo.md` §9 [S]
+- [x] L-04 diálogo ambiental 1 línea/NPC: `crucero_ambiental.gd` + `ambiental.json` (6 NPCs, test 5/0) [M]
+- [x] Verificación HUD tienda (M-06): precios en vivo vía `EconomyManager` en `shop_ui.gd` [S]
+- [?] D-05 colisión del bote salvavidas: exterior GLB sin `.tscn` de colisión (iter 2, requiere Blender) [M]
+- [?] D-06 ventanas de camarote sin solape (AABB): requiere Blender/visión (no disponible en este harness) [M]
 
 ### R.4 Pendiente
 - [ ] Revisión visual del fundador (B-02/B-03 e interiores)

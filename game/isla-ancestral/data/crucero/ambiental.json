@@ -1,0 +1,15 @@
+{
+  "_meta": {
+    "modulo": "169-Crucero",
+    "version": 1,
+    "descripcion": "Dialogo ambiental de 1 linea por NPC a bordo (L-04). Al interactuar con un NPC sin dialogo guionado, se muestra su linea ambiental. No reemplaza a M21 (dialogos guionados): es el fallback de ambiente."
+  },
+  "npcs": [
+    { "id": "capitan", "linea": "Capitan: Mantengan la calma, este buque ha cruzado mares peores." },
+    { "id": "tripulante", "linea": "Tripulante: Si necesitan algo, estoy en la cubierta de botes." },
+    { "id": "pasajero", "linea": "Pasajero: Dicen que el casino de la cubierta 3 es el mejor del archipielago." },
+    { "id": "musico", "linea": "Musico: Esta cancion la escribi para el atardecer en alta mar." },
+    { "id": "cocinero", "linea": "Cocinero: La cena se sirve al cruzar la mitad del trayecto." },
+    { "id": "medico", "linea": "Medico: Si se sienten mareados, suban a cubierta y respiren." }
+  ]
+}
