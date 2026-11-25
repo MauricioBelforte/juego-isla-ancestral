@@ -78,7 +78,7 @@ func _test_cola_pesos(sm: Node) -> void:
 func _test_progreso_piso_tope(sm: Node) -> void:
 	# Piso 2% con cola no vacía al inicio (§2)
 	var p0: float = sm.progreso()
-	_check(p0 >= 0.02, "piso 2% al iniciar cola (%.2f)" % p0)
+	_check(p0 >= 0.02, "piso 2%% al iniciar cola (%.2f)" % p0)
 	# Procesar todo: llega a 1.0 (tope se levanta al vaciar)
 	var frames := 0
 	while sm.cola_size() > 0 and frames < 50:
@@ -91,7 +91,7 @@ func _test_progreso_piso_tope(sm: Node) -> void:
 	sm.encolar("op_x2", "chunk_lod1", 2, func(): pass)
 	sm._process(0.016)  # procesa solo op_x1 (o ambas — depende del presupuesto)
 	var p1: float = sm.progreso()
-	_check(p1 <= 0.98 + 0.02, "tope 98% respetado en cola parcial (%.2f)" % p1)
+	_check(p1 <= 0.98 + 0.02, "tope 98%% respetado en cola parcial (%.2f)" % p1)
 	sm._process(0.016)
 	_fin("progreso")
 

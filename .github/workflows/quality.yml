@@ -155,9 +155,36 @@ jobs:
           echo "Format check completed (0 SCRIPT ERROR)"
 
   test-suite:
-    name: Run Test Suite (M112 Integration)
+    name: Run Test Suite (M112 Integration) [shard ${{ matrix.shard }}/${{ matrix.total }}]
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    # SHARDS (M112, minimax-m3-1-flash, Log 2464, 2026-11-25).
+    #
+    # El job lanzaba 111 invocaciones (108 suites de Godot + 3 de Python) de
+    # forma ESTRICTAMENTE SECUENCIAL, cada una en su propio proceso: el costo
+    # dominante no es la suite sino el ARRANQUE (autoloads + registro de
+    # singletons) que se paga una vez por proceso. Medido en local: arranque
+    # puro 3,8 s, pero una suite trivial 29-38 s (el resto es el arranque con
+    # autoloads). Con 111 invocaciones eso son ~875 s de job, MUY por encima
+    # del presupuesto de 600 s de M112.
+    #
+    # El reparto se hace con dos contadores round-robin independientes:
+    #   * suites LIGERAS (contador propio)
+    #   * suites PESADAS (voxel / rendimiento / memoria), que se reparten con un
+    #     contador SEPARADO para que la COLA larga no caiga entera en un shard
+    #     (si se usara un unico contador, un bloque contiguo de suites pesadas
+    #     —el que hay hoy en las lineas de scripts/rendimiento/memoria— caeria
+    #     casi todo en el mismo shard).
+    # La union de los shards es EXACTAMENTE el conjunto original: cada
+    # invocacion se ejecuta una vez y solo una (indice % TOTAL).
+    #
+    # `fail-fast: false`: un shard en rojo no cancela a los demas (asi se ve el
+    # fallo completo en una sola pasada, en vez de perder los shards vivos).
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [1, 2, 3, 4]
+        total: [4]
 
     steps:
       - name: Checkout repository
@@ -179,9 +206,22 @@ jobs:
         run: godot --headless --path game/isla-ancestral --import
 
       - name: Run validation tests
+        env:
+          SHARD: ${{ matrix.shard }}
+          TOTAL: ${{ matrix.total }}
         run: |
           cd game/isla-ancestral
           FAIL=0
+          # AISLAR `user://` POR SHARD: los shards corren EN PARALELO y las
+          # suites que escriben en `user://` (de forma directa o via autoloads
+          # como SaveManager/DataStore/GameSettings) se pisan entre si ->
+          # slots de guardado corruptos y suites que se cuelgan. Es el mismo
+          # problema que aisla el runner central (`tests/run_tests.gd`, que
+          # exporta XDG_DATA_HOME por worker): aqui se exporta una vez por
+          # shard. En Linux, `user://` cuelga de XDG_DATA_HOME.
+          export XDG_DATA_HOME="$RUNNER_TEMP/m112_shard_${SHARD}"
+          export XDG_CONFIG_HOME="$RUNNER_TEMP/m112_shard_cfg_${SHARD}"
+          mkdir -p "$XDG_DATA_HOME" "$XDG_CONFIG_HOME"
           # AVISO DE QUE SUITE FALLO (encargo del director, msg 315, 2026-10-19).
           # GitHub Actions solo muestra el STEP, no la suite: con 93 invocaciones en
           # un solo step, un rojo era ciego (habia que buscar el EXIT 1 en 6.000
@@ -192,6 +232,31 @@ jobs:
           N_SUITES=0
           N_FALLIDAS=0
           FALLIDAS=""
+          # Contadores de reparto (SHARDS). N_LIGERAS/N_PESADAS son indices
+          # round-robin independientes: cada invocacion cae en UN shard
+          # (indice % TOTAL) y la union de los shards es el conjunto original.
+          N_LIGERAS=0
+          N_PESADAS=0
+          N_ASIGNADAS=0
+          # Una suite es PESADA si su script toca voxel/rendimiento/memoria:
+          # son las que tardan ~72 s cada una (la "lane voxel" de M112).
+          es_pesada() {
+            case "$1" in
+              *rendimiento*|*memoria*|*voxel*|*performance*) return 0 ;;
+              *) return 1 ;;
+            esac
+          }
+          # Devuelve 0 si esta invocacion le TOCA a este shard, 1 si no.
+          me_toca() {
+            local script="$1" idx
+            if es_pesada "$script"; then
+              idx="$N_PESADAS"; N_PESADAS=$((N_PESADAS + 1))
+            else
+              idx="$N_LIGERAS"; N_LIGERAS=$((N_LIGERAS + 1))
+            fi
+            N_ASIGNADAS=$((N_ASIGNADAS + 1))
+            [ $(( idx % TOTAL )) -eq $(( SHARD - 1 )) ]
+          }
           suite() {
             local script="" prev="" a
             for a in "$@"; do
@@ -200,6 +265,9 @@ jobs:
               esac
               prev="$a"
             done
+            if ! me_toca "${script:-$*}"; then
+              return 0
+            fi
             N_SUITES=$((N_SUITES + 1))
             if ! godot --headless "$@" 2>&1; then
               echo "::error::FALLO ${script:-$*}"
@@ -211,6 +279,9 @@ jobs:
           py_suite() {
             local etiqueta="$1"
             shift
+            if ! me_toca "$etiqueta"; then
+              return 0
+            fi
             N_SUITES=$((N_SUITES + 1))
             if ! "$@" 2>&1; then
               echo "::error::FALLO $etiqueta"
@@ -762,7 +833,8 @@ jobs:
           else
             echo "Suites fallidas: 0 de $N_SUITES (todas salieron EXIT 0)"
           fi
-          echo "All validation tests completed"
+          echo "Shard $SHARD/$TOTAL: $N_SUITES suite(s) ejecutada(s) de $N_ASIGNADAS invocacion(es) repartidas entre $TOTAL shard(s)"
+          echo "All validation tests completed (shard $SHARD/$TOTAL)"
           exit $FAIL
 
   legal-tools:
