@@ -80,6 +80,25 @@ EXIT 1**. Restaurado → 32/0, EXIT 0.
 - "C4: al deshacer, los items vuelven del inventario al cofre (no se duplican)"
 - "D1: demoler una pieza SIN contenido -> ok (no rompe nada)"
 
+## Regresion GLOBAL (runner central del proyecto, el mismo que usa el gate de CI)
+
+`res://tests/run_tests.gd` (suite completa del repo, con su evidencia anti-falso-verde):
+
+```
+[EVIDENCIA] suites descubiertas: 70 (66 SceneTree + 4 GdUnit4) · excluidas documentadas: 0
+[EVIDENCIA] suites OK: 70/70 ejecutables (de 70 descubiertas, 0 excluidas documentadas)
+[EVIDENCIA] checks SceneTree: 2961 · test cases GdUnit4: 21 · tests totales: 2982
+RESULTADO: ÉXITO MEDIDO — 70/70 suites · 2982 tests ejecutados · 0 fallos
+```
+
+EXIT 0. Las 4 suites de M17 nuevas/entregadas por este agente aparecen en el descubrimiento del
+runner: `test_m17_categorias.gd`, `test_m17_contenido_piezas.gd`, `test_m17_hud_categorias.gd`,
+`test_m17_materiales_compartidos.gd`.
+
+> Nota honesta: el runner reporta **tiempo de suite 771 s (presupuesto 600 s, EXCEDE)**. No es una
+> regresion de este cambio (el runner paraleliza 66 suites y la maquina esta compartida con el resto
+> de la flota); el veredicto es **0 fallos**.
+
 ## Lo que NO se hizo (honestidad)
 
 - La **ventana de confirmación** con lo que devuelve la pieza es **UI de M18** (L133): aquí están el

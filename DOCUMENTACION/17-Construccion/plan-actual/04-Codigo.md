@@ -799,6 +799,13 @@ contenido de una pieza al demolerla — los items de un cofre **se perdían**.
   reglas_pieza 40/0 · circulacion 36/0 · persistencia 23/0 · suites_integracion 17/0 (501 checks) ·
   qa_m17_modo 9/0 · iter3 138/0.
 
+### 13.4 Regresion GLOBAL (runner central = gate de CI)
+
+`res://tests/run_tests.gd` (suite completa del repo): **70/70 suites · 2982 tests · 0 fallos ·
+EXIT 0**. Incluye las 4 suites de M17 entregadas por este agente. El runner reporta 771 s de tiempo
+de suite (presupuesto 600 s): no es una regresion de este cambio (66 suites en paralelo sobre una
+maquina compartida con el resto de la flota) — el veredicto es 0 fallos.
+
 ### 13.4 Lo que queda fuera de M17 (dueño explicito)
 
 La **ventana de confirmación** con lo que devuelve la pieza al demolerla es **UI de M18** (L133).
