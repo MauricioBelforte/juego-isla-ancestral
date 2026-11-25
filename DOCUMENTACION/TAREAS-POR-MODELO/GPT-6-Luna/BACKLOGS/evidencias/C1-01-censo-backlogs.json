@@ -1,0 +1,55 @@
+{
+  "scope": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS",
+  "included": "Archivos regulares propios del backlog fuera de evidencias para evitar autocontar informes generados.",
+  "file_count": 9,
+  "counts_by_extension": {
+    ".md": 9
+  },
+  "files": [
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
+      "extension": ".md",
+      "bytes": 3857
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/02-Backlog-Sintesis-y-CrossDoc.md",
+      "extension": ".md",
+      "bytes": 3629
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/03-Backlog-Estructuras-y-JSON.md",
+      "extension": ".md",
+      "bytes": 2948
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "extension": ".md",
+      "bytes": 3448
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/05-Backlog-Calibracion-y-Consistencia.md",
+      "extension": ".md",
+      "bytes": 3661
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/06-Validacion-y-Pruebas.md",
+      "extension": ".md",
+      "bytes": 3128
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/07-Localizacion-y-Recuperacion.md",
+      "extension": ".md",
+      "bytes": 3177
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/08-Informes-y-Coordinacion.md",
+      "extension": ".md",
+      "bytes": 3097
+    },
+    {
+      "path": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "extension": ".md",
+      "bytes": 9011
+    }
+  ]
+}

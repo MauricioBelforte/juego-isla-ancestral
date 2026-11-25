@@ -1,0 +1,407 @@
+{
+  "source": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+  "source_line_count": 1226,
+  "heading_count": 35,
+  "extraction": "Encabezados Markdown literales en orden de aparición; los títulos no se parafrasearon.",
+  "headings": [
+    {
+      "id": "H01",
+      "level": 1,
+      "line": 1,
+      "title": "08 - Guia Maestra de Orden de Implementacion",
+      "parent_id": null,
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion"
+      ]
+    },
+    {
+      "id": "H02",
+      "level": 2,
+      "line": 31,
+      "title": "Reserva actual",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "Reserva actual"
+      ]
+    },
+    {
+      "id": "H03",
+      "level": 2,
+      "line": 173,
+      "title": "1. Regla principal",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "1. Regla principal"
+      ]
+    },
+    {
+      "id": "H04",
+      "level": 2,
+      "line": 205,
+      "title": "2. Principio de construccion",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "2. Principio de construccion"
+      ]
+    },
+    {
+      "id": "H05",
+      "level": 2,
+      "line": 247,
+      "title": "3. Mapa de fases y puertas",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "3. Mapa de fases y puertas"
+      ]
+    },
+    {
+      "id": "H06",
+      "level": 3,
+      "line": 281,
+      "title": "3.1 Escala de dificultad y vision",
+      "parent_id": "H05",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "3. Mapa de fases y puertas",
+        "3.1 Escala de dificultad y vision"
+      ]
+    },
+    {
+      "id": "H07",
+      "level": 3,
+      "line": 317,
+      "title": "3.2 Matriz de la ruta critica",
+      "parent_id": "H05",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "3. Mapa de fases y puertas",
+        "3.2 Matriz de la ruta critica"
+      ]
+    },
+    {
+      "id": "H08",
+      "level": 3,
+      "line": 373,
+      "title": "3.3 Matriz de lineas paralelas",
+      "parent_id": "H05",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "3. Mapa de fases y puertas",
+        "3.3 Matriz de lineas paralelas"
+      ]
+    },
+    {
+      "id": "H09",
+      "level": 3,
+      "line": 409,
+      "title": "3.4 Regla de no interferencia visual",
+      "parent_id": "H05",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "3. Mapa de fases y puertas",
+        "3.4 Regla de no interferencia visual"
+      ]
+    },
+    {
+      "id": "H10",
+      "level": 2,
+      "line": 429,
+      "title": "4. Fase 0 - Contratos y preparacion",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "4. Fase 0 - Contratos y preparacion"
+      ]
+    },
+    {
+      "id": "H11",
+      "level": 2,
+      "line": 467,
+      "title": "5. Fase 1 - Fundacion ejecutable",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "5. Fase 1 - Fundacion ejecutable"
+      ]
+    },
+    {
+      "id": "H12",
+      "level": 3,
+      "line": 475,
+      "title": "M04 - Game Engine",
+      "parent_id": "H11",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "5. Fase 1 - Fundacion ejecutable",
+        "M04 - Game Engine"
+      ]
+    },
+    {
+      "id": "H13",
+      "level": 3,
+      "line": 495,
+      "title": "M05 - Lenguaje y Programacion",
+      "parent_id": "H11",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "5. Fase 1 - Fundacion ejecutable",
+        "M05 - Lenguaje y Programacion"
+      ]
+    },
+    {
+      "id": "H14",
+      "level": 3,
+      "line": 509,
+      "title": "M07 - Arquitectura General",
+      "parent_id": "H11",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "5. Fase 1 - Fundacion ejecutable",
+        "M07 - Arquitectura General"
+      ]
+    },
+    {
+      "id": "H15",
+      "level": 2,
+      "line": 533,
+      "title": "6. Fase 2 - Mundo minimo",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "6. Fase 2 - Mundo minimo"
+      ]
+    },
+    {
+      "id": "H16",
+      "level": 3,
+      "line": 541,
+      "title": "M08 - Mundo Voxel",
+      "parent_id": "H15",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "6. Fase 2 - Mundo minimo",
+        "M08 - Mundo Voxel"
+      ]
+    },
+    {
+      "id": "H17",
+      "level": 3,
+      "line": 559,
+      "title": "M10 - Generacion del Mundo",
+      "parent_id": "H15",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "6. Fase 2 - Mundo minimo",
+        "M10 - Generacion del Mundo"
+      ]
+    },
+    {
+      "id": "H18",
+      "level": 3,
+      "line": 573,
+      "title": "M09 - Terreno y Geografia",
+      "parent_id": "H15",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "6. Fase 2 - Mundo minimo",
+        "M09 - Terreno y Geografia"
+      ]
+    },
+    {
+      "id": "H19",
+      "level": 2,
+      "line": 597,
+      "title": "7. Fase 3 - Primer control jugable",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "7. Fase 3 - Primer control jugable"
+      ]
+    },
+    {
+      "id": "H20",
+      "level": 3,
+      "line": 605,
+      "title": "M11 - Personaje del Jugador",
+      "parent_id": "H19",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "7. Fase 3 - Primer control jugable",
+        "M11 - Personaje del Jugador"
+      ]
+    },
+    {
+      "id": "H21",
+      "level": 3,
+      "line": 621,
+      "title": "M12 - Camara",
+      "parent_id": "H19",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "7. Fase 3 - Primer control jugable",
+        "M12 - Camara"
+      ]
+    },
+    {
+      "id": "H22",
+      "level": 3,
+      "line": 635,
+      "title": "M13 - Herramientas",
+      "parent_id": "H19",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "7. Fase 3 - Primer control jugable",
+        "M13 - Herramientas"
+      ]
+    },
+    {
+      "id": "H23",
+      "level": 2,
+      "line": 659,
+      "title": "8. Fase 4 - Prototipo minimo divertido",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "8. Fase 4 - Prototipo minimo divertido"
+      ]
+    },
+    {
+      "id": "H24",
+      "level": 2,
+      "line": 723,
+      "title": "9. Fase 5 - Base de produccion",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "9. Fase 5 - Base de produccion"
+      ]
+    },
+    {
+      "id": "H25",
+      "level": 2,
+      "line": 765,
+      "title": "10. Fase 6 - Vertical slice visual",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "10. Fase 6 - Vertical slice visual"
+      ]
+    },
+    {
+      "id": "H26",
+      "level": 2,
+      "line": 803,
+      "title": "11. Fase 7 - Delegacion paralela de contenido",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "11. Fase 7 - Delegacion paralela de contenido"
+      ]
+    },
+    {
+      "id": "H27",
+      "level": 2,
+      "line": 835,
+      "title": "12. Fase 8 - Arte, accesibilidad y calidad",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "12. Fase 8 - Arte, accesibilidad y calidad"
+      ]
+    },
+    {
+      "id": "H28",
+      "level": 2,
+      "line": 873,
+      "title": "13. Fase 9 - Release y operacion",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "13. Fase 9 - Release y operacion"
+      ]
+    },
+    {
+      "id": "H29",
+      "level": 2,
+      "line": 903,
+      "title": "14. Procedimiento de reserva para todos los agentes",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "14. Procedimiento de reserva para todos los agentes"
+      ]
+    },
+    {
+      "id": "H30",
+      "level": 2,
+      "line": 1005,
+      "title": "15. Regla para agentes de investigacion",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "15. Regla para agentes de investigacion"
+      ]
+    },
+    {
+      "id": "H31",
+      "level": 2,
+      "line": 1035,
+      "title": "16. Estado inicial recomendado - 2026-08-26",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "16. Estado inicial recomendado - 2026-08-26"
+      ]
+    },
+    {
+      "id": "H32",
+      "level": 2,
+      "line": 1065,
+      "title": "17. Registro de reservas de la ruta critica",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "17. Registro de reservas de la ruta critica"
+      ]
+    },
+    {
+      "id": "H33",
+      "level": 3,
+      "line": 1073,
+      "title": "Flujo para modelos nuevos (SIEMPRE empezar en CHECKLIST-GLOBAL.md)",
+      "parent_id": "H32",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "17. Registro de reservas de la ruta critica",
+        "Flujo para modelos nuevos (SIEMPRE empezar en CHECKLIST-GLOBAL.md)"
+      ]
+    },
+    {
+      "id": "H34",
+      "level": 3,
+      "line": 1172,
+      "title": "Bloque `Reserva actual` obligatorio en cada checklist de módulo",
+      "parent_id": "H32",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "17. Registro de reservas de la ruta critica",
+        "Bloque `Reserva actual` obligatorio en cada checklist de módulo"
+      ]
+    },
+    {
+      "id": "H35",
+      "level": 2,
+      "line": 1182,
+      "title": "Reserva actual",
+      "parent_id": "H01",
+      "hierarchy": [
+        "08 - Guia Maestra de Orden de Implementacion",
+        "Reserva actual"
+      ]
+    }
+  ]
+}

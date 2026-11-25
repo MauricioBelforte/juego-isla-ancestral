@@ -1,0 +1,12 @@
+{
+  "scope": "DOCUMENTACION/11-BUGS.md",
+  "method": "Count exact IDs separately across two extracted summary tables; a repeated ID across tables is reported, not assumed erroneous, because the source contains two tables.",
+  "row_count": 113,
+  "unique_ids": 113,
+  "duplicate_id_count": 0,
+  "duplicates": {},
+  "limitations": [
+    "Table overlap or historical versioning is not adjudicated.",
+    "Duplicate rows are not automatically classified as defect."
+  ]
+}

@@ -1,0 +1,211 @@
+{
+  "source": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
+  "classification_method": "Asignación semántica manual por acción/resultado solicitado; etiquetas múltiples permitidas y no excluyentes.",
+  "item_count": 20,
+  "category_counts_nonexclusive": {
+    "censo_inventario": 5,
+    "clasificacion": 7,
+    "extraccion_estructurada": 5,
+    "auditoria_referencias": 3,
+    "salida_estructurada": 2,
+    "conteo": 1,
+    "validacion_referencias": 1,
+    "comparacion": 2,
+    "metadatos": 1,
+    "duplicados": 1,
+    "evidencia": 1,
+    "calibracion_medicion": 1
+  },
+  "items": [
+    {
+      "line": 8,
+      "status": " ",
+      "id": "C1-01",
+      "description": "Medir cantidad y tipos de archivos de una carpeta documental elegida por el director; informar método y conteos.",
+      "types": [
+        "censo_inventario"
+      ]
+    },
+    {
+      "line": 9,
+      "status": " ",
+      "id": "C1-02",
+      "description": "Clasificar una lista de pendientes existente por tipo (implementación, documentación, prueba, decisión externa), con referencias fuente.",
+      "types": [
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 10,
+      "status": "x",
+      "id": "C1-03",
+      "description": "Extraer encabezados y jerarquía de un documento largo a JSON sin parafrasear títulos. Evidencia: `evidencias/C1-03-encabezados-guia-08.json` (35 encabezados, jerarquía y líneas validadas).",
+      "types": [
+        "extraccion_estructurada"
+      ]
+    },
+    {
+      "line": 11,
+      "status": " ",
+      "id": "C1-04",
+      "description": "Crear índice JSON de enlaces Markdown rotos en una ruta acotada, excluyendo obsoletos según alcance autorizado.",
+      "types": [
+        "auditoria_referencias",
+        "salida_estructurada"
+      ]
+    },
+    {
+      "line": 12,
+      "status": " ",
+      "id": "C1-05",
+      "description": "Clasificar los `[?]` de un módulo asignado por responsable mencionado y evidencia textual; sin cambiar marcas.",
+      "types": [
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 13,
+      "status": " ",
+      "id": "C1-06",
+      "description": "Extraer las marcas y etiquetas literales de una sección acotada del backlog, conservar el orden y producir conteos por etiqueta sin evaluar si cada estado está justificado.",
+      "types": [
+        "extraccion_estructurada",
+        "conteo"
+      ]
+    },
+    {
+      "line": 14,
+      "status": " ",
+      "id": "C1-07",
+      "description": "Inventariar archivos de pruebas de un módulo y clasificar unitarios/integración/regresión por nombre y contenido.",
+      "types": [
+        "censo_inventario",
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 15,
+      "status": " ",
+      "id": "C1-08",
+      "description": "Clasificar entradas de un registro de bugs por severidad declarada, módulo y estado; no inferir severidad no declarada.",
+      "types": [
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 16,
+      "status": " ",
+      "id": "C1-09",
+      "description": "Extraer referencias a archivos desde una sección de `04-Codigo.md` y marcarlas como existentes/ausentes en disco.",
+      "types": [
+        "extraccion_estructurada",
+        "auditoria_referencias"
+      ]
+    },
+    {
+      "line": 17,
+      "status": " ",
+      "id": "C1-10",
+      "description": "Construir un JSON de módulos con dependencias declaradas de un conjunto asignado y verificar que cada ID exista.",
+      "types": [
+        "salida_estructurada",
+        "validacion_referencias"
+      ]
+    },
+    {
+      "line": 18,
+      "status": " ",
+      "id": "C1-11",
+      "description": "Censar claves de traducción declaradas en dos catálogos escogidos, reportando solo diferencias de conjunto.",
+      "types": [
+        "censo_inventario",
+        "comparacion"
+      ]
+    },
+    {
+      "line": 19,
+      "status": " ",
+      "id": "C1-12",
+      "description": "Clasificar tareas de backlog por modalidad de verificación requerida: estática, headless, runtime, visual o decisión humana.",
+      "types": [
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 20,
+      "status": " ",
+      "id": "C1-13",
+      "description": "Extraer nombres de señales declaradas de un script seleccionado y entregar JSON con archivo y línea.",
+      "types": [
+        "extraccion_estructurada"
+      ]
+    },
+    {
+      "line": 21,
+      "status": " ",
+      "id": "C1-14",
+      "description": "Procesar un lote documental aprobado y resumir sus metadatos en una tabla estructurada por ruta, tipo, fecha disponible y estado explícito; omitir campos ausentes sin inferirlos.",
+      "types": [
+        "extraccion_estructurada",
+        "metadatos"
+      ]
+    },
+    {
+      "line": 22,
+      "status": " ",
+      "id": "C1-15",
+      "description": "Clasificar secciones de una guía en norma, historial, ejemplo o propuesta con evidencia de encabezado/contexto.",
+      "types": [
+        "clasificacion"
+      ]
+    },
+    {
+      "line": 23,
+      "status": " ",
+      "id": "C1-16",
+      "description": "Verificar citas `archivo:L#` de un informe asignado; reportar válidas, rango inexistente o ruta ausente sin corregir la fuente.",
+      "types": [
+        "auditoria_referencias"
+      ]
+    },
+    {
+      "line": 24,
+      "status": " ",
+      "id": "C1-17",
+      "description": "Preparar JSON de inventario de autoloads desde `project.godot` y comparar contra otra lista documental indicada.",
+      "types": [
+        "censo_inventario",
+        "comparacion"
+      ]
+    },
+    {
+      "line": 25,
+      "status": " ",
+      "id": "C1-18",
+      "description": "Agrupar duplicados exactos de nombres/IDs en un dataset acotado; incluir huellas o claves que permitan reproducir el conteo.",
+      "types": [
+        "censo_inventario",
+        "duplicados"
+      ]
+    },
+    {
+      "line": 26,
+      "status": " ",
+      "id": "C1-19",
+      "description": "Separar evidencia directa de inferencias en un informe técnico seleccionado, entregando tabla/JSON con justificación.",
+      "types": [
+        "clasificacion",
+        "evidencia"
+      ]
+    },
+    {
+      "line": 27,
+      "status": " ",
+      "id": "C1-20",
+      "description": "Medir tiempo/tamaño/errores de una tarea de clasificación pequeña con dos tamaños de lote; registrar calidad y truncamientos.",
+      "types": [
+        "calibracion_medicion"
+      ]
+    }
+  ]
+}

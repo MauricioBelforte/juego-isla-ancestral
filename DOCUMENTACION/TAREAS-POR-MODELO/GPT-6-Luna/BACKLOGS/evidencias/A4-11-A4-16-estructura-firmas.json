@@ -1,0 +1,212 @@
+{
+  "scope": "Ocho sub-backlogs propios, no incluye BACKLOG-MASTER ni evidencias.",
+  "method": "Comprobación estructural por regex de encabezados Markdown, IDs de tareas y tres campos de firma exigidos.",
+  "file_count": 8,
+  "files": [
+    {
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "01 — Censos y clasificación (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "02 — Síntesis y análisis entre documentos (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "03 — Estructuras de datos y JSON (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "04 — Auditoría documental y código estático (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "05 — Calibración y consistencia de resultados (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "06-Validacion-y-Pruebas.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "06 — Validación y pruebas (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "07 — Localización de evidencia y recuperación (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    },
+    {
+      "file": "08-Informes-y-Coordinacion.md",
+      "top_heading": {
+        "line": 1,
+        "level": 1,
+        "text": "08 — Informes y coordinación verificable (20 tareas)"
+      },
+      "heading_count": 2,
+      "task_count": 20,
+      "task_ids_unique": true,
+      "signature_fields": {
+        "Modelo": true,
+        "Plataforma": true,
+        "Fecha": true
+      },
+      "missing_signature_fields": [],
+      "signature_values": {
+        "Modelo": "GPT-6-Luna",
+        "Plataforma": "DeepAI Code",
+        "Fecha": "2026-11-25"
+      },
+      "signature_matches_expected_identity": true
+    }
+  ],
+  "all_have_signatures": true,
+  "all_task_ids_unique_per_file": true,
+  "a4_11_review": {
+    "requested_elements": [
+      "encabezados",
+      "tabla de contenidos",
+      "estructura"
+    ],
+    "checked": [
+      "encabezados Markdown",
+      "conteo de encabezados",
+      "IDs de tareas",
+      "unicidad de IDs",
+      "presencia de campos de firma"
+    ],
+    "not_checked": [
+      "presencia/consistencia de una tabla de contenidos frente a secciones"
+    ],
+    "result": "parcial; no sustenta completar A4-11"
+  },
+  "all_signatures_match_expected_identity": true
+}

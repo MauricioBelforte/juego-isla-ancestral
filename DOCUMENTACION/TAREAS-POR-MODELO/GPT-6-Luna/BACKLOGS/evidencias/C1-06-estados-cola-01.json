@@ -1,0 +1,112 @@
+{
+  "source": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/01-Backlog-Censos-y-Clasificacion.md",
+  "scope": "Tareas numeradas C1-01..C1-20 de la cola activa, actualizada durante la sesión.",
+  "method": "Regex de marca e ID; extracción literal en orden, sin juzgar la justificación de estados.",
+  "counts": {
+    "pending": 8,
+    "complete": 12,
+    "unresolved": 0
+  },
+  "items": [
+    {
+      "line": 8,
+      "id": "C1-01",
+      "status": "[x]"
+    },
+    {
+      "line": 9,
+      "id": "C1-02",
+      "status": "[x]"
+    },
+    {
+      "line": 10,
+      "id": "C1-03",
+      "status": "[x]"
+    },
+    {
+      "line": 11,
+      "id": "C1-04",
+      "status": "[x]"
+    },
+    {
+      "line": 12,
+      "id": "C1-05",
+      "status": "[ ]"
+    },
+    {
+      "line": 13,
+      "id": "C1-06",
+      "status": "[x]"
+    },
+    {
+      "line": 14,
+      "id": "C1-07",
+      "status": "[ ]"
+    },
+    {
+      "line": 15,
+      "id": "C1-08",
+      "status": "[x]"
+    },
+    {
+      "line": 16,
+      "id": "C1-09",
+      "status": "[ ]"
+    },
+    {
+      "line": 17,
+      "id": "C1-10",
+      "status": "[ ]"
+    },
+    {
+      "line": 18,
+      "id": "C1-11",
+      "status": "[ ]"
+    },
+    {
+      "line": 19,
+      "id": "C1-12",
+      "status": "[x]"
+    },
+    {
+      "line": 20,
+      "id": "C1-13",
+      "status": "[ ]"
+    },
+    {
+      "line": 21,
+      "id": "C1-14",
+      "status": "[x]"
+    },
+    {
+      "line": 22,
+      "id": "C1-15",
+      "status": "[x]"
+    },
+    {
+      "line": 23,
+      "id": "C1-16",
+      "status": "[x]"
+    },
+    {
+      "line": 24,
+      "id": "C1-17",
+      "status": "[ ]"
+    },
+    {
+      "line": 25,
+      "id": "C1-18",
+      "status": "[x]"
+    },
+    {
+      "line": 26,
+      "id": "C1-19",
+      "status": "[x]"
+    },
+    {
+      "line": 27,
+      "id": "C1-20",
+      "status": "[ ]"
+    }
+  ]
+}

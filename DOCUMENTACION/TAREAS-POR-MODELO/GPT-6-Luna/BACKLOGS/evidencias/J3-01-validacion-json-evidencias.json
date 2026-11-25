@@ -1,0 +1,45 @@
+{
+  "scope": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias",
+  "file_count": 6,
+  "valid_count": 6,
+  "invalid_count": 0,
+  "files": [
+    {
+      "file": "C1-01-censo-backlogs.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 1719
+    },
+    {
+      "file": "C1-02-clasificacion-cola-01.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 6468
+    },
+    {
+      "file": "C1-03-encabezados-guia-08.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 10425
+    },
+    {
+      "file": "C1-06-estados-cola-01.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 1834
+    },
+    {
+      "file": "C1-18-ids-duplicados.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 250
+    },
+    {
+      "file": "S2-11-S2-15-sintesis-crossdoc.json",
+      "valid": true,
+      "root_type": "dict",
+      "bytes": 3679
+    }
+  ],
+  "method": "json.loads sobre UTF-8 estricto; solo lectura de fixtures/reportes de evidencia del propio backlog."
+}

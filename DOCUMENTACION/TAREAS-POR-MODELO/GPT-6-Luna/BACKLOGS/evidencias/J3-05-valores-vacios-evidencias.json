@@ -1,0 +1,294 @@
+{
+  "scope": "JSON propios de BACKLOGS/evidencias al momento del scan.",
+  "files_scanned": 15,
+  "findings_count": 54,
+  "counts_by_kind": {
+    "null": 1,
+    "empty_string": 53
+  },
+  "per_file": [
+    {
+      "file": "A4-11-A4-16-estructura-firmas.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-01-censo-backlogs.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-02-clasificacion-cola-01.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-03-encabezados-guia-08.json",
+      "finding_count": 1
+    },
+    {
+      "file": "C1-04-enlaces-markdown-backlogs.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-06-estados-cola-01.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-08-tablas-resumen-bugs.json",
+      "finding_count": 53
+    },
+    {
+      "file": "C1-12-modalidad-verificacion-160-tareas.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-15-clasificacion-secciones-agents.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-16-auditoria-citas.json",
+      "finding_count": 0
+    },
+    {
+      "file": "C1-18-ids-duplicados.json",
+      "finding_count": 0
+    },
+    {
+      "file": "J3-01-validacion-json-evidencias.json",
+      "finding_count": 0
+    },
+    {
+      "file": "J3-02-J3-03-claves-equivalencia.json",
+      "finding_count": 0
+    },
+    {
+      "file": "J3-04-ids-repetidos-tablas-bugs.json",
+      "finding_count": 0
+    },
+    {
+      "file": "S2-11-S2-15-sintesis-crossdoc.json",
+      "finding_count": 0
+    }
+  ],
+  "findings": [
+    {
+      "kind": "null",
+      "path": "$.headings[0].parent_id"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[54].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[55].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[56].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[57].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[58].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[59].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[60].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[61].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[62].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[63].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[63].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[63].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[64].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[65].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[66].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[68].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[69].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[70].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[71].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[71].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[72].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[73].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[73].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[74].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[74].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[75].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[76].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[77].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[78].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[79].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[80].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[81].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[82].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[83].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[83].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[84].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[85].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[86].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[87].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[88].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[89].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[89].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[89].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[90].module"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[90].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[90].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[90].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[91].severity"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[91].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[91].date"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[92].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[94].reported_by"
+    },
+    {
+      "kind": "empty_string",
+      "path": "$.rows[96].reported_by"
+    }
+  ],
+  "method": "json.loads + recorrido recursivo; null/vacío/placeholders se mantienen como categorías distintas. <...> se marca solo como candidato para revisión, no se declara inválido.",
+  "limitations": [
+    "El escaneo literal no conoce el schema ni el propósito de cada campo.",
+    "Se excluye a propósito el propio reporte para evitar auto-incluir sus descripciones de tokens."
+  ]
+}

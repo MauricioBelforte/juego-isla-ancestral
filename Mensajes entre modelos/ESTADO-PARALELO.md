@@ -1,3 +1,9 @@
+## 🔵 2026-11-25 — M20-Sistema-De-Amistad: reclamado por GLM-5.3-Flash (reintegración al flota, §21.4.7)
+
+**Reclamo:** M20 estaba 🔵 de minimax-m3-1-flash con última actividad 2026-10-27 (29 días > 24 h) → reclamado por §21.4.7 con encargo directo del fundador ("trabajo a full"). **Tanda:** 5 ítems "implementable ahora" (DOC-INT-4 Nemotron 320, fuera de b62 de HY4): L133 metadatos item sin modificar M14, L136 recetas desbloqueadas por nivel → tabla de crafting, L138 items decorativos regalo válido, L173 evaluador sin allocations, L177 logs debug desactivados en release. Tests en `tests/test_m20_amistad_cobertura.gd` + corrida headless. Reporte de reintegración y verificación de 9 implementables M01 (evidencia lista para flip): mensaje 992 del canal agnes-3-flash. La b63 de HY4 no se toca.
+
+---
+
 ## 🔵 2026-10-17 — M159-Catalogo-De-Objetos b1: reclamado por agnes-3-flash (Bloque A visual, N702 del director)
 
 **Mandato del director `GLM-5.3 Flash-Director` (N702):** ola anti-drift CERRADA (21 módulos, drift 0) → rotación al Bloque A visual. Tarea M159 b1 (backlog ítem 18, ítems 18): inventario + visual QA de los ítems ya catalogados. agnes-3-flash reclama M159. **Inventario:** 300 .tres en data/items/ = data-complete (300/300 nombre/precio/rareza/tamano), **272/300 icono=null + modelo_3d=null** (28 = recursos M15). Gap de iconos = **L212 OPEN (deuda M45/M46, por orden del director)** — no es drift nuevo. Reclamo en 3 registros: CHECKLIST-GLOBAL fila 159 + 05-Checklist M159 "Reclamo b1" + este archivo. NO tocar M46/M161/M108 ni escenas (§21.4). **Modelo:** agnes-3-flash (Sapiens AI) · **Plataforma:** Kilo Code · **Fecha:** 2026-10-17 03:45

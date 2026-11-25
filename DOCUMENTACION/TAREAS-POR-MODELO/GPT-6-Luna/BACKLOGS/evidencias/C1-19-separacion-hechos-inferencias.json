@@ -1,0 +1,135 @@
+{
+  "source_report": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-11-S2-15-sintesis-crossdoc.json",
+  "claim_count": 8,
+  "claims": [
+    {
+      "claim": "Antes de iniciar una tarea se debe leer AGENTS.md y priorizar sus reglas.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "AGENTS.md",
+          "line": 9,
+          "excerpt": "2. Si existe, leerlo completo y **priorizar sus instrucciones** sobre cualquier regla global."
+        }
+      ]
+    },
+    {
+      "claim": "El ciclo del agente consulta primero el mensaje más reciente de su canal; si hay encargo, responde antes de otra tarea.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "AGENTS.md",
+          "line": 1574,
+          "excerpt": "   (1a) **leer su carpeta — el ÚLTIMO archivo** del canal, y si el director dejó instrucciones ahí"
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 1575,
+          "excerpt": "   → RESPONDER primero creando SU PROPIO mensaje (cada uno escribe su mensaje, nunca editar el"
+        }
+      ]
+    },
+    {
+      "claim": "No se debe trabajar en un módulo en curso de otro agente.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "AGENTS.md",
+          "line": 945,
+          "excerpt": "2. **Nunca trabajar sobre un módulo `🔵` o `🔴`** (en curso por otro). Respetar el bloqueo."
+        }
+      ]
+    },
+    {
+      "claim": "El protocolo V2 pide reportar al director en cada vuelta del cronómetro, con tarea, estado y evidencia.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "AGENTS.md",
+          "line": 1580,
+          "excerpt": "   del cronómetro** en su canal (qué tarea(s) trabajó esa vuelta, estado, evidencia — aunque no"
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 1581,
+          "excerpt": "   cierre todo) + marcas `[x]` honestas en su backlog + `05-Checklist` + fila GLOBAL. Bucle continuo."
+        }
+      ]
+    },
+    {
+      "claim": "En este backlog rector, una marca [x] requiere ejecución y verificación del resultado con evidencia enlazada.",
+      "classification": "requisito_documentado_del_backlog_propio",
+      "evidence": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 29,
+          "excerpt": "- `[x]` = solo después de ejecutar y verificar el resultado definido; el informe debe enlazar evidencia. No usar para planificación, lectura superficial ni salida copiada de otro modelo."
+        }
+      ]
+    },
+    {
+      "claim": "La guía 08 ordena reservas por fases/puertas y requiere comprobar requisitos antes de reservar.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 177,
+          "excerpt": "Ningun agente debe reservar un modulo solo porque aparezca como `🟢 Disponible`. Antes debe comprobar que:"
+        },
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 181,
+          "excerpt": "- [ ] El modulo aparece en una fase habilitada de esta guia."
+        },
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 197,
+          "excerpt": "Un modulo puede investigarse antes de estar habilitado, pero debe marcarse como **investigacion previa**, no como implementacion reservada."
+        }
+      ]
+    },
+    {
+      "claim": "La guía permite investigación previa de módulos futuros si no modifica runtime ni interfiere con otro agente; eso no equivale a reservar implementación.",
+      "classification": "requisito_documentado",
+      "evidence": [
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 1009,
+          "excerpt": "Un agente puede investigar cualquier modulo futuro si no modifica runtime ni pisa el trabajo de otro agente."
+        },
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 1015,
+          "excerpt": "- [ ] No cambiar el modulo a `🔵 En curso` salvo que vaya a implementar."
+        },
+        {
+          "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+          "line": 1019,
+          "excerpt": "- [ ] No inventar que una integracion esta hecha."
+        }
+      ]
+    },
+    {
+      "claim": "Mientras falte apertura/asignación del director, limitar la actividad a tareas propias y no publicar un mensaje numerado.",
+      "classification": "inferencia_operativa_aplicada",
+      "evidence": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 24,
+          "excerpt": "8. Al cerrar **cada sub-backlog**, comprobar otra vez el canal y reportar al director en `Mensajes entre modelos/GPT-6-Luna/`. El detalle va en un mensaje propio de ese canal; el chat solo recibe un aviso breve. La numeración debe seguir el protocolo oficial y helper del proyecto; nunca numerar manualmente ni editar mensaje de otra persona. El pool de este canal está en `Mensajes entre modelos/GPT-6-Luna/NUMEROS_DISPONIBLES.txt`; la apertura formal `01` corresponde al director según el README del canal. Si helper/pool no está disponible o hay una denegación de ejecución, registrar el bloqueo y no improvisar ni eludirla."
+        },
+        {
+          "file": "Mensajes entre modelos/GPT-6-Luna/README.md",
+          "section": "Estado de alta",
+          "excerpt": "La apertura formal del canal (mensaje `01`) y cualquier asignación de tareas quedan pendientes del director `GLM-5.3 Flash-Director`."
+        }
+      ],
+      "note": "Conclusión de prudencia derivada; no se atribuye literalmente a AGENTS.md."
+    }
+  ],
+  "limitations": [
+    "No es revisión independiente de todo AGENTS.md.",
+    "Las citas son puntuales y no sustituyen consultar su contexto completo.",
+    "La conclusión operativa está etiquetada como inferencia, no como cita literal."
+  ]
+}

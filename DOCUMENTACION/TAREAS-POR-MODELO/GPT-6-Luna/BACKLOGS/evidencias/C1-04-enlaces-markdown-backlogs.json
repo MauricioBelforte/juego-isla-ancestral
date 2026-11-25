@@ -1,0 +1,9 @@
+{
+  "scope": "Archivos Markdown raíz de BACKLOGS/GPT-6-Luna (8 sub-backlogs + BACKLOG-MASTER), sin evidencias.",
+  "method": "Regex para enlaces inline/reference-style de Markdown después de excluir spans inline-code; alcance limitado, no parser CommonMark completo.",
+  "markdown_file_count": 9,
+  "link_count": 0,
+  "links": [],
+  "broken_links": [],
+  "note": "No se encontraron destinos Markdown en este alcance; al no haber links, no hay destinos que verificar. Rutas en texto/código no son enlaces Markdown."
+}

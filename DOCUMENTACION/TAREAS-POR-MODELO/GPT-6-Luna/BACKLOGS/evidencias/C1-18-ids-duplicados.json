@@ -1,0 +1,7 @@
+{
+  "scope": "Ocho sub-backlogs GPT-6-Luna, solo IDs de tareas numeradas.",
+  "id_count": 160,
+  "unique_id_count": 160,
+  "duplicate_ids": {},
+  "method": "Regex anclada al formato de tareas; se comprobaron también los IDs con estado [x] o [?]."
+}

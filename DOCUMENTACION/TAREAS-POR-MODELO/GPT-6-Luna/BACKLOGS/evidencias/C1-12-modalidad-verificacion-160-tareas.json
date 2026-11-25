@@ -1,0 +1,1715 @@
+{
+  "scope": "Todos los 160 ítems enumerados en los ocho sub-backlogs GPT-6-Luna.",
+  "method": "Clasificación por términos explícitos y tipo de acción en cada descripción; reglas enumeradas abajo. Etiquetas no excluyentes; human_gate señala necesidad explícita de asignación, autorización, referencia o decisión externa.",
+  "rules": {
+    "headless_cli": [
+      "headless",
+      "cli",
+      "--help",
+      "validator",
+      "validador",
+      "lint",
+      "exit code",
+      "código de retorno",
+      "comando"
+    ],
+    "runtime": [
+      "runtime",
+      "integración",
+      "ejecutar una prueba",
+      "ejecutar prueba",
+      "ejecutar test",
+      "suite de pruebas",
+      "prueba unitaria",
+      "godot",
+      "duración"
+    ],
+    "visual": [
+      "visual",
+      "captura",
+      "pantalla",
+      "imagen",
+      "screenshot",
+      "asset"
+    ],
+    "decision_humana": [
+      "asignado",
+      "seleccionado por el director",
+      "autoriz",
+      "aprob",
+      "permiso",
+      "decisión del usuario",
+      "decisión humana",
+      "elegido por el director",
+      "cuando el director",
+      "contrato citado",
+      "fuente de referencia",
+      "gold set",
+      "conjunto de referencia",
+      "decisión requerida"
+    ],
+    "estatica": "Tarea de análisis documental/datos o todo ítem sin modalidad de ejecución explícita."
+  },
+  "item_count": 160,
+  "classified_ids_unique": true,
+  "counts_nonexclusive": {
+    "estatica": 154,
+    "headless_cli": 11,
+    "runtime": 10,
+    "visual": 4,
+    "decision_humana": 28
+  },
+  "items": [
+    {
+      "id": "C1-01",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 8,
+      "description": "Medir cantidad y tipos de archivos de una carpeta documental elegida por el director; informar método y conteos. Alcance disponible del agente: carpeta propia BACKLOGS; 9 archivos Markdown de trabajo, excluidas evidencias para evitar autoconteo. Evidencia: `evidencias/C1-01-censo-backlogs.json`. No se inspeccionó carpeta ajena.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-02",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 9,
+      "description": "Clasificar una lista de pendientes existente por tipo (implementación, documentación, prueba, decisión externa), con referencias fuente. Evidencia: `evidencias/C1-02-clasificacion-cola-01.json` (20 tareas clasificadas; etiquetas no excluyentes y método declarado).",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-03",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 10,
+      "description": "Extraer encabezados y jerarquía de un documento largo a JSON sin parafrasear títulos. Evidencia: `evidencias/C1-03-encabezados-guia-08.json` (35 encabezados, jerarquía y líneas validadas).",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-04",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 11,
+      "description": "Crear índice JSON de enlaces Markdown rotos en una ruta acotada, excluyendo obsoletos según alcance autorizado.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-05",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 12,
+      "description": "Clasificar los `[?]` de un módulo asignado por responsable mencionado y evidencia textual; sin cambiar marcas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-06",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 13,
+      "description": "Extraer las marcas y etiquetas literales de una sección acotada del backlog, conservar el orden y producir conteos por etiqueta sin evaluar si cada estado está justificado. Evidencia: `evidencias/C1-06-estados-cola-01.json` (20 IDs; 19 pendientes, 1 completa, 0 sin resolver; marcas extraídas sin juzgar su validez).",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-07",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 14,
+      "description": "Inventariar archivos de pruebas de un módulo y clasificar unitarios/integración/regresión por nombre y contenido.",
+      "modalities": [
+        "runtime",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-08",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 15,
+      "description": "Clasificar entradas de un registro de bugs por severidad declarada, módulo y estado; no inferir severidad no declarada.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-09",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 16,
+      "description": "Extraer referencias a archivos desde una sección de `04-Codigo.md` y marcarlas como existentes/ausentes en disco.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-10",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 17,
+      "description": "Construir un JSON de módulos con dependencias declaradas de un conjunto asignado y verificar que cada ID exista.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-11",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 18,
+      "description": "Censar claves de traducción declaradas en dos catálogos escogidos, reportando solo diferencias de conjunto.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-12",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 19,
+      "description": "Clasificar tareas de backlog por modalidad de verificación requerida: estática, headless, runtime, visual o decisión humana.",
+      "modalities": [
+        "visual",
+        "headless_cli",
+        "runtime",
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-13",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 20,
+      "description": "Extraer nombres de señales declaradas de un script seleccionado y entregar JSON con archivo y línea.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-14",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 21,
+      "description": "Procesar un lote documental aprobado y resumir sus metadatos en una tabla estructurada por ruta, tipo, fecha disponible y estado explícito; omitir campos ausentes sin inferirlos.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-15",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 22,
+      "description": "Clasificar secciones de una guía en norma, historial, ejemplo o propuesta con evidencia de encabezado/contexto.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-16",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 23,
+      "description": "Verificar citas `archivo:L#` de un informe asignado; reportar válidas, rango inexistente o ruta ausente sin corregir la fuente. Alcance: informe cross-doc propio; 14 referencias verificadas contra disco y línea citada. Evidencia: `evidencias/C1-16-auditoria-citas.json`; se verificó rango/título, no se certifica todo el soporte semántico.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C1-17",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 24,
+      "description": "Preparar JSON de inventario de autoloads desde `project.godot` y comparar contra otra lista documental indicada.",
+      "modalities": [
+        "runtime",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-18",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 25,
+      "description": "Agrupar duplicados exactos de nombres/IDs en un dataset acotado; incluir huellas o claves que permitan reproducir el conteo. Evidencia: `evidencias/C1-18-ids-duplicados.json`; 160 IDs, 160 únicos, 0 duplicados.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-19",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 26,
+      "description": "Separar evidencia directa de inferencias en un informe técnico seleccionado, entregando tabla/JSON con justificación.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C1-20",
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "line": 27,
+      "description": "Medir tiempo/tamaño/errores de una tarea de clasificación pequeña con dos tamaños de lote; registrar calidad y truncamientos.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-01",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 8,
+      "description": "Resumir un plan-actual asignado en objetivo, alcance, estado, dependencias y pendientes; citar secciones/líneas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "S2-02",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 9,
+      "description": "Comparar `01-Requerimientos.md` con `03-Diseno.md` de un mismo módulo y listar requisitos no mapeados.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-03",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 10,
+      "description": "Comparar diseño y ejecución (`03-Diseno.md` vs `04-Codigo.md`) y señalar contradicciones expresas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-04",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 11,
+      "description": "Comparar `04-Codigo.md` con inventario de archivos y marcar referencias ausentes/existentes.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-05",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 12,
+      "description": "Sintetizar el estado de pruebas de un módulo desde plan y resultados de testing, sin elevar pruebas propuestas a ejecutadas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-06",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 13,
+      "description": "Crear una matriz claim→fuente para afirmaciones de una sección de diseño escogida.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-07",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 14,
+      "description": "Identificar decisiones pendientes del usuario en documentos de un módulo y separar de tareas que el agente sí puede ejecutar.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-08",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 15,
+      "description": "Sintetizar un hilo de mensajes asignado en cronología, decisión, evidencia y estado; preservar enlaces a cada mensaje.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "S2-09",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 16,
+      "description": "Comparar un mensaje de cierre con el código actual y clasificar cada afirmación como corroborada, stale o no verificable.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-10",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 17,
+      "description": "Extraer las lecciones aplicables a un bug conocido desde `11-BUGS.md` y guías temáticas, con referencias.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-11",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 18,
+      "description": "Construir mapa de contradicciones de un flujo concreto entre `AGENTS.md`, guía temática y plan-actual; citar todas las fuentes. **Bloqueo:** el artefacto inicial solo cruzó `AGENTS.md` y `BACKLOG-MASTER`, sin guía temática ni `plan-actual`; no se marca completo. Evidencia parcial: `evidencias/S2-11-S2-15-sintesis-crossdoc.json`. Para resolver: seleccionar con el director un módulo no reservado y su guía temática aplicable.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-12",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 19,
+      "description": "Sintetizar las tareas pendientes de un módulo sin modificar marcas; incluir dueños explícitos y dependencias.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-13",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 20,
+      "description": "Comparar la versión actual y una versión histórica seleccionada para identificar cambios semánticos, no de formato.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-14",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 21,
+      "description": "Extraer un glosario de nombres de clase/sistema desde documentos y enlazar cada término con su archivo fuente.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-15",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 22,
+      "description": "Crear un resumen ejecutivo de una guía larga limitado a 500 palabras con secciones exactas citadas. Evidencia: `evidencias/S2-11-S2-15-sintesis-crossdoc.json` (120 palabras; referencias a secciones/líneas de la guía 08 verificadas).",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-16",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 23,
+      "description": "Comparar dos módulos que documentan la misma interfaz/contrato e identificar diferencias de vocabulario o firma.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-17",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 24,
+      "description": "Clasificar referencias de un documento por fuente oficial, fuente interna, hipótesis o dato histórico.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-18",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 25,
+      "description": "Preparar borrador de handoff para un módulo con qué está probado, qué falta, riesgo y próximo paso sugerido.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-19",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 26,
+      "description": "Comprobar que un resumen existente no omite condiciones, excepciones o propietarios nombrados en su fuente.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "S2-20",
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "line": 27,
+      "description": "Evaluar consistencia de citas y fidelidad de un resumen contra una muestra elegida por el director; registrar omisiones y falsos claims.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-01",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 8,
+      "description": "Validar sintaxis JSON de un archivo asignado y devolver ruta, línea/columna de error o estado válido. Alcance inicial: 6 informes JSON generados en la carpeta de evidencias propia; 6/6 parsean correctamente. Evidencia: `evidencias/J3-01-validacion-json-evidencias.json`; no incluye JSON de producción ni datos de juego.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "J3-02",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 9,
+      "description": "Comprobar claves requeridas/extra de un JSON contra su schema existente.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-03",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 10,
+      "description": "Comparar dos JSON equivalentes por conjunto de claves, ignorando orden de propiedades, con diff compacto.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-04",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 11,
+      "description": "Auditar IDs duplicados en un catálogo asignado y generar lista reproducible.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "J3-05",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 12,
+      "description": "Detectar valores vacíos, null y placeholders en un dataset, manteniendo diferenciadas esas categorías.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-06",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 13,
+      "description": "Validar que referencias entre dos catálogos tengan destino existente; reportar huérfanas sin repararlas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-07",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 14,
+      "description": "Comprobar que cantidades numéricas cumplan tipos/rangos documentados en schema o contrato.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-08",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 15,
+      "description": "Comparar traducciones por claves y placeholders (`{x}`, `%s`) entre idiomas, solo lectura.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-09",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 16,
+      "description": "Auditar unicidad y formato de claves de traducción en un archivo PO o JSON asignado.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "J3-10",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 17,
+      "description": "Comprobar consistencia de listas paralelas (IDs/nombres/rutas) y hallar longitud/desfase.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-11",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 18,
+      "description": "Generar JSON de reporte de enlaces rotos en un catálogo con origen y destino.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-12",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 19,
+      "description": "Verificar nombres de archivo/rutas citados en manifiestos contra el sistema de archivos.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-13",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 20,
+      "description": "Clasificar entradas que no siguen schema como error, excepción documentada o caso indeterminado.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-14",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 21,
+      "description": "Revisar un `.tres`/`.tscn` en modo lectura y extraer nodos/recursos nombrados como JSON simple.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-15",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 22,
+      "description": "Comparar conteos de recursos declarados en plan-actual contra conteo real en un directorio asignado.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "J3-16",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 23,
+      "description": "Verificar que un inventario de assets no repita rutas, IDs o identificadores semánticos.",
+      "modalities": [
+        "visual",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-17",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 24,
+      "description": "Auditar formato de fechas/timestamps en un dataset y reportar valores no parseables sin normalizar.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-18",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 25,
+      "description": "Revisar serialización de un fixture contra el contrato documentado, sin ejecutar ni alterar guardados reales.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "J3-19",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 26,
+      "description": "Crear un validador de esquema pequeño solo con autorización expresa, incluir casos positivos/negativos y no integrarlo sin encargo.",
+      "modalities": [
+        "headless_cli",
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "J3-20",
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "line": 27,
+      "description": "Medir concordancia de clasificación JSON contra un conjunto de referencia elegido por el director; calcular precisión/recall si hay etiquetas válidas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "A4-01",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 8,
+      "description": "Comparar un `04-Codigo.md` con el árbol de archivos del módulo y clasificar cada ruta citada: existe, ausente, ambigua, histórica.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-02",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 9,
+      "description": "Comparar afirmaciones de un `03-Diseno.md` con funciones/clases citadas, verificando nombres y firmas exactas en disco.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-03",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 10,
+      "description": "Revisar un checklist asignado: conteo real `[x]/[ ]/[?]`, Totales y discrepancias; no corregir ni flipar marcas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "A4-04",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 11,
+      "description": "Validar una muestra de citas `archivo:L#` en un informe anterior contra contenido vigente y contexto semántico.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-05",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 12,
+      "description": "Auditar enlaces Markdown internos de un subárbol y distinguir ruta inexistente, anchor inválido y archivo obsoleto.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-06",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 13,
+      "description": "Extraer IDs de módulos mencionados en una guía y cruzarlos con títulos/IDs reales del GLOBAL, reportando alias históricos aparte.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-07",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 14,
+      "description": "Revisar si un plan llama “implementado” a un artefacto que en realidad aparece como propuesta, mock o plantilla.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-08",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 15,
+      "description": "Comprobar que pruebas citadas en cierres existan en `HEAD` y que sus aserciones cubran el comportamiento afirmado.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-09",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 16,
+      "description": "Contrastar funciones documentadas con declaraciones reales en un módulo sin lock de otro agente.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-10",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 17,
+      "description": "Buscar referencias a APIs Godot inexistentes o nombres de métodos sin definición en un alcance aprobado; registrar evidencia, no editar.",
+      "modalities": [
+        "runtime",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "A4-11",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 18,
+      "description": "Revisar encabezados, tabla de contenidos y estructura de un documento largo contra sus secciones reales.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-12",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 19,
+      "description": "Detectar contradicciones de estado dentro del mismo documento: pendiente vs cerrado, “no aplica” vs artefacto listado, test propuesto vs ejecutado.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-13",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 20,
+      "description": "Comparar `01-Requerimientos.md` y `03-Diseno.md` de un módulo seleccionado y mapear requisitos sin diseño asociado.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-14",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 21,
+      "description": "Comparar `03-Diseno.md` con `04-Codigo.md` y clasificar diferencias como implementación, deferral, contradicción o alcance externo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-15",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 22,
+      "description": "Auditar referencias cruzadas a capturas: verificar que cada ruta exista y que el nombre corresponda al módulo citado.",
+      "modalities": [
+        "visual",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-16",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 23,
+      "description": "Revisar una muestra de firmas del canal/backlog: modelo, plataforma y fecha coincidentes con la identidad del archivo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-17",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 24,
+      "description": "Comparar el texto de `3-DOCUMENTO-TAREAS-ACTUAL.md` con la tabla GLOBAL para detectar resúmenes stale; no editar fuente central.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-18",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 25,
+      "description": "Ejecutar lectura de un script de validación seleccionado y resumir inputs, outputs, exclusiones y posibles falsos positivos con líneas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-19",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 26,
+      "description": "Revisar claims negativos (“no hay uso”, “no existe consumidor”) verificando scope, variantes de nombres y rutas excluidas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "A4-20",
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "line": 27,
+      "description": "Revisar un informe propio con checklist anti-alucinación: afirmación→evidencia, citas, límites, tareas no ejecutadas y decisión del dueño.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-01",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 8,
+      "description": "Resolver un ejercicio pequeño de extracción con referencia conocida; medir exactitud exacta y registrar errores.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-02",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 9,
+      "description": "Repetir una clasificación etiquetada con instrucciones idénticas y medir consistencia entre dos ejecuciones disponibles.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-03",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 10,
+      "description": "Medir extracción de encabezados en documento de tres tamaños con gold set y reportar omisiones/alucinaciones.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "K5-04",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 11,
+      "description": "Comparar extracción en texto plano frente a Markdown conservando el mismo conjunto de etiquetas de referencia.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-05",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 12,
+      "description": "Evaluar salida JSON contra schema: sintaxis, campos, tipos, cardinalidad y valores permitidos.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-06",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 13,
+      "description": "Probar manejo de campos ausentes y distinguir “desconocido”, `null`, vacío y no aplicable según contrato.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-07",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 14,
+      "description": "Ejecutar un ejercicio con distractores contradictorios y medir si la respuesta cita la fuente vigente correcta.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-08",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 15,
+      "description": "Medir fidelidad de un resumen con una lista de hechos obligatorios y hechos prohibidos definida antes del test.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-09",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 16,
+      "description": "Evaluar retención de restricciones al procesar un documento largo dividido en secciones; reportar pérdida por posición.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-10",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 17,
+      "description": "Comprobar localización de evidencia para cinco afirmaciones: ruta, sección/línea y soporte semántico.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-11",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 18,
+      "description": "Comparar clasificación con y sin definiciones explícitas de etiquetas y cuantificar desacuerdos.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-12",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 19,
+      "description": "Probar instrucciones ambiguas y producir preguntas de aclaración en vez de completar supuestos no sustentados.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-13",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 20,
+      "description": "Medir robustez ante nombres parecidos de módulos/modelos y comprobar separación de identidades.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-14",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 21,
+      "description": "Evaluar resumen de un hilo con mensajes sucesivos, preservando autor, fecha, orden y estado de decisiones.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-15",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 22,
+      "description": "Repetir una extracción con misma entrada para detectar variación en orden, campos y contenido sustantivo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-16",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 23,
+      "description": "Medir propensión a afirmar ejecución no realizada usando un conjunto de tareas con acciones no disponibles.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-17",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 24,
+      "description": "Medir capacidad para marcar incertidumbre cuando faltan datos, con rúbrica de abstención acordada de antemano.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-18",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 25,
+      "description": "Registrar truncamientos, límites de contexto, errores de herramienta y pasos manuales en un ejercicio reproducible.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-19",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 26,
+      "description": "Evaluar transferencia de una regla de formato a tres documentos distintos sin alterar el significado fuente.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "K5-20",
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "line": 27,
+      "description": "Cuando el director lo autorice y los modelos estén disponibles, comparar GPT-6-Luna con al menos dos modelos de la flota en la misma tarea ciega, mismo prompt, fuente, herramientas y gold set; medir exactitud, cobertura, fidelidad de citas, tiempo/costo accesibles y errores. Si no es posible una comparación justa, reportar solo la línea base propia y por qué no se puede afirmar superioridad.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "V6-01",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 8,
+      "description": "Identificar el comando y versión documentados para una suite de pruebas asignada, sin ejecutarla todavía.",
+      "modalities": [
+        "headless_cli",
+        "runtime",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-02",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 9,
+      "description": "Ejecutar una prueba unitaria seleccionada y reportar salida exacta, código de retorno y entorno.",
+      "modalities": [
+        "headless_cli",
+        "runtime"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-03",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 10,
+      "description": "Ejecutar una prueba de integración aprobada y confirmar que cubre el contrato citado.",
+      "modalities": [
+        "runtime",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "V6-04",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 11,
+      "description": "Revisar los casos límite de un test existente contra los límites explícitos del requerimiento.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-05",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 12,
+      "description": "Comparar un plan de testing con archivos de test presentes; detectar escenarios no implementados sin alterar el plan.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-06",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 13,
+      "description": "Revisar si una prueba puede pasar falsamente por mocks/fixtures que no ejercitan el sistema real.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-07",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 14,
+      "description": "Verificar que un validador de proyecto documente su alcance, exclusiones y significado de exit codes.",
+      "modalities": [
+        "headless_cli",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-08",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 15,
+      "description": "Ejecutar un validador read-only con `--help` o modo dry-run y resumir opciones y efectos secundarios declarados.",
+      "modalities": [
+        "headless_cli",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-09",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 16,
+      "description": "Comparar salida de herramienta contra artefacto fuente mediante conteo independiente pequeño.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-10",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 17,
+      "description": "Preparar matriz de entrada válida/inválida para un parser JSON ya existente, sin ejecutar escrituras.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-11",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 18,
+      "description": "Verificar que errores esperados indiquen ruta y ubicación suficiente para reproducir el fallo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-12",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 19,
+      "description": "Revisar salidas de regresión y distinguir fallo nuevo, fallo preexistente y fallo ambiental con evidencia histórica disponible.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-13",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 20,
+      "description": "Confirmar que una suite no escribe sobre `res://`, documentos canónicos o datos del usuario antes de ejecutarla.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-14",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 21,
+      "description": "Ejecutar comprobación de formato/lint acotada a archivos autorizados y registrar warnings separados de errors.",
+      "modalities": [
+        "headless_cli",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "V6-15",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 22,
+      "description": "Revisar un test para determinismo: orden, semilla, reloj, red y dependencia externa.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-16",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 23,
+      "description": "Medir duración de una tarea de prueba previamente aprobada y reportar tamaño de alcance y hardware/contexto conocido.",
+      "modalities": [
+        "runtime",
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "V6-17",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 24,
+      "description": "Comprobar cobertura de casos nulos, vacíos, duplicados y referencias huérfanas en un validador de datos.",
+      "modalities": [
+        "headless_cli",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-18",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 25,
+      "description": "Validar que resumen de CI/CLI citado corresponde al último run disponible, no a una ejecución histórica.",
+      "modalities": [
+        "headless_cli",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-19",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 26,
+      "description": "Diseñar casos de prueba para un cambio propuesto sin editar código ni afirmar que la suite fue ejecutada.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "V6-20",
+      "file": "06-Validacion-y-Pruebas.md",
+      "line": 27,
+      "description": "Redactar reporte QA que separe comando preparado, ejecutado, fallido, omitido y bloqueado por autorización.",
+      "modalities": [
+        "headless_cli",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "R7-01",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 8,
+      "description": "Encontrar la fuente canónica de una afirmación técnica y distinguirla de copias/históricos por referencias internas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-02",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 9,
+      "description": "Localizar un error registrado por mensaje exacto y extraer causa/solución documentadas con cita.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-03",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 10,
+      "description": "Mapear una ruta de documentación faltante a un módulo candidato según IDs reales, sin crearla.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-04",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 11,
+      "description": "Rastrear una instrucción desde AGENTS a guía específica y devolver cadena de referencias verificable.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-05",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 12,
+      "description": "Localizar la configuración activa de un autoload y cotejarla con la declaración de `project.godot`.",
+      "modalities": [
+        "runtime",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-06",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 13,
+      "description": "Identificar qué herramienta oficial del repo valida un tipo de claim y qué límites declara.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-07",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 14,
+      "description": "Buscar el procedimiento documentado para recuperar un componente existente y resumir prerequisitos sin ejecutarlo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-08",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 15,
+      "description": "Distinguir copia histórica de documento vigente usando plan-inicial/plan-actual, fecha y enlaces.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-09",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 16,
+      "description": "Localizar archivos de coordinación para un módulo y resumir estado/propietario sin cambiarlo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-10",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 17,
+      "description": "Rastrear el origen de un valor de configuración desde código hacia especificación y capturar cualquier divergencia.",
+      "modalities": [
+        "visual",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-11",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 18,
+      "description": "Localizar casos similares a una incidencia por síntomas y componentes; devolver candidatos, no declararlos duplicados sin cotejo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-12",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 19,
+      "description": "Identificar guía Godot temática aplicable a un error y verificar que el índice enlaza al archivo actual.",
+      "modalities": [
+        "runtime",
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-13",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 20,
+      "description": "Localizar la última evidencia de prueba de un módulo y separarla de planes/resultados históricos.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-14",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 21,
+      "description": "Buscar dependencias de un archivo mediante referencias de texto/documentación y señalar límites de búsqueda estática.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-15",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 22,
+      "description": "Crear mapa de ruta de escalamiento (owner, coordinador, herramienta, decisión humana) desde fuentes explícitas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "R7-16",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 23,
+      "description": "Identificar rutas de respaldo/obsoletos mencionadas y comprobar existencia sin restaurar/copiar nada.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-17",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 24,
+      "description": "Encontrar el script oficial para verificar pools/mensajes y resumir sus efectos antes de invocarlo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-18",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 25,
+      "description": "Investigar un fallo de codificación usando bytes/UTF-8 estricto y herramientas documentadas; no reparar sin encargo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-19",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 26,
+      "description": "Localizar discrepancias de versiones/fechas que pueden hacer una recomendación obsoleta y citar cada indicio.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "R7-20",
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "line": 27,
+      "description": "Entregar handoff de recuperación con hechos, rutas, comandos read-only seguros, riesgos y acciones que requieren permiso.",
+      "modalities": [
+        "headless_cli",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C8-01",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 8,
+      "description": "Preparar informe de cierre por backlog con rutas creadas, conteo de tareas, verificación de encoding y limitaciones.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-02",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 9,
+      "description": "Preparar reporte de avance parcial con entregado, pendiente, evidencia y siguiente paso seguro.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-03",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 10,
+      "description": "Resumir el último mensaje del canal propio y extraer instrucciones explícitas antes de tocar backlog.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-04",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 11,
+      "description": "Distinguir mensaje de director, informe propio, consulta y plantilla reservada según cuerpo y encabezado.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-05",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 12,
+      "description": "Preparar respuesta al director que conteste cada punto en orden y cite el mensaje al que responde.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-06",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 13,
+      "description": "Verificar que un informe de cierre no afirme pruebas, ediciones, permisos o resultados que no ocurrieron.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C8-07",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 14,
+      "description": "Elaborar tabla evidencia→claim→estado para un reporte técnico con rutas exactas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-08",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 15,
+      "description": "Revisar que una recomendación indique si requiere autorización, reserva de módulo o decisión del usuario.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C8-09",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 16,
+      "description": "Preparar handoff por dependencias con bloqueos externos diferenciados de trabajo pendiente propio.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-10",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 17,
+      "description": "Resumir un reporte largo para el director en aviso de una línea sin duplicar el contenido del archivo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-11",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 18,
+      "description": "Detectar cuando un mensaje de canal está en plantilla y aplicar espera de 5 minutos; no actuar por el slug.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-12",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 19,
+      "description": "Verificar integridad de encabezados obligatorios (`Modelo`, `Plataforma`, `Fecha`, `Responde a`) de un borrador propio antes de enviarlo.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-13",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 20,
+      "description": "Preparar una consulta de bloqueo con pregunta concreta, intentos, evidencia y decisión requerida.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C8-14",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 21,
+      "description": "Separar en un reporte hallazgos confirmados, hipótesis, recomendaciones y acciones no autorizadas.",
+      "modalities": [
+        "estatica",
+        "decision_humana"
+      ],
+      "human_gate": true
+    },
+    {
+      "id": "C8-15",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 22,
+      "description": "Redactar un aviso de posible duplicación que cite el artefacto existente y evite reclamar trabajo ya hecho.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-16",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 23,
+      "description": "Preparar estado del backlog por archivo: completitud estructural, número de tareas y dependencias declaradas.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-17",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 24,
+      "description": "Hacer revisión de legibilidad y ambigüedad de un mensaje propio, sin cambiar contenido factual.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-18",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 25,
+      "description": "Confirmar que un reporte no comunica secretos ni datos personales y que omite valores sensibles.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-19",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 26,
+      "description": "Elaborar una matriz de decisiones pendientes con quién decide según fuente explícita del proyecto.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    },
+    {
+      "id": "C8-20",
+      "file": "08-Informes-y-Coordinacion.md",
+      "line": 27,
+      "description": "Registrar lección de calibración en lenguaje limitado a la muestra observada, sin alterar perfil oficial ni comparar modelos sin instrucción.",
+      "modalities": [
+        "estatica"
+      ],
+      "human_gate": false
+    }
+  ],
+  "limitations": [
+    "La clasificación describe la modalidad declarada por el texto, no la autorización efectiva ni la disponibilidad de herramientas.",
+    "El matching léxico puede requerir corrección humana; preservar las descripciones fuente."
+  ]
+}

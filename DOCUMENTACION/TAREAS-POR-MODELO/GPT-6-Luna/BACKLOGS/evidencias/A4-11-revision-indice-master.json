@@ -1,0 +1,177 @@
+{
+  "source": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+  "scope": "Estructura/índice interno de BACKLOG-MASTER.md, sin modificarlo.",
+  "method": "Extrae encabezados Markdown nivel 2+, filas del índice de sub-backlogs y cuenta IDs de tareas en rutas referenciadas; igualdad textual del orden/filename y verificación de existencia.",
+  "headings": [
+    {
+      "line": 9,
+      "level": 2,
+      "text": "1. Propósito y alcance"
+    },
+    {
+      "line": 15,
+      "level": 2,
+      "text": "2. Ciclo obligatorio antes de trabajar"
+    },
+    {
+      "line": 26,
+      "level": 2,
+      "text": "3. Estados y regla anti-duplicación"
+    },
+    {
+      "line": 34,
+      "level": 2,
+      "text": "4. Ocho sub-backlogs (20 tareas cada uno)"
+    },
+    {
+      "line": 49,
+      "level": 2,
+      "text": "5. Priorización por ajuste de capacidades"
+    },
+    {
+      "line": 59,
+      "level": 2,
+      "text": "6. Criterio mínimo de cierre por sub-backlog"
+    },
+    {
+      "line": 70,
+      "level": 2,
+      "text": "7. Límites permanentes"
+    }
+  ],
+  "numeric_sections": [
+    {
+      "line": 9,
+      "level": 2,
+      "text": "1. Propósito y alcance"
+    },
+    {
+      "line": 15,
+      "level": 2,
+      "text": "2. Ciclo obligatorio antes de trabajar"
+    },
+    {
+      "line": 26,
+      "level": 2,
+      "text": "3. Estados y regla anti-duplicación"
+    },
+    {
+      "line": 34,
+      "level": 2,
+      "text": "4. Ocho sub-backlogs (20 tareas cada uno)"
+    },
+    {
+      "line": 49,
+      "level": 2,
+      "text": "5. Priorización por ajuste de capacidades"
+    },
+    {
+      "line": 59,
+      "level": 2,
+      "text": "6. Criterio mínimo de cierre por sub-backlog"
+    },
+    {
+      "line": 70,
+      "level": 2,
+      "text": "7. Límites permanentes"
+    }
+  ],
+  "index_header_present": true,
+  "index_rows": [
+    {
+      "line": 38,
+      "order": 1,
+      "file": "01-Backlog-Censos-y-Clasificacion.md",
+      "specialty": "Censos pequeños, extracción, inventarios y clasificación con fuentes",
+      "prefix": "C1",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 39,
+      "order": 2,
+      "file": "02-Backlog-Sintesis-y-CrossDoc.md",
+      "specialty": "Síntesis documental, trazabilidad de claims y análisis entre fuentes",
+      "prefix": "S2",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 40,
+      "order": 3,
+      "file": "03-Backlog-Estructuras-y-JSON.md",
+      "specialty": "Esquemas, consistencia de datos, catálogos y JSON",
+      "prefix": "J3",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 41,
+      "order": 4,
+      "file": "04-Backlog-Auditoria-Documental-y-Codigo.md",
+      "specialty": "Auditoría documental/estática y contraste de claims con disco",
+      "prefix": "A4",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 42,
+      "order": 5,
+      "file": "05-Backlog-Calibracion-y-Consistencia.md",
+      "specialty": "Medición empírica acotada de esta sesión, exactitud y límites",
+      "prefix": "K5",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 43,
+      "order": 6,
+      "file": "06-Validacion-y-Pruebas.md",
+      "specialty": "Test existente, diseño de casos y reporte QA con evidencia",
+      "prefix": "V6",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 44,
+      "order": 7,
+      "file": "07-Localizacion-y-Recuperacion.md",
+      "specialty": "Encontrar fuentes, procedimientos, dependencias y handoffs",
+      "prefix": "R7",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    },
+    {
+      "line": 45,
+      "order": 8,
+      "file": "08-Informes-y-Coordinacion.md",
+      "specialty": "Informes, lectura del canal, handoffs y coordinación",
+      "prefix": "C8",
+      "task_count": 20,
+      "exists": true,
+      "actual_task_count": 20,
+      "task_count_matches": true
+    }
+  ],
+  "index_row_count": 8,
+  "index_files_exist": true,
+  "task_counts_match_index": true,
+  "limitations": [
+    "El encabezado de tabla y las secciones no son una TOC Markdown con anchors; el documento usa un índice tabular de archivos más secciones numeradas.",
+    "No se evalúa la corrección semántica de las descripciones del índice."
+  ]
+}

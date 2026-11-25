@@ -1,0 +1,1984 @@
+{
+  "source": "AGENTS.md",
+  "heading_count": 134,
+  "method": "Clasificación heurística por encabezado y bloque hasta el siguiente encabezado del mismo nivel o superior; etiquetas múltiples. Evidencia de términos se adjunta por sección.",
+  "counts_nonexclusive": {
+    "norma": 76,
+    "historial": 49,
+    "ejemplo": 30,
+    "propuesta": 23,
+    "contexto/descripcion": 46
+  },
+  "sections": [
+    {
+      "line": 1,
+      "level": 1,
+      "heading": "Reglas Globales para la IA — Proyecto Godot (Isla Ancestral)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 3,
+      "level": 2,
+      "heading": "1. Idioma",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 6,
+      "level": 2,
+      "heading": "2. Verificación inicial en proyectos",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 11,
+      "level": 2,
+      "heading": "2b. Carpeta GUIA-GODOT (documentación temática)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 14,
+      "level": 3,
+      "heading": "Fundamentales (01-12)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 28,
+      "level": 3,
+      "heading": "Avanzados / Específicos del juego (16-18)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 34,
+      "level": 2,
+      "heading": "2c. Carpeta GUIA-BLENDER (documentación temática de Blender)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 37,
+      "level": 3,
+      "heading": "Fundamentales (01-05)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 44,
+      "level": 3,
+      "heading": "Específicos del juego (06-10)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 51,
+      "level": 2,
+      "heading": "3. Estructura de Documentación del Proyecto",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 55,
+      "level": 3,
+      "heading": "`docs/` (raíz) — Material complementario, NO es la metodología oficial",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 71,
+      "level": 3,
+      "heading": "CHECKLIST-GLOBAL.md — Orquestador Multiagente (raíz del proyecto)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 75,
+      "level": 3,
+      "heading": "DOCUMENTACION/ — Raíz de la carpeta (documentación general vigente)",
+      "labels": [
+        "norma",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 91,
+      "level": 3,
+      "heading": "DOCUMENTACION/11-BUGS.md — Registro Central de Bugs (usuario + LLMs)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 104,
+      "level": 3,
+      "heading": "DOCUMENTACION/00-PLAN-INICIAL/ — Solo el origen del proyecto",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 108,
+      "level": 3,
+      "heading": "DOCUMENTACION/ — Documentación por Componentes",
+      "labels": [
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 151,
+      "level": 2,
+      "heading": "Archivos obligatorios",
+      "labels": [
+        "norma",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 157,
+      "level": 3,
+      "heading": "Archivos Obligatorios por Carpeta (plan-inicial y plan-actual)",
+      "labels": [
+        "norma",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 178,
+      "level": 3,
+      "heading": "Regla del Checklist Mínimo de 100 Ítems",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 194,
+      "level": 3,
+      "heading": "Reglas de Actualización por Componente",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 206,
+      "level": 3,
+      "heading": "Reglas de Actualización General",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 212,
+      "level": 3,
+      "heading": "DOCUMENTACION/5-FUTURAS-MEJORAS.md — Anotador de Ideas del Usuario",
+      "labels": [
+        "norma",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 223,
+      "level": 3,
+      "heading": "Firma de Documentación (Modelo y Plataforma)",
+      "labels": [
+        "norma",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 246,
+      "level": 2,
+      "heading": "4. Estándar de Commits y Protocolo de Push (Git)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 248,
+      "level": 3,
+      "heading": "4.1 Estilo de Commits",
+      "labels": [
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 252,
+      "level": 3,
+      "heading": "4.2 Protocolo de Push (Commits Completos y Detallados)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 276,
+      "level": 3,
+      "heading": "4.3 Regla de Trazabilidad de Push (todo push deja huella)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 297,
+      "level": 2,
+      "heading": "4.1-b GUÍA DE NUMERACIÓN DE CANALES (fundador 23oct 04:30 — obligatoria para todos los crons y apiladores)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 304,
+      "level": 2,
+      "heading": "5. Respaldos ante Cambios Grandes",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 309,
+      "level": 2,
+      "heading": "6. Registro de Cambios (Logs)",
+      "labels": [
+        "norma",
+        "historial",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 312,
+      "level": 3,
+      "heading": "6.1 Protocolo de Numeración (OBLIGATORIO — previene duplicados)",
+      "labels": [
+        "norma",
+        "historial",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 323,
+      "level": 4,
+      "heading": "6.1.a RESERVA del número (al finalizar la tarea, antes de crear el log)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 335,
+      "level": 4,
+      "heading": "6.1.b ESCRITURA del log (al finalizar la tarea)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 341,
+      "level": 4,
+      "heading": "6.1.c ABORTO o liberación sin log",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 346,
+      "level": 4,
+      "heading": "6.1.d Colisión residual",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 350,
+      "level": 3,
+      "heading": "6.2 Formato del Archivo",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 353,
+      "level": 1,
+      "heading": "Log NN: Descripcion breve",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 360,
+      "level": 2,
+      "heading": "Resumen",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 363,
+      "level": 2,
+      "heading": "Cambios Realizados",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 366,
+      "level": 2,
+      "heading": "Archivos Modificados/Creados",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 372,
+      "level": 3,
+      "heading": "6.3 Reglas de Seguridad",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 380,
+      "level": 2,
+      "heading": "7. Seguimiento de Progreso (Checklist)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 382,
+      "level": 3,
+      "heading": "Flujo de trabajo: Backlog Personal → Módulo → CHECKLIST-GLOBAL",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 414,
+      "level": 3,
+      "heading": "Comando /bucle — Automatización del bucle multiagente (2026-09-02, glm-5.3-flash/Kilo Code)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 445,
+      "level": 2,
+      "heading": "8. Progreso Visual Detallado (UX Obligatorio)",
+      "labels": [
+        "norma",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 451,
+      "level": 2,
+      "heading": "9. Modularidad y Desacoplamiento",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 457,
+      "level": 2,
+      "heading": "10. Protocolo de Comunicación entre Modelos de Lenguaje",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 468,
+      "level": 3,
+      "heading": "10.1 Modo Tema — colaboración puntual entre pares",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 472,
+      "level": 3,
+      "heading": "Estructura",
+      "labels": [
+        "historial",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 484,
+      "level": 3,
+      "heading": "Reglas",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 503,
+      "level": 3,
+      "heading": "10.2 Modo Canal — hilo permanente director <-> agente",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 617,
+      "level": 2,
+      "heading": "11. Documentación de Nuevos Componentes (DOCUMENTACION)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 630,
+      "level": 2,
+      "heading": "12. Verificación y Diagnóstico Post-Tarea",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 632,
+      "level": 3,
+      "heading": "12.1 Auto-corrección con MCP (obligatorio al codificar)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 655,
+      "level": 3,
+      "heading": "12.2 Verificación final",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 663,
+      "level": 2,
+      "heading": "13. Flujo de Trabajo: Documentación Primero (Documentation-First)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 667,
+      "level": 3,
+      "heading": "Para tareas NUEVAS (nuevo componente):",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 675,
+      "level": 3,
+      "heading": "Para tareas sobre MÓDULOS EXISTENTES (mejoras, bugfixes):",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 684,
+      "level": 2,
+      "heading": "14. Plan de Testings Profesional para Nuevos Módulos",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 688,
+      "level": 3,
+      "heading": "Requisitos del Plan de Testings",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 711,
+      "level": 3,
+      "heading": "Flujo de Testings",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 720,
+      "level": 2,
+      "heading": "15. Modularización de Flujos Complejos",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 731,
+      "level": 2,
+      "heading": "16. Flujos Bloqueados (Estables) — NO MODIFICAR",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 741,
+      "level": 2,
+      "heading": "17. Trabajo en Paralelo entre Agentes",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 754,
+      "level": 2,
+      "heading": "18. Sistema de Rotación de Logs",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 758,
+      "level": 3,
+      "heading": "Estructura de Logs",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 771,
+      "level": 3,
+      "heading": "Implementación en Código (Godot 4.x / GDScript)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 800,
+      "level": 3,
+      "heading": "Reglas para Nuevos Logs",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 810,
+      "level": 3,
+      "heading": "Formato de Nomenclatura para Logs Rotados",
+      "labels": [
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 821,
+      "level": 2,
+      "heading": "19. Archivo de Hilos de Chat Resueltos (RESUELTOS)",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 839,
+      "level": 2,
+      "heading": "21. Protocolo Multiagente Orquestado (CHECKLIST-GLOBAL)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 843,
+      "level": 3,
+      "heading": "21.1 Archivo Coordinador: CHECKLIST-GLOBAL.md",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 864,
+      "level": 3,
+      "heading": "21.2 Simbología de Estados",
+      "labels": [
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 895,
+      "level": 3,
+      "heading": "21.3 Flujo de Trabajo del Agente (Ciclo Completo)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 942,
+      "level": 3,
+      "heading": "21.4 Reglas de Bloqueo, Honestidad y Optimización",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 957,
+      "level": 3,
+      "heading": "21.5 Ciclo de Continuidad (Retomar un Módulo con Dudas)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 968,
+      "level": 3,
+      "heading": "21.6 Definición de Completado (DoD) y Finalización del Proyecto",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 980,
+      "level": 3,
+      "heading": "21.7 Interacción con el Sistema de Mensajes (Sección 10)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 986,
+      "level": 3,
+      "heading": "21.8 QA Cruzado (Verificación entre Modelos)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1004,
+      "level": 4,
+      "heading": "21.8.2.b Muestreo anti-inflación (obligatorio en todo sello ✅)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1040,
+      "level": 3,
+      "heading": "21.9 Herramientas de Automatización (Opcional)",
+      "labels": [
+        "norma",
+        "historial",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1089,
+      "level": 2,
+      "heading": "22. Empaquetado y Distribución (Godot Export Pipeline)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1093,
+      "level": 3,
+      "heading": "Plataformas objetivo",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1099,
+      "level": 3,
+      "heading": "Proceso de Build",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1102,
+      "level": 1,
+      "heading": "listar presets disponibles",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1120,
+      "level": 2,
+      "heading": "23. Instalación del Protocolo en un Proyecto Nuevo",
+      "labels": [
+        "norma",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1124,
+      "level": 3,
+      "heading": "Pasos de instalación",
+      "labels": [
+        "norma",
+        "ejemplo",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1166,
+      "level": 3,
+      "heading": "Verificación de que el kit está sano",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1177,
+      "level": 2,
+      "heading": "24. Stack Tecnológico del Proyecto",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1179,
+      "level": 3,
+      "heading": "Motor y Lenguaje",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1186,
+      "level": 3,
+      "heading": "Arquitectura de Código",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1208,
+      "level": 3,
+      "heading": "Herramientas de Godot Relevantes",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1218,
+      "level": 3,
+      "heading": "Convenciones de Código GDScript",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1229,
+      "level": 3,
+      "heading": "Convención de Scripts Temporales y Reutilizables + Capturas por Módulo",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1255,
+      "level": 2,
+      "heading": "25. Visión del Agente (M154) — Prerrequisito Fundamental para Trabajo Visual",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1264,
+      "level": 3,
+      "heading": "Regla de oro",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1268,
+      "level": 3,
+      "heading": "Vías disponibles (detalle completo en el módulo)",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1279,
+      "level": 3,
+      "heading": "Obligaciones del agente",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1289,
+      "level": 2,
+      "heading": "26. Guías de Referencia Obligatoria Antes de Codificar o Usar Herramientas",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1293,
+      "level": 3,
+      "heading": "Guía de Codificación en Godot — `DOCUMENTACION/GUIA-GODOT/`",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1301,
+      "level": 3,
+      "heading": "Guía de Conexión de Visión — `DOCUMENTACION/06-GUIA-DE-CONEXION-VISION.md`",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1308,
+      "level": 3,
+      "heading": "Guía Maestra de Orden de Implementación — `DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md`",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1324,
+      "level": 3,
+      "heading": "Módulos de Terreno e Islas — `DOCUMENTACION/167-Isla-Raiz/` y `DOCUMENTACION/168-Plantilla-De-Isla/`",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1350,
+      "level": 2,
+      "heading": "27. Skills de Desarrollo Reutilizables (SKILL.md en la Raíz)",
+      "labels": [
+        "norma",
+        "historial",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1354,
+      "level": 3,
+      "heading": "Propósito",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1358,
+      "level": 3,
+      "heading": "Reglas de uso (obligatorias)",
+      "labels": [
+        "norma",
+        "propuesta"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": true
+      }
+    },
+    {
+      "line": 1369,
+      "level": 3,
+      "heading": "Ubicación",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1373,
+      "level": 2,
+      "heading": "28. Codificación de Archivos (UTF-8 Obligatorio)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1390,
+      "level": 3,
+      "heading": "Problema detectado",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1396,
+      "level": 3,
+      "heading": "Regla obligatoria",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1412,
+      "level": 3,
+      "heading": "28.1 Herramientas del proyecto y lecciones duras (Log 852, 2026-09-12)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1453,
+      "level": 3,
+      "heading": "28.2 El falso positivo de PowerShell 5.1 al LEER UTF-8 (no es mojibake del archivo)",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1487,
+      "level": 3,
+      "heading": "28.3 Cuando `fix_encoding.py` dice \"irreversible\" y no lo es: arreglo token a token",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1555,
+      "level": 2,
+      "heading": "29. Tareas por Modelo — Checklists Personales (metodología multiagente)",
+      "labels": [
+        "norma",
+        "historial",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1565,
+      "level": 3,
+      "heading": "29.1 METODOLOGÍA V2 — Backlogs de flota en los canales del director (fundador 2026-10-17)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1599,
+      "level": 3,
+      "heading": "Flujo de trabajo obligatorio para TODO modelo (VIGENTE versión V2)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1615,
+      "level": 3,
+      "heading": "Estructura del backlog personal (V2)",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1622,
+      "level": 3,
+      "heading": "Reglas de marcado",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1634,
+      "level": 3,
+      "heading": "Mínimo obligatorio",
+      "labels": [
+        "norma",
+        "ejemplo"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": true,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1638,
+      "level": 3,
+      "heading": "Nuevos modelos",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1643,
+      "level": 2,
+      "heading": "30. Metodología de Delegación Rápida del Director (directiva del fundador 2026-10-10)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1650,
+      "level": 3,
+      "heading": "30.1 Asistentes del director (delegación primaria)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1669,
+      "level": 3,
+      "heading": "30.2 Reglas operativas",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1707,
+      "level": 3,
+      "heading": "30.3 Anti-patrones que esta metodología corrige",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1716,
+      "level": 3,
+      "heading": "30.5 Ciclo operativo del director (ronda completa de delegación)",
+      "labels": [
+        "norma"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1741,
+      "level": 3,
+      "heading": "30.6 Modelos con verificación obligatoria (directiva del fundador 2026-10-10)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1756,
+      "level": 3,
+      "heading": "30.7 Registro",
+      "labels": [
+        "historial"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1766,
+      "level": 2,
+      "heading": "31. Identidad de las sesiones y rol de director (directiva del fundador 2026-10-10, actualizada 2026-10-16)",
+      "labels": [
+        "norma",
+        "historial"
+      ],
+      "evidence": {
+        "norma": true,
+        "historial": true,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1831,
+      "level": 2,
+      "heading": "32. Mapa de Herencia del Director (instrumentos, fuel y sucesión — 24oct)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1835,
+      "level": 3,
+      "heading": "32.1 Memoria persistente y herencia",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1839,
+      "level": 3,
+      "heading": "32.2 APILADOR de Beam (fuel P-100 automatizado)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1845,
+      "level": 3,
+      "heading": "32.3 GATES (evalúan a Beam/funcionando — fundador 07:51: quedan IGUALES)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1850,
+      "level": 3,
+      "heading": "32.4 EJECUTORES ACTIVOS (GO corriendo, sin dependencia del director)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    },
+    {
+      "line": 1856,
+      "level": 3,
+      "heading": "32.5 CONSULTAS DEL FUNDADOR PENDIENTES (4 — ver consultas_fundador_23oct en estado_director.json)",
+      "labels": [
+        "contexto/descripcion"
+      ],
+      "evidence": {
+        "norma": false,
+        "historial": false,
+        "ejemplo": false,
+        "propuesta": false
+      }
+    }
+  ],
+  "limitations": [
+    "Las secciones pueden contener simultáneamente norma e historial; esto no reemplaza interpretación jurídica ni valida vigencia del contenido.",
+    "El análisis cubre encabezados Markdown solamente; no clasifica cada párrafo del archivo."
+  ]
+}

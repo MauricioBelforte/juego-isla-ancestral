@@ -1,0 +1,106 @@
+{
+  "task": "S2-11/S2-15",
+  "scope": [
+    "AGENTS.md",
+    "GPT-6-Luna BACKLOG-MASTER.md",
+    "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md"
+  ],
+  "claim_source_matrix": [
+    {
+      "claim": "Leer AGENTS.md completo antes del trabajo",
+      "sources": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 17
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 9
+        }
+      ]
+    },
+    {
+      "claim": "Leer el último mensaje del canal propio antes de comenzar",
+      "sources": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 18
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 390
+        }
+      ]
+    },
+    {
+      "claim": "No asumir reserva ni modificar módulo bloqueado sin protocolo",
+      "sources": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 21
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 945
+        }
+      ]
+    },
+    {
+      "claim": "Al cerrar una tanda o sub-backlog se reporta en canal propio",
+      "sources": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 24
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 1579
+        }
+      ]
+    },
+    {
+      "claim": "Marcar completado requiere evidencia y verificación; no planificar equivale a completar",
+      "sources": [
+        {
+          "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+          "line": 29
+        },
+        {
+          "file": "AGENTS.md",
+          "line": 946
+        }
+      ]
+    }
+  ],
+  "guide08_executive_summary": {
+    "source": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+    "word_limit": 500,
+    "summary": "La guía 08 organiza la implementación por fases y puertas, no por el orden numérico de los módulos. Antes de reservar, el agente debe comprobar fase habilitada, dependencias, dificultad y requisitos de visión; la reserva y su cierre se reflejan en los registros coordinados definidos por la guía. La regla de no interferencia impide solapar módulos, escenas o sesiones visuales sin coordinación. Para tareas de investigación, la guía distingue el análisis de una reserva de implementación: se priorizan consultas documentales y evidencia, y no se asume que investigar autoriza cambiar el módulo. Para este backlog, esto significa que puedo sintetizar, extraer y auditar fuentes generales, pero cualquier trabajo ligado a un módulo se detiene ante una reserva o autorización ausente.",
+    "citations": [
+      {
+        "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+        "line": 173,
+        "heading": "## 1. Regla principal"
+      },
+      {
+        "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+        "line": 247,
+        "heading": "## 3. Mapa de fases y puertas"
+      },
+      {
+        "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+        "line": 903,
+        "heading": "## 14. Procedimiento de reserva para todos los agentes"
+      },
+      {
+        "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+        "line": 1005,
+        "heading": "## 15. Regla para agentes de investigacion"
+      }
+    ]
+  },
+  "limitations": [
+    "Síntesis documental; no verifica estado vivo de módulos ni reemplaza consulta del CHECKLIST-GLOBAL.",
+    "Los números de línea se refieren al checkout leído durante esta ejecución y pueden cambiar."
+  ]
+}

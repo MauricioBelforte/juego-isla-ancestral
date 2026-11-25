@@ -1,0 +1,111 @@
+{
+  "source_report": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-11-S2-15-sintesis-crossdoc.json",
+  "citation_count": 14,
+  "valid_count": 14,
+  "invalid_count": 0,
+  "citations": [
+    {
+      "claim": "Leer AGENTS.md completo antes del trabajo",
+      "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "line": 17,
+      "line_in_range": true,
+      "source_line": "1. Leer `AGENTS.md` completo (contexto general y reglas del proyecto)."
+    },
+    {
+      "claim": "Leer AGENTS.md completo antes del trabajo",
+      "file": "AGENTS.md",
+      "line": 9,
+      "line_in_range": true,
+      "source_line": "2. Si existe, leerlo completo y **priorizar sus instrucciones** sobre cualquier regla global."
+    },
+    {
+      "claim": "Leer el último mensaje del canal propio antes de comenzar",
+      "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "line": 18,
+      "line_in_range": true,
+      "source_line": "2. Revisar siempre `Mensajes entre modelos/GPT-6-Luna/`: primero el último mensaje y después cualquier instrucción pendiente. Si hay un mensaje de director, atenderlo antes de seleccionar una tarea. No inferir instrucciones desde el nombre del archivo; si es una plantilla, respetar T-19 y esperar cinco minutos antes de releer."
+    },
+    {
+      "claim": "Leer el último mensaje del canal propio antes de comenzar",
+      "file": "AGENTS.md",
+      "line": 390,
+      "line_in_range": true,
+      "source_line": "1. **Leer tu carpeta — el ÚLTIMO archivo** → si el director te escribió, RESPONDER primero creando TU mensaje propio (numeración de hilo; cada uno escribe su mensaje)"
+    },
+    {
+      "claim": "No asumir reserva ni modificar módulo bloqueado sin protocolo",
+      "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "line": 21,
+      "line_in_range": true,
+      "source_line": "5. Por defecto, trabajar en lectura y preparación. No editar archivos canónicos, código, backlog de otro modelo, checklist de módulo o tabla GLOBAL, ni reservar un módulo, sin instrucción/encargo y coordinación requeridos."
+    },
+    {
+      "claim": "No asumir reserva ni modificar módulo bloqueado sin protocolo",
+      "file": "AGENTS.md",
+      "line": 945,
+      "line_in_range": true,
+      "source_line": "2. **Nunca trabajar sobre un módulo `🔵` o `🔴`** (en curso por otro). Respetar el bloqueo."
+    },
+    {
+      "claim": "Al cerrar una tanda o sub-backlog se reporta en canal propio",
+      "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "line": 24,
+      "line_in_range": true,
+      "source_line": "8. Al cerrar **cada sub-backlog**, comprobar otra vez el canal y reportar al director en `Mensajes entre modelos/GPT-6-Luna/`. El detalle va en un mensaje propio de ese canal; el chat solo recibe un aviso breve. La numeración debe seguir el protocolo oficial y helper del proyecto; nunca numerar manualmente ni editar mensaje de otra persona. El pool de este canal está en `Mensajes entre modelos/GPT-6-Luna/NUMEROS_DISPONIBLES.txt`; la apertura formal `01` corresponde al director según el README del canal. Si helper/pool no está disponible o hay una denegación de ejecución, registrar el bloqueo y no improvisar ni eludirla."
+    },
+    {
+      "claim": "Al cerrar una tanda o sub-backlog se reporta en canal propio",
+      "file": "AGENTS.md",
+      "line": 1579,
+      "line_in_range": true,
+      "source_line": "   (el director repone tareas cuando queda corto); (1c) **REPORTE al director EN CADA VUELTA"
+    },
+    {
+      "claim": "Marcar completado requiere evidencia y verificación; no planificar equivale a completar",
+      "file": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/BACKLOG-MASTER.md",
+      "line": 29,
+      "line_in_range": true,
+      "source_line": "- `[x]` = solo después de ejecutar y verificar el resultado definido; el informe debe enlazar evidencia. No usar para planificación, lectura superficial ni salida copiada de otro modelo."
+    },
+    {
+      "claim": "Marcar completado requiere evidencia y verificación; no planificar equivale a completar",
+      "file": "AGENTS.md",
+      "line": 946,
+      "line_in_range": true,
+      "source_line": "3. **Ser honesto siempre:** un `[?]` es mejor que un `[x]` falso. No hacer \"por hacer\"."
+    },
+    {
+      "claim": "Resumen ejecutivo guía 08",
+      "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "line": 173,
+      "line_in_range": true,
+      "heading_matches": true,
+      "source_line": "## 1. Regla principal"
+    },
+    {
+      "claim": "Resumen ejecutivo guía 08",
+      "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "line": 247,
+      "line_in_range": true,
+      "heading_matches": true,
+      "source_line": "## 3. Mapa de fases y puertas"
+    },
+    {
+      "claim": "Resumen ejecutivo guía 08",
+      "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "line": 903,
+      "line_in_range": true,
+      "heading_matches": true,
+      "source_line": "## 14. Procedimiento de reserva para todos los agentes"
+    },
+    {
+      "claim": "Resumen ejecutivo guía 08",
+      "file": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "line": 1005,
+      "line_in_range": true,
+      "heading_matches": true,
+      "source_line": "## 15. Regla para agentes de investigacion"
+    }
+  ],
+  "scope_limit": "Valida existencia/rango y coincidencia literal de títulos citados; no certifica por sí solo que toda afirmación esté semánticamente respaldada."
+}

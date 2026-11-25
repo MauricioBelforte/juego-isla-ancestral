@@ -30,6 +30,7 @@
 
 ## Reserva actual
 
+| M20-Sistema-De-Amistad (tanda 5 ítems [S], reclamo §21.4.7) | 🔵 En curso (2026-11-25 09:56) | GLM-5.3-Flash (Kilo Code, reintegrado como agente) | F3 (gameplay) | V0 | 102/150; previo 🔵 minimax-m3-1-flash stale 29 días (últ. actividad 2026-10-27); 5 ítems "implementable ahora" de DOC-INT-4 (Nemotron 320) fuera de b62 | Cierre: L133/L136/L138/L173/L177 implementados + checks nombrados en tests/test_m20_amistad_cobertura.gd + corrida headless + flips con cita + log + reporte en canal agnes (992) | `game/isla-ancestral/scripts/friendship/`, `game/isla-ancestral/tests/test_m20_amistad_cobertura.gd`, `DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/` |
 
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |

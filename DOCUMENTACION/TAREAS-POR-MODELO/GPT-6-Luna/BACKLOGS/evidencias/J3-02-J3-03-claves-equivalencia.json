@@ -1,0 +1,43 @@
+{
+  "scope": "Reportes JSON de evidencia propios solamente; sin datos de juego.",
+  "method": "J3-03 compara JSON canónico con sort_keys para ignorar el orden de propiedades; J3-02 revisa claves contra el contrato explícito declarado para C1-02.",
+  "results": [
+    {
+      "case": "same_object_reordered_keys",
+      "source": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/C1-02-clasificacion-cola-01.json",
+      "equivalent_ignoring_key_order": true,
+      "top_level_keys_count": 5,
+      "top_level_keys": [
+        "category_counts_nonexclusive",
+        "classification_method",
+        "item_count",
+        "items",
+        "source"
+      ]
+    },
+    {
+      "case": "structure_contract_C1-02",
+      "required_keys": [
+        "category_counts_nonexclusive",
+        "classification_method",
+        "item_count",
+        "items",
+        "source"
+      ],
+      "actual_keys": [
+        "category_counts_nonexclusive",
+        "classification_method",
+        "item_count",
+        "items",
+        "source"
+      ],
+      "missing_keys": [],
+      "extra_keys": [],
+      "conforms": true
+    }
+  ],
+  "limitations": [
+    "El objeto invertido se construyó en memoria desde el mismo fixture, no es un segundo archivo independiente.",
+    "El contrato es el acordado en el artefacto generado, no un JSON Schema del proyecto."
+  ]
+}
