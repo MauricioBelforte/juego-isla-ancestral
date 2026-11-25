@@ -810,3 +810,74 @@ maquina compartida con el resto de la flota) — el veredicto es 0 fallos.
 
 La **ventana de confirmación** con lo que devuelve la pieza al demolerla es **UI de M18** (L133).
 Aquí queda el dato y la lógica; el diálogo, no.
+
+## 14. Tanda P8 (2026-11-25 12:2x) — L102: la rejilla SOLO sobre terreno cargado
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 14.1 El item estaba realmente roto
+
+`04-Codigo.md` decía de L102: *"el adaptador devuelve 'aire' sin terreno, pero falta la prueba con
+chunks reales en runtime"*. Verificado: **no había ninguna comprobación de chunk**. El manager
+colocaba la pieza, la registraba en `_estructuras` y la daba por buena **aunque el terreno no
+tuviera data block en esa zona**: la pieza existía en la lógica de M17 pero no en el mundo (ni el
+undo ni el redo cuadraban).
+
+### 14.2 API nativa (medida, no supuesto)
+
+Medida con `ClassDB.class_get_method_list("VoxelTerrain")` en Godot 4.7.2 + Voxel Tools:
+
+```
+voxel_to_data_block(voxel_pos: Vector3) -> Vector3i
+has_data_block(block_position: Vector3i) -> bool
+get_data_block_size() -> int
+```
+
+Ese es el contrato correcto ("¿hay data block en la zona?") — no un invento.
+
+### 14.3 Qué se implementó
+
+**`scripts/construccion/construccion_mundo.gd`**
+| API | Qué hace |
+|---|---|
+| `chunk_cargada(celda) -> bool` | `voxel_to_data_block` + `has_data_block`. **Conservadora:** sin terreno (modo lógico) → true; sin esa API (VoxelTools distinto) → true. Solo bloquea cuando la API responde y dice que no hay data block. |
+| `celdas_sin_chunk(celdas) -> Array` | Las celdas fuera de la rejilla. |
+| `superficie_voxel(celda)` | Devuelve **"aire"** si el chunk no está cargado, aunque el voxelTool diga "sólido" (no se calcula sobre datos rancios). |
+| `consultas` (+ `reiniciar_contadores()`) | Contador de consultas al terreno: permite **probar** que la rejilla se acota a la huella de la pieza. |
+
+**`scripts/construccion/construccion_tipos.gd`**
+- Motivo nuevo **`TERRENO_NO_CARGADO`** (al final del enum, como se hizo con `SIN_ESPACIO`/`SIN_INVENTARIO`).
+- **Es TEMPORAL** (`MOTIVOS_TEMPORALES`): el chunk se carga solo (streaming de M08) y el reintento
+  funciona sin cambiar de celda ni de pieza.
+- Texto para el HUD: *"el terreno de esa zona todavía no está cargado"*.
+
+**`scripts/construccion/build_manager.gd`** — guard en las **tres** rutas que escriben en el mundo:
+`confirmar_colocacion()`, `copiar_pieza()` y `mover_pieza()`.
+- Si alguna celda de la pieza cae en un chunk sin cargar → **no se coloca/copia/mueve**.
+- **El guard va ANTES de validar**: si fuera después, el jugador vería "sin soporte" (permanente)
+  en vez de "terreno no cargado" (temporal) — que es el motivo que puede resolverse solo.
+- **No queda a medias:** no se registra la estructura, no se escribe ningún voxel, no se cobra el
+  costo. Al mover, el origen **sigue en su sitio** (se comprueba antes de vaciarlo).
+
+### 14.4 Verificación
+
+- Suite NUEVA `res://tests/test_m17_terreno_cargado.gd` → **24 checks, 0 fallos, EXIT 0**.
+  El terreno falso reproduce **exactamente** el contrato nativo medido (`voxel_to_data_block` +
+  `has_data_block` + un `VoxelTool` con `channel/mode/value/get_voxel/do_point`), con dos zonas:
+  chunk (0,0,0) **cargado** y chunk (8,0,0) **vacío** donde el voxelTool además dice "sólido"
+  (justo el caso que hay que cazar).
+- **ROJO-VERDE:** con `chunk_cargada()` stubbeada a `true` → **8 fallos (A2, A3, B1, B4, B5, F1, F2,
+  F3) / EXIT 1**. Restaurada → 24/0.
+- **Regresión (14 suites, todas EXIT 0):** terreno_cargado 24/0 · contenido_piezas 32/0 ·
+  hud_categorias 22/0 · categorias 24/0 · almacenamiento 33/0 · materiales 13/0 · validacion 44/0 ·
+  reglas_pieza 40/0 · circulacion 36/0 · persistencia 23/0 · suites_integracion 17/0 (501 checks) ·
+  qa_m17_modo 9/0 · iter3 138/0 · **M59 carga idempotente 28/0**.
+
+### 14.5 Alcance honesto (lo que NO se cierra aquí)
+
+La **comprobación en runtime con los chunks reales de M08** no se puede ejercitar headless en este
+build: está medido y documentado por M62 en `scripts/rendimiento/memoria/sesion_m62_voxel_500.gd`
+(*"VoxelTerrain no usable headless para editar, updated_blocks=0"*). Lo que se cierra aquí es el
+**lado de M17**: el contrato, el guard y la prueba con un terreno que reproduce la API nativa
+medida. La prueba visual con el terreno de verdad es de M08.

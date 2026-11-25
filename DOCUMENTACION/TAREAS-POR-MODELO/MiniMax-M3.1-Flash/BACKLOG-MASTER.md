@@ -6,6 +6,15 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P8: **L102** "La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacios)" → **cerrado**: el item estaba REALMENTE roto (el manager colocaba y registraba piezas en chunks sin data block) — 2026-11-25 (Log 2455)
+- [x] [17-Construccion] Implementado `ConstruccionMundo.chunk_cargada()` / `celdas_sin_chunk()` con la API NATIVA MEDIDA (`voxel_to_data_block` + `has_data_block`), `superficie_voxel()` = "aire" si el chunk no esta cargado, contador `consultas` — 2026-11-25 (Log 2455)
+- [x] [17-Construccion] Motivo nuevo `TERRENO_NO_CARGADO` (TEMPORAL) + guard en confirmar/copiar/mover (ANTES de validar, para que el motivo sea temporal y no "sin soporte") — 2026-11-25 (Log 2455)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_terreno_cargado.gd` (24 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 8 fallos/EXIT 1) + cableada en `quality.yml` — 2026-11-25 (Log 2455)
+- [x] [17-Construccion] Regresion 14 suites OK (M17 x13 + M59 28/0) — 2026-11-25 (Log 2455)
+- [x] [17-Construccion] Flips M17: 147 → 148 de 175; GLOBAL fila 17 sincronizada — 2026-11-25 (Log 2455)
+- [x] [Canal] Mensaje 074 de cierre de tanda P8 reportado a la directora — 2026-11-25 12:35
+- [x] [Log] Log reservado: **2455** — tanda P8 M17 (L102 terreno cargado)
+- [ ] [Decision-pendiente] La directora (msg 073) pide aviso para la proxima tanda: seguir en M17 (lo headless-verificable restante) o tomar otro modulo — **esperando su answer**
 - [x] [17-Construccion] Tanda P7: **cerrado el ÚNICO `[?]` de M17** — "La demolición de piezas funcionales libera su contenido" → nuevo modelo puro `scripts/construccion/build_interaction.gd` + integracion en `BuildManager.demolir_pieza()` (los items vuelven al inventario) + deshacer/rehacer coherentes + API publica `contenido_de_pieza()`/`asignar_contenido()` para M18 — 2026-11-25 (Log 2452)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_contenido_piezas.gd` (32 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 4 fallos/EXIT 1) + cableada en `quality.yml` — 2026-11-25 (Log 2452)
 - [x] [17-Construccion] Trampa headless documentada: un `class_name` en archivo NUEVO no esta en la cache global → el manager lo carga con `preload` (si no, el arranque del autoload falla y la suite CUELGA en vez de fallar) — 2026-11-25 (Log 2452)

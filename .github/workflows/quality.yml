@@ -494,6 +494,12 @@ jobs:
           # fallos / EXIT 1). OJO: build_interaction.gd se carga con preload, no por class_name
           # (en headless la clase nueva no esta en la cache global y rompia el arranque).
           suite --script tests/test_m17_contenido_piezas.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2455): TERRENO CARGADO (L102).
+          # El guard real: el manager colocaba y registraba piezas en chunks sin data block.
+          # chunk_cargada() usa la API nativa medida (voxel_to_data_block + has_data_block);
+          # guard en confirmar/copiar/mover con el motivo TEMPORAL TERRENO_NO_CARGADO.
+          # Suite NUEVA test_m17_terreno_cargado.gd = 24 checks / 0 fallos (stub: 8 fallos / EXIT 1).
+          suite --script tests/test_m17_terreno_cargado.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/
