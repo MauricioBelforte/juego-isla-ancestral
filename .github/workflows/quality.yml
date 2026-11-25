@@ -476,6 +476,16 @@ jobs:
           # EXIT 0; guarda anti-falso-verde probada quitando la cache compartida
           # (1 check en ROJO / EXIT 1).
           suite --script tests/test_m17_materiales_compartidos.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2450): HUD DE CATEGORIAS
+          # (L81/L84) — se implementa BuildHudModel.filas_categorias()/texto_categorias(), la API que
+          # faltaba y dejaba ROJO a la suite de L84. ARREGLA EL ROJO PRE-EXISTENTE:
+          # test_m17_categorias.gd pasa de 24 checks / 3 fallos a 24 / 0. Suite NUEVA
+          # test_m17_hud_categorias.gd = 22 checks / 0 fallos (4 filas canonicas, cantidad = catalogo
+          # (46) y cantidad_modo = disponible en el modo: CONSTRUCCION 25 / DECORACION 21), con
+          # watchdog de 120 s (sin el, un fallo temprano colgaba el runner) y guarda
+          # anti-falso-verde probada por STUB (10 fallos / EXIT 1).
+          suite --script tests/test_m17_hud_categorias.gd
+          suite --script tests/test_m17_categorias.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

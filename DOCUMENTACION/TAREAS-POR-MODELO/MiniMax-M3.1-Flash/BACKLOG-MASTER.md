@@ -6,6 +6,14 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P6: **L81** (HUD de modo con categorias del catalogo y costo de la pieza activa) y **L84** (seleccion de pieza por categorias) — se implementa `BuildHudModel.filas_categorias()`/`texto_categorias()` — 2026-11-25 (Log 2450)
+- [x] [17-Construccion] **ROJO PRE-EXISTENTE ARREGLADO**: `tests/test_m17_categorias.gd` paso de 24 checks / 3 fallos a **24/0** (le faltaba la API del HUD) — 2026-11-25 (Log 2450)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_hud_categorias.gd` (22 checks, 0 fallos, EXIT 0; ROJO-VERDE con stub → 10 fallos/EXIT 1) + watchdog de 120 s (sin el, un fallo temprano colgaba el runner) — 2026-11-25 (Log 2450)
+- [x] [17-Construccion] Las 2 suites de categorias/HUD cableadas en `quality.yml` (la de L84 NUNCA estuvo cableada: por eso su rojo no frenaba el CI) — 2026-11-25 (Log 2450)
+- [x] [17-Construccion] Flips M17: 144 → 146 de 175 (pendientes 30 → 28); GLOBAL fila 17 sincronizada; traza de Totales 143/144 restaurada — 2026-11-25 (Log 2450)
+- [x] [Canal] Mensaje 070 de cierre de tanda P6 reportado a la directora — 2026-11-25 11:10
+- [x] [Log] Log reservado: **2450** — tanda P6 M17 (HUD de categorias L81/L84 + rojo arreglado)
+- [ ] [Decision-pendiente] La directora (msg 067/069) pide aviso para la proxima tanda: seguir en M17 (quedan 28 `[ ]` de otros duenos: UI/arte/audio/navmesh/datos/playtest) o tomar otro modulo — **esperando su routo**
 - [x] [17-Construccion] Tanda P5: **L227** materiales compartidos entre instancias — cache ESTATICA ruta->Mesh en `BuildGhost` + contador `BuildGhost.cargas_de_malla()` (las piezas colocadas son voxeles de M08: la parte de mallas NO es de M17, queda anotada con dueño) — 2026-11-25 (Log 2447)
 - [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_materiales_compartidos.gd` (13 checks, 0 fallos, EXIT 0; ROJO-VERDE sin la cache compartida → 1 fallo/EXIT 1) + cableada en `quality.yml` (M118) — 2026-11-25 (Log 2447)
 - [x] [17-Construccion] Flips M17: 143 → 144 de 175 (pendientes 31 → 30); GLOBAL fila 17 sincronizada — 2026-11-25 (Log 2447)

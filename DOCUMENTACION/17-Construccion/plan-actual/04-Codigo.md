@@ -688,3 +688,58 @@ Quitando la cache compartida (cada consumidor vuelve a instanciar la escena) la 
   afecta al batching; si el pool creciera, habría que compartir el material por estado.
 - Los materiales del **terreno voxel** (las piezas ya colocadas) son de **M08** (VoxelTerrain /
   VoxelTool): quedan fuera de M17 y se anotan para su dueño.
+
+## 12. Tanda HUD de categorias (2026-11-25 10:5x) — 2 ítems cerrados (L81, L84) y un ROJO pre-existente ARREGLADO
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 12.1 Punto de partida
+
+La suite `tests/test_m17_categorias.gd` (escrita por DS-V4.1-Flash-Opencode el 2026-11-11 para el
+ítem **L84**) exigía `BuildHudModel.filas_categorias(...)` y quedó **ROJA** (24 checks, 3 fallos):
+la función **nunca se implementó**. Es decir: el rojo era el item, no un falso del test.
+
+### 12.2 Qué se añadió
+
+`scripts/construccion/build_hud.gd`:
+- **`static func filas_categorias(mgr, modo: int = -1) -> Array`** — las 4 categorías canónicas en
+  su orden de presentación (aunque una esté vacía: el HUD no salta filas). Cada fila:
+  `{categoria, nombre, cantidad, cantidad_modo, texto}`.
+  - `cantidad` = recetas del **catálogo** en esa categoría (las 4 filas suman las 46 reales).
+  - `cantidad_modo` = piezas **disponibles en el modo pedido** (filtro real por `es_mueble`).
+- **`static func texto_categorias(mgr, modo)`** — una línea con las 4 categorías y su disponibilidad.
+- Tolerancia: sin manager, o con un objeto sin `piezas_de_categoria` → `[]` (nunca crashea el HUD).
+
+**Tests:** suite NUEVA `res://tests/test_m17_hud_categorias.gd` → **22 checks, 0 fallos, EXIT 0**
+(Godot 4.7.2 headless), con **watchdog de 120 s** (sin él, un error temprano abortaba el bloque
+antes de `quit()` y el runner **se colgaba**: medido — el stub provocaba un cuelgue; con el
+watchdog + guards, el rojo sale limpio con EXIT 1).
+
+### 12.3 Ítems cerrados
+
+| Ítem | Evidencia |
+|---|---|
+| **L81** HUD de modo con categorías del catálogo y costo de la pieza activa | `filas_categorias()` / `texto_categorias()` (nuevas) + `filas_costo()`/`texto_costo()`/`resumen()` (preexistentes). Checks: "A1: el HUD devuelve 4 filas" · "A3: el orden es el canonico" · "A4: las cantidades del CATALOGO suman las 46 recetas reales" · "A5: el nombre de cada fila es el texto legible de su categoria" · "A6: cada 'cantidad' coincide con el conteo REAL del manager" · "A7/A7b: mutar una fila no afecta la siguiente llamada" · "E1/E2/E3: resumen() con costo, motivos y linea (y tolerante a receta nula)" |
+| **L84** Selección de pieza por categorías: estructura, mobiliario, iluminación, decoración | Suite de L84 `res://tests/test_m17_categorias.gd`: **24 checks, 0 fallos, EXIT 0** (era 3 fallos). Checks: "estructura = 26" · "mobiliario = 4" · "iluminacion = 3" · "decoracion = 13" · "suma de categorias = 46 (sin duplicados ni perdidas)" · "modo decoracion filtra por es_mueble tambien dentro de la categoria" |
+
+### 12.4 ROJO-VERDE y el rojo pre-existente
+
+- Con `filas_categorias()` stubbeada a `[]`: mi suite → **22 checks, 10 fallos, EXIT 1** (sin
+  cuelgue) y la suite heredada de L84 → **24 checks, 2 fallos, EXIT 1**.
+- Restaurada: **22/0** y **24/0**, ambas EXIT 0.
+- **El rojo pre-existente que reporté en el Log 2446 queda ARREGLADO**: `test_m17_categorias.gd`
+  pasó de 24 checks / 3 fallos a **24 checks / 0 fallos**. Ambas suites quedan cableadas en
+  `quality.yml` (M118) para que no vuelva a colarse.
+
+### 12.5 Mediciones reales del catálogo (para los próximos)
+
+| Dato | Valor |
+|---|---|
+| Recetas del catálogo | **46** |
+| Por categoría (todas) | estructura **26** · mobiliario **4** · iluminacion **3** · decoracion **13** |
+| Por modo (filtro `es_mueble`) | CONSTRUCCION **25** · DECORACION **21** (conjuntos disjuntos) |
+
+Nota de diseño: el filtro por modo (`es_mueble`) **cruza** las categorías (una antorcha es
+`iluminacion` y es mueble: aparece en modo decoración). Por eso el HUD lleva los dos conteos
+(`cantidad` = catálogo, `cantidad_modo` = disponible ahora) en lugar de uno solo.
