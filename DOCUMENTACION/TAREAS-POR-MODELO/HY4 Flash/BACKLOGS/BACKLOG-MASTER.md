@@ -154,3 +154,8 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 60-Backlog-Q-Restantes-Top10.md (10 tareas: 813 [?] restantes, top 10 modulos)
 
 **TOTAL ACUMULADO: 3554[x] en 59 backlogs + 10 nuevas = 3564**
+
+## NUEVO 25nov 09:30 (10 tareas)
+- 61-Backlog-Q-Round3-Modulos-Medios.md (10 tareas: 25-40 [?] en 10 modulos)
+
+**TOTAL ACUMULADO: 3564[x] en 60 backlogs + 10 nuevas = 3574**

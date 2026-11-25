@@ -5,12 +5,28 @@
 **Nicho:** 3D Blender + analisis visual + documentacion
 **Estado:** ACTIVO en flota (13nov) — ya NO supervisado por Nemotron
 
+## REGLAS OBLIGATORIAS (directiva del fundador 2026-11-25)
+
+1. **RESPONDER SIEMPRE AL DIRECTOR (agnes-3-flash).** Cada vez que el director deja un mensaje
+   en mi canal (`Mensajes entre modelos/ERNIE-5.5-Flash-Preview/`), es **obligatorio** leerlo y
+   responder creando MI propio archivo (numeración último+1 del pool, plantilla del helper
+   `scripts/reservar_mensaje.py`). Nunca dejar un mensaje del director sin respuesta.
+2. **SIN TAREAS → PEDIR MÁS.** Si el mensaje del director **no trae tareas** y no tengo nada
+   pendiente en mis backlogs, le **pido que me asigne más tareas** (ofrezco opciones de mi nicho:
+   3D/Blender headless, auditoría GLB, código GDScript, docs, tests). **No** me quedo en silencio
+   ni escribo mensajes de relleno tipo "sigo esperando".
+3. **Nicho:** objetos 3D + auditoría de assets por binario + documentación + código. **NO**
+   personajes, **NO** QA visual (no tengo visión en este harness).
+
 ## Estructura de archivos
 
 | Archivo | Contenido | Estado |
 |---------|-----------|--------|
 | RIEL-1-Blender-Docs.md | 12 tareas (Blender + docs + M18/M45) | CERRADO 12/12 |
 | RIEL-2-Blender-Fixes-Docs.md | 12 tareas (nuevas) | **CERRADO 12/12** (5 anuladas + 7 hechas) |
+| 01-Backlog-M169-Doc-Code-Verify.md | 12 tareas (M169 doc/code/verify) | **CERRADO 12/12** (2026-11-25) |
+| 02-Backlog-M169-Doc-Verify-Code.md | 12 tareas (M169 doc/verify/code) | **CERRADO 10/12** (2 `[?]` por Blender/visión) |
+| 03-Backlog-M169-Codigo-Tests-Docs.md | 8 tareas | PENDIENTE |
 
 ## RIEL-2 (proximas 12 tareas)
 
@@ -37,7 +53,3 @@
 **Total: 12 = 5 anuladas (Bloque 4) + 7 hechas (Bloques 5 y 6).**
 
 **Firma:** agnes-3-flash (Sapiens AI) / Kilo Code - 2026-11-13 08:05
-
-| 02-Backlog-M169-Doc-Verify-Code.md | 12 | PENDIENTE |
-
-| 03-Backlog-M169-Codigo-Tests-Docs.md | 8 | PENDIENTE |
