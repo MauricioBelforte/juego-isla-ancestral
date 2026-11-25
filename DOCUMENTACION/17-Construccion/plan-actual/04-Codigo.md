@@ -1003,3 +1003,47 @@ La P9 arregló la **colocación**. Al seguir el barrido de la misma clase de def
 - **ROJO-VERDE:** con `_fallo_de_mundo()` stubbeada a `false` → **4 fallos / EXIT 1** (se ve el
   comportamiento viejo). Restaurada → 33/0.
 - **Regresión: 15 suites en verde** (M17 ×14 + M59 28/0).
+
+## 17. Tanda P9c (2026-11-25 14:2x) — la CACHE del fantasma: invalidacion y contador auditable
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 17.1 El defecto
+
+`BuildPreview` cachea el resultado de la evaluacion por `(celda, rotacion, receta_id)`, y se
+invalida con `limpiar()`. La invalidacion existia en **cuatro** rutas (`confirmar_colocacion`,
+`demolir_pieza`, `mover_pieza`, `_invertir`) pero **faltaba en tres mutaciones del mundo**:
+
+| Ruta sin invalidar | Consecuencia |
+|---|---|
+| `copiar_pieza()` | aparece una pieza nueva y la cache sigue valiendo |
+| `limpiar_estructuras()` | se vacia el mundo y la cache sigue valiendo |
+| `restaurar_estructuras()` (carga de save) | idem |
+
+Efecto para el jugador: el fantasma podia pintar **VERDE** una celda que ya estaba ocupada (o ROJA
+una celda valida), porque reutilizaba un resultado viejo. Es la misma familia de defecto que L102 y
+la escritura no atomica: **el sistema mostraba un estado que ya no era verdad**.
+
+### 17.2 Correccion
+
+- `copiar_pieza()` y `limpiar_estructuras()` invalidan la cache (`_preview.limpiar()`).
+  `restaurar_estructuras()` queda cubierta porque llama a `limpiar_estructuras()`.
+  (`almacenar_pieza()` ya invalidaba.)
+- **Contador auditable monótono nuevo**: `BuildPreview.recalculos_totales()` — el total de recálculos
+  reales desde que se creó el evaluador, que **NO** se resetea al invalidar.
+  El contador existente `recalculos()` **se mantiene igual** (es el contador de sesión y lo usan
+  `test_construccion_iter2.gd` e `iter3.gd`: no se toca su semántica).
+
+### 17.3 Verificación
+
+- Suite NUEVA `res://tests/test_m17_cache_preview.gd` → **17 checks, 0 fallos, EXIT 0**.
+  Checks: "A2: la segunda vista previa MISMA celda es un acierto de cache" · "A3: el acierto de
+  cache NO recalcula" · "B3: COPIAR invalida la cache del fantasma (no se reutiliza el resultado
+  viejo)" · "B5: la vista previa de la celda recien copiada dice INVALIDA (la pieza esta ahi)" ·
+  "C1/C2: VACIAR el mundo invalida la cache y la celda ocupada vuelve a ser VALIDA" · "D1/D2:
+  RESTAURAR estructuras (carga de save) invalida la cache".
+- **ROJO-VERDE:** sin el `_preview.limpiar()` de `copiar_pieza()` → **1 fallo / EXIT 1** (el preview
+  reutiliza el resultado viejo). Restaurada → 17/0.
+- **Regresión: 16 suites en verde** (M17 ×15 + M59), incluidas `test_construccion_iter2.gd` (99/0) e
+  `iter3.gd` (138/0), que dependen de la semántica de `recalculos()` (intacta).

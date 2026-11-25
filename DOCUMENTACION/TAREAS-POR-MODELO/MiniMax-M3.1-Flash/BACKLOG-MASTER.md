@@ -6,6 +6,12 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P9c (**0 flips**, L225 anotado): la cache del fantasma se invalidaba solo en 4 rutas — faltaban `copiar_pieza()`, `limpiar_estructuras()` y `restaurar_estructuras()` (por cascada): el fantasma podia pintar VERDE una celda ya ocupada — 2026-11-25 (Log 2461)
+- [x] [17-Construccion] Contador auditable monótono nuevo `BuildPreview.recalculos_totales()` (NO resetea al invalidar); `recalculos()` de sesion intacto (lo usan iter2/iter3) — 2026-11-25 (Log 2461)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_cache_preview.gd` (17 checks, 0 fallos, EXIT 0; ROJO-VERDE sin el invalidar en copiar → 1 fallo/EXIT 1) + regresion 16 suites OK — 2026-11-25 (Log 2461)
+- [x] [Canal] Mensaje 077 (P9c) reportado a la directora — 2026-11-25 14:30
+- [x] [Log] Log reservado: **2461** — tanda P9c M17 (cache del fantasma)
+- [ ] [Decision-pendiente] Siguiente paso: auditar `build_ghost.gd` y `build_hud.gd` con el mismo criterio, o tomar otro modulo — **esperando su answer**
 - [x] [17-Construccion] Tanda P9b (**0 flips**): la misma clase de defecto en DEMOLER y en las **6 ramas del historial** (undo/redo de colocar, demoler, almacenar y mover) — el borrado fallido dejaba voxels **huerfanos** y el mover **perdia la pieza** — 2026-11-25 (Log 2459)
 - [x] [17-Construccion] Motivo nuevo `NO_SE_PUDO_BORRAR` (TEMPORAL) + helper `_fallo_de_mundo()`/`_fallo_mundo()`; principio aplicado en las 7 rutas: **primero la operacion en el mundo, despues el estado interno** — 2026-11-25 (Log 2459)
 - [x] [17-Construccion] Suite `test_m17_atomicidad_escritura.gd` ampliada de 24 a **33 checks, 0 fallos** (ROJO-VERDE con `_fallo_de_mundo` stub → 4 fallos/EXIT 1) + regresion 15 suites OK — 2026-11-25 (Log 2459)
