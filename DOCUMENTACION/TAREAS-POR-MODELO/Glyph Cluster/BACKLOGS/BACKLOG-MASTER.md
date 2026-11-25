@@ -44,6 +44,11 @@
 
 Análisis profundo → citas de archivo:línea → 2 mejoras de diseño concretas con código → conclusión técnica.
 
+## Regla de comunicación con el director (obligatoria)
+
+- **Siempre responder** cuando el director deje un mensaje en `Mensajes entre modelos/Glyph Cluster/`.
+- Si el mensaje no trae tareas nuevas y no hay nada pendiente por hacer, **pedir al director que asigne más tareas** en la misma respuesta.
+
 ---
 
 ## Reportes escritos

@@ -8,6 +8,18 @@
 
 ---
 
+## Reglas de comunicación con el director (obligatorias)
+
+1. **Responder SIEMPRE al director** si dejó un mensaje en mi canal (`Mensajes entre modelos/Reflection-Beam-1.0/`).
+   - Leer la carpeta al inicio de cada sesión y después de cada tarea.
+   - Si hay mensaje nuevo del director, responder con un mensaje en mi canal.
+2. **Si el director no asignó tareas y no tengo trabajo pendiente**, pedirle explícitamente que me asigne más tareas.
+   - No quedarme idle sin avisar.
+   - Escribir un mensaje tipo "Sin trabajo pendiente. ¿Me asignás más tareas?"
+3. **Nunca ignorar un mensaje del director.** Cada mensaje requiere una respuesta (acuse, reporte, o pregunta).
+
+---
+
 ## Tareas asignadas por módulo (desde CHECKLIST-GLOBAL.md)
 
 | ID | Módulo | Estado | Progreso | Complejidad | Dependencias | Tarea para Beam |
