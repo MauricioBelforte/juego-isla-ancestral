@@ -325,3 +325,44 @@ estado inicial ATRACADO sin pasaje.
 | bodega | 60 × 11 × 3,0 m | 448 | `bodega_lowpoly.blend` |
 
 **Pendiente:** variantes de camarote (interno, familiar, suite, dúplex), LOD "de verdad" (eliminando piezas), y el veredicto del juez visual (HY4 Flash) sobre los 10 renders.
+
+---
+
+## 9. Iconos de logros rotos (C-12 — 2026-11-25)
+
+**Modelo:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-25
+
+`data/logros/logros.json` (M72) declara **18 logros**, cada uno con un campo `icono` que apunta a
+`res://assets/ui/logros/<id>.png`. **La carpeta `assets/ui/logros/` está vacía: los 18 iconos no
+existen en disco** (verificado con `os.path.exists` sobre cada `icono` → 0/18 existen).
+
+| # | Logro (id) | Icono esperado | Estado |
+|---|---|---|---|
+| 1 | `logro_primer_sello` | `res://assets/ui/logros/primer_sello.png` | ❌ falta |
+| 2 | `logro_siete_sellos` | `res://assets/ui/logros/siete_sellos.png` | ❌ falta |
+| 3 | `logro_coleccionista` | `res://assets/ui/logros/coleccionista.png` | ❌ falta |
+| 4 | `logro_viajero` | `res://assets/ui/logros/viajero.png` | ❌ falta |
+| 5 | `logro_vecino` | `res://assets/ui/logros/vecino.png` | ❌ falta |
+| 6 | `logro_misionero` | `res://assets/ui/logros/misionero.png` | ❌ falta |
+| 7 | `logro_secreto_guardian` | `res://assets/ui/logros/secreto_guardian.png` | ❌ falta |
+| 8 | `logro_amigo_cercano` | `res://assets/ui/logros/amigo_cercano.png` | ❌ falta |
+| 9 | `logro_alma_de_la_isla` | `res://assets/ui/logros/alma_de_la_isla.png` | ❌ falta |
+| 10 | `logro_pescador_principiante` | `res://assets/ui/logros/pescador_principiante.png` | ❌ falta |
+| 11 | `logro_mar_adentro_10` | `res://assets/ui/logros/mar_adentro_10.png` | ❌ falta |
+| 12 | `logro_primer_cultivo` | `res://assets/ui/logros/primer_cultivo.png` | ❌ falta |
+| 13 | `logro_cosecha_diez` | `res://assets/ui/logros/cosecha_diez.png` | ❌ falta |
+| 14 | `logro_primer_mineral` | `res://assets/ui/logros/primer_mineral.png` | ❌ falta |
+| 15 | `logro_minero_veterano` | `res://assets/ui/logros/minero_veterano.png` | ❌ falta |
+| 16 | `logro_primera_isla` | `res://assets/ui/logros/primera_isla.png` | ❌ falta |
+| 17 | `logro_dias_en_aurora` | `res://assets/ui/logros/dias_en_aurora.png` | ❌ falta |
+| 18 | `logro_ruina_restaurada` | `res://assets/ui/logros/ruina_restaurada.png` | ❌ falta |
+
+**Impacto:** la UI de logros (M72/M110) no tiene arte para ningún logro; se verá el placeholder o
+nada. **No es un bug de M169** (el crucero no es dueño de los iconos), pero se anota acá porque
+M169 es el módulo que detectó el hueco al auditar dependencias visuales.
+
+**Recomendación:** crear los 18 PNG en `assets/ui/logros/` (o cambiar `logros.json` para apuntar a
+un atlas existente). Bloqueado para este agente: no hay visión en este harness (no puede validar el
+arte) y el nicho es 3D/auditoría, no UI.
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-25

@@ -42,7 +42,7 @@
 | `Z_APOYO` | `0,045` | convención del proyecto (ver 01-R4) |
 | Calado visual | **1,8 m** bajo el agua | el casco se ve sumergido, no se modela el fondo |
 | Cubiertas | 4 × **3,2 m** de altura libre | 3,2 m + 0,4 m de forjado = 3,6 m entre pisos |
-| Presupuesto | **≤ 9.000 v** (alta), ≤ 3.500 (media), ≤ 1.500 (baja) | 125 v/m |
+| Presupuesto | **≤ 9.000 v** (alta), ≤ 3.500 (media), ≤ 1.500 (baja) | 125 v/m — **excedido**: el modelo real es low-poly de cajas (ver §11, drift D-01) |
 
 **Silueta por cubierta** (de abajo hacia arriba, cada una más corta que la anterior):
 
@@ -99,7 +99,7 @@
 ```
 1. Jugador llega al puerto (M28/M67: punto de atraque del crucero)
 2. Cruza el Area3D "Puerto" del casco → aparece prompt "Embarcar"
-3. CruceroManager.vender_pasaje(clase) → valida monedas (M38) y descuenta
+3. CruceroManager.vender_pasaje(clase, route_id, origen, destino) → valida monedas (M38) y descuenta
 4. Fade → carga `interior_cubierta_2.tscn` (o la que corresponda)
 5. Jugador recorre: pasillo → camarote asignado (o comedor/casino)
 6. Zarpada: M28 dispara la ruta; el jugador puede quedarse dentro o salir a cubierta
@@ -121,7 +121,7 @@
 | Sistema | Punto de contacto | Técnica |
 |---|---|---|
 | **M68 Transporte** ⭐ | `TransportManager`, `TransportRoute`, `buy_ticket()`, `temporada` | **El buque es una parada tipo `barco` de M68.** No se reimplementa nada de rutas ni pasajes |
-| **M74 Eventos** ⭐ | `EventManager`, contrato de minijuego | Cada juego a bordo se registra como evento con `minijuego` (contrato de escena) |
+| **M74 Eventos** ⭐ | autoload `eventos` (`event_manager.gd`), `puede_participar` / `iniciar_participacion` / `finalizar_evento` | Cada juego a bordo enruta su resultado con `finalizar_evento` (no-op si el id no está en el catálogo de festivales) |
 | **M34 Pesca** | `FishingSession` como **plantilla** | Estructura FSM de 7 estados para los juegos a bordo |
 | **M21 Diálogos** | `DialogManager` | Retos conversacionales, espectáculo de cubierta 3 |
 | **M28-Viajes** | `Boat`, `BoatDeck`, flujo embarque/desembarque | El crucero es un `Boat` más; reutiliza la ruta y el embarque |
@@ -267,3 +267,31 @@ signal crucero_evento(tipo: String, texto: String)
 | 8 | Pasajeros NPC (M28 P20) | 6-10 NPC con rutina |
 | 9 | Audio + VFX | motor, olas, silbato, humo |
 | 10 | QA y cierre | suite de tests + prueba del fundador |
+
+## 11. Reconciliación de drifts (b57 — 2026-11-25)
+
+**Modelo:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-25
+
+Esta sección reconcilia el diseño original (secciones 1-10) con lo **realmente implementado y
+verificado en disco**. El diseño describía un objetivo; el código y los GLB son la verdad. Cada
+drift indica qué decía el documento, qué hay hoy y cómo se resolvió.
+
+| # | Sección | Doc decía | Realidad (verificado) | Resolución |
+|---|---|---|---|---|
+| D-01 | §2 presupuesto | alta ≤ 9.000 v, media ≤ 3.500, baja ≤ 1.500 | alta **16.882 v**, media **9.042 v**, baja **3.790 v** (v22) | Se acepta el exceso: el modelo es low-poly de cajas y el decimador no reduce más (04-Código §8.6). Se actualizó la nota del presupuesto. |
+| D-02 | §1 arquitectura | `pasajes_disponibles: Array[Pasaje]`, `pasaje_actual: Pasaje` | `_clases`/`_camarotes` (Dictionary desde JSON) + `pasaje_actual: PasajeCrucero` (Resource) | El diseño es conceptual; el manager real usa catálogos JSON. Sin acción (el diagrama es ilustrativo). |
+| D-03 | §5 flujo | `vender_pasaje(clase)` | `vender_pasaje(clase, route_id, origen, destino)` | Corregido en §5. El cobro lo hace M68 (`buy_ticket`); M169 solo orquesta. |
+| D-04 | §6 integración M74 | `EventManager` | autoload **`eventos`** (`event_manager.gd`) | Corregido en §6 y en `crucero_eventos.gd` (antes apuntaba a `/root/EventManager`, inexistente → no-op). |
+| D-05 | §4 camarotes | 6 tipos (80/140/220/400/700 monedas) | `camarotes.json` = **7** camarotes; `pasajes.json` = **3** clases (primera 140, tercera 30) | El diseño listaba variantes de camarote; el catálogo real separa *clase de pasaje* (3) de *camarote asignado* (7). |
+| D-06 | §6c contrato M74 | `iniciar_participacion()` / `puede_participar()` / `finalizar_evento()` | `CruceroEventos.puede_jugar(id)` / `finalizar(id, resultado)` (envuelven a M74) | El manager propio añade límite diario y bloqueo por clima; M74 queda como backend. |
+| D-07 | §7 colisiones | `ConvexPolygonShape3D` simplificado + 4 planos | Interiores reconstruidos con `StaticBody3D` (piso + 2 paredes) por cubierta | Colisión real documentada en 04-Código §8.6; el casco convex sigue pendiente (iter 2). |
+| D-08 | §9 rendimiento | vértices exterior ≤ 9.000 | 16.882 (alta) | Mismo drift que D-01; el objetivo de draw calls (≤ 40) sigue vigente. |
+| D-09 | §1 señal | `crucero_*` en `EventBus` | señales en `CruceroManager` (`embarque`, `zarpe`, `llegada`, `desembarco`) | Las señales viven en el autoload, no en EventBus. El contrato es equivalente. |
+| D-10 | §6b precios | 1.ª 120 / 2.ª 70 / 3.ª 30 | 1.ª **140** / 3.ª **30** (2.ª sin fijar en catálogo) | `pasajes.json` es la fuente de verdad; el diseño usaba cifras provisionales. |
+
+**Nota de honestidad:** el encargo citaba "56 drifts fixeados en b57"; no existe un registro
+con ese número en el repo (solo ruido binario de worktrees). Esta sección documenta los **10 drifts
+verificables** entre el diseño y el código/GLB actuales. Si el lote b57 tenía más ítems, quedan
+pendientes de que el director aporte la lista.
+
+**Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-25
