@@ -500,6 +500,14 @@ jobs:
           # guard en confirmar/copiar/mover con el motivo TEMPORAL TERRENO_NO_CARGADO.
           # Suite NUEVA test_m17_terreno_cargado.gd = 24 checks / 0 fallos (stub: 8 fallos / EXIT 1).
           suite --script tests/test_m17_terreno_cargado.gd
+          # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2458): ATOMICIDAD de la escritura.
+          # Defecto corregido: la colocacion registraba la pieza y REPORTABA EXITO aunque la
+          # escritura en el mundo devolviera 0 voxels (la pieza vivia solo en la logica, el undo
+          # no cuadraba y el material descontado se perdia). Ahora hay motivo NO_SE_PUDO_ESCRIBIR
+          # (temporal), no se registra la pieza, se DEVUELVE el costo, y al mover se escribe el
+          # destino antes de vaciar el origen (si falla, el origen sigue en su sitio).
+          # Suite NUEVA test_m17_atomicidad_escritura.gd = 24 checks / 0 fallos (guard off: 7 / EXIT 1).
+          suite --script tests/test_m17_atomicidad_escritura.gd
           # M103 Logging (iter. 1, reclamo §21.4.7 tras la retirada de ox-alpha):
           # API/autoload/registro en ServiceRegistry, niveles, categorias, formato
           # humano y JSON (con contexto VALIDO), sanitizacion (IP/token/password/

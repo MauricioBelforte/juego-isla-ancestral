@@ -466,8 +466,21 @@ func confirmar_colocacion(celda: Vector3i) -> Dictionary:
 			[ConstruccionTipos.Motivo.RECURSOS_INSUFICIENTES],
 			["descuento fallo al confirmar (carrera con otra operacion)"], celdas)
 
-	# Escritura en el mundo (M08). Sin terreno -> 0 y se reporta.
+	# Escritura en el mundo (M08). Sin terreno -> 0 y se reporta (modo logico:
+	# la pieza vive solo en la logica de M17, que es el diseno del modo).
+	#
+	# ATOMICIDAD (2026-11-25): si HAY terreno pero la escritura no ocurrio
+	# (0 voxels), la colocacion NO se registra: antes la pieza quedaba en la
+	# logica sin existir en el mundo (el jugador no veia nada y el undo no
+	# cuadraba). Ademas se DEVUELVE el costo, que ya se habia descontado.
 	var escritos: int = _mundo.escribir_voxel(celdas, r.bloque)
+	if _mundo.tiene_terreno() and escritos <= 0:
+		if _f_devolver.is_valid():
+			_f_devolver.call(r.costo)
+		zona_rechazada.emit(celda, "no se pudo escribir en el mundo")
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR],
+			["la escritura en el mundo fallo (0 voxels escritos); costo devuelto"], celdas)
 
 	_alta_estructura(celda, r, _rotacion)
 	_historial.registrar({
@@ -558,7 +571,15 @@ func copiar_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 		return ConstruccionTipos.resultado_fallo(
 			[ConstruccionTipos.Motivo.RECURSOS_INSUFICIENTES], ["sin recursos para la copia"], [])
 	var celdas_nuevas: Array[Vector3i] = r.celdas(destino, paso)
-	_mundo.escribir_voxel(celdas_nuevas, r.bloque)
+	# ATOMICIDAD: si hay terreno y no se escribieron voxels, la copia no se
+	# registra y el costo (ya descontado) se devuelve.
+	var escritos_copia: int = _mundo.escribir_voxel(celdas_nuevas, r.bloque)
+	if _mundo.tiene_terreno() and escritos_copia <= 0:
+		if _f_devolver.is_valid():
+			_f_devolver.call(r.costo)
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR],
+			["la escritura en el mundo fallo (0 voxels escritos); costo devuelto"], celdas_nuevas)
 	_alta_estructura(destino, r, paso, e, "", true)
 	_historial.registrar({
 		"tipo": BuildHistory.TIPO_COPIAR,
@@ -801,9 +822,17 @@ func mover_pieza(origen: Vector3i, destino: Vector3i) -> Dictionary:
 	# Destino valido: ahora si desocupar origen y reubicar.
 	var celdas_viejas: Array = _celdas_de_estructura(e, r)
 	var celdas_nuevas: Array[Vector3i] = r.celdas(destino, paso)
+	# ATOMICIDAD: se escribe el DESTINO antes de vaciar el origen. Si la
+	# escritura falla, el origen sigue intacto (antes se vaciaba igual y la
+	# pieza se perdia).
+	var escritos_mover: int = _mundo.escribir_voxel(celdas_nuevas, r.bloque)
+	if _mundo.tiene_terreno() and escritos_mover <= 0:
+		return ConstruccionTipos.resultado_fallo(
+			[ConstruccionTipos.Motivo.NO_SE_PUDO_ESCRIBIR],
+			["la escritura en el mundo fallo (0 voxels escritos); la pieza sigue en su sitio"],
+			celdas_nuevas)
 	_baja_estructura(ancla)
 	_mundo.borrar_voxel(celdas_viejas)
-	_mundo.escribir_voxel(celdas_nuevas, r.bloque)
 	_alta_estructura(destino, r, paso, e, "", true)
 	_historial.registrar({
 		"tipo": BuildHistory.TIPO_MOVER,

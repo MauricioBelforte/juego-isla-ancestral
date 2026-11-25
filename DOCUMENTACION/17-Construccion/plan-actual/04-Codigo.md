@@ -881,3 +881,78 @@ build: está medido y documentado por M62 en `scripts/rendimiento/memoria/sesion
 (*"VoxelTerrain no usable headless para editar, updated_blocks=0"*). Lo que se cierra aquí es el
 **lado de M17**: el contrato, el guard y la prueba con un terreno que reproduce la API nativa
 medida. La prueba visual con el terreno de verdad es de M08.
+
+## 15. Tanda P9 (2026-11-25 13:0x) — ATOMICIDAD de la escritura + auditoria anti-inflacion del modulo
+
+**Modelo:** minimax-m3-1-flash
+**Plataforma:** DeepAI Code (pi)
+
+### 15.1 Un DEFECTO de la misma clase que L102
+
+Al terminar L102 (seccion 14) hice un barrido de la clase de defecto que L102 representa
+("operaciones que reportan exito sin hacer el trabajo"). Encontre otro, **peor**:
+
+```gdscript
+# ANTES (build_manager.gd, confirmar_colocacion)
+var escritos: int = _mundo.escribir_voxel(celdas, r.bloque)   # puede ser 0
+_alta_estructura(celda, r, _rotacion)                        # se registra igual
+_historial.registrar({ ... })                                 # queda entrada de undo
+return { "ok": true, ... }                                    # y dice "ok"
+```
+
+Si el mundo tiene terreno pero la escritura falla (`escribir_voxel` devuelve 0), la pieza
+**quedaba REGISTRADA en la logica de M17 sin existir en el mundo**: el jugador no veia nada, el undo
+no cuadraba y **el material ya descontado se perdia**. `copiar_pieza()` y `mover_pieza()` tenian el
+mismo problema (el mover era el peor: vaciaba el origen y se perdia la pieza).
+
+### 15.2 Correccion
+
+**`scripts/construccion/construccion_tipos.gd`**
+- Motivo nuevo **`NO_SE_PUDO_ESCRIBIR`** (final del enum) + **TEMPORAL** + texto de HUD
+  ("no se pudo escribir en el mundo (intenta de nuevo)").
+
+**`scripts/construccion/build_manager.gd`** — las tres rutas que escriben:
+| Ruta | Antes | Ahora |
+|---|---|---|
+| `confirmar_colocacion()` | registraba la pieza y decía "ok" con 0 voxels | motivo `NO_SE_PUDO_ESCRIBIR`, **no registra**, **devuelve el costo** ya descontado, y no deja entrada en el historial |
+| `copiar_pieza()` | idem | idem (costo de la copia devuelto) |
+| `mover_pieza()` | **vaciaba el origen** y se perdia la pieza | **escribe el destino ANTES de vaciar el origen**: si la escritura falla, **el origen sigue en su sitio** |
+
+**Modo LÓGICO (sin terreno):** no se bloquea nada. Ahi la pieza vive solo en la logica **por
+diseno** (el mundo es nulo), asi que 0 voxels escritos es lo normal y la operacion es correcta.
+
+### 15.3 Verificacion
+
+- Suite NUEVA `res://tests/test_m17_atomicidad_escritura.gd` → **24 checks, 0 fallos, EXIT 0**.
+  - El fallo de escritura se inyecta de forma **determinista** (receta con `bloque = 0`: la
+    escritura devuelve 0 aunque el terreno responda), no con un terrain trampeado.
+  - Checks: "A1: escribir en el mundo falla -> motivo NO_SE_PUDO_ESCRIBIR" · "A2: NO se reporta
+    exito" · "A3: NO se registro la pieza (no queda a medias)" · "A4: el COSTO se devuelve" ·
+    "A6: la colocacion fallida NO dejo entrada en el historial" · "B6: al no poder mover, la pieza
+    ORIGEN sigue en su sitio" · "C1: en modo LOGICO se coloca igual que siempre" · "E2: en el camino
+    sano el costo SI se consume (no es un reembolso fantasma)".
+- **ROJO-VERDE:** con el guard desactivado (STUB) se reproduce el comportamiento viejo
+  (`"colocada pieza_sin_bloque en (2, 1, 2) (1 celdas, 0 voxeles)"`) y la suite da **7 fallos /
+  EXIT 1**. Restaurada → 24/0.
+- **Regresion (15 suites, todas EXIT 0):** atomicidad 24/0 · terreno_cargado 24/0 ·
+  contenido_piezas 32/0 · hud_categorias 22/0 · categorias 24/0 · almacenamiento 33/0 · materiales
+  13/0 · validacion 44/0 · reglas_pieza 40/0 · circulacion 36/0 · persistencia 23/0 ·
+  suites_integracion 17/0 (501 checks) · qa_m17_modo 9/0 · iter3 138/0 · **M59 28/0**.
+
+### 15.4 Auditoria anti-inflacion del PROPIO modulo (regla 21.8.2)
+
+El QA cruzado lo hace la directora, pero un modulo tampoco puede esperar a eso: se aplico el
+**muestreo §21.8.2 al propio M17**.
+
+- Se extrajeron los identificadores tecnicos de los **148 `[x]`** (funciones, clases, archivos,
+  metodos citados en el texto literal de cada item).
+- Se comprobo **cada uno contra disco** (`scripts/`, `tests/`, `data/`, `DOCUMENTACION/`).
+- Resultado: **0 items sin artefacto** — ningun `[x]` de M17 esta inflado. Los 27 `[ ]` que
+  quedan son de otros duenos (segun el mapa de propiedad de 04-Codigo.md) y **0 `[?]`** quedan.
+
+### 15.5 Nota de trazabilidad
+
+Se detecto un **choque de numeracion de logs**: existen `Logs/2450-m17-hud-...` (este agente) y
+`Logs/2450-m56-...` (otro agente) con el MISMO numero. Es la carrera que el protocolo advierte
+(§6.1.d: dos agentes leen la cabeza del pool a la vez). No lo toco — el pool es de la directora —
+pero lo reporto para que lo sanee.

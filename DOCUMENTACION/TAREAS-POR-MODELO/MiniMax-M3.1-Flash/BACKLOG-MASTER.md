@@ -6,6 +6,14 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [17-Construccion] Tanda P9 (**0 flips**): corregido un DEFECTO de la clase L102 — la colocacion registraba la pieza y reportaba EXITO aunque la escritura en el mundo devolviera 0 voxels (la pieza vivia solo en la logica, el undo no cuadraba y el material descontado se perdia) — 2026-11-25 (Log 2458)
+- [x] [17-Construccion] Atomicidad real: motivo nuevo `NO_SE_PUDO_ESCRIBIR` (TEMPORAL); `confirmar_colocacion()` no registra + devuelve el costo + no deja entrada en el historial; `copiar_pieza()` igual; `mover_pieza()` escribe el destino ANTES de vaciar el origen (el origen sigue en su sitio si falla) — 2026-11-25 (Log 2458)
+- [x] [17-Construccion] Suite NUEVA `game/isla-ancestral/tests/test_m17_atomicidad_escritura.gd` (24 checks, 0 fallos, EXIT 0; ROJO-VERDE con el guard off → 7 fallos/EXIT 1) + cableada en `quality.yml` — 2026-11-25 (Log 2458)
+- [x] [17-Construccion] **AUDITORIA ANTI-INFLACION del propio modulo** (regla §21.8.2): los 148 `[x]` revisados contra disco → **0 items sin artefacto** (ningun `[x]` inflado); 0 `[?]`; los 27 `[ ]` son de otros duenos — 2026-11-25 (Log 2458)
+- [x] [17-Construccion] Regresion 15 suites OK (M17 x14 + M59 28/0) — 2026-11-25 (Log 2458)
+- [x] [Canal] Mensaje 075 (P9) reportado a la directora + aviso de colision de numeracion de logs (2450 duplicado con otro agente) — 2026-11-25 13:10
+- [x] [Log] Log reservado: **2458** — tanda P9 M17 (atomicidad de la escritura + auditoria anti-inflacion)
+- [ ] [Decision-pendiente] Siguiente paso propuesto a la directora: seguir auditando M17 en busca de mas defectos de la misma clase, o tomar otro modulo — **esperando su answer**
 - [x] [17-Construccion] Tanda P8: **L102** "La rejilla solo se calcula sobre terreno cargado (nunca sobre chunks vacios)" → **cerrado**: el item estaba REALMENTE roto (el manager colocaba y registraba piezas en chunks sin data block) — 2026-11-25 (Log 2455)
 - [x] [17-Construccion] Implementado `ConstruccionMundo.chunk_cargada()` / `celdas_sin_chunk()` con la API NATIVA MEDIDA (`voxel_to_data_block` + `has_data_block`), `superficie_voxel()` = "aire" si el chunk no esta cargado, contador `consultas` — 2026-11-25 (Log 2455)
 - [x] [17-Construccion] Motivo nuevo `TERRENO_NO_CARGADO` (TEMPORAL) + guard en confirmar/copiar/mover (ANTES de validar, para que el motivo sea temporal y no "sin soporte") — 2026-11-25 (Log 2455)

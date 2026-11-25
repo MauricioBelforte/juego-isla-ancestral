@@ -112,6 +112,10 @@ enum Motivo {
 	# NO se coloca (la rejilla solo se calcula sobre terreno cargado). Es
 	# TEMPORAL: el chunk se carga solo y el reintento funciona igual.
 	TERRENO_NO_CARGADO,
+	# La escritura en el mundo NO ocurrio (hay terreno, pero no se escribieron
+	# voxeles). La pieza NO se registra y el costo se devuelve. TEMPORAL: se
+	# puede reintentar cuando el mundo vuelva a responder.
+	NO_SE_PUDO_ESCRIBIR,
 }
 
 ## ── Motivos TEMPORALES (edge case L de M17) ────────────────────────────────
@@ -129,6 +133,9 @@ const MOTIVOS_TEMPORALES: Array = [
 	# L102: el chunk de terreno se carga solo (streaming de M08) -> el rechazo
 	# desaparece sin que el jugador cambie de celda ni de pieza.
 	Motivo.TERRENO_NO_CARGADO,
+	# La escritura fallo por un problema transitorio del mundo (M08) -> el
+	# reintento funciona igual (y el costo ya fue devuelto).
+	Motivo.NO_SE_PUDO_ESCRIBIR,
 ]
 
 ## true si el motivo puede desaparecer sin que el jugador cambie de celda.
@@ -158,6 +165,7 @@ const TEXTO: Dictionary = {
 	Motivo.SIN_ESPACIO: "no hay espacio en el inventario para guardar la pieza",
 	Motivo.SIN_INVENTARIO: "no hay inventario conectado (no se puede guardar)",
 	Motivo.TERRENO_NO_CARGADO: "el terreno de esa zona todavia no esta cargado",
+	Motivo.NO_SE_PUDO_ESCRIBIR: "no se pudo escribir en el mundo (intenta de nuevo)",
 }
 
 ## Texto de un motivo. Tolerante a valores desconocidos.
