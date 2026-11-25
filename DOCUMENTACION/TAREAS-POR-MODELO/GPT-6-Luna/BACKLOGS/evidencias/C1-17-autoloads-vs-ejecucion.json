@@ -1,0 +1,981 @@
+{
+  "task_id": "C1-17",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Extracción estática de [autoload] y comparación literal con las dos listas visibles en 4-DOCUMENTO-EJECUCION-ACTUAL.md; sin cambios en fuentes.",
+  "sources": [
+    {
+      "path": "game/isla-ancestral/project.godot",
+      "section": "[autoload]",
+      "sha256": "0900f905b0857f746ec99c9cec26bb612bdf35682f0d0ef4429bfb3f38ecb9d6"
+    },
+    {
+      "path": "DOCUMENTACION/4-DOCUMENTO-EJECUCION-ACTUAL.md",
+      "section": "## Autoloads reales del proyecto (project.godot)",
+      "sha256": "14b1bbd1193fc28d7f82231ca14b99dad58c6b773a401bae1320255b5c67b77c"
+    }
+  ],
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "config_parser": "regex de asignación Nombre=\"[*]res://ruta\" en sección [autoload]",
+    "documentation_parser": "filas literales de la tabla y tokens de la nota parentética, registrados por separado",
+    "matching": "nombre exacto, sensible a mayúsculas; las agrupaciones escritas con / se mantienen literales; sin inferir alias."
+  },
+  "actual_autoload_count": 117,
+  "actual_unique_names": 117,
+  "documented_table_count": 10,
+  "documented_prose_terms_count": 14,
+  "table_exact_name_matches": 10,
+  "table_names_absent_from_config": [],
+  "table_path_mismatches": [],
+  "prose_terms_exactly_matching_config": [
+    "Crafting",
+    "EconomyManager",
+    "EventBus",
+    "Farm",
+    "Fishing",
+    "GameFlowManager",
+    "GameTime",
+    "Inventario",
+    "ServiceRegistry",
+    "ShopManager",
+    "TimeCalendar",
+    "VillagerManager"
+  ],
+  "prose_terms_not_exact_names_in_config": [
+    "Analytics/Telemetry",
+    "Logger"
+  ],
+  "configured_autoload_names_not_listed_exactly_in_either_doc_list": [
+    "AccesibilityManager",
+    "Achievements",
+    "AmbientDirector",
+    "AnalyticsDirector",
+    "AnimationService",
+    "AssetProfile",
+    "AudioConfig",
+    "BackupManager",
+    "Balance",
+    "Bootstrap",
+    "BotPaseoM09",
+    "BrandConfig",
+    "BuildConfigManager",
+    "CatalogoTiendas",
+    "CiCdManager",
+    "CommunityManager",
+    "Construccion",
+    "ControlInput",
+    "CrashReporter",
+    "CruceroManager",
+    "DebugMenu",
+    "DevTools",
+    "DialogueManager",
+    "Diary",
+    "DlcManager",
+    "EnchantmentSystem",
+    "EquipmentManager",
+    "EscalasGlobales",
+    "FeedbackDirector",
+    "FontCatalog",
+    "Friendship",
+    "GameLogger",
+    "GameSettings",
+    "HardwareManager",
+    "Historias",
+    "HouseManager",
+    "InstaladorConfig",
+    "IslandRegistry",
+    "ItemDatabase",
+    "MapManager",
+    "MaterialesRecursos",
+    "MemoryMonitor",
+    "MerchManager",
+    "ModdingManager",
+    "MonetizacionManager",
+    "MotivacionManager",
+    "MundoRaiz",
+    "MusicDirector",
+    "NPCManager",
+    "NPCVisualDatabase",
+    "NarrativeSound",
+    "NotificationService",
+    "PantallaCarga",
+    "PhotoService",
+    "PlatformManager",
+    "PlayerProfile",
+    "Postgame",
+    "ProgressionManager",
+    "RelojHud",
+    "ResourceManager",
+    "SFXManager",
+    "SceneManager",
+    "SecurityManager",
+    "SoftlockGuard",
+    "StreamManager",
+    "SubtitleManager",
+    "SupportManager",
+    "TelemetryDirector",
+    "TermsManager",
+    "TerrainLocator",
+    "TerrainProvider",
+    "ThemeService",
+    "Tiers",
+    "TooltipService",
+    "TransportManager",
+    "UIManager",
+    "UgcManager",
+    "UpdateManager",
+    "Vehiculos",
+    "WorldBible",
+    "WorldLocations",
+    "WorldState",
+    "animal_ai",
+    "coleccionables",
+    "combat_island",
+    "credits_manager",
+    "eventos",
+    "fauna",
+    "fauna_registry",
+    "gem_currency",
+    "hotbar",
+    "interacciones",
+    "inventario_helper",
+    "inventario_iter5",
+    "mineria"
+  ],
+  "actual_autoloads": [
+    {
+      "name": "TermsManager",
+      "singleton": false,
+      "path": "res://scripts/legal/terms_manager.gd",
+      "line_in_section": 3
+    },
+    {
+      "name": "EventBus",
+      "singleton": true,
+      "path": "res://scripts/core/event_bus.gd",
+      "line_in_section": 4
+    },
+    {
+      "name": "WorldState",
+      "singleton": true,
+      "path": "res://scripts/dialogos/world_state_service.gd",
+      "line_in_section": 5
+    },
+    {
+      "name": "DialogueManager",
+      "singleton": true,
+      "path": "res://scripts/dialogos/dialogue_manager.gd",
+      "line_in_section": 6
+    },
+    {
+      "name": "GameSettings",
+      "singleton": true,
+      "path": "res://scripts/core/game_settings.gd",
+      "line_in_section": 7
+    },
+    {
+      "name": "ServiceRegistry",
+      "singleton": true,
+      "path": "res://scripts/core/service_registry.gd",
+      "line_in_section": 8
+    },
+    {
+      "name": "GameLogger",
+      "singleton": true,
+      "path": "res://scripts/logging/logger.gd",
+      "line_in_section": 9
+    },
+    {
+      "name": "AnalyticsDirector",
+      "singleton": true,
+      "path": "res://scripts/analytics/analytics_director.gd",
+      "line_in_section": 10
+    },
+    {
+      "name": "TelemetryDirector",
+      "singleton": true,
+      "path": "res://scripts/telemetry/telemetry_director.gd",
+      "line_in_section": 11
+    },
+    {
+      "name": "SaveManager",
+      "singleton": true,
+      "path": "res://scripts/saving/save_manager.gd",
+      "line_in_section": 12
+    },
+    {
+      "name": "TimeCalendar",
+      "singleton": true,
+      "path": "res://scripts/time/time_calendar.gd",
+      "line_in_section": 13
+    },
+    {
+      "name": "ItemDatabase",
+      "singleton": true,
+      "path": "res://scripts/data/item_database.gd",
+      "line_in_section": 14
+    },
+    {
+      "name": "EconomyManager",
+      "singleton": true,
+      "path": "res://scripts/economia/economy_manager.gd",
+      "line_in_section": 15
+    },
+    {
+      "name": "SoftlockGuard",
+      "singleton": true,
+      "path": "res://scripts/core/softlock_guard.gd",
+      "line_in_section": 16
+    },
+    {
+      "name": "ShopManager",
+      "singleton": true,
+      "path": "res://scripts/shops/shop_manager.gd",
+      "line_in_section": 17
+    },
+    {
+      "name": "Inventario",
+      "singleton": true,
+      "path": "res://scripts/inventario/inventario_service.gd",
+      "line_in_section": 18
+    },
+    {
+      "name": "Friendship",
+      "singleton": true,
+      "path": "res://scripts/friendship/friendship_service.gd",
+      "line_in_section": 19
+    },
+    {
+      "name": "GameTime",
+      "singleton": true,
+      "path": "res://scripts/time/game_clock.gd",
+      "line_in_section": 20
+    },
+    {
+      "name": "RelojHud",
+      "singleton": true,
+      "path": "res://scripts/clock/reloj_hud.gd",
+      "line_in_section": 21
+    },
+    {
+      "name": "Bootstrap",
+      "singleton": true,
+      "path": "res://scripts/core/bootstrap.gd",
+      "line_in_section": 22
+    },
+    {
+      "name": "UIManager",
+      "singleton": true,
+      "path": "res://scripts/ui/core/ui_manager.gd",
+      "line_in_section": 23
+    },
+    {
+      "name": "TooltipService",
+      "singleton": true,
+      "path": "res://scripts/ui/services/tooltip_service.gd",
+      "line_in_section": 24
+    },
+    {
+      "name": "NotificationService",
+      "singleton": true,
+      "path": "res://scripts/ui/services/notification_service.gd",
+      "line_in_section": 25
+    },
+    {
+      "name": "TerrainLocator",
+      "singleton": true,
+      "path": "res://scripts/core/terrain_locator.gd",
+      "line_in_section": 26
+    },
+    {
+      "name": "VillagerManager",
+      "singleton": true,
+      "path": "res://scripts/npc/villager_manager.gd",
+      "line_in_section": 27
+    },
+    {
+      "name": "ControlInput",
+      "singleton": true,
+      "path": "res://scripts/controls/control_input.gd",
+      "line_in_section": 28
+    },
+    {
+      "name": "ResourceManager",
+      "singleton": true,
+      "path": "res://scripts/resources/resource_manager.gd",
+      "line_in_section": 29
+    },
+    {
+      "name": "mineria",
+      "singleton": true,
+      "path": "res://scripts/mineria/mining_manager.gd",
+      "line_in_section": 30
+    },
+    {
+      "name": "interacciones",
+      "singleton": true,
+      "path": "res://scripts/interacciones/interaction_manager.gd",
+      "line_in_section": 31
+    },
+    {
+      "name": "fauna_registry",
+      "singleton": true,
+      "path": "res://scripts/fauna/fauna_registry.gd",
+      "line_in_section": 32
+    },
+    {
+      "name": "fauna",
+      "singleton": true,
+      "path": "res://scripts/fauna/fauna_manager.gd",
+      "line_in_section": 33
+    },
+    {
+      "name": "credits_manager",
+      "singleton": true,
+      "path": "res://scripts/legal/credits_manager.gd",
+      "line_in_section": 34
+    },
+    {
+      "name": "MerchManager",
+      "singleton": true,
+      "path": "res://scripts/legal/merch_manager.gd",
+      "line_in_section": 35
+    },
+    {
+      "name": "animal_ai",
+      "singleton": true,
+      "path": "res://scripts/animales_ia/m65_animal_ai.gd",
+      "line_in_section": 36
+    },
+    {
+      "name": "coleccionables",
+      "singleton": true,
+      "path": "res://scripts/coleccionables/coleccionables_manager.gd",
+      "line_in_section": 37
+    },
+    {
+      "name": "hotbar",
+      "singleton": true,
+      "path": "res://scripts/inventario/hotbar_state.gd",
+      "line_in_section": 38
+    },
+    {
+      "name": "inventario_helper",
+      "singleton": true,
+      "path": "res://scripts/inventario/inventario_iter4.gd",
+      "line_in_section": 39
+    },
+    {
+      "name": "inventario_iter5",
+      "singleton": true,
+      "path": "res://scripts/inventario/inventario_iter5.gd",
+      "line_in_section": 40
+    },
+    {
+      "name": "Localization",
+      "singleton": true,
+      "path": "res://scripts/localization/localization_manager.gd",
+      "line_in_section": 41
+    },
+    {
+      "name": "Balance",
+      "singleton": true,
+      "path": "res://scripts/balance/balance_service.gd",
+      "line_in_section": 42
+    },
+    {
+      "name": "Tutorial",
+      "singleton": true,
+      "path": "res://scripts/tutorial/tutorial_manager.gd",
+      "line_in_section": 43
+    },
+    {
+      "name": "ThemeService",
+      "singleton": true,
+      "path": "res://scripts/ui/theme/theme_service.gd",
+      "line_in_section": 44
+    },
+    {
+      "name": "Crafting",
+      "singleton": true,
+      "path": "res://scripts/crafting/crafting_service.gd",
+      "line_in_section": 45
+    },
+    {
+      "name": "AssetProfile",
+      "singleton": true,
+      "path": "res://scripts/rendimiento/asset_profile.gd",
+      "line_in_section": 46
+    },
+    {
+      "name": "BrandConfig",
+      "singleton": true,
+      "path": "res://scripts/brand/brand_config.gd",
+      "line_in_section": 47
+    },
+    {
+      "name": "DebugMenu",
+      "singleton": true,
+      "path": "res://scripts/debug/debug_menu.gd",
+      "line_in_section": 48
+    },
+    {
+      "name": "CatalogoTiendas",
+      "singleton": true,
+      "path": "res://scripts/shops/catalogo_tiendas.gd",
+      "line_in_section": 49
+    },
+    {
+      "name": "Farm",
+      "singleton": true,
+      "path": "res://scripts/farm/farm_service.gd",
+      "line_in_section": 50
+    },
+    {
+      "name": "Fishing",
+      "singleton": true,
+      "path": "res://scripts/fishing/fishing_manager.gd",
+      "line_in_section": 51
+    },
+    {
+      "name": "Weather",
+      "singleton": true,
+      "path": "res://scripts/clima/weather_service.gd",
+      "line_in_section": 52
+    },
+    {
+      "name": "Historia",
+      "singleton": true,
+      "path": "res://scripts/historia/story_manager.gd",
+      "line_in_section": 53
+    },
+    {
+      "name": "Historias",
+      "singleton": true,
+      "path": "res://scripts/historias/secondary_stories_service.gd",
+      "line_in_section": 54
+    },
+    {
+      "name": "Barter",
+      "singleton": true,
+      "path": "res://scripts/economia/barter_system.gd",
+      "line_in_section": 55
+    },
+    {
+      "name": "TravelService",
+      "singleton": true,
+      "path": "res://scripts/viajes/travel_service.gd",
+      "line_in_section": 56
+    },
+    {
+      "name": "CollectionRegistry",
+      "singleton": true,
+      "path": "res://scripts/museum/collection_registry.gd",
+      "line_in_section": 57
+    },
+    {
+      "name": "DonationService",
+      "singleton": true,
+      "path": "res://scripts/museum/donation_service.gd",
+      "line_in_section": 58
+    },
+    {
+      "name": "Diary",
+      "singleton": true,
+      "path": "res://scripts/diario/diary_service.gd",
+      "line_in_section": 59
+    },
+    {
+      "name": "PlayerProfile",
+      "singleton": true,
+      "path": "res://scripts/progresion/player_profile.gd",
+      "line_in_section": 60
+    },
+    {
+      "name": "ProgressionManager",
+      "singleton": true,
+      "path": "res://scripts/progresion/progression_manager.gd",
+      "line_in_section": 61
+    },
+    {
+      "name": "Achievements",
+      "singleton": true,
+      "path": "res://scripts/logros/achievement_service.gd",
+      "line_in_section": 62
+    },
+    {
+      "name": "Vehiculos",
+      "singleton": true,
+      "path": "res://scripts/vehiculos/vehicle_manager.gd",
+      "line_in_section": 63
+    },
+    {
+      "name": "Postgame",
+      "singleton": true,
+      "path": "res://scripts/postgame/postgame_manager.gd",
+      "line_in_section": 64
+    },
+    {
+      "name": "EscalasGlobales",
+      "singleton": true,
+      "path": "res://scripts/core/escalas_globales.gd",
+      "line_in_section": 65
+    },
+    {
+      "name": "AccesibilityManager",
+      "singleton": true,
+      "path": "res://scripts/accesibilidad/accesibilidad_manager.gd",
+      "line_in_section": 66
+    },
+    {
+      "name": "AnimationService",
+      "singleton": true,
+      "path": "res://scripts/animacion/animation_service.gd",
+      "line_in_section": 67
+    },
+    {
+      "name": "PhotoService",
+      "singleton": true,
+      "path": "res://scripts/foto/photo_service.gd",
+      "line_in_section": 68
+    },
+    {
+      "name": "Tiers",
+      "singleton": true,
+      "path": "res://scripts/herramientas158/tool_tier_system.gd",
+      "line_in_section": 69
+    },
+    {
+      "name": "AudioConfig",
+      "singleton": true,
+      "path": "res://scripts/audio/audio_config_service.gd",
+      "line_in_section": 70
+    },
+    {
+      "name": "DataStore",
+      "singleton": true,
+      "path": "res://scripts/datos/data_store.gd",
+      "line_in_section": 71
+    },
+    {
+      "name": "SubtitleManager",
+      "singleton": true,
+      "path": "res://scripts/ui/subtitle_manager.gd",
+      "line_in_section": 72
+    },
+    {
+      "name": "StreamManager",
+      "singleton": true,
+      "path": "res://scripts/stream/stream_manager.gd",
+      "line_in_section": 73
+    },
+    {
+      "name": "PantallaCarga",
+      "singleton": true,
+      "path": "res://scripts/stream/pantalla_carga.gd",
+      "line_in_section": 74
+    },
+    {
+      "name": "MonetizacionManager",
+      "singleton": true,
+      "path": "res://scripts/monetizacion/monetizacion_manager.gd",
+      "line_in_section": 75
+    },
+    {
+      "name": "TerrainProvider",
+      "singleton": true,
+      "path": "res://scripts/terrenos/terrain_provider.gd",
+      "line_in_section": 76
+    },
+    {
+      "name": "GameFlowManager",
+      "singleton": true,
+      "path": "res://scripts/core/game_flow_manager.gd",
+      "line_in_section": 77
+    },
+    {
+      "name": "SceneManager",
+      "singleton": true,
+      "path": "res://scripts/core/scene_manager.gd",
+      "line_in_section": 78
+    },
+    {
+      "name": "MotivacionManager",
+      "singleton": true,
+      "path": "res://scripts/motivacion/motivacion_manager.gd",
+      "line_in_section": 79
+    },
+    {
+      "name": "PlatformManager",
+      "singleton": true,
+      "path": "res://scripts/plataformas/platform_manager.gd",
+      "line_in_section": 80
+    },
+    {
+      "name": "WorldBible",
+      "singleton": true,
+      "path": "res://scripts/world/world_bible.gd",
+      "line_in_section": 81
+    },
+    {
+      "name": "MemoryMonitor",
+      "singleton": true,
+      "path": "res://scripts/rendimiento/memoria/memory_monitor.gd",
+      "line_in_section": 82
+    },
+    {
+      "name": "MusicDirector",
+      "singleton": true,
+      "path": "res://scripts/audio/music_director.gd",
+      "line_in_section": 83
+    },
+    {
+      "name": "AmbientDirector",
+      "singleton": true,
+      "path": "res://scripts/audio/ambient_director.gd",
+      "line_in_section": 84
+    },
+    {
+      "name": "SFXManager",
+      "singleton": true,
+      "path": "res://scripts/audio/sfx_manager.gd",
+      "line_in_section": 85
+    },
+    {
+      "name": "FeedbackDirector",
+      "singleton": true,
+      "path": "res://scripts/audio/feedback_director.gd",
+      "line_in_section": 86
+    },
+    {
+      "name": "NarrativeSound",
+      "singleton": true,
+      "path": "res://scripts/audio/narrative_sound.gd",
+      "line_in_section": 87
+    },
+    {
+      "name": "CrashReporter",
+      "singleton": true,
+      "path": "res://scripts/crash/crash_reporter.gd",
+      "line_in_section": 88
+    },
+    {
+      "name": "CiCdManager",
+      "singleton": true,
+      "path": "res://scripts/ci/cicd_manager.gd",
+      "line_in_section": 89
+    },
+    {
+      "name": "InstaladorConfig",
+      "singleton": true,
+      "path": "res://scripts/installer/instalador_config.gd",
+      "line_in_section": 90
+    },
+    {
+      "name": "MapManager",
+      "singleton": true,
+      "path": "res://scripts/mapa/mapa_manager.gd",
+      "line_in_section": 91
+    },
+    {
+      "name": "HardwareManager",
+      "singleton": true,
+      "path": "res://scripts/hardware/hardware_manager.gd",
+      "line_in_section": 92
+    },
+    {
+      "name": "BuildConfigManager",
+      "singleton": true,
+      "path": "res://scripts/build/build_config_manager.gd",
+      "line_in_section": 93
+    },
+    {
+      "name": "UpdateManager",
+      "singleton": true,
+      "path": "res://scripts/updates/update_manager.gd",
+      "line_in_section": 94
+    },
+    {
+      "name": "DevTools",
+      "singleton": true,
+      "path": "res://scripts/dev/dev_tools.gd",
+      "line_in_section": 95
+    },
+    {
+      "name": "MaterialesRecursos",
+      "singleton": true,
+      "path": "res://scripts/arte3d/materiales_recursos.gd",
+      "line_in_section": 96
+    },
+    {
+      "name": "BotPaseoM09",
+      "singleton": true,
+      "path": "res://scripts/world/bot_paseo_m09.gd",
+      "line_in_section": 97
+    },
+    {
+      "name": "MundoRaiz",
+      "singleton": true,
+      "path": "res://scripts/world/mundo_raiz.gd",
+      "line_in_section": 98
+    },
+    {
+      "name": "SecurityManager",
+      "singleton": true,
+      "path": "res://scripts/security/security_manager.gd",
+      "line_in_section": 99
+    },
+    {
+      "name": "FontCatalog",
+      "singleton": true,
+      "path": "res://scripts/fonts/font_catalog.gd",
+      "line_in_section": 100
+    },
+    {
+      "name": "BackupManager",
+      "singleton": true,
+      "path": "res://scripts/backup/backup_manager.gd",
+      "line_in_section": 101
+    },
+    {
+      "name": "DlcManager",
+      "singleton": true,
+      "path": "res://scripts/dlc/dlc_manager.gd",
+      "line_in_section": 102
+    },
+    {
+      "name": "SupportManager",
+      "singleton": true,
+      "path": "res://scripts/support/support_manager.gd",
+      "line_in_section": 103
+    },
+    {
+      "name": "ModdingManager",
+      "singleton": true,
+      "path": "res://scripts/modding/modding_manager.gd",
+      "line_in_section": 104
+    },
+    {
+      "name": "UgcManager",
+      "singleton": true,
+      "path": "res://scripts/ugc/ugc_manager.gd",
+      "line_in_section": 105
+    },
+    {
+      "name": "CommunityManager",
+      "singleton": true,
+      "path": "res://scripts/community/community_manager.gd",
+      "line_in_section": 106
+    },
+    {
+      "name": "NPCManager",
+      "singleton": true,
+      "path": "res://scripts/ia_npc/npc_manager.gd",
+      "line_in_section": 107
+    },
+    {
+      "name": "eventos",
+      "singleton": true,
+      "path": "res://scripts/eventos/event_manager.gd",
+      "line_in_section": 108
+    },
+    {
+      "name": "EquipmentManager",
+      "singleton": true,
+      "path": "res://scripts/player/equipment_manager.gd",
+      "line_in_section": 109
+    },
+    {
+      "name": "NPCVisualDatabase",
+      "singleton": true,
+      "path": "res://scripts/data/npc_visual_database.gd",
+      "line_in_section": 110
+    },
+    {
+      "name": "WorldLocations",
+      "singleton": true,
+      "path": "res://scripts/data/world_locations.gd",
+      "line_in_section": 111
+    },
+    {
+      "name": "EnchantmentSystem",
+      "singleton": true,
+      "path": "res://scripts/enchantment/enchantment_system.gd",
+      "line_in_section": 112
+    },
+    {
+      "name": "TransportManager",
+      "singleton": true,
+      "path": "res://scripts/transporte/transport_manager.gd",
+      "line_in_section": 113
+    },
+    {
+      "name": "CruceroManager",
+      "singleton": true,
+      "path": "res://scripts/crucero/crucero_manager.gd",
+      "line_in_section": 114
+    },
+    {
+      "name": "IslandRegistry",
+      "singleton": true,
+      "path": "res://scripts/islas/island_registry.gd",
+      "line_in_section": 115
+    },
+    {
+      "name": "gem_currency",
+      "singleton": true,
+      "path": "res://scripts/combat/gem_currency.gd",
+      "line_in_section": 116
+    },
+    {
+      "name": "combat_island",
+      "singleton": true,
+      "path": "res://scripts/combat/combat_island_system.gd",
+      "line_in_section": 117
+    },
+    {
+      "name": "Construccion",
+      "singleton": true,
+      "path": "res://scripts/construccion/build_manager.gd",
+      "line_in_section": 118
+    },
+    {
+      "name": "HouseManager",
+      "singleton": true,
+      "path": "res://scripts/houses/house_manager.gd",
+      "line_in_section": 119
+    }
+  ],
+  "documented_explicit_table": [
+    {
+      "name": "DataStore",
+      "script": "scripts/datos/data_store.gd",
+      "module_text": "M60",
+      "responsibility": "Save/config persistente (GestorConfig + WriterAtomico)",
+      "line": 16
+    },
+    {
+      "name": "SaveManager",
+      "script": "scripts/saving/save_manager.gd",
+      "module_text": "M59",
+      "responsibility": "Cola de guardado, dirty tracking, auto-save (día/misión/cierre), bloqueo en diálogo",
+      "line": 17
+    },
+    {
+      "name": "Weather",
+      "script": "scripts/clima/weather_service.gd",
+      "module_text": "M32",
+      "responsibility": "Clima determinista (cadena seed+día, regla cozy, intensidad, persistencia)",
+      "line": 18
+    },
+    {
+      "name": "Historia",
+      "script": "scripts/historia/story_manager.gd",
+      "module_text": "M22",
+      "responsibility": "Grafo de historia data-driven, gating por sellos/flags/objetos",
+      "line": 19
+    },
+    {
+      "name": "Barter",
+      "script": "scripts/economia/barter_system.gd",
+      "module_text": "M38",
+      "responsibility": "Trueque objeto-por-objeto con amistad/temporada/límites + salvavidas",
+      "line": 20
+    },
+    {
+      "name": "TravelService",
+      "script": "scripts/viajes/travel_service.gd",
+      "module_text": "M28",
+      "responsibility": "Viajes en vapor (rutas data-driven, clima retraso-sin-bloqueo, persistencia mitad de ruta)",
+      "line": 21
+    },
+    {
+      "name": "CollectionRegistry",
+      "script": "scripts/museum/collection_registry.gd",
+      "module_text": "M37",
+      "responsibility": "Autoridad única de progreso de colecciones del museo",
+      "line": 22
+    },
+    {
+      "name": "DonationService",
+      "script": "scripts/museum/donation_service.gd",
+      "module_text": "M37",
+      "responsibility": "Validación/ejecución de donaciones (DonationResult, recompensas únicas)",
+      "line": 23
+    },
+    {
+      "name": "Tutorial",
+      "script": "scripts/tutorial/tutorial_manager.gd",
+      "module_text": "M92",
+      "responsibility": "Capítulos con triggers de señal/acción/mundo + watchdog",
+      "line": 24
+    },
+    {
+      "name": "Localization",
+      "script": "scripts/localization/localization_manager.gd",
+      "module_text": "M87",
+      "responsibility": "Idiomas es/en (.po), tr_key/tr_ctx, persistencia de locale",
+      "line": 25
+    }
+  ],
+  "documented_parenthetical_terms": [
+    {
+      "literal": "EventBus M07",
+      "line": 27
+    },
+    {
+      "literal": "ServiceRegistry",
+      "line": 27
+    },
+    {
+      "literal": "Logger",
+      "line": 27
+    },
+    {
+      "literal": "Analytics/Telemetry",
+      "line": 27
+    },
+    {
+      "literal": "GameTime",
+      "line": 27
+    },
+    {
+      "literal": "TimeCalendar",
+      "line": 27
+    },
+    {
+      "literal": "Inventario",
+      "line": 27
+    },
+    {
+      "literal": "VillagerManager",
+      "line": 27
+    },
+    {
+      "literal": "Farm",
+      "line": 27
+    },
+    {
+      "literal": "Fishing",
+      "line": 27
+    },
+    {
+      "literal": "EconomyManager",
+      "line": 27
+    },
+    {
+      "literal": "ShopManager",
+      "line": 27
+    },
+    {
+      "literal": "Crafting",
+      "line": 27
+    },
+    {
+      "literal": "GameFlowManager",
+      "line": 27
+    }
+  ],
+  "limitations": "La comparación es literal y estructural, no certifica que cada ruta cargue en runtime. La nota agrupa conceptos separados por barra (p. ej. Analytics/Telemetry), por lo que no se descompone automáticamente ni se adjudica error semántico. El texto puede ser una lista parcial: no aparecer en el documento no demuestra que la configuración sea inválida."
+}

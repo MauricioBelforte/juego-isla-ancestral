@@ -1,0 +1,38 @@
+{
+  "task_id": "C1-11",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Comparación de conjuntos de claves únicamente entre dos catálogos JSON seleccionados; no se comparan ni se reproducen sus valores traducidos.",
+  "sources": {
+    "es": {
+      "path": "game/isla-ancestral/data/localizacion/strings_es.json",
+      "language_field": "es",
+      "key_count": 170,
+      "sha256": "9a5e4f930090eca299f72fbf1068311e1e2b3084eaaca71d68a2ef98556514c2"
+    },
+    "en": {
+      "path": "game/isla-ancestral/data/localizacion/strings_en.json",
+      "language_field": "en",
+      "key_count": 170,
+      "sha256": "ff1dd5228e408e00fcb117bb3c0aef51d7e105216061b7dadcdba95ee9008458"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto sin BOM",
+    "parser": "JSON estándar con detector de claves duplicadas en todos los objetos",
+    "key_path": "cadenas",
+    "comparison": "conjuntos de claves exactos, sensible a mayúsculas, sin normalización"
+  },
+  "result": {
+    "es_only": [],
+    "en_only": [],
+    "intersection_count": 170,
+    "same_key_set": true,
+    "duplicate_json_keys": {
+      "es": 0,
+      "en": 0
+    }
+  },
+  "conclusion": "Los dos catálogos tienen 170 claves cada uno; 170 coinciden y no se encontraron claves ausentes de un idioma frente al otro.",
+  "limitations": "La igualdad de claves no valida calidad, adecuación contextual ni equivalencia semántica de las traducciones. Tampoco certifica rutas de uso en runtime."
+}

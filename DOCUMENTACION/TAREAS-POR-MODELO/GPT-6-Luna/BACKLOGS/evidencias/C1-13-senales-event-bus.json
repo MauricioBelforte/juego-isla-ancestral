@@ -1,0 +1,289 @@
+{
+  "task_id": "C1-13",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Extracción estática de declaraciones signal en un único script GDScript; solo lectura.",
+  "source": "game/isla-ancestral/scripts/core/event_bus.gd",
+  "source_sha256": "67796c20a6db371b02a7c0a3b2aae9b290007c74c954fac21c966276ea384dbe",
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "parser": "regex anclada a línea para declaraciones GDScript signal",
+    "line_numbers": "1-based",
+    "duplicates": "se conservan en el orden fuente; unicidad comprobada aparte"
+  },
+  "count": 54,
+  "unique_name_count": 54,
+  "signals": [
+    {
+      "name": "block_placed",
+      "line": 50,
+      "declaration": "signal block_placed(pos: Vector3i, block_type: int)"
+    },
+    {
+      "name": "block_removed",
+      "line": 52,
+      "declaration": "signal block_removed(pos: Vector3i, block_type: int)"
+    },
+    {
+      "name": "chunk_modified",
+      "line": 54,
+      "declaration": "signal chunk_modified(chunk_pos: Vector3i)"
+    },
+    {
+      "name": "biome_changed",
+      "line": 56,
+      "declaration": "signal biome_changed(old_biome: String, new_biome: String)"
+    },
+    {
+      "name": "currency_changed",
+      "line": 60,
+      "declaration": "signal currency_changed(old_amount: int, new_amount: int)"
+    },
+    {
+      "name": "purchase_done",
+      "line": 62,
+      "declaration": "signal purchase_done(item_id: String, cost: int)"
+    },
+    {
+      "name": "debt_paid",
+      "line": 64,
+      "declaration": "signal debt_paid(amount: int, creditor: String)"
+    },
+    {
+      "name": "item_added",
+      "line": 68,
+      "declaration": "signal item_added(item_id: String, quantity: int)"
+    },
+    {
+      "name": "item_removed",
+      "line": 70,
+      "declaration": "signal item_removed(item_id: String, quantity: int)"
+    },
+    {
+      "name": "hotbar_selected",
+      "line": 72,
+      "declaration": "signal hotbar_selected(slot_index: int)"
+    },
+    {
+      "name": "quest_started",
+      "line": 76,
+      "declaration": "signal quest_started(quest_id: String)"
+    },
+    {
+      "name": "quest_updated",
+      "line": 78,
+      "declaration": "signal quest_updated(quest_id: String, objective: String, progress: int)"
+    },
+    {
+      "name": "quest_completed",
+      "line": 80,
+      "declaration": "signal quest_completed(quest_id: String)"
+    },
+    {
+      "name": "prereq_met",
+      "line": 82,
+      "declaration": "signal prereq_met(seal_id: String)"
+    },
+    {
+      "name": "npc_moved_in",
+      "line": 86,
+      "declaration": "signal npc_moved_in(npc_id: String, island: String)"
+    },
+    {
+      "name": "friendship_level_up",
+      "line": 88,
+      "declaration": "signal friendship_level_up(npc_id: String, new_level: int)"
+    },
+    {
+      "name": "gift_given",
+      "line": 92,
+      "declaration": "signal gift_given(npc_id: String, item_id: String, clase: int)"
+    },
+    {
+      "name": "cumpleanos",
+      "line": 94,
+      "declaration": "signal cumpleanos(npc_id: String, edad: int)"
+    },
+    {
+      "name": "carta_recibida",
+      "line": 96,
+      "declaration": "signal carta_recibida(npc_id: String, respuesta_id: String)"
+    },
+    {
+      "name": "day_started",
+      "line": 100,
+      "declaration": "signal day_started(day: int, season: String)"
+    },
+    {
+      "name": "season_changed",
+      "line": 102,
+      "declaration": "signal season_changed(old_season: String, new_season: String)"
+    },
+    {
+      "name": "vessel_arrived",
+      "line": 104,
+      "declaration": "signal vessel_arrived(island: String, cargo: Array)"
+    },
+    {
+      "name": "fase_cambio",
+      "line": 108,
+      "declaration": "signal fase_cambio(fase: int)"
+    },
+    {
+      "name": "clima_cambio",
+      "line": 112,
+      "declaration": "signal clima_cambio(clima: int)"
+    },
+    {
+      "name": "intensidad_cambio",
+      "line": 114,
+      "declaration": "signal intensidad_cambio(intensidad: float)"
+    },
+    {
+      "name": "travel_started",
+      "line": 118,
+      "declaration": "signal travel_started(from_island: String, to_island: String)"
+    },
+    {
+      "name": "island_loaded",
+      "line": 120,
+      "declaration": "signal island_loaded(island: String)"
+    },
+    {
+      "name": "vehicle_entered",
+      "line": 126,
+      "declaration": "signal vehicle_entered(vehicle_id: String, tipo: String)"
+    },
+    {
+      "name": "vehicle_exited",
+      "line": 128,
+      "declaration": "signal vehicle_exited(vehicle_id: String, tipo: String)"
+    },
+    {
+      "name": "vehicle_docked",
+      "line": 130,
+      "declaration": "signal vehicle_docked(vehicle_id: String, dock_id: String)"
+    },
+    {
+      "name": "vehicle_aviso",
+      "line": 132,
+      "declaration": "signal vehicle_aviso(vehicle_id: String, mensaje: String)"
+    },
+    {
+      "name": "hud_request",
+      "line": 136,
+      "declaration": "signal hud_request(visible: bool)"
+    },
+    {
+      "name": "dialog_requested",
+      "line": 138,
+      "declaration": "signal dialog_requested(npc_id: String, dialog_data: Dictionary)"
+    },
+    {
+      "name": "dialog_finished",
+      "line": 140,
+      "declaration": "signal dialog_finished()"
+    },
+    {
+      "name": "layer_requested",
+      "line": 142,
+      "declaration": "signal layer_requested(layer_id: String)"
+    },
+    {
+      "name": "confirm_requested",
+      "line": 144,
+      "declaration": "signal confirm_requested(title: String, message: String)"
+    },
+    {
+      "name": "notify",
+      "line": 146,
+      "declaration": "signal notify(toast_data: Dictionary)"
+    },
+    {
+      "name": "ui_layers_changed",
+      "line": 148,
+      "declaration": "signal ui_layers_changed()"
+    },
+    {
+      "name": "ui_focus_moved",
+      "line": 150,
+      "declaration": "signal ui_focus_moved(node: Control)"
+    },
+    {
+      "name": "player_died",
+      "line": 154,
+      "declaration": "signal player_died(spawn_point: Vector3)"
+    },
+    {
+      "name": "level_up",
+      "line": 156,
+      "declaration": "signal level_up(new_level: int)"
+    },
+    {
+      "name": "damage_taken",
+      "line": 158,
+      "declaration": "signal damage_taken(amount: int, source: String)"
+    },
+    {
+      "name": "game_flow_changed",
+      "line": 165,
+      "declaration": "signal game_flow_changed(anterior: int, nuevo: int)"
+    },
+    {
+      "name": "carga_iniciada",
+      "line": 167,
+      "declaration": "signal carga_iniciada(ruta: String)"
+    },
+    {
+      "name": "carga_completada",
+      "line": 169,
+      "declaration": "signal carga_completada(ruta: String)"
+    },
+    {
+      "name": "boot_completado",
+      "line": 171,
+      "declaration": "signal boot_completado()"
+    },
+    {
+      "name": "nivel_herramienta_cambio",
+      "line": 177,
+      "declaration": "signal nivel_herramienta_cambio(herramienta_id: String, nivel: int)"
+    },
+    {
+      "name": "nivel_casa_cambio",
+      "line": 178,
+      "declaration": "signal nivel_casa_cambio(nivel: int)"
+    },
+    {
+      "name": "nivel_amistad_cambio",
+      "line": 180,
+      "declaration": "signal nivel_amistad_cambio(npc_id: String, nivel: int)"
+    },
+    {
+      "name": "entrada_nueva",
+      "line": 186,
+      "declaration": "signal entrada_nueva(entrada_id: String, categoria: String)"
+    },
+    {
+      "name": "categoria_completa",
+      "line": 188,
+      "declaration": "signal categoria_completa(categoria: String)"
+    },
+    {
+      "name": "progreso_cambiado",
+      "line": 190,
+      "declaration": "signal progreso_cambiado(porcentaje: float)"
+    },
+    {
+      "name": "sesion_iniciada",
+      "line": 197,
+      "declaration": "signal sesion_iniciada(sesion)"
+    },
+    {
+      "name": "sesion_terminada",
+      "line": 199,
+      "declaration": "signal sesion_terminada(sesion)"
+    }
+  ],
+  "limitations": "La extracción identifica declaraciones literales que coinciden con la expresión regular; no analiza AST ni valida conexiones/emisiones de señales. No es auditoría de uso en runtime."
+}

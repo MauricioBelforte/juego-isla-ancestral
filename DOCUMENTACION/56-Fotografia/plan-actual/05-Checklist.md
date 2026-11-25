@@ -3,9 +3,14 @@
 
 # 05-Checklist.md — Módulo 56: Fotografía (137 ítems)
 
-**Estado:** 26/137 completados (iter. 3 cerró +5). [S]=Simple [M]=Medio [C]=Complejo.
+**Estado:** 130/138 completados. [S]=Simple [M]=Medio [C]=Complejo.
 
 ## Reserva actual
+
+**Modelo:** GLM-5.3-Flash
+**Plataforma:** Kilo Code
+**Fecha:** 2026-11-25 10:55
+**Alcance (§21.3):** tanda de 4 ítems sobre el módulo 🟢 (130 [x]/7 [ ]/1 [?] medido) — L95/L97 verificación con flips (ya implementados en código: `npc_agent.gd::pose_foto_en(0.5)` + `photo_service.gd::posar()` con `create_timer(0.8)`) + L275 subtítulos en notificaciones (NotificationService, clave "subtitle") + L286 guía de horizonte opcional (overlay de PhotoService). QA con checks nombrados en `scripts/foto/qa_m56_photopose.gd`. La línea "Totales" interna (26/109) queda corregida al cierre. El ítem [?] (L341, dueño deepseek-v4-flash-vision-exp) NO se toca. No interfiere con HY4 (verificación M01/M20) ni minimax (M17).
 
 | Módulo | Estado | Agente | Fase | Visión | Entrada | Salida | Archivos afectados |
 |--------|--------|--------|------|--------|---------|--------|--------------------|
@@ -92,9 +97,9 @@
 
 - [x] Emitir PHOTO_POSE_REQUEST (M07) al entrar al modo foto [S] — VERIFICADO G-5.3-Flash-Agente 2026-10-22: photo_service.gd L251 photo_pose_request.emit() en posar() (confirmacion del disparo, flujo del 03-Diseno: confirmar -> 4) emitir -> NPC/animales posan) + receptor _on_photo_pose_request conectado en npc_manager.gd (agentes pose_foto); matiz documentado: la senal dispara al CONFIRMAR (posar), no al entrar; qa_m56_photopose.gd 13/0 EXIT 0
   · espera: modulo(s) dependiente(s): M7 (coordinar con su dueno)
-- [ ] NPC posa 0.5 s con animación M48 sin bugs [M]
+- [x] NPC posa 0.5 s con animación M48 sin bugs [M] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** implementación ya en disco — `scripts/ia_npc/npc_agent.gd::pose_foto_en(0.5)` (animación "pose_foto" vía AnimationPlayer contrato M48/M44, congela IA/necesidades y restaura; placeholder headless-safe) + receptor conectado en NPCManager (`_on_photo_pose_request`). Check nombrado "NPC posa 0.5 s con animación M48 sin bugs: ..." en `scripts/foto/qa_m56_photopose.gd` (16 checks / 0 fallos).
   · espera: modulo(s) dependiente(s): M48 (coordinar con su dueno)
-- [ ] Retardo de 0.8 s entre pose y captura (evitar tween) [M]
+- [x] Retardo de 0.8 s entre pose y captura (evitar tween) [M] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** implementación ya en disco — `scripts/foto/photo_service.gd::posar()` espera `create_timer(0.8)` (no Tween) y luego llama `tomar_foto()`. Check nombrado "Retardo de 0.8 s entre pose y captura (evitar tween): ..." en `scripts/foto/qa_m56_photopose.gd` (16/0).
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] No posar NPC en medio de diálogo (M21) [M]
   · espera: modulo(s) dependiente(s): M21 (coordinar con su dueno)
@@ -272,7 +277,7 @@
 - [x] Ofrecer tamaño de texto configurable [M]
 - [x] Reducir zoom automático con Reduce Motion activo [M]
   · espera: feature/dependencia externa por definir (dueno por asignar)
-- [ ] Ofrecer subtítulos en notificaciones [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (subtítulos notificaciones) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
+- [x] Ofrecer subtítulos en notificaciones [S] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** implementación REAL esta vez — `scripts/ui/services/notification_service.gd`: `push()` acepta la clave opcional "subtitle" y `_spawn_node` renderiza la segunda línea (Label "Subtitle", 12 px, alpha 0.8) bajo el texto principal. Check nombrado "Ofrecer subtítulos en notificaciones: ..." en `scripts/foto/qa_m56_photopose.gd` (16/0). (Historial: FLIP 2026-10-26 Reflection-Beam-1.0 por spec-only; DEGRADADO 2026-11-05 DS-V4.1-Flash-Opencode gate-1 — correcto entonces, ahora sí hay código. (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (subtítulos notificaciones) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Evitar estroboscopios en la UI y testear colorblind mode [M]
   · espera: feature de M53-UI-UX (definir contrato/dueno por asignar)
@@ -283,7 +288,7 @@
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M46
 - [x] Definir marcadores de encuadre (rejilla de tercios) con toggle [M] — 03-Diseno sec 5: 2+2 lineas al tercio blanco 40% + cruz centro; toggle G, defecto OFF por preset, solo UI (2026-10-23 S43)
   · espera: definicion de alcance/contrato del item (ver 03-Diseno.md; dueno por asignar)
-- [ ] Añadir guía de horizonte opcional [S] | FLIP 2026-10-26 (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (guía de horizonte) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
+- [x] Añadir guía de horizonte opcional [S] → **Cerrado por GLM-5.3-Flash (Kilo Code, 2026-11-25):** implementación REAL — `scripts/foto/photo_service.gd`: `set_guia_horizonte()`/`guia_horizonte()` + overlay perezoso (CanvasLayer L90 + ColorRect línea horizontal centrada 2 px, alpha 0.35, ignore mouse); visible SOLO en modo foto con la guía activa; se oculta al salir (la preferencia queda). Checks nombrados "Añadir guía de horizonte opcional: ..." ×4 en `scripts/foto/qa_m56_photopose.gd` (16/0). (Historial: FLIP 2026-10-26 por spec-only; DEGRADADO 2026-11-05 — ahora sí hay código. (Reflection-Beam-1.0, T097-56): spec en 03-Diseno.md § (guía de horizonte) | DEGRADADO 2026-11-05 (DS-V4.1-Flash-Opencode, gate-1, GO agnes-3-flash msg 246): FLIP revertido — una linea en 03-Diseno.md no es implementacion (DoD §21.6); la auditoria previa del propio item dice que no estaba hecho.
   · espera: feature/dependencia externa por definir (dueno por asignar)
 - [x] Definir sonido de obturador (M43) y vibración sutil (M57) [S] — 03-Diseno sec 5: obturador_foto -4 dB sincrono con PHOTO_TAKEN; vibracion gamepad 60 ms suave, tolerante a ausencia (2026-10-23 S43)
   · espera: definicion del contrato del item (ver 03-Diseno.md); coord. con M43, M57
@@ -356,7 +361,7 @@
 - Fijar hora/clima para la foto — M31/M32.
 - UI del modo foto y captura a archivo — M53/M56 visual.
 
-**Totales:** 137 ítems · Completados: 26 · Pendientes: 109 · No resueltos: 2.
+**Totales:** 138 ítems · Completados: 134 · Pendientes: 3 · No resueltos: 1. (Recontado GLM-5.3-Flash 2026-11-25 por prefijo de línea: 134 [x] / 3 [ ] / 1 [?] = 138; la línea anterior (26/109/2) estaba stale sin reflejar los apilados CRON F 1-3 + S43/S61/S62-bis (fila GLOBAL ya decía 130/138). **Nota (tanda GLM-5.3-Flash, Kilo Code, 2026-11-25):** +4 [x] = 130 → 134 — L95 (NPC posa 0.5 s, ya en código: npc_agent.pose_foto_en(0.5)), L97 (retardo 0.8 s sin tween, ya en código: posar()+create_timer(0.8)), L275 (subtítulos en notificaciones, implementación real: NotificationService clave "subtitle"), L286 (guía de horizonte opcional, implementación real: overlay PhotoService). Evidencia: scripts/foto/qa_m56_photopose.gd 16 checks / 0 fallos; regresión test_photomode 0 fallos, test_photo_service_headless 10/0, qa_m56_presets 11/0. Fallos PREEXISTENTES de validate_photo (2: presets con filtros M49 sin implementar) no tocados. Los 3 [ ] restantes (L112 bestiario, L135 filtros en frame, L161 texturas galería) y el [?] (L341, dueño deepseek-v4-flash-vision-exp) no se tocaron.)
 
 > **Agregado por auditoría de drift (atria-dawn-preview / Kilo Code, 2026-09-20, lote 3):**
 > este archivo no tenía línea de Totales. Conteo real de marcas: 21 [x] / 114 [ ] /

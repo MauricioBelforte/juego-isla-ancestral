@@ -1,0 +1,202 @@
+{
+  "task_id": "C1-09",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "scope": "Sección 2 (Archivos reales) de M87 04-Codigo.md; extracción de rutas/citas y comprobación de existencia y configuración actual [autoload]; solo lectura.",
+  "sources": {
+    "document": {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "start_line": 12,
+      "end_line": 42,
+      "sha256": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e"
+    },
+    "project_config": {
+      "path": "game/isla-ancestral/project.godot",
+      "section": "[autoload]",
+      "sha256": "0900f905b0857f746ec99c9cec26bb612bdf35682f0d0ef4429bfb3f38ecb9d6"
+    }
+  },
+  "method": {
+    "encoding": "UTF-8 estricto",
+    "route_check": "existencia como archivo/carpeta en el árbol",
+    "autoload_check": "asignaciones literales de Localization y búsqueda de LocalizationManager/ruta antigua en project.godot",
+    "pattern_check": "expansión de test_*.gd como conteo físico, no como certificación de suites"
+  },
+  "explicit_paths": [
+    {
+      "path": "game/isla-ancestral/scripts/localization",
+      "kind": "directory",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/localization_manager.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/locale_utils.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/validador_po.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/auditor_claves.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/analizador_layout.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/glosario.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/retraductor_ui.gd",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/locales",
+      "kind": "directory",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/locales/es.po",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/locales/en.po",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/data/localization",
+      "kind": "directory",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/data/localization/glosario.json",
+      "kind": "file",
+      "role": "current_tree",
+      "exists": true
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/localization_settings.gd",
+      "kind": "file",
+      "role": "historical_planned",
+      "exists": false
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localization/translation_validator.gd",
+      "kind": "file",
+      "role": "historical_planned",
+      "exists": false
+    },
+    {
+      "path": "game/isla-ancestral/scenes/language_selector.tscn",
+      "kind": "file",
+      "role": "historical_planned",
+      "exists": false
+    },
+    {
+      "path": "game/isla-ancestral/tools/check_translations.gd",
+      "kind": "file",
+      "role": "historical_planned",
+      "exists": false
+    },
+    {
+      "path": "game/isla-ancestral/scripts/localizacion/localization_manager.gd",
+      "kind": "file",
+      "role": "legacy_duplicate_path",
+      "exists": true
+    }
+  ],
+  "pattern": {
+    "source_claim_line": 35,
+    "pattern": "game/isla-ancestral/scripts/localization/test_*.gd",
+    "matched_file_count": 8,
+    "matched_files": [
+      "game/isla-ancestral/scripts/localization/test_catalogo_exhaustivo_m87.gd",
+      "game/isla-ancestral/scripts/localization/test_localizacion_iter2.gd",
+      "game/isla-ancestral/scripts/localization/test_localizacion_iter3.gd",
+      "game/isla-ancestral/scripts/localization/test_localizacion_iter4.gd",
+      "game/isla-ancestral/scripts/localization/test_localizacion_iter6.gd",
+      "game/isla-ancestral/scripts/localization/test_localization.gd",
+      "game/isla-ancestral/scripts/localization/test_placeholders_plurales_m87.gd",
+      "game/isla-ancestral/scripts/localization/test_validador_po_m87.gd"
+    ],
+    "documented_suite_count": 6,
+    "interpretation": "8 archivos coinciden con el patrón; no se infiere que todos sean suites operativas."
+  },
+  "autoload_citations": {
+    "document_claims": [
+      {
+        "line": 16,
+        "text": "> iter. 1. Ninguno de los nombres previstos (`localization_settings.gd`, `translation_validator.gd`,"
+      },
+      {
+        "line": 17,
+        "text": "> `language_selector.tscn`, `tools/check_translations.gd`) existe: la implementación los resolvió de otra"
+      },
+      {
+        "line": 23,
+        "text": "│   ├── localization_manager.gd   → LocalizationManager (autoload \"Localization\", project.godot:60)"
+      },
+      {
+        "line": 25,
+        "text": "│   ├── validador_po.gd           → ValidadorPO (iter. 5; reemplaza al previsto translation_validator.gd)"
+      },
+      {
+        "line": 26,
+        "text": "│   ├── auditor_claves.gd         → AuditorClaves (iter. 5; reemplaza al previsto tools/check_translations.gd)"
+      },
+      {
+        "line": 35,
+        "text": "└── scripts/localization/test_*.gd → 6 suites headless (ver 06-Plan-Testings.md)"
+      },
+      {
+        "line": 40,
+        "text": "(`scripts/localizacion/localization_manager.gd`, project.godot:108, catálogos JSON) sigue registrado y **sin"
+      }
+    ],
+    "current_localization_registration": [
+      {
+        "line": 59,
+        "text": "Localization=\"*res://scripts/localization/localization_manager.gd\""
+      }
+    ],
+    "current_duplicate_registration_matches": [],
+    "legacy_duplicate_file_exists": true,
+    "interpretation": "La cita project.godot:60 para Localization está desfasada (la asignación actual está en línea 59). El archivo antiguo scripts/localizacion/localization_manager.gd existe en disco, pero project.godot no contiene una asignación LocalizationManager ni esa ruta; por tanto, la afirmación “sigue registrado” no coincide con la configuración consultada."
+  },
+  "summary": {
+    "current_explicit_paths_existing": 13,
+    "current_explicit_paths_total": 13,
+    "historical_planned_paths_absent": 4,
+    "legacy_duplicate_file_exists": true,
+    "current_directory_test_files": 8,
+    "misaligned_config_claims": 2
+  },
+  "limitations": "No se ejecutaron pruebas ni se validaron compilación, runtime, cobertura o suites activas. El conteo de archivos no se equipara al número funcional de suites. Los nombres históricos previstos se separan de rutas de implementación actuales. La evidencia no modifica ni adjudica el estado del módulo."
+}

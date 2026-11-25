@@ -55,6 +55,11 @@ var _hora_previa: int = -1
 ## para condiciones de baja luz. -1 = auto (usa hora fijada), true = forzar noche.
 var _nocturna: bool = false
 var _env_ambient_previo: float = -1.0
+## M56 L286: guia de horizonte opcional (overlay de composicion).
+## Linea horizontal centrada que solo se muestra en modo foto cuando esta
+## activa, para encuadrar horizontes rectos. Persistencia no requerida (chico).
+var _guia_horizonte: bool = false
+var _overlay_guia: CanvasLayer = null
 
 ## ── Iter. 2 PhotoMode: estado de retorno ────────────────
 ## Cámara y contexto capturados al entrar para restaurarlos al salir.
@@ -150,7 +155,44 @@ func set_modo_foto(activo: bool) -> void:
 		_salir_modo_foto()
 	_activo = activo
 	modo_foto_cambiado.emit(activo)
+	_actualizar_overlay_guia()
 	print("[M56] Modo fotografía: %s" % ("ACTIVO" if activo else "DESACTIVADO"))
+
+
+## ── M56 L286: guía de horizonte opcional (overlay de composición) ──
+## Linea horizontal fina centrada en pantalla; solo visible en modo foto
+## cuando el jugador la activa. Overlay ligero (ColorRect), sin texturas.
+
+func set_guia_horizonte(activo: bool) -> void:
+	_guia_horizonte = activo
+	_actualizar_overlay_guia()
+	print("[PHOTO-GUIA] guia de horizonte: %s" % ("activa" if activo else "inactiva"))
+
+func guia_horizonte() -> bool:
+	return _guia_horizonte
+
+## Crea el overlay (perezoso) y refresca su visibilidad: activa SOLO si
+## modo foto AND guia horizonte. Al salir del modo queda oculta.
+func _actualizar_overlay_guia() -> void:
+	if _overlay_guia == null:
+		_overlay_guia = CanvasLayer.new()
+		_overlay_guia.name = "GuiaHorizonte"
+		_overlay_guia.layer = 90
+		var franja := ColorRect.new()
+		franja.name = "LineaHorizonte"
+		franja.color = Color(1.0, 1.0, 1.0, 0.35)
+		franja.set_anchors_preset(Control.PRESET_FULL_RECT)
+		franja.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		# Linea horizontal centrada: alto 2 px, ancho completo.
+		franja.anchor_top = 0.5
+		franja.anchor_bottom = 0.5
+		franja.offset_top = -1.0
+		franja.offset_bottom = 1.0
+		_overlay_guia.add_child(franja)
+		add_child(_overlay_guia)
+		_overlay_guia.visible = false
+		_overlay_guia.set_meta("franja", franja)
+	_overlay_guia.visible = _guia_horizonte and _activo
 
 
 ## PHOTO-ENTER: congela el tiempo del mundo (M31) y captura el contexto de

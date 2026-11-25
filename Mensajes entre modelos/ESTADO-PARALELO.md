@@ -4,6 +4,18 @@
 
 ---
 
+## 🟡 2026-11-25 — M56-Fotografia: tanda cerrada por GLM-5.3-Flash (reclamo §21.3 del 🟢)
+
+**Tanda:** L95/L97 verificación + L275/L286 implementación. **Cierre (11:10):** 134/138 (134 [x]/3 [ ]/1 [?], medido). L95 (pose NPC 0.5 s M48) y L97 (retardo 0.8 s sin tween) ya estaban en código → flip con checks; L275 (subtítulos notificaciones: NotificationService clave "subtitle") y L286 (guía de horizonte: overlay PhotoService) implementados. **Evidencia:** qa_m56_photopose 16/0; regresión photomode 0 fallos, service 10/0, presets 11/0; validate_photo 2 fallos PREEXISTENTES (filtros M49 sin implementar) documentados. Totales interno stale corregido (26/109 → 134/3/1). Los 3 [ ] restantes (L112 bestiario, L135 filtros, L161 texturas) no tocados. Log **2445**. Reporte 994 al canal agnes.
+
+---
+
+## 🔵 2026-11-25 — M56-Fotografia: tanda 4 ítems reclamada por GLM-5.3-Flash (módulo 🟢, reclamo §21.3)
+
+**Tanda:** L95/L97 (NPC posa 0.5 s M48 + retardo 0.8 s — ya implementados en código: `npc_agent.gd::pose_foto_en(0.5)` + `photo_service.gd::posar()` con `create_timer(0.8)`, verificación + flip con checks nombrados) + L275 subtítulos en notificaciones + L286 guía de horizonte opcional (implementación). QA en `scripts/foto/qa_m56_photopose.gd` (patrón existente). M56 real medido: 130 [x] / 7 [ ] / 1 [?] = 138 (fila GLOBAL coincide; línea Totales interna stale 26/109 — se corrige al cierre). No interfiere con HY4 (M01/M20 verificación) ni minimax (M17).
+
+---
+
 ## 🟡 2026-11-25 — M20-Sistema-De-Amistad: tanda cerrada por GLM-5.3-Flash (reintegración, §21.4.7)
 
 **Reclamo:** M20 estaba 🔵 de minimax-m3-1-flash con última actividad 2026-10-27 (29 días > 24 h) → reclamado por §21.4.7 con encargo directo del fundador ("trabajo a full"). **Cierre (10:20):** 5 ítems implementados y verificados — L133 metadatos item solo lectura, L136 recetas → tabla de crafting (nuevo `aprender_receta_externa` en M16 + mapa `RECOMPENSA_RECETA`), L138 decorativos regalo válido (`es_regalo_valido` + entrega al inventario), L173 evaluador sin allocations (arrays estáticos compartidos), L177 logs debug off en release (`_logs_debug`). **Evidencia:** `tests/test_m20_amistad_cobertura.gd` 29 checks / 0 fallos / EXIT 0 (9 checks nuevos) + wrapper `test_m20_amistad_suites.gd` 79 checks / 0 fallos. Fix lateral: `charla()`→`charlar()` en la suite (script error preexistente). **M20: 105/150** — liberado 🟡 (45 [ ] = deuda externa M21/M23/M53/FriendshipEvent). Reportes 992/993 en canal agnes-3-flash.

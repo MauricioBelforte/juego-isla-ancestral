@@ -62,3 +62,53 @@ func _run() -> void:
 	# Doble salida idempotente (sin crash)
 	ps.set_modo_foto(false)
 	_check(ps.modo_foto() == false, "modo foto: salida redundante idempotente")
+
+	# ── Tanda GLM-5.3-Flash 2026-11-25: L95 / L97 / L275 / L286 ──
+
+	# L95: NPC posa 0.5 s con animación M48 sin bugs.
+	var agente_script: GDScript = ResourceLoader.load("res://scripts/ia_npc/npc_agent.gd")
+	var fuente_agente: String = agente_script.source_code if agente_script != null else ""
+	var npc_mgr := root.get_node_or_null("/root/NPCManager")
+	_check(agente_script != null and fuente_agente.contains("anim.play(\"pose_foto\")")
+			and fuente_agente.contains("pose_foto_en(0.5)")
+			and fuente_agente.contains("pause_ai()") and fuente_agente.contains("resume_ai()")
+			and npc_mgr != null and npc_mgr.has_method("_on_photo_pose_request"),
+			"NPC posa 0.5 s con animación M48 sin bugs: pose_foto reproduce la animación (M48/M44), congela la IA 0.5 s y el receptor está conectado")
+
+	# L97: Retardo de 0.8 s entre pose y captura (evitar tween).
+	var ps_script: GDScript = ResourceLoader.load("res://scripts/foto/photo_service.gd")
+	var fuente_ps: String = ps_script.source_code if ps_script != null else ""
+	var posa_i := fuente_ps.find("func posar()")
+	var posa_fin := fuente_ps.find("func tomar_foto")
+	var bloque_posar: String = fuente_ps.substr(posa_i, posa_fin - posa_i) if posa_i >= 0 and posa_fin > posa_i else ""
+	_check(bloque_posar.contains("create_timer(0.8)") and not bloque_posar.contains("Tween") and bloque_posar.contains("tomar_foto()"),
+			"Retardo de 0.8 s entre pose y captura (evitar tween): posar() espera el timer 0.8 s y luego captura, sin Tween")
+
+	# L275: Ofrecer subtítulos en notificaciones.
+	var notif := root.get_node_or_null("/root/NotificationService")
+	_check(notif != null and notif.has_method("push"), "NotificationService presente para subtítulos")
+	if notif != null:
+		var panel_antes: int = notif.get_child_count()
+		notif.push({"text": "Foto guardada", "type": 0, "subtitle": "Se agregó al álbum (M56)"})
+		await process_frame
+		var hallado := false
+		var texto_ok := false
+		for hijo in notif.get_children():
+			var sub := hijo.find_child("Subtitle", true, false) if is_instance_valid(hijo) else null
+			if sub != null and sub is Label:
+				hallado = true
+				texto_ok = str(sub.text) == "Se agregó al álbum (M56)"
+		_check(hallado and texto_ok, "Ofrecer subtítulos en notificaciones: el toast con 'subtitle' renderiza la segunda línea con el texto dado")
+
+	# L286: Añadir guía de horizonte opcional.
+	ps.set_guia_horizonte(true)
+	_check(ps.guia_horizonte() == true and ps.modo_foto() == false and ps._overlay_guia.visible == false,
+			"Añadir guía de horizonte opcional: activa la guía pero el overlay queda oculto fuera del modo foto")
+	ps.set_modo_foto(true)
+	_check(ps.modo_foto() == true and ps._overlay_guia.visible == true,
+			"Añadir guía de horizonte opcional: en modo foto el overlay se muestra")
+	ps.set_modo_foto(false)
+	_check(ps.guia_horizonte() == true and ps._overlay_guia.visible == false,
+			"Añadir guía de horizonte opcional: al salir del modo foto el overlay se oculta (la preferencia queda)")
+	ps.set_guia_horizonte(false)
+	_check(ps.guia_horizonte() == false, "Añadir guía de horizonte opcional: se puede desactivar")

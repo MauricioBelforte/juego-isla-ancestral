@@ -65,7 +65,8 @@ func _on_event_notify(toast_data: Dictionary) -> void:
 
 ## Agrega un toast a la cola
 func push(toast: Dictionary) -> void:
-	# toast: { text: String, type: ToastType, icon: String (opcional) }
+	# toast: { text: String, type: ToastType, icon: String (opcional),
+	#          subtitle: String (opcional, M56 L275: subtítulo de la notificación) }
 	if _active.size() >= max_active:
 		_dequeue_oldest()
 
@@ -116,6 +117,27 @@ func _spawn_node(toast: Dictionary) -> void:
 	label.custom_minimum_size = Vector2(200, 0)
 	label.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
 	hbox.add_child(label)
+
+	# Subtítulo opcional (M56 L275: "Ofrecer subtítulos en notificaciones"):
+	# segunda línea más pequeña bajo el texto principal, para contexto
+	# adicional (ej. "Foto guardada" + ruta/indicación) sin duplicar toasts.
+	var subtitle_text: String = str(toast.get("subtitle", ""))
+	if subtitle_text != "":
+		var vbox := VBoxContainer.new()
+		vbox.add_theme_constant_override("separation", 2)
+		var main_label := label
+		hbox.remove_child(main_label)
+		vbox.add_child(main_label)
+		var sub := Label.new()
+		sub.name = "Subtitle"
+		sub.text = subtitle_text
+		sub.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+		sub.custom_minimum_size = Vector2(200, 0)
+		sub.add_theme_font_size_override("font_size", 12)
+		sub.modulate = Color(1, 1, 1, 0.8)
+		sub.add_theme_color_override("font_color", ThemeUx.COLOR_TEXT_DARK)
+		vbox.add_child(sub)
+		hbox.add_child(vbox)
 
 	# Estilo
 	var style := StyleBoxFlat.new()

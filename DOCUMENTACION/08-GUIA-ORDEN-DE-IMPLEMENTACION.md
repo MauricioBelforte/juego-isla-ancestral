@@ -30,6 +30,8 @@
 
 ## Reserva actual
 
+| M56-Fotografia (tanda 4 ítems: L95/L97 verificación + L275/L286 implementación) | 🟡 Liberado 2026-11-25 11:10 (134/138; tanda cerrada) | GLM-5.3-Flash (Kilo Code) | F3 (gameplay) | V0 | 130/138 → 134/138 (medido: 134/3/1); módulo 🟢 libre; histórico mío (Log 585 iter 2) | CERRADO: L95/L97 flips con checks + L275 subtítulos (NotificationService "subtitle") + L286 guía horizonte (overlay PhotoService); qa_m56_photopose 16/0, regresión 3 suites verde; Totales interno corregido; log 2445; reporte 994 al canal agnes | `game/isla-ancestral/scripts/foto/`, `game/isla-ancestral/scripts/ui/services/notification_service.gd`, `game/isla-ancestral/scripts/foto/qa_m56_photopose.gd`, `DOCUMENTACION/56-Fotografia/plan-actual/` |
+
 | M20-Sistema-De-Amistad (tanda 5 ítems [S], reclamo §21.4.7) | 🟡 Liberado 2026-11-25 10:20 (105/150; tanda cerrada) | GLM-5.3-Flash (Kilo Code, reintegrado como agente) | F3 (gameplay) | V0 | 102/150 → 105/150; previo 🔵 minimax-m3-1-flash stale 29 días; 5 ítems "implementable ahora" de DOC-INT-4 (Nemotron 320) fuera de b62 | CERRADO: L133/L136/L138/L173/L177 implementados + checks nombrados en tests/test_m20_amistad_cobertura.gd (29/0 EXIT 0) + wrapper 79/0 + flips con cita + log + reporte 992/993 al canal agnes. Fix lateral: charla()→charlar() en la suite | `game/isla-ancestral/scripts/friendship/`, `game/isla-ancestral/tests/test_m20_amistad_cobertura.gd`, `DOCUMENTACION/20-Sistema-De-Amistad/plan-actual/` |
 
 

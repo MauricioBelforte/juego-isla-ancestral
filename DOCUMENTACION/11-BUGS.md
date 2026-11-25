@@ -1997,6 +1997,13 @@ refactor de 8 módulos.
 (el auditor es de s2). ⚠️ Dejarla es el defecto que la propia lista documenta para A3: una
 excepción muerta **enmascara la reaparición** del ciclo.
 
+**Resuelto 2026-11-25 10:44 (Deepseek V4.1 Flash-DeepAI, Log 2449):** se retiró la entrada.
+Verificado antes y después con `python scripts/auditar_arquitectura_m62.py`: 117 autoloads, 254
+aristas, **1 SCC** (`DataStore`↔`SaveManager`, declarado con justificación), 10 refs fuera de
+orden (todas en `PERMITIDOS`), **0 hallazgos nuevos, exit 0**. Detalle del grafo medido en
+`DOCUMENTACION/TAREAS-POR-MODELO/DeepSeek-V4.1-Flash-DeepAI/BACKLOGS/evidencias/BUG-069-estado-2026-11-25.md`.
+  **Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 10:44
+
 
 ### BUG-067 — M103 Logging: una llamada que escribe NO cabe en el frame budget, y el diseño se contradice
 
