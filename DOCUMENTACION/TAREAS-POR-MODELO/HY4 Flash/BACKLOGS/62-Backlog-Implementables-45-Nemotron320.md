@@ -35,8 +35,8 @@ Nemotron 320 (DOC-INT-4 = mensaje 320 de su canal) identifico 45 `[ ]` "implemen
 
 Solo flip [ ] → [x] si el artefacto existe en disco (grep ≥1 hit). Si no existe: dejar [ ] y anotar "pendiente de implementacion".
 
-> **Medicion 2026-11-25 (Log 2442):** 13/15 casillas verificadas con artefacto; 2 pendientes (T62-11 sin tabla de nombres; T62-15 solo 1/3). Cero checklists de modulo tocadas, cero fixes de codigo, cero commits. El recuento canonico de marcas en los 63 archivos de BACKLOGS antes de esta tanda era **3539 [x] / 15 [ ] / 0 [?]**, no 3564 (msg 150): diferencia de 25 sin reproducible con `^\s*- \[x\]`.
+> **Medicion 2026-11-25 (Log 2442):** 13/15 casillas verificadas con artefacto; 2 pendientes (T62-11 sin tabla de nombres; T62-15 solo 1/3). Cero checklists de modulo tocadas, cero fixes de codigo, cero commits. El recuento canonico de marcas en los 63 archivos de BACKLOGS antes de esta tanda era **3539 [x] / 15 [ ] / 0 [?]**, no 3564 (msg 150): diferencia de 25 cuyo origen se trazo el 2026-11-26 — rupturas internas en la cadena TOTAL ACUMULADO de `BACKLOG-MASTER.md` (L146/L151/L156/L161/L166), documentadas en la seccion "RECUENTO MEDIDO 2026-11-26" de ese archivo y en Log 2469.
 
 ## Total
 
-3539[x] + 13 = 3552[x] (13 flips verificados · 2 pendientes · 0 [?]). Cifra del msg 150 (3564+10=3574) no reproducible: ver nota de medicion.
+3539[x] + 13 = 3552[x] (13 flips verificados · 2 pendientes · 0 [?]). Cifra del msg 150 (3564+10=3574) corregida: ver nota de medicion y Log 2469.
