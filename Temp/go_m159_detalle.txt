@@ -1,0 +1,25 @@
+=== patron de [x] hermanos: alfombras (CAT-05) ===
+item_obj_alf_001.tres descripcion= "Alfombra decorativa pequeña"
+item_obj_alf_002.tres descripcion= "Alfombra decorativa grande"
+=== arte: interacciones en .tres ===
+item_obj_art_001.tres [9]
+item_obj_art_005.tres [9]
+=== secretos en quests ===
+OBJ-SEC-001 [('game/isla-ancestral/data/historias/secundarias.json', 1)]
+OBJ-SEC-002 [('game/isla-ancestral/data/historias/secundarias.json', 1)]
+OBJ-SEC-003 [('game/isla-ancestral/data/historias/secundarias.json', 1)]
+OBJ-SEC-004 [('game/isla-ancestral/data/historias/secundarias.json', 1)]
+OBJ-SEC-005 [('game/isla-ancestral/data/historias/secundarias.json', 1)]
+=== test integracion inventario M159 ===
+OBJ- []
+ItemsABM []
+item_obj_ []
+=== recetas con IDs OBJ-COC ===
+OBJ-COC en crafting.json 0
+recetas total 7
+=== animaciones item-use ===
+item_use 1
+usar_item 1
+anim_item 0
+recoger 10
+cocinar 6

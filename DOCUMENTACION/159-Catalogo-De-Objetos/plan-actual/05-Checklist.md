@@ -128,7 +128,7 @@
 
 ### CAT-06: Cocina (10 ítems)
 
-- [?] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)
+- [x] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010) -- HY4F GO 164: 20/20 IDs OBJ-COC-001..020 en data/items/ (iter1 10/10).
 - [x] Definir tamaños de grid
 - [x] Definir interacciones (cocinar, hornear, freír, etc.) -- agnes 2026-10-22 (M159 t2): items_abm.gd INTERACCIONES[cocina].
 - [?] Definir recetas asociadas
@@ -141,7 +141,7 @@
 
 ### CAT-07: Taller (5 ítems)
 
-- [?] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)
+- [x] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005) -- HY4F GO 164: 10/10 IDs OBJ-TAL-001..010 en data/items/.
 - [x] Definir tamaños de grid
 - [x] Definir interacciones (fabricar, forjar, etc.) -- agnes 2026-10-22 (M159 t2): items_abm.gd INTERACCIONES[taller].
 - [x] Definir precios y rareza
@@ -149,7 +149,7 @@
 
 ### CAT-08: Exteriores (10 ítems)
 
-- [?] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005)
+- [x] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005) -- HY4F GO 164: 20/20 IDs OBJ-EXT-001..020 en data/items/.
 - [x] Definir tamaños de grid exterior
 - [?] Definir interacciones
 - [x] Definir precios y rareza
@@ -157,9 +157,9 @@
 
 ### CAT-09: Naturaleza (10 ítems)
 
-- [?] Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005)
-- [?] Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente
-- [?] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente
+- [x] Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005) -- HY4F GO 164: 10/10 IDs OBJ-NAT-001..010 en data/items/.
+- [x] Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente -- HY4F GO 164: 7/7 IDs OBJ-NAT-011..017 en data/items/.
+- [x] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente -- HY4F GO 164: 11/11 IDs OBJ-NAT-018..028 en data/items/.
 - [x] Definir tamaños de grid
 - [x] Definir interacciones (cortar, minar, recoger) -- agnes 2026-10-22 (M159 t2): items_abm.gd INTERACCIONES[naturaleza].
 - [x] Definir drops de materiales -- agnes 2026-10-22 (M159 t2): items_abm.gd DROP_TABLE.
@@ -170,7 +170,7 @@
 
 ### CAT-10: Construcción (5 ítems)
 
-- [?] Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005)
+- [x] Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005) -- HY4F GO 164: 15/15 IDs OBJ-CON-001..015 en data/items/.
 - [x] Definir tamaños de grid
 - [x] Definir interacciones (abrir/cerrar puertas/ventanas) -- agnes 2026-10-22 (M159 t2): items_abm.gd INTERACCIONES[construccion].
 - [x] Definir precios y rareza
@@ -178,7 +178,7 @@
 
 ### CAT-11: Herramientas (5 ítems)
 
-- [?] Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005)
+- [x] Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005) -- HY4F GO 164: 20/20 IDs OBJ-HER-001..020 en data/items/.
 - [x] Definir stats por tier (T1-T4) -- agnes 2026-10-22 (M159 t2): items_abm.gd TIER_STATS (t1-t4).
 - [x] Definir durabilidad -- agnes 2026-10-22 (M159 t2): items_abm.gd TIER_STATS.durabilidad.
 - [x] Definir precios y rareza
@@ -186,9 +186,9 @@
 
 ### CAT-12: Items (10 ítems)
 
-- [?] Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005)
-- [?] Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024)
-- [?] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente
+- [x] Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005) -- HY4F GO 164: 15/15 IDs OBJ-ITE-001..015 en data/items/.
+- [x] Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024) -- HY4F GO 164: 20/20 IDs OBJ-ITE-020..039 en data/items/.
+- [x] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente -- HY4F GO 164: 8/8 IDs OBJ-ITE-050..057 en data/items/.
 - [x] Definir precios de compra/venta -- agnes 2026-10-22 (M159 t2): items_abm.gd PRECIOS.
 - [?] Definir efectos de comida (energía)
 - [x] Definir stack máximo -- agnes 2026-10-22 (M159 t2): items_abm.gd STACK_MAX + stack_max().
@@ -199,7 +199,7 @@
 
 ### CAT-13: Ropa (5 ítems)
 
-- [?] Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005)
+- [x] Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005) -- HY4F GO 164: iter1 5/5 IDs OBJ-ROP-001..005 en data/items/ (15/20 pendientes).
 - [x] Definir slot (cabeza, cuerpo, pies, accesorio) -- agnes 2026-10-22 (M159 t2): items_abm.gd SLOTS.
 - [x] Definir bonificaciones por terreno -- agnes 2026-10-22 (M159 t2): items_abm.gd BONO_TERRENO.
 - [x] Definir precios y rareza
@@ -207,7 +207,7 @@
 
 ### CAT-14: Arte Ancestral (5 ítems)
 
-- [?] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005)
+- [x] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005) -- HY4F GO 164: iter1 5/5 IDs OBJ-ART-001..005 en data/items/ (7/12 pendientes).
 - [?] Definir lore asociado a cada uno
 - [?] Definir interacciones (mirar + lore)
 - [x] Definir rareza (solo Raro/Legendario) -- agnes 2026-10-22 (M159 t2): items_abm.gd RAREZA_ESPECIAL.
@@ -215,7 +215,7 @@
 
 ### CAT-15: Items de Evento (5 ítems)
 
-- [?] Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005)
+- [x] Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005) -- HY4F GO 164: iter1 5/5 IDs OBJ-EVE-001..005 en data/items/ (7/12 pendientes).
 - [x] Asociar cada item a un festival específico -- agnes 2026-10-22 (M159 t2): items_abm.gd FESTIVALES.
 - [?] Definir duración de disponibilidad
 - [?] Definir interacciones
@@ -223,7 +223,7 @@
 
 ### CAT-16: Items Secretos (5 ítems)
 
-- [?] Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005)
+- [x] Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005) -- HY4F GO 164: iter1 5/5 IDs OBJ-SEC-001..005 en data/items/ (7/12 pendientes).
 - [?] Definir cómo se obtienen (puzzles, quests)
 - [?] Definir lore asociado
 - [x] Definir rareza (solo Raro/Legendario) -- agnes 2026-10-22 (M159 t2): items_abm.gd RAREZA_ESPECIAL.
