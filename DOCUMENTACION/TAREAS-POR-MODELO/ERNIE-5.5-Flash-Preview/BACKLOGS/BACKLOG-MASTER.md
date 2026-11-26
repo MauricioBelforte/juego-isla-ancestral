@@ -26,7 +26,8 @@
 | RIEL-2-Blender-Fixes-Docs.md | 12 tareas (nuevas) | **CERRADO 12/12** (5 anuladas + 7 hechas) |
 | 01-Backlog-M169-Doc-Code-Verify.md | 12 tareas (M169 doc/code/verify) | **CERRADO 12/12** (2026-11-25) |
 | 02-Backlog-M169-Doc-Verify-Code.md | 12 tareas (M169 doc/verify/code) | **CERRADO 10/12** (2 `[?]` por Blender/visión) |
-| 03-Backlog-M169-Codigo-Tests-Docs.md | 8 tareas | PENDIENTE |
+| 03-Backlog-M169-Codigo-Tests-Docs.md | 8 tareas | **CERRADO 8/8** (2026-11-25) |
+| 04-Backlog-M169-Extra.md | 12 tareas (b04 verif+optim) | **CERRADO 10/12** (2 `[?]` Blender/visión) |
 
 ## RIEL-2 (proximas 12 tareas)
 

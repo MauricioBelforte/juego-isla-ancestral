@@ -164,3 +164,30 @@ DOCUMENTACION/TAREAS-POR-MODELO/HY4 Flash/
 - 62-Backlog-Implementables-45-Nemotron320.md (10 tareas: 45 implementables M01+M20)
 
 **TOTAL ACUMULADO: 3564[x] en 61 backlogs + 10 nuevas = 3574**
+
+## RECUENTO MEDIDO 2026-11-26 (origen del desvio de 25)
+
+No se reescriben las lineas historicas de "TOTAL ACUMULADO": son la evidencia
+del origen del desvio. Se publica aqui la medicion con `^\s*- \[x\]` +
+`re.MULTILINE` sobre los `.md` de esta carpeta, ejecutada en cada commit de
+alta de backlog (`git ls-tree` + `git show`).
+
+| Commit / alta | Archivos .md | [x] reales | Base escrita en MASTER | Desvio |
+|---|---|---|---|---|
+| bb22aa6 (b56) | 57 | 3456 | 3456 (L136) | 0 |
+| e8507c0 (b57) | 58 | 3474 | 3474 (L141) | 0 |
+| fe42f57 (b58) | 59 | 3489 | 3494 (L146) | +5 |
+| 05169d9 (b59) | 60 | 3509 | 3534 (L151) | +25 |
+| 956215c (b60) | 61 | 3519 | 3554 (L156) | +35 |
+| 1968195 (b61) | 62 | 3529 | 3564 (L161) | +35 |
+| 47eb7c5 (b62) | 63 | 3539 | 3564 (L166) | +25 (reusa la cifra anterior) |
+| HEAD (tras b62) | 63 | 3552 | 3577 (msg 153/155) | +25 |
+
+**Rupturas de la cadena:** L146 usa 3494 en vez del resultado de L141 (3489)
+-> +5; L151 usa 3534 en vez del resultado de L146 (3514) -> +25 acumulados;
+L156 usa 3554 en vez de 3544 -> +35; L161/L166 repiten 3564. El msg 150 tomo
+3564 (cifra del estado de 61 archivos) como total vigente con 63 archivos,
+dejando el desvio en +25. b62 sumo 13 flips reales (3539 -> 3552).
+
+**Cifra vigente medida:** 3552[x] / 2[ ] / 0[?] en 63 `.md` (62 backlogs
+numerados + este MASTER). Base para la proxima tanda: **3552**, no 3577.

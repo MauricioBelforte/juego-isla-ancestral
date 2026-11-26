@@ -225,7 +225,7 @@
 
 ---
 
-**Totales:** 203 ítems · Completados: 64 · Pendientes: 137 · No resueltos: 2. (Actualizado 2026-11-25: cerradas b01 (12/12), b02 (10/12) y b03 (8/8); tests M169 59/0; B-02/B-03 en STANDBY.)
+**Totales:** 205 ítems · Completados: 66 · Pendientes: 137 · No resueltos: 2. (Actualizado 2026-11-26: b01+b02+b03 cerradas, b04 verif 10/12; tests M169 72/0; B-02/B-03 en STANDBY.)
 
 **Firma:** ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code — 2026-11-14 05:25
 
@@ -275,6 +275,8 @@
 - [x] Seal CruceroManager↔CruceroInterior (`conectar_interior` + `_on_puerta_cruzada`) [S]
 - [x] `test_crucero_interior.gd` (9/0) y `test_crucero_puerto.gd` (7/0) [M]
 - [x] `06-Plan-Testings.md` y `07-Resultados-Testings.md` de M169 (59/0 global) [M]
+- [x] `test_crucero_escenas.gd`: 4/4 interiores cargan headless (13/0) [S]
+- [x] b04 verif: 10/10 GLB en z_min 0,045 · autoload+class_name · 06/07 docs · sin fugas (K-03 + guards) [M]
 - [?] D-05 colisión del bote salvavidas: exterior GLB sin `.tscn` de colisión (iter 2, requiere Blender) [M]
 - [?] D-06 ventanas de camarote sin solape (AABB): requiere Blender/visión (no disponible en este harness) [M]
 
