@@ -581,3 +581,76 @@ re-mide el TIMEOUT, que es un artefacto de contención. Documentado en la cabece
 **Pendiente de M112 (NO tocado en esta tanda):** el tiempo total del CI quedó en ~872-878 s, por encima del
 presupuesto de 600 s; el costo dominante es la **lane voxel** (6 suites x ~72 s de deinit). Medir y decidir
 (¿más workers? ¿serializar parte de la lane voxel? ¿recortar el deinit?) le corresponde al dueño de M112.
+
+---
+
+## Shards del CI + omision del mundo en procesos de test (2026-11-25, minimax-m3-1-flash)
+
+**Log:** 2465 · **Canal:** `MiniMax-M3.1-Flash` (msj 080)
+
+Cierra el pendiente que esta misma seccion dejo escrito: *"el tiempo total del CI quedo en ~872-878 s,
+por encima del presupuesto de 600 s; el costo dominante es la lane voxel (6 suites x ~72 s de deinit).
+Medir y decidir le corresponde al dueno de M112"*.
+
+### 1. La medicion (lo que nadie habia medido)
+
+Con una sonda temporal (ya borrada) sobre el proceso real:
+
+| Medida | Valor |
+|---|---|
+| Arranque puro del motor (sin escena) | **3,8 s** |
+| Carga de `main_island.tscn` (Bootstrap) | **5,3 s** (2 frames) |
+| **DEINIT** al salir el proceso (con el mundo cargado) | **~19,6 s** |
+| Suite tipica de M17, ANTES de este cambio | **~25-30 s** |
+| Suite tipica de M17, DESPUES | **~2,5 s** |
+
+**El 79% del costo de cada proceso de test era el TEARDOWN del mundo**, no la suite: el Bootstrap
+carga `main_island.tscn` (la isla de 5120x5120) en TODOS los procesos, y las suites no la usan. Con
+~90 suites en el CI, son ~2250 s locales (y ~6500 s en el runner de CI, donde el deinit se mide en
+~72 s por suite).
+
+### 2. La correccion (dos piezas, ambas opt-in y reversibles)
+
+**(a) El mundo NO se carga en los procesos de test.**
+`scripts/core/bootstrap.gd` -> `_load_main_scene()` consulta `_debe_cargar_escena_principal()`: si el
+script que conduce el proceso es una suite (`res://tests/...`, `test_*.gd`, `qa_*.gd`), la escena
+principal **no** se carga. El juego normal (sin `--script`) **no cambia** (verificado: sigue
+imprimiendo "Cargando escena principal").
+**Opt-in:** una suite que necesite el mundo declara `const NECESITA_MUNDO := true` y entonces se
+carga como siempre (el Bootstrap lo lee con `get_script().get_script_constant_map()`).
+Solo **2** suites lo necesitan (ambas AFIRMAN sobre `current_scene`): `test_bug128_hud_real.gd` y
+`test_m56_tomar_foto.gd` — se les anadio el const.
+
+**(b) El job `test-suite` se reparte en 4 shards en paralelo.**
+`.github/workflows/quality.yml`: matrix `shard: [1,2,3,4]`, `fail-fast: false`. Las 111 invocaciones
+(108 suites de Godot + 3 de Python) se reparten con **dos contadores round-robin independientes**
+(ligeras y **pesadas** = voxel/rendimiento/memoria), para que la cola larga no caiga entera en un
+shard. Cada invocacion la corre **exactamente un** shard (indice % TOTAL) — verificado: la union de
+los 4 shards es IDENTICA al conjunto original.
+**Aislamiento:** cada shard exporta `XDG_DATA_HOME`/`XDG_CONFIG_HOME` propios (en Linux, `user://`
+cuelga de `XDG_DATA_HOME`): sin eso, los shards en paralelo se pisan los slots de guardado y las
+suites se cuelgan (mismo problema que ya aislaba `tests/run_tests.gd` por worker).
+
+### 3. Verificacion (medida, no estimada)
+
+| Medida | Antes | Despues |
+|---|---|---|
+| Runner central (`res://tests/run_tests.gd`) | 771 s (fuera de presupuesto) | **366,7 s** (CUMPLE el presupuesto de 600 s) |
+| Runner central, resultado | — | **74/74 suites · 3080 tests · 0 fallos · EXIT 0** |
+| Suite suelta tipica | ~25-30 s | **~2,5 s** |
+| Las 108 suites del CI, una por una | — | **108/108 EXIT 0** (0 rojos) |
+| Job `test-suite` (proyeccion) | ~875 s | **~110-150 s** (875 / 4 shards + la cola pesada) |
+
+El verificador del reparto se ejecuto con el bloque **real** del workflow (extraido del YAML,
+no una copia): 4 shards en local -> cada invocacion se ejecuto una vez y solo una.
+
+### 4. Lo que NO se hizo (honestidad)
+
+- **No se midio el CI real**: no hay acceso a los runners; la reduccion del job es una PROYECCION
+  (875 / 4 shards). Lo que SI esta medido es el costo por proceso (25 s -> 2,5 s) y el runner central
+  (771 s -> 366,7 s).
+- **No se toco `05-Checklist.md` de M112 ni la fila global**: los conteos de este modulo los sello
+  agnes-3-flash; este documento es la evidencia, el flip lo decide quien sello el modulo.
+- No se cambio la lista de suites del CI: se ejecutan **las mismas**, las mismas veces.
+- El reparto en 4 shards multiplica por 4 los **runner-minutes** de GitHub (mismo trabajo, mas
+  paralelismo): es un trade-off consciente, no gratis.

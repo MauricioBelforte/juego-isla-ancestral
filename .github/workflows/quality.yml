@@ -158,7 +158,7 @@ jobs:
     name: Run Test Suite (M112 Integration) [shard ${{ matrix.shard }}/${{ matrix.total }}]
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    # SHARDS (M112, minimax-m3-1-flash, Log 2464, 2026-11-25).
+    # SHARDS (M112, minimax-m3-1-flash, Log 2465, 2026-11-25).
     #
     # El job lanzaba 111 invocaciones (108 suites de Godot + 3 de Python) de
     # forma ESTRICTAMENTE SECUENCIAL, cada una en su propio proceso: el costo
