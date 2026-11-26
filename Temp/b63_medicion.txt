@@ -1,0 +1,22 @@
+modulo | director | real | delta | archivo | git diff desde b60 (956215c)
+M75 | 87 | 87 | +0 | DOCUMENTACION/75-Postgame/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**Totales:** 130 ítems · Completados: 43 · Pendientes: 0 · No resueltos: 87. (Re-baseline GATE-1 31-
+   marcas: {'?': 87, 'x': 43}
+M156 | 82 | 82 | +0 | DOCUMENTACION/156-Terrenos-Y-Movimiento/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**Totales:** 307 ítems · Completados: 223 · Pendientes: 2 · No resueltos: 82. (Re-baseline GATE-1 1-
+   marcas: {'x': 223, '?': 82, ' ': 2}
+M74 | 58 | 58 | +0 | DOCUMENTACION/74-Eventos/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**227 `[x]` / 0 `[ ]` / 58 `[?]` = 285** = linea `Totales`. El Global debe pasar de 285/285 a 227/28
+   marcas: {'x': 227, '?': 58}
+M73 | 56 | 56 | +0 | DOCUMENTACION/73-Coleccionables/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**Totales:** 135 ítems · Completados: 76 · Pendientes: 3 · No resueltos: 56. (Re-baseline GATE-1 1-n
+   marcas: {'x': 76, ' ': 3, '?': 56}
+M71 | 44 | 44 | +0 | DOCUMENTACION/71-Progresion/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=> **Totales:** 213 ítems · Completados: 169 · Pendientes: 0 · No resueltos: 44 (re-contado 2026-10-3
+   marcas: {'x': 169, '?': 44}
+M27 | 40 | 40 | +0 | DOCUMENTACION/27-Islas-Del-Mundo/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=> este archivo no tenía línea de Totales. Conteo real de marcas: 99 [x] / 0 [ ] /
+   marcas: {'x': 152, '?': 40}
+M159 | 37 | 37 | +0 | DOCUMENTACION/159-Catalogo-De-Objetos/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**Totales:** 147 items (M159 datos t2) · Completados: 105 · Pendientes: 5 · No resueltos: 37. (Corre
+   marcas: {'x': 105, '?': 37, ' ': 5}
+M49 | 25 | 25 | +0 | DOCUMENTACION/49-Iluminacion/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=> **Totales:** 105 [x] / 38 [?] / 0 [ ] = 143 items.
+   marcas: {'x': 118, '?': 25}
+M115 | 26 | 26 | +0 | DOCUMENTACION/115-Hardware/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**78 `[x]` / 0 `[ ]` / 26 `[?]` = 104** = `Totales` = Global (78/104): **no hay nada que
+   marcas: {'x': 78, '?': 26}
+M105 | 28 | 28 | +0 | DOCUMENTACION/105-Telemetria-De-Gameplay/plan-actual/05-Checklist.md | SIN CAMBIOS | Totales=**Deuda menor detectada:** L345 conserva un `Totales` viejo (**163 items / 135 completados**) que
+   marcas: {'x': 143, '?': 28}
+TOTAL [?] real = 483  director suma = 483

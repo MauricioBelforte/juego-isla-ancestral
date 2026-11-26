@@ -1,0 +1,64 @@
+=== M159 ===
+131 - [?] Documentar 20 objetos de cocina (OBJ-COC-001 a 020) — iter 1: 10 .tres (OBJ-COC-001 a 010)
+134 - [?] Definir recetas asociadas
+138 - [?] Crear animaciones de uso
+139 - [?] Integrar con M16 (Crafting)
+140 - [?] Integrar con M18 (Casas)
+144 - [?] Documentar 10 objetos de taller (OBJ-TAL-001 a 010) — iter 1: 5 .tres (OBJ-TAL-001 a 005)
+152 - [?] Documentar 20 objetos exteriores (OBJ-EXT-001 a 020) — iter 1: 5 .tres (OBJ-EXT-001 a 005)
+154 - [?] Definir interacciones
+160 - [?] Documentar 10 árboles (OBJ-NAT-001 a 010) — iter 1: 5 .tres (OBJ-NAT-001 a 005)
+161 - [?] Documentar 7 rocas (OBJ-NAT-011 a 017) — pendiente
+162 - [?] Documentar 11 arbustos/flores (OBJ-NAT-018 a 028) — pendiente
+169 - [?] Crear animaciones de recolección
+173 - [?] Documentar 15 objetos de construcción (OBJ-CON-001 a 015) — iter 1: 5 .tres (OBJ-CON-001 a 005)
+181 - [?] Documentar 20 herramientas (OBJ-HER-001 a 020) — iter 1: 5 .tres (OBJ-HER-001 a 005)
+185 - [?] Integrar con M13 (Herramientas) y M158 (Desbloqueo de Zonas)
+189 - [?] Documentar 15 materiales (OBJ-ITE-001 a 015) — iter 1: 5 .tres (OBJ-ITE-001 a 005)
+190 - [?] Documentar 20 comidas (OBJ-ITE-020 a 039) — iter 1: 5 .tres (OBJ-ITE-020 a 024)
+191 - [?] Documentar 8 monedas/gemas (OBJ-ITE-050 a 057) — pendiente
+193 - [?] Definir efectos de comida (energía)
+196 - [?] Integrar con M14 (Inventario)
+197 - [?] Integrar con M16 (Crafting)
+198 - [?] Integrar con M38 (Economía)
+202 - [?] Documentar 20 prendas (OBJ-ROP-001 a 020) — iter 1: 5 .tres (OBJ-ROP-001 a 005)
+206 - [?] Integrar con M155 (Vestimenta)
+210 - [?] Documentar 12 objetos ancestrales (OBJ-ART-001 a 012) — iter 1: 5 .tres (OBJ-ART-001 a 005)
+211 - [?] Definir lore asociado a cada uno
+212 - [?] Definir interacciones (mirar + lore)
+214 - [?] Integrar con M25 (Ruinas) y M37 (Museos)
+218 - [?] Documentar 12 items de evento (OBJ-EVE-001 a 012) — iter 1: 5 .tres (OBJ-EVE-001 a 005)
+220 - [?] Definir duración de disponibilidad
+221 - [?] Definir interacciones
+222 - [?] Integrar con M29 (Tiempo y Calendario)
+226 - [?] Documentar 12 items secretos (OBJ-SEC-001 a 012) — iter 1: 5 .tres (OBJ-SEC-001 a 005)
+227 - [?] Definir cómo se obtienen (puzzles, quests)
+228 - [?] Definir lore asociado
+230 - [?] Integrar con M25 (Ruinas) y M23 (Misiones Secundarias)
+269 - [?] Crear test de integración con Inventario (M14 no implementado)
+=== M49 ===
+31 - [?] Definir cielo procedural por bioma (M09) [M] -- agnes-2.5-flash 2026-09-12: sky_curve.tres + sky_color_ramp.tres EXISTS en data/light/; DayNightCycle._cargar_curvas() las car
+46 - [?] Definir bake en CI (M118) con semilla fija [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §4 M108/M118 integrations; bake seed fixed in CI pipeline config
+47 - [?] Definir memoria de lightmaps contra M62 [M] -- agnes-2.5-flash 2026-09-12: documented 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 recibe reporte de lighting
+59 - [?] Definir luz de tiendas (M39) y talleres [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_tienda.gd definido; integracion con M39 shop placement; stub en DayNigh
+60 - [?] Definir ventanas con luz diurna (baked) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa profile documents baked window light; IMPLEMENTACIÓN bloqueada por 
+65 - [?] Definir faroles de pueblo y caminos [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_farol.gd definido; pool de faroles con flicker determinista; posición por e
+72 - [?] Definir luz cálida de hogueras/chimeneas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 dynamic/luz_fuego.gd definido; integrado con M52 particulas fuego; luz cálida desd
+78 - [?] Definir luz ambiental sutil de cristales (M47) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M47 integration documented; crystal emission light definida; integrada con m
+79 - [?] Definir glow acotado (sin bloom agresivo) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md estilo cozy; bloom agresivo descartado como risk; ambient light color ramps controla
+85 - [?] Definir esporas de luz (M11) como luz ambiental [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md menciona esporas M11 en cuevas; luz ambiental cálida 0.15-0.25; integrada con 
+91 - [?] Definir rayo cenital en salas principales (M24/M25) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §1 menciona templos con rayo cenital; implementacion requiere M24/M25 port
+92 - [?] Definir iluminación de bajorrelieves [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md no cubre especificamente; IMPLEMENTACIÓN bloqueada por M47 (materiales/emisivos); KnownIs
+101 - [?] Definir niebla de jungla densa y costa baja [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md niebla_por_bioma.tres estructurado; valores por bioma definidos en diseño; impleme
+109 - [?] Definir sombras suaves (PCF ≥ 4 samples) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md soft shadows required; PCF 4+ samples documented; validate_lighting_m49.gd verifica q
+120 - [?] Definir dónde hornea (interiores y estructuras) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3: baked SÍ para interior_casa, templo, cueva, ruinas; NO para exterior pue
+121 - [?] Definir formato/registro de memoria (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 light budgets by profile; MemoryMonitor M62 receives lighting memory reports
+122 - [?] Definir regeneración en CI [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md bake en CI (M118) with fixed seed; validate_lighting_m49.gd runs in headless mode
+126 - [?] Definir prueba de iluminación en hardware medio (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md hardware testing documented; M90 graphics presets include lighting valid
+127 - [?] Definir presets de calidad de sombras/luz (M90) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.2 shadow cascades by preset (bajo:2, medio:3, alto:4); shadow atlas 1024/20
+128 - [?] Definir objetivo 30 fps mínimo / 60 deseado [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target documented; M61 MemoryMonitor tracks frame budget
+142 - [?] Alinear con M108 [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §4 M108 integration documented; sky materials compression handled by M108 pipeline
+147 - [?] Memoria: lightmap + registro (M62) [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 lightmap budgets by profile; M62 MemoryMonitor receives lighting memory reports
+194 - [?] Escena pivote ≥ 30 fps en hardware medio con preset default [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md performance target; M90 quality presets validate frame budget
+199 - [?] Interior de casa horneado y legible sin dinámicas [M] -- agnes-2.5-flash 2026-09-12: 03-Diseno.md §3.3 interior_casa: baked SÍ, dinámicas <=3, ambiente 0.30
+200 - [?] Niebla por bioma/lluvia sin romper legibilidad [M] -- agnes-2.5-flash 2026-09-12: fog_curve.tres per biome; rain dimming documented; piso 0.15 ensures readability

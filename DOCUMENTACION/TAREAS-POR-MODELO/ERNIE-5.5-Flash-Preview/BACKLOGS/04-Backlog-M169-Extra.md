@@ -27,3 +27,8 @@
 42[x] + 10 = 52 (2 `[?]` honestos por Blender/visión).
 
 **Cerrado:** 2026-11-26 por ERNIE-5.5-Flash-Preview (Baidu) / Kilo Code.
+
+## b05 (msg 096 director) — DUPLICADO de b04
+Las 6 tareas de b05 (T096-01..06) son **las mismas** que b04 (T04-01..06). No se re-ejecutaron
+(sería repetir). Verificado y reportado en msg 098. Colisión de numeración: hay dos `096`
+(mío 06:59 y del director 07:05) — se reportó, sin renumerar a mano (prohibido §4.1-b).

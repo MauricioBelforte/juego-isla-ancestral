@@ -1,0 +1,22 @@
+=== M159: IDs exactos en data/items ===
+OBJ-COC 001-020: 20/20 presentes; iter1 10/10 COMPLETO
+OBJ-TAL 001-010: 10/10 presentes; iter1 5/5 COMPLETO
+OBJ-EXT 001-020: 20/20 presentes; iter1 5/5 COMPLETO
+OBJ-NAT 001-010: 10/10 presentes; iter1 5/5 COMPLETO
+OBJ-NAT 011-017: 7/7 presentes; iter1 0/0 
+OBJ-NAT 018-028: 11/11 presentes; iter1 0/0 
+OBJ-CON 001-015: 15/15 presentes; iter1 5/5 COMPLETO
+OBJ-HER 001-020: 20/20 presentes; iter1 5/5 COMPLETO
+OBJ-ITE 001-015: 15/15 presentes; iter1 5/5 COMPLETO
+OBJ-ITE 020-039: 20/20 presentes; iter1 5/5 COMPLETO
+OBJ-ITE 050-057: 8/8 presentes; iter1 0/0 
+OBJ-ROP 001-020: 5/20 presentes; iter1 5/5 COMPLETO
+OBJ-ART 001-012: 5/12 presentes; iter1 5/5 COMPLETO
+OBJ-EVE 001-012: 5/12 presentes; iter1 5/5 COMPLETO
+OBJ-SEC 001-012: 5/12 presentes; iter1 5/5 COMPLETO
+=== validate_lighting_m49.gd en b60 ===
+956215c EXISTE sin PCF bytes 6071
+HEAD EXISTE sin PCF bytes 6071
+   # Fog debe estar presente (M49 §fog)
+   _check(bool(env.fog_enabled), "fog habilitado en environment")
+   var curvas: Array[String] = ["day_curve.tres", "sky_curve.tres", "moon_curve.tres", "fog_curve.tres"]

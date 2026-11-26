@@ -1,0 +1,242 @@
+=== M159 artifacts ===
+M159 | OBJ-COC- | hits= 24 files= 28
+    game/isla-ancestral/data/items/item_obj_coc_001.tres 1
+    game/isla-ancestral/data/items/item_obj_coc_002.tres 1
+    game/isla-ancestral/data/items/item_obj_coc_003.tres 1
+    game/isla-ancestral/data/items/item_obj_coc_004.tres 1
+    game/isla-ancestral/data/items/item_obj_coc_005.tres 1
+    game/isla-ancestral/data/items/item_obj_coc_006.tres 1
+M159 | OBJ-TAL- | hits= 15 files= 27
+    game/isla-ancestral/data/historias/secundarias.json 2
+    game/isla-ancestral/data/items/item_obj_tal_001.tres 1
+    game/isla-ancestral/data/items/item_obj_tal_002.tres 1
+    game/isla-ancestral/data/items/item_obj_tal_003.tres 1
+    game/isla-ancestral/data/items/item_obj_tal_004.tres 1
+    game/isla-ancestral/data/items/item_obj_tal_005.tres 1
+M159 | OBJ-EXT- | hits= 26 files= 49
+    game/isla-ancestral/data/historias/secundarias.json 2
+    game/isla-ancestral/data/items/item_obj_ext_001.tres 1
+    game/isla-ancestral/data/items/item_obj_ext_002.tres 1
+    game/isla-ancestral/data/items/item_obj_ext_003.tres 1
+    game/isla-ancestral/data/items/item_obj_ext_004.tres 1
+    game/isla-ancestral/data/items/item_obj_ext_005.tres 1
+M159 | OBJ-NAT- | hits= 31 files= 61
+    game/isla-ancestral/data/historias/secundarias.json 5
+    game/isla-ancestral/data/items/item_obj_nat_001.tres 1
+    game/isla-ancestral/data/items/item_obj_nat_002.tres 1
+    game/isla-ancestral/data/items/item_obj_nat_003.tres 1
+    game/isla-ancestral/data/items/item_obj_nat_004.tres 1
+    game/isla-ancestral/data/items/item_obj_nat_005.tres 1
+M159 | OBJ-CON- | hits= 16 files= 22
+    game/isla-ancestral/data/items/item_obj_con_001.tres 1
+    game/isla-ancestral/data/items/item_obj_con_002.tres 1
+    game/isla-ancestral/data/items/item_obj_con_003.tres 1
+    game/isla-ancestral/data/items/item_obj_con_004.tres 1
+    game/isla-ancestral/data/items/item_obj_con_005.tres 1
+    game/isla-ancestral/data/items/item_obj_con_006.tres 1
+M159 | OBJ-HER- | hits= 32 files= 75
+    game/isla-ancestral/data/historias/secundarias.json 9
+    game/isla-ancestral/data/items/item_obj_her_001.tres 1
+    game/isla-ancestral/data/items/item_obj_her_002.tres 1
+    game/isla-ancestral/data/items/item_obj_her_003.tres 1
+    game/isla-ancestral/data/items/item_obj_her_004.tres 1
+    game/isla-ancestral/data/items/item_obj_her_005.tres 1
+M159 | OBJ-ITE- | hits= 49 files= 105
+    game/isla-ancestral/data/historias/secundarias.json 10
+    game/isla-ancestral/data/items/item_obj_ite_001.tres 1
+    game/isla-ancestral/data/items/item_obj_ite_002.tres 1
+    game/isla-ancestral/data/items/item_obj_ite_003.tres 1
+    game/isla-ancestral/data/items/item_obj_ite_004.tres 1
+    game/isla-ancestral/data/items/item_obj_ite_005.tres 1
+M159 | OBJ-ROP- | hits= 8 files= 13
+    game/isla-ancestral/data/historias/secundarias.json 1
+    game/isla-ancestral/data/items/item_obj_rop_001.tres 1
+    game/isla-ancestral/data/items/item_obj_rop_002.tres 1
+    game/isla-ancestral/data/items/item_obj_rop_003.tres 1
+    game/isla-ancestral/data/items/item_obj_rop_004.tres 1
+    game/isla-ancestral/data/items/item_obj_rop_005.tres 1
+M159 | OBJ-ART- | hits= 12 files= 29
+    game/isla-ancestral/data/historias/secundarias.json 5
+    game/isla-ancestral/data/items/item_obj_art_001.tres 1
+    game/isla-ancestral/data/items/item_obj_art_002.tres 1
+    game/isla-ancestral/data/items/item_obj_art_003.tres 1
+    game/isla-ancestral/data/items/item_obj_art_004.tres 1
+    game/isla-ancestral/data/items/item_obj_art_005.tres 1
+M159 | OBJ-EVE- | hits= 6 files= 14
+    game/isla-ancestral/data/items/item_obj_eve_001.tres 1
+    game/isla-ancestral/data/items/item_obj_eve_002.tres 1
+    game/isla-ancestral/data/items/item_obj_eve_003.tres 1
+    game/isla-ancestral/data/items/item_obj_eve_004.tres 1
+    game/isla-ancestral/data/items/item_obj_eve_005.tres 1
+    game/isla-ancestral/data/ubicaciones/ubicaciones_loc.json 9
+M159 | OBJ-SEC- | hits= 8 files= 35
+    game/isla-ancestral/data/historias/secundarias.json 5
+    game/isla-ancestral/data/items/item_obj_sec_001.tres 1
+    game/isla-ancestral/data/items/item_obj_sec_002.tres 1
+    game/isla-ancestral/data/items/item_obj_sec_003.tres 1
+    game/isla-ancestral/data/items/item_obj_sec_004.tres 1
+    game/isla-ancestral/data/items/item_obj_sec_005.tres 1
+tres named OBJ-* : 0
+=== M49 candidates ===
+M49-game | glow | hits= 3 files= 27
+    game/isla-ancestral/scenes/main_island.tscn 3
+    game/isla-ancestral/scripts/settings/graphics_config.gd 10
+    game/isla-ancestral/scripts/settings/test_graphics_config_post_m90.gd 14
+M49-game | bloom | hits= 3 files= 36
+    game/isla-ancestral/scenes/main_island.tscn 1
+    game/isla-ancestral/scripts/settings/graphics_config.gd 22
+    game/isla-ancestral/scripts/settings/test_graphics_config_post_m90.gd 13
+M49-game | PCF | hits= 1 files= 1
+    game/isla-ancestral/scripts/terrenos/test_terrenos_b3.gd 1
+M49-game | validate_lighting_m49 | hits= 3 files= 3
+    game/isla-ancestral/data/light/lighting_budget.json 1
+    game/isla-ancestral/scripts/editor/_colector_sintaxis.gd 1
+    game/isla-ancestral/scripts/world/validate_lighting_m49.gd 1
+M49-game | fog_curve.tres | hits= 5 files= 17
+    game/isla-ancestral/data/light/fase_umbral.json 1
+    game/isla-ancestral/scripts/world/day_night_cycle.gd 8
+    game/isla-ancestral/scripts/world/gen_curvas.gd 1
+    game/isla-ancestral/scripts/world/test_niebla_estacion_m31.gd 6
+    game/isla-ancestral/scripts/world/validate_lighting_m49.gd 1
+M49-game | lightmap | hits= 4 files= 8
+    game/isla-ancestral/data/light/lighting_budget.json 1
+    game/isla-ancestral/data/performance/budgets.json 4
+    game/isla-ancestral/Godot/editor_settings-4.7.tres 2
+    game/isla-ancestral/scripts/performance/validate_budget.gd 1
+M49-03Diseno glow 0
+M49-03Diseno bloom 0
+M49-03Diseno PCF 0
+M49-03Diseno fog_curve 0
+M49-03Diseno horne 1
+=== changed game files since b60 ===
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_columna_rota_alta.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_columna_rota_baja.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_dintel_caido.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_estatua_ancestral_erosionada.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_estructura_sumergida.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_losa_grabado.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_puente_cuerda.glb
+   game/isla-ancestral/assets/3d/media/25-Ruinas-Templos_puerta_templo.glb
+   game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_campamento_abandonado.glb
+   game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_cascada.glb
+   game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_cementerio_barcos.glb
+   game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_faro_viejo.glb
+   game/isla-ancestral/assets/3d/media/27-Islas-Ubicaciones_volcan.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_bananero.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_canaveral.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_compostera.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_brote.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_creciendo.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_lista.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_cultivo_madura.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_espantapajaros.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_regadera.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_tierra_arada.glb
+   game/isla-ancestral/assets/3d/media/33-Agricultura_tierra_regada.glb
+   game/isla-ancestral/assets/3d/media/35-Mineria_cana_pescar.glb
+   game/isla-ancestral/assets/3d/media/35-Mineria_carretilla_minero.glb
+   game/isla-ancestral/assets/3d/media/35-Mineria_carrito_vias.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_cabra.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_cangrejo_ermitano.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_cangrejo_playa.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_conejo.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_gallina.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_gaviota.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_jabali.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_lagarto_isla.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_mariposa.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_pez_tropical_azul.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_pez_tropical_naranja.glb
+   game/isla-ancestral/assets/3d/media/36-Fauna_tortuga_marina.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_bote_pesca.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_cartel_indicador.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_farola_fuego.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_muelle_madera.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_pozo_piedra.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_puente_cuerda_colgante.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_puente_troncos.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_valla_madera_esquina.glb
+   game/isla-ancestral/assets/3d/media/40-Infraestructura_valla_madera_recto.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_ancla_naufragio.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_anillo_piedras_ritual.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_barco_hundido.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_caveira_criatura.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_concha_mar.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_coral_abanico.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_estrella_mar.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_jarrones_urnas.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_jugador_voxel.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_monolito_glifos.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_totem_isla.glb
+   game/isla-ancestral/assets/3d/media/45-Arte3D_vieira_playa.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_arbol_frutal.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_arbusto_floral.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_arbusto_redondo.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_canas_bambu.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_flor_isla.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_helecho_chico.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_helecho_gigante.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_hierba_alta.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_hongo_luminoso.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_liana_colgante.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_musgo_roca.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera_inclinada.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_palmera_joven.glb
+   game/isla-ancestral/assets/3d/media/50-Vegetacion_raices_expuestas.glb
+   game/isla-ancestral/assets/3d/media/67-Vehiculos_barquita_aurora.glb
+   game/isla-ancestral/assets/3d/media/67-Vehiculos_globo_del_viento.glb
+   game/isla-ancestral/assets/3d/media/67-Vehiculos_gran_vapor.glb
+   game/isla-ancestral/assets/3d/media/67-Vehiculos_perla_ancestral.glb
+   game/isla-ancestral/assets/3d/media/70-Interacciones_boton_piso.glb
+   game/isla-ancestral/assets/3d/media/70-Interacciones_cofre_pequeno.glb
+   game/isla-ancestral/assets/3d/media/70-Interacciones_palanca_madera.glb
+   game/isla-ancestral/assets/3d/media/70-Interacciones_puerta_corrediza_piedra.glb
+   game/isla-ancestral/assets/3d/media/70-Interacciones_valvula_manivela.glb
+   game/isla-ancestral/scripts/backup/backup_manager.gd
+   game/isla-ancestral/scripts/backup/test_backup_m107.gd
+   game/isla-ancestral/scripts/construccion/build_ghost.gd
+   game/isla-ancestral/scripts/construccion/build_history.gd
+   game/isla-ancestral/scripts/construccion/build_hud.gd
+   game/isla-ancestral/scripts/construccion/build_interaction.gd
+   game/isla-ancestral/scripts/construccion/build_manager.gd
+   game/isla-ancestral/scripts/construccion/build_preview.gd
+   game/isla-ancestral/scripts/construccion/construccion_mundo.gd
+   game/isla-ancestral/scripts/construccion/construccion_tipos.gd
+   game/isla-ancestral/scripts/core/bootstrap.gd
+   game/isla-ancestral/scripts/crafting/crafting_service.gd
+   game/isla-ancestral/scripts/crucero/crucero_eventos.gd
+   game/isla-ancestral/scripts/crucero/crucero_interior.gd
+   game/isla-ancestral/scripts/crucero/crucero_manager.gd
+   game/isla-ancestral/scripts/crucero/crucero_puerto.gd
+   game/isla-ancestral/scripts/diario/diary_service.gd
+   game/isla-ancestral/scripts/diario/test_diario_extras_m55.gd
+   game/isla-ancestral/scripts/diario/test_diario_persist.gd
+   game/isla-ancestral/scripts/dlc/test_dlc_m120.gd
+   game/isla-ancestral/scripts/editor/_colector_sintaxis.gd
+   game/isla-ancestral/scripts/foto/photo_gallery.gd
+   game/isla-ancestral/scripts/foto/photo_service.gd
+   game/isla-ancestral/scripts/foto/qa_m56_galeria.gd
+   game/isla-ancestral/scripts/foto/qa_m56_photopose.gd
+   game/isla-ancestral/scripts/friendship/friendship_service.gd
+   game/isla-ancestral/scripts/friendship/gift_evaluator.gd
+   game/isla-ancestral/scripts/localization/test_localizacion_iter2.gd
+   game/isla-ancestral/scripts/localization/test_localization.gd
+   game/isla-ancestral/scripts/stream/test_stream.gd
+   game/isla-ancestral/scripts/templos/qa_rf12_audit_audio.gd
+   game/isla-ancestral/scripts/ui/layers/diary_layer.gd
+   game/isla-ancestral/scripts/ui/services/notification_service.gd
+   game/isla-ancestral/tests/test_bug128_hud_real.gd
+   game/isla-ancestral/tests/test_m17_almacenamiento.gd
+   game/isla-ancestral/tests/test_m17_atomicidad_escritura.gd
+   game/isla-ancestral/tests/test_m17_cache_preview.gd
+   game/isla-ancestral/tests/test_m17_contenido_piezas.gd
+   game/isla-ancestral/tests/test_m17_fantasma_estado.gd
+   game/isla-ancestral/tests/test_m17_hud_categorias.gd
+   game/isla-ancestral/tests/test_m17_materiales_compartidos.gd
+   game/isla-ancestral/tests/test_m17_terreno_cargado.gd
+   game/isla-ancestral/tests/test_m20_amistad_cobertura.gd
+   game/isla-ancestral/tests/test_m56_tomar_foto.gd
+   game/isla-ancestral/tests/unit/test_crucero_escenas.gd
+   game/isla-ancestral/tests/unit/test_crucero_interior.gd
+   game/isla-ancestral/tests/unit/test_crucero_puerto.gd
