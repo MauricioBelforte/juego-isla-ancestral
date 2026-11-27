@@ -49,6 +49,24 @@ const POOL_ESPERA := 0.2
 ## Timeout por suite dentro del pool: con N workers la CPU se comparte y una suite que
 ## tardaba 40 s en serie puede tardar 3-4x mas. 300 s (el mismo que usa GdUnit4).
 const POOL_TIMEOUT_MS := 300000
+## Timeout de la RE-MEDIDA en serie (M112, 2026-11-27).
+##
+## DEFECTO CORREGIDO: la re-medicion usaba `TIMEOUT_MS` (180 s), MENOS margen que
+## el pool (300 s). Una suite que agota los 300 s del pool se vuelve a medir con
+## 180 s para la MISMA tarea -> falla SIEMPRE ("TIMEOUT en pool -> se re-mide en
+## serie -> FAIL TIMEOUT"), y el runner reporta un fallo donde no hay ninguno.
+## Medido el 2026-11-27 con la lane de modulos: 1 suite con ese patron exacto.
+## El reintento existe para DESCONTAR la contencion del pool, asi que debe dar
+## MAS margen que el pool, nunca menos.
+const TIMEOUT_MS_REMEDIDA := 420000
+## Tope para las suites que declaran `const NECESITA_TIMEOUT_LARGO := true`.
+##
+## Motivo (M112, 2026-11-27): `MemoryMonitor.TIEMPO_BASELINE_S = 300.0` — la
+## baseline de memoria estabilizada tarda 5 MINUTOS POR DISENO. Con cualquier tope
+## menor, esa suite cae en "colgada" estando sana. Mismo patron que
+## `NECESITA_MUNDO`: opt-in explicito por suite (no un default que rompe el
+## presupuesto medido de los demas).
+const TIMEOUT_MS_LARGO := 900000
 ## Suites que dan TIMEOUT dentro del POOL y van a la lane SERIE (medido el 2026-10-22, lane opt-in
 ## de modulos: 1787.2 s, 13 rojos + 2 timeouts). Motivo: son suites con esperas BASADAS EN FRAMES
 ## (for i in range(N): await process_frame): en serie los frames van a velocidad normal y terminan en
@@ -327,10 +345,46 @@ func _worker_suite(ruta: String) -> void:
 	_pool_en_curso -= 1
 
 
+## ¿La suite pide un tope mas largo del normal?
+##
+## Opt-in por suite: `const NECESITA_TIMEOUT_LARGO := true` en la cabecera. Se
+## busca en las primeras lineas del archivo (NO en todo el cuerpo) y la linea NO
+## puede ser un comentario: asi el opt-in es explicito y no se activa por
+## accidento por una mencion en un texto.
+static func suite_pide_timeout_largo(ruta: String) -> bool:
+	var p: String = ProjectSettings.globalize_path(ruta) if ruta.begins_with("res://") else ruta
+	if not FileAccess.file_exists(p):
+		return false
+	var f := FileAccess.open(p, FileAccess.READ)
+	if f == null:
+		return false
+	var texto: String = f.get_as_text()
+	f.close()
+	var corte: int = mini(texto.length(), 4000)
+	for linea in texto.substr(0, corte).split("\n"):
+		var s: String = linea.strip_edges()
+		if s.begins_with("#"):
+			continue
+		if s.contains("NECESITA_TIMEOUT_LARGO") and s.contains("true"):
+			return true
+	return false
+
+
+## Tope de tiempo que corresponde a una suite (funcion pura, testeable).
+##
+##   * opt-in `NECESITA_TIMEOUT_LARGO := true` -> `TIMEOUT_MS_LARGO`
+##   * dentro del pool                        -> `POOL_TIMEOUT_MS`
+##   * en serie                               -> `TIMEOUT_MS`
+static func timeout_para_suite(ruta: String, en_pool: bool = false) -> int:
+	if suite_pide_timeout_largo(ruta):
+		return TIMEOUT_MS_LARGO
+	return POOL_TIMEOUT_MS if en_pool else TIMEOUT_MS
+
+
 func _correr_scenetree(ruta: String, en_pool: bool = false) -> void:
 	print("\n[SUITE SceneTree] %s" % ruta)
 	var t0 := Time.get_ticks_msec()
-	var timeout_ms := POOL_TIMEOUT_MS if en_pool else TIMEOUT_MS
+	var timeout_ms := timeout_para_suite(ruta, en_pool)
 	var args := ["--headless", "--path", "res://", "--script", ruta]
 	var r := await _ejecutar_con_redirect(args, timeout_ms, en_pool)
 	if r["timeout"] and en_pool:
@@ -345,8 +399,13 @@ func _correr_scenetree(ruta: String, en_pool: bool = false) -> void:
 		# El reintento NO tolera fallos: si la suite vuelve a fallar (rc != 0 o
 		# checks con fallos) el fallo se reporta igual. Solo se re-mide el
 		# TIMEOUT, que es un artefacto de contencion.
-		print("  [REINTENTO] TIMEOUT en pool (>%ds) -> se re-mide en serie" % [timeout_ms / 1000])
-		r = await _ejecutar_con_redirect(args, TIMEOUT_MS, false)
+		#
+		# 2026-11-27: la re-medicion usa `TIMEOUT_MS_REMEDIDA` (420 s), MAS margen
+		# que el pool (300 s). Antes usaba 180 s (menos que el pool): una suite
+		# que agota el pool fallaba SIEMPRE en la re-medicion, y el runner
+		# reportaba un fallo inexistente.
+		print("  [REINTENTO] TIMEOUT en pool (>%ds) -> se re-mide en serie (tope %ds)" % [timeout_ms / 1000, TIMEOUT_MS_REMEDIDA / 1000])
+		r = await _ejecutar_con_redirect(args, TIMEOUT_MS_REMEDIDA, false)
 	var dt := (Time.get_ticks_msec() - t0) / 1000.0
 	var texto: String = r["salida"]
 	var exit := int(r["rc"])

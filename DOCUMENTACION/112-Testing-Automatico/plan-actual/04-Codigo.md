@@ -801,3 +801,57 @@ reales y el timeout de la baseline.
   workers, asi que el log mezcla mensajes de suites concurrentes. Lo medido y verificable es que
   `MemoryMonitor.TIEMPO_BASELINE_S = 300.0` (diseño) y que `TIMEOUT_MS` del runner es 300 s: ambos
   valores, por si solos, ya hacen que una suite que espere la baseline caiga en timeout.
+
+---
+
+## Tope de tiempo por suite: la re-medidia con MENOS margen que el pool (corregido 2026-11-27)
+
+**Log:** 2478 · **Canal:** `MiniMax-M3.1-Flash` (msj 086) · suite: `tests/test_m112_timeout_adaptativo.gd`
+
+### El defecto
+
+En `_correr_scenetree()`, cuando una suite da TIMEOUT dentro del pool, el runner la **re-mide en
+serie** — pero lo hacia con `TIMEOUT_MS` (**180 s**), un tope **MENOR** que el del pool
+(`POOL_TIMEOUT_MS` = **300 s**). O sea: la misma tarea, con menos tiempo, en la segunda vuelta.
+
+Consecuencia: una suite que agota los 300 s del pool **falla siempre** en la re-medicion, y el runner
+reporta `FAIL TIMEOUT — suite colgada` donde **no hay ningun fallo de la suite**. Medido el 2026-11-27
+con la lane de modulos: 1 suite con ese patron exacto (ademas, en la salida del pool se ven
+`baseline estabilizada en 105.2 MB (t=300 s)`, que es el valor **por diseno**
+`MemoryMonitor.TIEMPO_BASELINE_S = 300.0`: una suite que espera la baseline de memoria nunca puede
+caber en un tope de 300 s).
+
+El reintento en serie existe para **descontar la contencion del pool**, asi que tiene que dar **MAS**
+margen que el pool, nunca menos.
+
+### La correccion (dos cosas)
+
+1. `TIMEOUT_MS_REMEDIDA := 420000` (7 min) para la re-medicion: mas margen que el pool.
+2. **Opt-in por suite** para las que legitimamente necesitan mas tiempo:
+   `const NECESITA_TIMEOUT_LARGO := true` (mismo patron que `NECESITA_MUNDO`).
+   - Se busca en las primeras 4000 caracteres del archivo y la linea **no puede ser un comentario**
+     (asi el opt-in es explicito y no se activa por una mencion en un texto).
+   - Con el opt-in, el tope pasa a `TIMEOUT_MS_LARGO := 900000` (15 min).
+   - La funcion que decide el tope es **pura y testeable**: `timeout_para_suite(ruta, en_pool)`.
+
+### Verificacion
+
+Suite nueva `res://tests/test_m112_timeout_adaptativo.gd` → **15 checks, 0 fallos, EXIT 0**:
+"A1: una suite normal NO pide timeout largo" · "A2: en el pool una suite normal usa el tope de pool
+(300000 ms)" · "B1: el opt-in se detecta" · "C1: una linea de COMENTARIO no cuenta como opt-in" ·
+"C2: un opt-in en false NO cuenta" · "D1: la re-medicion en serie usa un tope MAYOR que el del pool" ·
+**"D4: la RE-MEDIDION usa de verdad el tope largo (el sitio de llamada, no solo la constante)"**.
+
+**ROJO-VERDE**: revirtiendo los dos arreglos → **3 fallos / EXIT 1** (B2, B3, D4). El check D4 existe
+porque comparar constantes NO detecta que la llamada siga usando el tope viejo: mira el **sitio de
+llamada** en el codigo del runner.
+
+Runner central tras el cambio: **76/76 suites · 3095 tests · 0 fallos · 364,4 s** (CUMPLE el
+presupuesto de 600 s) — la suite nueva esta incluida en el descubrimiento.
+
+### Lo que NO se hizo
+
+- **No se activo** la lane de modulos (sigue apagada por defecto; la decision es de la directora).
+- No se marco ninguna suite con `NECESITA_TIMEOUT_LARGO`: hoy ninguna lo pide (la suite que espera la
+  baseline es un **arnes de 30 min** —`sesion_m62_30min.gd`—, que no es una suite del runner).
+- No se toco `05-Checklist.md` de M112 ni la fila global (los conteos los sello agnes-3-flash).

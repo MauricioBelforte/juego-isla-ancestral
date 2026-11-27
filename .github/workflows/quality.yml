@@ -530,6 +530,15 @@ jobs:
           # bloquean la colocacion, NO_DECONSTRUIBLE al demoler y la cache del preview
           # se invalida al rotar. 40 checks, 0 fallos, EXIT 0.
           suite --script tests/test_m17_reglas_pieza.gd
+          # M112 (2026-11-27, minimax-m3-1-flash): el TOPE DE TIEMPO por suite del
+          # runner central. Antes la re-medicion en serie usaba un tope MENOR que el
+          # del pool (180 s vs 300 s) -> una suite que agotaba el pool fallaba
+          # SIEMPRE en la re-medicion (fallo inexistente), y no habia forma de que
+          # una suite que necesita mas tiempo (p. ej. la baseline de M62, 300 s por
+          # diseno) lo pidiera: ahora existe el opt-in `NECESITA_TIMEOUT_LARGO`.
+          # 15 checks, piso 10 medido en verde; ROJO-VERDE revirtiendo los dos
+          # arreglos -> 3 fallos (B2, B3, D4).
+          suite --script tests/test_m112_timeout_adaptativo.gd
           # M17 Construccion (2026-11-25, minimax-m3-1-flash, Log 2446): ALMACENAMIENTO
           # DE PIEZAS (L132/L170) — funcion NUEVA BuildManager.almacenar_pieza() (antes no
           # existia ninguna: los 2 items eran promesas sin codigo). El item guardado usa el
