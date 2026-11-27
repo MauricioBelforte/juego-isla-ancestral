@@ -94,6 +94,20 @@
 | `suite_grande` | 5,6 × 4,6 m | cama grande + sala | ventanal + balcón | 700 monedas |
 | `camarote_tripulacion` | 2,0 × 2,6 m | 1 litera | sin ventana | no vendible |
 
+**Los 5 espacios interiores (recuento por ambiente, no por cubierta):**
+
+| # | Espacio | Cubierta | Escena / Fuente | Vértices | Estado |
+|---|---|---|---:|---|
+| 1 | Camarote tipo | 2 | `interior_cubierta_2.tscn` (GLB `169-Crucero_camarote_*`) | 540–1.704 | ✅ modelado + GLB |
+| 2 | Comedor | 3 | `interior_cubierta_3.tscn` (GLB `169-Crucero_comedor`) | 2.864 | ✅ modelado + GLB |
+| 3 | Casino | 3 | `interior_cubierta_3.tscn` (GLB `169-Crucero_casino`) | 2.962 | ✅ modelado + GLB |
+| 4 | Puente de mando | 4 | `interior_cubierta_4.tscn` (GLB `169-Crucero_puente`) | 1.288 | ✅ modelado + GLB |
+| 5 | Bodega | 1 | GLB `169-Crucero_bodega` (sin `.tscn` propio) | 1.312 | ⚠ GLB listo, falta `.tscn` |
+
+> Nota: las 4 escenas `.tscn` (cubierta 1–4) cargan headless con `StaticBody3D` + `CruceroInterior`
+> (`test_crucero_escenas.gd` 13/0). El 5º espacio (bodega) tiene GLB pero aún no `.tscn` propio
+> (pendiente iter 2). Detalle de medidas en `04-Codigo.md` §8.6.
+
 ## 5. Flujo de embarque y viaje
 
 ```

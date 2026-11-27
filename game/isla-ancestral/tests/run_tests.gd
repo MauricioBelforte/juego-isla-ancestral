@@ -18,6 +18,16 @@ extends SceneTree
 ##      la salida final del motor, no un fallo de la suite (evidencia en
 ##      _correr_scenetree). El reintento no tolera fallos reales.
 ##
+## CONVENCION "NECESITA_MUNDO" (2026-11-25, M112, Log 2465):
+## En los procesos de test el Bootstrap **no carga** `main_island.tscn`: cuesta
+## 5,3 s de carga + ~19,6 s de DEINIT por proceso, y las suites no usan el mundo
+## (suite tipica: 25-30 s -> 2,5 s). Si tu suite AFIRMA sobre la escena real
+## (`current_scene`, el HUD de `main_island.tscn`, el viewport para una captura),
+## declara arriba `const NECESITA_MUNDO := true`: el Bootstrap lo lee con
+## `get_script().get_script_constant_map()` y entonces carga la escena como
+## siempre. Sin ese const, esas suites quedan en rojo por el `current_scene` nulo.
+## Hoy lo piden: `tests/test_bug128_hud_real.gd` y `tests/test_m56_tomar_foto.gd`.
+##
 ## Nota de captura (misma lección que test_regresion_templos.gd): en este build
 ## `OS.execute` NO captura el stdout de un Godot hijo; cada corrida va envuelta
 ## en cmd.exe con redirect a archivo temporal.

@@ -19,7 +19,7 @@ Los 6 ítems que quedaron revertidos por la auditoría BUG-070 lote 6 (flips inf
 | **L119** resumen ejecutivo | §6 con citaciones correctas (el flip previo citaba §5.4 fantasma) |
 | **L132** recertificación anual | §5: 3 disparadores concretos + mecanismo procedimental (M121) |
 
-**M82: 97/100** (97 [x]/0 [ ]/3 [?]). Log **2460**. Los 3 [?] restantes requieren acciones del fundador en boards reales (cuentas/firmas/fees) — no son closes de agente.
+**M82: 97/100** (97 [x]/0 [ ]/3 [?]). Log **2468**. Los 3 [?] restantes requieren acciones del fundador en boards reales (cuentas/firmas/fees) — no son closes de agente.
 
 ## Estado del día — 6 tandas cerradas
 
@@ -27,9 +27,9 @@ Los 6 ítems que quedaron revertidos por la auditoría BUG-070 lote 6 (flips inf
 |---|---|---|---|
 | 1 | M20 Amistad (§21.4.7) | 5 ítems → 105/150 | 2444 |
 | 2-3 | M56 Fotografía | 5 ítems → 135/138 | 2449/2450 |
-| 4 | M58 Accesibilidad | RF12 → 183/184 | 2458 |
-| 5 | M55 Diario | 6 ítems → 98/131 (+ suite rota arreglada) | 2459 |
-| 6 | M82 Clasificación | 7 ítems → 97/100 (+ gate CI) | 2460 |
+| 4 | M58 Accesibilidad | RF12 → 183/184 | 2466 |
+| 5 | M55 Diario | 6 ítems → 98/131 (+ suite rota arreglada) | 2467 |
+| 6 | M82 Clasificación | 7 ítems → 97/100 (+ gate CI) | 2468 |
 
 **22 ítems cerrados hoy** + 1 suite rota arreglada + 1 gate de CI + 1 auditoría RF12.
 

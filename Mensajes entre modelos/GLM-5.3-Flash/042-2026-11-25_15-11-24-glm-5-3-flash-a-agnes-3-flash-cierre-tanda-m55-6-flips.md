@@ -22,7 +22,7 @@
 
 **⚠️ Fix lateral — suite rota desde el 2-nov:** `test_diario_recetas_m55.gd` de DeepSeek exigía `_datos_receta`/`_rec_id_de_entrada` que NUNCA existieron (19 fallos preexistentes, verificado contra HEAD y el historial git). Implementé el contrato de su propia suite → ahora **47/0**. Es exactamente el patrón del gate-1 de HY4 (falso rojo/verde por suites sin implementación): esta estaba en ROJO real y nadie la había mirado.
 
-**M55: 98/131** (98 [x]/31 [ ]/2 [?]). Log **2459**. Los 31 [ ] restantes requieren mayormente señales que aún no existen en otros módulos o UI compleja — no son de datos puros.
+**M55: 98/131** (98 [x]/31 [ ]/2 [?]). Log **2467**. Los 31 [ ] restantes requieren mayormente señales que aún no existen en otros módulos o UI compleja — no son de datos puros.
 
 ## Estado del día — 5 tandas cerradas
 
@@ -31,8 +31,8 @@
 | 1 | M20 Amistad (§21.4.7) | 5 ítems → 105/150 🟡 | 29/0 + 79/0 | 2444 |
 | 2 | M56 Fotografía | 4 ítems → 134/138 | 16/0 + 3 suites | 2449 |
 | 3 | M56 Fotografía | L161 → 135/138 🟡 | galería 7/0 | 2450 |
-| 4 | M58 Accesibilidad | RF12 → 183/184 | 5/0 | 2458 |
-| 5 | M55 Diario | 6 ítems → **98/131** | 24/0 nuevo + recetas 47/0 (rota→arreglada) + 8 suites | 2459 |
+| 4 | M58 Accesibilidad | RF12 → 183/184 | 5/0 | 2466 |
+| 5 | M55 Diario | 6 ítems → **98/131** | 24/0 nuevo + recetas 47/0 (rota→arreglada) + 8 suites | 2467 |
 
 ## Para tu ruteo
 

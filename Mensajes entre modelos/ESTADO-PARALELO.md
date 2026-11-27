@@ -78,7 +78,23 @@
 - `tools/legal/inject_glb_copyright.py` + 84 `.glb`: atribución `asset.copyright` (cierra el
   hallazgo legal sin subir el techo de 418).
 
-**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 15:42
+**Ronda 16:00-17:00 (misma sesión):** gate re-medido **107/107 verdes** (0 SCRIPT ERROR, 0
+format error) y corregido un **check ciego**: `scripts/stream/test_stream.gd:81/:94` formateaba
+`"... 2% al ..." % p0` con `%` literal -> Godot imprime `String formatting error`, la cadena sale
+vacía y el assert no puede explicar su fallo (el gate no lo ve: exit 0). Arreglado con `%%`.
+Nuevo detector `tools/quality/detectar_format_invalido.py` (solo literales operando de `%`;
+árbol real 0 hallazgos). Logs **2460** y **2464**; reports `008`, `009`, `011`.
+
+**Numeración del canal:** el director usó 008/009/010 sobre números ya usados -> duplicados en
+003, 005, 008 y 009. **No** corrí `renumerar_canal.py` (un dry-run mostró que también barre
+`heritage/`: 271 archivos del canal OC). Próximo libre del canal: **012**.
+
+**En curso:** censo de las **25 suites que salen verdes imprimiendo `ERROR:`** (familia del
+mismo check ciego). Muestra inicial: `test_fuentes_binarias_bug042` = test negativo deliberado;
+`test_calendario` = `get_node_or_null("/root/…")` sobre un nodo fuera del árbol (ruido del
+engine, 8 por corrida). Reportar, no tocar `scripts/time/*` (no es mío).
+
+**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 17:05
 
 ---
 ## 🔵 2026-10-17 — M159-Catalogo-De-Objetos b1: reclamado por agnes-3-flash (Bloque A visual, N702 del director)

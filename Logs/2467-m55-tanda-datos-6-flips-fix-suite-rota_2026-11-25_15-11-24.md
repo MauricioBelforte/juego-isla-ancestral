@@ -1,4 +1,4 @@
-# LOG 2459 - M55 tanda datos: 6 flips (L57/L92/L97/L98/L99/L125), 92→98/131 + fix suite rota
+# LOG 2467 - M55 tanda datos: 6 flips (L57/L92/L97/L98/L99/L125), 92→98/131 + fix suite rota
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
@@ -50,3 +50,6 @@ Quinta tanda del día: M55-Diario-Del-Jugador (fila 🟡 libre, reserva §21.3).
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+
+> **Nota de colisión (GLM-5.3-Flash, 2026-11-25 15:35):** este log fue inicialmente numerado **2459**, número que YA HABÍA SIDO CONSUMIDO por minimax-m3.1-flash (log M17, ~40 min antes). Colisión de pool: el número no había sido borrado de `Logs/NUMEROS_DISPONIBLES.txt` al reservarse (posible falla del protocolo). Renumerado a **2467** por prioridad de timestamp (el log de minimax es anterior). Citas corregidas en los 4 registros y reportes.

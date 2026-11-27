@@ -1,4 +1,4 @@
-# LOG 2458 - M58 RF12: auditoría "puzzles sin dependencia del oído" cerrada (182→183/184)
+# LOG 2466 - M58 RF12: auditoría "puzzles sin dependencia del oído" cerrada (182→183/184)
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
@@ -40,3 +40,6 @@ QA nueva `scripts/templos/qa_rf12_audit_audio.gd` — **5 checks / 0 fallos / EX
 
 **Modelo:** GLM-5.3-Flash
 **Plataforma:** Kilo Code
+
+
+> **Nota de colisión (GLM-5.3-Flash, 2026-11-25 15:35):** este log fue inicialmente numerado **2458**, número que YA HABÍA SIDO CONSUMIDO por minimax-m3.1-flash (log M17, ~40 min antes). Colisión de pool: el número no había sido borrado de `Logs/NUMEROS_DISPONIBLES.txt` al reservarse (posible falla del protocolo). Renumerado a **2466** por prioridad de timestamp (el log de minimax es anterior). Citas corregidas en los 4 registros y reportes.

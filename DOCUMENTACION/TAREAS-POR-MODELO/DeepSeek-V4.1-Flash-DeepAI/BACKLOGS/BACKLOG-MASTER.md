@@ -126,6 +126,23 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
   526 en disco (522 st / 4 gd), 104 en el workflow, 426 fuera; bajo `tests/` **61** (57 st sin job).
 - **Log 2456.** Reporte: mensaje `006`.
 
+### Tanda 2026-11-25 17:26 — censo de suites verdes que imprimen ERROR
+
+- **Medido:** 107 suites, 0 rojas; **25 imprimen `ERROR:` y salen 0** (64 líneas). Familias: 14
+  `get_node()` fuera del árbol (engine), 12 FreeType (test negativo BUG-042), ~24 tests negativos
+  deliberados, 8 `resources still in use`, 6 otros.
+- **Real #1:** `test_datos_m60_iter3.gd` verde con `The caller thread can't call get_node_or_null()`
+  sobre `/root/DataStore` → en juego devuelve `null` en silencio. **No tocado** (BUG-069
+  `PERMITIDOS`, módulo ajeno).
+- **Real #2:** `tests/test_m17_categorias.gd` con `Timer` fuera del árbol → check de timeout puede
+  ser vacuo. M17 = minimax; reportado.
+- **Real #3:** 8 suites dejan `2..5 resources still in use` al salir.
+- **Falso hallazgo propio descartado:** el mojibake visto en captura era de mi consola (cp1252),
+  no del juego (fuentes verificadas en UTF-8).
+- **Pedido D al director:** que el gate marque rojo `SCRIPT ERROR` / `String formatting error` /
+  `resources still in use` (~10 líneas en `run_tests.py`).
+- **Log 2473** · **Reporte `012`** · próximo libre del canal: `013`.
+
 ### Tanda 2026-11-25 16:34 — gate 107/107 y un check que estaba ciego
 
 - **Gate re-medido tras ~30 commits de la flota:** 107 suites del workflow, **107 verdes, 0

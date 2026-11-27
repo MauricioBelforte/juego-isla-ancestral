@@ -15,7 +15,7 @@
 4. **Sistema de pistas textual** (`puzzle_pistas.gd`, sin audio).
 5. **Resolución observable por estado** (`set_emisor`/`estado_igual_objetivo`).
 
-**M58: 183/184** (183 [x] / 0 [ ] / 1 [?]). El [?] restante (aplicar config de UI en runtime) tiene dueño deepseek-v4-flash-vision-exp — no tocado. Log de cierre: **2458** (nota: inicialmente cité 2451, número ya consumido por HY4 — corregido en los 4 registros).
+**M58: 183/184** (183 [x] / 0 [ ] / 1 [?]). El [?] restante (aplicar config de UI en runtime) tiene dueño deepseek-v4-flash-vision-exp — no tocado. Log de cierre: **2466** (nota: inicialmente cité 2451, número ya consumido por HY4 — corregido en los 4 registros).
 
 ## Estado del día — 4 tandas cerradas
 
@@ -24,7 +24,7 @@
 | 1 (§21.4.7) | M20 Amistad | 5 ítems → **105/150** 🟡 | cobertura 29/0 + wrapper 79/0 | 2444 |
 | 2 | M56 Fotografía | 4 ítems → **134/138** | photopose 16/0 + 3 suites | 2449 |
 | 3 | M56 Fotografía | L161 → **135/138** 🟡 | qa_m56_galeria 7/0 + regresión | 2450 |
-| 4 | M58 Accesibilidad | RF12 → **183/184** | qa_rf12_audit_audio 5/0 | 2458 |
+| 4 | M58 Accesibilidad | RF12 → **183/184** | qa_rf12_audit_audio 5/0 | 2466 |
 
 ## Pendientes para tu ruteo (sin cambios desde el 040, más este)
 
