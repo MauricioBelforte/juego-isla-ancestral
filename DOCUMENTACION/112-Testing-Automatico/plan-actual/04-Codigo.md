@@ -855,3 +855,61 @@ presupuesto de 600 s) — la suite nueva esta incluida en el descubrimiento.
 - No se marco ninguna suite con `NECESITA_TIMEOUT_LARGO`: hoy ninguna lo pide (la suite que espera la
   baseline es un **arnes de 30 min** —`sesion_m62_30min.gd`—, que no es una suite del runner).
 - No se toco `05-Checklist.md` de M112 ni la fila global (los conteos los sello agnes-3-flash).
+
+---
+
+## Re-medicion de la lane de MODULOS con el tope arreglado (2026-11-27, minimax-m3-1-flash)
+
+**Log:** 2479 · **Canal:** `MiniMax-M3.1-Flash` (msj 088)
+
+Se volvio a medir la lane de modulos **despues** de corregir el tope por suite (Log 2478), para
+actualizar el dato de decision. Resultado: **el veredicto NO cambia** — la lane sigue sin cerrar en el
+runner central — pero el motivo queda CLARO y la propuesta se AFINA.
+
+### La medicion (con el tope ya corregido)
+
+`M112_INCLUIR_MODULOS=1 ... --script res://tests/run_tests.gd` (tope 1150 s):
+
+| Medida | Valor |
+|---|---|
+| Suites descubiertas | **498** (494 SceneTree + 4 GdUnit4) |
+| Suites ejecutadas en 1150 s | 420 |
+| Rojas | **10** (1 de ellas TIMEOUT) |
+| Termino | **NO** |
+
+### Lo importante: los rojos NO son deterministas
+
+| Corrida | Numero de rojos | Quienes |
+|---|---|---|
+| 1 (Log 2477) | 9 | mayormente suites que el CI corre en VERDE |
+| 2 (Log 2479) | 10 | **set distinto**: aparecieron `test_balance_m93_iter3.gd`, `test_event_manager_verificacion.gd`, `test_amistad_eventos.gd`, `test_logros_m72_statids.gd`, `test_vfx_m52_iter6.gd` y se fueron otros |
+
+**El set de rojos cambia entre corridas**: eso es la firma de la **contencion del pool** (6 workers
+compitiendo por la CPU en una maquina compartida), no de fallos de codigo. Refuerza la medicion
+anterior: de 10 rojos, solo **2 son estables** (rojos en solitario, en AMBAS corridas):
+
+- `scripts/debug/test_debug_m110.gd` (M110)
+- `scripts/world/test_generacion_m10_atria.gd` (M10)
+
+Y dos de los rojos variables **los corre el CI** (`test_amistad_eventos.gd`,
+`test_logros_m72_statids.gd`), donde pasan en VERDE porque el CI los ejecuta **en serie**, sin pool.
+
+### La conclusion que cambia la propuesta
+
+**La lane de modulos NO pertenece al POOL del runner central: pertenece al CI.**
+
+- En el runner central las suites compiten por la CPU (pool de 6) y eso fabrica rojos que no existen.
+- En el CI (`quality.yml`, job `test-suite`) las invocaciones son **secuenciales dentro de cada
+  shard**: sin contencion. Con 4 shards, las 498 suites (~2,5 s cada una) serian
+  ~498 x 2,5 s / 4 = **~5-6 min** por shard, dentro del tope de 20 min del job.
+
+O sea: la salida correcta es **registrar las 390 suites que faltan en el CI** (decision de la
+directora y de los duenos de cada modulo), y **NO** activar la lane de modulos en el runner central.
+El runner central sigue siendo el verificador rapido (76 suites, 364 s) y el CI el verificador
+completo.
+
+### Lo que NO se hizo
+
+- **No se registro** ninguna suite nueva en el workflow (decision de la directora y de los duenos).
+- **No se activo** la lane de modulos en el runner central.
+- No se toco `05-Checklist.md` de M112 ni la fila global.
