@@ -6,6 +6,11 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [112-Testing] **Tanda P12 (Log 2474)**: el auditor de cobertura de suites (de DS-DeepAI) **nunca estuvo cableado** -> sus hallazgos no frenaban nada. Ahora es gate DURO del CI: job nuevo `suite-coverage-gate` (informe `--fuera` + prueba en rojo + gate `--check`), con `--workflow` opcional en el auditor para probarlo sobre una copia inyectada — 2026-11-27
+- [x] [112-Testing] `scripts/probar_gate_cobertura_suites.py` (nuevo): exige que el workflow real este verde, que con una suite inexistente el gate se ponga ROJO **y nombre la suite**, y que el workflow real quede intacto — EXIT 0 (4 ok, 0 fallos) — 2026-11-27
+- [x] [Canal] Mensaje 082 (P12) reportado a la directora — 2026-11-27 01:10
+- [x] [Log] Log reservado: **2474** (con `reservar_log.py --reservar`, consumo atomico) — tanda P12 M112 (gate de cobertura de suites)
+- [ ] [Decision-pendiente] M112: **registrar en el workflow las suites que hoy no corren** (el auditor las lista con `--fuera`): el gate no decide eso, es decision de la directora y de los duenos de cada modulo — **esperando su answer**
 - [x] [112-Testing] **Tanda P11 (Log 2465)**: mesure el costo real por proceso (arranque 3,8 s / carga del mundo 5,3 s / **DEINIT ~19,6 s** = 79% del costo) y lo elimine para los procesos de test: `Bootstrap._debe_cargar_escena_principal()` omite `main_island.tscn` en las suites, con opt-in `const NECESITA_MUNDO := true` (solo 2 suites lo piden) — suite tipica 25-30 s -> **2,5 s** — 2026-11-25
 - [x] [112-Testing] `.github/workflows/quality.yml`: job `test-suite` repartido en **4 shards** en paralelo (matrix + fail-fast:false), reparto por dos contadores round-robin (ligeras/pesadas) y **aislamiento de `user://` por shard** (XDG_DATA_HOME/XDG_CONFIG_HOME). Union de los shards = conjunto original (verificado con el bloque real) — 2026-11-25
 - [x] [112-Testing] Verificacion: **108/108 suites del CI EXIT 0** con el mundo omitido · runner central **74/74 suites, 3080 tests, 0 fallos, 366,7 s** (antes 771 s -> **CUMPLE** el presupuesto de 600 s) · regresion M17 7/7 · juego normal sin cambios · `validar_workflows.py` OK — 2026-11-25

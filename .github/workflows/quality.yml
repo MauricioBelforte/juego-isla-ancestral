@@ -1150,6 +1150,50 @@ jobs:
       - name: Bug registry gate
         run: python3 scripts/metricas_bugs.py --check
 
+  # Gate de COBERTURA de suites (M112, minimax-m3-1-flash, Log 2466, 2026-11-25).
+  #
+  # MOTIVO: una suite que NO esta en el workflow puede quedarse en ROJO durante
+  # semanas sin que nadie se entere — el job dice "verde" y miente por omision.
+  # Caso real ya cerrado: `tests/test_m17_categorias.gd` (24 checks, 3 fallos)
+  # no estaba registrada en el workflow y su rojo no frenaba el CI.
+  #
+  # EL AUDITOR YA EXISTIA (`tools/quality/auditar_cobertura_suites.py`, de
+  # DeepSeek-V4.1-Flash-DeepAI) pero NUNCA ESTABA CABLEADO: sus hallazgos no
+  # frenaban nada. Este job lo convierte en gate DURO.
+  #
+  # - `--fuera` es INFORME (que suites hay en el repo y el workflow no ejecuta):
+  #   no puede ser gate o naceria rojo por la deuda historica.
+  # - `--check` es el gate: exit 1 si el workflow referencia una suite INEXISTENTE
+  #   (el "rot del doctor": alguien borro una suite y dejo la entrada).
+  # - La prueba en rojo exige que el gate se ponga ROJO ante una entrada rota
+  #   (trabaja sobre una COPIA temporal: el workflow real no se toca, porque lo
+  #   editan varios agentes a la vez).
+  suite-coverage-gate:
+    name: Suite coverage gate (M112)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      # Informe (NO gate): el hueco de cobertura, visible en cada corrida.
+      - name: Suite coverage report (informative)
+        run: python3 tools/quality/auditar_cobertura_suites.py --fuera
+
+      # PRUEBA EN ROJO: un gate que nunca se ve rojo no es un gate.
+      - name: Prove the gate by injection
+        run: python3 scripts/probar_gate_cobertura_suites.py
+
+      # GATE DURO.
+      - name: Suite coverage gate
+        run: python3 tools/quality/auditar_cobertura_suites.py --check
+
   architecture-guard:
     name: "Architecture Guard (M62: servicios y carga sincrona)"
     runs-on: ubuntu-latest
@@ -1330,7 +1374,7 @@ jobs:
 
   summary:
     name: Quality Gate Summary
-    needs: [godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, bug-registry, architecture-guard, checklist-orchestrator, release-gate]
+    needs: [godot-lint, formatting-check, test-suite, legal-tools, security-scan, encoding-guard, log-protocol, binary-guard, bug-registry, suite-coverage-gate, architecture-guard, checklist-orchestrator, release-gate]
     runs-on: ubuntu-latest
     if: always()
     steps:

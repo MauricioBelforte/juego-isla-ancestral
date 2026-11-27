@@ -82,13 +82,22 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description="Cobertura de suites vs workflow de CI")
     ap.add_argument("--check", action="store_true", help="exit 1 si el workflow referencia suites inexistentes")
     ap.add_argument("--fuera", action="store_true", help="listar las suites que el workflow no ejecuta")
+    ap.add_argument("--workflow", default=None,
+                    help="workflow alternativo a auditar (por defecto: el del repo). "
+                         "Existe para poder PROBAR EL GATE en rojo sobre una copia "
+                         "inyectada, sin tocar el workflow real (M112, 2026-11-25).")
     args = ap.parse_args(argv)
 
     if not PROYECTO.is_dir() or not WORKFLOW.is_file():
         print("ERROR: no encuentro el proyecto o el workflow", file=sys.stderr)
         return 2
 
-    en_ci = suites_en_ci(WORKFLOW.read_text(encoding="utf-8"))
+    workflow = Path(args.workflow) if args.workflow else WORKFLOW
+    if not workflow.is_file():
+        print(f"ERROR: no encuentro el workflow a auditar: {workflow}", file=sys.stderr)
+        return 2
+
+    en_ci = suites_en_ci(workflow.read_text(encoding="utf-8"))
     disco = suites_en_disco()
     fuera = [s for s in disco if s not in en_ci]
     inexistentes = [s for s in en_ci if not (PROYECTO / s).is_file()]
