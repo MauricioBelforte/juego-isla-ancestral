@@ -1,0 +1,192 @@
+{
+  "task_id": "S2-20",
+  "model": "GPT-6-Luna",
+  "platform": "DeepAI Code",
+  "date": "2026-11-26",
+  "scope": "Auditoría de fidelidad y citas del handoff S2-18 contra las fuentes citadas y el estado disponible al cotejo. Muestra elegida por GPT-6-Luna tras la autorización general de Agnes #010 (Agnes no designó el artefacto concreto). Solo lectura; no es reserva, QA runtime, ni permiso para modificar M87.",
+  "sample": {
+    "artifact": "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-18-handoff-m87.json",
+    "basis": "Handoff de M87 preparado por GPT-6-Luna; se eligió por ser pertinente a síntesis y cross-documentación y no repetir el S2-12 auditado por S2-19.",
+    "authorization_reference": "Mensajes entre modelos/GPT-6-Luna/010-2026-11-26_00-05-00-agnes-3-flash-a-gpt-6-luna-acuse-999-1008-b02-avance.md",
+    "snapshot_in_sample": {
+      "head": "98ce7e6ba937950222f0cba8cf9ae3070ead7cd4",
+      "date": "2026-11-25"
+    },
+    "head_at_review": "f5e9caf7b1ea72986750881bce69f89c2c324ceb",
+    "selection_attribution": "La autorización de Agnes fue general (hacer S2-20); la selección de S2-18 fue decisión de GPT-6-Luna."
+  },
+  "source_hashes_sha256_at_review": {
+    "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-18-handoff-m87.json": "5caa66131fff22ce562d5ab97a628a98a2836aecc76d4da3c2867cb30b610bf8",
+    "DOCUMENTACION/TAREAS-POR-MODELO/GPT-6-Luna/BACKLOGS/evidencias/S2-17-clasificacion-referencias-m87.json": "14b86a9f694076119d87497462dcdef3f82c6d7fafb39cd8d92a42dee63d0db7",
+    "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md": "6361992a56d91af1c4a25d2c6426b8385a99c260666e1c2bdbb75736b22e827e",
+    "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md": "3231786c8ad8ec5b6613893962b3e1062f828de6eb68a4bc12d3d9b798dfa4a4",
+    "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md": "02e4d4239d6fa58525a3f808a84d4fbd1ff83a7a24a595801e644066f1639b25",
+    "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md": "c8e3d17d8dce86e365423860b0fe7ded5f86612ae04a53ec8043dd87adbc91c9",
+    "CHECKLIST-GLOBAL.md": "a7baecbf417cfc61d392394d89cec0a8ceaf211752dfe8b9ebdc9cffabe8e870",
+    "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md": "9ab5c149ebc54f1cb1b14537e68874fd41f222099d8ce6ca49e964468da72728",
+    "DOCUMENTACION/11-BUGS.md": "b688e09bf4c0cd5de0ab492df9613ee71c60081c2f598e097ba419080dad0855",
+    "game/isla-ancestral/project.godot": "0900f905b0857f746ec99c9cec26bb612bdf35682f0d0ef4429bfb3f38ecb9d6",
+    "game/isla-ancestral/scripts/player/player.gd": "1cdd789f5d72cb9d8f9f0be7487026e44ea8e4066396f720ec64859b758b0fcf",
+    "game/isla-ancestral/scripts/ui/layers/inventory_layer.gd": "f66da623e790db7eebd1caae81f322b2010ba77b873fa4e1e3ca241c948c65a9",
+    "game/isla-ancestral/scripts/localization/localization_manager.gd": "6631a7469b76575f863259013d68d623fb3b0cdcdbdde60c947ca0326982a0c6",
+    "game/isla-ancestral/scripts/localizacion/localization_manager.gd": "5ad06224bece44384272d7c91f07ddec80af3b190b98ba11e582fba86985c062",
+    "game/isla-ancestral/scripts/editor/_colector_sintaxis.gd": "5d09e17cd5f50eaaa395c70ff29dd8cf3e0f2bec3b44aecfe49345a353fdd133",
+    "game/isla-ancestral/scripts/legal/credits_manager.gd": "2711092ec8fe92866d3627a8aae4c69bfea743155a18413f7819548c7b1e5936",
+    "game/isla-ancestral/scripts/inventario/inventario_iter4.gd": "a5a49767e4cb8133463e04f7d6277fde5c6b0a46647fd4284de5cd003461919e",
+    "game/isla-ancestral/locales/es.po": "f21df27e9d32859fac7a97145da6c2541940b5340f924e6cff0f891017731269",
+    "game/isla-ancestral/locales/en.po": "ad377c73b896f30f46657b0e085abd4592eae523412c954fa05fb9bde7015f48",
+    "game/isla-ancestral/locales/pt.po": "fe9044e2c3317c26559d53e07985b42e1aebbd1ebdc3c7cc0f27a384d092a76e"
+  },
+  "findings": [
+    {
+      "severity": "omisión material de alcance",
+      "claim_in_handoff": "S2-18 presenta los literales del panel de inventario en player.gd y las claves propuestas ausentes como deuda UI corroborada estáticamente, citando S2-17.",
+      "evidence": "player.gd:504-508 declara explícitamente que el panel de inventario en esa sección es LEGACY INERTE/desactivado, que la acción B la gestiona InventoryLayer (M53), y que solo el hotbar sigue activo. Las funciones de panel citadas están en el bloque posterior (p. ej. _create_inventory_panel:575, _show_context_menu:938); no se halló en scripts un consumidor externo de _toggle_inventory o esas funciones de panel. inventory_layer.gd documenta que es el único panel y que la unificación BUG-001 eliminó el doble sistema; sus usos activos inspeccionados traducen título, placeholder, ordenar, aplicar y descartar vía claves existentes.",
+      "verdict": "El texto fuente de los literales permanece en disco y las cuatro claves ITEMS.* siguen ausentes, pero no debe inferirse que esos literales del panel sean deuda de UI activa/player-visible: están dentro del sistema que el propio archivo marca inerte. El hotbar sí permanece activo; la etiqueta Sin herramienta se encuentra en ese bloque, pero S2-18 no separa el hotbar del inventario legado. S2-18 preserva que el análisis es estático; faltó añadir esta condición de alcance.",
+      "certainty": "alta para las declaraciones y referencias estáticas; no establece flujo runtime"
+    },
+    {
+      "severity": "afirmación de pendiente desactualizada o ambigua",
+      "claim_in_handoff": "Handoff incluye en 04-Codigo §8 una decisión pendiente sobre eliminar el autoload duplicado LocalizationManager y recomienda confirmar vigencia.",
+      "evidence": "project.godot registra un único autoload de localización, Localization -> scripts/localization/localization_manager.gd. DOCUMENTACION/11-BUGS.md BUG-104 registra que la línea de autoload duplicada fue eliminada y las referencias corregidas; el script viejo quedó como huérfano. La búsqueda actual encuentra una referencia de producción en _colector_sintaxis.gd (preload para el colector de parseo), no una segunda entrada de autoload. La propia 04-Codigo §8b distingue el script huérfano del autoload activo.",
+      "verdict": "La fila de deuda 04-Codigo:216, repetida en la síntesis S2-18, confunde la eliminación ya resuelta del autoload duplicado con una posible limpieza futura del archivo legado. BUG-104/estado estático actual respaldan que ya no hay dos autoloads activos. La decisión residual sobre borrar el script del colector de sintaxis puede seguir pendiente, pero es una cuestión distinta y el handoff no la formula con precisión. No se comprobó runtime.",
+      "certainty": "alta para project.godot y referencias en disco; el resultado runtime se cita solo como historial de BUG-104"
+    },
+    {
+      "severity": "desfase de cita y snapshot histórico",
+      "claim_in_handoff": "S2-18 cita CHECKLIST-GLOBAL.md:191 y DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md:50 para estado de M87.",
+      "evidence": "Al snapshot revisado, fila global M87 aparece en la línea 191 y la fila histórica M87 de guía 08 en la línea 54 (no 50). La fila de guía conserva estado de octubre 131/136 y no es el estado actual. La fila de CHECKLIST-GLOBAL en HEAD y working tree permanece textualmente igual a la citada: ✅ completado, 140/140, QA §21.8; no se reejecutó ese gate.",
+      "verdict": "La referencia de guía 08 a línea 50 es ancla stale, aunque el handoff describe correctamente el carácter histórico de esa fila. La discrepancia entre guía 08 y GLOBAL no es una nueva contradicción del estado actual: guía 08 es registro histórico de reserva y GLOBAL es el tablero actual. Los hashes integrales de GLOBAL y guía 08 ya no coinciden con el snapshot guardado en S2-18; la fila M87 de GLOBAL se cotejó igual a HEAD.",
+      "certainty": "alta"
+    },
+    {
+      "severity": "cita de commit atribuida a evidencia incorrecta; confirmado previamente en S2-17",
+      "claim_in_source": "03-Diseno.md:180 atribuye la migración de 14 claves eventos.* a .po al commit 3b43f64.",
+      "evidence": "git show 3b43f64 sobre catálogos muestra claves SETTINGS.MEJORAR y no las claves eventos.historia_c*. Las entradas ES/EN eventos.* y ajuste del test M74 aparecen en 96a6e77; la traducción PT y habilitación de locale PT aparecen en 071a2f9. Las tres familias .po actuales contienen 14 msgids eventos.*; esto corrobora presencia actual en catálogos, no runtime.",
+      "verdict": "S2-17 ya había marcado este punto como procedencia Git incorrecta. S2-18 sí lo incluye dentro de un comentario general sobre drift de historial/atribución, pero no desarrolla el detalle; no contar como hallazgo totalmente omitido ni como falso claim nuevo de S2-18. Mantener separadas la existencia actual de claves y su atribución histórica.",
+      "certainty": "alta para los paths/diffs de commits examinados"
+    },
+    {
+      "severity": "anclas históricas en notas de M06",
+      "claim_in_source": "03-Diseno.md §2.4.6 y 04-Codigo.md TANDA 21 mantienen numeración de líneas de player.gd y una frase de que player.gd estaba sin cambios desde 1e62132.",
+      "evidence": "player.gd actual conserva los literales citados en el bloque legado, pero el archivo recibió cambios posteriores, incluido f860e00. Ejemplo de ancla: ‘Buscar ítem...’ está en player.gd:650, no en la antigua línea 637. La nota no delimita que el comentario ‘sin cambios’ se refería a ese bloque ni reconoce que el bloque es legado inerte.",
+      "verdict": "Advertencia documental ya clasificada en S2-17. El handoff menciona las referencias históricas y pide reconciliación, aunque no explicita la inactividad del panel. La permanencia literal del código no demuestra función activa ni validez de la deuda actual.",
+      "certainty": "alta"
+    },
+    {
+      "severity": "contradicción interna adicional del documento 04-Codigo",
+      "claim_in_source": "04-Codigo.md:238 conserva ‘25 solo-JSON’ y evento.* entre los grupos sin .po, mientras las notas posteriores de 04:247 y 03-Diseno:180/489 describen eventos.* migrado y 11 claves solo-JSON.",
+      "evidence": "Las fuentes actuales del proyecto incluyen 14 eventos.historia_c* en es.po, en.po y pt.po. La propia 04:247 declara 159/11/115 y que las 11 solo-JSON restantes son ui (6), msg (3), npc (2); 03-Diseno:180/489 registra la migración y 159/11/115. La cifra 25 de 04:238 es un estado anterior no actualizado.",
+      "verdict": "El comentario de S2-18 sobre párrafos pre-PT y referencias obsoletas apunta correctamente a deriva documental, pero no identifica esta contradicción interna concreta. El contenido de estos catálogos se inspeccionó estáticamente; las cifras son documentales y no resultado de validador ejecutado.",
+      "certainty": "alta para las líneas y contenidos inspeccionados"
+    },
+    {
+      "severity": "resumen de pruebas históricas bien acotado",
+      "claim_in_handoff": "S2-18 dice que 169 checks/0 fallos corresponden al QA global histórico y que no se reejecutó.",
+      "evidence": "CHECKLIST-GLOBAL:191 atribuye gate-2 a Hy3 #433/Log 2231 (46+36+87). 07-Resultados-Testings.md:6-17 contiene en cambio resultados históricos de seis suites y test_localizacion_iter6 82/0. No se ejecutó Godot, suites ni validadores durante S2-20.",
+      "verdict": "Fiel: S2-18 distingue fuente de QA, evidencia de 06/07 y verificación no ejecutada. No reclamar esos resultados como propios ni actuales.",
+      "certainty": "alta para atribución documental; sin revalidación"
+    }
+  ],
+  "citations": [
+    {
+      "path": "game/isla-ancestral/scripts/player/player.gd",
+      "lines": [504, 508, 549, 575, 650, 958, 965, 973, 1130],
+      "excerpt": "El encabezado declara panel M14 legacy inerte/desactivado, InventoryLayer como handler de B y hotbar como activo; las funciones y literales del panel siguen en el archivo.",
+      "use": "Alcance actual de los literales M06 reportados por S2-17/S2-18."
+    },
+    {
+      "path": "game/isla-ancestral/scripts/ui/layers/inventory_layer.gd",
+      "lines": [4, 11, 94, 129, 158, 169, 178, 449, 452],
+      "excerpt": "Se declara como panel único tras BUG-001 y las acciones de UI inspeccionadas consumen claves de Localization.",
+      "use": "Contraste estático con el inventario legacy de player.gd."
+    },
+    {
+      "path": "game/isla-ancestral/project.godot",
+      "lines": [59],
+      "excerpt": "Localization=\"*res://scripts/localization/localization_manager.gd\"; no hay segunda entrada LocalizationManager en [autoload].",
+      "use": "Estado estático de Autoload, no prueba runtime."
+    },
+    {
+      "path": "DOCUMENTACION/11-BUGS.md",
+      "lines": [5191],
+      "excerpt": "BUG-104 registra que se quitó la línea de autoload duplicada, se migraron dos referencias, y el script viejo quedó huérfano por restricción del director.",
+      "use": "Evidencia histórica del cambio; su runtime no se reejecutó aquí."
+    },
+    {
+      "path": "game/isla-ancestral/scripts/editor/_colector_sintaxis.gd",
+      "lines": [649, 650],
+      "excerpt": "El colector de sintaxis preloadea el script legacy y un test antiguo movido a Obsoletos.",
+      "use": "Explica la referencia superviviente, distinta de un autoload."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/04-Codigo.md",
+      "lines": [211, 218, 223, 224, 238, 243, 247, 249],
+      "excerpt": "Tabla de pendientes incluida la fila stale de autoload; §8b mezcla estado pre-PT (es/en, 25 solo-JSON) con notas posteriores que declaran PT y 11 solo-JSON; TANDA 21 conserva afirmaciones/anclas de player.gd.",
+      "use": "Contrastar el contenido sintético con el propio documento y su cronología interna."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/03-Diseno.md",
+      "lines": [180, 247, 277, 489],
+      "excerpt": "Migración de eventos mal atribuida a 3b43f64; nota ‘player.gd sin cambios’; sección 2.4.16 que registra PT runtime y conteo 159/11/115.",
+      "use": "Verificar drift de citas/procedencia y salvedad M06."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/05-Checklist.md",
+      "lines": [106, 109, 116, 342, 390],
+      "excerpt": "Adopción M53 acotada se marca [x] en dos ítems; 140 marcas literales coexisten con 135 completados netos + 5 deudas documentadas en texto.",
+      "use": "Estado del checklist reportado por fuente; no se normaliza ni flippea."
+    },
+    {
+      "path": "CHECKLIST-GLOBAL.md",
+      "lines": [191],
+      "excerpt": "M87 ✅ QA §21.8, 140/140, sello atribuido a Agnes y gate-2 histórico Hy3 169/0.",
+      "use": "Estado global registrado; no validado de nuevo."
+    },
+    {
+      "path": "DOCUMENTACION/08-GUIA-ORDEN-DE-IMPLEMENTACION.md",
+      "lines": [54],
+      "excerpt": "Fila M87 que conserva liberación de octubre 131/136 y cinco deudas delegadas.",
+      "use": "Registro histórico, actualmente en línea 54; la cita line 50 del snapshot S2-18 está desfasada."
+    },
+    {
+      "path": "DOCUMENTACION/87-Localizacion/plan-actual/07-Resultados-Testings.md",
+      "lines": [6, 17],
+      "excerpt": "Registra 6 suites y 82 checks en iteración 6 como historial.",
+      "use": "Diferenciar resultados de 06/07 del gate global posterior de 169 checks."
+    },
+    {
+      "path": "game/isla-ancestral/locales/es.po; game/isla-ancestral/locales/en.po; game/isla-ancestral/locales/pt.po",
+      "lines": ["msgid eventos.historia_c*"],
+      "excerpt": "Las tres familias tienen 14 claves eventos.historia_c* en el contenido actual.",
+      "use": "Presencia estática solamente; no ejecutar ni afirmar validador/runtime."
+    },
+    {
+      "path": "S2-17 (evidencia JSON), findings sobre 3b43f64 y player.gd",
+      "lines": [],
+      "excerpt": "S2-17 ya identificó el commit de eventos, la nota stale de player.gd y anclas de línea históricas.",
+      "use": "Separar hallazgos heredados y ya divulgados de los matices adicionales que S2-20 agrega."
+    }
+  ],
+  "checks": {
+    "sample_json_parseable": true,
+    "sample_sha256_recorded_at_review": "5caa66131fff22ce562d5ab97a628a98a2836aecc76d4da3c2867cb30b610bf8",
+    "current_global_row_equals_head": true,
+    "current_global_row_claim": "M87 ✅ QA §21.8, 140/140; el gate Hy3 169/0 está citado como histórico.",
+    "only_one_localization_autoload_in_project_godot": true,
+    "legacy_player_inventory_block_labeled_inactive": true,
+    "event_keys_static_presence_in_three_po_files": true,
+    "godot_tests_or_runtime_executed": false,
+    "validators_executed": false,
+    "canonical_sources_modified": false,
+    "checklists_global_or_marks_modified_by_this_task": false
+  },
+  "not_done": [
+    "No se ejecutó Godot, tests, runtime, validador i18n ni QA visual.",
+    "No se modificaron M87, player.gd, catálogos, documentación canónica, CHECKLIST-GLOBAL ni guía 08.",
+    "No se cambiaron marcas, backlogs ni estado de otros agentes.",
+    "Los mensajes de Agnes sobre M167 y BUG-073 se trataron como recibidos, no como autorización para modificar esos módulos."
+  ],
+  "conclusion": "S2-18 representa correctamente que el GLOBAL declara M87 sellado, que el gate de 169 checks es histórico y que la guía 08 es un registro antiguo. Sin embargo, hereda una deuda ambigua del autoload duplicado (la segunda entrada ya fue eliminada según BUG-104; el script huérfano preloadeado por el colector es otro asunto) y presenta literales del panel legacy de player.gd sin destacar que su sección se declara inerte y que InventoryLayer es el panel único. También omite la contradicción interna 25 vs 11 claves solo-JSON en 04-Codigo; sí incluye una advertencia general sobre drift de esa fuente. Las alertas de commit y líneas sobre eventos/player.gd ya constaban en S2-17. Esto es cotejo documental/estático, no verificación runtime, no reabre M87 y no asigna correcciones.",
+  "limitations": "La elección concreta S2-18 la realizó GPT-6-Luna bajo autorización general de Agnes; Agnes no nominó este artefacto. Claims de commits se comprobaron con git show; solo implican las rutas y diffs observados. Los hashes fijan fuentes en disco al momento del cotejo; el repositorio tenía cambios ajenos en otros archivos. No inferir comportamiento runtime a partir de inspección estática."
+}
