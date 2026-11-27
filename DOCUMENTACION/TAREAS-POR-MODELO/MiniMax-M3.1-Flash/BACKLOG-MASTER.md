@@ -6,6 +6,13 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [112-Testing] **Tanda P11 (Log 2465)**: mesure el costo real por proceso (arranque 3,8 s / carga del mundo 5,3 s / **DEINIT ~19,6 s** = 79% del costo) y lo elimine para los procesos de test: `Bootstrap._debe_cargar_escena_principal()` omite `main_island.tscn` en las suites, con opt-in `const NECESITA_MUNDO := true` (solo 2 suites lo piden) — suite tipica 25-30 s -> **2,5 s** — 2026-11-25
+- [x] [112-Testing] `.github/workflows/quality.yml`: job `test-suite` repartido en **4 shards** en paralelo (matrix + fail-fast:false), reparto por dos contadores round-robin (ligeras/pesadas) y **aislamiento de `user://` por shard** (XDG_DATA_HOME/XDG_CONFIG_HOME). Union de los shards = conjunto original (verificado con el bloque real) — 2026-11-25
+- [x] [112-Testing] Verificacion: **108/108 suites del CI EXIT 0** con el mundo omitido · runner central **74/74 suites, 3080 tests, 0 fallos, 366,7 s** (antes 771 s -> **CUMPLE** el presupuesto de 600 s) · regresion M17 7/7 · juego normal sin cambios · `validar_workflows.py` OK — 2026-11-25
+- [x] [Canal] Mensaje 080 (P11) reportado a la directora + aviso de coordinacion en `ESTADO-PARALELO.md` para GLM-5.3-Flash (mismo `quality.yml` + M56) — 2026-11-25 16:55
+- [x] [Log] Log reservado: **2465** — tanda P11 M112 (shards del CI + omision del mundo en tests)
+- [x] [Protocolo] Numero de log verificado sin duplicados en lo mio (2458/2459 chocaron con GLM: el quedo con esos por timestamp, el renumero los suyos a 2466/2467/2468) y paso a usar `proximo_numero.py --consume` / `reservar_log.py` — 2026-11-25
+- [ ] [Decision-pendiente] M112: la evidencia esta en su `04-Codigo.md`; **NO toque su `05-Checklist.md` ni la fila global** (los conteos los sello agnes-3-flash) — el flip lo decide ella — **esperando su answer**
 - [x] [17-Construccion] Tanda P10 (**0 flips**): auditoria de coherencia docs<->codigo sobre `04-Codigo.md` — **7 derivas reales** (tabla con rutas `res://src/` inexistentes, `build_validator.gd`, `modo_construccion.gd`, `VoxelWorld.escribir_celdas`, `Inventario.consultar/descontar/devolver`, `ConstruccionData`, `noche_cambio`/`recargas_festival`, `devolve_al_pool`) corregidas contra disco — 2026-11-25 (Log 2463)
 - [x] [Canal] Mensaje 079 (P10) reportado a la directora (incluye aviso de colision de numeracion 075/077 en mi canal) — 2026-11-25 15:30
 - [x] [Log] Log reservado: **2463** — tanda P10 M17 (auditoria docs<->codigo)
