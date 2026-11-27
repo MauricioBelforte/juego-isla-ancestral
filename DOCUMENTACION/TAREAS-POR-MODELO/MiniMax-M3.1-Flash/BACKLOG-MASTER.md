@@ -6,6 +6,11 @@
 **Capacidades:** Coding DeepSWE 73.7%, Cybersecurity CyberGym 82%, Computer Use OSWorld 61.7%, Agentic tasks (AutomationBench top), Precio $0.15/$0.60/1M, 200+ TPS
 
 ## COLA ACTIVA
+- [x] [112-Testing] **Tanda P13 (Log 2477)**: medí la lane de MODULOS del runner central (el dato que el propio `04-Codigo.md` de M112 pedia para decidir su activacion): **496 suites** descubiertas (492 SceneTree + 4 GdUnit4), la corrida **NO termina** en 1150 s (438 ejecutadas, 428 OK / 9 rojas / 1 timeout) — 2026-11-27
+- [x] [112-Testing] Cuello identificado: `MemoryMonitor.TIEMPO_BASELINE_S = 300.0` (espera de 5 min POR DISENO) vs `TIMEOUT_MS` del runner = 300 s -> la suite cae en 'colgada >300 s' estando sana. De las 9 rojas, **7 son verdes en solitario** (contencion del pool) y **2 son rojas reales que el CI NO ejecuta** (`scripts/debug/test_debug_m110.gd` = M110, `scripts/world/test_generacion_m10_atria.gd` = M10) — 2026-11-27
+- [x] [112-Testing] Propuesta cuantificada para la directora: con el mundo omitido (25 s -> 2,5 s por suite) y el job en **4 shards**, la lane COMPLETA cabria en el CI (496 x 2,5 s / 4 ~ **5-8 min**): el CI podria correr las 496 suites y cerrar el hueco de cobertura de raiz. **NO registré las 390 suites que faltan** (decision suya y de los duenos) — 2026-11-27
+- [x] [Canal] Mensaje 084 (P13) reportado a la directora — 2026-11-27 02:00
+- [x] [Log] Log reservado: **2477** (con `reservar_log.py --reservar`) — tanda P13 M112 (censo de la lane de modulos)
 - [x] [112-Testing] **Tanda P12 (Log 2474)**: el auditor de cobertura de suites (de DS-DeepAI) **nunca estuvo cableado** -> sus hallazgos no frenaban nada. Ahora es gate DURO del CI: job nuevo `suite-coverage-gate` (informe `--fuera` + prueba en rojo + gate `--check`), con `--workflow` opcional en el auditor para probarlo sobre una copia inyectada — 2026-11-27
 - [x] [112-Testing] `scripts/probar_gate_cobertura_suites.py` (nuevo): exige que el workflow real este verde, que con una suite inexistente el gate se ponga ROJO **y nombre la suite**, y que el workflow real quede intacto — EXIT 0 (4 ok, 0 fallos) — 2026-11-27
 - [x] [Canal] Mensaje 082 (P12) reportado a la directora — 2026-11-27 01:10

@@ -724,3 +724,80 @@ format strings: 0 hallazgos en 1378 archivos.
   comando que el workflow.
 - No se modificó `quality.yml`, `dev-build.yml` ni `run_tests.py` para bloquear estas marcas: es una
   **propuesta** (pedido D), pendiente de decisión del director, porque cambia el comportamiento del CI.
+
+---
+
+## Medicion de la lane de MODULOS (2026-11-27, minimax-m3-1-flash) — el dato que faltaba para decidir
+
+**Log:** 2477 · **Canal:** `MiniMax-M3.1-Flash` (msj 084)
+
+Esta seccion pedia explicitamente el dato: *"la activacion de la lane la decide el director con ese dato
+en mano, no un default que rompe un presupuesto ya medido"*. Con la optimizacion del mundo (25 s ->
+2,5 s por suite) el calculo cambia, asi que se VOLVIO a medir.
+
+### 1. Que se midio
+
+`M112_INCLUIR_MODULOS=1 godot --headless --path game/isla-ancestral --script res://tests/run_tests.gd`
+(con tope de 1150 s):
+
+| Medida | Valor |
+|---|---|
+| Suites descubiertas **con** la lane de modulos | **496** (492 SceneTree + 4 GdUnit4) |
+| Suites descubiertas **sin** la lane (por defecto) | 75 |
+| Suites que llegaron a ejecutarse en 1150 s | 438 (428 OK / 9 ROJAS / 1 TIMEOUT) |
+| ¿Termino dentro del tope? | **NO** (seguia corriendo) |
+| Coste por suite (tras la optimizacion del mundo) | **~2,5-4,6 s** (la mayoria) |
+
+### 2. Por que NO cabe (y por que NO es por el volumen)
+
+A primera vista 496 suites x 2,5 s = 1240 s en serie, o **~3,5 min con el pool de 6 workers**: deberia
+caber de sobra. Pero **no termina**, y la causa NO es el numero de suites:
+
+- **El cuello es una espera de 300 s POR DISENO.** `MemoryMonitor.TIEMPO_BASELINE_S = 300.0`
+  (`scripts/rendimiento/memoria/memory_monitor.gd:73`): cualquier suite que espere la baseline
+  estabilizada de memoria tarda 5 minutos. El timeout del runner es de 300 s -> la suite cae en
+  "TIMEOUT — suite colgada >300 s" aunque este perfectamente sana. (En la corrida con modulos aparece
+  el log `baseline estabilizada en 105.2 MB (t=300 s)`).
+- **9 suites en ROJO**, de las cuales **7 son verdes en solitario** (medidas una por una): son
+  reds por CONTENCION del pool, no por el codigo — exactamente lo que el propio runner documenta.
+  Las 2 que son **realmente rojas** (verificadas en solitario) y **NO las corre el CI** son:
+  | Suite en rojo real | Modulo | La corre el CI |
+  |---|---|---|
+  | `scripts/debug/test_debug_m110.gd` | M110 | **NO** (rojo invisible) |
+  | `scripts/world/test_generacion_m10_atria.gd` | M10 (terreno) | **NO** (rojo invisible) |
+- 1 suite del CI (`tests/unit/time/test_time_calendar.gd`) dio TIMEOUT **solo bajo saturacion** del
+  pool: en solitario tarda **2,4 s y sale EXIT 0**.
+
+### 3. Consecuencia: la lane de modulos NO se puede activar tal cual
+
+Activarla tal cual = el runner central deja de terminar y empieza a mentir por saturacion. Las tres
+condiciones para poder activarla:
+
+1. **Timeout adaptativo** para las suites que esperan la baseline de 300 s (mismo patron que
+   `NECESITA_MUNDO`: un opt-in explicito por suite, p. ej. `const NECESITA_TIMEOUT_LARGO := true`).
+2. **Arreglar o declarar** las 2 suites en rojo real (`test_debug_m110.gd`, `test_generacion_m10_atria.gd`),
+   que son de otros duenos.
+3. **Red de seguridad** contra la saturacion: el runner ya re-mide en serie un TIMEOUT, pero con la
+   maquina compartida eso no alcanza; conviene un margen de tiempo por suite.
+
+### 4. La propuesta concreta (para quien decide)
+
+Con el mundo omitido (25 s -> 2,5 s por suite) y el job `test-suite` **repartido en 4 shards**, la
+lane COMPLETA cabria en el CI: 496 suites x 2,5 s / 4 shards ~ **5-8 min** (mas la espera de 300 s de
+la baseline, que sola no rompe el tope de 20 min del job). Es decir: **el CI podria ejecutar TODAY las
+496 suites**, y no solo las 107, cerrando el hueco de cobertura de raiz.
+
+No se hizo (no es decision de una sola persona): (a) registrar 390 suites en el workflow es una
+decision de la directora y de los duenos de cada modulo; (b) hay que resolver antes los 2 rojos
+reales y el timeout de la baseline.
+
+### 5. Lo que NO se hizo (honestidad)
+
+- **No se activo** la lane de modulos en el runner central (sigue apagada por defecto).
+- **No se registro** ninguna suite nueva en el workflow.
+- Los 2 rojos reales son de **M110 y M10**: no se tocan esos modulos (son de otros duenos); se
+  reportan.
+- La atribucion exacta del TIMEOUT de 300 s quedo ambigua: el pool entrelaza la salida de varios
+  workers, asi que el log mezcla mensajes de suites concurrentes. Lo medido y verificable es que
+  `MemoryMonitor.TIEMPO_BASELINE_S = 300.0` (diseño) y que `TIMEOUT_MS` del runner es 300 s: ambos
+  valores, por si solos, ya hacen que una suite que espere la baseline caiga en timeout.
