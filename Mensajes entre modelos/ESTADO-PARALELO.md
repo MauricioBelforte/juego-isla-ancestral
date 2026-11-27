@@ -4,6 +4,12 @@
 
 ---
 
+## 🟡 2026-11-25 — M85-Modelos-3D-Legal: 18 de los 25 Familia A cerrados con implementación real (73→91/100)
+
+**Tanda (fila 🟡, 25 [ ] tras re-baseline 30oct):** capa de servicio completa NUEVA — `model_legal_manager.gd` + `model_license.gd` + `model_credit.gd` (espejo del patrón M84 audio): validate_all_models() (L66), add_license/add_credit con multi-licencia y multi-rol (L67), generate_credits_text/web (L68/L69), save_build_credits con MODEL_CREDITS.txt + reporte (L70/L75), dry-run (L112), skip dev (L113), y los 10 tests L92-L101 en una suite con guardian anti-falso-verde. **Evidencia:** test_model_legal_m85.gd NUEVO 33/0 EXIT 0 + test_model3d_m85 original 8/0 + regresiones M84/M78/M83 verdes. Quedan 7 [ ] de integración cross-módulo (L107/L108-L111/L114 — M117/M72/M71/M119, GO requerido) + 2 [?]. **Hallazgo:** el catálogo real arrastra 2 huecos documentales que la validación DETECTA (tercero sin documento: terrain_textures/ui_icons — evidencia para L48). **Cierre (18:50): 91/100.** Log **2475**. Reporte **045** en mi carpeta.
+
+---
+
 ## 🟡 2026-11-25 — M82-Clasificacion: los 6 [ ] del BUG-070 lote 6 cerrados con artefacto real (90→97/100)
 
 **Tanda (fila 🟡 libre):** L64/L65/L71/L72 via artefacto NUEVO `08-Plan-De-Submissions.md` (timeline W1-W4 del roadmap, matriz de responsabilidad — fundador firma/agente prepara/verificador cruza —, checklist pre-submission universal + adiciones por sistema IARC/PEGI/ESRB/CERO/GRAC/USK/ACB/ClassInd, QA interno 2 automáticos + 1 humano). **L92:** gate de CI REAL — `test_rating_m82.gd` (9/0 medido en verde ANTES de cablear) cableado en `.github/workflows/quality.yml` job test-suite (gate duro). **L119:** §6 resumen ejecutivo (citación correcta al artefacto; la previa era §5.4 fantasma). **L132:** §5 recertificación anual (3 disparadores; procedimental, M121). **Cierre (15:25): 97/100** (3 [?] = ejecuciones en boards reales del fundador). Log **2468**. Reporte **043** en mi carpeta.
@@ -94,7 +100,17 @@ mismo check ciego). Muestra inicial: `test_fuentes_binarias_bug042` = test negat
 `test_calendario` = `get_node_or_null("/root/…")` sobre un nodo fuera del árbol (ruido del
 engine, 8 por corrida). Reportar, no tocar `scripts/time/*` (no es mío).
 
-**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 17:05
+**Ronda 18:14:** cerrado el pendiente del msg 007 con medición real: el preset exportaba con
+`all_resources` y el `.exe` llevaba **174 rutas de `res://tests/`** + el addon + las suites de
+`scripts/**`. Con `exclude_filter="Godot/*,addons/gdUnit4/*,tests/*,scenes/test_runner.tscn,
+*test_*.gd,*qa_*.gd"` (4 presets): 124,52 -> **120,47 MB**, 0 rutas de tests, arranque headless
+`exit=0` con los mismos 3 errores de fuentes de BUG-042 (preexistentes). **`export_presets.cfg`
+quedó restaurado** y `git status` limpio: es propuesta, no cambio aplicado.
+
+**También documenté** los KnownIssues del gate en `112-Testing-Automatico/plan-actual/04-Codigo.md`
+§ N y anexé la nota en la fila 112 del CHECKLIST-GLOBAL (sin tocar estado ni conteos).
+
+**Modelo:** Deepseek V4.1 Flash-DeepAI · **Plataforma:** DeepAI · **Fecha:** 2026-11-25 18:20
 
 ---
 ## 🔵 2026-10-17 — M159-Catalogo-De-Objetos b1: reclamado por agnes-3-flash (Bloque A visual, N702 del director)

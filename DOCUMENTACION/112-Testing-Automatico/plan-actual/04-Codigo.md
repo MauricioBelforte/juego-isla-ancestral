@@ -1,5 +1,5 @@
-**Modelo:** minimax-m3-1-flash — último modificador (fix del TIMEOUT flake del pool → reintento en serie, 2026-10-27) · histórico: DS-V4.1-Flash-Opencode, mimo-v2.6-flash-free
-**Plataforma:** MiniMax API (Kilo Code)
+**Modelo:** Deepseek V4.1 Flash-DeepAI — último modificador (sección N: qué acepta el gate hoy, censo de `ERROR:` en verdes, herramientas de auditoría, 2026-11-25) · histórico: minimax-m3-1-flash (fix del TIMEOUT flake del pool, 2026-10-27), DS-V4.1-Flash-Opencode, mimo-v2.6-flash-free
+**Plataforma:** DeepAI
 
 # 04-Codigo.md — Módulo 112: Testing Automático
 
@@ -654,3 +654,73 @@ no una copia): 4 shards en local -> cada invocacion se ejecuto una vez y solo un
 - No se cambio la lista de suites del CI: se ejecutan **las mismas**, las mismas veces.
 - El reparto en 4 shards multiplica por 4 los **runner-minutes** de GitHub (mismo trabajo, mas
   paralelismo): es un trade-off consciente, no gratis.
+---
+
+## N. Qué acepta el gate HOY que no debería (medición 2026-11-25, Deepseek V4.1 Flash-DeepAI)
+
+**Contexto:** el gate del workflow solo mira el **exit code** de cada suite. Godot sale `0` en
+tres casos que no son verde real. Medido con las **107 invocaciones** del workflow (una por una,
+mismo comando que el CI), más un censo de la salida de cada una.
+
+### N.1 Las tres marcas que el exit code no ve
+
+| Marca en la salida | ¿Rompe el exit? | Qué significa | Medido 2026-11-25 |
+|---|---|---|---|
+| `SCRIPT ERROR` | **Sí** (aborta, exit != 0) | La suite murió a mitad: los checks que faltaban no se cuentan | **0 suites** |
+| `String formatting error: unsupported format character.` | **No** | El literal `%` mal escapado deja el mensaje del check **vacío**; el assert sigue evaluándose, pero si falla no explica nada | **2 líneas**, en `scripts/stream/test_stream.gd:81/:94` (**corregidas** con `%%`) |
+| `N resources still in use at exit` | **No** | Fuga de recursos al salir; no rompe nada hoy | **8 suites** (2 a 5 recursos) |
+
+Ejemplo real del segundo caso (el más peligroso, porque el check sigue verde):
+
+```gdscript
+_check(p0 >= 0.02, "piso 2% al iniciar cola (%.2f)" % p0)   # el % de '2% al' es especificador invalido
+# Godot: ERROR: String formatting error: unsupported format character.
+# -> el mensaje queda "", el check se evalua igual, EXIT 0
+```
+
+### N.2 Censo de `ERROR:` en suites verdes
+
+```
+107 suites -> 0 rojas, 0 timeouts
+  SCRIPT ERROR ....... 0
+  format error ....... 0
+  ERROR: y exit 0 .... 25 suites / 64 lineas
+```
+
+Desglose por familia (script de clasificación, temporal, ya borrado):
+
+| Familia | Líneas | Suites | Veredicto |
+|---|---|---|---|
+| `get_node()` con ruta absoluta fuera del árbol | 14 | 5 | Ruido del engine: `get_node_or_null("/root/…")` sobre un nodo sin `add_child` (p.ej. `scripts/time/game_clock.gd:51`) |
+| FreeType / `_ensure_cache_for_size` | 12 | 1 | Test negativo deliberado (BUG-042, fuentes binarias inválidas) |
+| Test negativo deliberado (JSON inválido, save corrupto, `.tres` faltante, versión futura) | ~24 | 9 | Correcto: provocan el error y verifican el manejo |
+| `N resources still in use at exit` | 8 | 8 | Fuga real al salir (menor) |
+| Otros | 6 | 5 | Ver N.3 |
+
+### N.3 Hallazgos que quedan abiertos (no se tocaron)
+
+- **Thread-safety sobre `/root/DataStore`**: `scripts/datos/test_datos_m60_iter3.gd` sale verde
+  imprimiendo `The caller thread can't call the function get_node_or_null() on this node`. En juego
+  esa llamada devuelve `null` en silencio y la lógica cae al fallback. Dueño: M60/persistencia.
+  No se tocó porque `DataStore`↔`SaveManager` está declarado `PERMITIDOS` (BUG-069).
+- **`Timer` fuera del árbol** en `tests/test_m17_categorias.gd`: el timer no arranca, así que un
+  check basado en timeout puede ser vacuamente verde. M17 está reclamado por `minimax-m3-1-flash`.
+- **8 suites dejan recursos vivos al salir**: señal barata de leaks en headless.
+
+### N.4 Herramientas nuevas (auditoría del gate, no del juego)
+
+| Archivo | Qué mide | Exit |
+|---|---|---|
+| `tools/quality/auditar_cobertura_suites.py` | Clasifica las suites en disco vs las registradas en `quality.yml`; `--check` falla solo si el workflow apunta a un archivo inexistente | 0/1 |
+| `tools/quality/detectar_format_invalido.py` | Escanea los `.gd` (sin `addons/`) y valida los especificadores **solo en literales que son operando de `%`**; `--check` devuelve 1 con hallazgos | 0/1 |
+
+Ambas son de solo lectura sobre el repo y corren en segundos: candidatas a paso de CI (propuesta al
+director, mensajes `009`, `011` y `012`). Hoy: cobertura 107 suites registradas / 0 inexistentes;
+format strings: 0 hallazgos en 1378 archivos.
+
+### N.5 Lo que este documento NO afirma
+
+- No se ejecutó el CI real (no hay runners desde este entorno): todo lo de arriba es local, mismo
+  comando que el workflow.
+- No se modificó `quality.yml`, `dev-build.yml` ni `run_tests.py` para bloquear estas marcas: es una
+  **propuesta** (pedido D), pendiente de decisión del director, porque cambia el comportamiento del CI.

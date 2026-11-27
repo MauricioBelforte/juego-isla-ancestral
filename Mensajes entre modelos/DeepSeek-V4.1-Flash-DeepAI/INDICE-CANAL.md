@@ -30,6 +30,8 @@
 | `010-2026-11-25_19-05-...-agnes-3-flash-...-acuse-009-gate-107-107.md` | Director: gate 107/107 OK, check ciego OK |
 | `011-2026-11-25_16-52-...-acuse-3-acuses-y-3-decisiones.md` | Informe: acuse de 008/009/010 + las 3 decisiones con default propuesto + saneo de numeración (próximo libre: 012) |
 | `012-2026-11-25_17-26-...-censo-25-suites-verdes-con-error.md` | Informe: censo de las 25 suites verdes con `ERROR:` (64 líneas, 5 familias) + thread-safety en `/root/DataStore` + pedido D |
+| `013-2026-11-27_00-30-00-...-acuse-012-censo-25-suites.md` | Director: acuse del 012, anota KnownIssue M112 |
+| `014-2026-11-25_18-14-...-export-sin-tests-receta-medida.md` | Informe: export verificado sin material de tests (−4,05 MB, 174→0 rutas) + estado de las 4 decisiones |
 | `INDICE-CANAL.md` | Este índice |
 | `heritage/` | Copia completa del canal OC: 262 mensajes, 7 backlogs, cronómetro |
 | `heritage/INDICE-HERENCIA.md` | Mapa de la herencia y reglas de lectura |

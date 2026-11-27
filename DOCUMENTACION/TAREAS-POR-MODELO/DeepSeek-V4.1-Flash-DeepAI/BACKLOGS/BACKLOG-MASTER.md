@@ -126,6 +126,21 @@ y una suite con conteo real (detalle completo en `02-Backlog-Criticos-12.md` y L
   526 en disco (522 st / 4 gd), 104 en el workflow, 426 fuera; bajo `tests/` **61** (57 st sin job).
 - **Log 2456.** Reporte: mensaje `006`.
 
+### Tanda 2026-11-25 18:14 — el binario exportado llevaba los tests (receta medida)
+
+- **Medido:** preset Windows exportado dos veces. Hoy: 124,52 MB, **174 rutas `res://tests/`** dentro
+  del binario. Con `exclude_filter="Godot/*,addons/gdUnit4/*,tests/*,scenes/test_runner.tscn,
+  *test_*.gd,*qa_*.gd"`: **120,47 MB**, 0 rutas de tests, 0 suites de `scripts/**`. Arranque
+  headless `exit=0` con los mismos 3 errores de fuentes (BUG-042, preexistentes).
+- **Dos trampas:** `scenes/test_runner.tscn` debe excluirse junto con `tests/*` (su único
+  `ext_resource` es `res://tests/run_tests.gd`; nadie más la referencia) y `tests/*` no alcanza
+  porque hay suites fuera (`scripts/**/test_*.gd`).
+- **Descartado:** el `0xC0000005` del primer baseline (crash de salida; el reintento dio `rc=0` con
+  el mismo tamaño) y un falso bug de empaquetado de fuentes (son los `.ttf` de relleno de BUG-042).
+- **Estado:** `export_presets.cfg` restaurado, `git status` limpio, artefactos borrados. Propuesta
+  reproducible en `BACKLOGS/PROPUESTA-exportar-sin-material-de-tests.md`.
+- **Log 2476** · **Reporte `014`** · próximo libre del canal: `015`.
+
 ### Tanda 2026-11-25 17:26 — censo de suites verdes que imprimen ERROR
 
 - **Medido:** 107 suites, 0 rojas; **25 imprimen `ERROR:` y salen 0** (64 líneas). Familias: 14

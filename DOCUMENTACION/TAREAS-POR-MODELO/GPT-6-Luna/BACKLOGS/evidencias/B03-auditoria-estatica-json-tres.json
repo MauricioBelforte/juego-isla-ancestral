@@ -1,0 +1,73 @@
+{
+  "id": "B03-auditoria-estatica-json-tres",
+  "modelo": "GPT-6-Luna",
+  "plataforma": "DeepAI Code",
+  "fecha_local": "2026-11-26",
+  "fecha_hora_local": "2026-11-26 23:09-23:25 -0300 (aprox.; ejecucion distribuida)",
+  "encargo": {
+    "fuente": "Mensajes entre modelos/GPT-6-Luna/011-2026-11-27_00-55-00-agnes-3-flash-a-gpt-6-luna-acuse-14-s2-20-ok-b03.md",
+    "asignacion": "B03: J3-01..J3-10 verificar JSON en data/ y K5-01..K5-10 verificar .tres en resources/, por diez modulos",
+    "limite": "Agnes no enumeró archivos ni emitió autorización de escritura en los datos inspeccionados. La selección concreta de la muestra fue hecha por GPT-6-Luna; esto no es una muestra seleccionada por Agnes.",
+    "conflicto_de_ids": "El encargo asigna K5-01..K5-10 a recursos .tres, pero BACKLOGS/05-Backlog-Calibracion-y-Consistencia.md define esos mismos IDs como ejercicios de calibración del modelo. No se modificó ni marcó ese backlog por esta discrepancia."
+  },
+  "alcance": {
+    "metodo": "Inspeccion estática con Python UTF-8 estricto, json.loads/object_pairs_hook y lectura textual de recursos .tres/scripts/documentacion. No se ejecutó Godot, GDScript, test runner ni ResourceLoader.",
+    "json_seleccionados_por_gpt6_luna": [
+      {"modulo": "M27", "ruta": "game/isla-ancestral/data/islas/islas.json", "bytes": 773, "sha256": "50c72d85a9e972aca351819168ae320983b5121fc734c78db9490406a51a0ad9", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M54", "ruta": "game/isla-ancestral/data/map/map_data.json", "bytes": 1683, "sha256": "7a47857bec34c1ded3da03900a32cab05c3d4ffd415141ceecff90b11e02761d", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M35", "ruta": "game/isla-ancestral/data/mining/ores.json", "bytes": 2470, "sha256": "4f246a081818e9d073af50b9415235469fedab252b92cee0d52ef6b5e285ebca", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M73", "ruta": "game/isla-ancestral/data/coleccionables/catalog.json", "bytes": 20787, "sha256": "2e437a522c4806f2b479bcc66a0a244910af1996b1cdc4a910c2bb91f11a0c30", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M67", "ruta": "game/isla-ancestral/data/vehiculos/vehicles.json", "bytes": 1841, "sha256": "6d0593f52eac909d9bb96eb7ef8e44a447e52c75389b303a62807c55132e2fe8", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M75", "ruta": "game/isla-ancestral/data/postgame/actividades.json", "bytes": 2283, "sha256": "642a8a1cf200e5a8ffc6463692c0f35b62a6965e80a6692e7111302c431ab3fd", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M26", "ruta": "game/isla-ancestral/data/templos/templo_subterraneo.json", "bytes": 1495, "sha256": "027161a6fc53c502309a9bd3642f3c01efd9d4914014cf2d2e227c04fa3aee48", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M52", "ruta": "game/isla-ancestral/data/vfx/vfx_catalog.json", "bytes": 17039, "sha256": "9e43cd7de801a7d926a11b7b2ab2730268380c3d1f7f81f527624aa587868535", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M160", "ruta": "game/isla-ancestral/data/ubicaciones/ubicaciones.json", "bytes": 1403, "sha256": "6add0e8164f33ce3e39e382f468681b75630f4f4887aaa97ca236e542e5f1af8", "parsea": true, "claves_duplicadas": 0},
+      {"modulo": "M87", "ruta": "game/isla-ancestral/data/localizacion/strings_es.json", "bytes": 8566, "sha256": "9a5e4f930090eca299f72fbf1068311e1e2b3084eaaca71d68a2ef98556514c2", "parsea": true, "claves_duplicadas": 0, "nota": "Solo strings_es.json, no se infiere paridad con otros idiomas ni validez runtime."}
+    ],
+    "tres_seleccionados_por_gpt6_luna": [
+      "game/isla-ancestral/resources/terrain/terrain_arena.tres",
+      "game/isla-ancestral/resources/terrain/terrain_agua.tres",
+      "game/isla-ancestral/resources/terrain/terrain_barro.tres",
+      "game/isla-ancestral/resources/terrain/terrain_ceped.tres",
+      "game/isla-ancestral/resources/terrain/terrain_nieve.tres",
+      "game/isla-ancestral/resources/terrain/terrain_pavimento.tres",
+      "game/isla-ancestral/resources/terrain/terrain_rocas.tres",
+      "game/isla-ancestral/data/ui/w_reloj.tres",
+      "game/isla-ancestral/data/economy/econ_prices.tres",
+      "game/isla-ancestral/data/transporte/transport_network.tres"
+    ]
+  },
+  "resultados_estaticos": {
+    "json": {
+      "parseo_y_claves": "10/10 parsean en UTF-8; 0 claves JSON duplicadas en todos los objetos.",
+      "M27_M54": "4 islas en ambos; M54 tiene 9 POIs con IDs únicos. RIZ aparece con centro [256,256] y radio 256 en ambos JSON. M167 (documentación plan-actual y scripts/world/mundo_raiz.gd) fija el layout de Isla Raíz en centro [2560,2560], radio procedural 2560 y mundo 5120x5120. Es una divergencia entre catálogos legacy y fuente actual del terreno; se observó además que documentación M27 los llama legacy y registra que islas.json aún alimenta el mapa. No se afirma que el runtime esté roto: ambas rutas tienen consumidores, pero no se ejecutó juego ni se rastrearon todas las transformaciones de coordenadas.",
+      "M35": "6 vetas; IDs únicos y no vacíos; todos los elementos examinados tienen item_id; no se detectaron drop_max < drop_min. No se invocó el cargador de minería.",
+      "M73": "81 entradas; 81 IDs compuestos categoria_id_local únicos/no vacíos; los campos mínimos del validador están presentes en muestra completa; no hay puntos cero/negativos en datos. Divergencia de contrato: el comentario del validador y documentos dicen puntos > 0, mientras validate_collectibles.gd solo rechaza puntos < 0, por lo que permitiría cero. Se reporta como hallazgo estático; no se ejecutó el validador.",
+      "M67": "schema_version 1; 4 vehículos, IDs únicos, tipos presentes y válidos según validate_vehicles.gd; locomotora indica condicional M68; todos declaran bloque mejoras. No se ejecutó validate_vehicles.gd.",
+      "M75": "7 actividades, IDs únicos; 6 fase 1 y 1 fase 2; la actividad de fase 2 está hidden=true, conforme a regla comentada en JSON y manager. Inspección estática solamente.",
+      "M26": "4 salas y 4 puzzles con IDs únicos; salidas entre salas resuelven; todos los puzzles referenciados por sala y viceversa; la sala final tiene checkpoint. No se ejecutó TemploSchema ni suite.",
+      "M52": "31 entradas; IDs únicos y no vacíos; las 24 etiquetas esperadas en VfxSchema.PLAN están presentes. 2 entradas tienen plan vacío (vfx_regalo_amistad, vfx_evento_festival); el validador de catálogo no comprueba explícitamente que cada entrada tenga plan no vacío, y cobertura_plan omite vacío al buscar los 24 nombres. Riesgo de calidad de datos, no fallo runtime demostrado.",
+      "M160": "10 ubicaciones; IDs únicos; campos id/nombre/isla/tipo/sello/x/z presentes. No se ejecutó UbicacionesSchema ni se comprobó semántica espacial.",
+      "M87": "strings_es.json contiene 170 claves en objeto cadenas y parsea; sin comparación contra strings_en.json/PO ni validación de placeholders en esta muestra."
+    },
+    "tres": {
+      "validacion_textual": "Los 10 archivos tienen encabezado gd_resource y sección [resource]; todos los scripts referenciados existen en disco; IDs ExtResource/SubResource no duplicados y todas las referencias textuales analizadas resuelven. Esto no equivale a parseo/carga por Godot.",
+      "terrain": "Los siete TerrainData tienen IDs 0..6 únicos, coincidentes con enum TerrainData, nombres declarados y speed_modifier en rango positivo 0.6..1.0. Propiedades serializadas coinciden con exports del script. TerrainDataProvider.gd enumera resources/terrain y asigna por terrain_id; la lectura del provider es inspección estática, sin ejecución.",
+      "w_reloj": "w_reloj.tres refiere WRelojConfig y sus cinco propiedades coinciden con exports declarados; load se rastrea en w_reloj.gd, sin ejecutarlo.",
+      "economia": "econ_prices.tres tiene 18 PriceDefinition; item_id no vacíos en inspección, propiedades corresponden a exports y el recurso apunta a EconomyPriceCatalog. Cinco entradas tienen compra 0 y venta positiva; reliquia_del_sello tiene ambos 0 y revendible=false, por lo que el cero parece intencional. Contratos/historial de M38 documentan este caso; no se intentó corregir ni validar precios de catálogo completo.",
+      "transporte": "transport_network.tres declara 10 stops y 20 routes; IDs únicos; 40 referencias de extremos from/to apuntan a IDs stop existentes; propiedades serializadas corresponden a exports (validadas por comparación del parser textual con el script). No se cargó TransportNetwork ni se llamó validar()."
+    }
+  },
+  "limitaciones": [
+    "Análisis de muestra elegida por GPT-6-Luna, no censo de todos los JSON ni todos los .tres; el proyecto contiene 443 archivos .tres dentro de data/ y 7 bajo resources/.",
+    "Sin parseo real de Godot ni ejecución de scripts/tests; los resultados de validez son estáticos.",
+    "No se escribieron/modificaron datos de juego, scripts, documentación canónica, checklists, CHECKLIST-GLOBAL ni Logs.",
+    "No se marcaron J3/K5 como completadas en los backlogs: hay ambigüedad en asignación de artefactos, y K5-01..10 en el backlog propio corresponde a calibración, no a auditoría .tres. Se solicita conciliación a Agnes antes de modificar marcas."
+  ],
+  "integridad": {
+    "metodo_json": "Python json.loads con UTF-8 estricto; object_pairs_hook para contar nombres de clave repetidos en cada objeto.",
+    "metodo_tres": "Regex textual: rutas ext_resource, IDs de sub_resource, referencias ExtResource/SubResource y propiedades comparadas contra @export del script asociado.",
+    "archivos_fuente_modificados": false,
+    "evidencia_es_nueva": true
+  }
+}
